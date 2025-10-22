@@ -11424,7 +11424,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.6OU4CHSM.mjs
+// /:https://app.framerstatic.com/framer.TLGREWSX.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -12678,6 +12678,10 @@ function isArray(value,) {
 }
 function isObject2(value,) {
   return value !== null && typeof value === 'object' && !isArray(value,);
+}
+function isEmptyObject(object,) {
+  for (const _ in object) return false;
+  return true;
 }
 function isUndefined(value,) {
   return typeof value === 'undefined';
@@ -21203,7 +21207,7 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
   `
         ul.framer-text,
         ol.framer-text {
-            padding-left: 3ch;
+            padding-inline-start: 3ch;
             position: relative;
         }
     `, /* css */
@@ -21219,7 +21223,7 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
   `
         ol.framer-text > li.framer-text::before {
             position: absolute;
-            left: 0;
+            inset-inline-start: 0;
             content: counter(list-item, var(--list-style-type)) ".";
             font-variant-numeric: tabular-nums;
         }
@@ -21233,37 +21237,37 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
   `
         ol.framer-text > li.framer-text:nth-last-child(n + 100),
         ol.framer-text > li.framer-text:nth-last-child(n + 100) ~ li {
-            padding-left: 1ch;
+            padding-inline-start: 1ch;
         }
     `, /* css */
   `
         ol.framer-text > li.framer-text:nth-last-child(n + 1000),
         ol.framer-text > li.framer-text:nth-last-child(n + 1000) ~ li {
-            padding-left: 2ch;
+            padding-inline-start: 2ch;
         }
     `, /* css */
   `
         ol.framer-text > li.framer-text:nth-last-child(n + 10000),
         ol.framer-text > li.framer-text:nth-last-child(n + 10000) ~ li {
-            padding-left: 3ch;
+            padding-inline-start: 3ch;
         }
     `, /* css */
   `
         ol.framer-text > li.framer-text:nth-last-child(n + 100000),
         ol.framer-text > li.framer-text:nth-last-child(n + 100000) ~ li {
-            padding-left: 4ch;
+            padding-inline-start: 4ch;
         }
     `, /* css */
   `
         ol.framer-text > li.framer-text:nth-last-child(n + 1000000),
         ol.framer-text > li.framer-text:nth-last-child(n + 1000000) ~ li {
-            padding-left: 5ch;
+            padding-inline-start: 5ch;
         }
     `, /* css */
   `
         ul.framer-text > li.framer-text::before {
             position: absolute;
-            left: 0;
+            inset-inline-start: 0;
             content: "\u2022";
         }
     `, /* css */
@@ -34864,10 +34868,6 @@ function getCursorHash(x, y,) {
   }
   return void 0;
 }
-function isEmptyObject(object,) {
-  for (const _ in object) return false;
-  return true;
-}
 var CustomCursorComponent = /* @__PURE__ */ memo2(function CustomCursorComponent2() {
   const {
     onRegisterCursors,
@@ -36746,7 +36746,11 @@ function propsForRoutePath(href, router, currentRoute, linkOptions, localeId, im
       linkOptions.smoothScroll,
     ),
     navigate: () => performNavigation(router, routeId, elementId, pathVariables, linkOptions.smoothScroll,),
-    'data-framer-page-link-current': !elementId && currentRoute.id === routeId || void 0,
+    'data-framer-page-link-current': currentRoute && linkMatchesRoute(currentRoute, {
+          webPageId: routeId,
+          hash: elementId,
+          pathVariables,
+        }, implicitPathVariables,) || void 0,
   };
 }
 var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(function Link2({
@@ -36848,9 +36852,13 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
   return replacedChildren;
 },),);
 function cloneChildPropsWithAggregatedEvents(childProps, linkProps, observerRef,) {
+  const mergedStyle = mergeStyles(childProps.style, linkProps.style,);
   const aggregatedProps = {
     ...childProps,
     ...linkProps,
+    ...(mergedStyle && {
+      style: mergedStyle,
+    }),
     ref: observerRef,
   };
   const {
@@ -36882,6 +36890,16 @@ function cloneChildPropsWithAggregatedEvents(childProps, linkProps, observerRef,
         onTap == null ? void 0 : onTap(event, info,);
       }
       : void 0,
+  };
+}
+function mergeStyles(childStyle, linkStyle,) {
+  const maybeChildStyle = isObject2(childStyle,) ? childStyle : void 0;
+  const hasChildStyles = maybeChildStyle && !isEmptyObject(maybeChildStyle,);
+  const hasLinkStyles = linkStyle && !isEmptyObject(linkStyle,);
+  if (!hasChildStyles && !hasLinkStyles) return void 0;
+  return {
+    ...maybeChildStyle,
+    ...linkStyle,
   };
 }
 function rebindEventHandlersIfNeeded(linkProps, motionChild, isInternalNavigation,) {
@@ -45966,10 +45984,10 @@ var Logger = class {
       if (this.level > 4) return;
       console == null ? void 0 : console.error(...entry.toMessage(),);
     },);
-    __publicField(this, 'reportError', (maybeError, extras, tags, critical,) => {
-      extras = enrichWithLogs(extras ?? {},);
-      const reportedError = reportError({
-        caller: this.reportError,
+    __publicField(this, 'reportWithoutLogging', (maybeError, extras, tags, critical,) => {
+      const enrichedExtras = enrichWithLogs(extras ?? {},);
+      const enrichedError = reportError({
+        caller: this.reportWithoutLogging,
         error: maybeError,
         tags: {
           ...tags,
@@ -45979,10 +45997,14 @@ var Logger = class {
         extras,
         critical: critical ?? this.errorIsCritical,
       },);
-      if (extras) {
-        this.error(reportedError, extras,);
+      return [enrichedExtras, enrichedError,];
+    },);
+    __publicField(this, 'reportError', (maybeError, extras, tags, critical,) => {
+      const [enrichedExtras, enrichedError,] = this.reportWithoutLogging(maybeError, extras, tags, critical,);
+      if (enrichedExtras) {
+        this.error(enrichedError, enrichedExtras,);
       } else {
-        this.error(reportedError,);
+        this.error(enrichedError,);
       }
     },);
     __publicField(this, 'reportErrorOncePerMinute', (error, extras,) => {
