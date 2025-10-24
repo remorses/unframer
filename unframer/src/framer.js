@@ -11424,7 +11424,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.TLGREWSX.mjs
+// /:https://app.framerstatic.com/framer.GU522ECM.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -46928,11 +46928,11 @@ function getAssetOwnerType(asset,) {
 async function loadFontsWithOpenType(source,) {
   switch (source) {
     case 'google': {
-      const supportedFonts = await import('./framer-chunks/google-AEMWXYNR-IDCH7KHR.js');
+      const supportedFonts = await import('./framer-chunks/google-IDDDP5DE-4OTJKQA4.js');
       return supportedFonts == null ? void 0 : supportedFonts.default;
     }
     case 'fontshare': {
-      const supportedFonts = await import('./framer-chunks/fontshare-J4HPAOKI-YVOYXTV4.js');
+      const supportedFonts = await import('./framer-chunks/fontshare-Q32225IX-34SLBQHF.js');
       return supportedFonts == null ? void 0 : supportedFonts.default;
     }
     default:
@@ -46942,11 +46942,11 @@ async function loadFontsWithOpenType(source,) {
 async function loadFontToOpenTypeFeatures(source,) {
   switch (source) {
     case 'google': {
-      const features = await import('./framer-chunks/google-RSE7HKS2-D4J2Q4I5.js');
+      const features = await import('./framer-chunks/google-XJDPWDTU-EJ2YKDXG.js');
       return features == null ? void 0 : features.default;
     }
     case 'fontshare': {
-      const features = await import('./framer-chunks/fontshare-A6KDKBQN-6VKBSDHV.js');
+      const features = await import('./framer-chunks/fontshare-SLOB5ECO-MYUIT52Z.js');
       return features == null ? void 0 : features.default;
     }
     case 'framer': {
@@ -47498,7 +47498,7 @@ function loadVariationAxes(source,) {
             return (await import('./framer-chunks/google-MBJLJ3TS-7YGIU73P.js')).default;
           }
           case 'fontshare': {
-            return (await import('./framer-chunks/fontshare-E26JE4UP-P3LIR4AL.js')).default;
+            return (await import('./framer-chunks/fontshare-AAJW7AVL-BWLPX4X4.js')).default;
           }
           default:
             assertNever(source,);
