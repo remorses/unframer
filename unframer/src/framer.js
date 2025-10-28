@@ -11424,7 +11424,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.GU522ECM.mjs
+// /:https://app.framerstatic.com/framer.GCMADKI3.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -11780,11 +11780,11 @@ var require_eventemitter3 = __commonJS({
     'use strict';
 
     var has = Object.prototype.hasOwnProperty;
-    var prefix2 = '~';
+    var prefix3 = '~';
     function Events() {}
     if (Object.create) {
       Events.prototype = /* @__PURE__ */ Object.create(null,);
-      if (!new Events().__proto__) prefix2 = false;
+      if (!new Events().__proto__) prefix3 = false;
     }
     function EE(fn, context, once,) {
       this.fn = fn;
@@ -11796,7 +11796,7 @@ var require_eventemitter3 = __commonJS({
         throw new TypeError('The listener must be a function',);
       }
       var listener = new EE(fn, context || emitter, once,),
-        evt = prefix2 ? prefix2 + event : event;
+        evt = prefix3 ? prefix3 + event : event;
       if (!emitter._events[evt]) emitter._events[evt] = listener, emitter._eventsCount++;
       else if (!emitter._events[evt].fn) emitter._events[evt].push(listener,);
       else emitter._events[evt] = [emitter._events[evt], listener,];
@@ -11816,7 +11816,7 @@ var require_eventemitter3 = __commonJS({
         name;
       if (this._eventsCount === 0) return names;
       for (name in events = this._events) {
-        if (has.call(events, name,)) names.push(prefix2 ? name.slice(1,) : name,);
+        if (has.call(events, name,)) names.push(prefix3 ? name.slice(1,) : name,);
       }
       if (Object.getOwnPropertySymbols) {
         return names.concat(Object.getOwnPropertySymbols(events,),);
@@ -11824,7 +11824,7 @@ var require_eventemitter3 = __commonJS({
       return names;
     };
     EventEmitter2.prototype.listeners = function listeners(event,) {
-      var evt = prefix2 ? prefix2 + event : event,
+      var evt = prefix3 ? prefix3 + event : event,
         handlers = this._events[evt];
       if (!handlers) return [];
       if (handlers.fn) return [handlers.fn,];
@@ -11834,14 +11834,14 @@ var require_eventemitter3 = __commonJS({
       return ee;
     };
     EventEmitter2.prototype.listenerCount = function listenerCount(event,) {
-      var evt = prefix2 ? prefix2 + event : event,
+      var evt = prefix3 ? prefix3 + event : event,
         listeners = this._events[evt];
       if (!listeners) return 0;
       if (listeners.fn) return 1;
       return listeners.length;
     };
     EventEmitter2.prototype.emit = function emit(event, a1, a2, a3, a4, a5,) {
-      var evt = prefix2 ? prefix2 + event : event;
+      var evt = prefix3 ? prefix3 + event : event;
       if (!this._events[evt]) return false;
       var listeners = this._events[evt],
         len = arguments.length,
@@ -11904,7 +11904,7 @@ var require_eventemitter3 = __commonJS({
       return addListener(this, event, fn, context, true,);
     };
     EventEmitter2.prototype.removeListener = function removeListener(event, fn, context, once,) {
-      var evt = prefix2 ? prefix2 + event : event;
+      var evt = prefix3 ? prefix3 + event : event;
       if (!this._events[evt]) return this;
       if (!fn) {
         clearEvent(this, evt,);
@@ -11929,7 +11929,7 @@ var require_eventemitter3 = __commonJS({
     EventEmitter2.prototype.removeAllListeners = function removeAllListeners(event,) {
       var evt;
       if (event) {
-        evt = prefix2 ? prefix2 + event : event;
+        evt = prefix3 ? prefix3 + event : event;
         if (this._events[evt]) clearEvent(this, evt,);
       } else {
         this._events = new Events();
@@ -11939,7 +11939,7 @@ var require_eventemitter3 = __commonJS({
     };
     EventEmitter2.prototype.off = EventEmitter2.prototype.removeListener;
     EventEmitter2.prototype.addListener = EventEmitter2.prototype.on;
-    EventEmitter2.prefixed = prefix2;
+    EventEmitter2.prefixed = prefix3;
     EventEmitter2.EventEmitter = EventEmitter2;
     if ('undefined' !== typeof module) {
       module.exports = EventEmitter2;
@@ -12700,6 +12700,9 @@ function isGenerator2(value,) {
 }
 function isPromiseLike(value,) {
   return isObject2(value,) && isFunction(value.then,);
+}
+function isPromise(value,) {
+  return value instanceof Promise;
 }
 var noop2 = () => {};
 var isWindow = typeof window !== 'undefined';
@@ -13961,8 +13964,8 @@ function getPathForRoute(route, {
 async function handleRedirectForMissingSlugs(route, pathVariables, nextLocale,) {
   if (!route.path) return false;
   if (!pathVariables) return false;
-  const prefix2 = nextLocale.slug ? `/${nextLocale.slug}` : '';
-  const nextLocaleWithDefaultSlugPath = `${prefix2}${fillPathVariables(route.path, pathVariables,)}`;
+  const prefix3 = nextLocale.slug ? `/${nextLocale.slug}` : '';
+  const nextLocaleWithDefaultSlugPath = `${prefix3}${fillPathVariables(route.path, pathVariables,)}`;
   const response = await fetch(nextLocaleWithDefaultSlugPath, {
     method: 'HEAD',
     redirect: 'manual',
@@ -24864,13 +24867,13 @@ var BasicTicker = /* @__PURE__ */ forwardRef(function BasicTicker2(props, ref,) 
     as: asProp,
     tickerEffectVelocity,
     tickerEffectHoverModifier,
-    tickerEffectAxis,
     tickerEffectDirectionModifier,
     tickerEffectAlign,
-    tickerEffectGap,
-    tickerEffectItemSize,
-    tickerEffectItemCrossSize,
-    tickerEffectOverflow,
+    axis,
+    gap,
+    overflow,
+    itemSize,
+    itemCrossSize,
     ...rest
   } = props;
   const Component18 = asProp ?? motion.div;
@@ -24884,15 +24887,15 @@ var BasicTicker = /* @__PURE__ */ forwardRef(function BasicTicker2(props, ref,) 
     as: Component18,
     ...rest,
     items: flattenChildrenToTickerItems(children,),
-    gap: tickerEffectGap,
-    axis: tickerEffectAxis,
+    gap,
+    axis,
     align: tickerEffectAlign ?? 'center',
     isStatic,
     velocity,
     hoverFactor: hoverModifier,
-    _itemCrossSize: tickerEffectItemCrossSize,
-    itemSize: tickerEffectItemSize,
-    overflow: tickerEffectOverflow,
+    _itemCrossSize: itemCrossSize,
+    itemSize,
+    overflow,
   },);
 },);
 var DraggableTicker = /* @__PURE__ */ forwardRef(function DraggableTicker2(props, ref,) {
@@ -24901,13 +24904,13 @@ var DraggableTicker = /* @__PURE__ */ forwardRef(function DraggableTicker2(props
     as: asProp,
     tickerEffectVelocity,
     tickerEffectHoverModifier,
-    tickerEffectAxis,
     tickerEffectDirectionModifier,
     tickerEffectAlign,
-    tickerEffectGap,
-    tickerEffectItemSize,
-    tickerEffectItemCrossSize,
-    tickerEffectOverflow,
+    axis,
+    gap,
+    overflow,
+    itemSize,
+    itemCrossSize,
     ...rest
   } = props;
   const Component18 = asProp ?? motion.div;
@@ -24937,16 +24940,16 @@ var DraggableTicker = /* @__PURE__ */ forwardRef(function DraggableTicker2(props
     as: Component18,
     ...rest,
     items: flattenChildrenToTickerItems(children,),
-    gap: tickerEffectGap,
-    axis: tickerEffectAxis,
+    gap,
+    axis,
     align: tickerEffectAlign ?? 'center',
-    itemSize: tickerEffectItemSize,
-    _itemCrossSize: tickerEffectItemCrossSize,
-    overflow: tickerEffectOverflow,
-    _dragX: tickerEffectAxis === 'x' ? offsetMotionValue : void 0,
-    _dragY: tickerEffectAxis === 'y' ? offsetMotionValue : void 0,
+    itemSize,
+    _itemCrossSize: itemCrossSize,
+    overflow,
+    _dragX: axis === 'x' ? offsetMotionValue : void 0,
+    _dragY: axis === 'y' ? offsetMotionValue : void 0,
     offset: offsetMotionValue,
-    drag: tickerEffectAxis,
+    drag: axis,
     onDragEnd: () => {
       lastDrag.current = performance.now();
       dragMomentum.current = true;
@@ -24962,20 +24965,57 @@ var DraggableTicker = /* @__PURE__ */ forwardRef(function DraggableTicker2(props
 var Ticker2 = /* @__PURE__ */ forwardRef(function Ticker3(props, ref,) {
   const {
     tickerEffectDraggable,
+    tickerEffectStackDirection,
+    tickerEffectXOverflow,
+    tickerEffectYOverflow,
+    tickerEffectOverflow,
+    tickerEffectItemWidth,
+    tickerEffectItemHeight,
+    tickerEffectGap,
     ...rest
   } = props;
   const isStatic = useIsStaticRenderer();
+  const axis = (tickerEffectStackDirection == null ? void 0 : tickerEffectStackDirection.startsWith('column',)) ? 'y' : 'x';
+  const xOverflowWithFallback = tickerEffectXOverflow ?? tickerEffectOverflow;
+  const yOverflowWithFallback = tickerEffectYOverflow ?? tickerEffectOverflow;
+  const overflow = (axis === 'x' ? xOverflowWithFallback : yOverflowWithFallback) === 'visible';
+  const itemSize = (axis === 'x' ? tickerEffectItemWidth : tickerEffectItemHeight) === 'fill' ? 'fill' : void 0;
+  const itemCrossSize = (axis === 'x' ? tickerEffectItemHeight : tickerEffectItemWidth) === 'fill' ? '100%' : void 0;
+  const gap = getGap(tickerEffectGap, axis,);
   if (isStatic || !tickerEffectDraggable) {
     return /* @__PURE__ */ jsx(BasicTicker, {
       ...rest,
       ref,
+      axis,
+      gap,
+      overflow,
+      itemSize,
+      itemCrossSize,
     },);
   }
   return /* @__PURE__ */ jsx(DraggableTicker, {
     ...rest,
     ref,
+    axis,
+    gap,
+    overflow,
+    itemSize,
+    itemCrossSize,
   },);
 },);
+function getGap(gap, axis,) {
+  if (isFiniteNumber(gap,)) return gap;
+  if (!isString(gap,)) return void 0;
+  const gaps = gap.split(' ',);
+  const rowGap = gaps[0];
+  const columnGap = gaps[1] ?? gaps[0];
+  if (axis === 'x' && columnGap) return naNToUndefined(parseInt(columnGap,),);
+  if (axis === 'y' && rowGap) return naNToUndefined(parseInt(rowGap,),);
+  return void 0;
+}
+function naNToUndefined(value,) {
+  return Number.isNaN(value,) ? void 0 : value;
+}
 function manageCache(cache2, maxEntries,) {
   const size = cache2.size;
   if (size < maxEntries) return;
@@ -25639,10 +25679,10 @@ var VisibleFrame = /* @__PURE__ */ forwardRef(function VisibleFrame2(props, forw
       tickerEffectHoverModifier,
       tickerEffectDirectionModifier,
       tickerEffectGap,
-      tickerEffectAxis,
+      tickerEffectStackDirection,
       tickerEffectAlign,
-      tickerEffectItemSize,
-      tickerEffectItemCrossSize,
+      tickerEffectItemWidth,
+      tickerEffectItemHeight,
     } = props;
     return /* @__PURE__ */ jsx(Ticker2, {
       ...dataProps,
@@ -25654,10 +25694,10 @@ var VisibleFrame = /* @__PURE__ */ forwardRef(function VisibleFrame2(props, forw
       tickerEffectHoverModifier,
       tickerEffectDirectionModifier,
       tickerEffectGap,
-      tickerEffectAxis,
+      tickerEffectStackDirection,
       tickerEffectAlign,
-      tickerEffectItemSize,
-      tickerEffectItemCrossSize,
+      tickerEffectItemWidth,
+      tickerEffectItemHeight,
       children,
     },);
   }
@@ -36167,64 +36207,100 @@ var GracefullyDegradingErrorBoundary = class extends Component2 {
     );
   }
 };
+var PromiseState = {
+  Pending: 'pending',
+  Fulfilled: 'fulfilled',
+  Rejected: 'rejected',
+};
 var LazyValue = class _LazyValue {
   constructor(resolver,) {
     this.resolver = resolver;
-    __publicField(this, 'status',);
+    __publicField(this, 'promiseState', PromiseState.Pending,);
+    __publicField(this, 'preloadPromise',);
+    __publicField(this, 'value',);
+    __publicField(this, 'reason',);
+    __publicField(this, 'read', () => {
+      if (this.promiseState === PromiseState.Fulfilled) {
+        return this.value;
+      }
+      if (this.promiseState === PromiseState.Rejected) {
+        throw this.reason;
+      }
+      throw new Error('Need to call preload() before read()',);
+    },);
   }
   static is(value,) {
     return value instanceof _LazyValue;
   }
+  /**
+   * Gets the status and preloads the value if it's not already preloaded.
+   */
+  get status() {
+    void this.preload();
+    return this.state;
+  }
   get state() {
-    var _a;
-    return ((_a = this.status) == null ? void 0 : _a.type) ?? 'pending';
+    return this.promiseState;
   }
-  /** Preload the value so it can be read() later. */
+  // biome-ignore lint/suspicious/noThenProperty: This is a PromiseLike class.
+  then(onfulfilled, onrejected,) {
+    if (this.promiseState === PromiseState.Fulfilled) {
+      return Promise.resolve(this.value,).then(onfulfilled, onrejected,);
+    }
+    if (this.promiseState === PromiseState.Rejected) {
+      return Promise.reject(this.reason,).then(onfulfilled, onrejected,);
+    }
+    return this.readAsync().then(onfulfilled, onrejected,);
+  }
+  /**
+   * Preload the value so it can be read() later.
+   *
+   * @returns The promise that resolves or rejects. `undefined` if the value has already been preloaded or is synchronously readable.
+   */
   preload() {
-    if (this.status) {
-      const status = this.status;
-      if (status.type !== 'pending') return;
-      return status.promise;
-    }
-    const promise = this.resolver().then((value) => {
-      this.status = {
-        type: 'fulfilled',
-        value,
-      };
-    }, (error) => {
-      this.status = {
-        type: 'rejected',
-        error,
-      };
-    },);
-    this.status = {
-      type: 'pending',
-      promise,
+    if (this.promiseState !== PromiseState.Pending) return;
+    if (this.preloadPromise) return this.preloadPromise;
+    const fulfill = (value) => {
+      this.promiseState = PromiseState.Fulfilled;
+      this.value = value;
     };
-    return promise;
-  }
-  /** Synchronously read the value after calling preload() before. */
-  read() {
-    const status = this.status;
-    if (!status) {
-      throw new Error('Need to call preload() before read()',);
+    const reject = (reason) => {
+      this.promiseState = PromiseState.Rejected;
+      this.reason = reason;
+    };
+    let maybeValue;
+    try {
+      maybeValue = this.resolver();
+    } catch (e) {
+      reject(e,);
+      return;
     }
-    switch (status.type) {
-      case 'pending':
-        throw new Error('Need to wait for preload() to resolve',);
-      case 'fulfilled':
-        return status.value;
-      case 'rejected':
-        throw status.error;
-      default:
-        assertNever(status,);
+    if (!isPromise(maybeValue,)) {
+      fulfill(maybeValue,);
+      return;
     }
+    const valuePromise = maybeValue.then(fulfill, (error) => {
+      reject(error,);
+    },);
+    this.preloadPromise = valuePromise;
+    return valuePromise;
   }
   async readAsync() {
-    const promise = this.preload();
-    if (promise) await promise;
+    return this.readMaybeAsync();
+  }
+  /**
+   * Loads the value if it's not already loaded.
+   *
+   * @returns The value or a promise that resolves to the value.
+   */
+  readMaybeAsync() {
+    const preloadPromise = this.preload();
+    if (preloadPromise) return preloadPromise.then(this.read,);
     return this.read();
   }
+  /**
+   * FIXME: With React 19, mark this as deprecated and use the official `use` hook instead (just pass in the LazyValue instance).
+   */
   use() {
     const promise = this.preload();
     if (promise) throw promise;
@@ -38596,6 +38672,9 @@ function getLogger(name,) {
       var _a;
       return (_a = runtime.getLogger(name,)) == null ? void 0 : _a.error(...args,);
     },
+    get enabled() {
+      return runtime.getLogger(name,) !== void 0;
+    },
   };
 }
 function evaluateSync(generator,) {
@@ -38609,6 +38688,11 @@ async function evaluateAsync(generator, state = generator.next(),) {
     state = generator.next(value,);
   }
   return state.value;
+}
+function evaluateMaybeAsync(generator,) {
+  const state = generator.next();
+  if (state.done) return state.value;
+  return evaluateAsync(generator, state,);
 }
 function* evaluateObject(values,) {
   const result = {};
@@ -39292,12 +39376,23 @@ var CompatibilityDatabaseCollection = class {
   }
   getDatabaseItem(item, pointer,) {
     const data2 = {};
+    const itemIndex = Number(pointer,);
     for (const key7 in this.schema) {
       const value = item[key7];
       if (isNullish2(value,)) continue;
       const definition = this.schema[key7];
       if (isUndefined(definition,)) continue;
       assert(definition.type !== 'unknown', 'Invalid definition type',);
+      if (definition.type === 'richtext') {
+        data2[key7] = {
+          type: definition.type,
+          value: {
+            itemIndex,
+            key: key7,
+          },
+        };
+        continue;
+      }
       data2[key7] = {
         type: definition.type,
         // biome-ignore lint/suspicious/noExplicitAny: Existing.
@@ -39310,12 +39405,17 @@ var CompatibilityDatabaseCollection = class {
     };
   }
   async resolveRichText(pointer,) {
-    if (LazyValue.is(pointer,)) {
-      const promise = pointer.preload();
-      if (promise) await promise;
-      return pointer.read();
+    var _a;
+    const {
+      itemIndex,
+      key: key7,
+    } = pointer;
+    const items = await getCollectionItems(this.collection, this.locale,);
+    const richText = (_a = items[itemIndex]) == null ? void 0 : _a[key7];
+    if (LazyValue.is(richText,)) {
+      return richText.readMaybeAsync();
     }
-    return pointer;
+    return richText;
   }
   async scanItems() {
     const items = await getCollectionItems(this.collection, this.locale,);
@@ -39338,10 +39438,17 @@ var CompatibilityDatabaseCollection = class {
   }
 };
 var collectionIds = /* @__PURE__ */ new WeakMap();
+var prefix2 = '$r_';
+function hasRandomCollectionId(id3,) {
+  return id3.includes(prefix2,);
+}
 function getCollectionId(collection,) {
+  if (isAnyDatabaseCollection(collection,) && collection.id) {
+    return collection.id;
+  }
   const existing = collectionIds.get(collection,);
   if (existing) return existing;
-  const id3 = Math.random().toString(16,).slice(2,);
+  const id3 = `${prefix2}${Math.random().toString(16,).slice(2,)}`;
   collectionIds.set(collection, id3,);
   return id3;
 }
@@ -43193,25 +43300,108 @@ function stringifyQuery(query,) {
 }
 var log = /* @__PURE__ */ getLogger('query-engine',);
 var QueryEngine = class {
-  async query(query, locale,) {
-    log.debug(`Query:
+  async evalQuery(query, locale, includeRaw,) {
+    if (log.enabled) {
+      log.debug(`Query:
 ${stringifyQuery(query,)}`,);
+    }
     const resolver = new Resolver(query, locale,);
     const optimizer = new Optimizer(query, locale, resolver,);
     const [root, namedFields,] = optimizer.optimize();
     const relation = await root.evaluateAsync();
     const namedFieldEntries = Object.entries(namedFields,);
-    const result = await evaluateAsync(evaluateArray(relation.tuples.map((tuple) => {
+    const rawResults = [];
+    const maybeEvaluatedPromise = evaluateMaybeAsync(evaluateArray(relation.tuples.map((tuple) => {
       const object = {};
-      for (const [name, field,] of namedFieldEntries) {
+      const rawObject = {};
+      for (const [fieldName, field,] of namedFieldEntries) {
         const value = tuple.getValue(field,);
-        object[name] = resolver.resolveValue(value,);
+        object[fieldName] = resolver.resolveValue(value,);
+        if (includeRaw) {
+          rawObject[fieldName] = value;
+        }
+      }
+      if (includeRaw) {
+        rawResults.push(rawObject,);
       }
       return evaluateObject(object,);
     },),),);
-    return result;
+    if (includeRaw) {
+      return [isPromise(maybeEvaluatedPromise,) ? await maybeEvaluatedPromise : maybeEvaluatedPromise, rawResults,];
+    }
+    return maybeEvaluatedPromise;
+  }
+  async serializeableQuery(query, locale,) {
+    return this.evalQuery(query, locale, true,);
+  }
+  async query(query, locale,) {
+    return this.evalQuery(query, locale, false,);
+  }
+  resolveSerializableQueryResult(raw, query, locale,) {
+    const resolver = new Resolver(query, locale,);
+    return evaluateMaybeAsync(evaluateArray(raw.map((item) => {
+      const object = {};
+      let key7;
+      for (key7 in item) {
+        const value = item[key7];
+        object[key7] = resolver.resolveValue(value,);
+      }
+      return evaluateObject(object,);
+    },),),);
   }
 };
+var CMSDataCollector = class {
+  constructor() {
+    __publicField(this, 'dataByKey', /* @__PURE__ */ new Map(),);
+  }
+  /** Register a resolved CMS query result for a given cache key. */
+  register(key7, data2,) {
+    this.dataByKey.set(key7, data2,);
+  }
+  /** Return an iterator over [key, data] entries. */
+  [Symbol.iterator]() {
+    return this.dataByKey.entries();
+  }
+  /** Return current size for diagnostics. */
+  size() {
+    return this.dataByKey.size;
+  }
+  /** Clear collected data. */
+  clear() {
+    this.dataByKey.clear();
+  }
+};
+var cmsDataCollector = typeof window === 'undefined' ? /* @__PURE__ */ new CMSDataCollector() : void 0;
+var cmsMap;
+function getHydratedDataFromDOM(key7,) {
+  if (!isBrowser2()) return;
+  if (cmsMap === void 0) cmsMap = parseCmsMapFromDOM();
+  if (cmsMap === void 0) return;
+  const entry = cmsMap[key7];
+  if (!entry) {
+    console.info('No preloaded CMS data found for key:', key7,);
+    return;
+  }
+  cmsMap[key7] = void 0;
+  return entry;
+}
+function parseCmsMapFromDOM() {
+  let script = document.getElementById('__framer__cmsData',);
+  if (!script) return;
+  requestIdleCallback(() => {
+    script == null ? void 0 : script.remove();
+    script = void 0;
+  },);
+  try {
+    return JSON.parse(script.text,) ?? {};
+  } catch (error) {
+    console.warn('Failed to parse the preloaded CMS data. Falling back to a network fetch.', error,);
+    return {};
+  }
+}
+function isCollection(value,) {
+  return isObject2(value,) && value.type === 'Collection';
+}
 var QueryCache = class {
   constructor(queryEngine2, maxSize = Infinity,) {
     this.queryEngine = queryEngine2;
@@ -43234,7 +43424,37 @@ var QueryCache = class {
       this.cache.set(key7, existing,);
       return existing;
     }
-    const resolver = () => this.queryEngine.query(query, locale,);
+    const resolver = () => {
+      const containsRandomCollectionId = hasRandomCollectionId(key7,);
+      const hydratedResult = containsRandomCollectionId ? void 0 : getHydratedDataFromDOM(key7,);
+      if (hydratedResult) {
+        try {
+          return this.queryEngine.resolveSerializableQueryResult(hydratedResult, query, locale,);
+        } catch (error) {
+          console.warn(
+            'Warning: Failed to resolve raw query result from DOM during hydration for:',
+            key7,
+            '. This might make the page load slightly slower. If you are the author of this website, please report this to the Framer team via https://www.framer.com/contact/',
+          );
+          const sampleRate = Math.random();
+          if (sampleRate < 0.01) {
+            const stack = error instanceof Error && typeof error.stack === 'string' ? error.stack : null;
+            sendTrackingEvent('published_site_load_error', {
+              message: String(error,),
+              stack,
+            },);
+          }
+        }
+      }
+      if (!isWindow && !containsRandomCollectionId) {
+        return this.queryEngine.serializeableQuery(query, locale,).then(([queryResult, serializableResult,],) => {
+          var _a;
+          (_a = cmsDataCollector) == null ? void 0 : _a.register(key7, serializableResult,);
+          return queryResult;
+        },);
+      }
+      return this.queryEngine.query(query, locale,);
+    };
     const value = new LazyValue(resolver,);
     this.cache.set(key7, value,);
     this.prune();
@@ -43242,9 +43462,7 @@ var QueryCache = class {
   }
 };
 function replaceCollection(_, value,) {
-  if (isObject2(value,) && value.type === 'Collection' && isAnyCollection(value.data,)) {
-    return getCollectionId(value.data,);
-  }
+  if (isCollection(value,) && isAnyCollection(value.data,)) return getCollectionId(value.data,);
   return value;
 }
 function getCacheKey(query, locale,) {
@@ -43907,9 +44125,6 @@ function usePrototypeNavigate({
     return false;
   };
 }
-function use(promise,) {
-  throw promise;
-}
 var queryEngine = /* @__PURE__ */ new QueryEngine();
 var queryCache = /* @__PURE__ */ new QueryCache(queryEngine,);
 function useQueryData(query,) {
@@ -43917,9 +44132,7 @@ function useQueryData(query,) {
     activeLocale,
   } = useLocaleInfo();
   const cached = queryCache.get(query, activeLocale,);
-  const promise = cached.preload();
-  if (promise) use(promise,);
-  return cached.read();
+  return cached.use();
 }
 function useQueryCount(query,) {
   const countQuery = {
@@ -43933,7 +44146,7 @@ function usePreloadQuery() {
   const {
     activeLocale,
   } = useLocaleInfo();
-  return useCallback2(async (query) => {
+  return useCallback2((query) => {
     return queryCache.get(query, activeLocale,).readAsync();
   }, [activeLocale,],);
 }
@@ -50502,37 +50715,37 @@ function parseSVG(svg,) {
     return;
   }
 }
-function prefixIdsInSVG(svg, prefix2,) {
-  const sanitizedPrefix = sanitizeString(prefix2,);
+function prefixIdsInSVG(svg, prefix3,) {
+  const sanitizedPrefix = sanitizeString(prefix3,);
   recursivelyPrefixId(svg, sanitizedPrefix,);
 }
 function sanitizeString(str,) {
   return str.replace(/[^\w\-:.]|^[^a-z]+/gi, '',);
 }
-function recursivelyPrefixId(el, prefix2,) {
-  prefixId(el, prefix2,);
+function recursivelyPrefixId(el, prefix3,) {
+  prefixId(el, prefix3,);
   const childNodes = Array.from(el.children,);
   childNodes.forEach((node) => {
-    recursivelyPrefixId(node, prefix2,);
+    recursivelyPrefixId(node, prefix3,);
   },);
 }
-function prefixId(el, prefix2,) {
+function prefixId(el, prefix3,) {
   const attributes = el.getAttributeNames();
   attributes.forEach((attr) => {
     const value = el.getAttribute(attr,);
     if (!value) return;
     if (attr === 'id') {
-      el.setAttribute(attr, `${prefix2}_${value}`,);
+      el.setAttribute(attr, `${prefix3}_${value}`,);
     }
     if (attr === 'href' || attr === 'xlink:href') {
       const [base, fragmentIdentifier,] = value.split('#',);
       if (base) return;
-      el.setAttribute(attr, `#${prefix2}_${fragmentIdentifier}`,);
+      el.setAttribute(attr, `#${prefix3}_${fragmentIdentifier}`,);
       return;
     }
     const URL_REF = 'url(#';
     if (value.includes(URL_REF,)) {
-      const prefixedValue = value.replace(URL_REF, `${URL_REF}${prefix2}_`,);
+      const prefixedValue = value.replace(URL_REF, `${URL_REF}${prefix3}_`,);
       el.setAttribute(attr, prefixedValue,);
     }
   },);
@@ -52411,13 +52624,13 @@ function upgradeToComponentFontV3(font,) {
     cssFamilyName,
   };
 }
-function withPerformanceMarks(prefix2, callback,) {
-  const markStart = `${prefix2}-start`;
+function withPerformanceMarks(prefix3, callback,) {
+  const markStart = `${prefix3}-start`;
   performance.mark(markStart,);
   callback();
-  const markEnd = `${prefix2}-end`;
+  const markEnd = `${prefix3}-end`;
   performance.mark(markEnd,);
-  performance.measure(prefix2, markStart, markEnd,);
+  performance.measure(prefix3, markStart, markEnd,);
 }
 function loadJSON(url,) {
   return fetch(url, {
@@ -52667,6 +52880,8 @@ export {
   circOut,
   clamp,
   clampRGB,
+  CMSDataCollector,
+  cmsDataCollector,
   collectMotionValues,
   collectVisualStyleFromProps,
   Color,
