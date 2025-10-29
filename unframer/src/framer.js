@@ -11424,7 +11424,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.GCMADKI3.mjs
+// /:https://app.framerstatic.com/framer.UFHGSEDY.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -24866,10 +24866,10 @@ var BasicTicker = /* @__PURE__ */ forwardRef(function BasicTicker2(props, ref,) 
     children,
     as: asProp,
     tickerEffectVelocity,
-    tickerEffectHoverModifier,
-    tickerEffectDirectionModifier,
     tickerEffectAlign,
     axis,
+    directionModifier,
+    hoverModifier,
     gap,
     overflow,
     itemSize,
@@ -24879,8 +24879,6 @@ var BasicTicker = /* @__PURE__ */ forwardRef(function BasicTicker2(props, ref,) 
   const Component18 = asProp ?? motion.div;
   const isStatic = useIsStaticRenderer();
   const baseVelocity = tickerEffectVelocity ?? 100;
-  const hoverModifier = tickerEffectHoverModifier ?? 1;
-  const directionModifier = tickerEffectDirectionModifier ?? 1;
   const velocity = baseVelocity * directionModifier;
   return /* @__PURE__ */ jsx(Ticker, {
     ref,
@@ -24903,10 +24901,10 @@ var DraggableTicker = /* @__PURE__ */ forwardRef(function DraggableTicker2(props
     children,
     as: asProp,
     tickerEffectVelocity,
-    tickerEffectHoverModifier,
-    tickerEffectDirectionModifier,
     tickerEffectAlign,
     axis,
+    directionModifier,
+    hoverModifier,
     gap,
     overflow,
     itemSize,
@@ -24915,8 +24913,6 @@ var DraggableTicker = /* @__PURE__ */ forwardRef(function DraggableTicker2(props
   } = props;
   const Component18 = asProp ?? motion.div;
   const baseVelocity = tickerEffectVelocity ?? 100;
-  const hoverModifier = tickerEffectHoverModifier ?? 1;
-  const directionModifier = tickerEffectDirectionModifier ?? 1;
   const targetVelocity = baseVelocity * directionModifier;
   const offsetMotionValue = useMotionValue(0,);
   const lastDrag = useRef(0,);
@@ -24972,10 +24968,14 @@ var Ticker2 = /* @__PURE__ */ forwardRef(function Ticker3(props, ref,) {
     tickerEffectItemWidth,
     tickerEffectItemHeight,
     tickerEffectGap,
+    tickerEffectDirectionModifier,
+    tickerEffectHoverModifier,
     ...rest
   } = props;
   const isStatic = useIsStaticRenderer();
   const axis = (tickerEffectStackDirection == null ? void 0 : tickerEffectStackDirection.startsWith('column',)) ? 'y' : 'x';
+  const directionModifier = tickerEffectDirectionModifier === 'reverse' ? -1 : 1;
+  const hoverModifier = isFiniteNumber(tickerEffectHoverModifier,) ? tickerEffectHoverModifier / 100 : 1;
   const xOverflowWithFallback = tickerEffectXOverflow ?? tickerEffectOverflow;
   const yOverflowWithFallback = tickerEffectYOverflow ?? tickerEffectOverflow;
   const overflow = (axis === 'x' ? xOverflowWithFallback : yOverflowWithFallback) === 'visible';
@@ -24991,6 +24991,8 @@ var Ticker2 = /* @__PURE__ */ forwardRef(function Ticker3(props, ref,) {
       overflow,
       itemSize,
       itemCrossSize,
+      directionModifier,
+      hoverModifier,
     },);
   }
   return /* @__PURE__ */ jsx(DraggableTicker, {
@@ -25001,6 +25003,8 @@ var Ticker2 = /* @__PURE__ */ forwardRef(function Ticker3(props, ref,) {
     overflow,
     itemSize,
     itemCrossSize,
+    directionModifier,
+    hoverModifier,
   },);
 },);
 function getGap(gap, axis,) {
@@ -47141,11 +47145,11 @@ function getAssetOwnerType(asset,) {
 async function loadFontsWithOpenType(source,) {
   switch (source) {
     case 'google': {
-      const supportedFonts = await import('./framer-chunks/google-IDDDP5DE-4OTJKQA4.js');
+      const supportedFonts = await import('./framer-chunks/google-KZPUDTN2-SVXYQPUD.js');
       return supportedFonts == null ? void 0 : supportedFonts.default;
     }
     case 'fontshare': {
-      const supportedFonts = await import('./framer-chunks/fontshare-Q32225IX-34SLBQHF.js');
+      const supportedFonts = await import('./framer-chunks/fontshare-FXZWFT7E-JFREW2EG.js');
       return supportedFonts == null ? void 0 : supportedFonts.default;
     }
     default:
@@ -47155,11 +47159,11 @@ async function loadFontsWithOpenType(source,) {
 async function loadFontToOpenTypeFeatures(source,) {
   switch (source) {
     case 'google': {
-      const features = await import('./framer-chunks/google-XJDPWDTU-EJ2YKDXG.js');
+      const features = await import('./framer-chunks/google-MX3N35K3-NSXXLNAK.js');
       return features == null ? void 0 : features.default;
     }
     case 'fontshare': {
-      const features = await import('./framer-chunks/fontshare-SLOB5ECO-MYUIT52Z.js');
+      const features = await import('./framer-chunks/fontshare-OQO4BJDD-MRKSLJT5.js');
       return features == null ? void 0 : features.default;
     }
     case 'framer': {
@@ -47708,10 +47712,10 @@ function loadVariationAxes(source,) {
       const axes = (async () => {
         switch (source) {
           case 'google': {
-            return (await import('./framer-chunks/google-MBJLJ3TS-7YGIU73P.js')).default;
+            return (await import('./framer-chunks/google-I65GYBZB-MP6KWJ3D.js')).default;
           }
           case 'fontshare': {
-            return (await import('./framer-chunks/fontshare-AAJW7AVL-BWLPX4X4.js')).default;
+            return (await import('./framer-chunks/fontshare-IXII5VYB-I6S3ZY5U.js')).default;
           }
           default:
             assertNever(source,);
