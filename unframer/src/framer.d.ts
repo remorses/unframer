@@ -1,7 +1,6 @@
-/// <reference types="react" />
-
 import type { AnimationPlaybackControls } from 'framer-motion';
-import { ComponentType } from 'react';
+import type { CSSProperties } from 'react';
+import { DOMAttributes } from 'react';
 import { ForwardRefExoticComponent } from 'react';
 import type { HTMLMotionProps } from 'framer-motion';
 import { JSX as JSX_2 } from 'react/jsx-runtime';
@@ -18,15 +17,13 @@ import type { ReactNode } from 'react';
 import { RefAttributes } from 'react';
 import type { SpringOptions as SpringOptions_2 } from 'framer-motion';
 import type { TapHandlers } from 'framer-motion';
-import type { TargetAndTransition } from 'framer-motion';
 import type { Transition } from 'framer-motion';
 import { useDeprecatedAnimatedState as useAnimatedState } from 'framer-motion';
 import { useDeprecatedInvertedScale as useInvertedScale } from 'framer-motion';
-import type { ValueAnimationTransition } from 'framer-motion';
-import type { VariantLabels } from 'framer-motion';
+import { ValueAnimationTransition } from 'framer-motion';
 
 /** @public */
-export declare function addFonts(component: React_2.ComponentType<unknown>, passedFonts: (ComponentFontV1 | ComponentFontBundle)[], flags?: {
+export declare function addFonts(component: React_2.ComponentType<unknown>, fontsOrBundles: (ComponentFontV1 | ComponentFontBundle<ComponentFontV2 | ComponentFont>)[], flags?: {
     supportsExplicitInterCodegen?: boolean;
 }): void;
 
@@ -46,6 +43,21 @@ export declare function addFonts(component: React_2.ComponentType<unknown>, pass
 export declare function addPropertyControls<Props = any>(component: React_2.ComponentType<Props> | React_2.ForwardRefExoticComponent<Props> | HigherOrderComponent<Props>, propertyControls: PropertyControls<Props>): void;
 
 declare type Alignment = "start" | "center" | "end";
+
+/**
+ * Supported types are:
+ * 1. Valid media types (`"image/png"`, `"audio/*"`, `"✱/✱"`)
+ * 2. File extensions with a leading dot (`".png"`)
+ * 3. `"*"` (`.*` as a pseudo file extension was confirmed to allow everything in file pickers of all three major browser engines)
+ * 4. File extensions WITHOUT a leading dot (`"png"`) – unlike in browser APIs – for backward compatibility and in case something doesn't parse as a media type
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/file#unique_file_type_specifiers
+ */
+declare type AllowedFileTypes = readonly string[];
+
+/**
+ * @public
+ */
+declare type AlphaNumericChar = "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z" | "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9";
 
 /**
  * @public
@@ -93,13 +105,10 @@ declare interface Animatable_2<Value> extends UpdateObserver<Value> {
  */
 declare const Animatable_2: {
     <Value>(value: Value | Animatable_2<Value>): Animatable_2<Value>;
-
-    /**
-     * @public
-     */
+    transaction(update: (updater: (animatable: Animatable_2<any>, value: any) => void, transactionId: TransactionId) => void): void;
     getNumber(value: number | Animatable_2<number> | null | undefined, defaultValue?: number): number;
-
-
+    get<Value>(value: Value | Animatable_2<Value> | null | undefined, defaultValue: Value): Value;
+    objectToValues<Object>(object: AnimatableObject<Object>): Object;
 };
 export { Animatable_2 as Animatable }
 
@@ -113,140 +122,15 @@ export declare type AnimatableObject<T> = {
  * @deprecated Use the {@link MotionProps.animate} prop on {@link Frame} instead.
  */
 export declare const animate: {
-    <Value, Options>(from: DeprecatedAnimationTarget<Value>, to: Value, animator?: AnimatorClass<Value, Options>, options?: Partial<Options & DeprecatedAnimationOptions<Value>>): FramerAnimation<Value, Options>;
+    <Value, Options>(from: Animatable_2<Value>, to: Value, animator?: AnimatorClass<Value, Options>, options?: Partial<Options & DeprecatedAnimationOptions<Value>>): FramerAnimation<Value, Options>;
     <V>(from: MotionValue<V> | V, to: V | V[], transition?: Transition & AnimationPlaybackLifecycles<V>): AnimationPlaybackControls;
-    /**
-     * Animate value with a spring curve
-     * @remarks
-     * ```jsx
-     * const value = Animatable(0)
-     * animate.spring(value, 100, {tension: 100, friction: 100})
-     *
-     * animate.spring(value, 100, {dampingRatio: 0.5, duration: 1})
-     * ```
-     * @param from - Value to animate
-     * @param to - Value to animate to
-     * @param options - Options for the spring
-     * These can be either `tension`, `friction`, `velocity` and `tolerance` _or_ `dampingRatio`, `duration`, `velocity` and `mass`
-     * @returns Instance of {@link FramerAnimation} that can be used to control the animation
-     * @deprecated Use {@link MotionProps.animate} on {@link Frame} instead.
-     */
-    spring<Value_1>(from: DeprecatedAnimationTarget<Value_1>, to: Value_1, options?: Partial<SpringOptions & DeprecatedAnimationOptions<Value_1>> | undefined): FramerAnimation<Value_1, SpringOptions>;
-    /**
-     * Animate value with a bezier curve
-     * @remarks
-     * ```jsx
-     * const value = Animatable(0)
-     * animate.bezier(value, 100, {duration: 1, curve: Bezier.EaseIn})
-     *
-     * animate.bezier(value, 100, {duration: 1, curve: [0.3, 0.1, 0.4, 1]})
-     * ```
-     * @param from - Value to animate
-     * @param to - Value to animate to
-     * @param options - Options for the bezier curve
-     *
-     * - `duration` Duration of the animation
-     * - `curve` One of the `Bezier` enum values or an array with 4 control points
-     *
-     * @returns Instance of {@link FramerAnimation} that can be used to control the animation
-     * @deprecated Use {@link MotionProps.animate} on {@link Frame} instead.
-     */
-    bezier<Value_2>(from: DeprecatedAnimationTarget<Value_2>, to: Value_2, options?: Partial<BezierOptions & DeprecatedAnimationOptions<Value_2>> | undefined): FramerAnimation<Value_2, BezierOptions>;
-    /**
-     * Animate value with a linear animation
-     * @remarks
-     * ```jsx
-     * const value = Animatable(0)
-     * animate.linear(value, 100)
-     *
-     * animate.linear(value, 100, {duration: 1})
-     * ```
-     * @param from  - Value to animate
-     * @param to - Value to animate to
-     * @param options - The options for the animation
-     *
-     * - `duration` - Duration of the animation
-     *
-     * @returns Instance of {@link FramerAnimation} that can be used to control the animation
-     * @deprecated Use {@link MotionProps.animate} on {@link Frame} instead.
-     */
-    linear<Value_3>(from: DeprecatedAnimationTarget<Value_3>, to: Value_3, options?: Partial<EaseOptions & DeprecatedAnimationOptions<Value_3>> | undefined): FramerAnimation<Value_3, BezierOptions>;
-    /**
-     * Animate value with a ease animation
-     * @remarks
-     * ```jsx
-     * const value = Animatable(0)
-     * animate.ease(value, 100)
-     *
-     * animate.ease(value, 100, {duration: 1})
-     * ```
-     * @param from  - Value to animate
-     * @param to - Value to animate to
-     * @param options - The options for the animation
-     *
-     * - `duration` - Duration of the animation
-     *
-     * @returns Instance of {@link FramerAnimation} that can be used to control the animation
-     * @deprecated Use {@link MotionProps.animate} on {@link Frame} instead.
-     */
-    ease<Value_4>(from: DeprecatedAnimationTarget<Value_4>, to: Value_4, options?: Partial<EaseOptions & DeprecatedAnimationOptions<Value_4>> | undefined): FramerAnimation<Value_4, BezierOptions>;
-    /**
-     * Animate value with a ease in animation
-     * @remarks
-     * ```jsx
-     * const value = Animatable(0)
-     * animate.easeIn(value, 100)
-     *
-     * animate.easeIn(value, 100, {duration: 1})
-     * ```
-     * @param from  - Value to animate
-     * @param to - Value to animate to
-     * @param options - The options for the animation
-     *
-     * - `duration` - Duration of the animation
-     *
-     * @returns Instance of {@link FramerAnimation} that can be used to control the animation
-     * @deprecated Use {@link MotionProps.animate} on {@link Frame} instead.
-     */
-    easeIn<Value_5>(from: DeprecatedAnimationTarget<Value_5>, to: Value_5, options?: Partial<EaseOptions & DeprecatedAnimationOptions<Value_5>> | undefined): FramerAnimation<Value_5, BezierOptions>;
-    /**
-     * Animate value with a ease out animation
-     * @remarks
-     * ```jsx
-     * const value = Animatable(0)
-     * animate.easeOut(value, 100)
-     *
-     * animate.easeOUt(value, 100, {duration: 1})
-     * ```
-     * @param from  - Value to animate
-     * @param to - Value to animate to
-     * @param options - The options for the animation
-     *
-     * - `duration` - Duration of the animation
-     *
-     * @returns Instance of {@link FramerAnimation} that can be used to control the animation
-     * @deprecated Use {@link MotionProps.animate} on {@link Frame} instead.
-     */
-    easeOut<Value_6>(from: DeprecatedAnimationTarget<Value_6>, to: Value_6, options?: Partial<EaseOptions & DeprecatedAnimationOptions<Value_6>> | undefined): FramerAnimation<Value_6, BezierOptions>;
-    /**
-     * Animate value with a ease in out animation
-     * @remarks
-     * ```jsx
-     * const value = Animatable(0)
-     * animate.easeInOut(value, 100)
-     *
-     * animate.easeInOut(value, 100, {duration: 1})
-     * ```
-     * @param from  - Value to animate
-     * @param to - Value to animate to
-     * @param options - The options for the animation
-     *
-     * - `duration` - Duration of the animation
-     *
-     * @returns Instance of {@link FramerAnimation} that can be used to control the animation
-     * @deprecated Use {@link MotionProps.animate} on {@link Frame} instead.
-     */
-    easeInOut<Value_7>(from: DeprecatedAnimationTarget<Value_7>, to: Value_7, options?: Partial<EaseOptions & DeprecatedAnimationOptions<Value_7>> | undefined): FramerAnimation<Value_7, BezierOptions>;
+    spring<Value>(from: Animatable_2<Value>, to: Value, options?: Partial<SpringOptions & DeprecatedAnimationOptions<Value>>): FramerAnimation<Value, SpringOptions>;
+    bezier<Value>(from: Animatable_2<Value>, to: Value, options?: Partial<BezierOptions & DeprecatedAnimationOptions<Value>>): FramerAnimation<Value, BezierOptions>;
+    linear<Value>(from: Animatable_2<Value>, to: Value, options?: Partial<EaseOptions & DeprecatedAnimationOptions<Value>>): FramerAnimation<Value, BezierOptions>;
+    ease<Value>(from: Animatable_2<Value>, to: Value, options?: Partial<EaseOptions & DeprecatedAnimationOptions<Value>>): FramerAnimation<Value, BezierOptions>;
+    easeIn<Value>(from: Animatable_2<Value>, to: Value, options?: Partial<EaseOptions & DeprecatedAnimationOptions<Value>>): FramerAnimation<Value, BezierOptions>;
+    easeOut<Value>(from: Animatable_2<Value>, to: Value, options?: Partial<EaseOptions & DeprecatedAnimationOptions<Value>>): FramerAnimation<Value, BezierOptions>;
+    easeInOut<Value>(from: Animatable_2<Value>, to: Value, options?: Partial<EaseOptions & DeprecatedAnimationOptions<Value>>): FramerAnimation<Value, BezierOptions>;
 };
 
 /**
@@ -289,6 +173,7 @@ export declare interface ArrayControlDescription<P = any> extends BaseControlDes
     control: ArrayItemControlDescription<P>;
     /** @deprecated This property has been renamed to control. */
     propertyControl?: ArrayItemControlDescription<P>;
+
     maxCount?: number;
     defaultValue?: any[];
 }
@@ -297,7 +182,7 @@ export declare interface ArrayControlDescription<P = any> extends BaseControlDes
  * Array sub type
  * @public
  */
-export declare type ArrayItemControlDescription<P = any> = Omit<NumberControlDescription<P>, "hidden" | "description"> | Omit<EnumControlDescription<P>, "hidden" | "description"> | Omit<BooleanControlDescription<P>, "hidden" | "description"> | Omit<StringControlDescription<P>, "hidden" | "description"> | Omit<RichTextControlDescription<P>, "hidden" | "description"> | Omit<ColorControlDescription<P>, "hidden" | "description" | "optional"> | Omit<SegmentedEnumControlDescription<P>, "hidden" | "description"> | Omit<ImageControlDescription<P>, "hidden" | "description"> | Omit<ResponsiveImageControlDescription<P>, "hidden" | "description"> | Omit<FileControlDescription<P>, "hidden" | "description"> | Omit<ComponentInstanceDescription<P>, "hidden" | "description"> | Omit<TransitionControlDescription<P>, "hidden" | "description"> | Omit<LinkControlDescription<P>, "hidden" | "description"> | Omit<DateControlDescription<P>, "hidden" | "description"> | Omit<ObjectControlDescription<P>, "hidden" | "description" | "optional"> | Omit<ScrollSectionRefControlDescription<P>, "hidden" | "description"> | Omit<CustomCursorControlDescription<P>, "hidden" | "description"> | Omit<BorderControlDescription<P>, "hidden" | "description"> | Omit<CursorControlDescription<P>, "hidden" | "description">;
+export declare type ArrayItemControlDescription<P = any> = Omit<NumberControlDescription<P>, "hidden" | "description"> | Omit<EnumControlDescription<P>, "hidden" | "description"> | Omit<BooleanControlDescription<P>, "hidden" | "description"> | Omit<StringControlDescription<P>, "hidden" | "description"> | Omit<RichTextControlDescription<P>, "hidden" | "description"> | Omit<ColorControlDescription<P>, "hidden" | "description" | "optional"> | Omit<SegmentedEnumControlDescription<P>, "hidden" | "description"> | Omit<ImageControlDescription<P>, "hidden" | "description"> | Omit<ResponsiveImageControlDescription<P>, "hidden" | "description"> | Omit<FileControlDescription<P>, "hidden" | "description"> | Omit<ComponentInstanceDescription<P>, "hidden" | "description"> | Omit<TransitionControlDescription<P>, "hidden" | "description"> | Omit<LinkControlDescription<P>, "hidden" | "description"> | Omit<DateControlDescription<P>, "hidden" | "description"> | Omit<ObjectControlDescription<P>, "hidden" | "description" | "optional"> | Omit<ScrollSectionRefControlDescription<P>, "hidden" | "description"> | Omit<CustomCursorControlDescription<P>, "hidden" | "description"> | Omit<BorderControlDescription<P>, "hidden" | "description" | "optional"> | Omit<CursorControlDescription<P>, "hidden" | "description">;
 
 /**
  * Enable or disable the automatic generation of layout ids for canvas layers.
@@ -343,16 +228,18 @@ export declare interface BackgroundImage {
     fit?: ImageFit;
     backgroundSize?: number;
     loading?: "lazy" | "eager";
+    fetchPriority?: "high" | "low";
 }
 
 /** @public */
 export declare const BackgroundImage: {
-    isImageObject: (image: any) => image is object & BackgroundImage;
+    isImageObject: (image: unknown) => image is object & BackgroundImage;
 };
 
 /** @public */
 declare interface BackgroundImageProps extends ImageAltProps {
     background: BackgroundImage;
+    fitImageDimension?: FitImageDimensionType;
 }
 
 /** @public */
@@ -393,7 +280,7 @@ export declare interface BackgroundProperties {
 export declare interface BaseControlDescription<P = any> {
     title?: string;
     description?: string;
-    hidden?(props: P, rootProps: any): boolean;
+    hidden?: ((props: P, rootProps: any) => boolean) | boolean;
 }
 
 /**
@@ -478,6 +365,7 @@ declare interface Border {
 export declare interface BorderControlDescription<P = any> extends BaseControlDescription<P> {
     type: ControlType.Border;
     defaultValue?: Border;
+    optional?: boolean;
 }
 
 declare interface BorderRadiusControlDescription<P = any> extends BaseControlDescription<P> {
@@ -515,11 +403,11 @@ export declare interface BoxShadowControlDescription<P = any> extends BaseContro
 
 /** @public */
 export declare interface BoxShadowProperties {
-    shadows: Readonly<BoxShadow[]>;
+    shadows: readonly BoxShadow[];
 }
 
 declare interface BoxShadowProperties_2 {
-    shadows: Readonly<BoxShadow[]>;
+    shadows: readonly BoxShadow[];
 }
 
 declare type CallbackMap = Record<string, (() => void) | undefined>;
@@ -532,7 +420,15 @@ declare interface Change<Value> {
     oldValue?: Value;
 }
 
+export declare function clampRGB<T>(color: T): T | string;
+
 declare type ClassName = string | false | void | null | 0;
+
+declare interface CollectionReferenceControlDescription<P = any> extends BaseControlDescription<P> {
+    type: ControlType.CollectionReference;
+    dataIdentifier: string;
+    defaultValue?: string;
+}
 
 /**
  * @public
@@ -586,421 +482,43 @@ export declare interface Color {
  */
 export declare const Color: {
     (color: IncomingColor | Color | number, r?: number, g?: number, b?: number): Color;
-    /**
-     * Formats a Color object into a readable string for debugging.
-     *
-     * @remarks
-     * ```jsx
-     * const blue = Color("#0099FF")
-     *
-     * Color.inspect(blue)
-     * ```
-     *
-     * @param color - The Color object to format
-     * @param initialValue - A canonical hex string to be used instead of an rgba() value.
-     */
     inspect(color: Color, initialValue?: string): string;
-    /**
-     * Checks if the value is a valid color object or color string. Returns true or false.
-     *
-     * @remarks
-     * ```jsx
-     * Color.isColor("#0099FF") // true
-     * Color.isColor(Color("#0099FF")) // true
-     * ```
-     *
-     * @param color - The potential color value to validate
-     */
     isColor(color: string | Color): boolean;
-    /**
-     * Checks if the value is a valid color string. Returns true or false.
-     *
-     * @remarks
-     * ```jsx
-     * Color.isColorString("#0099FF") // true
-     * ```
-     *
-     * @param color - A string representing a color
-     */
     isColorString(colorString: string | object): boolean;
-    /**
-     * Checks if the value is a valid Color object. Returns true or false.
-     *
-     * @remarks
-     * ```jsx
-     * const blue = Color("#0099FF")
-     *
-     * Color.isColorObject(blue) // true
-     * Color.isColorObject("#0099FF") // false
-     * ```
-     *
-     * @param color - An object representing a color.
-     */
-    isColorObject(color: any): color is object & Color;
-    /**
-     * Formats a Color instance into an RGB string.
-     *
-     * @remarks
-     * ```jsx
-     * const blue = Color("#0099FF")
-     *
-     * Color.toString(blue) // "rgb(0, 153, 255)"
-     * ```
-     *
-     * @param color - The color to format
-     */
+    isColorObject(color: unknown): color is object & Color;
     toString(color: Color): string;
-    /**
-     * Formats a Color instance into an hexidecimal value.
-     *
-     * @remarks
-     * ```jsx
-     * const blue = Color("#0099FF")
-     *
-     * Color.toHex(blue) // "0099FF"
-     * Color.toHex(Color("#FFAAFF"), true) // "FAF"
-     * ```
-     *
-     * @param color - The color to format
-     * @param allow3Char - If true will return short hand colors if possible (defaults to false).
-     */
     toHex(color: Color, allow3Char?: boolean): string;
-    /**
-     * Formats a Color instance into an hexidecimal string.
-     *
-     * @remarks
-     * ```jsx
-     * const blue = Color("#0099FF")
-     *
-     * Color.toHexString(blue) // "#0099FF"
-     * Color.toHexString(Color("#FFAAFF"), true) // "#FAF"
-     * ```
-     *
-     * @param color - The color to format
-     * @param allow3Char - If true will return short hand colors if possible (defaults to false).
-     */
     toHexString(color: Color, allow3Char?: boolean): string;
-    /**
-     * Formats a Color instance into an RGB string.
-     *
-     * @remarks
-     * ```jsx
-     * const blue = Color("#0099FF")
-     *
-     * Color.toRgbString(blue) // "rgb(0, 153, 255)"
-     * ```
-     *
-     * @param color - The color to format
-     */
+    isP3String(color: unknown): color is string;
     toRgbString(color: Color): string;
-    /**
-     * Formats a Color instance into an HUSL object.
-     *
-     * @remarks
-     * ```jsx
-     * const blue = Color("#0099FF")
-     *
-     * Color.toHusl(blue) // {h: 250, s: 100, l: 50, a: 1}
-     * ```
-     *
-     * @param color - The color to format
-     */
     toHusl(color: Color): ColorHSLA;
-    /**
-     * Formats a Color instance into an HSL string.
-     *
-     * @remarks
-     * ```jsx
-     * const blue = Color("#0099FF")
-     *
-     * Color.toHslString(blue) // "hsl(204, 100%, 50%)"
-     * ```
-     *
-     * @param color - The color to format
-     */
     toHslString(color: Color): string;
-    /**
-     * Formats a Color instance into an HSV object.
-     *
-     * @remarks
-     * ```jsx
-     * const blue = Color("#0099FF")
-     *
-     * Color.toHsv(blue) // {h: 204, s: 1, v: 1, a: 1}"
-     * ```
-     *
-     * @param color - The color to format
-     */
     toHsv(color: Color): ColorHSVA;
-    /**
-     * Formats a Color instance into an HSV string.
-     *
-     * @remarks
-     * ```jsx
-     * const blue = Color("#0099FF")
-     *
-     * Color.toHslString(blue) // "hsv(204, 100%, 50%)"
-     * ```
-     *
-     * @param color - The color to format
-     */
     toHsvString(color: Color): string;
-    /**
-     * Formats a Color instance into {@link https://css-tricks.com/snippets/css/named-colors-and-hex-equivalents/ | CSS name}
-     * or returns false if unspecified.
-     *
-     * @remarks
-     * ```jsx
-     * const green = Color("#8FBC8F")
-     *
-     * Color.toName(green) // "darkseagreen"
-     * ```
-     *
-     * @param color - The color to format
-     */
     toName(color: Color): string | false;
-    /**
-     * Formats a color into an HSL object.
-     *
-     * @remarks
-     * ```jsx
-     * const blue = Color("#0099FF")
-     *
-     * Color.toHsl(blue) // {h: 204, s: 1, l: 0.5, a: 1}
-     * ```
-     *
-     * @param color - The color to format
-     */
     toHsl(color: Color): ColorHSLA;
-    /**
-     * Formats a color into an RGB object.
-     *
-     * @remarks
-     * ```jsx
-     * const blue = Color("#0099FF")
-     *
-     * Color.toRgb(blue) // {r: 40, g: 175, b: 250, a: 1}
-     * ```
-     *
-     * @param color - The color to format
-     */
     toRgb(color: Color): ColorRGBA;
-    /**
-     * Returns a brightened color.
-     *
-     * @remarks
-     * ```jsx
-     * const blue = Color("#0099FF")
-     * const brightblue = Color.lighten(blue, 20)
-     * ```
-     *
-     * @param color - The color to brighten
-     * @param amount - A number, from 0 to 100. Set to 10 by default.
-     */
     brighten(color: Color, amount?: number): Color;
-    /**
-     * Add white and return a lightened color.
-     *
-     * @remarks
-     * ```jsx
-     * const blue = Color("#0099FF")
-     * const lightblue = Color.lighten(blue, 20)
-     * ```
-     *
-     * @param color - The color to lighten
-     * @param amount - A number, from 0 to 100. Set to 10 by default.
-     */
     lighten(color: Color, amount?: number): Color;
-    /**
-     * Add black and return a darkened color.
-     *
-     * @remarks
-     * ```jsx
-     * const blue = Color("#0099FF")
-     * const darkblue = Color.darken(blue, 20)
-     * ```
-     * @param color - The color to darken.
-     * @param amount - A number, from 0 to 100. Set to 10 by default.
-     */
     darken(color: Color, amount?: number): Color;
-    /**
-     * Increase the saturation of a color.
-     *
-     * @remarks
-     * ```jsx
-     * const blue = Color("#0099FF")
-     * const saturated = Color.saturate(blue, 100)
-     * ```
-     * @param color - The color to modify
-     * @param amount - A number from 0 to 100. Set to 10 by default.
-     */
     saturate(color: Color, amount?: number): Color;
-    /**
-     * Decrease the saturation of a color.
-     *
-     * @remarks
-     * ```jsx
-     * const blue = Color("#0099FF")
-     * const desaturated = Color.desaturate(blue, 100)
-     * ```
-     * @param color - The color to modify
-     * @param amount - A number from 0 to 100. Set to 10 by default.
-     */
     desaturate(color: Color, amount?: number): Color;
-    /**
-     * Return a fully desaturated color.
-     *
-     * @remarks
-     * ```jsx
-     * const blue = Color("#0099FF")
-     * const gray = Color.grayscale(blue)
-     * ```
-     * @param color - The color to convert.
-     */
     grayscale(color: Color): Color;
-    /**
-     * Returns a new color for the rotated hue.
-     * @param color - The color to manipulate
-     * @param angle - The angle in degrees in which to rotate the hue.
-     */
     hueRotate(color: Color, angle: number): Color;
-    /**
-     * Set the alpha value, also known as opacity, of the color.
-     *
-     * @remarks
-     * ```jsx
-     * const blue = Color("#0099FF")
-     *
-     * const transparent = Color.alpha(blue, 0.1)
-     * ```
-     * @param color - The original color to modify.
-     * @param alpha - A number from 1 to 0. Set to 1 by default.
-     */
     alpha(color: Color, a?: number): Color;
-    /**
-     * Set the alpha value, also known as opacity, of the color to zero.
-     *
-     * @remarks
-     * ```jsx
-     * const blue = Color("#0099FF")
-     *
-     * const transparent = Color.alpha(blue)
-     * ```
-     * @param color - The original color to modify.
-     */
     transparent(color: Color): Color;
-    /**
-     * Change the alpha value, also know as opacity, by a multiplier.
-     *
-     * @remarks
-     * ```jsx
-     * const blue = Color("#0099FF")
-     * const transparent = Color.multiplyAlpha(blue, 0.5)
-     * ```
-     * @param color - The original color to modify.
-     * @param alphaValue - A number between 1 and 0, defaults to 1,
-     */
     multiplyAlpha(color: Color, alphaValue?: number): Color;
-    /**
-     * Returns a function that can be used to transition a color from one value
-     * to another. By default this will use the RGB `mix` model. Useful for providing to animation tools.
-     *
-     * ```jsx
-     * const blend = Color.interpolate(Color("red"), Color("blue"))
-     *
-     * blend(0)   // Initial state (red)
-     * blend(0.5) // Mid state (purple)
-     * blend(1)   // Final state (blue)
-     * ```
-     * @param colorA - The starting color
-     * @param colorB - The final color
-     * @param model  - The model to use for the mix. One of {@link ColorMixModelType}
-     */
     interpolate(colorA: Color, colorB: Color, model?: ColorMixModelType): ((progress: number) => Color);
-    /**
-     * Create a function that will mix two colors together and output the result as an rgb string.
-     *
-     * @param colorA - The starting color
-     * @param colorB - The final color
-     * @param options - Options for the color mixer
-     *
-     * - `model`: The model to use for the mix. One of {@link ColorMixModelType}
-     *
-     * @public
-     */
     mix(from: Color, toColor: Color, { model }?: {
         model?: ColorMixModelType | undefined;
     }): (p: number) => string;
-    /**
-     * Blend two colors together, optionally based on user input. The fraction defines the
-     * distribution between the two colors, and is set to 0.5 by default.
-     * The `limit` defines if the color can transition beyond its range.
-     * @remarks
-     * ```jsx
-     * // Mix red with yellow
-     * const orange = Color.mix("red", "yellow", 0.5)
-     * ```
-     *
-     * ```jsx
-     * Color.mix("red", "yellow", 0.5, true, "husl")
-     * ```
-     *
-     * @param colorA   - A color, the first one.
-     * @param colorB   - A color, the second one.
-     * @param fraction - An optional number, from 0 to 1, set to 0.5 by default.
-     * @param limit    - An optional boolean, set to false by default.
-     * @param model    - The model to use for the mix. One of {@link ColorMixModelType}
-     */
     mixAsColor(colorA: Color, colorB: Color, fraction?: number, limit?: boolean, model?: ColorMixModelType): Color | null;
-    /**
-     * Returns a Color instance with a random color value set.
-     *
-     * @remarks
-     * ```jsx
-     * const random = Color.random()
-     * ```
-     *
-     * @param alphaValue - An optional alpha value, set to 1 by default.
-     */
     random(alphaValue?: number): Color;
-    /**
-     * Creates a greyscale color.
-     *
-     * @remarks
-     * ```jsx
-     * const gray = Color.gray(0.5)
-     * ```
-     *
-     * @param amount - A number from 0 to 1 representing the amount of white.
-     * @param alphaValue  - A number from 0 to 1 representing the alpha. Set to 1 by default.
-     */
     grey(amount?: number, alphaValue?: number): Color;
 
-
-
-    /**
-     * Calculates the color difference using {@link https://en.wikipedia.org/wiki/Color_difference#Euclidean |
-     * Euclidean distance fitting human perception}. Returns a value between 0 and 765
-     * @param colorA - A first color.
-     * @param colorB - A second color.
-     */
+    rgbToHsl(r: number, g: number, b: number): ColorHSL;
+    isValidColorProperty(name: string, value: string): boolean;
     difference(colorA: Color, colorB: Color): number;
-    /**
-     * Checks whether two Color objects are equal.
-     *
-     * @remarks
-     * ```jsx
-     * Color.equal(Color("red"), Color("red"))  // true
-     * Color.equal(Color("red"), Color("blue")) // false
-     *
-     * Color.equal(Color("#0099FF"), Color("009AFF"))    // false
-     * Color.equal(Color("#0099FF"), Color("009AFF"), 2) // true
-     * ```
-     *
-     * @param colorA    - The first color
-     * @param colorB    - The second color
-     * @param tolerance - A tolerance for the difference between rgba values. Set to 0.1 by default.
-     */
     equal(colorA: Color, colorB: Color, tolerance?: number): boolean;
     luminance(color: Color): number;
     contrast(a: Color, b: Color): number;
@@ -1139,65 +657,53 @@ export declare type ColorRGBA = ColorRGB & {
 };
 
 /**
- * Describes a single font used by a component.
- *
- * This should have enough data to construct a corresponding [FontFace] object
- * or a CSS `@font-face` rule.
- *
- * [FontFace]: https://drafts.csswg.org/css-font-loading/#fontface-interface
+ * Describes a single font used by a component. Unlike [Font](../render/fonts/types.ts) objects
+ * which are fetched from the Google/Fontshare/etc APIs every time the canvas is loaded (and die
+ * when the canvas is unloaded), these objects get serialized into codegenerated web pages and
+ * components.
  *
  * @public
  */
-export declare interface ComponentFont extends ComponentFontV1 {
-    source: FontSourceName;
+export declare interface ComponentFont extends Omit<ComponentFontV2, "family"> {
+
+
 }
 
 /**
- * Describes a bundle of fonts used by a single component, together with feature
- * flags to indicate which font features that component supported at the time of
- * codegen.
- */
-declare type ComponentFontBundle = {
-    /**
-     * This flag specifies whether the font bundle includes the specific font
-     * weights of Framer’s Inter font that the component uses. New smart
-     * components do that (which means we can emit CSS only for Inter fonts that
-     * are actually used); older smart components don’t (which means some places
-     * will emit CSS for all Inter fonts if this flag is not set).
-     * https://www.notion.so/framer/RFC-ComponentFont-v2-d5fd3e822fb049ffb6971554ab0e4e42
-     */
-    explicitInter: boolean;
-    fonts: ComponentFont[];
-};
-
-/**
- * An older version of ComponentFont that doesn't include the `source` field.
- * While this version of ComponentFont is not used internally, it may still be
- * passed into `addFonts()` by older versions of smart components.
+ * An older (pre-Feb 2024) version of ComponentFont that doesn’t include the `source` field. This
+ * version was introduced in the same PR that introduced ComponentFontBundle, thus upgrading from
+ * ComponentFontV1 to ComponentFontV2 also involves wrapping ComponentFontV1s into a
+ * ComponentFontBundle.
+ *
+ * While this version of ComponentFont is not used internally, it may still be passed into
+ * `addFonts()` by older versions of smart components.
  */
 declare interface ComponentFontV1 {
     url: string;
-    /** @deprecated Use cssFamilyName instead */
-    family?: string;
-    /** The font family name to use in CSS */
-    cssFamilyName?: string;
-    /** The font family name shown in the UI */
-    uiFamilyName?: string;
+    family: string;
 
     style?: string;
     weight?: string;
     stretch?: string;
     unicodeRange?: string;
-    /** Indicates if the font supports OpenType features */
-    openType?: boolean;
-    /** Module asset information for fonts loaded from modules */
-    moduleAsset?: {
-        localModuleIdentifier: string;
-        url: string;
-    };
 }
 
-/** @public */
+/**
+ * An older (pre-Sep 2025) version of ComponentFont that doesn’t include the `cssFontFamily` field.
+ *
+ * While this version of ComponentFont is not used internally, it may still be passed into
+ * `addFonts()` by older versions of smart components.
+ */
+declare interface ComponentFontV2 extends ComponentFontV1 {
+    source: FontSourceName;
+    variationAxes?: ReadonlyFontVariationAxes;
+
+}
+
+/**
+ * @deprecated Use {@link SlotControlDescription} instead.
+ * @public
+ */
 export declare interface ComponentInstanceDescription<P = any> extends BaseControlDescription<P> {
     type: ControlType.ComponentInstance;
 }
@@ -1206,7 +712,8 @@ export declare interface ComponentInstanceDescription<P = any> extends BaseContr
  * @public
  */
 declare type ComponentWithPreload<T extends React.ComponentType<any>> = T & {
-    preload: () => Promise<T>;
+    preload: () => Promise<void | T>;
+    getStatus: () => RouteStatus;
 };
 
 declare type ConstraintAuto = "auto";
@@ -1290,7 +797,7 @@ declare const ConstraintsContext: React_2.Context<{
 }>;
 
 /** @public */
-export declare type ControlDescription<P = any> = NumberControlDescription<P> | EnumControlDescription<P> | BooleanControlDescription<P> | StringControlDescription<P> | RichTextControlDescription<P> | ColorControlDescription<P> | FusedNumberControlDescription<P> | SegmentedEnumControlDescription<P> | ImageControlDescription<P> | ResponsiveImageControlDescription<P> | FileControlDescription<P> | ComponentInstanceDescription<P> | ArrayControlDescription<P> | EventHandlerControlDescription<P> | TransitionControlDescription<P> | BoxShadowControlDescription<P> | LinkControlDescription<P> | DateControlDescription<P> | ObjectControlDescription<P> | FontControlDescription<P> | PageScopeControlDescription<P> | ScrollSectionRefControlDescription<P> | CustomCursorControlDescription<P> | BorderControlDescription<P> | CursorControlDescription<P> | PaddingControlDescription<P> | BorderRadiusControlDescription<P>;
+export declare type ControlDescription<P = any> = NumberControlDescription<P> | EnumControlDescription<P> | BooleanControlDescription<P> | StringControlDescription<P> | RichTextControlDescription<P> | ColorControlDescription<P> | FusedNumberControlDescription<P> | SegmentedEnumControlDescription<P> | ImageControlDescription<P> | ResponsiveImageControlDescription<P> | FileControlDescription<P> | ComponentInstanceDescription<P> | ArrayControlDescription<P> | EventHandlerControlDescription<P> | TransitionControlDescription<P> | BoxShadowControlDescription<P> | LinkControlDescription<P> | LinkRelValuesControlDescription<P> | DateControlDescription<P> | ObjectControlDescription<P> | FontControlDescription<P> | PageScopeControlDescription<P> | ScrollSectionRefControlDescription<P> | CustomCursorControlDescription<P> | BorderControlDescription<P> | CursorControlDescription<P> | PaddingControlDescription<P> | BorderRadiusControlDescription<P> | GapControlDescription<P> | CollectionReferenceControlDescription<P> | MultiCollectionReferenceControlDescription<P> | TrackingIdControlDescription<P> | VectorSetItemControlDescription<P> | SlotControlDescription<P>;
 
 declare type ControlPoints = [number, number, number, number];
 
@@ -1580,15 +1087,18 @@ export declare enum ControlType {
      */
     File = "file",
     /**
-     * A control that references to another component on the canvas,
-     * included in the component props as a React node.
-     * The component will have an outlet to allow linking to other Frames.
-     * Available Frames will also be displayed in a dropdown menu in the
-     * properties panel. The component reference will be provided as a property.
-     * As a convention, the name for the property is usually just `children`.
+     * Deprecated, please use {@link ControlType.Slot} instead. The new slot type doesn't need to be
+     * nested within an array control if you want to allow for multiple slot items to be connected.
+     * By default the new slot type allows for an infinite amount of items. You can limit the amount
+     * of items by setting the `maxCount` property.
      *
-     * Multiple components can be linked by combining the `ComponentInstance`
-     * type with the {@link ControlType.Array}.
+     * @deprecated Please use {@link ControlType.Slot} instead.
+     */
+    ComponentInstance = "componentinstance",
+    /**
+     * A control that references 1 to many other components on the canvas, included in the component
+     * props as a React node. This control by default allows any number of components to be linked,
+     * but this can be limited by setting the `maxCount` property.
      *
      * ```javascript
      * export function MyComponent(props) {
@@ -1597,12 +1107,13 @@ export declare enum ControlType {
      *
      * addPropertyControls(MyComponent, {
      *   children: {
-     *     type: ControlType.ComponentInstance,
+     *     type: ControlType.Slot,
+     *     maxCount: 5,
      *   },
      * })
      * ```
      */
-    ComponentInstance = "componentinstance",
+    Slot = "slot",
     /**
      * A control that allows multiple values per `ControlType`, provided as an
      * array via properties. For most control types this will be displayed as an
@@ -1756,6 +1267,7 @@ export declare enum ControlType {
      * addPropertyControls(MyComponent, {
      *   date: {
      *     type: ControlType.Date,
+     *     displayTime: true
      *   }
      * })
      * ```
@@ -1781,7 +1293,34 @@ export declare enum ControlType {
      * ```
      */
     Object = "object",
-
+    /**
+     * A control that allows for selecting a font to be used in the component.
+     *
+     * ```javascript
+     * export function MyComponent(props) {
+     *   return <Frame style={props.customFont} />
+     * }
+     *
+     * addPropertyControls(MyComponent, {
+     *   customFont: {
+     *     type: ControlType.Font,
+     *     title: "Custom Font",
+     *     defaultValue: {
+     *       textAlign: "left", // or "right", or "center", or "justify"
+     *       fontSize: 16, // or "16px", or "16rem"
+     *       letterSpacing: 0.1, // or "0.1em", or "1px"
+     *       lineHeight: 1.5, // or "1.5em", or "20px", or "150%"
+     *     },
+     *     defaultFontType: "sans-serif", // or "serif", or "monospace"
+     *     defaultFontSize: "16px", // or "16rem", or "16pt"
+     *     displayTextAlignment: true,
+     *     displayFontSize: true,
+     *     controls: "basic", // or "extended", to show more options
+     *   }
+     * })
+     * ```
+     */
+    Font = "font",
 
 
 
@@ -1850,7 +1389,38 @@ export declare enum ControlType {
      *   }
      * })
      */
-    BorderRadius = "borderradius"
+    BorderRadius = "borderradius",
+    /**
+     * A control that represents CSS gap.
+     *
+     * @remarks
+     * ```javascript
+     * function MyComponent({ gap }) {
+     *   return <div style={{ gap, display: "grid" }} />
+     * }
+     *
+     * addPropertyControls(MyComponent, {
+     *   gap: {
+     *     type: ControlType.Gap,
+     *     defaultValue: "8px",
+     *   }
+     * })
+     */
+    Gap = "gap",
+
+
+    /**
+     * @public
+     * A control that represents an id of a tracking event:
+     * - Lowercase letters (a-z) and numbers (0-9) only
+     * - Hyphens (-) as separators (no leading/trailing or consecutive hyphens)
+     * - Valid: "button-click", "form-submit", "video-play", "nav-item-1"
+     * - Invalid: "Button-Click", "form--submit", "-button-click", "button_utils"
+     *
+     */
+    TrackingId = "trackingid",
+
+
 }
 
 /**
@@ -2076,14 +1646,15 @@ declare interface DampingDurationSpringOptions {
 export declare const Data: {
     <T extends object = object>(initial?: Partial<T> | object): T;
 
-
-
-
+    addData(_data: object): void;
+    reset(): void;
+    addObserver<T extends object>(target: T, observer: Observer<T>): Cancel;
 };
 
 /** @public */
 export declare interface DateControlDescription<P = any> extends BaseControlDescription<P> {
     type: ControlType.Date;
+    displayTime?: boolean;
     defaultValue?: string;
 }
 
@@ -2239,11 +1810,12 @@ declare class DeprecatedFrameType extends Layer<DeprecatedCoreFrameProps, Deprec
     static getDerivedStateFromProps(nextProps: Partial<DeprecatedCoreFrameProps>, prevState: DeprecatedFrameState): DeprecatedFrameState | null;
     static updatedSize(props: Partial<DeprecatedCoreFrameProps>, state: DeprecatedFrameState): AnimatableObject<Size> | Size;
     getStyle(): React_2.CSSProperties;
-    propsObserver: AnimatableObject<DeprecatedCoreFrameProps>;
+    propsObserver?: AnimatableObject<DeprecatedCoreFrameProps>;
     propsObserverCancel?: Cancel;
-    sizeObserver: AnimatableObject<Size>;
+    sizeObserver?: AnimatableObject<Size>;
     sizeObserverCancel?: Cancel;
-    layoutChildren(): (React_2.ReactElement<any, string | React_2.JSXElementConstructor<any>> | React_2.FunctionComponentElement<{
+    layoutChildren(): (// biome-ignore lint/suspicious/noExplicitAny: deprecated code
+    React_2.ReactElement<any, string | React_2.JSXElementConstructor<any>> | React_2.FunctionComponentElement<{
         _forwardedOverrides: {
             [key: string]: any;
         };
@@ -2346,30 +1918,29 @@ declare interface DraggableSpecificProps<Draggable> extends Partial<DragEvents<D
 
 declare type EaseOptions = Omit<BezierOptions, "curve">;
 
+declare interface EditorBarProps {
+    framerSiteId: string;
+    features?: Record<string, boolean>;
+}
+
 declare type EffectOrMotionProp<T> = (Partial<Record<keyof FXValues, number>> & {
     transition: ValueAnimationTransition<number>;
 }) | T;
 
-declare interface EffectScrollTarget {
+declare interface EffectScrollTarget<T> {
     ref?: React_2.RefObject<HTMLElement>;
     offset?: number;
     direction?: ScrollDirection;
-    target?: TargetAndTransition | VariantLabels;
+    target: T;
 }
 
-declare interface EffectStyleScrollTarget extends EffectScrollTarget {
-    target: StyleEffect;
-}
+declare type EffectStyleScrollTarget = EffectScrollTarget<StyleEffect>;
 
-declare interface EffectStyleScrollTarget_2 extends EffectScrollTarget {
-    target: Record<keyof FXValues, number>;
-}
+declare type EffectStyleScrollTarget_2 = EffectScrollTarget<Record<keyof FXValues, number>>;
 
 declare const effectValuesKeys: readonly ["opacity", "x", "y", "scale", "rotate", "rotateX", "rotateY", "skewX", "skewY", "transformPerspective"];
 
-declare interface EffectVariantScrollTarget extends EffectScrollTarget {
-    target: string;
-}
+declare type EffectVariantScrollTarget = EffectScrollTarget<string>;
 
 declare type ElementId = string;
 
@@ -2388,6 +1959,8 @@ export declare type EmulatedScrollProps = {
 declare interface EnabledGestures {
     hover: boolean;
     pressed: boolean;
+    loading: boolean;
+    error: boolean;
 }
 
 declare type EnabledVariantGestures = Record<string, EnabledGestures>;
@@ -2401,7 +1974,6 @@ export declare interface EnumControlDescription<P = any> extends BaseControlDesc
     displaySegmentedControl?: boolean;
     /**  Used when displaySegmentedControl is enabled. If not given defaults to horizontal */
     segmentedControlDirection?: "horizontal" | "vertical";
-
 
 }
 
@@ -2422,7 +1994,7 @@ export declare type FadeTransitionOptions = NavigationTransitionAnimation;
 /** @public */
 export declare interface FileControlDescription<P = any> extends BaseControlDescription<P> {
     type: ControlType.File;
-    allowedFileTypes: string[];
+    allowedFileTypes: AllowedFileTypes;
 }
 
 /** @public */
@@ -2439,7 +2011,7 @@ export declare interface FilterNumberProperties {
 
 /** @public */
 export declare interface FilterProperties extends FilterNumberProperties {
-    dropShadows: Readonly<Shadow[]>;
+    dropShadows: readonly Shadow[];
 }
 
 /**
@@ -2455,7 +2027,7 @@ export declare interface FlipTransitionOptions extends NavigationTransitionAnima
 
 export declare function Floating({ alignment, placement, safeArea, offsetX, offsetY, anchorRef, className, children, portalSelector, zIndex, collisionDetection, collisionDetectionPadding, onDismiss, ...rest }: React_2.PropsWithChildren<FloatingProps>): React_2.ReactPortal;
 
-declare interface FloatingProps {
+declare interface FloatingProps extends MotionProps {
     alignment: Alignment;
     placement: Placement;
     offsetX: number;
@@ -2463,34 +2035,55 @@ declare interface FloatingProps {
     anchorRef: React_2.MutableRefObject<HTMLElement | null>;
     safeArea: boolean;
     className: string;
-    portalSelector: string;
+    /** @deprecated */
+    portalSelector?: string;
     zIndex: number | undefined;
     collisionDetection?: boolean;
     collisionDetectionPadding?: number;
-    onDismiss: () => void;
+    onDismiss: () => void | (() => Promise<void>);
 }
 
-declare interface FontControlDefaultValue {
-    textAlign?: "left" | "right" | "center";
-    fontSize?: number;
+declare interface FontControlDefaultValueBase {
+    textAlign?: "left" | "right" | "center" | "justify";
+    fontSize?: string | number;
     letterSpacing?: string | number;
     lineHeight?: string | number;
 }
 
-declare interface FontControlDescription<P = any> extends BaseControlDescription<P> {
+declare interface FontControlDefaultValueWithVariant extends FontControlDefaultValueBase {
+    variant?: FramerFontVariant;
+}
+
+declare type FontControlDescription<P = any> = FontControlDescriptionSansSerif<P> | FontControlDescriptionMonospace<P> | FontControlDescriptionSerif<P>;
+
+declare interface FontControlDescriptionBase<P = any> extends BaseControlDescription<P> {
     type: ControlType.Font;
     controls?: "basic" | "extended";
-    defaultFontType?: "monospace" | "sans-serif";
-    defaultValue?: FontControlDefaultValue;
     displayTextAlignment?: boolean;
     displayFontSize?: boolean;
+    defaultValue?: FontControlDefaultValueBase;
+}
+
+declare interface FontControlDescriptionMonospace<P = any> extends FontControlDescriptionBase<P> {
+    defaultFontType?: "monospace";
+    defaultValue?: FontControlDefaultValueBase;
+}
+
+declare interface FontControlDescriptionSansSerif<P = any> extends FontControlDescriptionBase<P> {
+    defaultFontType?: "sans-serif";
+    defaultValue?: FontControlDefaultValueWithVariant;
+}
+
+declare interface FontControlDescriptionSerif<P = any> extends FontControlDescriptionBase<P> {
+    defaultFontType?: "serif";
+    defaultValue?: FontControlDefaultValueBase;
 }
 
 /** @public */
-declare type FontSourceName = "local" | "google" | "framer" | "fontshare" | "custom";
+declare type FontSourceName = "local" | "google" | "framer" | "fontshare" | "custom" | "builtIn";
 
 /** @public */
-export declare const Frame: React_2.ForwardRefExoticComponent<Partial<FrameProps> & React_2.RefAttributes<HTMLDivElement>>;
+export declare const Frame: React_2.ForwardRefExoticComponent<Omit<Partial<FrameProps>, "ref"> & React_2.RefAttributes<HTMLDivElement>>;
 
 /**
  * @privateRemarks do no use separately from FrameProps
@@ -2635,9 +2228,10 @@ export declare interface FrameLayoutProperties extends PositionStickyProperties,
 }
 
 /** @public */
-export declare interface FrameProps extends ImageAltProps, BackgroundProperties, VisualProperties, Omit<MotionDivProps, "color" | "children">, CSSTransformProperties, LayerProps, FrameLayoutProperties, ConstraintConfiguration, BaseFrameProps {
+export declare interface FrameProps extends ImageAltProps, BackgroundProperties, VisualProperties, Omit<MotionDivProps, "color" | "children">, CSSTransformProperties, LayerProps, FrameLayoutProperties, ConstraintConfiguration, TickerFrameProps, BaseFrameProps {
     componentType?: string;
-    as?: keyof HTMLElementTagNameMap;
+    as?: keyof HTMLElementTagNameMap | "svg";
+
 
 
 
@@ -2752,6 +2346,10 @@ export declare class FramerEvent {
 
 }
 
+declare type FramerFontVariant = (typeof framerFontVariants)[number];
+
+declare const framerFontVariants: readonly ["Regular", "Thin", "Extra Light", "Light", "Medium", "Semibold", "Bold", "Extra Bold", "Black", "Thin Italic", "Extra Light Italic", "Light Italic", "Italic", "Medium Italic", "Semibold Italic", "Bold Italic", "Extra Bold Italic", "Black Italic", "Regular Italic", "Variable", "Variable Italic"];
+
 /**
  * @deprecated Please use {@link ControlType.Padding} and {@link ControlType.BorderRadius}.
  * @public
@@ -2780,11 +2378,16 @@ declare type FXProps = Partial<Prefixed<ParallaxTransformOptions & StyleAppearEf
  */
 declare type FXValues = Record<(typeof effectValuesKeys)[number], MotionValue<number>>;
 
-declare type GestureHandlers = Pick<TapHandlers & React_2.DOMAttributes<HTMLDivElement>, "onTap" | "onTapStart" | "onTapCancel" | "onMouseEnter" | "onMouseLeave">;
+declare interface GapControlDescription<P = any> extends BaseControlDescription<P> {
+    type: ControlType.Gap;
+    defaultValue?: string;
+}
 
 declare type GestureState = Partial<{
     isHovered: boolean;
     isPressed: boolean;
+    isLoading: boolean;
+    isError: boolean;
 }>;
 
 /** @public */
@@ -2815,7 +2418,10 @@ export declare interface IdentityProps {
 }
 
 /** @public */
-declare const Image_2: React_2.ForwardRefExoticComponent<Partial<ImageProps> & React_2.RefAttributes<HTMLDivElement>>;
+declare const Image_2: React_2.ForwardRefExoticComponent<Omit<React_2.PropsWithChildren<Partial<ImageProps> & Partial<{
+    lightbox: LightboxEffectProps;
+    lightboxClassName: string;
+}>>, "ref"> & React_2.RefAttributes<HTMLDivElement>>;
 export { Image_2 as Image }
 
 declare interface ImageAltProps {
@@ -2845,6 +2451,7 @@ export declare type ImageFit = "fill" | "fit" | "stretch" | "tile";
 /** @public */
 declare interface ImageProps extends MotionDivProps, BackgroundImageProps {
     as?: keyof HTMLElementTagNameMap;
+    onClick?: React_2.HTMLAttributes<HTMLDivElement>["onClick"];
 }
 
 /** @public */
@@ -2869,8 +2476,22 @@ declare interface InterpolationOptions {
     colorModel: ColorMixModelType;
 }
 
+/**
+ * @public
+ */
+declare type IsAlphaNumeric<S extends string> = S extends `${infer Head}${infer Tail}` ? Head extends AlphaNumericChar ? IsAlphaNumeric<Tail> : false : true;
+
 /** @public */
 export declare function isRelativeNumber(value: unknown): value is RelativeNumber;
+
+/**
+ * Returns true if the caller is executed in a Framer Canvas or Export Canvas environment, or false
+ * otherwise. This function could be used outside of a React component; the value it returns will
+ * never change.
+ *
+ * @public
+ */
+export declare function isStaticRenderer(): boolean;
 
 /** @public */
 export declare type Layer = InstanceType<typeof Layer>;
@@ -2886,7 +2507,7 @@ export declare const Layer: {
         context: unknown;
         setState<K extends keyof S>(state: S | ((prevState: Readonly<S>, props: Readonly<P>) => S | Pick<S, K> | null) | Pick<S, K> | null, callback?: (() => void) | undefined): void;
         forceUpdate(callback?: (() => void) | undefined): void;
-        render(): React_2.ReactNode;
+        render(): ReactNode;
         readonly props: Readonly<P>;
         state: Readonly<S>;
         refs: {
@@ -2912,7 +2533,7 @@ export declare const Layer: {
         context: unknown;
         setState<K extends keyof S>(state: S | ((prevState: Readonly<S>, props: Readonly<P>) => S | Pick<S, K> | null) | Pick<S, K> | null, callback?: (() => void) | undefined): void;
         forceUpdate(callback?: (() => void) | undefined): void;
-        render(): React_2.ReactNode;
+        render(): ReactNode;
         readonly props: Readonly<P>;
         state: Readonly<S>;
         refs: {
@@ -2937,7 +2558,7 @@ export declare const Layer: {
 /** @public */
 export declare interface LayerProps extends IdentityProps, WillChangeTransformProp, DOMLayoutProps {
     children?: ReactNode;
-    key?: React_2.Key;
+    key?: React_2.Attributes["key"];
 
 
 
@@ -2945,6 +2566,18 @@ export declare interface LayerProps extends IdentityProps, WillChangeTransformPr
 }
 
 export { LayoutGroupContext }
+
+declare interface LightboxEffectProps {
+    transition: Transition;
+    zIndex: number;
+    maxWidth: number;
+    backdrop?: string;
+    padding?: number;
+    paddingTop?: number;
+    paddingRight?: number;
+    paddingBottom?: number;
+    paddingLeft?: number;
+}
 
 /**
  * @public
@@ -2958,7 +2591,7 @@ export declare const LinearGradient: {
     /**
      * @param value -
      */
-    isLinearGradient: (value: any) => value is LinearGradient;
+    isLinearGradient: (value: unknown) => value is LinearGradient;
 
 
 };
@@ -2972,7 +2605,7 @@ export declare interface LinearGradientBase {
 }
 
 /** @public */
-export declare const Link: ForwardRefExoticComponent<Omit<Props, "ref"> & RefAttributes<unknown>>;
+export declare const Link: React_2.ForwardRefExoticComponent<Omit<Props, "ref"> & RefAttributes<unknown>>;
 
 /** @public */
 declare interface LinkControlDescription<P = any> extends BaseControlDescription<P> {
@@ -2989,6 +2622,17 @@ declare interface LinkProps {
      */
     openInNewTab?: boolean;
     smoothScroll?: boolean;
+    clickTrackingId?: string;
+    relValues?: readonly SupportedLinkRelValue[];
+    preserveParams?: boolean;
+    nodeId?: string;
+    scopeId?: string;
+    /**
+     * Indicates whether `motion.a` is used for the child component, allowing the use of `onTap`
+     * instead of `onClick` on the link.
+     */
+    motionChild?: boolean;
+    style?: CSSProperties;
 }
 
 declare interface LinkToWebPage {
@@ -3015,6 +2659,8 @@ export declare interface Locale {
     readonly slug: string;
     /** Optional fallback locale, used when resolving localized values. */
     readonly fallback?: Locale;
+    /** Either "ltr" (left-to-right) or "rtl" (right-to-left). */
+    readonly textDirection?: TextDirection;
 }
 
 /**
@@ -3050,6 +2696,12 @@ declare type MotionDivProps = HTMLMotionProps<"div">;
 
 /** @public */
 export declare function MotionSetup({ children }: Props_2): JSX_2.Element;
+
+declare interface MultiCollectionReferenceControlDescription<P = any> extends BaseControlDescription<P> {
+    type: ControlType.MultiCollectionReference;
+    dataIdentifier: string;
+    defaultValue?: string[];
+}
 
 /**
  * @public
@@ -3261,7 +2913,7 @@ declare type ObjectControlIcon = "object" | "effect" | "color" | "interaction" |
  * Currently not supported: component instance, and event handler.
  * @public
  */
-export declare type ObjectPropertyControlDescription<P = any> = NumberControlDescription<P> | EnumControlDescription<P> | BooleanControlDescription<P> | StringControlDescription<P> | RichTextControlDescription<P> | ColorControlDescription<P> | SegmentedEnumControlDescription<P> | ImageControlDescription<P> | ResponsiveImageControlDescription<P> | FileControlDescription<P> | TransitionControlDescription<P> | BoxShadowControlDescription<P> | LinkControlDescription<P> | DateControlDescription<P> | ArrayControlDescription<P> | ObjectControlDescription<P> | FusedNumberControlDescription<P> | FontControlDescription<P> | PageScopeControlDescription<P> | ScrollSectionRefControlDescription<P> | CustomCursorControlDescription<P> | BorderControlDescription<P> | CursorControlDescription<P> | PaddingControlDescription<P> | BorderRadiusControlDescription<P>;
+export declare type ObjectPropertyControlDescription<P = any> = NumberControlDescription<P> | EnumControlDescription<P> | BooleanControlDescription<P> | StringControlDescription<P> | RichTextControlDescription<P> | ColorControlDescription<P> | SegmentedEnumControlDescription<P> | ImageControlDescription<P> | ResponsiveImageControlDescription<P> | FileControlDescription<P> | TransitionControlDescription<P> | BoxShadowControlDescription<P> | LinkControlDescription<P> | DateControlDescription<P> | ArrayControlDescription<P> | ObjectControlDescription<P> | FusedNumberControlDescription<P> | FontControlDescription<P> | PageScopeControlDescription<P> | ScrollSectionRefControlDescription<P> | CustomCursorControlDescription<P> | BorderControlDescription<P> | CursorControlDescription<P> | PaddingControlDescription<P> | BorderRadiusControlDescription<P> | GapControlDescription<P> | CollectionReferenceControlDescription<P> | MultiCollectionReferenceControlDescription<P> | TrackingIdControlDescription<P>;
 
 /**
  * @public
@@ -3271,7 +2923,7 @@ declare type Observer<Value> = {
     finish: FinishFunction;
 } | UpdateFunction<Value>;
 
-declare type Overflow = "visible" | "hidden" | "scroll" | "auto";
+declare type Overflow = "visible" | "hidden" | "clip" | "scroll" | "auto";
 
 declare interface OverflowProperties {
     overflow: Overflow;
@@ -3299,7 +2951,12 @@ declare interface PaddingControlDescription<P = any> extends BaseControlDescript
     defaultValue?: string;
 }
 
-export declare const Page: ForwardRefExoticComponent<Partial<PageProps> & RefAttributes<HTMLDivElement>>;
+/**
+ * @deprecated Creating new Page components in Framer is no longer supported as of July 2025.
+ * Existing Page components will continue to work, but please use alternative solutions for new
+ * projects.
+ */
+export declare const Page: ForwardRefExoticComponent<Omit<Partial<PageProps>, "ref"> & RefAttributes<HTMLDivElement>>;
 
 /**
  * @public
@@ -3661,10 +3318,14 @@ export declare type PageProps = Partial<PageProperties> & Partial<Omit<FrameProp
  * Webkit issue: https://bugs.webkit.org/show_bug.cgi?id=240653
  * */
 /** @public */
-export declare function PageRoot({ RootComponent, isWebsite, routeId, framerSiteId, pathVariables, routes, collectionUtils, notFoundPage, isReducedMotion, includeDataObserver, localeId, locales, preserveQueryParams, enableImproveInpDuringHydration, addHydrationMarkers, }: PageRootProps): JSX_2.Element;
+export declare function PageRoot({ RootComponent, isWebsite, routeId, framerSiteId, pathVariables, routes, collectionUtils, notFoundPage, isReducedMotion, includeDataObserver, localeId, locales, preserveQueryParams, EditorBar, defaultPageStyle, disableHistory, LayoutTemplate, siteCanonicalURL, adaptLayoutToTextDirection, }: PageRootProps): JSX_2.Element;
 
 declare interface PageRootProps {
-    RootComponent: RouteComponent;
+    /**
+     * @deprecated Passing this when `isWebsite` is true doesn't do anything, the page to render is instead taken from
+     * the `routes` map, via the `routeId` prop.
+     */
+    RootComponent?: RouteComponent;
     isWebsite: boolean;
     /**
      * framerSiteId is used by forms to identify the source of the form.
@@ -3673,17 +3334,23 @@ declare interface PageRootProps {
     routeId: string;
     pathVariables?: Record<string, unknown>;
     routes: Routes;
-    collectionUtils: UtilsByCollectionId;
+    collectionUtils?: UtilsByCollectionId;
     notFoundPage?: React_2.ComponentType;
     isReducedMotion?: boolean;
     includeDataObserver?: boolean;
-    locales?: Locale[];
+    locales?: readonly Locale[];
     localeId?: LocaleId;
+    adaptLayoutToTextDirection?: boolean;
     preserveQueryParams?: boolean;
-    /** Is `true` when the improveInpDuringHydration experiment is enabled. To be removed when the experiment is removed. */
-    enableImproveInpDuringHydration?: boolean;
-    /** Is `true` when the page root is used at the live site and is being hydrated. */
-    addHydrationMarkers?: boolean;
+    LayoutTemplate?: React_2.ComponentType<{
+        routeId: string;
+        style?: React_2.CSSProperties;
+        children: (inLayoutTemplate: boolean) => React_2.ReactNode;
+    }>;
+    EditorBar?: React_2.ComponentType<EditorBarProps>;
+    defaultPageStyle?: React_2.CSSProperties;
+    disableHistory?: boolean;
+    siteCanonicalURL?: string;
 }
 
 export declare interface PageScopeControlDescription<P = any> extends BaseControlDescription<P> {
@@ -3716,6 +3383,7 @@ export declare interface Point {
  * @public
  */
 export declare namespace Point {
+
 
 
 
@@ -3788,6 +3456,16 @@ declare interface Props_2 {
 
 declare type Props_3<T> = Omit<T, "animate" | "initial" | "exit"> & Pick<PresenceEffectOptions, "animate" | "exit" | "initial">;
 
+declare interface Props_4 {
+    strokeEffectLength: number;
+    strokeEffectGap: number;
+    strokeEffectOffset: number;
+    strokeEffectTotalLength: number;
+    strokeEffectLoop: boolean;
+    strokeEffectLoopType: "repeat" | "mirror" | "continuous";
+    pathLengthTransition: Omit<Transition, "from">;
+}
+
 /**
  * @public
  */
@@ -3807,7 +3485,7 @@ export declare const RadialGradient: {
      * @param value -
      * @public
      */
-    isRadialGradient: (value: any) => value is RadialGradient;
+    isRadialGradient: (value: unknown) => value is RadialGradient;
 
 
 };
@@ -3876,6 +3554,7 @@ export declare const Rect: {
 
 
 
+
     /** Takes a rect and transforms it by a matrix, resulting in the bounding rectangle of the
      * rotated and/or translated original.
      * @param rect - rectangle to transform
@@ -3906,7 +3585,6 @@ export declare const Rect: {
      * @deprecated: please use Rect.equals instead
      */
     isEqual: (rectA: Rect | null, rectB: Rect | null) => boolean;
-
 
 
 
@@ -4042,9 +3720,6 @@ declare enum RenderTargetName {
 }
 
 /** @public */
-export declare function resolveLink(href: LinkToWebPage | string | undefined, router: Partial<RouterAPI>, implicitPathVariables?: Record<string, unknown>): string | undefined;
-
-/** @public */
 declare interface ResponsiveImageControlDescription<P = any> extends BaseControlDescription<P> {
     type: ControlType.ResponsiveImage;
 }
@@ -4054,6 +3729,7 @@ declare interface RichTextControlDescription<P = any> extends BaseControlDescrip
     type: ControlType.RichText;
     defaultValue?: string;
     placeholder?: string;
+    preventLocalization?: boolean;
 
 }
 
@@ -4076,9 +3752,13 @@ declare type RouteId = string;
  */
 declare interface RouteInfo {
     path?: RoutePath;
+    pathLocalized?: Record<LocaleId, RoutePath>;
     elements?: Elements;
     collectionId?: string;
     includedLocales?: LocaleId[];
+    abTestId?: string;
+    abTestingParentId?: string;
+    abTestingVariantId?: string;
 }
 
 declare type RoutePath = string;
@@ -4088,10 +3768,20 @@ declare type RoutePath = string;
  */
 declare type Routes = Record<RouteId, Route>;
 
+declare interface RouteStatus {
+    hasLoaded: boolean;
+    hasRendered: boolean;
+}
+
+export declare function safeCSSValue(value: unknown): string | "none";
+
 /**
  * @public
+ * @deprecated Creating new Scroll components in Framer is no longer supported as of July 2025.
+ * Existing Scroll components will continue to work, but please use alternative solutions for new
+ * projects.
  */
-export declare const Scroll: React_2.ForwardRefExoticComponent<ScrollProps & React_2.RefAttributes<HTMLDivElement>>;
+export declare const Scroll: React_2.ForwardRefExoticComponent<(Omit<EmulatedScrollProps, "ref"> | Omit<NativeScrollProps, "ref">) & React_2.RefAttributes<HTMLDivElement>>;
 
 /**
  * The properties for the {@link Scroll} component, which are also available within other components, like {@link Page}.
@@ -4344,21 +4034,28 @@ export declare interface Size {
 
 export declare const Size: {
     (width: number, height: number): Size;
-
-
-
+    equals(sizeA: Size | null, sizeB: Size | null): boolean;
+    update(fromSize: Size, toSize: Partial<Size>, keepAspectRatio?: boolean): {
+        width: number;
+        height: number;
+    };
+    subtract(sizeA: Size, sizeB: Size): {
+        width: number;
+        height: number;
+    };
     /**
      * @public
      */
     zero: Size;
-    /**
-     * Checks if the size has a zero width and zero height
-     * @param size - size to check
-     * @public
-     */
     isZero(size: Size): boolean;
-
+    defaultIfZero(width: number, height: number, size: Size): Size;
 };
+
+/** @public */
+declare interface SlotControlDescription<P = any> extends BaseControlDescription<P> {
+    type: ControlType.Slot;
+    maxCount?: number;
+}
 
 declare type SpringOptions = TensionFrictionSpringOptions | DampingDurationSpringOptions;
 
@@ -4366,7 +4063,7 @@ declare type SpringOptions = TensionFrictionSpringOptions | DampingDurationSprin
  * @public
  * @deprecated The `Stack` component is being deprecated and will no longer be maintained in future releases. We recommend using flexbox instead for layout needs: {@link https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox}
  */
-export declare const Stack: React_2.ForwardRefExoticComponent<Partial<StackProperties> & React_2.RefAttributes<HTMLElement | HTMLDivElement>>;
+export declare const Stack: React_2.ForwardRefExoticComponent<Partial<StackProperties> & React_2.RefAttributes<HTMLDivElement>>;
 
 /**
  * @public
@@ -4560,6 +4257,7 @@ export declare interface StringControlDescription<P = any> extends BaseControlDe
     placeholder?: string;
     obscured?: boolean;
     displayTextArea?: boolean;
+    preventLocalization?: boolean;
 
 }
 
@@ -4603,6 +4301,12 @@ declare interface StyleTransformEffectOptions {
     transformTargets: EffectStyleScrollTarget_2[] | undefined;
 }
 
+/** Supported rel values for links https://www.iana.org/assignments/link-relations/link-relations.xhtml */
+declare type SupportedLinkRelValue = (typeof supportedLinkRelValues)[number];
+
+/** Supported rel values for links https://www.iana.org/assignments/link-relations/link-relations.xhtml */
+declare const supportedLinkRelValues: readonly ["nofollow", "noreferrer", "me", "ugc", "sponsored"];
+
 declare interface TensionFrictionSpringOptions {
     tension: number;
     friction: number;
@@ -4615,7 +4319,54 @@ export declare interface TextColorProperties {
     color: Color | string;
 }
 
+/**
+ * @public
+ * The direction of the text, either "ltr" (left-to-right) or "rtl" (right-to-left).
+ */
+declare type TextDirection = "ltr" | "rtl";
+
+declare interface TickerEffectProps {
+    tickerEffectVelocity?: number;
+    /** 0-100 percentage modifier stored as integer */
+    tickerEffectHoverModifier?: number;
+    tickerEffectDirectionModifier?: "default" | "reverse";
+    tickerEffectDraggable?: boolean;
+    tickerEffectAlign?: "start" | "center" | "end";
+    tickerEffectStackDirection?: "column" | "row" | "column-reverse" | "row-reverse";
+    tickerEffectGap?: number | string;
+    tickerEffectXOverflow?: "auto" | "visible" | "hidden" | "clip";
+    tickerEffectYOverflow?: "auto" | "visible" | "hidden" | "clip";
+    tickerEffectOverflow?: "auto" | "visible" | "hidden" | "clip";
+    tickerEffectItemWidth?: "fill" | "auto";
+    tickerEffectItemHeight?: "fill" | "auto";
+}
+
+declare interface TickerFrameProps extends TickerEffectProps {
+    tickerEffectEnabled?: boolean;
+}
+
+declare interface TickerProps extends HTMLMotionProps<"div">, TickerEffectProps {
+    as?: React.ElementType<HTMLMotionProps<"div">>;
+}
+
 declare type ToAnimatableOrValue<PossiblyAnimatable> = PossiblyAnimatable extends Animatable_2<infer Value> ? Value | Animatable_2<Value> : PossiblyAnimatable | Animatable_2<PossiblyAnimatable>;
+
+/**
+ * Function type for tracking custom events with a valid tracking ID.
+ * Throws an error if the tracking ID is invalid.
+ *
+ * @param trackingId - Valid format: lowercase alphanumeric + hyphens as separators
+ * - No leading/trailing hyphens or consecutive hyphens
+ * - Examples: "button-click", "form-submit", "video-play", "nav-item-1"
+ *
+ * @public
+ */
+export declare type TrackCustomEvent = <T extends string>(trackingId: ValidTrackingId<T> extends T ? T : ValidTrackingId<T>) => void;
+
+declare interface TrackingIdControlDescription<P = any> extends BaseControlDescription<P> {
+    type: ControlType.TrackingId;
+    defaultValue?: string;
+}
 
 /**
  * @public
@@ -4659,7 +4410,7 @@ export declare function useActiveVariantCallback(baseVariant: string | undefined
     /**
      * Create a callback that can be cancelled if the base variant changes.
      */
-    activeVariantCallback: (callback: (...args: any[]) => Promise<boolean | void>) => (...args: any[]) => Promise<unknown>;
+    activeVariantCallback: (callback: (...args: unknown[]) => Promise<boolean | undefined>) => (...args: unknown[]) => Promise<unknown>;
     /**
      * Execute a callback after a defined period of time. The callback will not
      * be called if pending events are cancelled because the timeout will be
@@ -4711,6 +4462,22 @@ export declare function useIsInCurrentNavigationTarget(): boolean;
 export declare function useIsOnFramerCanvas(): boolean;
 
 /**
+ * Returns a constant value based on whether the caller is mounted in a Framer Canvas or Export
+ * Canvas environment.
+ *
+ * If you need to use this outside of React, use `isStaticRenderer()` instead.
+ *
+ * @public
+ */
+export declare function useIsStaticRenderer(): boolean;
+
+/**
+ * @public
+ * @returns The current layout direction, either "ltr" (left-to-right) or "rtl" (right-to-left).
+ */
+export declare function useLayoutDirection(): TextDirection;
+
+/**
  * @public
  * @returns The current locale code, which is a combination of the language and optional region,
  * e.g. "en-US".
@@ -4751,19 +4518,51 @@ export declare function useOnVariantChange(variant: string, callbackMap: Callbac
  *
  * @public
  */
-export declare function useOverlayState({ blockDocumentScrolling }?: {
+export declare function useOverlayState({ blockDocumentScrolling, }?: {
     blockDocumentScrolling?: boolean;
-}): readonly [boolean, (show: boolean) => void];
+}): readonly [boolean, (show: boolean) => Promise<void>];
 
 /** @public */
 export declare const useProvidedWindow: () => (Window & typeof globalThis) | null | undefined;
+
+/**
+ * When a Scroll Section is provided to a Layout Template as a property by a Web
+ * Page, we need to create the ref on a context so that it is available in the
+ * parent Layout Template.
+ */
+export declare function useSiteRefs<T extends HTMLElement>(): (key: string) => React_2.RefObject<T> | undefined;
+
+/**
+ * React hook for tracking custom events on published Framer sites.
+ *
+ * @returns {TrackCustomEvent} Function that sends tracking events with valid IDs.
+ * Throws an error if the tracking ID is invalid.
+ *
+ * Tracking ID rules:
+ * - Lowercase letters (a-z) and numbers (0-9) only
+ * - Hyphens (-) as separators (no leading/trailing or consecutive hyphens)
+ * - Valid: "button-click", "form-submit", "video-play", "nav-item-1"
+ * - Invalid: "Button-Click", "form--submit", "-button-click", "button_utils"
+ *
+ * @example
+ *
+ * ```
+ * function MyButton() {
+ *     const trackEvent = useTracking()
+ *     return <button onClick={() => trackEvent("button-click")}>Click me</button>
+ * }
+ * ```
+ *
+ * @public
+ */
+export declare function useTracking(): TrackCustomEvent;
 
 /**
  * Handle stateful logic in Framer Canvas Components.
  *
  * @public
  */
-export declare function useVariantState({ variant, defaultVariant: externalDefaultVariant, transitions: externalTransitions, enabledGestures: externalEnabledGestures, cycleOrder: externalCycleOrder, variantProps, variantClassNames, }: {
+export declare function useVariantState({ variant, defaultVariant: externalDefaultVariant, transitions: externalTransitions, enabledGestures: externalEnabledGestures, cycleOrder: externalCycleOrder, variantProps, variantClassNames, ref, }: {
     defaultVariant: string;
     cycleOrder: string[];
     variant?: string;
@@ -4771,12 +4570,18 @@ export declare function useVariantState({ variant, defaultVariant: externalDefau
     enabledGestures?: EnabledVariantGestures;
     variantProps?: VariantProps;
     variantClassNames?: Record<string, string>;
+    ref?: React.RefObject<HTMLElement>;
 }): VariantState;
 
 /**
  * @public
  */
 declare type UtilsByCollectionId = Record<string, () => Promise<CollectionUtils | undefined>>;
+
+/**
+ * @public
+ */
+declare type ValidTrackingId<S extends string> = S extends `-${string}` | `${string}-` | `${string}--${string}` | "" ? `Error: Invalid hyphen usage or empty string.` : S extends `${infer P1}-${infer P2}` ? IsAlphaNumeric<P1> extends true ? ValidTrackingId<P2> extends P2 ? S : ValidTrackingId<P2> : `Error: The part '${P1}' should only contain lowercase alphanumeric characters (a to z, 0 to 9). Example: 'my-id' is correct, 'My-ID' is not.` : IsAlphaNumeric<S> extends true ? S : `Error: The part '${S}' should only contain lowercase alphanumeric characters (a to z, 0 to 9). Example: 'my-id' is correct, 'My-ID' is not.`;
 
 declare interface VariantAppearEffectOptions {
     visibleVariantId: string | undefined;
@@ -4805,8 +4610,9 @@ declare interface VariantState {
     classNames: string;
     transition: Partial<Transition> | undefined;
     gestureHandlers: GestureHandlers;
-    setVariant: (variant: string | typeof CycleVariantState) => void;
+    setVariant: (variant: string | typeof CycleVariantState, pauseOffscreen?: boolean) => void;
     setGestureState: (gestureState: GestureState) => void;
+    clearLoadingGesture: () => void;
     addVariantProps?: (id: string) => Record<string, unknown>;
 }
 
@@ -4925,6 +4731,7 @@ export declare interface VisualProperties {
 }
 
 declare interface WillChangeTransformProp {
+    /** @deprecated */
     willChangeTransform?: boolean;
 }
 
@@ -4938,7 +4745,7 @@ export declare const WindowContext: React_2.Context<(Window & typeof globalThis)
  *
  * @public
  */
-export declare const withCSS: <T extends object>(Component: React_2.ComponentType<T>, escapedCSS: string | string[], componentSerializationId?: string) => React_2.ForwardRefExoticComponent<React_2.PropsWithoutRef<T> & React_2.RefAttributes<unknown>>;
+export declare const withCSS: <T extends object>(Component: React_2.ComponentType<T>, escapedCSS: ((target: RenderTarget, props?: T) => string[]) | string[] | string, componentSerializationId: string) => React_2.ForwardRefExoticComponent<React_2.PropsWithoutRef<T> & React_2.RefAttributes<unknown>>;
 
 declare interface WithEventsProperties extends WithPanHandlers, WithTapHandlers, WithMouseHandlers, WithMouseWheelHandler {
 }
@@ -4999,28 +4806,32 @@ declare interface WithPanHandlers {
  * @deprecated
  */
 export declare const withParallaxTransform: <T extends Partial<Prefixed<ParallaxTransformOptions & StyleAppearEffectOptions & StyleTransformEffectOptions>> & Partial<MotionProps> & {
-    __withFX?: boolean | undefined;
-    __perspectiveFX?: boolean | undefined;
-    __targetOpacity?: number | undefined;
-    __smartComponentFX?: boolean | undefined;
-} & Record<string, unknown>>(Component: ComponentType<T>) => ForwardRefExoticComponent<PropsWithoutRef<T> & RefAttributes<HTMLElement>>;
+    __withFX?: boolean;
+    __perspectiveFX?: boolean;
+    __targetOpacity?: number;
+    __smartComponentFX?: boolean;
+} & Record<string, unknown>>(Component: React.ComponentType<T>) => ForwardRefExoticComponent<PropsWithoutRef<T> & RefAttributes<HTMLElement>>;
 
 /**
  * @public
  * @deprecated
  */
 export declare const withStyleAppearEffect: <T extends Partial<Prefixed<ParallaxTransformOptions & StyleAppearEffectOptions & StyleTransformEffectOptions>> & Partial<MotionProps> & {
-    __withFX?: boolean | undefined;
-    __perspectiveFX?: boolean | undefined;
-    __targetOpacity?: number | undefined;
-    __smartComponentFX?: boolean | undefined;
-} & Record<string, unknown>>(Component: ComponentType<T>) => ForwardRefExoticComponent<PropsWithoutRef<T> & RefAttributes<HTMLElement>>;
+    __withFX?: boolean;
+    __perspectiveFX?: boolean;
+    __targetOpacity?: number;
+    __smartComponentFX?: boolean;
+} & Record<string, unknown>>(Component: React.ComponentType<T>) => ForwardRefExoticComponent<PropsWithoutRef<T> & RefAttributes<HTMLElement>>;
 
 declare interface WithTapHandlers {
     onTapStart: EventHandler;
     onTap: EventHandler;
     onTapEnd: EventHandler;
 }
+
+export declare const withTickerFX: <T extends PropsWithChildren<TickerProps> & Record<string, unknown>>(Component: React.ComponentType<T>) => (props: T) => JSX_2.Element;
+
+export declare const withV1StrokeFX: <T extends MotionProps>(Component: React_2.ComponentType<T>) => React_2.ForwardRefExoticComponent<React_2.PropsWithoutRef<Props_4 & T> & React_2.RefAttributes<SVGElement>>;
 
 /**
  * @public
