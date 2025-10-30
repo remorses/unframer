@@ -1,7 +1,14 @@
 import dedent from 'string-dedent'
 import { withCSS as withCSSOriginal } from './framer.js'
 import React from 'react'
-import { ComponentFont } from './framer.js'
+import { ComponentFont, ComponentFontV1 } from './framer.js'
+
+type AnyComponentFont = ComponentFont | ComponentFontV1
+
+function getFontFamilyName(font: AnyComponentFont): string | undefined {
+    // New fonts have cssFamilyName, old fonts have family
+    return (font as ComponentFont).cssFamilyName || (font as ComponentFontV1).family
+}
 
 function deduplicateByKey<T>(arr: T[], key: (k: T) => string): T[] {
     let map = new Map()
@@ -37,8 +44,7 @@ export function logFontsUsage(fontsBundles: ComponentFontBundle[]) {
     for (let fontDefBundle of fontsBundles) {
         let filename = fontDefBundle.fileName
         for (let font of fontDefBundle.fonts) {
-            // Backwards compatibility: old fonts may have 'family' instead of 'cssFamilyName'
-            const familyName = font.cssFamilyName || (font as any).family
+            const familyName = getFontFamilyName(font)
             if (!familyName) continue
             if (familyToFilenames.has(familyName)) {
                 familyToFilenames.get(familyName)!.add(filename!)
@@ -79,8 +85,7 @@ export function getFontsStyles(_fontsDefs: ComponentFontBundle[]) {
     )
         .filter((x) => {
             if (!x.url) return false
-            // Backwards compatibility: old fonts may have 'family' instead of 'cssFamilyName'
-            const familyName = x.cssFamilyName || (x as any).family
+            const familyName = getFontFamilyName(x)
             if (!familyName) {
                 console.log('Font missing family field:', JSON.stringify(x, null, 2))
                 return false
@@ -103,8 +108,7 @@ export function getFontsStyles(_fontsDefs: ComponentFontBundle[]) {
             fonts
                 .map((x) => {
                     let str = ''
-                    // Backwards compatibility: old fonts may have 'family' instead of 'cssFamilyName'
-                    const familyName = x.cssFamilyName || (x as any).family
+                    const familyName = getFontFamilyName(x)!
                     str += dedent`
                     @font-face {
                         font-family: '${familyName}';

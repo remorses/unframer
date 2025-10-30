@@ -665,17 +665,8 @@ export declare type ColorRGBA = ColorRGB & {
  * @public
  */
 export declare interface ComponentFont extends Omit<ComponentFontV2, "family"> {
-    /** The font family name to use in CSS (replaces deprecated family field) */
-    cssFamilyName?: string;
-    /** The font family name shown in the UI */
-    uiFamilyName?: string;
-    /** Indicates if the font supports OpenType features */
-    openType?: boolean;
-    /** Module asset information for fonts loaded from modules */
-    moduleAsset?: {
-        localModuleIdentifier: string;
-        url: string;
-    };
+
+
 }
 
 /**
@@ -4864,7 +4855,7 @@ export declare const withVariantFX: <T extends MotionProps>(Component: React_2.C
 
 
 
-export { }
+export { ComponentFontV1 }
 export declare const combinedCSSRules: string[]
 
 export * from 'real-framer-motion'

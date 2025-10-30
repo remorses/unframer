@@ -259,14 +259,8 @@ export async function fixFramerCode({ resultFile }) {
     return { code, framerVersion, framerMotionVersion }
 }
 
-// find these scripts in Framer html:
-// <script>
-//     window.exportAssets = Object.freeze({
-//         library: "https://app.framerstatic.com/framer.5AKNTIWS.js",
-//         framerMotion: "https://app.framerstatic.com/framer-motion.5PJAF455.js",
-//     })
-// </script>
-// to find the types url: open framer app, load a code component, search in the network tab for a request to a .dts file
+
+// to find the types url: open framer app, load a code component, search in the network tab for a request to a .dts file. we also add export { ComponentFontV1 } at the end.
 main({
     framerTypesUrl: 'https://app.framerstatic.com/framer-4PAPG5SK.dts',
     // framerMotionUrl: `https://app.framerstatic.com/framer-motion.5PJAF455.js`,
