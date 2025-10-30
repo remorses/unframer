@@ -310,6 +310,9 @@ async function getLatestFramerScriptSrc({ session }) {
         },
     )
     const html = await res.text()
+    if (!res.ok) {
+        throw new Error(`Failed to fetch framer project: ${res.status}`)
+    }
     // console.log('html', html)
     // extract src from this code:
     // <script>
@@ -322,6 +325,7 @@ async function getLatestFramerScriptSrc({ session }) {
         /window.exportAssets = Object.freeze\({\s*library: "([^"]+)"/,
     )
     if (!match) {
+        console.log('html', html)
         throw new Error('Failed to extract framer script src')
     }
     const src = match[1]
