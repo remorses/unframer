@@ -665,8 +665,8 @@ export declare type ColorRGBA = ColorRGB & {
  * @public
  */
 export declare interface ComponentFont extends Omit<ComponentFontV2, "family"> {
-
-
+    cssFamilyName?: string;
+    uiFamilyName?: string;
 }
 
 /**

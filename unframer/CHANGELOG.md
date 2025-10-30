@@ -1,5 +1,14 @@
 # unframer
 
+## 3.2.14
+
+### Patch Changes
+
+- Refactor font handling to use union type (ComponentFont | ComponentFontV1) instead of type assertions
+- Export ComponentFontV1 type for backwards compatibility
+- Add helper function getFontFamilyName() for cleaner font family name extraction
+- Minimal changes to framer.d.ts (only cssFamilyName and uiFamilyName fields added)
+
 ## 3.2.13
 
 ### Patch Changes
