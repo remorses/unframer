@@ -19,26 +19,22 @@
  * width?: any
  * height?: any
  * layoutId?: string
- * variant?: 'Active' | 'Inactive' // Variant
+ * variant?: 'Large' | 'Small' // Variant
  * title?: string // Title
- * text?: string // Text
- * click?: Function // Click
 }} Props
 
  */
-import { stdin_default } from "../chunks/chunk-KEXPIFJ3.js";
-import "../chunks/chunk-PSINJK7R.js";
-import "../chunks/chunk-ZKAXZ4P5.js";
+import { stdin_default } from "../chunks/chunk-U2BTSRYM.js";
 import { routes } from "../chunks/chunk-HEB6EHGG.js";
 
-// virtual:sections/feature
+// virtual:elements/badge
 import { Fragment } from "react";
 import { ContextProviders } from "unframer";
 import { WithFramerBreakpoints } from "unframer";
 import { jsx } from "react/jsx-runtime";
 var locales = [];
 var defaultResponsiveVariants = {
-	base: "t3lFA7uHU",
+	base: "ih1f0O9Of",
 };
 /** @type {function(Props): any} */
 function ComponentWithRoot({ locale, ...rest }) {
@@ -69,7 +65,7 @@ function ComponentWithRoot({ locale, ...rest }) {
  */
 
 /**
- * Renders FeatureFramerComponent for all breakpoints with a variants map. Variant prop is inferred per breakpoint.
+ * Renders BadgeFramerComponent for all breakpoints with a variants map. Variant prop is inferred per breakpoint.
  * @function
  * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props
  * @returns {any}
@@ -93,5 +89,5 @@ ComponentWithRoot.Responsive = ({ locale = "", ...rest }) => {
 	);
 };
 Object.assign(ComponentWithRoot, stdin_default);
-var feature_default = ComponentWithRoot;
-export { feature_default as default };
+var badge_default = ComponentWithRoot;
+export { badge_default as default };

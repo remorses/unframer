@@ -24,12 +24,12 @@
 
  */
 import { Icon } from "./chunks/chunk-BTSBQWPZ.js";
-import { Ticker } from "./chunks/chunk-DUXOTEEB.js";
 import {
 	className as className2,
 	css as css2,
 	fonts as fonts2,
 } from "./chunks/chunk-PSINJK7R.js";
+import { Ticker } from "./chunks/chunk-DUXOTEEB.js";
 import { className, css, fonts } from "./chunks/chunk-ZKAXZ4P5.js";
 import { routes } from "./chunks/chunk-HEB6EHGG.js";
 
@@ -736,7 +736,11 @@ addFonts(
 import { WithFramerBreakpoints } from "unframer";
 import { jsx } from "react/jsx-runtime";
 var locales = [];
-var defaultResponsiveVariants = {};
+var defaultResponsiveVariants = {
+	base: "nzfsXBXZO",
+	md: "UQjHTCbHp",
+	xl: "iB4cGAnq6",
+};
 /** @type {function(Props): any} */
 function ComponentWithRoot({ locale, ...rest }) {
 	return (

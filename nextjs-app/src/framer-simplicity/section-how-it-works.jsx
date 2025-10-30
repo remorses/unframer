@@ -23,8 +23,8 @@
 }} Props
 
  */
-import { stdin_default } from "./chunks/chunk-U2BTSRYM.js";
 import { className, css, fonts } from "./chunks/chunk-BEKPESE7.js";
+import { stdin_default } from "./chunks/chunk-U2BTSRYM.js";
 import {
 	className as className2,
 	css as css2,
@@ -36,7 +36,7 @@ import { routes } from "./chunks/chunk-HEB6EHGG.js";
 import { Fragment as Fragment2 } from "react";
 import { ContextProviders } from "unframer";
 
-// /:https://framerusercontent.com/modules/sa8zVXMWkXY0aWzV57or/dSg3665WwTBWP5aMjUQ3/SrEfHh8IE.js
+// /:https://framerusercontent.com/modules/R1HMVNBOLEo7nK3QW2nb/GWOQdPopNa6BzxAvuof9/prCc0aVtv.js
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import {
 	addFonts,
@@ -112,14 +112,14 @@ var css3 = [
 ];
 var className3 = "framer-eyZpp";
 
-// /:https://framerusercontent.com/modules/sa8zVXMWkXY0aWzV57or/dSg3665WwTBWP5aMjUQ3/SrEfHh8IE.js
+// /:https://framerusercontent.com/modules/R1HMVNBOLEo7nK3QW2nb/GWOQdPopNa6BzxAvuof9/prCc0aVtv.js
 var ElementsBadgeFonts = getFonts(stdin_default);
-var cycleOrder = ["tZ3Nk88mM", "sRbSQTUZm", "s1KQAuUYo"];
-var serializationHash = "framer-QlpP5";
+var cycleOrder = ["yfUTb3bKB", "p00CGBTti", "Xcd0R0qpv"];
+var serializationHash = "framer-4k7qI";
 var variantClassNames = {
-	s1KQAuUYo: "framer-v-1ni4oso",
-	sRbSQTUZm: "framer-v-agv5pb",
-	tZ3Nk88mM: "framer-v-4mh3uy",
+	p00CGBTti: "framer-v-34q867",
+	Xcd0R0qpv: "framer-v-wu6x6",
+	yfUTb3bKB: "framer-v-1txg3nl",
 };
 function addPropertyOverrides(overrides, ...variants) {
 	const nextOverrides = {};
@@ -153,15 +153,15 @@ var Transition = ({ value, children }) => {
 };
 var Variants = motion.create(React.Fragment);
 var humanReadableVariantMap = {
-	Desktop: "tZ3Nk88mM",
-	Phone: "s1KQAuUYo",
-	Tablet: "sRbSQTUZm",
+	Desktop: "yfUTb3bKB",
+	Phone: "Xcd0R0qpv",
+	Tablet: "p00CGBTti",
 };
 var getProps = ({ height, id, width, ...props }) => {
 	return {
 		...props,
 		variant:
-			humanReadableVariantMap[props.variant] ?? props.variant ?? "tZ3Nk88mM",
+			humanReadableVariantMap[props.variant] ?? props.variant ?? "yfUTb3bKB",
 	};
 };
 var createLayoutDependency = (props, variants) => {
@@ -190,7 +190,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 		variants,
 	} = useVariantState({
 		cycleOrder,
-		defaultVariant: "tZ3Nk88mM",
+		defaultVariant: "yfUTb3bKB",
 		variant,
 		variantClassNames,
 	});
@@ -209,13 +209,13 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 						{...gestureHandlers}
 						className={cx(
 							scopingClassNames,
-							"framer-4mh3uy",
+							"framer-1txg3nl",
 							className4,
 							classNames,
 						)}
 						data-framer-name={"Desktop"}
 						layoutDependency={layoutDependency}
-						layoutId={"tZ3Nk88mM"}
+						layoutId={"yfUTb3bKB"}
 						ref={ref ?? ref1}
 						style={{
 							backgroundColor:
@@ -224,11 +224,11 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 						}}
 						{...addPropertyOverrides(
 							{
-								s1KQAuUYo: {
-									"data-framer-name": "Phone",
-								},
-								sRbSQTUZm: {
+								p00CGBTti: {
 									"data-framer-name": "Tablet",
+								},
+								Xcd0R0qpv: {
+									"data-framer-name": "Phone",
 								},
 							},
 							baseVariant,
@@ -236,23 +236,23 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 						)}
 					>
 						<motion.div
-							className={"framer-1nsdtov"}
+							className={"framer-26phku"}
 							data-framer-name={"Container"}
 							layoutDependency={layoutDependency}
-							layoutId={"HYJAgEkWh"}
+							layoutId={"qr3WdxNy4"}
 						>
 							<motion.div
-								className={"framer-zuvuk6"}
+								className={"framer-o9dj4w"}
 								data-framer-name={"Content"}
 								layoutDependency={layoutDependency}
-								layoutId={"SbIlK0NhG"}
+								layoutId={"ffzbPWZAO"}
 							>
 								<ComponentViewportProvider
 									height={40}
 									y={
 										(componentViewport?.y || 0) +
 										80 +
-										(((componentViewport?.height || 980) - 160 - 994.5) / 2 +
+										(((componentViewport?.height || 979) - 160 - 994.5) / 2 +
 											0 +
 											0) +
 										0 +
@@ -262,11 +262,11 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 									}
 									{...addPropertyOverrides(
 										{
-											s1KQAuUYo: {
+											p00CGBTti: {
 												y:
 													(componentViewport?.y || 0) +
 													80 +
-													(((componentViewport?.height || 200) - 160 - 2384.5) /
+													(((componentViewport?.height || 200) - 160 - 1689.5) /
 														2 +
 														0 +
 														0) +
@@ -275,13 +275,11 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 													0 +
 													0,
 											},
-											sRbSQTUZm: {
+											Xcd0R0qpv: {
 												y:
 													(componentViewport?.y || 0) +
 													80 +
-													(((componentViewport?.height || 1526) -
-														160 -
-														1689.5) /
+													(((componentViewport?.height || 200) - 160 - 2384.5) /
 														2 +
 														0 +
 														0) +
@@ -296,15 +294,15 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 									)}
 								>
 									<motion.div
-										className={"framer-os5ot-container"}
+										className={"framer-1hmgtw3-container"}
 										layoutDependency={layoutDependency}
-										layoutId={"Z3m_1GcDv-container"}
+										layoutId={"yGLY3owe0-container"}
 									>
 										{_jsx(stdin_default, {
 											D_QyhowU2: "Create React Components from Framer",
 											height: "100%",
-											id: "Z3m_1GcDv",
-											layoutId: "Z3m_1GcDv",
+											id: "yGLY3owe0",
+											layoutId: "yGLY3owe0",
 											variant: "ih1f0O9Of",
 											width: "100%",
 										})}
@@ -312,10 +310,10 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 								</ComponentViewportProvider>
 								<RichText
 									__fromCanvasComponent={true}
-									className={"framer-1xowome"}
+									className={"framer-13numsb"}
 									fonts={["FS;Satoshi-medium"]}
 									layoutDependency={layoutDependency}
-									layoutId={"wdcHjdH4q"}
+									layoutId={"Q62gyQFF_"}
 									style={{
 										"--extracted-1of0zx5":
 											"var(--token-a47e5f39-ab8e-4e9f-95d6-dca87be48225, rgb(255, 255, 255))",
@@ -346,10 +344,10 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 								</RichText>
 								<RichText
 									__fromCanvasComponent={true}
-									className={"framer-e2zgue"}
+									className={"framer-1s60nnl"}
 									fonts={["Inter"]}
 									layoutDependency={layoutDependency}
-									layoutId={"UYmX1CSC0"}
+									layoutId={"aOJ88xlle"}
 									style={{
 										"--framer-link-text-color": "rgb(0, 153, 255)",
 										"--framer-link-text-decoration": "underline",
@@ -373,9 +371,9 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 								</RichText>
 							</motion.div>
 							<motion.div
-								className={"framer-1gjf4lh"}
+								className={"framer-1e99kdl"}
 								layoutDependency={layoutDependency}
-								layoutId={"vPwbo6joY"}
+								layoutId={"KzK40JeD0"}
 							>
 								<Image
 									background={{
@@ -386,7 +384,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										loading: getLoadingLazyAtYPosition(
 											(componentViewport?.y || 0) +
 												80 +
-												(((componentViewport?.height || 980) - 160 - 994.5) /
+												(((componentViewport?.height || 979) - 160 - 994.5) /
 													2 +
 													0 +
 													0) +
@@ -403,10 +401,10 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										srcSet:
 											"https://framerusercontent.com/images/ZVpsyKlX8sfUnM4ni3AL3ObpSik.jpg?scale-down-to=512 512w,https://framerusercontent.com/images/ZVpsyKlX8sfUnM4ni3AL3ObpSik.jpg?scale-down-to=1024 1024w,https://framerusercontent.com/images/ZVpsyKlX8sfUnM4ni3AL3ObpSik.jpg?scale-down-to=2048 2048w,https://framerusercontent.com/images/ZVpsyKlX8sfUnM4ni3AL3ObpSik.jpg 3840w",
 									}}
-									className={"framer-y2t2e3"}
+									className={"framer-1z0sefd"}
 									data-framer-name={"BG"}
 									layoutDependency={layoutDependency}
-									layoutId={"tVwmxy0T2"}
+									layoutId={"gswOsh4As"}
 									style={{
 										mask: "radial-gradient(50% 50% at 50% 50%, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0) 100%) add",
 										opacity: 0.75,
@@ -415,7 +413,36 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 									}}
 									{...addPropertyOverrides(
 										{
-											s1KQAuUYo: {
+											p00CGBTti: {
+												background: {
+													alt: "",
+													fit: "fill",
+													intrinsicHeight: 1080,
+													intrinsicWidth: 1920,
+													loading: getLoadingLazyAtYPosition(
+														(componentViewport?.y || 0) +
+															80 +
+															(((componentViewport?.height || 200) -
+																160 -
+																1689.5) /
+																2 +
+																0 +
+																0) +
+															0 +
+															331.5 +
+															-0.4996320824133136,
+													),
+													pixelHeight: 2160,
+													pixelWidth: 3840,
+													positionX: "center",
+													positionY: "center",
+													sizes: `min(${componentViewport?.width || "100vw"} - 64px, 1072px)`,
+													src: "https://framerusercontent.com/images/ZVpsyKlX8sfUnM4ni3AL3ObpSik.jpg?scale-down-to=2048",
+													srcSet:
+														"https://framerusercontent.com/images/ZVpsyKlX8sfUnM4ni3AL3ObpSik.jpg?scale-down-to=512 512w,https://framerusercontent.com/images/ZVpsyKlX8sfUnM4ni3AL3ObpSik.jpg?scale-down-to=1024 1024w,https://framerusercontent.com/images/ZVpsyKlX8sfUnM4ni3AL3ObpSik.jpg?scale-down-to=2048 2048w,https://framerusercontent.com/images/ZVpsyKlX8sfUnM4ni3AL3ObpSik.jpg 3840w",
+												},
+											},
+											Xcd0R0qpv: {
 												background: {
 													alt: "",
 													fit: "fill",
@@ -444,46 +471,17 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 														"https://framerusercontent.com/images/ZVpsyKlX8sfUnM4ni3AL3ObpSik.jpg?scale-down-to=512 512w,https://framerusercontent.com/images/ZVpsyKlX8sfUnM4ni3AL3ObpSik.jpg?scale-down-to=1024 1024w,https://framerusercontent.com/images/ZVpsyKlX8sfUnM4ni3AL3ObpSik.jpg?scale-down-to=2048 2048w,https://framerusercontent.com/images/ZVpsyKlX8sfUnM4ni3AL3ObpSik.jpg 3840w",
 												},
 											},
-											sRbSQTUZm: {
-												background: {
-													alt: "",
-													fit: "fill",
-													intrinsicHeight: 1080,
-													intrinsicWidth: 1920,
-													loading: getLoadingLazyAtYPosition(
-														(componentViewport?.y || 0) +
-															80 +
-															(((componentViewport?.height || 1526) -
-																160 -
-																1689.5) /
-																2 +
-																0 +
-																0) +
-															0 +
-															331.5 +
-															-0.4996320824133136,
-													),
-													pixelHeight: 2160,
-													pixelWidth: 3840,
-													positionX: "center",
-													positionY: "center",
-													sizes: `min(${componentViewport?.width || "100vw"} - 64px, 1072px)`,
-													src: "https://framerusercontent.com/images/ZVpsyKlX8sfUnM4ni3AL3ObpSik.jpg?scale-down-to=2048",
-													srcSet:
-														"https://framerusercontent.com/images/ZVpsyKlX8sfUnM4ni3AL3ObpSik.jpg?scale-down-to=512 512w,https://framerusercontent.com/images/ZVpsyKlX8sfUnM4ni3AL3ObpSik.jpg?scale-down-to=1024 1024w,https://framerusercontent.com/images/ZVpsyKlX8sfUnM4ni3AL3ObpSik.jpg?scale-down-to=2048 2048w,https://framerusercontent.com/images/ZVpsyKlX8sfUnM4ni3AL3ObpSik.jpg 3840w",
-												},
-											},
 										},
 										baseVariant,
 										gestureVariant,
 									)}
 								/>
 								<motion.div
-									className={"framer-qmx0s1"}
+									className={"framer-1s9vhw7"}
 									data-border={true}
 									data-framer-name={"Card"}
 									layoutDependency={layoutDependency}
-									layoutId={"SX9cbh_r6"}
+									layoutId={"Fc8UL5ScH"}
 									style={{
 										"--border-bottom-width": "1px",
 										"--border-color":
@@ -507,9 +505,9 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											alt: "",
 											fit: "fill",
 										}}
-										className={"framer-1gi3t9g"}
+										className={"framer-164xepg"}
 										layoutDependency={layoutDependency}
-										layoutId={"sdo_y5p2v"}
+										layoutId={"IiqwHWAuR"}
 										style={{
 											mask: "radial-gradient(50% 50% at 50% 50%, rgb(0, 0, 0) 70.2931447072072%, rgba(0, 0, 0, 0) 100%) add",
 											WebkitMask:
@@ -517,11 +515,11 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										}}
 									>
 										<SVG
-											className={"framer-15az14g"}
+											className={"framer-jz54jo"}
 											data-framer-name={"Icon"}
 											layout={"position"}
 											layoutDependency={layoutDependency}
-											layoutId={"rI9e45w08"}
+											layoutId={"mvuWAsATV"}
 											opacity={0.08}
 											style={{
 												opacity: 0.08,
@@ -534,11 +532,11 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										/>
 									</motion.div>
 									<motion.div
-										className={"framer-b2buot"}
+										className={"framer-1mjvlp2"}
 										data-border={true}
 										data-framer-name={"Number"}
 										layoutDependency={layoutDependency}
-										layoutId={"rKEefS2sF"}
+										layoutId={"VjsWGBqRi"}
 										style={{
 											"--border-bottom-width": "1px",
 											"--border-color":
@@ -557,10 +555,10 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 									>
 										<RichText
 											__fromCanvasComponent={true}
-											className={"framer-5274yz"}
+											className={"framer-1to88pp"}
 											fonts={["Inter"]}
 											layoutDependency={layoutDependency}
-											layoutId={"bf3LjPwnv"}
+											layoutId={"cmVQ0OcQG"}
 											style={{
 												"--extracted-r6o4lv":
 													"var(--token-a47e5f39-ab8e-4e9f-95d6-dca87be48225, rgb(255, 255, 255))",
@@ -586,16 +584,16 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										</RichText>
 									</motion.div>
 									<motion.div
-										className={"framer-1gc5zrm"}
+										className={"framer-7nlvh2"}
 										layoutDependency={layoutDependency}
-										layoutId={"GqEwlVnN3"}
+										layoutId={"OhpyJMDGf"}
 									>
 										<RichText
 											__fromCanvasComponent={true}
-											className={"framer-jx6b9d"}
+											className={"framer-s46z6e"}
 											fonts={["Inter"]}
 											layoutDependency={layoutDependency}
-											layoutId={"sjSyVbZdU"}
+											layoutId={"rL0MHWY4L"}
 											style={{
 												"--extracted-r6o4lv":
 													"var(--token-a47e5f39-ab8e-4e9f-95d6-dca87be48225, rgb(255, 255, 255))",
@@ -620,10 +618,10 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										</RichText>
 										<RichText
 											__fromCanvasComponent={true}
-											className={"framer-72n1x8"}
+											className={"framer-1454csd"}
 											fonts={["Inter"]}
 											layoutDependency={layoutDependency}
-											layoutId={"eOF3_Yo1r"}
+											layoutId={"wydklV56t"}
 											style={{
 												"--framer-link-text-color": "rgb(0, 153, 255)",
 												"--framer-link-text-decoration": "underline",
@@ -645,11 +643,11 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 									</motion.div>
 								</motion.div>
 								<motion.div
-									className={"framer-j33awy"}
+									className={"framer-1dqizkn"}
 									data-border={true}
 									data-framer-name={"Card"}
 									layoutDependency={layoutDependency}
-									layoutId={"CZsXNfRF1"}
+									layoutId={"nHhC3zG2c"}
 									style={{
 										"--border-bottom-width": "1px",
 										"--border-color":
@@ -675,7 +673,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											loading: getLoadingLazyAtYPosition(
 												(componentViewport?.y || 0) +
 													80 +
-													(((componentViewport?.height || 980) - 160 - 994.5) /
+													(((componentViewport?.height || 979) - 160 - 994.5) /
 														2 +
 														0 +
 														0) +
@@ -693,9 +691,9 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											srcSet:
 												"https://framerusercontent.com/images/tWcAuMcGwKolzkjnyutsFhQMOlc.png?scale-down-to=512 512w,https://framerusercontent.com/images/tWcAuMcGwKolzkjnyutsFhQMOlc.png 728w",
 										}}
-										className={"framer-xxfhw2"}
+										className={"framer-1ec08u3"}
 										layoutDependency={layoutDependency}
-										layoutId={"wtbtJ9Qi9"}
+										layoutId={"ohDUqBJRp"}
 										style={{
 											mask: "radial-gradient(50% 50% at 50% 50%, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0) 100%) add",
 											WebkitMask:
@@ -703,7 +701,35 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										}}
 										{...addPropertyOverrides(
 											{
-												s1KQAuUYo: {
+												p00CGBTti: {
+													background: {
+														alt: "",
+														fit: "fill",
+														loading: getLoadingLazyAtYPosition(
+															(componentViewport?.y || 0) +
+																80 +
+																(((componentViewport?.height || 200) -
+																	160 -
+																	1689.5) /
+																	2 +
+																	0 +
+																	0) +
+																0 +
+																331.5 +
+																0 +
+																0 +
+																40 +
+																0,
+														),
+														pixelHeight: 668,
+														pixelWidth: 728,
+														sizes: `calc(max((min(${componentViewport?.width || "100vw"} - 64px, 1072px) - 32px) / 2, 50px) - 48px)`,
+														src: "https://framerusercontent.com/images/tWcAuMcGwKolzkjnyutsFhQMOlc.png",
+														srcSet:
+															"https://framerusercontent.com/images/tWcAuMcGwKolzkjnyutsFhQMOlc.png?scale-down-to=512 512w,https://framerusercontent.com/images/tWcAuMcGwKolzkjnyutsFhQMOlc.png 728w",
+													},
+												},
+												Xcd0R0qpv: {
 													background: {
 														alt: "",
 														fit: "fill",
@@ -731,45 +757,17 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 															"https://framerusercontent.com/images/tWcAuMcGwKolzkjnyutsFhQMOlc.png?scale-down-to=512 512w,https://framerusercontent.com/images/tWcAuMcGwKolzkjnyutsFhQMOlc.png 728w",
 													},
 												},
-												sRbSQTUZm: {
-													background: {
-														alt: "",
-														fit: "fill",
-														loading: getLoadingLazyAtYPosition(
-															(componentViewport?.y || 0) +
-																80 +
-																(((componentViewport?.height || 1526) -
-																	160 -
-																	1689.5) /
-																	2 +
-																	0 +
-																	0) +
-																0 +
-																331.5 +
-																0 +
-																0 +
-																40 +
-																0,
-														),
-														pixelHeight: 668,
-														pixelWidth: 728,
-														sizes: `calc(max((min(${componentViewport?.width || "100vw"} - 64px, 1072px) - 32px) / 2, 50px) - 48px)`,
-														src: "https://framerusercontent.com/images/tWcAuMcGwKolzkjnyutsFhQMOlc.png",
-														srcSet:
-															"https://framerusercontent.com/images/tWcAuMcGwKolzkjnyutsFhQMOlc.png?scale-down-to=512 512w,https://framerusercontent.com/images/tWcAuMcGwKolzkjnyutsFhQMOlc.png 728w",
-													},
-												},
 											},
 											baseVariant,
 											gestureVariant,
 										)}
 									/>
 									<motion.div
-										className={"framer-19t43e7"}
+										className={"framer-np2fxt"}
 										data-border={true}
 										data-framer-name={"Number"}
 										layoutDependency={layoutDependency}
-										layoutId={"UCgdwK5I7"}
+										layoutId={"CVyPMzviz"}
 										style={{
 											"--border-bottom-width": "1px",
 											"--border-color":
@@ -788,10 +786,10 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 									>
 										<RichText
 											__fromCanvasComponent={true}
-											className={"framer-m5kkff"}
+											className={"framer-1vd6lsb"}
 											fonts={["Inter"]}
 											layoutDependency={layoutDependency}
-											layoutId={"lUCtKCxwm"}
+											layoutId={"giOr1Jz0K"}
 											style={{
 												"--extracted-r6o4lv":
 													"var(--token-a47e5f39-ab8e-4e9f-95d6-dca87be48225, rgb(255, 255, 255))",
@@ -817,16 +815,16 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										</RichText>
 									</motion.div>
 									<motion.div
-										className={"framer-ek5v8l"}
+										className={"framer-jzwczf"}
 										layoutDependency={layoutDependency}
-										layoutId={"q7l4TrKSN"}
+										layoutId={"Rjhd2uoCy"}
 									>
 										<RichText
 											__fromCanvasComponent={true}
-											className={"framer-yzze6a"}
+											className={"framer-mm30kz"}
 											fonts={["Inter"]}
 											layoutDependency={layoutDependency}
-											layoutId={"vMlcAkC_j"}
+											layoutId={"ySdnofJlw"}
 											style={{
 												"--extracted-r6o4lv":
 													"var(--token-a47e5f39-ab8e-4e9f-95d6-dca87be48225, rgb(255, 255, 255))",
@@ -851,10 +849,10 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										</RichText>
 										<RichText
 											__fromCanvasComponent={true}
-											className={"framer-ewahfm"}
+											className={"framer-1518ltk"}
 											fonts={["Inter"]}
 											layoutDependency={layoutDependency}
-											layoutId={"MUFe40uqq"}
+											layoutId={"muRgK9H01"}
 											style={{
 												"--framer-link-text-color": "rgb(0, 153, 255)",
 												"--framer-link-text-decoration": "underline",
@@ -876,11 +874,11 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 									</motion.div>
 								</motion.div>
 								<motion.div
-									className={"framer-pxpcl"}
+									className={"framer-1mnf7bs"}
 									data-border={true}
 									data-framer-name={"Card"}
 									layoutDependency={layoutDependency}
-									layoutId={"d8_0FP5eS"}
+									layoutId={"x72llBwwo"}
 									style={{
 										"--border-bottom-width": "1px",
 										"--border-color":
@@ -906,7 +904,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											loading: getLoadingLazyAtYPosition(
 												(componentViewport?.y || 0) +
 													80 +
-													(((componentViewport?.height || 980) - 160 - 994.5) /
+													(((componentViewport?.height || 979) - 160 - 994.5) /
 														2 +
 														0 +
 														0) +
@@ -924,9 +922,9 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											srcSet:
 												"https://framerusercontent.com/images/sUdPzmKAlZDa1aUhd2GicVWtxks.png?scale-down-to=512 512w,https://framerusercontent.com/images/sUdPzmKAlZDa1aUhd2GicVWtxks.png 728w",
 										}}
-										className={"framer-1xtzsde"}
+										className={"framer-1q5250a"}
 										layoutDependency={layoutDependency}
-										layoutId={"SPOG96v3H"}
+										layoutId={"qfvVlPyVV"}
 										style={{
 											mask: "radial-gradient(50% 50% at 50% 50%, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0) 100%) add",
 											WebkitMask:
@@ -934,7 +932,35 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										}}
 										{...addPropertyOverrides(
 											{
-												s1KQAuUYo: {
+												p00CGBTti: {
+													background: {
+														alt: "",
+														fit: "fill",
+														loading: getLoadingLazyAtYPosition(
+															(componentViewport?.y || 0) +
+																80 +
+																(((componentViewport?.height || 200) -
+																	160 -
+																	1689.5) /
+																	2 +
+																	0 +
+																	0) +
+																0 +
+																331.5 +
+																0 +
+																695 +
+																40 +
+																0,
+														),
+														pixelHeight: 668,
+														pixelWidth: 728,
+														sizes: `calc(max((min(${componentViewport?.width || "100vw"} - 64px, 1072px) - 32px) / 2, 50px) - 48px)`,
+														src: "https://framerusercontent.com/images/sUdPzmKAlZDa1aUhd2GicVWtxks.png",
+														srcSet:
+															"https://framerusercontent.com/images/sUdPzmKAlZDa1aUhd2GicVWtxks.png?scale-down-to=512 512w,https://framerusercontent.com/images/sUdPzmKAlZDa1aUhd2GicVWtxks.png 728w",
+													},
+												},
+												Xcd0R0qpv: {
 													background: {
 														alt: "",
 														fit: "fill",
@@ -962,45 +988,17 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 															"https://framerusercontent.com/images/sUdPzmKAlZDa1aUhd2GicVWtxks.png?scale-down-to=512 512w,https://framerusercontent.com/images/sUdPzmKAlZDa1aUhd2GicVWtxks.png 728w",
 													},
 												},
-												sRbSQTUZm: {
-													background: {
-														alt: "",
-														fit: "fill",
-														loading: getLoadingLazyAtYPosition(
-															(componentViewport?.y || 0) +
-																80 +
-																(((componentViewport?.height || 1526) -
-																	160 -
-																	1689.5) /
-																	2 +
-																	0 +
-																	0) +
-																0 +
-																331.5 +
-																0 +
-																695 +
-																40 +
-																0,
-														),
-														pixelHeight: 668,
-														pixelWidth: 728,
-														sizes: `calc(max((min(${componentViewport?.width || "100vw"} - 64px, 1072px) - 32px) / 2, 50px) - 48px)`,
-														src: "https://framerusercontent.com/images/sUdPzmKAlZDa1aUhd2GicVWtxks.png",
-														srcSet:
-															"https://framerusercontent.com/images/sUdPzmKAlZDa1aUhd2GicVWtxks.png?scale-down-to=512 512w,https://framerusercontent.com/images/sUdPzmKAlZDa1aUhd2GicVWtxks.png 728w",
-													},
-												},
 											},
 											baseVariant,
 											gestureVariant,
 										)}
 									/>
 									<motion.div
-										className={"framer-ctm5l5"}
+										className={"framer-6ymp3i"}
 										data-border={true}
 										data-framer-name={"Number"}
 										layoutDependency={layoutDependency}
-										layoutId={"ODXYji_yR"}
+										layoutId={"yCwsOzC3u"}
 										style={{
 											"--border-bottom-width": "1px",
 											"--border-color":
@@ -1019,10 +1017,10 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 									>
 										<RichText
 											__fromCanvasComponent={true}
-											className={"framer-gm2lc7"}
+											className={"framer-j7z4er"}
 											fonts={["Inter"]}
 											layoutDependency={layoutDependency}
-											layoutId={"hKg0YiSJm"}
+											layoutId={"DhP_htW0f"}
 											style={{
 												"--extracted-r6o4lv":
 													"var(--token-a47e5f39-ab8e-4e9f-95d6-dca87be48225, rgb(255, 255, 255))",
@@ -1048,16 +1046,16 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										</RichText>
 									</motion.div>
 									<motion.div
-										className={"framer-rw3jym"}
+										className={"framer-1q4bd7x"}
 										layoutDependency={layoutDependency}
-										layoutId={"db2leOMho"}
+										layoutId={"sCfSzn3KG"}
 									>
 										<RichText
 											__fromCanvasComponent={true}
-											className={"framer-1es16an"}
+											className={"framer-fsevcb"}
 											fonts={["Inter"]}
 											layoutDependency={layoutDependency}
-											layoutId={"RheJzzkuO"}
+											layoutId={"xhBZeaayA"}
 											style={{
 												"--extracted-r6o4lv":
 													"var(--token-a47e5f39-ab8e-4e9f-95d6-dca87be48225, rgb(255, 255, 255))",
@@ -1082,10 +1080,10 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										</RichText>
 										<RichText
 											__fromCanvasComponent={true}
-											className={"framer-1ku952u"}
+											className={"framer-125uoaq"}
 											fonts={["Inter"]}
 											layoutDependency={layoutDependency}
-											layoutId={"nUdQnZa7x"}
+											layoutId={"P7f4qYdSs"}
 											style={{
 												"--framer-link-text-color": "rgb(0, 153, 255)",
 												"--framer-link-text-decoration": "underline",
@@ -1116,58 +1114,57 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 });
 var css4 = [
 	"@supports (aspect-ratio: 1) { body { --framer-aspect-ratio-supported: auto; } }",
-	".framer-QlpP5.framer-x15bvl, .framer-QlpP5 .framer-x15bvl { display: block; }",
-	".framer-QlpP5.framer-4mh3uy { align-content: center; align-items: center; display: flex; flex-direction: column; flex-wrap: nowrap; gap: 64px; height: min-content; justify-content: center; overflow: hidden; padding: 80px; position: relative; width: 1200px; }",
-	".framer-QlpP5 .framer-1nsdtov { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 64px; height: min-content; justify-content: center; max-width: 1072px; overflow: visible; padding: 0px; position: relative; width: 100%; }",
-	".framer-QlpP5 .framer-zuvuk6 { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 16px; height: min-content; justify-content: center; overflow: visible; padding: 0px; position: relative; width: 100%; }",
-	".framer-QlpP5 .framer-os5ot-container { flex: none; height: auto; position: relative; width: auto; }",
-	".framer-QlpP5 .framer-1xowome { flex: none; height: auto; max-width: 584px; position: relative; white-space: pre-wrap; width: 100%; word-break: break-word; word-wrap: break-word; }",
-	".framer-QlpP5 .framer-e2zgue, .framer-QlpP5 .framer-72n1x8, .framer-QlpP5 .framer-ewahfm, .framer-QlpP5 .framer-1ku952u { flex: none; height: auto; max-width: 515px; position: relative; white-space: pre-wrap; width: 100%; word-break: break-word; word-wrap: break-word; }",
-	".framer-QlpP5 .framer-1gjf4lh { display: grid; flex: none; gap: 32px; grid-auto-rows: min-content; grid-template-columns: repeat(3, minmax(50px, 1fr)); grid-template-rows: repeat(1, min-content); height: min-content; justify-content: center; overflow: visible; padding: 0px; position: relative; width: 100%; }",
-	".framer-QlpP5 .framer-y2t2e3 { flex: none; height: 100%; left: calc(50.00000000000002% - 100% / 2); overflow: visible; position: absolute; top: calc(49.88505747126439% - 100% / 2); width: 100%; z-index: 0; }",
-	".framer-QlpP5 .framer-qmx0s1, .framer-QlpP5 .framer-j33awy, .framer-QlpP5 .framer-pxpcl { align-content: center; align-items: center; align-self: start; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 32px; height: auto; justify-content: center; justify-self: start; overflow: visible; padding: 40px 24px 40px 24px; position: relative; width: 100%; }",
-	".framer-QlpP5 .framer-1gi3t9g, .framer-QlpP5 .framer-1xtzsde { aspect-ratio: 1.0925196850393701 / 1; flex: none; height: var(--framer-aspect-ratio-supported, 254px); position: relative; width: 100%; }",
-	".framer-QlpP5 .framer-15az14g { flex: none; height: 110px; left: calc(49.729729729729755% - 110px / 2); position: absolute; top: calc(50.00000000000002% - 110px / 2); width: 110px; }",
-	".framer-QlpP5 .framer-b2buot { flex: none; height: 32px; left: 139px; overflow: hidden; position: absolute; top: -16px; width: 48px; will-change: var(--framer-will-change-override, transform); z-index: 1; }",
-	".framer-QlpP5 .framer-5274yz, .framer-QlpP5 .framer-m5kkff, .framer-QlpP5 .framer-gm2lc7 { flex: none; height: auto; left: 50%; position: absolute; top: 50%; white-space: pre; width: auto; }",
-	".framer-QlpP5 .framer-1gc5zrm, .framer-QlpP5 .framer-ek5v8l, .framer-QlpP5 .framer-rw3jym { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 12px; height: min-content; justify-content: center; overflow: hidden; padding: 0px; position: relative; width: 100%; }",
-	".framer-QlpP5 .framer-jx6b9d, .framer-QlpP5 .framer-yzze6a, .framer-QlpP5 .framer-1es16an { flex: none; height: auto; position: relative; white-space: pre-wrap; width: 100%; word-break: break-word; word-wrap: break-word; }",
-	".framer-QlpP5 .framer-xxfhw2 { aspect-ratio: 1.0905511811023623 / 1; flex: none; height: var(--framer-aspect-ratio-supported, 254px); position: relative; width: 100%; }",
-	".framer-QlpP5 .framer-19t43e7, .framer-QlpP5 .framer-ctm5l5 { flex: none; height: 32px; left: calc(50.00000000000002% - 48px / 2); overflow: hidden; position: absolute; top: -16px; width: 48px; will-change: var(--framer-will-change-override, transform); z-index: 1; }",
-	"@supports (background: -webkit-named-image(i)) and (not (font-palette:dark)) { .framer-QlpP5.framer-4mh3uy, .framer-QlpP5 .framer-1nsdtov, .framer-QlpP5 .framer-zuvuk6, .framer-QlpP5 .framer-qmx0s1, .framer-QlpP5 .framer-1gc5zrm, .framer-QlpP5 .framer-j33awy, .framer-QlpP5 .framer-ek5v8l, .framer-QlpP5 .framer-pxpcl, .framer-QlpP5 .framer-rw3jym { gap: 0px; } .framer-QlpP5.framer-4mh3uy > *, .framer-QlpP5 .framer-1nsdtov > * { margin: 0px; margin-bottom: calc(64px / 2); margin-top: calc(64px / 2); } .framer-QlpP5.framer-4mh3uy > :first-child, .framer-QlpP5 .framer-1nsdtov > :first-child, .framer-QlpP5 .framer-zuvuk6 > :first-child, .framer-QlpP5 .framer-qmx0s1 > :first-child, .framer-QlpP5 .framer-1gc5zrm > :first-child, .framer-QlpP5 .framer-j33awy > :first-child, .framer-QlpP5 .framer-ek5v8l > :first-child, .framer-QlpP5 .framer-pxpcl > :first-child, .framer-QlpP5 .framer-rw3jym > :first-child { margin-top: 0px; } .framer-QlpP5.framer-4mh3uy > :last-child, .framer-QlpP5 .framer-1nsdtov > :last-child, .framer-QlpP5 .framer-zuvuk6 > :last-child, .framer-QlpP5 .framer-qmx0s1 > :last-child, .framer-QlpP5 .framer-1gc5zrm > :last-child, .framer-QlpP5 .framer-j33awy > :last-child, .framer-QlpP5 .framer-ek5v8l > :last-child, .framer-QlpP5 .framer-pxpcl > :last-child, .framer-QlpP5 .framer-rw3jym > :last-child { margin-bottom: 0px; } .framer-QlpP5 .framer-zuvuk6 > * { margin: 0px; margin-bottom: calc(16px / 2); margin-top: calc(16px / 2); } .framer-QlpP5 .framer-qmx0s1 > *, .framer-QlpP5 .framer-j33awy > *, .framer-QlpP5 .framer-pxpcl > * { margin: 0px; margin-bottom: calc(32px / 2); margin-top: calc(32px / 2); } .framer-QlpP5 .framer-1gc5zrm > *, .framer-QlpP5 .framer-ek5v8l > *, .framer-QlpP5 .framer-rw3jym > * { margin: 0px; margin-bottom: calc(12px / 2); margin-top: calc(12px / 2); } }",
-	".framer-QlpP5.framer-v-agv5pb.framer-4mh3uy { padding: 80px 32px 80px 32px; width: 810px; }",
-	".framer-QlpP5.framer-v-agv5pb .framer-1xowome { max-width: 561px; }",
-	".framer-QlpP5.framer-v-agv5pb .framer-e2zgue, .framer-QlpP5.framer-v-agv5pb .framer-72n1x8, .framer-QlpP5.framer-v-agv5pb .framer-ewahfm, .framer-QlpP5.framer-v-agv5pb .framer-1ku952u, .framer-QlpP5.framer-v-1ni4oso .framer-e2zgue, .framer-QlpP5.framer-v-1ni4oso .framer-72n1x8, .framer-QlpP5.framer-v-1ni4oso .framer-ewahfm, .framer-QlpP5.framer-v-1ni4oso .framer-1ku952u { --framer-text-wrap-override: balance; max-width: unset; }",
-	".framer-QlpP5.framer-v-agv5pb .framer-1gjf4lh { grid-template-columns: repeat(2, minmax(50px, 1fr)); }",
-	".framer-QlpP5.framer-v-agv5pb .framer-y2t2e3 { top: calc(49.963208241353954% - 100% / 2); }",
-	".framer-QlpP5.framer-v-agv5pb .framer-1gi3t9g, .framer-QlpP5.framer-v-agv5pb .framer-xxfhw2, .framer-QlpP5.framer-v-agv5pb .framer-1xtzsde { height: var(--framer-aspect-ratio-supported, 283px); }",
-	".framer-QlpP5.framer-v-1ni4oso.framer-4mh3uy { padding: 80px 24px 80px 24px; width: 390px; }",
-	".framer-QlpP5.framer-v-1ni4oso .framer-1xowome { --framer-text-wrap: balance; max-width: unset; }",
-	".framer-QlpP5.framer-v-1ni4oso .framer-1gjf4lh { grid-template-columns: repeat(1, minmax(50px, 1fr)); }",
-	".framer-QlpP5.framer-v-1ni4oso .framer-1gi3t9g, .framer-QlpP5.framer-v-1ni4oso .framer-xxfhw2, .framer-QlpP5.framer-v-1ni4oso .framer-1xtzsde { height: var(--framer-aspect-ratio-supported, 183px); }",
-	".framer-QlpP5.framer-v-1ni4oso .framer-jx6b9d, .framer-QlpP5.framer-v-1ni4oso .framer-yzze6a, .framer-QlpP5.framer-v-1ni4oso .framer-1es16an { --framer-text-wrap-override: balance; }",
+	".framer-4k7qI.framer-xxnwvw, .framer-4k7qI .framer-xxnwvw { display: block; }",
+	".framer-4k7qI.framer-1txg3nl { align-content: center; align-items: center; display: flex; flex-direction: column; flex-wrap: nowrap; gap: 64px; height: min-content; justify-content: center; overflow: hidden; padding: 80px; position: relative; width: 1200px; }",
+	".framer-4k7qI .framer-26phku { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 64px; height: min-content; justify-content: center; max-width: 1072px; overflow: visible; padding: 0px; position: relative; width: 100%; }",
+	".framer-4k7qI .framer-o9dj4w { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 16px; height: min-content; justify-content: center; overflow: visible; padding: 0px; position: relative; width: 100%; }",
+	".framer-4k7qI .framer-1hmgtw3-container { flex: none; height: auto; position: relative; width: auto; }",
+	".framer-4k7qI .framer-13numsb { flex: none; height: auto; max-width: 584px; position: relative; white-space: pre-wrap; width: 100%; word-break: break-word; word-wrap: break-word; }",
+	".framer-4k7qI .framer-1s60nnl, .framer-4k7qI .framer-1454csd, .framer-4k7qI .framer-1518ltk, .framer-4k7qI .framer-125uoaq { flex: none; height: auto; max-width: 515px; position: relative; white-space: pre-wrap; width: 100%; word-break: break-word; word-wrap: break-word; }",
+	".framer-4k7qI .framer-1e99kdl { display: grid; flex: none; gap: 32px; grid-auto-rows: min-content; grid-template-columns: repeat(3, minmax(50px, 1fr)); grid-template-rows: repeat(1, min-content); height: min-content; justify-content: center; overflow: visible; padding: 0px; position: relative; width: 100%; }",
+	".framer-4k7qI .framer-1z0sefd { flex: none; height: 100%; left: calc(50.00000000000002% - 100% / 2); overflow: visible; position: absolute; top: calc(49.88505747126439% - 100% / 2); width: 100%; z-index: 0; }",
+	".framer-4k7qI .framer-1s9vhw7, .framer-4k7qI .framer-1dqizkn, .framer-4k7qI .framer-1mnf7bs { align-content: center; align-items: center; align-self: start; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 32px; height: auto; justify-content: center; justify-self: start; overflow: visible; padding: 40px 24px 40px 24px; position: relative; width: 100%; }",
+	".framer-4k7qI .framer-164xepg, .framer-4k7qI .framer-1q5250a { aspect-ratio: 1.0925196850393701 / 1; flex: none; height: var(--framer-aspect-ratio-supported, 253px); position: relative; width: 100%; }",
+	".framer-4k7qI .framer-jz54jo { flex: none; height: 110px; left: calc(49.729729729729755% - 110px / 2); position: absolute; top: calc(50.00000000000002% - 110px / 2); width: 110px; }",
+	".framer-4k7qI .framer-1mjvlp2 { flex: none; height: 32px; left: 139px; overflow: hidden; position: absolute; top: -16px; width: 48px; will-change: var(--framer-will-change-override, transform); z-index: 1; }",
+	".framer-4k7qI .framer-1to88pp, .framer-4k7qI .framer-1vd6lsb, .framer-4k7qI .framer-j7z4er { flex: none; height: auto; left: 50%; position: absolute; top: 50%; white-space: pre; width: auto; }",
+	".framer-4k7qI .framer-7nlvh2, .framer-4k7qI .framer-jzwczf, .framer-4k7qI .framer-1q4bd7x { align-content: center; align-items: center; display: flex; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 12px; height: min-content; justify-content: center; overflow: hidden; padding: 0px; position: relative; width: 100%; }",
+	".framer-4k7qI .framer-s46z6e, .framer-4k7qI .framer-mm30kz, .framer-4k7qI .framer-fsevcb { flex: none; height: auto; position: relative; white-space: pre-wrap; width: 100%; word-break: break-word; word-wrap: break-word; }",
+	".framer-4k7qI .framer-1ec08u3 { aspect-ratio: 1.0905511811023623 / 1; flex: none; height: var(--framer-aspect-ratio-supported, 254px); position: relative; width: 100%; }",
+	".framer-4k7qI .framer-np2fxt, .framer-4k7qI .framer-6ymp3i { flex: none; height: 32px; left: calc(50.00000000000002% - 48px / 2); overflow: hidden; position: absolute; top: -16px; width: 48px; will-change: var(--framer-will-change-override, transform); z-index: 1; }",
+	"@supports (background: -webkit-named-image(i)) and (not (font-palette:dark)) { .framer-4k7qI.framer-1txg3nl, .framer-4k7qI .framer-26phku, .framer-4k7qI .framer-o9dj4w, .framer-4k7qI .framer-1s9vhw7, .framer-4k7qI .framer-7nlvh2, .framer-4k7qI .framer-1dqizkn, .framer-4k7qI .framer-jzwczf, .framer-4k7qI .framer-1mnf7bs, .framer-4k7qI .framer-1q4bd7x { gap: 0px; } .framer-4k7qI.framer-1txg3nl > *, .framer-4k7qI .framer-26phku > * { margin: 0px; margin-bottom: calc(64px / 2); margin-top: calc(64px / 2); } .framer-4k7qI.framer-1txg3nl > :first-child, .framer-4k7qI .framer-26phku > :first-child, .framer-4k7qI .framer-o9dj4w > :first-child, .framer-4k7qI .framer-1s9vhw7 > :first-child, .framer-4k7qI .framer-7nlvh2 > :first-child, .framer-4k7qI .framer-1dqizkn > :first-child, .framer-4k7qI .framer-jzwczf > :first-child, .framer-4k7qI .framer-1mnf7bs > :first-child, .framer-4k7qI .framer-1q4bd7x > :first-child { margin-top: 0px; } .framer-4k7qI.framer-1txg3nl > :last-child, .framer-4k7qI .framer-26phku > :last-child, .framer-4k7qI .framer-o9dj4w > :last-child, .framer-4k7qI .framer-1s9vhw7 > :last-child, .framer-4k7qI .framer-7nlvh2 > :last-child, .framer-4k7qI .framer-1dqizkn > :last-child, .framer-4k7qI .framer-jzwczf > :last-child, .framer-4k7qI .framer-1mnf7bs > :last-child, .framer-4k7qI .framer-1q4bd7x > :last-child { margin-bottom: 0px; } .framer-4k7qI .framer-o9dj4w > * { margin: 0px; margin-bottom: calc(16px / 2); margin-top: calc(16px / 2); } .framer-4k7qI .framer-1s9vhw7 > *, .framer-4k7qI .framer-1dqizkn > *, .framer-4k7qI .framer-1mnf7bs > * { margin: 0px; margin-bottom: calc(32px / 2); margin-top: calc(32px / 2); } .framer-4k7qI .framer-7nlvh2 > *, .framer-4k7qI .framer-jzwczf > *, .framer-4k7qI .framer-1q4bd7x > * { margin: 0px; margin-bottom: calc(12px / 2); margin-top: calc(12px / 2); } }",
+	".framer-4k7qI.framer-v-34q867.framer-1txg3nl { padding: 80px 32px 80px 32px; width: 810px; }",
+	".framer-4k7qI.framer-v-34q867 .framer-13numsb { max-width: 561px; }",
+	".framer-4k7qI.framer-v-34q867 .framer-1s60nnl, .framer-4k7qI.framer-v-34q867 .framer-1454csd, .framer-4k7qI.framer-v-34q867 .framer-1518ltk, .framer-4k7qI.framer-v-34q867 .framer-125uoaq, .framer-4k7qI.framer-v-wu6x6 .framer-1s60nnl, .framer-4k7qI.framer-v-wu6x6 .framer-1454csd, .framer-4k7qI.framer-v-wu6x6 .framer-1518ltk, .framer-4k7qI.framer-v-wu6x6 .framer-125uoaq { --framer-text-wrap-override: balance; max-width: unset; }",
+	".framer-4k7qI.framer-v-34q867 .framer-1e99kdl { grid-template-columns: repeat(2, minmax(50px, 1fr)); }",
+	".framer-4k7qI.framer-v-34q867 .framer-1z0sefd { top: calc(49.963208241353954% - 100% / 2); }",
+	".framer-4k7qI.framer-v-34q867 .framer-164xepg, .framer-4k7qI.framer-v-34q867 .framer-1ec08u3, .framer-4k7qI.framer-v-34q867 .framer-1q5250a, .framer-4k7qI.framer-v-wu6x6 .framer-164xepg, .framer-4k7qI.framer-v-wu6x6 .framer-1ec08u3, .framer-4k7qI.framer-v-wu6x6 .framer-1q5250a { height: var(--framer-aspect-ratio-supported, 183px); }",
+	".framer-4k7qI.framer-v-wu6x6.framer-1txg3nl { padding: 80px 24px 80px 24px; width: 390px; }",
+	".framer-4k7qI.framer-v-wu6x6 .framer-13numsb { --framer-text-wrap: balance; max-width: unset; }",
+	".framer-4k7qI.framer-v-wu6x6 .framer-1e99kdl { grid-template-columns: repeat(1, minmax(50px, 1fr)); }",
+	".framer-4k7qI.framer-v-wu6x6 .framer-s46z6e, .framer-4k7qI.framer-v-wu6x6 .framer-mm30kz, .framer-4k7qI.framer-v-wu6x6 .framer-fsevcb { --framer-text-wrap-override: balance; }",
 	...css,
 	...css3,
 	...css2,
-	'.framer-QlpP5[data-border="true"]::after, .framer-QlpP5 [data-border="true"]::after { content: ""; border-width: var(--border-top-width, 0) var(--border-right-width, 0) var(--border-bottom-width, 0) var(--border-left-width, 0); border-color: var(--border-color, none); border-style: var(--border-style, none); width: 100%; height: 100%; position: absolute; box-sizing: border-box; left: 0; top: 0; border-radius: inherit; pointer-events: none; }',
+	'.framer-4k7qI[data-border="true"]::after, .framer-4k7qI [data-border="true"]::after { content: ""; border-width: var(--border-top-width, 0) var(--border-right-width, 0) var(--border-bottom-width, 0) var(--border-left-width, 0); border-color: var(--border-color, none); border-style: var(--border-style, none); width: 100%; height: 100%; position: absolute; box-sizing: border-box; left: 0; top: 0; border-radius: inherit; pointer-events: none; }',
 ];
-var FramerSrEfHh8IE = withCSS(Component, css4, "framer-QlpP5");
-var stdin_default2 = FramerSrEfHh8IE;
-FramerSrEfHh8IE.displayName = "Section How It Works";
-FramerSrEfHh8IE.defaultProps = {
-	height: 980,
+var FramerprCc0aVtv = withCSS(Component, css4, "framer-4k7qI");
+var stdin_default2 = FramerprCc0aVtv;
+FramerprCc0aVtv.displayName = "Section How It Works";
+FramerprCc0aVtv.defaultProps = {
+	height: 979,
 	width: 1200,
 };
-addPropertyControls(FramerSrEfHh8IE, {
+addPropertyControls(FramerprCc0aVtv, {
 	variant: {
-		options: ["tZ3Nk88mM", "sRbSQTUZm", "s1KQAuUYo"],
+		options: ["yfUTb3bKB", "p00CGBTti", "Xcd0R0qpv"],
 		optionTitles: ["Desktop", "Tablet", "Phone"],
 		title: "Variant",
 		type: ControlType.Enum,
 	},
 });
 addFonts(
-	FramerSrEfHh8IE,
+	FramerprCc0aVtv,
 	[
 		{
 			explicitInter: true,
@@ -1255,7 +1252,11 @@ addFonts(
 import { WithFramerBreakpoints } from "unframer";
 import { jsx } from "react/jsx-runtime";
 var locales = [];
-var defaultResponsiveVariants = {};
+var defaultResponsiveVariants = {
+	base: "s1KQAuUYo",
+	md: "sRbSQTUZm",
+	xl: "tZ3Nk88mM",
+};
 /** @type {function(Props): any} */
 function ComponentWithRoot({ locale, ...rest }) {
 	return (

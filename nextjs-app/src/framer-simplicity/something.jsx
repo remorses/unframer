@@ -19,27 +19,71 @@
  * width?: any
  * height?: any
  * layoutId?: string
- * variant?: 'Active' | 'Inactive' // Variant
- * title?: string // Title
- * text?: string // Text
- * click?: Function // Click
+ * tint?: string // Tint
 }} Props
 
  */
-import { stdin_default } from "../chunks/chunk-KEXPIFJ3.js";
-import "../chunks/chunk-PSINJK7R.js";
-import "../chunks/chunk-ZKAXZ4P5.js";
-import { routes } from "../chunks/chunk-HEB6EHGG.js";
+import { routes } from "./chunks/chunk-HEB6EHGG.js";
 
-// virtual:sections/feature
+// virtual:something
 import { Fragment } from "react";
 import { ContextProviders } from "unframer";
+
+// /:https://framerusercontent.com/modules/A8wh1CaSIAh8JoIKwzrf/v8gul28odVR8PgqKT6cD/Something.js
+import { jsx as _jsx } from "react/jsx-runtime";
+import { addPropertyControls, ControlType } from "unframer";
+import { motion } from "unframer";
+function Something(props) {
+	const { tint } = props;
+	return (
+		<motion.div
+			style={{
+				margin: 50,
+				width: 100,
+				height: 100,
+				borderRadius: 25,
+				backgroundColor: tint,
+			}}
+			animate={{
+				scale: 1.5,
+			}}
+			whileHover={{
+				rotate: 90,
+			}}
+		/>
+	);
+}
+addPropertyControls(Something, {
+	tint: {
+		title: "Tint",
+		type: ControlType.Color,
+		defaultValue: "#09F",
+	},
+});
+function AnotherComponent({}) {
+	return (
+		<div
+			style={{
+				width: 100,
+				height: 100,
+				background: "black",
+			}}
+		/>
+	);
+}
+addPropertyControls(AnotherComponent, {
+	tint: {
+		title: "Tint",
+		type: ControlType.Color,
+		defaultValue: "#09F",
+	},
+});
+
+// virtual:something
 import { WithFramerBreakpoints } from "unframer";
 import { jsx } from "react/jsx-runtime";
 var locales = [];
-var defaultResponsiveVariants = {
-	base: "t3lFA7uHU",
-};
+var defaultResponsiveVariants = {};
 /** @type {function(Props): any} */
 function ComponentWithRoot({ locale, ...rest }) {
 	return (
@@ -51,9 +95,7 @@ function ComponentWithRoot({ locale, ...rest }) {
 			locale={locale}
 			locales={locales}
 		>
-			{jsx(stdin_default, {
-				...rest,
-			})}
+			<Something {...rest} />
 		</ContextProviders>
 	);
 }
@@ -69,7 +111,7 @@ function ComponentWithRoot({ locale, ...rest }) {
  */
 
 /**
- * Renders FeatureFramerComponent for all breakpoints with a variants map. Variant prop is inferred per breakpoint.
+ * Renders SomethingFramerComponent for all breakpoints with a variants map. Variant prop is inferred per breakpoint.
  * @function
  * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props
  * @returns {any}
@@ -85,13 +127,13 @@ ComponentWithRoot.Responsive = ({ locale = "", ...rest }) => {
 			locales={locales}
 		>
 			<WithFramerBreakpoints
-				Component={stdin_default}
+				Component={Something}
 				variants={defaultResponsiveVariants}
 				{...rest}
 			/>
 		</ContextProviders>
 	);
 };
-Object.assign(ComponentWithRoot, stdin_default);
-var feature_default = ComponentWithRoot;
-export { feature_default as default };
+Object.assign(ComponentWithRoot, Something);
+var something_default = ComponentWithRoot;
+export { something_default as default };

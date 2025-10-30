@@ -26,10 +26,15 @@
 }} Props
 
  */
+import {
+	className as className2,
+	css as css2,
+	fonts as fonts2,
+} from "./chunks/chunk-MJUKP3FS.js";
 import { stdin_default as stdin_default2 } from "./chunks/chunk-D4IPCJGN.js";
+import { className, css, fonts } from "./chunks/chunk-BEKPESE7.js";
 import "./chunks/chunk-BTSBQWPZ.js";
 import { stdin_default } from "./chunks/chunk-U2BTSRYM.js";
-import { className, css, fonts } from "./chunks/chunk-BEKPESE7.js";
 import { routes } from "./chunks/chunk-HEB6EHGG.js";
 
 // virtual:section-hero
@@ -69,7 +74,7 @@ fontStore.loadFonts([
 	"GF;Inter-700italic",
 	"GF;Inter-500italic",
 ]);
-var fonts2 = [
+var fonts3 = [
 	{
 		explicitInter: true,
 		fonts: [
@@ -108,26 +113,12 @@ var fonts2 = [
 		],
 	},
 ];
-var css2 = [
+var css3 = [
 	`.framer-d41tb .framer-styles-preset-d2jvfr:not(.rich-text-wrapper), .framer-d41tb .framer-styles-preset-d2jvfr.rich-text-wrapper p { --framer-font-family: "Inter", "Inter Placeholder", sans-serif; --framer-font-family-bold: "Inter", "Inter Placeholder", sans-serif; --framer-font-family-bold-italic: "Inter", "Inter Placeholder", sans-serif; --framer-font-family-italic: "Inter", "Inter Placeholder", sans-serif; --framer-font-open-type-features: 'blwf' on, 'cv09' on, 'cv03' on, 'cv04' on, 'cv11' on; --framer-font-size: 12px; --framer-font-style: normal; --framer-font-style-bold: normal; --framer-font-style-bold-italic: italic; --framer-font-style-italic: italic; --framer-font-variation-axes: normal; --framer-font-weight: 500; --framer-font-weight-bold: 700; --framer-font-weight-bold-italic: 700; --framer-font-weight-italic: 500; --framer-letter-spacing: -0.02em; --framer-line-height: 1.5em; --framer-paragraph-spacing: 20px; --framer-text-alignment: start; --framer-text-color: var(--token-19a7d54a-8908-466b-aff3-afd2d858cefc, rgba(255, 255, 255, 0.7)); --framer-text-decoration: none; --framer-text-stroke-color: initial; --framer-text-stroke-width: initial; --framer-text-transform: none; }`,
 	`@media (max-width: 1199px) and (min-width: 810px) { .framer-d41tb .framer-styles-preset-d2jvfr:not(.rich-text-wrapper), .framer-d41tb .framer-styles-preset-d2jvfr.rich-text-wrapper p { --framer-font-family: "Inter", "Inter Placeholder", sans-serif; --framer-font-family-bold: "Inter", "Inter Placeholder", sans-serif; --framer-font-family-bold-italic: "Inter", "Inter Placeholder", sans-serif; --framer-font-family-italic: "Inter", "Inter Placeholder", sans-serif; --framer-font-open-type-features: 'blwf' on, 'cv09' on, 'cv03' on, 'cv04' on, 'cv11' on; --framer-font-size: 12px; --framer-font-style: normal; --framer-font-style-bold: normal; --framer-font-style-bold-italic: italic; --framer-font-style-italic: italic; --framer-font-variation-axes: normal; --framer-font-weight: 500; --framer-font-weight-bold: 700; --framer-font-weight-bold-italic: 700; --framer-font-weight-italic: 500; --framer-letter-spacing: -0.02em; --framer-line-height: 1.5em; --framer-paragraph-spacing: 20px; --framer-text-alignment: start; --framer-text-color: var(--token-19a7d54a-8908-466b-aff3-afd2d858cefc, rgba(255, 255, 255, 0.7)); --framer-text-decoration: none; --framer-text-stroke-color: initial; --framer-text-stroke-width: initial; --framer-text-transform: none; } }`,
 	`@media (max-width: 809px) and (min-width: 0px) { .framer-d41tb .framer-styles-preset-d2jvfr:not(.rich-text-wrapper), .framer-d41tb .framer-styles-preset-d2jvfr.rich-text-wrapper p { --framer-font-family: "Inter", "Inter Placeholder", sans-serif; --framer-font-family-bold: "Inter", "Inter Placeholder", sans-serif; --framer-font-family-bold-italic: "Inter", "Inter Placeholder", sans-serif; --framer-font-family-italic: "Inter", "Inter Placeholder", sans-serif; --framer-font-open-type-features: 'blwf' on, 'cv09' on, 'cv03' on, 'cv04' on, 'cv11' on; --framer-font-size: 12px; --framer-font-style: normal; --framer-font-style-bold: normal; --framer-font-style-bold-italic: italic; --framer-font-style-italic: italic; --framer-font-variation-axes: normal; --framer-font-weight: 500; --framer-font-weight-bold: 700; --framer-font-weight-bold-italic: 700; --framer-font-weight-italic: 500; --framer-letter-spacing: -0.02em; --framer-line-height: 1.5em; --framer-paragraph-spacing: 20px; --framer-text-alignment: start; --framer-text-color: var(--token-19a7d54a-8908-466b-aff3-afd2d858cefc, rgba(255, 255, 255, 0.7)); --framer-text-decoration: none; --framer-text-stroke-color: initial; --framer-text-stroke-width: initial; --framer-text-transform: none; } }`,
 ];
-var className2 = "framer-d41tb";
-
-// /:https://framerusercontent.com/modules/dwaoDH2PyfjCqM82JqPh/lweX3SI5cQI8d99yaz3c/UwhnZFjEy.js
-import { fontStore as fontStore2 } from "unframer";
-fontStore2.loadFonts([]);
-var fonts3 = [
-	{
-		explicitInter: true,
-		fonts: [],
-	},
-];
-var css3 = [
-	".framer-cIlNy .framer-styles-preset-1ge2maa:not(.rich-text-wrapper), .framer-cIlNy .framer-styles-preset-1ge2maa.rich-text-wrapper a { --framer-link-current-text-decoration: none; --framer-link-hover-text-color: rgba(255, 255, 255, 0.9); --framer-link-hover-text-decoration: none; --framer-link-text-color: #b8a8ff; --framer-link-text-decoration: underline; transition-delay: 0s; transition-duration: 0.4s; transition-property: color,text-decoration-color,text-decoration-thickness,text-underline-offset; transition-timing-function: cubic-bezier(0.44, 0, 0.56, 1); }",
-];
-var className3 = "framer-cIlNy";
+var className3 = "framer-d41tb";
 
 // /:https://framerusercontent.com/modules/AMs1BHWFE26iLmA4bGBY/MZxnJqxrMYkSma05q109/aKlzorVQO.js
 var ElementsBadgeFonts = getFonts(stdin_default);
@@ -312,7 +303,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 			if (res === false) return false;
 		}
 	});
-	const sharedStyleClassNames = [className, className2, className3];
+	const sharedStyleClassNames = [className, className3, className2];
 	const scopingClassNames = cx(serializationHash, ...sharedStyleClassNames);
 	return (
 		<LayoutGroup id={layoutId ?? defaultLayoutId}>
@@ -697,8 +688,8 @@ var css4 = [
 	".framer-nykwV.framer-v-1hchsjm .framer-7elwrr { --framer-text-wrap: balance; max-width: unset; }",
 	".framer-nykwV.framer-v-1hchsjm .framer-nqkn6i { max-width: unset; }",
 	...css,
-	...css2,
 	...css3,
+	...css2,
 ];
 var FrameraKlzorVQO = withCSS(Component, css4, "framer-nykwV");
 var stdin_default3 = FrameraKlzorVQO;
@@ -815,8 +806,8 @@ addFonts(
 		...ElementsBadgeFonts,
 		...ButtonsButtonFonts,
 		...getFontsFromSharedStyle(fonts),
-		...getFontsFromSharedStyle(fonts2),
 		...getFontsFromSharedStyle(fonts3),
+		...getFontsFromSharedStyle(fonts2),
 	],
 	{
 		supportsExplicitInterCodegen: true,
@@ -827,7 +818,11 @@ addFonts(
 import { WithFramerBreakpoints } from "unframer";
 import { jsx } from "react/jsx-runtime";
 var locales = [];
-var defaultResponsiveVariants = {};
+var defaultResponsiveVariants = {
+	base: "K1iE6Mz7N",
+	md: "Gbz9maQw1",
+	xl: "L_pX4uUkR",
+};
 /** @type {function(Props): any} */
 function ComponentWithRoot({ locale, ...rest }) {
 	return (

@@ -19,26 +19,34 @@
  * width?: any
  * height?: any
  * layoutId?: string
- * variant?: 'Active' | 'Inactive' // Variant
- * title?: string // Title
- * text?: string // Text
- * click?: Function // Click
+ * variant?: 'Default' | '1' | '2' | '3' | '4' | '5' | '6' // Variant
+ * question1?: string // Question 1
+ * answer1?: string // Answer 1
+ * question2?: string // Question 2
+ * answer2?: string // Answer 2
+ * question3?: string // Question 3
+ * answer3?: string // Answer 3
+ * question4?: string // Question 4
+ * answer4?: string // Answer 4
+ * question5?: string // Question 5
+ * answer5?: string // Answer 5
+ * question6?: string // Question 6
+ * answer6?: string // Answer 6
 }} Props
 
  */
-import { stdin_default } from "../chunks/chunk-KEXPIFJ3.js";
-import "../chunks/chunk-PSINJK7R.js";
+import { stdin_default } from "../chunks/chunk-3VABVIZ6.js";
 import "../chunks/chunk-ZKAXZ4P5.js";
 import { routes } from "../chunks/chunk-HEB6EHGG.js";
 
-// virtual:sections/feature
+// virtual:elements/faq
 import { Fragment } from "react";
 import { ContextProviders } from "unframer";
 import { WithFramerBreakpoints } from "unframer";
 import { jsx } from "react/jsx-runtime";
 var locales = [];
 var defaultResponsiveVariants = {
-	base: "t3lFA7uHU",
+	base: "CHJ1QtQsP",
 };
 /** @type {function(Props): any} */
 function ComponentWithRoot({ locale, ...rest }) {
@@ -69,7 +77,7 @@ function ComponentWithRoot({ locale, ...rest }) {
  */
 
 /**
- * Renders FeatureFramerComponent for all breakpoints with a variants map. Variant prop is inferred per breakpoint.
+ * Renders FaqFramerComponent for all breakpoints with a variants map. Variant prop is inferred per breakpoint.
  * @function
  * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props
  * @returns {any}
@@ -93,5 +101,5 @@ ComponentWithRoot.Responsive = ({ locale = "", ...rest }) => {
 	);
 };
 Object.assign(ComponentWithRoot, stdin_default);
-var feature_default = ComponentWithRoot;
-export { feature_default as default };
+var faq_default = ComponentWithRoot;
+export { faq_default as default };

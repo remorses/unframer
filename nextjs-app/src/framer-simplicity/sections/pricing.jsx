@@ -23,11 +23,12 @@
 }} Props
 
  */
-import { stdin_default } from "../chunks/chunk-ZTGE4HX2.js";
+import { stdin_default } from "../chunks/chunk-NHWAW736.js";
+import "../chunks/chunk-KGO37XCZ.js";
 import "../chunks/chunk-D4IPCJGN.js";
 import "../chunks/chunk-QYC47C72.js";
-import "../chunks/chunk-BTSBQWPZ.js";
 import "../chunks/chunk-BEKPESE7.js";
+import "../chunks/chunk-BTSBQWPZ.js";
 import { routes } from "../chunks/chunk-HEB6EHGG.js";
 
 // virtual:sections/pricing
@@ -36,7 +37,10 @@ import { ContextProviders } from "unframer";
 import { WithFramerBreakpoints } from "unframer";
 import { jsx } from "react/jsx-runtime";
 var locales = [];
-var defaultResponsiveVariants = {};
+var defaultResponsiveVariants = {
+	base: "BBhLTTA5K",
+	xl: "FM3SqD1tW",
+};
 /** @type {function(Props): any} */
 function ComponentWithRoot({ locale, ...rest }) {
 	return (

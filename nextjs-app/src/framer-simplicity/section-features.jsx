@@ -23,11 +23,11 @@
 }} Props
 
  */
-import { stdin_default } from "./chunks/chunk-GADIJJRS.js";
+import { stdin_default } from "./chunks/chunk-B3MU4H4H.js";
+import "./chunks/chunk-BPH5BCDR.js";
 import "./chunks/chunk-KEXPIFJ3.js";
 import "./chunks/chunk-PSINJK7R.js";
 import "./chunks/chunk-ZKAXZ4P5.js";
-import "./chunks/chunk-BPH5BCDR.js";
 import { routes } from "./chunks/chunk-HEB6EHGG.js";
 
 // virtual:section-features
@@ -276,7 +276,11 @@ addFonts(
 import { WithFramerBreakpoints } from "unframer";
 import { jsx } from "react/jsx-runtime";
 var locales = [];
-var defaultResponsiveVariants = {};
+var defaultResponsiveVariants = {
+	base: "Z9XgSJQcP",
+	md: "IOIaixBce",
+	xl: "sHnGLtvML",
+};
 /** @type {function(Props): any} */
 function ComponentWithRoot({ locale, ...rest }) {
 	return (
