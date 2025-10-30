@@ -266,9 +266,9 @@ export async function fixFramerCode({ resultFile }) {
 //         framerMotion: "https://app.framerstatic.com/framer-motion.5PJAF455.js",
 //     })
 // </script>
-// to find the types url: open framer app, load a code component, search in the network tab for a request to a .d.ts file
+// to find the types url: open framer app, load a code component, search in the network tab for a request to a .dts file
 main({
-    framerTypesUrl: 'https://app.framerstatic.com/framer-ZLX3XBO5.dts',
+    framerTypesUrl: 'https://app.framerstatic.com/framer-4PAPG5SK.dts',
     // framerMotionUrl: `https://app.framerstatic.com/framer-motion.5PJAF455.js`,
 })
 
