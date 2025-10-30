@@ -1188,6 +1188,13 @@ declare interface ComponentFontV1 {
     weight?: string;
     stretch?: string;
     unicodeRange?: string;
+    /** Indicates if the font supports OpenType features */
+    openType?: boolean;
+    /** Module asset information for fonts loaded from modules */
+    moduleAsset?: {
+        localModuleIdentifier: string;
+        url: string;
+    };
 }
 
 /** @public */

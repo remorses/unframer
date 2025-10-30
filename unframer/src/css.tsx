@@ -38,6 +38,7 @@ export function logFontsUsage(fontsBundles: ComponentFontBundle[]) {
         let filename = fontDefBundle.fileName
         for (let font of fontDefBundle.fonts) {
             const familyName = font.cssFamilyName || font.family
+            if (!familyName) continue
             if (familyToFilenames.has(familyName)) {
                 familyToFilenames.get(familyName)!.add(filename!)
             } else {
