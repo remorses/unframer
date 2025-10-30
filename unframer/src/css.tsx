@@ -37,10 +37,11 @@ export function logFontsUsage(fontsBundles: ComponentFontBundle[]) {
     for (let fontDefBundle of fontsBundles) {
         let filename = fontDefBundle.fileName
         for (let font of fontDefBundle.fonts) {
-            if (familyToFilenames.has(font.family)) {
-                familyToFilenames.get(font.family)!.add(filename!)
+            const familyName = font.cssFamilyName || font.family
+            if (familyToFilenames.has(familyName)) {
+                familyToFilenames.get(familyName)!.add(filename!)
             } else {
-                familyToFilenames.set(font.family, new Set([filename!]))
+                familyToFilenames.set(familyName, new Set([filename!]))
             }
         }
     }
@@ -74,7 +75,15 @@ export function getFontsStyles(_fontsDefs: ComponentFontBundle[]) {
         _fontsDefs.flatMap((x) => x.fonts),
         (x) => x?.url,
     )
-        .filter((x) => x.url)
+        .filter((x) => {
+            if (!x.url) return false
+            const familyName = x.cssFamilyName || x.family
+            if (!familyName) {
+                console.log('Font missing family field:', JSON.stringify(x, null, 2))
+                return false
+            }
+            return true
+        })
         .sort((a, b) => a.url.localeCompare(b.url))
 
     // group fonts by the filenames users
@@ -91,9 +100,10 @@ export function getFontsStyles(_fontsDefs: ComponentFontBundle[]) {
             fonts
                 .map((x) => {
                     let str = ''
+                    const familyName = x.cssFamilyName || x.family
                     str += dedent`
                     @font-face {
-                        font-family: '${x.family}';
+                        font-family: '${familyName}';
                         src: url('${x.url}');\n
                     `
                     if (x.style) {

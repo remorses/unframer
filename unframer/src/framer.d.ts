@@ -1171,13 +1171,18 @@ declare type ComponentFontBundle = {
 };
 
 /**
- * An older version of ComponentFont that doesn’t include the `source` field.
+ * An older version of ComponentFont that doesn't include the `source` field.
  * While this version of ComponentFont is not used internally, it may still be
  * passed into `addFonts()` by older versions of smart components.
  */
 declare interface ComponentFontV1 {
     url: string;
-    family: string;
+    /** @deprecated Use cssFamilyName instead */
+    family?: string;
+    /** The font family name to use in CSS */
+    cssFamilyName?: string;
+    /** The font family name shown in the UI */
+    uiFamilyName?: string;
 
     style?: string;
     weight?: string;
