@@ -37,7 +37,8 @@ export function logFontsUsage(fontsBundles: ComponentFontBundle[]) {
     for (let fontDefBundle of fontsBundles) {
         let filename = fontDefBundle.fileName
         for (let font of fontDefBundle.fonts) {
-            const familyName = font.cssFamilyName || font.family
+            // Backwards compatibility: old fonts may have 'family' instead of 'cssFamilyName'
+            const familyName = font.cssFamilyName || (font as any).family
             if (!familyName) continue
             if (familyToFilenames.has(familyName)) {
                 familyToFilenames.get(familyName)!.add(filename!)
@@ -78,7 +79,8 @@ export function getFontsStyles(_fontsDefs: ComponentFontBundle[]) {
     )
         .filter((x) => {
             if (!x.url) return false
-            const familyName = x.cssFamilyName || x.family
+            // Backwards compatibility: old fonts may have 'family' instead of 'cssFamilyName'
+            const familyName = x.cssFamilyName || (x as any).family
             if (!familyName) {
                 console.log('Font missing family field:', JSON.stringify(x, null, 2))
                 return false
@@ -101,7 +103,8 @@ export function getFontsStyles(_fontsDefs: ComponentFontBundle[]) {
             fonts
                 .map((x) => {
                     let str = ''
-                    const familyName = x.cssFamilyName || x.family
+                    // Backwards compatibility: old fonts may have 'family' instead of 'cssFamilyName'
+                    const familyName = x.cssFamilyName || (x as any).family
                     str += dedent`
                     @font-face {
                         font-family: '${familyName}';
@@ -274,7 +277,7 @@ export function withCSS(
     const framerCSSMarker = 'data-framer-css-ssr'
 
     if (typeof window !== 'undefined' && typeof window.document !== 'undefined')
-        return withCSSOriginal(Component, escapedCSS, componentSerializationId)
+        return withCSSOriginal(Component, escapedCSS, componentSerializationId || '')
 
     return (props: any) => {
         // Check if we're in SSR mode

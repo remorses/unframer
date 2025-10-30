@@ -77,7 +77,6 @@ export function propControlsToTypedocComments({
                         case ControlType.String:
                             return 'string'
                         case ControlType.Enum: {
-                            // @ts-expect-error
                             const options = value.optionTitles || value.options
                             return options.map((x) => `'${x}'`).join(' | ')
                         }
@@ -88,13 +87,10 @@ export function propControlsToTypedocComments({
                         case ControlType.ComponentInstance:
                             return 'React.ReactNode'
                         case ControlType.Array:
-                            // @ts-expect-error
                             return `${typescriptType(value.control)}[]`
                         case ControlType.Object:
-                            // @ts-expect-error
                             return `{${Object.entries(value.controls)
                                 .map(([k, v]) => {
-                                    // @ts-expect-error
                                     return `${k}: ${typescriptType(v)}`
                                 })
                                 .join(', ')}`

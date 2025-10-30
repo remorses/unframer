@@ -1,5 +1,15 @@
 # unframer
 
+## 3.2.13
+
+### Patch Changes
+
+- Fix font-family generation to support Framer's updated font structure (cssFamilyName field)
+- Update ComponentFont type definitions to include cssFamilyName, uiFamilyName, openType, and moduleAsset fields
+- Add backwards compatibility for fonts using deprecated 'family' field
+- Fix withCSS type signature to handle optional componentSerializationId parameter
+- Remove unused @ts-expect-error directives in TypeScript type generation
+
 ## 3.2.12
 
 ### Patch Changes
