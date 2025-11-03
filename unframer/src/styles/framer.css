@@ -623,7 +623,7 @@ body { --framer-will-change-override: none; --framer-will-change-effect-override
 
         ul.framer-text,
         ol.framer-text {
-            padding-inline-start: 3ch;
+            padding-inline-start: 0;
             position: relative;
         }
     
@@ -631,6 +631,7 @@ body { --framer-will-change-override: none; --framer-will-change-effect-override
         li.framer-text {
             counter-increment: list-item;
             list-style: none;
+            padding-inline-start: 2ch;
         }
     
 
@@ -642,33 +643,39 @@ body { --framer-will-change-override: none; --framer-will-change-effect-override
         }
     
 
+        ol.framer-text > li.framer-text:nth-last-child(n + 10),
+        ol.framer-text > li.framer-text:nth-last-child(n + 10) ~ li {
+            padding-inline-start: 3ch;
+        }
+    
+
         ol.framer-text > li.framer-text:nth-last-child(n + 100),
         ol.framer-text > li.framer-text:nth-last-child(n + 100) ~ li {
-            padding-inline-start: 1ch;
+            padding-inline-start: 4ch;
         }
     
 
         ol.framer-text > li.framer-text:nth-last-child(n + 1000),
         ol.framer-text > li.framer-text:nth-last-child(n + 1000) ~ li {
-            padding-inline-start: 2ch;
+            padding-inline-start: 5ch;
         }
     
 
         ol.framer-text > li.framer-text:nth-last-child(n + 10000),
         ol.framer-text > li.framer-text:nth-last-child(n + 10000) ~ li {
-            padding-inline-start: 3ch;
+            padding-inline-start: 6ch;
         }
     
 
         ol.framer-text > li.framer-text:nth-last-child(n + 100000),
         ol.framer-text > li.framer-text:nth-last-child(n + 100000) ~ li {
-            padding-inline-start: 4ch;
+            padding-inline-start: 7ch;
         }
     
 
         ol.framer-text > li.framer-text:nth-last-child(n + 1000000),
         ol.framer-text > li.framer-text:nth-last-child(n + 1000000) ~ li {
-            padding-inline-start: 5ch;
+            padding-inline-start: 8ch;
         }
     
 
