@@ -11424,7 +11424,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.7VXLDRS7.mjs
+// /:https://app.framerstatic.com/framer.77IM6UO7.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -44958,7 +44958,6 @@ var BasicTicker = /* @__PURE__ */ forwardRef(function BasicTicker2(props, ref,) 
     ref,
     as: Component18,
     ...rest,
-    items: flattenChildrenToTickerItems(children,),
     gap,
     axis,
     align: tickerEffectAlign ?? 'center',
@@ -45008,7 +45007,6 @@ var DraggableTicker = /* @__PURE__ */ forwardRef(function DraggableTicker2(props
     ref,
     as: Component18,
     ...rest,
-    items: flattenChildrenToTickerItems(children,),
     gap,
     axis,
     align: tickerEffectAlign ?? 'center',
@@ -45033,6 +45031,7 @@ var DraggableTicker = /* @__PURE__ */ forwardRef(function DraggableTicker2(props
 },);
 var Ticker2 = /* @__PURE__ */ forwardRef(function Ticker3(props, ref,) {
   const {
+    children,
     tickerEffectDraggable,
     tickerEffectStackDirection,
     tickerEffectXOverflow,
@@ -45042,6 +45041,7 @@ var Ticker2 = /* @__PURE__ */ forwardRef(function Ticker3(props, ref,) {
     tickerEffectDirectionModifier,
     tickerEffectHoverModifier,
     tickerEffectPosition,
+    tickerEffectIsDataRepeater,
     style: styleProps,
     ...rest
   } = props;
@@ -45049,12 +45049,15 @@ var Ticker2 = /* @__PURE__ */ forwardRef(function Ticker3(props, ref,) {
   const axis = (tickerEffectStackDirection == null ? void 0 : tickerEffectStackDirection.startsWith('column',)) ? 'y' : 'x';
   const directionModifier = tickerEffectDirectionModifier === 'reverse' ? -1 : 1;
   const hoverModifier = isFiniteNumber(tickerEffectHoverModifier,) ? tickerEffectHoverModifier / 100 : 1;
-  const xOverflowWithFallback = tickerEffectXOverflow ?? tickerEffectOverflow;
-  const yOverflowWithFallback = tickerEffectYOverflow ?? tickerEffectOverflow;
+  const xOverflowWithFallback = tickerEffectXOverflow ?? tickerEffectOverflow ?? 'visible';
+  const yOverflowWithFallback = tickerEffectYOverflow ?? tickerEffectOverflow ?? 'visible';
   const overflow = (axis === 'x' ? xOverflowWithFallback : yOverflowWithFallback) === 'visible';
   const gap = getGap(tickerEffectGap, axis,);
+  const items = flattenChildrenToTickerItems(children,);
   const tickerStyle = {
     ...styleProps,
+    // Enable fractional unit fallback for dynamic numbers of CMS items
+    '--ticker-cms-total-children': tickerEffectIsDataRepeater ? items.length : void 0,
     // collected position is not present on canvas and would be overridden when codegenned into a class
     // so we have to add it here to avoid it being set to relative by the underlying ticker component
     position: tickerEffectPosition,
@@ -45069,6 +45072,7 @@ var Ticker2 = /* @__PURE__ */ forwardRef(function Ticker3(props, ref,) {
       overflow,
       directionModifier,
       hoverModifier,
+      items,
     },);
   }
   return /* @__PURE__ */ jsx(DraggableTicker, {
@@ -45080,6 +45084,7 @@ var Ticker2 = /* @__PURE__ */ forwardRef(function Ticker3(props, ref,) {
     overflow,
     directionModifier,
     hoverModifier,
+    items,
   },);
 },);
 function getGap(gap, axis,) {
@@ -46854,12 +46859,12 @@ var BuiltInFontSource = class {
     );
     __publicField(this, 'fontFamilies', [],);
     __publicField(this, 'byFamilyName', /* @__PURE__ */ new Map(),);
-    __publicField(this, 'assetsByFamily', /* @__PURE__ */ new Map(),);
+    __publicField(this, 'assetByKey', /* @__PURE__ */ new Map(),);
   }
   importFonts(assets,) {
     this.fontFamilies.length = 0;
     this.byFamilyName.clear();
-    this.assetsByFamily.clear();
+    this.assetByKey.clear();
     const fonts = [];
     for (const asset of assets) {
       if (!this.isValidBuiltInFont(asset,)) continue;
@@ -46874,6 +46879,7 @@ var BuiltInFontSource = class {
       const variant = isVariableFont2 ? 'variable' : properties.font.fontSubFamily || 'regular';
       const url = createAbsoluteAssetURLFromAsset(asset,);
       const font = {
+        assetKey: asset.key,
         family: fontFamily,
         selector: this.createSelector(fontName, variant, properties.font.fontVersion,),
         variant,
@@ -46886,7 +46892,7 @@ var BuiltInFontSource = class {
         cssFamilyName: createCSSFamilyName(fontName, isVariableFont2,),
       };
       fontFamily.fonts.push(font,);
-      this.assetsByFamily.set(fontName, asset,);
+      this.assetByKey.set(asset.key, asset,);
       fonts.push(font,);
     }
     for (const fontFamily of this.fontFamilies) {
@@ -46931,10 +46937,11 @@ var BuiltInFontSource = class {
     this.addFontFamily(fontFamily,);
     return fontFamily;
   }
-  getOpenTypeFeatures(family,) {
+  getOpenTypeFeatures(font,) {
     var _a, _b;
-    const assets = this.assetsByFamily.get(family,);
-    const openTypeData = (_b = (_a = assets == null ? void 0 : assets.properties) == null ? void 0 : _a.font) == null
+    assert(font.assetKey, 'Font must have an asset key',);
+    const asset = this.assetByKey.get(font.assetKey,);
+    const openTypeData = (_b = (_a = asset == null ? void 0 : asset.properties) == null ? void 0 : _a.font) == null
       ? void 0
       : _b.openTypeData;
     if (!supportsOpenType(openTypeData,)) return [];
@@ -47173,10 +47180,10 @@ function findDuplicateFont(existingFonts, newFont,) {
     }
     if (
       existingFont &&
-      // TODO: Figure out if we should remove this check, to dedupe fonts with overlapping
-      // style and weight. If we do so, we need to show something in the UI about the fonts
-      // that we are hiding, and a way for the user to resolve the conflict.
-      existingFont.selector === newFont.selector && existingFont.weight === newFont.weight && existingFont.style === newFont.style
+      // TODO: When fonts have a duplicate selector, we assume it's the same font, but it can
+      // be a different file. Currently there is no way to resolve these conflicts in the UI.
+      // This problem exsits already for files with the same metadata.
+      existingFont.selector === newFont.selector
     ) {
       return {
         existingFont,
@@ -47226,13 +47233,13 @@ var CustomFontSource = class _CustomFontSource {
     );
     __publicField(this, 'fontFamilies', [],);
     __publicField(this, 'byFamilyName', /* @__PURE__ */ new Map(),);
-    __publicField(this, 'assetsByFamily', /* @__PURE__ */ new Map(),);
+    __publicField(this, 'assetsByKey', /* @__PURE__ */ new Map(),);
   }
   deprecatedImportFonts(assets,) {
     var _a, _b;
     this.fontFamilies.length = 0;
     this.byFamilyName.clear();
-    this.assetsByFamily.clear();
+    this.assetsByKey.clear();
     const fonts = [];
     for (const asset of assets) {
       if (!this.isValidCustomFontAsset(asset,)) {
@@ -47269,7 +47276,7 @@ var CustomFontSource = class _CustomFontSource {
         },
       };
       fontFamily.fonts.push(font,);
-      this.assetsByFamily.set(fontName, asset,);
+      this.assetsByKey.set(asset.key, asset,);
       fonts.push(...fontFamily.fonts,);
     }
     return fonts;
@@ -47281,7 +47288,7 @@ var CustomFontSource = class _CustomFontSource {
     }
     this.fontFamilies.length = 0;
     this.byFamilyName.clear();
-    this.assetsByFamily.clear();
+    this.assetsByKey.clear();
     const fonts = {};
     for (const asset of assets) {
       if (!this.isValidCustomFontAsset(asset,)) {
@@ -47341,7 +47348,7 @@ var CustomFontSource = class _CustomFontSource {
         fonts[selector] = font;
       }
       fontFamily.owner = ownerType;
-      this.assetsByFamily.set(family, asset,);
+      this.assetsByKey.set(asset.key, asset,);
     }
     for (const fontFamily of this.fontFamilies) {
       if (fontFamily.fonts.length > 0) {
@@ -47370,10 +47377,11 @@ var CustomFontSource = class _CustomFontSource {
     if (!asset.properties.font) return false;
     return 'fontFamily' in asset.properties.font;
   }
-  getOpenTypeFeatures(family,) {
+  getOpenTypeFeatures(font,) {
     var _a, _b;
-    const assets = this.assetsByFamily.get(family,);
-    const openTypeData = (_b = (_a = assets == null ? void 0 : assets.properties) == null ? void 0 : _a.font) == null
+    assert(font.assetKey, 'Font must have an asset key',);
+    const asset = this.assetsByKey.get(font.assetKey,);
+    const openTypeData = (_b = (_a = asset == null ? void 0 : asset.properties) == null ? void 0 : _a.font) == null
       ? void 0
       : _b.openTypeData;
     if (!supportsOpenType(openTypeData,)) return [];
@@ -47632,11 +47640,11 @@ var FontshareSource = class _FontshareSource {
     }
     return fonts;
   }
-  async getOpenTypeFeatures(family,) {
+  async getOpenTypeFeatures(font,) {
     const fontToOpenTypeFeatures = await loadFontToOpenTypeFeatures('fontshare',/* Fontshare */
     );
-    const selector = _FontshareSource.createMetadataSelector(family,);
-    return fontToOpenTypeFeatures[selector];
+    const metadataSelector = _FontshareSource.createMetadataSelector(font.family.name,);
+    return fontToOpenTypeFeatures[metadataSelector];
   }
 };
 function mapToKnownCategory(categoryString,) {
@@ -47732,11 +47740,11 @@ var FramerFontSource = class _FramerFontSource {
     },);
     return fonts;
   }
-  async getOpenTypeFeatures(family,) {
+  async getOpenTypeFeatures(font,) {
     const fontToOpenTypeFeatures = await loadFontToOpenTypeFeatures('framer',/* Framer */
     );
-    const selector = _FramerFontSource.createMetadataSelector(family,);
-    return fontToOpenTypeFeatures[selector];
+    const metadataSelector = _FramerFontSource.createMetadataSelector(font.family.name,);
+    return fontToOpenTypeFeatures[metadataSelector];
   }
 };
 var googleFontSelectorPrefix = 'GF;';
@@ -47887,11 +47895,11 @@ var GoogleFontSource = class _GoogleFontSource {
     }
     return fonts;
   }
-  async getOpenTypeFeatures(family,) {
+  async getOpenTypeFeatures(font,) {
     const fontToOpenTypeFeatures = await loadFontToOpenTypeFeatures('google',/* Google */
     );
-    const selector = _GoogleFontSource.createMetadataSelector(family,);
-    return fontToOpenTypeFeatures[selector];
+    const metadataSelector = _GoogleFontSource.createMetadataSelector(font.family.name,);
+    return fontToOpenTypeFeatures[metadataSelector];
   }
 };
 function mapToKnownCategory2(category,) {
