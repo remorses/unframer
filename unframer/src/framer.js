@@ -11424,7 +11424,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.77IM6UO7.mjs
+// /:https://app.framerstatic.com/framer.BEVHCO6E.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -47347,7 +47347,6 @@ var CustomFontSource = class _CustomFontSource {
         fontFamily.fonts.push(font,);
         fonts[selector] = font;
       }
-      fontFamily.owner = ownerType;
       this.assetsByKey.set(asset.key, asset,);
     }
     for (const fontFamily of this.fontFamilies) {
