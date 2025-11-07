@@ -11424,7 +11424,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.BEVHCO6E.mjs
+// /:https://app.framerstatic.com/framer.ATKQQ2EE.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -12715,6 +12715,14 @@ var requestIdleCallback = /* @__PURE__ */ (() =>
 function encodeSVGForCSS(svg,) {
   return `url('data:image/svg+xml,${svg.replaceAll('#', '%23',).replaceAll('\'', '%27',)}')`;
 }
+function getPleaseReportMessage(message, error,) {
+  return `${
+    message
+      ? `${message}
+`
+      : ''
+  }In case the issue persists, report this to the Framer team via https://www.framer.com/contact/${error ? ':\n' : '.'}`;
+}
 var mockWindow = {
   addEventListener: () => {},
   removeEventListener: () => {},
@@ -12880,6 +12888,600 @@ function useRouteHandler(routeId, preload = false, elementId,) {
   const handler = React42.useCallback(() => navigate == null ? void 0 : navigate(routeId, elementId,), [navigate, elementId, routeId,],);
   return handler;
 }
+var defaultLocaleId = 'default';
+function assert(condition, ...msg) {
+  var _a, _b;
+  if (condition) return;
+  const e = Error('Assertion Error' + (msg.length > 0 ? ': ' + msg.join(' ',) : ''),);
+  if (e.stack) {
+    try {
+      const lines = e.stack.split('\n',);
+      if ((_a = lines[1]) == null ? void 0 : _a.includes('assert',)) {
+        lines.splice(1, 1,);
+        e.stack = lines.join('\n',);
+      } else if ((_b = lines[0]) == null ? void 0 : _b.includes('assert',)) {
+        lines.splice(0, 1,);
+        e.stack = lines.join('\n',);
+      }
+    } catch {}
+  }
+  throw e;
+}
+function assertNever(x, error,) {
+  throw error || new Error(x ? `Unexpected value: ${x}` : 'Application entered invalid state',);
+}
+var PromiseState = {
+  Pending: 'pending',
+  Fulfilled: 'fulfilled',
+  Rejected: 'rejected',
+};
+var LazyValue = class _LazyValue {
+  constructor(resolver,) {
+    this.resolver = resolver;
+    __publicField(this, 'promiseState', PromiseState.Pending,);
+    __publicField(this, 'preloadPromise',);
+    __publicField(this, 'value',);
+    __publicField(this, 'reason',);
+    __publicField(this, 'read', () => {
+      if (this.promiseState === PromiseState.Fulfilled) {
+        return this.value;
+      }
+      if (this.promiseState === PromiseState.Rejected) {
+        throw this.reason;
+      }
+      throw new Error('Need to call preload() before read()',);
+    },);
+  }
+  static is(value,) {
+    return value instanceof _LazyValue;
+  }
+  /**
+   * Gets the status and preloads the value if it's not already preloaded.
+   */
+  get status() {
+    void this.preload();
+    return this.state;
+  }
+  get state() {
+    return this.promiseState;
+  }
+  // biome-ignore lint/suspicious/noThenProperty: This is a PromiseLike class.
+  then(onfulfilled, onrejected,) {
+    if (this.promiseState === PromiseState.Fulfilled) {
+      return Promise.resolve(this.value,).then(onfulfilled, onrejected,);
+    }
+    if (this.promiseState === PromiseState.Rejected) {
+      return Promise.reject(this.reason,).then(onfulfilled, onrejected,);
+    }
+    return this.readAsync().then(onfulfilled, onrejected,);
+  }
+  /**
+   * Preload the value so it can be read() later.
+   *
+   * @returns The promise that resolves or rejects. `undefined` if the value has already been preloaded or is synchronously readable.
+   */
+  preload() {
+    if (this.promiseState !== PromiseState.Pending) return;
+    if (this.preloadPromise) return this.preloadPromise;
+    const fulfill = (value) => {
+      this.promiseState = PromiseState.Fulfilled;
+      this.value = value;
+    };
+    const reject = (reason) => {
+      this.promiseState = PromiseState.Rejected;
+      this.reason = reason;
+    };
+    let maybeValue;
+    try {
+      maybeValue = this.resolver();
+    } catch (e) {
+      reject(e,);
+      return;
+    }
+    if (!isPromise(maybeValue,)) {
+      fulfill(maybeValue,);
+      return;
+    }
+    const valuePromise = maybeValue.then(fulfill, (error) => {
+      reject(error,);
+    },);
+    this.preloadPromise = valuePromise;
+    return valuePromise;
+  }
+  /**
+   * @deprecated Use readMaybeAsync() instead.
+   * @important Don't remove it - was used in code-gen before October 2025.
+   */
+  async readAsync() {
+    return this.readMaybeAsync();
+  }
+  /**
+   * Loads the value if it's not already loaded.
+   *
+   * @returns The value or a promise that resolves to the value.
+   */
+  readMaybeAsync() {
+    const preloadPromise = this.preload();
+    if (preloadPromise) return preloadPromise.then(this.read,);
+    return this.read();
+  }
+  /**
+   * FIXME: With React 19, mark this as deprecated and use the official `use` hook instead (just pass in the LazyValue instance).
+   */
+  use() {
+    const promise = this.preload();
+    if (promise) throw promise;
+    return this.read();
+  }
+};
+var DevalueError = class extends Error {
+  /**
+   * @param {string} message
+   * @param {string[]} keys
+   */
+  constructor(message, keys3,) {
+    super(message,);
+    this.name = 'DevalueError';
+    this.path = keys3.join('',);
+  }
+};
+function is_primitive(thing,) {
+  return Object(thing,) !== thing;
+}
+var object_proto_names = /* @__PURE__ */ Object.getOwnPropertyNames(Object.prototype,).sort().join('\0',);
+function is_plain_object(thing,) {
+  const proto = Object.getPrototypeOf(thing,);
+  return proto === Object.prototype || proto === null || Object.getPrototypeOf(proto,) === null ||
+    Object.getOwnPropertyNames(proto,).sort().join('\0',) === object_proto_names;
+}
+function get_type(thing,) {
+  return Object.prototype.toString.call(thing,).slice(8, -1,);
+}
+function get_escaped_char(char,) {
+  switch (char) {
+    case '"':
+      return '\\"';
+    case '<':
+      return '\\u003C';
+    case '\\':
+      return '\\\\';
+    case '\n':
+      return '\\n';
+    case '\r':
+      return '\\r';
+    case '	':
+      return '\\t';
+    case '\b':
+      return '\\b';
+    case '\f':
+      return '\\f';
+    case '\u2028':
+      return '\\u2028';
+    case '\u2029':
+      return '\\u2029';
+    default:
+      return char < ' ' ? `\\u${char.charCodeAt(0,).toString(16,).padStart(4, '0',)}` : '';
+  }
+}
+function stringify_string(str,) {
+  let result = '';
+  let last_pos = 0;
+  const len = str.length;
+  for (let i = 0; i < len; i += 1) {
+    const char = str[i];
+    const replacement = get_escaped_char(char,);
+    if (replacement) {
+      result += str.slice(last_pos, i,) + replacement;
+      last_pos = i + 1;
+    }
+  }
+  return `"${last_pos === 0 ? str : result + str.slice(last_pos,)}"`;
+}
+function enumerable_symbols(object,) {
+  return Object.getOwnPropertySymbols(object,).filter((symbol) => Object.getOwnPropertyDescriptor(object, symbol,).enumerable);
+}
+var is_identifier = /^[a-zA-Z_$][a-zA-Z_$0-9]*$/;
+function stringify_key(key7,) {
+  return is_identifier.test(key7,) ? '.' + key7 : '[' + JSON.stringify(key7,) + ']';
+}
+function encode64(arraybuffer,) {
+  const dv = new DataView(arraybuffer,);
+  let binaryString = '';
+  for (let i = 0; i < arraybuffer.byteLength; i++) {
+    binaryString += String.fromCharCode(dv.getUint8(i,),);
+  }
+  return binaryToAscii(binaryString,);
+}
+function decode64(string,) {
+  const binaryString = asciiToBinary(string,);
+  const arraybuffer = new ArrayBuffer(binaryString.length,);
+  const dv = new DataView(arraybuffer,);
+  for (let i = 0; i < arraybuffer.byteLength; i++) {
+    dv.setUint8(i, binaryString.charCodeAt(i,),);
+  }
+  return arraybuffer;
+}
+var KEY_STRING = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+function asciiToBinary(data2,) {
+  if (data2.length % 4 === 0) {
+    data2 = data2.replace(/==?$/, '',);
+  }
+  let output = '';
+  let buffer = 0;
+  let accumulatedBits = 0;
+  for (let i = 0; i < data2.length; i++) {
+    buffer <<= 6;
+    buffer |= KEY_STRING.indexOf(data2[i],);
+    accumulatedBits += 6;
+    if (accumulatedBits === 24) {
+      output += String.fromCharCode((buffer & 16711680) >> 16,);
+      output += String.fromCharCode((buffer & 65280) >> 8,);
+      output += String.fromCharCode(buffer & 255,);
+      buffer = accumulatedBits = 0;
+    }
+  }
+  if (accumulatedBits === 12) {
+    buffer >>= 4;
+    output += String.fromCharCode(buffer,);
+  } else if (accumulatedBits === 18) {
+    buffer >>= 2;
+    output += String.fromCharCode((buffer & 65280) >> 8,);
+    output += String.fromCharCode(buffer & 255,);
+  }
+  return output;
+}
+function binaryToAscii(str,) {
+  let out = '';
+  for (let i = 0; i < str.length; i += 3) {
+    const groupsOfSix = [void 0, void 0, void 0, void 0,];
+    groupsOfSix[0] = str.charCodeAt(i,) >> 2;
+    groupsOfSix[1] = (str.charCodeAt(i,) & 3) << 4;
+    if (str.length > i + 1) {
+      groupsOfSix[1] |= str.charCodeAt(i + 1,) >> 4;
+      groupsOfSix[2] = (str.charCodeAt(i + 1,) & 15) << 2;
+    }
+    if (str.length > i + 2) {
+      groupsOfSix[2] |= str.charCodeAt(i + 2,) >> 6;
+      groupsOfSix[3] = str.charCodeAt(i + 2,) & 63;
+    }
+    for (let j = 0; j < groupsOfSix.length; j++) {
+      if (typeof groupsOfSix[j] === 'undefined') {
+        out += '=';
+      } else {
+        out += KEY_STRING[groupsOfSix[j]];
+      }
+    }
+  }
+  return out;
+}
+var UNDEFINED = -1;
+var HOLE = -2;
+var NAN = -3;
+var POSITIVE_INFINITY = -4;
+var NEGATIVE_INFINITY = -5;
+var NEGATIVE_ZERO = -6;
+function parse(serialized, revivers,) {
+  return unflatten(JSON.parse(serialized,), revivers,);
+}
+function unflatten(parsed, revivers,) {
+  if (typeof parsed === 'number') return hydrate(parsed, true,);
+  if (!Array.isArray(parsed,) || parsed.length === 0) {
+    throw new Error('Invalid input',);
+  }
+  const values = /** @type {any[]} */
+    parsed;
+  const hydrated = Array(values.length,);
+  function hydrate(index, standalone = false,) {
+    if (index === UNDEFINED) return void 0;
+    if (index === NAN) return NaN;
+    if (index === POSITIVE_INFINITY) return Infinity;
+    if (index === NEGATIVE_INFINITY) return -Infinity;
+    if (index === NEGATIVE_ZERO) return -0;
+    if (standalone || typeof index !== 'number') {
+      throw new Error(`Invalid input`,);
+    }
+    if (index in hydrated) return hydrated[index];
+    const value = values[index];
+    if (!value || typeof value !== 'object') {
+      hydrated[index] = value;
+    } else if (Array.isArray(value,)) {
+      if (typeof value[0] === 'string') {
+        const type = value[0];
+        const reviver = revivers == null ? void 0 : revivers[type];
+        if (reviver) {
+          let i = value[1];
+          if (typeof i !== 'number') {
+            i = values.push(value[1],) - 1;
+          }
+          return hydrated[index] = reviver(hydrate(i,),);
+        }
+        switch (type) {
+          case 'Date':
+            hydrated[index] = new Date(value[1],);
+            break;
+          case 'Set':
+            const set = /* @__PURE__ */ new Set();
+            hydrated[index] = set;
+            for (let i = 1; i < value.length; i += 1) {
+              set.add(hydrate(value[i],),);
+            }
+            break;
+          case 'Map':
+            const map2 = /* @__PURE__ */ new Map();
+            hydrated[index] = map2;
+            for (let i = 1; i < value.length; i += 2) {
+              map2.set(hydrate(value[i],), hydrate(value[i + 1],),);
+            }
+            break;
+          case 'RegExp':
+            hydrated[index] = new RegExp(value[1], value[2],);
+            break;
+          case 'Object':
+            hydrated[index] = Object(value[1],);
+            break;
+          case 'BigInt':
+            hydrated[index] = BigInt(value[1],);
+            break;
+          case 'null':
+            const obj = /* @__PURE__ */ Object.create(null,);
+            hydrated[index] = obj;
+            for (let i = 1; i < value.length; i += 2) {
+              obj[value[i]] = hydrate(value[i + 1],);
+            }
+            break;
+          case 'Int8Array':
+          case 'Uint8Array':
+          case 'Uint8ClampedArray':
+          case 'Int16Array':
+          case 'Uint16Array':
+          case 'Int32Array':
+          case 'Uint32Array':
+          case 'Float32Array':
+          case 'Float64Array':
+          case 'BigInt64Array':
+          case 'BigUint64Array': {
+            const TypedArrayConstructor = globalThis[type];
+            const typedArray = new TypedArrayConstructor(hydrate(value[1],),);
+            hydrated[index] = value[2] !== void 0 ? typedArray.subarray(value[2], value[3],) : typedArray;
+            break;
+          }
+          case 'ArrayBuffer': {
+            const base64 = value[1];
+            const arraybuffer = decode64(base64,);
+            hydrated[index] = arraybuffer;
+            break;
+          }
+          case 'Temporal.Duration':
+          case 'Temporal.Instant':
+          case 'Temporal.PlainDate':
+          case 'Temporal.PlainTime':
+          case 'Temporal.PlainDateTime':
+          case 'Temporal.PlainMonthDay':
+          case 'Temporal.PlainYearMonth':
+          case 'Temporal.ZonedDateTime': {
+            const temporalName = type.slice(9,);
+            hydrated[index] = Temporal[temporalName].from(value[1],);
+            break;
+          }
+          case 'URL': {
+            const url = new URL(value[1],);
+            hydrated[index] = url;
+            break;
+          }
+          case 'URLSearchParams': {
+            const url = new URLSearchParams(value[1],);
+            hydrated[index] = url;
+            break;
+          }
+          default:
+            throw new Error(`Unknown type ${type}`,);
+        }
+      } else {
+        const array = new Array(value.length,);
+        hydrated[index] = array;
+        for (let i = 0; i < value.length; i += 1) {
+          const n = value[i];
+          if (n === HOLE) continue;
+          array[i] = hydrate(n,);
+        }
+      }
+    } else {
+      const object = {};
+      hydrated[index] = object;
+      for (const key7 in value) {
+        if (key7 === '__proto__') {
+          throw new Error('Cannot parse an object with a `__proto__` property',);
+        }
+        const n = value[key7];
+        object[key7] = hydrate(n,);
+      }
+    }
+    return hydrated[index];
+  }
+  return hydrate(0,);
+}
+function stringify(value, reducers,) {
+  const stringified = [];
+  const indexes = /* @__PURE__ */ new Map();
+  const custom = [];
+  if (reducers) {
+    for (const key7 of Object.getOwnPropertyNames(reducers,)) {
+      custom.push({
+        key: key7,
+        fn: reducers[key7],
+      },);
+    }
+  }
+  const keys3 = [];
+  let p = 0;
+  function flatten(thing,) {
+    if (typeof thing === 'function') {
+      throw new DevalueError(`Cannot stringify a function`, keys3,);
+    }
+    if (thing === void 0) return UNDEFINED;
+    if (Number.isNaN(thing,)) return NAN;
+    if (thing === Infinity) return POSITIVE_INFINITY;
+    if (thing === -Infinity) return NEGATIVE_INFINITY;
+    if (thing === 0 && 1 / thing < 0) return NEGATIVE_ZERO;
+    if (indexes.has(thing,)) return indexes.get(thing,);
+    const index2 = p++;
+    indexes.set(thing, index2,);
+    for (
+      const {
+        key: key7,
+        fn,
+      } of custom
+    ) {
+      const value2 = fn(thing,);
+      if (value2) {
+        stringified[index2] = `["${key7}",${flatten(value2,)}]`;
+        return index2;
+      }
+    }
+    let str = '';
+    if (is_primitive(thing,)) {
+      str = stringify_primitive(thing,);
+    } else {
+      const type = get_type(thing,);
+      switch (type) {
+        case 'Number':
+        case 'String':
+        case 'Boolean':
+          str = `["Object",${stringify_primitive(thing,)}]`;
+          break;
+        case 'BigInt':
+          str = `["BigInt",${thing}]`;
+          break;
+        case 'Date':
+          const valid = !isNaN(thing.getDate(),);
+          str = `["Date","${valid ? thing.toISOString() : ''}"]`;
+          break;
+        case 'URL':
+          str = `["URL",${stringify_string(thing.toString(),)}]`;
+          break;
+        case 'URLSearchParams':
+          str = `["URLSearchParams",${stringify_string(thing.toString(),)}]`;
+          break;
+        case 'RegExp':
+          const {
+            source,
+            flags,
+          } = thing;
+          str = flags ? `["RegExp",${stringify_string(source,)},"${flags}"]` : `["RegExp",${stringify_string(source,)}]`;
+          break;
+        case 'Array':
+          str = '[';
+          for (let i = 0; i < thing.length; i += 1) {
+            if (i > 0) str += ',';
+            if (i in thing) {
+              keys3.push(`[${i}]`,);
+              str += flatten(thing[i],);
+              keys3.pop();
+            } else {
+              str += HOLE;
+            }
+          }
+          str += ']';
+          break;
+        case 'Set':
+          str = '["Set"';
+          for (const value2 of thing) {
+            str += `,${flatten(value2,)}`;
+          }
+          str += ']';
+          break;
+        case 'Map':
+          str = '["Map"';
+          for (const [key7, value2,] of thing) {
+            keys3.push(`.get(${is_primitive(key7,) ? stringify_primitive(key7,) : '...'})`,);
+            str += `,${flatten(key7,)},${flatten(value2,)}`;
+            keys3.pop();
+          }
+          str += ']';
+          break;
+        case 'Int8Array':
+        case 'Uint8Array':
+        case 'Uint8ClampedArray':
+        case 'Int16Array':
+        case 'Uint16Array':
+        case 'Int32Array':
+        case 'Uint32Array':
+        case 'Float32Array':
+        case 'Float64Array':
+        case 'BigInt64Array':
+        case 'BigUint64Array': {
+          const typedArray = thing;
+          str = '["' + type + '",' + flatten(typedArray.buffer,);
+          const a = thing.byteOffset;
+          const b = a + thing.byteLength;
+          if (a > 0 || b !== typedArray.buffer.byteLength) {
+            const m2 = +/(\d+)/.exec(type,)[1] / 8;
+            str += `,${a / m2},${b / m2}`;
+          }
+          str += ']';
+          break;
+        }
+        case 'ArrayBuffer': {
+          const arraybuffer = thing;
+          const base64 = encode64(arraybuffer,);
+          str = `["ArrayBuffer","${base64}"]`;
+          break;
+        }
+        case 'Temporal.Duration':
+        case 'Temporal.Instant':
+        case 'Temporal.PlainDate':
+        case 'Temporal.PlainTime':
+        case 'Temporal.PlainDateTime':
+        case 'Temporal.PlainMonthDay':
+        case 'Temporal.PlainYearMonth':
+        case 'Temporal.ZonedDateTime':
+          str = `["${type}",${stringify_string(thing.toString(),)}]`;
+          break;
+        default:
+          if (!is_plain_object(thing,)) {
+            throw new DevalueError(`Cannot stringify arbitrary non-POJOs`, keys3,);
+          }
+          if (enumerable_symbols(thing,).length > 0) {
+            throw new DevalueError(`Cannot stringify POJOs with symbolic keys`, keys3,);
+          }
+          if (Object.getPrototypeOf(thing,) === null) {
+            str = '["null"';
+            for (const key7 in thing) {
+              keys3.push(stringify_key(key7,),);
+              str += `,${stringify_string(key7,)},${flatten(thing[key7],)}`;
+              keys3.pop();
+            }
+            str += ']';
+          } else {
+            str = '{';
+            let started = false;
+            for (const key7 in thing) {
+              if (started) str += ',';
+              started = true;
+              keys3.push(stringify_key(key7,),);
+              str += `${stringify_string(key7,)}:${flatten(thing[key7],)}`;
+              keys3.pop();
+            }
+            str += '}';
+          }
+      }
+    }
+    stringified[index2] = str;
+    return index2;
+  }
+  const index = flatten(value,);
+  if (index < 0) return `${index}`;
+  return `[${stringified.join(',',)}]`;
+}
+function stringify_primitive(thing,) {
+  const type = typeof thing;
+  if (type === 'string') return stringify_string(thing,);
+  if (thing instanceof String) return stringify_string(thing.toString(),);
+  if (thing === void 0) return UNDEFINED.toString();
+  if (thing === 0 && 1 / thing < 0) return NEGATIVE_ZERO.toString();
+  if (type === 'bigint') return `["BigInt","${thing}"]`;
+  return String(thing,);
+}
 var pageviewEventVersion = 2;
 function sendTrackingEvent(eventType, eventData, sendOn = 'lazy',) {
   var _a;
@@ -12933,6 +13535,220 @@ function sendTrackingEvent(eventType, eventData, sendOn = 'lazy',) {
     }
   }
 }
+var HandoverDataType = {
+  QueryCache: 0,
+  CollectionUtilsCache: 1,
+};
+var hydratedData;
+function createEmptyPayload() {
+  return {
+    [HandoverDataType.QueryCache]: /* @__PURE__ */ new Map(),
+    [HandoverDataType.CollectionUtilsCache]: /* @__PURE__ */ new Map(),
+  };
+}
+function parseHandoverData() {
+  if (
+    !isWindow ||
+    // some tests set window, but don't set document.
+    false
+  ) {
+    return;
+  }
+  if (hydratedData !== void 0) return hydratedData;
+  let script = document.getElementById('__framer__handoverData',);
+  if (!script) return;
+  try {
+    hydratedData = parse(script.text,) ?? createEmptyPayload();
+  } catch (error) {
+    hydratedData = createEmptyPayload();
+    console.warn('Failed to parse handover data. Falling back to network.', error,);
+  }
+  requestIdleCallback(() => {
+    script == null ? void 0 : script.remove();
+    script = null;
+  },);
+  return hydratedData;
+}
+function handleHydrationError(error, key7,) {
+  console.warn(
+    getPleaseReportMessage(
+      `Failed to resolve raw query result from DOM during hydration for: ${key7}. This might make the page load slightly slower.`,
+    ),
+  );
+  const sampleRate = Math.random();
+  if (sampleRate < 0.01) {
+    const stack = error instanceof Error && typeof error.stack === 'string' ? error.stack : null;
+    sendTrackingEvent('published_site_load_error', {
+      message: String(error,),
+      stack,
+    },);
+  }
+}
+function hasHandoverData(dataType, key7,) {
+  const data2 = parseHandoverData();
+  if (!data2) return false;
+  return data2[dataType].has(key7,);
+}
+function getHandoverData(dataType, key7,) {
+  const data2 = parseHandoverData();
+  if (!data2) return;
+  const map2 = data2[dataType];
+  if (!map2.has(key7,)) return;
+  const value = map2.get(key7,);
+  map2.delete(key7,);
+  return value;
+}
+var HandoverCollector = class {
+  constructor() {
+    __publicField(this, 'payload', createEmptyPayload(),);
+    __publicField(this, 'isEmpty', true,);
+  }
+  set(dataType, key7, value,) {
+    this.payload[dataType].set(key7, value,);
+    this.isEmpty = false;
+  }
+  has(dataType, key7,) {
+    return this.payload[dataType].has(key7,);
+  }
+  get(dataType, key7,) {
+    return this.payload[dataType].get(key7,);
+  }
+  /**
+   * Serializes the handover data to a string safe to use inside `<script>` tags.
+   */
+  toString() {
+    if (this.isEmpty) return void 0;
+    try {
+      return stringify(this.payload,);
+    } catch (error) {
+      console.error('Failed to serialize handover data.', error,);
+      return void 0;
+    }
+  }
+  clear() {
+    for (const map2 of Object.values(this.payload,)) {
+      map2.clear();
+    }
+    this.isEmpty = true;
+  }
+};
+var handoverCollector = /* @__PURE__ */ (() => isWindow ? void 0 : new HandoverCollector())();
+var handoverDataType = /* @__PURE__ */ (() => HandoverDataType.CollectionUtilsCache)();
+function getLocaleKey(locale,) {
+  return (locale == null ? void 0 : locale.id) ?? defaultLocaleId;
+}
+function makeHandoverKey(method, collectionId, localeKey, id3,) {
+  return `${method}|${collectionId}|${localeKey}|${id3}`;
+}
+var utilsCache = /* @__PURE__ */ new WeakMap();
+function getCollectionUtilsCache(collectionUtils,) {
+  return (collectionId) => {
+    if (!collectionUtils) return;
+    const utilsFactory = collectionUtils[collectionId];
+    if (!utilsFactory) return void 0;
+    if (utilsCache.has(utilsFactory,)) return utilsCache.get(utilsFactory,);
+    const cache2 = new CollectionUtilsCache(utilsFactory, collectionId,);
+    utilsCache.set(utilsFactory, cache2,);
+    return cache2;
+  };
+}
+var CollectionUtilsCacheContext = /* @__PURE__ */ createContext(void 0,);
+function CollectionUtilsCacheProvider({
+  children,
+  collectionUtils,
+},) {
+  const getCollectionUtilsCacheMemoized = useMemo(() => {
+    return {
+      get: getCollectionUtilsCache(collectionUtils,),
+    };
+  }, [collectionUtils,],);
+  return /* @__PURE__ */ jsx(CollectionUtilsCacheContext.Provider, {
+    value: getCollectionUtilsCacheMemoized,
+    children,
+  },);
+}
+function useCollectionUtils() {
+  return useContext(CollectionUtilsCacheContext,);
+}
+var CollectionUtilsCache = class {
+  constructor(utilFactory, collectionId,) {
+    this.collectionId = collectionId;
+    __publicField(this, 'module',);
+    __publicField(this, 'cacheMap', /* @__PURE__ */ new Map(),);
+    this.module = new LazyValue(async () => {
+      try {
+        const utils = await utilFactory();
+        assert(utils, 'Couldn\'t find CollectionUtils',);
+        return utils;
+      } catch (error) {
+        console.error(getPleaseReportMessage('Failed to import collection module.', error,),);
+        return void 0;
+      }
+    },);
+  }
+  callUtilsMethod(method, id3, locale,) {
+    const localeKey = getLocaleKey(locale,);
+    const entryKey = makeHandoverKey(method, this.collectionId, localeKey, id3,);
+    if (this.cacheMap.has(entryKey,)) {
+      const cached = this.cacheMap.get(entryKey,);
+      const value = cached == null ? void 0 : cached.readMaybeAsync();
+      if (handoverCollector !== void 0) {
+        if (isPromise(value,)) {
+          return value.then((result) => {
+            handoverCollector.set(handoverDataType, entryKey, result,);
+            return result;
+          },);
+        }
+        handoverCollector.set(handoverDataType, entryKey, value,);
+      }
+      return value;
+    }
+    if (hasHandoverData(handoverDataType, entryKey,)) {
+      const data2 = getHandoverData(handoverDataType, entryKey,);
+      this.cacheMap.set(entryKey, new LazyValue(() => data2),);
+      return data2;
+    }
+    const maybeUtils = this.module.readMaybeAsync();
+    const utilsIsPromise = isPromise(maybeUtils,);
+    let maybeResult;
+    try {
+      maybeResult = utilsIsPromise
+        ? maybeUtils.then((utils) => utils == null ? void 0 : utils[method](id3, locale,))
+        : maybeUtils == null
+        ? void 0
+        : maybeUtils[method](id3, locale,);
+    } catch (error) {
+      console.error(getPleaseReportMessage('Failed to call CollectionUtils method.', error,),);
+      maybeResult = void 0;
+    }
+    if (maybeResult === void 0) {
+      if (handoverCollector !== void 0) {
+        handoverCollector.set(handoverDataType, entryKey, maybeResult,);
+      }
+      this.cacheMap.set(entryKey, maybeResult,);
+      return;
+    }
+    const lazyValue = new LazyValue(() =>
+      maybeResult.then((result) => {
+        if (handoverCollector !== void 0) {
+          handoverCollector.set(handoverDataType, entryKey, result,);
+        }
+        return result;
+      },).catch((error) => {
+        console.error(getPleaseReportMessage('Failed to call CollectionUtils method.', error,),);
+        return void 0;
+      },)
+    );
+    this.cacheMap.set(entryKey, lazyValue,);
+    return lazyValue.readMaybeAsync();
+  }
+  getSlugByRecordId(recordId, locale,) {
+    return this.callUtilsMethod('getSlugByRecordId', recordId, locale,);
+  }
+  getRecordIdBySlug(slug, locale,) {
+    return this.callUtilsMethod('getRecordIdBySlug', slug, locale,);
+  }
+};
 function computeRelativePath(from, to,) {
   if (!from.startsWith('/',) || !to.startsWith('/',)) {
     throw new Error('from/to paths are expected to be absolute',);
@@ -13103,7 +13919,6 @@ async function replacePathVariables(path, currentLocale, nextLocale, defaultLoca
   };
   const matches = Array.from(resultPath.matchAll(pathVariablesRegExp,),);
   const replacements = await Promise.all(matches.map(async (match) => {
-    var _a2;
     const pathVariableWithDelimiter = match == null ? void 0 : match[0];
     const pathVariableValue = match == null ? void 0 : match[1];
     if (!pathVariableWithDelimiter || !pathVariableValue) {
@@ -13113,17 +13928,19 @@ async function replacePathVariables(path, currentLocale, nextLocale, defaultLoca
     if (!currentSlug || !isString(currentSlug,)) {
       throw new Error(`No slug found for path variable ${pathVariableValue}`,);
     }
-    const utils =
-      await ((_a2 = collectionUtils == null ? void 0 : collectionUtils[collectionId]) == null ? void 0 : _a2.call(collectionUtils,));
+    const utils = collectionUtils == null ? void 0 : collectionUtils.get(collectionId,);
     if (!utils || !currentLocale) {
       return currentSlug;
     }
-    const recordId = await utils.getRecordIdBySlug(currentSlug, currentLocale,);
+    const maybeRecordId = utils.getRecordIdBySlug(currentSlug, currentLocale,);
+    const recordId = isPromise(maybeRecordId,) ? await maybeRecordId : maybeRecordId;
     if (!recordId) return currentSlug;
-    const nextSlug = await utils.getSlugByRecordId(recordId, nextLocale,);
+    const maybeNextSlug = utils.getSlugByRecordId(recordId, nextLocale,);
+    const nextSlug = isPromise(maybeNextSlug,) ? await maybeNextSlug : maybeNextSlug;
     if (!nextSlug) {
       isMissingInLocale = true;
-      const defaultLocaleSlug = await utils.getSlugByRecordId(recordId, defaultLocale,);
+      const maybeDefaultLocaleSlug = utils.getSlugByRecordId(recordId, defaultLocale,);
+      const defaultLocaleSlug = isPromise(maybeDefaultLocaleSlug,) ? await maybeDefaultLocaleSlug : maybeDefaultLocaleSlug;
       if (defaultLocaleSlug) {
         resultPathVariables[pathVariableValue] = defaultLocaleSlug;
       }
@@ -13977,6 +14794,15 @@ async function handleRedirectForMissingSlugs(route, pathVariables, nextLocale,) 
   }
   return false;
 }
+function useSwitchLocale() {
+  const collectionUtils = useCollectionUtils();
+  return useCallback2((options) => {
+    return switchLocale({
+      ...options,
+      collectionUtils,
+    },);
+  }, [collectionUtils,],);
+}
 async function switchLocale(options,) {
   const result = await getLocalizedNavigationPath(options,);
   if (!result) return;
@@ -14095,7 +14921,6 @@ async function getLocalesForCurrentRoute(activeLocale, locales, currentRoute, pa
   return localesForCurrentRoute;
 }
 async function getSlugByLocaleIfCollectionPage(activeLocale, locales, currentRoute, pathVariables, collectionUtils,) {
-  var _a;
   const {
     collectionId,
   } = currentRoute;
@@ -14118,14 +14943,15 @@ async function getSlugByLocaleIfCollectionPage(activeLocale, locales, currentRou
   if (!currentSlug || !isString(currentSlug,)) {
     throw new Error(`No slug found for path variable ${pathVariableValue}`,);
   }
-  const utils =
-    await ((_a = collectionUtils == null ? void 0 : collectionUtils[collectionId]) == null ? void 0 : _a.call(collectionUtils,));
+  const utils = collectionUtils == null ? void 0 : collectionUtils.get(collectionId,);
   if (!utils) return null;
-  const recordId = await utils.getRecordIdBySlug(currentSlug, activeLocale,);
+  const maybeRecordId = utils.getRecordIdBySlug(currentSlug, activeLocale,);
+  const recordId = isPromise(maybeRecordId,) ? await maybeRecordId : maybeRecordId;
   if (!recordId) return null;
   const slugById = /* @__PURE__ */ new Map();
   await Promise.all(locales.map(async (locale) => {
-    const slug = await utils.getSlugByRecordId(recordId, locale,);
+    const maybeSlug = utils.getSlugByRecordId(recordId, locale,);
+    const slug = isPromise(maybeSlug,) ? await maybeSlug : maybeSlug;
     if (!slug) return;
     slugById.set(locale.id, slug,);
   },),);
@@ -14149,7 +14975,6 @@ function useLocalesForCurrentRoute() {
   const {
     currentRouteId,
     routes,
-    collectionUtils,
     currentPathVariables,
   } = useRouter();
   const {
@@ -14158,6 +14983,7 @@ function useLocalesForCurrentRoute() {
   } = useLocaleInfo();
   const [localesForCurrentRoute, setLocalesForCurrentRoute,] = React42.useState(() => activeLocale ? [activeLocale,] : []);
   const currentRoute = currentRouteId ? routes == null ? void 0 : routes[currentRouteId] : void 0;
+  const collectionUtils = useCollectionUtils();
   React42.useEffect(() => {
     let active = true;
     getLocalesForCurrentRoute(activeLocale, locales, currentRoute, currentPathVariables, collectionUtils,).then((localesSubset) => {
@@ -14670,40 +15496,90 @@ var NotFoundErrorBoundary = class extends Component2 {
     return renderPage(notFoundPage, defaultPageStyle,);
   }
 };
-var memoPathRoutes;
-var memoPaths;
-var lastRoutes;
+var frozenEmptyArray = Object.freeze([],);
+function emptyArray() {
+  return frozenEmptyArray;
+}
+var routeInfoCache;
 function getRouteInfoMemo(routes,) {
-  if (lastRoutes !== routes) {
-    memoPathRoutes = {};
-    for (
-      const [routeId, {
+  if ((routeInfoCache == null ? void 0 : routeInfoCache.lastRoutes) !== routes) {
+    const pathRoutes = {};
+    const pathRoutesLocalized = {};
+    let paths = [];
+    const pathsLocalized = {};
+    const lastRoutes = routes;
+    for (const routeId in routes) {
+      const route = routes[routeId];
+      assert(route, 'route must be defined',);
+      const {
         path,
-      },] of Object.entries(routes,)
-    ) {
-      if (path) {
-        memoPathRoutes[path] = {
-          path,
-          depth: pathDepth(path,),
+        pathLocalized,
+      } = route;
+      if (!path) continue;
+      const depth = pathDepth(path,);
+      pathRoutes[path] = {
+        path,
+        depth,
+        routeId,
+      };
+      if (!pathLocalized) continue;
+      for (const localeId in pathLocalized) {
+        const localizedPath = pathLocalized[localeId];
+        assert(localizedPath, 'localizedPath must be defined',);
+        const localizedDepth = pathDepth(localizedPath,);
+        const byLocale = pathRoutesLocalized[localeId] ||= {};
+        byLocale[localizedPath] = {
+          path: localizedPath,
+          depth: localizedDepth,
           routeId,
         };
       }
     }
-    memoPaths = Object.values(memoPathRoutes,);
-    memoPaths.sort(({
+    paths = Object.values(pathRoutes,);
+    paths.sort(({
       depth: depth1,
     }, {
       depth: depth2,
     },) => depth2 - depth1);
-    lastRoutes = routes;
+    for (const localeId in pathRoutesLocalized) {
+      const routesByPathLocalized = pathRoutesLocalized[localeId];
+      if (!routesByPathLocalized) continue;
+      const pathsForLocale = Object.values(routesByPathLocalized,);
+      pathsForLocale.sort(({
+        depth: depth1,
+      }, {
+        depth: depth2,
+      },) => depth2 - depth1);
+      pathsLocalized[localeId] = pathsForLocale;
+    }
+    routeInfoCache = {
+      pathRoutes,
+      pathRoutesLocalized,
+      paths,
+      pathsLocalized,
+      lastRoutes,
+    };
   }
-  return [memoPathRoutes, memoPaths,];
+  return {
+    pathRoutes: routeInfoCache.pathRoutes,
+    paths: routeInfoCache.paths,
+    pathRoutesLocalized: routeInfoCache.pathRoutesLocalized,
+    pathsLocalized: routeInfoCache.pathsLocalized,
+  };
 }
-function inferInitialRouteFromPath(routes, decodedLocationPath, fallback = true, locales = [],) {
-  const [pathRoutes, paths,] = getRouteInfoMemo(routes,);
+function inferInitialRouteFromPath(routes, locationPath, fallback = true, locales = emptyArray(),) {
+  return inferInitialRouteFromPathAndLocales(routes, locationPath, locales, fallback,);
+}
+function inferInitialRouteFromPathAndLocales(routes, locationPath, locales, fallback = true,) {
+  const {
+    pathRoutes,
+    paths,
+    pathRoutesLocalized,
+    pathsLocalized,
+  } = getRouteInfoMemo(routes,);
   let activeLocale;
   let localeId;
-  let locationPath = decodedLocationPath;
+  let hasNonDefaultLocale = false;
   if (locales.length > 0) {
     const firstPathSegment = locationPath.split('/',).find(Boolean,);
     if (firstPathSegment) {
@@ -14713,6 +15589,7 @@ function inferInitialRouteFromPath(routes, decodedLocationPath, fallback = true,
       if (activeLocale) {
         localeId = activeLocale.id;
         locationPath = locationPath.substring(activeLocale.slug.length + 1,);
+        hasNonDefaultLocale = true;
       }
     }
     if (!localeId) {
@@ -14721,6 +15598,20 @@ function inferInitialRouteFromPath(routes, decodedLocationPath, fallback = true,
       },) => slug === '');
       if (defaultLocale) {
         localeId = defaultLocale.id;
+      }
+    }
+  }
+  if (localeId && hasNonDefaultLocale) {
+    const localizedMap = pathRoutesLocalized[localeId];
+    const exactMatchForLocale = localizedMap ? localizedMap[locationPath] : void 0;
+    if (exactMatchForLocale) {
+      const match = matchPath(locationPath, exactMatchForLocale.path,);
+      if (match.isMatch) {
+        return {
+          routeId: exactMatchForLocale.routeId,
+          localeId,
+          pathVariables: match.pathVariables,
+        };
       }
     }
   }
@@ -14733,6 +15624,26 @@ function inferInitialRouteFromPath(routes, decodedLocationPath, fallback = true,
         localeId,
         pathVariables: match.pathVariables,
       };
+    }
+  }
+  if (localeId && hasNonDefaultLocale) {
+    const localizedList = pathsLocalized[localeId];
+    if (localizedList) {
+      for (
+        const {
+          path,
+          routeId,
+        } of localizedList
+      ) {
+        const match = matchPath(locationPath, path,);
+        if (match.isMatch) {
+          return {
+            routeId,
+            localeId,
+            pathVariables: match.pathVariables,
+          };
+        }
+      }
     }
   }
   for (
@@ -14908,27 +15819,6 @@ var endOfHeadStartMarker = '<!-- End of headStart -->';
 var endOfHeadEndMarker = '<!-- End of headEnd -->';
 var endOfBodyStartMarker = '<!-- End of bodyStart -->';
 var endOfBodyEndMarker = '<!-- End of bodyEnd -->';
-function assert(condition, ...msg) {
-  var _a, _b;
-  if (condition) return;
-  const e = Error('Assertion Error' + (msg.length > 0 ? ': ' + msg.join(' ',) : ''),);
-  if (e.stack) {
-    try {
-      const lines = e.stack.split('\n',);
-      if ((_a = lines[1]) == null ? void 0 : _a.includes('assert',)) {
-        lines.splice(1, 1,);
-        e.stack = lines.join('\n',);
-      } else if ((_b = lines[0]) == null ? void 0 : _b.includes('assert',)) {
-        lines.splice(0, 1,);
-        e.stack = lines.join('\n',);
-      }
-    } catch {}
-  }
-  throw e;
-}
-function assertNever(x, error,) {
-  throw error || new Error(x ? `Unexpected value: ${x}` : 'Application entered invalid state',);
-}
 async function insertHTML(html, referenceNode, position = 'beforeend',) {
   let insertionParent, insertionPoint;
   switch (position) {
@@ -23385,7 +24275,7 @@ var DeviceCodeComponent = /* @__PURE__ */ (() => {
     },
     hand: {
       type: 'enum',
-      options: [void 0, 'hand-1', 'hand-2',],
+      options: [null, 'hand-1', 'hand-2',],
       optionTitles: ['None', 'Model 1', 'Model 2',],
       hidden: (props) => !supportsHand(props,),
     },
@@ -23497,6 +24387,784 @@ function _injectRuntime(injectedRuntime,) {
   Object.assign(implementation, injectedRuntime,);
   isRuntimeInjected = true;
 }
+function assert2(condition, ...msg) {
+  var _a, _b;
+  if (condition) return;
+  const e = Error('Assertion Error' + (msg.length > 0 ? ': ' + msg.join(' ',) : ''),);
+  if (e.stack) {
+    try {
+      const lines = e.stack.split('\n',);
+      if ((_a = lines[1]) == null ? void 0 : _a.includes('assert',)) {
+        lines.splice(1, 1,);
+        e.stack = lines.join('\n',);
+      } else if ((_b = lines[0]) == null ? void 0 : _b.includes('assert',)) {
+        lines.splice(0, 1,);
+        e.stack = lines.join('\n',);
+      }
+    } catch {}
+  }
+  throw e;
+}
+var missing = Symbol('missing',);
+var errorReporter;
+function reportError({
+  error: maybeError,
+  tags,
+  extras,
+  critical,
+  caller,
+},) {
+  assert2(errorReporter, 'Set up an error callback with setErrorReporter, or configure Sentry with initializeEnvironment',);
+  const error = reportableError(maybeError, caller,);
+  errorReporter({
+    error,
+    tags: {
+      ...error.tags,
+      ...tags,
+    },
+    extras: {
+      ...error.extras,
+      ...extras,
+    },
+    critical: !!critical,
+  },);
+  return error;
+}
+function reportableError(error, caller = reportableError,) {
+  if (error instanceof Error) {
+    return error;
+  }
+  return new UnhandledError(error, caller,);
+}
+var UnhandledError = class extends Error {
+  constructor(error, caller,) {
+    const message = error ? JSON.stringify(error,) : 'No error message provided';
+    super(message,);
+    this.message = message;
+    if (caller && Error.captureStackTrace) {
+      Error.captureStackTrace(this, caller,);
+    } else {
+      try {
+        throw new Error();
+      } catch (e) {
+        this.stack = e.stack;
+      }
+    }
+  }
+};
+var hostname = typeof window !== 'undefined' ? window.location.hostname : void 0;
+var isLocal = Boolean(hostname && ['web.framerlocal.com', 'localhost', '127.0.0.1', '[::1]',].includes(hostname,),);
+var hosts = (() => {
+  if (!hostname) return;
+  if (isLocal) {
+    return {
+      main: hostname,
+      previewLink: void 0,
+    };
+  }
+  const previewHostRegex = /^(([^.]+\.)?beta\.)?((?:development\.)?framer\.com)$/u;
+  const match = hostname.match(previewHostRegex,);
+  if (!match || !match[3]) return;
+  return {
+    previewLink: match[2] && match[0],
+    main: match[3],
+  };
+})();
+var hostInfo = {
+  hosts,
+  isDevelopment: (hosts == null ? void 0 : hosts.main) === 'development.framer.com',
+  isProduction: (hosts == null ? void 0 : hosts.main) === 'framer.com',
+  isLocal,
+};
+var cachedServiceMap;
+function getServiceMap() {
+  if (typeof window === 'undefined') return {};
+  if (cachedServiceMap) return cachedServiceMap;
+  cachedServiceMap = extractServiceMap();
+  return cachedServiceMap;
+}
+function extractServiceMap() {
+  var _a, _b, _c;
+  const location = window.location;
+  let services = (_a = window == null ? void 0 : window.bootstrap) == null ? void 0 : _a.services;
+  if (services) {
+    return services;
+  }
+  let topOrigin;
+  try {
+    const topWindow = window.top;
+    topOrigin = topWindow.location.origin;
+    services = (_c = (_b = window.top) == null ? void 0 : _b.bootstrap) == null ? void 0 : _c.services;
+    if (services) {
+      return services;
+    }
+  } catch (e) {}
+  if (topOrigin && topOrigin !== location.origin) {
+    throw Error(`Unexpectedly embedded by ${topOrigin} (expected ${location.origin})`,);
+  }
+  if (location.origin.endsWith('framer.com',) || location.origin.endsWith('framer.dev',)) {
+    throw Error('ServiceMap data was not provided in document',);
+  }
+  try {
+    const servicesJSON = new URLSearchParams(location.search,).get('services',) ||
+      new URLSearchParams(location.hash.substring(1,),).get('services',);
+    if (servicesJSON) {
+      services = JSON.parse(servicesJSON,);
+    }
+  } catch (e) {}
+  if (services && typeof services === 'object' && services.api) {
+    return services;
+  }
+  throw Error('ServiceMap requested but not available',);
+}
+function jsonSafeCopy(obj, depth = 0, seen = /* @__PURE__ */ new Set(),) {
+  var _a;
+  if (obj === null) return obj;
+  if (typeof obj === 'function') return `[Function: ${obj.name ?? 'unknown'}]`;
+  if (typeof obj !== 'object') return obj;
+  if (obj instanceof Error) return `[${obj.toString()}]`;
+  if (seen.has(obj,)) return '[Circular]';
+  if (depth > 2) return '...';
+  seen.add(obj,);
+  try {
+    if ('toJSON' in obj && typeof obj.toJSON === 'function') {
+      return jsonSafeCopy(obj.toJSON(), depth + 1, seen,);
+    } else if (Array.isArray(obj,)) {
+      return obj.map((v) => jsonSafeCopy(v, depth + 1, seen,));
+    } else if (Object.getPrototypeOf(obj,) !== Object.prototype) {
+      return `[Object: ${'__class' in obj && obj.__class || ((_a = obj.constructor) == null ? void 0 : _a.name)}]`;
+    } else {
+      const result = {};
+      for (const [key7, v,] of Object.entries(obj,)) {
+        result[key7] = jsonSafeCopy(v, depth + 1, seen,);
+      }
+      return result;
+    }
+  } catch (e) {
+    return `[Throws: ${e instanceof Error ? e.message : e}]`;
+  } finally {
+    seen.delete(obj,);
+  }
+}
+var levelNames = ['trace', 'debug', 'info', 'warn', 'error',];
+var postfixNames = [':trace', ':debug', ':info', ':warn', ':error',];
+function applyLogLevelSpec(spec, all,) {
+  const missingSpecs = [];
+  for (const s of spec.split(/[ ,]/u,)) {
+    let match = s.trim();
+    if (match.length === 0) continue;
+    let level = 1;
+    let inverted = false;
+    if (match.startsWith('-',)) {
+      match = match.slice(1,);
+      level = 3;
+      inverted = true;
+    }
+    for (let i = 0; i <= 4; i++) {
+      const postfix = postfixNames[i];
+      if (!postfix) continue;
+      if (match.endsWith(postfix,)) {
+        level = i;
+        if (inverted) {
+          level += 1;
+        }
+        match = match.slice(0, match.length - postfix.length,);
+        if (match.length === 0) {
+          match = '*';
+        }
+        break;
+      }
+    }
+    const regex2 = new RegExp('^' + escapeRegExp(match,).replace(/\\\*/gu, '.*',) + '$',);
+    let loggersUpdated = 0;
+    for (const logger of all) {
+      if (logger.id.match(regex2,)) {
+        logger.level = level;
+        ++loggersUpdated;
+      }
+    }
+    if (loggersUpdated === 0) {
+      missingSpecs.push(s,);
+    }
+  }
+  return missingSpecs;
+}
+var _LogEntry = class _LogEntry2 {
+  constructor(logger, level, parts,) {
+    this.logger = logger;
+    this.level = level;
+    this.parts = parts;
+    __publicField(this, 'id',);
+    __publicField(this, 'time',);
+    __publicField(this, 'stringPrefix',);
+    this.id = _LogEntry2.nextId++;
+    this.time = Date.now();
+  }
+  toMessage() {
+    if (this.stringPrefix) return this.parts;
+    const r = [new Date(this.time,).toISOString().substr(-14, 14,), levelNames[this.level] + ': [' + this.logger.id + ']',];
+    let i = 0;
+    for (; i < this.parts.length; i++) {
+      const part = this.parts[i];
+      if (typeof part === 'string') {
+        r.push(part,);
+        continue;
+      }
+      break;
+    }
+    this.stringPrefix = r.join(' ',);
+    this.parts.splice(0, i, this.stringPrefix,);
+    return this.parts;
+  }
+  toString() {
+    return this.toMessage().map((part) => {
+      const type = typeof part;
+      if (type === 'string') return part;
+      if (type === 'function') return `[Function: ${part.name ?? 'unknown'}]`;
+      if (part instanceof Error) return part.stack ?? part.toString();
+      const json = JSON.stringify(jsonSafeCopy(part,),);
+      if ((json == null ? void 0 : json.length) > 253) {
+        return json.slice(0, 250,) + '...';
+      }
+      return json;
+    },).join(' ',);
+  }
+};
+__publicField(_LogEntry, 'nextId', 0,);
+var LogEntry = _LogEntry;
+var logLevelSpec = '*:app:info,app:info';
+var isNode = typeof process !== 'undefined' && !!process.kill;
+var isCI = isNode && false;
+if (isCI) {
+  logLevelSpec = '-:warn';
+} else if (isNode) {
+  logLevelSpec = '';
+}
+try {
+  if (typeof window !== 'undefined' && window.localStorage) {
+    logLevelSpec = window.localStorage.logLevel || logLevelSpec;
+  }
+} catch {}
+try {
+  if (typeof process !== 'undefined') {
+    logLevelSpec = process.env.DEBUG || logLevelSpec;
+  }
+} catch {}
+try {
+  if (typeof window !== 'undefined') {
+    Object.assign(window, {
+      setLogLevel,
+    },);
+  }
+} catch {}
+try {
+  if (typeof window !== 'undefined' && !!window.postMessage && window.top === window) {
+    window.addEventListener('message', (msg) => {
+      if (!msg.data || typeof msg.data !== 'object') return;
+      const {
+        loggerId,
+        level,
+        parts,
+        printed,
+      } = msg.data;
+      if (typeof loggerId !== 'string') return;
+      if (!Array.isArray(parts,) || parts.length < 1 || typeof level !== 'number') return;
+      const logger = getLogger(loggerId,);
+      if (level < 0 || level > 5) return;
+      parts[0] = parts[0].replace('[', '*[',);
+      const entry = new LogEntry(logger, level, parts,);
+      entry.stringPrefix = parts[0];
+      replayBuffer.push(entry,);
+      if (printed) return;
+      if (logger.level > level) return;
+      console == null ? void 0 : console.log(...entry.toMessage(),);
+    },);
+  }
+} catch {}
+var postLogEntry;
+try {
+  if (
+    typeof window !== 'undefined' && !!window.postMessage && window.parent !== window &&
+    // Don't post messages to the top-level site from the Editor Bar
+    !window.location.pathname.startsWith('/edit',)
+  ) {
+    postLogEntry = (entry) => {
+      var _a;
+      try {
+        const parts = entry.toMessage().map((p) => jsonSafeCopy(p,));
+        const logger = entry.logger;
+        const level = entry.level;
+        const printed = logger.level <= entry.level;
+        const data2 = {
+          loggerId: logger.id,
+          level,
+          parts,
+          printed,
+        };
+        (_a = window.parent) == null ? void 0 : _a.postMessage(data2, getServiceMap().app,);
+      } catch {}
+    };
+  }
+} catch {}
+var loggers = {};
+var replayBuffer = [];
+var maxReplayBufferEntries = 1e3;
+function createLogEntry(logger, level, parts,) {
+  const entry = new LogEntry(logger, level, parts,);
+  replayBuffer.push(entry,);
+  postLogEntry == null ? void 0 : postLogEntry(entry,);
+  while (replayBuffer.length > maxReplayBufferEntries) {
+    replayBuffer.shift();
+  }
+  return entry;
+}
+function getLogReplayBuffer(maxEntries,) {
+  if (typeof maxEntries === 'number') {
+    maxReplayBufferEntries = maxEntries;
+  }
+  return replayBuffer;
+}
+var pathRegex = /\/(?<filename>[^/.]+)(?=\.(?:debug\.)?html$)/u;
+var cachedFilename;
+function getFilenameFromWindowPathname() {
+  var _a, _b;
+  if (typeof window === 'undefined' || !window.location) return;
+  cachedFilename ??= (_b = (_a = pathRegex.exec(window.location.pathname,)) == null ? void 0 : _a.groups) == null ? void 0 : _b.filename;
+  return cachedFilename;
+}
+function getLogger(id3,) {
+  const path = getFilenameFromWindowPathname();
+  id3 = (path ? path + ':' : '') + id3;
+  const existing = loggers[id3];
+  if (existing) return existing;
+  const logger = new Logger(id3,);
+  loggers[id3] = logger;
+  applyLogLevelSpec(logLevelSpec, [logger,],);
+  postLogEntry == null ? void 0 : postLogEntry(new LogEntry(logger, -1, [],),);
+  return logger;
+}
+function setLogLevel(spec, replay = true,) {
+  try {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      window.localStorage.logLevel = spec;
+    }
+  } catch {}
+  const previousSpec = logLevelSpec;
+  logLevelSpec = spec;
+  const all = Object.values(loggers,);
+  for (const logger of all) {
+    logger.level = 3;
+  }
+  const missingSpecs = applyLogLevelSpec(spec, all,);
+  if (missingSpecs.length > 0) {
+    console == null ? void 0 : console.warn('Some log level specs matched no loggers:', missingSpecs,);
+  }
+  if (replay && replayBuffer.length > 0) {
+    console == null ? void 0 : console.log('--- LOG REPLAY ---',);
+    for (const entry of replayBuffer) {
+      if (entry.logger.level > entry.level) continue;
+      if (entry.level >= 3) {
+        console == null ? void 0 : console.warn(...entry.toMessage(),);
+      } else {
+        console == null ? void 0 : console.log(...entry.toMessage(),);
+      }
+    }
+    console == null ? void 0 : console.log('--- END OF LOG REPLAY ---',);
+  }
+  return previousSpec;
+}
+var enrichWithLogs = (extras) => {
+  const result = {
+    ...extras,
+    logs: getLogReplayBuffer().slice(-50,).map((entry) => entry.toString().slice(0, 600,)).join('\n',),
+  };
+  if (extras.logs) {
+    console == null ? void 0 : console.warn('extras.logs is reserved for log replay buffer, use another key',);
+  }
+  return result;
+};
+var Logger = class {
+  constructor(id3, errorIsCritical,) {
+    this.id = id3;
+    __publicField(this, 'level', 3,/* Warn */
+    );
+    __publicField(this, 'didLog', {},);
+    __publicField(this, 'errorIsCritical',);
+    __publicField(this, 'trace', (...parts) => {
+      if (this.level > 0) return;
+      const entry = createLogEntry(this, 0, parts,);
+      console == null ? void 0 : console.log(...entry.toMessage(),);
+    },);
+    __publicField(this, 'debug', (...parts) => {
+      const entry = createLogEntry(this, 1, parts,);
+      if (this.level > 1) return;
+      console == null ? void 0 : console.log(...entry.toMessage(),);
+    },);
+    __publicField(this, 'info', (...parts) => {
+      const entry = createLogEntry(this, 2, parts,);
+      if (this.level > 2) return;
+      console == null ? void 0 : console.info(...entry.toMessage(),);
+    },);
+    __publicField(this, 'warn', (...parts) => {
+      const entry = createLogEntry(this, 3, parts,);
+      if (this.level > 3) return;
+      console == null ? void 0 : console.warn(...entry.toMessage(),);
+    },);
+    __publicField(this, 'warnOncePerMinute', (firstPart, ...parts) => {
+      const lastLoggedTime = this.didLog[firstPart];
+      if (lastLoggedTime && lastLoggedTime > Date.now()) return;
+      this.didLog[firstPart] = Date.now() + 1e3 * 60;
+      parts.unshift(firstPart,);
+      const entry = createLogEntry(this, 3, parts,);
+      if (this.level > 3) return;
+      console == null ? void 0 : console.warn(...entry.toMessage(),);
+    },);
+    __publicField(this, 'error', (...parts) => {
+      const entry = createLogEntry(this, 4, parts,);
+      if (this.level > 4) return;
+      console == null ? void 0 : console.error(...entry.toMessage(),);
+    },);
+    __publicField(this, 'errorOncePerMinute', (firstPart, ...parts) => {
+      const lastLoggedTime = this.didLog[firstPart];
+      if (lastLoggedTime && lastLoggedTime > Date.now()) return;
+      this.didLog[firstPart] = Date.now() + 1e3 * 60;
+      parts.unshift(firstPart,);
+      const entry = createLogEntry(this, 4, parts,);
+      if (this.level > 4) return;
+      console == null ? void 0 : console.error(...entry.toMessage(),);
+    },);
+    __publicField(this, 'reportWithoutLogging', (maybeError, extras, tags, critical,) => {
+      const enrichedExtras = enrichWithLogs(extras ?? {},);
+      const enrichedError = reportError({
+        caller: this.reportWithoutLogging,
+        error: maybeError,
+        tags: {
+          ...tags,
+          handler: 'logger',
+          where: this.id,
+        },
+        extras,
+        critical: critical ?? this.errorIsCritical,
+      },);
+      return [enrichedExtras, enrichedError,];
+    },);
+    __publicField(this, 'reportError', (maybeError, extras, tags, critical,) => {
+      const [enrichedExtras, enrichedError,] = this.reportWithoutLogging(maybeError, extras, tags, critical,);
+      if (enrichedExtras) {
+        this.error(enrichedError, enrichedExtras,);
+      } else {
+        this.error(enrichedError,);
+      }
+    },);
+    __publicField(this, 'reportErrorOncePerMinute', (error, extras,) => {
+      if (!isErrorWithMessage(error,)) return;
+      const lastLoggedTime = this.didLog[error.message];
+      if (lastLoggedTime && lastLoggedTime > Date.now()) return;
+      this.didLog[error.message] = Date.now() + 1e3 * 60;
+      this.reportError(error, extras,);
+    },);
+    __publicField(this, 'reportCriticalError', (maybeError, extras, tags,) => this.reportError(maybeError, extras, tags, true,),);
+    this.errorIsCritical = errorIsCritical ?? (id3 === 'fatal' || id3.endsWith(':fatal',));
+  }
+  extend(name,) {
+    const id3 = this.id + ':' + name;
+    return getLogger(id3,);
+  }
+  /** Returns the messages this logger created that are still in the global replay buffer. */
+  getBufferedMessages() {
+    return replayBuffer.filter((entry) => entry.logger === this);
+  }
+  /** Set new level and return previous level. */
+  setLevel(level,) {
+    const previous = this.level;
+    this.level = level;
+    return previous;
+  }
+  /** Check if a trace messages will be output. */
+  isLoggingTraceMessages() {
+    return this.level >= 0;
+  }
+};
+function isErrorWithMessage(maybeError,) {
+  return Object.prototype.hasOwnProperty.call(maybeError, 'message',);
+}
+function escapeRegExp(string,) {
+  return string.replace(/[/\-\\^$*+?.()|[\]{}]/gu, '\\$&',);
+}
+var Mixed = Symbol('Mixed',);
+var DEPENDENCIES_MODULE_NAME = 'dependencies';
+var DEPENDENCIES_MODULE_TYPE = 'config';
+var DEPENDENCIES_MODULE_TYPE_SLASH_NAME = `${DEPENDENCIES_MODULE_TYPE}/${DEPENDENCIES_MODULE_NAME}`;
+var IMPORT_MAP_FILE_NAME = 'importMap.json';
+var DEPENDENCIES_FILE_NAME = 'dependencies.json';
+var IMPORT_MAP_FILE_ID = `${DEPENDENCIES_MODULE_TYPE_SLASH_NAME}/${IMPORT_MAP_FILE_NAME}`;
+var DEPENDENCIES_FILE_ID = `${DEPENDENCIES_MODULE_TYPE_SLASH_NAME}/${DEPENDENCIES_FILE_NAME}`;
+var USE_FREEZE = false;
+var List;
+((List2) => {
+  function push(ls, ...elements) {
+    return ls.concat(elements,);
+  }
+  List2.push = push;
+  function pop(a,) {
+    return a.slice(0, -1,);
+  }
+  List2.pop = pop;
+  function unshift(ls, ...elements) {
+    return elements.concat(ls,);
+  }
+  List2.unshift = unshift;
+  function insert(a, index, ...elements) {
+    const length = a.length;
+    if (index < 0 || index > length) throw Error('index out of range: ' + index,);
+    const copy = a.slice();
+    copy.splice(index, 0, ...elements,);
+    return copy;
+  }
+  List2.insert = insert;
+  function replace(a, index, replacement,) {
+    const length = a.length;
+    if (index < 0 || index >= length) throw Error('index out of range: ' + index,);
+    const itemsToAdd = Array.isArray(replacement,) ? replacement : [replacement,];
+    const copy = a.slice();
+    copy.splice(index, 1, ...itemsToAdd,);
+    return copy;
+  }
+  List2.replace = replace;
+  function remove2(a, index,) {
+    const length = a.length;
+    if (index < 0 || index >= length) throw Error('index out of range: ' + index,);
+    const copy = a.slice();
+    copy.splice(index, 1,);
+    return copy;
+  }
+  List2.remove = remove2;
+  function move(a, from, to,) {
+    const length = a.length;
+    if (from < 0 || from >= length) throw Error('from index out of range: ' + from,);
+    if (to < 0 || to >= length) throw Error('to index out of range: ' + to,);
+    const copy = a.slice();
+    if (to === from) return copy;
+    const element = copy[from];
+    if (from < to) {
+      copy.splice(to + 1, 0, element,);
+      copy.splice(from, 1,);
+    } else {
+      copy.splice(from, 1,);
+      copy.splice(to, 0, element,);
+    }
+    return copy;
+  }
+  List2.move = move;
+  function zip(a, b,) {
+    const res = [];
+    const length = Math.min(a.length, b.length,);
+    for (let i = 0; i < length; i++) {
+      res.push([a[i], b[i],],);
+    }
+    return res;
+  }
+  List2.zip = zip;
+  function update(a, index, body,) {
+    const res = a.slice();
+    const targetElement = res[index];
+    if (targetElement === void 0) return res;
+    res[index] = body(targetElement,);
+    return res;
+  }
+  List2.update = update;
+  function unique(a,) {
+    return Array.from(new Set(a,),);
+  }
+  List2.unique = unique;
+  function union(a, ...collections) {
+    return Array.from(/* @__PURE__ */ new Set([...a, ...collections.flat(),],),);
+  }
+  List2.union = union;
+  function filter2(a, predicate,) {
+    return a.filter(predicate,);
+  }
+  List2.filter = filter2;
+})(List || (List = {}),);
+var objectHasOwnProperty = Object.prototype.hasOwnProperty;
+function hasOwnProperty(object, property,) {
+  return objectHasOwnProperty.call(object, property,);
+}
+var ValueObject;
+((ValueObject2) => {
+  function morphUsingTemplate(values, template,) {
+    for (const field of Object.keys(values,)) {
+      if (!hasOwnProperty(template, field,)) {
+        delete values[field];
+      }
+    }
+    for (const field of Object.keys(template,)) {
+      if (values[field] === void 0) {
+        values[field] = template[field];
+      }
+    }
+    Object.setPrototypeOf(values, Object.getPrototypeOf(template,),);
+    if (USE_FREEZE) {
+      Object.freeze(values,);
+    }
+    return values;
+  }
+  ValueObject2.morphUsingTemplate = morphUsingTemplate;
+  function writeOnce(object, values,) {
+    if (values) {
+      Object.assign(object, values,);
+    }
+    if (USE_FREEZE) {
+      Object.freeze(object,);
+    }
+  }
+  ValueObject2.writeOnce = writeOnce;
+  function update(object, values,) {
+    const result = Object.assign(Object.create(Object.getPrototypeOf(object,),), object, values,);
+    if (USE_FREEZE) {
+      Object.freeze(result,);
+    }
+    return result;
+  }
+  ValueObject2.update = update;
+})(ValueObject || (ValueObject = {}),);
+var ReadonlySet;
+((ReadonlySet2) => {
+  function add3(set, ...items) {
+    return /* @__PURE__ */ new Set([...set, ...items,],);
+  }
+  ReadonlySet2.add = add3;
+  function remove2(set, ...items) {
+    const result = new Set(set,);
+    for (const item of items) {
+      result.delete(item,);
+    }
+    return result;
+  }
+  ReadonlySet2.remove = remove2;
+  function union(...sets) {
+    const result = /* @__PURE__ */ new Set();
+    for (const set of sets) {
+      for (const item of set) {
+        result.add(item,);
+      }
+    }
+    return result;
+  }
+  ReadonlySet2.union = union;
+  function toggle(set, item,) {
+    if (set.has(item,)) {
+      return ReadonlySet2.remove(set, item,);
+    }
+    return ReadonlySet2.add(set, item,);
+  }
+  ReadonlySet2.toggle = toggle;
+})(ReadonlySet || (ReadonlySet = {}),);
+var ReadonlyMap;
+((ReadonlyMap2) => {
+  function merge(map2, ...otherMaps) {
+    const result = /* @__PURE__ */ new Map();
+    map2.forEach((value, key7,) => result.set(key7, value,));
+    let didMergeMaps = false;
+    for (const otherMap of otherMaps) {
+      if (!otherMap) continue;
+      otherMap.forEach((value, key7,) => result.set(key7, value,));
+      didMergeMaps = true;
+    }
+    return didMergeMaps ? result : map2;
+  }
+  ReadonlyMap2.merge = merge;
+  function set(map2, key7, value,) {
+    const result = new Map(map2,);
+    result.set(key7, value,);
+    return result;
+  }
+  ReadonlyMap2.set = set;
+  function remove2(map2, key7,) {
+    const result = new Map(map2,);
+    result.delete(key7,);
+    return result;
+  }
+  ReadonlyMap2.remove = remove2;
+})(ReadonlyMap || (ReadonlyMap = {}),);
+var ResolvablePromise = class extends Promise {
+  constructor() {
+    let res;
+    let rej;
+    super((resolve, reject,) => {
+      res = resolve;
+      rej = reject;
+    },);
+    __publicField(this, '_state', 'initial',);
+    __publicField(this, 'resolve',);
+    __publicField(this, 'reject',);
+    this.resolve = (val) => {
+      this._state = 'fulfilled';
+      res(val,);
+    };
+    this.reject = (reason) => {
+      this._state = 'rejected';
+      rej(reason,);
+    };
+  }
+  get state() {
+    return this._state;
+  }
+  /**
+   * A function that sets the state to "pending".
+   * Useful for when you want to signal that the task started but is not yet completed.
+   */
+  pending() {
+    this._state = 'pending';
+    return this;
+  }
+  isResolved() {
+    return this._state === 'fulfilled' || this._state === 'rejected';
+  }
+};
+ResolvablePromise.prototype.constructor = Promise;
+var hasNativeYield = false;
+var hasNativePostTask = false;
+var hasIsInputPending = false;
+if (typeof window !== 'undefined' && window.scheduler) {
+  hasNativeYield = 'yield' in window.scheduler;
+  hasNativePostTask = 'postTask' in window.scheduler;
+  hasIsInputPending = 'isInputPending' in window.scheduler;
+}
+var log = getLogger('task-queue',);
+function getAssetFilename(asset,) {
+  return asset.key + asset.extension;
+}
+function createAbsoluteAssetURL(filename,) {
+  const serviceMap = getServiceMap();
+  return `${serviceMap.userContent}/assets/${filename}`;
+}
+function createAbsoluteAssetURLFromAsset(asset,) {
+  return createAbsoluteAssetURL(getAssetFilename(asset,),);
+}
+var FixedSizeScaleVariants = [1, 2, 2.2,];
+var ValidSteps = [512, 1024, 2048, 4096,];
+function getVariantsDimensions(width, height,) {
+  if (width === void 0 || height === void 0) return;
+  let lead = width,
+    follow = height,
+    orient = 0;
+  if (height > width) {
+    lead = height;
+    follow = width;
+    orient = 1;
+  }
+  const ratio = lead / follow;
+  const sizes = [];
+  for (const step2 of ValidSteps) {
+    if (lead <= step2) return sizes;
+    sizes.push({
+      maxSideSize: step2,
+      width: orient === 0 ? step2 : Math.trunc(step2 / ratio,),
+    },);
+  }
+  return sizes;
+}
 var LibraryFeaturesContext = /* @__PURE__ */ React42.createContext(void 0,);
 LibraryFeaturesContext.displayName = 'LibraryFeaturesContext';
 var LibraryFeaturesProvider = /* @__PURE__ */ (() => LibraryFeaturesContext.Provider)();
@@ -23564,6 +25232,71 @@ function useDecodingAttribute(avoidAsyncDecoding,) {
     onImageMount,
   };
 }
+var MinVariantSizeForSourceSet = 512;
+function getResponsiveSrcSet(source, image, variants,) {
+  if (!variants || variants.length === 0) return void 0;
+  if (!image.pixelWidth) return void 0;
+  const srcSet = [];
+  for (const variant of variants) {
+    if (variant.width >= MinVariantSizeForSourceSet) {
+      const url2 = new URL(source,);
+      url2.searchParams.set('scale-down-to', `${variant.maxSideSize}`,);
+      srcSet.push(`${url2.toString()} ${variant.width}w`,);
+    }
+  }
+  const url = new URL(source,);
+  url.searchParams.set('scale-down-to', `${image.pixelWidth}`,);
+  srcSet.push(`${url.toString()} ${image.pixelWidth}w`,);
+  return srcSet.join(', ',) || void 0;
+}
+function getFixedSrcSets(source, image, nodeFixedSize,) {
+  if (!image.pixelWidth || !image.pixelHeight) return void 0;
+  if (!(nodeFixedSize == null ? void 0 : nodeFixedSize.width) || !(nodeFixedSize == null ? void 0 : nodeFixedSize.height)) return void 0;
+  const srcSet = [];
+  const largestDimension = image.pixelWidth > image.pixelHeight ? 'width' : 'height';
+  for (const variant of FixedSizeScaleVariants) {
+    const imageTagSize = largestDimension === 'width' ? nodeFixedSize.width : nodeFixedSize.height;
+    const maxSideSize = Math.round(imageTagSize * variant,);
+    const url = new URL(source,);
+    url.searchParams.set('scale-down-to', `${maxSideSize}`,);
+    srcSet.push({
+      src: url.toString(),
+      scale: variant,
+    },);
+  }
+  return srcSet;
+}
+function getSrcSet(nodeFixedSize, image, source,) {
+  if (!['auto', 'lossless',].includes(image.preferredSize ?? '',)) {
+    return {
+      src: source,
+      srcSet: void 0,
+    };
+  }
+  if (nodeFixedSize) {
+    const fixedSrcSets = getFixedSrcSets(source, image, nodeFixedSize,);
+    if (!(fixedSrcSets == null ? void 0 : fixedSrcSets.length)) {
+      return {
+        src: source,
+        srcSet: void 0,
+      };
+    }
+    const [x1, ...rest] = fixedSrcSets;
+    return {
+      src: x1 == null ? void 0 : x1.src,
+      srcSet: rest.map(({
+        src,
+        scale: scale2,
+      },) => `${src} ${scale2}x`).join(', ',),
+    };
+  } else {
+    const variants = getVariantsDimensions(image.pixelWidth, image.pixelHeight,);
+    return {
+      src: source,
+      srcSet: getResponsiveSrcSet(source, image, variants,),
+    };
+  }
+}
 function StaticImage({
   image,
   containerSize,
@@ -23579,6 +25312,13 @@ function StaticImage({
     onImageLoad,
     onImageMount,
   } = useDecodingAttribute(avoidAsyncDecoding,);
+  const {
+    srcSet,
+    src,
+  } = !('srcSet' in image) ? getSrcSet(image.nodeFixedSize, image, source,) : {
+    src: source,
+    srcSet: image.srcSet,
+  };
   return (
     // eslint-disable-next-line framer-studio/require-async-decoding -- we conditionally apply it
     /* @__PURE__ */
@@ -23590,8 +25330,8 @@ function StaticImage({
       width: image.pixelWidth,
       height: image.pixelHeight,
       sizes: image.sizes,
-      srcSet: image.srcSet,
-      src: source,
+      srcSet,
+      src,
       onLoad: onImageLoad,
       alt: alt ?? image.alt ?? '',
       style: imageStyle,
@@ -27911,7 +29651,7 @@ function WithEvents(BaseComponent,) {
   (0, import_hoist_non_react_statics3.default)(withEvents, BaseComponent,);
   return withEvents;
 }
-var hasOwnProperty = (obj, prop,) => Object.prototype.hasOwnProperty.call(obj, prop,);
+var hasOwnProperty2 = (obj, prop,) => Object.prototype.hasOwnProperty.call(obj, prop,);
 var $private = /* @__PURE__ */ Symbol('private',);
 var ObservableObject = /* @__PURE__ */ (() => {
   function ObservableObject2(initial = {}, makeAnimatables = false, observeAnimatables = true,) {
@@ -27922,8 +29662,8 @@ var ObservableObject = /* @__PURE__ */ (() => {
         observers: new Observers(),
         reset() {
           for (const key7 in state) {
-            if (hasOwnProperty(state, key7,)) {
-              const value = hasOwnProperty(initial, key7,) ? asRecord(initial,)[key7] : void 0;
+            if (hasOwnProperty2(state, key7,)) {
+              const value = hasOwnProperty2(initial, key7,) ? asRecord(initial,)[key7] : void 0;
               if (value !== void 0) {
                 state[key7] = value;
               } else {
@@ -29065,7 +30805,7 @@ function withInfiniteScroll(Component18,) {
     },);
   },);
 }
-function debounce(fn, time2,) {
+function debounce2(fn, time2,) {
   let timeout;
   const debounced = (...args) => {
     safeWindow.clearTimeout(timeout,);
@@ -29131,7 +30871,7 @@ function useWheelScroll(ref, {
       clampY = clampY2,
       updateX = updateX2,
       updateY = updateY2;
-    const debouncedOnScrollEnd = debounce(() => {
+    const debouncedOnScrollEnd = debounce2(() => {
       onScrollEnd && onScrollEnd(getPointData(),);
       isWheelScrollActive.current = false;
     }, 200,);
@@ -30499,7 +32239,7 @@ var MouseWheelGestureRecognizer = class extends GestureRecognizer {
     __publicField(
       this,
       'onMouseWheelEnd',
-      debounce((event) => {
+      debounce2((event) => {
         if (this.handler && this.startEvent) {
           this.stateSwitch(16,/* Ended */
           );
@@ -33644,7 +35384,10 @@ var SynchronousSuspenseErrorBoundary = class extends Component2 {
       error,
       '\n\nComponent stack:\n',
       componentStack,
-      '\n\nThis error indicates a state update wasn\u2019t wrapped with `startTransition`. Some of the UI might flash as a result. If you are the author of this website, update external components and check recently added custom code or code overrides. In case the issue persists, report it to the Framer team via https://www.framer.com/contact/.',
+      '\n\nThis error indicates a state update wasn\u2019t wrapped with `startTransition`. Some of the UI might flash as a result. ' +
+        getPleaseReportMessage(
+          'If you are the author of this website, update external components and check recently added custom code or code overrides.',
+        ),
     );
     const stack = error instanceof Error && typeof error.stack === 'string' ? error.stack : void 0;
     sendTrackingEvent('published_site_load_recoverable_error', {
@@ -35391,13 +37134,8 @@ var GracefullyDegradingErrorBoundary = class extends Component2 {
     __publicField(this, 'state', {
       error: void 0,
     },);
-    __publicField(this, 'message', 'Made UI non-interactive due to an error',);
-    __publicField(this, 'messageFatal', 'Fatal error',);
-    __publicField(
-      this,
-      'messageReport',
-      'If you are the author of this website, please report this issue to the Framer team via https://www.framer.com/contact/',
-    );
+    __publicField(this, 'message', 'Made UI non-interactive due to an error.',);
+    __publicField(this, 'messageFatal', 'Fatal error.',);
   }
   static getDerivedStateFromError(error,) {
     return {
@@ -35409,12 +37147,7 @@ var GracefullyDegradingErrorBoundary = class extends Component2 {
     if ('cause' in error) {
       error = error.cause;
     }
-    console.error(
-      `${isBot ? this.message : this.messageFatal}. ${this.messageReport}. Error:
-
-`,
-      error,
-    );
+    console.error(getPleaseReportMessage(isBot ? this.message : this.messageFatal, error,),);
     const sampleRate = Math.random();
     if (sampleRate > 0.5) return;
     const stack = error instanceof Error && typeof error.stack === 'string' ? error.stack : null;
@@ -35449,112 +37182,12 @@ var GracefullyDegradingErrorBoundary = class extends Component2 {
           __html:
             `<!-- DOM replaced by GracefullyDegradingErrorBoundary due to "${
               unwrappedError.message.replace(closingHTMLComment, closingHTMLCommentReplacement,)
-            }". ${this.messageReport}: --><!-- Stack: ${
+            }". ${getPleaseReportMessage()}: --><!-- Stack: ${
               (_b = error.stack) == null ? void 0 : _b.replace(closingHTMLComment, '--!>',)
             } -->` + dom,
         },
       },)
     );
-  }
-};
-var PromiseState = {
-  Pending: 'pending',
-  Fulfilled: 'fulfilled',
-  Rejected: 'rejected',
-};
-var LazyValue = class _LazyValue {
-  constructor(resolver,) {
-    this.resolver = resolver;
-    __publicField(this, 'promiseState', PromiseState.Pending,);
-    __publicField(this, 'preloadPromise',);
-    __publicField(this, 'value',);
-    __publicField(this, 'reason',);
-    __publicField(this, 'read', () => {
-      if (this.promiseState === PromiseState.Fulfilled) {
-        return this.value;
-      }
-      if (this.promiseState === PromiseState.Rejected) {
-        throw this.reason;
-      }
-      throw new Error('Need to call preload() before read()',);
-    },);
-  }
-  static is(value,) {
-    return value instanceof _LazyValue;
-  }
-  /**
-   * Gets the status and preloads the value if it's not already preloaded.
-   */
-  get status() {
-    void this.preload();
-    return this.state;
-  }
-  get state() {
-    return this.promiseState;
-  }
-  // biome-ignore lint/suspicious/noThenProperty: This is a PromiseLike class.
-  then(onfulfilled, onrejected,) {
-    if (this.promiseState === PromiseState.Fulfilled) {
-      return Promise.resolve(this.value,).then(onfulfilled, onrejected,);
-    }
-    if (this.promiseState === PromiseState.Rejected) {
-      return Promise.reject(this.reason,).then(onfulfilled, onrejected,);
-    }
-    return this.readAsync().then(onfulfilled, onrejected,);
-  }
-  /**
-   * Preload the value so it can be read() later.
-   *
-   * @returns The promise that resolves or rejects. `undefined` if the value has already been preloaded or is synchronously readable.
-   */
-  preload() {
-    if (this.promiseState !== PromiseState.Pending) return;
-    if (this.preloadPromise) return this.preloadPromise;
-    const fulfill = (value) => {
-      this.promiseState = PromiseState.Fulfilled;
-      this.value = value;
-    };
-    const reject = (reason) => {
-      this.promiseState = PromiseState.Rejected;
-      this.reason = reason;
-    };
-    let maybeValue;
-    try {
-      maybeValue = this.resolver();
-    } catch (e) {
-      reject(e,);
-      return;
-    }
-    if (!isPromise(maybeValue,)) {
-      fulfill(maybeValue,);
-      return;
-    }
-    const valuePromise = maybeValue.then(fulfill, (error) => {
-      reject(error,);
-    },);
-    this.preloadPromise = valuePromise;
-    return valuePromise;
-  }
-  async readAsync() {
-    return this.readMaybeAsync();
-  }
-  /**
-   * Loads the value if it's not already loaded.
-   *
-   * @returns The value or a promise that resolves to the value.
-   */
-  readMaybeAsync() {
-    const preloadPromise = this.preload();
-    if (preloadPromise) return preloadPromise.then(this.read,);
-    return this.read();
-  }
-  /**
-   * FIXME: With React 19, mark this as deprecated and use the official `use` hook instead (just pass in the LazyValue instance).
-   */
-  use() {
-    const promise = this.preload();
-    if (promise) throw promise;
-    return this.read();
   }
 };
 function findAnchorElement(target, withinElement,) {
@@ -35672,125 +37305,13 @@ function getObserveRouteForPreloadingFn() {
 var observeRouteForPreloading =
   // this also guards `window`
   !shouldPreloadBasedOnUA || typeof IntersectionObserver === 'undefined' ? null : /* @__PURE__ */ getObserveRouteForPreloadingFn();
-var noLocale = Symbol('noLocale',);
-var resolveSlugCache = /* @__PURE__ */ new Map();
-function resolveSlug(unresolvedSlug, utilsByCollectionId, activeLocale,) {
-  var _a, _b;
-  const cache2 =
-    (_b =
-        (_a = resolveSlugCache == null ? void 0 : resolveSlugCache.get((activeLocale == null ? void 0 : activeLocale.id) ?? noLocale,)) ==
-            null
-          ? void 0
-          : _a.get(unresolvedSlug.collectionId,)) == null
-      ? void 0
-      : _b.get(unresolvedSlug.collectionItemId,);
-  if (cache2) return cache2;
-  const collectionCache = resolveSlugCache.get((activeLocale == null ? void 0 : activeLocale.id) ?? noLocale,) ?? /* @__PURE__ */ new Map();
-  resolveSlugCache.set((activeLocale == null ? void 0 : activeLocale.id) ?? noLocale, collectionCache,);
-  const collectionItemCache = collectionCache.get(unresolvedSlug.collectionId,) ?? /* @__PURE__ */ new Map();
-  collectionCache.set(unresolvedSlug.collectionId, collectionItemCache,);
-  const lazyValue = new LazyValue(async () => {
-    try {
-      const getUtils = utilsByCollectionId[unresolvedSlug.collectionId];
-      if (!getUtils) {
-        throw new Error(`Key not found in collection utils for collection id: "${unresolvedSlug.collectionId}"`,);
-      }
-      const utils = await getUtils();
-      if (!utils) throw new Error('Collection does not contain utility functions',);
-      const slug = await utils.getSlugByRecordId(unresolvedSlug.collectionItemId, activeLocale ?? void 0,);
-      return slug;
-    } catch (error) {
-      console.warn(`Failed to resolve slug: ${error instanceof Error ? error.message : 'Unknown error'}`,);
-      return void 0;
-    }
-  },);
-  collectionItemCache.set(unresolvedSlug.collectionItemId, lazyValue,);
-  return lazyValue;
-}
-async function resolveSlugs(unresolvedPathSlugs, unresolvedHashSlugs, collectionUtils, activeLocale,) {
-  async function handleSlugs(unresolvedSlugs,) {
-    if (!unresolvedSlugs || !collectionUtils) return {};
-    const result = {};
-    for (const slugKey in unresolvedSlugs) {
-      const unresolvedSlug = unresolvedSlugs[slugKey];
-      assert(unresolvedSlug, 'unresolvedSlug should be defined',);
-      const lazyValue = resolveSlug(unresolvedSlug, collectionUtils, activeLocale,);
-      await lazyValue.preload();
-      const value = lazyValue.read();
-      if (value) {
-        result[slugKey] = value;
-      }
-    }
-    return result;
-  }
-  const [pathResult, slugResult,] = await Promise.allSettled([handleSlugs(unresolvedPathSlugs,), handleSlugs(unresolvedHashSlugs,),],);
-  return {
-    path: pathResult.status === 'fulfilled' ? pathResult.value : void 0,
-    hash: slugResult.status === 'fulfilled' ? slugResult.value : void 0,
-  };
-}
-function resolveSlugsWithSuspense(unresolvedPathSlugs, unresolvedHashSlugs, collectionUtils, activeLocale,) {
-  const promises = [];
-  function handleSlugs(unresolvedSlugs,) {
-    if (!unresolvedSlugs || !collectionUtils) return void 0;
-    const result2 = {};
-    for (const slugKey in unresolvedSlugs) {
-      const unresolvedSlug = unresolvedSlugs[slugKey];
-      assert(unresolvedSlug, 'unresolvedSlug should be defined',);
-      const lazyValue = resolveSlug(unresolvedSlug, collectionUtils, activeLocale,);
-      const promise = lazyValue.preload();
-      if (promise) {
-        promises.push(promise,);
-      } else {
-        const value = lazyValue.read();
-        if (value) {
-          result2[slugKey] = value;
-        }
-      }
-    }
-    return result2;
-  }
-  const result = {
-    path: handleSlugs(unresolvedPathSlugs,),
-    hash: handleSlugs(unresolvedHashSlugs,),
-  };
-  if (promises.length) {
-    throw Promise.allSettled(promises,);
-  }
-  return result;
-}
-async function findMatchingRouteAttributesForWebPageLink(router, currentRoute, pageLink, activeLocale, implicitPathVariables,) {
+function findMatchingRouteAttributesForWebPageLink(router, currentRoute, pageLink, activeLocale, resolvedSlugs, implicitPathVariables,) {
   const {
     webPageId,
     hash: hash2,
     pathVariables,
     hashVariables,
-    unresolvedHashSlugs,
-    unresolvedPathSlugs,
   } = pageLink;
-  const resolvedSlugs = await resolveSlugs(unresolvedPathSlugs, unresolvedHashSlugs, router.collectionUtils, activeLocale,);
-  return getRouteAttributes(
-    router,
-    currentRoute,
-    webPageId,
-    hash2,
-    implicitPathVariables,
-    pathVariables,
-    hashVariables,
-    resolvedSlugs,
-    activeLocale,
-  );
-}
-function findMatchingRouteAttributesForWebPageLinkWithSuspense(router, currentRoute, pageLink, activeLocale, implicitPathVariables,) {
-  const {
-    webPageId,
-    hash: hash2,
-    pathVariables,
-    hashVariables,
-    unresolvedHashSlugs,
-    unresolvedPathSlugs,
-  } = pageLink;
-  const resolvedSlugs = resolveSlugsWithSuspense(unresolvedPathSlugs, unresolvedHashSlugs, router.collectionUtils, activeLocale,);
   return getRouteAttributes(
     router,
     currentRoute,
@@ -35947,6 +37468,79 @@ function combineRels(rel, otherRel,) {
   if (rel && otherRel) return `${rel} ${otherRel}`;
   return void 0;
 }
+function handleResolveSlugError(error, fallbackMessage,) {
+  console.warn(
+    getPleaseReportMessage(`Failed to resolve slug: ${error instanceof Error ? error.message : fallbackMessage ?? 'Unknown error'}`,),
+  );
+  return void 0;
+}
+function resolveSlug(unresolvedSlug, collectionUtils, activeLocale,) {
+  try {
+    const utils = collectionUtils == null ? void 0 : collectionUtils.get(unresolvedSlug.collectionId,);
+    if (!utils) {
+      return handleResolveSlugError(void 0, `Couldn't find collection utils for collection id: "${unresolvedSlug.collectionId}"`,);
+    }
+    const maybeSlug = utils.getSlugByRecordId(unresolvedSlug.collectionItemId, activeLocale ?? void 0,);
+    if (isPromise(maybeSlug,)) {
+      return maybeSlug.catch(handleResolveSlugError,);
+    }
+    return maybeSlug;
+  } catch (error) {
+    handleResolveSlugError(error,);
+  }
+}
+async function resolveSlugs(unresolvedPathSlugs, unresolvedHashSlugs, activeLocale, collectionUtils,) {
+  async function handleSlugs(unresolvedSlugs,) {
+    if (!unresolvedSlugs) return {};
+    const result = {};
+    for (const slugKey in unresolvedSlugs) {
+      const unresolvedSlug = unresolvedSlugs[slugKey];
+      assert(unresolvedSlug, 'unresolvedSlug should be defined',);
+      const maybeSlug = resolveSlug(unresolvedSlug, collectionUtils, activeLocale,);
+      const value = isPromise(maybeSlug,) ? await maybeSlug : maybeSlug;
+      if (value) {
+        result[slugKey] = value;
+      }
+    }
+    return result;
+  }
+  const [pathResult, slugResult,] = await Promise.allSettled([handleSlugs(unresolvedPathSlugs,), handleSlugs(unresolvedHashSlugs,),],);
+  return {
+    path: pathResult.status === 'fulfilled' ? pathResult.value : void 0,
+    hash: slugResult.status === 'fulfilled' ? slugResult.value : void 0,
+  };
+}
+function resolveSlugsWithSuspense(unresolvedPathSlugs, unresolvedHashSlugs, activeLocale, collectionUtils, promises = [],) {
+  function handleSlugs(unresolvedSlugs,) {
+    if (!unresolvedSlugs) return;
+    const result2 = {};
+    for (const slugKey in unresolvedSlugs) {
+      const unresolvedSlug = unresolvedSlugs[slugKey];
+      if (!unresolvedSlug) continue;
+      const maybeSlug = resolveSlug(unresolvedSlug, collectionUtils, activeLocale,);
+      if (isPromise(maybeSlug,)) {
+        promises.push(maybeSlug,);
+      } else if (maybeSlug) {
+        result2[slugKey] = maybeSlug;
+      }
+    }
+    return result2;
+  }
+  const result = {
+    path: handleSlugs(unresolvedPathSlugs,),
+    hash: handleSlugs(unresolvedHashSlugs,),
+  };
+  if (promises.length > 0) {
+    return Promise.allSettled(promises,);
+  }
+  return result;
+}
+function useResolveSlugsWithSuspense() {
+  const collectionUtils = useCollectionUtils();
+  return useCallback2((unresolvedPathSlugs, unresolvedHashSlugs, activeLocale, promises = [],) => {
+    return resolveSlugsWithSuspense(unresolvedPathSlugs, unresolvedHashSlugs, activeLocale, collectionUtils, promises,);
+  }, [collectionUtils,],);
+}
 function useTrackLinkClick({
   nodeId,
   clickTrackingId,
@@ -35954,8 +37548,9 @@ function useTrackLinkClick({
   href,
   activeLocale,
 },) {
+  const collectionUtils = useCollectionUtils();
   return useCallback2(async (hrefAttribute) => {
-    var _a, _b, _c, _d, _e;
+    var _a, _b;
     if (!((_a = router.pageviewEventData) == null ? void 0 : _a.current)) return;
     const pageviewEventData = router.pageviewEventData.current instanceof Promise
       ? await router.pageviewEventData.current
@@ -35976,14 +37571,14 @@ function useTrackLinkClick({
     const targetRoute = (_b = router == null ? void 0 : router.getRoute) == null ? void 0 : _b.call(router, targetWebPageId,);
     const targetRoutePath = (targetRoute == null ? void 0 : targetRoute.path) ?? null;
     let targetCollectionItemId = null;
-    if (
-      (targetRoute == null ? void 0 : targetRoute.collectionId) && pageLink.pathVariables &&
-      ((_c = router.collectionUtils) == null ? void 0 : _c[targetRoute.collectionId])
-    ) {
-      const utils = await ((_e = (_d = router.collectionUtils)[targetRoute.collectionId]) == null ? void 0 : _e.call(_d,));
+    if ((targetRoute == null ? void 0 : targetRoute.collectionId) && pageLink.pathVariables) {
+      const utils = collectionUtils == null ? void 0 : collectionUtils.get(targetRoute.collectionId,);
+      if (!utils) return;
       const [slug,] = Object.values(pageLink.pathVariables,);
-      if (utils && typeof slug === 'string') {
-        targetCollectionItemId = (await utils.getRecordIdBySlug(slug, activeLocale || void 0,)) ?? null;
+      if (isString(slug,)) {
+        const maybeCollectionItemId = utils.getRecordIdBySlug(slug, activeLocale || void 0,);
+        const collectionItemId = isPromise(maybeCollectionItemId,) ? await maybeCollectionItemId : maybeCollectionItemId;
+        targetCollectionItemId = collectionItemId ?? null;
       }
     }
     return sendTrackingEvent('published_site_click', {
@@ -35995,7 +37590,7 @@ function useTrackLinkClick({
       targetWebPageId,
       targetCollectionItemId,
     }, 'eager',);
-  }, [nodeId, clickTrackingId, router, href, activeLocale,],);
+  }, [nodeId, clickTrackingId, router, href, activeLocale, collectionUtils,],);
 }
 function makeUrlAbsolute(href,) {
   try {
@@ -36098,6 +37693,7 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
   const {
     activeLocale,
   } = useLocaleInfo();
+  const resolveSlugsWithSuspense2 = useResolveSlugsWithSuspense();
   const trackLinkClick = useTrackLinkClick({
     nodeId,
     clickTrackingId,
@@ -36126,11 +37722,27 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
       );
     }
     const {
+      unresolvedPathSlugs,
+      unresolvedHashSlugs,
+    } = pageLink;
+    const maybeResolvedSlugs = resolveSlugsWithSuspense2(unresolvedPathSlugs, unresolvedHashSlugs, activeLocale,);
+    if (isPromise(maybeResolvedSlugs,)) {
+      throw maybeResolvedSlugs;
+    }
+    const maybeRouteAttributes = findMatchingRouteAttributesForWebPageLink(
+      router,
+      currentRoute,
+      pageLink,
+      activeLocale,
+      maybeResolvedSlugs,
+      implicitPathVariables,
+    );
+    const {
       routeId,
       href: resolvedHref,
       elementId,
       pathVariables,
-    } = findMatchingRouteAttributesForWebPageLinkWithSuspense(router, currentRoute, pageLink, activeLocale, implicitPathVariables,);
+    } = maybeRouteAttributes;
     const anchorTarget = getTargetAttrValue(openInNewTab, true,);
     return {
       href: resolvedHref,
@@ -36150,6 +37762,7 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
     trackLinkClick,
     relValues,
     preserveParams,
+    resolveSlugsWithSuspense2,
   ],);
   const hasRef = isValidElement(children,) && 'ref' in children;
   const observerRef = useObserverRef(hasRef ? children.ref : void 0,);
@@ -36162,20 +37775,18 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
     if (!route) return;
     return (_a = observeRouteForPreloading) == null ? void 0 : _a(route, node,);
   }, [currentRoute, href, router,],);
-  let replacedChildren = children;
   const {
     navigate,
     ...propsAddedByLinkExceptNavigate
   } = propsAddedByLink;
   const isInternalNavigation = Boolean(navigate,);
   const clone = useCloneChildrenWithPropsAndRef(forwardedRef,);
-  replacedChildren = clone.cloneAsArray(replacedChildren, (childProps) =>
+  const replacedChildren = clone.cloneAsArray(children, (childProps) =>
     cloneChildPropsWithAggregatedEvents(childProps, {
       ...restProps,
       ...rebindEventHandlersIfNeeded(propsAddedByLinkExceptNavigate, motionChild, isInternalNavigation,),
     }, observerRef,),);
-  replacedChildren = useReplaceNestedLinks(replacedChildren, scopeId, nodeId, href, propsAddedByLink, observerRef,);
-  return replacedChildren;
+  return useReplaceNestedLinks(replacedChildren, scopeId, nodeId, href, propsAddedByLink, observerRef,);
 },),);
 function cloneChildPropsWithAggregatedEvents(childProps, linkProps, observerRef,) {
   const mergedStyle = mergeStyles(childProps.style, linkProps.style,);
@@ -36275,6 +37886,7 @@ function resolveLinkInternal(href, router, implicitPathVariables, onlyHash, acti
   const resolvedSlugs = unresolvedPathSlugs || unresolvedHashSlugs
     ? resolveSlugs2 == null ? void 0 : resolveSlugs2(unresolvedPathSlugs, unresolvedHashSlugs,)
     : void 0;
+  if (isPromise(resolvedSlugs,)) return;
   const combinedPathVariables = Object.assign(
     {},
     router.currentPathVariables,
@@ -36444,6 +38056,8 @@ function sendFormSubmitTrackingEvent(pageviewEventData, nodeId, trackingId,) {
     trackingId: trackingId || null,
   }, 'eager',);
 }
+var HONEYPOT_FIELD_NAME = '__framer';
+var COMMON_FIELD_NAMES = ['website', 'company', 'phone', 'address', 'message', 'subject', 'title', 'description',];
 var pendingState = {
   state: 'pending',
 };
@@ -36500,6 +38114,26 @@ function openExternalLinkInCurrentTab(link, formRef,) {
   linkElement.click();
   linkElement.remove();
 }
+var HoneypotInput = /* @__PURE__ */ React42.forwardRef(function HoneypotInput2(_props, ref,) {
+  const randomName = React42.useMemo(() => {
+    const randomIndex = Math.floor(Math.random() * COMMON_FIELD_NAMES.length,);
+    return COMMON_FIELD_NAMES[randomIndex];
+  }, [],);
+  return /* @__PURE__ */ jsx('input', {
+    ref,
+    type: 'text',
+    name: randomName,
+    suppressHydrationWarning: true,
+    tabIndex: -1,
+    autoComplete: 'one-time-code',
+    'aria-hidden': 'true',
+    style: {
+      position: 'absolute',
+      transform: 'scale(0)',
+    },
+    defaultValue: '',
+  },);
+},);
 var FormContext = React42.createContext(void 0,);
 var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
   action,
@@ -36514,9 +38148,13 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
 }, forwardedRef,) {
   const fallbackRef = React42.useRef(null,);
   const ref = forwardedRef ?? fallbackRef;
+  const honeypotRef = React42.useRef(null,);
+  const libraryFeatures = useLibraryFeatures();
+  const isAdvancedSpamProtectionEnabled = libraryFeatures.advancedSpamProtection;
   const router = useRouter();
   const currentRoute = useCurrentRoute();
   const implicitPathVariables = useImplicitPathVariables();
+  const collectionUtils = useCollectionUtils();
   const [state, dispatch,] = React42.useReducer(formReducer, incompleteState,);
   const {
     activeLocale,
@@ -36550,7 +38188,15 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
       return;
     }
     assert(isLinkToWebPage(link,), 'Expected link to be either a LinkToWebPage or a string', link,);
-    const matchingRoute = await findMatchingRouteAttributesForWebPageLink(router, currentRoute, link, activeLocale, implicitPathVariables,);
+    const resolvedSlugs = await resolveSlugs(link.unresolvedPathSlugs, link.unresolvedHashSlugs, activeLocale, collectionUtils,);
+    const matchingRoute = findMatchingRouteAttributesForWebPageLink(
+      router,
+      currentRoute,
+      link,
+      activeLocale,
+      resolvedSlugs,
+      implicitPathVariables,
+    );
     const {
       routeId,
       elementId,
@@ -36559,11 +38205,18 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
     (_b = router.navigate) == null ? void 0 : _b.call(router, routeId, elementId, pathVariables,);
   }
   const handleSubmit = async (event) => {
-    var _a, _b, _c, _d, _e, _f;
+    var _a, _b, _c, _d, _e, _f, _g;
     event.preventDefault();
     if (!action || !projectHash || submissionInProgressRef.current) return;
     submissionInProgressRef.current = true;
+    const originalName = (_a = honeypotRef.current) == null ? void 0 : _a.name;
+    if (isAdvancedSpamProtectionEnabled && honeypotRef.current) {
+      honeypotRef.current.name = HONEYPOT_FIELD_NAME;
+    }
     const data2 = new FormData(event.currentTarget,);
+    if (isAdvancedSpamProtectionEnabled && honeypotRef.current && originalName) {
+      honeypotRef.current.name = originalName;
+    }
     await yieldToMain({
       priority: 'user-visible',
       continueAfter: 'paint',
@@ -36578,7 +38231,7 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
       if (value instanceof File) data2.delete(key7,);
     }
     try {
-      (_b = (_a = callbacks.current).onLoading) == null ? void 0 : _b.call(_a,);
+      (_c = (_b = callbacks.current).onLoading) == null ? void 0 : _c.call(_b,);
       trackFormSubmit({
         router,
         nodeId,
@@ -36591,7 +38244,7 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
           type: 'success',
         },)
       );
-      (_d = (_c = callbacks.current).onSuccess) == null ? void 0 : _d.call(_c,);
+      (_e = (_d = callbacks.current).onSuccess) == null ? void 0 : _e.call(_d,);
       if (redirectUrl) {
         await redirectTo(redirectUrl,);
       }
@@ -36601,7 +38254,7 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
           type: 'error',
         },)
       );
-      (_f = (_e = callbacks.current).onError) == null ? void 0 : _f.call(_e,);
+      (_g = (_f = callbacks.current).onError) == null ? void 0 : _g.call(_f,);
       console.error(error,);
     }
     submissionInProgressRef.current = false;
@@ -36631,13 +38284,18 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
       },)
     );
   };
-  return /* @__PURE__ */ jsx(motion.form, {
+  return /* @__PURE__ */ jsxs(motion.form, {
     ...props,
     onSubmit: stateCanSubmitForm(state,) ? handleSubmit : preventDefault,
     onKeyDown: handleKeyDown,
     onChange: checkValidity,
     ref,
-    children: children(state,),
+    children: [
+      children(state,),
+      isAdvancedSpamProtectionEnabled && /* @__PURE__ */ jsx(HoneypotInput, {
+        ref: honeypotRef,
+      },),
+    ],
   },);
 },);
 function anyEmptyRequiredFields(element,) {
@@ -36720,7 +38378,7 @@ function EditorBarLauncher({
     const features = {};
     let key7;
     for (key7 in libraryFeatures) {
-      if (libraryFeatures.hasOwnProperty(key7,) && key7.startsWith('editorBar',)) {
+      if (libraryFeatures.hasOwnProperty(key7,) && (key7.startsWith('editorBar',) || key7.startsWith('onPage',))) {
         features[key7] = libraryFeatures[key7];
       }
     }
@@ -36752,9 +38410,10 @@ function setTimezoneAndLocaleForTracking() {
   visitorLocale = resolvedDateTimeOptions.locale;
 }
 requestIdleCallback(setTimezoneAndLocaleForTracking,);
-var useSendPageView = (currentRoute, currentRouteId, currentPathnameWithHash, currentPathVariables, collectionUtils, activeLocale,) => {
+var useSendPageView = (currentRoute, currentRouteId, currentPathnameWithHash, currentPathVariables, activeLocale,) => {
   const framerSiteId = useContext(FormContext,);
   const pageviewEventData = useRef();
+  const collectionUtils = useCollectionUtils();
   const skipFirstPageView = useRef(true,);
   useEffect(() => {
     function getFullPageviewEventData() {
@@ -36784,15 +38443,15 @@ var useSendPageView = (currentRoute, currentRouteId, currentPathnameWithHash, cu
         timezone,
         locale: visitorLocale,
       };
-      return (currentRoute == null ? void 0 : currentRoute.collectionId) && collectionUtils && currentPathVariables
+      return (currentRoute == null ? void 0 : currentRoute.collectionId) && currentPathVariables
         ? (async () => {
-          var _a;
           let collectionItemId = null;
-          const utils = currentRoute.collectionId &&
-            (await ((_a = collectionUtils[currentRoute.collectionId]) == null ? void 0 : _a.call(collectionUtils,)));
+          const utils = currentRoute.collectionId && (collectionUtils == null ? void 0 : collectionUtils.get(currentRoute.collectionId,));
           const [slug,] = Object.values(currentPathVariables,);
-          if (utils && typeof slug === 'string') {
-            collectionItemId = (await utils.getRecordIdBySlug(slug, activeLocale || void 0,)) ?? null;
+          if (utils && isString(slug,)) {
+            const maybeCollectionItemId = utils.getRecordIdBySlug(slug, activeLocale || void 0,);
+            const _collectionItemId = isPromise(maybeCollectionItemId,) ? await maybeCollectionItemId : maybeCollectionItemId;
+            collectionItemId = _collectionItemId ?? null;
           }
           return {
             ...eventData,
@@ -36823,10 +38482,9 @@ var useSendPageView = (currentRoute, currentRouteId, currentPathnameWithHash, cu
     return () => {
       window.removeEventListener('pageshow', listener,);
     };
-  }, [currentRoute, currentRouteId, currentPathnameWithHash, currentPathVariables, collectionUtils, activeLocale, framerSiteId,],);
+  }, [currentRoute, currentRouteId, currentPathnameWithHash, currentPathVariables, activeLocale, framerSiteId, collectionUtils,],);
   return pageviewEventData;
 };
-var defaultLocaleId = 'default';
 function useForceUpdate3() {
   const [_, setForcedRenderCount,] = React42.useState(0,);
   return [_, React42.useCallback(() => setForcedRenderCount((v) => v + 1), [],),];
@@ -36955,6 +38613,7 @@ function Router({
     if (!adaptLayoutToTextDirection) return;
     document.documentElement.setAttribute('dir', textDirection,);
   }, [textDirection, adaptLayoutToTextDirection,],);
+  const switchLocale2 = useSwitchLocale();
   const localeInfo = useMemo(() => {
     return {
       activeLocale,
@@ -36984,14 +38643,13 @@ function Router({
         const currentRoute2 = routes[currentRouteId2];
         if (!currentRoute2) return;
         try {
-          const localeResult = await switchLocale({
+          const localeResult = await switchLocale2({
             currentLocale: activeLocale,
             nextLocale,
             route: currentRoute2,
             routeId: currentRouteId2,
             defaultLocale,
             pathVariables: currentPathVariablesRef.current,
-            collectionUtils,
             preserveQueryParams,
           },);
           if (!localeResult) return;
@@ -37027,7 +38685,6 @@ function Router({
     };
   }, [
     activeLocale,
-    collectionUtils,
     forceUpdate,
     locales,
     preserveQueryParams,
@@ -37036,6 +38693,7 @@ function Router({
     startViewTransition2,
     monitorNextPaintAfterRender,
     transitionFn,
+    switchLocale2,
   ],);
   const setCurrentRouteId = useCallback2(
     (routeId, localeId, hash2, pathnameWithHash, pathVariables, isHistoryTransition, nextRender, smoothScroll = false, updateURL,) => {
@@ -37170,14 +38828,7 @@ function Router({
   const currentPathVariables = currentPathVariablesRef.current;
   const currentRoute = routes[currentRouteId];
   const currentRoutePath = currentRoute == null ? void 0 : currentRoute.path;
-  const pageviewEventData = useSendPageView(
-    currentRoute,
-    currentRouteId,
-    currentPathnameWithHash,
-    currentPathVariables,
-    collectionUtils,
-    activeLocale,
-  );
+  const pageviewEventData = useSendPageView(currentRoute, currentRouteId, currentPathnameWithHash, currentPathVariables, activeLocale,);
   const isInitialNavigation = isInitialNavigationRef.current;
   const api = useMemo(() => ({
     navigate,
@@ -37390,7 +39041,7 @@ var _FetchClient = class _FetchClient2 {
     __publicField(
       this,
       'persistCache',
-      debounce(() => {
+      debounce2(() => {
         const data2 = {};
         for (const [url, responseValue,] of this.responseValues) {
           if (!responseValue) continue;
@@ -37790,28 +39441,31 @@ function PageRoot({
   if (isWebsite) {
     return /* @__PURE__ */ jsx(MotionConfig, {
       reducedMotion: isReducedMotion ? 'user' : 'never',
-      children: /* @__PURE__ */ jsx(FetchClientProvider, {
-        children: /* @__PURE__ */ jsx(CustomCursorHost, {
-          children: /* @__PURE__ */ jsx(FormContext.Provider, {
-            value: framerSiteId,
-            children: /* @__PURE__ */ jsx(Router, {
-              initialRoute: routeId,
-              initialPathVariables: pathVariables,
-              initialLocaleId: localeId,
-              routes,
-              collectionUtils,
-              notFoundPage,
-              locales,
-              defaultPageStyle: defaultPageStyle ?? {
-                minHeight: '100vh',
-                width: 'auto',
-              },
-              preserveQueryParams,
-              EditorBar,
-              disableHistory,
-              LayoutTemplate,
-              siteCanonicalURL,
-              adaptLayoutToTextDirection,
+      children: /* @__PURE__ */ jsx(CollectionUtilsCacheProvider, {
+        collectionUtils,
+        children: /* @__PURE__ */ jsx(FetchClientProvider, {
+          children: /* @__PURE__ */ jsx(CustomCursorHost, {
+            children: /* @__PURE__ */ jsx(FormContext.Provider, {
+              value: framerSiteId,
+              children: /* @__PURE__ */ jsx(Router, {
+                initialRoute: routeId,
+                initialPathVariables: pathVariables,
+                initialLocaleId: localeId,
+                routes,
+                collectionUtils,
+                notFoundPage,
+                locales,
+                defaultPageStyle: defaultPageStyle ?? {
+                  minHeight: '100vh',
+                  width: 'auto',
+                },
+                preserveQueryParams,
+                EditorBar,
+                disableHistory,
+                LayoutTemplate,
+                siteCanonicalURL,
+                adaptLayoutToTextDirection,
+              },),
             },),
           },),
         },),
@@ -37846,6 +39500,7 @@ var ResolveLinks = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwar
     activeLocale,
   } = useLocaleInfo();
   const cloneWithPropsAndRef = useCloneChildrenWithPropsAndRef(ref,);
+  const resolveSlugsWithSuspense2 = useResolveSlugsWithSuspense();
   const promises = [];
   const resolvedLinks = links.map((link) => {
     if (!link) return void 0;
@@ -37857,29 +39512,7 @@ var ResolveLinks = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwar
       link.refKey,
       activeLocale,
       (unresolvedPathSlugs, unresolvedHashSlugs,) => {
-        function handleSlugs(slugs,) {
-          const result = {};
-          for (const slugKey in slugs) {
-            const unresolvedSlug = slugs[slugKey];
-            assert(router.collectionUtils, 'collectionUtils should be defined',);
-            assert(unresolvedSlug, 'unresolvedSlug be defined',);
-            const lazyValue = resolveSlug(unresolvedSlug, router.collectionUtils, activeLocale,);
-            const promise = lazyValue.preload();
-            if (promise) {
-              promises.push(promise,);
-            } else {
-              const resolvedValue = lazyValue.read();
-              if (resolvedValue) {
-                result[slugKey] = resolvedValue;
-              }
-            }
-          }
-          return result;
-        }
-        return {
-          path: handleSlugs(unresolvedPathSlugs,),
-          hash: handleSlugs(unresolvedHashSlugs,),
-        };
+        return resolveSlugsWithSuspense2(unresolvedPathSlugs, unresolvedHashSlugs, activeLocale, promises,);
       },
     );
   },);
@@ -37900,7 +39533,7 @@ var Fetcher = /* @__PURE__ */ React.forwardRef(function Fetcher2({
   return cloneWithPropsAndRef(childrenWithValues, rest,);
 },);
 var callEach = (...fns) => fns.forEach((fn) => fn && fn());
-function getLogger(name,) {
+function getLogger2(name,) {
   return {
     trace(...args) {
       var _a;
@@ -42548,11 +44181,11 @@ function stringifyQuery(query,) {
   }
   return autoIndentSql(queryString,);
 }
-var log = /* @__PURE__ */ getLogger('query-engine',);
+var log2 = /* @__PURE__ */ getLogger2('query-engine',);
 var QueryEngine = class {
   async evalQuery(query, locale, includeRaw,) {
-    if (log.enabled) {
-      log.debug(`Query:
+    if (log2.enabled) {
+      log2.debug(`Query:
 ${stringifyQuery(query,)}`,);
     }
     const resolver = new Resolver(query, locale,);
@@ -42600,55 +44233,7 @@ ${stringifyQuery(query,)}`,);
     },),),);
   }
 };
-var CMSDataCollector = class {
-  constructor() {
-    __publicField(this, 'dataByKey', /* @__PURE__ */ new Map(),);
-  }
-  /** Register a resolved CMS query result for a given cache key. */
-  register(key7, data2,) {
-    this.dataByKey.set(key7, data2,);
-  }
-  /** Return an iterator over [key, data] entries. */
-  [Symbol.iterator]() {
-    return this.dataByKey.entries();
-  }
-  /** Return current size for diagnostics. */
-  size() {
-    return this.dataByKey.size;
-  }
-  /** Clear collected data. */
-  clear() {
-    this.dataByKey.clear();
-  }
-};
-var cmsDataCollector = typeof window === 'undefined' ? /* @__PURE__ */ new CMSDataCollector() : void 0;
-var cmsMap;
-function getHydratedDataFromDOM(key7,) {
-  if (!isBrowser2()) return;
-  if (cmsMap === void 0) cmsMap = parseCmsMapFromDOM();
-  if (cmsMap === void 0) return;
-  const entry = cmsMap[key7];
-  if (!entry) {
-    console.info('No preloaded CMS data found for key:', key7,);
-    return;
-  }
-  cmsMap[key7] = void 0;
-  return entry;
-}
-function parseCmsMapFromDOM() {
-  let script = document.getElementById('__framer__cmsData',);
-  if (!script) return;
-  requestIdleCallback(() => {
-    script == null ? void 0 : script.remove();
-    script = void 0;
-  },);
-  try {
-    return JSON.parse(script.text,) ?? {};
-  } catch (error) {
-    console.warn('Failed to parse the preloaded CMS data. Falling back to a network fetch.', error,);
-    return {};
-  }
-}
+var handoverDataType2 = /* @__PURE__ */ (() => HandoverDataType.QueryCache)();
 function isCollection(value,) {
   return isObject2(value,) && value.type === 'Collection';
 }
@@ -42657,13 +44242,16 @@ var QueryCache = class {
     this.queryEngine = queryEngine2;
     this.maxSize = maxSize;
     __publicField(this, 'cache', /* @__PURE__ */ new Map(),);
+    __publicField(this, 'serializedCache', handoverCollector !== void 0 ? /* @__PURE__ */ new Map() : void 0,);
   }
   prune() {
+    var _a;
     if (this.cache.size <= this.maxSize) return;
     for (const [key7, value,] of this.cache) {
       if (this.cache.size <= this.maxSize) break;
       if (value.state === 'pending') continue;
       this.cache.delete(key7,);
+      (_a = this.serializedCache) == null ? void 0 : _a.delete(key7,);
     }
   }
   get(query, locale,) {
@@ -42672,34 +44260,31 @@ var QueryCache = class {
     if (existing) {
       this.cache.delete(key7,);
       this.cache.set(key7, existing,);
+      if (
+        handoverCollector !== void 0 && this.serializedCache !== void 0 && !hasRandomCollectionId(key7,) && existing.state === 'fulfilled'
+      ) {
+        const cachedSerialized = this.serializedCache.get(key7,);
+        if (cachedSerialized !== void 0) {
+          handoverCollector.set(handoverDataType2, key7, cachedSerialized,);
+        }
+      }
       return existing;
     }
     const resolver = () => {
       const containsRandomCollectionId = hasRandomCollectionId(key7,);
-      const hydratedResult = containsRandomCollectionId ? void 0 : getHydratedDataFromDOM(key7,);
-      if (hydratedResult) {
+      const handoverResult = containsRandomCollectionId ? void 0 : getHandoverData(handoverDataType2, key7,);
+      if (handoverResult) {
         try {
-          return this.queryEngine.resolveSerializableQueryResult(hydratedResult, query, locale,);
+          return this.queryEngine.resolveSerializableQueryResult(handoverResult, query, locale,);
         } catch (error) {
-          console.warn(
-            'Warning: Failed to resolve raw query result from DOM during hydration for:',
-            key7,
-            '. This might make the page load slightly slower. If you are the author of this website, please report this to the Framer team via https://www.framer.com/contact/',
-          );
-          const sampleRate = Math.random();
-          if (sampleRate < 0.01) {
-            const stack = error instanceof Error && typeof error.stack === 'string' ? error.stack : null;
-            sendTrackingEvent('published_site_load_error', {
-              message: String(error,),
-              stack,
-            },);
-          }
+          handleHydrationError(error, key7,);
         }
       }
-      if (!isWindow && !containsRandomCollectionId) {
+      if (handoverCollector !== void 0 && !containsRandomCollectionId) {
         return this.queryEngine.serializeableQuery(query, locale,).then(([queryResult, serializableResult,],) => {
           var _a;
-          (_a = cmsDataCollector) == null ? void 0 : _a.register(key7, serializableResult,);
+          (_a = this.serializedCache) == null ? void 0 : _a.set(key7, serializableResult,);
+          handoverCollector.set(handoverDataType2, key7, serializableResult,);
           return queryResult;
         },);
       }
@@ -43397,7 +44982,7 @@ function usePreloadQuery() {
     activeLocale,
   } = useLocaleInfo();
   return useCallback2((query) => {
-    return queryCache.get(query, activeLocale,).readAsync();
+    return queryCache.get(query, activeLocale,).readMaybeAsync();
   }, [activeLocale,],);
 }
 function getWhereExpressionFromPathVariables(pathVariables, collection,) {
@@ -46055,753 +47640,6 @@ var MapWithHash = class extends Map {
     return super.clear();
   }
 };
-function assert2(condition, ...msg) {
-  var _a, _b;
-  if (condition) return;
-  const e = Error('Assertion Error' + (msg.length > 0 ? ': ' + msg.join(' ',) : ''),);
-  if (e.stack) {
-    try {
-      const lines = e.stack.split('\n',);
-      if ((_a = lines[1]) == null ? void 0 : _a.includes('assert',)) {
-        lines.splice(1, 1,);
-        e.stack = lines.join('\n',);
-      } else if ((_b = lines[0]) == null ? void 0 : _b.includes('assert',)) {
-        lines.splice(0, 1,);
-        e.stack = lines.join('\n',);
-      }
-    } catch {}
-  }
-  throw e;
-}
-var missing = Symbol('missing',);
-var frozenEmptyArray = Object.freeze([],);
-function emptyArray() {
-  return frozenEmptyArray;
-}
-var errorReporter;
-function reportError({
-  error: maybeError,
-  tags,
-  extras,
-  critical,
-  caller,
-},) {
-  assert2(errorReporter, 'Set up an error callback with setErrorReporter, or configure Sentry with initializeEnvironment',);
-  const error = reportableError(maybeError, caller,);
-  errorReporter({
-    error,
-    tags: {
-      ...error.tags,
-      ...tags,
-    },
-    extras: {
-      ...error.extras,
-      ...extras,
-    },
-    critical: !!critical,
-  },);
-  return error;
-}
-function reportableError(error, caller = reportableError,) {
-  if (error instanceof Error) {
-    return error;
-  }
-  return new UnhandledError(error, caller,);
-}
-var UnhandledError = class extends Error {
-  constructor(error, caller,) {
-    const message = error ? JSON.stringify(error,) : 'No error message provided';
-    super(message,);
-    this.message = message;
-    if (caller && Error.captureStackTrace) {
-      Error.captureStackTrace(this, caller,);
-    } else {
-      try {
-        throw new Error();
-      } catch (e) {
-        this.stack = e.stack;
-      }
-    }
-  }
-};
-var hostname = typeof window !== 'undefined' ? window.location.hostname : void 0;
-var isLocal = Boolean(hostname && ['web.framerlocal.com', 'localhost', '127.0.0.1', '[::1]',].includes(hostname,),);
-var hosts = (() => {
-  if (!hostname) return;
-  if (isLocal) {
-    return {
-      main: hostname,
-      previewLink: void 0,
-    };
-  }
-  const previewHostRegex = /^(([^.]+\.)?beta\.)?((?:development\.)?framer\.com)$/u;
-  const match = hostname.match(previewHostRegex,);
-  if (!match || !match[3]) return;
-  return {
-    previewLink: match[2] && match[0],
-    main: match[3],
-  };
-})();
-var hostInfo = {
-  hosts,
-  isDevelopment: (hosts == null ? void 0 : hosts.main) === 'development.framer.com',
-  isProduction: (hosts == null ? void 0 : hosts.main) === 'framer.com',
-  isLocal,
-};
-var cachedServiceMap;
-function getServiceMap() {
-  if (typeof window === 'undefined') return {};
-  if (cachedServiceMap) return cachedServiceMap;
-  cachedServiceMap = extractServiceMap();
-  return cachedServiceMap;
-}
-function extractServiceMap() {
-  var _a, _b, _c;
-  const location = window.location;
-  let services = (_a = window == null ? void 0 : window.bootstrap) == null ? void 0 : _a.services;
-  if (services) {
-    return services;
-  }
-  let topOrigin;
-  try {
-    const topWindow = window.top;
-    topOrigin = topWindow.location.origin;
-    services = (_c = (_b = window.top) == null ? void 0 : _b.bootstrap) == null ? void 0 : _c.services;
-    if (services) {
-      return services;
-    }
-  } catch (e) {}
-  if (topOrigin && topOrigin !== location.origin) {
-    throw Error(`Unexpectedly embedded by ${topOrigin} (expected ${location.origin})`,);
-  }
-  if (location.origin.endsWith('framer.com',) || location.origin.endsWith('framer.dev',)) {
-    throw Error('ServiceMap data was not provided in document',);
-  }
-  try {
-    const servicesJSON = new URLSearchParams(location.search,).get('services',) ||
-      new URLSearchParams(location.hash.substring(1,),).get('services',);
-    if (servicesJSON) {
-      services = JSON.parse(servicesJSON,);
-    }
-  } catch (e) {}
-  if (services && typeof services === 'object' && services.api) {
-    return services;
-  }
-  throw Error('ServiceMap requested but not available',);
-}
-function jsonSafeCopy(obj, depth = 0, seen = /* @__PURE__ */ new Set(),) {
-  var _a;
-  if (obj === null) return obj;
-  if (typeof obj === 'function') return `[Function: ${obj.name ?? 'unknown'}]`;
-  if (typeof obj !== 'object') return obj;
-  if (obj instanceof Error) return `[${obj.toString()}]`;
-  if (seen.has(obj,)) return '[Circular]';
-  if (depth > 2) return '...';
-  seen.add(obj,);
-  try {
-    if ('toJSON' in obj && typeof obj.toJSON === 'function') {
-      return jsonSafeCopy(obj.toJSON(), depth + 1, seen,);
-    } else if (Array.isArray(obj,)) {
-      return obj.map((v) => jsonSafeCopy(v, depth + 1, seen,));
-    } else if (Object.getPrototypeOf(obj,) !== Object.prototype) {
-      return `[Object: ${'__class' in obj && obj.__class || ((_a = obj.constructor) == null ? void 0 : _a.name)}]`;
-    } else {
-      const result = {};
-      for (const [key7, v,] of Object.entries(obj,)) {
-        result[key7] = jsonSafeCopy(v, depth + 1, seen,);
-      }
-      return result;
-    }
-  } catch (e) {
-    return `[Throws: ${e instanceof Error ? e.message : e}]`;
-  } finally {
-    seen.delete(obj,);
-  }
-}
-var levelNames = ['trace', 'debug', 'info', 'warn', 'error',];
-var postfixNames = [':trace', ':debug', ':info', ':warn', ':error',];
-function applyLogLevelSpec(spec, all,) {
-  const missingSpecs = [];
-  for (const s of spec.split(/[ ,]/u,)) {
-    let match = s.trim();
-    if (match.length === 0) continue;
-    let level = 1;
-    let inverted = false;
-    if (match.startsWith('-',)) {
-      match = match.slice(1,);
-      level = 3;
-      inverted = true;
-    }
-    for (let i = 0; i <= 4; i++) {
-      const postfix = postfixNames[i];
-      if (!postfix) continue;
-      if (match.endsWith(postfix,)) {
-        level = i;
-        if (inverted) {
-          level += 1;
-        }
-        match = match.slice(0, match.length - postfix.length,);
-        if (match.length === 0) {
-          match = '*';
-        }
-        break;
-      }
-    }
-    const regex2 = new RegExp('^' + escapeRegExp(match,).replace(/\\\*/gu, '.*',) + '$',);
-    let loggersUpdated = 0;
-    for (const logger of all) {
-      if (logger.id.match(regex2,)) {
-        logger.level = level;
-        ++loggersUpdated;
-      }
-    }
-    if (loggersUpdated === 0) {
-      missingSpecs.push(s,);
-    }
-  }
-  return missingSpecs;
-}
-var _LogEntry = class _LogEntry2 {
-  constructor(logger, level, parts,) {
-    this.logger = logger;
-    this.level = level;
-    this.parts = parts;
-    __publicField(this, 'id',);
-    __publicField(this, 'time',);
-    __publicField(this, 'stringPrefix',);
-    this.id = _LogEntry2.nextId++;
-    this.time = Date.now();
-  }
-  toMessage() {
-    if (this.stringPrefix) return this.parts;
-    const r = [new Date(this.time,).toISOString().substr(-14, 14,), levelNames[this.level] + ': [' + this.logger.id + ']',];
-    let i = 0;
-    for (; i < this.parts.length; i++) {
-      const part = this.parts[i];
-      if (typeof part === 'string') {
-        r.push(part,);
-        continue;
-      }
-      break;
-    }
-    this.stringPrefix = r.join(' ',);
-    this.parts.splice(0, i, this.stringPrefix,);
-    return this.parts;
-  }
-  toString() {
-    return this.toMessage().map((part) => {
-      const type = typeof part;
-      if (type === 'string') return part;
-      if (type === 'function') return `[Function: ${part.name ?? 'unknown'}]`;
-      if (part instanceof Error) return part.stack ?? part.toString();
-      const json = JSON.stringify(jsonSafeCopy(part,),);
-      if ((json == null ? void 0 : json.length) > 253) {
-        return json.slice(0, 250,) + '...';
-      }
-      return json;
-    },).join(' ',);
-  }
-};
-__publicField(_LogEntry, 'nextId', 0,);
-var LogEntry = _LogEntry;
-var logLevelSpec = '*:app:info,app:info';
-var isNode = typeof process !== 'undefined' && !!process.kill;
-var isCI = isNode && false;
-if (isCI) {
-  logLevelSpec = '-:warn';
-} else if (isNode) {
-  logLevelSpec = '';
-}
-try {
-  if (typeof window !== 'undefined' && window.localStorage) {
-    logLevelSpec = window.localStorage.logLevel || logLevelSpec;
-  }
-} catch {}
-try {
-  if (typeof process !== 'undefined') {
-    logLevelSpec = process.env.DEBUG || logLevelSpec;
-  }
-} catch {}
-try {
-  if (typeof window !== 'undefined') {
-    Object.assign(window, {
-      setLogLevel,
-    },);
-  }
-} catch {}
-try {
-  if (typeof window !== 'undefined' && !!window.postMessage && window.top === window) {
-    window.addEventListener('message', (msg) => {
-      if (!msg.data || typeof msg.data !== 'object') return;
-      const {
-        loggerId,
-        level,
-        parts,
-        printed,
-      } = msg.data;
-      if (typeof loggerId !== 'string') return;
-      if (!Array.isArray(parts,) || parts.length < 1 || typeof level !== 'number') return;
-      const logger = getLogger2(loggerId,);
-      if (level < 0 || level > 5) return;
-      parts[0] = parts[0].replace('[', '*[',);
-      const entry = new LogEntry(logger, level, parts,);
-      entry.stringPrefix = parts[0];
-      replayBuffer.push(entry,);
-      if (printed) return;
-      if (logger.level > level) return;
-      console == null ? void 0 : console.log(...entry.toMessage(),);
-    },);
-  }
-} catch {}
-var postLogEntry;
-try {
-  if (
-    typeof window !== 'undefined' && !!window.postMessage && window.parent !== window &&
-    // Don't post messages to the top-level site from the Editor Bar
-    !window.location.pathname.startsWith('/edit',)
-  ) {
-    postLogEntry = (entry) => {
-      var _a;
-      try {
-        const parts = entry.toMessage().map((p) => jsonSafeCopy(p,));
-        const logger = entry.logger;
-        const level = entry.level;
-        const printed = logger.level <= entry.level;
-        const data2 = {
-          loggerId: logger.id,
-          level,
-          parts,
-          printed,
-        };
-        (_a = window.parent) == null ? void 0 : _a.postMessage(data2, getServiceMap().app,);
-      } catch {}
-    };
-  }
-} catch {}
-var loggers = {};
-var replayBuffer = [];
-var maxReplayBufferEntries = 1e3;
-function createLogEntry(logger, level, parts,) {
-  const entry = new LogEntry(logger, level, parts,);
-  replayBuffer.push(entry,);
-  postLogEntry == null ? void 0 : postLogEntry(entry,);
-  while (replayBuffer.length > maxReplayBufferEntries) {
-    replayBuffer.shift();
-  }
-  return entry;
-}
-function getLogReplayBuffer(maxEntries,) {
-  if (typeof maxEntries === 'number') {
-    maxReplayBufferEntries = maxEntries;
-  }
-  return replayBuffer;
-}
-var pathRegex = /\/(?<filename>[^/.]+)(?=\.(?:debug\.)?html$)/u;
-var cachedFilename;
-function getFilenameFromWindowPathname() {
-  var _a, _b;
-  if (typeof window === 'undefined' || !window.location) return;
-  cachedFilename ??= (_b = (_a = pathRegex.exec(window.location.pathname,)) == null ? void 0 : _a.groups) == null ? void 0 : _b.filename;
-  return cachedFilename;
-}
-function getLogger2(id3,) {
-  const path = getFilenameFromWindowPathname();
-  id3 = (path ? path + ':' : '') + id3;
-  const existing = loggers[id3];
-  if (existing) return existing;
-  const logger = new Logger(id3,);
-  loggers[id3] = logger;
-  applyLogLevelSpec(logLevelSpec, [logger,],);
-  postLogEntry == null ? void 0 : postLogEntry(new LogEntry(logger, -1, [],),);
-  return logger;
-}
-function setLogLevel(spec, replay = true,) {
-  try {
-    if (typeof window !== 'undefined' && window.localStorage) {
-      window.localStorage.logLevel = spec;
-    }
-  } catch {}
-  const previousSpec = logLevelSpec;
-  logLevelSpec = spec;
-  const all = Object.values(loggers,);
-  for (const logger of all) {
-    logger.level = 3;
-  }
-  const missingSpecs = applyLogLevelSpec(spec, all,);
-  if (missingSpecs.length > 0) {
-    console == null ? void 0 : console.warn('Some log level specs matched no loggers:', missingSpecs,);
-  }
-  if (replay && replayBuffer.length > 0) {
-    console == null ? void 0 : console.log('--- LOG REPLAY ---',);
-    for (const entry of replayBuffer) {
-      if (entry.logger.level > entry.level) continue;
-      if (entry.level >= 3) {
-        console == null ? void 0 : console.warn(...entry.toMessage(),);
-      } else {
-        console == null ? void 0 : console.log(...entry.toMessage(),);
-      }
-    }
-    console == null ? void 0 : console.log('--- END OF LOG REPLAY ---',);
-  }
-  return previousSpec;
-}
-var enrichWithLogs = (extras) => {
-  const result = {
-    ...extras,
-    logs: getLogReplayBuffer().slice(-50,).map((entry) => entry.toString().slice(0, 600,)).join('\n',),
-  };
-  if (extras.logs) {
-    console == null ? void 0 : console.warn('extras.logs is reserved for log replay buffer, use another key',);
-  }
-  return result;
-};
-var Logger = class {
-  constructor(id3, errorIsCritical,) {
-    this.id = id3;
-    __publicField(this, 'level', 3,/* Warn */
-    );
-    __publicField(this, 'didLog', {},);
-    __publicField(this, 'errorIsCritical',);
-    __publicField(this, 'trace', (...parts) => {
-      if (this.level > 0) return;
-      const entry = createLogEntry(this, 0, parts,);
-      console == null ? void 0 : console.log(...entry.toMessage(),);
-    },);
-    __publicField(this, 'debug', (...parts) => {
-      const entry = createLogEntry(this, 1, parts,);
-      if (this.level > 1) return;
-      console == null ? void 0 : console.log(...entry.toMessage(),);
-    },);
-    __publicField(this, 'info', (...parts) => {
-      const entry = createLogEntry(this, 2, parts,);
-      if (this.level > 2) return;
-      console == null ? void 0 : console.info(...entry.toMessage(),);
-    },);
-    __publicField(this, 'warn', (...parts) => {
-      const entry = createLogEntry(this, 3, parts,);
-      if (this.level > 3) return;
-      console == null ? void 0 : console.warn(...entry.toMessage(),);
-    },);
-    __publicField(this, 'warnOncePerMinute', (firstPart, ...parts) => {
-      const lastLoggedTime = this.didLog[firstPart];
-      if (lastLoggedTime && lastLoggedTime > Date.now()) return;
-      this.didLog[firstPart] = Date.now() + 1e3 * 60;
-      parts.unshift(firstPart,);
-      const entry = createLogEntry(this, 3, parts,);
-      if (this.level > 3) return;
-      console == null ? void 0 : console.warn(...entry.toMessage(),);
-    },);
-    __publicField(this, 'error', (...parts) => {
-      const entry = createLogEntry(this, 4, parts,);
-      if (this.level > 4) return;
-      console == null ? void 0 : console.error(...entry.toMessage(),);
-    },);
-    __publicField(this, 'errorOncePerMinute', (firstPart, ...parts) => {
-      const lastLoggedTime = this.didLog[firstPart];
-      if (lastLoggedTime && lastLoggedTime > Date.now()) return;
-      this.didLog[firstPart] = Date.now() + 1e3 * 60;
-      parts.unshift(firstPart,);
-      const entry = createLogEntry(this, 4, parts,);
-      if (this.level > 4) return;
-      console == null ? void 0 : console.error(...entry.toMessage(),);
-    },);
-    __publicField(this, 'reportWithoutLogging', (maybeError, extras, tags, critical,) => {
-      const enrichedExtras = enrichWithLogs(extras ?? {},);
-      const enrichedError = reportError({
-        caller: this.reportWithoutLogging,
-        error: maybeError,
-        tags: {
-          ...tags,
-          handler: 'logger',
-          where: this.id,
-        },
-        extras,
-        critical: critical ?? this.errorIsCritical,
-      },);
-      return [enrichedExtras, enrichedError,];
-    },);
-    __publicField(this, 'reportError', (maybeError, extras, tags, critical,) => {
-      const [enrichedExtras, enrichedError,] = this.reportWithoutLogging(maybeError, extras, tags, critical,);
-      if (enrichedExtras) {
-        this.error(enrichedError, enrichedExtras,);
-      } else {
-        this.error(enrichedError,);
-      }
-    },);
-    __publicField(this, 'reportErrorOncePerMinute', (error, extras,) => {
-      if (!isErrorWithMessage(error,)) return;
-      const lastLoggedTime = this.didLog[error.message];
-      if (lastLoggedTime && lastLoggedTime > Date.now()) return;
-      this.didLog[error.message] = Date.now() + 1e3 * 60;
-      this.reportError(error, extras,);
-    },);
-    __publicField(this, 'reportCriticalError', (maybeError, extras, tags,) => this.reportError(maybeError, extras, tags, true,),);
-    this.errorIsCritical = errorIsCritical ?? (id3 === 'fatal' || id3.endsWith(':fatal',));
-  }
-  extend(name,) {
-    const id3 = this.id + ':' + name;
-    return getLogger2(id3,);
-  }
-  /** Returns the messages this logger created that are still in the global replay buffer. */
-  getBufferedMessages() {
-    return replayBuffer.filter((entry) => entry.logger === this);
-  }
-  /** Set new level and return previous level. */
-  setLevel(level,) {
-    const previous = this.level;
-    this.level = level;
-    return previous;
-  }
-  /** Check if a trace messages will be output. */
-  isLoggingTraceMessages() {
-    return this.level >= 0;
-  }
-};
-function isErrorWithMessage(maybeError,) {
-  return Object.prototype.hasOwnProperty.call(maybeError, 'message',);
-}
-function escapeRegExp(string,) {
-  return string.replace(/[/\-\\^$*+?.()|[\]{}]/gu, '\\$&',);
-}
-var Mixed = Symbol('Mixed',);
-var DEPENDENCIES_MODULE_NAME = 'dependencies';
-var DEPENDENCIES_MODULE_TYPE = 'config';
-var DEPENDENCIES_MODULE_TYPE_SLASH_NAME = `${DEPENDENCIES_MODULE_TYPE}/${DEPENDENCIES_MODULE_NAME}`;
-var IMPORT_MAP_FILE_NAME = 'importMap.json';
-var DEPENDENCIES_FILE_NAME = 'dependencies.json';
-var IMPORT_MAP_FILE_ID = `${DEPENDENCIES_MODULE_TYPE_SLASH_NAME}/${IMPORT_MAP_FILE_NAME}`;
-var DEPENDENCIES_FILE_ID = `${DEPENDENCIES_MODULE_TYPE_SLASH_NAME}/${DEPENDENCIES_FILE_NAME}`;
-var USE_FREEZE = false;
-var List;
-((List2) => {
-  function push(ls, ...elements) {
-    return ls.concat(elements,);
-  }
-  List2.push = push;
-  function pop(a,) {
-    return a.slice(0, -1,);
-  }
-  List2.pop = pop;
-  function unshift(ls, ...elements) {
-    return elements.concat(ls,);
-  }
-  List2.unshift = unshift;
-  function insert(a, index, ...elements) {
-    const length = a.length;
-    if (index < 0 || index > length) throw Error('index out of range: ' + index,);
-    const copy = a.slice();
-    copy.splice(index, 0, ...elements,);
-    return copy;
-  }
-  List2.insert = insert;
-  function replace(a, index, replacement,) {
-    const length = a.length;
-    if (index < 0 || index >= length) throw Error('index out of range: ' + index,);
-    const itemsToAdd = Array.isArray(replacement,) ? replacement : [replacement,];
-    const copy = a.slice();
-    copy.splice(index, 1, ...itemsToAdd,);
-    return copy;
-  }
-  List2.replace = replace;
-  function remove2(a, index,) {
-    const length = a.length;
-    if (index < 0 || index >= length) throw Error('index out of range: ' + index,);
-    const copy = a.slice();
-    copy.splice(index, 1,);
-    return copy;
-  }
-  List2.remove = remove2;
-  function move(a, from, to,) {
-    const length = a.length;
-    if (from < 0 || from >= length) throw Error('from index out of range: ' + from,);
-    if (to < 0 || to >= length) throw Error('to index out of range: ' + to,);
-    const copy = a.slice();
-    if (to === from) return copy;
-    const element = copy[from];
-    if (from < to) {
-      copy.splice(to + 1, 0, element,);
-      copy.splice(from, 1,);
-    } else {
-      copy.splice(from, 1,);
-      copy.splice(to, 0, element,);
-    }
-    return copy;
-  }
-  List2.move = move;
-  function zip(a, b,) {
-    const res = [];
-    const length = Math.min(a.length, b.length,);
-    for (let i = 0; i < length; i++) {
-      res.push([a[i], b[i],],);
-    }
-    return res;
-  }
-  List2.zip = zip;
-  function update(a, index, body,) {
-    const res = a.slice();
-    const targetElement = res[index];
-    if (targetElement === void 0) return res;
-    res[index] = body(targetElement,);
-    return res;
-  }
-  List2.update = update;
-  function unique(a,) {
-    return Array.from(new Set(a,),);
-  }
-  List2.unique = unique;
-  function union(a, ...collections) {
-    return Array.from(/* @__PURE__ */ new Set([...a, ...collections.flat(),],),);
-  }
-  List2.union = union;
-  function filter2(a, predicate,) {
-    return a.filter(predicate,);
-  }
-  List2.filter = filter2;
-})(List || (List = {}),);
-var objectHasOwnProperty = Object.prototype.hasOwnProperty;
-function hasOwnProperty2(object, property,) {
-  return objectHasOwnProperty.call(object, property,);
-}
-var ValueObject;
-((ValueObject2) => {
-  function morphUsingTemplate(values, template,) {
-    for (const field of Object.keys(values,)) {
-      if (!hasOwnProperty2(template, field,)) {
-        delete values[field];
-      }
-    }
-    for (const field of Object.keys(template,)) {
-      if (values[field] === void 0) {
-        values[field] = template[field];
-      }
-    }
-    Object.setPrototypeOf(values, Object.getPrototypeOf(template,),);
-    if (USE_FREEZE) {
-      Object.freeze(values,);
-    }
-    return values;
-  }
-  ValueObject2.morphUsingTemplate = morphUsingTemplate;
-  function writeOnce(object, values,) {
-    if (values) {
-      Object.assign(object, values,);
-    }
-    if (USE_FREEZE) {
-      Object.freeze(object,);
-    }
-  }
-  ValueObject2.writeOnce = writeOnce;
-  function update(object, values,) {
-    const result = Object.assign(Object.create(Object.getPrototypeOf(object,),), object, values,);
-    if (USE_FREEZE) {
-      Object.freeze(result,);
-    }
-    return result;
-  }
-  ValueObject2.update = update;
-})(ValueObject || (ValueObject = {}),);
-var ReadonlySet;
-((ReadonlySet2) => {
-  function add3(set, ...items) {
-    return /* @__PURE__ */ new Set([...set, ...items,],);
-  }
-  ReadonlySet2.add = add3;
-  function remove2(set, ...items) {
-    const result = new Set(set,);
-    for (const item of items) {
-      result.delete(item,);
-    }
-    return result;
-  }
-  ReadonlySet2.remove = remove2;
-  function union(...sets) {
-    const result = /* @__PURE__ */ new Set();
-    for (const set of sets) {
-      for (const item of set) {
-        result.add(item,);
-      }
-    }
-    return result;
-  }
-  ReadonlySet2.union = union;
-  function toggle(set, item,) {
-    if (set.has(item,)) {
-      return ReadonlySet2.remove(set, item,);
-    }
-    return ReadonlySet2.add(set, item,);
-  }
-  ReadonlySet2.toggle = toggle;
-})(ReadonlySet || (ReadonlySet = {}),);
-var ReadonlyMap;
-((ReadonlyMap2) => {
-  function set(map2, key7, value,) {
-    const result = new Map(map2,);
-    result.set(key7, value,);
-    return result;
-  }
-  ReadonlyMap2.set = set;
-  function remove2(map2, key7,) {
-    const result = new Map(map2,);
-    result.delete(key7,);
-    return result;
-  }
-  ReadonlyMap2.remove = remove2;
-})(ReadonlyMap || (ReadonlyMap = {}),);
-var ResolvablePromise = class extends Promise {
-  constructor() {
-    let res;
-    let rej;
-    super((resolve, reject,) => {
-      res = resolve;
-      rej = reject;
-    },);
-    __publicField(this, '_state', 'initial',);
-    __publicField(this, 'resolve',);
-    __publicField(this, 'reject',);
-    this.resolve = (val) => {
-      this._state = 'fulfilled';
-      res(val,);
-    };
-    this.reject = (reason) => {
-      this._state = 'rejected';
-      rej(reason,);
-    };
-  }
-  get state() {
-    return this._state;
-  }
-  /**
-   * A function that sets the state to "pending".
-   * Useful for when you want to signal that the task started but is not yet completed.
-   */
-  pending() {
-    this._state = 'pending';
-    return this;
-  }
-  isResolved() {
-    return this._state === 'fulfilled' || this._state === 'rejected';
-  }
-};
-ResolvablePromise.prototype.constructor = Promise;
-var hasNativeYield = false;
-var hasNativePostTask = false;
-var hasIsInputPending = false;
-if (typeof window !== 'undefined' && window.scheduler) {
-  hasNativeYield = 'yield' in window.scheduler;
-  hasNativePostTask = 'postTask' in window.scheduler;
-  hasIsInputPending = 'isInputPending' in window.scheduler;
-}
-var log2 = getLogger2('task-queue',);
-function getAssetFilename(asset,) {
-  return asset.key + asset.extension;
-}
-function createAbsoluteAssetURL(filename,) {
-  const serviceMap = getServiceMap();
-  return `${serviceMap.userContent}/assets/${filename}`;
-}
-function createAbsoluteAssetURLFromAsset(asset,) {
-  return createAbsoluteAssetURL(getAssetFilename(asset,),);
-}
 var FRAMER_VARIABLE_FONT_SUFFIX = 'Variable';
 function createCSSFamilyName(fontFamilyName, isVariable,) {
   return isVariable ? `${fontFamilyName} ${FRAMER_VARIABLE_FONT_SUFFIX}` : fontFamilyName;
@@ -47155,7 +47993,7 @@ function pickVariableVariants(currentVariant, availableVariants,) {
 function isVariableFont(font,) {
   return Boolean(font.variationAxes,);
 }
-var log3 = getLogger('custom-font-source',);
+var log3 = getLogger2('custom-font-source',);
 var customFontSelectorLegacyPrefix = 'CUSTOM;';
 var customFontSelectorPrefixV2 = 'CUSTOMV2;';
 function isCustomFontSelector(selector,) {
@@ -47451,7 +48289,7 @@ function getAssetOwnerType(asset,) {
 async function loadFontsWithOpenType(source,) {
   switch (source) {
     case 'google': {
-      const supportedFonts = await import('./framer-chunks/google-KZPUDTN2-SVXYQPUD.js');
+      const supportedFonts = await import('./framer-chunks/google-UPWYMW24-OUQWIMPK.js');
       return supportedFonts == null ? void 0 : supportedFonts.default;
     }
     case 'fontshare': {
@@ -47465,7 +48303,7 @@ async function loadFontsWithOpenType(source,) {
 async function loadFontToOpenTypeFeatures(source,) {
   switch (source) {
     case 'google': {
-      const features = await import('./framer-chunks/google-MX3N35K3-NSXXLNAK.js');
+      const features = await import('./framer-chunks/google-UXOX5SHT-L6YCUBAJ.js');
       return features == null ? void 0 : features.default;
     }
     case 'fontshare': {
@@ -48018,7 +48856,7 @@ function loadVariationAxes(source,) {
       const axes = (async () => {
         switch (source) {
           case 'google': {
-            return (await import('./framer-chunks/google-I65GYBZB-MP6KWJ3D.js')).default;
+            return (await import('./framer-chunks/google-WAJV2XMM-5FI2Q7LQ.js')).default;
           }
           case 'fontshare': {
             return (await import('./framer-chunks/fontshare-IXII5VYB-I6S3ZY5U.js')).default;
@@ -53105,6 +53943,7 @@ var package_default = {
     postinstall: 'node postinstall.cjs',
   },
   dependencies: {
+    devalue: '^5.4.2',
     eventemitter3: '^5.0.1',
     fontfaceobserver: '2.2.0',
     'hoist-non-react-statics': '^3.3.2',
@@ -53218,8 +54057,7 @@ export {
   circOut,
   clamp,
   clampRGB,
-  CMSDataCollector,
-  cmsDataCollector,
+  CollectionUtilsCache,
   collectMotionValues,
   collectVisualStyleFromProps,
   Color,
@@ -53258,7 +54096,7 @@ export {
   DataContext,
   DataObserver,
   DataObserverContext,
-  debounce,
+  debounce2 as debounce,
   defaultDeviceProps,
   defaultEasing,
   defaultOffset,
@@ -53356,6 +54194,7 @@ export {
   gradientForShape,
   GroupAnimation,
   GroupAnimationWithThen,
+  handoverCollector,
   hasWarned,
   hex,
   hover,
