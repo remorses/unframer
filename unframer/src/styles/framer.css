@@ -1,4 +1,5 @@
 body { --framer-will-change-override: none; --framer-will-change-effect-override: none; }
+body { --framer-will-change-filter-override: none; }
 [data-framer-component-type] { position: absolute; }
 [data-framer-component-type="Text"] { cursor: inherit; }
 [data-framer-component-text-autosized] * { white-space: pre; }

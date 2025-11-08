@@ -11424,7 +11424,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.ATKQQ2EE.mjs
+// /:https://app.framerstatic.com/framer.DK76H64B.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -22568,8 +22568,10 @@ var hideScrollbars = [
 ];
 var willChangeOverrideCSSVariable = '--framer-will-change-override';
 var willChangeEffectOverrideCSSVariable = '--framer-will-change-effect-override';
+var willChangeFilterOverrideCSSVariable = '--framer-will-change-filter-override';
 var anySafariVersion2 = '(background: -webkit-named-image(i))';
 var safari16OrGreater = '(grid-template-rows: subgrid)';
+var safari26OrGreater = '(position-area: top right)';
 var willChangeTransformRules = (isPreview) =>
   isPreview
     ? [
@@ -22577,6 +22579,13 @@ var willChangeTransformRules = (isPreview) =>
       `@supports ${anySafariVersion2} and (not ${safari16OrGreater}) { body { ${willChangeOverrideCSSVariable}: transform; } }`,
     ]
     : [`body { ${willChangeOverrideCSSVariable}: none; ${willChangeEffectOverrideCSSVariable}: none; }`,];
+var willChangeFilterRules = (isPreview) =>
+  isPreview
+    ? [
+      `body { ${willChangeFilterOverrideCSSVariable}: none; }`,
+      `@supports ${anySafariVersion2} and (not ${safari26OrGreater}) { body { ${willChangeFilterOverrideCSSVariable}: filter; } }`,
+    ]
+    : [`body { ${willChangeFilterOverrideCSSVariable}: none; }`,];
 var frameCSSRules = (isPreview) => {
   return isPreview ? frameCSS : [];
 };
@@ -22588,6 +22597,7 @@ var overflowClipFallbackCSSRules = /* @__PURE__ */ (() => [`@supports (not (over
 var combineCSSRules =
   (isPreview) => [
     ...willChangeTransformRules(isPreview,),
+    ...willChangeFilterRules(isPreview,),
     ...componentCSSRules,
     ...textCSSRules,
     ...richTextCSSRules,
@@ -38888,7 +38898,7 @@ function Router({
                     /* @__PURE__ */ jsx(MarkSuspenseEffects.Start, {},),
                     /* @__PURE__ */ jsx(WithLayoutTemplate, {
                       LayoutTemplate,
-                      routeId: (currentRoute == null ? void 0 : currentRoute.abTestingVariantId) ?? currentRouteId,
+                      webPageId: (currentRoute == null ? void 0 : currentRoute.abTestingVariantId) ?? currentRouteId,
                       style: defaultPageStyle,
                       children: (inLayoutTemplate) => {
                         return /* @__PURE__ */ jsx(Fragment, {
@@ -38916,13 +38926,13 @@ function Router({
 }
 function WithLayoutTemplate({
   LayoutTemplate,
-  routeId,
+  webPageId,
   style: style2,
   children,
 },) {
   if (!LayoutTemplate) return children(false,);
   return /* @__PURE__ */ jsx(LayoutTemplate, {
-    routeId,
+    webPageId,
     style: style2,
     children,
   },);
@@ -43501,8 +43511,8 @@ var ScalarVariable = class extends ScalarNode {
   }
 };
 var Normalizer = class {
-  constructor(memo3,) {
-    this.memo = memo3;
+  constructor(memo4,) {
+    this.memo = memo4;
   }
   finishRelational(node,) {
     return this.memo.addRelational(node,);
@@ -45055,8 +45065,8 @@ function useLoadMorePagination(totalSize, pageSize, hash2, paginateWithSuspended
       continueAfter: 'paint',
     },);
     if (currentPageRef.current >= totalPages) return;
-    const renderNextPage = (startTransition14) => {
-      startTransition14(() => {
+    const renderNextPage = (startTransition15) => {
+      startTransition15(() => {
         setCurrentPage((_currentPage) => {
           const nextPage = Math.min(_currentPage + 1, totalPages,);
           currentPageRef.current = nextPage;
@@ -50393,6 +50403,174 @@ var Component16 = /* @__PURE__ */ React42.forwardRef(function Image2(props, ref,
   },);
 },);
 var Image3 = /* @__PURE__ */ withLightboxEffect(Component16,);
+var formatters = /* @__PURE__ */ new Map();
+function getRelativeTimeFormat(style2, numeric, locale,) {
+  const options = {
+    numeric,
+    style: style2,
+  };
+  const args = [locale, options,];
+  const key7 = JSON.stringify(args,);
+  const existing = formatters.get(key7,);
+  if (existing) return existing;
+  const formatter = new Intl.RelativeTimeFormat(...args,);
+  formatters.set(key7, formatter,);
+  return formatter;
+}
+function formatRelativeDate(targetDate, referenceDate, format, style2, numeric, capitalize, locale,) {
+  const unit = getRelativeDateUnit(targetDate, referenceDate, format,);
+  const value = getRelativeDateValue(targetDate, referenceDate, unit,);
+  const formatted = getRelativeTimeFormat(style2, numeric, locale,).format(value, unit,);
+  if (capitalize) return capitalizeFirstLetter(formatted,);
+  return formatted;
+}
+function capitalizeFirstLetter(text,) {
+  return text.charAt(0,).toUpperCase() + text.slice(1,);
+}
+function getRelativeDateUnit(targetDate, referenceDate, format,) {
+  if (format !== 'auto') return format;
+  const daysDiff = differenceInCalendarDays(targetDate, referenceDate,);
+  if (Math.abs(daysDiff,) <= 7) return 'day';
+  const weeksDiff = differenceInCalendarWeeks(targetDate, referenceDate,);
+  if (Math.abs(weeksDiff,) <= 4) return 'week';
+  const monthsDiff = differenceInCalendarMonths(targetDate, referenceDate,);
+  if (Math.abs(monthsDiff,) <= 12) return 'month';
+  return 'year';
+}
+var SECOND = 1e3;
+var MINUTE = 6e4;
+var HOUR = 36e5;
+var DAY = 864e5;
+var WEEK = 6048e5;
+function getRelativeDateValue(targetDate, referenceDate, unit,) {
+  const delta = targetDate.getTime() - referenceDate.getTime();
+  switch (unit) {
+    case 'second':
+      return Math.trunc(delta / SECOND,);
+    case 'minute':
+      return Math.trunc(delta / MINUTE,);
+    case 'hour':
+      return Math.trunc(delta / HOUR,);
+    case 'day':
+      return differenceInCalendarDays(targetDate, referenceDate,);
+    case 'week':
+      return differenceInCalendarWeeks(targetDate, referenceDate,);
+    case 'month':
+      return differenceInCalendarMonths(targetDate, referenceDate,);
+    case 'quarter':
+      return differenceInCalendarQuarters(targetDate, referenceDate,);
+    case 'year':
+      return differenceInCalendarYears(targetDate, referenceDate,);
+  }
+  const _ = unit;
+}
+function getStartOfDay(date,) {
+  const result = new Date(date,);
+  result.setHours(0, 0, 0, 0,);
+  return result;
+}
+function differenceInCalendarDays(targetDate, referenceDate,) {
+  const targetStartOfDay = getStartOfDay(targetDate,);
+  const referenceStartOfDay = getStartOfDay(referenceDate,);
+  const targetTimestamp = targetStartOfDay.getTime() - getTimezoneOffsetInMilliseconds(targetStartOfDay,);
+  const referenceTimestamp = referenceStartOfDay.getTime() - getTimezoneOffsetInMilliseconds(referenceStartOfDay,);
+  return Math.round((targetTimestamp - referenceTimestamp) / DAY,);
+}
+function getStartOfWeek(date,) {
+  const result = new Date(date,);
+  const day = result.getDay();
+  const diff = (day < 1 ? 7 : 0) + day - 1;
+  result.setDate(result.getDate() - diff,);
+  result.setHours(0, 0, 0, 0,);
+  return result;
+}
+function differenceInCalendarWeeks(targetDate, referenceDate,) {
+  const targetStartOfWeek = getStartOfWeek(targetDate,);
+  const referenceStartOfWeek = getStartOfWeek(referenceDate,);
+  const targetTimestamp = targetStartOfWeek.getTime() - getTimezoneOffsetInMilliseconds(targetStartOfWeek,);
+  const referenceTimestamp = referenceStartOfWeek.getTime() - getTimezoneOffsetInMilliseconds(referenceStartOfWeek,);
+  return Math.round((targetTimestamp - referenceTimestamp) / WEEK,);
+}
+function differenceInCalendarMonths(targetDate, referenceDate,) {
+  const yearsDiff = targetDate.getFullYear() - referenceDate.getFullYear();
+  const monthsDiff = targetDate.getMonth() - referenceDate.getMonth();
+  return yearsDiff * 12 + monthsDiff;
+}
+function getQuarter(date,) {
+  const month = date.getMonth();
+  return Math.trunc(month / 3,);
+}
+function differenceInCalendarQuarters(targetDate, referenceDate,) {
+  const yearsDiff = targetDate.getFullYear() - referenceDate.getFullYear();
+  const quartersDiff = getQuarter(targetDate,) - getQuarter(referenceDate,);
+  return yearsDiff * 4 + quartersDiff;
+}
+function differenceInCalendarYears(targetDate, referenceDate,) {
+  return targetDate.getFullYear() - referenceDate.getFullYear();
+}
+function getTimezoneOffsetInMilliseconds(date,) {
+  const year = date.getFullYear();
+  const utcDate = new Date(
+    Date.UTC(year, date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds(),),
+  );
+  return date.getTime() - utcDate.setUTCFullYear(year,);
+}
+var RelativeDate = /* @__PURE__ */ memo2(function RelativeDate2({
+  date: dateString,
+  dateFormat = 'auto',
+  dateStyle = 'long',
+  dateNumeric = 'auto',
+  dateCapitalize = false,
+  locale: externalLocale,
+  ...props
+},) {
+  const fallbackLocale = useLocaleCode();
+  const locale = externalLocale || fallbackLocale;
+  const targetDate = new Date(dateString,);
+  const [currentDate, setCurrentDate,] = useState(() => /* @__PURE__ */ new Date());
+  const interval = dateFormat === 'second' ? 1e3 : 6e4;
+  useEffect(() => {
+    const timeout = setInterval(() => {
+      startTransition2(() => {
+        const now2 = /* @__PURE__ */ new Date();
+        setCurrentDate(now2,);
+      },);
+    }, interval,);
+    return () => {
+      clearInterval(timeout,);
+    };
+  }, [interval,],);
+  const formattedDate = targetDate.toLocaleString(locale, {
+    dateStyle: 'long',
+    timeStyle: dateFormat === 'second' ? 'medium' : dateFormat === 'minute' || dateFormat === 'hour' ? 'short' : void 0,
+  },);
+  const formattedRelativeDate = formatRelativeDate(targetDate, currentDate, dateFormat, dateStyle, dateNumeric, dateCapitalize, locale,);
+  const formattedIsoDate = targetDate.toISOString();
+  return /* @__PURE__ */ jsxs('time', {
+    suppressHydrationWarning: true,
+    dateTime: formattedIsoDate,
+    title: formattedDate,
+    ...props,
+    children: [
+      isWindow ? formattedRelativeDate : formattedDate,
+      isWindow ? null : /* @__PURE__ */ jsx('script', {
+        'data-relative-date-script': 'inline',
+        dangerouslySetInnerHTML: {
+          __html: createHydrationScript(targetDate, dateFormat, dateStyle, dateNumeric, dateCapitalize, locale,),
+        },
+      },),
+    ],
+  },);
+},);
+function createHydrationScript(date, format, style2, numeric, capitalize, locale,) {
+  const serializedDate = date.getTime();
+  const serializedFormat = JSON.stringify(format,);
+  const serializedStyle = JSON.stringify(style2,);
+  const serializedNumeric = JSON.stringify(numeric,);
+  const serializedCapitalize = JSON.stringify(capitalize,);
+  const serializedLocale = JSON.stringify(locale,);
+  return /* js */ `document.currentScript.parentElement.textContent = window.__framer_formatRelativeDate(new Date(${serializedDate}), new Date(), ${serializedFormat}, ${serializedStyle}, ${serializedNumeric}, ${serializedCapitalize}, ${serializedLocale})`;
+}
 var frameFromElement = (element) => {
   const frame2 = Rect.fromRect(element.getBoundingClientRect(),);
   frame2.x = frame2.x + safeWindow.scrollX;
@@ -51391,7 +51569,7 @@ function processRichTextChildren(
   depth = isFragment(element,) ? -1 : 0,
 ) {
   let children = Children.toArray(element.props.children,);
-  if (isString(plainText,)) {
+  if (!isUndefined(plainText,)) {
     children = children.slice(0, 1,);
   }
   let onlyLineBreaks = true;
@@ -51400,7 +51578,7 @@ function processRichTextChildren(
     if (isValidElement(child,)) {
       return processRichTextChildren(child, stylesPresetsClassNames, plainText, anchorLinkOffsetY, slugCounters, tokenizer, depth + 1,);
     }
-    const text = isString(plainText,) ? plainText : child;
+    const text = !isUndefined(plainText,) ? plainText : child;
     return isString(text,) && tokenizer ? tokenizer.text(text,) : text;
   },);
   const {
@@ -54355,6 +54533,7 @@ export {
   readTransformValue,
   recordStats,
   Rect,
+  RelativeDate,
   removeHiddenBreakpointLayers,
   removeHiddenBreakpointLayersV2,
   removeItem,
