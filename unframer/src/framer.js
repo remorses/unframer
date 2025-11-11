@@ -11424,14 +11424,14 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.DK76H64B.mjs
+// /:https://app.framerstatic.com/framer.KB6PVM3Q.mjs
 
 import React42 from 'react';
+import { useDeferredValue, useSyncExternalStore, } from 'react';
 import { startTransition as startTransition2, } from 'react';
 import { Suspense as Suspense2, } from 'react';
 import { memo as memo2, } from 'react';
 import ReactDOM from 'react-dom';
-import { useSyncExternalStore, } from 'react';
 import { createRef, } from 'react';
 import { useTransition, } from 'react';
 import { createPortal, } from 'react-dom';
@@ -14896,6 +14896,85 @@ function sendCustomTrackingEvent(eventData, nodeId, trackingId,) {
     // Don't attach a tracking ID if it's empty
     trackingId: trackingId || null,
   }, 'eager',);
+}
+function useMemoOne(factory, inputs,) {
+  const initial = useState(() => ({
+    inputs,
+    result: factory(),
+  }))[0];
+  const isFirstRun = useRef(true,);
+  const committed = useRef(initial,);
+  const useCache = isFirstRun.current || Boolean(inputs && committed.current.inputs && isEqual(inputs, committed.current.inputs, false,),);
+  const cache2 = useCache ? committed.current : {
+    inputs,
+    result: factory(),
+  };
+  useEffect(() => {
+    isFirstRun.current = false;
+    committed.current = cache2;
+  }, [cache2,],);
+  return cache2.result;
+}
+var URLSearchParamsContext = /* @__PURE__ */ (() => {
+  const Context2 = createContext({
+    urlSearchParams: new URLSearchParams(),
+    triggerUpdate: () => {},
+  },);
+  Context2.displayName = 'URLSearchParamsContext';
+  return Context2;
+})();
+function URLSearchParamsProvider({
+  children,
+},) {
+  const onStoreChangeRef = useRef(null,);
+  const searchString = useSyncExternalStore(
+    (onStoreChange) => {
+      onStoreChangeRef.current = onStoreChange;
+      const handler = () => {
+        onStoreChange();
+      };
+      window.addEventListener('popstate', handler,);
+      return () => {
+        onStoreChangeRef.current = null;
+        window.removeEventListener('popstate', handler,);
+      };
+    },
+    () => window.location.search,
+    () => '',
+  );
+  const deferredSearchString = useDeferredValue(searchString,);
+  const triggerUpdate = useCallback2(() => {
+    var _a;
+    (_a = onStoreChangeRef.current) == null ? void 0 : _a.call(onStoreChangeRef,);
+  }, [],);
+  const value = useMemoOne(() => ({
+    urlSearchParams: new URLSearchParams(deferredSearchString,),
+    triggerUpdate,
+  }), [deferredSearchString, triggerUpdate,],);
+  return /* @__PURE__ */ jsx(URLSearchParamsContext.Provider, {
+    value,
+    children,
+  },);
+}
+function useStringQueryParameter(parameterName, initialValue,) {
+  const parameterNameRef = useRef(parameterName,);
+  const {
+    urlSearchParams,
+    triggerUpdate,
+  } = useContext(URLSearchParamsContext,);
+  const value = urlSearchParams.get(parameterNameRef.current,) || initialValue;
+  const setValue = useCallback2(async (newValue) => {
+    const currentHistoryState = window.history.state;
+    if (!isHistoryState(currentHistoryState,)) return;
+    const newUrl = new URL(window.location.href,);
+    newUrl.searchParams.set(parameterNameRef.current, newValue,);
+    await yieldToMain({
+      continueAfter: 'paint',
+    },);
+    replaceHistoryState(currentHistoryState, newUrl.toString(),);
+    triggerUpdate();
+  }, [triggerUpdate,],);
+  return useMemoOne(() => [value, setValue,], [value, setValue,],);
 }
 async function getLocalesForCurrentRoute(activeLocale, locales, currentRoute, pathVariables, collectionUtils,) {
   if (!currentRoute) return locales;
@@ -21735,65 +21814,76 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
         a.framer-text span.framer-text:not([data-text-fill]),
         span.framer-text[data-nested-link],
         span.framer-text[data-nested-link] span.framer-text:not([data-text-fill]) {
+            /* Ensure the color is inherited from the link style rather than the parent text for nested spans */
+            color: inherit;
             font-family: var(--framer-blockquote-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
             font-style: var(--framer-blockquote-font-style, var(--framer-link-font-style, var(--framer-font-style, normal)));
             font-weight: var(--framer-blockquote-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400)));
-            color: var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-text-color, #000)));
             font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-blockquote-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none)));
             /* Cursor inherit to overwrite the user agent stylesheet on rich text links. */
             cursor: var(--framer-custom-cursors, pointer);
             /* Don't inherit background styles from any parent text style. */
-            background-color: var(--framer-link-text-background-color, initial);
+            background-color: initial;
             border-radius: var(--framer-link-text-background-radius, initial);
             padding: var(--framer-link-text-background-padding, initial);
         }
     `,
-  // Text decoration can't be applied to the nested spans of links because it breaks animations
+  // Animateable link styles can't be applied to the nested spans of links because it breaks animations
   /* css */
   `
         a.framer-text,
         span.framer-text[data-nested-link] {
+            color: var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-text-color, #000)));
             text-decoration-line: var(--framer-blockquote-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, initial)));
             text-decoration-style: var(--framer-blockquote-text-decoration-style, var(--framer-link-text-decoration-style, var(--framer-text-decoration-style, initial)));
             text-decoration-color: var(--framer-blockquote-text-decoration-color, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color, initial)));
             text-decoration-thickness: var(--framer-blockquote-text-decoration-thickness, var(--framer-link-text-decoration-thickness, var(--framer-text-decoration-thickness, initial)));
             text-decoration-skip-ink: var(--framer-blockquote-text-decoration-skip-ink, var(--framer-link-text-decoration-skip-ink, var(--framer-text-decoration-skip-ink, initial)));
             text-underline-offset: var(--framer-blockquote-text-decoration-offset, var(--framer-link-text-decoration-offset, var(--framer-text-decoration-offset, initial)));
+            /* Don't inherit background styles from any parent text style. */
+            background-color: var(--framer-link-text-background-color, initial);
         }
     `, /* css */
   `
         @supports not (color: color(display-p3 1 1 1)) {
             a.framer-text,
-            a.framer-text span.framer-text:not([data-text-fill]),
-            span.framer-text[data-nested-link],
-            span.framer-text[data-nested-link] span.framer-text:not([data-text-fill]) {
+            span.framer-text[data-nested-link] {
                 color: ${
     createRGBVariableFallbacks(['--framer-blockquote-text-color', '--framer-link-text-color', '--framer-text-color',], '#000',)
   };
                 background-color: ${createRGBVariableFallbacks(['--framer-link-text-background-color',], 'initial',)};
+                text-decoration-color: ${
+    createRGBVariableFallbacks(['--framer-link-text-decoration-color', '--framer-text-decoration-color',], 'currentcolor',)
+  };
             }
         }
     `, /* css */
   `
+    code.framer-text a.framer-text,
+    code.framer-text a.framer-text span.framer-text:not([data-text-fill]),
+    code.framer-text span.framer-text[data-nested-link],
+    code.framer-text span.framer-text[data-nested-link] span.framer-text:not([data-text-fill]) {
+        font-family: var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
+        font-style: var(--framer-blockquote-font-style, var(--framer-code-font-style, var(--framer-font-style, normal)));
+        font-weight: var(--framer-blockquote-font-weight, var(--framer-code-font-weight, var(--framer-font-weight, 400)));
+        color: inherit;
+        font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
+    }
+`, /* css */
+  `
+    code.framer-text a.framer-text,
+    code.framer-text span.framer-text[data-nested-link] {
+        color: var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000))));
+    }
+`, /* css */
+  `
+    @supports not (color: color(display-p3 1 1 1)) {
         code.framer-text a.framer-text,
         code.framer-text a.framer-text span.framer-text:not([data-text-fill]),
         code.framer-text span.framer-text[data-nested-link],
         code.framer-text span.framer-text[data-nested-link] span.framer-text:not([data-text-fill]) {
-            font-family: var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
-            font-style: var(--framer-blockquote-font-style, var(--framer-code-font-style, var(--framer-font-style, normal)));
-            font-weight: var(--framer-blockquote-font-weight, var(--framer-code-font-weight, var(--framer-font-weight, 400)));
-            color: var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000))));
-            font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
-        }
-    `, /* css */
-  `
-        @supports not (color: color(display-p3 1 1 1)) {
-            code.framer-text a.framer-text,
-            code.framer-text a.framer-text span.framer-text:not([data-text-fill]),
-            code.framer-text span.framer-text[data-nested-link],
-            code.framer-text span.framer-text[data-nested-link] span.framer-text:not([data-text-fill]) {
-                color: ${
+            color: ${
     createRGBVariableFallbacks([
       '--framer-blockquote-text-color',
       '--framer-link-text-color',
@@ -21801,9 +21891,9 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
       '--framer-text-color',
     ], '#000',)
   };
-            }
         }
-    `, /* css */
+    }
+`, /* css */
   `
         a.framer-text:hover,
         a.framer-text:hover span.framer-text:not([data-text-fill]),
@@ -21812,10 +21902,8 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             font-family: var(--framer-link-hover-font-family, var(--framer-blockquote-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif))));
             font-style: var(--framer-link-hover-font-style, var(--framer-blockquote-font-style, var(--framer-link-font-style, var(--framer-font-style, normal))));
             font-weight: var(--framer-link-hover-font-weight, var(--framer-blockquote-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400))));
-            color: var(--framer-link-hover-text-color, var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-text-color, #000))));
             font-size: calc(var(--framer-link-hover-font-size, var(--framer-blockquote-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-link-hover-text-transform, var(--framer-blockquote-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none))));
-            background-color: var(--framer-link-hover-text-background-color, var(--framer-link-text-background-color, var(--framer-text-background-color, initial)));
             border-radius: var(--framer-link-hover-text-background-radius, var(--framer-link-text-background-radius, var(--framer-text-background-radius, initial)));
             padding: var(--framer-link-hover-text-background-padding, var(--framer-link-text-background-padding, var(--framer-text-background-padding, initial)));
         }
@@ -21823,20 +21911,20 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
   `
         a.framer-text:hover,
         span.framer-text[data-nested-link]:hover {
+            color: var(--framer-link-hover-text-color, var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-text-color, #000))));
             text-decoration-line: var(--framer-link-hover-text-decoration, var(--framer-blockquote-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, initial))));
             text-decoration-style: var(--framer-link-hover-text-decoration-style, var(--framer-blockquote-text-decoration-style, var(--framer-link-text-decoration-style, var(--framer-text-decoration-style, initial))));
             text-decoration-color: var(--framer-link-hover-text-decoration-color, var(--framer-blockquote-text-decoration-color, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color, initial))));
             text-decoration-thickness: var(--framer-link-hover-text-decoration-thickness, var(--framer-blockquote-text-decoration-thickness, var(--framer-link-text-decoration-thickness, var(--framer-text-decoration-thickness, initial))));
             text-decoration-skip-ink: var(--framer-link-hover-text-decoration-skip-ink, var(--framer-blockquote-text-decoration-skip-ink, var(--framer-link-text-decoration-skip-ink, var(--framer-text-decoration-skip-ink, initial))));
             text-underline-offset: var(--framer-link-hover-text-decoration-offset, var(--framer-blockquote-text-decoration-offset, var(--framer-link-text-decoration-offset, var(--framer-text-decoration-offset, initial))));
+            background-color: var(--framer-link-hover-text-background-color, var(--framer-link-text-background-color, var(--framer-text-background-color, initial)));
         }
     `, /* css */
   `
     @supports not (color: color(display-p3 1 1 1)) {
         a.framer-text:hover,
-        a.framer-text:hover span.framer-text:not([data-text-fill]),
-        span.framer-text[data-nested-link]:hover,
-        span.framer-text[data-nested-link]:hover span.framer-text:not([data-text-fill]) {
+        span.framer-text[data-nested-link]:hover {
             color: ${
     createRGBVariableFallbacks([
       '--framer-link-hover-text-color',
@@ -21852,32 +21940,32 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
       '--framer-text-background-color',
     ], 'initial',)
   };
+            text-decoration-color: ${
+    createRGBVariableFallbacks([
+      '--framer-link-hover-text-decoration-color',
+      '--framer-link-text-decoration-color',
+      '--framer-text-decoration-color',
+    ], 'currentcolor',)
+  };
         }
     }
     `, /* css */
   `
         code.framer-text a.framer-text:hover,
-        code.framer-text a.framer-text:hover span.framer-text:not([data-text-fill]),
-        code.framer-text span.framer-text[data-nested-link]:hover,
-        code.framer-text span.framer-text[data-nested-link]:hover span.framer-text:not([data-text-fill]) {
-            font-family: var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
-            font-style: var(--framer-blockquote-font-style, var(--framer-code-font-style, var(--framer-font-style, normal)));
-            font-weight: var(--framer-blockquote-font-weight, var(--framer-code-font-weight, var(--framer-font-weight, 400)));
+        code.framer-text span.framer-text[data-nested-link]:hover {
             color: var(--framer-link-hover-text-color, var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000)))));
-            font-size: calc(var(--framer-link-hover-font-size, var(--framer-blockquote-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)))) * var(--framer-font-size-scale, 1));
         }
     `, /* css */
   `
     @supports not (color: color(display-p3 1 1 1)) {
         code.framer-text a.framer-text:hover,
-        code.framer-text a.framer-text:hover span.framer-text:not([data-text-fill]),
-        code.framer-text span.framer-text[data-nested-link]:hover,
-        code.framer-text span.framer-text[data-nested-link]:hover span.framer-text:not([data-text-fill]) {
+        code.framer-text span.framer-text[data-nested-link]:hover {
             color: ${
     createRGBVariableFallbacks([
       '--framer-link-hover-text-color',
       '--framer-blockquote-text-color',
       '--framer-link-text-color',
+      '--framer-code-text-color',
       '--framer-text-color',
     ], '#000',)
   };
@@ -21892,10 +21980,8 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             font-family: var(--framer-link-current-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
             font-style: var(--framer-link-current-font-style, var(--framer-link-font-style, var(--framer-font-style, normal)));
             font-weight: var(--framer-link-current-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400)));
-            color: var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-text-color, #000)));
             font-size: calc(var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-link-current-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none)));
-            background-color: var(--framer-link-current-text-background-color, var(--framer-link-text-background-color, initial));
             border-radius: var(--framer-link-current-text-background-radius, var(--framer-link-text-background-radius, initial));
             padding: var(--framer-link-current-text-background-padding, var(--framer-link-text-background-padding, initial));
         }
@@ -21903,20 +21989,20 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
   `
         a.framer-text[data-framer-page-link-current],
         span.framer-text[data-framer-page-link-current] {
+            color: var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-text-color, #000)));
             text-decoration-line: var(--framer-link-current-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, initial)));
             text-decoration-style: var(--framer-link-current-text-decoration-style, var(--framer-link-text-decoration-style, var(--framer-text-decoration-style, initial)));
             text-decoration-color: var(--framer-link-current-text-decoration-color, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color, initial)));
             text-decoration-thickness: var(--framer-link-current-text-decoration-thickness, var(--framer-link-text-decoration-thickness, var(--framer-text-decoration-thickness, initial)));
             text-decoration-skip-ink: var(--framer-link-current-text-decoration-skip-ink, var(--framer-link-text-decoration-skip-ink, var(--framer-text-decoration-skip-ink, initial)));
             text-underline-offset: var(--framer-link-current-text-decoration-offset, var(--framer-link-text-decoration-offset, var(--framer-text-decoration-offset, initial)));
+            background-color: var(--framer-link-current-text-background-color, var(--framer-link-text-background-color, var(--framer-text-background-color, initial)));
         }
     `, /* css */
   `
         @supports not (color: color(display-p3 1 1 1)) {
             a.framer-text[data-framer-page-link-current],
-            a.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]),
-            span.framer-text[data-framer-page-link-current],
-            span.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]) {
+            span.framer-text[data-framer-page-link-current]{
                 color: ${
     createRGBVariableFallbacks(['--framer-link-current-text-color', '--framer-link-text-color', '--framer-text-color',], '#000',)
   };
@@ -21926,6 +22012,13 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
       '--framer-link-text-background-color',
       '--framer-text-background-color',
     ], 'initial',)
+  };
+                text-decoration-color: ${
+    createRGBVariableFallbacks([
+      '--framer-link-current-text-decoration-color',
+      '--framer-link-text-decoration-color',
+      '--framer-text-decoration-color',
+    ], 'currentcolor',)
   };
             }
         }
@@ -21938,8 +22031,14 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             font-family: var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
             font-style: var(--framer-code-font-style, var(--framer-font-style, normal));
             font-weight: var(--framer-code-font-weight, var(--framer-font-weight, 400));
-            color: var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000))));
+            color: inherit;
             font-size: calc(var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
+        }
+    `, /* css */
+  `
+        code.framer-text a.framer-text[data-framer-page-link-current],
+        code.framer-text span.framer-text[data-framer-page-link-current] {
+            color: var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000))));
         }
     `, /* css */
   `
@@ -21971,13 +22070,12 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
         a.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]),
         span.framer-text[data-framer-page-link-current]:hover,
         span.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]) {
+            color: inherit;
             font-family: var(--framer-link-hover-font-family, var(--framer-link-current-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif))));
             font-style: var(--framer-link-hover-font-style, var(--framer-link-current-font-style, var(--framer-link-font-style, var(--framer-font-style, normal))));
             font-weight: var(--framer-link-hover-font-weight, var(--framer-link-current-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400))));
-            color: var(--framer-link-hover-text-color, var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-text-color, #000))));
             font-size: calc(var(--framer-link-hover-font-size, var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)))) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-link-hover-text-transform, var(--framer-link-current-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none))));
-            background-color: var(--framer-link-hover-text-background-color, var(--framer-link-current-text-background-color, var(--framer-link-text-background-color, initial)));
             border-radius: var(--framer-link-hover-text-background-radius, var(--framer-link-current-text-background-radius, var(--framer-link-text-background-radius, initial)));
             padding: var(--framer-link-hover-text-background-padding, var(--framer-link-current-text-background-padding, var(--framer-link-text-background-padding, initial)));
         }
@@ -21985,20 +22083,20 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
   `
         a.framer-text[data-framer-page-link-current]:hover,
         span.framer-text[data-framer-page-link-current]:hover {
+            color: var(--framer-link-hover-text-color, var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-text-color, #000))));
             text-decoration-line: var(--framer-link-hover-text-decoration, var(--framer-link-current-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, initial))));
             text-decoration-style: var(--framer-link-hover-text-decoration-style, var(--framer-link-current-text-decoration-style, var(--framer-link-text-decoration-style, var(--framer-text-decoration-style, initial))));
             text-decoration-color: var(--framer-link-hover-text-decoration-color, var(--framer-link-current-text-decoration-color, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color, initial))));
             text-decoration-thickness: var(--framer-link-hover-text-decoration-thickness, var(--framer-link-current-text-decoration-thickness, var(--framer-link-text-decoration-thickness, var(--framer-text-decoration-thickness, initial))));
             text-decoration-skip-ink: var(--framer-link-hover-text-decoration-skip-ink, var(--framer-link-current-text-decoration-skip-ink, var(--framer-link-text-decoration-skip-ink, var(--framer-text-decoration-skip-ink, initial))));
             text-underline-offset: var(--framer-link-hover-text-decoration-offset, var(--framer-link-current-text-decoration-offset, var(--framer-link-text-decoration-offset, var(--framer-text-decoration-offset, initial))));
+            background-color: var(--framer-link-hover-text-background-color, var(--framer-link-current-text-background-color, var(--framer-link-text-background-color, initial)));
         }
     `, /* css */
   `
         @supports not (color: color(display-p3 1 1 1)) {
             a.framer-text[data-framer-page-link-current]:hover,
-            a.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]),
-            span.framer-text[data-framer-page-link-current]:hover,
-            span.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]) {
+            span.framer-text[data-framer-page-link-current]:hover {
                 color: ${
     createRGBVariableFallbacks([
       '--framer-link-hover-text-color',
@@ -22015,22 +22113,21 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
       '--framer-link-text-background-color',
     ], 'initial',)
   };
+                text-decoration-color: ${
+    createRGBVariableFallbacks([
+      '--framer-link-hover-text-decoration-color',
+      '--framer-link-current-text-decoration-color',
+      '--framer-link-text-decoration-color',
+      '--framer-text-decoration-color',
+    ], 'currentcolor',)
+  };
             }
         }
     `, /* css */
   `
         code.framer-text a.framer-text[data-framer-page-link-current]:hover,
-        code.framer-text a.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]),
-        code.framer-text span.framer-text[data-framer-page-link-current]:hover,
-        code.framer-text span.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]) {
-            font-family: var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
-            font-style: var(--framer-code-font-style, var(--framer-font-style, normal));
-            font-weight: var(--framer-code-font-weight, var(--framer-font-weight, 400));
+        code.framer-text span.framer-text[data-framer-page-link-current]:hover {
             color: var(--framer-link-hover-text-color, var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000)))));
-            font-size: calc(var(--framer-link-hover-font-size, var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)))) * var(--framer-font-size-scale, 1));
-            background-color: var(--framer-link-hover-text-background-color, var(--framer-link-current-text-background-color, var(--framer-link-text-background-color, var(--framer-text-background-color, initial))));
-            border-radius: var(--framer-link-hover-text-background-radius, var(--framer-link-current-text-background-radius, var(--framer-link-text-background-radius, var(--framer-text-background-radius, initial))));
-            padding: var(--framer-link-hover-text-background-padding, var(--framer-link-current-text-background-padding, var(--framer-link-text-background-padding, var(--framer-text-background-padding, initial))));
         }
     `, /* css */
   `
@@ -25175,13 +25272,73 @@ function getVariantsDimensions(width, height,) {
   }
   return sizes;
 }
-var LibraryFeaturesContext = /* @__PURE__ */ React42.createContext(void 0,);
-LibraryFeaturesContext.displayName = 'LibraryFeaturesContext';
-var LibraryFeaturesProvider = /* @__PURE__ */ (() => LibraryFeaturesContext.Provider)();
-var useLibraryFeatures = () => {
-  const context = React42.useContext(LibraryFeaturesContext,);
-  return context ?? {};
-};
+var MinVariantSizeForSourceSet = 512;
+function getResponsiveSrcSet(source, image, variants,) {
+  if (!variants || variants.length === 0) return void 0;
+  if (!image.pixelWidth) return void 0;
+  const srcSet = [];
+  for (const variant of variants) {
+    if (variant.width >= MinVariantSizeForSourceSet) {
+      const url = new URL(source,);
+      if (variant.maxSideSize < image.pixelWidth) {
+        url.searchParams.set('scale-down-to', `${variant.maxSideSize}`,);
+      }
+      srcSet.push(`${url.toString()} ${variant.width}w`,);
+    }
+  }
+  srcSet.push(`${source} ${image.pixelWidth}w`,);
+  return srcSet.join(', ',) || void 0;
+}
+function getFixedSrcSets(source, image, nodeFixedSize,) {
+  if (!image.pixelWidth || !image.pixelHeight) return void 0;
+  if (!(nodeFixedSize == null ? void 0 : nodeFixedSize.width) || !(nodeFixedSize == null ? void 0 : nodeFixedSize.height)) return void 0;
+  const srcSet = [];
+  const imageMaxSide = Math.max(image.pixelWidth, image.pixelHeight,);
+  const scaleRatio = Math.max(nodeFixedSize.width / image.pixelWidth, nodeFixedSize.height / image.pixelHeight,);
+  for (const variant of FixedSizeScaleVariants) {
+    const scaleMaxSideSizeTo = Math.round(imageMaxSide * variant * scaleRatio,);
+    const url = new URL(source,);
+    if (scaleMaxSideSizeTo < imageMaxSide) {
+      url.searchParams.set('scale-down-to', `${scaleMaxSideSizeTo}`,);
+    }
+    srcSet.push({
+      src: url.toString(),
+      scale: variant,
+    },);
+  }
+  return srcSet;
+}
+function getSrcSet(nodeFixedSize, image, source,) {
+  if (!['auto', 'lossless',].includes(image.preferredSize ?? '',)) {
+    return {
+      src: source,
+      srcSet: void 0,
+    };
+  }
+  if (nodeFixedSize) {
+    const fixedSrcSets = getFixedSrcSets(source, image, nodeFixedSize,);
+    if (!(fixedSrcSets == null ? void 0 : fixedSrcSets.length)) {
+      return {
+        src: source,
+        srcSet: void 0,
+      };
+    }
+    const [x1, ...rest] = fixedSrcSets;
+    return {
+      src: x1 == null ? void 0 : x1.src,
+      srcSet: rest.map(({
+        src,
+        scale: scale2,
+      },) => `${src} ${scale2}x`).join(', ',),
+    };
+  } else {
+    const variants = getVariantsDimensions(image.pixelWidth, image.pixelHeight,);
+    return {
+      src: source,
+      srcSet: getResponsiveSrcSet(source, image, variants,),
+    };
+  }
+}
 var wrapperStyle = {
   position: 'absolute',
   borderRadius: 'inherit',
@@ -25241,71 +25398,6 @@ function useDecodingAttribute(avoidAsyncDecoding,) {
     onImageLoad,
     onImageMount,
   };
-}
-var MinVariantSizeForSourceSet = 512;
-function getResponsiveSrcSet(source, image, variants,) {
-  if (!variants || variants.length === 0) return void 0;
-  if (!image.pixelWidth) return void 0;
-  const srcSet = [];
-  for (const variant of variants) {
-    if (variant.width >= MinVariantSizeForSourceSet) {
-      const url2 = new URL(source,);
-      url2.searchParams.set('scale-down-to', `${variant.maxSideSize}`,);
-      srcSet.push(`${url2.toString()} ${variant.width}w`,);
-    }
-  }
-  const url = new URL(source,);
-  url.searchParams.set('scale-down-to', `${image.pixelWidth}`,);
-  srcSet.push(`${url.toString()} ${image.pixelWidth}w`,);
-  return srcSet.join(', ',) || void 0;
-}
-function getFixedSrcSets(source, image, nodeFixedSize,) {
-  if (!image.pixelWidth || !image.pixelHeight) return void 0;
-  if (!(nodeFixedSize == null ? void 0 : nodeFixedSize.width) || !(nodeFixedSize == null ? void 0 : nodeFixedSize.height)) return void 0;
-  const srcSet = [];
-  const largestDimension = image.pixelWidth > image.pixelHeight ? 'width' : 'height';
-  for (const variant of FixedSizeScaleVariants) {
-    const imageTagSize = largestDimension === 'width' ? nodeFixedSize.width : nodeFixedSize.height;
-    const maxSideSize = Math.round(imageTagSize * variant,);
-    const url = new URL(source,);
-    url.searchParams.set('scale-down-to', `${maxSideSize}`,);
-    srcSet.push({
-      src: url.toString(),
-      scale: variant,
-    },);
-  }
-  return srcSet;
-}
-function getSrcSet(nodeFixedSize, image, source,) {
-  if (!['auto', 'lossless',].includes(image.preferredSize ?? '',)) {
-    return {
-      src: source,
-      srcSet: void 0,
-    };
-  }
-  if (nodeFixedSize) {
-    const fixedSrcSets = getFixedSrcSets(source, image, nodeFixedSize,);
-    if (!(fixedSrcSets == null ? void 0 : fixedSrcSets.length)) {
-      return {
-        src: source,
-        srcSet: void 0,
-      };
-    }
-    const [x1, ...rest] = fixedSrcSets;
-    return {
-      src: x1 == null ? void 0 : x1.src,
-      srcSet: rest.map(({
-        src,
-        scale: scale2,
-      },) => `${src} ${scale2}x`).join(', ',),
-    };
-  } else {
-    const variants = getVariantsDimensions(image.pixelWidth, image.pixelHeight,);
-    return {
-      src: source,
-      srcSet: getResponsiveSrcSet(source, image, variants,),
-    };
-  }
 }
 function StaticImage({
   image,
@@ -25400,9 +25492,6 @@ function BackgroundImageComponent({
   image,
   ...props
 },) {
-  const {
-    motionDivToDivBackgroundImage,
-  } = useLibraryFeatures();
   if (layoutId) {
     layoutId += '-background';
   }
@@ -25454,7 +25543,7 @@ function BackgroundImageComponent({
     ...wrapperStyle,
     ...getPlaceholderStyle(),
   };
-  return needsMotion || !motionDivToDivBackgroundImage
+  return needsMotion
     ? /* @__PURE__ */ jsx(motion.div, {
       layoutId,
       style: style2,
@@ -26943,24 +27032,6 @@ function MagicMotionCrossfadeRoot(props,) {
     style: rootStyles,
     children: props.children,
   },);
-}
-function useMemoOne(factory, inputs,) {
-  const initial = useState(() => ({
-    inputs,
-    result: factory(),
-  }))[0];
-  const isFirstRun = useRef(true,);
-  const committed = useRef(initial,);
-  const useCache = isFirstRun.current || Boolean(inputs && committed.current.inputs && isEqual(inputs, committed.current.inputs, false,),);
-  const cache2 = useCache ? committed.current : {
-    inputs,
-    result: factory(),
-  };
-  useEffect(() => {
-    isFirstRun.current = false;
-    committed.current = cache2;
-  }, [cache2,],);
-  return cache2.result;
 }
 function setRef2(ref, value,) {
   if (isFunction(ref,)) {
@@ -37200,6 +37271,13 @@ var GracefullyDegradingErrorBoundary = class extends Component2 {
     );
   }
 };
+var LibraryFeaturesContext = /* @__PURE__ */ React42.createContext(void 0,);
+LibraryFeaturesContext.displayName = 'LibraryFeaturesContext';
+var LibraryFeaturesProvider = /* @__PURE__ */ (() => LibraryFeaturesContext.Provider)();
+var useLibraryFeatures = () => {
+  const context = React42.useContext(LibraryFeaturesContext,);
+  return context ?? {};
+};
 function findAnchorElement(target, withinElement,) {
   if (target instanceof HTMLAnchorElement) {
     return target;
@@ -38880,46 +38958,48 @@ function Router({
     api,
     children: /* @__PURE__ */ jsx(LocaleInfoContext.Provider, {
       value: localeInfo,
-      children: /* @__PURE__ */ jsxs(LayoutDirectionContext.Provider, {
+      children: /* @__PURE__ */ jsx(LayoutDirectionContext.Provider, {
         value: layoutDirection,
-        children: [
-          EditorBar && /* @__PURE__ */ jsx(EditorBarLauncher, {
-            EditorBar,
-            fast: true,
-          },),
-          /* @__PURE__ */ jsx(SynchronousSuspenseErrorBoundary, {
-            children: /* @__PURE__ */ jsxs(SuspenseThatPreservesDom, {
-              children: [
-                /* @__PURE__ */ jsxs(NotFoundErrorBoundary, {
-                  notFoundPage,
-                  defaultPageStyle,
-                  forceUpdateKey: dep,
-                  children: [
-                    /* @__PURE__ */ jsx(MarkSuspenseEffects.Start, {},),
-                    /* @__PURE__ */ jsx(WithLayoutTemplate, {
-                      LayoutTemplate,
-                      webPageId: (currentRoute == null ? void 0 : currentRoute.abTestingVariantId) ?? currentRouteId,
-                      style: defaultPageStyle,
-                      children: (inLayoutTemplate) => {
-                        return /* @__PURE__ */ jsx(Fragment, {
-                          children: pageExistsInCurrentLocale
-                            ? renderPage(currentRoute.page, inLayoutTemplate ? templatePageStyle : defaultPageStyle,)
-                            : // LAYOUT_TEMPLATE @TODO: display: content for not found page?
-                            notFoundPage && renderPage(notFoundPage, defaultPageStyle,),
-                        }, remountKey,);
-                      },
-                    },),
-                  ],
-                },),
-                EditorBar && /* @__PURE__ */ jsx(EditorBarLauncher, {
-                  EditorBar,
-                },),
-                /* @__PURE__ */ jsx(TurnOnReactEventHandling, {},),
-                /* @__PURE__ */ jsx(MarkSuspenseEffects.End, {},),
-              ],
+        children: /* @__PURE__ */ jsxs(URLSearchParamsProvider, {
+          children: [
+            EditorBar && /* @__PURE__ */ jsx(EditorBarLauncher, {
+              EditorBar,
+              fast: true,
             },),
-          },),
-        ],
+            /* @__PURE__ */ jsx(SynchronousSuspenseErrorBoundary, {
+              children: /* @__PURE__ */ jsxs(SuspenseThatPreservesDom, {
+                children: [
+                  /* @__PURE__ */ jsxs(NotFoundErrorBoundary, {
+                    notFoundPage,
+                    defaultPageStyle,
+                    forceUpdateKey: dep,
+                    children: [
+                      /* @__PURE__ */ jsx(MarkSuspenseEffects.Start, {},),
+                      /* @__PURE__ */ jsx(WithLayoutTemplate, {
+                        LayoutTemplate,
+                        webPageId: (currentRoute == null ? void 0 : currentRoute.abTestingVariantId) ?? currentRouteId,
+                        style: defaultPageStyle,
+                        children: (inLayoutTemplate) => {
+                          return /* @__PURE__ */ jsx(Fragment, {
+                            children: pageExistsInCurrentLocale
+                              ? renderPage(currentRoute.page, inLayoutTemplate ? templatePageStyle : defaultPageStyle,)
+                              : // LAYOUT_TEMPLATE @TODO: display: content for not found page?
+                              notFoundPage && renderPage(notFoundPage, defaultPageStyle,),
+                          }, remountKey,);
+                        },
+                      },),
+                    ],
+                  },),
+                  EditorBar && /* @__PURE__ */ jsx(EditorBarLauncher, {
+                    EditorBar,
+                  },),
+                  /* @__PURE__ */ jsx(TurnOnReactEventHandling, {},),
+                  /* @__PURE__ */ jsx(MarkSuspenseEffects.End, {},),
+                ],
+              },),
+            },),
+          ],
+        },),
       },),
     },),
   },);
@@ -45286,7 +45366,6 @@ function useVariantState({
   const isCanvas = useIsOnFramerCanvas();
   const validBaseVariants = useConstant2(() => new Set(externalCycleOrder,));
   const {
-    pauseOffscreen: pauseOffscreenFeatureOn,
     yieldOnTap: yieldOnTapFeatureOn,
   } = useLibraryFeatures();
   useWaitForGlobalClick(yieldOnTapFeatureOn,);
@@ -45360,9 +45439,9 @@ function useVariantState({
         startTransition2(forceUpdate,);
         return;
       }
-      runUpdateIfVisible(() => startTransition2(forceUpdate,), pauseOffscreenFeatureOn && checkViewport,);
+      runUpdateIfVisible(() => startTransition2(forceUpdate,), checkViewport,);
     },
-    [resolveNextVariant, forceUpdate, runUpdateIfVisible, pauseOffscreenFeatureOn, yieldOnTapFeatureOn,],
+    [resolveNextVariant, forceUpdate, runUpdateIfVisible, yieldOnTapFeatureOn,],
   );
   const setGestureState = useCallback2(({
     isHovered: isHovered2,
@@ -48299,7 +48378,7 @@ function getAssetOwnerType(asset,) {
 async function loadFontsWithOpenType(source,) {
   switch (source) {
     case 'google': {
-      const supportedFonts = await import('./framer-chunks/google-UPWYMW24-OUQWIMPK.js');
+      const supportedFonts = await import('./framer-chunks/google-EG6NI4GX-GJW4JE5M.js');
       return supportedFonts == null ? void 0 : supportedFonts.default;
     }
     case 'fontshare': {
@@ -48313,7 +48392,7 @@ async function loadFontsWithOpenType(source,) {
 async function loadFontToOpenTypeFeatures(source,) {
   switch (source) {
     case 'google': {
-      const features = await import('./framer-chunks/google-UXOX5SHT-L6YCUBAJ.js');
+      const features = await import('./framer-chunks/google-3CBHXOZP-WWKSUDZN.js');
       return features == null ? void 0 : features.default;
     }
     case 'fontshare': {
@@ -48866,7 +48945,7 @@ function loadVariationAxes(source,) {
       const axes = (async () => {
         switch (source) {
           case 'google': {
-            return (await import('./framer-chunks/google-WAJV2XMM-5FI2Q7LQ.js')).default;
+            return (await import('./framer-chunks/google-IKKKVJ3J-3SWD2RIY.js')).default;
           }
           case 'fontshare': {
             return (await import('./framer-chunks/fontshare-IXII5VYB-I6S3ZY5U.js')).default;
@@ -54688,6 +54767,7 @@ export {
   useScroll,
   useSiteRefs,
   useSpring,
+  useStringQueryParameter,
   useSVGTemplate,
   useTime,
   useTracking,
