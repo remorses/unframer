@@ -11424,7 +11424,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.KB6PVM3Q.mjs
+// /:https://app.framerstatic.com/framer.SBH3UIZ4.mjs
 
 import React42 from 'react';
 import { useDeferredValue, useSyncExternalStore, } from 'react';
@@ -49093,9 +49093,7 @@ var FontStore = class {
     for (const font of importedFonts) {
       this.addFont(font,);
     }
-    if (importedFonts.length > 0) {
-      this.resolveCustomFontsImportPromise();
-    }
+    this.resolveCustomFontsImportPromise();
   }
   /**
    * Returns a promise that resolves when custom fonts have been imported
