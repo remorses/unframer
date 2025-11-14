@@ -11424,7 +11424,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.SBH3UIZ4.mjs
+// /:https://app.framerstatic.com/framer.JE2EWGBQ.mjs
 
 import React42 from 'react';
 import { useDeferredValue, useSyncExternalStore, } from 'react';
@@ -15898,6 +15898,13 @@ var endOfHeadStartMarker = '<!-- End of headStart -->';
 var endOfHeadEndMarker = '<!-- End of headEnd -->';
 var endOfBodyStartMarker = '<!-- End of bodyStart -->';
 var endOfBodyEndMarker = '<!-- End of bodyEnd -->';
+var LibraryFeaturesContext = /* @__PURE__ */ React42.createContext(void 0,);
+LibraryFeaturesContext.displayName = 'LibraryFeaturesContext';
+var LibraryFeaturesProvider = /* @__PURE__ */ (() => LibraryFeaturesContext.Provider)();
+var useLibraryFeatures = () => {
+  const context = React42.useContext(LibraryFeaturesContext,);
+  return context ?? {};
+};
 async function insertHTML(html, referenceNode, position = 'beforeend',) {
   let insertionParent, insertionPoint;
   switch (position) {
@@ -15970,6 +15977,9 @@ function useMetadata(metadata,) {
   const {
     isInitialNavigation,
   } = useRouter();
+  const {
+    customCodeSiteSettings,
+  } = useLibraryFeatures();
   React.useEffect(() => {
     if (metadata.robots) {
       let robotsTag = document.querySelector('meta[name="robots"]',);
@@ -15992,6 +16002,7 @@ function useMetadata(metadata,) {
   }, [metadata.title, metadata.viewport,],);
   React.useEffect(() => {
     if (!isInitialNavigation) return;
+    if (customCodeSiteSettings) return;
     const mainTag = document.getElementById(mainTagId,);
     const isGeneratedPage = mainTag && mainTag.dataset[generatedPageDatasetKey] !== void 0;
     if (isGeneratedPage) return;
@@ -25431,7 +25442,7 @@ function StaticImage({
       loading: image.loading,
       width: image.pixelWidth,
       height: image.pixelHeight,
-      sizes: image.sizes,
+      sizes: srcSet ? image.sizes : void 0,
       srcSet,
       src,
       onLoad: onImageLoad,
@@ -37271,13 +37282,6 @@ var GracefullyDegradingErrorBoundary = class extends Component2 {
     );
   }
 };
-var LibraryFeaturesContext = /* @__PURE__ */ React42.createContext(void 0,);
-LibraryFeaturesContext.displayName = 'LibraryFeaturesContext';
-var LibraryFeaturesProvider = /* @__PURE__ */ (() => LibraryFeaturesContext.Provider)();
-var useLibraryFeatures = () => {
-  const context = React42.useContext(LibraryFeaturesContext,);
-  return context ?? {};
-};
 function findAnchorElement(target, withinElement,) {
   if (target instanceof HTMLAnchorElement) {
     return target;
@@ -45145,8 +45149,8 @@ function useLoadMorePagination(totalSize, pageSize, hash2, paginateWithSuspended
       continueAfter: 'paint',
     },);
     if (currentPageRef.current >= totalPages) return;
-    const renderNextPage = (startTransition15) => {
-      startTransition15(() => {
+    const renderNextPage = (startTransition16) => {
+      startTransition16(() => {
         setCurrentPage((_currentPage) => {
           const nextPage = Math.min(_currentPage + 1, totalPages,);
           currentPageRef.current = nextPage;
@@ -46622,11 +46626,12 @@ var BasicTicker = /* @__PURE__ */ forwardRef(function BasicTicker2(props, ref,) 
     hoverModifier,
     gap,
     overflow,
+    playState,
     ...rest
   } = props;
   const Component18 = asProp ?? motion.div;
   const isStatic = useIsStaticRenderer();
-  const baseVelocity = tickerEffectVelocity ?? 100;
+  const baseVelocity = playState === 'paused' ? 0 : tickerEffectVelocity ?? 100;
   const velocity = baseVelocity * directionModifier;
   return /* @__PURE__ */ jsx(Ticker, {
     ref,
@@ -46653,12 +46658,13 @@ var DraggableTicker = /* @__PURE__ */ forwardRef(function DraggableTicker2(props
     hoverModifier,
     gap,
     overflow,
+    playState,
     ...rest
   } = props;
   const Component18 = asProp ?? motion.div;
   const layoutDirection = useLayoutDirection();
   const layoutDirectionModifier = layoutDirection === 'rtl' && axis === 'x' ? -1 : 1;
-  const baseVelocity = tickerEffectVelocity ?? 100;
+  const baseVelocity = playState === 'paused' ? 0 : tickerEffectVelocity ?? 100;
   const targetVelocity = baseVelocity * directionModifier * layoutDirectionModifier;
   const offsetMotionValue = useMotionValue(0,);
   const lastDrag = useRef(0,);
@@ -46677,6 +46683,11 @@ var DraggableTicker = /* @__PURE__ */ forwardRef(function DraggableTicker2(props
       offsetMotionValue.set(updated,);
     }
   },);
+  useEffect(() => {
+    if (playState === 'paused') {
+      offsetMotionValue.stop();
+    }
+  }, [playState, offsetMotionValue,],);
   return /* @__PURE__ */ jsx(Ticker, {
     ref,
     as: Component18,
@@ -46703,6 +46714,24 @@ var DraggableTicker = /* @__PURE__ */ forwardRef(function DraggableTicker2(props
     },
   },);
 },);
+var TickerContext2 = /* @__PURE__ */ (() => {
+  const Context2 = createContext(void 0,);
+  Context2.displayName = 'TickerContext';
+  return Context2;
+})();
+var TickerContextProvider = ({
+  onPlayStateChange,
+  children,
+},) => {
+  const value = useMemo(() => ({
+    start: () => startTransition2(() => onPlayStateChange('running',)),
+    stop: () => startTransition2(() => onPlayStateChange('paused',)),
+  }), [onPlayStateChange,],);
+  return /* @__PURE__ */ jsx(TickerContext2.Provider, {
+    value,
+    children,
+  },);
+};
 var Ticker2 = /* @__PURE__ */ forwardRef(function Ticker3(props, ref,) {
   const {
     children,
@@ -46720,6 +46749,7 @@ var Ticker2 = /* @__PURE__ */ forwardRef(function Ticker3(props, ref,) {
     ...rest
   } = props;
   const isStatic = useIsStaticRenderer();
+  const [playState, setPlayState,] = useState('running',);
   const axis = (tickerEffectStackDirection == null ? void 0 : tickerEffectStackDirection.startsWith('column',)) ? 'y' : 'x';
   const directionModifier = tickerEffectDirectionModifier === 'reverse' ? -1 : 1;
   const hoverModifier = isFiniteNumber(tickerEffectHoverModifier,) ? tickerEffectHoverModifier / 100 : 1;
@@ -46737,7 +46767,25 @@ var Ticker2 = /* @__PURE__ */ forwardRef(function Ticker3(props, ref,) {
     position: tickerEffectPosition,
   };
   if (isStatic || !tickerEffectDraggable) {
-    return /* @__PURE__ */ jsx(BasicTicker, {
+    return /* @__PURE__ */ jsx(TickerContextProvider, {
+      onPlayStateChange: setPlayState,
+      children: /* @__PURE__ */ jsx(BasicTicker, {
+        ...rest,
+        style: tickerStyle,
+        ref,
+        axis,
+        gap,
+        overflow,
+        directionModifier,
+        hoverModifier,
+        items,
+        playState,
+      },),
+    },);
+  }
+  return /* @__PURE__ */ jsx(TickerContextProvider, {
+    onPlayStateChange: setPlayState,
+    children: /* @__PURE__ */ jsx(DraggableTicker, {
       ...rest,
       style: tickerStyle,
       ref,
@@ -46747,18 +46795,8 @@ var Ticker2 = /* @__PURE__ */ forwardRef(function Ticker3(props, ref,) {
       directionModifier,
       hoverModifier,
       items,
-    },);
-  }
-  return /* @__PURE__ */ jsx(DraggableTicker, {
-    ...rest,
-    style: tickerStyle,
-    ref,
-    axis,
-    gap,
-    overflow,
-    directionModifier,
-    hoverModifier,
-    items,
+      playState,
+    },),
   },);
 },);
 function getGap(gap, axis,) {
@@ -50196,6 +50234,8 @@ function withLightboxEffect(Component18,) {
     ...props
   }, forwardedRef,) {
     const config = useContext(MotionConfigContext,);
+    const ancestorTickerContext = useContext(TickerContext2,);
+    const isInTickerItem = Boolean(ancestorTickerContext,);
     const fallbackRef = useRef(null,);
     const ref = forwardedRef ?? fallbackRef;
     const decodePromiseRef = useRef();
@@ -50217,7 +50257,7 @@ function withLightboxEffect(Component18,) {
         const borderStyle2 = hasBorder ? getComputedStyle(ref.current, '::after',) : void 0;
         const width = ref.current.offsetWidth ?? 1;
         const height = ref.current.offsetHeight ?? 1;
-        const transition2 = isDistorted(ref,)
+        const transition2 = isDistorted(ref,) || isInTickerItem
           ? {
             duration: 0,
           }
@@ -50237,9 +50277,10 @@ function withLightboxEffect(Component18,) {
             filter: style22.filter,
           },);
           setOpen(true,);
+          ancestorTickerContext == null ? void 0 : ancestorTickerContext.stop();
         },);
       },);
-    }, [lightbox, open, ref,],);
+    }, [lightbox, open, ref, ancestorTickerContext == null ? void 0 : ancestorTickerContext.stop, isInTickerItem,],);
     const aspectRatio2 = (openOverrides == null ? void 0 : openOverrides.aspectRatio) ?? 1;
     const decode = useStableCallback(() => {
       var _a;
@@ -50332,18 +50373,25 @@ function withLightboxEffect(Component18,) {
       }
       : props.style;
     const layoutDependency = open ? props.layoutDependency ? `${props.layoutDependency}-open` : 'open' : props.layoutDependency;
+    const layoutId = isInTickerItem ? void 0 : props.layoutId ?? (lightbox ? fallbackLayoutId : void 0);
     return /* @__PURE__ */ jsxs(Fragment, {
       children: [
         /* @__PURE__ */ jsx(Component18, {
           ...props,
           style: style2,
           onClick: handleClick,
-          layoutId: props.layoutId ?? (lightbox ? fallbackLayoutId : void 0),
+          layoutId,
           ref,
           layoutDependency,
           transition,
         },),
         /* @__PURE__ */ jsx(AnimatePresence, {
+          onExitComplete: () => {
+            startTransition2(() => {
+              setOpenOverrides(void 0,);
+              ancestorTickerContext == null ? void 0 : ancestorTickerContext.start();
+            },);
+          },
           children: open && lightbox && image && /* @__PURE__ */ jsx(Fragment, {
             children: createPortal(
               /* @__PURE__ */ jsxs(Fragment, {
@@ -50362,13 +50410,8 @@ function withLightboxEffect(Component18,) {
                     initial: enterExitBackdropAnimation,
                     animate: targetBackdropAnimation,
                     exit: enterExitBackdropAnimation,
-                    onTransitionEnd: () => {
-                      startTransition2(() => {
-                        setOpenOverrides(void 0,);
-                      },);
-                    },
                   },),
-                  /* @__PURE__ */ jsx('div', {
+                  /* @__PURE__ */ jsx(motion.div, {
                     ...portalProps,
                     className: lightboxClassName,
                     style: {
@@ -50392,7 +50435,7 @@ function withLightboxEffect(Component18,) {
                         maxWidth: lightbox.maxWidth,
                       },
                       children: /* @__PURE__ */ jsx(motion.div, {
-                        layoutId: props.layoutId ?? fallbackLayoutId,
+                        layoutId,
                         transition,
                         onClick: onOpen,
                         className: 'framer-lightbox-container',
