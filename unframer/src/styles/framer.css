@@ -705,20 +705,21 @@ body { --framer-will-change-filter-override: none; }
         }
     
 
-        .framer-text-module[style*="aspect-ratio"] > :first-child {
+        .framer-text-module[data-width="fill"] > :first-child,
+        .framer-text-module:not([data-width="fit"])[style*="aspect-ratio"] > :first-child {
             width: 100%;
         }
     
 
         @supports not (aspect-ratio: 1) {
-            .framer-text-module[style*="aspect-ratio"] {
+            .framer-text-module:not([data-width="fit"])[style*="aspect-ratio"] {
                 position: relative;
             }
         }
     
 
         @supports not (aspect-ratio: 1) {
-            .framer-text-module[style*="aspect-ratio"]::before {
+            .framer-text-module:not([data-width="fit"])[style*="aspect-ratio"]::before {
                 content: "";
                 display: block;
                 padding-bottom: calc(100% / calc(var(--aspect-ratio)));
@@ -727,7 +728,8 @@ body { --framer-will-change-filter-override: none; }
     
 
         @supports not (aspect-ratio: 1) {
-            .framer-text-module[style*="aspect-ratio"] > :first-child {
+            .framer-text-module[data-width="fill"] > :first-child,
+            .framer-text-module:not([data-width="fit"])[style*="aspect-ratio"] > :first-child {
                 position: absolute;
                 top: 0;
                 left: 0;

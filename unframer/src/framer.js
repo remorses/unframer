@@ -11424,7 +11424,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.JE2EWGBQ.mjs
+// /:https://app.framerstatic.com/framer.H3UANILA.mjs
 
 import React42 from 'react';
 import { useDeferredValue, useSyncExternalStore, } from 'react';
@@ -13872,7 +13872,7 @@ function normalizeString(path,) {
   }
   return res;
 }
-var customNotFoundPagePaths = /* @__PURE__ */ new Set(['/404.html', '/404', '/404/',],);
+var customNotFoundPagePaths = /* @__PURE__ */ new Set([`/404.html`, `/404`, `/404/`,],);
 var pathVariablesRegExpRaw = ':([a-z]\\w*)';
 var pathVariablesRegExp = /* @__PURE__ */ new RegExp(pathVariablesRegExpRaw, 'gi',);
 function fillPathVariables(path, variables,) {
@@ -22302,20 +22302,21 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
         }
     `, /* css */
   `
-        .framer-text-module[style*="aspect-ratio"] > :first-child {
+        .framer-text-module[data-width="fill"] > :first-child,
+        .framer-text-module:not([data-width="fit"])[style*="aspect-ratio"] > :first-child {
             width: 100%;
         }
     `, /* css */
   `
         @supports not (aspect-ratio: 1) {
-            .framer-text-module[style*="aspect-ratio"] {
+            .framer-text-module:not([data-width="fit"])[style*="aspect-ratio"] {
                 position: relative;
             }
         }
     `, /* css */
   `
         @supports not (aspect-ratio: 1) {
-            .framer-text-module[style*="aspect-ratio"]::before {
+            .framer-text-module:not([data-width="fit"])[style*="aspect-ratio"]::before {
                 content: "";
                 display: block;
                 padding-bottom: calc(100% / calc(var(--aspect-ratio)));
@@ -22324,7 +22325,8 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
     `, /* css */
   `
         @supports not (aspect-ratio: 1) {
-            .framer-text-module[style*="aspect-ratio"] > :first-child {
+            .framer-text-module[data-width="fill"] > :first-child,
+            .framer-text-module:not([data-width="fit"])[style*="aspect-ratio"] > :first-child {
                 position: absolute;
                 top: 0;
                 left: 0;
@@ -44927,6 +44929,7 @@ function setOverflow(blockDocumentScrolling, show,) {
 }
 function useOverlayState({
   blockDocumentScrolling = true,
+  dismissWithEsc = false,
 } = {},) {
   const [showOverlay, setShowOverlay,] = React42.useState(false,);
   const callback = React42.useCallback(async (show) => {
@@ -44945,6 +44948,17 @@ function useOverlayState({
       setOverflow(blockDocumentScrolling, false,);
     },);
   }, [blockDocumentScrolling,],);
+  React42.useEffect(() => {
+    if (!dismissWithEsc) return;
+    const handleEscapeKeyDown = (event) => {
+      if (event.key !== 'Escape') return;
+      event.preventDefault();
+      event.stopPropagation();
+      void callback(false,);
+    };
+    safeWindow.addEventListener('keydown', handleEscapeKeyDown,);
+    return () => safeWindow.removeEventListener('keydown', handleEscapeKeyDown,);
+  }, [dismissWithEsc, callback,],);
   return [showOverlay, callback,];
 }
 var key4 = 'page';
@@ -48411,7 +48425,7 @@ function updateFontRelationships(fontFamily,) {
   }
 }
 function getAssetOwnerType(asset,) {
-  return asset.ownerType === 'team' ? 'team' : 'project';
+  return asset.ownerTypes.includes('team',) ? 'team' : 'project';
 }
 async function loadFontsWithOpenType(source,) {
   switch (source) {
@@ -50523,6 +50537,87 @@ var Component16 = /* @__PURE__ */ React42.forwardRef(function Image2(props, ref,
   },);
 },);
 var Image3 = /* @__PURE__ */ withLightboxEffect(Component16,);
+var ColumnMasonryLayout = /* @__PURE__ */ React42.memo(function ColumnMasonryLayout2({
+  trackCount,
+  rowGap,
+  parentIsDataRepeater = false,
+  columnMasonryLayoutEnabled,
+  children,
+},) {
+  if (!columnMasonryLayoutEnabled) return children;
+  const normalizedChildren = prepareChildrenArrayForMasonry(children, parentIsDataRepeater,);
+  const tracks = groupChildrenIntoTracks(trackCount, normalizedChildren,);
+  const wrapperStyle2 = getMasonryColumnStyle(rowGap,);
+  return tracks.map((trackChildren, i,) =>
+    /* @__PURE__ */ jsx('div', {
+      style: wrapperStyle2,
+      children: trackChildren,
+    }, getMasonryColumnKey(i,),)
+  );
+},);
+function prepareChildrenArrayForMasonry(children, parentIsDataRepeater,) {
+  const array = React42.Children.toArray(children,);
+  if (!parentIsDataRepeater) return array;
+  return array.flatMap((child) =>
+    React42.isValidElement(child,) && child.type === React42.Fragment ? React42.Children.toArray(child.props.children,) : child
+  );
+}
+function groupChildrenIntoTracks(trackCount, children,) {
+  const tracks = Array.from({
+    length: trackCount,
+  }, () => [],);
+  children.forEach((child, idx,) => {
+    var _a;
+    const track = pickMasonryTrack(trackCount, idx,);
+    (_a = tracks[track]) == null ? void 0 : _a.push(child,);
+  },);
+  return tracks;
+}
+function getMasonryColumnStyle(rowGap,) {
+  return {
+    display: 'flex',
+    flexDirection: 'column',
+    rowGap,
+    width: '100%',
+  };
+}
+function getMasonryColumnKey(i,) {
+  return `masonry-stack-${i}`;
+}
+function pickMasonryTrack(trackCount, childIndex,) {
+  if (trackCount <= 0) return 0;
+  return childIndex % trackCount;
+}
+var withColumnMasonryLayout = (Component18) => {
+  return forwardRef(function MasonryLayout({
+    columnMasonryLayoutEnabled,
+    trackCount = 1,
+    rowGap,
+    parentIsDataRepeater,
+    children,
+    style: existingStyle,
+    ...rest
+  }, ref,) {
+    const mergedStyle = columnMasonryLayoutEnabled
+      ? {
+        ...existingStyle,
+        gridTemplateColumns: `repeat(${trackCount}, 1fr)`,
+      }
+      : existingStyle;
+    return /* @__PURE__ */ jsx(Component18, {
+      ref,
+      style: mergedStyle,
+      ...rest,
+      children: /* @__PURE__ */ jsx(ColumnMasonryLayout, {
+        trackCount,
+        rowGap,
+        parentIsDataRepeater,
+        columnMasonryLayoutEnabled,
+        children,
+      },),
+    },);
+  },);
+};
 var formatters = /* @__PURE__ */ new Map();
 function getRelativeTimeFormat(style2, numeric, locale,) {
   const options = {
@@ -54835,6 +54930,7 @@ export {
   WillChangeMotionValue,
   WindowContext,
   withCodeBoundaryForOverrides,
+  withColumnMasonryLayout,
   withCSS,
   withFX,
   withGeneratedLayoutId,
