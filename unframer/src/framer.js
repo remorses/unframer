@@ -11424,7 +11424,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.H3UANILA.mjs
+// /:https://app.framerstatic.com/framer.HRECQKPP.mjs
 
 import React42 from 'react';
 import { useDeferredValue, useSyncExternalStore, } from 'react';
@@ -46445,6 +46445,7 @@ function ListView({
     _dragX,
     _dragY,
     dragMomentum = false,
+    onDragStart,
     onDragEnd,
     onPointerDown,
     ...remainingProps
@@ -46577,6 +46578,7 @@ function ListView({
           dragConstraints,
           dragMomentum,
           onPointerDown,
+          onDragStart,
           onDragEnd,
           children: [
             items.map((item, index,) =>
@@ -46684,6 +46686,14 @@ var DraggableTicker = /* @__PURE__ */ forwardRef(function DraggableTicker2(props
   const lastDrag = useRef(0,);
   const dragMomentum = useRef(false,);
   const isHovering = useRef(false,);
+  const isDragging2 = useRef(false,);
+  const handleClickCapture = (event) => {
+    if (!isDragging2.current) return;
+    if (event.target && event.target !== event.currentTarget) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  };
   useAnimationFrame((_, delta,) => {
     const velocity = Math.abs(offsetMotionValue.getVelocity(),);
     const currentTargetVelocity = isHovering.current ? targetVelocity * hoverModifier : targetVelocity;
@@ -46716,9 +46726,16 @@ var DraggableTicker = /* @__PURE__ */ forwardRef(function DraggableTicker2(props
     offset: offsetMotionValue,
     drag: axis,
     dragMomentum: true,
+    onClickCapture: handleClickCapture,
+    onDragStart: () => {
+      isDragging2.current = true;
+    },
     onDragEnd: () => {
       lastDrag.current = performance.now();
       dragMomentum.current = true;
+      setTimeout(() => {
+        isDragging2.current = false;
+      }, 5,);
     },
     onMouseEnter: () => {
       isHovering.current = true;
@@ -50526,6 +50543,7 @@ var Component16 = /* @__PURE__ */ React42.forwardRef(function Image2(props, ref,
     ...rest,
     style: style2,
     ref,
+    draggable,
     children: [
       background && /* @__PURE__ */ jsx(BackgroundImageComponent, {
         image: background,
