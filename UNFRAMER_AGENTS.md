@@ -12,6 +12,13 @@ Before working on the user task read relevant files inside unframer folder to se
 
 Running validation of changes
 
-- run `pnpm build` from repo root to start compiling the project and watch for changes
-- run `pnpm --filter nextjs-app framer-simplicity` to generate the code using unframer inside nextjs-app/src/framer-simplicity. this is a complex and rich project you can use to see what unframer generates and validate fixes or issues.
-- you can add logs, then try generating again to inspect data and fields of objects managed by Unframer cli and fix issues.
+- run `pnpm build` from repo root to start compiling the project (unframer npm package). this script needs to be called every time you change code in unframer/src before testing
+- run `pnpm --filter nextjs-app framer-simplicity` to generate the code from Framer using `unframer` tool, code will be put inside nextjs-app/src/framer-simplicity. this is a complex and rich project you can use to see what unframer generates and validate fixes or issues.
+- you can also add logs inside unframer/src, then try generating again to inspect data and fields of objects managed by Unframer cli and fix issues.
+
+
+## fixing issues inside unframer/src/framer.js script
+
+framer.js is a generated script. the script that generates it is inside scripts/download.ts
+
+to run that script you have to run `download-framer:doppler` from root.
