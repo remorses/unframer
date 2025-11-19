@@ -1,7 +1,11 @@
 import dedent from 'string-dedent'
 import { withCSS as withCSSOriginal } from './framer.js'
 import React from 'react'
-import { ComponentFont, ComponentFontV1 } from './framer.js'
+import { ComponentFont } from './framer.js'
+
+interface ComponentFontV1 {
+    family: string
+}
 
 type AnyComponentFont = ComponentFont | ComponentFontV1
 

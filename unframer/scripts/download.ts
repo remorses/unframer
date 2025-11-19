@@ -68,7 +68,14 @@ export async function main({ framerTypesUrl }) {
     })
     // logger.log('result', result)
     let types = await fetch(framerTypesUrl).then((x) => x.text())
-    types = types.replace('export * from "framer-motion";', '')
+    types = types
+        .replace('export * from "framer-motion";', '')
+        .replace(
+            'export declare interface ComponentFont extends Omit<ComponentFontV2, "family"> {',
+            'export declare interface ComponentFont extends Omit<ComponentFontV2, "family"> {\n    cssFamilyName?: string;',
+        )
+        .replace('declare interface ComponentFontV1 {', 'export declare interface ComponentFontV1 {')
+
     types += dedent`
     export declare const combinedCSSRules: string[]
 

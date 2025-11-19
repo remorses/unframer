@@ -665,8 +665,7 @@ export declare type ColorRGBA = ColorRGB & {
  * @public
  */
 export declare interface ComponentFont extends Omit<ComponentFontV2, "family"> {
-
-
+    cssFamilyName?: string;
 }
 
 /**
@@ -678,7 +677,7 @@ export declare interface ComponentFont extends Omit<ComponentFontV2, "family"> {
  * While this version of ComponentFont is not used internally, it may still be passed into
  * `addFonts()` by older versions of smart components.
  */
-declare interface ComponentFontV1 {
+export declare interface ComponentFontV1 {
     url: string;
     family: string;
 
