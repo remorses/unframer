@@ -1,5 +1,13 @@
 # unframer
 
+## 3.2.16
+
+### Patch Changes
+
+- Fix build performance and timeouts in CI by excluding large generated files (framer.js and chunks) from TypeScript compilation and copying them manually instead.
+- Remove concurrent execution of build steps to improve stability in resource-constrained environments.
+- Upgrade TypeScript to latest version (5.8.3+).
+
 ## 3.2.15
 
 ### Patch Changes
