@@ -1,4 +1,5 @@
 body { --framer-will-change-override: none; --framer-will-change-effect-override: none; }
+body { --framer-will-change-filter-override: none; }
 [data-framer-component-type] { position: absolute; }
 [data-framer-component-type="Text"] { cursor: inherit; }
 [data-framer-component-text-autosized] * { white-space: pre; }
@@ -342,16 +343,17 @@ body { --framer-will-change-override: none; --framer-will-change-effect-override
         a.framer-text span.framer-text:not([data-text-fill]),
         span.framer-text[data-nested-link],
         span.framer-text[data-nested-link] span.framer-text:not([data-text-fill]) {
+            /* Ensure the color is inherited from the link style rather than the parent text for nested spans */
+            color: inherit;
             font-family: var(--framer-blockquote-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
             font-style: var(--framer-blockquote-font-style, var(--framer-link-font-style, var(--framer-font-style, normal)));
             font-weight: var(--framer-blockquote-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400)));
-            color: var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-text-color, #000)));
             font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-blockquote-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none)));
             /* Cursor inherit to overwrite the user agent stylesheet on rich text links. */
             cursor: var(--framer-custom-cursors, pointer);
             /* Don't inherit background styles from any parent text style. */
-            background-color: var(--framer-link-text-background-color, initial);
+            background-color: initial;
             border-radius: var(--framer-link-text-background-radius, initial);
             padding: var(--framer-link-text-background-padding, initial);
         }
@@ -359,47 +361,55 @@ body { --framer-will-change-override: none; --framer-will-change-effect-override
 
         a.framer-text,
         span.framer-text[data-nested-link] {
+            color: var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-text-color, #000)));
             text-decoration-line: var(--framer-blockquote-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, initial)));
             text-decoration-style: var(--framer-blockquote-text-decoration-style, var(--framer-link-text-decoration-style, var(--framer-text-decoration-style, initial)));
             text-decoration-color: var(--framer-blockquote-text-decoration-color, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color, initial)));
             text-decoration-thickness: var(--framer-blockquote-text-decoration-thickness, var(--framer-link-text-decoration-thickness, var(--framer-text-decoration-thickness, initial)));
             text-decoration-skip-ink: var(--framer-blockquote-text-decoration-skip-ink, var(--framer-link-text-decoration-skip-ink, var(--framer-text-decoration-skip-ink, initial)));
             text-underline-offset: var(--framer-blockquote-text-decoration-offset, var(--framer-link-text-decoration-offset, var(--framer-text-decoration-offset, initial)));
+            /* Don't inherit background styles from any parent text style. */
+            background-color: var(--framer-link-text-background-color, initial);
         }
     
 
         @supports not (color: color(display-p3 1 1 1)) {
             a.framer-text,
-            a.framer-text span.framer-text:not([data-text-fill]),
-            span.framer-text[data-nested-link],
-            span.framer-text[data-nested-link] span.framer-text:not([data-text-fill]) {
+            span.framer-text[data-nested-link] {
                 color: var(--framer-blockquote-text-color-rgb, var(--framer-blockquote-text-color, var(--framer-link-text-color-rgb, var(--framer-link-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))));
                 background-color: var(--framer-link-text-background-color-rgb, var(--framer-link-text-background-color, initial));
+                text-decoration-color: var(--framer-link-text-decoration-color-rgb, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color-rgb, var(--framer-text-decoration-color, currentcolor))));
             }
         }
     
 
+    code.framer-text a.framer-text,
+    code.framer-text a.framer-text span.framer-text:not([data-text-fill]),
+    code.framer-text span.framer-text[data-nested-link],
+    code.framer-text span.framer-text[data-nested-link] span.framer-text:not([data-text-fill]) {
+        font-family: var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
+        font-style: var(--framer-blockquote-font-style, var(--framer-code-font-style, var(--framer-font-style, normal)));
+        font-weight: var(--framer-blockquote-font-weight, var(--framer-code-font-weight, var(--framer-font-weight, 400)));
+        color: inherit;
+        font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
+    }
+
+
+    code.framer-text a.framer-text,
+    code.framer-text span.framer-text[data-nested-link] {
+        color: var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000))));
+    }
+
+
+    @supports not (color: color(display-p3 1 1 1)) {
         code.framer-text a.framer-text,
         code.framer-text a.framer-text span.framer-text:not([data-text-fill]),
         code.framer-text span.framer-text[data-nested-link],
         code.framer-text span.framer-text[data-nested-link] span.framer-text:not([data-text-fill]) {
-            font-family: var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
-            font-style: var(--framer-blockquote-font-style, var(--framer-code-font-style, var(--framer-font-style, normal)));
-            font-weight: var(--framer-blockquote-font-weight, var(--framer-code-font-weight, var(--framer-font-weight, 400)));
-            color: var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000))));
-            font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
+            color: var(--framer-blockquote-text-color-rgb, var(--framer-blockquote-text-color, var(--framer-link-text-color-rgb, var(--framer-link-text-color, var(--framer-code-text-color-rgb, var(--framer-code-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))))));
         }
-    
+    }
 
-        @supports not (color: color(display-p3 1 1 1)) {
-            code.framer-text a.framer-text,
-            code.framer-text a.framer-text span.framer-text:not([data-text-fill]),
-            code.framer-text span.framer-text[data-nested-link],
-            code.framer-text span.framer-text[data-nested-link] span.framer-text:not([data-text-fill]) {
-                color: var(--framer-blockquote-text-color-rgb, var(--framer-blockquote-text-color, var(--framer-link-text-color-rgb, var(--framer-link-text-color, var(--framer-code-text-color-rgb, var(--framer-code-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))))));
-            }
-        }
-    
 
         a.framer-text:hover,
         a.framer-text:hover span.framer-text:not([data-text-fill]),
@@ -408,10 +418,8 @@ body { --framer-will-change-override: none; --framer-will-change-effect-override
             font-family: var(--framer-link-hover-font-family, var(--framer-blockquote-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif))));
             font-style: var(--framer-link-hover-font-style, var(--framer-blockquote-font-style, var(--framer-link-font-style, var(--framer-font-style, normal))));
             font-weight: var(--framer-link-hover-font-weight, var(--framer-blockquote-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400))));
-            color: var(--framer-link-hover-text-color, var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-text-color, #000))));
             font-size: calc(var(--framer-link-hover-font-size, var(--framer-blockquote-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-link-hover-text-transform, var(--framer-blockquote-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none))));
-            background-color: var(--framer-link-hover-text-background-color, var(--framer-link-text-background-color, var(--framer-text-background-color, initial)));
             border-radius: var(--framer-link-hover-text-background-radius, var(--framer-link-text-background-radius, var(--framer-text-background-radius, initial)));
             padding: var(--framer-link-hover-text-background-padding, var(--framer-link-text-background-padding, var(--framer-text-background-padding, initial)));
         }
@@ -419,44 +427,37 @@ body { --framer-will-change-override: none; --framer-will-change-effect-override
 
         a.framer-text:hover,
         span.framer-text[data-nested-link]:hover {
+            color: var(--framer-link-hover-text-color, var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-text-color, #000))));
             text-decoration-line: var(--framer-link-hover-text-decoration, var(--framer-blockquote-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, initial))));
             text-decoration-style: var(--framer-link-hover-text-decoration-style, var(--framer-blockquote-text-decoration-style, var(--framer-link-text-decoration-style, var(--framer-text-decoration-style, initial))));
             text-decoration-color: var(--framer-link-hover-text-decoration-color, var(--framer-blockquote-text-decoration-color, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color, initial))));
             text-decoration-thickness: var(--framer-link-hover-text-decoration-thickness, var(--framer-blockquote-text-decoration-thickness, var(--framer-link-text-decoration-thickness, var(--framer-text-decoration-thickness, initial))));
             text-decoration-skip-ink: var(--framer-link-hover-text-decoration-skip-ink, var(--framer-blockquote-text-decoration-skip-ink, var(--framer-link-text-decoration-skip-ink, var(--framer-text-decoration-skip-ink, initial))));
             text-underline-offset: var(--framer-link-hover-text-decoration-offset, var(--framer-blockquote-text-decoration-offset, var(--framer-link-text-decoration-offset, var(--framer-text-decoration-offset, initial))));
+            background-color: var(--framer-link-hover-text-background-color, var(--framer-link-text-background-color, var(--framer-text-background-color, initial)));
         }
     
 
     @supports not (color: color(display-p3 1 1 1)) {
         a.framer-text:hover,
-        a.framer-text:hover span.framer-text:not([data-text-fill]),
-        span.framer-text[data-nested-link]:hover,
-        span.framer-text[data-nested-link]:hover span.framer-text:not([data-text-fill]) {
+        span.framer-text[data-nested-link]:hover {
             color: var(--framer-link-hover-text-color-rgb, var(--framer-link-hover-text-color, var(--framer-blockquote-text-color-rgb, var(--framer-blockquote-text-color, var(--framer-link-text-color-rgb, var(--framer-link-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))))));
             background-color: var(--framer-link-hover-text-background-color-rgb, var(--framer-link-hover-text-background-color, var(--framer-link-text-background-color-rgb, var(--framer-link-text-background-color, var(--framer-text-background-color-rgb, var(--framer-text-background-color, initial))))));
+            text-decoration-color: var(--framer-link-hover-text-decoration-color-rgb, var(--framer-link-hover-text-decoration-color, var(--framer-link-text-decoration-color-rgb, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color-rgb, var(--framer-text-decoration-color, currentcolor))))));
         }
     }
     
 
         code.framer-text a.framer-text:hover,
-        code.framer-text a.framer-text:hover span.framer-text:not([data-text-fill]),
-        code.framer-text span.framer-text[data-nested-link]:hover,
-        code.framer-text span.framer-text[data-nested-link]:hover span.framer-text:not([data-text-fill]) {
-            font-family: var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
-            font-style: var(--framer-blockquote-font-style, var(--framer-code-font-style, var(--framer-font-style, normal)));
-            font-weight: var(--framer-blockquote-font-weight, var(--framer-code-font-weight, var(--framer-font-weight, 400)));
+        code.framer-text span.framer-text[data-nested-link]:hover {
             color: var(--framer-link-hover-text-color, var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000)))));
-            font-size: calc(var(--framer-link-hover-font-size, var(--framer-blockquote-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)))) * var(--framer-font-size-scale, 1));
         }
     
 
     @supports not (color: color(display-p3 1 1 1)) {
         code.framer-text a.framer-text:hover,
-        code.framer-text a.framer-text:hover span.framer-text:not([data-text-fill]),
-        code.framer-text span.framer-text[data-nested-link]:hover,
-        code.framer-text span.framer-text[data-nested-link]:hover span.framer-text:not([data-text-fill]) {
-            color: var(--framer-link-hover-text-color-rgb, var(--framer-link-hover-text-color, var(--framer-blockquote-text-color-rgb, var(--framer-blockquote-text-color, var(--framer-link-text-color-rgb, var(--framer-link-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))))));
+        code.framer-text span.framer-text[data-nested-link]:hover {
+            color: var(--framer-link-hover-text-color-rgb, var(--framer-link-hover-text-color, var(--framer-blockquote-text-color-rgb, var(--framer-blockquote-text-color, var(--framer-link-text-color-rgb, var(--framer-link-text-color, var(--framer-code-text-color-rgb, var(--framer-code-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))))))));
         }
     }
    
@@ -468,10 +469,8 @@ body { --framer-will-change-override: none; --framer-will-change-effect-override
             font-family: var(--framer-link-current-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
             font-style: var(--framer-link-current-font-style, var(--framer-link-font-style, var(--framer-font-style, normal)));
             font-weight: var(--framer-link-current-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400)));
-            color: var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-text-color, #000)));
             font-size: calc(var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-link-current-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none)));
-            background-color: var(--framer-link-current-text-background-color, var(--framer-link-text-background-color, initial));
             border-radius: var(--framer-link-current-text-background-radius, var(--framer-link-text-background-radius, initial));
             padding: var(--framer-link-current-text-background-padding, var(--framer-link-text-background-padding, initial));
         }
@@ -479,22 +478,23 @@ body { --framer-will-change-override: none; --framer-will-change-effect-override
 
         a.framer-text[data-framer-page-link-current],
         span.framer-text[data-framer-page-link-current] {
+            color: var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-text-color, #000)));
             text-decoration-line: var(--framer-link-current-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, initial)));
             text-decoration-style: var(--framer-link-current-text-decoration-style, var(--framer-link-text-decoration-style, var(--framer-text-decoration-style, initial)));
             text-decoration-color: var(--framer-link-current-text-decoration-color, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color, initial)));
             text-decoration-thickness: var(--framer-link-current-text-decoration-thickness, var(--framer-link-text-decoration-thickness, var(--framer-text-decoration-thickness, initial)));
             text-decoration-skip-ink: var(--framer-link-current-text-decoration-skip-ink, var(--framer-link-text-decoration-skip-ink, var(--framer-text-decoration-skip-ink, initial)));
             text-underline-offset: var(--framer-link-current-text-decoration-offset, var(--framer-link-text-decoration-offset, var(--framer-text-decoration-offset, initial)));
+            background-color: var(--framer-link-current-text-background-color, var(--framer-link-text-background-color, var(--framer-text-background-color, initial)));
         }
     
 
         @supports not (color: color(display-p3 1 1 1)) {
             a.framer-text[data-framer-page-link-current],
-            a.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]),
-            span.framer-text[data-framer-page-link-current],
-            span.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]) {
+            span.framer-text[data-framer-page-link-current]{
                 color: var(--framer-link-current-text-color-rgb, var(--framer-link-current-text-color, var(--framer-link-text-color-rgb, var(--framer-link-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))));
                 background-color: var(--framer-link-current-text-background-color-rgb, var(--framer-link-current-text-background-color, var(--framer-link-text-background-color-rgb, var(--framer-link-text-background-color, var(--framer-text-background-color-rgb, var(--framer-text-background-color, initial))))));
+                text-decoration-color: var(--framer-link-current-text-decoration-color-rgb, var(--framer-link-current-text-decoration-color, var(--framer-link-text-decoration-color-rgb, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color-rgb, var(--framer-text-decoration-color, currentcolor))))));
             }
         }
     
@@ -506,8 +506,14 @@ body { --framer-will-change-override: none; --framer-will-change-effect-override
             font-family: var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
             font-style: var(--framer-code-font-style, var(--framer-font-style, normal));
             font-weight: var(--framer-code-font-weight, var(--framer-font-weight, 400));
-            color: var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000))));
+            color: inherit;
             font-size: calc(var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
+        }
+    
+
+        code.framer-text a.framer-text[data-framer-page-link-current],
+        code.framer-text span.framer-text[data-framer-page-link-current] {
+            color: var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000))));
         }
     
 
@@ -526,13 +532,12 @@ body { --framer-will-change-override: none; --framer-will-change-effect-override
         a.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]),
         span.framer-text[data-framer-page-link-current]:hover,
         span.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]) {
+            color: inherit;
             font-family: var(--framer-link-hover-font-family, var(--framer-link-current-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif))));
             font-style: var(--framer-link-hover-font-style, var(--framer-link-current-font-style, var(--framer-link-font-style, var(--framer-font-style, normal))));
             font-weight: var(--framer-link-hover-font-weight, var(--framer-link-current-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400))));
-            color: var(--framer-link-hover-text-color, var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-text-color, #000))));
             font-size: calc(var(--framer-link-hover-font-size, var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)))) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-link-hover-text-transform, var(--framer-link-current-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none))));
-            background-color: var(--framer-link-hover-text-background-color, var(--framer-link-current-text-background-color, var(--framer-link-text-background-color, initial)));
             border-radius: var(--framer-link-hover-text-background-radius, var(--framer-link-current-text-background-radius, var(--framer-link-text-background-radius, initial)));
             padding: var(--framer-link-hover-text-background-padding, var(--framer-link-current-text-background-padding, var(--framer-link-text-background-padding, initial)));
         }
@@ -540,38 +545,30 @@ body { --framer-will-change-override: none; --framer-will-change-effect-override
 
         a.framer-text[data-framer-page-link-current]:hover,
         span.framer-text[data-framer-page-link-current]:hover {
+            color: var(--framer-link-hover-text-color, var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-text-color, #000))));
             text-decoration-line: var(--framer-link-hover-text-decoration, var(--framer-link-current-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, initial))));
             text-decoration-style: var(--framer-link-hover-text-decoration-style, var(--framer-link-current-text-decoration-style, var(--framer-link-text-decoration-style, var(--framer-text-decoration-style, initial))));
             text-decoration-color: var(--framer-link-hover-text-decoration-color, var(--framer-link-current-text-decoration-color, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color, initial))));
             text-decoration-thickness: var(--framer-link-hover-text-decoration-thickness, var(--framer-link-current-text-decoration-thickness, var(--framer-link-text-decoration-thickness, var(--framer-text-decoration-thickness, initial))));
             text-decoration-skip-ink: var(--framer-link-hover-text-decoration-skip-ink, var(--framer-link-current-text-decoration-skip-ink, var(--framer-link-text-decoration-skip-ink, var(--framer-text-decoration-skip-ink, initial))));
             text-underline-offset: var(--framer-link-hover-text-decoration-offset, var(--framer-link-current-text-decoration-offset, var(--framer-link-text-decoration-offset, var(--framer-text-decoration-offset, initial))));
+            background-color: var(--framer-link-hover-text-background-color, var(--framer-link-current-text-background-color, var(--framer-link-text-background-color, initial)));
         }
     
 
         @supports not (color: color(display-p3 1 1 1)) {
             a.framer-text[data-framer-page-link-current]:hover,
-            a.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]),
-            span.framer-text[data-framer-page-link-current]:hover,
-            span.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]) {
+            span.framer-text[data-framer-page-link-current]:hover {
                 color: var(--framer-link-hover-text-color-rgb, var(--framer-link-hover-text-color, var(--framer-link-current-text-color-rgb, var(--framer-link-current-text-color, var(--framer-link-text-color-rgb, var(--framer-link-text-color, var(--framer-code-text-color-rgb, var(--framer-code-text-color, var(--framer-text-color-rgb, var(--framer-text-color, #000))))))))));
                 background-color: var(--framer-link-hover-text-background-color-rgb, var(--framer-link-hover-text-background-color, var(--framer-link-current-text-background-color-rgb, var(--framer-link-current-text-background-color, var(--framer-link-text-background-color-rgb, var(--framer-link-text-background-color, initial))))));
+                text-decoration-color: var(--framer-link-hover-text-decoration-color-rgb, var(--framer-link-hover-text-decoration-color, var(--framer-link-current-text-decoration-color-rgb, var(--framer-link-current-text-decoration-color, var(--framer-link-text-decoration-color-rgb, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color-rgb, var(--framer-text-decoration-color, currentcolor))))))));
             }
         }
     
 
         code.framer-text a.framer-text[data-framer-page-link-current]:hover,
-        code.framer-text a.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]),
-        code.framer-text span.framer-text[data-framer-page-link-current]:hover,
-        code.framer-text span.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]) {
-            font-family: var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
-            font-style: var(--framer-code-font-style, var(--framer-font-style, normal));
-            font-weight: var(--framer-code-font-weight, var(--framer-font-weight, 400));
+        code.framer-text span.framer-text[data-framer-page-link-current]:hover {
             color: var(--framer-link-hover-text-color, var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000)))));
-            font-size: calc(var(--framer-link-hover-font-size, var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)))) * var(--framer-font-size-scale, 1));
-            background-color: var(--framer-link-hover-text-background-color, var(--framer-link-current-text-background-color, var(--framer-link-text-background-color, var(--framer-text-background-color, initial))));
-            border-radius: var(--framer-link-hover-text-background-radius, var(--framer-link-current-text-background-radius, var(--framer-link-text-background-radius, var(--framer-text-background-radius, initial))));
-            padding: var(--framer-link-hover-text-background-padding, var(--framer-link-current-text-background-padding, var(--framer-link-text-background-padding, var(--framer-text-background-padding, initial))));
         }
     
 
@@ -623,7 +620,7 @@ body { --framer-will-change-override: none; --framer-will-change-effect-override
 
         ul.framer-text,
         ol.framer-text {
-            padding-inline-start: 3ch;
+            padding-inline-start: 0;
             position: relative;
         }
     
@@ -631,6 +628,7 @@ body { --framer-will-change-override: none; --framer-will-change-effect-override
         li.framer-text {
             counter-increment: list-item;
             list-style: none;
+            padding-inline-start: 2ch;
         }
     
 
@@ -642,33 +640,39 @@ body { --framer-will-change-override: none; --framer-will-change-effect-override
         }
     
 
+        ol.framer-text > li.framer-text:nth-last-child(n + 10),
+        ol.framer-text > li.framer-text:nth-last-child(n + 10) ~ li {
+            padding-inline-start: 3ch;
+        }
+    
+
         ol.framer-text > li.framer-text:nth-last-child(n + 100),
         ol.framer-text > li.framer-text:nth-last-child(n + 100) ~ li {
-            padding-inline-start: 1ch;
+            padding-inline-start: 4ch;
         }
     
 
         ol.framer-text > li.framer-text:nth-last-child(n + 1000),
         ol.framer-text > li.framer-text:nth-last-child(n + 1000) ~ li {
-            padding-inline-start: 2ch;
+            padding-inline-start: 5ch;
         }
     
 
         ol.framer-text > li.framer-text:nth-last-child(n + 10000),
         ol.framer-text > li.framer-text:nth-last-child(n + 10000) ~ li {
-            padding-inline-start: 3ch;
+            padding-inline-start: 6ch;
         }
     
 
         ol.framer-text > li.framer-text:nth-last-child(n + 100000),
         ol.framer-text > li.framer-text:nth-last-child(n + 100000) ~ li {
-            padding-inline-start: 4ch;
+            padding-inline-start: 7ch;
         }
     
 
         ol.framer-text > li.framer-text:nth-last-child(n + 1000000),
         ol.framer-text > li.framer-text:nth-last-child(n + 1000000) ~ li {
-            padding-inline-start: 5ch;
+            padding-inline-start: 8ch;
         }
     
 
@@ -701,20 +705,21 @@ body { --framer-will-change-override: none; --framer-will-change-effect-override
         }
     
 
-        .framer-text-module[style*="aspect-ratio"] > :first-child {
+        .framer-text-module[data-width="fill"] > :first-child,
+        .framer-text-module:not([data-width="fit"])[style*="aspect-ratio"] > :first-child {
             width: 100%;
         }
     
 
         @supports not (aspect-ratio: 1) {
-            .framer-text-module[style*="aspect-ratio"] {
+            .framer-text-module:not([data-width="fit"])[style*="aspect-ratio"] {
                 position: relative;
             }
         }
     
 
         @supports not (aspect-ratio: 1) {
-            .framer-text-module[style*="aspect-ratio"]::before {
+            .framer-text-module:not([data-width="fit"])[style*="aspect-ratio"]::before {
                 content: "";
                 display: block;
                 padding-bottom: calc(100% / calc(var(--aspect-ratio)));
@@ -723,7 +728,8 @@ body { --framer-will-change-override: none; --framer-will-change-effect-override
     
 
         @supports not (aspect-ratio: 1) {
-            .framer-text-module[style*="aspect-ratio"] > :first-child {
+            .framer-text-module[data-width="fill"] > :first-child,
+            .framer-text-module:not([data-width="fit"])[style*="aspect-ratio"] > :first-child {
                 position: absolute;
                 top: 0;
                 left: 0;
