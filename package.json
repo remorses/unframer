@@ -5,7 +5,8 @@
         "watch": "pnpm -r watch",
         "download-framer": "pnpm --filter unframer run download-framer",
         "build": "pnpm --filter unframer build",
-        "release": "pnpm build && changeset"
+        "release": "pnpm build && changeset",
+        "agents.md": "agentsdotmd ./UNFRAMER_AGENTS.md core.md typescript.md pnpm.md react.md vitest.md changelog.md github.md cac.md spiceflow.md dedent.md tailwind.md "
     },
     "devDependencies": {
         "@changesets/cli": "^2.27.12",

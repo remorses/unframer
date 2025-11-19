@@ -15,3 +15,621 @@ Running validation of changes
 - run `pnpm build` from repo root to start compiling the project and watch for changes
 - run `pnpm --filter nextjs-app framer-simplicity` to generate the code using unframer inside nextjs-app/src/framer-simplicity. this is a complex and rich project you can use to see what unframer generates and validate fixes or issues.
 - you can add logs, then try generating again to inspect data and fields of objects managed by Unframer cli and fix issues.
+
+# core guidelines
+
+when summarizing changes at the end of the message, be super short, a few words and in bullet points, use bold text to highlight important keywords. use markdown.
+
+please ask questions and confirm assumptions before generating complex architecture code.
+
+NEVER run commands with & at the end to run them in the background. this is leaky and harmful! instead ask me to run commands in the background if needed.
+
+NEVER commit yourself unless asked to do so. I will commit the code myself.
+
+NEVER add comments unless I tell you
+
+## files
+
+always use kebab case for new filenames. never use uppercase letters in filenames
+
+
+## see files in the repo
+
+use `git ls-files | tree --fromfile` to see files in the repo. this command will ignore files ignored by git
+
+# typescript
+
+- ALWAYS use normal imports instead of dynamic imports, unless there is an issue with es module only packages and you are in a commonjs package (this is rare).
+
+- use a single object argument instead of multiple positional args: use object arguments for new typescript functions if the function would accept more than one argument, so it is more readable, ({a,b,c}) instead of (a,b,c). this way you can use the object as a sort of named argument feature, where order of arguments does not matter and it's easier to discover parameters.
+
+- always add the {} block body in arrow functions: arrow functions should never be written as `onClick={(x) => setState('')}`. NEVER. instead you should ALWAYS write `onClick={() => {setState('')}}`. this way it's easy to add new statements in the arrow function without refactoring it.
+
+- in array operations .map, .filter, .reduce and .flatMap are preferred over .forEach and for of loops. For example prefer doing `.push(...array.map(x => x.items))` over mutating array variables inside for loops. Always think of how to turn for loops into expressions using .map, .filter or .flatMap if you ever are about to write a for loop.
+
+- if you encounter typescript errors like "undefined | T is not assignable to T" after .filter(Boolean) operations: use a guarded function instead of Boolean: `.filter(isTruthy)`. implemented as `function isTruthy<T>(value: T): value is NonNullable<T> { return Boolean(value) }`
+
+- minimize useless comments: do not add useless comments if the code is self descriptive. only add comments if requested or if this was a change that i asked for, meaning it is not obvious code and needs some inline documentation. if a comment is required because the part of the code was result of difficult back and forth with me, keep it very short.
+
+- ALWAYS add all information encapsulated in my prompt to comments: when my prompt is super detailed and in depth, all this information should be added to comments in your code. this is because if the prompt is very detailed it must be the fruit of a lot of research. all this information would be lost if you don't put it in the code. next LLM calls would misinterpret the code and miss context.
+
+- NEVER write comments that reference changes between previous and old code generated between iterations of our conversation. do that in prompt instead. comments should be used for information of the current code. code that is deleted does not matter.
+
+- use early returns (and breaks in loops): do not nest code too much. follow the go best practice of if statements: avoid else, nest as little as possible, use top level ifs. minimize nesting. instead of doing `if (x) { if (b) {} }` you should do `if (x && b) {};` for example. you can always convert multiple nested ifs or elses into many linear ifs at one nesting level. use the @think tool for this if necessary.
+
+- typecheck after updating code: after any change to typescript code ALWAYS run the `pnpm typecheck` script of that package, or if there is no typecheck script run `pnpm tsc` yourself
+
+- do not use any: you must NEVER use any. if you find yourself using `as any` or `:any`, use the @think tool to think hard if there are types you can import instead. do even a search in the project for what the type could be. any should be used as a last resort.
+
+- NEVER do `(x as any).field` or `'field' in x` before checking if the code compiles first without it. the code probably doesn't need any or the in check. even if it does not compile, use think tool first! before adding (x as any).something, ALWAYS read the .d.ts to understand the types
+
+- after any change to typescript code ALWAYS run the `pnpm typecheck` script of that package, or if there is no typecheck script run `pnpm tsc` yourself
+
+- do not declare uninitialized variables that are defined later in the flow. instead use an IIFE with returns. this way there is less state. also define the type of the variable before the iife. here is an example:
+
+- use || over in: avoid 'x' in obj checks. prefer doing `obj?.x || ''` over doing `'x' in obj ? obj.x : ''`. only use the in operator if that field causes problems in typescript checks because typescript thinks the field is missing, as a last resort.
+
+- when creating urls from a path and a base url, prefer using `new URL(path, baseUrl).toString()` instead of normal string interpolation. use type-safe react-router `href` or spiceflow `this.safePath` (available inside routes) if possible
+
+- for node built-in imports, never import singular exported names. instead do `import fs from 'node:fs'`, same for path, os, etc.
+
+- NEVER start the development server with pnpm dev yourself. there is no reason to do so, even with &
+
+- When creating classes do not add setters and getters for a simple private field. instead make the field public directly so user can get it or set it himself without abstractions on top
+
+- if you encounter typescript lint errors for an npm package, read the node_modules/package/\*.d.ts files to understand the typescript types of the package. if you cannot understand them, ask me to help you with it.
+
+```ts
+// BAD. DO NOT DO THIS
+let favicon: string | undefined;
+if (docsConfig?.favicon) {
+  if (typeof docsConfig.favicon === "string") {
+    favicon = docsConfig.favicon;
+  } else if (docsConfig.favicon?.light) {
+    // Use light favicon as default, could be enhanced with theme detection
+    favicon = docsConfig.favicon.light;
+  }
+}
+// DO THIS. use an iife. Immediately Invoked Function Expression
+const favicon: string = (() => {
+  if (!docsConfig?.favicon) {
+    return "";
+  }
+  if (typeof docsConfig.favicon === "string") {
+    return docsConfig.favicon;
+  }
+  if (docsConfig.favicon?.light) {
+    // Use light favicon as default, could be enhanced with theme detection
+    return docsConfig.favicon.light;
+  }
+  return "";
+})();
+// if you already know the type use it:
+const favicon: string = () => {
+  // ...
+};
+```
+
+- when a package has to import files from another packages in the workspace never add a new tsconfig path, instead add that package as a workspace dependency using `pnpm i "package@workspace:*"`
+
+NEVER use require. always esm imports
+
+always try to use non-relative imports. each package has an absolute import with the package name, you can find it in the tsconfig.json paths section. for example, paths inside website can be imported from website. notice these paths also need to include the src directory.
+
+this is preferable to other aliases like @/ because i can easily move the code from one package to another without changing the import paths. this way you can even move a file and import paths do not change much.
+
+always specify the type when creating arrays, especially for empty arrays. if you don't, typescript will infer the type as `never[]`, which can cause type errors when adding elements later.
+
+**Example:**
+
+```ts
+// BAD: Type will be never[]
+const items = [];
+
+// GOOD: Specify the expected type
+const items: string[] = [];
+const numbers: number[] = [];
+const users: User[] = [];
+```
+
+remember to always add the explicit type to avoid unexpected type inference.
+
+- when using nodejs APIs like fs always import the module and not the named exports. I prefer hacing nodejs APIs accessed on the module namspace like fs, os, path, etc.
+
+DO `import fs from 'fs'; fs.writeFileSync(...)`
+DO NOT `import { writeFileSync } from 'fs';`
+
+# package manager: pnpm with workspace
+
+this project uses pnpm workspaces to manage dependencies. important scripts are in the root package.json or various packages' package.json
+
+try to run commands inside the package folder that you are working on. for example you should never run `pnpm test` from the root
+
+if you need to install packages always use pnpm
+
+instead of adding packages directly in package.json use `pnpm install package` inside the right workspace folder. NEVER manually add a package by updating package.json
+
+## updating a package
+
+when i ask you to update a package always run `pnpm update -r packagename`. to update to latest also add --latest
+
+Do not do `pnpm add packagename` to update a package. only to add a missing one. otherwise other packages versions will get out of sync.
+
+## fixing duplicate pnpm dependencies
+
+sometimes typescript will fail if there are 2 duplicate packages in the workspace node_modules. this can happen in pnpm if a package is used in 2 different places (even if inside a node_module package, transitive dependency) with a different set of versions for a peer dependency
+
+for example if better-auth depends on zod peer dep and zod is in different versions in 2 dependency subtrees
+
+to identify if a pnpm package is duplicated, search for the string " packagename@" inside `pnpm-lock.yaml`, notice the space in the search string. then if the result returns multiple instances with a different set of peer deps inside the round brackets, it means that this package is being duplicated. here is an example of a package getting duplicated:
+
+```
+
+  better-auth@1.3.6(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(zod@3.25.76):
+    dependencies:
+      '@better-auth/utils': 0.2.6
+      '@better-fetch/fetch': 1.1.18
+      '@noble/ciphers': 0.6.0
+      '@noble/hashes': 1.8.0
+      '@simplewebauthn/browser': 13.1.2
+      '@simplewebauthn/server': 13.1.2
+      better-call: 1.0.13
+      defu: 6.1.4
+      jose: 5.10.0
+      kysely: 0.28.5
+      nanostores: 0.11.4
+      zod: 3.25.76
+    optionalDependencies:
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+
+  better-auth@1.3.6(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(zod@4.0.17):
+    dependencies:
+      '@better-auth/utils': 0.2.6
+      '@better-fetch/fetch': 1.1.18
+      '@noble/ciphers': 0.6.0
+      '@noble/hashes': 1.8.0
+      '@simplewebauthn/browser': 13.1.2
+      '@simplewebauthn/server': 13.1.2
+      better-call: 1.0.13
+      defu: 6.1.4
+      jose: 5.10.0
+      kysely: 0.28.5
+      nanostores: 0.11.4
+      zod: 4.0.17
+    optionalDependencies:
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+
+```
+
+as you can see, better-auth is listed twice with different sets of peer deps. in this case it's because of zod being in version 3 and 4 in two subtrees of our workspace dependencies.
+
+as a first step, try running `pnpm dedupe better-auth` with your package name and see if there is still the problem.
+
+below i will describe how to generally deduplicate a package. i will use zod as an example. it works with any dependency found in the previous step.
+
+to deduplicate the package, we have to make sure we only have 1 version of zod installed in your workspace. DO NOT use overrides for this. instead, fix the problem by manually updating the dependencies that are forcing the older version of zod in the dependency tree.
+
+to do so, we first have to run the command `pnpm -r why zod@3.25.76` to see the reason the older zod version is installed. in this case, the result is something like this:
+
+```
+
+website /Users/morse/Documents/GitHub/holocron/website (PRIVATE)
+
+dependencies:
+@better-auth/stripe 1.2.10
+├─┬ better-auth 1.3.6
+│ └── zod 3.25.76 peer
+└── zod 3.25.76
+db link:../db
+└─┬ docs-website link:../docs-website
+  ├─┬ fumadocs-docgen 2.0.1
+  │ └── zod 3.25.76
+  ├─┬ fumadocs-openapi link:../fumadocs/packages/openapi
+  │ └─┬ @modelcontextprotocol/sdk 1.17.3
+  │   ├── zod 3.25.76
+  │   └─┬ zod-to-json-schema 3.24.6
+  │     └── zod 3.25.76 peer
+  └─┬ searchapi link:../searchapi
+    └─┬ agents 0.0.109
+      ├─┬ @modelcontextprotocol/sdk 1.17.3
+      │ ├── zod 3.25.76
+      │ └─┬ zod-to-json-schema 3.24.6
+      │   └── zod 3.25.76 peer
+      └─┬ ai 4.3.19
+        ├─┬ @ai-sdk/provider-utils 2.2.8
+        │ └── zod 3.25.76 peer
+        └─┬ @ai-sdk/react 1.2.12
+          ├─┬ @ai-sdk/provider-utils 2.2.8
+          │ └── zod 3.25.76 peer
+          └─┬ @ai-sdk/ui-utils 1.2.11
+            └─┬ @ai-sdk/provider-utils 2.2.8
+              └── zod 3.25.76 peer
+```
+
+here we can see zod 3 is installed because of @modelcontextprotocol/sdk, @better-auth/stripe and agents packages. to fix the problem, we can run
+
+```
+pnpm update -r --latest  @modelcontextprotocol/sdk @better-auth/stripe agents
+```
+
+this way, if these packages include the newer version of the dependency, zod will be deduplicated automatically.
+
+in this case, we could have only updated @better-auth/stripe to fix the issue too, that's because @better-auth/stripe is the one that has better-auth as a peer dep. but finding what is the exact problematic package is difficult, so it is easier to just update all packages you notice that we depend on directly in our workspace package.json files.
+
+if after doing this we still have duplicate packages, you will have to ask the user for help. you can try deleting the node_modules and restarting the approach, but it rarely helps.
+
+# react
+
+- never test react code. instead put as much code as possible in react-agnostic functions or classes and test those if needed.
+
+- hooks, all functions that start with use, MUST ALWAYS be called in the component render scope, never inside other closures in the component or event handlers. follow react rules of hooks.
+
+- always put all hooks at the start of component functions. put hooks that are bigger and longer later if possible. all other non-hooks logic should go after hooks section, things like conditionals, expressions, etc
+
+## react code
+
+- `useEffect` is bad: the use of useEffect is discouraged. please do not use it unless strictly necessary. before using useEffect call the @think tool to make sure that there are no other options. usually you can colocate code that runs inside useEffect to the functions that call that useEffect dependencies setState instead
+
+- too many `useState` calls are bad. if some piece of state is dependent on other state just compute it as an expression in render. do not add new state unless strictly necessary. before adding a new useState to a component, use @think tool to think hard if you can instead: use expression with already existing local state, use expression with some global state, use expression with loader data, use expression with some other existing variable instead. for example if you need to show a popover when there is an error you should use the error as open state for the popover instead of adding new useState hook
+
+- `useCallback` is bad. it should be always avoided.
+
+- NEVER pass functions to useEffect or useMemo dependencies. when you start passing functions to hook dependencies you need to add useCallback everywhere in the code, useCallback is a virus that infects the codebase and should be ALWAYS avoided.
+
+- custom hooks are bad. NEVER add custom hooks unless asked to do so by me. instead of creating hooks create generic react-independent functions. every time you find yourself creating a custom hook call @think and think hard if you can just create a normal function instead, or just inline the expression in the component if small enough
+
+- minimize number of props. do not use props if you can use zustand state instead. the app has global zustand state that lets you get a piece of state down from the component tree by using something like `useStore(x => x.something)` or `useLoaderData<typeof loader>()` or even useRouteLoaderData if you are deep in the react component tree
+
+- do not consider local state truthful when interacting with server. when interacting with the server with rpc or api calls never use state from the render function as input for the api call. this state can easily become stale or not get updated in the closure context. instead prefer using zustand `useStore.getState().stateValue`. notice that useLoaderData or useParams should be fine in this case.
+
+- when using useRef with a generic type always add undefined in the call, for example `useRef<number>(undefined)`. this is required by the react types definitions
+
+- when using && in jsx make sure that the result type is not of type number. in that case add Boolean() wrapper. this way jsx will not show zeros when the value is falsy.
+
+## components
+
+- place new components in the src/components folder. shadcn components will go to the src/components/ui folder, usually they are not manually updated but added with the shadcn cli (which is preferred to be run without npx, either with pnpm or globally just shadcn)
+
+- component filenames should follow kebab case structure
+
+- do not create a new component file if this new code will only be used in another component file. only create a component file if the component is used by multiple components or routes. colocate related components in the same file.
+
+- non component code should be put in the src/lib folder.
+
+- hooks should be put in the src/hooks.tsx file. do not create a new file for each new hook. also notice that you should never create custom hooks, only do it if asked for.
+
+## zustand
+
+zustand is the preferred way to created global React state. put it in files like state.ts or x-state.ts where x is something that describe a portion of app state in case of multiple global states or multiple apps
+
+- minimize number of props. do not use props if you can use zustand state instead. the app has global zustand state that lets you get a piece of state down from the component tree by using something like `useStore(x => x.something)` or `useLoaderData<typeof loader>()` or even useRouteLoaderData if you are deep in the react component tree
+
+- do not consider local state truthful when interacting with server. when interacting with the server with rpc or api calls never use state from the render function as input for the api call. this state can easily become stale or not get updated in the closure context. instead prefer using zustand `useStore.getState().stateValue`. notice that useLoaderData or useParams should be fine in this case.
+
+- NEVER add zustand state setter methods. instead use useStore.setState to set state. For example never add a method `setVariable` in the state type. Instead call `setState` directly
+
+- zustand already merges new partial state with the previous state. NEVER DO `useStore.setState({ ...useStore.getInitialState(), ... })` unless for resetting state
+
+# testing
+
+do not write new test files unless asked. do not write tests if there is not already a test or describe block for that function or module.
+
+tests should validate complex and non-obvious logic. if a test looks like a placeholder, do not add it.
+
+use vitest to run tests. tests should be run from the current package directory and not root. try using the test script instead of vitest directly. additional vitest flags can be added at the end, like --run to disable watch mode or -u to update snapshots.
+
+to understand how the code you are writing works, you should add inline snapshots in the test files with expect().toMatchInlineSnapshot(), then run the test with `pnpm test -u --run` or `pnpm vitest -u --run` to update the snapshot in the file, then read the file again to inspect the result. if the result is not expected, update the code and repeat until the snapshot matches your expectations. never write the inline snapshots in test files yourself. just leave them empty and run `pnpm test -u --run` to update them.
+
+> always call `pnpm vitest` or `pnpm test` with `--run` or they will hang forever waiting for changes!
+> ALWAYS read back the test if you use the `-u` option to make sure the inline snapshots are as you expect.
+
+- NEVER writes the snapshots content yourself in `toMatchInlineSnapshot`. instead leave it empty and call `pnpm test -u` to fill in snapshots content.
+
+- when updating implementation and `toMatchInlineSnapshot` should change, DO NOT remove the inline snapshots yourself, just run `pnpm test -u` instead! This will replace contents of the snapshots without wasting time doing it yourself.
+
+- for very long snapshots you should use `toMatchFileSnapshot(filename)` instead of `toMatchInlineSnapshot()`. put the snapshot files in a snapshots/ directory and use the appropriate extension for the file based on the content
+
+never test client react components. only server code that runs on the server.
+
+most tests should be simple calls to functions with some expect calls, no mocks. test files should be called the same as the file where the tested function is being exported from.
+
+NEVER use mocks. the database does not need to be mocked, just use it. simply do not test functions that mutate the database if not asked.
+
+tests should strive to be as simple as possible. the best test is a simple `.toMatchInlineSnapshot()` call. these can be easily evaluated by reading the test file after the run passing the -u option. you can clearly see from the inline snapshot if the function behaves as expected or not.
+
+try to use only describe and test in your tests. do not use beforeAll, before, etc if not strictly required.
+
+NEVER write tests for react components or react hooks. NEVER write tests for react components. you will be fired if you do.
+
+sometimes tests work directly on database data, using prisma. to run these tests you have to use the package.json script, which will call `doppler run -- vitest` or similar. never run doppler cli yourself as you could delete or update production data. tests generally use a staging database instead.
+
+never write tests yourself that call prisma or interact with database or emails. for these, ask the user to write them for you.
+
+# changelog
+
+## 1.1.2
+
+### Patch Changes
+
+- Header comment in generated AGENTS.md instructing not to edit directly
+- Instructions to create ./MY_AGENTS.md for custom instructions
+
+after you make a change that is noteworthy, add an entry in the CHANGELOG.md file in the root of the package. there are 2 kinds of packages, public and private packages. private packages have a private: true field in package.json, public packages do not and instead have a version field in package.json. public packages are the ones that are published to npm.
+
+If the current package has a version field and it is not private then include the version in the changelog too like in the examples, otherwise use the current date and time.
+
+If you use the version you MUST use a bumped version compared to the current package.json version, and you should update the package.json version field to that version. But do not publish. I will handle that myself.
+
+to write a changelog.md file for a public package, use the following format, add a heading with the new version and a bullet list of your changes, like this:
+
+```md
+## 0.1.3
+
+### Patch Changes
+
+- bug fixes
+
+## 0.1.2
+
+### Patch Changes
+
+- add support for githubPath
+```
+
+for private packages, which do not have versions, you must instead use the current date and time, for example:
+
+```md
+# Changelog
+
+## 2025-01-24 19:50
+
+- Added a feature to improve user experience
+- Fixed a bug that caused the app to crash on startup
+```
+
+these are just examples. be clear and concise in your changelog entries.
+
+use present tense. be detailed but concise, omit useless verbs like "implement", "added", just put the subject there instead, so it is shorter. it's implicit we are adding features or fixes. do not use nested bullet points. always show example code snippets if applicable, and use proper markdown formatting.
+
+```
+
+the website package has a dependency on docs-website. instead of duplicating code that is needed both in website and docs-website keep a file in docs-website instead and import from there for the website package.
+
+# github
+
+you can use the `gh` cli to do operations on github for the current repository. For example: open issues, open PRs, check actions status, read workflow logs, etc.
+
+## creating issues and pull requests
+
+when opening issues and pull requests with gh cli, never use markdown headings or sections. instead just use simple paragraphs, lists and code examples. be as short as possible while remaining clear and using good English.
+
+example:
+
+```bash
+gh issue create --title "Fix login timeout" --body "The login form times out after 5 seconds on slow connections. This affects users on mobile networks.
+
+Steps to reproduce:
+1. Open login page on 3G connection
+2. Enter credentials
+3. Click submit
+
+Expected: Login completes within 30 seconds
+Actual: Request times out after 5 seconds
+
+Error in console:
+\`\`\`bash
+Error: Request timeout at /api/auth/login
+\`\`\`"
+```
+
+## get current github repo
+
+`git config --get remote.origin.url`
+
+## checking status of latest github actions workflow run
+
+```bash
+gh run list # lists latest actions runs
+gh run watch <id> --exit-status # if workflow is in progress, wait for the run to complete. the actions run is finished when this command exits. Set a tiemout of at least 10 minutes when running this command
+gh run view <id> --log-failed | tail -n 300 # read the logs for failed steps in the actions run
+gh run view <id> --log | tail -n 300 # read all logs for a github actions run
+```
+
+## reading github repositories
+
+you can use gitchamber.com to read repo files. run `curl https://gitchamber.com` to see how the API works. always use curl to fetch the responses of gitchamber.com
+
+for example when working with the vercel ai sdk, you can fetch the latest docs using:
+
+https://gitchamber.com/repos/repos/vercel/ai/main/files
+
+use gitchamber to read the .md files using curl
+
+# cac for cli development
+
+the cli uses cac npm package.
+
+# spiceflow
+
+before writing or updating spiceflow related code always execute this command to get Spiceflow full documentation: `curl -s https://gitchamber.com/repos/remorses/spiceflow/main/files/README.md`
+
+spiceflow is an API library similar to hono, it allows you to write api servers using whatwg requests and responses
+
+use zod to create schemas and types that need to be used for tool inputs or spiceflow API routes.
+
+## calling the server from the clientE
+
+you can obtain a type safe client for the API using `createSpiceflowClient` from `spiceflow/client`
+
+for simple routes that only have one interaction in the page, for example a form page, you should use react-router forms and actions to interact with the server.
+
+but when you do interactions from a component that can be rendered from multiple routes, or simply is not implemented inside a route page, you should use spiceflow client instead.
+
+> ALWAYS use the fetch tool to get the latest docs if you need to implement a new route in a spiceflow API app server or need to add a new rpc call with a spiceflow api client!
+
+spiceflow has support for client-side type-safe rpc. use this client when you need to interact with the server from the client, for example for a settings save deep inside a component. here is example usage of it
+
+> SUPER IMPORTANT! if you add a new route to a spiceflow app, use the spiceflow app state like `userId` to add authorization to the route. if there is no state then you can use functions like `getSession({request})` or similar.
+> make sure the current userId has access to the fetched or updated rows. this can be done by checking that the parent row or current row has a relation with the current userId. for example `prisma.site.findFirst({where: {users: {some: {userId }}}})`
+
+> IMPORTANT! spiceflow api client cannot be called server side to call a route! In that case instead you MUST call the server functions used in the route directly, otherwise the server would do fetch requests that would fail!
+
+always use `const {data, error} = await apiClient...` when calling spiceflow rpc. if data is already declared, give it a different name with `const {data: data2, error} = await apiClient...`. this pattern of destructuring is preferred for all apis that return data and error object fields.
+
+## getting spiceflow docs
+
+spiceflow is a little-known api framework. if you add server routes to a file that includes spiceflow in the name or you are using the apiClient rpc, you always need to fetch the spiceflow docs first, using the @fetch tool on https://getspiceflow.com/
+
+this url returns a single long documentation that covers your use case. always fetch this document so you know how to use spiceflow. spiceflow is different from hono and other api frameworks, that's why you should ALWAYS fetch the docs first before using it
+
+## using spiceflow client in published public workspace packages
+
+usually you can just import the App type from the server workspace to create the client with createSpiceflowClient
+
+if you want to use the spiceflow client in a published package instead we will use the pattern of generating .d.ts and copying these in the workspace package, this way the package does not need to depend on unpublished private server package.
+
+example:
+
+```json
+{
+  "scripts": {
+    "gen-client": "export DIR=../plugin-mcp/src/generated/ && cd ../website && tsc --incremental && cd ../plugin-mcp && rm -rf $DIR && mkdir -p $DIR && cp ../website/dist/src/lib/api-client.* $DIR"
+  }
+}
+```
+
+notice that if you add a route in the spiceflow server you will need to run `pnpm --filter website gen-client` to update the apiClient inside cli.
+
+## dedent
+
+when creating long strings in functions use dedent so that we can indent the string content and make it more readable
+
+for example:
+
+```ts
+import dedent from 'string-dedent'
+
+const content = dedent`
+  some content
+```
+
+IMPORTANT: notice that i have at start and end a new line. this is required when using string-dedent. Also notice npm package `string-dedent` instead of `dedent`.
+
+When creating code snippets alias dedent to variables like html or javascript so that I get syntax highlight in my editor: `const html = dedent`
+
+# tailwind v4
+
+this project uses tailwind v4. this new tailwind version does not use tailwind.config.js. instead it does all configuration in css files.
+
+read https://tailwindcss.com/docs/upgrade-guide to understand the updates landed in tailwind v4 if you do not have tailwind v4 in your training context. ignore the parts that talk about running the upgrade cli. this project already uses tailwind v4 so no need to upgrade anything.
+
+## spacing should use multiples of 4
+
+for margin, padding, gaps, widths and heights it is preferable to use multiples of 4 of the tailwind spacing scale. for example p-4 or gap-4
+
+4 is equal to 16px which is the default font size of the page. this way every spacing is a multiple of the height and width of a default letter.
+
+user interfaces are mostly text so using the letter width and height as a base unit makes it easier to reason about the layout and sizes.
+
+use grow instead of flex-1.
+
+# Searching and reading files on github
+
+You have access to GitChamber for GitHub repository operations, use the fetch tool with these urls every time you want to read files in a GitHub repository
+
+using gitchamber is preferred over web search, you are guaranteed to see the latest version of the repository and to find all markdown files in the repo.
+
+## Why Use GitChamber Instead of WebFetch
+
+GitChamber provides superior GitHub repository access compared to the WebFetch tool:
+
+- **Never Get Stale Information**: GitChamber automatically refreshes cached content based on TTL, ensuring you always access the latest repository version
+- **Native Markdown Format**: Files are served in their original markdown format, eliminating the need to convert HTML back to markdown and preserving formatting
+- **Access Actual Implementation**: Use custom glob patterns to retrieve source code files (.js, .ts, .py, etc.), not just documentation - get the real implementation details
+- **Context-Aware Pagination**: Built-in support for line-based pagination with `start` and `end` parameters prevents LLM context overflow - Claude loves this feature for processing large files efficiently
+- **Precise Search Capabilities**: Uses exact string matching with SQLite FTS instead of imprecise fuzzy or semantic search, ensuring accurate results every time
+- **LLM-Optimized Design**: Purpose-built for AI agents and LLMs that need structured, reliable repository access without rate limits or HTML parsing overhead
+
+BASE_URL: `https://gitchamber.com/repos/{owner}/{repo}/{branch}/`
+
+OPERATIONS:
+
+1. LIST FILES: GET {BASE_URL}/files
+2. READ FILE: GET {BASE_URL}/files/{filepath}?start=N&end=M&showLineNumbers=true
+3. SEARCH: GET {BASE_URL}/search/{query}
+
+EXAMPLES:
+
+- List files: https://gitchamber.com/repos/facebook/react/main/files
+- Read file: https://gitchamber.com/repos/facebook/react/main/files/README.md?start=10&end=50
+- Search: https://gitchamber.com/repos/facebook/react/main/search/useState
+
+GUIDELINES:
+
+- URL-encode paths and queries
+- Use line numbers for code references (filename:line_number)
+- Search returns markdown with clickable links
+
+## Query Parameters
+
+| Parameter          | Description       | Example                  |
+|--------------------|-------------------|--------------------------|
+| `start`            | Start line number | `?start=10`              |
+| `end`              | End line number   | `?end=50`                |
+| `showLineNumbers`  | Add line numbers  | `?showLineNumbers=true`  |
+
+## Search Examples
+
+```bash
+GET /search/function
+GET /search/async%20function
+GET /search/useState%20AND%20effect
+```
+
+## File Filtering with Glob Patterns
+
+By default, GitChamber only indexes **markdown files and READMEs** to keep repos fast and manageable. The default glob pattern is:
+```
+**/{*.md,*.mdx,README*}
+```
+
+### Using Custom Glob Patterns (Use Rarely)
+
+You can override the default to read specific implementation files, but **use this sparingly** as it impacts performance:
+
+| Parameter | Description         | Example         |
+|-----------|---------------------|-----------------|
+| `glob`    | File pattern filter | `?glob=**/src/**/*.ts` |
+
+**Important:**
+- The same glob pattern **MUST** be used consistently across ALL operations (list, read, search) for a repository
+- Be very specific with patterns to keep operations fast
+- Only use custom globs when you need to examine specific implementation details
+
+If the first /files result shows very few files and you can assume the repo is very small you can then use an url like <https://gitchamber.com/repos/cloudflare/sandbox-sdk/main/files?glob=**> to list, read and search all files. This should be done only for very small repos
+
+If you notice a repo has an `examples/something/README.md` it is a good idea to then list all files in the examples to read real code implementations. By using a glob like `examples/**`
+
+### Examples with Custom Globs
+
+#### TypeScript files only (use same glob for all operations)
+https://gitchamber.com/repos/remorses/fumabase/main/files?glob=**/*.ts
+https://gitchamber.com/repos/remorses/fumabase/main/files/website/react-router.config.ts?glob=**/*.ts
+https://gitchamber.com/repos/remorses/fumabase/main/search/export?glob=**/*.ts
+
+#### JavaScript files in website directory only
+https://gitchamber.com/repos/remorses/fumabase/main/files?glob=website/**/*.js
+https://gitchamber.com/repos/remorses/fumabase/main/files/website/vite.config.js?glob=website/**/*.js
+https://gitchamber.com/repos/remorses/fumabase/main/search/async?website=website/**/*.js
+
+#### All files (NOT RECOMMENDED - very slow)
+<https://gitchamber.com/repos/remorses/fumabase/main/files?glob=**/*>
+
+**Best Practice:** Stick to the default (markdown/README only) unless you specifically need to examine source code implementations.
+
+## Reading responses
+
+Agents should fetch these pages using the command `curl -s gitchamber.com/...` if available. This is preferred over generic web fetch tool because fetch tool may require additional params like `prompt` or may format the result with another LLM and make it less useful. Instead use curl and the params ?start and end to paginate files content
+
