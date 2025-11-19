@@ -12,9 +12,9 @@ import {
   __require,
   __runInitializers,
   __toESM,
-} from './framer-chunks/chunk-VUHWYTYT.js';
+} from './framer-chunks/chunk-DBJCHRFG.js';
 
-// /:https://app.framerstatic.com/chunk-QQPGYYDD.mjs
+// /:https://app.framerstatic.com/chunk-SMTZCOHA.mjs
 import { createContext, } from 'react';
 import { useEffect, useLayoutEffect, } from 'react';
 import * as React from 'react';
@@ -547,10 +547,7 @@ var color = {
 };
 var colorRegex = /(?:#[\da-f]{3,8}|(?:rgb|hsl)a?\((?:-?[\d.]+%?[,\s]+){2}-?[\d.]+%?\s*(?:[,/]\s*)?(?:\b\d+(?:\.\d+)?|\.\d+)?%?\))/giu;
 function test(v,) {
-  var _a, _b;
-  return isNaN(v,) && typeof v === 'string' &&
-    (((_a = v.match(floatRegex,)) == null ? void 0 : _a.length) || 0) + (((_b = v.match(colorRegex,)) == null ? void 0 : _b.length) || 0) >
-      0;
+  return isNaN(v,) && typeof v === 'string' && (v.match(floatRegex,)?.length || 0) + (v.match(colorRegex,)?.length || 0) > 0;
 }
 var NUMBER_TOKEN = 'number';
 var COLOR_TOKEN = 'color';
@@ -1318,7 +1315,6 @@ var JSAnimation = class extends WithPromise {
     this.holdTime = null;
     this.playbackSpeed = 1;
     this.stop = () => {
-      var _a, _b;
       const {
         motionValue: motionValue2,
       } = this.options;
@@ -1328,7 +1324,7 @@ var JSAnimation = class extends WithPromise {
       this.isStopped = true;
       if (this.state === 'idle') return;
       this.teardown();
-      (_b = (_a = this.options).onStop) == null ? void 0 : _b.call(_a,);
+      this.options.onStop?.();
     };
     activeAnimations.mainThread++;
     this.options = options;
@@ -1501,7 +1497,6 @@ var JSAnimation = class extends WithPromise {
     return millisecondsToSeconds(this.currentTime,);
   }
   set time(newTime,) {
-    var _a;
     newTime = secondsToMilliseconds(newTime,);
     this.currentTime = newTime;
     if (this.startTime === null || this.holdTime !== null || this.playbackSpeed === 0) {
@@ -1509,7 +1504,7 @@ var JSAnimation = class extends WithPromise {
     } else if (this.driver) {
       this.startTime = this.driver.now() - newTime / this.playbackSpeed;
     }
-    (_a = this.driver) == null ? void 0 : _a.start(false,);
+    this.driver?.start(false,);
   }
   get speed() {
     return this.playbackSpeed;
@@ -1523,7 +1518,6 @@ var JSAnimation = class extends WithPromise {
     }
   }
   play() {
-    var _a, _b;
     if (this.isStopped) return;
     const {
       driver = frameloopDriver,
@@ -1532,7 +1526,7 @@ var JSAnimation = class extends WithPromise {
     if (!this.driver) {
       this.driver = driver((timestamp) => this.tick(timestamp,));
     }
-    (_b = (_a = this.options).onPlay) == null ? void 0 : _b.call(_a,);
+    this.options.onPlay?.();
     const now2 = this.driver.now();
     if (this.state === 'finished') {
       this.updateFinished();
@@ -1562,19 +1556,17 @@ var JSAnimation = class extends WithPromise {
     this.holdTime = null;
   }
   finish() {
-    var _a, _b;
     this.notifyFinished();
     this.teardown();
     this.state = 'finished';
-    (_b = (_a = this.options).onComplete) == null ? void 0 : _b.call(_a,);
+    this.options.onComplete?.();
   }
   cancel() {
-    var _a, _b;
     this.holdTime = null;
     this.startTime = 0;
     this.tick(0,);
     this.teardown();
-    (_b = (_a = this.options).onCancel) == null ? void 0 : _b.call(_a,);
+    this.options.onCancel?.();
   }
   teardown() {
     this.state = 'idle';
@@ -1592,13 +1584,12 @@ var JSAnimation = class extends WithPromise {
     return this.tick(sampleTime, true,);
   }
   attachTimeline(timeline,) {
-    var _a;
     if (this.options.allowFlatten) {
       this.options.type = 'keyframes';
       this.options.ease = 'linear';
       this.initAnimation();
     }
-    (_a = this.driver) == null ? void 0 : _a.stop();
+    this.driver?.stop();
     return timeline.observe(this,);
   }
 };
@@ -1784,8 +1775,7 @@ function measureAllKeyframes() {
       const restore = transformsToRestore.get(element,);
       if (restore) {
         restore.forEach(([key7, value,],) => {
-          var _a;
-          (_a = element.getValue(key7,)) == null ? void 0 : _a.set(value,);
+          element.getValue(key7,)?.set(value,);
         },);
       }
     },);
@@ -1849,7 +1839,7 @@ var KeyframeResolver = class {
       motionValue: motionValue2,
     } = this;
     if (unresolvedKeyframes[0] === null) {
-      const currentValue = motionValue2 == null ? void 0 : motionValue2.get();
+      const currentValue = motionValue2?.get();
       const finalKeyframe = unresolvedKeyframes[unresolvedKeyframes.length - 1];
       if (currentValue !== void 0) {
         unresolvedKeyframes[0] = currentValue;
@@ -2018,7 +2008,7 @@ var NativeAnimation = class extends WithPromise {
         }
         this.animation.cancel();
       }
-      onComplete == null ? void 0 : onComplete();
+      onComplete?.();
       this.notifyFinished();
     };
   }
@@ -2033,8 +2023,7 @@ var NativeAnimation = class extends WithPromise {
     this.animation.pause();
   }
   complete() {
-    var _a, _b;
-    (_b = (_a = this.animation).finish) == null ? void 0 : _b.call(_a,);
+    this.animation.finish?.();
   }
   cancel() {
     try {
@@ -2070,15 +2059,12 @@ var NativeAnimation = class extends WithPromise {
    * while deferring the commit until the next animation frame.
    */
   commitStyles() {
-    var _a, _b;
     if (!this.isPseudoElement) {
-      (_b = (_a = this.animation).commitStyles) == null ? void 0 : _b.call(_a,);
+      this.animation.commitStyles?.();
     }
   }
   get duration() {
-    var _a, _b;
-    const duration =
-      ((_b = (_a = this.animation.effect) == null ? void 0 : _a.getComputedTiming) == null ? void 0 : _b.call(_a,).duration) || 0;
+    const duration = this.animation.effect?.getComputedTiming?.().duration || 0;
     return millisecondsToSeconds(Number(duration,),);
   }
   get iterationDuration() {
@@ -2121,9 +2107,8 @@ var NativeAnimation = class extends WithPromise {
     timeline,
     observe,
   },) {
-    var _a;
     if (this.allowFlatten) {
-      (_a = this.animation.effect) == null ? void 0 : _a.updateTiming({
+      this.animation.effect?.updateTiming({
         easing: 'linear',
       },);
     }
@@ -2203,7 +2188,6 @@ var acceleratedValues = /* @__PURE__ */ new Set(['opacity', 'clipPath', 'filter'
 ],);
 var supportsWaapi = /* @__PURE__ */ memo(() => Object.hasOwnProperty.call(Element.prototype, 'animate',));
 function supportsBrowserAnimation(options,) {
-  var _a;
   const {
     motionValue: motionValue2,
     name,
@@ -2212,7 +2196,7 @@ function supportsBrowserAnimation(options,) {
     damping,
     type,
   } = options;
-  const subject = (_a = motionValue2 == null ? void 0 : motionValue2.owner) == null ? void 0 : _a.current;
+  const subject = motionValue2?.owner?.current;
   if (!(subject instanceof HTMLElement)) {
     return false;
   }
@@ -2283,15 +2267,13 @@ var AsyncMotionValueAnimation = class extends WithPromise {
     element,
     ...options
   },) {
-    var _a;
     super();
     this.stop = () => {
-      var _a2, _b;
       if (this._animation) {
         this._animation.stop();
-        (_a2 = this.stopTimeline) == null ? void 0 : _a2.call(this,);
+        this.stopTimeline?.();
       }
-      (_b = this.keyframeResolver) == null ? void 0 : _b.cancel();
+      this.keyframeResolver?.cancel();
     };
     this.createdAt = time.now();
     const optionsWithDefaults = {
@@ -2306,7 +2288,7 @@ var AsyncMotionValueAnimation = class extends WithPromise {
       element,
       ...options,
     };
-    const KeyframeResolver$1 = (element == null ? void 0 : element.KeyframeResolver) || KeyframeResolver;
+    const KeyframeResolver$1 = element?.KeyframeResolver || KeyframeResolver;
     this.keyframeResolver = new KeyframeResolver$1(
       keyframes2,
       (resolvedKeyframes, finalKeyframe, forced,) =>
@@ -2315,7 +2297,7 @@ var AsyncMotionValueAnimation = class extends WithPromise {
       motionValue2,
       element,
     );
-    (_a = this.keyframeResolver) == null ? void 0 : _a.scheduleResolve();
+    this.keyframeResolver?.scheduleResolve();
   }
   onKeyframesResolved(keyframes2, finalKeyframe, options, sync2,) {
     this.keyframeResolver = void 0;
@@ -2330,7 +2312,7 @@ var AsyncMotionValueAnimation = class extends WithPromise {
     this.resolvedAt = time.now();
     if (!canAnimate(keyframes2, name, type, velocity,)) {
       if (MotionGlobalConfig.instantAnimations || !delay2) {
-        onUpdate == null ? void 0 : onUpdate(getFinalKeyframe(keyframes2, options, finalKeyframe,),);
+        onUpdate?.(getFinalKeyframe(keyframes2, options, finalKeyframe,),);
       }
       keyframes2[0] = keyframes2[keyframes2.length - 1];
       makeAnimationInstant(options,);
@@ -2369,9 +2351,8 @@ var AsyncMotionValueAnimation = class extends WithPromise {
     return this.finished.finally(onResolve,).then(() => {},);
   }
   get animation() {
-    var _a;
     if (!this._animation) {
-      (_a = this.keyframeResolver) == null ? void 0 : _a.resume();
+      this.keyframeResolver?.resume();
       flushKeyframeResolvers();
     }
     return this._animation;
@@ -2418,11 +2399,10 @@ var AsyncMotionValueAnimation = class extends WithPromise {
     this.animation.complete();
   }
   cancel() {
-    var _a;
     if (this._animation) {
       this.animation.cancel();
     }
-    (_a = this.keyframeResolver) == null ? void 0 : _a.cancel();
+    this.keyframeResolver?.cancel();
   }
 };
 var GroupAnimation = class {
@@ -2551,7 +2531,7 @@ function getVariableValue(current2, element, depth = 1,) {
   return isCSSVariableToken(fallback,) ? getVariableValue(fallback, element, depth + 1,) : fallback;
 }
 function getValueTransition(transition, key7,) {
-  return (transition == null ? void 0 : transition[key7]) ?? (transition == null ? void 0 : transition['default']) ?? transition;
+  return transition?.[key7] ?? transition?.['default'] ?? transition;
 }
 var positionalKeys = /* @__PURE__ */ new Set(['width', 'height', 'top', 'left', 'right', 'bottom', ...transformPropOrder,],);
 var testValueType = (v) => (type) => type.test(v,);
@@ -2781,7 +2761,6 @@ var DOMKeyframesResolver = class extends KeyframeResolver {
     }
   }
   measureEndState() {
-    var _a;
     const {
       element,
       name,
@@ -2799,7 +2778,7 @@ var DOMKeyframesResolver = class extends KeyframeResolver {
     if (finalKeyframe !== null && this.finalKeyframe === void 0) {
       this.finalKeyframe = finalKeyframe;
     }
-    if ((_a = this.removedTransforms) == null ? void 0 : _a.length) {
+    if (this.removedTransforms?.length) {
       this.removedTransforms.forEach(([unsetTransformName, unsetTransformValue,],) => {
         element.getValue(unsetTransformName,).set(unsetTransformValue,);
       },);
@@ -2880,7 +2859,7 @@ function resolveElements(elementOrSelector, scope, selectorCache,) {
     if (scope) {
       root = scope.current;
     }
-    const elements = (selectorCache == null ? void 0 : selectorCache[elementOrSelector]) ?? root.querySelectorAll(elementOrSelector,);
+    const elements = selectorCache?.[elementOrSelector] ?? root.querySelectorAll(elementOrSelector,);
     return elements ? Array.from(elements,) : [];
   }
   return Array.from(elementOrSelector,);
@@ -2939,8 +2918,7 @@ var MotionValueState = class {
     return remove2;
   }
   get(name,) {
-    var _a;
-    return (_a = this.values.get(name,)) == null ? void 0 : _a.value;
+    return this.values.get(name,)?.value;
   }
   destroy() {
     for (const value of this.values.values()) {
@@ -3020,7 +2998,6 @@ var MotionValue = class {
     this.canTrackVelocity = null;
     this.events = {};
     this.updateAndNotify = (v) => {
-      var _a;
       const currentTime = time.now();
       if (this.updatedAt !== currentTime) {
         this.setPrevFrameValue();
@@ -3028,7 +3005,7 @@ var MotionValue = class {
       this.prev = this.current;
       this.setCurrent(v,);
       if (this.current !== this.prev) {
-        (_a = this.events.change) == null ? void 0 : _a.notify(this.current,);
+        this.events.change?.notify(this.current,);
         if (this.dependents) {
           for (const dependent of this.dependents) {
             dependent.dirty();
@@ -3166,8 +3143,7 @@ var MotionValue = class {
     if (this.stopPassiveEffect) this.stopPassiveEffect();
   }
   dirty() {
-    var _a;
-    (_a = this.events.change) == null ? void 0 : _a.notify(this.current,);
+    this.events.change?.notify(this.current,);
   }
   addDependent(dependent,) {
     if (!this.dependents) {
@@ -3274,9 +3250,8 @@ var MotionValue = class {
    * @public
    */
   destroy() {
-    var _a, _b;
-    (_a = this.dependents) == null ? void 0 : _a.clear();
-    (_b = this.events.destroy) == null ? void 0 : _b.notify();
+    this.dependents?.clear();
+    this.events.destroy?.notify();
     this.clearListeners();
     this.stop();
     if (this.stopPassiveEffect) {
@@ -3570,8 +3545,7 @@ function notifyTarget({
   target,
   borderBoxSize,
 },) {
-  var _a;
-  (_a = resizeHandlers.get(target,)) == null ? void 0 : _a.forEach((handler) => {
+  resizeHandlers.get(target,)?.forEach((handler) => {
     handler(target, {
       get width() {
         return getWidth(target, borderBoxSize,);
@@ -3599,14 +3573,14 @@ function resizeElement(target, handler,) {
       resizeHandlers.set(element, elementHandlers,);
     }
     elementHandlers.add(handler,);
-    observer == null ? void 0 : observer.observe(element,);
+    observer?.observe(element,);
   },);
   return () => {
     elements.forEach((element) => {
       const elementHandlers = resizeHandlers.get(element,);
-      elementHandlers == null ? void 0 : elementHandlers.delete(handler,);
-      if (!(elementHandlers == null ? void 0 : elementHandlers.size)) {
-        observer == null ? void 0 : observer.unobserve(element,);
+      elementHandlers?.delete(handler,);
+      if (!elementHandlers?.size) {
+        observer?.unobserve(element,);
       }
     },);
   };
@@ -3896,12 +3870,11 @@ function getViewAnimationLayerInfo(pseudoElement,) {
   };
 }
 function filterViewAnimations(animation,) {
-  var _a;
   const {
     effect,
   } = animation;
   if (!effect) return false;
-  return effect.target === document.documentElement && ((_a = effect.pseudoElement) == null ? void 0 : _a.startsWith('::view-transition',));
+  return effect.target === document.documentElement && effect.pseudoElement?.startsWith('::view-transition',);
 }
 function getViewAnimations() {
   return document.getAnimations().filter(filterViewAnimations,);
@@ -4054,8 +4027,7 @@ function startViewAnimation(builder,) {
   },);
 }
 function hasOpacity(target, key7,) {
-  var _a;
-  return (_a = target == null ? void 0 : target[key7]) == null ? void 0 : _a.keyframes.opacity;
+  return target?.[key7]?.keyframes.opacity;
 }
 var builders = [];
 var current = null;
@@ -4073,7 +4045,6 @@ function start(builder,) {
   },);
 }
 function processQueue() {
-  var _a;
   for (let i = builders.length - 1; i >= 0; i--) {
     const builder = builders[i];
     const {
@@ -4089,7 +4060,7 @@ function processQueue() {
       break;
     }
   }
-  if (!current || ((_a = builders[0]) == null ? void 0 : _a.options.interrupt) === 'immediate') {
+  if (!current || builders[0]?.options.interrupt === 'immediate') {
     next();
   }
 }
@@ -4251,7 +4222,7 @@ function PopChild({
   const {
     nonce,
   } = useContext(MotionConfigContext,);
-  const composedRef = useComposedRefs(ref, children == null ? void 0 : children.ref,);
+  const composedRef = useComposedRefs(ref, children?.ref,);
   useInsertionEffect(() => {
     const {
       width,
@@ -4466,9 +4437,9 @@ var AnimatePresence = ({
           if (!isExitComplete) isEveryExitComplete = false;
         },);
         if (isEveryExitComplete) {
-          forceRender == null ? void 0 : forceRender();
+          forceRender?.();
           setRenderedChildren(pendingPresentChildren.current,);
-          propagate && (safeToRemove == null ? void 0 : safeToRemove());
+          propagate && safeToRemove?.();
           onExitComplete && onExitComplete();
         }
       };
@@ -4768,7 +4739,7 @@ function isVariantNode(props,) {
 }
 function getValueState(visualElement,) {
   const state = [{}, {},];
-  visualElement == null ? void 0 : visualElement.values.forEach((value, key7,) => {
+  visualElement?.values.forEach((value, key7,) => {
     state[0][key7] = value.get();
     state[1][key7] = value.getVelocity();
   },);
@@ -5032,7 +5003,7 @@ function buildSVGAttrs(
     delete attrs.transformOrigin;
   }
   if (style2.transform) {
-    style2.transformBox = (styleProp == null ? void 0 : styleProp.transformBox) ?? 'fill-box';
+    style2.transformBox = styleProp?.transformBox ?? 'fill-box';
     delete attrs.transformBox;
   }
   if (attrX !== void 0) attrs.x = attrX;
@@ -5152,7 +5123,6 @@ function useRender(
   },);
 }
 function scrapeMotionValuesFromProps(props, prevProps, visualElement,) {
-  var _a;
   const {
     style: style2,
   } = props;
@@ -5160,7 +5130,7 @@ function scrapeMotionValuesFromProps(props, prevProps, visualElement,) {
   for (const key7 in style2) {
     if (
       isMotionValue(style2[key7],) || prevProps.style && isMotionValue(prevProps.style[key7],) || isForcedMotionValue(key7, props,) ||
-      ((_a = visualElement == null ? void 0 : visualElement.getValue(key7,)) == null ? void 0 : _a.liveStyle) !== void 0
+      visualElement?.getValue(key7,)?.liveStyle !== void 0
     ) {
       newValues[key7] = style2[key7];
     }
@@ -5215,7 +5185,6 @@ function useMotionRef(visualState, visualElement, externalRef,) {
   [visualElement,],);
 }
 function useVisualElement(Component33, visualState, props, createVisualElement, ProjectionNodeConstructor,) {
-  var _a, _b;
   const {
     visualElement: parent,
   } = useContext(MotionContext,);
@@ -5250,8 +5219,8 @@ function useVisualElement(Component33, visualState, props, createVisualElement, 
   },);
   const optimisedAppearId = props[optimizedAppearDataAttribute];
   const wantsHandoff = useRef(
-    Boolean(optimisedAppearId,) && !((_a = window.MotionHandoffIsComplete) == null ? void 0 : _a.call(window, optimisedAppearId,)) &&
-      ((_b = window.MotionHasOptimisedAnimation) == null ? void 0 : _b.call(window, optimisedAppearId,)),
+    Boolean(optimisedAppearId,) && !window.MotionHandoffIsComplete?.(optimisedAppearId,) &&
+      window.MotionHasOptimisedAnimation?.(optimisedAppearId,),
   );
   useIsomorphicLayoutEffect(() => {
     if (!visualElement) return;
@@ -5270,8 +5239,7 @@ function useVisualElement(Component33, visualState, props, createVisualElement, 
     }
     if (wantsHandoff.current) {
       queueMicrotask(() => {
-        var _a2;
-        (_a2 = window.MotionHandoffMarkAsComplete) == null ? void 0 : _a2.call(window, optimisedAppearId,);
+        window.MotionHandoffMarkAsComplete?.(optimisedAppearId,);
       },);
       wantsHandoff.current = false;
     }
@@ -5401,9 +5369,7 @@ function getProjectionFunctionality(props,) {
     ...layout2,
   };
   return {
-    MeasureLayout: (drag2 == null ? void 0 : drag2.isEnabled(props,)) || (layout2 == null ? void 0 : layout2.isEnabled(props,))
-      ? combined.MeasureLayout
-      : void 0,
+    MeasureLayout: drag2?.isEnabled(props,) || layout2?.isEnabled(props,) ? combined.MeasureLayout : void 0,
     ProjectionNode: combined.ProjectionNode,
   };
 }
@@ -5604,7 +5570,6 @@ var VisualElement = class {
     }
   }
   mount(instance,) {
-    var _a;
     this.current = instance;
     visualElementStore.set(instance, this,);
     if (this.projection && !this.projection.instance) {
@@ -5629,18 +5594,17 @@ var VisualElement = class {
         'reduced-motion-disabled',
       );
     }
-    (_a = this.parent) == null ? void 0 : _a.addChild(this,);
+    this.parent?.addChild(this,);
     this.update(this.props, this.presenceContext,);
   }
   unmount() {
-    var _a;
     this.projection && this.projection.unmount();
     cancelFrame(this.notifyUpdate,);
     cancelFrame(this.render,);
     this.valueSubscriptions.forEach((remove2) => remove2());
     this.valueSubscriptions.clear();
     this.removeFromVariantTree && this.removeFromVariantTree();
-    (_a = this.parent) == null ? void 0 : _a.removeChild(this,);
+    this.parent?.removeChild(this,);
     for (const key7 in this.events) {
       this.events[key7].clear();
     }
@@ -5873,13 +5837,12 @@ var VisualElement = class {
    * props.
    */
   getBaseTarget(key7,) {
-    var _a;
     const {
       initial,
     } = this.props;
     let valueFromInitial;
     if (typeof initial === 'string' || typeof initial === 'object') {
-      const variant = resolveVariantFromProps(this.props, initial, (_a = this.presenceContext) == null ? void 0 : _a.custom,);
+      const variant = resolveVariantFromProps(this.props, initial, this.presenceContext?.custom,);
       if (variant) {
         valueFromInitial = variant[key7];
       }
@@ -6156,12 +6119,7 @@ function calcChildStagger(children, child, delayChildren, staggerChildren = 0, s
     : maxStaggerDuration - index * staggerChildren;
 }
 function animateVariant(visualElement, variant, options = {},) {
-  var _a;
-  const resolved = resolveVariant(
-    visualElement,
-    variant,
-    options.type === 'exit' ? (_a = visualElement.presenceContext) == null ? void 0 : _a.custom : void 0,
-  );
+  const resolved = resolveVariant(visualElement, variant, options.type === 'exit' ? visualElement.presenceContext?.custom : void 0,);
   let {
     transition = visualElement.getDefaultTransition() || {},
   } = resolved || {};
@@ -6262,12 +6220,7 @@ function createAnimationState(visualElement,) {
   let state = createState();
   let isInitialRender = true;
   const buildResolvedTypeValues = (type) => (acc, definition,) => {
-    var _a;
-    const resolved = resolveVariant(
-      visualElement,
-      definition,
-      type === 'exit' ? (_a = visualElement.presenceContext) == null ? void 0 : _a.custom : void 0,
-    );
+    const resolved = resolveVariant(visualElement, definition, type === 'exit' ? visualElement.presenceContext?.custom : void 0,);
     if (resolved) {
       const {
         transition,
@@ -6433,12 +6386,8 @@ function createAnimationState(visualElement,) {
     return shouldAnimate ? animate22(animations2,) : Promise.resolve();
   }
   function setActive(type, isActive,) {
-    var _a;
     if (state[type].isActive === isActive) return Promise.resolve();
-    (_a = visualElement.variantChildren) == null ? void 0 : _a.forEach((child) => {
-      var _a2;
-      return (_a2 = child.animationState) == null ? void 0 : _a2.setActive(type, isActive,);
-    },);
+    visualElement.variantChildren?.forEach((child) => child.animationState?.setActive(type, isActive,));
     state[type].isActive = isActive;
     const animations2 = animateChanges(type,);
     for (const key7 in state) {
@@ -6526,9 +6475,8 @@ var AnimationFeature = class extends Feature {
     }
   }
   unmount() {
-    var _a;
     this.node.animationState.reset();
-    (_a = this.unmountControls) == null ? void 0 : _a.call(this,);
+    this.unmountControls?.();
   }
 };
 var id = 0;
@@ -6863,7 +6811,7 @@ function renderHTML(
   for (key7 in style2) {
     elementStyle[key7] = style2[key7];
   }
-  projection == null ? void 0 : projection.applyProjectionStyles(elementStyle, styleProp,);
+  projection?.applyProjectionStyles(elementStyle, styleProp,);
   for (key7 in vars) {
     elementStyle.setProperty(key7, vars[key7],);
   }
@@ -6878,11 +6826,8 @@ var HTMLVisualElement = class extends DOMVisualElement {
     this.renderInstance = renderHTML;
   }
   readValueFromInstance(instance, key7,) {
-    var _a;
     if (transformProps.has(key7,)) {
-      return ((_a = this.projection) == null ? void 0 : _a.isProjecting)
-        ? defaultTransformValue(key7,)
-        : readTransformValue(instance, key7,);
+      return this.projection?.isProjecting ? defaultTransformValue(key7,) : readTransformValue(instance, key7,);
     } else {
       const computedStyle = getComputedStyle3(instance,);
       const value = (isCSSVariableName(key7,) ? computedStyle.getPropertyValue(key7,) : computedStyle[key7]) || 0;
@@ -7347,10 +7292,7 @@ var VisualElementDragControls = class {
       this.latestPanInfo = null;
     };
     const resumeAnimation = () =>
-      eachAxis((axis) => {
-        var _a;
-        return this.getAnimationState(axis,) === 'paused' && ((_a = this.getAxisMotionValue(axis,).animation) == null ? void 0 : _a.play());
-      },);
+      eachAxis((axis) => this.getAnimationState(axis,) === 'paused' && this.getAxisMotionValue(axis,).animation?.play());
     const {
       dragSnapToOrigin,
     } = this.getProps();
@@ -7423,16 +7365,13 @@ var VisualElementDragControls = class {
     axisValue.set(next2,);
   }
   resolveConstraints() {
-    var _a;
     const {
       dragConstraints,
       dragElastic,
     } = this.getProps();
     const layout2 = this.visualElement.projection && !this.visualElement.projection.layout
       ? this.visualElement.projection.measure(false,)
-      : (_a = this.visualElement.projection) == null
-      ? void 0
-      : _a.layout;
+      : this.visualElement.projection?.layout;
     const prevConstraints = this.constraints;
     if (dragConstraints && isRefObject(dragConstraints,)) {
       if (!this.constraints) {
@@ -7528,14 +7467,10 @@ var VisualElementDragControls = class {
     eachAxis((axis) => this.getAxisMotionValue(axis,).stop());
   }
   pauseAnimation() {
-    eachAxis((axis) => {
-      var _a;
-      return (_a = this.getAxisMotionValue(axis,).animation) == null ? void 0 : _a.pause();
-    },);
+    eachAxis((axis) => this.getAxisMotionValue(axis,).animation?.pause());
   }
   getAnimationState(axis,) {
-    var _a;
-    return (_a = this.getAxisMotionValue(axis,).animation) == null ? void 0 : _a.state;
+    return this.getAxisMotionValue(axis,).animation?.state;
   }
   /**
    * Drag works differently depending on which props are provided.
@@ -8180,7 +8115,7 @@ function buildProjectionTransform(delta, treeScale, latestTransform,) {
   let transform2 = '';
   const xTranslate = delta.x.translate / treeScale.x;
   const yTranslate = delta.y.translate / treeScale.y;
-  const zTranslate = (latestTransform == null ? void 0 : latestTransform.z) || 0;
+  const zTranslate = latestTransform?.z || 0;
   if (xTranslate || yTranslate || zTranslate) {
     transform2 = `translate3d(${xTranslate}px, ${yTranslate}px, ${zTranslate}px) `;
   }
@@ -8260,7 +8195,7 @@ function createProjectionNode2({
   resetTransform,
 },) {
   return class ProjectionNode {
-    constructor(latestValues = {}, parent = defaultParent == null ? void 0 : defaultParent(),) {
+    constructor(latestValues = {}, parent = defaultParent?.(),) {
       this.id = id2++;
       this.animationId = 0;
       this.animationCommitId = 0;
@@ -8629,13 +8564,12 @@ function createProjectionNode2({
       };
     }
     measurePageBox() {
-      var _a;
       const {
         visualElement,
       } = this.options;
       if (!visualElement) return createBox();
       const box = visualElement.measureViewportBox();
-      const wasInScrollRoot = ((_a = this.scroll) == null ? void 0 : _a.wasRoot) || this.path.some(checkNodeWasScrollRoot,);
+      const wasInScrollRoot = this.scroll?.wasRoot || this.path.some(checkNodeWasScrollRoot,);
       if (!wasInScrollRoot) {
         const {
           scroll: scroll2,
@@ -8648,10 +8582,9 @@ function createProjectionNode2({
       return box;
     }
     removeElementScroll(box,) {
-      var _a;
       const boxWithoutScroll = createBox();
       copyBoxInto(boxWithoutScroll, box,);
-      if ((_a = this.scroll) == null ? void 0 : _a.wasRoot) {
+      if (this.scroll?.wasRoot) {
         return boxWithoutScroll;
       }
       for (let i = 0; i < this.path.length; i++) {
@@ -8735,16 +8668,14 @@ function createProjectionNode2({
       }
     }
     resolveTargetDelta(forceRecalculation = false,) {
-      var _a;
       const lead = this.getLead();
       this.isProjectionDirty || (this.isProjectionDirty = lead.isProjectionDirty);
       this.isTransformDirty || (this.isTransformDirty = lead.isTransformDirty);
       this.isSharedProjectionDirty || (this.isSharedProjectionDirty = lead.isSharedProjectionDirty);
       const isShared = Boolean(this.resumingFrom,) || this !== lead;
       const canSkip =
-        !(forceRecalculation || isShared && this.isSharedProjectionDirty || this.isProjectionDirty ||
-          ((_a = this.parent) == null ? void 0 : _a.isProjectionDirty) || this.attemptToResolveRelativeTarget ||
-          this.root.updateBlockedByResize);
+        !(forceRecalculation || isShared && this.isSharedProjectionDirty || this.isProjectionDirty || this.parent?.isProjectionDirty ||
+          this.attemptToResolveRelativeTarget || this.root.updateBlockedByResize);
       if (canSkip) return;
       const {
         layout: layout2,
@@ -8818,11 +8749,10 @@ function createProjectionNode2({
       return Boolean((this.relativeTarget || this.targetDelta || this.options.layoutRoot) && this.layout,);
     }
     calcProjection() {
-      var _a;
       const lead = this.getLead();
       const isShared = Boolean(this.resumingFrom,) || this !== lead;
       let canSkip = true;
-      if (this.isProjectionDirty || ((_a = this.parent) == null ? void 0 : _a.isProjectionDirty)) {
+      if (this.isProjectionDirty || this.parent?.isProjectionDirty) {
         canSkip = false;
       }
       if (isShared && (this.isSharedProjectionDirty || this.isTransformDirty)) {
@@ -8886,8 +8816,7 @@ function createProjectionNode2({
       this.isVisible = true;
     }
     scheduleRender(notifyAll2 = true,) {
-      var _a;
-      (_a = this.options.visualElement) == null ? void 0 : _a.scheduleRender();
+      this.options.visualElement?.scheduleRender();
       if (notifyAll2) {
         const stack = this.getStack();
         stack && stack.scheduleRender();
@@ -8948,10 +8877,9 @@ function createProjectionNode2({
       this.mixTargetDelta(this.options.layoutRoot ? 1e3 : 0,);
     }
     startAnimation(options,) {
-      var _a, _b, _c;
       this.notifyListeners('animationStart',);
-      (_a = this.currentAnimation) == null ? void 0 : _a.stop();
-      (_c = (_b = this.resumingFrom) == null ? void 0 : _b.currentAnimation) == null ? void 0 : _c.stop();
+      this.currentAnimation?.stop();
+      this.resumingFrom?.currentAnimation?.stop();
       if (this.pendingAnimation) {
         cancelFrame(this.pendingAnimation,);
         this.pendingAnimation = void 0;
@@ -9042,18 +8970,16 @@ function createProjectionNode2({
       return stack ? stack.lead === this : true;
     }
     getLead() {
-      var _a;
       const {
         layoutId,
       } = this.options;
-      return layoutId ? ((_a = this.getStack()) == null ? void 0 : _a.lead) || this : this;
+      return layoutId ? this.getStack()?.lead || this : this;
     }
     getPrevLead() {
-      var _a;
       const {
         layoutId,
       } = this.options;
-      return layoutId ? (_a = this.getStack()) == null ? void 0 : _a.prevLead : void 0;
+      return layoutId ? this.getStack()?.prevLead : void 0;
     }
     getStack() {
       const {
@@ -9130,7 +9056,7 @@ function createProjectionNode2({
         this.needsReset = false;
         targetStyle.visibility = '';
         targetStyle.opacity = '';
-        targetStyle.pointerEvents = resolveMotionValue(styleProp == null ? void 0 : styleProp.pointerEvents,) || '';
+        targetStyle.pointerEvents = resolveMotionValue(styleProp?.pointerEvents,) || '';
         targetStyle.transform = transformTemplate2 ? transformTemplate2(this.latestValues, '',) : 'none';
         return;
       }
@@ -9138,7 +9064,7 @@ function createProjectionNode2({
       if (!this.projectionDelta || !this.layout || !lead.target) {
         if (this.options.layoutId) {
           targetStyle.opacity = this.latestValues.opacity !== void 0 ? this.latestValues.opacity : 1;
-          targetStyle.pointerEvents = resolveMotionValue(styleProp == null ? void 0 : styleProp.pointerEvents,) || '';
+          targetStyle.pointerEvents = resolveMotionValue(styleProp?.pointerEvents,) || '';
         }
         if (this.hasProjected && !hasTransform(this.latestValues,)) {
           targetStyle.transform = transformTemplate2 ? transformTemplate2({}, '',) : 'none';
@@ -9194,9 +9120,7 @@ function createProjectionNode2({
         }
       }
       if (this.options.layoutId) {
-        targetStyle.pointerEvents = lead === this
-          ? resolveMotionValue(styleProp == null ? void 0 : styleProp.pointerEvents,) || ''
-          : 'none';
+        targetStyle.pointerEvents = lead === this ? resolveMotionValue(styleProp?.pointerEvents,) || '' : 'none';
       }
     }
     clearSnapshot() {
@@ -9204,10 +9128,7 @@ function createProjectionNode2({
     }
     // Only run on root
     resetTree() {
-      this.root.nodes.forEach((node) => {
-        var _a;
-        return (_a = node.currentAnimation) == null ? void 0 : _a.stop();
-      },);
+      this.root.nodes.forEach((node) => node.currentAnimation?.stop());
       this.root.nodes.forEach(clearMeasurements,);
       this.root.sharedNodes.clear();
     }
@@ -9217,8 +9138,7 @@ function updateLayout(node,) {
   node.updateLayout();
 }
 function notifyLayoutUpdate(node,) {
-  var _a;
-  const snapshot = ((_a = node.resumeFrom) == null ? void 0 : _a.snapshot) || node.snapshot;
+  const snapshot = node.resumeFrom?.snapshot || node.snapshot;
   if (node.isLead() && node.layout && snapshot && node.hasListeners('didUpdate',)) {
     const {
       layoutBox: layout2,
@@ -9385,8 +9305,7 @@ function shouldAnimatePositionOnly(animationType, snapshot, layout2,) {
     animationType === 'preserve-aspect' && !isNear(aspectRatio(snapshot,), aspectRatio(layout2,), 0.2,);
 }
 function checkNodeWasScrollRoot(node,) {
-  var _a;
-  return node !== node.root && ((_a = node.scroll) == null ? void 0 : _a.wasRoot);
+  return node !== node.root && node.scroll?.wasRoot;
 }
 var DocumentProjectionNode = createProjectionNode2({
   attachResizeListener: (ref, notify2,) => addDomEvent(ref, 'resize', notify2,),
@@ -9944,7 +9863,6 @@ function scrollInfo(onScroll, {
   const listener = scrollListeners.get(container,);
   frame.read(listener, false, true,);
   return () => {
-    var _a;
     cancelFrame(listener,);
     const currentHandlers = onScrollHandlers.get(container,);
     if (!currentHandlers) return;
@@ -9954,7 +9872,7 @@ function scrollInfo(onScroll, {
     scrollListeners.delete(container,);
     if (scrollListener) {
       getEventTarget(container,).removeEventListener('scroll', scrollListener,);
-      (_a = resizeListeners.get(container,)) == null ? void 0 : _a();
+      resizeListeners.get(container,)?.();
       window.removeEventListener('resize', scrollListener,);
     }
   };
@@ -10067,12 +9985,11 @@ function useScroll({
       values.scrollYProgress.set(y.progress,);
     }, {
       ...options,
-      container: (container == null ? void 0 : container.current) || void 0,
-      target: (target == null ? void 0 : target.current) || void 0,
+      container: container?.current || void 0,
+      target: target?.current || void 0,
     },);
     return () => {
-      var _a;
-      (_a = scrollAnimation.current) == null ? void 0 : _a.call(scrollAnimation,);
+      scrollAnimation.current?.();
     };
   }, [container, target, JSON.stringify(options.offset,),],);
   useIsomorphicLayoutEffect(() => {
@@ -10450,7 +10367,7 @@ function createAnimationsFromSequence(
       } = valueTransition;
       const calculatedDelay = typeof delay2 === 'function' ? delay2(elementIndex, numSubjects,) : delay2;
       const numKeyframes = valueKeyframesAsList.length;
-      const createGenerator = isGenerator(type,) ? type : generators == null ? void 0 : generators[type || 'keyframes'];
+      const createGenerator = isGenerator(type,) ? type : generators?.[type || 'keyframes'];
       if (numKeyframes <= 2 && createGenerator) {
         let absoluteDelta = 100;
         if (numKeyframes === 2 && isNumberKeyframesArray(valueKeyframesAsList,)) {
@@ -11083,7 +11000,6 @@ var appearStoreId = (elementId, valueName,) => {
   return `${elementId}: ${key7}`;
 };
 function handoffOptimizedAppearAnimation(elementId, valueName, frame2,) {
-  var _a;
   const storeId = appearStoreId(elementId, valueName,);
   const optimisedAnimation = appearAnimationStore.get(storeId,);
   if (!optimisedAnimation) {
@@ -11094,11 +11010,10 @@ function handoffOptimizedAppearAnimation(elementId, valueName, frame2,) {
     startTime,
   } = optimisedAnimation;
   function cancelAnimation() {
-    var _a2;
-    (_a2 = window.MotionCancelOptimisedAnimation) == null ? void 0 : _a2.call(window, elementId, valueName, frame2,);
+    window.MotionCancelOptimisedAnimation?.(elementId, valueName, frame2,);
   }
   animation.onfinish = cancelAnimation;
-  if (startTime === null || ((_a = window.MotionHandoffIsComplete) == null ? void 0 : _a.call(window, elementId,))) {
+  if (startTime === null || window.MotionHandoffIsComplete?.(elementId,)) {
     cancelAnimation();
     return null;
   } else {
@@ -11177,16 +11092,14 @@ function startOptimizedAppearAnimation(element, name, keyframes2, options, onRea
       }
     };
     window.MotionCheckAppearSync = (visualElement, valueName, value,) => {
-      var _a, _b;
       const appearId = getOptimisedAppearId(visualElement,);
       if (!appearId) return;
-      const valueIsOptimised = (_a = window.MotionHasOptimisedAnimation) == null ? void 0 : _a.call(window, appearId, valueName,);
-      const externalAnimationValue = (_b = visualElement.props.values) == null ? void 0 : _b[valueName];
+      const valueIsOptimised = window.MotionHasOptimisedAnimation?.(appearId, valueName,);
+      const externalAnimationValue = visualElement.props.values?.[valueName];
       if (!valueIsOptimised || !externalAnimationValue) return;
       const removeSyncCheck = value.on('change', (latestValue) => {
-        var _a2;
         if (externalAnimationValue.get() !== latestValue) {
-          (_a2 = window.MotionCancelOptimisedAnimation) == null ? void 0 : _a2.call(window, appearId, valueName,);
+          window.MotionCancelOptimisedAnimation?.(appearId, valueName,);
           removeSyncCheck();
         }
       },);
@@ -11424,7 +11337,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.HRECQKPP.mjs
+// /:https://app.framerstatic.com/framer.RI4JAUGT.mjs
 
 import React42 from 'react';
 import { useDeferredValue, useSyncExternalStore, } from 'react';
@@ -12579,12 +12492,11 @@ function RoutesProvider({
 }
 var CurrentRouteContext = /* @__PURE__ */ (() => React42.createContext({},))();
 function useCurrentRoute() {
-  var _a;
   const router = useRouter();
   const override = useContext(CurrentRouteContext,);
-  const id3 = (override == null ? void 0 : override.routeId) ?? router.currentRouteId;
-  const pathVariables = (override == null ? void 0 : override.routeId) ? override.pathVariables : router.currentPathVariables;
-  const route = id3 ? (_a = router.getRoute) == null ? void 0 : _a.call(router, id3,) : void 0;
+  const id3 = override?.routeId ?? router.currentRouteId;
+  const pathVariables = override?.routeId ? override.pathVariables : router.currentPathVariables;
+  const route = id3 ? router.getRoute?.(id3,) : void 0;
   return useMemo(() => {
     if (!id3 || !route) return void 0;
     return {
@@ -12600,8 +12512,7 @@ function useCurrentRouteKey() {
   return `${currentRoute.id}-${JSON.stringify(currentRoute.pathVariables,)}`;
 }
 function useCurrentRouteId() {
-  var _a;
-  return (_a = useCurrentRoute()) == null ? void 0 : _a.id;
+  return useCurrentRoute()?.id;
 }
 function useOnRouteChange(cb,) {
   const currentRoute = useCurrentRoute();
@@ -12611,10 +12522,9 @@ function useOnRouteChange(cb,) {
   cb(currentRoute,);
 }
 function useRoute(routeId,) {
-  var _a;
   const routerAPI = useRouter();
   if (!routeId) return void 0;
-  return (_a = routerAPI.getRoute) == null ? void 0 : _a.call(routerAPI, routeId,);
+  return routerAPI.getRoute?.(routeId,);
 }
 function getRouteElementId(route, hash2,) {
   if (hash2 && route) {
@@ -12658,8 +12568,7 @@ function useRouteElementId(id3, targetRouteId,) {
   }, [id3, route,],);
 }
 function useCurrentPathVariables() {
-  var _a;
-  return (_a = useCurrentRoute()) == null ? void 0 : _a.pathVariables;
+  return useCurrentRoute()?.pathVariables;
 }
 function isFunction(value,) {
   return typeof value === 'function';
@@ -12799,9 +12708,8 @@ function yieldUnlessUrgent(options,) {
     document.addEventListener('pagehide', resolvePendingPromises,);
     frame.read(() => {
       const resolveFn = () => {
-        var _a;
         pendingResolvers.delete(resolve,);
-        if ((_a = options == null ? void 0 : options.signal) == null ? void 0 : _a.aborted) return;
+        if (options?.signal?.aborted) return;
         resolve();
       };
       void schedulerYield(options,).then(resolveFn,);
@@ -12823,7 +12731,7 @@ function interactionResponse(options,) {
   },);
 }
 function schedulerYield(options,) {
-  const priority = options == null ? void 0 : options.priority;
+  const priority = options?.priority;
   const canUseModernAPI = canUseYield || canUsePostTask;
   if (!canUseModernAPI) {
     if (priority === 'user-blocking') {
@@ -12885,21 +12793,20 @@ function useRouteHandler(routeId, preload = false, elementId,) {
     navigate,
   } = useRouter();
   useRoutePreloader([routeId,], preload,);
-  const handler = React42.useCallback(() => navigate == null ? void 0 : navigate(routeId, elementId,), [navigate, elementId, routeId,],);
+  const handler = React42.useCallback(() => navigate?.(routeId, elementId,), [navigate, elementId, routeId,],);
   return handler;
 }
 var defaultLocaleId = 'default';
 function assert(condition, ...msg) {
-  var _a, _b;
   if (condition) return;
   const e = Error('Assertion Error' + (msg.length > 0 ? ': ' + msg.join(' ',) : ''),);
   if (e.stack) {
     try {
       const lines = e.stack.split('\n',);
-      if ((_a = lines[1]) == null ? void 0 : _a.includes('assert',)) {
+      if (lines[1]?.includes('assert',)) {
         lines.splice(1, 1,);
         e.stack = lines.join('\n',);
-      } else if ((_b = lines[0]) == null ? void 0 : _b.includes('assert',)) {
+      } else if (lines[0]?.includes('assert',)) {
         lines.splice(0, 1,);
         e.stack = lines.join('\n',);
       }
@@ -13187,7 +13094,7 @@ function unflatten(parsed, revivers,) {
     } else if (Array.isArray(value,)) {
       if (typeof value[0] === 'string') {
         const type = value[0];
-        const reviver = revivers == null ? void 0 : revivers[type];
+        const reviver = revivers?.[type];
         if (reviver) {
           let i = value[1];
           if (typeof i !== 'number') {
@@ -13484,8 +13391,7 @@ function stringify_primitive(thing,) {
 }
 var pageviewEventVersion = 2;
 function sendTrackingEvent(eventType, eventData, sendOn = 'lazy',) {
-  var _a;
-  (_a = safeWindow.__framer_events) == null ? void 0 : _a.push([eventType, eventData, sendOn,],);
+  safeWindow.__framer_events?.push([eventType, eventData, sendOn,],);
   switch (eventType) {
     case 'published_site_click': {
       const {
@@ -13564,7 +13470,7 @@ function parseHandoverData() {
     console.warn('Failed to parse handover data. Falling back to network.', error,);
   }
   requestIdleCallback(() => {
-    script == null ? void 0 : script.remove();
+    script?.remove();
     script = null;
   },);
   return hydratedData;
@@ -13635,7 +13541,7 @@ var HandoverCollector = class {
 var handoverCollector = /* @__PURE__ */ (() => isWindow ? void 0 : new HandoverCollector())();
 var handoverDataType = /* @__PURE__ */ (() => HandoverDataType.CollectionUtilsCache)();
 function getLocaleKey(locale,) {
-  return (locale == null ? void 0 : locale.id) ?? defaultLocaleId;
+  return locale?.id ?? defaultLocaleId;
 }
 function makeHandoverKey(method, collectionId, localeKey, id3,) {
   return `${method}|${collectionId}|${localeKey}|${id3}`;
@@ -13691,7 +13597,7 @@ var CollectionUtilsCache = class {
     const entryKey = makeHandoverKey(method, this.collectionId, localeKey, id3,);
     if (this.cacheMap.has(entryKey,)) {
       const cached = this.cacheMap.get(entryKey,);
-      const value = cached == null ? void 0 : cached.readMaybeAsync();
+      const value = cached?.readMaybeAsync();
       if (handoverCollector !== void 0) {
         if (isPromise(value,)) {
           return value.then((result) => {
@@ -13712,11 +13618,7 @@ var CollectionUtilsCache = class {
     const utilsIsPromise = isPromise(maybeUtils,);
     let maybeResult;
     try {
-      maybeResult = utilsIsPromise
-        ? maybeUtils.then((utils) => utils == null ? void 0 : utils[method](id3, locale,))
-        : maybeUtils == null
-        ? void 0
-        : maybeUtils[method](id3, locale,);
+      maybeResult = utilsIsPromise ? maybeUtils.then((utils) => utils?.[method](id3, locale,)) : maybeUtils?.[method](id3, locale,);
     } catch (error) {
       console.error(getPleaseReportMessage('Failed to call CollectionUtils method.', error,),);
       maybeResult = void 0;
@@ -13911,7 +13813,6 @@ function forwardQueryParams(queryParamsString, href,) {
   return baseUrl + '?' + newSearchString + hash2;
 }
 async function replacePathVariables(path, currentLocale, nextLocale, defaultLocale, collectionId, pathVariables, collectionUtils,) {
-  var _a;
   let resultPath = path;
   let isMissingInLocale = false;
   const resultPathVariables = {
@@ -13919,8 +13820,8 @@ async function replacePathVariables(path, currentLocale, nextLocale, defaultLoca
   };
   const matches = Array.from(resultPath.matchAll(pathVariablesRegExp,),);
   const replacements = await Promise.all(matches.map(async (match) => {
-    const pathVariableWithDelimiter = match == null ? void 0 : match[0];
-    const pathVariableValue = match == null ? void 0 : match[1];
+    const pathVariableWithDelimiter = match?.[0];
+    const pathVariableValue = match?.[1];
     if (!pathVariableWithDelimiter || !pathVariableValue) {
       throw new Error('Failed to replace path variables: unexpected regex match group',);
     }
@@ -13928,7 +13829,7 @@ async function replacePathVariables(path, currentLocale, nextLocale, defaultLoca
     if (!currentSlug || !isString(currentSlug,)) {
       throw new Error(`No slug found for path variable ${pathVariableValue}`,);
     }
-    const utils = collectionUtils == null ? void 0 : collectionUtils.get(collectionId,);
+    const utils = collectionUtils?.get(collectionId,);
     if (!utils || !currentLocale) {
       return currentSlug;
     }
@@ -13957,7 +13858,7 @@ async function replacePathVariables(path, currentLocale, nextLocale, defaultLoca
     const replacement = replacements[i];
     if (!match || !replacement) continue;
     replacedPath += resultPath.substring(lastIndex, match.index,);
-    lastIndex = (match.index ?? 0) + (((_a = match[0]) == null ? void 0 : _a.length) ?? 0);
+    lastIndex = (match.index ?? 0) + (match[0]?.length ?? 0);
     replacedPath += replacements[i];
     hasMatch = true;
   }
@@ -13984,7 +13885,7 @@ async function getLocalizedNavigationPath({
     path: basePath,
     pathLocalized,
   } = route;
-  const path = (pathLocalized == null ? void 0 : pathLocalized[nextLocale.id]) ?? basePath;
+  const path = pathLocalized?.[nextLocale.id] ?? basePath;
   let result = {
     path,
     pathVariables,
@@ -14045,8 +13946,7 @@ function getPageEffectForRoute(currentRouteId, nextRouteId, {
   global,
   routes,
 },) {
-  var _a;
-  return ((_a = routes[currentRouteId]) == null ? void 0 : _a[nextRouteId]) || global;
+  return routes[currentRouteId]?.[nextRouteId] || global;
 }
 var step = 10;
 var maxDuration = 1e4;
@@ -14213,15 +14113,12 @@ var restState = {
   mask: void 0,
 };
 function valuesToCSSKeyframes(values, progress2, page, maskGenerator,) {
-  var _a;
   let keyframes2 = `
       opacity: ${values.opacity};
       transform: translate(${values.x}, ${values.y}) scale(${values.scale}) rotateX(${values.rotateX}deg) rotateY(${values.rotateY}deg) rotateZ(${values.rotate}deg);
     `;
   if (values.mask) {
-    keyframes2 += ((_a = maskGenerator == null ? void 0 : maskGenerator.makeKeyframe) == null
-      ? void 0
-      : _a.call(maskGenerator, values.mask, progress2, page,)) || '';
+    keyframes2 += maskGenerator?.makeKeyframe?.(values.mask, progress2, page,) || '';
   }
   return keyframes2;
 }
@@ -14232,7 +14129,6 @@ function createPageTransitionRules(page, {
   transition,
   ...values
 },) {
-  var _a;
   const name = 'view-transition-' + page;
   const settings = {
     duration: '0s',
@@ -14254,7 +14150,7 @@ function createPageTransitionRules(page, {
     settings.duration = duration + 'ms';
     settings.easing = easing;
   }
-  const maskGenerator = getMaskGenerator((_a = values == null ? void 0 : values.mask) == null ? void 0 : _a.type,);
+  const maskGenerator = getMaskGenerator(values?.mask?.type,);
   let startKeyframes = valuesToCSSKeyframes(values, 'start', page, maskGenerator,);
   let endKeyframes = valuesToCSSKeyframes(
     {
@@ -14269,9 +14165,7 @@ function createPageTransitionRules(page, {
     [startKeyframes, endKeyframes,] = [endKeyframes, startKeyframes,];
   }
   return `
-        ${
-    values.mask && (maskGenerator == null ? void 0 : maskGenerator.makePropertyRules) ? maskGenerator.makePropertyRules(values.mask,) : ''
-  }
+        ${values.mask && maskGenerator?.makePropertyRules ? maskGenerator.makePropertyRules(values.mask,) : ''}
 
         @keyframes ${name} {
             0% {
@@ -14289,9 +14183,7 @@ function createPageTransitionRules(page, {
             animation-delay: ${transition.delay}s;
             animation-timing-function: ${settings.easing};
             animation-fill-mode: both;
-            ${
-    values.mask && (maskGenerator == null ? void 0 : maskGenerator.makeStyles) ? maskGenerator.makeStyles(values.mask, page,) : ''
-  }
+            ${values.mask && maskGenerator?.makeStyles ? maskGenerator.makeStyles(values.mask, page,) : ''}
         }
     `;
 }
@@ -14397,12 +14289,12 @@ async function startViewTransition(updateView, effect, signal,) {
     return;
   }
   await addVTStylesheetAfterInRender(effect,);
-  if (signal == null ? void 0 : signal.aborted) return;
+  if (signal?.aborted) return;
   performance.mark('framer-vt',);
   const transition = document.startViewTransition(async () => {
     performance.mark('framer-vt-freeze',);
-    if (signal == null ? void 0 : signal.aborted) return;
-    else signal == null ? void 0 : signal.addEventListener('abort', () => transition.skipTransition(),);
+    if (signal?.aborted) return;
+    else signal?.addEventListener('abort', () => transition.skipTransition(),);
     await updateView();
   },);
   transition.updateCallbackDone.then(() => {
@@ -14528,9 +14420,8 @@ function useMonitorNextPaintAfterRender(label,) {
       promise: hasPainted,
       measureDetail,
       ignore: () => {
-        var _a;
         ignore = true;
-        (_a = resolveHasPainted.current) == null ? void 0 : _a.call(resolveHasPainted,);
+        resolveHasPainted.current?.();
         resolveHasPainted.current = void 0;
       },
     };
@@ -14647,10 +14538,7 @@ function useReplaceInitialState({
     );
   }, [],);
 }
-var supportsNavigationAPI = /* @__PURE__ */ (() => {
-  var _a;
-  return isWindow && typeof ((_a = window.navigation) == null ? void 0 : _a.back) === 'function';
-})();
+var supportsNavigationAPI = /* @__PURE__ */ (() => isWindow && typeof window.navigation?.back === 'function')();
 function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
   const startViewTransition2 = useViewTransition();
   const monitorNextPaintAfterRender = useMonitorNextPaintAfterRender('framer-route-change',);
@@ -14658,11 +14546,7 @@ function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
   const popStateHandler = useCallback2(async ({
     state,
   },) => {
-    var _a, _b, _c, _d, _e, _f;
-    if (
-      ((_a = window.navigation) == null ? void 0 : _a.transition) &&
-      ((_c = (_b = window.navigation) == null ? void 0 : _b.transition) == null ? void 0 : _c.navigationType) !== 'traverse'
-    ) return;
+    if (window.navigation?.transition && window.navigation?.transition?.navigationType !== 'traverse') return;
     if (!isObject2(state,)) return;
     const {
       routeId,
@@ -14689,13 +14573,13 @@ function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
       );
     };
     const viewTransition = await startViewTransition2(currentRouteId.current, routeId, changeRoute,);
-    const navigationTransition = (_d = window.navigation) == null ? void 0 : _d.transition;
-    await ((viewTransition == null ? void 0 : viewTransition.updateCallbackDone) ?? Promise.resolve()).then(
-      (_e = viewTransitionReady.current) == null ? void 0 : _e.resolve,
-    ).catch((_f = viewTransitionReady.current) == null ? void 0 : _f.reject,);
+    const navigationTransition = window.navigation?.transition;
+    await (viewTransition?.updateCallbackDone ?? Promise.resolve()).then(viewTransitionReady.current?.resolve,).catch(
+      viewTransitionReady.current?.reject,
+    );
     await nextRender.promise;
     try {
-      await (navigationTransition == null ? void 0 : navigationTransition.finished);
+      await navigationTransition?.finished;
     } catch (error) {
       console.warn('Popstate transition failed', error,);
     }
@@ -14729,7 +14613,7 @@ function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
 function getHashForRoute(hash2, route, hashVariables,) {
   const resolvedHash = getRouteElementId(route, hash2,);
   if (!resolvedHash) return void 0;
-  const variables = Object.assign({}, route == null ? void 0 : route.elements, hashVariables,);
+  const variables = Object.assign({}, route?.elements, hashVariables,);
   return resolvedHash.replace(pathVariablesRegExp, (m2, p1,) => variables[p1] ?? m2,);
 }
 function getPathForRoute(route, {
@@ -14745,7 +14629,6 @@ function getPathForRoute(route, {
   siteCanonicalURL,
   localeId,
 },) {
-  var _a;
   const resolvedHash = getHashForRoute(hash2, route, hashVariables,);
   if (onlyHash) return resolvedHash ?? '';
   let currentPath = currentRoutePath ?? '/';
@@ -14755,8 +14638,8 @@ function getPathForRoute(route, {
   if (currentPathVariables) {
     currentPath = currentPath.replace(pathVariablesRegExp, (m2, p1,) => String(currentPathVariables[p1] || m2,),);
   }
-  const targetPathLocalized = localeId ? (_a = route == null ? void 0 : route.pathLocalized) == null ? void 0 : _a[localeId] : void 0;
-  const targetPath = targetPathLocalized ?? (route == null ? void 0 : route.path) ?? '/';
+  const targetPathLocalized = localeId ? route?.pathLocalized?.[localeId] : void 0;
+  const targetPath = targetPathLocalized ?? route?.path ?? '/';
   let path = targetPath;
   if (pathVariables) {
     path = path.replace(pathVariablesRegExp, (m2, p1,) => String(pathVariables[p1] || m2,),);
@@ -14824,8 +14707,7 @@ function pushLoadMoreHistory(hash2, paginationInfo,) {
   try {
     const currentHistoryState = window.history.state;
     if (!isHistoryState(currentHistoryState,)) return;
-    const isInitialLoad = (currentHistoryState == null ? void 0 : currentHistoryState.paginationInfo) === void 0 ||
-      currentHistoryState.paginationInfo[hash2] === void 0;
+    const isInitialLoad = currentHistoryState?.paginationInfo === void 0 || currentHistoryState.paginationInfo[hash2] === void 0;
     const newPaginationInfo = {
       ...currentHistoryState.paginationInfo,
       [hash2]: paginationInfo,
@@ -14846,7 +14728,7 @@ function useNativeLoadingSpinner() {
   const navigateListener = useCallback2((navigateEvent) => {
     if (navigateEvent.navigationType === 'traverse' || !navigateEvent.canIntercept) return;
     const controller = navigationController.current;
-    controller == null ? void 0 : controller.signal.addEventListener('abort', () => {
+    controller?.signal.addEventListener('abort', () => {
       controller.abort('user aborted',);
     },);
     navigateEvent.intercept({
@@ -14877,8 +14759,7 @@ function useTracking() {
   const router = useRouter();
   const nodeId = useContext(NodeIdContext,);
   return useCallback2((trackingId) => {
-    var _a;
-    if (!((_a = router.pageviewEventData) == null ? void 0 : _a.current)) return;
+    if (!router.pageviewEventData?.current) return;
     if (slugify(trackingId,) !== trackingId) {
       throw new Error(`Invalid tracking ID: ${trackingId}`,);
     }
@@ -14944,8 +14825,7 @@ function URLSearchParamsProvider({
   );
   const deferredSearchString = useDeferredValue(searchString,);
   const triggerUpdate = useCallback2(() => {
-    var _a;
-    (_a = onStoreChangeRef.current) == null ? void 0 : _a.call(onStoreChangeRef,);
+    onStoreChangeRef.current?.();
   }, [],);
   const value = useMemoOne(() => ({
     urlSearchParams: new URLSearchParams(deferredSearchString,),
@@ -15013,8 +14893,8 @@ async function getSlugByLocaleIfCollectionPage(activeLocale, locales, currentRou
   const matches = Array.from(path.matchAll(pathVariablesRegExp,),);
   const lastMatch = matches.pop();
   if (!lastMatch) return null;
-  const pathVariableWithDelimiter = lastMatch == null ? void 0 : lastMatch[0];
-  const pathVariableValue = lastMatch == null ? void 0 : lastMatch[1];
+  const pathVariableWithDelimiter = lastMatch?.[0];
+  const pathVariableValue = lastMatch?.[1];
   if (!pathVariableWithDelimiter || !pathVariableValue) {
     throw new Error('Failed to replace path variables: unexpected regex match group',);
   }
@@ -15022,7 +14902,7 @@ async function getSlugByLocaleIfCollectionPage(activeLocale, locales, currentRou
   if (!currentSlug || !isString(currentSlug,)) {
     throw new Error(`No slug found for path variable ${pathVariableValue}`,);
   }
-  const utils = collectionUtils == null ? void 0 : collectionUtils.get(collectionId,);
+  const utils = collectionUtils?.get(collectionId,);
   if (!utils) return null;
   const maybeRecordId = utils.getRecordIdBySlug(currentSlug, activeLocale,);
   const recordId = isPromise(maybeRecordId,) ? await maybeRecordId : maybeRecordId;
@@ -15061,7 +14941,7 @@ function useLocalesForCurrentRoute() {
     locales,
   } = useLocaleInfo();
   const [localesForCurrentRoute, setLocalesForCurrentRoute,] = React42.useState(() => activeLocale ? [activeLocale,] : []);
-  const currentRoute = currentRouteId ? routes == null ? void 0 : routes[currentRouteId] : void 0;
+  const currentRoute = currentRouteId ? routes?.[currentRouteId] : void 0;
   const collectionUtils = useCollectionUtils();
   React42.useEffect(() => {
     let active = true;
@@ -15094,8 +14974,7 @@ function useLocalizationInfo() {
   };
 }
 function useLocaleCode() {
-  var _a;
-  return ((_a = useLocaleInfo().activeLocale) == null ? void 0 : _a.code) ?? 'en-US';
+  return useLocaleInfo().activeLocale?.code ?? 'en-US';
 }
 function useLocale() {
   return useLocaleCode();
@@ -15128,23 +15007,15 @@ function useRouteAnchor(routeId, {
   const hash2 = linkHash ?? elementId;
   const href = React42.useMemo(() =>
     getPathForRoute(route, {
-      currentRoutePath: currentRoute == null ? void 0 : currentRoute.path,
-      currentRoutePathLocalized: currentRoute == null ? void 0 : currentRoute.pathLocalized,
+      currentRoutePath: currentRoute?.path,
+      currentRoutePathLocalized: currentRoute?.pathLocalized,
       currentPathVariables,
       hash: hash2,
       preserveQueryParams,
       siteCanonicalURL,
-      localeId: activeLocale == null ? void 0 : activeLocale.id,
-    },), [
-    currentRoute,
-    currentPathVariables,
-    hash2,
-    preserveQueryParams,
-    route,
-    siteCanonicalURL,
-    activeLocale == null ? void 0 : activeLocale.id,
-  ],);
-  const navigateToRoute = React42.useCallback(() => navigate == null ? void 0 : navigate(routeId, hash2,), [hash2, navigate, routeId,],);
+      localeId: activeLocale?.id,
+    },), [currentRoute, currentPathVariables, hash2, preserveQueryParams, route, siteCanonicalURL, activeLocale?.id,],);
+  const navigateToRoute = React42.useCallback(() => navigate?.(routeId, hash2,), [hash2, navigate, routeId,],);
   const onClick = React42.useCallback((event) => {
     event.preventDefault();
     navigateToRoute();
@@ -15185,8 +15056,7 @@ var eventsToStop = [
   'reset',
 ];
 var stopFn = (event) => {
-  var _a, _b;
-  if (!((_b = (_a = event.target) == null ? void 0 : _a.closest) == null ? void 0 : _b.call(_a, '#main',))) return;
+  if (!event.target?.closest?.('#main',)) return;
   event.stopPropagation();
   performance.mark('framer-react-event-handling-prevented',);
 };
@@ -15363,18 +15233,13 @@ var HydrationMarker = class {
     );
   }
   markUseEffectsEnd() {
-    var _a, _b;
     performance.mark('framer-hydration-effects-end',/* UseEffects_End */
     );
     measureSafe(
       'framer-hydration-effects',
-      ((_a = performance.getEntriesByName('framer-hydration-first-paint',/* BrowserRender_LayoutStylePaintEnd */
-        )[0]) == null
-        ? void 0
-        : _a.name) ?? ((_b = performance.getEntriesByName('framer-hydration-effects-start',/* UseEffects_Start */
-          )[0]) == null
-          ? void 0
-          : _b.name),
+      performance.getEntriesByName('framer-hydration-first-paint',/* BrowserRender_LayoutStylePaintEnd */
+      )[0]?.name ?? performance.getEntriesByName('framer-hydration-effects-start',/* UseEffects_Start */
+      )[0]?.name,
       'framer-hydration-effects-end',
       /* UseEffects_End */
     );
@@ -15415,18 +15280,13 @@ var HydrationMarker = class {
     );
   }
   measureUnattributedHydrationOverhead() {
-    var _a, _b;
     measureSafe(
       'framer-hydration-uho',
       // If effects have run before the start of the render pipeline, we measure from the effects end.
       // If not, the paint will happen before effects run, so we measure from the layout effects end.
-      ((_a = performance.getEntriesByName('framer-hydration-effects-end',/* UseEffects_End */
-        )[0]) == null
-        ? void 0
-        : _a.name) ?? ((_b = performance.getEntriesByName('framer-hydration-layout-effects-end',/* UseLayoutEffects_End */
-          )[0]) == null
-          ? void 0
-          : _b.name),
+      performance.getEntriesByName('framer-hydration-effects-end',/* UseEffects_End */
+      )[0]?.name ?? performance.getEntriesByName('framer-hydration-layout-effects-end',/* UseLayoutEffects_End */
+      )[0]?.name,
       'framer-hydration-browser-render-start',
       /* BrowserRender_RafStart */
     );
@@ -15458,56 +15318,56 @@ function markHydrationStart() {
 }
 function useMarkRouterEffects() {
   useInsertionEffect(() => {
-    hydrationMarker == null ? void 0 : hydrationMarker.useInsertionEffects.markRouterStart();
+    hydrationMarker?.useInsertionEffects.markRouterStart();
   }, [],);
   useLayoutEffect(() => {
-    hydrationMarker == null ? void 0 : hydrationMarker.useLayoutEffects.markRouterStart();
+    hydrationMarker?.useLayoutEffects.markRouterStart();
   }, [],);
   useEffect(() => {
-    hydrationMarker == null ? void 0 : hydrationMarker.useEffects.markRouterStart();
+    hydrationMarker?.useEffects.markRouterStart();
   }, [],);
 }
 var wasInBackground = false;
 function useMarkSuspenseEffectsStart() {
   useInsertionEffect(() => {
-    hydrationMarker == null ? void 0 : hydrationMarker.render.markEnd();
-    hydrationMarker == null ? void 0 : hydrationMarker.useInsertionEffects.markStart();
+    hydrationMarker?.render.markEnd();
+    hydrationMarker?.useInsertionEffects.markStart();
   }, [],);
   useLayoutEffect(() => {
-    hydrationMarker == null ? void 0 : hydrationMarker.useLayoutEffects.markStart();
+    hydrationMarker?.useLayoutEffects.markStart();
     if (document.visibilityState !== 'visible') {
       wasInBackground = true;
       return;
     }
     frame.read(() => {
-      hydrationMarker == null ? void 0 : hydrationMarker.browserRendering.requestAnimationFrame.markStart();
-      hydrationMarker == null ? void 0 : hydrationMarker.unattributedHydrationOverhead.measure();
+      hydrationMarker?.browserRendering.requestAnimationFrame.markStart();
+      hydrationMarker?.unattributedHydrationOverhead.measure();
     },);
   }, [],);
   useEffect(() => {
-    hydrationMarker == null ? void 0 : hydrationMarker.useEffects.markStart();
-    if (!(hydrationMarker == null ? void 0 : hydrationMarker.browserRendering.hasStarted)) {
-      hydrationMarker == null ? void 0 : hydrationMarker.mutationEffects.measure();
-      hydrationMarker == null ? void 0 : hydrationMarker.useEffects.markAreSynchronous();
+    hydrationMarker?.useEffects.markStart();
+    if (!hydrationMarker?.browserRendering.hasStarted) {
+      hydrationMarker?.mutationEffects.measure();
+      hydrationMarker?.useEffects.markAreSynchronous();
     }
   }, [],);
 }
 function useMarkSuspenseEffectEnd() {
   useInsertionEffect(() => {
-    hydrationMarker == null ? void 0 : hydrationMarker.useInsertionEffects.markEnd();
+    hydrationMarker?.useInsertionEffects.markEnd();
   }, [],);
   useLayoutEffect(() => {
-    hydrationMarker == null ? void 0 : hydrationMarker.useLayoutEffects.markEnd();
+    hydrationMarker?.useLayoutEffects.markEnd();
     if (wasInBackground || document.visibilityState !== 'visible') return;
     frame.read(() => {
-      hydrationMarker == null ? void 0 : hydrationMarker.browserRendering.requestAnimationFrame.markEnd();
+      hydrationMarker?.browserRendering.requestAnimationFrame.markEnd();
       void yieldToMain().then(() => {
-        hydrationMarker == null ? void 0 : hydrationMarker.browserRendering.layoutStylePaint.markEnd();
+        hydrationMarker?.browserRendering.layoutStylePaint.markEnd();
       },);
     },);
   }, [],);
   useEffect(() => {
-    hydrationMarker == null ? void 0 : hydrationMarker.useEffects.markEnd();
+    hydrationMarker?.useEffects.markEnd();
   }, [],);
 }
 function MarkSuspenseEffectsStart() {
@@ -15581,7 +15441,7 @@ function emptyArray() {
 }
 var routeInfoCache;
 function getRouteInfoMemo(routes,) {
-  if ((routeInfoCache == null ? void 0 : routeInfoCache.lastRoutes) !== routes) {
+  if (routeInfoCache?.lastRoutes !== routes) {
     const pathRoutes = {};
     const pathRoutesLocalized = {};
     let paths = [];
@@ -15809,9 +15669,8 @@ function escapeStringRegExp(string,) {
   return string.replace(/[|\\{}()[\]^$+*?.]/gu, '\\$&',).replace(/-/gu, '\\x2d',);
 }
 function getVariantsFromServerTiming() {
-  var _a;
   if ('PerformanceServerTiming' in window) {
-    const serverTiming = (_a = performance.getEntriesByType('navigation',)[0]) == null ? void 0 : _a.serverTiming;
+    const serverTiming = performance.getEntriesByType('navigation',)[0]?.serverTiming;
     if (!serverTiming || serverTiming.length === 0) return new URLSearchParams();
     const entry = serverTiming.find((it) => it.name === 'abtests');
     if (!entry) return new URLSearchParams();
@@ -15847,15 +15706,13 @@ function patchRoutesFromSearchParams(routes, variants,) {
   }
 }
 function removeRoutesVariants(routes,) {
-  var _a;
   for (const routeId in routes) {
-    if ((_a = routes[routeId]) == null ? void 0 : _a.abTestingParentId) {
+    if (routes[routeId]?.abTestingParentId) {
       delete routes[routeId];
     }
   }
 }
 function patchInitialRoute(routes, routeId,) {
-  var _a, _b;
   if (!routes[routeId]) return;
   if (!routes[routeId].abTestingParentId) return;
   const parentId = routes[routeId].abTestingParentId;
@@ -15863,9 +15720,9 @@ function patchInitialRoute(routes, routeId,) {
     abTestingParentId,
     ...route
   } = routes[routeId];
-  const elements = ((_a = routes[parentId]) == null ? void 0 : _a.elements) || route.elements
+  const elements = routes[parentId]?.elements || route.elements
     ? {
-      ...((_b = routes[parentId]) == null ? void 0 : _b.elements),
+      ...routes[parentId]?.elements,
       ...route.elements,
     }
     : void 0;
@@ -15876,12 +15733,11 @@ function patchInitialRoute(routes, routeId,) {
   };
 }
 function patchRoutesForABTesting(routes, initialRouteId,) {
-  var _a;
   if (typeof window === 'undefined') return initialRouteId;
   let resolvedInitialRouteId = initialRouteId;
   if (initialRouteId) {
     patchInitialRoute(routes, initialRouteId,);
-    const parentRouteId = (_a = routes[initialRouteId]) == null ? void 0 : _a.abTestingParentId;
+    const parentRouteId = routes[initialRouteId]?.abTestingParentId;
     if (parentRouteId) {
       resolvedInitialRouteId = parentRouteId;
     }
@@ -15951,7 +15807,6 @@ async function pump(sourceNode, targetParent, beforeNode,) {
   }
 }
 function handleScript(node, parent, beforeNode,) {
-  var _a;
   const script = node.cloneNode(true,);
   if (
     !node.hasAttribute('src',) ||
@@ -15960,7 +15815,7 @@ function handleScript(node, parent, beforeNode,) {
     // async
     node.hasAttribute('defer',) ||
     // defer
-    ((_a = node.getAttribute('type',)) == null ? void 0 : _a.toLowerCase()) === 'module'
+    node.getAttribute('type',)?.toLowerCase() === 'module'
   ) {
     parent.insertBefore(script, beforeNode,);
   } else {
@@ -15994,10 +15849,9 @@ function useMetadata(metadata,) {
     }
   }, [metadata.robots,],);
   React.useInsertionEffect(() => {
-    var _a;
     document.title = metadata.title || '';
     if (metadata.viewport) {
-      (_a = document.querySelector('meta[name="viewport"]',)) == null ? void 0 : _a.setAttribute('content', metadata.viewport,);
+      document.querySelector('meta[name="viewport"]',)?.setAttribute('content', metadata.viewport,);
     }
   }, [metadata.title, metadata.viewport,],);
   React.useEffect(() => {
@@ -16070,17 +15924,11 @@ function findCommentMarkers(nodes, startMarker, endMarker,) {
   while (i <= j) {
     const startNode = nodes[i];
     const endNode = nodes[j];
-    if (
-      !start2 && (startNode == null ? void 0 : startNode.nodeType) === Node.COMMENT_NODE && startMarker &&
-      `<!--${startNode.nodeValue}-->` === startMarker
-    ) {
+    if (!start2 && startNode?.nodeType === Node.COMMENT_NODE && startMarker && `<!--${startNode.nodeValue}-->` === startMarker) {
       start2 = startNode;
       if (!endMarker) break;
     }
-    if (
-      !end && (endNode == null ? void 0 : endNode.nodeType) === Node.COMMENT_NODE && endMarker &&
-      `<!--${endNode.nodeValue}-->` === endMarker
-    ) {
+    if (!end && endNode?.nodeType === Node.COMMENT_NODE && endMarker && `<!--${endNode.nodeValue}-->` === endMarker) {
       end = endNode;
       if (!startMarker) break;
     }
@@ -16286,7 +16134,7 @@ function Point(x, y,) {
 }
 ((Point2) => {
   Point2.isQuadrilateralPoints = (points) => {
-    return (points == null ? void 0 : points.length) === 4;
+    return points?.length === 4;
   };
   Point2.add = (...args) => {
     return args.reduce((previousValue, currentValue,) => {
@@ -17779,10 +17627,10 @@ var P3Color = class _P3Color {
   toString(space = 'p3', overrides,) {
     switch (space) {
       case 'p3': {
-        const r = (overrides == null ? void 0 : overrides.r) ?? this.r;
-        const g = (overrides == null ? void 0 : overrides.g) ?? this.g;
-        const b = (overrides == null ? void 0 : overrides.b) ?? this.b;
-        const a = (overrides == null ? void 0 : overrides.a) ?? this.a;
+        const r = overrides?.r ?? this.r;
+        const g = overrides?.g ?? this.g;
+        const b = overrides?.b ?? this.b;
+        const a = overrides?.a ?? this.a;
         return a === 1 ? `color(display-p3 ${r} ${g} ${b})` : `color(display-p3 ${r} ${g} ${b} / ${a})`;
       }
       case 'srgb': {
@@ -17790,10 +17638,10 @@ var P3Color = class _P3Color {
         const clampedR = Math.round(Math.max(0, Math.min(color2.r, 1,),) * 100,) / 100;
         const clampedG = Math.round(Math.max(0, Math.min(color2.g, 1,),) * 100,) / 100;
         const clampedB = Math.round(Math.max(0, Math.min(color2.b, 1,),) * 100,) / 100;
-        const r = (overrides == null ? void 0 : overrides.r) ?? clampedR * 255;
-        const g = (overrides == null ? void 0 : overrides.g) ?? clampedG * 255;
-        const b = (overrides == null ? void 0 : overrides.b) ?? clampedB * 255;
-        const a = (overrides == null ? void 0 : overrides.a) ?? color2.a ?? 1;
+        const r = overrides?.r ?? clampedR * 255;
+        const g = overrides?.g ?? clampedG * 255;
+        const b = overrides?.b ?? clampedB * 255;
+        const a = overrides?.a ?? color2.a ?? 1;
         return a === 1 ? `rgb(${r}, ${g}, ${b})` : `rgba(${r}, ${g}, ${b}, ${a})`;
       }
     }
@@ -18595,12 +18443,11 @@ var Loop = class extends EventEmitter {
     this._frameTasks.push(task,);
   }
   _processFrameTasks() {
-    var _a;
     const postEventTasks = this._frameTasks;
     const length = postEventTasks.length;
     if (length === 0) return;
     for (let i = 0; i < length; i++) {
-      (_a = postEventTasks[i]) == null ? void 0 : _a.call(postEventTasks,);
+      postEventTasks[i]?.();
     }
     postEventTasks.length = 0;
   }
@@ -19218,7 +19065,7 @@ function LayoutIdProvider({
       return nodeIdentifier;
     }
     let possibleMatch = void 0;
-    if (duplicatedFrom == null ? void 0 : duplicatedFrom.length) {
+    if (duplicatedFrom?.length) {
       for (let index = duplicatedFrom.length - 1; index >= 0; index--) {
         const duplicatedId = duplicatedFrom[index];
         assert(!!duplicatedId, `duplicatedId must be defined`,);
@@ -19260,7 +19107,7 @@ function LayoutIdProvider({
       screen.current.byId[id3] = possible;
       return possible;
     }
-    const rootDuplicatedId = duplicatedFrom == null ? void 0 : duplicatedFrom[0];
+    const rootDuplicatedId = duplicatedFrom?.[0];
     const identifier = name || rootDuplicatedId || id3;
     const value = (cache2.current.count[cacheKey][identifier] ?? -1) + 1;
     const {
@@ -19269,7 +19116,7 @@ function LayoutIdProvider({
     } = nextLayoutId(identifier, value, usedIds,);
     cache2.current.count[cacheKey][identifier] = nextValue;
     screen.current[cacheKey][id3] = layoutId;
-    if (duplicatedFrom == null ? void 0 : duplicatedFrom.length) {
+    if (duplicatedFrom?.length) {
       if (!name) {
         const lastId = duplicatedFrom[duplicatedFrom.length - 1];
         if (lastId) {
@@ -19500,8 +19347,7 @@ var ErrorBoundary = class extends Component2 {
     __publicField(this, 'state', {},);
   }
   componentDidCatch(error, info,) {
-    var _a;
-    let stack = (_a = info.componentStack) == null ? void 0 : _a.split('\n',).filter((line) => line.length !== 0);
+    let stack = info.componentStack?.split('\n',).filter((line) => line.length !== 0);
     let currentIndex = 0;
     if (stack) {
       for (const line of stack) {
@@ -19543,10 +19389,9 @@ function Device({
   ResizeObserver: ResizeObserver2 = safeWindow.ResizeObserver,
   ...options
 },) {
-  var _a, _b;
   const optionsRef = React42.useRef(void 0,);
   if (optionsRef.current === void 0) optionsRef.current = options;
-  const deviceAppearance = (_a = options.deviceOptions) == null ? void 0 : _a.appearance.type;
+  const deviceAppearance = options.deviceOptions?.appearance.type;
   const scaleDataRef = React42.useRef();
   const containerRef = React42.useRef(null,);
   const deviceRef = React42.useRef(null,);
@@ -19622,7 +19467,7 @@ function Device({
       height: '100%',
     }
     : {};
-  const screenBackground = ((_b = options.deviceOptions) == null ? void 0 : _b.transparentBackground) ? 'transparent' : 'white';
+  const screenBackground = options.deviceOptions?.transparentBackground ? 'transparent' : 'white';
   return /* @__PURE__ */ jsx('div', {
     style: {
       ...containerStyle2,
@@ -19731,9 +19576,9 @@ function getDeviceStyle({
       boxShadows.push(`inset 0 0 15px ${overriddenColors.bezelShadeColor || appearance.bezelShadeColor}`,);
     }
   }
-  const handOffsetLeft = (hand == null ? void 0 : hand.offsetLeft) ?? 0;
-  const handOffsetRight = (hand == null ? void 0 : hand.offsetRight) ?? 0;
-  const handOffsetBottom = (hand == null ? void 0 : hand.offsetBottom) ?? 0;
+  const handOffsetLeft = hand?.offsetLeft ?? 0;
+  const handOffsetRight = hand?.offsetRight ?? 0;
+  const handOffsetBottom = hand?.offsetBottom ?? 0;
   const handScale = (deviceWidth - handOffsetLeft - handOffsetRight) / HAND_IMG_GAP_WIDTH;
   return {
     containerStyle: {
@@ -20686,12 +20531,8 @@ var ConstraintValues = {
   toSize: (values, parentSizeInfo, autoSize, freeSpace,) => {
     let width = null;
     let height = null;
-    const parentWidth = (parentSizeInfo == null ? void 0 : parentSizeInfo.sizing)
-      ? Animatable.getNumber(parentSizeInfo == null ? void 0 : parentSizeInfo.sizing.width,)
-      : null;
-    const parentHeight = (parentSizeInfo == null ? void 0 : parentSizeInfo.sizing)
-      ? Animatable.getNumber(parentSizeInfo == null ? void 0 : parentSizeInfo.sizing.height,)
-      : null;
+    const parentWidth = parentSizeInfo?.sizing ? Animatable.getNumber(parentSizeInfo?.sizing.width,) : null;
+    const parentHeight = parentSizeInfo?.sizing ? Animatable.getNumber(parentSizeInfo?.sizing.height,) : null;
     const hOpposingPinsOffset = pinnedOffset(values.left, values.right,);
     if (parentWidth && isFiniteNumber(hOpposingPinsOffset,)) {
       width = parentWidth - hOpposingPinsOffset;
@@ -20747,7 +20588,7 @@ var ConstraintValues = {
     return sizeAfterApplyingConstraintsAndAspectRatio(width, height, values, {
       height: parentHeight ?? 0,
       width: parentWidth ?? 0,
-    }, parentSizeInfo == null ? void 0 : parentSizeInfo.viewport,);
+    }, parentSizeInfo?.viewport,);
   },
   // Returns a parent-relative rect given concrete ConstraintValues.
   toRect: (values, parentSizeInfo = null, autoSize = null, pixelAlign = false, freeSpace = null,) => {
@@ -20757,7 +20598,7 @@ var ConstraintValues = {
       width,
       height,
     } = ConstraintValues.toSize(values, parentSizeInfo, autoSize, freeSpace,);
-    const parentSizeForPositioning = (parentSizeInfo == null ? void 0 : parentSizeInfo.positioning) ?? null;
+    const parentSizeForPositioning = parentSizeInfo?.positioning ?? null;
     const positioningParentWidth = parentSizeForPositioning ? Animatable.getNumber(parentSizeForPositioning.width,) : null;
     const positioningParentHeight = parentSizeForPositioning ? Animatable.getNumber(parentSizeForPositioning.height,) : null;
     if (values.left !== null) {
@@ -21512,7 +21353,7 @@ function isRelevantValidityStateKey(key7,) {
 function isInvalid(validity,) {
   for (const key7 in validity) {
     if (!isRelevantValidityStateKey(key7,)) continue;
-    if ((validity == null ? void 0 : validity[key7]) === true) return true;
+    if (validity?.[key7] === true) return true;
   }
   return false;
 }
@@ -21527,19 +21368,19 @@ function useCustomValidity(onValid, onInvalid, onChange, onBlur, onFocus,) {
     onInvalid(e,);
   }, [onInvalid,],);
   const handleChange = React42.useCallback((e) => {
-    onChange == null ? void 0 : onChange(e,);
+    onChange?.(e,);
     if (!onInvalid && !onValid) return;
     const validity = e.target.validity;
     if (isValidRef.current === false && !isInvalid(validity,)) {
       e.currentTarget.setCustomValidity('',);
       e.target.reportValidity();
       isValidRef.current = true;
-      onValid == null ? void 0 : onValid();
+      onValid?.();
     }
   }, [onInvalid, onValid, onChange,],);
   const handleBlur = React42.useCallback((e) => {
     if (!onInvalid) {
-      onBlur == null ? void 0 : onBlur(e,);
+      onBlur?.(e,);
       return;
     }
     if (isValidRef.current === false) return;
@@ -21548,7 +21389,7 @@ function useCustomValidity(onValid, onInvalid, onChange, onBlur, onFocus,) {
       handleInvalid(e,);
       return;
     }
-    onBlur == null ? void 0 : onBlur(e,);
+    onBlur?.(e,);
   }, [handleInvalid, onBlur, onInvalid,],);
   return React42.useMemo(() => {
     return {
@@ -24082,7 +23923,6 @@ var defaultDeviceProps = {
 function convertPropsToDeviceOptions(props, {
   forceOldClay = false,
 } = {},) {
-  var _a;
   if (props.preset === 'no-device') {
     return;
   }
@@ -24160,7 +24000,7 @@ function convertPropsToDeviceOptions(props, {
     [screenWidth, screenHeight,] = [screenHeight, screenWidth,];
     [screenOffsetTop, screenOffsetLeft,] = [screenOffsetRight, screenOffsetTop,];
   }
-  const handOffset = (_a = preset.realisticImage) == null ? void 0 : _a.handOffset;
+  const handOffset = preset.realisticImage?.handOffset;
   return {
     deviceWidth,
     deviceHeight,
@@ -24184,9 +24024,9 @@ function convertPropsToDeviceOptions(props, {
     hand: props.hand !== void 0 && supportsHand(props,)
       ? {
         imageUrl: `https://preview.framercdn.com/images/hands/${props.hand}.png`,
-        offsetLeft: handOffset == null ? void 0 : handOffset.left,
-        offsetRight: handOffset == null ? void 0 : handOffset.right,
-        offsetBottom: handOffset == null ? void 0 : handOffset.bottom,
+        offsetLeft: handOffset?.left,
+        offsetRight: handOffset?.right,
+        offsetBottom: handOffset?.bottom,
       }
       : void 0,
     background: props.backgroundColor,
@@ -24212,7 +24052,6 @@ function makeScreenMaskImage({
 var lightColors = /* @__PURE__ */ new Set(['white', 'silver', 'clearly-white', 'sorta-sage',],);
 var darkColors = /* @__PURE__ */ new Set(['black', 'space-grey', 'graphite', 'just-black', 'pro',],);
 function colorIdForTheme(theme, availableColors,) {
-  var _a;
   if (!availableColors) return;
   const colors = theme === 'light' ? lightColors : darkColors;
   for (const color2 of availableColors) {
@@ -24220,24 +24059,22 @@ function colorIdForTheme(theme, availableColors,) {
       return color2.id;
     }
   }
-  return (_a = availableColors[0]) == null ? void 0 : _a.id;
+  return availableColors[0]?.id;
 }
 function supportsHand({
   preset: presetId,
   skin,
   orientation = 'portrait',
 },) {
-  var _a;
   if (!presetId || presetId === 'custom' || presetId === 'no-device' || orientation === 'landscape') return false;
   const preset = getDevicePreset(presetId,);
-  return skin !== 'clay' && ((_a = preset.realisticImage) == null ? void 0 : _a.handOffset) !== void 0;
+  return skin !== 'clay' && preset.realisticImage?.handOffset !== void 0;
 }
 function applyMetaTag(name, props,) {
-  var _a;
   let tag = document.querySelector(`meta[name="${name}"]`,);
   if (!tag) {
     tag = document.createElement('meta',);
-    (_a = document.getElementsByTagName('head',)[0]) == null ? void 0 : _a.appendChild(tag,);
+    document.getElementsByTagName('head',)[0]?.appendChild(tag,);
     tag.setAttribute('name', name,);
   }
   for (const [k, v,] of Object.entries(props,)) {
@@ -24508,16 +24345,15 @@ function _injectRuntime(injectedRuntime,) {
   isRuntimeInjected = true;
 }
 function assert2(condition, ...msg) {
-  var _a, _b;
   if (condition) return;
   const e = Error('Assertion Error' + (msg.length > 0 ? ': ' + msg.join(' ',) : ''),);
   if (e.stack) {
     try {
       const lines = e.stack.split('\n',);
-      if ((_a = lines[1]) == null ? void 0 : _a.includes('assert',)) {
+      if (lines[1]?.includes('assert',)) {
         lines.splice(1, 1,);
         e.stack = lines.join('\n',);
-      } else if ((_b = lines[0]) == null ? void 0 : _b.includes('assert',)) {
+      } else if (lines[0]?.includes('assert',)) {
         lines.splice(0, 1,);
         e.stack = lines.join('\n',);
       }
@@ -24592,8 +24428,8 @@ var hosts = (() => {
 })();
 var hostInfo = {
   hosts,
-  isDevelopment: (hosts == null ? void 0 : hosts.main) === 'development.framer.com',
-  isProduction: (hosts == null ? void 0 : hosts.main) === 'framer.com',
+  isDevelopment: hosts?.main === 'development.framer.com',
+  isProduction: hosts?.main === 'framer.com',
   isLocal,
 };
 var cachedServiceMap;
@@ -24604,9 +24440,8 @@ function getServiceMap() {
   return cachedServiceMap;
 }
 function extractServiceMap() {
-  var _a, _b, _c;
   const location = window.location;
-  let services = (_a = window == null ? void 0 : window.bootstrap) == null ? void 0 : _a.services;
+  let services = window?.bootstrap?.services;
   if (services) {
     return services;
   }
@@ -24614,7 +24449,7 @@ function extractServiceMap() {
   try {
     const topWindow = window.top;
     topOrigin = topWindow.location.origin;
-    services = (_c = (_b = window.top) == null ? void 0 : _b.bootstrap) == null ? void 0 : _c.services;
+    services = window.top?.bootstrap?.services;
     if (services) {
       return services;
     }
@@ -24638,7 +24473,6 @@ function extractServiceMap() {
   throw Error('ServiceMap requested but not available',);
 }
 function jsonSafeCopy(obj, depth = 0, seen = /* @__PURE__ */ new Set(),) {
-  var _a;
   if (obj === null) return obj;
   if (typeof obj === 'function') return `[Function: ${obj.name ?? 'unknown'}]`;
   if (typeof obj !== 'object') return obj;
@@ -24652,7 +24486,7 @@ function jsonSafeCopy(obj, depth = 0, seen = /* @__PURE__ */ new Set(),) {
     } else if (Array.isArray(obj,)) {
       return obj.map((v) => jsonSafeCopy(v, depth + 1, seen,));
     } else if (Object.getPrototypeOf(obj,) !== Object.prototype) {
-      return `[Object: ${'__class' in obj && obj.__class || ((_a = obj.constructor) == null ? void 0 : _a.name)}]`;
+      return `[Object: ${'__class' in obj && obj.__class || obj.constructor?.name}]`;
     } else {
       const result = {};
       for (const [key7, v,] of Object.entries(obj,)) {
@@ -24743,7 +24577,7 @@ var _LogEntry = class _LogEntry2 {
       if (type === 'function') return `[Function: ${part.name ?? 'unknown'}]`;
       if (part instanceof Error) return part.stack ?? part.toString();
       const json = JSON.stringify(jsonSafeCopy(part,),);
-      if ((json == null ? void 0 : json.length) > 253) {
+      if (json?.length > 253) {
         return json.slice(0, 250,) + '...';
       }
       return json;
@@ -24797,7 +24631,7 @@ try {
       replayBuffer.push(entry,);
       if (printed) return;
       if (logger.level > level) return;
-      console == null ? void 0 : console.log(...entry.toMessage(),);
+      console?.log(...entry.toMessage(),);
     },);
   }
 } catch {}
@@ -24809,7 +24643,6 @@ try {
     !window.location.pathname.startsWith('/edit',)
   ) {
     postLogEntry = (entry) => {
-      var _a;
       try {
         const parts = entry.toMessage().map((p) => jsonSafeCopy(p,));
         const logger = entry.logger;
@@ -24821,7 +24654,7 @@ try {
           parts,
           printed,
         };
-        (_a = window.parent) == null ? void 0 : _a.postMessage(data2, getServiceMap().app,);
+        window.parent?.postMessage(data2, getServiceMap().app,);
       } catch {}
     };
   }
@@ -24832,7 +24665,7 @@ var maxReplayBufferEntries = 1e3;
 function createLogEntry(logger, level, parts,) {
   const entry = new LogEntry(logger, level, parts,);
   replayBuffer.push(entry,);
-  postLogEntry == null ? void 0 : postLogEntry(entry,);
+  postLogEntry?.(entry,);
   while (replayBuffer.length > maxReplayBufferEntries) {
     replayBuffer.shift();
   }
@@ -24847,9 +24680,8 @@ function getLogReplayBuffer(maxEntries,) {
 var pathRegex = /\/(?<filename>[^/.]+)(?=\.(?:debug\.)?html$)/u;
 var cachedFilename;
 function getFilenameFromWindowPathname() {
-  var _a, _b;
   if (typeof window === 'undefined' || !window.location) return;
-  cachedFilename ??= (_b = (_a = pathRegex.exec(window.location.pathname,)) == null ? void 0 : _a.groups) == null ? void 0 : _b.filename;
+  cachedFilename ??= pathRegex.exec(window.location.pathname,)?.groups?.filename;
   return cachedFilename;
 }
 function getLogger(id3,) {
@@ -24860,7 +24692,7 @@ function getLogger(id3,) {
   const logger = new Logger(id3,);
   loggers[id3] = logger;
   applyLogLevelSpec(logLevelSpec, [logger,],);
-  postLogEntry == null ? void 0 : postLogEntry(new LogEntry(logger, -1, [],),);
+  postLogEntry?.(new LogEntry(logger, -1, [],),);
   return logger;
 }
 function setLogLevel(spec, replay = true,) {
@@ -24877,19 +24709,19 @@ function setLogLevel(spec, replay = true,) {
   }
   const missingSpecs = applyLogLevelSpec(spec, all,);
   if (missingSpecs.length > 0) {
-    console == null ? void 0 : console.warn('Some log level specs matched no loggers:', missingSpecs,);
+    console?.warn('Some log level specs matched no loggers:', missingSpecs,);
   }
   if (replay && replayBuffer.length > 0) {
-    console == null ? void 0 : console.log('--- LOG REPLAY ---',);
+    console?.log('--- LOG REPLAY ---',);
     for (const entry of replayBuffer) {
       if (entry.logger.level > entry.level) continue;
       if (entry.level >= 3) {
-        console == null ? void 0 : console.warn(...entry.toMessage(),);
+        console?.warn(...entry.toMessage(),);
       } else {
-        console == null ? void 0 : console.log(...entry.toMessage(),);
+        console?.log(...entry.toMessage(),);
       }
     }
-    console == null ? void 0 : console.log('--- END OF LOG REPLAY ---',);
+    console?.log('--- END OF LOG REPLAY ---',);
   }
   return previousSpec;
 }
@@ -24899,7 +24731,7 @@ var enrichWithLogs = (extras) => {
     logs: getLogReplayBuffer().slice(-50,).map((entry) => entry.toString().slice(0, 600,)).join('\n',),
   };
   if (extras.logs) {
-    console == null ? void 0 : console.warn('extras.logs is reserved for log replay buffer, use another key',);
+    console?.warn('extras.logs is reserved for log replay buffer, use another key',);
   }
   return result;
 };
@@ -24913,22 +24745,22 @@ var Logger = class {
     __publicField(this, 'trace', (...parts) => {
       if (this.level > 0) return;
       const entry = createLogEntry(this, 0, parts,);
-      console == null ? void 0 : console.log(...entry.toMessage(),);
+      console?.log(...entry.toMessage(),);
     },);
     __publicField(this, 'debug', (...parts) => {
       const entry = createLogEntry(this, 1, parts,);
       if (this.level > 1) return;
-      console == null ? void 0 : console.log(...entry.toMessage(),);
+      console?.log(...entry.toMessage(),);
     },);
     __publicField(this, 'info', (...parts) => {
       const entry = createLogEntry(this, 2, parts,);
       if (this.level > 2) return;
-      console == null ? void 0 : console.info(...entry.toMessage(),);
+      console?.info(...entry.toMessage(),);
     },);
     __publicField(this, 'warn', (...parts) => {
       const entry = createLogEntry(this, 3, parts,);
       if (this.level > 3) return;
-      console == null ? void 0 : console.warn(...entry.toMessage(),);
+      console?.warn(...entry.toMessage(),);
     },);
     __publicField(this, 'warnOncePerMinute', (firstPart, ...parts) => {
       const lastLoggedTime = this.didLog[firstPart];
@@ -24937,12 +24769,12 @@ var Logger = class {
       parts.unshift(firstPart,);
       const entry = createLogEntry(this, 3, parts,);
       if (this.level > 3) return;
-      console == null ? void 0 : console.warn(...entry.toMessage(),);
+      console?.warn(...entry.toMessage(),);
     },);
     __publicField(this, 'error', (...parts) => {
       const entry = createLogEntry(this, 4, parts,);
       if (this.level > 4) return;
-      console == null ? void 0 : console.error(...entry.toMessage(),);
+      console?.error(...entry.toMessage(),);
     },);
     __publicField(this, 'errorOncePerMinute', (firstPart, ...parts) => {
       const lastLoggedTime = this.didLog[firstPart];
@@ -24951,7 +24783,7 @@ var Logger = class {
       parts.unshift(firstPart,);
       const entry = createLogEntry(this, 4, parts,);
       if (this.level > 4) return;
-      console == null ? void 0 : console.error(...entry.toMessage(),);
+      console?.error(...entry.toMessage(),);
     },);
     __publicField(this, 'reportWithoutLogging', (maybeError, extras, tags, critical,) => {
       const enrichedExtras = enrichWithLogs(extras ?? {},);
@@ -25304,7 +25136,7 @@ function getResponsiveSrcSet(source, image, variants,) {
 }
 function getFixedSrcSets(source, image, nodeFixedSize,) {
   if (!image.pixelWidth || !image.pixelHeight) return void 0;
-  if (!(nodeFixedSize == null ? void 0 : nodeFixedSize.width) || !(nodeFixedSize == null ? void 0 : nodeFixedSize.height)) return void 0;
+  if (!nodeFixedSize?.width || !nodeFixedSize?.height) return void 0;
   const srcSet = [];
   const imageMaxSide = Math.max(image.pixelWidth, image.pixelHeight,);
   const scaleRatio = Math.max(nodeFixedSize.width / image.pixelWidth, nodeFixedSize.height / image.pixelHeight,);
@@ -25330,7 +25162,7 @@ function getSrcSet(nodeFixedSize, image, source,) {
   }
   if (nodeFixedSize) {
     const fixedSrcSets = getFixedSrcSets(source, image, nodeFixedSize,);
-    if (!(fixedSrcSets == null ? void 0 : fixedSrcSets.length)) {
+    if (!fixedSrcSets?.length) {
       return {
         src: source,
         srcSet: void 0,
@@ -25338,7 +25170,7 @@ function getSrcSet(nodeFixedSize, image, source,) {
     }
     const [x1, ...rest] = fixedSrcSets;
     return {
-      src: x1 == null ? void 0 : x1.src,
+      src: x1?.src,
       srcSet: rest.map(({
         src,
         scale: scale2,
@@ -25404,7 +25236,7 @@ function useDecodingAttribute(avoidAsyncDecoding,) {
     switchDecodingToAuto(event.currentTarget,);
   }, [switchDecodingToAuto,],);
   const onImageMount = useCallback2((node) => {
-    if (node == null ? void 0 : node.complete) switchDecodingToAuto(node,);
+    if (node?.complete) switchDecodingToAuto(node,);
   }, [switchDecodingToAuto,],);
   return {
     decoding: currentDecoding.current,
@@ -25701,10 +25533,7 @@ function htmlElementAsMotionComponent(asElem,) {
 }
 var safeNavigator = typeof __unframerNavigator2 !== 'undefined' ? __unframerNavigator2 : void 0;
 var isBrowser2 = () => typeof document === 'object';
-var isWebKit = () => {
-  var _a;
-  return ((_a = safeNavigator) == null ? void 0 : _a.userAgent.includes('AppleWebKit/',)) && !isChrome() && !isEdge();
-};
+var isWebKit = () => safeNavigator?.userAgent.includes('AppleWebKit/',) && !isChrome() && !isEdge();
 var webkitVersion = () => {
   let version2 = -1;
   const regexp = /AppleWebKit\/([\d.]+)/u;
@@ -25949,11 +25778,11 @@ var sharedResizeObserver = /* @__PURE__ */ (() => isBrowser2() ? new SharedObser
 function useRerenderOnResize(ref,) {
   const update = useForceUpdate2();
   useEffect(() => {
-    const element = ref == null ? void 0 : ref.current;
+    const element = ref?.current;
     if (!element) return;
-    sharedResizeObserver == null ? void 0 : sharedResizeObserver.observeElementWithCallback(ref.current, update,);
+    sharedResizeObserver?.observeElementWithCallback(ref.current, update,);
     return () => {
-      sharedResizeObserver == null ? void 0 : sharedResizeObserver.unobserve(element,);
+      sharedResizeObserver?.unobserve(element,);
     };
   }, [ref, update,],);
 }
@@ -26008,8 +25837,8 @@ var withMeasuredSize = (Component18) => (props) => {
     ...dataProps,
     children: shouldRender && /* @__PURE__ */ jsx(Component18, {
       ...props,
-      width: (size == null ? void 0 : size.width) ?? fallbackWidth,
-      height: (size == null ? void 0 : size.height) ?? fallbackHeight,
+      width: size?.width ?? fallbackWidth,
+      height: size?.height ?? fallbackHeight,
     },),
   },);
 };
@@ -26348,9 +26177,7 @@ var LinearGradient = {
   toCSS: (linearGradient, overrideAngle, getStopValue,) => {
     const stops = gradientColorStops(linearGradient, linearGradient.alpha,);
     const angle = overrideAngle !== void 0 ? overrideAngle : linearGradient.angle;
-    const cssStops = stops.map((stop) =>
-      `${(getStopValue == null ? void 0 : getStopValue(stop.value,)) ?? stop.value} ${stop.position * 100}%`
-    );
+    const cssStops = stops.map((stop) => `${getStopValue?.(stop.value,) ?? stop.value} ${stop.position * 100}%`);
     return `linear-gradient(${angle}deg, ${cssStops.join(', ',)})`;
   },
 };
@@ -26381,8 +26208,8 @@ var RadialGradient = {
     const stops = gradientColorStops(radialGradient, alpha2,);
     const cssStops = stops.map((stop, index,) => {
       const nextStop = stops[index + 1];
-      const position = stop.position === 1 && (nextStop == null ? void 0 : nextStop.position) === 1 ? stop.position - 1e-4 : stop.position;
-      return `${(getStopValue == null ? void 0 : getStopValue(stop.value,)) ?? stop.value} ${position * 100}%`;
+      const position = stop.position === 1 && nextStop?.position === 1 ? stop.position - 1e-4 : stop.position;
+      return `${getStopValue?.(stop.value,) ?? stop.value} ${position * 100}%`;
     },);
     return `radial-gradient(${widthFactor * 100}% ${heightFactor * 100}% at ${centerAnchorX * 100}% ${centerAnchorY * 100}%, ${
       cssStops.join(', ',)
@@ -26612,7 +26439,7 @@ function useStyleAndRect(props,) {
   const constraintsRect = useConstraints(unwrappedProps,);
   const defaultStyle = {
     display: 'block',
-    flex: (style2 == null ? void 0 : style2.flex) ?? '0 0 auto',
+    flex: style2?.flex ?? '0 0 auto',
     userSelect: RenderTarget.current() !== RenderTarget.preview ? 'none' : void 0,
   };
   if (!props.__fromCanvasComponent) {
@@ -26998,15 +26825,13 @@ var SharedLayoutRoot = class extends Component2 {
   // Runs after all descendent SharedLayoutTree finish taking snapshots in
   // their getSnapshotBeforeUpdate lifecycle method.
   getSnapshotBeforeUpdate() {
-    var _a;
     if (!this.scheduledPromotion || !this.lead || !this.follow) return null;
-    const needsReset = ((_a = this.lead) == null ? void 0 : _a.layoutMaybeMutated) && !this.shouldAnimate;
+    const needsReset = this.lead?.layoutMaybeMutated && !this.shouldAnimate;
     this.lead.projectionNodes.forEach((projectionNode) => {
-      var _a2;
-      projectionNode == null ? void 0 : projectionNode.promote({
+      projectionNode?.promote({
         needsReset,
         transition: this.shouldAnimate ? this.transition : void 0,
-        preserveFollowOpacity: projectionNode.options.layoutId === TREE_ROOT_ID && !((_a2 = this.follow) == null ? void 0 : _a2.isExiting),
+        preserveFollowOpacity: projectionNode.options.layoutId === TREE_ROOT_ID && !this.follow?.isExiting,
       },);
     },);
     if (this.shouldAnimate) {
@@ -27020,10 +26845,9 @@ var SharedLayoutRoot = class extends Component2 {
     return null;
   }
   componentDidUpdate() {
-    var _a, _b;
     if (!this.lead) return null;
     if (this.scheduledDidUpdate) {
-      (_b = (_a = this.lead.rootProjectionNode) == null ? void 0 : _a.root) == null ? void 0 : _b.didUpdate();
+      this.lead.rootProjectionNode?.root?.didUpdate();
       this.scheduledDidUpdate = false;
     }
   }
@@ -27167,16 +26991,15 @@ var SharedIntersectionObserver = class {
     this.callbacks.delete(element,);
   }
   get root() {
-    var _a;
-    return (_a = this.sharedIntersectionObserver) == null ? void 0 : _a.root;
+    return this.sharedIntersectionObserver?.root;
   }
 };
 var SharedIntersectionObserverContext = /* @__PURE__ */ createContext(/* @__PURE__ */ new Map(),);
 function observeElement(observers2, key7, element, root, callback, rootMargin, threshold,) {
   let observer2 = observers2.get(key7,);
-  if (!observer2 || observer2.root !== (root == null ? void 0 : root.current)) {
+  if (!observer2 || observer2.root !== root?.current) {
     observer2 = new SharedIntersectionObserver({
-      root: root == null ? void 0 : root.current,
+      root: root?.current,
       rootMargin,
       threshold,
     },);
@@ -27221,7 +27044,7 @@ function useAppearEffect(ref, appearCallback, options,) {
       isInView,
       hasAnimatedOnce,
     } = internalState.current;
-    const isIntersecting = isIntersectingWithThreshold(entry, (threshold == null ? void 0 : threshold.y) ?? 0,);
+    const isIntersecting = isIntersectingWithThreshold(entry, threshold?.y ?? 0,);
     if (isIntersecting && !isInView) {
       if (animateOnce && hasAnimatedOnce) return;
       internalState.current.hasAnimatedOnce = true;
@@ -27235,7 +27058,7 @@ function useAppearEffect(ref, appearCallback, options,) {
       appearCallback(false,);
       return;
     }
-  }, [animateOnce, threshold == null ? void 0 : threshold.y, appearCallback,],);
+  }, [animateOnce, threshold?.y, appearCallback,],);
   useSharedIntersectionObserver(ref, callback, {
     threshold: thresholds2,
     rootMargin,
@@ -27294,7 +27117,7 @@ var LayoutTree = class extends Component2 {
     const shouldDemote = !!this.props.isLead && !isLead;
     const overlayChanged = this.props.isOverlayed !== isOverlayed;
     if (shouldPromote || shouldDemote) {
-      this.projectionNodes.forEach((projection) => projection == null ? void 0 : projection.willUpdate());
+      this.projectionNodes.forEach((projection) => projection?.willUpdate());
     }
     if (shouldPromote) {
       sharedLayoutContext.schedulePromoteTree(this, transition, !!animatesLayout,);
@@ -27369,7 +27192,7 @@ var NavigationTargetWrapper = ({
   ],);
   const deregister = useCallback2((fn) => {
     const cleanup = callbacks.get(fn,);
-    cleanup == null ? void 0 : cleanup();
+    cleanup?.();
     callbacks.delete(fn,);
   }, [callbacks,/* constant, so should never change */
   ],);
@@ -27667,15 +27490,12 @@ function getOriginProps(currentOriginProps, initialProps, transitionProps,) {
   return result;
 }
 function contains3Dprops(containerProps,) {
-  var _a, _b, _c;
   if (!containerProps) return false;
   const containsProps = 'rotateX' in containerProps || 'rotateY' in containerProps || 'z' in containerProps;
   if (!containsProps) return false;
   const toPropsContain3d = containerProps.rotateX !== 0 || containerProps.rotateY !== 0 || containerProps.z !== 0;
-  const fromPropsContain3d =
-    ((_a = containerProps == null ? void 0 : containerProps.transition) == null ? void 0 : _a.rotateX.from) !== 0 ||
-    ((_b = containerProps == null ? void 0 : containerProps.transition) == null ? void 0 : _b.rotateY.from) !== 0 ||
-    ((_c = containerProps == null ? void 0 : containerProps.transition) == null ? void 0 : _c.z.from) !== 0;
+  const fromPropsContain3d = containerProps?.transition?.rotateX.from !== 0 || containerProps?.transition?.rotateY.from !== 0 ||
+    containerProps?.transition?.z.from !== 0;
   return toPropsContain3d || fromPropsContain3d;
 }
 var allAnimatableProperties = {
@@ -27991,7 +27811,7 @@ function add(currentState, key7, transition, component,) {
   if (isCurrentScreen) return;
   const nextIndex = currentState.containerVisualIndex[key7];
   const removed = currentState.containerIsRemoved[key7];
-  const shouldMoveForward = (currentItem == null ? void 0 : currentItem.key) && transition.withMagicMotion
+  const shouldMoveForward = currentItem?.key && transition.withMagicMotion
     ? isNextTargetForward(key7, nextIndex, removed, currentState.history,)
     : true;
   currentState.history.push({
@@ -28148,9 +27968,8 @@ function magicMotionPropsForRemove(currentState, target, currentItem,) {
   return update;
 }
 function findLatestHistoryIndex(key7, history,) {
-  var _a;
   for (let index = history.length; index > history.length; index--) {
-    if (((_a = history[index]) == null ? void 0 : _a.key) === key7) return index;
+    if (history[index]?.key === key7) return index;
   }
   return -1;
 }
@@ -28188,19 +28007,19 @@ function transitionForScreen(screenIndex, stackState,) {
   if (screenIndex !== current2 && screenIndex !== previous) return void 0;
   if (screenIndex === current2 && current2 > previous) {
     const item = history[screenIndex];
-    return sequence('enter', item == null ? void 0 : item.transition.enter, item == null ? void 0 : item.transition.animation,);
+    return sequence('enter', item?.transition.enter, item?.transition.animation,);
   }
   if (screenIndex === previous && current2 > previous) {
     const item = history[screenIndex + 1];
-    return sequence('exit', item == null ? void 0 : item.transition.exit, item == null ? void 0 : item.transition.animation,);
+    return sequence('exit', item?.transition.exit, item?.transition.animation,);
   }
   if (screenIndex === current2 && current2 < previous) {
     const item = history[screenIndex + 1];
-    return sequence('enter', item == null ? void 0 : item.transition.exit, item == null ? void 0 : item.transition.animation,);
+    return sequence('enter', item?.transition.exit, item?.transition.animation,);
   }
   if (screenIndex === previous && current2 < previous) {
     const item = history[screenIndex];
-    return sequence('exit', item == null ? void 0 : item.transition.enter, item == null ? void 0 : item.transition.animation,);
+    return sequence('exit', item?.transition.enter, item?.transition.animation,);
   }
 }
 var allAnimatableKeys = /* @__PURE__ */ objectKeys(allAnimatableProperties,);
@@ -28244,7 +28063,6 @@ var Navigation = /* @__PURE__ */ (() => {
   var _lastEventTimeStamp, _a, _Navigation_instances, getStackState_fn, isSameEventTransition_fn, _navigationAction, transition_fn;
   return _a = class extends Component2 {
     constructor(props,) {
-      var _a2;
       super(props,);
       __privateAdd(this, _Navigation_instances,);
       __privateAdd(this, _lastEventTimeStamp, null,);
@@ -28258,13 +28076,12 @@ var Navigation = /* @__PURE__ */ (() => {
         } = this.props;
         const historyItem = newState2.history[newState2.current];
         const withMagicMotion = action2.type === 'add' && action2.transition.withMagicMotion ||
-          action2.type === 'forward' && (historyItem == null ? void 0 : historyItem.transition.withMagicMotion) ||
+          action2.type === 'forward' && historyItem?.transition.withMagicMotion ||
           action2.type === 'remove' && !!newState2.previousTransition;
         const updateState = () => {
-          var _a22;
           this.setState(newState2,);
-          if (historyItem == null ? void 0 : historyItem.key) {
-            (_a22 = this.context) == null ? void 0 : _a22.call(this, historyItem.key,);
+          if (historyItem?.key) {
+            this.context?.(historyItem.key,);
           }
         };
         if (skipLayoutAnimation && !withMagicMotion) {
@@ -28274,9 +28091,8 @@ var Navigation = /* @__PURE__ */ (() => {
         }
       },);
       __publicField(this, 'goBack', () => {
-        var _a22;
         if (__privateMethod(this, _Navigation_instances, isSameEventTransition_fn,).call(this,)) return;
-        __privateSet(this, _lastEventTimeStamp, ((_a22 = globalThis.event) == null ? void 0 : _a22.timeStamp) || null,);
+        __privateSet(this, _lastEventTimeStamp, globalThis.event?.timeStamp || null,);
         if (this.state.currentOverlay !== -1) {
           return __privateGet(this, _navigationAction,).call(this, {
             type: 'removeOverlay',
@@ -28291,7 +28107,7 @@ var Navigation = /* @__PURE__ */ (() => {
       const transition = {
         ...TransitionDefaults.Instant,
       };
-      const key7 = ((_a2 = component.key) == null ? void 0 : _a2.toString()) || `stack-${this.state.historyItemId + 1}`;
+      const key7 = component.key?.toString() || `stack-${this.state.historyItemId + 1}`;
       const action = {
         type: 'add',
         key: key7,
@@ -28303,16 +28119,14 @@ var Navigation = /* @__PURE__ */ (() => {
       this.state = newState;
     }
     componentDidMount() {
-      var _a2;
       const historyItem = this.state.history[this.state.current];
       if (!historyItem) return;
-      (_a2 = this.context) == null ? void 0 : _a2.call(this, historyItem.key,);
+      this.context?.(historyItem.key,);
     }
     UNSAFE_componentWillReceiveProps(props,) {
-      var _a2;
       const component = props['children'];
       if (!isReactChild(component,) || !isReactElement(component,)) return;
-      const key7 = (_a2 = component.key) == null ? void 0 : _a2.toString();
+      const key7 = component.key?.toString();
       if (!key7) return;
       if (this.state.history.length === 0) {
         __privateMethod(this, _Navigation_instances, transition_fn,).call(this, component, TransitionDefaults.Instant,);
@@ -28325,8 +28139,7 @@ var Navigation = /* @__PURE__ */ (() => {
       }
     }
     componentWillUnmount() {
-      var _a2, _b;
-      (_b = (_a2 = this.props).resetProjection) == null ? void 0 : _b.call(_a2,);
+      this.props.resetProjection?.();
     }
     instant(component,) {
       __privateMethod(this, _Navigation_instances, transition_fn,).call(this, component, TransitionDefaults.Instant, void 0,);
@@ -28353,7 +28166,6 @@ var Navigation = /* @__PURE__ */ (() => {
       __privateMethod(this, _Navigation_instances, transition_fn,).call(this, component, transition,);
     }
     render() {
-      var _a2, _b, _c, _d, _e;
       const stackState = __privateMethod(this, _Navigation_instances, getStackState_fn,).call(this, {
         overCurrentContext: false,
       },);
@@ -28375,8 +28187,7 @@ var Navigation = /* @__PURE__ */ (() => {
         const isCurrent = index === this.state.current;
         const isPrevious = index === this.state.previous;
         const areMagicMotionLayersPresent = isCurrent ? false : removed;
-        const withMagicMotion = ((_a2 = historyItem == null ? void 0 : historyItem.transition) == null ? void 0 : _a2.withMagicMotion) ||
-          isCurrent && !!this.state.previousTransition;
+        const withMagicMotion = historyItem?.transition?.withMagicMotion || isCurrent && !!this.state.previousTransition;
         contentContainers.push(/* @__PURE__ */ jsx(NavigationContainer, {
           id: key7,
           index: visualIndex,
@@ -28385,20 +28196,20 @@ var Navigation = /* @__PURE__ */ (() => {
           isPrevious,
           isOverlayed: isOverlayVisible,
           visible: isCurrent || isPrevious,
-          position: (_b = historyItem == null ? void 0 : historyItem.transition) == null ? void 0 : _b.position,
+          position: historyItem?.transition?.position,
           instant: isInstantContainerTransition(index, stackState,),
           transitionProps,
           animation: animationPropsForContainer(index, stackState,),
           backfaceVisible: getBackfaceVisibleForScreen(index, stackState,),
-          exitAnimation: (_c = historyItem == null ? void 0 : historyItem.transition) == null ? void 0 : _c.animation,
-          exitBackfaceVisible: (_d = historyItem == null ? void 0 : historyItem.transition) == null ? void 0 : _d.backfaceVisible,
-          exitProps: (_e = historyItem == null ? void 0 : historyItem.transition) == null ? void 0 : _e.enter,
+          exitAnimation: historyItem?.transition?.animation,
+          exitBackfaceVisible: historyItem?.transition?.backfaceVisible,
+          exitProps: historyItem?.transition?.enter,
           withMagicMotion,
           areMagicMotionLayersPresent: areMagicMotionLayersPresent ? false : void 0,
           children: /* @__PURE__ */ jsx(MagicMotionCrossfadeRoot, {
             children: containerContent({
               component,
-              transition: historyItem == null ? void 0 : historyItem.transition,
+              transition: historyItem?.transition,
             },),
           },),
         }, key7,),);
@@ -28508,9 +28319,8 @@ var Navigation = /* @__PURE__ */ (() => {
     },
     _navigationAction = /* @__PURE__ */ new WeakMap(),
     transition_fn = function (component, transitionTraits, transitionOptions,) {
-      var _a2, _b;
       if (__privateMethod(this, _Navigation_instances, isSameEventTransition_fn,).call(this,)) return;
-      __privateSet(this, _lastEventTimeStamp, ((_a2 = globalThis.event) == null ? void 0 : _a2.timeStamp) || null,);
+      __privateSet(this, _lastEventTimeStamp, globalThis.event?.timeStamp || null,);
       if (!component || !isReactChild(component,) || !isReactElement(component,)) return;
       const transition = {
         ...transitionTraits,
@@ -28522,7 +28332,7 @@ var Navigation = /* @__PURE__ */ (() => {
           transition,
           component,
         },);}
-      const key7 = ((_b = component.key) == null ? void 0 : _b.toString()) || `stack-${this.state.historyItemId + 1}`;
+      const key7 = component.key?.toString() || `stack-${this.state.historyItemId + 1}`;
       __privateGet(this, _navigationAction,).call(this, {
         type: 'add',
         key: key7,
@@ -28614,16 +28424,15 @@ function initialPropsForOverlay(containerIndex, stackState,) {
   if (navigationItem) return navigationItem.transition.enter;
 }
 function getBackfaceVisibleForScreen(screenIndex, stackState,) {
-  var _a, _b, _c, _d;
   const {
     current: current2,
     previous,
     history,
   } = stackState;
   if (screenIndex === previous && current2 > previous || screenIndex === current2 && current2 < previous) {
-    return (_b = (_a = history[screenIndex + 1]) == null ? void 0 : _a.transition) == null ? void 0 : _b.backfaceVisible;
+    return history[screenIndex + 1]?.transition?.backfaceVisible;
   }
-  return (_d = (_c = history[screenIndex]) == null ? void 0 : _c.transition) == null ? void 0 : _d.backfaceVisible;
+  return history[screenIndex]?.transition?.backfaceVisible;
 }
 function transitionPropsForOverlay(overlayIndex, stackState,) {
   const {
@@ -28663,7 +28472,7 @@ function animationPropsForContainer(containerIndex, stackState,) {
     }
   } else {
     const navigationItem = history[containerIndex];
-    if (navigationItem == null ? void 0 : navigationItem.transition.animation) {
+    if (navigationItem?.transition.animation) {
       return navigationItem.transition.animation;
     }
   }
@@ -28691,14 +28500,13 @@ function containerIsVisible(containerIndex, stackState,) {
 }
 function containerContent(item,) {
   const content = React42.Children.map(item.component, (child) => {
-    var _a;
     if (!isReactChild(child,) || !isReactElement(child,) || !child.props) {
       return child;
     }
     const props = {
       style: child.props.style ?? {},
     };
-    const position = (_a = item == null ? void 0 : item.transition) == null ? void 0 : _a.position;
+    const position = item?.transition?.position;
     const shouldStretchWidth = !position || position.left !== void 0 && position.right !== void 0;
     const shouldStretchHeight = !position || position.top !== void 0 && position.bottom !== void 0;
     const canStretchStyle = 'style' in child.props ? isObject2(child.props.style,) : true;
@@ -31139,8 +30947,8 @@ var Stack = /* @__PURE__ */ (() => {
       contentWrapperStyle.height = heightType === 2 ? 'min-content' : '100%';
     }
     if (fromCanvasComponent) {
-      if (styleProp == null ? void 0 : styleProp.width) contentWrapperStyle.width = styleProp == null ? void 0 : styleProp.width;
-      if (styleProp == null ? void 0 : styleProp.height) contentWrapperStyle.height = styleProp == null ? void 0 : styleProp.height;
+      if (styleProp?.width) contentWrapperStyle.width = styleProp?.width;
+      if (styleProp?.height) contentWrapperStyle.height = styleProp?.height;
     }
     return /* @__PURE__ */ jsx(FrameWithMotion, {
       as,
@@ -31423,7 +31231,6 @@ function PageContainer({
   },);
 }
 var Page = /* @__PURE__ */ React42.forwardRef(function Page2(props, forwardedRef,) {
-  var _a;
   const {
     direction = 'horizontal',
     contentWidth = 'stretch',
@@ -31790,7 +31597,7 @@ var Page = /* @__PURE__ */ React42.forwardRef(function Page2(props, forwardedRef
         padding: makePaddingString(paddingFromProps(props,),),
         display: 'flex',
         flexDirection: isHorizontal ? 'row' : 'column',
-        pointerEvents: (_a = props.style) == null ? void 0 : _a.pointerEvents,
+        pointerEvents: props.style?.pointerEvents,
       },
       children: [
         /* @__PURE__ */ jsx(EmptyState, {
@@ -31910,11 +31717,10 @@ function nearestPageIndex(pageRects, startPosition, endPosition, isHorizontalDir
   }
 }
 function getPageContentRects(containerRef, containerSize, direction, gap,) {
-  var _a;
   const containerElement = containerRef.current;
   if (!containerElement) return;
   const contentWrappers = [];
-  (_a = containerElement.firstChild) == null ? void 0 : _a.childNodes.forEach((node) => {
+  containerElement.firstChild?.childNodes.forEach((node) => {
     const childNode = node.firstChild;
     if (!(childNode instanceof HTMLElement)) return;
     const componentType = childNode.getAttribute('data-framer-component-type',);
@@ -32853,10 +32659,8 @@ var EmulatedScroll = /* @__PURE__ */ React42.forwardRef(function EmulatedScroll2
       !isMotionValue2(contentOffsetY,) && contentOffsetY !== previous.offsetY;
     const currentMaxXOffset = contentRef.current.offsetWidth - containerRef.current.offsetWidth;
     const currentMaxYOffset = contentRef.current.offsetHeight - containerRef.current.offsetHeight;
-    const hasSizeChanged = currentMaxXOffset !== (previous == null ? void 0 : previous.maxXOffset) ||
-      currentMaxYOffset !== (previous == null ? void 0 : previous.maxYOffset);
-    const hasScrollOffsetChanged = (previous == null ? void 0 : previous.x) !== x.get() ||
-      (previous == null ? void 0 : previous.y) !== y.get();
+    const hasSizeChanged = currentMaxXOffset !== previous?.maxXOffset || currentMaxYOffset !== previous?.maxYOffset;
+    const hasScrollOffsetChanged = previous?.x !== x.get() || previous?.y !== y.get();
     const shouldStayPinned = hasSizeChanged && !hasScrollOffsetChanged;
     if (mustReset || shouldUpdateOffset || shouldStayPinned) {
       const currentOffsetX = direction !== 'vertical' ? numberFromOptionalMotionValue(contentOffsetX,) : 0;
@@ -32936,7 +32740,7 @@ var EmulatedScroll = /* @__PURE__ */ React42.forwardRef(function EmulatedScroll2
   };
   const onMotionDragTransitionEnd = () => onScrollEnd && onScrollEnd(getPointData(),);
   const onWheelScrollStart = (info) => {
-    onScrollStart == null ? void 0 : onScrollStart(info,);
+    onScrollStart?.(info,);
   };
   useWheelScroll(containerRef, {
     enabled: wheelEnabled,
@@ -33221,13 +33025,12 @@ function getEventPoint(event,) {
   };
 }
 function setPointerEvents(element, value,) {
-  if (element == null ? void 0 : element.style) {
+  if (element?.style) {
     element.style['pointerEvents'] = value;
   }
 }
 function getPointerEvents(element,) {
-  var _a;
-  return (_a = element == null ? void 0 : element.style) == null ? void 0 : _a['pointerEvents'];
+  return element?.style?.['pointerEvents'];
 }
 var emptyObject = /* @__PURE__ */ Object.freeze({},);
 function useEmulateTouchScroll(ref, direction, enabled,) {
@@ -33243,7 +33046,6 @@ function useEmulateTouchScroll(ref, direction, enabled,) {
     let scrollOffsetStart = null;
     let mouseMoveEvents = [];
     function onMouseMove(event,) {
-      var _a;
       switch (phase) {
         case 0:
         case 4:
@@ -33266,12 +33068,12 @@ function useEmulateTouchScroll(ref, direction, enabled,) {
             return;
           }
           phase = 2;
-          targets == null ? void 0 : targets.forEach(([target,],) => setPointerEvents(target, 'none',));
+          targets?.forEach(([target,],) => setPointerEvents(target, 'none',));
         }
       }
       if (isSafariBrowser) event.preventDefault();
       if (phase !== 2) return;
-      (_a = safeWindow.getSelection()) == null ? void 0 : _a.empty();
+      safeWindow.getSelection()?.empty();
       mouseMoveEvents = getRecentEvents([...mouseMoveEvents, event,],);
       if (scrollOffsetStart) {
         if (direction !== 'vertical') element.scrollLeft = scrollOffsetStart.x - offset.x;
@@ -33330,17 +33132,15 @@ function useEmulateTouchScroll(ref, direction, enabled,) {
       }
     }
     function onMouseWheel() {
-      var _a;
-      (_a = scrollAnimationControlsRef.current) == null ? void 0 : _a.stop();
+      scrollAnimationControlsRef.current?.stop();
     }
     function onMouseDown(event,) {
-      var _a;
       if (!enabled) return;
       if (event.metaKey) return;
       if (!canStartScrollFromElement(event.target, direction,)) {
         if (phase === 4) {
           phase = 0;
-          (_a = scrollAnimationControlsRef.current) == null ? void 0 : _a.stop();
+          scrollAnimationControlsRef.current?.stop();
         }
         return;
       }
@@ -33367,20 +33167,18 @@ function useEmulateTouchScroll(ref, direction, enabled,) {
     }
     element.addEventListener('mousedown', onMouseDown,);
     return () => {
-      var _a;
       element.removeEventListener('mousedown', onMouseDown,);
       element.removeEventListener('mousewheel', onMouseWheel,);
       safeWindow.removeEventListener('mousemove', onMouseMove,);
       safeWindow.removeEventListener('mouseup', onMouseUp,);
       phase = 5;
-      (_a = scrollAnimationControlsRef.current) == null ? void 0 : _a.stop();
+      scrollAnimationControlsRef.current?.stop();
     };
   }, [ref, direction, enabled,],);
   return React42.useMemo(() => {
     return {
       cancelEmulatedTouchScrollAnimation: () => {
-        var _a;
-        (_a = scrollAnimationControlsRef.current) == null ? void 0 : _a.stop();
+        scrollAnimationControlsRef.current?.stop();
       },
     };
   }, [],);
@@ -33415,7 +33213,7 @@ function useUpdateScrollOffset(ref, side, offset, cancelEmulatedTouchScrollAnima
   useIsomorphicLayoutEffect2(() => {
     if (isMotionValue2(offset,)) {
       const updateScrollLeft = () => {
-        cancelEmulatedTouchScrollAnimation == null ? void 0 : cancelEmulatedTouchScrollAnimation();
+        cancelEmulatedTouchScrollAnimation?.();
         const element = ref.current;
         if (element) element[side] = Math.abs(offset.get(),);
       };
@@ -33424,7 +33222,7 @@ function useUpdateScrollOffset(ref, side, offset, cancelEmulatedTouchScrollAnima
     } else if (isFiniteNumber(offset,)) {
       const element = ref.current;
       if (!element) return;
-      cancelEmulatedTouchScrollAnimation == null ? void 0 : cancelEmulatedTouchScrollAnimation();
+      cancelEmulatedTouchScrollAnimation?.();
       element[side] = Math.abs(offset,);
     }
   }, [offset,],);
@@ -33485,11 +33283,11 @@ var NativeScroll = /* @__PURE__ */ React42.forwardRef(function NativeScroll2(pro
     const element = ref.current;
     if (!element) return;
     if (direction !== 'vertical') {
-      cancelEmulatedTouchScrollAnimation == null ? void 0 : cancelEmulatedTouchScrollAnimation();
+      cancelEmulatedTouchScrollAnimation?.();
       element.scrollLeft = Math.abs(isMotionValue2(contentOffsetX,) ? contentOffsetX.get() : contentOffsetX,);
     }
     if (direction !== 'horizontal') {
-      cancelEmulatedTouchScrollAnimation == null ? void 0 : cancelEmulatedTouchScrollAnimation();
+      cancelEmulatedTouchScrollAnimation?.();
       element.scrollTop = Math.abs(isMotionValue2(contentOffsetY,) ? contentOffsetY.get() : contentOffsetY,);
     }
   };
@@ -33946,11 +33744,8 @@ function createRefFunction(state,) {
 var StyleSheetContext = /* @__PURE__ */ React42.createContext(void 0,);
 var framerPostSSRCSSSelector = 'style[data-framer-css-ssr-minified]';
 var componentsWithServerRenderedStyles = /* @__PURE__ */ (() => {
-  var _a;
   if (!isBrowser2()) return /* @__PURE__ */ new Set();
-  const componentsWithSSRStylesAttr = (_a = document.querySelector(framerPostSSRCSSSelector,)) == null
-    ? void 0
-    : _a.getAttribute('data-framer-components',);
+  const componentsWithSSRStylesAttr = document.querySelector(framerPostSSRCSSSelector,)?.getAttribute('data-framer-components',);
   if (!componentsWithSSRStylesAttr) return /* @__PURE__ */ new Set();
   return new Set(componentsWithSSRStylesAttr.split(' ',),);
 })();
@@ -34167,9 +33962,7 @@ var PropertyOverridesWithoutCSS = /* @__PURE__ */ React42.forwardRef(function Pr
       primaryVariantId,
       variantClassNames,
     } = generatedComponentContext;
-    const parentVariants = (ancestorCtx == null ? void 0 : ancestorCtx.primaryVariantId) === primaryVariantId
-      ? ancestorCtx == null ? void 0 : ancestorCtx.variants
-      : void 0;
+    const parentVariants = ancestorCtx?.primaryVariantId === primaryVariantId ? ancestorCtx?.variants : void 0;
     switch (action) {
       case 0:
         return cloneWithRefs(children, propsForBreakpoint(breakpoint, restProps, overrides,),);
@@ -34249,15 +34042,14 @@ var AnimationCollector = class {
     this.entries.set(id3, existing,);
   }
   variantHash(variantId, info,) {
-    if (variantId === (info == null ? void 0 : info.primaryVariantId)) return defaultVariantKey;
+    if (variantId === info?.primaryVariantId) return defaultVariantKey;
     const existing = __privateGet(this, _variantHashes,)[variantId];
     if (existing) return existing;
-    const className2 = info == null ? void 0 : info.variantClassNames[variantId];
+    const className2 = info?.variantClassNames[variantId];
     if (!className2) return defaultVariantKey;
     return __privateGet(this, _variantHashes,)[variantId] = variantHashFromClassName(className2,);
   }
   setAll(id3, variants = defaultVariants, props, info,) {
-    var _a;
     if (props === null) {
       for (const variantId of variants) {
         this.setHash(id3, this.variantHash(variantId, info,), null,);
@@ -34265,7 +34057,7 @@ var AnimationCollector = class {
       return;
     }
     const transformTemplate2 = isFunction(props.transformTemplate,)
-      ? (_a = props.transformTemplate) == null ? void 0 : _a.call(props, {}, framerAppearTransformTemplateToken,)
+      ? props.transformTemplate?.({}, framerAppearTransformTemplateToken,)
       : void 0;
     const initial = props.__framer__presenceInitial ?? props.initial;
     const animate3 = props.__framer__presenceAnimate ?? props.animate;
@@ -34290,9 +34082,8 @@ function withOptimizedAppearEffect(Component18,) {
     optimized,
     ...props
   }, ref,) => {
-    var _a;
     const generatedComponentContext = React42.useContext(GeneratedComponentContext,);
-    const variants = (_a = React42.useContext(SSRParentVariantsContext,)) == null ? void 0 : _a.variants;
+    const variants = React42.useContext(SSRParentVariantsContext,)?.variants;
     const id3 = props[framerAppearIdKey];
     if (id3 && !isBrowser2()) {
       framerAppearEffects.setAll(
@@ -34324,7 +34115,7 @@ var optimizeAppear = (prop, id3, animateTargetAndTransition, variantHash,) => {
 var framerAppearTransformTemplateToken = '__Appear_Animation_Transform__';
 var optimizeAppearTransformTemplate = (id3, fn,) => {
   if (!isBrowser2()) {
-    const template = fn == null ? void 0 : fn({}, framerAppearTransformTemplateToken,);
+    const template = fn?.({}, framerAppearTransformTemplateToken,);
     if (template === void 0) return fn;
     framerAppearEffects.set(id3, 'transformTemplate', template,);
   }
@@ -34358,17 +34149,17 @@ var effectValuesKeys = [
 ];
 var makeFXValues = (defaults) => {
   return {
-    x: motionValue((defaults == null ? void 0 : defaults.x) ?? 0,),
-    y: motionValue((defaults == null ? void 0 : defaults.y) ?? 0,),
-    opacity: motionValue((defaults == null ? void 0 : defaults.opacity) ?? 1,),
-    scale: motionValue((defaults == null ? void 0 : defaults.scale) ?? 1,),
-    rotate: motionValue((defaults == null ? void 0 : defaults.rotate) ?? 0,),
-    rotateX: motionValue((defaults == null ? void 0 : defaults.rotateX) ?? 0,),
-    rotateY: motionValue((defaults == null ? void 0 : defaults.rotateY) ?? 0,),
-    skewX: motionValue((defaults == null ? void 0 : defaults.skewX) ?? 0,),
-    skewY: motionValue((defaults == null ? void 0 : defaults.skewY) ?? 0,),
+    x: motionValue(defaults?.x ?? 0,),
+    y: motionValue(defaults?.y ?? 0,),
+    opacity: motionValue(defaults?.opacity ?? 1,),
+    scale: motionValue(defaults?.scale ?? 1,),
+    rotate: motionValue(defaults?.rotate ?? 0,),
+    rotateX: motionValue(defaults?.rotateX ?? 0,),
+    rotateY: motionValue(defaults?.rotateY ?? 0,),
+    skewX: motionValue(defaults?.skewX ?? 0,),
+    skewY: motionValue(defaults?.skewY ?? 0,),
     /** @deprecated */
-    transformPerspective: motionValue((defaults == null ? void 0 : defaults.transformPerspective) ?? 0,),
+    transformPerspective: motionValue(defaults?.transformPerspective ?? 0,),
   };
 };
 var defaultFXValues = {
@@ -34609,7 +34400,7 @@ function isTargetAndTransition(value,) {
 }
 function getTransition(value,) {
   if (!isTargetAndTransition(value,)) return void 0;
-  return value == null ? void 0 : value.transition;
+  return value?.transition;
 }
 function runEffectAnimation(target, effect, shouldReduceMotion, ref, appearId, instant,) {
   const transition = getTransition(target,);
@@ -34618,15 +34409,13 @@ function runEffectAnimation(target, effect, shouldReduceMotion, ref, appearId, i
       if (shouldReduceMotion && key7 !== 'opacity') return resolve();
       const motionValue2 = effect.values[key7];
       motionValue2.stop();
-      let value = !isTargetAndTransition(target,)
-        ? defaultFXValues[key7]
-        : (target == null ? void 0 : target[key7]) ?? defaultFXValues[key7];
+      let value = !isTargetAndTransition(target,) ? defaultFXValues[key7] : target?.[key7] ?? defaultFXValues[key7];
       if (isMotionValue(value,)) value = value.get();
       if (!isNumber2(value,)) return resolve();
       const visualElement = visualElementStore.get(ref.current,);
       if (visualElement) visualElement.setBaseTarget(key7, value,);
       let startTime;
-      if (isString(appearId,) && !(motionValue2 == null ? void 0 : motionValue2.hasAnimated) && safeWindow.MotionHandoffAnimation) {
+      if (isString(appearId,) && !motionValue2?.hasAnimated && safeWindow.MotionHandoffAnimation) {
         const handoffAnimationStartTime = safeWindow.MotionHandoffAnimation(appearId, key7, frame,);
         if (handoffAnimationStartTime) {
           startTime = handoffAnimationStartTime;
@@ -34699,14 +34488,14 @@ function usePresenceAnimation(
     },);
     for (const key7 in effect.values) {
       if (!isFXValuesKey(key7,)) continue;
-      const value = style2 == null ? void 0 : style2[key7];
+      const value = style2?.[key7];
       visualElement.setBaseTarget(key7, isNumber2(value,) ? value : defaultFXValues[key7],);
     }
   }, [animateConfig,],);
   const shouldReduceMotion = useReducedMotionConfig();
   useRefEffect(ref, (element) => {
     if (!enabled) {
-      safeToRemove == null ? void 0 : safeToRemove();
+      safeToRemove?.();
       return;
     }
     if (element === null) return;
@@ -34774,7 +34563,6 @@ function calcOffsetTop(element, container,) {
 }
 var scrollObserverOffset = 1;
 function createTransformInputRange(transformTargets, threshold = 0, callback,) {
-  var _a;
   const starts = [];
   const inputRange = [];
   for (let index = transformTargets.length; index >= 0; index--) {
@@ -34785,12 +34573,12 @@ function createTransformInputRange(transformTargets, threshold = 0, callback,) {
     if (!targetRef || !targetRef.current) continue;
     const offsetTop = calcOffsetTop(targetRef.current, document.documentElement,);
     const top = offsetTop - scrollObserverOffset - (offset ?? 0) - threshold;
-    const height = ((_a = targetRef.current) == null ? void 0 : _a.clientHeight) ?? 0;
+    const height = targetRef.current?.clientHeight ?? 0;
     const previousTop = starts[starts.length - 1];
     const end = Math.max(top + height, 0,);
     starts.push(top,);
     inputRange.unshift(Math.max(top, 0,), previousTop === void 0 ? end : Math.min(end, Math.max(previousTop - 1, 0,),),);
-    callback == null ? void 0 : callback(index,);
+    callback?.(index,);
   }
   return inputRange;
 }
@@ -34886,17 +34674,17 @@ function createInputOutputRange(targets, threshold, hasExit,) {
 }
 function makeStyle(defaults,) {
   return {
-    x: (defaults == null ? void 0 : defaults.x) ?? defaultFXValues.x,
-    y: (defaults == null ? void 0 : defaults.y) ?? defaultFXValues.y,
-    scale: (defaults == null ? void 0 : defaults.scale) ?? defaultFXValues.scale,
-    opacity: (defaults == null ? void 0 : defaults.opacity) ?? defaultFXValues.opacity,
-    transformPerspective: (defaults == null ? void 0 : defaults.transformPerspective) ?? defaultFXValues.transformPerspective,
-    rotate: (defaults == null ? void 0 : defaults.rotate) ?? defaultFXValues.rotate,
-    rotateX: (defaults == null ? void 0 : defaults.rotateX) ?? defaultFXValues.rotateX,
-    rotateY: (defaults == null ? void 0 : defaults.rotateY) ?? defaultFXValues.rotateY,
-    skewX: (defaults == null ? void 0 : defaults.skewX) ?? defaultFXValues.skewX,
-    skewY: (defaults == null ? void 0 : defaults.skewY) ?? defaultFXValues.skewY,
-    transition: (defaults == null ? void 0 : defaults.transition) ?? void 0,
+    x: defaults?.x ?? defaultFXValues.x,
+    y: defaults?.y ?? defaultFXValues.y,
+    scale: defaults?.scale ?? defaultFXValues.scale,
+    opacity: defaults?.opacity ?? defaultFXValues.opacity,
+    transformPerspective: defaults?.transformPerspective ?? defaultFXValues.transformPerspective,
+    rotate: defaults?.rotate ?? defaultFXValues.rotate,
+    rotateX: defaults?.rotateX ?? defaultFXValues.rotateX,
+    rotateY: defaults?.rotateY ?? defaultFXValues.rotateY,
+    skewX: defaults?.skewX ?? defaultFXValues.skewX,
+    skewY: defaults?.skewY ?? defaultFXValues.skewY,
+    transition: defaults?.transition ?? void 0,
   };
 }
 function useAnimationVariants({
@@ -35022,11 +34810,10 @@ function useStyleAppearEffect(options, ref,) {
     repeat: !options.animateOnce,
   },);
   useOnRouteChange(() => {
-    var _a;
     if (!enabled) return;
     if (!options.targets && !options.scrollDirection) return;
     for (const key7 of effectValuesKeys) {
-      effect.values[key7].set(((_a = variants.initial) == null ? void 0 : _a[key7]) ?? defaultFXValues[key7],);
+      effect.values[key7].set(variants.initial?.[key7] ?? defaultFXValues[key7],);
     }
   },);
   return useMemo(() => {
@@ -35044,11 +34831,10 @@ var styleTransformOptionsKeys = /* @__PURE__ */ new Set([
   'transformTrigger',
 ],);
 var defaultValues = (transformTargets, shouldReduceMotion,) => {
-  var _a;
-  const initial = (_a = transformTargets == null ? void 0 : transformTargets[0]) == null ? void 0 : _a.target;
+  const initial = transformTargets?.[0]?.target;
   return shouldReduceMotion
     ? {
-      opacity: (initial == null ? void 0 : initial.opacity) ?? 1,
+      opacity: initial?.opacity ?? 1,
     }
     : initial;
 };
@@ -35096,16 +34882,10 @@ function useAttachOptionalSpring(values, spring2,) {
 function createInputOutputRanges(transformTargets, threshold,) {
   const effectKeyOutputRange = defaultRanges2();
   const inputRange = createTransformInputRange(transformTargets, threshold, (index) => {
-    var _a, _b, _c;
-    const previousTarget = (_a = transformTargets[index - 1]) == null ? void 0 : _a.target;
-    const currentTarget = (_b = transformTargets[index]) == null ? void 0 : _b.target;
+    const previousTarget = transformTargets[index - 1]?.target;
+    const currentTarget = transformTargets[index]?.target;
     for (const key7 of effectValuesKeys) {
-      (_c = effectKeyOutputRange[key7]) == null
-        ? void 0
-        : _c.unshift(
-          (previousTarget == null ? void 0 : previousTarget[key7]) ?? 0,
-          (currentTarget == null ? void 0 : currentTarget[key7]) ?? 0,
-        );
+      effectKeyOutputRange[key7]?.unshift(previousTarget?.[key7] ?? 0, currentTarget?.[key7] ?? 0,);
     }
   },);
   return {
@@ -35114,14 +34894,13 @@ function createInputOutputRanges(transformTargets, threshold,) {
   };
 }
 function createPageOutputRange(transformTargets,) {
-  var _a;
   const keyOutputRange = defaultRanges2();
   for (
     const {
       target,
     } of transformTargets
   ) {
-    for (const key7 of effectValuesKeys) (_a = keyOutputRange[key7]) == null ? void 0 : _a.push(target[key7],);
+    for (const key7 of effectValuesKeys) keyOutputRange[key7]?.push(target[key7],);
   }
   return keyOutputRange;
 }
@@ -35189,7 +34968,7 @@ function useStyleTransform({
     if (effectDisabled) return;
     const values = defaultValues(transformTargets, shouldReduceMotion,);
     for (const key7 of effectValuesKeys) {
-      effect.values[key7].set((values == null ? void 0 : values[key7]) ?? defaultFXValues[key7],);
+      effect.values[key7].set(values?.[key7] ?? defaultFXValues[key7],);
     }
   },);
   return React42.useMemo(() => {
@@ -35232,7 +35011,7 @@ function extractFXOptions(props,) {
     if (strippedKey) {
       for (const group of groupValues) {
         const keys3 = groups[group];
-        if (keys3 == null ? void 0 : keys3.has(strippedKey,)) {
+        if (keys3?.has(strippedKey,)) {
           result[group][strippedKey] = asRecord(props,)[key7];
           break;
         }
@@ -35269,7 +35048,6 @@ function isVariantOrVariantList2(value,) {
 }
 var withFX = (Component18) =>
   React42.forwardRef((props, forwardedRef,) => {
-    var _a;
     if (props.__withFX) {
       return /* @__PURE__ */ jsx(Component18, {
         ...props,
@@ -35306,7 +35084,7 @@ var withFX = (Component18) =>
     const {
       values: parallaxValues,
       style: parallaxStyle,
-    } = useParallax(parallax, observerRef, (_a = props.style) == null ? void 0 : _a.visibility,);
+    } = useParallax(parallax, observerRef, props.style?.visibility,);
     const {
       values: transformValues2,
       style: scrollStyle,
@@ -35472,7 +35250,7 @@ var SynchronousSuspenseErrorBoundary = class extends Component2 {
   // it means that you’re experiencing a scenario not covered by our tests.
   componentDidCatch(error, errorInfo,) {
     if (!isSuspense426Error(error,)) return;
-    const componentStack = errorInfo == null ? void 0 : errorInfo.componentStack;
+    const componentStack = errorInfo?.componentStack;
     console.error(
       'Caught an error in SynchronousSuspenseErrorBoundary:\n\n',
       error,
@@ -35546,7 +35324,7 @@ function collectErrorToAnalytics(error, errorInfo,) {
   if (!isWindow) return;
   if (Math.random() > 0.01) return;
   const stack = error instanceof Error && typeof error.stack === 'string' ? error.stack : null;
-  const componentStack = errorInfo == null ? void 0 : errorInfo.componentStack;
+  const componentStack = errorInfo?.componentStack;
   sendTrackingEvent('published_site_load_recoverable_error', {
     message: String(error,),
     stack,
@@ -35591,7 +35369,7 @@ var ClientSideErrorBoundary = class extends Component2 {
     };
   }
   componentDidCatch(error, errorInfo,) {
-    logError(this.props.getErrorMessage(), errorInfo == null ? void 0 : errorInfo.componentStack,);
+    logError(this.props.getErrorMessage(), errorInfo?.componentStack,);
     collectErrorToAnalytics(error, errorInfo,);
   }
   render() {
@@ -35637,7 +35415,7 @@ var DeprecatedContainerErrorBoundary = class extends Component2 {
   // We use `componentDidCatch` instead of `static getDerivedStateFromError()` because the latter could also catch hydration errors.
   // Hydration errors are recoverable by React, so we don't want to hide the coponent in that case (since the tree will not unmount).
   componentDidCatch(error, errorInfo,) {
-    const componentStack = errorInfo == null ? void 0 : errorInfo.componentStack;
+    const componentStack = errorInfo?.componentStack;
     console.error(
       'Error in component (see previous log). This component has been hidden. Please check any custom code or code overrides to fix.',
       componentStack,
@@ -35680,7 +35458,7 @@ function IsExternalComponent({
 },) {
   const parent = useNearestExternalComponent();
   const newValue = React42.useMemo(() => ({
-    level: ((parent == null ? void 0 : parent.level) ?? 0) + 1,
+    level: (parent?.level ?? 0) + 1,
     scopeId,
     nodeId,
     parent,
@@ -35765,8 +35543,8 @@ function useMaybeWrapComponentWithCodeBoundary(children, scopeId, nodeId, isAuth
   }
   const shouldWrapWithBoundary = shouldWrapComponentWithBoundary(
     scopeId,
-    nearestExternalComponent == null ? void 0 : nearestExternalComponent.scopeId,
-    nearestExternalComponent == null ? void 0 : nearestExternalComponent.level,
+    nearestExternalComponent?.scopeId,
+    nearestExternalComponent?.level,
     isAuthoredByUser ?? false,
     isModuleExternal ?? false,
     inComponentSlot ?? false,
@@ -36069,8 +35847,7 @@ var CustomCursorComponent = /* @__PURE__ */ memo2(function CustomCursorComponent
         button: e.button,
       },);
       frame.update(() => {
-        var _a;
-        (_a = cursorRef.current) == null ? void 0 : _a.dispatchEvent(event,);
+        cursorRef.current?.dispatchEvent(event,);
       },);
     }
     safeWindow.addEventListener('pointermove', updateCursor,);
@@ -36121,22 +35898,16 @@ var CustomCursorComponent = /* @__PURE__ */ memo2(function CustomCursorComponent
     if (!hasHoverCapability) return;
     document.body.classList.toggle(replaceCursorClassName, replaceNativeCursor,);
   }, [replaceNativeCursor, hasHoverCapability,],);
-  const Cursor = cursor == null ? void 0 : cursor.component;
-  const spring2 = (cursor == null ? void 0 : cursor.transition) ?? {
+  const Cursor = cursor?.component;
+  const spring2 = cursor?.transition ?? {
     duration: 0,
   };
   const sprungX = useSpring(pointerX, spring2,);
   const sprungY = useSpring(pointerY, spring2,);
-  const x = useTransform(() => {
-    var _a;
-    return sprungX.get() + (((_a = cursor == null ? void 0 : cursor.offset) == null ? void 0 : _a.x) ?? 0);
-  },);
-  const y = useTransform(() => {
-    var _a;
-    return sprungY.get() + (((_a = cursor == null ? void 0 : cursor.offset) == null ? void 0 : _a.y) ?? 0);
-  },);
-  const alignment = cursor == null ? void 0 : cursor.alignment;
-  const placement = cursor == null ? void 0 : cursor.placement;
+  const x = useTransform(() => sprungX.get() + (cursor?.offset?.x ?? 0));
+  const y = useTransform(() => sprungY.get() + (cursor?.offset?.y ?? 0));
+  const alignment = cursor?.alignment;
+  const placement = cursor?.placement;
   const transformTemplate2 = useCallback2((_, t,) => `translate(${getCenteringTransform(placement, alignment,)}) ${t}`, [
     alignment,
     placement,
@@ -36152,7 +35923,7 @@ var CustomCursorComponent = /* @__PURE__ */ memo2(function CustomCursorComponent
         opacity,
       },
       globalTapTarget: true,
-      variant: cursor == null ? void 0 : cursor.variant,
+      variant: cursor?.variant,
       ref: cursorRef,
       className: cursorComponentClassName,
     },),
@@ -36173,10 +35944,7 @@ function isLinkToWebPage(link,) {
   return Boolean(link && typeof link === 'object' && linkKey in link,);
 }
 function linkInfoKey(link,) {
-  var _a, _b;
-  return `${link.scopeId}:${link.nodeId}:${(_a = link.furthestExternalComponent) == null ? void 0 : _a.scopeId}:${
-    (_b = link.furthestExternalComponent) == null ? void 0 : _b.nodeId
-  }`;
+  return `${link.scopeId}:${link.nodeId}:${link.furthestExternalComponent?.scopeId}:${link.furthestExternalComponent?.nodeId}`;
 }
 var NestedLinksCollector = class {
   constructor() {
@@ -36233,8 +36001,7 @@ function isValidURL(href, isInternal,) {
   } catch {}
   return isInternal;
 }
-function getRouteFromPageLink(pageLink, router, currentRoute,) {
-  var _a;
+function getRouteFromPageLink(pageLink, router, currentRoute, locales,) {
   if (isString(pageLink,)) {
     const isInternal = isInternalURL(pageLink,);
     if (!router.routes || !router.getRoute || !currentRoute || !isInternal) {
@@ -36246,13 +36013,13 @@ function getRouteFromPageLink(pageLink, router, currentRoute,) {
     if (pathname === void 0) return;
     const {
       routeId,
-    } = inferInitialRouteFromPath(router.routes, pathname,);
+    } = inferInitialRouteFromPath(router.routes, pathname, void 0, locales,);
     return router.getRoute(routeId,);
   }
   const {
     webPageId,
   } = pageLink;
-  return (_a = router.getRoute) == null ? void 0 : _a.call(router, webPageId,);
+  return router.getRoute?.(webPageId,);
 }
 var elementKey = 'element';
 var collectionKey = 'collection';
@@ -36312,7 +36079,6 @@ function shouldOpenLinkInNewTab(link,) {
   return !isFramerPageLink(link,);
 }
 function navigateFromAttributes(navigate, element, implicitPathVariables,) {
-  var _a;
   let routeId = element.getAttribute('data-framer-page-link-target',/* Page */
   );
   let elementId;
@@ -36332,7 +36098,7 @@ function navigateFromAttributes(navigate, element, implicitPathVariables,) {
     if (!link || !link.target) return false;
     routeId = link.target;
     elementId = link.element ?? void 0;
-    pathVariables = (_a = link.collectionItem) == null ? void 0 : _a.pathVariables;
+    pathVariables = link.collectionItem?.pathVariables;
   }
   const smoothScroll = elementId ? element.dataset.framerSmoothScroll !== void 0 : void 0;
   navigate(routeId, elementId, Object.assign({}, implicitPathVariables, pathVariables,), smoothScroll,);
@@ -36382,15 +36148,17 @@ function useReplaceNestedLinks(children, scopeId, nodeId, href, propsAddedByLink
   }), [scopeId, nodeId, furthestExternalComponent,],);
   const router = useRouter();
   const currentRoute = useCurrentRoute();
+  const {
+    locales,
+  } = useLocaleInfo();
   const route = useMemo(() => {
     const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
     if (!pageLink) return;
-    return getRouteFromPageLink(pageLink, router, currentRoute,);
-  }, [currentRoute, href, router,],);
+    return getRouteFromPageLink(pageLink, router, currentRoute, locales,);
+  }, [currentRoute, href, router, locales,],);
   const isOnFramerCanvas = useIsOnFramerCanvas();
-  const shouldReplaceLink = Boolean(!isOnFramerCanvas && (outerLink == null ? void 0 : outerLink.nodeId) && innerLink.nodeId,);
+  const shouldReplaceLink = Boolean(!isOnFramerCanvas && outerLink?.nodeId && innerLink.nodeId,);
   const onClick = useCallback2((event) => {
-    var _a;
     if (!propsAddedByLink.href) return;
     event.preventDefault();
     event.stopPropagation();
@@ -36400,7 +36168,7 @@ function useReplaceNestedLinks(children, scopeId, nodeId, href, propsAddedByLink
       return;
     }
     if (route) {
-      (_a = propsAddedByLink.navigate) == null ? void 0 : _a.call(propsAddedByLink,);
+      propsAddedByLink.navigate?.();
     } else {
       openExternalLink(propsAddedByLink.href, propsAddedByLink.rel, propsAddedByLink.target,);
     }
@@ -36412,13 +36180,12 @@ function useReplaceNestedLinks(children, scopeId, nodeId, href, propsAddedByLink
     openExternalLink(propsAddedByLink.href, '', '_blank',);
   }, [propsAddedByLink,],);
   const onKeyDown = useCallback2((event) => {
-    var _a;
     if (!propsAddedByLink.href) return;
     if (event.key !== 'Enter') return;
     event.preventDefault();
     event.stopPropagation();
     if (route) {
-      (_a = propsAddedByLink.navigate) == null ? void 0 : _a.call(propsAddedByLink,);
+      propsAddedByLink.navigate?.();
     } else {
       openExternalLink(propsAddedByLink.href, propsAddedByLink.rel, propsAddedByLink.target,);
     }
@@ -36474,7 +36241,7 @@ function useReplaceNestedLinks(children, scopeId, nodeId, href, propsAddedByLink
   },);
 }
 function linkInfoIsCollectable(linkInfo,) {
-  return !isUndefined(linkInfo == null ? void 0 : linkInfo.nodeId,);
+  return !isUndefined(linkInfo?.nodeId,);
 }
 function isChildReplaceable(child,) {
   return isValidElement(child,) &&
@@ -36539,7 +36306,7 @@ var InjectSelectionStyle =
   /* @__PURE__ */ (() =>
     withCSS(
       InjectSelectionStyleWithoutCSS,
-      (_target, props,) => getTextSelectionStylesFromTrigger(props == null ? void 0 : props.triggerId,),
+      (_target, props,) => getTextSelectionStylesFromTrigger(props?.triggerId,),
       'InjectSelectionStyle',
     ))();
 var Polygon = {
@@ -36583,16 +36350,15 @@ var Polygon = {
    * @internal
    */
   containsPoint: (polygonPoints2, point2,) => {
-    var _a, _b, _c, _d;
     let sign = void 0;
     for (let i = 0; i < polygonPoints2.length; i++) {
       if (Point.isEqual(polygonPoints2[i], point2,)) return true;
-      const x1 = ((_a = polygonPoints2[i]) == null ? void 0 : _a.x) ?? 0;
-      const y1 = ((_b = polygonPoints2[i]) == null ? void 0 : _b.y) ?? 0;
+      const x1 = polygonPoints2[i]?.x ?? 0;
+      const y1 = polygonPoints2[i]?.y ?? 0;
       const i2 = (i + 1) % polygonPoints2.length;
       if (Point.isEqual(polygonPoints2[i2], point2,)) return true;
-      const x2 = ((_c = polygonPoints2[i2]) == null ? void 0 : _c.x) ?? 0;
-      const y2 = ((_d = polygonPoints2[i2]) == null ? void 0 : _d.y) ?? 0;
+      const x2 = polygonPoints2[i2]?.x ?? 0;
+      const y2 = polygonPoints2[i2]?.y ?? 0;
       const d = (point2.x - x1) * (y2 - y1) - (point2.y - y1) * (x2 - x1);
       if (d === 0) continue;
       const localSign = d > 0;
@@ -36674,7 +36440,7 @@ var Polygon = {
   },
 };
 function keyForPoint(point2,) {
-  return `${point2 == null ? void 0 : point2.x}-${point2 == null ? void 0 : point2.y}`;
+  return `${point2?.x}-${point2?.y}`;
 }
 function invertPlacement(placement,) {
   switch (placement) {
@@ -36894,15 +36660,14 @@ function motionOriginFromFloatingPosition(placement = 'bottom', alignment = 'cen
   }
 }
 function domReadGetAncestorInfo(anchorRef,) {
-  var _a;
   let el = anchorRef.current;
   const info = {
     position: 'absolute',
     scrolls: false,
   };
   while (el) {
-    if ((el == null ? void 0 : el.tagName) === 'BODY') return info;
-    if (((_a = getComputedStyle(el,)) == null ? void 0 : _a.position) === 'fixed') info.position = 'fixed';
+    if (el?.tagName === 'BODY') return info;
+    if (getComputedStyle(el,)?.position === 'fixed') info.position = 'fixed';
     if (el.scrollWidth > el.clientWidth || el.scrollHeight > el.clientHeight) info.scrolls = true;
     if (info.scrolls && info.position === 'fixed') return info;
     el = el.parentElement;
@@ -36917,10 +36682,9 @@ function domWriteCreateUpdateSafeArea(safeAreaRef,) {
   let x = 0;
   let y = 0;
   return (anchorRect, calculatedRect, placement, event,) => {
-    var _a;
-    if (!((_a = safeAreaRef.current) == null ? void 0 : _a.style)) return;
-    x = (event == null ? void 0 : event.clientX) ?? x;
-    y = (event == null ? void 0 : event.clientY) ?? y;
+    if (!safeAreaRef.current?.style) return;
+    x = event?.clientX ?? x;
+    y = event?.clientY ?? y;
     Object.assign(safeAreaRef.current.style, floatingPositionSafeAreaStyle(x, y, placement, anchorRect, calculatedRect,),);
   };
 }
@@ -36930,8 +36694,8 @@ function domWriteUpdatePosition(floatingPositionRef, position, rect, scrollX, sc
     position,
     visibility: 'visible',
     // Append "px" because we are assigning this object straight to style.
-    left: ((rect == null ? void 0 : rect.x) ?? 0) + scrollX + 'px',
-    top: ((rect == null ? void 0 : rect.y) ?? 0) + scrollY + 'px',
+    left: (rect?.x ?? 0) + scrollX + 'px',
+    top: (rect?.y ?? 0) + scrollY + 'px',
   },);
 }
 var FloatingStackingContext = /* @__PURE__ */ (() => {
@@ -37057,7 +36821,6 @@ function Floating({
   onDismiss,
   ...rest
 },) {
-  var _a;
   const floatingPositionRef = React42.useRef(null,);
   const safeAreaRef = React42.useRef(null,);
   const contentRef = React42.useRef(null,);
@@ -37134,7 +36897,7 @@ function Floating({
     }
     if (!safeArea) {
       return () => {
-        cleanup == null ? void 0 : cleanup();
+        cleanup?.();
         cleanupHasRun = true;
       };
     }
@@ -37149,7 +36912,7 @@ function Floating({
     anchor.addEventListener('mousemove', handleMouseMove,);
     return () => {
       anchor.removeEventListener('mousemove', handleMouseMove,);
-      cleanup == null ? void 0 : cleanup();
+      cleanup?.();
       cleanupHasRun = true;
     };
   }, [safeArea, placement, alignment, offsetX, offsetY, anchorRef, collisionDetection, collisionDetectionPadding, updateOrigin,],);
@@ -37198,7 +36961,7 @@ function Floating({
           value: descendantContext,
           children: /* @__PURE__ */ jsx(ResetOuterLinkContext, {
             children: /* @__PURE__ */ jsx(InjectSelectionStyle, {
-              triggerId: ((_a = anchorRef.current) == null ? void 0 : _a.id) ?? void 0,
+              triggerId: anchorRef.current?.id ?? void 0,
               children: /* @__PURE__ */ jsx('div', {
                 ref: contentRef,
                 children: childrenWithOrigin(children, origin,),
@@ -37251,13 +37014,12 @@ var GracefullyDegradingErrorBoundary = class extends Component2 {
     },);
   }
   render() {
-    var _a, _b;
     const error = this.state.error;
     if (!error) return this.props.children;
     const unwrappedError = 'cause' in error ? error.cause : error;
     const closingHTMLComment = /-->/gu;
     const closingHTMLCommentReplacement = '--!>';
-    const dom = isBot ? ((_a = document.getElementById('main',)) == null ? void 0 : _a.innerHTML) || '' : // @FIXME: We should have a UI for fatal error recovery.
+    const dom = isBot ? document.getElementById('main',)?.innerHTML || '' : // @FIXME: We should have a UI for fatal error recovery.
     // We don't have a UI for fatal error recovery currently, so we just render nothing for regular users. If we were to throw, React would unmount too.
     // We do render instead of throwing, so that:
     // - `componentDidCatch` runs (if we throw here, it does not)
@@ -37276,9 +37038,7 @@ var GracefullyDegradingErrorBoundary = class extends Component2 {
           __html:
             `<!-- DOM replaced by GracefullyDegradingErrorBoundary due to "${
               unwrappedError.message.replace(closingHTMLComment, closingHTMLCommentReplacement,)
-            }". ${getPleaseReportMessage()}: --><!-- Stack: ${
-              (_b = error.stack) == null ? void 0 : _b.replace(closingHTMLComment, '--!>',)
-            } -->` + dom,
+            }". ${getPleaseReportMessage()}: --><!-- Stack: ${error.stack?.replace(closingHTMLComment, '--!>',)} -->` + dom,
         },
       },)
     );
@@ -37322,7 +37082,6 @@ var nodeToRoute = /* @__PURE__ */ new WeakMap();
 var preloadedRoutes = /* @__PURE__ */ new Set();
 var routeToNodesInViewport = /* @__PURE__ */ new Map();
 function getObserveRouteForPreloadingFn() {
-  var _a;
   const connection = __unframerNavigator2.connection || __unframerNavigator2.mozConnection || __unframerNavigator2.webkitConnection || {};
   const lowDeviceMemory = __unframerNavigator2.deviceMemory && __unframerNavigator2.deviceMemory > LOW_MEMORY_THRESHOLD;
   let effectiveType, preloadDisabled, maxPreloadAmount;
@@ -37333,7 +37092,7 @@ function getObserveRouteForPreloadingFn() {
       ? MAX_CONCURRENT_PRELOADS_SLOW_NETWORK
       : MAX_CONCURRENT_PRELOADS_FAST_NETWORK;
   }
-  (_a = connection.addEventListener) == null ? void 0 : _a.call(connection, 'change', updateConnection,);
+  connection.addEventListener?.('change', updateConnection,);
   updateConnection();
   const observer2 = new IntersectionObserver(onPreloadIntersectionChange, {
     threshold: OBSERVER_THRESHOLD,
@@ -37342,7 +37101,7 @@ function getObserveRouteForPreloadingFn() {
   async function preloadTimeout(route, target,) {
     if (preloadDisabled) return;
     const nodesInViewport = routeToNodesInViewport.get(route,);
-    if (!(nodesInViewport == null ? void 0 : nodesInViewport.size) || preloadedRoutes.has(route,)) return;
+    if (!nodesInViewport?.size || preloadedRoutes.has(route,)) return;
     ++activePreloadsAmount;
     preloadedRoutes.add(route,);
     const preloadDone = preloadRoute(route,).catch(() => {
@@ -37364,7 +37123,6 @@ function getObserveRouteForPreloadingFn() {
     --activePreloadsAmount;
   }
   function onPreloadIntersectionChange(entries,) {
-    var _a2;
     for (const entry of entries) {
       const target = entry.target;
       const route = nodeToRoute.get(target,);
@@ -37374,7 +37132,7 @@ function getObserveRouteForPreloadingFn() {
         continue;
       }
       const nodes = routeToNodesInViewport.get(route,);
-      const amountOfNodesInViewport = ((_a2 = routeToNodesInViewport.get(route,)) == null ? void 0 : _a2.size) ?? 0;
+      const amountOfNodesInViewport = routeToNodesInViewport.get(route,)?.size ?? 0;
       if (entry.isIntersecting) {
         if (activePreloadsAmount >= maxPreloadAmount) continue;
         if (nodes) nodes.add(target,);
@@ -37418,7 +37176,7 @@ function findMatchingRouteAttributesForWebPageLink(router, currentRoute, pageLin
     activeLocale,
   );
 }
-function findMatchingRouteAttributesForResolvedPath(router, path, implicitPathVariables,) {
+function findMatchingRouteAttributesForResolvedPath(router, path, implicitPathVariables, locales,) {
   if (!router.routes || !router.getRoute) {
     return;
   }
@@ -37434,7 +37192,7 @@ function findMatchingRouteAttributesForResolvedPath(router, path, implicitPathVa
     const {
       routeId,
       pathVariables,
-    } = inferInitialRouteFromPath(router.routes, pathname,);
+    } = inferInitialRouteFromPath(router.routes, pathname, void 0, locales,);
     const route = router.getRoute(routeId,);
     if (route) {
       const combinedPathVariables = Object.assign({}, implicitPathVariables, pathVariables,);
@@ -37461,28 +37219,27 @@ function getRouteAttributes(
   resolvedSlugs,
   activeLocale,
 ) {
-  var _a;
   const combinedPathVariables = {
     ...implicitPathVariables,
     ...pathVariables,
-    ...(resolvedSlugs == null ? void 0 : resolvedSlugs.path),
+    ...resolvedSlugs?.path,
   };
   const combinedHashVariables = {
     ...implicitPathVariables,
     ...hashVariables,
-    ...(resolvedSlugs == null ? void 0 : resolvedSlugs.hash),
+    ...resolvedSlugs?.hash,
   };
-  const route = (_a = router.getRoute) == null ? void 0 : _a.call(router, routeId,);
+  const route = router.getRoute?.(routeId,);
   const resolvedHref = getPathForRoute(route, {
-    currentRoutePath: currentRoute == null ? void 0 : currentRoute.path,
-    currentRoutePathLocalized: currentRoute == null ? void 0 : currentRoute.pathLocalized,
-    currentPathVariables: currentRoute == null ? void 0 : currentRoute.pathVariables,
+    currentRoutePath: currentRoute?.path,
+    currentRoutePathLocalized: currentRoute?.pathLocalized,
+    currentPathVariables: currentRoute?.pathVariables,
     hash: hash2,
     pathVariables: combinedPathVariables,
     hashVariables: combinedHashVariables,
     preserveQueryParams: router.preserveQueryParams,
     siteCanonicalURL: router.siteCanonicalURL,
-    localeId: activeLocale == null ? void 0 : activeLocale.id,
+    localeId: activeLocale?.id,
   },);
   const resolvedHash = resolvedHref.split('#', 2,)[1];
   return {
@@ -37496,9 +37253,8 @@ function getRouteAttributes(
 var pathVariablesRegExp2 = /:([a-z]\w*)/gi;
 var PathVariablesContext = /* @__PURE__ */ createContext(void 0,);
 function useImplicitPathVariables() {
-  var _a;
   const contextPathVariables = useContext(PathVariablesContext,);
-  const currentPathVariables = (_a = useCurrentRoute()) == null ? void 0 : _a.pathVariables;
+  const currentPathVariables = useCurrentRoute()?.pathVariables;
   const pathVariables = contextPathVariables || currentPathVariables;
   return pathVariables;
 }
@@ -37536,14 +37292,14 @@ function propsForLink(href, options,) {
   const isInternal = isInternalURL(href,);
   const props = {
     href: href === '' || isValidURL(href, isInternal,) ? href : `https://${href}`,
-    target: getTargetAttrValue(options == null ? void 0 : options.openInNewTab, isInternal,),
-    rel: !isInternal ? combineRels('noopener', options == null ? void 0 : options.rel,) : void 0,
+    target: getTargetAttrValue(options?.openInNewTab, isInternal,),
+    rel: !isInternal ? combineRels('noopener', options?.rel,) : void 0,
   };
-  if (options == null ? void 0 : options.preserveParams) {
+  if (options?.preserveParams) {
     props.href = forwardCurrentQueryParams(props.href ?? href,);
     props['data-framer-preserve-params'] = true;
   }
-  if (options == null ? void 0 : options.trackLinkClick) {
+  if (options?.trackLinkClick) {
     props.onClick = () => {
       void options.trackLinkClick(href,);
     };
@@ -37570,7 +37326,7 @@ function handleResolveSlugError(error, fallbackMessage,) {
 }
 function resolveSlug(unresolvedSlug, collectionUtils, activeLocale,) {
   try {
-    const utils = collectionUtils == null ? void 0 : collectionUtils.get(unresolvedSlug.collectionId,);
+    const utils = collectionUtils?.get(unresolvedSlug.collectionId,);
     if (!utils) {
       return handleResolveSlugError(void 0, `Couldn't find collection utils for collection id: "${unresolvedSlug.collectionId}"`,);
     }
@@ -37644,8 +37400,7 @@ function useTrackLinkClick({
 },) {
   const collectionUtils = useCollectionUtils();
   return useCallback2(async (hrefAttribute) => {
-    var _a, _b;
-    if (!((_a = router.pageviewEventData) == null ? void 0 : _a.current)) return;
+    if (!router.pageviewEventData?.current) return;
     const pageviewEventData = router.pageviewEventData.current instanceof Promise
       ? await router.pageviewEventData.current
       : router.pageviewEventData.current;
@@ -37662,11 +37417,11 @@ function useTrackLinkClick({
       }, 'eager',);
     }
     const targetWebPageId = pageLink.webPageId;
-    const targetRoute = (_b = router == null ? void 0 : router.getRoute) == null ? void 0 : _b.call(router, targetWebPageId,);
-    const targetRoutePath = (targetRoute == null ? void 0 : targetRoute.path) ?? null;
+    const targetRoute = router?.getRoute?.(targetWebPageId,);
+    const targetRoutePath = targetRoute?.path ?? null;
     let targetCollectionItemId = null;
-    if ((targetRoute == null ? void 0 : targetRoute.collectionId) && pageLink.pathVariables) {
-      const utils = collectionUtils == null ? void 0 : collectionUtils.get(targetRoute.collectionId,);
+    if (targetRoute?.collectionId && pageLink.pathVariables) {
+      const utils = collectionUtils?.get(targetRoute.collectionId,);
       if (!utils) return;
       const [slug,] = Object.values(pageLink.pathVariables,);
       if (isString(slug,)) {
@@ -37695,12 +37450,11 @@ function makeUrlAbsolute(href,) {
   }
 }
 function performNavigation(router, routeId, elementId, combinedPathVariables, smoothScroll, beforeUrlUpdate,) {
-  var _a, _b;
-  const route = (_a = router.getRoute) == null ? void 0 : _a.call(router, routeId,);
-  if (route && isLazyComponentType(route == null ? void 0 : route.page,)) {
+  const route = router.getRoute?.(routeId,);
+  if (route && isLazyComponentType(route?.page,)) {
     void route.page.preload();
   }
-  (_b = router.navigate) == null ? void 0 : _b.call(router, routeId, elementId, combinedPathVariables, smoothScroll, beforeUrlUpdate,);
+  router.navigate?.(routeId, elementId, combinedPathVariables, smoothScroll, beforeUrlUpdate,);
 }
 function createOnClickLinkHandler(router, routeId, href, trackLinkClick, elementId, combinedPathVariables, smoothScroll,) {
   return async (event) => {
@@ -37722,9 +37476,9 @@ function createOnClickLinkHandler(router, routeId, href, trackLinkClick, element
     performNavigation(router, routeId, elementId, combinedPathVariables, smoothScroll, track,);
   };
 }
-function propsForRoutePath(href, router, currentRoute, linkOptions, localeId, implicitPathVariables,) {
+function propsForRoutePath(href, router, currentRoute, linkOptions, localeId, locales, implicitPathVariables,) {
   if (!currentRoute) return propsForLink(href, linkOptions,);
-  const matchedRoute = findMatchingRouteAttributesForResolvedPath(router, href, implicitPathVariables,);
+  const matchedRoute = findMatchingRouteAttributesForResolvedPath(router, href, implicitPathVariables, locales,);
   if (!matchedRoute) return propsForLink(href, linkOptions,);
   const {
     routeId,
@@ -37786,6 +37540,7 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
   const implicitPathVariables = useImplicitPathVariables();
   const {
     activeLocale,
+    locales,
   } = useLocaleInfo();
   const resolveSlugsWithSuspense2 = useResolveSlugsWithSuspense();
   const trackLinkClick = useTrackLinkClick({
@@ -37807,11 +37562,12 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
         {
           openInNewTab,
           trackLinkClick,
-          rel: relValues == null ? void 0 : relValues.join(' ',),
+          rel: relValues?.join(' ',),
           preserveParams,
           smoothScroll,
         },
-        activeLocale == null ? void 0 : activeLocale.id,
+        activeLocale?.id,
+        locales,
         implicitPathVariables,
       );
     }
@@ -37855,20 +37611,20 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
     smoothScroll,
     trackLinkClick,
     relValues,
+    locales,
     preserveParams,
     resolveSlugsWithSuspense2,
   ],);
   const hasRef = isValidElement(children,) && 'ref' in children;
   const observerRef = useObserverRef(hasRef ? children.ref : void 0,);
   useRefEffect(observerRef, (node) => {
-    var _a;
     if (node === null) return;
     const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
     if (!pageLink) return;
-    const route = getRouteFromPageLink(pageLink, router, currentRoute,);
+    const route = getRouteFromPageLink(pageLink, router, currentRoute, locales,);
     if (!route) return;
-    return (_a = observeRouteForPreloading) == null ? void 0 : _a(route, node,);
-  }, [currentRoute, href, router,],);
+    return observeRouteForPreloading?.(route, node,);
+  }, [currentRoute, href, router, locales,],);
   const {
     navigate,
     ...propsAddedByLinkExceptNavigate
@@ -37908,17 +37664,17 @@ function cloneChildPropsWithAggregatedEvents(childProps, linkProps, observerRef,
     onClick: onClick || childOnClick
       ? (event) => {
         if (isFunction(childOnClick,)) {
-          childOnClick == null ? void 0 : childOnClick(event,);
+          childOnClick?.(event,);
         }
-        onClick == null ? void 0 : onClick(event,);
+        onClick?.(event,);
       }
       : void 0,
     onTap: onTap || childOnTap
       ? (event, info,) => {
         if (isFunction(childOnTap,)) {
-          childOnTap == null ? void 0 : childOnTap(event, info,);
+          childOnTap?.(event, info,);
         }
-        onTap == null ? void 0 : onTap(event, info,);
+        onTap?.(event, info,);
       }
       : void 0,
   };
@@ -37977,27 +37733,13 @@ function resolveLinkInternal(href, router, implicitPathVariables, onlyHash, acti
     unresolvedPathSlugs,
   } = pageLink;
   const route = router.getRoute(webPageId,);
-  const resolvedSlugs = unresolvedPathSlugs || unresolvedHashSlugs
-    ? resolveSlugs2 == null ? void 0 : resolveSlugs2(unresolvedPathSlugs, unresolvedHashSlugs,)
-    : void 0;
+  const resolvedSlugs = unresolvedPathSlugs || unresolvedHashSlugs ? resolveSlugs2?.(unresolvedPathSlugs, unresolvedHashSlugs,) : void 0;
   if (isPromise(resolvedSlugs,)) return;
-  const combinedPathVariables = Object.assign(
-    {},
-    router.currentPathVariables,
-    implicitPathVariables,
-    pathVariables,
-    resolvedSlugs == null ? void 0 : resolvedSlugs.path,
-  );
-  const combinedHashVariables = Object.assign(
-    {},
-    router.currentPathVariables,
-    implicitPathVariables,
-    hashVariables,
-    resolvedSlugs == null ? void 0 : resolvedSlugs.hash,
-  );
-  return getPathForRoute(route, {
-    currentRoutePath: currentRoute == null ? void 0 : currentRoute.path,
-    currentRoutePathLocalized: currentRoute == null ? void 0 : currentRoute.pathLocalized,
+  const combinedPathVariables = Object.assign({}, router.currentPathVariables, implicitPathVariables, pathVariables, resolvedSlugs?.path,);
+  const combinedHashVariables = Object.assign({}, router.currentPathVariables, implicitPathVariables, hashVariables, resolvedSlugs?.hash,);
+  const path = getPathForRoute(route, {
+    currentRoutePath: currentRoute?.path,
+    currentRoutePathLocalized: currentRoute?.pathLocalized,
     currentPathVariables: router.currentPathVariables,
     hash: hash2,
     pathVariables: combinedPathVariables,
@@ -38006,8 +37748,11 @@ function resolveLinkInternal(href, router, implicitPathVariables, onlyHash, acti
     preserveQueryParams: router.preserveQueryParams,
     onlyHash,
     siteCanonicalURL: router.siteCanonicalURL,
-    localeId: activeLocale == null ? void 0 : activeLocale.id,
+    localeId: activeLocale?.id,
   },);
+  if (onlyHash) return path;
+  const slugPrefix = activeLocale?.slug ? `/${activeLocale.slug}` : '';
+  return slugPrefix + path;
 }
 function resolvePageScope(pageLink, router, localeId,) {
   if (!router.getRoute || !router.currentRouteId) return void 0;
@@ -38017,8 +37762,8 @@ function resolvePageScope(pageLink, router, localeId,) {
   } = pageLink;
   const route = router.getRoute(webPageId,);
   return getPathForRoute(route, {
-    currentRoutePath: currentRoute == null ? void 0 : currentRoute.path,
-    currentRoutePathLocalized: currentRoute == null ? void 0 : currentRoute.pathLocalized,
+    currentRoutePath: currentRoute?.path,
+    currentRoutePathLocalized: currentRoute?.pathLocalized,
     currentPathVariables: router.currentPathVariables,
     relative: false,
     preserveQueryParams: false,
@@ -38128,13 +37873,181 @@ function addUTMTagsToFormData(data2, document2,) {
     }
   } catch (e) {}
 }
+var HONEYPOT_VERSION = '2';
+var HONEYPOT_FIELD_NAME = '__framer';
+var COMMON_FIELD_NAMES = [
+  'website',
+  'company',
+  'address',
+  'message',
+  'subject',
+  'title',
+  'description',
+  // safari safe ones below for testing their performance
+  'feedback',
+  'notes',
+  'details',
+  'remarks',
+  'comments',
+];
+var MODULE_LOAD_TIME = /* @__PURE__ */ (() => Date.now())();
+var getTimeSinceModuleLoadInSeconds = () => {
+  return ((Date.now() - MODULE_LOAD_TIME) / 1e3).toFixed(2,);
+};
+var HoneypotInput = ({
+  inputStateRef,
+},) => {
+  const {
+    inputRef,
+    originalName,
+  } = inputStateRef;
+  React42.useLayoutEffect(() => {
+    const honeypotInput = inputRef.current;
+    if (!honeypotInput) return;
+    const methodsUsed = inputStateRef.methodsUsed;
+    if (honeypotInput.value) {
+      methodsUsed.wasFilledBeforeHydration = true;
+    }
+  }, [inputRef, inputStateRef,],);
+  React42.useEffect(() => {
+    const myInput = inputRef.current;
+    if (!myInput) return;
+    const methodsUsed = inputStateRef.methodsUsed;
+    const originalSetAttributeMethod = Element.prototype.setAttribute;
+    const originalSetAttribute = originalSetAttributeMethod.bind(myInput,);
+    myInput.setAttribute = function (attrName, attrValue,) {
+      if (attrName === 'value') {
+        methodsUsed.setAttribute = true;
+        methodsUsed.inputChangeTimeSinceModuleLoad = getTimeSinceModuleLoadInSeconds();
+      }
+      originalSetAttribute(attrName, attrValue,);
+    };
+    const originalDescriptor = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value',);
+    if (originalDescriptor) {
+      Object.defineProperty(myInput, 'value', {
+        configurable: true,
+        enumerable: true,
+        get: function () {
+          return originalDescriptor.get?.call(this,) ?? '';
+        },
+        set: function (newValue,) {
+          methodsUsed.valueProperty = true;
+          methodsUsed.inputChangeTimeSinceModuleLoad = getTimeSinceModuleLoadInSeconds();
+          originalDescriptor.set?.call(this, newValue,);
+        },
+      },);
+    }
+    const handleInput = (event) => {
+      methodsUsed.isInputEventTrusted = event.isTrusted;
+      methodsUsed.inputChangeTimeSinceModuleLoad = getTimeSinceModuleLoadInSeconds();
+    };
+    myInput.addEventListener('input', handleInput,);
+    return () => {
+      myInput.setAttribute = originalSetAttributeMethod.bind(myInput,);
+      if (originalDescriptor) {
+        Object.defineProperty(myInput, 'value', originalDescriptor,);
+      }
+      myInput.removeEventListener('input', handleInput,);
+    };
+  }, [inputRef, inputStateRef,],);
+  return /* @__PURE__ */ jsx('input', {
+    ref: inputRef,
+    type: 'text',
+    name: originalName,
+    suppressHydrationWarning: true,
+    tabIndex: -1,
+    autoComplete: 'one-time-code',
+    'aria-hidden': 'true',
+    style: {
+      position: 'absolute',
+      transform: 'scale(0)',
+    },
+    defaultValue: '',
+    'data-1p-ignore': true,
+    'data-lpignore': 'true',
+    'data-form-type': 'other',
+    'data-bwignore': true,
+  },);
+};
+function useHoneypotFields() {
+  const states = React42.useMemo(() =>
+    COMMON_FIELD_NAMES.map((fieldName) => {
+      return {
+        inputRef: React42.createRef(),
+        originalName: fieldName,
+        methodsUsed: {
+          setAttribute: false,
+          valueProperty: false,
+        },
+      };
+    },), [],);
+  const convertHoneypotFieldsForSubmission = React42.useCallback(() => {
+    const timeSinceModuleLoadedInSeconds = getTimeSinceModuleLoadInSeconds();
+    states.forEach((state) => {
+      const {
+        inputRef,
+        methodsUsed,
+        originalName,
+      } = state;
+      if (inputRef.current) {
+        const methodParts = [];
+        if (methodsUsed.setAttribute) {
+          methodParts.push('setAttribute',);
+        }
+        if (methodsUsed.valueProperty) {
+          methodParts.push('valueProperty',);
+        }
+        if (methodsUsed.isInputEventTrusted !== void 0) {
+          const trustedString = methodsUsed.isInputEventTrusted ? 'trusted' : 'untrusted';
+          methodParts.push(`${trustedString}Event`,);
+        }
+        if (methodsUsed.inputChangeTimeSinceModuleLoad !== void 0) {
+          methodParts.push(`inputChangedAt:${methodsUsed.inputChangeTimeSinceModuleLoad}s`,);
+        }
+        if (methodsUsed.wasFilledBeforeHydration) {
+          methodParts.push('filledBeforeHydration',);
+        }
+        if (inputRef.current.value) {
+          methodParts.push(`submittedAt:${timeSinceModuleLoadedInSeconds}s`,);
+        }
+        const methodsSuffix = methodParts.length > 0 ? `_${methodParts.join('_',)}` : '';
+        const framerName = `${HONEYPOT_FIELD_NAME}_v${HONEYPOT_VERSION}_${originalName}${methodsSuffix}`;
+        inputRef.current.name = framerName;
+      }
+    },);
+  }, [states,],);
+  const clear = React42.useCallback(() => {
+    states.forEach((state) => {
+      if (state.inputRef.current) {
+        state.inputRef.current.name = state.originalName;
+      }
+    },);
+  }, [states,],);
+  return {
+    states,
+    convertHoneypotFieldsForSubmission,
+    clear,
+  };
+}
+function HoneypotFields({
+  states,
+},) {
+  return /* @__PURE__ */ jsx(Fragment, {
+    children: states.map((stateRef) =>
+      // Names are unique at the moment, so using the originalName is fine
+      /* @__PURE__ */
+      jsx(HoneypotInput, {
+        inputStateRef: stateRef,
+      }, `hp_${stateRef.originalName}`,)
+    ),
+  },);
+}
 function trackFormSubmit({
   router,
   nodeId,
   submitTrackingId,
 },) {
-  var _a;
-  if (!((_a = router == null ? void 0 : router.pageviewEventData) == null ? void 0 : _a.current)) return;
+  if (!router?.pageviewEventData?.current) return;
   if (router.pageviewEventData.current instanceof Promise) {
     void router.pageviewEventData.current.then((pageviewEventData) => {
       sendFormSubmitTrackingEvent(pageviewEventData, nodeId, submitTrackingId,);
@@ -38150,8 +38063,6 @@ function sendFormSubmitTrackingEvent(pageviewEventData, nodeId, trackingId,) {
     trackingId: trackingId || null,
   }, 'eager',);
 }
-var HONEYPOT_FIELD_NAME = '__framer';
-var COMMON_FIELD_NAMES = ['website', 'company', 'phone', 'address', 'message', 'subject', 'title', 'description',];
 var pendingState = {
   state: 'pending',
 };
@@ -38208,26 +38119,6 @@ function openExternalLinkInCurrentTab(link, formRef,) {
   linkElement.click();
   linkElement.remove();
 }
-var HoneypotInput = /* @__PURE__ */ React42.forwardRef(function HoneypotInput2(_props, ref,) {
-  const randomName = React42.useMemo(() => {
-    const randomIndex = Math.floor(Math.random() * COMMON_FIELD_NAMES.length,);
-    return COMMON_FIELD_NAMES[randomIndex];
-  }, [],);
-  return /* @__PURE__ */ jsx('input', {
-    ref,
-    type: 'text',
-    name: randomName,
-    suppressHydrationWarning: true,
-    tabIndex: -1,
-    autoComplete: 'one-time-code',
-    'aria-hidden': 'true',
-    style: {
-      position: 'absolute',
-      transform: 'scale(0)',
-    },
-    defaultValue: '',
-  },);
-},);
 var FormContext = React42.createContext(void 0,);
 var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
   action,
@@ -38242,7 +38133,11 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
 }, forwardedRef,) {
   const fallbackRef = React42.useRef(null,);
   const ref = forwardedRef ?? fallbackRef;
-  const honeypotRef = React42.useRef(null,);
+  const {
+    states: honeypotStateRefs,
+    convertHoneypotFieldsForSubmission,
+    clear: resetHoneypotNames,
+  } = useHoneypotFields();
   const libraryFeatures = useLibraryFeatures();
   const isAdvancedSpamProtectionEnabled = libraryFeatures.advancedSpamProtection;
   const router = useRouter();
@@ -38252,6 +38147,7 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
   const [state, dispatch,] = React42.useReducer(formReducer, incompleteState,);
   const {
     activeLocale,
+    locales,
   } = useLocaleInfo();
   const projectHash = useContext(FormContext,);
   const callbacks = React42.useRef({
@@ -38266,9 +38162,8 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
   };
   const submissionInProgressRef = React42.useRef(false,);
   async function redirectTo(link,) {
-    var _a, _b;
     if (isString(link,)) {
-      const matchingRoute2 = findMatchingRouteAttributesForResolvedPath(router, link, implicitPathVariables,);
+      const matchingRoute2 = findMatchingRouteAttributesForResolvedPath(router, link, implicitPathVariables, locales,);
       if (!matchingRoute2) {
         openExternalLinkInCurrentTab(link, ref,);
         return;
@@ -38278,7 +38173,7 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
         elementId: elementId2,
         pathVariables: pathVariables2,
       } = matchingRoute2;
-      (_a = router.navigate) == null ? void 0 : _a.call(router, routeId2, elementId2, pathVariables2,);
+      router.navigate?.(routeId2, elementId2, pathVariables2,);
       return;
     }
     assert(isLinkToWebPage(link,), 'Expected link to be either a LinkToWebPage or a string', link,);
@@ -38296,20 +38191,18 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
       elementId,
       pathVariables,
     } = matchingRoute;
-    (_b = router.navigate) == null ? void 0 : _b.call(router, routeId, elementId, pathVariables,);
+    router.navigate?.(routeId, elementId, pathVariables,);
   }
   const handleSubmit = async (event) => {
-    var _a, _b, _c, _d, _e, _f, _g;
     event.preventDefault();
     if (!action || !projectHash || submissionInProgressRef.current) return;
     submissionInProgressRef.current = true;
-    const originalName = (_a = honeypotRef.current) == null ? void 0 : _a.name;
-    if (isAdvancedSpamProtectionEnabled && honeypotRef.current) {
-      honeypotRef.current.name = HONEYPOT_FIELD_NAME;
+    if (isAdvancedSpamProtectionEnabled) {
+      convertHoneypotFieldsForSubmission();
     }
     const data2 = new FormData(event.currentTarget,);
-    if (isAdvancedSpamProtectionEnabled && honeypotRef.current && originalName) {
-      honeypotRef.current.name = originalName;
+    if (isAdvancedSpamProtectionEnabled) {
+      resetHoneypotNames();
     }
     await yieldToMain({
       priority: 'user-visible',
@@ -38325,7 +38218,7 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
       if (value instanceof File) data2.delete(key7,);
     }
     try {
-      (_c = (_b = callbacks.current).onLoading) == null ? void 0 : _c.call(_b,);
+      callbacks.current.onLoading?.();
       trackFormSubmit({
         router,
         nodeId,
@@ -38338,7 +38231,7 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
           type: 'success',
         },)
       );
-      (_e = (_d = callbacks.current).onSuccess) == null ? void 0 : _e.call(_d,);
+      callbacks.current.onSuccess?.();
       if (redirectUrl) {
         await redirectTo(redirectUrl,);
       }
@@ -38348,7 +38241,7 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
           type: 'error',
         },)
       );
-      (_g = (_f = callbacks.current).onError) == null ? void 0 : _g.call(_f,);
+      callbacks.current.onError?.();
       console.error(error,);
     }
     submissionInProgressRef.current = false;
@@ -38386,8 +38279,8 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
     ref,
     children: [
       children(state,),
-      isAdvancedSpamProtectionEnabled && /* @__PURE__ */ jsx(HoneypotInput, {
-        ref: honeypotRef,
+      isAdvancedSpamProtectionEnabled && /* @__PURE__ */ jsx(HoneypotFields, {
+        states: honeypotStateRefs,
       },),
     ],
   },);
@@ -38517,13 +38410,13 @@ var useSendPageView = (currentRoute, currentRouteId, currentPathnameWithHash, cu
         : safeWindow.location;
       const eventData = {
         version: pageviewEventVersion,
-        abTestId: currentRoute == null ? void 0 : currentRoute.abTestId,
+        abTestId: currentRoute?.abTestId,
         framerSiteId: framerSiteId ?? null,
         // If we are in a variant route, let's use the variant ID as the route ID instead, so that the analytics panel will be able to show the correct tracking data.
-        webPageId: (currentRoute == null ? void 0 : currentRoute.abTestingVariantId) ?? currentRouteId,
-        routePath: (currentRoute == null ? void 0 : currentRoute.path) || '/',
+        webPageId: currentRoute?.abTestingVariantId ?? currentRouteId,
+        routePath: currentRoute?.path || '/',
         collectionItemId: null,
-        framerLocale: (activeLocale == null ? void 0 : activeLocale.code) || null,
+        framerLocale: activeLocale?.code || null,
         referrer: null,
         // The first pageview event will always be sent before hydration, in a script in `exportToHTML.ts`.
         url: currentLocation.href,
@@ -38537,10 +38430,10 @@ var useSendPageView = (currentRoute, currentRouteId, currentPathnameWithHash, cu
         timezone,
         locale: visitorLocale,
       };
-      return (currentRoute == null ? void 0 : currentRoute.collectionId) && currentPathVariables
+      return currentRoute?.collectionId && currentPathVariables
         ? (async () => {
           let collectionItemId = null;
-          const utils = currentRoute.collectionId && (collectionUtils == null ? void 0 : collectionUtils.get(currentRoute.collectionId,));
+          const utils = currentRoute.collectionId && collectionUtils?.get(currentRoute.collectionId,);
           const [slug,] = Object.values(currentPathVariables,);
           if (utils && isString(slug,)) {
             const maybeCollectionItemId = utils.getRecordIdBySlug(slug, activeLocale || void 0,);
@@ -38595,8 +38488,7 @@ function updateScrollPosition(hash2, smoothScroll, isHistoryTransition,) {
 function useScheduleRenderSideEffects(dep,) {
   const actions = useRef([],);
   useLayoutEffect(() => {
-    var _a;
-    if (!((_a = actions.current) == null ? void 0 : _a.length)) return;
+    if (!actions.current?.length) return;
     actions.current.forEach((action) => action());
     actions.current = [];
   }, [dep,],);
@@ -38610,19 +38502,18 @@ function executeBeforeUrlUpdateOnce(beforeUrlUpdate,) {
   return () => {
     if (beforeUrlUpdateExecuted) return;
     beforeUrlUpdateExecuted = true;
-    beforeUrlUpdate == null ? void 0 : beforeUrlUpdate();
+    beforeUrlUpdate?.();
   };
 }
 function useNavigationTransition() {
   const startNativeSpinner = useNativeLoadingSpinner();
   const navigationController = useRef(void 0,);
   return useCallback2(async (transitionFn, nextRender, updateURL, isAbortable = true,) => {
-    var _a, _b;
     const hasUpdateURL = updateURL !== void 0;
-    (_a = navigationController.current) == null ? void 0 : _a.abort();
+    navigationController.current?.abort();
     const controller = isAbortable ? new AbortController() : void 0;
     navigationController.current = controller;
-    const signal = controller == null ? void 0 : controller.signal;
+    const signal = controller?.signal;
     const stopMonitoringINPRelatedInputs = monitorINPRelatedInputs(signal,);
     void nextRender.promise.finally(stopMonitoringINPRelatedInputs,);
     if (!hasUpdateURL) {
@@ -38634,19 +38525,19 @@ function useNavigationTransition() {
     let resolveNavigationPromise;
     const navigationPromise = new Promise((resolve, reject,) => {
       resolveNavigationPromise = resolve;
-      signal == null ? void 0 : signal.addEventListener('abort', reject,);
+      signal?.addEventListener('abort', reject,);
     },).catch(noop2,);
     startNativeSpinner(navigationPromise, updateURL, controller,);
     await nextRender.promise;
-    if (signal == null ? void 0 : signal.aborted) return;
-    const navigationTransition = (_b = window.navigation) == null ? void 0 : _b.transition;
+    if (signal?.aborted) return;
+    const navigationTransition = window.navigation?.transition;
     resolveNavigationPromise();
     try {
-      await (navigationTransition == null ? void 0 : navigationTransition.finished);
+      await navigationTransition?.finished;
     } catch (error) {
       console.error('Navigation transition failed', error,);
     }
-    if (signal == null ? void 0 : signal.aborted) return;
+    if (signal?.aborted) return;
     announceNavigation();
   }, [startNativeSpinner,],);
 }
@@ -38701,7 +38592,7 @@ function Router({
       return id3 === currentLocaleId;
     },) ?? null;
   }, [currentLocaleId, locales,],);
-  const textDirection = (activeLocale == null ? void 0 : activeLocale.textDirection) ?? 'ltr';
+  const textDirection = activeLocale?.textDirection ?? 'ltr';
   const layoutDirection = adaptLayoutToTextDirection ? textDirection : 'ltr';
   useLayoutEffect(() => {
     if (!adaptLayoutToTextDirection) return;
@@ -38817,13 +38708,12 @@ function Router({
   );
   usePopStateHandler(currentRouteRef, setCurrentRouteId,);
   const navigate = useCallback2(async (routeId, hash2, pathVariables, smoothScroll, beforeUrlUpdate,) => {
-    var _a, _b;
     const newRoute = routes[routeId];
-    const routeStatus = isLazyComponentType(newRoute == null ? void 0 : newRoute.page,) ? newRoute.page.getStatus() : void 0;
-    const hasRendered = routeStatus == null ? void 0 : routeStatus.hasRendered;
+    const routeStatus = isLazyComponentType(newRoute?.page,) ? newRoute.page.getStatus() : void 0;
+    const hasRendered = routeStatus?.hasRendered;
     const nextRender = monitorNextPaintAfterRender({
       cached: hasRendered,
-      preloaded: hasRendered ? void 0 : routeStatus == null ? void 0 : routeStatus.hasLoaded,
+      preloaded: hasRendered ? void 0 : routeStatus?.hasLoaded,
     },);
     const executeBeforeUrlUpdate = executeBeforeUrlUpdateOnce(beforeUrlUpdate,);
     void yieldToMain({
@@ -38837,7 +38727,7 @@ function Router({
     },);
     if (pathVariables) {
       const inUse = /* @__PURE__ */ new Set();
-      const path = (newRoute == null ? void 0 : newRoute.path) ?? '/';
+      const path = newRoute?.path ?? '/';
       for (const match of path.matchAll(pathVariablesRegExp,)) {
         const usedVariable = match[1];
         if (usedVariable === void 0) {
@@ -38859,9 +38749,9 @@ function Router({
         pathVariables,
       },)
     ) {
-      (_a = nextRender.ignore) == null ? void 0 : _a.call(nextRender,);
+      nextRender.ignore?.();
       const route = routes[routeId];
-      if (((_b = window.history.state) == null ? void 0 : _b.hash) !== hash2 && !disableHistory && route) {
+      if (window.history.state?.hash !== hash2 && !disableHistory && route) {
         executeBeforeUrlUpdate();
         await pushRouteState(routeId, route, {
           currentRoutePath: route.path,
@@ -38882,9 +38772,9 @@ function Router({
     const updateURL = async (ignorePushStateWrapper = false,) => {
       executeBeforeUrlUpdate();
       return pushRouteState(routeId, newRoute, {
-        currentRoutePath: currentRoute2 == null ? void 0 : currentRoute2.path,
+        currentRoutePath: currentRoute2?.path,
         currentPathVariables: currentPathVariables2,
-        currentRoutePathLocalized: currentRoute2 == null ? void 0 : currentRoute2.pathLocalized,
+        currentRoutePathLocalized: currentRoute2?.pathLocalized,
         hash: hash2,
         pathVariables,
         localeId: currentRouteLocaleId,
@@ -38893,8 +38783,8 @@ function Router({
       }, ignorePushStateWrapper,);
     };
     const pathnameWithHash = getSitePrefix(siteCanonicalURL,) + getPathForRoute(newRoute, {
-      currentRoutePath: currentRoute2 == null ? void 0 : currentRoute2.path,
-      currentRoutePathLocalized: currentRoute2 == null ? void 0 : currentRoute2.pathLocalized,
+      currentRoutePath: currentRoute2?.path,
+      currentRoutePathLocalized: currentRoute2?.pathLocalized,
       currentPathVariables: currentPathVariables2,
       hash: hash2,
       pathVariables,
@@ -38921,7 +38811,7 @@ function Router({
   const currentPathnameWithHash = currentPathnameWithHashRef.current;
   const currentPathVariables = currentPathVariablesRef.current;
   const currentRoute = routes[currentRouteId];
-  const currentRoutePath = currentRoute == null ? void 0 : currentRoute.path;
+  const currentRoutePath = currentRoute?.path;
   const pageviewEventData = useSendPageView(currentRoute, currentRouteId, currentPathnameWithHash, currentPathVariables, activeLocale,);
   const isInitialNavigation = isInitialNavigationRef.current;
   const api = useMemo(() => ({
@@ -38983,7 +38873,7 @@ function Router({
                       /* @__PURE__ */ jsx(MarkSuspenseEffects.Start, {},),
                       /* @__PURE__ */ jsx(WithLayoutTemplate, {
                         LayoutTemplate,
-                        webPageId: (currentRoute == null ? void 0 : currentRoute.abTestingVariantId) ?? currentRouteId,
+                        webPageId: currentRoute?.abTestingVariantId ?? currentRouteId,
                         style: defaultPageStyle,
                         children: (inLayoutTemplate) => {
                           return /* @__PURE__ */ jsx(Fragment, {
@@ -39435,7 +39325,6 @@ var RequestsObserver = class {
   setRequests(requests, {
     onlyPrefetched = false,
   },) {
-    var _a;
     const lastRequests = this.requests;
     this.requests = requests;
     const requestsByCacheKey = new Map(requests.map((request) => [getRequestCacheKey(request,), request,]),);
@@ -39451,7 +39340,7 @@ var RequestsObserver = class {
       return;
     }
     for (const url of __privateGet(this, _subscriptions,).keys()) {
-      (_a = __privateGet(this, _subscriptions,).get(url,)) == null ? void 0 : _a();
+      __privateGet(this, _subscriptions,).get(url,)?.();
       __privateGet(this, _subscriptions,).delete(url,);
     }
     for (const cacheKey of nextSubscribedKeys) {
@@ -39632,24 +39521,19 @@ var callEach = (...fns) => fns.forEach((fn) => fn && fn());
 function getLogger2(name,) {
   return {
     trace(...args) {
-      var _a;
-      return (_a = runtime.getLogger(name,)) == null ? void 0 : _a.trace(...args,);
+      return runtime.getLogger(name,)?.trace(...args,);
     },
     debug(...args) {
-      var _a;
-      return (_a = runtime.getLogger(name,)) == null ? void 0 : _a.debug(...args,);
+      return runtime.getLogger(name,)?.debug(...args,);
     },
     info(...args) {
-      var _a;
-      return (_a = runtime.getLogger(name,)) == null ? void 0 : _a.info(...args,);
+      return runtime.getLogger(name,)?.info(...args,);
     },
     warn(...args) {
-      var _a;
-      return (_a = runtime.getLogger(name,)) == null ? void 0 : _a.warn(...args,);
+      return runtime.getLogger(name,)?.warn(...args,);
     },
     error(...args) {
-      var _a;
-      return (_a = runtime.getLogger(name,)) == null ? void 0 : _a.error(...args,);
+      return runtime.getLogger(name,)?.error(...args,);
     },
     get enabled() {
       return runtime.getLogger(name,) !== void 0;
@@ -39760,7 +39644,7 @@ function compareArray(left, right, collation11,) {
   return 0;
 }
 function castArray(value, definition,) {
-  switch (value == null ? void 0 : value.type) {
+  switch (value?.type) {
     case 'array': {
       const result = value.value.map((item) => {
         return DatabaseValue.cast(item, definition.definition,);
@@ -39779,7 +39663,7 @@ function compareBoolean(left, right,) {
   return 0;
 }
 function castBoolean(value,) {
-  switch (value == null ? void 0 : value.type) {
+  switch (value?.type) {
     case 'boolean': {
       return value;
     }
@@ -39795,7 +39679,7 @@ function castBoolean(value,) {
 }
 function valueToBoolean(value,) {
   const cast = castBoolean(value,);
-  return (cast == null ? void 0 : cast.value) ?? false;
+  return cast?.value ?? false;
 }
 function compareColor(left, right,) {
   if (left.value < right.value) return -1;
@@ -39803,7 +39687,7 @@ function compareColor(left, right,) {
   return 0;
 }
 function castColor(value,) {
-  switch (value == null ? void 0 : value.type) {
+  switch (value?.type) {
     case 'color': {
       return value;
     }
@@ -39818,7 +39702,7 @@ function compareDate(left, right,) {
   return 0;
 }
 function castDate(value,) {
-  switch (value == null ? void 0 : value.type) {
+  switch (value?.type) {
     case 'date': {
       return value;
     }
@@ -39842,7 +39726,7 @@ function compareEnum(left, right,) {
   return 0;
 }
 function castEnum(value,) {
-  switch (value == null ? void 0 : value.type) {
+  switch (value?.type) {
     case 'enum': {
       return value;
     }
@@ -39861,7 +39745,7 @@ function compareFile(left, right,) {
   return 0;
 }
 function castFile(value,) {
-  switch (value == null ? void 0 : value.type) {
+  switch (value?.type) {
     case 'file': {
       return value;
     }
@@ -39876,7 +39760,7 @@ function compareLink(left, right,) {
   return 0;
 }
 function castLink(value,) {
-  switch (value == null ? void 0 : value.type) {
+  switch (value?.type) {
     case 'link': {
       return value;
     }
@@ -39905,7 +39789,7 @@ function compareNumber(left, right,) {
   return 0;
 }
 function castNumber(value,) {
-  switch (value == null ? void 0 : value.type) {
+  switch (value?.type) {
     case 'number':
     case 'string': {
       const number2 = Number(value.value,);
@@ -39922,7 +39806,7 @@ function castNumber(value,) {
 }
 function valueToNumber(value,) {
   const cast = castNumber(value,);
-  return (cast == null ? void 0 : cast.value) ?? null;
+  return cast?.value ?? null;
 }
 function compareObject(left, right, collation11,) {
   const leftKeys = Object.keys(left.value,).sort();
@@ -39942,7 +39826,7 @@ function compareObject(left, right, collation11,) {
   return 0;
 }
 function castObject(value, definition,) {
-  switch (value == null ? void 0 : value.type) {
+  switch (value?.type) {
     case 'object': {
       const result = {};
       const definitionEntries = Object.entries(definition.definitions,);
@@ -39966,7 +39850,7 @@ function compareResponsiveImage(left, right,) {
   return 0;
 }
 function castResponsiveImage(value,) {
-  switch (value == null ? void 0 : value.type) {
+  switch (value?.type) {
     case 'responsiveimage': {
       return value;
     }
@@ -39981,7 +39865,7 @@ function compareRichText(left, right,) {
   return 0;
 }
 function castRichText(value,) {
-  switch (value == null ? void 0 : value.type) {
+  switch (value?.type) {
     case 'richtext': {
       return value;
     }
@@ -39996,7 +39880,7 @@ function compareVectorSetItem(left, right,) {
   return 0;
 }
 function castVectorSetItem(value,) {
-  switch (value == null ? void 0 : value.type) {
+  switch (value?.type) {
     case 'vectorsetitem': {
       return value;
     }
@@ -40015,7 +39899,7 @@ function compareString(left, right, collation11,) {
   return 0;
 }
 function castString(value,) {
-  switch (value == null ? void 0 : value.type) {
+  switch (value?.type) {
     case 'string': {
       return value;
     }
@@ -40030,7 +39914,7 @@ function castString(value,) {
 }
 function valueToString(value,) {
   const cast = castString(value,);
-  return (cast == null ? void 0 : cast.value) ?? null;
+  return cast?.value ?? null;
 }
 var DatabaseValue = {
   /**
@@ -40111,7 +39995,7 @@ var DatabaseValue = {
    * the values are not of the same type.
    */
   equal(left, right, collation11,) {
-    if ((left == null ? void 0 : left.type) !== (right == null ? void 0 : right.type)) {
+    if (left?.type !== right?.type) {
       return false;
     }
     return compare(left, right, collation11,) === 0;
@@ -40121,7 +40005,7 @@ var DatabaseValue = {
    * the values are not of the same type.
    */
   lessThan(left, right, collation11,) {
-    if ((left == null ? void 0 : left.type) !== (right == null ? void 0 : right.type)) {
+    if (left?.type !== right?.type) {
       return false;
     }
     return compare(left, right, collation11,) < 0;
@@ -40131,7 +40015,7 @@ var DatabaseValue = {
    * Returns false if the values are not of the same type.
    */
   lessThanOrEqual(left, right, collation11,) {
-    if ((left == null ? void 0 : left.type) !== (right == null ? void 0 : right.type)) {
+    if (left?.type !== right?.type) {
       return false;
     }
     return compare(left, right, collation11,) <= 0;
@@ -40141,7 +40025,7 @@ var DatabaseValue = {
    * if the values are not of the same type.
    */
   greaterThan(left, right, collation11,) {
-    if ((left == null ? void 0 : left.type) !== (right == null ? void 0 : right.type)) {
+    if (left?.type !== right?.type) {
       return false;
     }
     return compare(left, right, collation11,) > 0;
@@ -40151,7 +40035,7 @@ var DatabaseValue = {
    * Returns false if the values are not of the same type.
    */
   greaterThanOrEqual(left, right, collation11,) {
-    if ((left == null ? void 0 : left.type) !== (right == null ? void 0 : right.type)) {
+    if (left?.type !== right?.type) {
       return false;
     }
     return compare(left, right, collation11,) >= 0;
@@ -40161,7 +40045,7 @@ var DatabaseValue = {
    * right value is not an array.
    */
   in(left, right, collation11,) {
-    if ((right == null ? void 0 : right.type) !== 'array') return false;
+    if (right?.type !== 'array') return false;
     return right.value.some((item) => {
       return DatabaseValue.equal(item, left, collation11,);
     },);
@@ -40172,7 +40056,7 @@ var DatabaseValue = {
    * If source has duplicates, the index of the first occurrence is always returned.
    */
   indexOf(source, target, collation11,) {
-    if ((source == null ? void 0 : source.type) !== 'array') return -1;
+    if (source?.type !== 'array') return -1;
     return source.value.findIndex((item) => {
       return DatabaseValue.equal(item, target, collation11,);
     },);
@@ -40211,7 +40095,7 @@ var DatabaseValue = {
     return sourceValue.endsWith(targetValue,);
   },
   length(value,) {
-    switch (value == null ? void 0 : value.type) {
+    switch (value?.type) {
       case 'array':
         return value.value.length;
     }
@@ -40384,13 +40268,12 @@ var CompatibilityDatabaseCollection = class {
     };
   }
   async resolveRichText(pointer,) {
-    var _a;
     const {
       itemIndex,
       key: key7,
     } = pointer;
     const items = await getCollectionItems(this.collection, this.locale,);
-    const richText = (_a = items[itemIndex]) == null ? void 0 : _a[key7];
+    const richText = items[itemIndex]?.[key7];
     if (LazyValue.is(richText,)) {
       return richText.readMaybeAsync();
     }
@@ -40435,7 +40318,7 @@ var compatibilityCache = /* @__PURE__ */ new Map();
 function getCollectionForLocale(data2, locale,) {
   if (isAnyLegacyCollection(data2,)) {
     const collectionId = getCollectionId(data2,);
-    const localeId = (locale == null ? void 0 : locale.id) ?? defaultLocaleId;
+    const localeId = locale?.id ?? defaultLocaleId;
     const cacheKey = collectionId + localeId;
     const cached = compatibilityCache.get(cacheKey,);
     if (cached) return cached;
@@ -40698,7 +40581,7 @@ var Resolver = class {
     return result;
   }
   *resolveValue(value,) {
-    switch (value == null ? void 0 : value.type) {
+    switch (value?.type) {
       case 'array':
         return yield* this.resolveArrayValue(value,);
       case 'object':
@@ -40708,7 +40591,7 @@ var Resolver = class {
       case 'vectorsetitem':
         return yield* this.resolveVectorSetItemValue(value,);
     }
-    return (value == null ? void 0 : value.value) ?? null;
+    return value?.value ?? null;
   }
 };
 function getCollectionsFromQuery(query, locale,) {
@@ -40818,7 +40701,7 @@ var FieldMetadata = class {
   getValue(item,) {
     assert(this.name, 'Can only get value of field with a name',);
     const value = item.data[this.name];
-    switch (value == null ? void 0 : value.type) {
+    switch (value?.type) {
       case 'richtext': {
         assert(this.collection, 'Rich text field must have a collection',);
         return {
@@ -40994,7 +40877,6 @@ var Scope = class _Scope {
    * thrown.
    */
   resolveField(name, collection,) {
-    var _a;
     const candidates = [];
     for (const field of this.fields) {
       if (field.name !== name) continue;
@@ -41007,17 +40889,16 @@ var Scope = class _Scope {
     if (candidates.length > 1) {
       throw new Error('Ambiguous fields',);
     }
-    return (_a = this.parent) == null ? void 0 : _a.resolveField(name, collection,);
+    return this.parent?.resolveField(name, collection,);
   }
   /**
    * Checks if the scope or any parent scope has the given scope field.
    */
   has(scopeField,) {
-    var _a;
     if (this.fields.includes(scopeField,)) {
       return true;
     }
-    return ((_a = this.parent) == null ? void 0 : _a.has(scopeField,)) ?? false;
+    return this.parent?.has(scopeField,) ?? false;
   }
   /**
    * Returns the required ordering for the scope.
@@ -41377,34 +41258,31 @@ var ScalarCase = class _ScalarCase extends ScalarNode {
     return calculateHash('ScalarCase', this.input, ...this.conditions, this.otherwise,);
   }
   optimize(optimizer,) {
-    var _a, _b;
-    (_a = this.input) == null ? void 0 : _a.optimize(optimizer,);
+    this.input?.optimize(optimizer,);
     for (const condition of this.conditions) {
       condition.when.optimize(optimizer,);
       condition.then.optimize(optimizer,);
     }
-    (_b = this.otherwise) == null ? void 0 : _b.optimize(optimizer,);
+    this.otherwise?.optimize(optimizer,);
     return new Cost(0,);
   }
   getOptimized() {
-    var _a, _b;
-    const input = (_a = this.input) == null ? void 0 : _a.getOptimized();
+    const input = this.input?.getOptimized();
     const conditions = this.conditions.map((condition) => {
       const when = condition.when.getOptimized();
       const then = condition.then.getOptimized();
       return new CaseCondition(when, then,);
     },);
-    const otherwise = (_b = this.otherwise) == null ? void 0 : _b.getOptimized();
+    const otherwise = this.otherwise?.getOptimized();
     return new _ScalarCase(input, conditions, otherwise,);
   }
   *evaluate(context, tuple,) {
-    var _a, _b;
     const {
       input,
       conditions,
       otherwise,
     } = yield* evaluateObject({
-      input: ((_a = this.input) == null ? void 0 : _a.evaluate(context, tuple,)) ?? null,
+      input: this.input?.evaluate(context, tuple,) ?? null,
       conditions: evaluateArray(this.conditions.map((condition) =>
         evaluateObject({
           when: condition.when.evaluate(context, tuple,),
@@ -41412,7 +41290,7 @@ var ScalarCase = class _ScalarCase extends ScalarNode {
           then: condition.then.evaluate(context, tuple,),
         },)
       ),),
-      otherwise: ((_b = this.otherwise) == null ? void 0 : _b.evaluate(context, tuple,)) ?? null,
+      otherwise: this.otherwise?.evaluate(context, tuple,) ?? null,
     },);
     if (this.input) {
       for (
@@ -42104,7 +41982,7 @@ var RelationalLeftJoin = class _RelationalLeftJoin extends RelationalNode {
     const joinKeyMap = /* @__PURE__ */ new Map();
     for (const rightTuple of right.tuples) {
       const rightValue = yield* rightConstraint.evaluate(context, rightTuple,);
-      const key7 = JSON.stringify((rightValue == null ? void 0 : rightValue.value) ?? null,);
+      const key7 = JSON.stringify(rightValue?.value ?? null,);
       const tuplesForKey = joinKeyMap.get(key7,) ?? [];
       tuplesForKey.push(rightTuple,);
       joinKeyMap.set(key7, tuplesForKey,);
@@ -42113,7 +41991,7 @@ var RelationalLeftJoin = class _RelationalLeftJoin extends RelationalNode {
     const result = new Relation(outputFields,);
     for (const leftTuple of left.tuples) {
       const leftValue = yield* leftConstraint.evaluate(context, leftTuple,);
-      const key7 = JSON.stringify((leftValue == null ? void 0 : leftValue.value) ?? null,);
+      const key7 = JSON.stringify(leftValue?.value ?? null,);
       const matches = joinKeyMap.get(key7,) ?? [];
       if (matches.length === 0) {
         result.push(leftTuple,);
@@ -42234,7 +42112,7 @@ var RelationalRightJoin = class _RelationalRightJoin extends RelationalNode {
     const joinKeyMap = /* @__PURE__ */ new Map();
     for (const leftTuple of left.tuples) {
       const leftValue = yield* leftConstraint.evaluate(context, leftTuple,);
-      const key7 = JSON.stringify((leftValue == null ? void 0 : leftValue.value) ?? null,);
+      const key7 = JSON.stringify(leftValue?.value ?? null,);
       const tuplesForKey = joinKeyMap.get(key7,) ?? [];
       tuplesForKey.push(leftTuple,);
       joinKeyMap.set(key7, tuplesForKey,);
@@ -42243,7 +42121,7 @@ var RelationalRightJoin = class _RelationalRightJoin extends RelationalNode {
     const result = new Relation(outputFields,);
     for (const rightTuple of right.tuples) {
       const rightValue = yield* rightConstraint.evaluate(context, rightTuple,);
-      const key7 = JSON.stringify((rightValue == null ? void 0 : rightValue.value) ?? null,);
+      const key7 = JSON.stringify(rightValue?.value ?? null,);
       const matches = joinKeyMap.get(key7,) ?? [];
       if (matches.length === 0) {
         result.push(rightTuple,);
@@ -43953,9 +43831,9 @@ var EnforcerResolve = class _EnforcerResolve extends EnforcerNode {
     for (const tuple of input.tuples) {
       for (const field of this.fields) {
         const value = tuple.getValue(field,);
-        if ((value == null ? void 0 : value.type) === 'richtext') {
+        if (value?.type === 'richtext') {
           this.resolver.preloadRichTextValue(value,);
-        } else if ((value == null ? void 0 : value.type) === 'vectorsetitem') {
+        } else if (value?.type === 'vectorsetitem') {
           this.resolver.preloadVectorSetItemValue(value,);
         }
       }
@@ -44341,13 +44219,12 @@ var QueryCache = class {
     __publicField(this, 'serializedCache', handoverCollector !== void 0 ? /* @__PURE__ */ new Map() : void 0,);
   }
   prune() {
-    var _a;
     if (this.cache.size <= this.maxSize) return;
     for (const [key7, value,] of this.cache) {
       if (this.cache.size <= this.maxSize) break;
       if (value.state === 'pending') continue;
       this.cache.delete(key7,);
-      (_a = this.serializedCache) == null ? void 0 : _a.delete(key7,);
+      this.serializedCache?.delete(key7,);
     }
   }
   get(query, locale,) {
@@ -44378,8 +44255,7 @@ var QueryCache = class {
       }
       if (handoverCollector !== void 0 && !containsRandomCollectionId) {
         return this.queryEngine.serializeableQuery(query, locale,).then(([queryResult, serializableResult,],) => {
-          var _a;
-          (_a = this.serializedCache) == null ? void 0 : _a.set(key7, serializableResult,);
+          this.serializedCache?.set(key7, serializableResult,);
           handoverCollector.set(handoverDataType2, key7, serializableResult,);
           return queryResult;
         },);
@@ -44397,13 +44273,13 @@ function replaceCollection(_, value,) {
   return value;
 }
 function getCacheKey(query, locale,) {
-  const localeId = (locale == null ? void 0 : locale.id) ?? 'default';
+  const localeId = locale?.id ?? 'default';
   return JSON.stringify(query, replaceCollection,) + localeId;
 }
 function rejectPending(pendingTimers, pendingPromises,) {
   pendingTimers.forEach((t) => clearTimeout(t,));
   pendingTimers.clear();
-  pendingPromises.forEach((reject) => reject == null ? void 0 : reject('Callback cancelled by variant change',));
+  pendingPromises.forEach((reject) => reject?.('Callback cancelled by variant change',));
   pendingPromises.clear();
 }
 function createSet() {
@@ -44453,17 +44329,12 @@ function useActiveTargetCallback() {
 }
 function useAddVariantProps(baseVariant, gestureVariant, variantProps2,) {
   return React42.useCallback((id3) => {
-    var _a, _b, _c;
     if (!variantProps2) return {};
     if (!baseVariant) return {};
     if (gestureVariant) {
-      return Object.assign(
-        {},
-        (_a = variantProps2[baseVariant]) == null ? void 0 : _a[id3],
-        (_b = variantProps2[gestureVariant]) == null ? void 0 : _b[id3],
-      );
+      return Object.assign({}, variantProps2[baseVariant]?.[id3], variantProps2[gestureVariant]?.[id3],);
     }
-    return ((_c = variantProps2[baseVariant]) == null ? void 0 : _c[id3]) || {};
+    return variantProps2[baseVariant]?.[id3] || {};
   }, [baseVariant, gestureVariant, variantProps2,],);
 }
 function createMediaQueriesFromBreakpoints(breakpoints,) {
@@ -44487,7 +44358,6 @@ function activeMediaQueryFromWindow(mediaQueries,) {
   }
 }
 function activeBreakpointHashesFromWindow(breakpoints,) {
-  var _a;
   const matches = [];
   for (
     const {
@@ -44500,7 +44370,7 @@ function activeBreakpointHashesFromWindow(breakpoints,) {
     if (mql.matches) matches.push(hash2,);
   }
   if (matches.length > 0) return matches;
-  const defaultHash = (_a = breakpoints[0]) == null ? void 0 : _a.hash;
+  const defaultHash = breakpoints[0]?.hash;
   if (!defaultHash) return void 0;
   return [defaultHash,];
 }
@@ -44577,7 +44447,6 @@ function requestIdleCallbackFallback(callback,) {
   setTimeout(callback, 1,);
 }
 function removeHiddenBreakpointLayersV2(breakpoints,) {
-  var _a, _b, _c, _d;
   const suspenseBoundaries = /* @__PURE__ */ new Set();
   const activeBreakpointHashes = activeBreakpointHashesFromWindow(breakpoints,);
   if (activeBreakpointHashes) {
@@ -44586,33 +44455,32 @@ function removeHiddenBreakpointLayersV2(breakpoints,) {
         if (isSuspenseBoundaryStart(hiddenLayer.previousSibling,)) {
           suspenseBoundaries.add(hiddenLayer.previousSibling,);
         }
-        (_a = hiddenLayer.parentNode) == null ? void 0 : _a.removeChild(hiddenLayer,);
+        hiddenLayer.parentNode?.removeChild(hiddenLayer,);
       }
     }
   }
   const requestIdleCallback2 = supportsRequestIdleCallback ? safeWindow.requestIdleCallback : requestIdleCallbackFallback;
   requestIdleCallback2(() => {
-    var _a2;
-    (_a2 = document.querySelector(framerBreakpointCSSSelector,)) == null ? void 0 : _a2.remove();
+    document.querySelector(framerBreakpointCSSSelector,)?.remove();
   },);
   for (const ssrVariant of document.querySelectorAll('.ssr-variant:empty',)) {
     if (isSuspenseBoundaryStart(ssrVariant.previousSibling,)) {
       suspenseBoundaries.add(ssrVariant.previousSibling,);
     }
-    (_b = ssrVariant.parentNode) == null ? void 0 : _b.removeChild(ssrVariant,);
+    ssrVariant.parentNode?.removeChild(ssrVariant,);
   }
   for (const suspenseBoundary of suspenseBoundaries) {
     if (isSuspenseBoundaryEnd(suspenseBoundary.nextSibling,)) {
-      (_c = suspenseBoundary.parentNode) == null ? void 0 : _c.removeChild(suspenseBoundary.nextSibling,);
-      (_d = suspenseBoundary.parentNode) == null ? void 0 : _d.removeChild(suspenseBoundary,);
+      suspenseBoundary.parentNode?.removeChild(suspenseBoundary.nextSibling,);
+      suspenseBoundary.parentNode?.removeChild(suspenseBoundary,);
     }
   }
 }
 function isSuspenseBoundaryStart(node,) {
-  return (node == null ? void 0 : node.nodeType) === Node.COMMENT_NODE && node.textContent === '$';
+  return node?.nodeType === Node.COMMENT_NODE && node.textContent === '$';
 }
 function isSuspenseBoundaryEnd(node,) {
-  return (node == null ? void 0 : node.nodeType) === Node.COMMENT_NODE && node.textContent === '/$';
+  return node?.nodeType === Node.COMMENT_NODE && node.textContent === '/$';
 }
 function useDataRecord(collection, variables,) {
   return useMemo(() => {
@@ -44652,15 +44520,15 @@ function useSiteRefs() {
   } = useLocaleInfo();
   const path = useMemo(() => {
     return getPathForRoute(route, {
-      currentRoutePath: route == null ? void 0 : route.path,
-      currentRoutePathLocalized: route == null ? void 0 : route.pathLocalized,
-      currentPathVariables: route == null ? void 0 : route.pathVariables,
+      currentRoutePath: route?.path,
+      currentRoutePathLocalized: route?.pathLocalized,
+      currentPathVariables: route?.pathVariables,
       preserveQueryParams: false,
       relative: false,
       siteCanonicalURL: void 0,
-      localeId: activeLocale == null ? void 0 : activeLocale.id,
+      localeId: activeLocale?.id,
     },);
-  }, [route, activeLocale == null ? void 0 : activeLocale.id,],);
+  }, [route, activeLocale?.id,],);
   return React42.useCallback((key7) => {
     if (!key7) return;
     const computedKey = `${path}-${key7}`;
@@ -44991,10 +44859,10 @@ function usePrototypeNavigate({
   const onCanvas = useIsOnFramerCanvas();
   React42.useEffect(() => {
     if (!navigation || onCanvas) return;
-    preload == null ? void 0 : preload.forEach((componentOrRoute) => {
+    preload?.forEach((componentOrRoute) => {
       let component;
       if (isString(componentOrRoute,)) {
-        const route = getRoute == null ? void 0 : getRoute(componentOrRoute,);
+        const route = getRoute?.(componentOrRoute,);
         if (isRoute(route,)) {
           component = route.page;
         }
@@ -45012,7 +44880,7 @@ function usePrototypeNavigate({
       return false;
     }
     const Component18 = typeof target === 'string'
-      ? await componentForRoute(getRoute == null ? void 0 : getRoute(target,),).catch(() => {},)
+      ? await componentForRoute(getRoute?.(target,),).catch(() => {},)
       : React42.isValidElement(target,)
       ? target
       : null;
@@ -45131,18 +44999,9 @@ function getWhereExpressionFromPathVariables(pathVariables, collection,) {
   }));
 }
 function useLoadMorePagination(totalSize, pageSize, hash2, paginateWithSuspendedLoadingState = false,) {
-  var _a, _b, _c, _d;
   const [isPending, startLoadingTransition,] = useTransition();
   const totalPages = Math.ceil(totalSize / pageSize,);
-  const [currentPage, setCurrentPage,] = useState(
-    ((_d = (_c = (_b = (_a = globalThis == null ? void 0 : globalThis.history) == null ? void 0 : _a.state) == null
-          ? void 0
-          : _b.paginationInfo) == null
-        ? void 0
-        : _c[hash2]) == null
-      ? void 0
-      : _d.currentPage) ?? 1,
-  );
+  const [currentPage, setCurrentPage,] = useState(globalThis?.history?.state?.paginationInfo?.[hash2]?.currentPage ?? 1,);
   const currentPageRef = useRef(currentPage,);
   const paginationInfo = useMemo(() => {
     return {
@@ -45279,9 +45138,8 @@ function useRunCallbackIfPageIsVisible() {
     callbackRef.current = callback;
     if (listenerRef.current) return;
     const listenerFn = () => {
-      var _a;
       if (document.hidden) return;
-      (_a = callbackRef.current) == null ? void 0 : _a.call(callbackRef,);
+      callbackRef.current?.();
       clean();
     };
     listenerRef.current = listenerFn;
@@ -45295,14 +45153,13 @@ function useRunCallbackIfElementIsInView() {
   const observers2 = useContext(SharedIntersectionObserverContext,);
   useEffect(() => {
     return () => {
-      var _a;
-      (_a = observerRefCleanup.current) == null ? void 0 : _a.call(observerRefCleanup,);
+      observerRefCleanup.current?.();
       callbackRef.current = void 0;
       observerRefCleanup.current = void 0;
     };
   }, [],);
   return useCallback2((callback, ref,) => {
-    if (!(ref == null ? void 0 : ref.current) || isInViewRef.current) {
+    if (!ref?.current || isInViewRef.current) {
       callback();
       return;
     }
@@ -45314,10 +45171,9 @@ function useRunCallbackIfElementIsInView() {
       if (queuedMicrotask) return;
       queuedMicrotask = true;
       queueMicrotask(() => {
-        var _a;
         queuedMicrotask = false;
         if (!isInViewRef.current) return;
-        (_a = callbackRef.current) == null ? void 0 : _a.call(callbackRef,);
+        callbackRef.current?.();
       },);
     };
     observerRefCleanup.current = observeElement(observers2, 'undefined', ref.current, null, observerCallback,);
@@ -45360,7 +45216,7 @@ function globalWaitForClickListener(event,) {
 function globalClickReceivedListener() {
   performance.mark('click-received-listener',);
   globalWaitingForClickPromise = void 0;
-  globalWaitingForClickResolve == null ? void 0 : globalWaitingForClickResolve();
+  globalWaitingForClickResolve?.();
   globalWaitingForClickResolve = void 0;
 }
 function useWaitForGlobalClick(enabled = false,) {
@@ -45416,13 +45272,7 @@ function useVariantState({
       defaultVariant: defaultVariant2,
     } = internalState.current;
     const nextBaseVariant = safeBaseVariant(targetBaseVariant, defaultVariant2, validBaseVariants,);
-    const gesture = getGesture(
-      enabledGestures2 == null ? void 0 : enabledGestures2[nextBaseVariant],
-      isHovered2,
-      isPressed2,
-      false,
-      isError2,
-    );
+    const gesture = getGesture(enabledGestures2?.[nextBaseVariant], isHovered2, isPressed2, false, isError2,);
     const nextGestureVariant = gesture ? createGestureVariant(nextBaseVariant, gesture,) : void 0;
     return [nextBaseVariant, nextGestureVariant,];
   }, [],);
@@ -45519,14 +45369,13 @@ function useVariantState({
   } = internalState.current;
   const addVariantProps = useAddVariantProps(internalState.current.baseVariant, internalState.current.gestureVariant, variantProps2,);
   return useMemo(() => {
-    var _a;
     const variants = [];
     if (baseVariant !== defaultVariant) variants.push(baseVariant,);
-    const hasLoadingVariant = (_a = enabledGestures == null ? void 0 : enabledGestures[baseVariant]) == null ? void 0 : _a.loading;
+    const hasLoadingVariant = enabledGestures?.[baseVariant]?.loading;
     const isLoading = !isError && !isCanvas && !!hasLoadingVariant && !loadedBaseVariant[baseVariant];
     const gesture = isLoading ? createGestureVariant(baseVariant, 'loading',) : gestureVariant;
     if (gesture) variants.push(gesture,);
-    const gestures = enabledGestures == null ? void 0 : enabledGestures[baseVariant];
+    const gestures = enabledGestures?.[baseVariant];
     const gestureHandlers = {
       onMouseEnter: () =>
         setGestureState({
@@ -45537,7 +45386,7 @@ function useVariantState({
           isHovered: false,
         },),
     };
-    if (gestures == null ? void 0 : gestures.pressed) {
+    if (gestures?.pressed) {
       Object.assign(gestureHandlers, {
         onTapStart: () =>
           setGestureState({
@@ -45605,8 +45454,8 @@ function withCodeBoundaryForOverrides(Component18, {
     const nearestExternalComponent = useNearestExternalComponent();
     const shouldWrapWithBoundary = shouldWrapOverrideWithBoundary(
       scopeId,
-      nearestExternalComponent == null ? void 0 : nearestExternalComponent.scopeId,
-      nearestExternalComponent == null ? void 0 : nearestExternalComponent.level,
+      nearestExternalComponent?.scopeId,
+      nearestExternalComponent?.level,
       inComponentSlot ?? false,
     );
     if (shouldWrapWithBoundary) {
@@ -45761,11 +45610,10 @@ function findCurrentIndexFromInset(currentInset, itemPositions, wrapInset,) {
   return itemIndex + iteration * itemPositions.length;
 }
 function findNextItemInset(currentInset, itemPositions, gap, targetInset,) {
-  var _a;
   if (itemPositions.length === 0) return 0;
   const totalItemLength = itemPositions[itemPositions.length - 1].end;
   const wrapInset = totalItemLength + gap;
-  const idealInset = targetInset ?? currentInset + (((_a = itemPositions[0]) == null ? void 0 : _a.end) ?? 0);
+  const idealInset = targetInset ?? currentInset + (itemPositions[0]?.end ?? 0);
   const currentItemIndex = findCurrentIndexFromInset(currentInset, itemPositions, wrapInset,);
   let index = currentItemIndex + 1;
   let nextItemInset = 0;
@@ -45867,7 +45715,7 @@ var ltrStrategy = (insetProp, lengthProp, viewportLengthProp, paddingStartProp, 
 var xStrategy = /* @__PURE__ */ (() => ltrStrategy('offsetLeft', 'offsetWidth', 'innerWidth', 'paddingLeft', 'right',))();
 var yStrategy = /* @__PURE__ */ (() => ltrStrategy('offsetTop', 'offsetHeight', 'innerHeight', 'paddingTop', 'bottom',))();
 function offsetRight(element, container,) {
-  const containerWidth = (container == null ? void 0 : container.offsetWidth) ?? window.innerWidth;
+  const containerWidth = container?.offsetWidth ?? window.innerWidth;
   return containerWidth - (element.offsetLeft + element.offsetWidth);
 }
 var xRtlStrategy = /* @__PURE__ */ (() => ({
@@ -46294,7 +46142,7 @@ function TickerComponent({
     const trackViewport = overflow ? resize(updateMeasurements,) : void 0;
     const trackContainer = resize(internalContainerRef.current, updateMeasurements,);
     return () => {
-      trackViewport == null ? void 0 : trackViewport();
+      trackViewport?.();
       trackContainer();
     };
   }, [items, isInView, overflow,],);
@@ -46486,7 +46334,7 @@ function ListView({
         };
         dragMomentumAnimation.current = animate(
           dragMotionValue,
-          clampOffset == null ? void 0 : clampOffset(target,),
+          clampOffset?.(target,),
           snap ? pageTransition : {
             type: 'inertia',
             velocity: velocity[axis],
@@ -46781,7 +46629,7 @@ var Ticker2 = /* @__PURE__ */ forwardRef(function Ticker3(props, ref,) {
   } = props;
   const isStatic = useIsStaticRenderer();
   const [playState, setPlayState,] = useState('running',);
-  const axis = (tickerEffectStackDirection == null ? void 0 : tickerEffectStackDirection.startsWith('column',)) ? 'y' : 'x';
+  const axis = tickerEffectStackDirection?.startsWith('column',) ? 'y' : 'x';
   const directionModifier = tickerEffectDirectionModifier === 'reverse' ? -1 : 1;
   const hoverModifier = isFiniteNumber(tickerEffectHoverModifier,) ? tickerEffectHoverModifier / 100 : 1;
   const xOverflowWithFallback = tickerEffectXOverflow ?? tickerEffectOverflow ?? 'visible';
@@ -46857,8 +46705,7 @@ var withTickerFX = (Component18) => {
   };
 };
 function extractMappingFromInfo(info,) {
-  var _a;
-  const json = (_a = info.__FramerMetadata__.exports.default.annotations) == null ? void 0 : _a.framerVariables;
+  const json = info.__FramerMetadata__.exports.default.annotations?.framerVariables;
   if (!json) return void 0;
   try {
     return JSON.parse(json,);
@@ -46871,7 +46718,7 @@ function withMappedReactProps(Component18, info,) {
     const props = {};
     const mapping = extractMappingFromInfo(info,);
     for (const key7 in rawProps) {
-      asRecord(props,)[(mapping == null ? void 0 : mapping[key7]) ?? key7] = rawProps[key7];
+      asRecord(props,)[mapping?.[key7] ?? key7] = rawProps[key7];
     }
     return /* @__PURE__ */ jsx(Component18, {
       ...props,
@@ -46960,7 +46807,6 @@ var withVariantAppearEffect = (Component18) =>
       return scroll((_, {
         y: scrollY,
       },) => {
-        var _a;
         if (!targets[0] || targets[0].ref && !targets[0].ref.current) return;
         const {
           inputRange,
@@ -46970,7 +46816,7 @@ var withVariantAppearEffect = (Component18) =>
         const index = Math.floor(transform(scrollY.current, inputRange, outputRange,),);
         if (animateOnce && playedState[index]) return;
         playedState[index] = true;
-        const variant = ((_a = targets[index]) == null ? void 0 : _a.target) ?? void 0;
+        const variant = targets[index]?.target ?? void 0;
         if (variant === currentVariant) return;
         currentVariant = variant;
         React42.startTransition(() => {
@@ -47020,7 +46866,7 @@ var withVariantFX = (Component18) =>
     return /* @__PURE__ */ jsx(Component18, {
       ...props,
       style: {
-        ...(props == null ? void 0 : props.style),
+        ...props?.style,
         ...effect.values,
       },
       ref: observerRef,
@@ -47934,14 +47780,11 @@ var BuiltInFontSource = class {
     return fontFamily;
   }
   getOpenTypeFeatures(font,) {
-    var _a, _b;
     assert(font.assetKey, 'Font must have an asset key',);
     const asset = this.assetByKey.get(font.assetKey,);
-    const openTypeData = (_b = (_a = asset == null ? void 0 : asset.properties) == null ? void 0 : _a.font) == null
-      ? void 0
-      : _b.openTypeData;
+    const openTypeData = asset?.properties?.font?.openTypeData;
     if (!supportsOpenType(openTypeData,)) return [];
-    return openTypeData == null ? void 0 : openTypeData.map((feature) => {
+    return openTypeData?.map((feature) => {
       if (!isOpenTypeFeature(feature,)) return;
       return {
         tag: feature.tag,
@@ -47950,9 +47793,8 @@ var BuiltInFontSource = class {
     },);
   }
   isValidBuiltInFont(asset,) {
-    var _a;
     if (!asset.mimeType.startsWith('font/',)) return false;
-    if (((_a = asset.properties) == null ? void 0 : _a.kind) !== 'font') return false;
+    if (asset.properties?.kind !== 'font') return false;
     if (!asset.properties.font) return false;
     if (!asset.properties.font.fontVersion) return false;
     if (!asset.properties.font.fontFamily) return false;
@@ -48232,7 +48074,6 @@ var CustomFontSource = class _CustomFontSource {
     __publicField(this, 'assetsByKey', /* @__PURE__ */ new Map(),);
   }
   deprecatedImportFonts(assets,) {
-    var _a, _b;
     this.fontFamilies.length = 0;
     this.byFamilyName.clear();
     this.assetsByKey.clear();
@@ -48241,11 +48082,11 @@ var CustomFontSource = class _CustomFontSource {
       if (!this.isValidCustomFontAsset(asset,)) {
         continue;
       }
-      const variationAxesData = (_a = asset.properties) == null ? void 0 : _a.font.variationAxes;
+      const variationAxesData = asset.properties?.font.variationAxes;
       const assetIsVariableFont = Array.isArray(variationAxesData,);
       const fontName = getLegacyFontFamilyName(asset.properties,);
       const fontFamily = this.createFontFamily(fontName,);
-      const openTypeData = (_b = asset.properties) == null ? void 0 : _b.font.openTypeData;
+      const openTypeData = asset.properties?.font.openTypeData;
       const variant = assetIsVariableFont ? 'variable' : this.inferVariantName(fontName,);
       const url = createAbsoluteAssetURLFromAsset(asset,);
       const selector = _CustomFontSource.createLegacySelector(fontName,);
@@ -48278,7 +48119,6 @@ var CustomFontSource = class _CustomFontSource {
     return fonts;
   }
   importFonts(assets, enableFontImprovements,) {
-    var _a, _b;
     if (!enableFontImprovements) {
       return this.deprecatedImportFonts(assets,);
     }
@@ -48325,7 +48165,7 @@ var CustomFontSource = class _CustomFontSource {
         cssFamilyName: _CustomFontSource.cssFontFamilyFromSelector(selector,),
       };
       const duplicateInfo = findDuplicateFont(fontFamily.fonts, font,);
-      if (duplicateInfo == null ? void 0 : duplicateInfo.projectDuplicate) {
+      if (duplicateInfo?.projectDuplicate) {
         if (font.owner === 'project') {
           fontFamily.fonts[duplicateInfo.index] = font;
           fonts[selector] = font;
@@ -48333,8 +48173,8 @@ var CustomFontSource = class _CustomFontSource {
       } else if (duplicateInfo) {
         log3.warn('Duplicate font found for:', font, 'with existing font:', duplicateInfo.existingFont,);
         const existingFont = duplicateInfo.existingFont;
-        const newIsWoff2 = ((_a = font.file) == null ? void 0 : _a.endsWith('.woff2',)) ?? false;
-        const existingIsWoff2 = ((_b = existingFont.file) == null ? void 0 : _b.endsWith('.woff2',)) ?? false;
+        const newIsWoff2 = font.file?.endsWith('.woff2',) ?? false;
+        const existingIsWoff2 = existingFont.file?.endsWith('.woff2',) ?? false;
         if (newIsWoff2 && !existingIsWoff2) {
           fontFamily.fonts[duplicateInfo.index] = font;
           fonts[selector] = font;
@@ -48366,21 +48206,17 @@ var CustomFontSource = class _CustomFontSource {
     return selector.slice(customFontSelectorPrefixV2.length,);
   }
   isValidCustomFontAsset(asset,) {
-    var _a;
     if (!asset.mimeType.startsWith('font/',)) return false;
-    if (((_a = asset.properties) == null ? void 0 : _a.kind) !== 'font') return false;
+    if (asset.properties?.kind !== 'font') return false;
     if (!asset.properties.font) return false;
     return 'fontFamily' in asset.properties.font;
   }
   getOpenTypeFeatures(font,) {
-    var _a, _b;
     assert(font.assetKey, 'Font must have an asset key',);
     const asset = this.assetsByKey.get(font.assetKey,);
-    const openTypeData = (_b = (_a = asset == null ? void 0 : asset.properties) == null ? void 0 : _a.font) == null
-      ? void 0
-      : _b.openTypeData;
+    const openTypeData = asset?.properties?.font?.openTypeData;
     if (!supportsOpenType(openTypeData,)) return [];
-    return openTypeData == null ? void 0 : openTypeData.map((feature) => {
+    return openTypeData?.map((feature) => {
       if (!isOpenTypeFeature(feature,)) return;
       return {
         tag: feature.tag,
@@ -48428,17 +48264,16 @@ function fontToVariantWithMetadata(font,) {
   };
 }
 function updateFontRelationships(fontFamily,) {
-  var _a, _b, _c, _d, _e;
   const availableVariants = fontFamily.fonts.map((font) => fontToVariantWithMetadata(font,)).filter((font) => font !== void 0);
   for (const font of fontFamily.fonts) {
     const variant = fontToVariantWithMetadata(font,);
     if (!variant) continue;
     const relatedVariants = getRelatedFontVariants(variant, availableVariants,);
-    font.selectorVariable = (_a = relatedVariants.variantVariable) == null ? void 0 : _a.selector;
-    font.selectorVariableItalic = (_b = relatedVariants.variantVariableItalic) == null ? void 0 : _b.selector;
-    font.selectorBold = (_c = relatedVariants.variantBold) == null ? void 0 : _c.selector;
-    font.selectorBoldItalic = (_d = relatedVariants.variantBoldItalic) == null ? void 0 : _d.selector;
-    font.selectorItalic = (_e = relatedVariants.variantItalic) == null ? void 0 : _e.selector;
+    font.selectorVariable = relatedVariants.variantVariable?.selector;
+    font.selectorVariableItalic = relatedVariants.variantVariableItalic?.selector;
+    font.selectorBold = relatedVariants.variantBold?.selector;
+    font.selectorBoldItalic = relatedVariants.variantBoldItalic?.selector;
+    font.selectorItalic = relatedVariants.variantItalic?.selector;
   }
 }
 function getAssetOwnerType(asset,) {
@@ -48447,12 +48282,12 @@ function getAssetOwnerType(asset,) {
 async function loadFontsWithOpenType(source,) {
   switch (source) {
     case 'google': {
-      const supportedFonts = await import('./framer-chunks/google-EG6NI4GX-GJW4JE5M.js');
-      return supportedFonts == null ? void 0 : supportedFonts.default;
+      const supportedFonts = await import('./framer-chunks/google-RE4DULFA-7U353QI3.js');
+      return supportedFonts?.default;
     }
     case 'fontshare': {
-      const supportedFonts = await import('./framer-chunks/fontshare-FXZWFT7E-JFREW2EG.js');
-      return supportedFonts == null ? void 0 : supportedFonts.default;
+      const supportedFonts = await import('./framer-chunks/fontshare-LTYJMI6Q-NLLRF2SZ.js');
+      return supportedFonts?.default;
     }
     default:
       throw new Error(`Unknown font source: ${source}`,);
@@ -48461,16 +48296,16 @@ async function loadFontsWithOpenType(source,) {
 async function loadFontToOpenTypeFeatures(source,) {
   switch (source) {
     case 'google': {
-      const features = await import('./framer-chunks/google-3CBHXOZP-WWKSUDZN.js');
-      return features == null ? void 0 : features.default;
+      const features = await import('./framer-chunks/google-IP4ZFBZ6-BPKEAUY3.js');
+      return features?.default;
     }
     case 'fontshare': {
-      const features = await import('./framer-chunks/fontshare-OQO4BJDD-MRKSLJT5.js');
-      return features == null ? void 0 : features.default;
+      const features = await import('./framer-chunks/fontshare-XMKN2FOD-GVCUQL37.js');
+      return features?.default;
     }
     case 'framer': {
-      const features = await import('./framer-chunks/framer-font-T5XNAHJ3-SBU5UWOY.js');
-      return features == null ? void 0 : features.default;
+      const features = await import('./framer-chunks/framer-font-D6RMCRV4-5YYG4HIW.js');
+      return features?.default;
     }
     default:
       throw new Error(`Unknown font source: ${source}`,);
@@ -48591,7 +48426,7 @@ var FontshareSource = class _FontshareSource {
         };
       },);
       const key7 = _FontshareSource.createMetadataSelector(fontshareFont.name,);
-      const variationAxes = variationAxesData == null ? void 0 : variationAxesData[key7];
+      const variationAxes = variationAxesData?.[key7];
       const familyName = fontshareFont.name;
       let fontFamily = this.getFontFamilyByName(familyName,);
       if (!fontFamily) {
@@ -48616,11 +48451,11 @@ var FontshareSource = class _FontshareSource {
           family: fontFamily,
           variant: fontVariant.fontshareVariantName.toLowerCase(),
           selector: fontVariant.selector,
-          selectorBold: variantBold == null ? void 0 : variantBold.selector,
-          selectorBoldItalic: variantBoldItalic == null ? void 0 : variantBoldItalic.selector,
-          selectorItalic: variantItalic == null ? void 0 : variantItalic.selector,
-          selectorVariable: variantVariable == null ? void 0 : variantVariable.selector,
-          selectorVariableItalic: variantVariableItalic == null ? void 0 : variantVariableItalic.selector,
+          selectorBold: variantBold?.selector,
+          selectorBoldItalic: variantBoldItalic?.selector,
+          selectorItalic: variantItalic?.selector,
+          selectorVariable: variantVariable?.selector,
+          selectorVariableItalic: variantVariableItalic?.selector,
           weight: fontVariant.weight,
           style: fontVariant.style,
           file: fontVariant.file,
@@ -48719,7 +48554,7 @@ var FramerFontSource = class _FramerFontSource {
         ...rest
       } = framerFont;
       const key7 = _FramerFontSource.createMetadataSelector(framerFont.uiFamilyName,);
-      const variationAxes = variationAxesData == null ? void 0 : variationAxesData[key7];
+      const variationAxes = variationAxesData?.[key7];
       let fontFamily = this.getFontFamilyByName(familyName,);
       if (!fontFamily) {
         fontFamily = this.addFontFamily(familyName,);
@@ -48805,7 +48640,6 @@ var GoogleFontSource = class _GoogleFontSource {
     return fontFamily;
   }
   async importFonts(webFonts, webFontsWithAxes, fontsToVariationAxes,) {
-    var _a;
     this.fontFamilies.length = 0;
     this.byFamilyName.clear();
     const fontsWithOpenType = await loadFontsWithOpenType('google',/* Google */
@@ -48832,7 +48666,7 @@ var GoogleFontSource = class _GoogleFontSource {
         };
       },);
       const variableFont = webFontsWithAxesMap[webFontName];
-      const variableVariants = (variableFont == null ? void 0 : variableFont.axes)
+      const variableVariants = variableFont?.axes
         ? variableFont.variants.map((variantName) => {
           const parsedVariant = _GoogleFontSource.parseVariant(variantName,);
           return {
@@ -48845,7 +48679,7 @@ var GoogleFontSource = class _GoogleFontSource {
         },)
         : [];
       const key7 = _GoogleFontSource.createMetadataSelector(webFont.family,);
-      const variationAxes = fontsToVariationAxes == null ? void 0 : fontsToVariationAxes[key7];
+      const variationAxes = fontsToVariationAxes?.[key7];
       const allVariants = [...staticVariants, ...variableVariants,];
       const allSuccessfullyParsedVariants = allVariants.filter(isSuccessfullyParsedFontVariant,);
       const fontMetadataSelector = _GoogleFontSource.createMetadataSelector(webFontName,);
@@ -48871,15 +48705,15 @@ var GoogleFontSource = class _GoogleFontSource {
           family: fontFamily,
           variant: googleFontsVariantName,
           selector,
-          selectorBold: variantBold == null ? void 0 : variantBold.selector,
-          selectorBoldItalic: variantBoldItalic == null ? void 0 : variantBoldItalic.selector,
-          selectorItalic: variantItalic == null ? void 0 : variantItalic.selector,
-          selectorVariable: variantVariable == null ? void 0 : variantVariable.selector,
-          selectorVariableItalic: variantVariableItalic == null ? void 0 : variantVariableItalic.selector,
+          selectorBold: variantBold?.selector,
+          selectorBoldItalic: variantBoldItalic?.selector,
+          selectorItalic: variantItalic?.selector,
+          selectorVariable: variantVariable?.selector,
+          selectorVariableItalic: variantVariableItalic?.selector,
           weight,
           style: style2,
           category: mapToKnownCategory2(webFont.category,),
-          file: (_a = variant.file) == null ? void 0 : _a.replace('http://', 'https://',),
+          file: variant.file?.replace('http://', 'https://',),
           variationAxes: variant.isVariable ? variationAxes : void 0,
           hasOpenTypeFeatures,
           cssFamilyName: createCSSFamilyName(fontFamily.name, variant.isVariable,),
@@ -48938,7 +48772,7 @@ async function loadFontWithRetries(data2, doc, attempt = 0,) {
   const requestId = `${family}-${style2}-${weight}-${url}`;
   if (!fontRequests.has(requestId,) || attempt > 0) {
     const fontFace = new FontFace(family, `url(${url})`, {
-      weight: isString(weight,) ? weight : weight == null ? void 0 : weight.toString(),
+      weight: isString(weight,) ? weight : weight?.toString(),
       style: style2,
       stretch,
       unicodeRange,
@@ -49014,10 +48848,10 @@ function loadVariationAxes(source,) {
       const axes = (async () => {
         switch (source) {
           case 'google': {
-            return (await import('./framer-chunks/google-IKKKVJ3J-3SWD2RIY.js')).default;
+            return (await import('./framer-chunks/google-HVUQEOXY-IDXMIEDZ.js')).default;
           }
           case 'fontshare': {
-            return (await import('./framer-chunks/fontshare-IXII5VYB-I6S3ZY5U.js')).default;
+            return (await import('./framer-chunks/fontshare-X63NXWGB-NL5Q3YUU.js')).default;
           }
           default:
             assertNever(source,);
@@ -49423,8 +49257,7 @@ var DeprecatedComponentContainer = /* @__PURE__ */ (() => {
       },);
     }
     componentDidCatch(error, info,) {
-      var _a2;
-      let stack = (_a2 = info.componentStack) == null ? void 0 : _a2.split('\n',).filter((line) => line.length !== 0);
+      let stack = info.componentStack?.split('\n',).filter((line) => line.length !== 0);
       let currentIndex = 0;
       if (stack) {
         for (const line of stack) {
@@ -49457,7 +49290,6 @@ var DeprecatedComponentContainer = /* @__PURE__ */ (() => {
       },);
     }
     render() {
-      var _a2, _b;
       countNodeRender();
       let {
         children,
@@ -49491,7 +49323,7 @@ var DeprecatedComponentContainer = /* @__PURE__ */ (() => {
         },);
       }
 
-      (_b = (_a2 = asRecord(safeWindow,))['__checkComponentBudget__']) == null ? void 0 : _b.call(_a2,);
+      asRecord(safeWindow,)['__checkComponentBudget__']?.();
       let frameProps = this.props;
       if (RenderTarget.current() !== RenderTarget.canvas) {
         const {
@@ -49661,7 +49493,7 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
       continueAfter: 'paint',
     },);
     const newValue = e.target.value;
-    onChange == null ? void 0 : onChange(e,);
+    onChange?.(e,);
     startTransition2(() => setHasValue(!!newValue,));
   }, [onChange,],);
   const eventHandlers = useCustomValidity(onValid, onInvalid, handleChange, onBlur, onFocus,);
@@ -50031,7 +49863,7 @@ var Select = /* @__PURE__ */ React42.forwardRef(function Select2(props, measureR
       className: inputClassName,
       defaultValue,
       ...eventHandlers,
-      children: selectOptions == null ? void 0 : selectOptions.map((option, index,) => {
+      children: selectOptions?.map((option, index,) => {
         switch (option.type) {
           case 'divider':
             return /* @__PURE__ */ jsx('hr', {}, index,);
@@ -50175,12 +50007,10 @@ function getSidePadding(value, padding,) {
   return padding ?? 0;
 }
 function getTotalVerticalPadding(lightbox,) {
-  return getSidePadding(lightbox == null ? void 0 : lightbox.paddingTop, lightbox == null ? void 0 : lightbox.padding,) +
-    getSidePadding(lightbox == null ? void 0 : lightbox.paddingBottom, lightbox == null ? void 0 : lightbox.padding,);
+  return getSidePadding(lightbox?.paddingTop, lightbox?.padding,) + getSidePadding(lightbox?.paddingBottom, lightbox?.padding,);
 }
 function getTotalHorizontalPadding(lightbox,) {
-  return getSidePadding(lightbox == null ? void 0 : lightbox.paddingLeft, lightbox == null ? void 0 : lightbox.padding,) +
-    getSidePadding(lightbox == null ? void 0 : lightbox.paddingRight, lightbox == null ? void 0 : lightbox.padding,);
+  return getSidePadding(lightbox?.paddingLeft, lightbox?.padding,) + getSidePadding(lightbox?.paddingRight, lightbox?.padding,);
 }
 function useStableCallback(callback,) {
   const latest = useRef(callback,);
@@ -50240,11 +50070,10 @@ function isDistortionTransform(values,) {
   return false;
 }
 function isDistorted(ref,) {
-  var _a, _b;
   const element = visualElementStore.get(ref.current,);
   if (!element) return false;
-  if (isDistortionTransform((_a = element.projection) == null ? void 0 : _a.latestValues,)) return true;
-  const path = (_b = element.projection) == null ? void 0 : _b.path;
+  if (isDistortionTransform(element.projection?.latestValues,)) return true;
+  const path = element.projection?.path;
   if (!path || path.length === 0) return false;
   for (const p of path) {
     if (isDistortionTransform(p.latestValues,)) return true;
@@ -50297,26 +50126,25 @@ function withLightboxEffect(Component18,) {
           setOpenOverrides({
             borderRadius: style22.borderRadius,
             aspectRatio: width / (height || 1),
-            borderTop: borderStyle2 == null ? void 0 : borderStyle2.borderTopWidth,
-            borderRight: borderStyle2 == null ? void 0 : borderStyle2.borderRightWidth,
-            borderBottom: borderStyle2 == null ? void 0 : borderStyle2.borderBottomWidth,
-            borderLeft: borderStyle2 == null ? void 0 : borderStyle2.borderLeftWidth,
-            borderStyle: borderStyle2 == null ? void 0 : borderStyle2.borderStyle,
-            borderColor: borderStyle2 == null ? void 0 : borderStyle2.borderColor,
+            borderTop: borderStyle2?.borderTopWidth,
+            borderRight: borderStyle2?.borderRightWidth,
+            borderBottom: borderStyle2?.borderBottomWidth,
+            borderLeft: borderStyle2?.borderLeftWidth,
+            borderStyle: borderStyle2?.borderStyle,
+            borderColor: borderStyle2?.borderColor,
             transition: transition2,
             imageRendering: style22.imageRendering,
             filter: style22.filter,
           },);
           setOpen(true,);
-          ancestorTickerContext == null ? void 0 : ancestorTickerContext.stop();
+          ancestorTickerContext?.stop();
         },);
       },);
-    }, [lightbox, open, ref, ancestorTickerContext == null ? void 0 : ancestorTickerContext.stop, isInTickerItem,],);
-    const aspectRatio2 = (openOverrides == null ? void 0 : openOverrides.aspectRatio) ?? 1;
+    }, [lightbox, open, ref, ancestorTickerContext?.stop, isInTickerItem,],);
+    const aspectRatio2 = openOverrides?.aspectRatio ?? 1;
     const decode = useStableCallback(() => {
-      var _a;
       if (!lightbox || !image || !image.src) return;
-      const srcDecodePromise = (_a = decodePromiseRef.current) == null ? void 0 : _a[image.src];
+      const srcDecodePromise = decodePromiseRef.current?.[image.src];
       if (srcDecodePromise) return srcDecodePromise;
       const width = calculateImageWidth(
         aspectRatio2,
@@ -50334,13 +50162,13 @@ function withLightboxEffect(Component18,) {
       return promise;
     },);
     const handleClick = useCallback2(async (e) => {
-      onClick == null ? void 0 : onClick(e,);
+      onClick?.(e,);
       if (open || !lightbox || !image) return;
       await decode();
       onOpen();
     }, [onClick, onOpen, open, image, lightbox, decode,],);
     const onClose = useCallback2((e) => {
-      e == null ? void 0 : e.stopPropagation();
+      e?.stopPropagation();
       startTransition2(() => {
         setOpen(false,);
       },);
@@ -50358,27 +50186,27 @@ function withLightboxEffect(Component18,) {
         clearTimeout(timer,);
       }
       const currentRef = ref.current;
-      currentRef == null ? void 0 : currentRef.addEventListener('mouseenter', enter,);
-      currentRef == null ? void 0 : currentRef.addEventListener('mouseleave', clear,);
-      currentRef == null ? void 0 : currentRef.addEventListener('pointerdown', decode,);
+      currentRef?.addEventListener('mouseenter', enter,);
+      currentRef?.addEventListener('mouseleave', clear,);
+      currentRef?.addEventListener('pointerdown', decode,);
       return () => {
         clear();
-        currentRef == null ? void 0 : currentRef.removeEventListener('mouseenter', enter,);
-        currentRef == null ? void 0 : currentRef.removeEventListener('mouseleave', clear,);
-        currentRef == null ? void 0 : currentRef.removeEventListener('pointerdown', decode,);
+        currentRef?.removeEventListener('mouseenter', enter,);
+        currentRef?.removeEventListener('mouseleave', clear,);
+        currentRef?.removeEventListener('pointerdown', decode,);
       };
     }, [decode, ref, lightbox,],);
     const fallbackLayoutId = useId();
-    const transition = (openOverrides == null ? void 0 : openOverrides.transition) ?? props.transition ?? config.transition;
-    const borderRadius2 = openOverrides == null ? void 0 : openOverrides.borderRadius;
-    const imageRendering = openOverrides == null ? void 0 : openOverrides.imageRendering;
-    const filter2 = openOverrides == null ? void 0 : openOverrides.filter;
-    const borderTop = openOverrides == null ? void 0 : openOverrides.borderTop;
-    const borderRight = openOverrides == null ? void 0 : openOverrides.borderRight;
-    const borderBottom = openOverrides == null ? void 0 : openOverrides.borderBottom;
-    const borderLeft = openOverrides == null ? void 0 : openOverrides.borderLeft;
-    const borderStyle = openOverrides == null ? void 0 : openOverrides.borderStyle;
-    const borderColor = openOverrides == null ? void 0 : openOverrides.borderColor;
+    const transition = openOverrides?.transition ?? props.transition ?? config.transition;
+    const borderRadius2 = openOverrides?.borderRadius;
+    const imageRendering = openOverrides?.imageRendering;
+    const filter2 = openOverrides?.filter;
+    const borderTop = openOverrides?.borderTop;
+    const borderRight = openOverrides?.borderRight;
+    const borderBottom = openOverrides?.borderBottom;
+    const borderLeft = openOverrides?.borderLeft;
+    const borderStyle = openOverrides?.borderStyle;
+    const borderColor = openOverrides?.borderColor;
     const hasAnyBorder = Boolean(borderTop || borderRight || borderBottom || borderLeft || borderStyle || borderColor,);
     const border = hasAnyBorder
       ? {
@@ -50393,11 +50221,11 @@ function withLightboxEffect(Component18,) {
     const portalProps = {
       [portalIdAttribute]: props.id,
     };
-    const paddingTop = getSidePadding(lightbox == null ? void 0 : lightbox.paddingTop, lightbox == null ? void 0 : lightbox.padding,);
-    const paddingBottom = getSidePadding(lightbox == null ? void 0 : lightbox.paddingBottom, lightbox == null ? void 0 : lightbox.padding,);
-    const paddingLeft = getSidePadding(lightbox == null ? void 0 : lightbox.paddingLeft, lightbox == null ? void 0 : lightbox.padding,);
-    const paddingRight = getSidePadding(lightbox == null ? void 0 : lightbox.paddingRight, lightbox == null ? void 0 : lightbox.padding,);
-    const style2 = (openOverrides == null ? void 0 : openOverrides.borderRadius)
+    const paddingTop = getSidePadding(lightbox?.paddingTop, lightbox?.padding,);
+    const paddingBottom = getSidePadding(lightbox?.paddingBottom, lightbox?.padding,);
+    const paddingLeft = getSidePadding(lightbox?.paddingLeft, lightbox?.padding,);
+    const paddingRight = getSidePadding(lightbox?.paddingRight, lightbox?.padding,);
+    const style2 = openOverrides?.borderRadius
       ? {
         ...props.style,
         borderRadius: openOverrides.borderRadius,
@@ -50420,7 +50248,7 @@ function withLightboxEffect(Component18,) {
           onExitComplete: () => {
             startTransition2(() => {
               setOpenOverrides(void 0,);
-              ancestorTickerContext == null ? void 0 : ancestorTickerContext.start();
+              ancestorTickerContext?.start();
             },);
           },
           children: open && lightbox && image && /* @__PURE__ */ jsx(Fragment, {
@@ -50516,7 +50344,7 @@ var Component16 = /* @__PURE__ */ React42.forwardRef(function Image2(props, ref,
   const intrinsicSize = useMemo(() => getIntrinsicSizeForBackgroundImage(background,), [background,],);
   const [fallbackIntrinsicSize, setFallbackIntrinsicSize,] = useState();
   React42.useLayoutEffect(() => {
-    if (!(background == null ? void 0 : background.src)) return;
+    if (!background?.src) return;
     if (!fitImageDimension) return;
     if (intrinsicSize) return;
     const img = document.createElement('img',);
@@ -50529,7 +50357,7 @@ var Component16 = /* @__PURE__ */ React42.forwardRef(function Image2(props, ref,
       }
     };
     img.src = background.src;
-  }, [background == null ? void 0 : background.src, fitImageDimension, intrinsicSize,],);
+  }, [background?.src, fitImageDimension, intrinsicSize,],);
   const size = intrinsicSize ?? fallbackIntrinsicSize;
   if (fitImageDimension && size) {
     style2[fitImageDimension] = 'auto';
@@ -50585,9 +50413,8 @@ function groupChildrenIntoTracks(trackCount, children,) {
     length: trackCount,
   }, () => [],);
   children.forEach((child, idx,) => {
-    var _a;
     const track = pickMasonryTrack(trackCount, idx,);
-    (_a = tracks[track]) == null ? void 0 : _a.push(child,);
+    tracks[track]?.push(child,);
   },);
   return tracks;
 }
@@ -50907,7 +50734,6 @@ var regex =
   /(<([a-z]+)(?:\s+(?!href[\s=])[^=\s]+=(?:'[^']*'|"[^"]*"))*)(?:(\s+href\s*=)(?:'([^']*)'|"([^"]*)"))?((?:\s+[^=\s]+=(?:'[^']*'|"[^"]*"))*>)/gi;
 function replaceFramerPageLinks(rawHTML, getRoute, currentRoute, implicitPathVariables,) {
   return rawHTML.replace(regex, (original, pre1, tag, pre2, value1, value2, post,) => {
-    var _a, _b;
     if (tag.toLowerCase() !== 'a') return original;
     const href = value1 || value2;
     const pageLink = parseFramerPageLink(href.replace(/&amp;/gu, '&',),);
@@ -50928,11 +50754,11 @@ function replaceFramerPageLinks(rawHTML, getRoute, currentRoute, implicitPathVar
       attributes += ` ${'data-framer-page-link-current'}`;
     }
     let relativePath = targetPath;
-    const pathVariables = Object.assign({}, implicitPathVariables, (_a = pageLink.collectionItem) == null ? void 0 : _a.pathVariables,);
+    const pathVariables = Object.assign({}, implicitPathVariables, pageLink.collectionItem?.pathVariables,);
     if (Object.keys(pathVariables,).length > 0) {
       relativePath = relativePath.replace(pathVariablesRegExp2, (_, key7,) => '' + pathVariables[key7],);
     }
-    if ((_b = pageLink.collectionItem) == null ? void 0 : _b.pathVariables) {
+    if (pageLink.collectionItem?.pathVariables) {
       const params = new URLSearchParams(pageLink.collectionItem.pathVariables,);
       attributes += ` ${'data-framer-page-link-path-variables'}="${params}"`;
     }
@@ -51214,7 +51040,6 @@ function tokenizeText(text, tokenization = 'character', elements, shouldReduceMo
       const words = text.split(' ',);
       const lastWordIndex = words.length - 1;
       return words.map((word, wordIndex,) => {
-        var _a;
         const isLastWord = wordIndex === lastWordIndex;
         const short = word.length <= 12;
         return /* @__PURE__ */ jsxs(React.Fragment, {
@@ -51223,7 +51048,7 @@ function tokenizeText(text, tokenization = 'character', elements, shouldReduceMo
               style: {
                 whiteSpace: short ? 'nowrap' : 'unset',
               },
-              children: (_a = word.match(emojiSplitRe,)) == null ? void 0 : _a.map((char, i,) => {
+              children: word.match(emojiSplitRe,)?.map((char, i,) => {
                 const ref = newOverrideableRef();
                 elements.add(ref,);
                 return (
@@ -51333,9 +51158,9 @@ function useTextEffect(config, ref, preview,) {
     effect: config,
   },);
   state.current.effect = config;
-  const trigger = (config == null ? void 0 : config.trigger) ?? 'onMount';
-  const target = config == null ? void 0 : config.target;
-  const threshold = config == null ? void 0 : config.threshold;
+  const trigger = config?.trigger ?? 'onMount';
+  const target = config?.target;
+  const threshold = config?.threshold;
   React.useEffect(() => {
     if (!canPlay || preview) return;
     state.current.hasMounted = true;
@@ -51344,8 +51169,8 @@ function useTextEffect(config, ref, preview,) {
         effect,
       } = state.current;
       if (!canPlay || !effect) return;
-      if ((effect == null ? void 0 : effect.repeat) !== true && state.current.hasAnimatedOnce) return;
-      if ((effect == null ? void 0 : effect.type) === 'appear' && state.current.isAnimating) return;
+      if (effect?.repeat !== true && state.current.hasAnimatedOnce) return;
+      if (effect?.type === 'appear' && state.current.isAnimating) return;
       Object.assign(state.current, {
         hasAnimatedOnce: true,
         isAnimating: true,
@@ -51367,10 +51192,7 @@ function useTextEffect(config, ref, preview,) {
               isAnimating: false,
             },);
           }, cleanupRef,);
-          return () => {
-            var _a;
-            return (_a = cleanupRef.current) == null ? void 0 : _a.call(cleanupRef,);
-          };
+          return () => cleanupRef.current?.();
         }
         default:
           assertNever(type,);
@@ -51381,19 +51203,19 @@ function useTextEffect(config, ref, preview,) {
         play();
         return;
       case 'onInView': {
-        const element = ref == null ? void 0 : ref.current;
+        const element = ref?.current;
         if (!element) return;
         return inView(element, play, {
           amount: threshold ?? 0,
         },);
       }
       case 'onScrollTarget': {
-        const element = target == null ? void 0 : target.ref.current;
+        const element = target?.ref.current;
         if (!element) return;
         return inView(element, play, {
           amount: threshold ?? 0,
           root: document,
-          margin: (target == null ? void 0 : target.offset) ? `${target.offset}px 0px 0px 0px` : void 0,
+          margin: target?.offset ? `${target.offset}px 0px 0px 0px` : void 0,
         },);
       }
       default:
@@ -51423,7 +51245,7 @@ function useTextEffect(config, ref, preview,) {
       return {
         text: (text) => tokenizeText(text, tokenization, elements, shouldReduceMotion, effectStyle,),
         props: (style2) => {
-          if ((effect == null ? void 0 : effect.tokenization) !== 'element') return void 0;
+          if (effect?.tokenization !== 'element') return void 0;
           const r = newOverrideableRef();
           elements.add(r,);
           return {
@@ -51464,9 +51286,8 @@ function mayAnimate(hasMounted, hasAnimatedOnce, effect,) {
     // completion, the effect is not repeatable, and the trigger
     // is one that is impacted by repeated effects, we don't
     // need to set initial style again.
-    hasMounted && (effect == null ? void 0 : effect.trigger) === 'onMount' ||
-    hasAnimatedOnce && !(effect == null ? void 0 : effect.repeat) &&
-      ((effect == null ? void 0 : effect.trigger) === 'onInView' || (effect == null ? void 0 : effect.trigger) === 'onScrollTarget')
+    hasMounted && effect?.trigger === 'onMount' ||
+    hasAnimatedOnce && !effect?.repeat && (effect?.trigger === 'onInView' || effect?.trigger === 'onScrollTarget')
   );
 }
 async function runAppearEffect(
@@ -51492,10 +51313,10 @@ async function runAppearEffect(
       void animate(list, enter, {
         ...transition,
         restDelta: 1e-3,
-        delay: stagger((transition == null ? void 0 : transition.delay) ?? 0, {
+        delay: stagger(transition?.delay ?? 0, {
           startDelay,
         },),
-      },).then(() => callback == null ? void 0 : callback());
+      },).then(() => callback?.());
       if (!repeat || !cleanupRef) return;
       cleanupRef.current = () => {
         const actualEffect = shouldReduceMotion
@@ -51506,7 +51327,7 @@ async function runAppearEffect(
         void animate(list, actualEffect, {
           ...transition,
           restDelta: 1e-3,
-          delay: stagger((transition == null ? void 0 : transition.delay) ?? 0, {
+          delay: stagger(transition?.delay ?? 0, {
             startDelay,
           },),
         },);
@@ -51534,10 +51355,10 @@ async function runAppearEffect(
               // characters where each group is animated at once, we can't use
               // motion's built in `stagger()` function, and have to manage the
               // outer delay ourselves.
-              delay: startDelay + i * ((transition == null ? void 0 : transition.delay) ?? 0),
+              delay: startDelay + i * (transition?.delay ?? 0),
             },);
           },);
-          void Promise.all(animations2,).then(() => callback == null ? void 0 : callback());
+          void Promise.all(animations2,).then(() => callback?.());
         },);
       },);
       if (!repeat || !cleanupRef) return;
@@ -51552,7 +51373,7 @@ async function runAppearEffect(
           void animate(group, actualEffect, {
             ...transition,
             restDelta: 1e-3,
-            delay: startDelay + i * ((transition == null ? void 0 : transition.delay) ?? 0),
+            delay: startDelay + i * (transition?.delay ?? 0),
           },);
         },);
       };
@@ -51703,8 +51524,8 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
   const template = hasTransformTemplate ? props.transformTemplate ?? transformTemplate(center,) : void 0;
   if (!withExternalLayout) {
     if (frame2 && restrictedRenderTarget && !isAutoSized2) {
-      positionStyle.x = frame2.x + (isNumber2(style2 == null ? void 0 : style2.x,) ? style2.x : 0);
-      positionStyle.y = frame2.y + (isNumber2(style2 == null ? void 0 : style2.y,) ? style2.y : 0);
+      positionStyle.x = frame2.x + (isNumber2(style2?.x,) ? style2.x : 0);
+      positionStyle.y = frame2.y + (isNumber2(style2?.y,) ? style2.y : 0);
       containerStyle2.rotate = Animatable.getNumber(rotation,);
       containerStyle2.width = frame2.width;
       containerStyle2.minWidth = frame2.width;
@@ -51821,12 +51642,12 @@ function processRichTextChildren(
   if (isString(element.type,) || isMotionComponent(element.type,)) {
     const elementType = unwrapMotionComponent(element.type,) || element.type;
     const tag = dataPresetTag || elementType;
-    const stylesPresetClassName = isString(tag,) ? stylesPresetsClassNames == null ? void 0 : stylesPresetsClassNames[tag] : void 0;
+    const stylesPresetClassName = isString(tag,) ? stylesPresetsClassNames?.[tag] : void 0;
     props.className = cx('framer-text', props.className, stylesPresetClassName,);
     if (tokenizer && depth === 0 && !onlyLineBreaks) Object.assign(props, tokenizer.props(props.style,),);
     const isHeading = elementType === 'h1' || elementType === 'h2' || elementType === 'h3' || elementType === 'h4' ||
       elementType === 'h5' || elementType === 'h6';
-    const anchorLinkStylePresetClassName = stylesPresetsClassNames == null ? void 0 : stylesPresetsClassNames['anchor'];
+    const anchorLinkStylePresetClassName = stylesPresetsClassNames?.['anchor'];
     if (isHeading && anchorLinkStylePresetClassName) {
       const slug = generateHeadingSlug(children, slugCounters,);
       props.id = slug;
@@ -51909,7 +51730,6 @@ var RichText = /* @__PURE__ */ forwardRef(function RichText2({
   },);
 },);
 function linearGradientLine(angle,) {
-  var _a, _b;
   const rad = angle * Math.PI / 180;
   const offset = {
     x: -Math.sin(rad,) * 100,
@@ -51927,8 +51747,8 @@ function linearGradientLine(angle,) {
     point: point2,
     distance: Point.distance(anglePoint, point2,),
   })).sort((a2, b2,) => a2.distance - b2.distance);
-  const a = (_a = sortedPoints[0]) == null ? void 0 : _a.point;
-  const b = (_b = sortedPoints[1]) == null ? void 0 : _b.point;
+  const a = sortedPoints[0]?.point;
+  const b = sortedPoints[1]?.point;
   assert(a && b, 'linearGradientLine: Must have 2 closest points.',);
   const [c, d,] = points.filter((point2) => !Point.isEqual(point2, a,) && !Point.isEqual(point2, b,));
   assert(c && d, 'linearGradientLine: Must have 2 opposing points.',);
@@ -51938,11 +51758,10 @@ function linearGradientLine(angle,) {
   return Line(start2, end,);
 }
 function elementPropertiesForLinearGradient(gradient, id3,) {
-  var _a, _b;
   const line = linearGradientLine(gradient.angle,);
   const stops = gradientColorStops(gradient,);
-  const startPosition = ((_a = stops[0]) == null ? void 0 : _a.position) ?? 0;
-  const endPosition = ((_b = stops[stops.length - 1]) == null ? void 0 : _b.position) ?? 1;
+  const startPosition = stops[0]?.position ?? 0;
+  const endPosition = stops[stops.length - 1]?.position ?? 1;
   const startPoint = Line.pointAtPercentDistance(line, startPosition,);
   const endPoint = Line.pointAtPercentDistance(line, endPosition,);
   const interpolator = interpolate([startPosition, endPosition,], [0, 1,],);
@@ -52158,7 +51977,7 @@ var SharedSVGManager = class {
   getViewBox(svg,) {
     if (!svg || svg === '') return;
     const entry = this.entries.get(svg,);
-    return entry == null ? void 0 : entry.viewBox;
+    return entry?.viewBox;
   }
   /** When no longer rendering an svg it must be unsubscribed from so resources can be cleaned up.
    * Pass in the same svg as used with `subscribe()`. */
@@ -52179,8 +51998,8 @@ var SharedSVGManager = class {
   }
   removeDOMElement(entry,) {
     if (useDOM) {
-      const container = document == null ? void 0 : document.getElementById(entry.id,);
-      container == null ? void 0 : container.remove();
+      const container = document?.getElementById(entry.id,);
+      container?.remove();
     }
   }
   getOrCreateTemplateContainer() {
@@ -52238,10 +52057,9 @@ var SharedSVGManager = class {
       latest.count--;
       if (latest.count > 0) return;
       setTimeout(() => {
-        var _a, _b;
-        if ((_a = this.vectorSetItems.get(revision,)) == null ? void 0 : _a.count) return;
+        if (this.vectorSetItems.get(revision,)?.count) return;
         this.vectorSetItems.delete(revision,);
-        if (useDOM) (_b = document == null ? void 0 : document.getElementById(revision,)) == null ? void 0 : _b.remove();
+        if (useDOM) document?.getElementById(revision,)?.remove();
       }, 5e3,);
     };
   }
@@ -52324,11 +52142,10 @@ var unitsToPixels = /* @__PURE__ */ (() => ({
   rem: 16,
 }))();
 function parseLength(value,) {
-  var _a;
   if (!value) return;
   const m2 = /(-?[\d.]+)([a-z%]*)/u.exec(value,);
-  if ((m2 == null ? void 0 : m2[1]) === void 0 || (m2 == null ? void 0 : m2[2]) === void 0) return;
-  if ((_a = m2[2]) == null ? void 0 : _a.startsWith('%',)) return;
+  if (m2?.[1] === void 0 || m2?.[2] === void 0) return;
+  if (m2[2]?.startsWith('%',)) return;
   return Math.round(parseFloat(m2[1],) * (unitsToPixels[m2[2]] || 1),);
 }
 function getSVGSize(svg,) {
@@ -52368,7 +52185,6 @@ function hasBorderRadius(style2,) {
     style2.borderTopRightRadius);
 }
 function sizeSVG(container, props,) {
-  var _a, _b;
   const div = container.current;
   if (!div) return;
   const localWindow = props.providedWindow ?? safeWindow;
@@ -52392,8 +52208,8 @@ function sizeSVG(container, props,) {
     _constraints,
   } = props;
   if (
-    ((_a = svg.viewBox.baseVal) == null ? void 0 : _a.width) === 0 && ((_b = svg.viewBox.baseVal) == null ? void 0 : _b.height) === 0 &&
-    isFiniteNumber(intrinsicWidth,) && isFiniteNumber(intrinsicHeight,)
+    svg.viewBox.baseVal?.width === 0 && svg.viewBox.baseVal?.height === 0 && isFiniteNumber(intrinsicWidth,) &&
+    isFiniteNumber(intrinsicHeight,)
   ) {
     svg.setAttribute('viewBox', `0 0 ${intrinsicWidth} ${intrinsicHeight}`,);
   }
@@ -54109,7 +53925,7 @@ function addActionControls(action, title, controls,) {
 function addFonts(component, fontsOrBundles, flags,) {
   const bundles = upgradeFontBundlesAsNeeded(fontsOrBundles,);
   if (
-    !(flags == null ? void 0 : flags.supportsExplicitInterCodegen) &&
+    !flags?.supportsExplicitInterCodegen &&
     // Only emit an `explicitInter: false` bundle if we don’t already have one.
     !bundles.some((font) => font.explicitInter === false)
   ) {
@@ -54324,8 +54140,7 @@ function initialRouteComponent(component,) {
   return component;
 }
 function useInitialRouteComponent(routes, homeNodeId,) {
-  var _a;
-  const InitialRouteComponent = (_a = routes[homeNodeId]) == null ? void 0 : _a.page;
+  const InitialRouteComponent = routes[homeNodeId]?.page;
   const [RouteComponent, setRouteComponent,] = useState(() => initialRouteComponent(InitialRouteComponent,));
   useEffect(() => {
     if (withPreload(InitialRouteComponent,)) {
