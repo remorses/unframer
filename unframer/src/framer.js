@@ -11337,7 +11337,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.RI4JAUGT.mjs
+// /:https://app.framerstatic.com/framer.F7PBHTL4.mjs
 
 import React42 from 'react';
 import { useDeferredValue, useSyncExternalStore, } from 'react';
@@ -37873,7 +37873,7 @@ function addUTMTagsToFormData(data2, document2,) {
     }
   } catch (e) {}
 }
-var HONEYPOT_VERSION = '2';
+var HONEYPOT_VERSION = '2.1';
 var HONEYPOT_FIELD_NAME = '__framer';
 var COMMON_FIELD_NAMES = [
   'website',
@@ -37970,6 +37970,7 @@ var HoneypotInput = ({
   },);
 };
 function useHoneypotFields() {
+  const framerSiteId = React42.useContext(FormContext,);
   const states = React42.useMemo(() =>
     COMMON_FIELD_NAMES.map((fieldName) => {
       return {
@@ -38010,12 +38011,15 @@ function useHoneypotFields() {
         if (inputRef.current.value) {
           methodParts.push(`submittedAt:${timeSinceModuleLoadedInSeconds}s`,);
         }
+        if (framerSiteId) {
+          methodParts.push(`siteId:${framerSiteId}`,);
+        }
         const methodsSuffix = methodParts.length > 0 ? `_${methodParts.join('_',)}` : '';
         const framerName = `${HONEYPOT_FIELD_NAME}_v${HONEYPOT_VERSION}_${originalName}${methodsSuffix}`;
         inputRef.current.name = framerName;
       }
     },);
-  }, [states,],);
+  }, [states, framerSiteId,],);
   const clear = React42.useCallback(() => {
     states.forEach((state) => {
       if (state.inputRef.current) {
