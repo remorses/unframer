@@ -1,5 +1,11 @@
 # unframer
 
+## 3.2.17
+
+### Patch Changes
+
+- Update UNFRAMER_AGENTS.md documentation
+
 ## 3.2.16
 
 ### Patch Changes
