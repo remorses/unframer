@@ -22,3 +22,11 @@ Running validation of changes
 framer.js is a generated script. the script that generates it is inside scripts/download.ts
 
 to run that script you have to run `download-framer:doppler` from root.
+
+
+## making a new release
+
+
+to make a new release you should first run the command `pnpm changeset version` in the repo root to apply any previous changeset versions that were added with changeset. This command will also bump the package.json versions and update the changelog file.
+
+for your own changes instead you can just update the CHANGELOG.md file directly and bump the package.json version, then run `pnpm publish` in the right package folder
