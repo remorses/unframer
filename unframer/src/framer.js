@@ -11337,7 +11337,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.F7PBHTL4.mjs
+// /:https://app.framerstatic.com/framer.UKEZDP4I.mjs
 
 import React42 from 'react';
 import { useDeferredValue, useSyncExternalStore, } from 'react';
@@ -12271,27 +12271,126 @@ var require_fontfaceobserver_standalone = __commonJS({
     })();
   },
 },);
+function isFunction(value,) {
+  return typeof value === 'function';
+}
+function isBoolean(value,) {
+  return typeof value === 'boolean';
+}
+function isString(value,) {
+  return typeof value === 'string';
+}
+function isNumber2(value,) {
+  return Number.isFinite(value,);
+}
+function isArray(value,) {
+  return Array.isArray(value,);
+}
+function isObject2(value,) {
+  return value !== null && typeof value === 'object' && !isArray(value,);
+}
+function isEmptyObject(object,) {
+  for (const _ in object) return false;
+  return true;
+}
+function isUndefined(value,) {
+  return typeof value === 'undefined';
+}
+function isNull(value,) {
+  return value === null;
+}
+function isNullish2(value,) {
+  return value == null;
+}
+function isValidDate(value,) {
+  return value instanceof Date && !Number.isNaN(value.getTime(),);
+}
+function isGenerator2(value,) {
+  return isObject2(value,) && isFunction(value.return,);
+}
+function isPromiseLike(value,) {
+  return isObject2(value,) && isFunction(value.then,);
+}
+function isPromise(value,) {
+  return value instanceof Promise;
+}
+var noop2 = () => {};
+var isWindow = typeof window !== 'undefined';
+var isBot =
+  /* @__PURE__ */ (() => isWindow && /bot|-google|google-|yandex|ia_archiver|crawl|spider/iu.test(__unframerNavigator2.userAgent,))();
+var supportsRequestIdleCallback = isWindow && typeof window.requestIdleCallback === 'function';
+var requestIdleCallback = /* @__PURE__ */ (() =>
+  // eslint-disable-next-line compat/compat,framer-studio/tscompat
+  supportsRequestIdleCallback ? window.requestIdleCallback : setTimeout)();
+function encodeSVGForCSS(svg,) {
+  return `url('data:image/svg+xml,${svg.replaceAll('#', '%23',).replaceAll('\'', '%27',)}')`;
+}
+function getPleaseReportMessage(message, error,) {
+  return `${
+    message
+      ? `${message}
+`
+      : ''
+  }In case the issue persists, report this to the Framer team via https://www.framer.com/contact/${error ? ':\n' : '.'}`;
+}
+var lazyModulesCache = /* @__PURE__ */ new Map();
+function initLazyModulesCache() {
+  if (!isWindow) return;
+  const lazyPreloadLinks = document.querySelectorAll('[rel="modulepreload"][data-framer-lazy]',);
+  for (const link of lazyPreloadLinks) {
+    const hash2 = link.getAttribute('data-framer-lazy',);
+    const url = link.getAttribute('href',);
+    if (!hash2 || !url) continue;
+    const promise = import(url).then((module) => {
+      lazyModulesCache.set(hash2, module,);
+      return module;
+    },).catch((error) => {
+      lazyModulesCache.delete(hash2,);
+      console.warn(`Failed to import lazy module: ${url}`, error,);
+      throw error;
+    },);
+    promise.catch(noop2,);
+    lazyModulesCache.set(hash2, promise,);
+  }
+}
+var lazyModulesCollector = isWindow ? void 0 : /* @__PURE__ */ new Set();
 var preloadKey = 'preload';
 function isLazyComponentType(componentType,) {
   return typeof componentType === 'object' && componentType !== null && !isValidElement(componentType,) && preloadKey in componentType;
 }
-function lazy(factory, moduleName = 'default',) {
+function getLoadedComponent(module, moduleName,) {
+  if (moduleName in module) {
+    return module[moduleName];
+  }
+  throw new Error(`Module does not contain export '${moduleName}'`,);
+}
+function lazy(factory, moduleName = 'default', cacheHash,) {
   let factoryPromise;
   let LoadedComponent;
-  let hasRendered = false;
   let error;
-  const load = () => {
+  const updateFromCache = () => {
+    if (LoadedComponent || !cacheHash || !lazyModulesCache.has(cacheHash,)) return;
+    const maybeModule = lazyModulesCache.get(cacheHash,);
+    if (isPromise(maybeModule,)) {
+      void load(() => maybeModule);
+    } else {
+      LoadedComponent = getLoadedComponent(maybeModule, moduleName,);
+    }
+  };
+  const load = (factoryFn) => {
+    if (LoadedComponent) return Promise.resolve(LoadedComponent,);
     if (!factoryPromise) {
-      factoryPromise = factory().then((module) => {
-        if (!(moduleName in module)) throw new Error(`Module does not contain export '${moduleName}'`,);
-        LoadedComponent = module[moduleName];
-        return LoadedComponent;
+      factoryPromise = factoryFn().then((module) => {
+        const component = getLoadedComponent(module, moduleName,);
+        LoadedComponent = component;
+        return component;
       },).catch((err) => {
         error = err;
       },);
     }
     return factoryPromise;
   };
+  let hasRendered = false;
   const Component18 = forwardRef(function LazyWithPreload(props, ref,) {
     useEffect(() => {
       hasRendered = true;
@@ -12299,15 +12398,22 @@ function lazy(factory, moduleName = 'default',) {
     if (error) {
       throw error;
     }
+    updateFromCache();
+    if (cacheHash !== void 0 && lazyModulesCollector !== void 0) {
+      lazyModulesCollector.add(cacheHash,);
+    }
     if (!LoadedComponent) {
-      throw load();
+      throw load(factory,);
     }
     return /* @__PURE__ */ jsx(LoadedComponent, {
       ref,
       ...props,
     },);
   },);
-  Component18.preload = load;
+  Component18.preload = () => {
+    updateFromCache();
+    return load(factory,);
+  };
   Component18.getStatus = () => {
     return {
       hasLoaded: LoadedComponent !== void 0,
@@ -12570,68 +12676,6 @@ function useRouteElementId(id3, targetRouteId,) {
 function useCurrentPathVariables() {
   return useCurrentRoute()?.pathVariables;
 }
-function isFunction(value,) {
-  return typeof value === 'function';
-}
-function isBoolean(value,) {
-  return typeof value === 'boolean';
-}
-function isString(value,) {
-  return typeof value === 'string';
-}
-function isNumber2(value,) {
-  return Number.isFinite(value,);
-}
-function isArray(value,) {
-  return Array.isArray(value,);
-}
-function isObject2(value,) {
-  return value !== null && typeof value === 'object' && !isArray(value,);
-}
-function isEmptyObject(object,) {
-  for (const _ in object) return false;
-  return true;
-}
-function isUndefined(value,) {
-  return typeof value === 'undefined';
-}
-function isNull(value,) {
-  return value === null;
-}
-function isNullish2(value,) {
-  return value == null;
-}
-function isValidDate(value,) {
-  return value instanceof Date && !Number.isNaN(value.getTime(),);
-}
-function isGenerator2(value,) {
-  return isObject2(value,) && isFunction(value.return,);
-}
-function isPromiseLike(value,) {
-  return isObject2(value,) && isFunction(value.then,);
-}
-function isPromise(value,) {
-  return value instanceof Promise;
-}
-var noop2 = () => {};
-var isWindow = typeof window !== 'undefined';
-var isBot =
-  /* @__PURE__ */ (() => isWindow && /bot|-google|google-|yandex|ia_archiver|crawl|spider/iu.test(__unframerNavigator2.userAgent,))();
-var supportsRequestIdleCallback = isWindow && typeof window.requestIdleCallback === 'function';
-var requestIdleCallback = /* @__PURE__ */ (() =>
-  // eslint-disable-next-line compat/compat,framer-studio/tscompat
-  supportsRequestIdleCallback ? window.requestIdleCallback : setTimeout)();
-function encodeSVGForCSS(svg,) {
-  return `url('data:image/svg+xml,${svg.replaceAll('#', '%23',).replaceAll('\'', '%27',)}')`;
-}
-function getPleaseReportMessage(message, error,) {
-  return `${
-    message
-      ? `${message}
-`
-      : ''
-  }In case the issue persists, report this to the Framer team via https://www.framer.com/contact/${error ? ':\n' : '.'}`;
-}
 var mockWindow = {
   addEventListener: () => {},
   removeEventListener: () => {},
@@ -12823,8 +12867,13 @@ var PromiseState = {
   Rejected: 'rejected',
 };
 var LazyValue = class _LazyValue {
-  constructor(resolver,) {
+  /**
+   * @param resolver Function that returns the value or promise
+   * @param cacheHash Optional hash of the module filename, used for cache optimization. During build, this is automatically injected as a compact hash of the filename extracted from the original HTTPS URL (e.g., "YouTube.js" → hash).
+   */
+  constructor(resolver, cacheHash,) {
     this.resolver = resolver;
+    this.cacheHash = cacheHash;
     __publicField(this, 'promiseState', PromiseState.Pending,);
     __publicField(this, 'preloadPromise',);
     __publicField(this, 'value',);
@@ -12870,6 +12919,9 @@ var LazyValue = class _LazyValue {
   preload() {
     if (this.promiseState !== PromiseState.Pending) return;
     if (this.preloadPromise) return this.preloadPromise;
+    if (this.cacheHash !== void 0 && lazyModulesCollector !== void 0) {
+      lazyModulesCollector.add(this.cacheHash,);
+    }
     const fulfill = (value) => {
       this.promiseState = PromiseState.Fulfilled;
       this.value = value;
@@ -12880,7 +12932,7 @@ var LazyValue = class _LazyValue {
     };
     let maybeValue;
     try {
-      maybeValue = this.resolver();
+      maybeValue = this.cacheHash && lazyModulesCache.has(this.cacheHash,) ? lazyModulesCache.get(this.cacheHash,) : this.resolver();
     } catch (e) {
       reject(e,);
       return;
@@ -12889,9 +12941,7 @@ var LazyValue = class _LazyValue {
       fulfill(maybeValue,);
       return;
     }
-    const valuePromise = maybeValue.then(fulfill, (error) => {
-      reject(error,);
-    },);
+    const valuePromise = maybeValue.then(fulfill, reject,);
     this.preloadPromise = valuePromise;
     return valuePromise;
   }
@@ -15750,9 +15800,13 @@ var mainTagId = 'main';
 var generatedPageDatasetKey = 'framerGeneratedPage';
 var searchIndexMetaName = 'framer-search-index';
 var searchIndexMetaSelector = `meta[name="${searchIndexMetaName}"]`;
+var startOfHeadStartMarker = '<!-- Start of headStart -->';
 var endOfHeadStartMarker = '<!-- End of headStart -->';
+var startOfHeadEndMarker = '<!-- Start of headEnd -->';
 var endOfHeadEndMarker = '<!-- End of headEnd -->';
+var startOfBodyStartMarker = '<!-- Start of bodyStart -->';
 var endOfBodyStartMarker = '<!-- End of bodyStart -->';
+var startOfBodyEndMarker = '<!-- Start of bodyEnd -->';
 var endOfBodyEndMarker = '<!-- End of bodyEnd -->';
 var LibraryFeaturesContext = /* @__PURE__ */ React42.createContext(void 0,);
 LibraryFeaturesContext.displayName = 'LibraryFeaturesContext';
@@ -25117,21 +25171,30 @@ function getVariantsDimensions(width, height,) {
   }
   return sizes;
 }
+function urlWithScaleDownTo(url, scaleDownTo,) {
+  try {
+    const urlObj = new URL(url,);
+    if (scaleDownTo) {
+      urlObj.searchParams.set('scale-down-to', `${scaleDownTo}`,);
+    } else {
+      urlObj.searchParams.delete('scale-down-to',);
+    }
+    return urlObj.toString();
+  } catch {
+    return url;
+  }
+}
 var MinVariantSizeForSourceSet = 512;
 function getResponsiveSrcSet(source, image, variants,) {
   if (!variants || variants.length === 0) return void 0;
   if (!image.pixelWidth) return void 0;
   const srcSet = [];
   for (const variant of variants) {
-    if (variant.width >= MinVariantSizeForSourceSet) {
-      const url = new URL(source,);
-      if (variant.maxSideSize < image.pixelWidth) {
-        url.searchParams.set('scale-down-to', `${variant.maxSideSize}`,);
-      }
-      srcSet.push(`${url.toString()} ${variant.width}w`,);
-    }
+    if (variant.width < MinVariantSizeForSourceSet) continue;
+    const url = urlWithScaleDownTo(source, variant.maxSideSize,);
+    srcSet.push(`${url} ${variant.width}w`,);
   }
-  srcSet.push(`${source} ${image.pixelWidth}w`,);
+  srcSet.push(`${urlWithScaleDownTo(source, null,)} ${image.pixelWidth}w`,);
   return srcSet.join(', ',) || void 0;
 }
 function getFixedSrcSets(source, image, nodeFixedSize,) {
@@ -25142,12 +25205,9 @@ function getFixedSrcSets(source, image, nodeFixedSize,) {
   const scaleRatio = Math.max(nodeFixedSize.width / image.pixelWidth, nodeFixedSize.height / image.pixelHeight,);
   for (const variant of FixedSizeScaleVariants) {
     const scaleMaxSideSizeTo = Math.round(imageMaxSide * variant * scaleRatio,);
-    const url = new URL(source,);
-    if (scaleMaxSideSizeTo < imageMaxSide) {
-      url.searchParams.set('scale-down-to', `${scaleMaxSideSizeTo}`,);
-    }
+    const url = urlWithScaleDownTo(source, scaleMaxSideSizeTo,);
     srcSet.push({
-      src: url.toString(),
+      src: url,
       scale: variant,
     },);
   }
@@ -36272,9 +36332,9 @@ function updateTextSelectionStyles(triggerId,) {
   frame.read(() => {
     const el = document.getElementById(triggerId,);
     if (!el) return;
-    const styles4 = getComputedStyle(el, '::selection',);
-    const textSelectionColor = styles4.getPropertyValue('color',).trim();
-    const textSelectionBackgroundColor = styles4.getPropertyValue('background-color',).trim();
+    const styles4 = getComputedStyle(el,);
+    const textSelectionColor = styles4.getPropertyValue('--selection-color',).trim();
+    const textSelectionBackgroundColor = styles4.getPropertyValue('--selection-background-color',).trim();
     frame.render(() => {
       const overlayPortal = document.querySelectorAll(`[data-framer-portal-id="${triggerId}"]`,);
       if (overlayPortal.length === 0) return;
@@ -38385,6 +38445,187 @@ function EditorBarLauncher({
     },),
   },);
 }
+var SnippetsContext = /* @__PURE__ */ (() => React42.createContext(void 0,))();
+function SnippetsProvider({
+  children,
+  loadSnippetsModule,
+},) {
+  return /* @__PURE__ */ jsx(SnippetsContext.Provider, {
+    value: loadSnippetsModule,
+    children,
+  },);
+}
+function useSnippets() {
+  return React42.useContext(SnippetsContext,);
+}
+function getSnippetMarkers(id3,) {
+  return {
+    start: `<!-- Snippet: ${id3} -->`,
+    end: `<!-- SnippetEnd: ${id3} -->`,
+  };
+}
+function findMarkers(placement,) {
+  let startMarker;
+  let endMarker;
+  switch (placement) {
+    case 'bodyStart':
+      startMarker = startOfBodyStartMarker;
+      endMarker = endOfBodyStartMarker;
+      break;
+    case 'bodyEnd':
+      startMarker = startOfBodyEndMarker;
+      endMarker = endOfBodyEndMarker;
+      break;
+    case 'headStart':
+      startMarker = startOfHeadStartMarker;
+      endMarker = endOfHeadStartMarker;
+      break;
+    case 'headEnd':
+      startMarker = startOfHeadEndMarker;
+      endMarker = endOfHeadEndMarker;
+      break;
+  }
+  const element = placement === 'bodyStart' || placement === 'bodyEnd' ? document.body : document.head;
+  let start2 = null;
+  let end = null;
+  for (const node of element.childNodes) {
+    if (node.nodeType !== Node.COMMENT_NODE) {
+      continue;
+    }
+    const comment = `<!--${node.nodeValue}-->`;
+    if (comment === startMarker) {
+      start2 = node;
+    } else if (comment === endMarker) {
+      end = node;
+    }
+  }
+  return {
+    start: start2,
+    end,
+  };
+}
+function findSnippetMarkerNodes(snippetId, startMarker, endMarker,) {
+  if (!startMarker || !endMarker) {
+    return {
+      start: null,
+      end: null,
+    };
+  }
+  let start2 = null;
+  let end = null;
+  const {
+    start: startComment,
+    end: endComment,
+  } = getSnippetMarkers(snippetId,);
+  let node = startMarker.nextSibling;
+  while (node && node !== endMarker) {
+    if (node.nodeType !== Node.COMMENT_NODE) {
+      node = node.nextSibling;
+      continue;
+    }
+    const comment = `<!--${node.nodeValue}-->`;
+    if (comment === startComment) {
+      start2 = node;
+    } else if (comment === endComment) {
+      end = node;
+      break;
+    }
+    node = node.nextSibling;
+  }
+  return {
+    start: start2,
+    end,
+  };
+}
+async function loadSnippets(placement, snippets, sorting,) {
+  if (snippets.length === 0) return;
+  const {
+    start: start2,
+    end,
+  } = findMarkers(placement,);
+  const placementParent = placement === 'bodyStart' || placement === 'bodyEnd' ? document.body : document.head;
+  for (const snippet of snippets) {
+    const {
+      start: startSnippetMarker,
+      end: endSnippetMarker,
+    } = findSnippetMarkerNodes(snippet.id, start2, end,);
+    const isLoaded = startSnippetMarker && endSnippetMarker;
+    if (isLoaded && snippet.loadMode === 'once') {
+      continue;
+    }
+    removeSnippetElements(startSnippetMarker, endSnippetMarker,);
+    if (isLoaded) {
+      await insertHTML(snippet.code, endSnippetMarker, 'beforebegin',);
+      continue;
+    }
+    const {
+      start: codeStart,
+      end: codeEnd,
+    } = getSnippetMarkers(snippet.id,);
+    const code = `${codeStart}
+${snippet.code}
+${codeEnd}`;
+    const insertReference = findInsertReferece(snippet.id, sorting, start2, end,);
+    if (insertReference) {
+      await insertHTML(code, insertReference, 'afterend',);
+    } else {
+      const node = start2 ?? placementParent;
+      const position = start2 ? 'afterend' : 'beforeend';
+      await insertHTML(code, node, position,);
+    }
+  }
+}
+function removeSnippetElements(start2, end,) {
+  if (!start2 || !end) return;
+  let node = start2.nextSibling;
+  while (node && node !== end) {
+    const nextNode = node.nextSibling;
+    if (isRemovableNode(node,)) {
+      node.remove();
+    }
+    node = nextNode;
+  }
+}
+function isRemovableNode(node,) {
+  if (node.nodeType !== Node.ELEMENT_NODE) return true;
+  if (node.nodeName === 'SCRIPT') {
+    const script = node;
+    const type = script.type;
+    if (!type || type === 'text/javascript' || type === 'module') return false;
+  }
+  return true;
+}
+function findInsertReferece(snippetId, sorting, start2, end,) {
+  const startIndex = sorting.indexOf(snippetId,) - 1;
+  if (startIndex < 0) return null;
+  for (let i = startIndex; i >= 0; i--) {
+    const item = sorting[i];
+    if (!item) continue;
+    const reference = findSnippetMarkerNodes(item, start2, end,).end;
+    if (reference) return reference;
+  }
+  return null;
+}
+function useLoadSnippets() {
+  const loadSnippetsModule = useSnippets();
+  return useCallback2(async (pageId, pathVariables, activeLocale, isInitialNavigation,) => {
+    if (!loadSnippetsModule) return;
+    const mainTag = document.getElementById(mainTagId,);
+    const isGeneratedPage = mainTag && mainTag.dataset[generatedPageDatasetKey] !== void 0;
+    if (isInitialNavigation && isGeneratedPage) return;
+    const {
+      getSnippets,
+      snippetsSorting,
+    } = await loadSnippetsModule.readMaybeAsync();
+    const snippets = await getSnippets(pageId, pathVariables, activeLocale,);
+    for (const key7 in snippets) {
+      const placement = key7;
+      const snippetsForPlacement = snippets[placement];
+      const sorting = snippetsSorting[placement];
+      await loadSnippets(placement, snippetsForPlacement, sorting,);
+    }
+  }, [loadSnippetsModule,],);
+}
 function isSamePage(a, b,) {
   if (a.routeId !== b.routeId) return false;
   if (a.pathVariables === b.pathVariables) return true;
@@ -38582,6 +38823,7 @@ function Router({
     }
     return (fn) => fn();
   }, [synchronousNavigationOnDesktop,],);
+  const loadSnippets2 = useLoadSnippets();
   const isInitialNavigationRef = useRef(true,);
   const currentPathnameWithHashRef = useRef();
   const currentRouteRef = useRef(initialRoute,);
@@ -38818,6 +39060,9 @@ function Router({
   const currentRoutePath = currentRoute?.path;
   const pageviewEventData = useSendPageView(currentRoute, currentRouteId, currentPathnameWithHash, currentPathVariables, activeLocale,);
   const isInitialNavigation = isInitialNavigationRef.current;
+  useEffect(() => {
+    void loadSnippets2(currentRouteId, currentPathVariables ?? {}, localeInfo.activeLocale?.code || null, isInitialNavigation,);
+  }, [loadSnippets2, currentRouteId, currentPathVariables, localeInfo, isInitialNavigation,],);
   const api = useMemo(() => ({
     navigate,
     getRoute,
@@ -39422,6 +39667,7 @@ function PageRoot({
   LayoutTemplate,
   siteCanonicalURL,
   adaptLayoutToTextDirection,
+  loadSnippetsModule,
 },) {
   React42.useEffect(() => {
     if (isWebsite) return;
@@ -39436,24 +39682,27 @@ function PageRoot({
           children: /* @__PURE__ */ jsx(CustomCursorHost, {
             children: /* @__PURE__ */ jsx(FormContext.Provider, {
               value: framerSiteId,
-              children: /* @__PURE__ */ jsx(Router, {
-                initialRoute: routeId,
-                initialPathVariables: pathVariables,
-                initialLocaleId: localeId,
-                routes,
-                collectionUtils,
-                notFoundPage,
-                locales,
-                defaultPageStyle: defaultPageStyle ?? {
-                  minHeight: '100vh',
-                  width: 'auto',
-                },
-                preserveQueryParams,
-                EditorBar,
-                disableHistory,
-                LayoutTemplate,
-                siteCanonicalURL,
-                adaptLayoutToTextDirection,
+              children: /* @__PURE__ */ jsx(SnippetsProvider, {
+                loadSnippetsModule,
+                children: /* @__PURE__ */ jsx(Router, {
+                  initialRoute: routeId,
+                  initialPathVariables: pathVariables,
+                  initialLocaleId: localeId,
+                  routes,
+                  collectionUtils,
+                  notFoundPage,
+                  locales,
+                  defaultPageStyle: defaultPageStyle ?? {
+                    minHeight: '100vh',
+                    width: 'auto',
+                  },
+                  preserveQueryParams,
+                  EditorBar,
+                  disableHistory,
+                  LayoutTemplate,
+                  siteCanonicalURL,
+                  adaptLayoutToTextDirection,
+                },),
               },),
             },),
           },),
@@ -41564,7 +41813,8 @@ var Builder = class {
       assert(argument, 'Missing argument',);
       return this.buildExpression(inScope, argument,);
     };
-    switch (expression.functionName) {
+    const functionName = expression.functionName;
+    switch (functionName) {
       case 'CONTAINS': {
         const source = getArgument(0,);
         const target = getArgument(1,);
@@ -41601,8 +41851,13 @@ var Builder = class {
         assert(subquery.type === 'Select', 'Subqueries require a select expression',);
         return this.buildSubqueryFlatArray(inScope, subquery,);
       }
+      case 'INTERSECT': {
+        const source = getArgument(0,);
+        const target = getArgument(1,);
+        return this.normalizer.newScalarIntersection(source, target,);
+      }
       default:
-        throw new Error('Unsupported function name',);
+        assertNever(functionName, 'Unsupported function name',);
     }
   }
   buildSubqueryArray(inScope, expression,) {
@@ -43341,6 +43596,78 @@ var ScalarIndexOf = class _ScalarIndexOf extends ScalarNode {
     };
   }
 };
+var ScalarIntersection = class _ScalarIntersection extends ScalarNode {
+  constructor(left, right,) {
+    const referencedFields = new Fields();
+    referencedFields.merge(left.referencedFields,);
+    referencedFields.merge(right.referencedFields,);
+    const referencedOuterFields = new Fields();
+    referencedOuterFields.merge(left.referencedOuterFields,);
+    referencedOuterFields.merge(right.referencedOuterFields,);
+    const isSynchronous = left.isSynchronous && right.isSynchronous;
+    super(referencedFields, referencedOuterFields, isSynchronous,);
+    this.left = left;
+    this.right = right;
+    __publicField(this, 'definition', {
+      type: 'array',
+      definition: {
+        type: 'string',
+        isNullable: false,
+      },
+      isNullable: false,
+    },);
+  }
+  getHash() {
+    return calculateHash('ScalarIntersection', this.left, this.right,);
+  }
+  optimize(optimizer,) {
+    const leftCost = this.left.optimize(optimizer,);
+    const rightCost = this.right.optimize(optimizer,);
+    return Cost.max(leftCost, rightCost,);
+  }
+  getOptimized() {
+    const left = this.left.getOptimized();
+    const right = this.right.getOptimized();
+    return new _ScalarIntersection(left, right,);
+  }
+  *evaluate(context, tuple,) {
+    const {
+      left,
+      right,
+    } = yield* evaluateObject({
+      left: this.left.evaluate(context, tuple,),
+      right: this.right.evaluate(context, tuple,),
+    },);
+    const leftSet = databaseValueToSet(left,);
+    const rightSet = databaseValueToSet(right,);
+    const intersection2 = [];
+    const shortestSet = leftSet.size < rightSet.size ? leftSet : rightSet;
+    const longestSet = shortestSet === leftSet ? rightSet : leftSet;
+    for (const item of shortestSet) {
+      if (longestSet.has(item,)) {
+        intersection2.push({
+          type: 'string',
+          value: item,
+        },);
+      }
+    }
+    return {
+      type: 'array',
+      value: intersection2,
+    };
+  }
+};
+function databaseValueToSet(value,) {
+  const set = /* @__PURE__ */ new Set();
+  if (!value) return set;
+  assert2(value.type === 'array', 'ScalarIntersection expects an array, got:', value.type,);
+  for (const item of value.value) {
+    if (!item) continue;
+    assert2(item.type === 'string', 'ScalarIntersection expects an array of strings, got an array with:', item.type,);
+    set.add(item.value,);
+  }
+  return set;
+}
 var ScalarLength = class _ScalarLength extends ScalarNode {
   constructor(input,) {
     super(input.referencedFields, input.referencedOuterFields, input.isSynchronous,);
@@ -43778,6 +44105,10 @@ var Normalizer = class {
   }
   newScalarFlatArray(input, field, ordering, referencedFields, referencedOuterFields,) {
     const node = new ScalarFlatArray(input, field, ordering, referencedFields, referencedOuterFields,);
+    return this.finishScalar(node,);
+  }
+  newScalarIntersection(left, right,) {
+    const node = new ScalarIntersection(left, right,);
     return this.finishScalar(node,);
   }
   newScalarCast(input, definition,) {
@@ -47891,6 +48222,10 @@ var variantsNameToWeight = {
   // We assign them different (fake) weights to ensure that the changes are picked up when switching between variants.
   '53': 400,
   '55': 600,
+  // The following variants are only used in the Rag font.
+  // We assign them different (fake) weights to ensure that the changes are picked up when switching between variants.
+  'narrow-regular': 350,
+  'narrow-black': 850,
   // we want to put variable fonts last
   variable: 1e3,
   'variable-italic': 1e3,
@@ -50392,10 +50727,14 @@ var ColumnMasonryLayout = /* @__PURE__ */ React42.memo(function ColumnMasonryLay
   rowGap,
   parentIsDataRepeater = false,
   columnMasonryLayoutEnabled,
+  itemsOrder,
   children,
 },) {
   if (!columnMasonryLayoutEnabled) return children;
-  const normalizedChildren = prepareChildrenArrayForMasonry(children, parentIsDataRepeater,);
+  let normalizedChildren = prepareChildrenArrayForMasonry(children, parentIsDataRepeater,);
+  if (itemsOrder?.length) {
+    normalizedChildren = reorderChildrenForItemsOrder(normalizedChildren, itemsOrder,);
+  }
   const tracks = groupChildrenIntoTracks(trackCount, normalizedChildren,);
   const wrapperStyle2 = getMasonryColumnStyle(rowGap,);
   return tracks.map((trackChildren, i,) =>
@@ -50405,6 +50744,28 @@ var ColumnMasonryLayout = /* @__PURE__ */ React42.memo(function ColumnMasonryLay
     }, getMasonryColumnKey(i,),)
   );
 },);
+function getChildOrderId(child,) {
+  return React42.isValidElement(child,) ? child.props['data-framer-order-id'] : void 0;
+}
+function reorderChildrenForItemsOrder(children, itemsOrder,) {
+  const childrenById = /* @__PURE__ */ new Map();
+  const remaining = [];
+  const orderSet = new Set(itemsOrder,);
+  for (const child of children) {
+    const id3 = getChildOrderId(child,);
+    if (id3 && orderSet.has(id3,)) {
+      childrenById.set(id3, child,);
+    } else {
+      remaining.push(child,);
+    }
+  }
+  const ordered = [];
+  for (const id3 of itemsOrder) {
+    const child = childrenById.get(id3,);
+    if (child) ordered.push(child,);
+  }
+  return [...ordered, ...remaining,];
+}
 function prepareChildrenArrayForMasonry(children, parentIsDataRepeater,) {
   const array = React42.Children.toArray(children,);
   if (!parentIsDataRepeater) return array;
@@ -50443,6 +50804,7 @@ var withColumnMasonryLayout = (Component18) => {
     trackCount = 1,
     rowGap,
     parentIsDataRepeater,
+    itemsOrder,
     children,
     style: existingStyle,
     ...rest
@@ -50462,6 +50824,7 @@ var withColumnMasonryLayout = (Component18) => {
         rowGap,
         parentIsDataRepeater,
         columnMasonryLayoutEnabled,
+        itemsOrder,
         children,
       },),
     },);
@@ -54435,6 +54798,7 @@ export {
   imageUrlForAsset,
   inertia,
   inferInitialRouteFromPath,
+  initLazyModulesCache,
   injectComponentCSSRules,
   InjectSelectionStyle,
   installFlexboxGapWorkaroundIfNeeded,
@@ -54486,6 +54850,7 @@ export {
   LayoutGroup,
   LayoutIdContext,
   lazy,
+  lazyModulesCollector,
   LazyMotion,
   LazyValue,
   LibraryFeaturesProvider,
