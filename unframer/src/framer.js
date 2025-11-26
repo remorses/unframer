@@ -11337,7 +11337,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.UKEZDP4I.mjs
+// /:https://app.framerstatic.com/framer.55OHA6GE.mjs
 
 import React42 from 'react';
 import { useDeferredValue, useSyncExternalStore, } from 'react';
@@ -14886,7 +14886,10 @@ function URLSearchParamsProvider({
     children,
   },);
 }
-function useStringQueryParameter(parameterName, initialValue,) {
+function useStringQueryParam({
+  initialValue,
+  parameterName,
+},) {
   const parameterNameRef = useRef(parameterName,);
   const {
     urlSearchParams,
@@ -48621,7 +48624,7 @@ function getAssetOwnerType(asset,) {
 async function loadFontsWithOpenType(source,) {
   switch (source) {
     case 'google': {
-      const supportedFonts = await import('./framer-chunks/google-RE4DULFA-7U353QI3.js');
+      const supportedFonts = await import('./framer-chunks/google-4VARBVAS-WSAQU7QB.js');
       return supportedFonts?.default;
     }
     case 'fontshare': {
@@ -48635,7 +48638,7 @@ async function loadFontsWithOpenType(source,) {
 async function loadFontToOpenTypeFeatures(source,) {
   switch (source) {
     case 'google': {
-      const features = await import('./framer-chunks/google-IP4ZFBZ6-BPKEAUY3.js');
+      const features = await import('./framer-chunks/google-IHP45ZLM-ZVSA7AH6.js');
       return features?.default;
     }
     case 'fontshare': {
@@ -49187,7 +49190,7 @@ function loadVariationAxes(source,) {
       const axes = (async () => {
         switch (source) {
           case 'google': {
-            return (await import('./framer-chunks/google-HVUQEOXY-IDXMIEDZ.js')).default;
+            return (await import('./framer-chunks/google-LWW6GXZ4-WR5WKIYC.js')).default;
           }
           case 'fontshare': {
             return (await import('./framer-chunks/fontshare-X63NXWGB-NL5Q3YUU.js')).default;
@@ -50726,11 +50729,9 @@ var ColumnMasonryLayout = /* @__PURE__ */ React42.memo(function ColumnMasonryLay
   trackCount,
   rowGap,
   parentIsDataRepeater = false,
-  columnMasonryLayoutEnabled,
   itemsOrder,
   children,
 },) {
-  if (!columnMasonryLayoutEnabled) return children;
   let normalizedChildren = prepareChildrenArrayForMasonry(children, parentIsDataRepeater,);
   if (itemsOrder?.length) {
     normalizedChildren = reorderChildrenForItemsOrder(normalizedChildren, itemsOrder,);
@@ -50809,12 +50810,18 @@ var withColumnMasonryLayout = (Component18) => {
     style: existingStyle,
     ...rest
   }, ref,) {
-    const mergedStyle = columnMasonryLayoutEnabled
-      ? {
-        ...existingStyle,
-        gridTemplateColumns: `repeat(${trackCount}, 1fr)`,
-      }
-      : existingStyle;
+    if (!columnMasonryLayoutEnabled) {
+      return /* @__PURE__ */ jsx(Component18, {
+        ref,
+        style: existingStyle,
+        ...rest,
+        children,
+      },);
+    }
+    const mergedStyle = {
+      ...existingStyle,
+      gridTemplateColumns: `repeat(${trackCount}, 1fr)`,
+    };
     return /* @__PURE__ */ jsx(Component18, {
       ref,
       style: mergedStyle,
@@ -50823,7 +50830,6 @@ var withColumnMasonryLayout = (Component18) => {
         trackCount,
         rowGap,
         parentIsDataRepeater,
-        columnMasonryLayoutEnabled,
         itemsOrder,
         children,
       },),
@@ -55105,7 +55111,7 @@ export {
   useScroll,
   useSiteRefs,
   useSpring,
-  useStringQueryParameter,
+  useStringQueryParam,
   useSVGTemplate,
   useTime,
   useTracking,
