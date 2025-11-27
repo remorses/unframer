@@ -11337,7 +11337,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.55OHA6GE.mjs
+// /:https://app.framerstatic.com/framer.27B532IA.mjs
 
 import React42 from 'react';
 import { useDeferredValue, useSyncExternalStore, } from 'react';
@@ -50897,56 +50897,45 @@ function getRelativeDateValue(targetDate, referenceDate, unit,) {
   }
   const _ = unit;
 }
-function getStartOfDay(date,) {
+function getUTCStartOfDay(date,) {
   const result = new Date(date,);
-  result.setHours(0, 0, 0, 0,);
+  result.setUTCHours(0, 0, 0, 0,);
   return result;
 }
 function differenceInCalendarDays(targetDate, referenceDate,) {
-  const targetStartOfDay = getStartOfDay(targetDate,);
-  const referenceStartOfDay = getStartOfDay(referenceDate,);
-  const targetTimestamp = targetStartOfDay.getTime() - getTimezoneOffsetInMilliseconds(targetStartOfDay,);
-  const referenceTimestamp = referenceStartOfDay.getTime() - getTimezoneOffsetInMilliseconds(referenceStartOfDay,);
+  const targetTimestamp = getUTCStartOfDay(targetDate,).getTime();
+  const referenceTimestamp = getUTCStartOfDay(referenceDate,).getTime();
   return Math.round((targetTimestamp - referenceTimestamp) / DAY,);
 }
-function getStartOfWeek(date,) {
+function getUTCStartOfWeek(date,) {
   const result = new Date(date,);
-  const day = result.getDay();
+  const day = result.getUTCDay();
   const diff = (day < 1 ? 7 : 0) + day - 1;
-  result.setDate(result.getDate() - diff,);
-  result.setHours(0, 0, 0, 0,);
+  result.setUTCDate(result.getUTCDate() - diff,);
+  result.setUTCHours(0, 0, 0, 0,);
   return result;
 }
 function differenceInCalendarWeeks(targetDate, referenceDate,) {
-  const targetStartOfWeek = getStartOfWeek(targetDate,);
-  const referenceStartOfWeek = getStartOfWeek(referenceDate,);
-  const targetTimestamp = targetStartOfWeek.getTime() - getTimezoneOffsetInMilliseconds(targetStartOfWeek,);
-  const referenceTimestamp = referenceStartOfWeek.getTime() - getTimezoneOffsetInMilliseconds(referenceStartOfWeek,);
+  const targetTimestamp = getUTCStartOfWeek(targetDate,).getTime();
+  const referenceTimestamp = getUTCStartOfWeek(referenceDate,).getTime();
   return Math.round((targetTimestamp - referenceTimestamp) / WEEK,);
 }
 function differenceInCalendarMonths(targetDate, referenceDate,) {
-  const yearsDiff = targetDate.getFullYear() - referenceDate.getFullYear();
-  const monthsDiff = targetDate.getMonth() - referenceDate.getMonth();
+  const yearsDiff = targetDate.getUTCFullYear() - referenceDate.getUTCFullYear();
+  const monthsDiff = targetDate.getUTCMonth() - referenceDate.getUTCMonth();
   return yearsDiff * 12 + monthsDiff;
 }
-function getQuarter(date,) {
-  const month = date.getMonth();
+function getUTCQuarter(date,) {
+  const month = date.getUTCMonth();
   return Math.trunc(month / 3,);
 }
 function differenceInCalendarQuarters(targetDate, referenceDate,) {
-  const yearsDiff = targetDate.getFullYear() - referenceDate.getFullYear();
-  const quartersDiff = getQuarter(targetDate,) - getQuarter(referenceDate,);
+  const yearsDiff = targetDate.getUTCFullYear() - referenceDate.getUTCFullYear();
+  const quartersDiff = getUTCQuarter(targetDate,) - getUTCQuarter(referenceDate,);
   return yearsDiff * 4 + quartersDiff;
 }
 function differenceInCalendarYears(targetDate, referenceDate,) {
-  return targetDate.getFullYear() - referenceDate.getFullYear();
-}
-function getTimezoneOffsetInMilliseconds(date,) {
-  const year = date.getFullYear();
-  const utcDate = new Date(
-    Date.UTC(year, date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds(),),
-  );
-  return date.getTime() - utcDate.setUTCFullYear(year,);
+  return targetDate.getUTCFullYear() - referenceDate.getUTCFullYear();
 }
 var RelativeDate = /* @__PURE__ */ memo2(function RelativeDate2({
   date: dateString,
@@ -50960,13 +50949,12 @@ var RelativeDate = /* @__PURE__ */ memo2(function RelativeDate2({
   const fallbackLocale = useLocaleCode();
   const locale = externalLocale || fallbackLocale;
   const targetDate = new Date(dateString,);
-  const [currentDate, setCurrentDate,] = useState(() => /* @__PURE__ */ new Date());
+  const [currentDate, setCurrentDate,] = useState(getCurrentDate,);
   const interval = dateFormat === 'second' ? 1e3 : 6e4;
   useEffect(() => {
     const timeout = setInterval(() => {
       startTransition2(() => {
-        const now2 = /* @__PURE__ */ new Date();
-        setCurrentDate(now2,);
+        setCurrentDate(getCurrentDate,);
       },);
     }, interval,);
     return () => {
@@ -50974,6 +50962,7 @@ var RelativeDate = /* @__PURE__ */ memo2(function RelativeDate2({
     };
   }, [interval,],);
   const formattedDate = targetDate.toLocaleString(locale, {
+    timeZone: 'UTC',
     dateStyle: 'long',
     timeStyle: dateFormat === 'second' ? 'medium' : dateFormat === 'minute' || dateFormat === 'hour' ? 'short' : void 0,
   },);
@@ -50995,6 +50984,20 @@ var RelativeDate = /* @__PURE__ */ memo2(function RelativeDate2({
     ],
   },);
 },);
+function getCurrentDate() {
+  const date = /* @__PURE__ */ new Date();
+  return new Date(
+    Date.UTC(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate(),
+      date.getHours(),
+      date.getMinutes(),
+      date.getSeconds(),
+      date.getMilliseconds(),
+    ),
+  );
+}
 function createHydrationScript(date, format, style2, numeric, capitalize, locale,) {
   const serializedDate = date.getTime();
   const serializedFormat = JSON.stringify(format,);
