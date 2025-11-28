@@ -11337,7 +11337,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.27B532IA.mjs
+// /:https://app.framerstatic.com/framer.TWQ3O3PK.mjs
 
 import React42 from 'react';
 import { useDeferredValue, useSyncExternalStore, } from 'react';
@@ -12317,7 +12317,9 @@ function isPromise(value,) {
 var noop2 = () => {};
 var isWindow = typeof window !== 'undefined';
 var isBot =
-  /* @__PURE__ */ (() => isWindow && /bot|-google|google-|yandex|ia_archiver|crawl|spider/iu.test(__unframerNavigator2.userAgent,))();
+  /* @__PURE__ */ (() =>
+    isWindow &&
+    (__unframerNavigator2.webdriver || /bot|-google|google-|yandex|ia_archiver|crawl|spider/iu.test(__unframerNavigator2.userAgent,)))();
 var supportsRequestIdleCallback = isWindow && typeof window.requestIdleCallback === 'function';
 var requestIdleCallback = /* @__PURE__ */ (() =>
   // eslint-disable-next-line compat/compat,framer-studio/tscompat
@@ -14740,7 +14742,7 @@ async function switchLocale(options,) {
   const result = await getLocalizedNavigationPath(options,);
   if (!result) return;
   try {
-    localStorage.setItem('preferredLocale', options.nextLocale.code,);
+    localStorage.preferredLocale = options.nextLocale.code;
   } catch {}
   try {
     if (!isString(result.path,)) {
@@ -21331,27 +21333,29 @@ function cssValue(value,) {
   if (value === '') return '""';
   return value;
 }
-function css2(selector, declaration,) {
-  let output = ' ';
-  for (const key7 in declaration) {
-    const value = declaration[key7];
-    output += `${key7.replace(/([A-Z])/gu, '-$1',).toLowerCase()}: ${cssValue(value,)}; `;
+var css2 = /* @__PURE__ */ (() => {
+  function css22(selector, declaration,) {
+    let output = ' ';
+    for (const key7 in declaration) {
+      const value = declaration[key7];
+      assert(value !== void 0, 'Encountered `undefined` in CSSDeclaration',);
+      output += `${key7.replace(/([A-Z])/gu, '-$1',).toLowerCase()}: ${cssValue(value,)}; `;
+    }
+    return selector + ' {' + output + '}';
   }
-  return selector + ' {' + output + '}';
-}
-((css22) => {
-  function variable(...variables) {
+  css22.variable = (...variables) => {
     const lastItem = variables[variables.length - 1];
+    assert(lastItem !== void 0, 'Zero variables passed to `css.variable`',);
     let value = lastItem.startsWith('--',) ? `var(${lastItem})` : lastItem;
     for (let index = variables.length - 2; index >= 0; index--) {
       const element = variables[index];
       value = `var(${element}, ${value})`;
     }
     return value;
-  }
-  css22.variable = variable;
-})(css2 || (css2 = {}),);
-var sharedInputCSS = [
+  };
+  return css22;
+})();
+var sharedInputCSS = /* @__PURE__ */ (() => [
   css2(`.${inputClassName}`, {
     padding: css2.variable(Var.Padding,),
     background: 'transparent',
@@ -21374,13 +21378,13 @@ var sharedInputCSS = [
   css2(`.${inputClassName}:focus-visible`, {
     outline: 'none',
   },),
-];
+])();
 var inputWrapperCSS = /* @__PURE__ */ (() => [css2(`.${inputWrapperClassName}`, {
   overflow: 'hidden',
 },),])();
 var inputBorderAllSides =
   `var(${Var.BorderTopWidth}) var(${Var.BorderRightWidth}) var(${Var.BorderBottomWidth}) var(${Var.BorderLeftWidth})`;
-var inputBorderCSS = [`.${inputWrapperClassName}:after {
+var inputBorderCSS = /* @__PURE__ */ (() => [`.${inputWrapperClassName}:after {
         content: "";
         pointer-events: none;
         box-sizing: border-box;
@@ -21401,7 +21405,7 @@ var inputBorderCSS = [`.${inputWrapperClassName}:after {
         border-style: var(${Var.BorderStyle});
         transition: var(${Var.FocusedTransition});
         transition-property: border-color, border-width, border-style, border-top-left-radius, border-top-right-radius, border-bottom-right-radius, border-bottom-left-radius;
-    }`,];
+    }`,])();
 var customValidityKey = 'customError';
 var validKey = 'valid';
 function isRelevantValidityStateKey(key7,) {
@@ -21459,7 +21463,7 @@ function useCustomValidity(onValid, onInvalid, onChange, onBlur, onFocus,) {
 }
 var iconSpacing = 10;
 var iconSize = 16;
-var inputIconCSSDeclaration = {
+var inputIconCSSDeclaration = /* @__PURE__ */ (() => ({
   content: '',
   display: 'block',
   position: 'absolute',
@@ -21476,7 +21480,7 @@ var inputIconCSSDeclaration = {
   maskRepeat: 'no-repeat',
   maskSize: `${iconSize}px`,
   backgroundColor: css2.variable(Var.IconColor,),
-};
+}))();
 function createRGBVariableFallbacks(variables, fallback,) {
   return css2.variable(...variables.flatMap((variable) => [`${variable}-rgb`, variable,]), fallback,);
 }
@@ -30689,14 +30693,13 @@ var frameWithMotionPropsFields = [
 ];
 var deprecatedFramePropsFields = ['autoSize', 'aspectRatio', 'borderWidth', 'borderStyle', 'borderColor', 'centerX', 'centerY',];
 function isDeprecatedFrameProps(props,) {
-  let field;
   for (const propKey in props) {
     if (isAnimatable2(props[propKey],)) return true;
   }
-  for (field of frameWithMotionPropsFields) {
+  for (const field of frameWithMotionPropsFields) {
     if (props.hasOwnProperty(field,)) return false;
   }
-  for (field of deprecatedFramePropsFields) {
+  for (const field of deprecatedFramePropsFields) {
     if (props.hasOwnProperty(field,)) return true;
   }
   return false;
@@ -37936,17 +37939,15 @@ function addUTMTagsToFormData(data2, document2,) {
     }
   } catch (e) {}
 }
-var HONEYPOT_VERSION = '2.1';
+var HONEYPOT_VERSION = '3';
 var HONEYPOT_FIELD_NAME = '__framer';
 var COMMON_FIELD_NAMES = [
   'website',
   'company',
-  'address',
   'message',
   'subject',
   'title',
   'description',
-  // safari safe ones below for testing their performance
   'feedback',
   'notes',
   'details',
@@ -37954,6 +37955,23 @@ var COMMON_FIELD_NAMES = [
   'comments',
 ];
 var MODULE_LOAD_TIME = /* @__PURE__ */ (() => Date.now())();
+var FIELD_DATA_ENUM = {
+  name: 0,
+  value: 1,
+  setAttribute: 2,
+  valueProperty: 3,
+  isInputEventTrusted: 4,
+  inputChangeTimeSinceModuleLoad: 5,
+  wasFilledBeforeHydration: 6,
+};
+var METADATA_KEYS_ENUM = {
+  fieldData: 0,
+  fieldCount: 1,
+  fieldFilledCount: 2,
+  hpVersion: 3,
+  siteId: 4,
+  timeToSubmissionSinceModuleLoad: 5,
+};
 var getTimeSinceModuleLoadInSeconds = () => {
   return ((Date.now() - MODULE_LOAD_TIME) / 1e3).toFixed(2,);
 };
@@ -38046,54 +38064,50 @@ function useHoneypotFields() {
       };
     },), [],);
   const convertHoneypotFieldsForSubmission = React42.useCallback(() => {
-    const timeSinceModuleLoadedInSeconds = getTimeSinceModuleLoadInSeconds();
     states.forEach((state) => {
-      const {
-        inputRef,
-        methodsUsed,
-        originalName,
-      } = state;
-      if (inputRef.current) {
-        const methodParts = [];
-        if (methodsUsed.setAttribute) {
-          methodParts.push('setAttribute',);
-        }
-        if (methodsUsed.valueProperty) {
-          methodParts.push('valueProperty',);
-        }
-        if (methodsUsed.isInputEventTrusted !== void 0) {
-          const trustedString = methodsUsed.isInputEventTrusted ? 'trusted' : 'untrusted';
-          methodParts.push(`${trustedString}Event`,);
-        }
-        if (methodsUsed.inputChangeTimeSinceModuleLoad !== void 0) {
-          methodParts.push(`inputChangedAt:${methodsUsed.inputChangeTimeSinceModuleLoad}s`,);
-        }
-        if (methodsUsed.wasFilledBeforeHydration) {
-          methodParts.push('filledBeforeHydration',);
-        }
-        if (inputRef.current.value) {
-          methodParts.push(`submittedAt:${timeSinceModuleLoadedInSeconds}s`,);
-        }
-        if (framerSiteId) {
-          methodParts.push(`siteId:${framerSiteId}`,);
-        }
-        const methodsSuffix = methodParts.length > 0 ? `_${methodParts.join('_',)}` : '';
-        const framerName = `${HONEYPOT_FIELD_NAME}_v${HONEYPOT_VERSION}_${originalName}${methodsSuffix}`;
-        inputRef.current.name = framerName;
-      }
-    },);
-  }, [states, framerSiteId,],);
-  const clear = React42.useCallback(() => {
-    states.forEach((state) => {
-      if (state.inputRef.current) {
-        state.inputRef.current.name = state.originalName;
+      const currentHoneypotInput = state.inputRef.current;
+      if (currentHoneypotInput) {
+        currentHoneypotInput.name = `${HONEYPOT_FIELD_NAME}_${state.originalName}`;
       }
     },);
   }, [states,],);
+  const replaceHoneypotWithMetadata = React42.useCallback((formData) => {
+    const honeypotCount = states.length;
+    let honeypotFilled = 0;
+    const filledFieldsData = [];
+    states.forEach((state) => {
+      const currentHoneypotInput = state.inputRef.current;
+      if (currentHoneypotInput) {
+        const currentName = currentHoneypotInput.name;
+        const currentValue = currentHoneypotInput.value;
+        if (currentValue) {
+          honeypotFilled++;
+          const fieldData = {
+            [FIELD_DATA_ENUM.name]: state.originalName,
+            [FIELD_DATA_ENUM.value]: currentValue,
+            [FIELD_DATA_ENUM.setAttribute]: state.methodsUsed.setAttribute,
+            [FIELD_DATA_ENUM.valueProperty]: state.methodsUsed.valueProperty,
+            [FIELD_DATA_ENUM.isInputEventTrusted]: state.methodsUsed.isInputEventTrusted,
+            [FIELD_DATA_ENUM.inputChangeTimeSinceModuleLoad]: state.methodsUsed.inputChangeTimeSinceModuleLoad,
+            [FIELD_DATA_ENUM.wasFilledBeforeHydration]: state.methodsUsed.wasFilledBeforeHydration,
+          };
+          filledFieldsData.push(JSON.stringify(fieldData,),);
+        }
+        formData.delete(currentName,);
+        currentHoneypotInput.name = state.originalName;
+      }
+    },);
+    formData.append(`${HONEYPOT_FIELD_NAME}_${METADATA_KEYS_ENUM.fieldData}`, `[${filledFieldsData.join(',',)}]`,);
+    formData.append(`${HONEYPOT_FIELD_NAME}_${METADATA_KEYS_ENUM.fieldCount}`, honeypotCount.toString(),);
+    formData.append(`${HONEYPOT_FIELD_NAME}_${METADATA_KEYS_ENUM.fieldFilledCount}`, honeypotFilled.toString(),);
+    formData.append(`${HONEYPOT_FIELD_NAME}_${METADATA_KEYS_ENUM.hpVersion}`, HONEYPOT_VERSION,);
+    formData.append(`${HONEYPOT_FIELD_NAME}_${METADATA_KEYS_ENUM.siteId}`, framerSiteId || '',);
+    formData.append(`${HONEYPOT_FIELD_NAME}_${METADATA_KEYS_ENUM.timeToSubmissionSinceModuleLoad}`, getTimeSinceModuleLoadInSeconds(),);
+  }, [states, framerSiteId,],);
   return {
     states,
     convertHoneypotFieldsForSubmission,
-    clear,
+    replaceHoneypotWithMetadata,
   };
 }
 function HoneypotFields({
@@ -38203,7 +38217,7 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
   const {
     states: honeypotStateRefs,
     convertHoneypotFieldsForSubmission,
-    clear: resetHoneypotNames,
+    replaceHoneypotWithMetadata,
   } = useHoneypotFields();
   const libraryFeatures = useLibraryFeatures();
   const isAdvancedSpamProtectionEnabled = libraryFeatures.advancedSpamProtection;
@@ -38268,13 +38282,13 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
       convertHoneypotFieldsForSubmission();
     }
     const data2 = new FormData(event.currentTarget,);
-    if (isAdvancedSpamProtectionEnabled) {
-      resetHoneypotNames();
-    }
     await yieldToMain({
       priority: 'user-visible',
       continueAfter: 'paint',
     },);
+    if (isAdvancedSpamProtectionEnabled) {
+      replaceHoneypotWithMetadata(data2,);
+    }
     startTransition2(() =>
       dispatch({
         type: 'submit',
@@ -38611,7 +38625,11 @@ function findInsertReferece(snippetId, sorting, start2, end,) {
 }
 function useLoadSnippets() {
   const loadSnippetsModule = useSnippets();
+  const {
+    customCodeSiteSettings,
+  } = useLibraryFeatures();
   return useCallback2(async (pageId, pathVariables, activeLocale, isInitialNavigation,) => {
+    if (!customCodeSiteSettings) return;
     if (!loadSnippetsModule) return;
     const mainTag = document.getElementById(mainTagId,);
     const isGeneratedPage = mainTag && mainTag.dataset[generatedPageDatasetKey] !== void 0;
@@ -38627,7 +38645,7 @@ function useLoadSnippets() {
       const sorting = snippetsSorting[placement];
       await loadSnippets(placement, snippetsForPlacement, sorting,);
     }
-  }, [loadSnippetsModule,],);
+  }, [loadSnippetsModule, customCodeSiteSettings,],);
 }
 function isSamePage(a, b,) {
   if (a.routeId !== b.routeId) return false;
