@@ -11337,7 +11337,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.TWQ3O3PK.mjs
+// /:https://app.framerstatic.com/framer.BPRZY6W6.mjs
 
 import React42 from 'react';
 import { useDeferredValue, useSyncExternalStore, } from 'react';
@@ -13274,9 +13274,6 @@ function stringify(value, reducers,) {
   const keys3 = [];
   let p = 0;
   function flatten(thing,) {
-    if (typeof thing === 'function') {
-      throw new DevalueError(`Cannot stringify a function`, keys3,);
-    }
     if (thing === void 0) return UNDEFINED;
     if (Number.isNaN(thing,)) return NAN;
     if (thing === Infinity) return POSITIVE_INFINITY;
@@ -13296,6 +13293,9 @@ function stringify(value, reducers,) {
         stringified[index2] = `["${key7}",${flatten(value2,)}]`;
         return index2;
       }
+    }
+    if (typeof thing === 'function') {
+      throw new DevalueError(`Cannot stringify a function`, keys3,);
     }
     let str = '';
     if (is_primitive(thing,)) {
@@ -14848,69 +14848,6 @@ function useMemoOne(factory, inputs,) {
   }, [cache2,],);
   return cache2.result;
 }
-var URLSearchParamsContext = /* @__PURE__ */ (() => {
-  const Context2 = createContext({
-    urlSearchParams: new URLSearchParams(),
-    triggerUpdate: () => {},
-  },);
-  Context2.displayName = 'URLSearchParamsContext';
-  return Context2;
-})();
-function URLSearchParamsProvider({
-  children,
-},) {
-  const onStoreChangeRef = useRef(null,);
-  const searchString = useSyncExternalStore(
-    (onStoreChange) => {
-      onStoreChangeRef.current = onStoreChange;
-      const handler = () => {
-        onStoreChange();
-      };
-      window.addEventListener('popstate', handler,);
-      return () => {
-        onStoreChangeRef.current = null;
-        window.removeEventListener('popstate', handler,);
-      };
-    },
-    () => window.location.search,
-    () => '',
-  );
-  const deferredSearchString = useDeferredValue(searchString,);
-  const triggerUpdate = useCallback2(() => {
-    onStoreChangeRef.current?.();
-  }, [],);
-  const value = useMemoOne(() => ({
-    urlSearchParams: new URLSearchParams(deferredSearchString,),
-    triggerUpdate,
-  }), [deferredSearchString, triggerUpdate,],);
-  return /* @__PURE__ */ jsx(URLSearchParamsContext.Provider, {
-    value,
-    children,
-  },);
-}
-function useStringQueryParam({
-  initialValue,
-  parameterName,
-},) {
-  const parameterNameRef = useRef(parameterName,);
-  const {
-    urlSearchParams,
-    triggerUpdate,
-  } = useContext(URLSearchParamsContext,);
-  const value = urlSearchParams.get(parameterNameRef.current,) || initialValue;
-  const setValue = useCallback2(async (newValue) => {
-    const currentHistoryState = window.history.state;
-    if (!isHistoryState(currentHistoryState,)) return;
-    const newUrl = new URL(window.location.href,);
-    newUrl.searchParams.set(parameterNameRef.current, newValue,);
-    await yieldToMain({
-      continueAfter: 'paint',
-    },);
-    replaceHistoryState(currentHistoryState, newUrl.toString(),);
-    triggerUpdate();
-  }, [triggerUpdate,],);
-  return useMemoOne(() => [value, setValue,], [value, setValue,],);
-}
 async function getLocalesForCurrentRoute(activeLocale, locales, currentRoute, pathVariables, collectionUtils,) {
   if (!currentRoute) return locales;
   const slugByLocaleIfCollectionPage = await getSlugByLocaleIfCollectionPage(
@@ -15041,6 +14978,152 @@ var LayoutDirectionContext = /* @__PURE__ */ (() => {
 })();
 function useLayoutDirection() {
   return React42.useContext(LayoutDirectionContext,);
+}
+var URLSearchParamsContext = /* @__PURE__ */ (() => {
+  const Context2 = createContext({
+    urlSearchParams: new URLSearchParams(),
+    triggerUpdate: () => {},
+  },);
+  Context2.displayName = 'URLSearchParamsContext';
+  return Context2;
+})();
+function URLSearchParamsProvider({
+  children,
+},) {
+  const onStoreChangeRef = useRef(null,);
+  const searchString = useSyncExternalStore(
+    (onStoreChange) => {
+      onStoreChangeRef.current = onStoreChange;
+      const handler = () => {
+        onStoreChange();
+      };
+      window.addEventListener('popstate', handler,);
+      return () => {
+        onStoreChangeRef.current = null;
+        window.removeEventListener('popstate', handler,);
+      };
+    },
+    () => window.location.search,
+    () => '',
+  );
+  const deferredSearchString = useDeferredValue(searchString,);
+  const triggerUpdate = useCallback2(() => {
+    onStoreChangeRef.current?.();
+  }, [],);
+  const value = useMemoOne(() => ({
+    urlSearchParams: new URLSearchParams(deferredSearchString,),
+    triggerUpdate,
+  }), [deferredSearchString, triggerUpdate,],);
+  return /* @__PURE__ */ jsx(URLSearchParamsContext.Provider, {
+    value,
+    children,
+  },);
+}
+function useStringArrayQueryParam({
+  initialValue,
+  parameterName,
+},) {
+  const parameterNameRef = useRef(parameterName,);
+  const {
+    urlSearchParams,
+    triggerUpdate,
+  } = useContext(URLSearchParamsContext,);
+  const paramValue = urlSearchParams.getAll(parameterNameRef.current,);
+  const value = paramValue.length > 0 ? paramValue : initialValue;
+  const setValue = useCallback2(async (newValues) => {
+    const currentHistoryState = window.history.state;
+    if (!isHistoryState(currentHistoryState,)) return;
+    const newUrl = new URL(window.location.href,);
+    newUrl.searchParams.delete(parameterNameRef.current,);
+    for (const newValue of newValues) {
+      newUrl.searchParams.append(parameterNameRef.current, newValue,);
+    }
+    await yieldToMain({
+      continueAfter: 'paint',
+    },);
+    replaceHistoryState(currentHistoryState, newUrl.toString(),);
+    triggerUpdate();
+  }, [triggerUpdate,],);
+  return [value, setValue,];
+}
+function useStringQueryParam({
+  initialValue,
+  parameterName,
+},) {
+  const initialArrayValue = useMemo(() => initialValue ? [initialValue,] : EMPTY_ARRAY, [initialValue,],);
+  const [arrayValue, setArrayValue,] = useStringArrayQueryParam({
+    initialValue: initialArrayValue,
+    parameterName,
+  },);
+  const value = arrayValue[0] ?? '';
+  const setValue = useCallback2((newValue) => setArrayValue(newValue ? [newValue,] : EMPTY_ARRAY,), [setArrayValue,],);
+  return [value, setValue,];
+}
+function useCollectionReferenceQueryParam({
+  collectionId,
+  initialValue,
+  parameterName,
+},) {
+  const collectionUtils = useCollectionUtils();
+  const locale = useLocaleInfo().activeLocale ?? void 0;
+  const [slug, setSlug,] = useStringQueryParam({
+    initialValue: '',
+    parameterName,
+  },);
+  const id3 = useMemo(() => {
+    if (!slug) return initialValue || void 0;
+    const cache2 = getCollectionUtilsCache2(collectionUtils, collectionId,);
+    return use(cache2.getRecordIdBySlug(slug, locale,),);
+  }, [collectionUtils, collectionId, initialValue, locale, slug,],);
+  const setId = useCallback2(async (newId) => {
+    const cache2 = getCollectionUtilsCache2(collectionUtils, collectionId,);
+    const newSlug = await cache2.getSlugByRecordId(newId, locale,);
+    if (typeof newSlug === 'string') {
+      await setSlug(newSlug,);
+    }
+  }, [collectionUtils, collectionId, locale, setSlug,],);
+  return [id3, setId,];
+}
+function useMultiCollectionReferenceQueryParam({
+  collectionId,
+  initialValue,
+  parameterName,
+},) {
+  const collectionUtils = useCollectionUtils();
+  const locale = useLocaleInfo().activeLocale ?? void 0;
+  const [slugs, setSlugs,] = useStringArrayQueryParam({
+    initialValue: [],
+    parameterName,
+  },);
+  const ids = useMemo(() => {
+    if (slugs.length === 0) return initialValue;
+    const cache2 = getCollectionUtilsCache2(collectionUtils, collectionId,);
+    const maybePromises = slugs.map((slug) => cache2.getRecordIdBySlug(slug, locale,));
+    return useAll(maybePromises,).filter(isString,);
+  }, [collectionUtils, collectionId, initialValue, locale, slugs,],);
+  const setIds = useCallback2(async (newIds) => {
+    const cache2 = getCollectionUtilsCache2(collectionUtils, collectionId,);
+    const newSlugs = await Promise.all(newIds.map((id3) => cache2.getSlugByRecordId(id3, locale,)),);
+    await setSlugs(newSlugs.filter(isString,),);
+  }, [collectionUtils, collectionId, locale, setSlugs,],);
+  return [ids, setIds,];
+}
+function getCollectionUtilsCache2(collectionUtils, collectionId,) {
+  const collectionUtilsCache = collectionUtils?.get(collectionId,);
+  assert(collectionUtilsCache, 'CollectionUtilsCache not found for collectionId:', collectionId,);
+  return collectionUtilsCache;
+}
+function use(maybePromise,) {
+  if (isPromise(maybePromise,)) throw maybePromise;
+  return maybePromise;
+}
+function useAll(maybePromises,) {
+  for (const maybePromise of maybePromises) {
+    if (isPromise(maybePromise,)) {
+      throw Promise.all(maybePromises,);
+    }
+  }
+  return maybePromises;
 }
 function useRouteAnchor(routeId, {
   elementId,
@@ -21284,6 +21367,7 @@ var FormInputStyleVariableNames = /* @__PURE__ */ ((FormInputStyleVariableNames2
   FormInputStyleVariableNames2['BorderRadiusTopRight'] = '--framer-input-border-radius-top-right';
   FormInputStyleVariableNames2['BorderRadiusBottomRight'] = '--framer-input-border-radius-bottom-right';
   FormInputStyleVariableNames2['BorderRadiusBottomLeft'] = '--framer-input-border-radius-bottom-left';
+  FormInputStyleVariableNames2['CornerShape'] = '--framer-input-corner-shape';
   FormInputStyleVariableNames2['BorderColor'] = '--framer-input-border-color';
   FormInputStyleVariableNames2['BorderTopWidth'] = '--framer-input-border-top-width';
   FormInputStyleVariableNames2['BorderRightWidth'] = '--framer-input-border-right-width';
@@ -21397,6 +21481,7 @@ var inputBorderCSS = /* @__PURE__ */ (() => [`.${inputWrapperClassName}:after {
         border-top-right-radius: var(${Var.BorderRadiusTopRight});
         border-bottom-right-radius: var(${Var.BorderRadiusBottomRight});
         border-bottom-left-radius: var(${Var.BorderRadiusBottomLeft});
+        corner-shape: var(${Var.CornerShape});
         border-color: var(${Var.BorderColor});
         border-top-width: var(${Var.BorderTopWidth});
         border-right-width: var(${Var.BorderRightWidth});
@@ -21404,7 +21489,7 @@ var inputBorderCSS = /* @__PURE__ */ (() => [`.${inputWrapperClassName}:after {
         border-left-width: var(${Var.BorderLeftWidth});
         border-style: var(${Var.BorderStyle});
         transition: var(${Var.FocusedTransition});
-        transition-property: border-color, border-width, border-style, border-top-left-radius, border-top-right-radius, border-bottom-right-radius, border-bottom-left-radius;
+        transition-property: border-color, border-width, border-style, border-top-left-radius, border-top-right-radius, border-bottom-right-radius, border-bottom-left-radius, corner-shape;
     }`,])();
 var customValidityKey = 'customError';
 var validKey = 'valid';
@@ -21585,6 +21670,7 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
         ul.framer-text {
             background-color: var(--framer-blockquote-text-background-color, var(--framer-text-background-color, initial));
             border-radius: var(--framer-blockquote-text-background-radius, var(--framer-text-background-radius, initial));
+            corner-shape: var(--framer-blockquote-text-background-corner-shape, var(--framer-text-background-corner-shape, initial));
             padding: var(--framer-blockquote-text-background-padding, var(--framer-text-background-padding, initial));
         }
     `, /* css */
@@ -21739,6 +21825,7 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             /* Don't inherit background styles from any parent text style. */
             background-color: initial;
             border-radius: var(--framer-link-text-background-radius, initial);
+            corner-shape: var(--framer-link-text-background-corner-shape, initial);
             padding: var(--framer-link-text-background-padding, initial);
         }
     `,
@@ -21818,6 +21905,7 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             font-size: calc(var(--framer-link-hover-font-size, var(--framer-blockquote-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-link-hover-text-transform, var(--framer-blockquote-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none))));
             border-radius: var(--framer-link-hover-text-background-radius, var(--framer-link-text-background-radius, var(--framer-text-background-radius, initial)));
+            corner-shape: var(--framer-link-hover-text-background-corner-shape, var(--framer-link-text-background-corner-shape, var(--framer-text-background-corner-shape, initial)));
             padding: var(--framer-link-hover-text-background-padding, var(--framer-link-text-background-padding, var(--framer-text-background-padding, initial)));
         }
     `, /* css */
@@ -21896,6 +21984,7 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             font-size: calc(var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-link-current-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none)));
             border-radius: var(--framer-link-current-text-background-radius, var(--framer-link-text-background-radius, initial));
+            corner-shape: var(--framer-link-current-text-background-corner-shape, var(--framer-link-text-background-corner-shape, initial));
             padding: var(--framer-link-current-text-background-padding, var(--framer-link-text-background-padding, initial));
         }
     `, /* css */
@@ -21990,6 +22079,7 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             font-size: calc(var(--framer-link-hover-font-size, var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)))) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-link-hover-text-transform, var(--framer-link-current-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none))));
             border-radius: var(--framer-link-hover-text-background-radius, var(--framer-link-current-text-background-radius, var(--framer-link-text-background-radius, initial)));
+            corner-shape: var(--framer-link-hover-text-background-corner-shape, var(--framer-link-current-text-background-corner-shape, var(--framer-link-text-background-corner-shape, initial)));
             padding: var(--framer-link-hover-text-background-padding, var(--framer-link-current-text-background-padding, var(--framer-link-text-background-padding, initial)));
         }
     `, /* css */
@@ -22095,6 +22185,7 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             --framer-font-open-type-features: normal;
             --framer-text-background-color: initial;
             --framer-text-background-radius: initial;
+            --framer-text-background-corner-shape: initial;
             --framer-text-background-padding: initial;
         }
     `, /* css */
@@ -24405,6 +24496,10 @@ function _injectRuntime(injectedRuntime,) {
   Object.assign(implementation, injectedRuntime,);
   isRuntimeInjected = true;
 }
+var cornerPropertiesToInherit = {
+  borderRadius: 'inherit',
+  cornerShape: 'inherit',
+};
 function assert2(condition, ...msg) {
   if (condition) return;
   const e = Error('Assertion Error' + (msg.length > 0 ? ': ' + msg.join(' ',) : ''),);
@@ -25251,14 +25346,14 @@ function getSrcSet(nodeFixedSize, image, source,) {
     };
   }
 }
-var wrapperStyle = {
+var wrapperStyle = /* @__PURE__ */ (() => ({
   position: 'absolute',
-  borderRadius: 'inherit',
+  ...cornerPropertiesToInherit,
   top: 0,
   right: 0,
   bottom: 0,
   left: 0,
-};
+}))();
 function getPlaceholderStyle() {
   return {
     backgroundRepeat: 'repeat',
@@ -25288,7 +25383,7 @@ function getImageStyle(image,) {
     display: 'block',
     width: '100%',
     height: '100%',
-    borderRadius: 'inherit',
+    ...cornerPropertiesToInherit,
     objectPosition: cssObjectPosition(image.positionX, image.positionY,),
     objectFit: cssObjectFit(image.fit,),
   };
@@ -25374,7 +25469,7 @@ function CanvasImage({
     ref: wrapperRef,
     style: {
       display: 'contents',
-      borderRadius: 'inherit',
+      ...cornerPropertiesToInherit,
     },
   },);
 }
@@ -25395,7 +25490,7 @@ function OptimizedCanvasImage({
     ref: wrapperRef,
     style: {
       display: 'contents',
-      borderRadius: 'inherit',
+      ...cornerPropertiesToInherit,
     },
   },);
 }
@@ -25518,7 +25613,7 @@ function Border(props,) {
     right: 0,
     top: 0,
     bottom: 0,
-    borderRadius: 'inherit',
+    ...cornerPropertiesToInherit,
     pointerEvents: 'none',
   };
   if (props.border) {
@@ -26355,6 +26450,14 @@ function getStyleForFrameProps(props,) {
         style2.top = '50%';
       }
     }
+  }
+  const {
+    cornerShape,
+  } = props;
+  if (isMotionValue(cornerShape,)) {
+    style2.cornerShape = transformValue(() => `superellipse(${cornerShape.get()})`);
+  } else if (cornerShape !== void 0) {
+    style2.cornerShape = `superellipse(${cornerShape})`;
   }
   extractStyleFromProps(props, 'size', style2,);
   extractStyleFromProps(props, 'width', style2,);
@@ -30688,6 +30791,7 @@ var frameWithMotionPropsFields = [
   'position',
   'border',
   'borderRadius',
+  'cornerShape',
   'shadow',
   'size',
 ];
@@ -49922,6 +50026,8 @@ var styles = /* @__PURE__ */ (() => [
     ),
     borderBottomLeftRadius: css2.variable('--framer-input-border-radius-bottom-left',/* BorderRadiusBottomLeft */
     ),
+    cornerShape: css2.variable('--framer-input-corner-shape',/* CornerShape */
+    ),
     background: css2.variable('--framer-input-background',/* Background */
     ),
     transition: css2.variable('--framer-input-focused-transition',/* FocusedTransition */
@@ -50073,6 +50179,8 @@ var styles2 = /* @__PURE__ */ (() => [
     backgroundColor: '#fff',
     background: '--framer-input-background',
     borderRadius,
+    cornerShape: css2.variable('--framer-input-corner-shape',/* CornerShape */
+    ),
     boxShadow: '--framer-input-box-shadow',
     display: 'flex',
     justifyContent: 'center',
@@ -50088,6 +50196,8 @@ var styles2 = /* @__PURE__ */ (() => [
     background: 'transparent',
     borderColor: css2.variable('--framer-input-border-color', 'transparent',),
     borderRadius,
+    cornerShape: css2.variable('--framer-input-corner-shape',/* CornerShape */
+    ),
     borderStyle: '--framer-input-border-style',
     borderWidth: inputBorderAllSides,
     boxSizing: 'border-box',
@@ -50270,6 +50380,8 @@ var styles3 = /* @__PURE__ */ (() => [
     borderBottomRightRadius: css2.variable('--framer-input-border-radius-bottom-right',/* BorderRadiusBottomRight */
     ),
     borderBottomLeftRadius: css2.variable('--framer-input-border-radius-bottom-left',/* BorderRadiusBottomLeft */
+    ),
+    cornerShape: css2.variable('--framer-input-corner-shape',/* CornerShape */
     ),
     boxShadow: css2.variable('--framer-input-box-shadow',/* BoxShadow */
     ),
@@ -55063,6 +55175,7 @@ export {
   useAnimationControls,
   useAnimationFrame,
   useBreakpointVariants,
+  useCollectionReferenceQueryParam,
   useComponentViewport,
   useComposedRefs,
   useConstant2 as useConstant,
@@ -55104,6 +55217,7 @@ export {
   useMotionTemplate,
   useMotionValue,
   useMotionValueEvent,
+  useMultiCollectionReferenceQueryParam,
   useNavigate,
   useNavigation,
   useObserveData,
