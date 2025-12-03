@@ -11337,7 +11337,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.BPRZY6W6.mjs
+// /:https://app.framerstatic.com/framer.JDBOK434.mjs
 
 import React42 from 'react';
 import { useDeferredValue, useSyncExternalStore, } from 'react';
@@ -26339,8 +26339,9 @@ var LinearGradient = {
   toCSS: (linearGradient, overrideAngle, getStopValue,) => {
     const stops = gradientColorStops(linearGradient, linearGradient.alpha,);
     const angle = overrideAngle !== void 0 ? overrideAngle : linearGradient.angle;
+    const roundedAngle = Math.round(angle,);
     const cssStops = stops.map((stop) => `${getStopValue?.(stop.value,) ?? stop.value} ${stop.position * 100}%`);
-    return `linear-gradient(${angle}deg, ${cssStops.join(', ',)})`;
+    return `linear-gradient(${roundedAngle}deg, ${cssStops.join(', ',)})`;
   },
 };
 var radialGradientKeys = ['widthFactor', 'heightFactor', 'centerAnchorX', 'centerAnchorY', 'alpha',];
