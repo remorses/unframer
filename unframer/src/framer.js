@@ -14,7 +14,7 @@ import {
   __toESM,
 } from './framer-chunks/chunk-DBJCHRFG.js';
 
-// /:https://app.framerstatic.com/chunk-SMTZCOHA.mjs
+// /:https://app.framerstatic.com/chunk-QUOCKOA6.mjs
 import { createContext, } from 'react';
 import { useEffect, useLayoutEffect, } from 'react';
 import * as React from 'react';
@@ -313,7 +313,7 @@ function createRenderBatcher(scheduleNextBatch, allowKeepAlive,) {
     isProcessing: false,
   };
   const flagRunNextFrame = () => runNextFrame = true;
-  const steps22 = stepsOrder.reduce((acc, key7,) => {
+  const steps2 = stepsOrder.reduce((acc, key7,) => {
     acc[key7] = createRenderStep(flagRunNextFrame, allowKeepAlive ? key7 : void 0,);
     return acc;
   }, {},);
@@ -326,7 +326,7 @@ function createRenderBatcher(scheduleNextBatch, allowKeepAlive,) {
     preRender,
     render,
     postRender,
-  } = steps22;
+  } = steps2;
   const processBatch = () => {
     const timestamp = MotionGlobalConfig.useManualTiming ? state.timestamp : performance.now();
     runNextFrame = false;
@@ -357,7 +357,7 @@ function createRenderBatcher(scheduleNextBatch, allowKeepAlive,) {
     }
   };
   const schedule = stepsOrder.reduce((acc, key7,) => {
-    const step2 = steps22[key7];
+    const step2 = steps2[key7];
     acc[key7] = (process2, keepAlive = false, immediate = false,) => {
       if (!runNextFrame) wake();
       return step2.schedule(process2, keepAlive, immediate,);
@@ -366,14 +366,14 @@ function createRenderBatcher(scheduleNextBatch, allowKeepAlive,) {
   }, {},);
   const cancel = (process2) => {
     for (let i = 0; i < stepsOrder.length; i++) {
-      steps22[stepsOrder[i]].cancel(process2,);
+      steps2[stepsOrder[i]].cancel(process2,);
     }
   };
   return {
     schedule,
     cancel,
     state,
-    steps: steps22,
+    steps: steps2,
   };
 }
 var {
@@ -8220,6 +8220,7 @@ function createProjectionNode2({
       };
       this.eventHandlers = /* @__PURE__ */ new Map();
       this.hasTreeAnimated = false;
+      this.layoutVersion = 0;
       this.updateScheduled = false;
       this.scheduleUpdate = () => this.update();
       this.projectionUpdateScheduled = false;
@@ -8243,6 +8244,7 @@ function createProjectionNode2({
         }
       };
       this.resolvedRelativeTargetAt = 0;
+      this.linkedParentVersion = 0;
       this.hasProjected = false;
       this.isVisible = true;
       this.animationProgress = 0;
@@ -8510,6 +8512,7 @@ function createProjectionNode2({
       }
       const prevLayout = this.layout;
       this.layout = this.measure(false,);
+      this.layoutVersion++;
       this.layoutCorrected = createBox();
       this.isLayoutDirty = false;
       this.projectionDelta = void 0;
@@ -8683,17 +8686,15 @@ function createProjectionNode2({
       } = this.options;
       if (!this.layout || !(layout2 || layoutId)) return;
       this.resolvedRelativeTargetAt = frameData.timestamp;
+      const relativeParent = this.getClosestProjectingParent();
+      if (relativeParent && this.linkedParentVersion !== relativeParent.layoutVersion && !relativeParent.options.layoutRoot) {
+        this.removeRelativeTarget();
+      }
       if (!this.targetDelta && !this.relativeTarget) {
-        const relativeParent = this.getClosestProjectingParent();
-        if (relativeParent && relativeParent.layout && this.animationProgress !== 1) {
-          this.relativeParent = relativeParent;
-          this.forceRelativeParentToResolveTarget();
-          this.relativeTarget = createBox();
-          this.relativeTargetOrigin = createBox();
-          calcRelativePosition(this.relativeTargetOrigin, this.layout.layoutBox, relativeParent.layout.layoutBox,);
-          copyBoxInto(this.relativeTarget, this.relativeTargetOrigin,);
+        if (relativeParent && relativeParent.layout) {
+          this.createRelativeTarget(relativeParent, this.layout.layoutBox, relativeParent.layout.layoutBox,);
         } else {
-          this.relativeParent = this.relativeTarget = void 0;
+          this.removeRelativeTarget();
         }
       }
       if (!this.relativeTarget && !this.targetDelta) return;
@@ -8716,17 +8717,11 @@ function createProjectionNode2({
       }
       if (this.attemptToResolveRelativeTarget) {
         this.attemptToResolveRelativeTarget = false;
-        const relativeParent = this.getClosestProjectingParent();
         if (
           relativeParent && Boolean(relativeParent.resumingFrom,) === Boolean(this.resumingFrom,) && !relativeParent.options.layoutScroll &&
           relativeParent.target && this.animationProgress !== 1
         ) {
-          this.relativeParent = relativeParent;
-          this.forceRelativeParentToResolveTarget();
-          this.relativeTarget = createBox();
-          this.relativeTargetOrigin = createBox();
-          calcRelativePosition(this.relativeTargetOrigin, this.target, relativeParent.target,);
-          copyBoxInto(this.relativeTarget, this.relativeTargetOrigin,);
+          this.createRelativeTarget(relativeParent, this.target, relativeParent.target,);
         } else {
           this.relativeParent = this.relativeTarget = void 0;
         }
@@ -8747,6 +8742,18 @@ function createProjectionNode2({
     }
     isProjecting() {
       return Boolean((this.relativeTarget || this.targetDelta || this.options.layoutRoot) && this.layout,);
+    }
+    createRelativeTarget(relativeParent, layout2, parentLayout,) {
+      this.relativeParent = relativeParent;
+      this.linkedParentVersion = relativeParent.layoutVersion;
+      this.forceRelativeParentToResolveTarget();
+      this.relativeTarget = createBox();
+      this.relativeTargetOrigin = createBox();
+      calcRelativePosition(this.relativeTargetOrigin, layout2, parentLayout,);
+      copyBoxInto(this.relativeTarget, this.relativeTargetOrigin,);
+    }
+    removeRelativeTarget() {
+      this.relativeParent = this.relativeTarget = void 0;
     }
     calcProjection() {
       const lead = this.getLead();
@@ -11337,7 +11344,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.JDBOK434.mjs
+// /:https://app.framerstatic.com/framer.6GMM65EK.mjs
 
 import React42 from 'react';
 import { useDeferredValue, useSyncExternalStore, } from 'react';
@@ -50453,7 +50460,6 @@ function useEscToClose(isOpen, close,) {
     return () => window.removeEventListener('keyup', handleKeyDown,);
   }, [isOpen, close,],);
 }
-var steps2 = [512, 1024, 2048, 4096,];
 function calculateImageWidth(aspectRatio2, maxWidth, totalHorizontalPadding, totalVerticalPadding,) {
   const availableHeight = window.innerHeight - totalVerticalPadding;
   const availableWidth = Math.min(window.innerWidth - totalHorizontalPadding, maxWidth,);
@@ -50468,6 +50474,7 @@ function optimisticallyDecodeImage(image, {
   const i = new window.Image();
   i.src = image.src;
   i.srcset = image.srcSet;
+  i.sizes = image.sizes || '';
   i.width = width;
   i.height = height;
   return i.decode();
@@ -50498,12 +50505,7 @@ function createImageWithSrcSet(lightbox, background,) {
   return {
     ...background,
     sizes: `min(100vw, ${lightbox.maxWidth - getTotalHorizontalPadding(lightbox,)}px)`,
-    // Use all steps since the lightbox can scale up and down with the viewport.
-    srcSet: steps2.map((size) => {
-      const src = new URL(base,);
-      src.searchParams.set('scale-down-to', size.toString(),);
-      return `${src.toString()} ${size}w`;
-    },).join(', ',),
+    srcSet: getSrcSet(background.nodeFixedSize, background, background.src,).srcSet,
   };
 }
 var distortionTransforms = /* @__PURE__ */ (() => ({
@@ -51717,7 +51719,7 @@ function useTextEffect(config, ref, preview,) {
         },);
       }
       case 'onScrollTarget': {
-        const element = target?.ref.current;
+        const element = target?.ref?.current;
         if (!element) return;
         return inView(element, play, {
           amount: threshold ?? 0,
