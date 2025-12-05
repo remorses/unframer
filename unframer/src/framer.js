@@ -11344,7 +11344,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.6GMM65EK.mjs
+// /:https://app.framerstatic.com/framer.CK6WGF7S.mjs
 
 import React42 from 'react';
 import { useDeferredValue, useSyncExternalStore, } from 'react';
@@ -11706,16 +11706,16 @@ var require_eventemitter3 = __commonJS({
       Events.prototype = /* @__PURE__ */ Object.create(null,);
       if (!new Events().__proto__) prefix3 = false;
     }
-    function EE(fn, context, once,) {
+    function EE(fn, context, once2,) {
       this.fn = fn;
       this.context = context;
-      this.once = once || false;
+      this.once = once2 || false;
     }
-    function addListener(emitter, event, fn, context, once,) {
+    function addListener(emitter, event, fn, context, once2,) {
       if (typeof fn !== 'function') {
         throw new TypeError('The listener must be a function',);
       }
-      var listener = new EE(fn, context || emitter, once,),
+      var listener = new EE(fn, context || emitter, once2,),
         evt = prefix3 ? prefix3 + event : event;
       if (!emitter._events[evt]) emitter._events[evt] = listener, emitter._eventsCount++;
       else if (!emitter._events[evt].fn) emitter._events[evt].push(listener,);
@@ -11820,10 +11820,10 @@ var require_eventemitter3 = __commonJS({
     EventEmitter2.prototype.on = function on(event, fn, context,) {
       return addListener(this, event, fn, context, false,);
     };
-    EventEmitter2.prototype.once = function once(event, fn, context,) {
+    EventEmitter2.prototype.once = function once2(event, fn, context,) {
       return addListener(this, event, fn, context, true,);
     };
-    EventEmitter2.prototype.removeListener = function removeListener(event, fn, context, once,) {
+    EventEmitter2.prototype.removeListener = function removeListener(event, fn, context, once2,) {
       var evt = prefix3 ? prefix3 + event : event;
       if (!this._events[evt]) return this;
       if (!fn) {
@@ -11832,12 +11832,12 @@ var require_eventemitter3 = __commonJS({
       }
       var listeners = this._events[evt];
       if (listeners.fn) {
-        if (listeners.fn === fn && (!once || listeners.once) && (!context || listeners.context === context)) {
+        if (listeners.fn === fn && (!once2 || listeners.once) && (!context || listeners.context === context)) {
           clearEvent(this, evt,);
         }
       } else {
         for (var i = 0, events = [], length = listeners.length; i < length; i++) {
-          if (listeners[i].fn !== fn || once && !listeners[i].once || context && listeners[i].context !== context) {
+          if (listeners[i].fn !== fn || once2 && !listeners[i].once || context && listeners[i].context !== context) {
             events.push(listeners[i],);
           }
         }
@@ -15064,6 +15064,20 @@ function useStringQueryParam({
   },);
   const value = arrayValue[0] ?? '';
   const setValue = useCallback2((newValue) => setArrayValue(newValue ? [newValue,] : EMPTY_ARRAY,), [setArrayValue,],);
+  return [value, setValue,];
+}
+var BOOLEAN_YES = 'yes';
+var BOOLEAN_NO = 'no';
+function useBooleanQueryParam({
+  initialValue,
+  parameterName,
+},) {
+  const [stringValue, setStringValue,] = useStringQueryParam({
+    initialValue: '',
+    parameterName,
+  },);
+  const value = stringValue ? stringValue === BOOLEAN_YES : initialValue;
+  const setValue = useCallback2((newValue) => setStringValue(newValue ? BOOLEAN_YES : BOOLEAN_NO,), [setStringValue,],);
   return [value, setValue,];
 }
 function useCollectionReferenceQueryParam({
@@ -18517,7 +18531,7 @@ var EventEmitter = class {
   unique(eventName, fn,) {
     this.addEventListener(eventName, fn, false, true, this,);
   }
-  addEventListener(eventName, fn, once, unique, context,) {
+  addEventListener(eventName, fn, once2, unique, context,) {
     if (unique) {
       for (const name of this._emitter.eventNames()) {
         if (fn === this._emitter.listeners(name,)) {
@@ -18525,7 +18539,7 @@ var EventEmitter = class {
         }
       }
     }
-    if (once === true) {
+    if (once2 === true) {
       this._emitter.once(eventName, fn, context,);
     } else {
       this._emitter.addListener(eventName, fn, context,);
@@ -38737,11 +38751,7 @@ function findInsertReferece(snippetId, sorting, start2, end,) {
 }
 function useLoadSnippets() {
   const loadSnippetsModule = useSnippets();
-  const {
-    customCodeSiteSettings,
-  } = useLibraryFeatures();
   return useCallback2(async (pageId, pathVariables, activeLocale, isInitialNavigation,) => {
-    if (!customCodeSiteSettings) return;
     if (!loadSnippetsModule) return;
     const mainTag = document.getElementById(mainTagId,);
     const isGeneratedPage = mainTag && mainTag.dataset[generatedPageDatasetKey] !== void 0;
@@ -38757,7 +38767,7 @@ function useLoadSnippets() {
       const sorting = snippetsSorting[placement];
       await loadSnippets(placement, snippetsForPlacement, sorting,);
     }
-  }, [loadSnippetsModule, customCodeSiteSettings,],);
+  }, [loadSnippetsModule,],);
 }
 function isSamePage(a, b,) {
   if (a.routeId !== b.routeId) return false;
@@ -47342,16 +47352,6 @@ var withVariantFX = (Component18) =>
   },);
 var WindowContext = /* @__PURE__ */ React42.createContext(void 0,);
 var useProvidedWindow = () => React42.useContext(WindowContext,);
-function isDesignDefinition(d,) {
-  return d.type === 'master';
-}
-function isOverride(d,) {
-  return d.type === 'override';
-}
-function isReactDefinition(d,) {
-  return d.type !== 'master';
-}
-var localPackageFallbackIdentifier = '|local|';
 var safeFonts = {
   Arial: {
     Regular: {
@@ -49714,207 +49714,6 @@ function CustomProperties({
     style: customProperties,
     children,
   },);
-}
-var DeprecatedComponentContainer = /* @__PURE__ */ (() => {
-  var _a;
-  return _a = class extends Layer {
-    constructor() {
-      super(...arguments,);
-      __publicField(this, 'state', {},);
-      __publicField(this, 'setElement', (element) => {
-        if (this.props.innerRef) {
-          this.props.innerRef.current = element;
-        }
-        this.setLayerElement(element,);
-      },);
-    }
-    componentDidCatch(error, info,) {
-      let stack = info.componentStack?.split('\n',).filter((line) => line.length !== 0);
-      let currentIndex = 0;
-      if (stack) {
-        for (const line of stack) {
-          if (line.startsWith(`    in ${this.constructor.name}`,)) {
-            break;
-          }
-          currentIndex++;
-        }
-        stack = stack.slice(0, currentIndex,);
-      }
-      this.setState({
-        lastError: {
-          children: this.props.children,
-          name: error.name,
-          message: error.message,
-          componentStack: stack,
-        },
-      },);
-    }
-    renderErrorPlaceholder(error,) {
-      const {
-        RenderPlaceholder,
-      } = runtime;
-      return /* @__PURE__ */ jsx(FrameWithMotion, {
-        ...this.props,
-        background: null,
-        children: /* @__PURE__ */ jsx(RenderPlaceholder, {
-          error,
-        },),
-      },);
-    }
-    render() {
-      countNodeRender();
-      let {
-        children,
-      } = this.props;
-      const {
-        componentIdentifier,
-      } = this.props;
-      const {
-        lastError: error,
-      } = this.state;
-      const noChildren = !children || Array.isArray(children,) && children.filter((c) => c).length === 0;
-      if (noChildren) {
-        const errorComponent = runtime.componentLoader.errorForIdentifier(componentIdentifier,);
-        if (errorComponent) {
-          const title = `Error in ${errorComponent.file}`;
-          const message = errorComponent.error;
-          return this.renderErrorPlaceholder({
-            title,
-            message,
-          },);
-        }
-      }
-      if (error && error.children === children) {
-        const component = runtime.componentLoader.componentForIdentifier(componentIdentifier,);
-        const file = component ? component.file : '???';
-        const title = `Error in ${file}`;
-        const message = error.message;
-        return this.renderErrorPlaceholder({
-          title,
-          message,
-        },);
-      }
-
-      asRecord(safeWindow,)['__checkComponentBudget__']?.();
-      let frameProps = this.props;
-      if (RenderTarget.current() !== RenderTarget.canvas) {
-        const {
-          left,
-          right,
-          top,
-          bottom,
-          center,
-          centerX,
-          centerY,
-          aspectRatio: aspectRatio2,
-          parentSize,
-          width,
-          height,
-          rotation,
-          opacity: _opacity,
-          visible,
-          _constraints,
-          _initialStyle,
-          name,
-          positionSticky,
-          positionStickyTop,
-          positionStickyRight,
-          positionStickyBottom,
-          positionStickyLeft,
-          // Remove the children and the componentIdentifier from the props passed into the component
-          componentIdentifier: originalComponentIdentifier,
-          children: originalChildren,
-          style: style2,
-          duplicatedFrom,
-          widthType,
-          heightType,
-          ...childProps
-        } = frameProps;
-        children = React42.Children.map(originalChildren, (child) => {
-          if (!isReactChild(child,) || !isReactElement(child,)) {
-            return child;
-          }
-          if (!isPageOrScroll(originalComponentIdentifier,)) {
-            return /* @__PURE__ */ jsx(LayoutGroup, {
-              inherit: false,
-              id: this.props.__layoutId,
-              children: /* @__PURE__ */ jsx(AutomaticLayoutIds, {
-                enabled: false,
-                children: React42.cloneElement(child, childProps,),
-              },),
-            },);
-          }
-          return React42.cloneElement(child, childProps,);
-        },);
-        frameProps = {
-          style: style2,
-          _constraints,
-          _initialStyle,
-          left,
-          right,
-          top,
-          bottom,
-          center,
-          centerX,
-          centerY,
-          aspectRatio: aspectRatio2,
-          parentSize,
-          width,
-          height,
-          rotation,
-          visible,
-          name,
-          duplicatedFrom,
-          id: frameProps.id,
-          layoutId: this.props.__layoutId,
-          widthType,
-          heightType,
-          positionSticky,
-          positionStickyTop,
-          positionStickyRight,
-          positionStickyBottom,
-          positionStickyLeft,
-        };
-      }
-      return (
-        /* The background should come before the frameProps. It looks like there never should be a background in frameProps,
-         * but published design components can contain an old version of the presentation tree that expects the background
-         * that is passed to be rendered here
-         * See the stackBackgroundTest.tsx integration test for an example of such a case
-         */
-        /* @__PURE__ */
-        jsx(ComponentContainerContext.Provider, {
-          value: true,
-          children: /* @__PURE__ */ jsx(FrameWithMotion, {
-            'data-framer-component-container': true,
-            background: null,
-            overflow: 'visible',
-            ref: this.setElement,
-            ...frameProps,
-            children,
-          },),
-        },)
-      );
-    }
-  },
-    __publicField(_a, 'supportsConstraints', true,),
-    __publicField(_a, 'defaultComponentContainerProps', {
-      style: {},
-      visible: true,
-      componentIdentifier: '',
-    },),
-    __publicField(_a, 'defaultProps', {
-      ...Layer.defaultProps,
-      ..._a.defaultComponentContainerProps,
-    },),
-    __publicField(_a, 'contextType', ComponentContainerContext,),
-    _a;
-})();
-function isPageOrScroll(identifier,) {
-  if (!identifier) return false;
-  if (identifier === 'framer/Page') return true;
-  if (identifier === 'framer/Scroll') return true;
-  return false;
 }
 var passwordManagerIgnoreDataProps = {
   // 1Password
@@ -54840,7 +54639,6 @@ export {
   degrees,
   degreesToRadians,
   delay,
-  DeprecatedComponentContainer,
   DeprecatedFrameWithEvents,
   DeprecatedLayoutGroupContext,
   DeprecatedLayoutGroupContext as LayoutGroupContext,
@@ -54955,7 +54753,6 @@ export {
   isBrowser,
   isCSSVariableName,
   isCSSVariableToken,
-  isDesignDefinition,
   isDragActive,
   isDragging,
   isEasingArray,
@@ -54973,9 +54770,7 @@ export {
   isNumericalString,
   isObject,
   isOfAnnotatedType,
-  isOverride,
   isPrimaryPointer,
-  isReactDefinition,
   isRelativeNumber,
   isShallowEqualArray,
   isStaticRenderer,
@@ -55001,7 +54796,6 @@ export {
   Link,
   loadFont,
   loadJSON,
-  localPackageFallbackIdentifier,
   localShadowFrame,
   m,
   MainLoop,
@@ -55177,6 +54971,7 @@ export {
   useAnimation,
   useAnimationControls,
   useAnimationFrame,
+  useBooleanQueryParam,
   useBreakpointVariants,
   useCollectionReferenceQueryParam,
   useComponentViewport,
