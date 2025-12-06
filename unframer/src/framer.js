@@ -11344,7 +11344,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.CK6WGF7S.mjs
+// /:https://app.framerstatic.com/framer.4YPBZJPZ.mjs
 
 import React42 from 'react';
 import { useDeferredValue, useSyncExternalStore, } from 'react';
@@ -15905,99 +15905,7 @@ function patchRoutesForABTesting(routes, initialRouteId,) {
   removeRoutesVariants(routes,);
   return resolvedInitialRouteId;
 }
-var mainTagId = 'main';
-var generatedPageDatasetKey = 'framerGeneratedPage';
-var searchIndexMetaName = 'framer-search-index';
-var searchIndexMetaSelector = `meta[name="${searchIndexMetaName}"]`;
-var startOfHeadStartMarker = '<!-- Start of headStart -->';
-var endOfHeadStartMarker = '<!-- End of headStart -->';
-var startOfHeadEndMarker = '<!-- Start of headEnd -->';
-var endOfHeadEndMarker = '<!-- End of headEnd -->';
-var startOfBodyStartMarker = '<!-- Start of bodyStart -->';
-var endOfBodyStartMarker = '<!-- End of bodyStart -->';
-var startOfBodyEndMarker = '<!-- Start of bodyEnd -->';
-var endOfBodyEndMarker = '<!-- End of bodyEnd -->';
-var LibraryFeaturesContext = /* @__PURE__ */ React42.createContext(void 0,);
-LibraryFeaturesContext.displayName = 'LibraryFeaturesContext';
-var LibraryFeaturesProvider = /* @__PURE__ */ (() => LibraryFeaturesContext.Provider)();
-var useLibraryFeatures = () => {
-  const context = React42.useContext(LibraryFeaturesContext,);
-  return context ?? {};
-};
-async function insertHTML(html, referenceNode, position = 'beforeend',) {
-  let insertionParent, insertionPoint;
-  switch (position) {
-    case 'beforebegin':
-      assert(referenceNode.parentNode, 'Can\'t use \'beforebegin\' with a referenceNode at the top level',);
-      insertionParent = referenceNode.parentNode;
-      insertionPoint = referenceNode;
-      break;
-    case 'afterend':
-      assert(referenceNode.parentNode, 'Can\'t use \'afterend\' with a referenceNode at the top level',);
-      insertionParent = referenceNode.parentNode;
-      insertionPoint = referenceNode.nextSibling;
-      break;
-    case 'afterbegin':
-      insertionParent = referenceNode;
-      insertionPoint = referenceNode.firstChild;
-      break;
-    case 'beforeend':
-      insertionParent = referenceNode;
-      insertionPoint = null;
-      break;
-    default:
-      assertNever(position,);
-  }
-  const range = document.createRange();
-  range.selectNodeContents(insertionParent,);
-  const fragment = range.createContextualFragment(html,);
-  await pump(fragment, insertionParent, insertionPoint,);
-}
-async function pump(sourceNode, targetParent, beforeNode,) {
-  for (let node = sourceNode.firstChild; node; node = node.nextSibling) {
-    if (node instanceof HTMLScriptElement) {
-      const needsWait = handleScript(node, targetParent, beforeNode,);
-      if (needsWait !== void 0) {
-        await needsWait;
-      }
-      continue;
-    }
-    const clone = node.cloneNode(false,);
-    targetParent.insertBefore(clone, beforeNode,);
-    if (node.firstChild) {
-      await pump(node, clone, null,);
-    }
-  }
-}
-function handleScript(node, parent, beforeNode,) {
-  const script = node.cloneNode(true,);
-  if (
-    !node.hasAttribute('src',) ||
-    // external
-    node.hasAttribute('async',) ||
-    // async
-    node.hasAttribute('defer',) ||
-    // defer
-    node.getAttribute('type',)?.toLowerCase() === 'module'
-  ) {
-    parent.insertBefore(script, beforeNode,);
-  } else {
-    return execExternalBlockingScript(script, parent, beforeNode,);
-  }
-}
-function execExternalBlockingScript(script, parent, beforeNode,) {
-  return new Promise((resolve) => {
-    script.onload = script.onerror = resolve;
-    parent.insertBefore(script, beforeNode,);
-  },);
-}
 function useMetadata(metadata,) {
-  const {
-    isInitialNavigation,
-  } = useRouter();
-  const {
-    customCodeSiteSettings,
-  } = useLibraryFeatures();
   React.useEffect(() => {
     if (metadata.robots) {
       let robotsTag = document.querySelector('meta[name="robots"]',);
@@ -16017,92 +15925,6 @@ function useMetadata(metadata,) {
       document.querySelector('meta[name="viewport"]',)?.setAttribute('content', metadata.viewport,);
     }
   }, [metadata.title, metadata.viewport,],);
-  React.useEffect(() => {
-    if (!isInitialNavigation) return;
-    if (customCodeSiteSettings) return;
-    const mainTag = document.getElementById(mainTagId,);
-    const isGeneratedPage = mainTag && mainTag.dataset[generatedPageDatasetKey] !== void 0;
-    if (isGeneratedPage) return;
-    void insertCustomHTML(
-      metadata.customHTMLHeadStart,
-      metadata.customHTMLHeadEnd,
-      metadata.customHTMLBodyStart,
-      metadata.customHTMLBodyEnd,
-    );
-  }, [],);
-}
-async function insertCustomHTML(customHTMLHeadStart, customHTMLHeadEnd, customHTMLBodyStart, customHTMLBodyEnd,) {
-  let endOfHeadStart;
-  let endOfHeadEnd;
-  let endOfBodyStart;
-  let endOfBodyEnd;
-  if (customHTMLHeadStart || customHTMLHeadEnd) {
-    const {
-      start: start2,
-      end,
-    } = findCommentMarkers(
-      document.head.childNodes,
-      customHTMLHeadStart ? endOfHeadStartMarker : void 0,
-      customHTMLHeadEnd ? endOfHeadEndMarker : void 0,
-    );
-    endOfHeadStart = start2;
-    endOfHeadEnd = end;
-  }
-  if (customHTMLBodyStart || customHTMLBodyEnd) {
-    const {
-      start: start2,
-      end,
-    } = findCommentMarkers(
-      document.body.childNodes,
-      customHTMLBodyStart ? endOfBodyStartMarker : void 0,
-      customHTMLBodyEnd ? endOfBodyEndMarker : void 0,
-    );
-    endOfBodyStart = start2;
-    endOfBodyEnd = end;
-  }
-  if (customHTMLHeadStart && endOfHeadStart) {
-    await insertHTML(customHTMLHeadStart, endOfHeadStart, 'beforebegin',);
-  }
-  if (customHTMLHeadEnd && endOfHeadEnd) {
-    await insertHTML(customHTMLHeadEnd, endOfHeadEnd, 'beforebegin',);
-  }
-  if (customHTMLBodyStart && endOfBodyStart) {
-    await insertHTML(customHTMLBodyStart, endOfBodyStart, 'beforebegin',);
-  }
-  if (customHTMLBodyEnd && endOfBodyEnd) {
-    await insertHTML(customHTMLBodyEnd, endOfBodyEnd, 'beforebegin',);
-  }
-}
-function findCommentMarkers(nodes, startMarker, endMarker,) {
-  if (!startMarker && !endMarker) {
-    return {
-      start: void 0,
-      end: void 0,
-    };
-  }
-  let start2;
-  let end;
-  let i = 0;
-  let j = nodes.length - 1;
-  while (i <= j) {
-    const startNode = nodes[i];
-    const endNode = nodes[j];
-    if (!start2 && startNode?.nodeType === Node.COMMENT_NODE && startMarker && `<!--${startNode.nodeValue}-->` === startMarker) {
-      start2 = startNode;
-      if (!endMarker) break;
-    }
-    if (!end && endNode?.nodeType === Node.COMMENT_NODE && endMarker && `<!--${endNode.nodeValue}-->` === endMarker) {
-      end = endNode;
-      if (!startMarker) break;
-    }
-    if (start2 && end) break;
-    i++;
-    j--;
-  }
-  return {
-    start: start2,
-    end,
-  };
 }
 var warningMessages = /* @__PURE__ */ new Set();
 function warnOnce2(keyMessage, ...rest) {
@@ -37236,6 +37058,13 @@ var GracefullyDegradingErrorBoundary = class extends Component2 {
     );
   }
 };
+var LibraryFeaturesContext = /* @__PURE__ */ React42.createContext(void 0,);
+LibraryFeaturesContext.displayName = 'LibraryFeaturesContext';
+var LibraryFeaturesProvider = /* @__PURE__ */ (() => LibraryFeaturesContext.Provider)();
+var useLibraryFeatures = () => {
+  const context = React42.useContext(LibraryFeaturesContext,);
+  return context ?? {};
+};
 function findAnchorElement(target, withinElement,) {
   if (target instanceof HTMLAnchorElement) {
     return target;
@@ -38588,6 +38417,18 @@ function EditorBarLauncher({
     },),
   },);
 }
+var mainTagId = 'main';
+var generatedPageDatasetKey = 'framerGeneratedPage';
+var searchIndexMetaName = 'framer-search-index';
+var searchIndexMetaSelector = `meta[name="${searchIndexMetaName}"]`;
+var startOfHeadStartMarker = '<!-- Start of headStart -->';
+var endOfHeadStartMarker = '<!-- End of headStart -->';
+var startOfHeadEndMarker = '<!-- Start of headEnd -->';
+var endOfHeadEndMarker = '<!-- End of headEnd -->';
+var startOfBodyStartMarker = '<!-- Start of bodyStart -->';
+var endOfBodyStartMarker = '<!-- End of bodyStart -->';
+var startOfBodyEndMarker = '<!-- Start of bodyEnd -->';
+var endOfBodyEndMarker = '<!-- End of bodyEnd -->';
 var SnippetsContext = /* @__PURE__ */ (() => React42.createContext(void 0,))();
 function SnippetsProvider({
   children,
@@ -38606,6 +38447,73 @@ function getSnippetMarkers(id3,) {
     start: `<!-- Snippet: ${id3} -->`,
     end: `<!-- SnippetEnd: ${id3} -->`,
   };
+}
+async function insertHTML(html, referenceNode, position = 'beforeend',) {
+  let insertionParent, insertionPoint;
+  switch (position) {
+    case 'beforebegin':
+      assert(referenceNode.parentNode, 'Can\'t use \'beforebegin\' with a referenceNode at the top level',);
+      insertionParent = referenceNode.parentNode;
+      insertionPoint = referenceNode;
+      break;
+    case 'afterend':
+      assert(referenceNode.parentNode, 'Can\'t use \'afterend\' with a referenceNode at the top level',);
+      insertionParent = referenceNode.parentNode;
+      insertionPoint = referenceNode.nextSibling;
+      break;
+    case 'afterbegin':
+      insertionParent = referenceNode;
+      insertionPoint = referenceNode.firstChild;
+      break;
+    case 'beforeend':
+      insertionParent = referenceNode;
+      insertionPoint = null;
+      break;
+    default:
+      assertNever(position,);
+  }
+  const range = document.createRange();
+  range.selectNodeContents(insertionParent,);
+  const fragment = range.createContextualFragment(html,);
+  await pump(fragment, insertionParent, insertionPoint,);
+}
+async function pump(sourceNode, targetParent, beforeNode,) {
+  for (let node = sourceNode.firstChild; node; node = node.nextSibling) {
+    if (node instanceof HTMLScriptElement) {
+      const needsWait = handleScript(node, targetParent, beforeNode,);
+      if (needsWait !== void 0) {
+        await needsWait;
+      }
+      continue;
+    }
+    const clone = node.cloneNode(false,);
+    targetParent.insertBefore(clone, beforeNode,);
+    if (node.firstChild) {
+      await pump(node, clone, null,);
+    }
+  }
+}
+function handleScript(node, parent, beforeNode,) {
+  const script = node.cloneNode(true,);
+  if (
+    !node.hasAttribute('src',) ||
+    // external
+    node.hasAttribute('async',) ||
+    // async
+    node.hasAttribute('defer',) ||
+    // defer
+    node.getAttribute('type',)?.toLowerCase() === 'module'
+  ) {
+    parent.insertBefore(script, beforeNode,);
+  } else {
+    return execExternalBlockingScript(script, parent, beforeNode,);
+  }
+}
+function execExternalBlockingScript(script, parent, beforeNode,) {
+  return new Promise((resolve) => {
+    script.onload = script.onerror = resolve;
+    parent.insertBefore(script, beforeNode,);
+  },);
 }
 function findMarkers(placement,) {
   let startMarker;
@@ -39204,7 +39112,7 @@ function Router({
   const pageviewEventData = useSendPageView(currentRoute, currentRouteId, currentPathnameWithHash, currentPathVariables, activeLocale,);
   const isInitialNavigation = isInitialNavigationRef.current;
   useEffect(() => {
-    void loadSnippets2(currentRouteId, currentPathVariables ?? {}, localeInfo.activeLocale?.code || null, isInitialNavigation,);
+    void loadSnippets2(currentRouteId, currentPathVariables ?? {}, localeInfo.activeLocale, isInitialNavigation,);
   }, [loadSnippets2, currentRouteId, currentPathVariables, localeInfo, isInitialNavigation,],);
   const api = useMemo(() => ({
     navigate,
