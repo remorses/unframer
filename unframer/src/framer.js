@@ -11344,7 +11344,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.4YPBZJPZ.mjs
+// /:https://app.framerstatic.com/framer.GX5GPJKD.mjs
 
 import React42 from 'react';
 import { useDeferredValue, useSyncExternalStore, } from 'react';
@@ -49722,6 +49722,8 @@ var iconSize2 = 16;
 var textInputWrapperClassName = 'framer-form-text-input';
 var defaultTextareaResizerIcon =
   `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"><path d="m1.5 8 7-7M9 5.5l-3 3" stroke="%23999" stroke-width="1.5" stroke-linecap="round"></path></svg>`;
+var defaultTextareaResizerIconFlipped =
+  `<svg xmlns="http://www.w3.org/2000/svg" transform="scale(-1, 1)" width="14" height="14"><path d="m1.5 8 7-7M9 5.5l-3 3" stroke="%23999" stroke-width="1.5" stroke-linecap="round"></path></svg>`;
 var defaultDateIconMaskImage =
   '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path fill="rgb(153, 153, 153)" d="M3 5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2H3Z" opacity=".3"/><path fill="transparent" stroke="rgb(153, 153, 153)" stroke-width="1.5" d="M3.25 5.25a2 2 0 0 1 2-2h5.5a2 2 0 0 1 2 2v5.5a2 2 0 0 1-2 2h-5.5a2 2 0 0 1-2-2ZM3 6.75h9.5"/></svg>';
 var defaultTimeIconMaskImage =
@@ -49775,6 +49777,9 @@ var styles = /* @__PURE__ */ (() => [
   // show the native resize handle.
   css2(`.${textInputWrapperClassName} textarea::-webkit-resizer`, {
     background: `no-repeat ${encodeSVGForCSS(defaultTextareaResizerIcon,)}`,
+  },),
+  css2(`.${textInputWrapperClassName}:dir(rtl) textarea::-webkit-resizer`, {
+    background: `no-repeat ${encodeSVGForCSS(defaultTextareaResizerIconFlipped,)}`,
   },),
   css2(`.${textInputWrapperClassName} textarea::-webkit-scrollbar`, {
     cursor: 'pointer',
