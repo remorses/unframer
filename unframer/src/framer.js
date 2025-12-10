@@ -11344,7 +11344,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.GX5GPJKD.mjs
+// /:https://app.framerstatic.com/framer.JW6WFXZK.mjs
 
 import React42 from 'react';
 import { useDeferredValue, useSyncExternalStore, } from 'react';
@@ -14808,18 +14808,28 @@ function useNativeLoadingSpinner() {
     },);
   }, [navigateListener,],);
 }
-var nonSlugCharactersRegExp = /[^\p{Letter}\p{Number}()]+/gu;
-var trimSlugRegExp = /^-+|-+$/gu;
+var unsafeSlugCharactersRegExp = /[\s_?#[\]@!$&'*+,;:="<>%{}|\\^`]+/gu;
+function trimDashes(str,) {
+  let start2 = 0;
+  let end = str.length;
+  while (start2 < end && str[start2] === '-') start2++;
+  while (end > start2 && str[end - 1] === '-') end--;
+  return str.slice(start2, end,);
+}
 function slugify(value,) {
-  return value.toLowerCase().replace(nonSlugCharactersRegExp, '-',).replace(trimSlugRegExp, '',);
+  return trimDashes(value.trim().toLowerCase().replace(unsafeSlugCharactersRegExp, '-',),);
 }
 var NodeIdContext = /* @__PURE__ */ React42.createContext(null,);
+var validTrackingIdRegExp = /^[a-z0-9]+(?:-[a-z0-9]+)*$/u;
+function isValidTrackingId(trackingId,) {
+  return trackingId === '' || validTrackingIdRegExp.test(trackingId,);
+}
 function useTracking() {
   const router = useRouter();
   const nodeId = useContext(NodeIdContext,);
   return useCallback2((trackingId) => {
     if (!router.pageviewEventData?.current) return;
-    if (slugify(trackingId,) !== trackingId) {
+    if (!isValidTrackingId(trackingId,)) {
       throw new Error(`Invalid tracking ID: ${trackingId}`,);
     }
     if (router.pageviewEventData.current instanceof Promise) {
@@ -22540,6 +22550,9 @@ var overflowClipFallbackCSSVariable = '--overflow-clip-fallback';
 var overflowClipFallbackCSSRules = /* @__PURE__ */ (() => [`@supports (not (overflow: clip)) {
         :root { ${overflowClipFallbackCSSVariable}: hidden; }
     }`,])();
+var oneIfCornerShapeSupportedCSSVariable = '--one-if-corner-shape-supported';
+var cornerShapeCSSRules =
+  /* @__PURE__ */ (() => [`@supports (corner-shape: superellipse(2)) { :root { ${oneIfCornerShapeSupportedCSSVariable}: 1 } }`,])();
 var combineCSSRules =
   (isPreview) => [
     ...willChangeTransformRules(isPreview,),
@@ -22563,6 +22576,7 @@ var combineCSSRules =
     ...overflowClipFallbackCSSRules,
     ...lightboxCSS,
     ...safari16TextTruncationFix,
+    ...cornerShapeCSSRules,
   ];
 export var combinedCSSRules = /* @__PURE__ */ combineCSSRules(false,);
 var combinedCSSRulesForPreview = /* @__PURE__ */ combineCSSRules(true,);
@@ -22588,7 +22602,6 @@ function getControlDefaultValue(control,) {
     switch (control.type) {
       case 'string':
       case 'collectionreference':
-      case 'multicollectionreference':
       case 'color':
       case 'date':
       case 'link':
@@ -22612,6 +22625,8 @@ function getControlDefaultValue(control,) {
       case 'font':
         return isObject2(control.defaultValue,) ? control.defaultValue : void 0;
       case 'linkrelvalues':
+        return isArray(control.defaultValue,) ? control.defaultValue : void 0;
+      case 'multicollectionreference':
         return isArray(control.defaultValue,) ? control.defaultValue : void 0;
       case 'object': {
         const value = isObject2(control.defaultValue,) ? control.defaultValue : {};
@@ -35579,7 +35594,7 @@ function useMaybeWrapComponentWithCodeBoundary(children, scopeId, nodeId, isAuth
   }
   return children;
 }
-var ContainerInner = /* @__PURE__ */ React42.forwardRef(({
+var ContainerInner = /* @__PURE__ */ React42.forwardRef(function ContainerInner2({
   children,
   layoutId,
   as,
@@ -35589,7 +35604,7 @@ var ContainerInner = /* @__PURE__ */ React42.forwardRef(({
   isModuleExternal,
   inComponentSlot,
   ...props
-}, ref,) => {
+}, ref,) {
   const outerLayoutId = useConstant2(() => layoutId ? `${layoutId}-container` : void 0);
   const MotionComponent = htmlElementAsMotionComponent(as,);
   const clonedChildren = React42.Children.map(children, (child) => {
@@ -35619,7 +35634,7 @@ var ContainerInner = /* @__PURE__ */ React42.forwardRef(({
           enabled: false,
           children: /* @__PURE__ */ jsx(LayoutGroup, {
             id: layoutId ?? '',
-            inherit: 'id',
+            inherit: props.layout ? true : 'id',
             children: childrenWithCodeBoundary,
           },),
         },),
@@ -35628,7 +35643,7 @@ var ContainerInner = /* @__PURE__ */ React42.forwardRef(({
   },);
 },);
 var Container = /* @__PURE__ */ withGeneratedLayoutId(ContainerInner,);
-var SmartComponentScopedContainer = /* @__PURE__ */ React42.forwardRef((props, ref,) => {
+var SmartComponentScopedContainer = /* @__PURE__ */ React42.forwardRef(function SmartComponentScopedContainer2(props, ref,) {
   const {
     as,
     children,
@@ -47090,6 +47105,46 @@ var withTickerFX = (Component18) => {
     },);
   };
 };
+var withFlowFX = (Component18) =>
+  React42.forwardRef((props, forwardedRef,) => {
+    const {
+      flowEffectEnabled,
+      flowEffectTransition,
+      isNestedFlowEffect,
+      transition,
+      ...forwardedProps
+    } = props;
+    const mergedTransition = useMemo(() =>
+      flowEffectTransition
+        ? {
+          default: transition,
+          layout: flowEffectTransition,
+        }
+        : transition, [transition, flowEffectTransition,],);
+    if (!flowEffectEnabled) {
+      return /* @__PURE__ */ jsx(Component18, {
+        ...forwardedProps,
+        ref: forwardedRef,
+        transition,
+      },);
+    }
+    let componentWithFlowEffect = /* @__PURE__ */ jsx(Component18, {
+      ...forwardedProps,
+      ref: forwardedRef,
+    },);
+    if (flowEffectTransition) {
+      componentWithFlowEffect = /* @__PURE__ */ jsx(MotionConfig, {
+        transition: mergedTransition,
+        children: componentWithFlowEffect,
+      },);
+    }
+    if (!isNestedFlowEffect) {
+      componentWithFlowEffect = /* @__PURE__ */ jsx(LayoutGroup, {
+        children: componentWithFlowEffect,
+      },);
+    }
+    return componentWithFlowEffect;
+  },);
 function extractMappingFromInfo(info,) {
   const json = info.__FramerMetadata__.exports.default.annotations?.framerVariables;
   if (!json) return void 0;
@@ -48662,7 +48717,7 @@ function getAssetOwnerType(asset,) {
 async function loadFontsWithOpenType(source,) {
   switch (source) {
     case 'google': {
-      const supportedFonts = await import('./framer-chunks/google-4VARBVAS-WSAQU7QB.js');
+      const supportedFonts = await import('./framer-chunks/google-2ZWHHBOO-CPA5JVM3.js');
       return supportedFonts?.default;
     }
     case 'fontshare': {
@@ -48676,7 +48731,7 @@ async function loadFontsWithOpenType(source,) {
 async function loadFontToOpenTypeFeatures(source,) {
   switch (source) {
     case 'google': {
-      const features = await import('./framer-chunks/google-IHP45ZLM-ZVSA7AH6.js');
+      const features = await import('./framer-chunks/google-3XKDZJDS-CGWKCHCG.js');
       return features?.default;
     }
     case 'fontshare': {
@@ -51747,6 +51802,8 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
     if (frame2 && restrictedRenderTarget && !isAutoSized2) {
       positionStyle.x = frame2.x + (isNumber2(style2?.x,) ? style2.x : 0);
       positionStyle.y = frame2.y + (isNumber2(style2?.y,) ? style2.y : 0);
+      positionStyle.left = 0;
+      positionStyle.top = 0;
       containerStyle2.rotate = Animatable.getNumber(rotation,);
       containerStyle2.width = frame2.width;
       containerStyle2.minWidth = frame2.width;
@@ -54986,6 +55043,7 @@ export {
   withCodeBoundaryForOverrides,
   withColumnMasonryLayout,
   withCSS,
+  withFlowFX,
   withFX,
   withGeneratedLayoutId,
   withInfiniteScroll,

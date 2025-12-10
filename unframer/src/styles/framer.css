@@ -1029,3 +1029,4 @@ NavigationContainer
         /* Render text-fill elements inline when text is truncated, otherwise default to their default value (e.g. inline-block) */
         p.framer-text[data-text-fill] { display: var(--text-truncation-display-inline-for-safari-16, inline-block) }
     }
+@supports (corner-shape: superellipse(2)) { :root { --one-if-corner-shape-supported: 1 } }
