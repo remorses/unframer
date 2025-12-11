@@ -14,7 +14,7 @@ import {
   __toESM,
 } from './framer-chunks/chunk-DBJCHRFG.js';
 
-// /:https://app.framerstatic.com/chunk-QUOCKOA6.mjs
+// /:https://app.framerstatic.com/chunk-2J7GL3DQ.mjs
 import { createContext, } from 'react';
 import { useEffect, useLayoutEffect, } from 'react';
 import * as React from 'react';
@@ -4671,7 +4671,56 @@ function MotionConfig({
   },);
 }
 var MotionContext = /* @__PURE__ */ createContext({},);
-var scaleCorrectors = {};
+function pixelsToPercent(pixels, axis,) {
+  if (axis.max === axis.min) return 0;
+  return pixels / (axis.max - axis.min) * 100;
+}
+var correctBorderRadius = {
+  correct: (latest, node,) => {
+    if (!node.target) return latest;
+    if (typeof latest === 'string') {
+      if (px.test(latest,)) {
+        latest = parseFloat(latest,);
+      } else {
+        return latest;
+      }
+    }
+    const x = pixelsToPercent(latest, node.target.x,);
+    const y = pixelsToPercent(latest, node.target.y,);
+    return `${x}% ${y}%`;
+  },
+};
+var correctBoxShadow = {
+  correct: (latest, {
+    treeScale,
+    projectionDelta,
+  },) => {
+    const original = latest;
+    const shadow = complex.parse(latest,);
+    if (shadow.length > 5) return original;
+    const template = complex.createTransformer(latest,);
+    const offset = typeof shadow[0] !== 'number' ? 1 : 0;
+    const xScale = projectionDelta.x.scale * treeScale.x;
+    const yScale = projectionDelta.y.scale * treeScale.y;
+    shadow[0 + offset] /= xScale;
+    shadow[1 + offset] /= yScale;
+    const averageScale = mixNumber(xScale, yScale, 0.5,);
+    if (typeof shadow[2 + offset] === 'number') shadow[2 + offset] /= averageScale;
+    if (typeof shadow[3 + offset] === 'number') shadow[3 + offset] /= averageScale;
+    return template(shadow,);
+  },
+};
+var scaleCorrectors = {
+  borderRadius: {
+    ...correctBorderRadius,
+    applyTo: ['borderTopLeftRadius', 'borderTopRightRadius', 'borderBottomLeftRadius', 'borderBottomRightRadius',],
+  },
+  borderTopLeftRadius: correctBorderRadius,
+  borderTopRightRadius: correctBorderRadius,
+  borderBottomLeftRadius: correctBorderRadius,
+  borderBottomRightRadius: correctBorderRadius,
+  boxShadow: correctBoxShadow,
+};
 function addScaleCorrector(correctors,) {
   for (const key7 in correctors) {
     scaleCorrectors[key7] = correctors[key7];
@@ -7714,45 +7763,6 @@ var globalProjectionState = {
    */
   hasEverUpdated: false,
 };
-function pixelsToPercent(pixels, axis,) {
-  if (axis.max === axis.min) return 0;
-  return pixels / (axis.max - axis.min) * 100;
-}
-var correctBorderRadius = {
-  correct: (latest, node,) => {
-    if (!node.target) return latest;
-    if (typeof latest === 'string') {
-      if (px.test(latest,)) {
-        latest = parseFloat(latest,);
-      } else {
-        return latest;
-      }
-    }
-    const x = pixelsToPercent(latest, node.target.x,);
-    const y = pixelsToPercent(latest, node.target.y,);
-    return `${x}% ${y}%`;
-  },
-};
-var correctBoxShadow = {
-  correct: (latest, {
-    treeScale,
-    projectionDelta,
-  },) => {
-    const original = latest;
-    const shadow = complex.parse(latest,);
-    if (shadow.length > 5) return original;
-    const template = complex.createTransformer(latest,);
-    const offset = typeof shadow[0] !== 'number' ? 1 : 0;
-    const xScale = projectionDelta.x.scale * treeScale.x;
-    const yScale = projectionDelta.y.scale * treeScale.y;
-    shadow[0 + offset] /= xScale;
-    shadow[1 + offset] /= yScale;
-    const averageScale = mixNumber(xScale, yScale, 0.5,);
-    if (typeof shadow[2 + offset] === 'number') shadow[2 + offset] /= averageScale;
-    if (typeof shadow[3 + offset] === 'number') shadow[3 + offset] /= averageScale;
-    return template(shadow,);
-  },
-};
 var hasTakenAnySnapshot = false;
 var MeasureLayoutWithContext = class extends Component2 {
   /**
@@ -7770,7 +7780,6 @@ var MeasureLayoutWithContext = class extends Component2 {
     const {
       projection,
     } = visualElement;
-    addScaleCorrector(defaultScaleCorrectors,);
     if (projection) {
       if (layoutGroup.group) layoutGroup.group.add(projection,);
       if (switchLayoutGroup && switchLayoutGroup.register && layoutId) {
@@ -7871,17 +7880,6 @@ function MeasureLayout(props,) {
     safeToRemove,
   },);
 }
-var defaultScaleCorrectors = {
-  borderRadius: {
-    ...correctBorderRadius,
-    applyTo: ['borderTopLeftRadius', 'borderTopRightRadius', 'borderBottomLeftRadius', 'borderBottomRightRadius',],
-  },
-  borderTopLeftRadius: correctBorderRadius,
-  borderTopRightRadius: correctBorderRadius,
-  borderBottomLeftRadius: correctBorderRadius,
-  borderBottomRightRadius: correctBorderRadius,
-  boxShadow: correctBoxShadow,
-};
 function animateSingleValue(value, keyframes2, options,) {
   const motionValue$1 = isMotionValue(value,) ? value : motionValue(value,);
   motionValue$1.start(animateMotionValue('', motionValue$1, keyframes2, options,),);
@@ -11344,7 +11342,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.JW6WFXZK.mjs
+// /:https://app.framerstatic.com/framer.ZO6EUKKV.mjs
 
 import React42 from 'react';
 import { useDeferredValue, useSyncExternalStore, } from 'react';
@@ -14808,7 +14806,7 @@ function useNativeLoadingSpinner() {
     },);
   }, [navigateListener,],);
 }
-var unsafeSlugCharactersRegExp = /[\s_?#[\]@!$&'*+,;:="<>%{}|\\^`]+/gu;
+var unsafeSlugCharactersRegExp = /[\s_?#[\]@!$&'*+,;:="<>%{}|\\^`/]+/gu;
 function trimDashes(str,) {
   let start2 = 0;
   let end = str.length;
@@ -18892,14 +18890,14 @@ var FramerAnimation = class _FramerAnimation {
 };
 var correctBorderScale = (axis) => ({
   correct: (latest, {
-    delta,
+    projectionDelta,
     treeScale,
   },) => {
     if (typeof latest === 'string') latest = parseFloat(latest,);
     if (latest === 0) return '0px';
     let corrected = latest;
-    if (delta && treeScale) {
-      corrected = Math.round(latest / delta[axis].scale / treeScale[axis],);
+    if (projectionDelta && treeScale) {
+      corrected = Math.round(latest / projectionDelta[axis].scale / treeScale[axis],);
       corrected = Math.max(corrected, 1,);
     }
     return corrected + 'px';
@@ -18917,6 +18915,54 @@ function MotionSetup({
   return /* @__PURE__ */ jsx(Fragment, {
     children,
   },);
+}
+function patchBorderRadiusScaleCorrector() {
+  if (isPatched) return;
+  isPatched = true;
+  addScaleCorrector(borderRadiusCorrectors,);
+}
+var isPatched = false;
+var calcPrefix = 'calc(';
+var separator2 = '*';
+var correctBorderRadius2 = {
+  correct: (latest, node,) => {
+    if (!node.target) return latest;
+    if (typeof latest === 'string') {
+      if (latest.startsWith(calcPrefix,)) {
+        const [candidate, ...rest] = latest.slice(calcPrefix.length,).split(separator2,);
+        if (isUndefined(candidate,) || !px.test(candidate.trim(),)) return latest;
+        const pixels = parseFloat(candidate,);
+        const x2 = pixelsToPercent2(pixels, node.target.x,);
+        const y2 = pixelsToPercent2(pixels, node.target.y,);
+        return `${reWrapInCalc(x2, rest,)} ${reWrapInCalc(y2, rest,)}`;
+      }
+      if (px.test(latest,)) {
+        latest = parseFloat(latest,);
+      } else {
+        return latest;
+      }
+    }
+    const x = pixelsToPercent2(latest, node.target.x,);
+    const y = pixelsToPercent2(latest, node.target.y,);
+    return `${x}% ${y}%`;
+  },
+};
+var borderRadiusCorrectors = /* @__PURE__ */ (() => ({
+  borderRadius: {
+    ...correctBorderRadius2,
+    applyTo: ['borderTopLeftRadius', 'borderTopRightRadius', 'borderBottomLeftRadius', 'borderBottomRightRadius',],
+  },
+  borderTopLeftRadius: correctBorderRadius2,
+  borderTopRightRadius: correctBorderRadius2,
+  borderBottomLeftRadius: correctBorderRadius2,
+  borderBottomRightRadius: correctBorderRadius2,
+}))();
+function pixelsToPercent2(pixels, axis,) {
+  if (axis.max === axis.min) return 0;
+  return pixels / (axis.max - axis.min) * 100;
+}
+function reWrapInCalc(percentage, rest,) {
+  return `${calcPrefix}${percentage}%${separator2}${rest.join(separator2,)}`;
 }
 function startAnimation(_key, value, target, transition = {},) {
   warnOnce2(`"startAnimation" is unsupported. Use "animate" instead: https://www.framer.com/api/motion/utilities/#animate`,);
@@ -20299,7 +20345,10 @@ var Rect = {
     }
     return false;
   },
-  /** @internal */
+  /**
+   * Returns the four edges of a rect as lines in the order of top, right, bottom, left.
+   * @internal
+   */
   edges: (rect) => {
     const [tl, tr, br, bl,] = Rect.cornerPoints(rect,);
     return [Line(tl, tr,), Line(tr, br,), Line(br, bl,), Line(bl, tl,),];
@@ -20366,7 +20415,50 @@ var Rect = {
     }
     return rebasedRect;
   },
+  /**
+   * Constrain a rect to a bound, offsetting its position to make the rect fit within the bound.
+   * @internal
+   */
+  constrain: (rect, bound,) => {
+    if (!bound) return rect;
+    let y = Math.max(rect.y, bound.y,);
+    y = Math.min(y, bound.y + bound.height - rect.height,);
+    let x = Math.max(rect.x, bound.x,);
+    x = Math.min(x, bound.x + bound.width - rect.width,);
+    return {
+      x,
+      y,
+      width: rect.width,
+      height: rect.height,
+    };
+  },
+  /**
+   * Finds the closest edge of a rect to a point. Note that this does not check perpendicular
+   * distances, so it might not be the technically closest edge, but rather a close approximation
+   * or the visually closest edge. It achieves this by drawing a line from the center of the rect
+   * to the point and checking if it intersects with any of the edges. Returns undefined if no
+   * edge is intersected (e.g., if the point is inside the rect).
+   * @internal
+   */
+  closestEdge: (rect, point2,) => {
+    const center = Rect.center(rect,);
+    const pointToCenterLine = Line(point2, center,);
+    const edges = Rect.edges(rect,);
+    for (let i = 0; i < edges.length; i++) {
+      const edge = edges[i];
+      if (!edge) continue;
+      if (Line.intersection(pointToCenterLine, edge, true,)) {
+        const name = edgesInOrder[i];
+        assert(name, 'Invalid edge name', edgesInOrder,);
+        return {
+          edge,
+          name,
+        };
+      }
+    }
+  },
 };
+var edgesInOrder = ['top', 'right', 'bottom', 'left',];
 var constraintDefaults = {
   left: null,
   right: null,
@@ -21237,6 +21329,7 @@ var FormInputStyleVariableNames = /* @__PURE__ */ ((FormInputStyleVariableNames2
   FormInputStyleVariableNames2['FontTextAlignment'] = '--framer-input-font-text-alignment';
   FormInputStyleVariableNames2['FontLineHeight'] = '--framer-input-font-line-height';
   FormInputStyleVariableNames2['FontOpenType'] = '--framer-input-font-open-type-features';
+  FormInputStyleVariableNames2['FontVariationAxes'] = '--framer-input-font-variation-axes';
   FormInputStyleVariableNames2['PlaceholderColor'] = '--framer-input-placeholder-color';
   FormInputStyleVariableNames2['BoxShadow'] = '--framer-input-box-shadow';
   FormInputStyleVariableNames2['FocusedBorderColor'] = '--framer-input-focused-border-color';
@@ -21302,6 +21395,7 @@ var sharedInputCSS = /* @__PURE__ */ (() => [
     fontStyle: css2.variable(Var.FontStyle,),
     color: css2.variable(Var.FontColor,),
     fontFeatureSettings: css2.variable(Var.FontOpenType,),
+    fontVariationSettings: css2.variable(Var.FontVariationAxes,),
     border: 'none',
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
@@ -54827,6 +54921,7 @@ export {
   parseCSSVariable,
   parseFramerPageLink,
   parseValueFromTransform,
+  patchBorderRadiusScaleCorrector,
   patchRoutesForABTesting,
   pathDefaults,
   PathSegment,
