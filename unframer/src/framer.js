@@ -11342,7 +11342,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.6VRKXCY5.mjs
+// /:https://app.framerstatic.com/framer.NVDDHNE2.mjs
 
 import React42 from 'react';
 import { useDeferredValue, useSyncExternalStore, } from 'react';
@@ -48811,7 +48811,7 @@ function getAssetOwnerType(asset,) {
 async function loadFontsWithOpenType(source,) {
   switch (source) {
     case 'google': {
-      const supportedFonts = await import('./framer-chunks/google-2ZWHHBOO-CPA5JVM3.js');
+      const supportedFonts = await import('./framer-chunks/google-AG6EYFMK-VXMK4LWI.js');
       return supportedFonts?.default;
     }
     case 'fontshare': {
@@ -48825,7 +48825,7 @@ async function loadFontsWithOpenType(source,) {
 async function loadFontToOpenTypeFeatures(source,) {
   switch (source) {
     case 'google': {
-      const features = await import('./framer-chunks/google-3XKDZJDS-CGWKCHCG.js');
+      const features = await import('./framer-chunks/google-EJBUPU3N-JOFVHSFQ.js');
       return features?.default;
     }
     case 'fontshare': {
@@ -49377,7 +49377,7 @@ function loadVariationAxes(source,) {
       const axes = (async () => {
         switch (source) {
           case 'google': {
-            return (await import('./framer-chunks/google-LWW6GXZ4-WR5WKIYC.js')).default;
+            return (await import('./framer-chunks/google-CQFUID6E-OQQXADED.js')).default;
           }
           case 'fontshare': {
             return (await import('./framer-chunks/fontshare-X63NXWGB-NL5Q3YUU.js')).default;
