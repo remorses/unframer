@@ -11342,7 +11342,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.NVDDHNE2.mjs
+// /:https://app.framerstatic.com/framer.P26PY5RQ.mjs
 
 import React42 from 'react';
 import { useDeferredValue, useSyncExternalStore, } from 'react';
@@ -12333,12 +12333,18 @@ function encodeSVGForCSS(svg,) {
   return `url('data:image/svg+xml,${svg.replaceAll('#', '%23',).replaceAll('\'', '%27',)}')`;
 }
 function getPleaseReportMessage(message, error,) {
+  const formattedError = error instanceof Error ? error.stack ?? error.message : error;
   return `${
     message
       ? `${message}
 `
       : ''
-  }In case the issue persists, report this to the Framer team via https://www.framer.com/contact/${error ? ':\n' : '.'}`;
+  }In case the issue persists, report this to the Framer team via https://www.framer.com/contact/${
+    formattedError
+      ? `:
+${formattedError}`
+      : '.'
+  }`;
 }
 var lazyModulesCache = /* @__PURE__ */ new Map();
 function initLazyModulesCache() {
@@ -12683,170 +12689,13 @@ function useRouteElementId(id3, targetRouteId,) {
 function useCurrentPathVariables() {
   return useCurrentRoute()?.pathVariables;
 }
-var mockWindow = {
-  addEventListener: () => {},
-  removeEventListener: () => {},
-  dispatchEvent: () => false,
-  ResizeObserver: void 0,
-  onpointerdown: false,
-  onpointermove: false,
-  onpointerup: false,
-  ontouchstart: false,
-  ontouchmove: false,
-  ontouchend: false,
-  onmousedown: false,
-  onmousemove: false,
-  onmouseup: false,
-  devicePixelRatio: 1,
-  scrollX: 0,
-  scrollY: 0,
-  location: {
-    hash: '',
-    hostname: '',
-    href: '',
-    origin: '',
-    pathname: '',
-    search: '',
-  },
-  document: {
-    baseURI: '',
-    cookie: '',
-    referrer: null,
-  },
-  setTimeout: () => 0,
-  clearTimeout: () => {},
-  setInterval: () => 0,
-  clearInterval: () => {},
-  requestAnimationFrame: () => 0,
-  cancelAnimationFrame: () => {},
-  requestIdleCallback: () => 0,
-  getSelection: () => null,
-  matchMedia: (query) => {
-    return {
-      matches: false,
-      media: query,
-      onchange: () => {},
-      addEventListener: () => {},
-      removeEventListener: () => {},
-      addListener: () => {},
-      removeListener: () => {},
-      dispatchEvent: () => false,
-    };
-  },
-  innerHeight: 0,
-  innerWidth: 0,
-  SVGSVGElement: {},
-  scheduler: void 0,
-  open: function (_url, _target, _features,) {},
-  __framer_events: [],
+var LibraryFeaturesContext = /* @__PURE__ */ React42.createContext(void 0,);
+LibraryFeaturesContext.displayName = 'LibraryFeaturesContext';
+var LibraryFeaturesProvider = /* @__PURE__ */ (() => LibraryFeaturesContext.Provider)();
+var useLibraryFeatures = () => {
+  const context = React42.useContext(LibraryFeaturesContext,);
+  return context ?? {};
 };
-var safeWindow = !isWindow ? mockWindow : window;
-var canUseYield = /* @__PURE__ */ (() => safeWindow.scheduler && 'yield' in safeWindow.scheduler)();
-var canUsePostTask = /* @__PURE__ */ (() => safeWindow.scheduler && 'postTask' in safeWindow.scheduler)();
-var pendingResolvers = /* @__PURE__ */ new Set();
-function resolvePendingPromises() {
-  for (const resolve of pendingResolvers) resolve();
-  pendingResolvers.clear();
-}
-function yieldUnlessUrgent(options,) {
-  return new Promise((resolve) => {
-    pendingResolvers.add(resolve,);
-    if (document.hidden) {
-      resolvePendingPromises();
-      return;
-    }
-    document.addEventListener('visibilitychange', resolvePendingPromises,);
-    document.addEventListener('pagehide', resolvePendingPromises,);
-    frame.read(() => {
-      const resolveFn = () => {
-        pendingResolvers.delete(resolve,);
-        if (options?.signal?.aborted) return;
-        resolve();
-      };
-      void schedulerYield(options,).then(resolveFn,);
-    },);
-    return;
-  },);
-}
-function interactionResponse(options,) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, 100,);
-    frame.read(
-      () => {
-        void schedulerYield(options,).then(resolve,);
-      },
-      false,
-      // In some cases, interactionResponse might be called in a rAF. This means, we should right away call `schedulerYield`, as the next paint follows immediately.
-      true,
-    );
-  },);
-}
-function schedulerYield(options,) {
-  const priority = options?.priority;
-  const canUseModernAPI = canUseYield || canUsePostTask;
-  if (!canUseModernAPI) {
-    if (priority === 'user-blocking') {
-      return Promise.resolve();
-    }
-    return new Promise((resolve) => {
-      setTimeout(resolve, priority === 'background' ? 1 : 0,);
-    },);
-  }
-  if (priority === 'background') {
-    return new Promise((resolve) => {
-      setTimeout(resolve, 1,);
-    },);
-  }
-  if (canUseYield) {
-    return safeWindow.scheduler.yield(options,).catch(noop2,);
-  }
-  return safeWindow.scheduler.postTask(() => {}, options,).catch(noop2,);
-}
-function yieldToMain(options,) {
-  const {
-    continueAfter,
-    ensureContinueBeforeUnload,
-    ...schedulerOptions
-  } = options ?? {};
-  if (ensureContinueBeforeUnload) {
-    return yieldUnlessUrgent(schedulerOptions,);
-  }
-  if (continueAfter === 'paint') {
-    return interactionResponse(schedulerOptions,);
-  }
-  return schedulerYield(schedulerOptions,);
-}
-var shouldPreloadBasedOnUA = !isBot;
-function useRoutePreloader(routeIds, enabled = true,) {
-  const {
-    getRoute,
-  } = useRouter();
-  useEffect(() => {
-    if (!getRoute || !enabled || !shouldPreloadBasedOnUA) return;
-    for (const routeId of routeIds) {
-      void preloadRoute(getRoute(routeId,),);
-    }
-  }, [routeIds, getRoute, enabled,],);
-}
-async function preloadRoute(route,) {
-  if (!shouldPreloadBasedOnUA || !route) return;
-  const component = route.page;
-  if (!component || !isLazyComponentType(component,)) return;
-  await yieldToMain();
-  try {
-    await component.preload();
-  } catch (e) {
-    if (false) console.warn('Preload failed', route, e,);
-  }
-}
-function useRouteHandler(routeId, preload = false, elementId,) {
-  const {
-    navigate,
-  } = useRouter();
-  useRoutePreloader([routeId,], preload,);
-  const handler = React42.useCallback(() => navigate?.(routeId, elementId,), [navigate, elementId, routeId,],);
-  return handler;
-}
 var defaultLocaleId = 'default';
 function assert(condition, ...msg) {
   if (condition) return;
@@ -13446,6 +13295,64 @@ function stringify_primitive(thing,) {
   if (type === 'bigint') return `["BigInt","${thing}"]`;
   return String(thing,);
 }
+var mockWindow = {
+  addEventListener: () => {},
+  removeEventListener: () => {},
+  dispatchEvent: () => false,
+  ResizeObserver: void 0,
+  onpointerdown: false,
+  onpointermove: false,
+  onpointerup: false,
+  ontouchstart: false,
+  ontouchmove: false,
+  ontouchend: false,
+  onmousedown: false,
+  onmousemove: false,
+  onmouseup: false,
+  devicePixelRatio: 1,
+  scrollX: 0,
+  scrollY: 0,
+  location: {
+    hash: '',
+    hostname: '',
+    href: '',
+    origin: '',
+    pathname: '',
+    search: '',
+  },
+  document: {
+    baseURI: '',
+    cookie: '',
+    referrer: null,
+  },
+  setTimeout: () => 0,
+  clearTimeout: () => {},
+  setInterval: () => 0,
+  clearInterval: () => {},
+  requestAnimationFrame: () => 0,
+  cancelAnimationFrame: () => {},
+  requestIdleCallback: () => 0,
+  getSelection: () => null,
+  matchMedia: (query) => {
+    return {
+      matches: false,
+      media: query,
+      onchange: () => {},
+      addEventListener: () => {},
+      removeEventListener: () => {},
+      addListener: () => {},
+      removeListener: () => {},
+      dispatchEvent: () => false,
+    };
+  },
+  innerHeight: 0,
+  innerWidth: 0,
+  SVGSVGElement: {},
+  scheduler: void 0,
+  open: function (_url, _target, _features,) {},
+  __framer_events: [],
+};
+var safeWindow = !isWindow ? mockWindow : window;
 var pageviewEventVersion = 2;
 function sendTrackingEvent(eventType, eventData, sendOn = 'lazy',) {
   safeWindow.__framer_events?.push([eventType, eventData, sendOn,],);
@@ -13708,6 +13615,289 @@ var CollectionUtilsCache = class {
     return this.callUtilsMethod('getRecordIdBySlug', slug, locale,);
   }
 };
+var canUseYield = /* @__PURE__ */ (() => safeWindow.scheduler && 'yield' in safeWindow.scheduler)();
+var canUsePostTask = /* @__PURE__ */ (() => safeWindow.scheduler && 'postTask' in safeWindow.scheduler)();
+var pendingResolvers = /* @__PURE__ */ new Set();
+function resolvePendingPromises() {
+  for (const resolve of pendingResolvers) resolve();
+  pendingResolvers.clear();
+}
+function yieldUnlessUrgent(options,) {
+  return new Promise((resolve) => {
+    pendingResolvers.add(resolve,);
+    if (document.hidden) {
+      resolvePendingPromises();
+      return;
+    }
+    document.addEventListener('visibilitychange', resolvePendingPromises,);
+    document.addEventListener('pagehide', resolvePendingPromises,);
+    frame.read(() => {
+      const resolveFn = () => {
+        pendingResolvers.delete(resolve,);
+        if (options?.signal?.aborted) return;
+        resolve();
+      };
+      void schedulerYield(options,).then(resolveFn,);
+    },);
+    return;
+  },);
+}
+function interactionResponse(options,) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, 100,);
+    frame.read(
+      () => {
+        void schedulerYield(options,).then(resolve,);
+      },
+      false,
+      // In some cases, interactionResponse might be called in a rAF. This means, we should right away call `schedulerYield`, as the next paint follows immediately.
+      true,
+    );
+  },);
+}
+function schedulerYield(options,) {
+  const priority = options?.priority;
+  const canUseModernAPI = canUseYield || canUsePostTask;
+  if (!canUseModernAPI) {
+    if (priority === 'user-blocking') {
+      return Promise.resolve();
+    }
+    return new Promise((resolve) => {
+      setTimeout(resolve, priority === 'background' ? 1 : 0,);
+    },);
+  }
+  if (priority === 'background') {
+    return new Promise((resolve) => {
+      setTimeout(resolve, 1,);
+    },);
+  }
+  if (canUseYield) {
+    return safeWindow.scheduler.yield(options,).catch(noop2,);
+  }
+  return safeWindow.scheduler.postTask(() => {}, options,).catch(noop2,);
+}
+function yieldToMain(options,) {
+  const {
+    continueAfter,
+    ensureContinueBeforeUnload,
+    ...schedulerOptions
+  } = options ?? {};
+  if (ensureContinueBeforeUnload) {
+    return yieldUnlessUrgent(schedulerOptions,);
+  }
+  if (continueAfter === 'paint') {
+    return interactionResponse(schedulerOptions,);
+  }
+  return schedulerYield(schedulerOptions,);
+}
+var pathVariablesRegExpRaw = ':([a-z]\\w*)';
+var pathVariablesRegExp = /* @__PURE__ */ new RegExp(pathVariablesRegExpRaw, 'gi',);
+async function getLocalesForCurrentRoute(activeLocale, locales, currentRoute, pathVariables, collectionUtils,) {
+  if (!currentRoute) return locales;
+  const slugByLocaleIfCollectionPage = await getSlugByLocaleIfCollectionPage(
+    activeLocale,
+    locales,
+    currentRoute,
+    pathVariables,
+    collectionUtils,
+  );
+  const includedLocalesForCurrentRoute = currentRoute.includedLocales;
+  const localesForCurrentRoute = [];
+  for (const locale of locales) {
+    if (includedLocalesForCurrentRoute) {
+      if (!includedLocalesForCurrentRoute.includes(locale.id,)) continue;
+    }
+    if (slugByLocaleIfCollectionPage) {
+      const hasSlug = slugByLocaleIfCollectionPage.has(locale.id,);
+      if (!hasSlug) continue;
+    }
+    localesForCurrentRoute.push(locale,);
+  }
+  return localesForCurrentRoute;
+}
+async function getSlugByLocaleIfCollectionPage(activeLocale, locales, currentRoute, pathVariables, collectionUtils,) {
+  const {
+    collectionId,
+  } = currentRoute;
+  if (!collectionId) return null;
+  if (!activeLocale) return null;
+  if (!pathVariables) return null;
+  const {
+    path,
+  } = currentRoute;
+  if (!path) return null;
+  const matches = Array.from(path.matchAll(pathVariablesRegExp,),);
+  const lastMatch = matches.pop();
+  if (!lastMatch) return null;
+  const pathVariableWithDelimiter = lastMatch?.[0];
+  const pathVariableValue = lastMatch?.[1];
+  if (!pathVariableWithDelimiter || !pathVariableValue) {
+    throw new Error('Failed to replace path variables: unexpected regex match group',);
+  }
+  const currentSlug = pathVariables[pathVariableValue];
+  if (!currentSlug || !isString(currentSlug,)) {
+    throw new Error(`No slug found for path variable ${pathVariableValue}`,);
+  }
+  const utils = collectionUtils?.get(collectionId,);
+  if (!utils) return null;
+  const maybeRecordId = utils.getRecordIdBySlug(currentSlug, activeLocale,);
+  const recordId = isPromise(maybeRecordId,) ? await maybeRecordId : maybeRecordId;
+  if (!recordId) return null;
+  const slugById = /* @__PURE__ */ new Map();
+  await Promise.all(locales.map(async (locale) => {
+    const maybeSlug = utils.getSlugByRecordId(recordId, locale,);
+    const slug = isPromise(maybeSlug,) ? await maybeSlug : maybeSlug;
+    if (!slug) return;
+    slugById.set(locale.id, slug,);
+  },),);
+  return slugById;
+}
+var noopAsync = async () => {};
+var defaultLocaleInfo = {
+  activeLocale: null,
+  locales: [],
+  setLocale: noopAsync,
+};
+var LocaleInfoContext = /* @__PURE__ */ (() => {
+  const Context2 = React42.createContext(defaultLocaleInfo,);
+  Context2.displayName = 'LocaleInfoContext';
+  return Context2;
+})();
+function useLocaleInfo() {
+  return React42.useContext(LocaleInfoContext,);
+}
+function useLocalesForCurrentRoute() {
+  const {
+    currentRouteId,
+    routes,
+    currentPathVariables,
+  } = useRouter();
+  const {
+    activeLocale,
+    locales,
+  } = useLocaleInfo();
+  const [localesForCurrentRoute, setLocalesForCurrentRoute,] = React42.useState(() => activeLocale ? [activeLocale,] : []);
+  const currentRoute = currentRouteId ? routes?.[currentRouteId] : void 0;
+  const collectionUtils = useCollectionUtils();
+  React42.useEffect(() => {
+    let active = true;
+    getLocalesForCurrentRoute(activeLocale, locales, currentRoute, currentPathVariables, collectionUtils,).then((localesSubset) => {
+      if (!active) return;
+      React42.startTransition(() => {
+        if (localesSubset) {
+          setLocalesForCurrentRoute(localesSubset,);
+        } else {
+          setLocalesForCurrentRoute(activeLocale ? [activeLocale,] : [],);
+        }
+      },);
+    },).catch(() => {},);
+    return () => {
+      active = false;
+    };
+  }, [activeLocale, locales, collectionUtils, currentRoute, currentPathVariables,],);
+  return localesForCurrentRoute;
+}
+function useLocalizationInfo() {
+  const {
+    activeLocale,
+    locales,
+    setLocale,
+  } = useLocaleInfo();
+  return {
+    activeLocalization: activeLocale,
+    localizations: locales,
+    setLocalization: setLocale,
+  };
+}
+function useLocaleCode() {
+  return useLocaleInfo().activeLocale?.code ?? 'en-US';
+}
+function useLocale() {
+  return useLocaleCode();
+}
+var LayoutDirectionContext = /* @__PURE__ */ (() => {
+  const Context2 = React42.createContext('ltr',);
+  Context2.displayName = 'LayoutDirectionContext';
+  return Context2;
+})();
+function useLayoutDirection() {
+  return React42.useContext(LayoutDirectionContext,);
+}
+var shouldPreloadBasedOnUA = !isBot;
+function usePreloadRoute() {
+  const {
+    activeLocale,
+  } = useLocaleInfo();
+  const collectionUtils = useCollectionUtils();
+  const {
+    autobahnNavigation: autobahnNavigationEnabled,
+  } = useLibraryFeatures();
+  const {
+    getRoute,
+  } = useRouter();
+  return useCallback2((routeId, pathVariables, yieldBeforePreload = true,) => {
+    if (!routeId || !getRoute) return;
+    const route = getRoute(routeId,);
+    const context = routeId && autobahnNavigationEnabled
+      ? {
+        routeId,
+        pathVariables,
+        locale: activeLocale ?? void 0,
+        collectionUtils,
+      }
+      : void 0;
+    return preloadRoute(route, context, yieldBeforePreload,);
+  }, [getRoute, activeLocale, collectionUtils, autobahnNavigationEnabled,],);
+}
+function useRoutePreloader(routeIds, enabled = true,) {
+  const preload = usePreloadRoute();
+  useEffect(() => {
+    if (!enabled || !shouldPreloadBasedOnUA) return;
+    for (const routeId of routeIds) {
+      void preload(routeId,);
+    }
+  }, [routeIds, enabled, preload,],);
+}
+async function preloadRoute(route, context, yieldBeforePreload = true,) {
+  if (!shouldPreloadBasedOnUA || !route) return;
+  const component = route.page;
+  if (!component || !isLazyComponentType(component,)) return;
+  if (yieldBeforePreload) {
+    await yieldToMain();
+  }
+  try {
+    const loadedComponent = await component.preload();
+    if (context && loadedComponent) {
+      await preloadRouteData(loadedComponent, context,);
+    }
+  } catch (e) {
+    if (false) console.warn('Preload failed', route, e,);
+  }
+}
+async function preloadRouteData(component, context,) {
+  const loader = component.loader;
+  if (!loader?.load) return;
+  const loaderContext = {
+    signal: context.signal ?? new AbortController().signal,
+    pathVariables: context.pathVariables ?? {},
+    routeId: context.routeId,
+    locale: context.locale,
+    collectionUtils: context.collectionUtils,
+  };
+  try {
+    await loader.load({}, loaderContext,);
+  } catch (e) {
+    if (false) console.warn('Route data preload failed', e,);
+  }
+}
+function useRouteHandler(routeId, preload = false, elementId,) {
+  const {
+    navigate,
+  } = useRouter();
+  useRoutePreloader([routeId,], preload,);
+  const handler = React42.useCallback(() => navigate?.(routeId, elementId,), [navigate, elementId, routeId,],);
+  return handler;
+}
 function computeRelativePath(from, to,) {
   if (!from.startsWith('/',) || !to.startsWith('/',)) {
     throw new Error('from/to paths are expected to be absolute',);
@@ -13832,8 +14022,6 @@ function normalizeString(path,) {
   return res;
 }
 var customNotFoundPagePaths = /* @__PURE__ */ new Set([`/404.html`, `/404`, `/404/`,],);
-var pathVariablesRegExpRaw = ':([a-z]\\w*)';
-var pathVariablesRegExp = /* @__PURE__ */ new RegExp(pathVariablesRegExpRaw, 'gi',);
 function fillPathVariables(path, variables,) {
   return path.replace(pathVariablesRegExp, (match, name,) => {
     const value = variables[name];
@@ -14862,137 +15050,6 @@ function useMemoOne(factory, inputs,) {
     committed.current = cache2;
   }, [cache2,],);
   return cache2.result;
-}
-async function getLocalesForCurrentRoute(activeLocale, locales, currentRoute, pathVariables, collectionUtils,) {
-  if (!currentRoute) return locales;
-  const slugByLocaleIfCollectionPage = await getSlugByLocaleIfCollectionPage(
-    activeLocale,
-    locales,
-    currentRoute,
-    pathVariables,
-    collectionUtils,
-  );
-  const includedLocalesForCurrentRoute = currentRoute.includedLocales;
-  const localesForCurrentRoute = [];
-  for (const locale of locales) {
-    if (includedLocalesForCurrentRoute) {
-      if (!includedLocalesForCurrentRoute.includes(locale.id,)) continue;
-    }
-    if (slugByLocaleIfCollectionPage) {
-      const hasSlug = slugByLocaleIfCollectionPage.has(locale.id,);
-      if (!hasSlug) continue;
-    }
-    localesForCurrentRoute.push(locale,);
-  }
-  return localesForCurrentRoute;
-}
-async function getSlugByLocaleIfCollectionPage(activeLocale, locales, currentRoute, pathVariables, collectionUtils,) {
-  const {
-    collectionId,
-  } = currentRoute;
-  if (!collectionId) return null;
-  if (!activeLocale) return null;
-  if (!pathVariables) return null;
-  const {
-    path,
-  } = currentRoute;
-  if (!path) return null;
-  const matches = Array.from(path.matchAll(pathVariablesRegExp,),);
-  const lastMatch = matches.pop();
-  if (!lastMatch) return null;
-  const pathVariableWithDelimiter = lastMatch?.[0];
-  const pathVariableValue = lastMatch?.[1];
-  if (!pathVariableWithDelimiter || !pathVariableValue) {
-    throw new Error('Failed to replace path variables: unexpected regex match group',);
-  }
-  const currentSlug = pathVariables[pathVariableValue];
-  if (!currentSlug || !isString(currentSlug,)) {
-    throw new Error(`No slug found for path variable ${pathVariableValue}`,);
-  }
-  const utils = collectionUtils?.get(collectionId,);
-  if (!utils) return null;
-  const maybeRecordId = utils.getRecordIdBySlug(currentSlug, activeLocale,);
-  const recordId = isPromise(maybeRecordId,) ? await maybeRecordId : maybeRecordId;
-  if (!recordId) return null;
-  const slugById = /* @__PURE__ */ new Map();
-  await Promise.all(locales.map(async (locale) => {
-    const maybeSlug = utils.getSlugByRecordId(recordId, locale,);
-    const slug = isPromise(maybeSlug,) ? await maybeSlug : maybeSlug;
-    if (!slug) return;
-    slugById.set(locale.id, slug,);
-  },),);
-  return slugById;
-}
-var noopAsync = async () => {};
-var defaultLocaleInfo = {
-  activeLocale: null,
-  locales: [],
-  setLocale: noopAsync,
-};
-var LocaleInfoContext = /* @__PURE__ */ (() => {
-  const Context2 = React42.createContext(defaultLocaleInfo,);
-  Context2.displayName = 'LocaleInfoContext';
-  return Context2;
-})();
-function useLocaleInfo() {
-  return React42.useContext(LocaleInfoContext,);
-}
-function useLocalesForCurrentRoute() {
-  const {
-    currentRouteId,
-    routes,
-    currentPathVariables,
-  } = useRouter();
-  const {
-    activeLocale,
-    locales,
-  } = useLocaleInfo();
-  const [localesForCurrentRoute, setLocalesForCurrentRoute,] = React42.useState(() => activeLocale ? [activeLocale,] : []);
-  const currentRoute = currentRouteId ? routes?.[currentRouteId] : void 0;
-  const collectionUtils = useCollectionUtils();
-  React42.useEffect(() => {
-    let active = true;
-    getLocalesForCurrentRoute(activeLocale, locales, currentRoute, currentPathVariables, collectionUtils,).then((localesSubset) => {
-      if (!active) return;
-      React42.startTransition(() => {
-        if (localesSubset) {
-          setLocalesForCurrentRoute(localesSubset,);
-        } else {
-          setLocalesForCurrentRoute(activeLocale ? [activeLocale,] : [],);
-        }
-      },);
-    },).catch(() => {},);
-    return () => {
-      active = false;
-    };
-  }, [activeLocale, locales, collectionUtils, currentRoute, currentPathVariables,],);
-  return localesForCurrentRoute;
-}
-function useLocalizationInfo() {
-  const {
-    activeLocale,
-    locales,
-    setLocale,
-  } = useLocaleInfo();
-  return {
-    activeLocalization: activeLocale,
-    localizations: locales,
-    setLocalization: setLocale,
-  };
-}
-function useLocaleCode() {
-  return useLocaleInfo().activeLocale?.code ?? 'en-US';
-}
-function useLocale() {
-  return useLocaleCode();
-}
-var LayoutDirectionContext = /* @__PURE__ */ (() => {
-  const Context2 = React42.createContext('ltr',);
-  Context2.displayName = 'LayoutDirectionContext';
-  return Context2;
-})();
-function useLayoutDirection() {
-  return React42.useContext(LayoutDirectionContext,);
 }
 var URLSearchParamsContext = /* @__PURE__ */ (() => {
   const Context2 = createContext({
@@ -37167,13 +37224,6 @@ var GracefullyDegradingErrorBoundary = class extends Component2 {
     );
   }
 };
-var LibraryFeaturesContext = /* @__PURE__ */ React42.createContext(void 0,);
-LibraryFeaturesContext.displayName = 'LibraryFeaturesContext';
-var LibraryFeaturesProvider = /* @__PURE__ */ (() => LibraryFeaturesContext.Provider)();
-var useLibraryFeatures = () => {
-  const context = React42.useContext(LibraryFeaturesContext,);
-  return context ?? {};
-};
 function findAnchorElement(target, withinElement,) {
   if (target instanceof HTMLAnchorElement) {
     return target;
@@ -37228,13 +37278,18 @@ function getObserveRouteForPreloadingFn() {
     threshold: OBSERVER_THRESHOLD,
   },);
   let activePreloadsAmount = 0;
-  async function preloadTimeout(route, target,) {
+  async function preloadTimeout(context, target,) {
     if (preloadDisabled) return;
-    const nodesInViewport = routeToNodesInViewport.get(route,);
-    if (!nodesInViewport?.size || preloadedRoutes.has(route,)) return;
+    const {
+      routeId,
+      pathVariables,
+      preload,
+    } = context;
+    const nodesInViewport = routeToNodesInViewport.get(routeId,);
+    if (!nodesInViewport?.size || preloadedRoutes.has(routeId,)) return;
     ++activePreloadsAmount;
-    preloadedRoutes.add(route,);
-    const preloadDone = preloadRoute(route,).catch(() => {
+    preloadedRoutes.add(routeId,);
+    const preloadPromise = preload(routeId, pathVariables,)?.catch(() => {
       if (false) {
         throw new Error(
           'Error in preloadRoute during preloadTimeout. This should never happen as it introduces bugs. Please make sure preloadRoute does not throw.',
@@ -37248,35 +37303,42 @@ function getObserveRouteForPreloadingFn() {
       nodeToRoute.delete(node,);
     }
     nodesInViewport.clear();
-    routeToNodesInViewport.delete(route,);
-    await preloadDone;
+    routeToNodesInViewport.delete(routeId,);
+    await preloadPromise;
     --activePreloadsAmount;
   }
   function onPreloadIntersectionChange(entries,) {
     for (const entry of entries) {
       const target = entry.target;
-      const route = nodeToRoute.get(target,);
-      if (!route || preloadedRoutes.has(route,)) {
+      const context = nodeToRoute.get(target,);
+      if (!context || preloadedRoutes.has(context.routeId,)) {
         observer2.unobserve(target,);
         nodeToRoute.delete(target,);
         continue;
       }
-      const nodes = routeToNodesInViewport.get(route,);
-      const amountOfNodesInViewport = routeToNodesInViewport.get(route,)?.size ?? 0;
+      const {
+        routeId,
+      } = context;
+      const nodes = routeToNodesInViewport.get(routeId,);
+      const amountOfNodesInViewport = routeToNodesInViewport.get(routeId,)?.size ?? 0;
       if (entry.isIntersecting) {
         if (activePreloadsAmount >= maxPreloadAmount) continue;
         if (nodes) nodes.add(target,);
-        else routeToNodesInViewport.set(route, /* @__PURE__ */ new Set([target,],),);
-        setTimeout(preloadTimeout.bind(void 0, route, target,), PRELOAD_AFTER_MS,);
+        else routeToNodesInViewport.set(routeId, /* @__PURE__ */ new Set([target,],),);
+        setTimeout(preloadTimeout.bind(void 0, context, target,), PRELOAD_AFTER_MS,);
       } else {
         if (nodes) nodes.delete(target,);
-        if (amountOfNodesInViewport <= 1) routeToNodesInViewport.delete(route,);
+        if (amountOfNodesInViewport <= 1) routeToNodesInViewport.delete(routeId,);
       }
     }
   }
-  return (route, node,) => {
-    if (preloadedRoutes.has(route,)) return;
-    nodeToRoute.set(node, route,);
+  return (node, preload, routeId, pathVariables,) => {
+    if (preloadedRoutes.has(routeId,)) return;
+    nodeToRoute.set(node, {
+      routeId,
+      pathVariables,
+      preload,
+    },);
     observer2.observe(node,);
     return () => {
       nodeToRoute.delete(node,);
@@ -37579,14 +37641,11 @@ function makeUrlAbsolute(href,) {
     return href;
   }
 }
-function performNavigation(router, routeId, elementId, combinedPathVariables, smoothScroll, beforeUrlUpdate,) {
-  const route = router.getRoute?.(routeId,);
-  if (route && isLazyComponentType(route?.page,)) {
-    void route.page.preload();
-  }
+function performNavigation(router, routeId, preload, elementId, combinedPathVariables, smoothScroll, beforeUrlUpdate,) {
+  void preload(routeId, combinedPathVariables, false,);
   router.navigate?.(routeId, elementId, combinedPathVariables, smoothScroll, beforeUrlUpdate,);
 }
-function createOnClickLinkHandler(router, routeId, href, trackLinkClick, elementId, combinedPathVariables, smoothScroll,) {
+function createOnClickLinkHandler(router, routeId, href, trackLinkClick, preload, elementId, combinedPathVariables, smoothScroll,) {
   return async (event) => {
     const usedMetaKey = event.metaKey;
     const anchorElement = findAnchorElement(event.target,);
@@ -37603,10 +37662,10 @@ function createOnClickLinkHandler(router, routeId, href, trackLinkClick, element
       return;
     }
     event.preventDefault();
-    performNavigation(router, routeId, elementId, combinedPathVariables, smoothScroll, track,);
+    performNavigation(router, routeId, preload, elementId, combinedPathVariables, smoothScroll, track,);
   };
 }
-function propsForRoutePath(href, router, currentRoute, linkOptions, localeId, locales, implicitPathVariables,) {
+function propsForRoutePath(href, router, currentRoute, linkOptions, preload, localeId, locales, implicitPathVariables,) {
   if (!currentRoute) return propsForLink(href, linkOptions,);
   const matchedRoute = findMatchingRouteAttributesForResolvedPath(router, href, implicitPathVariables, locales,);
   if (!matchedRoute) return propsForLink(href, linkOptions,);
@@ -37633,6 +37692,7 @@ function propsForRoutePath(href, router, currentRoute, linkOptions, localeId, lo
   },);
   const anchorTarget = getTargetAttrValue(linkOptions.openInNewTab, true,);
   return {
+    routeId,
     href: path,
     target: anchorTarget,
     onClick: createOnClickLinkHandler(
@@ -37640,11 +37700,12 @@ function propsForRoutePath(href, router, currentRoute, linkOptions, localeId, lo
       routeId,
       path,
       linkOptions.trackLinkClick,
+      preload,
       elementId,
       pathVariables,
       linkOptions.smoothScroll,
     ),
-    navigate: () => performNavigation(router, routeId, elementId, pathVariables, linkOptions.smoothScroll,),
+    navigate: () => performNavigation(router, routeId, preload, elementId, pathVariables, linkOptions.smoothScroll,),
     'data-framer-page-link-current': currentRoute && linkMatchesRoute(currentRoute, {
           webPageId: routeId,
           hash: elementId,
@@ -37673,6 +37734,7 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
     locales,
   } = useLocaleInfo();
   const resolveSlugsWithSuspense2 = useResolveSlugsWithSuspense();
+  const preload = usePreloadRoute();
   const trackLinkClick = useTrackLinkClick({
     nodeId,
     clickTrackingId,
@@ -37696,6 +37758,7 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
           preserveParams,
           smoothScroll,
         },
+        preload,
         activeLocale?.id,
         locales,
         implicitPathVariables,
@@ -37718,17 +37781,18 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
       implicitPathVariables,
     );
     const {
-      routeId,
+      routeId: routeId2,
       href: resolvedHref,
       elementId,
       pathVariables,
     } = maybeRouteAttributes;
     const anchorTarget = getTargetAttrValue(openInNewTab, true,);
     return {
+      routeId: routeId2,
       href: resolvedHref,
       target: anchorTarget,
-      onClick: createOnClickLinkHandler(router, routeId, resolvedHref, trackLinkClick, elementId, pathVariables, smoothScroll,),
-      navigate: () => performNavigation(router, routeId, elementId, pathVariables, smoothScroll,),
+      onClick: createOnClickLinkHandler(router, routeId2, resolvedHref, trackLinkClick, preload, elementId, pathVariables, smoothScroll,),
+      navigate: () => performNavigation(router, routeId2, preload, elementId, pathVariables, smoothScroll,),
       'data-framer-page-link-current': currentRoute && linkMatchesRoute(currentRoute, pageLink, implicitPathVariables,) || void 0,
     };
   }, [
@@ -37744,21 +37808,22 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
     locales,
     preserveParams,
     resolveSlugsWithSuspense2,
+    preload,
   ],);
   const hasRef = isValidElement(children,) && 'ref' in children;
   const observerRef = useObserverRef(hasRef ? children.ref : void 0,);
-  useRefEffect(observerRef, (node) => {
-    if (node === null) return;
-    const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
-    if (!pageLink) return;
-    const route = getRouteFromPageLink(pageLink, router, currentRoute, locales,);
-    if (!route) return;
-    return observeRouteForPreloading?.(route, node,);
-  }, [currentRoute, href, router, locales,],);
   const {
     navigate,
+    routeId,
     ...propsAddedByLinkExceptNavigate
   } = propsAddedByLink;
+  useRefEffect(observerRef, (node) => {
+    if (node === null || !routeId) return;
+    const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
+    if (!pageLink) return;
+    const pathVariables = isString(pageLink,) ? void 0 : pageLink.pathVariables;
+    return observeRouteForPreloading?.(node, preload, routeId, pathVariables,);
+  }, [href, preload, routeId,],);
   const isInternalNavigation = Boolean(navigate,);
   const clone = useCloneChildrenWithPropsAndRef(forwardedRef,);
   const replacedChildren = clone.cloneAsArray(children, (childProps) =>
@@ -54946,6 +55011,7 @@ export {
   pushLoadMoreHistory,
   px,
   QueryCache,
+  queryCache,
   QueryEngine,
   RadialGradient,
   readTransformValue,
