@@ -218,6 +218,7 @@ body { --framer-will-change-filter-override: none; }
         ul.framer-text {
             background-color: var(--framer-blockquote-text-background-color, var(--framer-text-background-color, initial));
             border-radius: var(--framer-blockquote-text-background-radius, var(--framer-text-background-radius, initial));
+            corner-shape: var(--framer-blockquote-text-background-corner-shape, var(--framer-text-background-corner-shape, initial));
             padding: var(--framer-blockquote-text-background-padding, var(--framer-text-background-padding, initial));
         }
     
@@ -355,6 +356,7 @@ body { --framer-will-change-filter-override: none; }
             /* Don't inherit background styles from any parent text style. */
             background-color: initial;
             border-radius: var(--framer-link-text-background-radius, initial);
+            corner-shape: var(--framer-link-text-background-corner-shape, initial);
             padding: var(--framer-link-text-background-padding, initial);
         }
     
@@ -421,6 +423,7 @@ body { --framer-will-change-filter-override: none; }
             font-size: calc(var(--framer-link-hover-font-size, var(--framer-blockquote-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-link-hover-text-transform, var(--framer-blockquote-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none))));
             border-radius: var(--framer-link-hover-text-background-radius, var(--framer-link-text-background-radius, var(--framer-text-background-radius, initial)));
+            corner-shape: var(--framer-link-hover-text-background-corner-shape, var(--framer-link-text-background-corner-shape, var(--framer-text-background-corner-shape, initial)));
             padding: var(--framer-link-hover-text-background-padding, var(--framer-link-text-background-padding, var(--framer-text-background-padding, initial)));
         }
     
@@ -472,6 +475,7 @@ body { --framer-will-change-filter-override: none; }
             font-size: calc(var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-link-current-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none)));
             border-radius: var(--framer-link-current-text-background-radius, var(--framer-link-text-background-radius, initial));
+            corner-shape: var(--framer-link-current-text-background-corner-shape, var(--framer-link-text-background-corner-shape, initial));
             padding: var(--framer-link-current-text-background-padding, var(--framer-link-text-background-padding, initial));
         }
     
@@ -539,6 +543,7 @@ body { --framer-will-change-filter-override: none; }
             font-size: calc(var(--framer-link-hover-font-size, var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)))) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-link-hover-text-transform, var(--framer-link-current-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none))));
             border-radius: var(--framer-link-hover-text-background-radius, var(--framer-link-current-text-background-radius, var(--framer-link-text-background-radius, initial)));
+            corner-shape: var(--framer-link-hover-text-background-corner-shape, var(--framer-link-current-text-background-corner-shape, var(--framer-link-text-background-corner-shape, initial)));
             padding: var(--framer-link-hover-text-background-padding, var(--framer-link-current-text-background-padding, var(--framer-link-text-background-padding, initial)));
         }
     
@@ -609,6 +614,7 @@ body { --framer-will-change-filter-override: none; }
             --framer-font-open-type-features: normal;
             --framer-text-background-color: initial;
             --framer-text-background-radius: initial;
+            --framer-text-background-corner-shape: initial;
             --framer-text-background-padding: initial;
         }
     
@@ -1023,3 +1029,4 @@ NavigationContainer
         /* Render text-fill elements inline when text is truncated, otherwise default to their default value (e.g. inline-block) */
         p.framer-text[data-text-fill] { display: var(--text-truncation-display-inline-for-safari-16, inline-block) }
     }
+@supports (corner-shape: superellipse(2)) { :root { --one-if-corner-shape-supported: 1 } }

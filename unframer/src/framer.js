@@ -14,7 +14,7 @@ import {
   __toESM,
 } from './framer-chunks/chunk-DBJCHRFG.js';
 
-// /:https://app.framerstatic.com/chunk-SMTZCOHA.mjs
+// /:https://app.framerstatic.com/chunk-2J7GL3DQ.mjs
 import { createContext, } from 'react';
 import { useEffect, useLayoutEffect, } from 'react';
 import * as React from 'react';
@@ -313,7 +313,7 @@ function createRenderBatcher(scheduleNextBatch, allowKeepAlive,) {
     isProcessing: false,
   };
   const flagRunNextFrame = () => runNextFrame = true;
-  const steps22 = stepsOrder.reduce((acc, key7,) => {
+  const steps2 = stepsOrder.reduce((acc, key7,) => {
     acc[key7] = createRenderStep(flagRunNextFrame, allowKeepAlive ? key7 : void 0,);
     return acc;
   }, {},);
@@ -326,7 +326,7 @@ function createRenderBatcher(scheduleNextBatch, allowKeepAlive,) {
     preRender,
     render,
     postRender,
-  } = steps22;
+  } = steps2;
   const processBatch = () => {
     const timestamp = MotionGlobalConfig.useManualTiming ? state.timestamp : performance.now();
     runNextFrame = false;
@@ -357,7 +357,7 @@ function createRenderBatcher(scheduleNextBatch, allowKeepAlive,) {
     }
   };
   const schedule = stepsOrder.reduce((acc, key7,) => {
-    const step2 = steps22[key7];
+    const step2 = steps2[key7];
     acc[key7] = (process2, keepAlive = false, immediate = false,) => {
       if (!runNextFrame) wake();
       return step2.schedule(process2, keepAlive, immediate,);
@@ -366,14 +366,14 @@ function createRenderBatcher(scheduleNextBatch, allowKeepAlive,) {
   }, {},);
   const cancel = (process2) => {
     for (let i = 0; i < stepsOrder.length; i++) {
-      steps22[stepsOrder[i]].cancel(process2,);
+      steps2[stepsOrder[i]].cancel(process2,);
     }
   };
   return {
     schedule,
     cancel,
     state,
-    steps: steps22,
+    steps: steps2,
   };
 }
 var {
@@ -4671,7 +4671,56 @@ function MotionConfig({
   },);
 }
 var MotionContext = /* @__PURE__ */ createContext({},);
-var scaleCorrectors = {};
+function pixelsToPercent(pixels, axis,) {
+  if (axis.max === axis.min) return 0;
+  return pixels / (axis.max - axis.min) * 100;
+}
+var correctBorderRadius = {
+  correct: (latest, node,) => {
+    if (!node.target) return latest;
+    if (typeof latest === 'string') {
+      if (px.test(latest,)) {
+        latest = parseFloat(latest,);
+      } else {
+        return latest;
+      }
+    }
+    const x = pixelsToPercent(latest, node.target.x,);
+    const y = pixelsToPercent(latest, node.target.y,);
+    return `${x}% ${y}%`;
+  },
+};
+var correctBoxShadow = {
+  correct: (latest, {
+    treeScale,
+    projectionDelta,
+  },) => {
+    const original = latest;
+    const shadow = complex.parse(latest,);
+    if (shadow.length > 5) return original;
+    const template = complex.createTransformer(latest,);
+    const offset = typeof shadow[0] !== 'number' ? 1 : 0;
+    const xScale = projectionDelta.x.scale * treeScale.x;
+    const yScale = projectionDelta.y.scale * treeScale.y;
+    shadow[0 + offset] /= xScale;
+    shadow[1 + offset] /= yScale;
+    const averageScale = mixNumber(xScale, yScale, 0.5,);
+    if (typeof shadow[2 + offset] === 'number') shadow[2 + offset] /= averageScale;
+    if (typeof shadow[3 + offset] === 'number') shadow[3 + offset] /= averageScale;
+    return template(shadow,);
+  },
+};
+var scaleCorrectors = {
+  borderRadius: {
+    ...correctBorderRadius,
+    applyTo: ['borderTopLeftRadius', 'borderTopRightRadius', 'borderBottomLeftRadius', 'borderBottomRightRadius',],
+  },
+  borderTopLeftRadius: correctBorderRadius,
+  borderTopRightRadius: correctBorderRadius,
+  borderBottomLeftRadius: correctBorderRadius,
+  borderBottomRightRadius: correctBorderRadius,
+  boxShadow: correctBoxShadow,
+};
 function addScaleCorrector(correctors,) {
   for (const key7 in correctors) {
     scaleCorrectors[key7] = correctors[key7];
@@ -7714,45 +7763,6 @@ var globalProjectionState = {
    */
   hasEverUpdated: false,
 };
-function pixelsToPercent(pixels, axis,) {
-  if (axis.max === axis.min) return 0;
-  return pixels / (axis.max - axis.min) * 100;
-}
-var correctBorderRadius = {
-  correct: (latest, node,) => {
-    if (!node.target) return latest;
-    if (typeof latest === 'string') {
-      if (px.test(latest,)) {
-        latest = parseFloat(latest,);
-      } else {
-        return latest;
-      }
-    }
-    const x = pixelsToPercent(latest, node.target.x,);
-    const y = pixelsToPercent(latest, node.target.y,);
-    return `${x}% ${y}%`;
-  },
-};
-var correctBoxShadow = {
-  correct: (latest, {
-    treeScale,
-    projectionDelta,
-  },) => {
-    const original = latest;
-    const shadow = complex.parse(latest,);
-    if (shadow.length > 5) return original;
-    const template = complex.createTransformer(latest,);
-    const offset = typeof shadow[0] !== 'number' ? 1 : 0;
-    const xScale = projectionDelta.x.scale * treeScale.x;
-    const yScale = projectionDelta.y.scale * treeScale.y;
-    shadow[0 + offset] /= xScale;
-    shadow[1 + offset] /= yScale;
-    const averageScale = mixNumber(xScale, yScale, 0.5,);
-    if (typeof shadow[2 + offset] === 'number') shadow[2 + offset] /= averageScale;
-    if (typeof shadow[3 + offset] === 'number') shadow[3 + offset] /= averageScale;
-    return template(shadow,);
-  },
-};
 var hasTakenAnySnapshot = false;
 var MeasureLayoutWithContext = class extends Component2 {
   /**
@@ -7770,7 +7780,6 @@ var MeasureLayoutWithContext = class extends Component2 {
     const {
       projection,
     } = visualElement;
-    addScaleCorrector(defaultScaleCorrectors,);
     if (projection) {
       if (layoutGroup.group) layoutGroup.group.add(projection,);
       if (switchLayoutGroup && switchLayoutGroup.register && layoutId) {
@@ -7871,17 +7880,6 @@ function MeasureLayout(props,) {
     safeToRemove,
   },);
 }
-var defaultScaleCorrectors = {
-  borderRadius: {
-    ...correctBorderRadius,
-    applyTo: ['borderTopLeftRadius', 'borderTopRightRadius', 'borderBottomLeftRadius', 'borderBottomRightRadius',],
-  },
-  borderTopLeftRadius: correctBorderRadius,
-  borderTopRightRadius: correctBorderRadius,
-  borderBottomLeftRadius: correctBorderRadius,
-  borderBottomRightRadius: correctBorderRadius,
-  boxShadow: correctBoxShadow,
-};
 function animateSingleValue(value, keyframes2, options,) {
   const motionValue$1 = isMotionValue(value,) ? value : motionValue(value,);
   motionValue$1.start(animateMotionValue('', motionValue$1, keyframes2, options,),);
@@ -8220,6 +8218,7 @@ function createProjectionNode2({
       };
       this.eventHandlers = /* @__PURE__ */ new Map();
       this.hasTreeAnimated = false;
+      this.layoutVersion = 0;
       this.updateScheduled = false;
       this.scheduleUpdate = () => this.update();
       this.projectionUpdateScheduled = false;
@@ -8243,6 +8242,7 @@ function createProjectionNode2({
         }
       };
       this.resolvedRelativeTargetAt = 0;
+      this.linkedParentVersion = 0;
       this.hasProjected = false;
       this.isVisible = true;
       this.animationProgress = 0;
@@ -8510,6 +8510,7 @@ function createProjectionNode2({
       }
       const prevLayout = this.layout;
       this.layout = this.measure(false,);
+      this.layoutVersion++;
       this.layoutCorrected = createBox();
       this.isLayoutDirty = false;
       this.projectionDelta = void 0;
@@ -8683,17 +8684,15 @@ function createProjectionNode2({
       } = this.options;
       if (!this.layout || !(layout2 || layoutId)) return;
       this.resolvedRelativeTargetAt = frameData.timestamp;
+      const relativeParent = this.getClosestProjectingParent();
+      if (relativeParent && this.linkedParentVersion !== relativeParent.layoutVersion && !relativeParent.options.layoutRoot) {
+        this.removeRelativeTarget();
+      }
       if (!this.targetDelta && !this.relativeTarget) {
-        const relativeParent = this.getClosestProjectingParent();
-        if (relativeParent && relativeParent.layout && this.animationProgress !== 1) {
-          this.relativeParent = relativeParent;
-          this.forceRelativeParentToResolveTarget();
-          this.relativeTarget = createBox();
-          this.relativeTargetOrigin = createBox();
-          calcRelativePosition(this.relativeTargetOrigin, this.layout.layoutBox, relativeParent.layout.layoutBox,);
-          copyBoxInto(this.relativeTarget, this.relativeTargetOrigin,);
+        if (relativeParent && relativeParent.layout) {
+          this.createRelativeTarget(relativeParent, this.layout.layoutBox, relativeParent.layout.layoutBox,);
         } else {
-          this.relativeParent = this.relativeTarget = void 0;
+          this.removeRelativeTarget();
         }
       }
       if (!this.relativeTarget && !this.targetDelta) return;
@@ -8716,17 +8715,11 @@ function createProjectionNode2({
       }
       if (this.attemptToResolveRelativeTarget) {
         this.attemptToResolveRelativeTarget = false;
-        const relativeParent = this.getClosestProjectingParent();
         if (
           relativeParent && Boolean(relativeParent.resumingFrom,) === Boolean(this.resumingFrom,) && !relativeParent.options.layoutScroll &&
           relativeParent.target && this.animationProgress !== 1
         ) {
-          this.relativeParent = relativeParent;
-          this.forceRelativeParentToResolveTarget();
-          this.relativeTarget = createBox();
-          this.relativeTargetOrigin = createBox();
-          calcRelativePosition(this.relativeTargetOrigin, this.target, relativeParent.target,);
-          copyBoxInto(this.relativeTarget, this.relativeTargetOrigin,);
+          this.createRelativeTarget(relativeParent, this.target, relativeParent.target,);
         } else {
           this.relativeParent = this.relativeTarget = void 0;
         }
@@ -8747,6 +8740,18 @@ function createProjectionNode2({
     }
     isProjecting() {
       return Boolean((this.relativeTarget || this.targetDelta || this.options.layoutRoot) && this.layout,);
+    }
+    createRelativeTarget(relativeParent, layout2, parentLayout,) {
+      this.relativeParent = relativeParent;
+      this.linkedParentVersion = relativeParent.layoutVersion;
+      this.forceRelativeParentToResolveTarget();
+      this.relativeTarget = createBox();
+      this.relativeTargetOrigin = createBox();
+      calcRelativePosition(this.relativeTargetOrigin, layout2, parentLayout,);
+      copyBoxInto(this.relativeTarget, this.relativeTargetOrigin,);
+    }
+    removeRelativeTarget() {
+      this.relativeParent = this.relativeTarget = void 0;
     }
     calcProjection() {
       const lead = this.getLead();
@@ -11337,7 +11342,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.RI4JAUGT.mjs
+// /:https://app.framerstatic.com/framer.NVDDHNE2.mjs
 
 import React42 from 'react';
 import { useDeferredValue, useSyncExternalStore, } from 'react';
@@ -11699,16 +11704,16 @@ var require_eventemitter3 = __commonJS({
       Events.prototype = /* @__PURE__ */ Object.create(null,);
       if (!new Events().__proto__) prefix3 = false;
     }
-    function EE(fn, context, once,) {
+    function EE(fn, context, once2,) {
       this.fn = fn;
       this.context = context;
-      this.once = once || false;
+      this.once = once2 || false;
     }
-    function addListener(emitter, event, fn, context, once,) {
+    function addListener(emitter, event, fn, context, once2,) {
       if (typeof fn !== 'function') {
         throw new TypeError('The listener must be a function',);
       }
-      var listener = new EE(fn, context || emitter, once,),
+      var listener = new EE(fn, context || emitter, once2,),
         evt = prefix3 ? prefix3 + event : event;
       if (!emitter._events[evt]) emitter._events[evt] = listener, emitter._eventsCount++;
       else if (!emitter._events[evt].fn) emitter._events[evt].push(listener,);
@@ -11813,10 +11818,10 @@ var require_eventemitter3 = __commonJS({
     EventEmitter2.prototype.on = function on(event, fn, context,) {
       return addListener(this, event, fn, context, false,);
     };
-    EventEmitter2.prototype.once = function once(event, fn, context,) {
+    EventEmitter2.prototype.once = function once2(event, fn, context,) {
       return addListener(this, event, fn, context, true,);
     };
-    EventEmitter2.prototype.removeListener = function removeListener(event, fn, context, once,) {
+    EventEmitter2.prototype.removeListener = function removeListener(event, fn, context, once2,) {
       var evt = prefix3 ? prefix3 + event : event;
       if (!this._events[evt]) return this;
       if (!fn) {
@@ -11825,12 +11830,12 @@ var require_eventemitter3 = __commonJS({
       }
       var listeners = this._events[evt];
       if (listeners.fn) {
-        if (listeners.fn === fn && (!once || listeners.once) && (!context || listeners.context === context)) {
+        if (listeners.fn === fn && (!once2 || listeners.once) && (!context || listeners.context === context)) {
           clearEvent(this, evt,);
         }
       } else {
         for (var i = 0, events = [], length = listeners.length; i < length; i++) {
-          if (listeners[i].fn !== fn || once && !listeners[i].once || context && listeners[i].context !== context) {
+          if (listeners[i].fn !== fn || once2 && !listeners[i].once || context && listeners[i].context !== context) {
             events.push(listeners[i],);
           }
         }
@@ -12271,27 +12276,128 @@ var require_fontfaceobserver_standalone = __commonJS({
     })();
   },
 },);
+function isFunction(value,) {
+  return typeof value === 'function';
+}
+function isBoolean(value,) {
+  return typeof value === 'boolean';
+}
+function isString(value,) {
+  return typeof value === 'string';
+}
+function isNumber2(value,) {
+  return Number.isFinite(value,);
+}
+function isArray(value,) {
+  return Array.isArray(value,);
+}
+function isObject2(value,) {
+  return value !== null && typeof value === 'object' && !isArray(value,);
+}
+function isEmptyObject(object,) {
+  for (const _ in object) return false;
+  return true;
+}
+function isUndefined(value,) {
+  return typeof value === 'undefined';
+}
+function isNull(value,) {
+  return value === null;
+}
+function isNullish2(value,) {
+  return value == null;
+}
+function isValidDate(value,) {
+  return value instanceof Date && !Number.isNaN(value.getTime(),);
+}
+function isGenerator2(value,) {
+  return isObject2(value,) && isFunction(value.return,);
+}
+function isPromiseLike(value,) {
+  return isObject2(value,) && isFunction(value.then,);
+}
+function isPromise(value,) {
+  return value instanceof Promise;
+}
+var noop2 = () => {};
+var isWindow = typeof window !== 'undefined';
+var isBot =
+  /* @__PURE__ */ (() =>
+    isWindow &&
+    (__unframerNavigator2.webdriver || /bot|-google|google-|yandex|ia_archiver|crawl|spider/iu.test(__unframerNavigator2.userAgent,)))();
+var supportsRequestIdleCallback = isWindow && typeof window.requestIdleCallback === 'function';
+var requestIdleCallback = /* @__PURE__ */ (() =>
+  // eslint-disable-next-line compat/compat,framer-studio/tscompat
+  supportsRequestIdleCallback ? window.requestIdleCallback : setTimeout)();
+function encodeSVGForCSS(svg,) {
+  return `url('data:image/svg+xml,${svg.replaceAll('#', '%23',).replaceAll('\'', '%27',)}')`;
+}
+function getPleaseReportMessage(message, error,) {
+  return `${
+    message
+      ? `${message}
+`
+      : ''
+  }In case the issue persists, report this to the Framer team via https://www.framer.com/contact/${error ? ':\n' : '.'}`;
+}
+var lazyModulesCache = /* @__PURE__ */ new Map();
+function initLazyModulesCache() {
+  if (!isWindow) return;
+  const lazyPreloadLinks = document.querySelectorAll('[rel="modulepreload"][data-framer-lazy]',);
+  for (const link of lazyPreloadLinks) {
+    const hash2 = link.getAttribute('data-framer-lazy',);
+    const url = link.getAttribute('href',);
+    if (!hash2 || !url) continue;
+    const promise = import(url).then((module) => {
+      lazyModulesCache.set(hash2, module,);
+      return module;
+    },).catch((error) => {
+      lazyModulesCache.delete(hash2,);
+      console.warn(`Failed to import lazy module: ${url}`, error,);
+      throw error;
+    },);
+    promise.catch(noop2,);
+    lazyModulesCache.set(hash2, promise,);
+  }
+}
+var lazyModulesCollector = isWindow ? void 0 : /* @__PURE__ */ new Set();
 var preloadKey = 'preload';
 function isLazyComponentType(componentType,) {
   return typeof componentType === 'object' && componentType !== null && !isValidElement(componentType,) && preloadKey in componentType;
 }
-function lazy(factory, moduleName = 'default',) {
+function getLoadedComponent(module, moduleName,) {
+  if (moduleName in module) {
+    return module[moduleName];
+  }
+  throw new Error(`Module does not contain export '${moduleName}'`,);
+}
+function lazy(factory, moduleName = 'default', cacheHash,) {
   let factoryPromise;
   let LoadedComponent;
-  let hasRendered = false;
   let error;
-  const load = () => {
+  const updateFromCache = () => {
+    if (LoadedComponent || !cacheHash || !lazyModulesCache.has(cacheHash,)) return;
+    const maybeModule = lazyModulesCache.get(cacheHash,);
+    if (isPromise(maybeModule,)) {
+      void load(() => maybeModule);
+    } else {
+      LoadedComponent = getLoadedComponent(maybeModule, moduleName,);
+    }
+  };
+  const load = (factoryFn) => {
+    if (LoadedComponent) return Promise.resolve(LoadedComponent,);
     if (!factoryPromise) {
-      factoryPromise = factory().then((module) => {
-        if (!(moduleName in module)) throw new Error(`Module does not contain export '${moduleName}'`,);
-        LoadedComponent = module[moduleName];
-        return LoadedComponent;
+      factoryPromise = factoryFn().then((module) => {
+        const component = getLoadedComponent(module, moduleName,);
+        LoadedComponent = component;
+        return component;
       },).catch((err) => {
         error = err;
       },);
     }
     return factoryPromise;
   };
+  let hasRendered = false;
   const Component18 = forwardRef(function LazyWithPreload(props, ref,) {
     useEffect(() => {
       hasRendered = true;
@@ -12299,15 +12405,22 @@ function lazy(factory, moduleName = 'default',) {
     if (error) {
       throw error;
     }
+    updateFromCache();
+    if (cacheHash !== void 0 && lazyModulesCollector !== void 0) {
+      lazyModulesCollector.add(cacheHash,);
+    }
     if (!LoadedComponent) {
-      throw load();
+      throw load(factory,);
     }
     return /* @__PURE__ */ jsx(LoadedComponent, {
       ref,
       ...props,
     },);
   },);
-  Component18.preload = load;
+  Component18.preload = () => {
+    updateFromCache();
+    return load(factory,);
+  };
   Component18.getStatus = () => {
     return {
       hasLoaded: LoadedComponent !== void 0,
@@ -12570,68 +12683,6 @@ function useRouteElementId(id3, targetRouteId,) {
 function useCurrentPathVariables() {
   return useCurrentRoute()?.pathVariables;
 }
-function isFunction(value,) {
-  return typeof value === 'function';
-}
-function isBoolean(value,) {
-  return typeof value === 'boolean';
-}
-function isString(value,) {
-  return typeof value === 'string';
-}
-function isNumber2(value,) {
-  return Number.isFinite(value,);
-}
-function isArray(value,) {
-  return Array.isArray(value,);
-}
-function isObject2(value,) {
-  return value !== null && typeof value === 'object' && !isArray(value,);
-}
-function isEmptyObject(object,) {
-  for (const _ in object) return false;
-  return true;
-}
-function isUndefined(value,) {
-  return typeof value === 'undefined';
-}
-function isNull(value,) {
-  return value === null;
-}
-function isNullish2(value,) {
-  return value == null;
-}
-function isValidDate(value,) {
-  return value instanceof Date && !Number.isNaN(value.getTime(),);
-}
-function isGenerator2(value,) {
-  return isObject2(value,) && isFunction(value.return,);
-}
-function isPromiseLike(value,) {
-  return isObject2(value,) && isFunction(value.then,);
-}
-function isPromise(value,) {
-  return value instanceof Promise;
-}
-var noop2 = () => {};
-var isWindow = typeof window !== 'undefined';
-var isBot =
-  /* @__PURE__ */ (() => isWindow && /bot|-google|google-|yandex|ia_archiver|crawl|spider/iu.test(__unframerNavigator2.userAgent,))();
-var supportsRequestIdleCallback = isWindow && typeof window.requestIdleCallback === 'function';
-var requestIdleCallback = /* @__PURE__ */ (() =>
-  // eslint-disable-next-line compat/compat,framer-studio/tscompat
-  supportsRequestIdleCallback ? window.requestIdleCallback : setTimeout)();
-function encodeSVGForCSS(svg,) {
-  return `url('data:image/svg+xml,${svg.replaceAll('#', '%23',).replaceAll('\'', '%27',)}')`;
-}
-function getPleaseReportMessage(message, error,) {
-  return `${
-    message
-      ? `${message}
-`
-      : ''
-  }In case the issue persists, report this to the Framer team via https://www.framer.com/contact/${error ? ':\n' : '.'}`;
-}
 var mockWindow = {
   addEventListener: () => {},
   removeEventListener: () => {},
@@ -12823,8 +12874,13 @@ var PromiseState = {
   Rejected: 'rejected',
 };
 var LazyValue = class _LazyValue {
-  constructor(resolver,) {
+  /**
+   * @param resolver Function that returns the value or promise
+   * @param cacheHash Optional hash of the module filename, used for cache optimization. During build, this is automatically injected as a compact hash of the filename extracted from the original HTTPS URL (e.g., "YouTube.js" → hash).
+   */
+  constructor(resolver, cacheHash,) {
     this.resolver = resolver;
+    this.cacheHash = cacheHash;
     __publicField(this, 'promiseState', PromiseState.Pending,);
     __publicField(this, 'preloadPromise',);
     __publicField(this, 'value',);
@@ -12870,6 +12926,9 @@ var LazyValue = class _LazyValue {
   preload() {
     if (this.promiseState !== PromiseState.Pending) return;
     if (this.preloadPromise) return this.preloadPromise;
+    if (this.cacheHash !== void 0 && lazyModulesCollector !== void 0) {
+      lazyModulesCollector.add(this.cacheHash,);
+    }
     const fulfill = (value) => {
       this.promiseState = PromiseState.Fulfilled;
       this.value = value;
@@ -12880,7 +12939,7 @@ var LazyValue = class _LazyValue {
     };
     let maybeValue;
     try {
-      maybeValue = this.resolver();
+      maybeValue = this.cacheHash && lazyModulesCache.has(this.cacheHash,) ? lazyModulesCache.get(this.cacheHash,) : this.resolver();
     } catch (e) {
       reject(e,);
       return;
@@ -12889,9 +12948,7 @@ var LazyValue = class _LazyValue {
       fulfill(maybeValue,);
       return;
     }
-    const valuePromise = maybeValue.then(fulfill, (error) => {
-      reject(error,);
-    },);
+    const valuePromise = maybeValue.then(fulfill, reject,);
     this.preloadPromise = valuePromise;
     return valuePromise;
   }
@@ -13222,9 +13279,6 @@ function stringify(value, reducers,) {
   const keys3 = [];
   let p = 0;
   function flatten(thing,) {
-    if (typeof thing === 'function') {
-      throw new DevalueError(`Cannot stringify a function`, keys3,);
-    }
     if (thing === void 0) return UNDEFINED;
     if (Number.isNaN(thing,)) return NAN;
     if (thing === Infinity) return POSITIVE_INFINITY;
@@ -13244,6 +13298,9 @@ function stringify(value, reducers,) {
         stringified[index2] = `["${key7}",${flatten(value2,)}]`;
         return index2;
       }
+    }
+    if (typeof thing === 'function') {
+      throw new DevalueError(`Cannot stringify a function`, keys3,);
     }
     let str = '';
     if (is_primitive(thing,)) {
@@ -14690,7 +14747,7 @@ async function switchLocale(options,) {
   const result = await getLocalizedNavigationPath(options,);
   if (!result) return;
   try {
-    localStorage.setItem('preferredLocale', options.nextLocale.code,);
+    localStorage.preferredLocale = options.nextLocale.code;
   } catch {}
   try {
     if (!isString(result.path,)) {
@@ -14749,18 +14806,28 @@ function useNativeLoadingSpinner() {
     },);
   }, [navigateListener,],);
 }
-var nonSlugCharactersRegExp = /[^\p{Letter}\p{Number}()]+/gu;
-var trimSlugRegExp = /^-+|-+$/gu;
+var unsafeSlugCharactersRegExp = /[\s_?#[\]@!$&'*+,;:="<>%{}|\\^`/]+/gu;
+function trimDashes(str,) {
+  let start2 = 0;
+  let end = str.length;
+  while (start2 < end && str[start2] === '-') start2++;
+  while (end > start2 && str[end - 1] === '-') end--;
+  return str.slice(start2, end,);
+}
 function slugify(value,) {
-  return value.toLowerCase().replace(nonSlugCharactersRegExp, '-',).replace(trimSlugRegExp, '',);
+  return trimDashes(value.trim().toLowerCase().replace(unsafeSlugCharactersRegExp, '-',),);
 }
 var NodeIdContext = /* @__PURE__ */ React42.createContext(null,);
+var validTrackingIdRegExp = /^[a-z0-9]+(?:-[a-z0-9]+)*$/u;
+function isValidTrackingId(trackingId,) {
+  return trackingId === '' || validTrackingIdRegExp.test(trackingId,);
+}
 function useTracking() {
   const router = useRouter();
   const nodeId = useContext(NodeIdContext,);
   return useCallback2((trackingId) => {
     if (!router.pageviewEventData?.current) return;
-    if (slugify(trackingId,) !== trackingId) {
+    if (!isValidTrackingId(trackingId,)) {
       throw new Error(`Invalid tracking ID: ${trackingId}`,);
     }
     if (router.pageviewEventData.current instanceof Promise) {
@@ -14795,66 +14862,6 @@ function useMemoOne(factory, inputs,) {
     committed.current = cache2;
   }, [cache2,],);
   return cache2.result;
-}
-var URLSearchParamsContext = /* @__PURE__ */ (() => {
-  const Context2 = createContext({
-    urlSearchParams: new URLSearchParams(),
-    triggerUpdate: () => {},
-  },);
-  Context2.displayName = 'URLSearchParamsContext';
-  return Context2;
-})();
-function URLSearchParamsProvider({
-  children,
-},) {
-  const onStoreChangeRef = useRef(null,);
-  const searchString = useSyncExternalStore(
-    (onStoreChange) => {
-      onStoreChangeRef.current = onStoreChange;
-      const handler = () => {
-        onStoreChange();
-      };
-      window.addEventListener('popstate', handler,);
-      return () => {
-        onStoreChangeRef.current = null;
-        window.removeEventListener('popstate', handler,);
-      };
-    },
-    () => window.location.search,
-    () => '',
-  );
-  const deferredSearchString = useDeferredValue(searchString,);
-  const triggerUpdate = useCallback2(() => {
-    onStoreChangeRef.current?.();
-  }, [],);
-  const value = useMemoOne(() => ({
-    urlSearchParams: new URLSearchParams(deferredSearchString,),
-    triggerUpdate,
-  }), [deferredSearchString, triggerUpdate,],);
-  return /* @__PURE__ */ jsx(URLSearchParamsContext.Provider, {
-    value,
-    children,
-  },);
-}
-function useStringQueryParameter(parameterName, initialValue,) {
-  const parameterNameRef = useRef(parameterName,);
-  const {
-    urlSearchParams,
-    triggerUpdate,
-  } = useContext(URLSearchParamsContext,);
-  const value = urlSearchParams.get(parameterNameRef.current,) || initialValue;
-  const setValue = useCallback2(async (newValue) => {
-    const currentHistoryState = window.history.state;
-    if (!isHistoryState(currentHistoryState,)) return;
-    const newUrl = new URL(window.location.href,);
-    newUrl.searchParams.set(parameterNameRef.current, newValue,);
-    await yieldToMain({
-      continueAfter: 'paint',
-    },);
-    replaceHistoryState(currentHistoryState, newUrl.toString(),);
-    triggerUpdate();
-  }, [triggerUpdate,],);
-  return useMemoOne(() => [value, setValue,], [value, setValue,],);
 }
 async function getLocalesForCurrentRoute(activeLocale, locales, currentRoute, pathVariables, collectionUtils,) {
   if (!currentRoute) return locales;
@@ -14986,6 +14993,166 @@ var LayoutDirectionContext = /* @__PURE__ */ (() => {
 })();
 function useLayoutDirection() {
   return React42.useContext(LayoutDirectionContext,);
+}
+var URLSearchParamsContext = /* @__PURE__ */ (() => {
+  const Context2 = createContext({
+    urlSearchParams: new URLSearchParams(),
+    triggerUpdate: () => {},
+  },);
+  Context2.displayName = 'URLSearchParamsContext';
+  return Context2;
+})();
+function URLSearchParamsProvider({
+  children,
+},) {
+  const onStoreChangeRef = useRef(null,);
+  const searchString = useSyncExternalStore(
+    (onStoreChange) => {
+      onStoreChangeRef.current = onStoreChange;
+      const handler = () => {
+        onStoreChange();
+      };
+      window.addEventListener('popstate', handler,);
+      return () => {
+        onStoreChangeRef.current = null;
+        window.removeEventListener('popstate', handler,);
+      };
+    },
+    () => window.location.search,
+    () => '',
+  );
+  const deferredSearchString = useDeferredValue(searchString,);
+  const triggerUpdate = useCallback2(() => {
+    onStoreChangeRef.current?.();
+  }, [],);
+  const value = useMemoOne(() => ({
+    urlSearchParams: new URLSearchParams(deferredSearchString,),
+    triggerUpdate,
+  }), [deferredSearchString, triggerUpdate,],);
+  return /* @__PURE__ */ jsx(URLSearchParamsContext.Provider, {
+    value,
+    children,
+  },);
+}
+function useStringArrayQueryParam({
+  initialValue,
+  parameterName,
+},) {
+  const parameterNameRef = useRef(parameterName,);
+  const {
+    urlSearchParams,
+    triggerUpdate,
+  } = useContext(URLSearchParamsContext,);
+  const paramValue = urlSearchParams.getAll(parameterNameRef.current,);
+  const value = paramValue.length > 0 ? paramValue : initialValue;
+  const setValue = useCallback2(async (newValues) => {
+    const currentHistoryState = window.history.state;
+    if (!isHistoryState(currentHistoryState,)) return;
+    const newUrl = new URL(window.location.href,);
+    newUrl.searchParams.delete(parameterNameRef.current,);
+    for (const newValue of newValues) {
+      newUrl.searchParams.append(parameterNameRef.current, newValue,);
+    }
+    await yieldToMain({
+      continueAfter: 'paint',
+    },);
+    replaceHistoryState(currentHistoryState, newUrl.toString(),);
+    triggerUpdate();
+  }, [triggerUpdate,],);
+  return [value, setValue,];
+}
+function useStringQueryParam({
+  initialValue,
+  parameterName,
+},) {
+  const initialArrayValue = useMemo(() => initialValue ? [initialValue,] : EMPTY_ARRAY, [initialValue,],);
+  const [arrayValue, setArrayValue,] = useStringArrayQueryParam({
+    initialValue: initialArrayValue,
+    parameterName,
+  },);
+  const value = arrayValue[0] ?? '';
+  const setValue = useCallback2((newValue) => setArrayValue(newValue ? [newValue,] : EMPTY_ARRAY,), [setArrayValue,],);
+  return [value, setValue,];
+}
+var BOOLEAN_YES = 'yes';
+var BOOLEAN_NO = 'no';
+function useBooleanQueryParam({
+  initialValue,
+  parameterName,
+},) {
+  const [stringValue, setStringValue,] = useStringQueryParam({
+    initialValue: '',
+    parameterName,
+  },);
+  const value = stringValue ? stringValue === BOOLEAN_YES : initialValue;
+  const setValue = useCallback2((newValue) => setStringValue(newValue ? BOOLEAN_YES : BOOLEAN_NO,), [setStringValue,],);
+  return [value, setValue,];
+}
+function useCollectionReferenceQueryParam({
+  collectionId,
+  initialValue,
+  parameterName,
+},) {
+  const collectionUtils = useCollectionUtils();
+  const locale = useLocaleInfo().activeLocale ?? void 0;
+  const [slug, setSlug,] = useStringQueryParam({
+    initialValue: '',
+    parameterName,
+  },);
+  const id3 = useMemo(() => {
+    if (!slug) return initialValue || void 0;
+    const cache2 = getCollectionUtilsCache2(collectionUtils, collectionId,);
+    return use(cache2.getRecordIdBySlug(slug, locale,),);
+  }, [collectionUtils, collectionId, initialValue, locale, slug,],);
+  const setId = useCallback2(async (newId) => {
+    const cache2 = getCollectionUtilsCache2(collectionUtils, collectionId,);
+    const newSlug = await cache2.getSlugByRecordId(newId, locale,);
+    if (typeof newSlug === 'string') {
+      await setSlug(newSlug,);
+    }
+  }, [collectionUtils, collectionId, locale, setSlug,],);
+  return [id3, setId,];
+}
+function useMultiCollectionReferenceQueryParam({
+  collectionId,
+  initialValue,
+  parameterName,
+},) {
+  const collectionUtils = useCollectionUtils();
+  const locale = useLocaleInfo().activeLocale ?? void 0;
+  const [slugs, setSlugs,] = useStringArrayQueryParam({
+    initialValue: [],
+    parameterName,
+  },);
+  const ids = useMemo(() => {
+    if (slugs.length === 0) return initialValue;
+    const cache2 = getCollectionUtilsCache2(collectionUtils, collectionId,);
+    const maybePromises = slugs.map((slug) => cache2.getRecordIdBySlug(slug, locale,));
+    return useAll(maybePromises,).filter(isString,);
+  }, [collectionUtils, collectionId, initialValue, locale, slugs,],);
+  const setIds = useCallback2(async (newIds) => {
+    const cache2 = getCollectionUtilsCache2(collectionUtils, collectionId,);
+    const newSlugs = await Promise.all(newIds.map((id3) => cache2.getSlugByRecordId(id3, locale,)),);
+    await setSlugs(newSlugs.filter(isString,),);
+  }, [collectionUtils, collectionId, locale, setSlugs,],);
+  return [ids, setIds,];
+}
+function getCollectionUtilsCache2(collectionUtils, collectionId,) {
+  const collectionUtilsCache = collectionUtils?.get(collectionId,);
+  assert(collectionUtilsCache, 'CollectionUtilsCache not found for collectionId:', collectionId,);
+  return collectionUtilsCache;
+}
+function use(maybePromise,) {
+  if (isPromise(maybePromise,)) throw maybePromise;
+  return maybePromise;
+}
+function useAll(maybePromises,) {
+  for (const maybePromise of maybePromises) {
+    if (isPromise(maybePromise,)) {
+      throw Promise.all(maybePromises,);
+    }
+  }
+  return maybePromises;
 }
 function useRouteAnchor(routeId, {
   elementId,
@@ -15746,95 +15913,7 @@ function patchRoutesForABTesting(routes, initialRouteId,) {
   removeRoutesVariants(routes,);
   return resolvedInitialRouteId;
 }
-var mainTagId = 'main';
-var generatedPageDatasetKey = 'framerGeneratedPage';
-var searchIndexMetaName = 'framer-search-index';
-var searchIndexMetaSelector = `meta[name="${searchIndexMetaName}"]`;
-var endOfHeadStartMarker = '<!-- End of headStart -->';
-var endOfHeadEndMarker = '<!-- End of headEnd -->';
-var endOfBodyStartMarker = '<!-- End of bodyStart -->';
-var endOfBodyEndMarker = '<!-- End of bodyEnd -->';
-var LibraryFeaturesContext = /* @__PURE__ */ React42.createContext(void 0,);
-LibraryFeaturesContext.displayName = 'LibraryFeaturesContext';
-var LibraryFeaturesProvider = /* @__PURE__ */ (() => LibraryFeaturesContext.Provider)();
-var useLibraryFeatures = () => {
-  const context = React42.useContext(LibraryFeaturesContext,);
-  return context ?? {};
-};
-async function insertHTML(html, referenceNode, position = 'beforeend',) {
-  let insertionParent, insertionPoint;
-  switch (position) {
-    case 'beforebegin':
-      assert(referenceNode.parentNode, 'Can\'t use \'beforebegin\' with a referenceNode at the top level',);
-      insertionParent = referenceNode.parentNode;
-      insertionPoint = referenceNode;
-      break;
-    case 'afterend':
-      assert(referenceNode.parentNode, 'Can\'t use \'afterend\' with a referenceNode at the top level',);
-      insertionParent = referenceNode.parentNode;
-      insertionPoint = referenceNode.nextSibling;
-      break;
-    case 'afterbegin':
-      insertionParent = referenceNode;
-      insertionPoint = referenceNode.firstChild;
-      break;
-    case 'beforeend':
-      insertionParent = referenceNode;
-      insertionPoint = null;
-      break;
-    default:
-      assertNever(position,);
-  }
-  const range = document.createRange();
-  range.selectNodeContents(insertionParent,);
-  const fragment = range.createContextualFragment(html,);
-  await pump(fragment, insertionParent, insertionPoint,);
-}
-async function pump(sourceNode, targetParent, beforeNode,) {
-  for (let node = sourceNode.firstChild; node; node = node.nextSibling) {
-    if (node instanceof HTMLScriptElement) {
-      const needsWait = handleScript(node, targetParent, beforeNode,);
-      if (needsWait !== void 0) {
-        await needsWait;
-      }
-      continue;
-    }
-    const clone = node.cloneNode(false,);
-    targetParent.insertBefore(clone, beforeNode,);
-    if (node.firstChild) {
-      await pump(node, clone, null,);
-    }
-  }
-}
-function handleScript(node, parent, beforeNode,) {
-  const script = node.cloneNode(true,);
-  if (
-    !node.hasAttribute('src',) ||
-    // external
-    node.hasAttribute('async',) ||
-    // async
-    node.hasAttribute('defer',) ||
-    // defer
-    node.getAttribute('type',)?.toLowerCase() === 'module'
-  ) {
-    parent.insertBefore(script, beforeNode,);
-  } else {
-    return execExternalBlockingScript(script, parent, beforeNode,);
-  }
-}
-function execExternalBlockingScript(script, parent, beforeNode,) {
-  return new Promise((resolve) => {
-    script.onload = script.onerror = resolve;
-    parent.insertBefore(script, beforeNode,);
-  },);
-}
 function useMetadata(metadata,) {
-  const {
-    isInitialNavigation,
-  } = useRouter();
-  const {
-    customCodeSiteSettings,
-  } = useLibraryFeatures();
   React.useEffect(() => {
     if (metadata.robots) {
       let robotsTag = document.querySelector('meta[name="robots"]',);
@@ -15854,92 +15933,6 @@ function useMetadata(metadata,) {
       document.querySelector('meta[name="viewport"]',)?.setAttribute('content', metadata.viewport,);
     }
   }, [metadata.title, metadata.viewport,],);
-  React.useEffect(() => {
-    if (!isInitialNavigation) return;
-    if (customCodeSiteSettings) return;
-    const mainTag = document.getElementById(mainTagId,);
-    const isGeneratedPage = mainTag && mainTag.dataset[generatedPageDatasetKey] !== void 0;
-    if (isGeneratedPage) return;
-    void insertCustomHTML(
-      metadata.customHTMLHeadStart,
-      metadata.customHTMLHeadEnd,
-      metadata.customHTMLBodyStart,
-      metadata.customHTMLBodyEnd,
-    );
-  }, [],);
-}
-async function insertCustomHTML(customHTMLHeadStart, customHTMLHeadEnd, customHTMLBodyStart, customHTMLBodyEnd,) {
-  let endOfHeadStart;
-  let endOfHeadEnd;
-  let endOfBodyStart;
-  let endOfBodyEnd;
-  if (customHTMLHeadStart || customHTMLHeadEnd) {
-    const {
-      start: start2,
-      end,
-    } = findCommentMarkers(
-      document.head.childNodes,
-      customHTMLHeadStart ? endOfHeadStartMarker : void 0,
-      customHTMLHeadEnd ? endOfHeadEndMarker : void 0,
-    );
-    endOfHeadStart = start2;
-    endOfHeadEnd = end;
-  }
-  if (customHTMLBodyStart || customHTMLBodyEnd) {
-    const {
-      start: start2,
-      end,
-    } = findCommentMarkers(
-      document.body.childNodes,
-      customHTMLBodyStart ? endOfBodyStartMarker : void 0,
-      customHTMLBodyEnd ? endOfBodyEndMarker : void 0,
-    );
-    endOfBodyStart = start2;
-    endOfBodyEnd = end;
-  }
-  if (customHTMLHeadStart && endOfHeadStart) {
-    await insertHTML(customHTMLHeadStart, endOfHeadStart, 'beforebegin',);
-  }
-  if (customHTMLHeadEnd && endOfHeadEnd) {
-    await insertHTML(customHTMLHeadEnd, endOfHeadEnd, 'beforebegin',);
-  }
-  if (customHTMLBodyStart && endOfBodyStart) {
-    await insertHTML(customHTMLBodyStart, endOfBodyStart, 'beforebegin',);
-  }
-  if (customHTMLBodyEnd && endOfBodyEnd) {
-    await insertHTML(customHTMLBodyEnd, endOfBodyEnd, 'beforebegin',);
-  }
-}
-function findCommentMarkers(nodes, startMarker, endMarker,) {
-  if (!startMarker && !endMarker) {
-    return {
-      start: void 0,
-      end: void 0,
-    };
-  }
-  let start2;
-  let end;
-  let i = 0;
-  let j = nodes.length - 1;
-  while (i <= j) {
-    const startNode = nodes[i];
-    const endNode = nodes[j];
-    if (!start2 && startNode?.nodeType === Node.COMMENT_NODE && startMarker && `<!--${startNode.nodeValue}-->` === startMarker) {
-      start2 = startNode;
-      if (!endMarker) break;
-    }
-    if (!end && endNode?.nodeType === Node.COMMENT_NODE && endMarker && `<!--${endNode.nodeValue}-->` === endMarker) {
-      end = endNode;
-      if (!startMarker) break;
-    }
-    if (start2 && end) break;
-    i++;
-    j--;
-  }
-  return {
-    start: start2,
-    end,
-  };
 }
 var warningMessages = /* @__PURE__ */ new Set();
 function warnOnce2(keyMessage, ...rest) {
@@ -18368,7 +18361,7 @@ var EventEmitter = class {
   unique(eventName, fn,) {
     this.addEventListener(eventName, fn, false, true, this,);
   }
-  addEventListener(eventName, fn, once, unique, context,) {
+  addEventListener(eventName, fn, once2, unique, context,) {
     if (unique) {
       for (const name of this._emitter.eventNames()) {
         if (fn === this._emitter.listeners(name,)) {
@@ -18376,7 +18369,7 @@ var EventEmitter = class {
         }
       }
     }
-    if (once === true) {
+    if (once2 === true) {
       this._emitter.once(eventName, fn, context,);
     } else {
       this._emitter.addListener(eventName, fn, context,);
@@ -18897,14 +18890,14 @@ var FramerAnimation = class _FramerAnimation {
 };
 var correctBorderScale = (axis) => ({
   correct: (latest, {
-    delta,
+    projectionDelta,
     treeScale,
   },) => {
     if (typeof latest === 'string') latest = parseFloat(latest,);
     if (latest === 0) return '0px';
     let corrected = latest;
-    if (delta && treeScale) {
-      corrected = Math.round(latest / delta[axis].scale / treeScale[axis],);
+    if (projectionDelta && treeScale) {
+      corrected = Math.round(latest / projectionDelta[axis].scale / treeScale[axis],);
       corrected = Math.max(corrected, 1,);
     }
     return corrected + 'px';
@@ -18922,6 +18915,54 @@ function MotionSetup({
   return /* @__PURE__ */ jsx(Fragment, {
     children,
   },);
+}
+function patchBorderRadiusScaleCorrector() {
+  if (isPatched) return;
+  isPatched = true;
+  addScaleCorrector(borderRadiusCorrectors,);
+}
+var isPatched = false;
+var calcPrefix = 'calc(';
+var separator2 = '*';
+var correctBorderRadius2 = {
+  correct: (latest, node,) => {
+    if (!node.target) return latest;
+    if (typeof latest === 'string') {
+      if (latest.startsWith(calcPrefix,)) {
+        const [candidate, ...rest] = latest.slice(calcPrefix.length,).split(separator2,);
+        if (isUndefined(candidate,) || !px.test(candidate.trim(),)) return latest;
+        const pixels = parseFloat(candidate,);
+        const x2 = pixelsToPercent2(pixels, node.target.x,);
+        const y2 = pixelsToPercent2(pixels, node.target.y,);
+        return `${reWrapInCalc(x2, rest,)} ${reWrapInCalc(y2, rest,)}`;
+      }
+      if (px.test(latest,)) {
+        latest = parseFloat(latest,);
+      } else {
+        return latest;
+      }
+    }
+    const x = pixelsToPercent2(latest, node.target.x,);
+    const y = pixelsToPercent2(latest, node.target.y,);
+    return `${x}% ${y}%`;
+  },
+};
+var borderRadiusCorrectors = /* @__PURE__ */ (() => ({
+  borderRadius: {
+    ...correctBorderRadius2,
+    applyTo: ['borderTopLeftRadius', 'borderTopRightRadius', 'borderBottomLeftRadius', 'borderBottomRightRadius',],
+  },
+  borderTopLeftRadius: correctBorderRadius2,
+  borderTopRightRadius: correctBorderRadius2,
+  borderBottomLeftRadius: correctBorderRadius2,
+  borderBottomRightRadius: correctBorderRadius2,
+}))();
+function pixelsToPercent2(pixels, axis,) {
+  if (axis.max === axis.min) return 0;
+  return pixels / (axis.max - axis.min) * 100;
+}
+function reWrapInCalc(percentage, rest,) {
+  return `${calcPrefix}${percentage}%${separator2}${rest.join(separator2,)}`;
 }
 function startAnimation(_key, value, target, transition = {},) {
   warnOnce2(`"startAnimation" is unsupported. Use "animate" instead: https://www.framer.com/api/motion/utilities/#animate`,);
@@ -20304,7 +20345,10 @@ var Rect = {
     }
     return false;
   },
-  /** @internal */
+  /**
+   * Returns the four edges of a rect as lines in the order of top, right, bottom, left.
+   * @internal
+   */
   edges: (rect) => {
     const [tl, tr, br, bl,] = Rect.cornerPoints(rect,);
     return [Line(tl, tr,), Line(tr, br,), Line(br, bl,), Line(bl, tl,),];
@@ -20371,7 +20415,50 @@ var Rect = {
     }
     return rebasedRect;
   },
+  /**
+   * Constrain a rect to a bound, offsetting its position to make the rect fit within the bound.
+   * @internal
+   */
+  constrain: (rect, bound,) => {
+    if (!bound) return rect;
+    let y = Math.max(rect.y, bound.y,);
+    y = Math.min(y, bound.y + bound.height - rect.height,);
+    let x = Math.max(rect.x, bound.x,);
+    x = Math.min(x, bound.x + bound.width - rect.width,);
+    return {
+      x,
+      y,
+      width: rect.width,
+      height: rect.height,
+    };
+  },
+  /**
+   * Finds the closest edge of a rect to a point. Note that this does not check perpendicular
+   * distances, so it might not be the technically closest edge, but rather a close approximation
+   * or the visually closest edge. It achieves this by drawing a line from the center of the rect
+   * to the point and checking if it intersects with any of the edges. Returns undefined if no
+   * edge is intersected (e.g., if the point is inside the rect).
+   * @internal
+   */
+  closestEdge: (rect, point2,) => {
+    const center = Rect.center(rect,);
+    const pointToCenterLine = Line(point2, center,);
+    const edges = Rect.edges(rect,);
+    for (let i = 0; i < edges.length; i++) {
+      const edge = edges[i];
+      if (!edge) continue;
+      if (Line.intersection(pointToCenterLine, edge, true,)) {
+        const name = edgesInOrder[i];
+        assert(name, 'Invalid edge name', edgesInOrder,);
+        return {
+          edge,
+          name,
+        };
+      }
+    }
+  },
 };
+var edgesInOrder = ['top', 'right', 'bottom', 'left',];
 var constraintDefaults = {
   left: null,
   right: null,
@@ -21225,6 +21312,7 @@ var FormInputStyleVariableNames = /* @__PURE__ */ ((FormInputStyleVariableNames2
   FormInputStyleVariableNames2['BorderRadiusTopRight'] = '--framer-input-border-radius-top-right';
   FormInputStyleVariableNames2['BorderRadiusBottomRight'] = '--framer-input-border-radius-bottom-right';
   FormInputStyleVariableNames2['BorderRadiusBottomLeft'] = '--framer-input-border-radius-bottom-left';
+  FormInputStyleVariableNames2['CornerShape'] = '--framer-input-corner-shape';
   FormInputStyleVariableNames2['BorderColor'] = '--framer-input-border-color';
   FormInputStyleVariableNames2['BorderTopWidth'] = '--framer-input-border-top-width';
   FormInputStyleVariableNames2['BorderRightWidth'] = '--framer-input-border-right-width';
@@ -21241,6 +21329,7 @@ var FormInputStyleVariableNames = /* @__PURE__ */ ((FormInputStyleVariableNames2
   FormInputStyleVariableNames2['FontTextAlignment'] = '--framer-input-font-text-alignment';
   FormInputStyleVariableNames2['FontLineHeight'] = '--framer-input-font-line-height';
   FormInputStyleVariableNames2['FontOpenType'] = '--framer-input-font-open-type-features';
+  FormInputStyleVariableNames2['FontVariationAxes'] = '--framer-input-font-variation-axes';
   FormInputStyleVariableNames2['PlaceholderColor'] = '--framer-input-placeholder-color';
   FormInputStyleVariableNames2['BoxShadow'] = '--framer-input-box-shadow';
   FormInputStyleVariableNames2['FocusedBorderColor'] = '--framer-input-focused-border-color';
@@ -21274,27 +21363,29 @@ function cssValue(value,) {
   if (value === '') return '""';
   return value;
 }
-function css2(selector, declaration,) {
-  let output = ' ';
-  for (const key7 in declaration) {
-    const value = declaration[key7];
-    output += `${key7.replace(/([A-Z])/gu, '-$1',).toLowerCase()}: ${cssValue(value,)}; `;
+var css2 = /* @__PURE__ */ (() => {
+  function css22(selector, declaration,) {
+    let output = ' ';
+    for (const key7 in declaration) {
+      const value = declaration[key7];
+      assert(value !== void 0, 'Encountered `undefined` in CSSDeclaration',);
+      output += `${key7.replace(/([A-Z])/gu, '-$1',).toLowerCase()}: ${cssValue(value,)}; `;
+    }
+    return selector + ' {' + output + '}';
   }
-  return selector + ' {' + output + '}';
-}
-((css22) => {
-  function variable(...variables) {
+  css22.variable = (...variables) => {
     const lastItem = variables[variables.length - 1];
+    assert(lastItem !== void 0, 'Zero variables passed to `css.variable`',);
     let value = lastItem.startsWith('--',) ? `var(${lastItem})` : lastItem;
     for (let index = variables.length - 2; index >= 0; index--) {
       const element = variables[index];
       value = `var(${element}, ${value})`;
     }
     return value;
-  }
-  css22.variable = variable;
-})(css2 || (css2 = {}),);
-var sharedInputCSS = [
+  };
+  return css22;
+})();
+var sharedInputCSS = /* @__PURE__ */ (() => [
   css2(`.${inputClassName}`, {
     padding: css2.variable(Var.Padding,),
     background: 'transparent',
@@ -21304,6 +21395,7 @@ var sharedInputCSS = [
     fontStyle: css2.variable(Var.FontStyle,),
     color: css2.variable(Var.FontColor,),
     fontFeatureSettings: css2.variable(Var.FontOpenType,),
+    fontVariationSettings: css2.variable(Var.FontVariationAxes,),
     border: 'none',
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
@@ -21317,13 +21409,13 @@ var sharedInputCSS = [
   css2(`.${inputClassName}:focus-visible`, {
     outline: 'none',
   },),
-];
+])();
 var inputWrapperCSS = /* @__PURE__ */ (() => [css2(`.${inputWrapperClassName}`, {
   overflow: 'hidden',
 },),])();
 var inputBorderAllSides =
   `var(${Var.BorderTopWidth}) var(${Var.BorderRightWidth}) var(${Var.BorderBottomWidth}) var(${Var.BorderLeftWidth})`;
-var inputBorderCSS = [`.${inputWrapperClassName}:after {
+var inputBorderCSS = /* @__PURE__ */ (() => [`.${inputWrapperClassName}:after {
         content: "";
         pointer-events: none;
         box-sizing: border-box;
@@ -21336,6 +21428,7 @@ var inputBorderCSS = [`.${inputWrapperClassName}:after {
         border-top-right-radius: var(${Var.BorderRadiusTopRight});
         border-bottom-right-radius: var(${Var.BorderRadiusBottomRight});
         border-bottom-left-radius: var(${Var.BorderRadiusBottomLeft});
+        corner-shape: var(${Var.CornerShape});
         border-color: var(${Var.BorderColor});
         border-top-width: var(${Var.BorderTopWidth});
         border-right-width: var(${Var.BorderRightWidth});
@@ -21343,8 +21436,8 @@ var inputBorderCSS = [`.${inputWrapperClassName}:after {
         border-left-width: var(${Var.BorderLeftWidth});
         border-style: var(${Var.BorderStyle});
         transition: var(${Var.FocusedTransition});
-        transition-property: border-color, border-width, border-style, border-top-left-radius, border-top-right-radius, border-bottom-right-radius, border-bottom-left-radius;
-    }`,];
+        transition-property: border-color, border-width, border-style, border-top-left-radius, border-top-right-radius, border-bottom-right-radius, border-bottom-left-radius, corner-shape;
+    }`,])();
 var customValidityKey = 'customError';
 var validKey = 'valid';
 function isRelevantValidityStateKey(key7,) {
@@ -21402,7 +21495,7 @@ function useCustomValidity(onValid, onInvalid, onChange, onBlur, onFocus,) {
 }
 var iconSpacing = 10;
 var iconSize = 16;
-var inputIconCSSDeclaration = {
+var inputIconCSSDeclaration = /* @__PURE__ */ (() => ({
   content: '',
   display: 'block',
   position: 'absolute',
@@ -21419,7 +21512,7 @@ var inputIconCSSDeclaration = {
   maskRepeat: 'no-repeat',
   maskSize: `${iconSize}px`,
   backgroundColor: css2.variable(Var.IconColor,),
-};
+}))();
 function createRGBVariableFallbacks(variables, fallback,) {
   return css2.variable(...variables.flatMap((variable) => [`${variable}-rgb`, variable,]), fallback,);
 }
@@ -21524,6 +21617,7 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
         ul.framer-text {
             background-color: var(--framer-blockquote-text-background-color, var(--framer-text-background-color, initial));
             border-radius: var(--framer-blockquote-text-background-radius, var(--framer-text-background-radius, initial));
+            corner-shape: var(--framer-blockquote-text-background-corner-shape, var(--framer-text-background-corner-shape, initial));
             padding: var(--framer-blockquote-text-background-padding, var(--framer-text-background-padding, initial));
         }
     `, /* css */
@@ -21678,6 +21772,7 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             /* Don't inherit background styles from any parent text style. */
             background-color: initial;
             border-radius: var(--framer-link-text-background-radius, initial);
+            corner-shape: var(--framer-link-text-background-corner-shape, initial);
             padding: var(--framer-link-text-background-padding, initial);
         }
     `,
@@ -21757,6 +21852,7 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             font-size: calc(var(--framer-link-hover-font-size, var(--framer-blockquote-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-link-hover-text-transform, var(--framer-blockquote-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none))));
             border-radius: var(--framer-link-hover-text-background-radius, var(--framer-link-text-background-radius, var(--framer-text-background-radius, initial)));
+            corner-shape: var(--framer-link-hover-text-background-corner-shape, var(--framer-link-text-background-corner-shape, var(--framer-text-background-corner-shape, initial)));
             padding: var(--framer-link-hover-text-background-padding, var(--framer-link-text-background-padding, var(--framer-text-background-padding, initial)));
         }
     `, /* css */
@@ -21835,6 +21931,7 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             font-size: calc(var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-link-current-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none)));
             border-radius: var(--framer-link-current-text-background-radius, var(--framer-link-text-background-radius, initial));
+            corner-shape: var(--framer-link-current-text-background-corner-shape, var(--framer-link-text-background-corner-shape, initial));
             padding: var(--framer-link-current-text-background-padding, var(--framer-link-text-background-padding, initial));
         }
     `, /* css */
@@ -21929,6 +22026,7 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             font-size: calc(var(--framer-link-hover-font-size, var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)))) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-link-hover-text-transform, var(--framer-link-current-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none))));
             border-radius: var(--framer-link-hover-text-background-radius, var(--framer-link-current-text-background-radius, var(--framer-link-text-background-radius, initial)));
+            corner-shape: var(--framer-link-hover-text-background-corner-shape, var(--framer-link-current-text-background-corner-shape, var(--framer-link-text-background-corner-shape, initial)));
             padding: var(--framer-link-hover-text-background-padding, var(--framer-link-current-text-background-padding, var(--framer-link-text-background-padding, initial)));
         }
     `, /* css */
@@ -22034,6 +22132,7 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             --framer-font-open-type-features: normal;
             --framer-text-background-color: initial;
             --framer-text-background-radius: initial;
+            --framer-text-background-corner-shape: initial;
             --framer-text-background-padding: initial;
         }
     `, /* css */
@@ -22545,6 +22644,9 @@ var overflowClipFallbackCSSVariable = '--overflow-clip-fallback';
 var overflowClipFallbackCSSRules = /* @__PURE__ */ (() => [`@supports (not (overflow: clip)) {
         :root { ${overflowClipFallbackCSSVariable}: hidden; }
     }`,])();
+var oneIfCornerShapeSupportedCSSVariable = '--one-if-corner-shape-supported';
+var cornerShapeCSSRules =
+  /* @__PURE__ */ (() => [`@supports (corner-shape: superellipse(2)) { :root { ${oneIfCornerShapeSupportedCSSVariable}: 1 } }`,])();
 var combineCSSRules =
   (isPreview) => [
     ...willChangeTransformRules(isPreview,),
@@ -22568,6 +22670,7 @@ var combineCSSRules =
     ...overflowClipFallbackCSSRules,
     ...lightboxCSS,
     ...safari16TextTruncationFix,
+    ...cornerShapeCSSRules,
   ];
 export var combinedCSSRules = /* @__PURE__ */ combineCSSRules(false,);
 var combinedCSSRulesForPreview = /* @__PURE__ */ combineCSSRules(true,);
@@ -22593,7 +22696,6 @@ function getControlDefaultValue(control,) {
     switch (control.type) {
       case 'string':
       case 'collectionreference':
-      case 'multicollectionreference':
       case 'color':
       case 'date':
       case 'link':
@@ -22617,6 +22719,8 @@ function getControlDefaultValue(control,) {
       case 'font':
         return isObject2(control.defaultValue,) ? control.defaultValue : void 0;
       case 'linkrelvalues':
+        return isArray(control.defaultValue,) ? control.defaultValue : void 0;
+      case 'multicollectionreference':
         return isArray(control.defaultValue,) ? control.defaultValue : void 0;
       case 'object': {
         const value = isObject2(control.defaultValue,) ? control.defaultValue : {};
@@ -24344,6 +24448,10 @@ function _injectRuntime(injectedRuntime,) {
   Object.assign(implementation, injectedRuntime,);
   isRuntimeInjected = true;
 }
+var cornerPropertiesToInherit = {
+  borderRadius: 'inherit',
+  cornerShape: 'inherit',
+};
 function assert2(condition, ...msg) {
   if (condition) return;
   const e = Error('Assertion Error' + (msg.length > 0 ? ': ' + msg.join(' ',) : ''),);
@@ -25117,21 +25225,30 @@ function getVariantsDimensions(width, height,) {
   }
   return sizes;
 }
+function urlWithScaleDownTo(url, scaleDownTo,) {
+  try {
+    const urlObj = new URL(url,);
+    if (scaleDownTo) {
+      urlObj.searchParams.set('scale-down-to', `${scaleDownTo}`,);
+    } else {
+      urlObj.searchParams.delete('scale-down-to',);
+    }
+    return urlObj.toString();
+  } catch {
+    return url;
+  }
+}
 var MinVariantSizeForSourceSet = 512;
 function getResponsiveSrcSet(source, image, variants,) {
   if (!variants || variants.length === 0) return void 0;
   if (!image.pixelWidth) return void 0;
   const srcSet = [];
   for (const variant of variants) {
-    if (variant.width >= MinVariantSizeForSourceSet) {
-      const url = new URL(source,);
-      if (variant.maxSideSize < image.pixelWidth) {
-        url.searchParams.set('scale-down-to', `${variant.maxSideSize}`,);
-      }
-      srcSet.push(`${url.toString()} ${variant.width}w`,);
-    }
+    if (variant.width < MinVariantSizeForSourceSet) continue;
+    const url = urlWithScaleDownTo(source, variant.maxSideSize,);
+    srcSet.push(`${url} ${variant.width}w`,);
   }
-  srcSet.push(`${source} ${image.pixelWidth}w`,);
+  srcSet.push(`${urlWithScaleDownTo(source, null,)} ${image.pixelWidth}w`,);
   return srcSet.join(', ',) || void 0;
 }
 function getFixedSrcSets(source, image, nodeFixedSize,) {
@@ -25142,12 +25259,9 @@ function getFixedSrcSets(source, image, nodeFixedSize,) {
   const scaleRatio = Math.max(nodeFixedSize.width / image.pixelWidth, nodeFixedSize.height / image.pixelHeight,);
   for (const variant of FixedSizeScaleVariants) {
     const scaleMaxSideSizeTo = Math.round(imageMaxSide * variant * scaleRatio,);
-    const url = new URL(source,);
-    if (scaleMaxSideSizeTo < imageMaxSide) {
-      url.searchParams.set('scale-down-to', `${scaleMaxSideSizeTo}`,);
-    }
+    const url = urlWithScaleDownTo(source, scaleMaxSideSizeTo,);
     srcSet.push({
-      src: url.toString(),
+      src: url,
       scale: variant,
     },);
   }
@@ -25184,14 +25298,14 @@ function getSrcSet(nodeFixedSize, image, source,) {
     };
   }
 }
-var wrapperStyle = {
+var wrapperStyle = /* @__PURE__ */ (() => ({
   position: 'absolute',
-  borderRadius: 'inherit',
+  ...cornerPropertiesToInherit,
   top: 0,
   right: 0,
   bottom: 0,
   left: 0,
-};
+}))();
 function getPlaceholderStyle() {
   return {
     backgroundRepeat: 'repeat',
@@ -25221,7 +25335,7 @@ function getImageStyle(image,) {
     display: 'block',
     width: '100%',
     height: '100%',
-    borderRadius: 'inherit',
+    ...cornerPropertiesToInherit,
     objectPosition: cssObjectPosition(image.positionX, image.positionY,),
     objectFit: cssObjectFit(image.fit,),
   };
@@ -25307,7 +25421,7 @@ function CanvasImage({
     ref: wrapperRef,
     style: {
       display: 'contents',
-      borderRadius: 'inherit',
+      ...cornerPropertiesToInherit,
     },
   },);
 }
@@ -25328,7 +25442,7 @@ function OptimizedCanvasImage({
     ref: wrapperRef,
     style: {
       display: 'contents',
-      borderRadius: 'inherit',
+      ...cornerPropertiesToInherit,
     },
   },);
 }
@@ -25451,7 +25565,7 @@ function Border(props,) {
     right: 0,
     top: 0,
     bottom: 0,
-    borderRadius: 'inherit',
+    ...cornerPropertiesToInherit,
     pointerEvents: 'none',
   };
   if (props.border) {
@@ -26177,8 +26291,9 @@ var LinearGradient = {
   toCSS: (linearGradient, overrideAngle, getStopValue,) => {
     const stops = gradientColorStops(linearGradient, linearGradient.alpha,);
     const angle = overrideAngle !== void 0 ? overrideAngle : linearGradient.angle;
+    const roundedAngle = Math.round(angle,);
     const cssStops = stops.map((stop) => `${getStopValue?.(stop.value,) ?? stop.value} ${stop.position * 100}%`);
-    return `linear-gradient(${angle}deg, ${cssStops.join(', ',)})`;
+    return `linear-gradient(${roundedAngle}deg, ${cssStops.join(', ',)})`;
   },
 };
 var radialGradientKeys = ['widthFactor', 'heightFactor', 'centerAnchorX', 'centerAnchorY', 'alpha',];
@@ -26288,6 +26403,14 @@ function getStyleForFrameProps(props,) {
         style2.top = '50%';
       }
     }
+  }
+  const {
+    cornerShape,
+  } = props;
+  if (isMotionValue(cornerShape,)) {
+    style2.cornerShape = transformValue(() => `superellipse(${cornerShape.get()})`);
+  } else if (cornerShape !== void 0) {
+    style2.cornerShape = `superellipse(${cornerShape})`;
   }
   extractStyleFromProps(props, 'size', style2,);
   extractStyleFromProps(props, 'width', style2,);
@@ -30621,19 +30744,19 @@ var frameWithMotionPropsFields = [
   'position',
   'border',
   'borderRadius',
+  'cornerShape',
   'shadow',
   'size',
 ];
 var deprecatedFramePropsFields = ['autoSize', 'aspectRatio', 'borderWidth', 'borderStyle', 'borderColor', 'centerX', 'centerY',];
 function isDeprecatedFrameProps(props,) {
-  let field;
   for (const propKey in props) {
     if (isAnimatable2(props[propKey],)) return true;
   }
-  for (field of frameWithMotionPropsFields) {
+  for (const field of frameWithMotionPropsFields) {
     if (props.hasOwnProperty(field,)) return false;
   }
-  for (field of deprecatedFramePropsFields) {
+  for (const field of deprecatedFramePropsFields) {
     if (props.hasOwnProperty(field,)) return true;
   }
   return false;
@@ -35565,7 +35688,7 @@ function useMaybeWrapComponentWithCodeBoundary(children, scopeId, nodeId, isAuth
   }
   return children;
 }
-var ContainerInner = /* @__PURE__ */ React42.forwardRef(({
+var ContainerInner = /* @__PURE__ */ React42.forwardRef(function ContainerInner2({
   children,
   layoutId,
   as,
@@ -35575,7 +35698,7 @@ var ContainerInner = /* @__PURE__ */ React42.forwardRef(({
   isModuleExternal,
   inComponentSlot,
   ...props
-}, ref,) => {
+}, ref,) {
   const outerLayoutId = useConstant2(() => layoutId ? `${layoutId}-container` : void 0);
   const MotionComponent = htmlElementAsMotionComponent(as,);
   const clonedChildren = React42.Children.map(children, (child) => {
@@ -35605,7 +35728,7 @@ var ContainerInner = /* @__PURE__ */ React42.forwardRef(({
           enabled: false,
           children: /* @__PURE__ */ jsx(LayoutGroup, {
             id: layoutId ?? '',
-            inherit: 'id',
+            inherit: props.layout ? true : 'id',
             children: childrenWithCodeBoundary,
           },),
         },),
@@ -35614,7 +35737,7 @@ var ContainerInner = /* @__PURE__ */ React42.forwardRef(({
   },);
 },);
 var Container = /* @__PURE__ */ withGeneratedLayoutId(ContainerInner,);
-var SmartComponentScopedContainer = /* @__PURE__ */ React42.forwardRef((props, ref,) => {
+var SmartComponentScopedContainer = /* @__PURE__ */ React42.forwardRef(function SmartComponentScopedContainer2(props, ref,) {
   const {
     as,
     children,
@@ -36272,9 +36395,9 @@ function updateTextSelectionStyles(triggerId,) {
   frame.read(() => {
     const el = document.getElementById(triggerId,);
     if (!el) return;
-    const styles4 = getComputedStyle(el, '::selection',);
-    const textSelectionColor = styles4.getPropertyValue('color',).trim();
-    const textSelectionBackgroundColor = styles4.getPropertyValue('background-color',).trim();
+    const styles4 = getComputedStyle(el,);
+    const textSelectionColor = styles4.getPropertyValue('--selection-color',).trim();
+    const textSelectionBackgroundColor = styles4.getPropertyValue('--selection-background-color',).trim();
     frame.render(() => {
       const overlayPortal = document.querySelectorAll(`[data-framer-portal-id="${triggerId}"]`,);
       if (overlayPortal.length === 0) return;
@@ -37043,6 +37166,13 @@ var GracefullyDegradingErrorBoundary = class extends Component2 {
       },)
     );
   }
+};
+var LibraryFeaturesContext = /* @__PURE__ */ React42.createContext(void 0,);
+LibraryFeaturesContext.displayName = 'LibraryFeaturesContext';
+var LibraryFeaturesProvider = /* @__PURE__ */ (() => LibraryFeaturesContext.Provider)();
+var useLibraryFeatures = () => {
+  const context = React42.useContext(LibraryFeaturesContext,);
+  return context ?? {};
 };
 function findAnchorElement(target, withinElement,) {
   if (target instanceof HTMLAnchorElement) {
@@ -37873,17 +38003,15 @@ function addUTMTagsToFormData(data2, document2,) {
     }
   } catch (e) {}
 }
-var HONEYPOT_VERSION = '2';
+var HONEYPOT_VERSION = '3';
 var HONEYPOT_FIELD_NAME = '__framer';
 var COMMON_FIELD_NAMES = [
   'website',
   'company',
-  'address',
   'message',
   'subject',
   'title',
   'description',
-  // safari safe ones below for testing their performance
   'feedback',
   'notes',
   'details',
@@ -37891,6 +38019,23 @@ var COMMON_FIELD_NAMES = [
   'comments',
 ];
 var MODULE_LOAD_TIME = /* @__PURE__ */ (() => Date.now())();
+var FIELD_DATA_ENUM = {
+  name: 0,
+  value: 1,
+  setAttribute: 2,
+  valueProperty: 3,
+  isInputEventTrusted: 4,
+  inputChangeTimeSinceModuleLoad: 5,
+  wasFilledBeforeHydration: 6,
+};
+var METADATA_KEYS_ENUM = {
+  fieldData: 0,
+  fieldCount: 1,
+  fieldFilledCount: 2,
+  hpVersion: 3,
+  siteId: 4,
+  timeToSubmissionSinceModuleLoad: 5,
+};
 var getTimeSinceModuleLoadInSeconds = () => {
   return ((Date.now() - MODULE_LOAD_TIME) / 1e3).toFixed(2,);
 };
@@ -37970,6 +38115,7 @@ var HoneypotInput = ({
   },);
 };
 function useHoneypotFields() {
+  const framerSiteId = React42.useContext(FormContext,);
   const states = React42.useMemo(() =>
     COMMON_FIELD_NAMES.map((fieldName) => {
       return {
@@ -37982,51 +38128,50 @@ function useHoneypotFields() {
       };
     },), [],);
   const convertHoneypotFieldsForSubmission = React42.useCallback(() => {
-    const timeSinceModuleLoadedInSeconds = getTimeSinceModuleLoadInSeconds();
     states.forEach((state) => {
-      const {
-        inputRef,
-        methodsUsed,
-        originalName,
-      } = state;
-      if (inputRef.current) {
-        const methodParts = [];
-        if (methodsUsed.setAttribute) {
-          methodParts.push('setAttribute',);
-        }
-        if (methodsUsed.valueProperty) {
-          methodParts.push('valueProperty',);
-        }
-        if (methodsUsed.isInputEventTrusted !== void 0) {
-          const trustedString = methodsUsed.isInputEventTrusted ? 'trusted' : 'untrusted';
-          methodParts.push(`${trustedString}Event`,);
-        }
-        if (methodsUsed.inputChangeTimeSinceModuleLoad !== void 0) {
-          methodParts.push(`inputChangedAt:${methodsUsed.inputChangeTimeSinceModuleLoad}s`,);
-        }
-        if (methodsUsed.wasFilledBeforeHydration) {
-          methodParts.push('filledBeforeHydration',);
-        }
-        if (inputRef.current.value) {
-          methodParts.push(`submittedAt:${timeSinceModuleLoadedInSeconds}s`,);
-        }
-        const methodsSuffix = methodParts.length > 0 ? `_${methodParts.join('_',)}` : '';
-        const framerName = `${HONEYPOT_FIELD_NAME}_v${HONEYPOT_VERSION}_${originalName}${methodsSuffix}`;
-        inputRef.current.name = framerName;
+      const currentHoneypotInput = state.inputRef.current;
+      if (currentHoneypotInput) {
+        currentHoneypotInput.name = `${HONEYPOT_FIELD_NAME}_${state.originalName}`;
       }
     },);
   }, [states,],);
-  const clear = React42.useCallback(() => {
+  const replaceHoneypotWithMetadata = React42.useCallback((formData) => {
+    const honeypotCount = states.length;
+    let honeypotFilled = 0;
+    const filledFieldsData = [];
     states.forEach((state) => {
-      if (state.inputRef.current) {
-        state.inputRef.current.name = state.originalName;
+      const currentHoneypotInput = state.inputRef.current;
+      if (currentHoneypotInput) {
+        const currentName = currentHoneypotInput.name;
+        const currentValue = currentHoneypotInput.value;
+        if (currentValue) {
+          honeypotFilled++;
+          const fieldData = {
+            [FIELD_DATA_ENUM.name]: state.originalName,
+            [FIELD_DATA_ENUM.value]: currentValue,
+            [FIELD_DATA_ENUM.setAttribute]: state.methodsUsed.setAttribute,
+            [FIELD_DATA_ENUM.valueProperty]: state.methodsUsed.valueProperty,
+            [FIELD_DATA_ENUM.isInputEventTrusted]: state.methodsUsed.isInputEventTrusted,
+            [FIELD_DATA_ENUM.inputChangeTimeSinceModuleLoad]: state.methodsUsed.inputChangeTimeSinceModuleLoad,
+            [FIELD_DATA_ENUM.wasFilledBeforeHydration]: state.methodsUsed.wasFilledBeforeHydration,
+          };
+          filledFieldsData.push(JSON.stringify(fieldData,),);
+        }
+        formData.delete(currentName,);
+        currentHoneypotInput.name = state.originalName;
       }
     },);
-  }, [states,],);
+    formData.append(`${HONEYPOT_FIELD_NAME}_${METADATA_KEYS_ENUM.fieldData}`, `[${filledFieldsData.join(',',)}]`,);
+    formData.append(`${HONEYPOT_FIELD_NAME}_${METADATA_KEYS_ENUM.fieldCount}`, honeypotCount.toString(),);
+    formData.append(`${HONEYPOT_FIELD_NAME}_${METADATA_KEYS_ENUM.fieldFilledCount}`, honeypotFilled.toString(),);
+    formData.append(`${HONEYPOT_FIELD_NAME}_${METADATA_KEYS_ENUM.hpVersion}`, HONEYPOT_VERSION,);
+    formData.append(`${HONEYPOT_FIELD_NAME}_${METADATA_KEYS_ENUM.siteId}`, framerSiteId || '',);
+    formData.append(`${HONEYPOT_FIELD_NAME}_${METADATA_KEYS_ENUM.timeToSubmissionSinceModuleLoad}`, getTimeSinceModuleLoadInSeconds(),);
+  }, [states, framerSiteId,],);
   return {
     states,
     convertHoneypotFieldsForSubmission,
-    clear,
+    replaceHoneypotWithMetadata,
   };
 }
 function HoneypotFields({
@@ -38136,7 +38281,7 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
   const {
     states: honeypotStateRefs,
     convertHoneypotFieldsForSubmission,
-    clear: resetHoneypotNames,
+    replaceHoneypotWithMetadata,
   } = useHoneypotFields();
   const libraryFeatures = useLibraryFeatures();
   const isAdvancedSpamProtectionEnabled = libraryFeatures.advancedSpamProtection;
@@ -38201,13 +38346,13 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
       convertHoneypotFieldsForSubmission();
     }
     const data2 = new FormData(event.currentTarget,);
-    if (isAdvancedSpamProtectionEnabled) {
-      resetHoneypotNames();
-    }
     await yieldToMain({
       priority: 'user-visible',
       continueAfter: 'paint',
     },);
+    if (isAdvancedSpamProtectionEnabled) {
+      replaceHoneypotWithMetadata(data2,);
+    }
     startTransition2(() =>
       dispatch({
         type: 'submit',
@@ -38380,6 +38525,266 @@ function EditorBarLauncher({
       },),
     },),
   },);
+}
+var mainTagId = 'main';
+var generatedPageDatasetKey = 'framerGeneratedPage';
+var searchIndexMetaName = 'framer-search-index';
+var searchIndexMetaSelector = `meta[name="${searchIndexMetaName}"]`;
+var startOfHeadStartMarker = '<!-- Start of headStart -->';
+var endOfHeadStartMarker = '<!-- End of headStart -->';
+var startOfHeadEndMarker = '<!-- Start of headEnd -->';
+var endOfHeadEndMarker = '<!-- End of headEnd -->';
+var startOfBodyStartMarker = '<!-- Start of bodyStart -->';
+var endOfBodyStartMarker = '<!-- End of bodyStart -->';
+var startOfBodyEndMarker = '<!-- Start of bodyEnd -->';
+var endOfBodyEndMarker = '<!-- End of bodyEnd -->';
+var SnippetsContext = /* @__PURE__ */ (() => React42.createContext(void 0,))();
+function SnippetsProvider({
+  children,
+  loadSnippetsModule,
+},) {
+  return /* @__PURE__ */ jsx(SnippetsContext.Provider, {
+    value: loadSnippetsModule,
+    children,
+  },);
+}
+function useSnippets() {
+  return React42.useContext(SnippetsContext,);
+}
+function getSnippetMarkers(id3,) {
+  return {
+    start: `<!-- Snippet: ${id3} -->`,
+    end: `<!-- SnippetEnd: ${id3} -->`,
+  };
+}
+async function insertHTML(html, referenceNode, position = 'beforeend',) {
+  let insertionParent, insertionPoint;
+  switch (position) {
+    case 'beforebegin':
+      assert(referenceNode.parentNode, 'Can\'t use \'beforebegin\' with a referenceNode at the top level',);
+      insertionParent = referenceNode.parentNode;
+      insertionPoint = referenceNode;
+      break;
+    case 'afterend':
+      assert(referenceNode.parentNode, 'Can\'t use \'afterend\' with a referenceNode at the top level',);
+      insertionParent = referenceNode.parentNode;
+      insertionPoint = referenceNode.nextSibling;
+      break;
+    case 'afterbegin':
+      insertionParent = referenceNode;
+      insertionPoint = referenceNode.firstChild;
+      break;
+    case 'beforeend':
+      insertionParent = referenceNode;
+      insertionPoint = null;
+      break;
+    default:
+      assertNever(position,);
+  }
+  const range = document.createRange();
+  range.selectNodeContents(insertionParent,);
+  const fragment = range.createContextualFragment(html,);
+  await pump(fragment, insertionParent, insertionPoint,);
+}
+async function pump(sourceNode, targetParent, beforeNode,) {
+  for (let node = sourceNode.firstChild; node; node = node.nextSibling) {
+    if (node instanceof HTMLScriptElement) {
+      const needsWait = handleScript(node, targetParent, beforeNode,);
+      if (needsWait !== void 0) {
+        await needsWait;
+      }
+      continue;
+    }
+    const clone = node.cloneNode(false,);
+    targetParent.insertBefore(clone, beforeNode,);
+    if (node.firstChild) {
+      await pump(node, clone, null,);
+    }
+  }
+}
+function handleScript(node, parent, beforeNode,) {
+  const script = node.cloneNode(true,);
+  if (
+    !node.hasAttribute('src',) ||
+    // external
+    node.hasAttribute('async',) ||
+    // async
+    node.hasAttribute('defer',) ||
+    // defer
+    node.getAttribute('type',)?.toLowerCase() === 'module'
+  ) {
+    parent.insertBefore(script, beforeNode,);
+  } else {
+    return execExternalBlockingScript(script, parent, beforeNode,);
+  }
+}
+function execExternalBlockingScript(script, parent, beforeNode,) {
+  return new Promise((resolve) => {
+    script.onload = script.onerror = resolve;
+    parent.insertBefore(script, beforeNode,);
+  },);
+}
+function findMarkers(placement,) {
+  let startMarker;
+  let endMarker;
+  switch (placement) {
+    case 'bodyStart':
+      startMarker = startOfBodyStartMarker;
+      endMarker = endOfBodyStartMarker;
+      break;
+    case 'bodyEnd':
+      startMarker = startOfBodyEndMarker;
+      endMarker = endOfBodyEndMarker;
+      break;
+    case 'headStart':
+      startMarker = startOfHeadStartMarker;
+      endMarker = endOfHeadStartMarker;
+      break;
+    case 'headEnd':
+      startMarker = startOfHeadEndMarker;
+      endMarker = endOfHeadEndMarker;
+      break;
+  }
+  const element = placement === 'bodyStart' || placement === 'bodyEnd' ? document.body : document.head;
+  let start2 = null;
+  let end = null;
+  for (const node of element.childNodes) {
+    if (node.nodeType !== Node.COMMENT_NODE) {
+      continue;
+    }
+    const comment = `<!--${node.nodeValue}-->`;
+    if (comment === startMarker) {
+      start2 = node;
+    } else if (comment === endMarker) {
+      end = node;
+    }
+  }
+  return {
+    start: start2,
+    end,
+  };
+}
+function findSnippetMarkerNodes(snippetId, startMarker, endMarker,) {
+  if (!startMarker || !endMarker) {
+    return {
+      start: null,
+      end: null,
+    };
+  }
+  let start2 = null;
+  let end = null;
+  const {
+    start: startComment,
+    end: endComment,
+  } = getSnippetMarkers(snippetId,);
+  let node = startMarker.nextSibling;
+  while (node && node !== endMarker) {
+    if (node.nodeType !== Node.COMMENT_NODE) {
+      node = node.nextSibling;
+      continue;
+    }
+    const comment = `<!--${node.nodeValue}-->`;
+    if (comment === startComment) {
+      start2 = node;
+    } else if (comment === endComment) {
+      end = node;
+      break;
+    }
+    node = node.nextSibling;
+  }
+  return {
+    start: start2,
+    end,
+  };
+}
+async function loadSnippets(placement, snippets, sorting,) {
+  if (snippets.length === 0) return;
+  const {
+    start: start2,
+    end,
+  } = findMarkers(placement,);
+  const placementParent = placement === 'bodyStart' || placement === 'bodyEnd' ? document.body : document.head;
+  for (const snippet of snippets) {
+    const {
+      start: startSnippetMarker,
+      end: endSnippetMarker,
+    } = findSnippetMarkerNodes(snippet.id, start2, end,);
+    const isLoaded = startSnippetMarker && endSnippetMarker;
+    if (isLoaded && snippet.loadMode === 'once') {
+      continue;
+    }
+    removeSnippetElements(startSnippetMarker, endSnippetMarker,);
+    if (isLoaded) {
+      await insertHTML(snippet.code, endSnippetMarker, 'beforebegin',);
+      continue;
+    }
+    const {
+      start: codeStart,
+      end: codeEnd,
+    } = getSnippetMarkers(snippet.id,);
+    const code = `${codeStart}
+${snippet.code}
+${codeEnd}`;
+    const insertReference = findInsertReferece(snippet.id, sorting, start2, end,);
+    if (insertReference) {
+      await insertHTML(code, insertReference, 'afterend',);
+    } else {
+      const node = start2 ?? placementParent;
+      const position = start2 ? 'afterend' : 'beforeend';
+      await insertHTML(code, node, position,);
+    }
+  }
+}
+function removeSnippetElements(start2, end,) {
+  if (!start2 || !end) return;
+  let node = start2.nextSibling;
+  while (node && node !== end) {
+    const nextNode = node.nextSibling;
+    if (isRemovableNode(node,)) {
+      node.remove();
+    }
+    node = nextNode;
+  }
+}
+function isRemovableNode(node,) {
+  if (node.nodeType !== Node.ELEMENT_NODE) return true;
+  if (node.nodeName === 'SCRIPT') {
+    const script = node;
+    const type = script.type;
+    if (!type || type === 'text/javascript' || type === 'module') return false;
+  }
+  return true;
+}
+function findInsertReferece(snippetId, sorting, start2, end,) {
+  const startIndex = sorting.indexOf(snippetId,) - 1;
+  if (startIndex < 0) return null;
+  for (let i = startIndex; i >= 0; i--) {
+    const item = sorting[i];
+    if (!item) continue;
+    const reference = findSnippetMarkerNodes(item, start2, end,).end;
+    if (reference) return reference;
+  }
+  return null;
+}
+function useLoadSnippets() {
+  const loadSnippetsModule = useSnippets();
+  return useCallback2(async (pageId, pathVariables, activeLocale, isInitialNavigation,) => {
+    if (!loadSnippetsModule) return;
+    const mainTag = document.getElementById(mainTagId,);
+    const isGeneratedPage = mainTag && mainTag.dataset[generatedPageDatasetKey] !== void 0;
+    if (isInitialNavigation && isGeneratedPage) return;
+    const {
+      getSnippets,
+      snippetsSorting,
+    } = await loadSnippetsModule.readMaybeAsync();
+    const snippets = await getSnippets(pageId, pathVariables, activeLocale,);
+    for (const key7 in snippets) {
+      const placement = key7;
+      const snippetsForPlacement = snippets[placement];
+      const sorting = snippetsSorting[placement];
+      await loadSnippets(placement, snippetsForPlacement, sorting,);
+    }
+  }, [loadSnippetsModule,],);
 }
 function isSamePage(a, b,) {
   if (a.routeId !== b.routeId) return false;
@@ -38578,6 +38983,7 @@ function Router({
     }
     return (fn) => fn();
   }, [synchronousNavigationOnDesktop,],);
+  const loadSnippets2 = useLoadSnippets();
   const isInitialNavigationRef = useRef(true,);
   const currentPathnameWithHashRef = useRef();
   const currentRouteRef = useRef(initialRoute,);
@@ -38814,6 +39220,9 @@ function Router({
   const currentRoutePath = currentRoute?.path;
   const pageviewEventData = useSendPageView(currentRoute, currentRouteId, currentPathnameWithHash, currentPathVariables, activeLocale,);
   const isInitialNavigation = isInitialNavigationRef.current;
+  useEffect(() => {
+    void loadSnippets2(currentRouteId, currentPathVariables ?? {}, localeInfo.activeLocale, isInitialNavigation,);
+  }, [loadSnippets2, currentRouteId, currentPathVariables, localeInfo, isInitialNavigation,],);
   const api = useMemo(() => ({
     navigate,
     getRoute,
@@ -39418,6 +39827,7 @@ function PageRoot({
   LayoutTemplate,
   siteCanonicalURL,
   adaptLayoutToTextDirection,
+  loadSnippetsModule,
 },) {
   React42.useEffect(() => {
     if (isWebsite) return;
@@ -39432,24 +39842,27 @@ function PageRoot({
           children: /* @__PURE__ */ jsx(CustomCursorHost, {
             children: /* @__PURE__ */ jsx(FormContext.Provider, {
               value: framerSiteId,
-              children: /* @__PURE__ */ jsx(Router, {
-                initialRoute: routeId,
-                initialPathVariables: pathVariables,
-                initialLocaleId: localeId,
-                routes,
-                collectionUtils,
-                notFoundPage,
-                locales,
-                defaultPageStyle: defaultPageStyle ?? {
-                  minHeight: '100vh',
-                  width: 'auto',
-                },
-                preserveQueryParams,
-                EditorBar,
-                disableHistory,
-                LayoutTemplate,
-                siteCanonicalURL,
-                adaptLayoutToTextDirection,
+              children: /* @__PURE__ */ jsx(SnippetsProvider, {
+                loadSnippetsModule,
+                children: /* @__PURE__ */ jsx(Router, {
+                  initialRoute: routeId,
+                  initialPathVariables: pathVariables,
+                  initialLocaleId: localeId,
+                  routes,
+                  collectionUtils,
+                  notFoundPage,
+                  locales,
+                  defaultPageStyle: defaultPageStyle ?? {
+                    minHeight: '100vh',
+                    width: 'auto',
+                  },
+                  preserveQueryParams,
+                  EditorBar,
+                  disableHistory,
+                  LayoutTemplate,
+                  siteCanonicalURL,
+                  adaptLayoutToTextDirection,
+                },),
               },),
             },),
           },),
@@ -41560,7 +41973,8 @@ var Builder = class {
       assert(argument, 'Missing argument',);
       return this.buildExpression(inScope, argument,);
     };
-    switch (expression.functionName) {
+    const functionName = expression.functionName;
+    switch (functionName) {
       case 'CONTAINS': {
         const source = getArgument(0,);
         const target = getArgument(1,);
@@ -41597,8 +42011,13 @@ var Builder = class {
         assert(subquery.type === 'Select', 'Subqueries require a select expression',);
         return this.buildSubqueryFlatArray(inScope, subquery,);
       }
+      case 'INTERSECT': {
+        const source = getArgument(0,);
+        const target = getArgument(1,);
+        return this.normalizer.newScalarIntersection(source, target,);
+      }
       default:
-        throw new Error('Unsupported function name',);
+        assertNever(functionName, 'Unsupported function name',);
     }
   }
   buildSubqueryArray(inScope, expression,) {
@@ -43337,6 +43756,78 @@ var ScalarIndexOf = class _ScalarIndexOf extends ScalarNode {
     };
   }
 };
+var ScalarIntersection = class _ScalarIntersection extends ScalarNode {
+  constructor(left, right,) {
+    const referencedFields = new Fields();
+    referencedFields.merge(left.referencedFields,);
+    referencedFields.merge(right.referencedFields,);
+    const referencedOuterFields = new Fields();
+    referencedOuterFields.merge(left.referencedOuterFields,);
+    referencedOuterFields.merge(right.referencedOuterFields,);
+    const isSynchronous = left.isSynchronous && right.isSynchronous;
+    super(referencedFields, referencedOuterFields, isSynchronous,);
+    this.left = left;
+    this.right = right;
+    __publicField(this, 'definition', {
+      type: 'array',
+      definition: {
+        type: 'string',
+        isNullable: false,
+      },
+      isNullable: false,
+    },);
+  }
+  getHash() {
+    return calculateHash('ScalarIntersection', this.left, this.right,);
+  }
+  optimize(optimizer,) {
+    const leftCost = this.left.optimize(optimizer,);
+    const rightCost = this.right.optimize(optimizer,);
+    return Cost.max(leftCost, rightCost,);
+  }
+  getOptimized() {
+    const left = this.left.getOptimized();
+    const right = this.right.getOptimized();
+    return new _ScalarIntersection(left, right,);
+  }
+  *evaluate(context, tuple,) {
+    const {
+      left,
+      right,
+    } = yield* evaluateObject({
+      left: this.left.evaluate(context, tuple,),
+      right: this.right.evaluate(context, tuple,),
+    },);
+    const leftSet = databaseValueToSet(left,);
+    const rightSet = databaseValueToSet(right,);
+    const intersection2 = [];
+    const shortestSet = leftSet.size < rightSet.size ? leftSet : rightSet;
+    const longestSet = shortestSet === leftSet ? rightSet : leftSet;
+    for (const item of shortestSet) {
+      if (longestSet.has(item,)) {
+        intersection2.push({
+          type: 'string',
+          value: item,
+        },);
+      }
+    }
+    return {
+      type: 'array',
+      value: intersection2,
+    };
+  }
+};
+function databaseValueToSet(value,) {
+  const set = /* @__PURE__ */ new Set();
+  if (!value) return set;
+  assert2(value.type === 'array', 'ScalarIntersection expects an array, got:', value.type,);
+  for (const item of value.value) {
+    if (!item) continue;
+    assert2(item.type === 'string', 'ScalarIntersection expects an array of strings, got an array with:', item.type,);
+    set.add(item.value,);
+  }
+  return set;
+}
 var ScalarLength = class _ScalarLength extends ScalarNode {
   constructor(input,) {
     super(input.referencedFields, input.referencedOuterFields, input.isSynchronous,);
@@ -43774,6 +44265,10 @@ var Normalizer = class {
   }
   newScalarFlatArray(input, field, ordering, referencedFields, referencedOuterFields,) {
     const node = new ScalarFlatArray(input, field, ordering, referencedFields, referencedOuterFields,);
+    return this.finishScalar(node,);
+  }
+  newScalarIntersection(left, right,) {
+    const node = new ScalarIntersection(left, right,);
     return this.finishScalar(node,);
   }
   newScalarCast(input, definition,) {
@@ -46704,6 +47199,46 @@ var withTickerFX = (Component18) => {
     },);
   };
 };
+var withFlowFX = (Component18) =>
+  React42.forwardRef((props, forwardedRef,) => {
+    const {
+      flowEffectEnabled,
+      flowEffectTransition,
+      isNestedFlowEffect,
+      transition,
+      ...forwardedProps
+    } = props;
+    const mergedTransition = useMemo(() =>
+      flowEffectTransition
+        ? {
+          default: transition,
+          layout: flowEffectTransition,
+        }
+        : transition, [transition, flowEffectTransition,],);
+    if (!flowEffectEnabled) {
+      return /* @__PURE__ */ jsx(Component18, {
+        ...forwardedProps,
+        ref: forwardedRef,
+        transition,
+      },);
+    }
+    let componentWithFlowEffect = /* @__PURE__ */ jsx(Component18, {
+      ...forwardedProps,
+      ref: forwardedRef,
+    },);
+    if (flowEffectTransition) {
+      componentWithFlowEffect = /* @__PURE__ */ jsx(MotionConfig, {
+        transition: mergedTransition,
+        children: componentWithFlowEffect,
+      },);
+    }
+    if (!isNestedFlowEffect) {
+      componentWithFlowEffect = /* @__PURE__ */ jsx(LayoutGroup, {
+        children: componentWithFlowEffect,
+      },);
+    }
+    return componentWithFlowEffect;
+  },);
 function extractMappingFromInfo(info,) {
   const json = info.__FramerMetadata__.exports.default.annotations?.framerVariables;
   if (!json) return void 0;
@@ -46874,16 +47409,6 @@ var withVariantFX = (Component18) =>
   },);
 var WindowContext = /* @__PURE__ */ React42.createContext(void 0,);
 var useProvidedWindow = () => React42.useContext(WindowContext,);
-function isDesignDefinition(d,) {
-  return d.type === 'master';
-}
-function isOverride(d,) {
-  return d.type === 'override';
-}
-function isReactDefinition(d,) {
-  return d.type !== 'master';
-}
-var localPackageFallbackIdentifier = '|local|';
 var safeFonts = {
   Arial: {
     Regular: {
@@ -47887,6 +48412,10 @@ var variantsNameToWeight = {
   // We assign them different (fake) weights to ensure that the changes are picked up when switching between variants.
   '53': 400,
   '55': 600,
+  // The following variants are only used in the Rag font.
+  // We assign them different (fake) weights to ensure that the changes are picked up when switching between variants.
+  'narrow-regular': 350,
+  'narrow-black': 850,
   // we want to put variable fonts last
   variable: 1e3,
   'variable-italic': 1e3,
@@ -48282,7 +48811,7 @@ function getAssetOwnerType(asset,) {
 async function loadFontsWithOpenType(source,) {
   switch (source) {
     case 'google': {
-      const supportedFonts = await import('./framer-chunks/google-RE4DULFA-7U353QI3.js');
+      const supportedFonts = await import('./framer-chunks/google-AG6EYFMK-VXMK4LWI.js');
       return supportedFonts?.default;
     }
     case 'fontshare': {
@@ -48296,7 +48825,7 @@ async function loadFontsWithOpenType(source,) {
 async function loadFontToOpenTypeFeatures(source,) {
   switch (source) {
     case 'google': {
-      const features = await import('./framer-chunks/google-IP4ZFBZ6-BPKEAUY3.js');
+      const features = await import('./framer-chunks/google-EJBUPU3N-JOFVHSFQ.js');
       return features?.default;
     }
     case 'fontshare': {
@@ -48848,7 +49377,7 @@ function loadVariationAxes(source,) {
       const axes = (async () => {
         switch (source) {
           case 'google': {
-            return (await import('./framer-chunks/google-HVUQEOXY-IDXMIEDZ.js')).default;
+            return (await import('./framer-chunks/google-CQFUID6E-OQQXADED.js')).default;
           }
           case 'fontshare': {
             return (await import('./framer-chunks/fontshare-X63NXWGB-NL5Q3YUU.js')).default;
@@ -49243,207 +49772,6 @@ function CustomProperties({
     children,
   },);
 }
-var DeprecatedComponentContainer = /* @__PURE__ */ (() => {
-  var _a;
-  return _a = class extends Layer {
-    constructor() {
-      super(...arguments,);
-      __publicField(this, 'state', {},);
-      __publicField(this, 'setElement', (element) => {
-        if (this.props.innerRef) {
-          this.props.innerRef.current = element;
-        }
-        this.setLayerElement(element,);
-      },);
-    }
-    componentDidCatch(error, info,) {
-      let stack = info.componentStack?.split('\n',).filter((line) => line.length !== 0);
-      let currentIndex = 0;
-      if (stack) {
-        for (const line of stack) {
-          if (line.startsWith(`    in ${this.constructor.name}`,)) {
-            break;
-          }
-          currentIndex++;
-        }
-        stack = stack.slice(0, currentIndex,);
-      }
-      this.setState({
-        lastError: {
-          children: this.props.children,
-          name: error.name,
-          message: error.message,
-          componentStack: stack,
-        },
-      },);
-    }
-    renderErrorPlaceholder(error,) {
-      const {
-        RenderPlaceholder,
-      } = runtime;
-      return /* @__PURE__ */ jsx(FrameWithMotion, {
-        ...this.props,
-        background: null,
-        children: /* @__PURE__ */ jsx(RenderPlaceholder, {
-          error,
-        },),
-      },);
-    }
-    render() {
-      countNodeRender();
-      let {
-        children,
-      } = this.props;
-      const {
-        componentIdentifier,
-      } = this.props;
-      const {
-        lastError: error,
-      } = this.state;
-      const noChildren = !children || Array.isArray(children,) && children.filter((c) => c).length === 0;
-      if (noChildren) {
-        const errorComponent = runtime.componentLoader.errorForIdentifier(componentIdentifier,);
-        if (errorComponent) {
-          const title = `Error in ${errorComponent.file}`;
-          const message = errorComponent.error;
-          return this.renderErrorPlaceholder({
-            title,
-            message,
-          },);
-        }
-      }
-      if (error && error.children === children) {
-        const component = runtime.componentLoader.componentForIdentifier(componentIdentifier,);
-        const file = component ? component.file : '???';
-        const title = `Error in ${file}`;
-        const message = error.message;
-        return this.renderErrorPlaceholder({
-          title,
-          message,
-        },);
-      }
-
-      asRecord(safeWindow,)['__checkComponentBudget__']?.();
-      let frameProps = this.props;
-      if (RenderTarget.current() !== RenderTarget.canvas) {
-        const {
-          left,
-          right,
-          top,
-          bottom,
-          center,
-          centerX,
-          centerY,
-          aspectRatio: aspectRatio2,
-          parentSize,
-          width,
-          height,
-          rotation,
-          opacity: _opacity,
-          visible,
-          _constraints,
-          _initialStyle,
-          name,
-          positionSticky,
-          positionStickyTop,
-          positionStickyRight,
-          positionStickyBottom,
-          positionStickyLeft,
-          // Remove the children and the componentIdentifier from the props passed into the component
-          componentIdentifier: originalComponentIdentifier,
-          children: originalChildren,
-          style: style2,
-          duplicatedFrom,
-          widthType,
-          heightType,
-          ...childProps
-        } = frameProps;
-        children = React42.Children.map(originalChildren, (child) => {
-          if (!isReactChild(child,) || !isReactElement(child,)) {
-            return child;
-          }
-          if (!isPageOrScroll(originalComponentIdentifier,)) {
-            return /* @__PURE__ */ jsx(LayoutGroup, {
-              inherit: false,
-              id: this.props.__layoutId,
-              children: /* @__PURE__ */ jsx(AutomaticLayoutIds, {
-                enabled: false,
-                children: React42.cloneElement(child, childProps,),
-              },),
-            },);
-          }
-          return React42.cloneElement(child, childProps,);
-        },);
-        frameProps = {
-          style: style2,
-          _constraints,
-          _initialStyle,
-          left,
-          right,
-          top,
-          bottom,
-          center,
-          centerX,
-          centerY,
-          aspectRatio: aspectRatio2,
-          parentSize,
-          width,
-          height,
-          rotation,
-          visible,
-          name,
-          duplicatedFrom,
-          id: frameProps.id,
-          layoutId: this.props.__layoutId,
-          widthType,
-          heightType,
-          positionSticky,
-          positionStickyTop,
-          positionStickyRight,
-          positionStickyBottom,
-          positionStickyLeft,
-        };
-      }
-      return (
-        /* The background should come before the frameProps. It looks like there never should be a background in frameProps,
-         * but published design components can contain an old version of the presentation tree that expects the background
-         * that is passed to be rendered here
-         * See the stackBackgroundTest.tsx integration test for an example of such a case
-         */
-        /* @__PURE__ */
-        jsx(ComponentContainerContext.Provider, {
-          value: true,
-          children: /* @__PURE__ */ jsx(FrameWithMotion, {
-            'data-framer-component-container': true,
-            background: null,
-            overflow: 'visible',
-            ref: this.setElement,
-            ...frameProps,
-            children,
-          },),
-        },)
-      );
-    }
-  },
-    __publicField(_a, 'supportsConstraints', true,),
-    __publicField(_a, 'defaultComponentContainerProps', {
-      style: {},
-      visible: true,
-      componentIdentifier: '',
-    },),
-    __publicField(_a, 'defaultProps', {
-      ...Layer.defaultProps,
-      ..._a.defaultComponentContainerProps,
-    },),
-    __publicField(_a, 'contextType', ComponentContainerContext,),
-    _a;
-})();
-function isPageOrScroll(identifier,) {
-  if (!identifier) return false;
-  if (identifier === 'framer/Page') return true;
-  if (identifier === 'framer/Scroll') return true;
-  return false;
-}
 var passwordManagerIgnoreDataProps = {
   // 1Password
   'data-1p-ignore': true,
@@ -49543,6 +49871,8 @@ var iconSize2 = 16;
 var textInputWrapperClassName = 'framer-form-text-input';
 var defaultTextareaResizerIcon =
   `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"><path d="m1.5 8 7-7M9 5.5l-3 3" stroke="%23999" stroke-width="1.5" stroke-linecap="round"></path></svg>`;
+var defaultTextareaResizerIconFlipped =
+  `<svg xmlns="http://www.w3.org/2000/svg" transform="scale(-1, 1)" width="14" height="14"><path d="m1.5 8 7-7M9 5.5l-3 3" stroke="%23999" stroke-width="1.5" stroke-linecap="round"></path></svg>`;
 var defaultDateIconMaskImage =
   '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path fill="rgb(153, 153, 153)" d="M3 5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2H3Z" opacity=".3"/><path fill="transparent" stroke="rgb(153, 153, 153)" stroke-width="1.5" d="M3.25 5.25a2 2 0 0 1 2-2h5.5a2 2 0 0 1 2 2v5.5a2 2 0 0 1-2 2h-5.5a2 2 0 0 1-2-2ZM3 6.75h9.5"/></svg>';
 var defaultTimeIconMaskImage =
@@ -49561,6 +49891,8 @@ var styles = /* @__PURE__ */ (() => [
     borderBottomRightRadius: css2.variable('--framer-input-border-radius-bottom-right',/* BorderRadiusBottomRight */
     ),
     borderBottomLeftRadius: css2.variable('--framer-input-border-radius-bottom-left',/* BorderRadiusBottomLeft */
+    ),
+    cornerShape: css2.variable('--framer-input-corner-shape',/* CornerShape */
     ),
     background: css2.variable('--framer-input-background',/* Background */
     ),
@@ -49594,6 +49926,9 @@ var styles = /* @__PURE__ */ (() => [
   // show the native resize handle.
   css2(`.${textInputWrapperClassName} textarea::-webkit-resizer`, {
     background: `no-repeat ${encodeSVGForCSS(defaultTextareaResizerIcon,)}`,
+  },),
+  css2(`.${textInputWrapperClassName}:dir(rtl) textarea::-webkit-resizer`, {
+    background: `no-repeat ${encodeSVGForCSS(defaultTextareaResizerIconFlipped,)}`,
   },),
   css2(`.${textInputWrapperClassName} textarea::-webkit-scrollbar`, {
     cursor: 'pointer',
@@ -49713,6 +50048,8 @@ var styles2 = /* @__PURE__ */ (() => [
     backgroundColor: '#fff',
     background: '--framer-input-background',
     borderRadius,
+    cornerShape: css2.variable('--framer-input-corner-shape',/* CornerShape */
+    ),
     boxShadow: '--framer-input-box-shadow',
     display: 'flex',
     justifyContent: 'center',
@@ -49728,6 +50065,8 @@ var styles2 = /* @__PURE__ */ (() => [
     background: 'transparent',
     borderColor: css2.variable('--framer-input-border-color', 'transparent',),
     borderRadius,
+    cornerShape: css2.variable('--framer-input-corner-shape',/* CornerShape */
+    ),
     borderStyle: '--framer-input-border-style',
     borderWidth: inputBorderAllSides,
     boxSizing: 'border-box',
@@ -49911,6 +50250,8 @@ var styles3 = /* @__PURE__ */ (() => [
     ),
     borderBottomLeftRadius: css2.variable('--framer-input-border-radius-bottom-left',/* BorderRadiusBottomLeft */
     ),
+    cornerShape: css2.variable('--framer-input-corner-shape',/* CornerShape */
+    ),
     boxShadow: css2.variable('--framer-input-box-shadow',/* BoxShadow */
     ),
     transition: css2.variable('--framer-input-focused-transition',/* FocusedTransition */
@@ -49980,7 +50321,6 @@ function useEscToClose(isOpen, close,) {
     return () => window.removeEventListener('keyup', handleKeyDown,);
   }, [isOpen, close,],);
 }
-var steps2 = [512, 1024, 2048, 4096,];
 function calculateImageWidth(aspectRatio2, maxWidth, totalHorizontalPadding, totalVerticalPadding,) {
   const availableHeight = window.innerHeight - totalVerticalPadding;
   const availableWidth = Math.min(window.innerWidth - totalHorizontalPadding, maxWidth,);
@@ -49995,6 +50335,7 @@ function optimisticallyDecodeImage(image, {
   const i = new window.Image();
   i.src = image.src;
   i.srcset = image.srcSet;
+  i.sizes = image.sizes || '';
   i.width = width;
   i.height = height;
   return i.decode();
@@ -50025,12 +50366,7 @@ function createImageWithSrcSet(lightbox, background,) {
   return {
     ...background,
     sizes: `min(100vw, ${lightbox.maxWidth - getTotalHorizontalPadding(lightbox,)}px)`,
-    // Use all steps since the lightbox can scale up and down with the viewport.
-    srcSet: steps2.map((size) => {
-      const src = new URL(base,);
-      src.searchParams.set('scale-down-to', size.toString(),);
-      return `${src.toString()} ${size}w`;
-    },).join(', ',),
+    srcSet: getSrcSet(background.nodeFixedSize, background, background.src,).srcSet,
   };
 }
 var distortionTransforms = /* @__PURE__ */ (() => ({
@@ -50387,11 +50723,13 @@ var ColumnMasonryLayout = /* @__PURE__ */ React42.memo(function ColumnMasonryLay
   trackCount,
   rowGap,
   parentIsDataRepeater = false,
-  columnMasonryLayoutEnabled,
+  itemsOrder,
   children,
 },) {
-  if (!columnMasonryLayoutEnabled) return children;
-  const normalizedChildren = prepareChildrenArrayForMasonry(children, parentIsDataRepeater,);
+  let normalizedChildren = prepareChildrenArrayForMasonry(children, parentIsDataRepeater,);
+  if (itemsOrder?.length) {
+    normalizedChildren = reorderChildrenForItemsOrder(normalizedChildren, itemsOrder,);
+  }
   const tracks = groupChildrenIntoTracks(trackCount, normalizedChildren,);
   const wrapperStyle2 = getMasonryColumnStyle(rowGap,);
   return tracks.map((trackChildren, i,) =>
@@ -50401,6 +50739,28 @@ var ColumnMasonryLayout = /* @__PURE__ */ React42.memo(function ColumnMasonryLay
     }, getMasonryColumnKey(i,),)
   );
 },);
+function getChildOrderId(child,) {
+  return React42.isValidElement(child,) ? child.props['data-framer-order-id'] : void 0;
+}
+function reorderChildrenForItemsOrder(children, itemsOrder,) {
+  const childrenById = /* @__PURE__ */ new Map();
+  const remaining = [];
+  const orderSet = new Set(itemsOrder,);
+  for (const child of children) {
+    const id3 = getChildOrderId(child,);
+    if (id3 && orderSet.has(id3,)) {
+      childrenById.set(id3, child,);
+    } else {
+      remaining.push(child,);
+    }
+  }
+  const ordered = [];
+  for (const id3 of itemsOrder) {
+    const child = childrenById.get(id3,);
+    if (child) ordered.push(child,);
+  }
+  return [...ordered, ...remaining,];
+}
 function prepareChildrenArrayForMasonry(children, parentIsDataRepeater,) {
   const array = React42.Children.toArray(children,);
   if (!parentIsDataRepeater) return array;
@@ -50439,16 +50799,23 @@ var withColumnMasonryLayout = (Component18) => {
     trackCount = 1,
     rowGap,
     parentIsDataRepeater,
+    itemsOrder,
     children,
     style: existingStyle,
     ...rest
   }, ref,) {
-    const mergedStyle = columnMasonryLayoutEnabled
-      ? {
-        ...existingStyle,
-        gridTemplateColumns: `repeat(${trackCount}, 1fr)`,
-      }
-      : existingStyle;
+    if (!columnMasonryLayoutEnabled) {
+      return /* @__PURE__ */ jsx(Component18, {
+        ref,
+        style: existingStyle,
+        ...rest,
+        children,
+      },);
+    }
+    const mergedStyle = {
+      ...existingStyle,
+      gridTemplateColumns: `repeat(${trackCount}, 1fr)`,
+    };
     return /* @__PURE__ */ jsx(Component18, {
       ref,
       style: mergedStyle,
@@ -50457,7 +50824,7 @@ var withColumnMasonryLayout = (Component18) => {
         trackCount,
         rowGap,
         parentIsDataRepeater,
-        columnMasonryLayoutEnabled,
+        itemsOrder,
         children,
       },),
     },);
@@ -50524,56 +50891,45 @@ function getRelativeDateValue(targetDate, referenceDate, unit,) {
   }
   const _ = unit;
 }
-function getStartOfDay(date,) {
+function getUTCStartOfDay(date,) {
   const result = new Date(date,);
-  result.setHours(0, 0, 0, 0,);
+  result.setUTCHours(0, 0, 0, 0,);
   return result;
 }
 function differenceInCalendarDays(targetDate, referenceDate,) {
-  const targetStartOfDay = getStartOfDay(targetDate,);
-  const referenceStartOfDay = getStartOfDay(referenceDate,);
-  const targetTimestamp = targetStartOfDay.getTime() - getTimezoneOffsetInMilliseconds(targetStartOfDay,);
-  const referenceTimestamp = referenceStartOfDay.getTime() - getTimezoneOffsetInMilliseconds(referenceStartOfDay,);
+  const targetTimestamp = getUTCStartOfDay(targetDate,).getTime();
+  const referenceTimestamp = getUTCStartOfDay(referenceDate,).getTime();
   return Math.round((targetTimestamp - referenceTimestamp) / DAY,);
 }
-function getStartOfWeek(date,) {
+function getUTCStartOfWeek(date,) {
   const result = new Date(date,);
-  const day = result.getDay();
+  const day = result.getUTCDay();
   const diff = (day < 1 ? 7 : 0) + day - 1;
-  result.setDate(result.getDate() - diff,);
-  result.setHours(0, 0, 0, 0,);
+  result.setUTCDate(result.getUTCDate() - diff,);
+  result.setUTCHours(0, 0, 0, 0,);
   return result;
 }
 function differenceInCalendarWeeks(targetDate, referenceDate,) {
-  const targetStartOfWeek = getStartOfWeek(targetDate,);
-  const referenceStartOfWeek = getStartOfWeek(referenceDate,);
-  const targetTimestamp = targetStartOfWeek.getTime() - getTimezoneOffsetInMilliseconds(targetStartOfWeek,);
-  const referenceTimestamp = referenceStartOfWeek.getTime() - getTimezoneOffsetInMilliseconds(referenceStartOfWeek,);
+  const targetTimestamp = getUTCStartOfWeek(targetDate,).getTime();
+  const referenceTimestamp = getUTCStartOfWeek(referenceDate,).getTime();
   return Math.round((targetTimestamp - referenceTimestamp) / WEEK,);
 }
 function differenceInCalendarMonths(targetDate, referenceDate,) {
-  const yearsDiff = targetDate.getFullYear() - referenceDate.getFullYear();
-  const monthsDiff = targetDate.getMonth() - referenceDate.getMonth();
+  const yearsDiff = targetDate.getUTCFullYear() - referenceDate.getUTCFullYear();
+  const monthsDiff = targetDate.getUTCMonth() - referenceDate.getUTCMonth();
   return yearsDiff * 12 + monthsDiff;
 }
-function getQuarter(date,) {
-  const month = date.getMonth();
+function getUTCQuarter(date,) {
+  const month = date.getUTCMonth();
   return Math.trunc(month / 3,);
 }
 function differenceInCalendarQuarters(targetDate, referenceDate,) {
-  const yearsDiff = targetDate.getFullYear() - referenceDate.getFullYear();
-  const quartersDiff = getQuarter(targetDate,) - getQuarter(referenceDate,);
+  const yearsDiff = targetDate.getUTCFullYear() - referenceDate.getUTCFullYear();
+  const quartersDiff = getUTCQuarter(targetDate,) - getUTCQuarter(referenceDate,);
   return yearsDiff * 4 + quartersDiff;
 }
 function differenceInCalendarYears(targetDate, referenceDate,) {
-  return targetDate.getFullYear() - referenceDate.getFullYear();
-}
-function getTimezoneOffsetInMilliseconds(date,) {
-  const year = date.getFullYear();
-  const utcDate = new Date(
-    Date.UTC(year, date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds(),),
-  );
-  return date.getTime() - utcDate.setUTCFullYear(year,);
+  return targetDate.getUTCFullYear() - referenceDate.getUTCFullYear();
 }
 var RelativeDate = /* @__PURE__ */ memo2(function RelativeDate2({
   date: dateString,
@@ -50587,13 +50943,12 @@ var RelativeDate = /* @__PURE__ */ memo2(function RelativeDate2({
   const fallbackLocale = useLocaleCode();
   const locale = externalLocale || fallbackLocale;
   const targetDate = new Date(dateString,);
-  const [currentDate, setCurrentDate,] = useState(() => /* @__PURE__ */ new Date());
+  const [currentDate, setCurrentDate,] = useState(getCurrentDate,);
   const interval = dateFormat === 'second' ? 1e3 : 6e4;
   useEffect(() => {
     const timeout = setInterval(() => {
       startTransition2(() => {
-        const now2 = /* @__PURE__ */ new Date();
-        setCurrentDate(now2,);
+        setCurrentDate(getCurrentDate,);
       },);
     }, interval,);
     return () => {
@@ -50601,6 +50956,7 @@ var RelativeDate = /* @__PURE__ */ memo2(function RelativeDate2({
     };
   }, [interval,],);
   const formattedDate = targetDate.toLocaleString(locale, {
+    timeZone: 'UTC',
     dateStyle: 'long',
     timeStyle: dateFormat === 'second' ? 'medium' : dateFormat === 'minute' || dateFormat === 'hour' ? 'short' : void 0,
   },);
@@ -50622,6 +50978,20 @@ var RelativeDate = /* @__PURE__ */ memo2(function RelativeDate2({
     ],
   },);
 },);
+function getCurrentDate() {
+  const date = /* @__PURE__ */ new Date();
+  return new Date(
+    Date.UTC(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate(),
+      date.getHours(),
+      date.getMinutes(),
+      date.getSeconds(),
+      date.getMilliseconds(),
+    ),
+  );
+}
 function createHydrationScript(date, format, style2, numeric, capitalize, locale,) {
   const serializedDate = date.getTime();
   const serializedFormat = JSON.stringify(format,);
@@ -51210,7 +51580,7 @@ function useTextEffect(config, ref, preview,) {
         },);
       }
       case 'onScrollTarget': {
-        const element = target?.ref.current;
+        const element = target?.ref?.current;
         if (!element) return;
         return inView(element, play, {
           amount: threshold ?? 0,
@@ -51526,6 +51896,8 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
     if (frame2 && restrictedRenderTarget && !isAutoSized2) {
       positionStyle.x = frame2.x + (isNumber2(style2?.x,) ? style2.x : 0);
       positionStyle.y = frame2.y + (isNumber2(style2?.y,) ? style2.y : 0);
+      positionStyle.left = 0;
+      positionStyle.top = 0;
       containerStyle2.rotate = Animatable.getNumber(rotation,);
       containerStyle2.width = frame2.width;
       containerStyle2.minWidth = frame2.width;
@@ -54331,7 +54703,6 @@ export {
   degrees,
   degreesToRadians,
   delay,
-  DeprecatedComponentContainer,
   DeprecatedFrameWithEvents,
   DeprecatedLayoutGroupContext,
   DeprecatedLayoutGroupContext as LayoutGroupContext,
@@ -54431,6 +54802,7 @@ export {
   imageUrlForAsset,
   inertia,
   inferInitialRouteFromPath,
+  initLazyModulesCache,
   injectComponentCSSRules,
   InjectSelectionStyle,
   installFlexboxGapWorkaroundIfNeeded,
@@ -54445,7 +54817,6 @@ export {
   isBrowser,
   isCSSVariableName,
   isCSSVariableToken,
-  isDesignDefinition,
   isDragActive,
   isDragging,
   isEasingArray,
@@ -54463,9 +54834,7 @@ export {
   isNumericalString,
   isObject,
   isOfAnnotatedType,
-  isOverride,
   isPrimaryPointer,
-  isReactDefinition,
   isRelativeNumber,
   isShallowEqualArray,
   isStaticRenderer,
@@ -54482,6 +54851,7 @@ export {
   LayoutGroup,
   LayoutIdContext,
   lazy,
+  lazyModulesCollector,
   LazyMotion,
   LazyValue,
   LibraryFeaturesProvider,
@@ -54490,7 +54860,6 @@ export {
   Link,
   loadFont,
   loadJSON,
-  localPackageFallbackIdentifier,
   localShadowFrame,
   m,
   MainLoop,
@@ -54552,6 +54921,7 @@ export {
   parseCSSVariable,
   parseFramerPageLink,
   parseValueFromTransform,
+  patchBorderRadiusScaleCorrector,
   patchRoutesForABTesting,
   pathDefaults,
   PathSegment,
@@ -54666,7 +55036,9 @@ export {
   useAnimation,
   useAnimationControls,
   useAnimationFrame,
+  useBooleanQueryParam,
   useBreakpointVariants,
+  useCollectionReferenceQueryParam,
   useComponentViewport,
   useComposedRefs,
   useConstant2 as useConstant,
@@ -54708,6 +55080,7 @@ export {
   useMotionTemplate,
   useMotionValue,
   useMotionValueEvent,
+  useMultiCollectionReferenceQueryParam,
   useNavigate,
   useNavigation,
   useObserveData,
@@ -54736,7 +55109,7 @@ export {
   useScroll,
   useSiteRefs,
   useSpring,
-  useStringQueryParameter,
+  useStringQueryParam,
   useSVGTemplate,
   useTime,
   useTracking,
@@ -54765,6 +55138,7 @@ export {
   withCodeBoundaryForOverrides,
   withColumnMasonryLayout,
   withCSS,
+  withFlowFX,
   withFX,
   withGeneratedLayoutId,
   withInfiniteScroll,
