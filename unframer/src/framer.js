@@ -11342,7 +11342,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.P26PY5RQ.mjs
+// /:https://app.framerstatic.com/framer.E466USME.mjs
 
 import React42 from 'react';
 import { useDeferredValue, useSyncExternalStore, } from 'react';
@@ -38348,8 +38348,6 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
     convertHoneypotFieldsForSubmission,
     replaceHoneypotWithMetadata,
   } = useHoneypotFields();
-  const libraryFeatures = useLibraryFeatures();
-  const isAdvancedSpamProtectionEnabled = libraryFeatures.advancedSpamProtection;
   const router = useRouter();
   const currentRoute = useCurrentRoute();
   const implicitPathVariables = useImplicitPathVariables();
@@ -38407,17 +38405,13 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
     event.preventDefault();
     if (!action || !projectHash || submissionInProgressRef.current) return;
     submissionInProgressRef.current = true;
-    if (isAdvancedSpamProtectionEnabled) {
-      convertHoneypotFieldsForSubmission();
-    }
+    convertHoneypotFieldsForSubmission();
     const data2 = new FormData(event.currentTarget,);
     await yieldToMain({
       priority: 'user-visible',
       continueAfter: 'paint',
     },);
-    if (isAdvancedSpamProtectionEnabled) {
-      replaceHoneypotWithMetadata(data2,);
-    }
+    replaceHoneypotWithMetadata(data2,);
     startTransition2(() =>
       dispatch({
         type: 'submit',
@@ -38489,7 +38483,7 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
     ref,
     children: [
       children(state,),
-      isAdvancedSpamProtectionEnabled && /* @__PURE__ */ jsx(HoneypotFields, {
+      /* @__PURE__ */ jsx(HoneypotFields, {
         states: honeypotStateRefs,
       },),
     ],
@@ -44053,6 +44047,9 @@ var Normalizer = class {
     return this.newRelationalLeftJoin(right, left, constraint,);
   }
   newRelationalFilter(input, predicate,) {
+    if (predicate instanceof ScalarConstant && predicate.value?.type === 'boolean' && predicate.value.value === true) {
+      return input;
+    }
     if (
       input instanceof RelationalLeftJoin &&
       // Check that the predicate doesn't depend on any joined field.
@@ -44176,21 +44173,37 @@ var Normalizer = class {
     const node = new ScalarNot(input,);
     return this.finishScalar(node,);
   }
-  // TODO: Normalize `$1 AND true` to `$1`
-  // TODO: Normalize `true AND $1` to `$1`
-  // TODO: Normalize `$1 AND false` to `false`
-  // TODO: Normalize `false AND $1` to `false`
   // TODO: Normalize `$1 AND ($2 AND $c)` to `($1 AND $2) AND $c`
   newScalarAnd(left, right,) {
+    if (right instanceof ScalarConstant && right.value?.type === 'boolean' && right.value.value === true) {
+      return left;
+    }
+    if (left instanceof ScalarConstant && left.value?.type === 'boolean' && left.value.value === true) {
+      return right;
+    }
+    if (right instanceof ScalarConstant && right.value?.type === 'boolean' && right.value.value === false) {
+      return right;
+    }
+    if (left instanceof ScalarConstant && left.value?.type === 'boolean' && left.value.value === false) {
+      return left;
+    }
     const node = new ScalarAnd(left, right,);
     return this.finishScalar(node,);
   }
-  // TODO: Normalize `$1 OR true` to `$1`
-  // TODO: Normalize `true OR $1` to `$1`
-  // TODO: Normalize `$1 OR false` to `$1`
-  // TODO: Normalize `false OR $1` to `false`
   // TODO: Normalize `$1 OR ($2 OR $c)` to `($1 OR $2) OR $c`
   newScalarOr(left, right,) {
+    if (right instanceof ScalarConstant && right.value?.type === 'boolean' && right.value.value === true) {
+      return right;
+    }
+    if (left instanceof ScalarConstant && left.value?.type === 'boolean' && left.value.value === true) {
+      return left;
+    }
+    if (right instanceof ScalarConstant && right.value?.type === 'boolean' && right.value.value === false) {
+      return left;
+    }
+    if (left instanceof ScalarConstant && left.value?.type === 'boolean' && left.value.value === false) {
+      return right;
+    }
     const node = new ScalarOr(left, right,);
     return this.finishScalar(node,);
   }
@@ -54603,7 +54616,6 @@ var package_default = {
     'lint:fix': 'yarn lint --fix',
     test: 'jest',
     watch: 'jest --watch',
-    postinstall: 'node postinstall.cjs',
   },
   dependencies: {
     devalue: '^5.4.2',
@@ -54631,6 +54643,7 @@ var package_default = {
     chalk: '^4.1.2',
     eslint: '^8.57.1',
     'eslint-plugin-framer-studio': 'workspace:*',
+    'framer-motion': '12.23.26',
     immutable: '^3.8.2',
     jest: '29.4.1',
     'jest-diff': '^29.3.1',
@@ -54641,11 +54654,6 @@ var package_default = {
     semver: '^7.7.1',
     typescript: '^5.9.2',
     yargs: '^17.7.2',
-  },
-  peerDependencies: {
-    'framer-motion': '12.20.2',
-    react: '^18.2.0',
-    'react-dom': '^18.2.0',
   },
   tsdoc: {
     tsdocFlavor: 'AEDoc',
