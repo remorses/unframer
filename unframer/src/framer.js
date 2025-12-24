@@ -11342,7 +11342,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.E466USME.mjs
+// /:https://app.framerstatic.com/framer.6U7CQHYK.mjs
 
 import React42 from 'react';
 import { useDeferredValue, useSyncExternalStore, } from 'react';
@@ -15051,9 +15051,97 @@ function useMemoOne(factory, inputs,) {
   }, [cache2,],);
   return cache2.result;
 }
+function decodeQueryComponent(value,) {
+  const normalized = value.replace(/\+/g, ' ',);
+  try {
+    return decodeURIComponent(normalized,);
+  } catch {
+    return normalized;
+  }
+}
+function parseSearchString(searchString,) {
+  const questionMarkIndex = searchString.indexOf('?',);
+  const search = questionMarkIndex === -1 ? searchString : searchString.slice(questionMarkIndex + 1,);
+  if (!search) return EMPTY_ARRAY;
+  const entries = [];
+  for (const part of search.split('&',)) {
+    if (!part) continue;
+    const equalsIndex = part.indexOf('=',);
+    const rawKey = equalsIndex === -1 ? part : part.slice(0, equalsIndex,);
+    if (!rawKey) continue;
+    const key7 = decodeQueryComponent(rawKey,);
+    if (equalsIndex === -1) {
+      entries.push({
+        key: key7,
+        value: void 0,
+      },);
+    } else {
+      const rawValue = part.slice(equalsIndex + 1,);
+      const value = decodeQueryComponent(rawValue,);
+      entries.push({
+        key: key7,
+        value,
+      },);
+    }
+  }
+  return entries;
+}
+function encodeQueryComponent(value,) {
+  const encoded = new URLSearchParams([['', value,],],).toString();
+  return encoded.startsWith('=',) ? encoded.slice(1,) : encoded;
+}
+function encodeQueryKey(key7,) {
+  const encoded = new URLSearchParams([[key7, '',],],).toString();
+  return encoded.endsWith('=',) ? encoded.slice(0, -1,) : encoded;
+}
+function serializeSearchEntries(entries,) {
+  if (entries.length === 0) return '';
+  const parts = entries.map((entry) => {
+    const encodedKey = encodeQueryKey(entry.key,);
+    if (entry.value === void 0) return encodedKey;
+    return `${encodedKey}=${encodeQueryComponent(entry.value,)}`;
+  },);
+  return `?${parts.join('&',)}`;
+}
+function getQueryParamValues(entries, parameterName,) {
+  let values;
+  for (const entry of entries) {
+    if (entry.key !== parameterName) continue;
+    values ??= [];
+    values.push(entry.value,);
+  }
+  return values;
+}
+function updateQueryParamEntries(entries, parameterName, newValues,) {
+  const updated = [];
+  let didAddNewValues = false;
+  for (const entry of entries) {
+    if (entry.key !== parameterName) {
+      updated.push(entry,);
+      continue;
+    }
+    if (didAddNewValues) continue;
+    didAddNewValues = true;
+    for (const newValue of newValues) {
+      updated.push({
+        key: parameterName,
+        value: newValue,
+      },);
+    }
+  }
+  if (!didAddNewValues) {
+    for (const newValue of newValues) {
+      updated.push({
+        key: parameterName,
+        value: newValue,
+      },);
+    }
+  }
+  return updated;
+}
 var URLSearchParamsContext = /* @__PURE__ */ (() => {
   const Context2 = createContext({
-    urlSearchParams: new URLSearchParams(),
+    searchEntries: EMPTY_ARRAY,
     triggerUpdate: () => {},
   },);
   Context2.displayName = 'URLSearchParamsContext';
@@ -15083,7 +15171,7 @@ function URLSearchParamsProvider({
     onStoreChangeRef.current?.();
   }, [],);
   const value = useMemoOne(() => ({
-    urlSearchParams: new URLSearchParams(deferredSearchString,),
+    searchEntries: parseSearchString(deferredSearchString,),
     triggerUpdate,
   }), [deferredSearchString, triggerUpdate,],);
   return /* @__PURE__ */ jsx(URLSearchParamsContext.Provider, {
@@ -15094,22 +15182,30 @@ function URLSearchParamsProvider({
 function useStringArrayQueryParam({
   initialValue,
   parameterName,
+  optional,
 },) {
   const parameterNameRef = useRef(parameterName,);
   const {
-    urlSearchParams,
+    searchEntries,
     triggerUpdate,
   } = useContext(URLSearchParamsContext,);
-  const paramValue = urlSearchParams.getAll(parameterNameRef.current,);
-  const value = paramValue.length > 0 ? paramValue : initialValue;
+  const value = useMemo(() => {
+    const rawValues = getQueryParamValues(searchEntries, parameterNameRef.current,);
+    if (!rawValues || rawValues.length === 0) {
+      return initialValue;
+    }
+    if (optional === true) {
+      return rawValues;
+    }
+    return rawValues.map((item) => item ?? '');
+  }, [initialValue, optional, searchEntries,],);
   const setValue = useCallback2(async (newValues) => {
     const currentHistoryState = window.history.state;
     if (!isHistoryState(currentHistoryState,)) return;
     const newUrl = new URL(window.location.href,);
-    newUrl.searchParams.delete(parameterNameRef.current,);
-    for (const newValue of newValues) {
-      newUrl.searchParams.append(parameterNameRef.current, newValue,);
-    }
+    const currentEntries = parseSearchString(newUrl.search,);
+    const updatedEntries = updateQueryParamEntries(currentEntries, parameterNameRef.current, newValues ?? EMPTY_ARRAY,);
+    newUrl.search = serializeSearchEntries(updatedEntries,);
     await yieldToMain({
       continueAfter: 'paint',
     },);
@@ -15121,14 +15217,33 @@ function useStringArrayQueryParam({
 function useStringQueryParam({
   initialValue,
   parameterName,
+  optional,
 },) {
-  const initialArrayValue = useMemo(() => initialValue ? [initialValue,] : EMPTY_ARRAY, [initialValue,],);
+  const initialArrayValue = useMemo(() => {
+    if (optional === true) {
+      if (initialValue === void 0) {
+        return void 0;
+      }
+      return [initialValue,];
+    }
+    return initialValue ? [initialValue,] : EMPTY_ARRAY;
+  }, [initialValue, optional,],);
   const [arrayValue, setArrayValue,] = useStringArrayQueryParam({
     initialValue: initialArrayValue,
     parameterName,
+    optional,
   },);
-  const value = arrayValue[0] ?? '';
-  const setValue = useCallback2((newValue) => setArrayValue(newValue ? [newValue,] : EMPTY_ARRAY,), [setArrayValue,],);
+  const rawValue = arrayValue?.[0];
+  const value = optional ? rawValue : rawValue ?? '';
+  const setValue = useCallback2((newValue) => {
+    if (newValue === initialValue) {
+      return setArrayValue(EMPTY_ARRAY,);
+    }
+    if (optional === true) {
+      return setArrayValue([newValue,],);
+    }
+    return setArrayValue(newValue ? [newValue,] : EMPTY_ARRAY,);
+  }, [initialValue, optional, setArrayValue,],);
   return [value, setValue,];
 }
 var BOOLEAN_YES = 'yes';
@@ -15136,35 +15251,56 @@ var BOOLEAN_NO = 'no';
 function useBooleanQueryParam({
   initialValue,
   parameterName,
+  optional,
 },) {
   const [stringValue, setStringValue,] = useStringQueryParam({
     initialValue: '',
     parameterName,
+    optional,
   },);
-  const value = stringValue ? stringValue === BOOLEAN_YES : initialValue;
-  const setValue = useCallback2((newValue) => setStringValue(newValue ? BOOLEAN_YES : BOOLEAN_NO,), [setStringValue,],);
+  const value = useMemo(() => {
+    if (stringValue === void 0 && optional) return void 0;
+    if (!stringValue) return initialValue;
+    return stringValue === BOOLEAN_YES;
+  }, [initialValue, optional, stringValue,],);
+  const setValue = useCallback2((newValue) => {
+    if (newValue === initialValue) {
+      return setStringValue('',);
+    }
+    if (optional === true && newValue === void 0) {
+      return setStringValue(void 0,);
+    }
+    return setStringValue(newValue ? BOOLEAN_YES : BOOLEAN_NO,);
+  }, [initialValue, optional, setStringValue,],);
   return [value, setValue,];
 }
 function useCollectionReferenceQueryParam({
   collectionId,
   initialValue,
   parameterName,
+  optional,
 },) {
   const collectionUtils = useCollectionUtils();
   const locale = useLocaleInfo().activeLocale ?? void 0;
   const [slug, setSlug,] = useStringQueryParam({
     initialValue: '',
     parameterName,
+    optional,
   },);
   const id3 = useMemo(() => {
+    if (slug === void 0) return void 0;
     if (!slug) return initialValue || void 0;
     const cache2 = getCollectionUtilsCache2(collectionUtils, collectionId,);
     return use(cache2.getRecordIdBySlug(slug, locale,),);
   }, [collectionUtils, collectionId, initialValue, locale, slug,],);
   const setId = useCallback2(async (newId) => {
+    if (newId === void 0) {
+      await setSlug(void 0,);
+      return;
+    }
     const cache2 = getCollectionUtilsCache2(collectionUtils, collectionId,);
     const newSlug = await cache2.getSlugByRecordId(newId, locale,);
-    if (typeof newSlug === 'string') {
+    if (isString(newSlug,)) {
       await setSlug(newSlug,);
     }
   }, [collectionUtils, collectionId, locale, setSlug,],);
@@ -15174,24 +15310,42 @@ function useMultiCollectionReferenceQueryParam({
   collectionId,
   initialValue,
   parameterName,
+  optional,
 },) {
   const collectionUtils = useCollectionUtils();
   const locale = useLocaleInfo().activeLocale ?? void 0;
+  const initialArrayValue = useRef(optional && initialValue === void 0 ? void 0 : EMPTY_ARRAY,);
   const [slugs, setSlugs,] = useStringArrayQueryParam({
-    initialValue: [],
+    initialValue: initialArrayValue.current,
     parameterName,
+    optional,
   },);
   const ids = useMemo(() => {
+    if (!slugs) return initialValue;
+    if (optional && slugs.some((slug) => slug === void 0)) {
+      return void 0;
+    }
+    if (optional && slugs.length === 1 && slugs[0] === '') {
+      return [];
+    }
     if (slugs.length === 0) return initialValue;
     const cache2 = getCollectionUtilsCache2(collectionUtils, collectionId,);
-    const maybePromises = slugs.map((slug) => cache2.getRecordIdBySlug(slug, locale,));
+    const maybePromises = slugs.filter(isString,).map((slug) => cache2.getRecordIdBySlug(slug, locale,));
     return useAll(maybePromises,).filter(isString,);
-  }, [collectionUtils, collectionId, initialValue, locale, slugs,],);
+  }, [collectionUtils, collectionId, initialValue, locale, optional, slugs,],);
   const setIds = useCallback2(async (newIds) => {
+    if (newIds === void 0) {
+      await setSlugs(void 0,);
+      return;
+    }
+    if (optional && newIds.length === 0) {
+      await setSlugs(['',],);
+      return;
+    }
     const cache2 = getCollectionUtilsCache2(collectionUtils, collectionId,);
     const newSlugs = await Promise.all(newIds.map((id3) => cache2.getSlugByRecordId(id3, locale,)),);
     await setSlugs(newSlugs.filter(isString,),);
-  }, [collectionUtils, collectionId, locale, setSlugs,],);
+  }, [collectionUtils, collectionId, locale, setSlugs, optional,],);
   return [ids, setIds,];
 }
 function getCollectionUtilsCache2(collectionUtils, collectionId,) {
@@ -21136,6 +21290,211 @@ var ControlType = /* @__PURE__ */ ((ControlType2) => {
   ControlType2['LinkRelValues'] = 'linkrelvalues';
   return ControlType2;
 })(ControlType || {},);
+var StyleSheetContext = /* @__PURE__ */ React42.createContext(void 0,);
+var defaultCache = /* @__PURE__ */ new Set();
+var defaultSheet;
+function injectCSSRule(cssRule, sheet, cache2 = defaultCache,) {
+  if (!cssRule || cache2.has(cssRule,) || typeof document === 'undefined') return;
+  cache2.add(cssRule,);
+  if (!sheet) {
+    if (!defaultSheet) {
+      const styleElement = document.createElement('style',);
+      styleElement.setAttribute('type', 'text/css',);
+      styleElement.setAttribute('data-framer-css', 'true',);
+      if (!document.head) {
+        console.warn('not injecting CSS: the document is missing a <head> element',);
+        return;
+      }
+      document.head.appendChild(styleElement,);
+      if (styleElement.sheet) {
+        defaultSheet = styleElement.sheet;
+      } else {
+        console.warn('not injecting CSS: injected <style> element does not have a sheet', styleElement,);
+        return;
+      }
+    }
+    sheet = defaultSheet;
+  }
+  try {
+    sheet.insertRule(cssRule, sheet.cssRules.length,);
+  } catch {}
+}
+var safeNavigator = typeof __unframerNavigator2 !== 'undefined' ? __unframerNavigator2 : void 0;
+var isBrowser2 = () => typeof document === 'object';
+var isWebKit = () => safeNavigator?.userAgent.includes('AppleWebKit/',) && !isChrome() && !isEdge();
+var webkitVersion = () => {
+  let version2 = -1;
+  const regexp = /AppleWebKit\/([\d.]+)/u;
+  const result = safeNavigator && regexp.exec(safeNavigator.userAgent,);
+  if (result && result[1]) {
+    version2 = parseFloat(result[1],);
+  }
+  return version2;
+};
+var safariVersion = () => {
+  let version2 = -1;
+  const regexp = /Version\/([\d.]+)/u;
+  const result = safeNavigator && regexp.exec(safeNavigator.userAgent,);
+  if (result && result[1]) {
+    version2 = parseFloat(result[1],);
+  }
+  return version2;
+};
+var isChrome = () => safeNavigator && /Chrome/u.test(safeNavigator.userAgent,) && /Google Inc/u.test(safeNavigator.vendor,) && !isEdge();
+var isSafari = () => safeNavigator && /Safari/u.test(safeNavigator.userAgent,) && /Apple Computer/u.test(safeNavigator.vendor,);
+var isFirefox = () => safeNavigator && /Firefox\/\d+\.\d+$/u.test(safeNavigator.userAgent,);
+var isFramerX = () => safeNavigator && /FramerX/u.test(safeNavigator.userAgent,);
+var isEdge = () => safeNavigator && /Edg\//u.test(safeNavigator.userAgent,);
+var isAndroid = () => safeNavigator && /android/iu.test(safeNavigator.userAgent,);
+var iOSRegex = /iPhone|iPod|iPad/iu;
+var macIntelRegex = /MacIntel/iu;
+var isIOS = () => {
+  if (!safeNavigator) return false;
+  if (iOSRegex.test(safeNavigator.platform,)) return true;
+  return macIntelRegex.test(safeNavigator.platform,) && safeNavigator.maxTouchPoints && safeNavigator.maxTouchPoints > 2;
+};
+var isMacOS = () => safeNavigator && /Mac/u.test(safeNavigator.platform,);
+var isWindows = () => safeNavigator && /Win/u.test(safeNavigator.platform,);
+var isTouch = () => safeWindow.ontouchstart === null && safeWindow.ontouchmove === null && safeWindow.ontouchend === null;
+var isDesktop = () => deviceType() === 'desktop';
+var isPhone = () => deviceType() === 'phone';
+var isTablet = () => deviceType() === 'tablet';
+var isMobile = () => isPhone() || isTablet();
+var isFileUrl = (url) => url.startsWith('file://',);
+var isDataUrl = (url) => url.startsWith('data:',);
+var isTest = () => false;
+var isRelativeUrl = (url) => !/^[a-z]{1,8}:\/\/.*$/i.test(url,);
+var isLocalServerUrl = (url) => /[a-z]{1,8}:\/\/127\.0\.0\.1/i.test(url,) || /[a-zA-Z]{1,8}:\/\/localhost/u.test(url,);
+var isLocalUrl = (url) => {
+  if (isFileUrl(url,)) return true;
+  if (isLocalServerUrl(url,)) return true;
+  return false;
+};
+var isLocalAssetUrl = (url, baseUrl,) => {
+  if (baseUrl === null) baseUrl = safeWindow.location.href;
+  if (isDataUrl(url,)) return false;
+  if (isLocalUrl(url,)) return true;
+  if (isRelativeUrl(url,) && isLocalUrl(baseUrl,)) return true;
+  return false;
+};
+var devicePixelRatio = () => safeWindow.devicePixelRatio;
+var isJP2Supported = function () {
+  if (isFirefox()) return false;
+  return isWebKit();
+};
+var isWebPSupported = () => isChrome();
+var deviceType = () => {
+  if (safeNavigator && /tablet|iPad|Nexus 9/i.test(safeNavigator.userAgent,)) return 'tablet';
+  if (safeNavigator && /mobi/iu.test(safeNavigator.userAgent,)) return 'phone';
+  return 'desktop';
+};
+var deviceOS = () => {
+  if (isMacOS()) return 'macos';
+  if (isIOS()) return 'ios';
+  if (isAndroid()) return 'android';
+  if (isWindows()) return 'windows';
+};
+var deviceFont = (os) => {
+  if (!os) {
+    os = deviceOS();
+  }
+  const fonts = {
+    apple: '-apple-system, BlinkMacSystemFont, SF Pro Text, SF UI Text, Helvetica Neue',
+    google: 'Roboto, Helvetica Neue',
+    microsoft: 'Segoe UI, Helvetica Neue',
+  };
+  if (os === 'macos') return fonts.apple;
+  if (os === 'ios') return fonts.apple;
+  if (os === 'android') return fonts.google;
+  if (os === 'windows') return fonts.microsoft;
+  return fonts.apple;
+};
+var environment = {
+  isWebKit,
+  webkitVersion,
+  isChrome,
+  isSafari,
+  isFirefox,
+  isFramerX,
+  isEdge,
+  isAndroid,
+  isIOS,
+  isMacOS,
+  isWindows,
+  isTouch,
+  isDesktop,
+  isPhone,
+  isTablet,
+  isMobile,
+  isFileUrl,
+  isDataUrl,
+  isRelativeUrl,
+  isLocalServerUrl,
+  isLocalUrl,
+  isLocalAssetUrl,
+  devicePixelRatio,
+  isJP2Supported,
+  isWebPSupported,
+  deviceType,
+  deviceOS,
+  deviceFont,
+  safariVersion,
+};
+var framerPostSSRCSSSelector = 'style[data-framer-css-ssr-minified]';
+var componentsWithServerRenderedStyles = /* @__PURE__ */ (() => {
+  if (!isBrowser2()) return /* @__PURE__ */ new Set();
+  const componentsWithSSRStylesAttr = document.querySelector(framerPostSSRCSSSelector,)?.getAttribute('data-framer-components',);
+  if (!componentsWithSSRStylesAttr) return /* @__PURE__ */ new Set();
+  return new Set(componentsWithSSRStylesAttr.split(' ',),);
+})();
+var framerCSSMarker = 'data-framer-css-ssr';
+var withCSS = (Component18, escapedCSS, componentSerializationId,) =>
+  React42.forwardRef((props, ref,) => {
+    const {
+      sheet,
+      cache: cache2,
+    } = React42.useContext(StyleSheetContext,) ?? {};
+    const id3 = componentSerializationId;
+    if (!isBrowser2()) {
+      if (isFunction(escapedCSS,)) escapedCSS = escapedCSS(RenderTarget.current(), props,);
+      const concatenatedCSS = Array.isArray(escapedCSS,) ? escapedCSS.join('\n',) : escapedCSS;
+      cssCollector.add(concatenatedCSS, id3,);
+    }
+    useInsertionEffect(() => {
+      if (id3 && componentsWithServerRenderedStyles.has(id3,)) return;
+      const css22 = isFunction(escapedCSS,)
+        ? escapedCSS(RenderTarget.current(), props,)
+        : Array.isArray(escapedCSS,)
+        ? escapedCSS
+        : escapedCSS.split('\n',);
+      css22.forEach((rule) => rule && injectCSSRule(rule, sheet, cache2,));
+    }, [],);
+    return /* @__PURE__ */ jsx(Component18, {
+      ...props,
+      ref,
+    },);
+  },);
+var CSSCollector = class {
+  constructor() {
+    __publicField(this, 'styles', /* @__PURE__ */ new Set(),);
+    __publicField(this, 'componentIds', /* @__PURE__ */ new Set(),);
+  }
+  add(css22, componentId,) {
+    this.styles.add(css22,);
+    if (componentId) this.componentIds.add(componentId,);
+  }
+  getStyles() {
+    return this.styles;
+  }
+  getComponentIds() {
+    return this.componentIds;
+  }
+  clear() {
+    this.styles.clear();
+    this.componentIds.clear();
+  }
+};
+var cssCollector = /* @__PURE__ */ new CSSCollector();
 var isFlexboxGapSupportedCached;
 function isFlexboxGapSupported() {
   if (isFlexboxGapSupportedCached !== void 0) {
@@ -22368,34 +22727,6 @@ var safari16TextTruncationFix = /* @__PURE__ */ (() => [`@supports ${anySafariVe
         /* Render text-fill elements inline when text is truncated, otherwise default to their default value (e.g. inline-block) */
         p.framer-text[data-text-fill] { display: var(${textTruncationDisplayInlineVariableForSafari16}, ${defaultTextFillStyle.display}) }
     }`,])();
-var defaultCache = /* @__PURE__ */ new Set();
-var defaultSheet;
-function injectCSSRule(cssRule, sheet, cache2 = defaultCache,) {
-  if (!cssRule || cache2.has(cssRule,) || typeof document === 'undefined') return;
-  cache2.add(cssRule,);
-  if (!sheet) {
-    if (!defaultSheet) {
-      const styleElement = document.createElement('style',);
-      styleElement.setAttribute('type', 'text/css',);
-      styleElement.setAttribute('data-framer-css', 'true',);
-      if (!document.head) {
-        console.warn('not injecting CSS: the document is missing a <head> element',);
-        return;
-      }
-      document.head.appendChild(styleElement,);
-      if (styleElement.sheet) {
-        defaultSheet = styleElement.sheet;
-      } else {
-        console.warn('not injecting CSS: injected <style> element does not have a sheet', styleElement,);
-        return;
-      }
-    }
-    sheet = defaultSheet;
-  }
-  try {
-    sheet.insertRule(cssRule, sheet.cssRules.length,);
-  } catch {}
-}
 var componentCSSRules = [`[data-framer-component-type] { position: absolute; }`,];
 var textAlignmentRule = `
 [data-framer-component-type="Text"] > * {
@@ -22731,14 +23062,11 @@ var combineCSSRules =
   ];
 export var combinedCSSRules = /* @__PURE__ */ combineCSSRules(false,);
 var combinedCSSRulesForPreview = /* @__PURE__ */ combineCSSRules(true,);
-var didInject = false;
-function injectComponentCSSRules() {
-  if (didInject) return;
-  didInject = true;
-  const styles4 = RenderTarget.current() === RenderTarget.preview ? combinedCSSRulesForPreview : combinedCSSRules;
-  for (const rule of styles4) {
-    injectCSSRule(rule, void 0, void 0,);
-  }
+function getCombinedCSSRules() {
+  return RenderTarget.current() === RenderTarget.preview ? combinedCSSRulesForPreview : combinedCSSRules;
+}
+function withLibraryCSS(Component18,) {
+  return withCSS(Component18, getCombinedCSSRules, 'framer-lib-combinedCSSRules',);
 }
 function isReactComponent(component,) {
   return isObject2(component,) || isFunction(component,);
@@ -24258,7 +24586,7 @@ function usePrototypingMetaTags() {
     },);
   }, [],);
 }
-var DeviceCodeComponentInner = ({
+var DeviceCodeComponentInner = /* @__PURE__ */ withLibraryCSS(({
   children,
   ...props
 },) => {
@@ -24266,9 +24594,6 @@ var DeviceCodeComponentInner = ({
   const deviceOptions = convertPropsToDeviceOptions(props, {
     forceOldClay: true,
   },);
-  React42.useInsertionEffect(() => {
-    injectComponentCSSRules();
-  }, [],);
   if (!deviceOptions) {
     return /* @__PURE__ */ jsx('div', {
       'data-framer-component-type': 'DeviceComponent',
@@ -24295,7 +24620,7 @@ var DeviceCodeComponentInner = ({
     deviceOptions,
     children: resizedChild,
   },);
-};
+},);
 var DeviceCodeComponent = /* @__PURE__ */ (() => {
   const {
     componentWidth: defaultWidth2,
@@ -25702,127 +26027,6 @@ function getIntrinsicSizeForBackgroundImage(background,) {
 function htmlElementAsMotionComponent(asElem,) {
   return asElem && asElem !== 'search' && asElem !== 'slot' && asElem !== 'template' ? motion[asElem] : motion['div'];
 }
-var safeNavigator = typeof __unframerNavigator2 !== 'undefined' ? __unframerNavigator2 : void 0;
-var isBrowser2 = () => typeof document === 'object';
-var isWebKit = () => safeNavigator?.userAgent.includes('AppleWebKit/',) && !isChrome() && !isEdge();
-var webkitVersion = () => {
-  let version2 = -1;
-  const regexp = /AppleWebKit\/([\d.]+)/u;
-  const result = safeNavigator && regexp.exec(safeNavigator.userAgent,);
-  if (result && result[1]) {
-    version2 = parseFloat(result[1],);
-  }
-  return version2;
-};
-var safariVersion = () => {
-  let version2 = -1;
-  const regexp = /Version\/([\d.]+)/u;
-  const result = safeNavigator && regexp.exec(safeNavigator.userAgent,);
-  if (result && result[1]) {
-    version2 = parseFloat(result[1],);
-  }
-  return version2;
-};
-var isChrome = () => safeNavigator && /Chrome/u.test(safeNavigator.userAgent,) && /Google Inc/u.test(safeNavigator.vendor,) && !isEdge();
-var isSafari = () => safeNavigator && /Safari/u.test(safeNavigator.userAgent,) && /Apple Computer/u.test(safeNavigator.vendor,);
-var isFirefox = () => safeNavigator && /Firefox\/\d+\.\d+$/u.test(safeNavigator.userAgent,);
-var isFramerX = () => safeNavigator && /FramerX/u.test(safeNavigator.userAgent,);
-var isEdge = () => safeNavigator && /Edg\//u.test(safeNavigator.userAgent,);
-var isAndroid = () => safeNavigator && /android/iu.test(safeNavigator.userAgent,);
-var iOSRegex = /iPhone|iPod|iPad/iu;
-var macIntelRegex = /MacIntel/iu;
-var isIOS = () => {
-  if (!safeNavigator) return false;
-  if (iOSRegex.test(safeNavigator.platform,)) return true;
-  return macIntelRegex.test(safeNavigator.platform,) && safeNavigator.maxTouchPoints && safeNavigator.maxTouchPoints > 2;
-};
-var isMacOS = () => safeNavigator && /Mac/u.test(safeNavigator.platform,);
-var isWindows = () => safeNavigator && /Win/u.test(safeNavigator.platform,);
-var isTouch = () => safeWindow.ontouchstart === null && safeWindow.ontouchmove === null && safeWindow.ontouchend === null;
-var isDesktop = () => deviceType() === 'desktop';
-var isPhone = () => deviceType() === 'phone';
-var isTablet = () => deviceType() === 'tablet';
-var isMobile = () => isPhone() || isTablet();
-var isFileUrl = (url) => url.startsWith('file://',);
-var isDataUrl = (url) => url.startsWith('data:',);
-var isTest = () => false;
-var isRelativeUrl = (url) => !/^[a-z]{1,8}:\/\/.*$/i.test(url,);
-var isLocalServerUrl = (url) => /[a-z]{1,8}:\/\/127\.0\.0\.1/i.test(url,) || /[a-zA-Z]{1,8}:\/\/localhost/u.test(url,);
-var isLocalUrl = (url) => {
-  if (isFileUrl(url,)) return true;
-  if (isLocalServerUrl(url,)) return true;
-  return false;
-};
-var isLocalAssetUrl = (url, baseUrl,) => {
-  if (baseUrl === null) baseUrl = safeWindow.location.href;
-  if (isDataUrl(url,)) return false;
-  if (isLocalUrl(url,)) return true;
-  if (isRelativeUrl(url,) && isLocalUrl(baseUrl,)) return true;
-  return false;
-};
-var devicePixelRatio = () => safeWindow.devicePixelRatio;
-var isJP2Supported = function () {
-  if (isFirefox()) return false;
-  return isWebKit();
-};
-var isWebPSupported = () => isChrome();
-var deviceType = () => {
-  if (safeNavigator && /tablet|iPad|Nexus 9/i.test(safeNavigator.userAgent,)) return 'tablet';
-  if (safeNavigator && /mobi/iu.test(safeNavigator.userAgent,)) return 'phone';
-  return 'desktop';
-};
-var deviceOS = () => {
-  if (isMacOS()) return 'macos';
-  if (isIOS()) return 'ios';
-  if (isAndroid()) return 'android';
-  if (isWindows()) return 'windows';
-};
-var deviceFont = (os) => {
-  if (!os) {
-    os = deviceOS();
-  }
-  const fonts = {
-    apple: '-apple-system, BlinkMacSystemFont, SF Pro Text, SF UI Text, Helvetica Neue',
-    google: 'Roboto, Helvetica Neue',
-    microsoft: 'Segoe UI, Helvetica Neue',
-  };
-  if (os === 'macos') return fonts.apple;
-  if (os === 'ios') return fonts.apple;
-  if (os === 'android') return fonts.google;
-  if (os === 'windows') return fonts.microsoft;
-  return fonts.apple;
-};
-var environment = {
-  isWebKit,
-  webkitVersion,
-  isChrome,
-  isSafari,
-  isFirefox,
-  isFramerX,
-  isEdge,
-  isAndroid,
-  isIOS,
-  isMacOS,
-  isWindows,
-  isTouch,
-  isDesktop,
-  isPhone,
-  isTablet,
-  isMobile,
-  isFileUrl,
-  isDataUrl,
-  isRelativeUrl,
-  isLocalServerUrl,
-  isLocalUrl,
-  isLocalAssetUrl,
-  devicePixelRatio,
-  isJP2Supported,
-  isWebPSupported,
-  deviceType,
-  deviceOS,
-  deviceFont,
-  safariVersion,
-};
 var isChrome2 = /* @__PURE__ */ isChrome();
 function collectLayoutHintDataProps(props, center,) {
   props['data-framer-layout-hint-center-x'] = center === true || center === 'x' ? true : void 0;
@@ -26605,9 +26809,6 @@ var defaultFrameRect = {
   height: 200,
 };
 function useStyleAndRect(props,) {
-  React42.useInsertionEffect(() => {
-    injectComponentCSSRules();
-  }, [],);
   const inCodeComponent = useContext(ComponentContainerContext,);
   const {
     style: style2,
@@ -26825,7 +27026,7 @@ var VisibleFrame = /* @__PURE__ */ forwardRef(function VisibleFrame2(props, forw
     children: [wrappedContent, __portal,],
   },);
 },);
-var FrameWithMotion = /* @__PURE__ */ forwardRef(function FrameWithMotion2(props, ref,) {
+var FrameWithMotionInner = /* @__PURE__ */ forwardRef(function FrameWithMotion(props, ref,) {
   countNodeRender();
   const {
     visible = true,
@@ -26836,6 +27037,7 @@ var FrameWithMotion = /* @__PURE__ */ forwardRef(function FrameWithMotion2(props
     ref,
   },);
 },);
+var FrameWithMotion2 = /* @__PURE__ */ withLibraryCSS(FrameWithMotionInner,);
 function resolveParentSize(props, unwrappedProps, rect, inCodeComponent,) {
   if (inCodeComponent) {
     const parentSize = rect
@@ -26883,7 +27085,7 @@ function EmptyState({
   } = RenderEnvironment;
   const childCount = React42.Children.count(children,);
   if (insideUserCodeComponent && childCount === 0) {
-    return /* @__PURE__ */ jsx(FrameWithMotion, {
+    return /* @__PURE__ */ jsx(FrameWithMotion2, {
       ...size,
       'data-name': 'placeholder',
     },);
@@ -26891,7 +27093,7 @@ function EmptyState({
   if (target !== RenderTarget.canvas) return null;
   if (hide) return null;
   if (childCount !== 0) return null;
-  return /* @__PURE__ */ jsx(FrameWithMotion, {
+  return /* @__PURE__ */ jsx(FrameWithMotion2, {
     className: 'framerInternalUI-canvasPlaceholder',
     top: 0,
     left: 0,
@@ -27561,7 +27763,7 @@ var NavigationContainer = /* @__PURE__ */ React42.memo(function NavigationContai
   const isPresent2 = !(isBeingRemoved || areMagicMotionLayersPresent === false);
   const isCurrentTarget = !!isCurrent && isPresent2;
   const forceOpacity = isCurrent && isInitial;
-  return /* @__PURE__ */ jsxs(FrameWithMotion, {
+  return /* @__PURE__ */ jsxs(FrameWithMotion2, {
     'data-framer-component-type': 'NavigationContainerWrapper',
     width: '100%',
     height: '100%',
@@ -27579,7 +27781,7 @@ var NavigationContainer = /* @__PURE__ */ React42.memo(function NavigationContai
       perspective,
     },
     children: [
-      isLayeredContainer && /* @__PURE__ */ jsx(FrameWithMotion, {
+      isLayeredContainer && /* @__PURE__ */ jsx(FrameWithMotion2, {
         width: '100%',
         height: '100%',
         'data-framer-component-type': 'NavigationContainerBackdrop',
@@ -27596,7 +27798,7 @@ var NavigationContainer = /* @__PURE__ */ React42.memo(function NavigationContai
         backgroundColor: backdropColor ? backdropColor : 'transparent',
         onTap: !isBeingRemoved ? onTapBackdrop : void 0,
       },),
-      /* @__PURE__ */ jsx(FrameWithMotion, {
+      /* @__PURE__ */ jsx(FrameWithMotion2, {
         ...layout2,
         ...animations2,
         transition: {
@@ -28415,7 +28617,7 @@ var Navigation = /* @__PURE__ */ (() => {
           },),
         }, item.key,);
       },);
-      return /* @__PURE__ */ jsx(FrameWithMotion, {
+      return /* @__PURE__ */ jsx(FrameWithMotion2, {
         'data-framer-component-type': 'NavigationRoot',
         top: 0,
         left: 0,
@@ -28679,7 +28881,8 @@ function containerIsVisible(containerIndex, stackState,) {
   return false;
 }
 function containerContent(item,) {
-  const content = React42.Children.map(item.component, (child) => {
+  const content = React42.Children.map(item.component, // biome-ignore lint/suspicious/noExplicitAny: deprecated component
+  (child) => {
     if (!isReactChild(child,) || !isReactElement(child,) || !child.props) {
       return child;
     }
@@ -28710,9 +28913,6 @@ function backdropTapAction(transition, goBackAction,) {
 function NavigationWrapper(props,) {
   const resetProjection = useResetProjection();
   const skipLayoutAnimation = useInstantLayoutTransition();
-  React42.useInsertionEffect(() => {
-    injectComponentCSSRules();
-  }, [],);
   return /* @__PURE__ */ jsx(Navigation, {
     ...props,
     resetProjection,
@@ -28720,6 +28920,7 @@ function NavigationWrapper(props,) {
     children: props.children,
   },);
 }
+var NavigationExport = /* @__PURE__ */ withLibraryCSS(NavigationWrapper,);
 var import_hoist_non_react_statics = __toESM(require_hoist_non_react_statics_cjs(), 1,);
 var NavigateTo = /* @__PURE__ */ ((NavigateTo2) => {
   NavigateTo2['Previous'] = '@Previous';
@@ -30829,7 +31030,7 @@ var Frame = /* @__PURE__ */ (() => {
         parentSize: currentParentSize,
       },);
     }
-    return /* @__PURE__ */ jsx(FrameWithMotion, {
+    return /* @__PURE__ */ jsx(FrameWithMotion2, {
       ...props,
       ref,
     },);
@@ -31130,7 +31331,7 @@ var Stack = /* @__PURE__ */ (() => {
       if (styleProp?.width) contentWrapperStyle.width = styleProp?.width;
       if (styleProp?.height) contentWrapperStyle.height = styleProp?.height;
     }
-    return /* @__PURE__ */ jsx(FrameWithMotion, {
+    return /* @__PURE__ */ jsx(FrameWithMotion2, {
       as,
       background: fromCanvasComponent ? void 0 : 'none',
       ...props,
@@ -31371,7 +31572,7 @@ function PageContainer({
   const wrapperHeight = hasAutoHeight ? 'auto' : '100%';
   const containerWidth = hasHorizontalGap && wrapperWidth === '100%' ? `calc(100% + ${gap}px)` : wrapperWidth;
   const containerHeight = hasVerticalGap && wrapperHeight === '100%' ? `calc(100% + ${gap}px)` : wrapperHeight;
-  return /* @__PURE__ */ jsx(FrameWithMotion, {
+  return /* @__PURE__ */ jsx(FrameWithMotion2, {
     position: 'relative',
     'data-framer-component-type': 'PageContainer',
     width: containerWidth,
@@ -31392,7 +31593,7 @@ function PageContainer({
       paddingRight: hasHorizontalGap ? gap : 0,
       paddingBottom: hasVerticalGap ? gap : 0,
     },
-    children: /* @__PURE__ */ jsx(FrameWithMotion, {
+    children: /* @__PURE__ */ jsx(FrameWithMotion2, {
       position: 'relative',
       'data-framer-component-type': pageContentWrapperType,
       width: wrapperWidth,
@@ -31410,7 +31611,7 @@ function PageContainer({
     }, effect ? Object.keys(effect,).join('',) : '',),
   },);
 }
-var Page = /* @__PURE__ */ React42.forwardRef(function Page2(props, forwardedRef,) {
+var PageInner = /* @__PURE__ */ React42.forwardRef(function Page(props, forwardedRef,) {
   const {
     direction = 'horizontal',
     contentWidth = 'stretch',
@@ -31481,9 +31682,6 @@ var Page = /* @__PURE__ */ React42.forwardRef(function Page2(props, forwardedRef
     warnOnce2(`The 'gap' property of Page component can not be negative, but is ${gapValue}.`,);
     gap = 0;
   }
-  React42.useInsertionEffect(() => {
-    injectComponentCSSRules();
-  }, [],);
   const pageCount = React42.Children.count(children,);
   const maxOffsetRef = React42.useRef(0,);
   const constraints = React42.useRef({
@@ -31749,7 +31947,7 @@ var Page = /* @__PURE__ */ React42.forwardRef(function Page2(props, forwardedRef
     onScroll,
     onScrollEnd,
   },);
-  return /* @__PURE__ */ jsx(FrameWithMotion, {
+  return /* @__PURE__ */ jsx(FrameWithMotion2, {
     'data-framer-component-type': 'PageWrapper',
     preserve3d: false,
     perspective: hasEffect(props,) ? 1200 : void 0,
@@ -31762,7 +31960,7 @@ var Page = /* @__PURE__ */ React42.forwardRef(function Page2(props, forwardedRef
     layoutId,
     ref: containerRef,
     onLayoutMeasure: handleMeasureLifecycle,
-    children: /* @__PURE__ */ jsxs(FrameWithMotion, {
+    children: /* @__PURE__ */ jsxs(FrameWithMotion2, {
       'data-framer-component-type': 'Page',
       ref: scrollableRef,
       background: null,
@@ -31792,6 +31990,7 @@ var Page = /* @__PURE__ */ React42.forwardRef(function Page2(props, forwardedRef
     },),
   },);
 },);
+var Page2 = /* @__PURE__ */ withLibraryCSS(PageInner,);
 function cubeEffect(info,) {
   const {
     normalizedOffset,
@@ -32081,11 +32280,11 @@ var Page3 = /* @__PURE__ */ (() => {
         return 'End';
     }
   },);
-  Page.defaultProps = {
+  Page2.defaultProps = {
     gap: 10,
     directionLock: false,
   };
-  addPropertyControls(Page, {
+  addPropertyControls(Page2, {
     direction: {
       type: 'enum',
       options: ['horizontal', 'vertical',],
@@ -32209,8 +32408,8 @@ var Page3 = /* @__PURE__ */ (() => {
       },
     },
   },);
-  Page.supportsConstraints = true;
-  return Page;
+  Page2.supportsConstraints = true;
+  return Page2;
 })();
 function stateName(state,) {
   switch (state) {
@@ -32756,7 +32955,7 @@ var useUpdateChildSize = ({
 var numberFromOptionalMotionValue = (value) => {
   return typeof value === 'number' ? value : value.get();
 };
-var EmulatedScroll = /* @__PURE__ */ React42.forwardRef(function EmulatedScroll2(props, forwardedRef,) {
+var EmulatedScrollInner = /* @__PURE__ */ React42.forwardRef(function EmulatedScroll(props, forwardedRef,) {
   const {
     direction = 'vertical',
     directionLock = false,
@@ -32798,9 +32997,6 @@ var EmulatedScroll = /* @__PURE__ */ React42.forwardRef(function EmulatedScroll2
   const dragControls = useDragControls();
   const isInTarget = useIsInCurrentNavigationTarget();
   const wasInTargetRef = useRef(true,);
-  useInsertionEffect(() => {
-    injectComponentCSSRules();
-  }, [],);
   function setMeasureDragConstraints(constraints,) {
     constraints = offsetToZero(constraints,);
     if (contentWidth !== void 0) constraints.left = -contentWidth;
@@ -32989,7 +33185,7 @@ var EmulatedScroll = /* @__PURE__ */ React42.forwardRef(function EmulatedScroll2
       height: containerProps.__fromCodeComponentNode ? '100%' : containerProps.height,
     }
     : {};
-  return /* @__PURE__ */ jsx(FrameWithMotion, {
+  return /* @__PURE__ */ jsx(FrameWithMotion2, {
     'data-framer-component-type': 'Scroll',
     background: 'none',
     ...containerProps,
@@ -33006,7 +33202,7 @@ var EmulatedScroll = /* @__PURE__ */ React42.forwardRef(function EmulatedScroll2
     layoutId,
     layoutScroll: true,
     onBeforeLayoutMeasure: measureAndUpdateScrollOffset,
-    children: /* @__PURE__ */ jsxs(FrameWithMotion, {
+    children: /* @__PURE__ */ jsxs(FrameWithMotion2, {
       'data-framer-component-type': 'ScrollContentWrapper',
       animate: scrollAnimate,
       drag: dragEnabled && convertScrollDirectionToDrag(direction,),
@@ -33060,6 +33256,7 @@ var EmulatedScroll = /* @__PURE__ */ React42.forwardRef(function EmulatedScroll2
     },),
   },);
 },);
+var EmulatedScroll2 = /* @__PURE__ */ withLibraryCSS(EmulatedScrollInner,);
 function offsetToZero({
   top,
   left,
@@ -33407,7 +33604,7 @@ function useUpdateScrollOffset(ref, side, offset, cancelEmulatedTouchScrollAnima
     }
   }, [offset,],);
 }
-var NativeScroll = /* @__PURE__ */ React42.forwardRef(function NativeScroll2(props, forwardedRef,) {
+var NativeScrollInner = /* @__PURE__ */ React42.forwardRef(function NativeScroll(props, forwardedRef,) {
   const {
     direction = 'vertical',
     scrollBarVisible = false,
@@ -33449,9 +33646,6 @@ var NativeScroll = /* @__PURE__ */ React42.forwardRef(function NativeScroll2(pro
   const {
     cancelEmulatedTouchScrollAnimation,
   } = useEmulateTouchScroll(ref, direction, dragEnabled,);
-  useInsertionEffect(() => {
-    injectComponentCSSRules();
-  }, [],);
   const isInTarget = useIsInCurrentNavigationTarget();
   const previousIsInTargetRef = React42.useRef(isInTarget,);
   const updateScrollOffsetHandler = () => {
@@ -33480,7 +33674,7 @@ var NativeScroll = /* @__PURE__ */ React42.forwardRef(function NativeScroll2(pro
       height: containerProps.__fromCodeComponentNode ? '100%' : containerProps.height,
     }
     : {};
-  return /* @__PURE__ */ jsxs(FrameWithMotion, {
+  return /* @__PURE__ */ jsxs(FrameWithMotion2, {
     ref,
     'data-framer-component-type': 'NativeScroll',
     background: 'none',
@@ -33506,15 +33700,16 @@ var NativeScroll = /* @__PURE__ */ React42.forwardRef(function NativeScroll2(pro
     ],
   },);
 },);
+var NativeScroll2 = /* @__PURE__ */ withLibraryCSS(NativeScrollInner,);
 var Scroll = /* @__PURE__ */ (() => {
   const ScrollInner = React42.forwardRef(function ScrollInner2(props, forwardedRef,) {
     if (props.native) {
-      return /* @__PURE__ */ jsx(NativeScroll, {
+      return /* @__PURE__ */ jsx(NativeScroll2, {
         ref: forwardedRef,
         ...props,
       },);
     } else {
-      return /* @__PURE__ */ jsx(EmulatedScroll, {
+      return /* @__PURE__ */ jsx(EmulatedScroll2, {
         ref: forwardedRef,
         ...props,
       },);
@@ -33921,62 +34116,6 @@ function createRefFunction(state,) {
     setRef2(prevForwardedRef, value,);
   };
 }
-var StyleSheetContext = /* @__PURE__ */ React42.createContext(void 0,);
-var framerPostSSRCSSSelector = 'style[data-framer-css-ssr-minified]';
-var componentsWithServerRenderedStyles = /* @__PURE__ */ (() => {
-  if (!isBrowser2()) return /* @__PURE__ */ new Set();
-  const componentsWithSSRStylesAttr = document.querySelector(framerPostSSRCSSSelector,)?.getAttribute('data-framer-components',);
-  if (!componentsWithSSRStylesAttr) return /* @__PURE__ */ new Set();
-  return new Set(componentsWithSSRStylesAttr.split(' ',),);
-})();
-var framerCSSMarker = 'data-framer-css-ssr';
-var withCSS = (Component18, escapedCSS, componentSerializationId,) =>
-  React42.forwardRef((props, ref,) => {
-    const {
-      sheet,
-      cache: cache2,
-    } = React42.useContext(StyleSheetContext,) ?? {};
-    const id3 = componentSerializationId;
-    if (!isBrowser2()) {
-      if (isFunction(escapedCSS,)) escapedCSS = escapedCSS(RenderTarget.current(), props,);
-      const concatenatedCSS = Array.isArray(escapedCSS,) ? escapedCSS.join('\n',) : escapedCSS;
-      cssCollector.add(concatenatedCSS, id3,);
-    }
-    useInsertionEffect(() => {
-      if (id3 && componentsWithServerRenderedStyles.has(id3,)) return;
-      const css22 = isFunction(escapedCSS,)
-        ? escapedCSS(RenderTarget.current(), props,)
-        : Array.isArray(escapedCSS,)
-        ? escapedCSS
-        : escapedCSS.split('\n',);
-      css22.forEach((rule) => rule && injectCSSRule(rule, sheet, cache2,));
-    }, [],);
-    return /* @__PURE__ */ jsx(Component18, {
-      ...props,
-      ref,
-    },);
-  },);
-var CSSCollector = class {
-  constructor() {
-    __publicField(this, 'styles', /* @__PURE__ */ new Set(),);
-    __publicField(this, 'componentIds', /* @__PURE__ */ new Set(),);
-  }
-  add(css22, componentId,) {
-    this.styles.add(css22,);
-    if (componentId) this.componentIds.add(componentId,);
-  }
-  getStyles() {
-    return this.styles;
-  }
-  getComponentIds() {
-    return this.componentIds;
-  }
-  clear() {
-    this.styles.clear();
-    this.componentIds.clear();
-  }
-};
-var cssCollector = /* @__PURE__ */ new CSSCollector();
 var SSRParentVariantsContext = /* @__PURE__ */ React42.createContext(void 0,);
 var SSRVariantClassName = 'ssr-variant';
 function renderBranchedChildrenFromPropertyOverrides(
@@ -39933,7 +40072,7 @@ function PageRoot({
     return /* @__PURE__ */ jsx(Wrapper, {
       children: /* @__PURE__ */ jsx(RoutesProvider, {
         routes,
-        children: /* @__PURE__ */ jsx(NavigationWrapper, {
+        children: /* @__PURE__ */ jsx(NavigationExport, {
           children: React42.isValidElement(RootComponent,) ? RootComponent : React42.createElement(
             // @ts-expect-error to figure out how to type this properly, as tests are using different
             // $$typeof symbol and isValidElement fails
@@ -51219,7 +51358,7 @@ function isShallowEqualArray(a, b,) {
 }
 var deprecatedRichTextPlaceholder = '{{ text-placeholder }}';
 var richTextWrapperClassName = 'rich-text-wrapper';
-var DeprecatedRichText = /* @__PURE__ */ React.forwardRef(function Text(props, forwardedRef,) {
+var DeprecatedRichTextInner = /* @__PURE__ */ React.forwardRef(function Text(props, forwardedRef,) {
   const {
     id: id3,
     name,
@@ -51314,9 +51453,6 @@ var DeprecatedRichText = /* @__PURE__ */ React.forwardRef(function Text(props, f
     };
   }, [navigate, implicitPathVariables,],);
   useLoadFonts(fonts, __fromCanvasComponent, layoutRef,);
-  React.useInsertionEffect(() => {
-    injectComponentCSSRules();
-  }, [],);
   if (!visible) return null;
   const isHidden = isEditable && environment2() === RenderTarget.canvas;
   const style2 = {
@@ -51381,6 +51517,7 @@ var DeprecatedRichText = /* @__PURE__ */ React.forwardRef(function Text(props, f
     },
   },);
 },);
+var DeprecatedRichText = /* @__PURE__ */ withLibraryCSS(DeprecatedRichTextInner,);
 function convertVerticalAlignment(verticalAlignment,) {
   switch (verticalAlignment) {
     case 'top':
@@ -51947,9 +52084,6 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
   const containerRef = forwardedRef ?? fallbackRef;
   useMeasureLayout(props, containerRef,);
   useLoadFonts(fonts, __fromCanvasComponent, containerRef,);
-  useInsertionEffect(() => {
-    injectComponentCSSRules();
-  }, [],);
   const textEffect = useTextEffect(effect, containerRef,);
   const processedChildren = useMemo(() => {
     if (!children) return;
@@ -52138,7 +52272,7 @@ function extractTextFromReactNode(node,) {
   }
   return '';
 }
-var RichText = /* @__PURE__ */ forwardRef(function RichText2({
+var RichTextInner = /* @__PURE__ */ forwardRef(function RichText({
   children,
   html,
   htmlFromDesign,
@@ -52179,6 +52313,7 @@ var RichText = /* @__PURE__ */ forwardRef(function RichText2({
     children: isValidElement(content,) ? content : void 0,
   },);
 },);
+var RichText2 = /* @__PURE__ */ withLibraryCSS(RichTextInner,);
 function linearGradientLine(angle,) {
   const rad = angle * Math.PI / 180;
   const offset = {
@@ -52608,7 +52743,7 @@ function getSVGSize(svg,) {
     height,
   };
 }
-var SVG = /* @__PURE__ */ forwardRef(function SVG2(props, forwardedRef,) {
+var SVGInner = /* @__PURE__ */ forwardRef(function SVG(props, forwardedRef,) {
   const parentSize = useParentSize();
   const layoutId = useLayoutId2(props,);
   const layoutRef = React42.useRef(null,);
@@ -52670,12 +52805,6 @@ function sizeSVG(container, props,) {
   }
   svg.setAttribute('width', '100%',);
   svg.setAttribute('height', '100%',);
-}
-function SVGStyleSheet() {
-  React42.useInsertionEffect(() => {
-    injectComponentCSSRules();
-  }, [],);
-  return null;
 }
 var SVGComponent = /* @__PURE__ */ (() => {
   var _a;
@@ -52972,7 +53101,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
         onTap,
       } = this.props;
       const hasTitleOrDescription = title || description;
-      return /* @__PURE__ */ jsxs(MotionComponent, {
+      return /* @__PURE__ */ jsx(MotionComponent, {
         ...dataProps,
         ...rest,
         layoutId,
@@ -52994,7 +53123,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
           target,
           rel,
         },
-        children: [content, /* @__PURE__ */ jsx(SVGStyleSheet, {},),],
+        children: content,
       },);
     }
   },
@@ -53021,6 +53150,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
     },),
     _a;
 })();
+var SVG2 = /* @__PURE__ */ withLibraryCSS(SVGInner,);
 function useFontLoadStatus(fontSelectors = [], timeout = 5e3,) {
   const missingFontSelectors = fontSelectors.filter((s) => !fontStore.isSelectorLoaded(s,));
   const [fontLoadStatus, setFontLoadStatus,] = React42.useState(missingFontSelectors.length ? 'loading' : 'done',);
@@ -53037,13 +53167,7 @@ function useFontLoadStatus(fontSelectors = [], timeout = 5e3,) {
   }, [fontSelectors.join(', ',), missingFontSelectors.join(', ',),],);
   return fontLoadStatus;
 }
-function TextStyleSheet() {
-  React42.useInsertionEffect(() => {
-    injectComponentCSSRules();
-  }, [],);
-  return null;
-}
-var Text2 = /* @__PURE__ */ React42.forwardRef(function Text3(props, forwardedRef,) {
+var TextInner = /* @__PURE__ */ React42.forwardRef(function Text2(props, forwardedRef,) {
   const parentSize = useParentSize();
   const layoutId = useLayoutId2(props,);
   const fallbackLayoutRef = useRef(null,);
@@ -53239,13 +53363,8 @@ var TextComponent = /* @__PURE__ */ (() => {
       }
     }
     render() {
-      return /* @__PURE__ */ jsxs(Fragment, {
-        children: [
-          /* @__PURE__ */ jsx(ComponentContainerContext.Consumer, {
-            children: this.renderMain,
-          },),
-          /* @__PURE__ */ jsx(TextStyleSheet, {},),
-        ],
+      return /* @__PURE__ */ jsx(ComponentContainerContext.Consumer, {
+        children: this.renderMain,
       },);
     }
     collectLayout(style2, inCodeComponent,) {
@@ -53367,6 +53486,7 @@ var TextComponent = /* @__PURE__ */ (() => {
     },),
     _a;
 })();
+var Text3 = /* @__PURE__ */ withLibraryCSS(TextInner,);
 var linkTag = '(?:<a[^>]*>)?';
 var linkClosingTag = '(?:</a>)?';
 var outerTag = '<[^>]+>';
@@ -54835,7 +54955,7 @@ export {
   FramerEventListener,
   FramerEventSession,
   frameSteps,
-  FrameWithMotion,
+  FrameWithMotion2 as FrameWithMotion,
   GamepadContext,
   GeneratedComponentContext,
   generateLinearEasing,
@@ -54876,7 +54996,6 @@ export {
   inertia,
   inferInitialRouteFromPath,
   initLazyModulesCache,
-  injectComponentCSSRules,
   InjectSelectionStyle,
   installFlexboxGapWorkaroundIfNeeded,
   Instance,
@@ -54974,8 +55093,8 @@ export {
   NavigateTo,
   NavigationCallbackProvider,
   NavigationConsumer,
+  NavigationExport as Navigation,
   NavigationTransitionType,
-  NavigationWrapper as Navigation,
   nestedLinksCollector,
   noop,
   NotFoundError,
@@ -55040,7 +55159,7 @@ export {
   reverseEasing,
   rgba,
   rgbUnit,
-  RichText,
+  RichText2 as RichText,
   roundedNumber,
   roundedNumberString,
   roundWithOffset,
@@ -55078,13 +55197,13 @@ export {
   supportsLinearEasing,
   supportsPartialKeyframes,
   supportsScrollTimeline,
-  SVG,
+  SVG2 as SVG,
   svgEffect,
   SwitchLayoutGroupContext,
   sync,
   systemFontFamilyName,
   testValueType,
-  Text2 as Text,
+  Text3 as Text,
   throttle,
   TickerItem,
   time,
