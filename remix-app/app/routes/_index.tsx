@@ -2,7 +2,7 @@
 
 import 'nextjs-app/src/framer-simplicity/styles.css'
 
-import { useLoaderData } from '@remix-run/react'
+import { useLoaderData } from 'react-router'
 import Home from 'nextjs-app/src/app/page'
 
 export function loader() {

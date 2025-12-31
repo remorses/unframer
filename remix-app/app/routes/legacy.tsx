@@ -18,7 +18,7 @@ import Hero from 'nextjs-app/src/framer/hero'
 import MenuOverlay from 'nextjs-app/src/framer/menu-overlay'
 import Collection from 'nextjs-app/src/framer/collection'
 import Card from 'nextjs-app/src/framer/card'
-import { useLoaderData } from '@remix-run/react'
+import { useLoaderData } from 'react-router'
 import PluginComponentTestFramerComponent from '../../framer-canvas-pages/plugin-component-test'
 
 export function loader() {

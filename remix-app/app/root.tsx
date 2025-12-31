@@ -8,7 +8,7 @@ import {
     Scripts,
     ScrollRestoration,
     useRouteError,
-} from '@remix-run/react'
+} from 'react-router'
 
 import 'nextjs-app/src/framer/styles.css'
 import 'tailwindcss/tailwind.css'

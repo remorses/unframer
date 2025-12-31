@@ -6,7 +6,7 @@ import { PageRoot } from 'unframer'
 import Hero from '../../framer-intl/hero-section'
 import Navigation from '../../framer-intl/docs/navigation'
 
-import { useLoaderData } from '@remix-run/react'
+import { useLoaderData } from 'react-router'
 import { Component, Fragment } from 'react'
 
 export function loader() {

@@ -1,11 +1,9 @@
-import { json } from '@remix-run/node'
-
-import { useLoaderData } from '@remix-run/react'
+import { useLoaderData } from 'react-router'
 import SidebarFramerComponent from '../../bug/sidebar'
 import '../../bug/styles.css'
 
 export async function loader() {
-    return json({})
+    return {}
 }
 
 export default function BugRoute() {
