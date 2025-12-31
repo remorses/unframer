@@ -242,6 +242,11 @@ export async function fixFramerCode({ resultFile }) {
         /className: 'svgContainer',/g,
         "className: 'svgContainer', suppressHydrationWarning: true,",
     )
+    // Fix dynamic import for lazy modules - add ignore comments so Turbopack/webpack/Vite don't try to resolve it
+    codeAfter = codeAfter.replace(
+        /const promise = import\(url\)\.then/g,
+        'const promise = import(/* webpackIgnore: true */ /* @vite-ignore */ url).then',
+    )
     codeAfter += '\n\n'
     codeAfter += dedent`
     export { Link as FramerLink  }
