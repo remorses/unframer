@@ -12354,7 +12354,7 @@ function initLazyModulesCache() {
     const hash2 = link.getAttribute('data-framer-lazy',);
     const url = link.getAttribute('href',);
     if (!hash2 || !url) continue;
-    const promise = import(url).then((module) => {
+    const promise = import(/* webpackIgnore: true */ /* @vite-ignore */ url).then((module) => {
       lazyModulesCache.set(hash2, module,);
       return module;
     },).catch((error) => {
