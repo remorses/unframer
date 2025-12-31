@@ -1,5 +1,12 @@
 # unframer
 
+## 3.2.18
+
+### Patch Changes
+
+- New Framer release with bundler-friendly dynamic imports
+- Add `/* webpackIgnore: true */ /* @vite-ignore */` comments to dynamic imports in framer.js to prevent bundler warnings
+
 ## 3.2.17
 
 ### Patch Changes
