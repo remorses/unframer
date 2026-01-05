@@ -11342,7 +11342,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.6U7CQHYK.mjs
+// /:https://app.framerstatic.com/framer.YDINANB5.mjs
 
 import React42 from 'react';
 import { useDeferredValue, useSyncExternalStore, } from 'react';
@@ -11704,16 +11704,16 @@ var require_eventemitter3 = __commonJS({
       Events.prototype = /* @__PURE__ */ Object.create(null,);
       if (!new Events().__proto__) prefix3 = false;
     }
-    function EE(fn, context, once2,) {
+    function EE(fn, context, once,) {
       this.fn = fn;
       this.context = context;
-      this.once = once2 || false;
+      this.once = once || false;
     }
-    function addListener(emitter, event, fn, context, once2,) {
+    function addListener(emitter, event, fn, context, once,) {
       if (typeof fn !== 'function') {
         throw new TypeError('The listener must be a function',);
       }
-      var listener = new EE(fn, context || emitter, once2,),
+      var listener = new EE(fn, context || emitter, once,),
         evt = prefix3 ? prefix3 + event : event;
       if (!emitter._events[evt]) emitter._events[evt] = listener, emitter._eventsCount++;
       else if (!emitter._events[evt].fn) emitter._events[evt].push(listener,);
@@ -11818,10 +11818,10 @@ var require_eventemitter3 = __commonJS({
     EventEmitter2.prototype.on = function on(event, fn, context,) {
       return addListener(this, event, fn, context, false,);
     };
-    EventEmitter2.prototype.once = function once2(event, fn, context,) {
+    EventEmitter2.prototype.once = function once(event, fn, context,) {
       return addListener(this, event, fn, context, true,);
     };
-    EventEmitter2.prototype.removeListener = function removeListener(event, fn, context, once2,) {
+    EventEmitter2.prototype.removeListener = function removeListener(event, fn, context, once,) {
       var evt = prefix3 ? prefix3 + event : event;
       if (!this._events[evt]) return this;
       if (!fn) {
@@ -11830,12 +11830,12 @@ var require_eventemitter3 = __commonJS({
       }
       var listeners = this._events[evt];
       if (listeners.fn) {
-        if (listeners.fn === fn && (!once2 || listeners.once) && (!context || listeners.context === context)) {
+        if (listeners.fn === fn && (!once || listeners.once) && (!context || listeners.context === context)) {
           clearEvent(this, evt,);
         }
       } else {
         for (var i = 0, events = [], length = listeners.length; i < length; i++) {
-          if (listeners[i].fn !== fn || once2 && !listeners[i].once || context && listeners[i].context !== context) {
+          if (listeners[i].fn !== fn || once && !listeners[i].once || context && listeners[i].context !== context) {
             events.push(listeners[i],);
           }
         }
@@ -15274,6 +15274,67 @@ function useBooleanQueryParam({
   }, [initialValue, optional, setStringValue,],);
   return [value, setValue,];
 }
+function parseNumberQueryParam(value,) {
+  const includesComma = value.includes(',',);
+  const includesDot = value.includes('.',);
+  if (includesComma && includesDot) return void 0;
+  const normalizedValue = includesComma ? value.replace(',', '.',) : value;
+  const parsed = Number(normalizedValue,);
+  if (!isNumber2(parsed,)) return void 0;
+  return parsed;
+}
+function serializeNumberQueryParam(value,) {
+  return String(value,);
+}
+function useNumberQueryParam({
+  initialValue,
+  parameterName,
+  optional,
+},) {
+  const initialValueRef = useRef(initialValue,);
+  const optionalRef = useRef(optional,);
+  const initialStringValue = useMemo(() => {
+    const initialOptional = optionalRef.current;
+    const initialNumberValue = initialValueRef.current;
+    if (initialOptional === true && initialNumberValue === void 0) {
+      return void 0;
+    }
+    if (!isNumber2(initialNumberValue,)) {
+      return '';
+    }
+    return serializeNumberQueryParam(initialNumberValue,);
+  }, [],);
+  const [stringValue, setStringValue,] = useStringQueryParam({
+    initialValue: initialStringValue,
+    parameterName,
+    optional: optionalRef.current,
+  },);
+  const value = useMemo(() => {
+    const initialOptional = optionalRef.current;
+    const initialNumberValue = initialValueRef.current;
+    if (stringValue === void 0 && initialOptional) {
+      return void 0;
+    }
+    if (!stringValue) return initialNumberValue;
+    const parsed = parseNumberQueryParam(stringValue,);
+    return parsed ?? initialNumberValue;
+  }, [stringValue,],);
+  const setValue = useCallback2((newValue) => {
+    const initialOptional = optionalRef.current;
+    const initialNumberValue = initialValueRef.current;
+    if (initialOptional === true && newValue === void 0) {
+      return setStringValue(void 0,);
+    }
+    if (newValue === initialNumberValue) {
+      return setStringValue(initialStringValue,);
+    }
+    if (!isNumber2(newValue,)) {
+      return setStringValue('',);
+    }
+    return setStringValue(serializeNumberQueryParam(newValue,),);
+  }, [initialStringValue, setStringValue,],);
+  return [value, setValue,];
+}
 function useCollectionReferenceQueryParam({
   collectionId,
   initialValue,
@@ -18572,7 +18633,7 @@ var EventEmitter = class {
   unique(eventName, fn,) {
     this.addEventListener(eventName, fn, false, true, this,);
   }
-  addEventListener(eventName, fn, once2, unique, context,) {
+  addEventListener(eventName, fn, once, unique, context,) {
     if (unique) {
       for (const name of this._emitter.eventNames()) {
         if (fn === this._emitter.listeners(name,)) {
@@ -18580,7 +18641,7 @@ var EventEmitter = class {
         }
       }
     }
-    if (once2 === true) {
+    if (once === true) {
       this._emitter.once(eventName, fn, context,);
     } else {
       this._emitter.addListener(eventName, fn, context,);
@@ -24834,756 +24895,6 @@ var cornerPropertiesToInherit = {
   borderRadius: 'inherit',
   cornerShape: 'inherit',
 };
-function assert2(condition, ...msg) {
-  if (condition) return;
-  const e = Error('Assertion Error' + (msg.length > 0 ? ': ' + msg.join(' ',) : ''),);
-  if (e.stack) {
-    try {
-      const lines = e.stack.split('\n',);
-      if (lines[1]?.includes('assert',)) {
-        lines.splice(1, 1,);
-        e.stack = lines.join('\n',);
-      } else if (lines[0]?.includes('assert',)) {
-        lines.splice(0, 1,);
-        e.stack = lines.join('\n',);
-      }
-    } catch {}
-  }
-  throw e;
-}
-var missing = Symbol('missing',);
-var errorReporter;
-function reportError({
-  error: maybeError,
-  tags,
-  extras,
-  critical,
-  caller,
-},) {
-  assert2(errorReporter, 'Set up an error callback with setErrorReporter, or configure Sentry with initializeEnvironment',);
-  const error = reportableError(maybeError, caller,);
-  errorReporter({
-    error,
-    tags: {
-      ...error.tags,
-      ...tags,
-    },
-    extras: {
-      ...error.extras,
-      ...extras,
-    },
-    critical: !!critical,
-  },);
-  return error;
-}
-function reportableError(error, caller = reportableError,) {
-  if (error instanceof Error) {
-    return error;
-  }
-  return new UnhandledError(error, caller,);
-}
-var UnhandledError = class extends Error {
-  constructor(error, caller,) {
-    const message = error ? JSON.stringify(error,) : 'No error message provided';
-    super(message,);
-    this.message = message;
-    if (caller && Error.captureStackTrace) {
-      Error.captureStackTrace(this, caller,);
-    } else {
-      try {
-        throw new Error();
-      } catch (e) {
-        this.stack = e.stack;
-      }
-    }
-  }
-};
-var hostname = typeof window !== 'undefined' ? window.location.hostname : void 0;
-var isLocal = Boolean(hostname && ['web.framerlocal.com', 'localhost', '127.0.0.1', '[::1]',].includes(hostname,),);
-var hosts = (() => {
-  if (!hostname) return;
-  if (isLocal) {
-    return {
-      main: hostname,
-      previewLink: void 0,
-    };
-  }
-  const previewHostRegex = /^(([^.]+\.)?beta\.)?((?:development\.)?framer\.com)$/u;
-  const match = hostname.match(previewHostRegex,);
-  if (!match || !match[3]) return;
-  return {
-    previewLink: match[2] && match[0],
-    main: match[3],
-  };
-})();
-var hostInfo = {
-  hosts,
-  isDevelopment: hosts?.main === 'development.framer.com',
-  isProduction: hosts?.main === 'framer.com',
-  isLocal,
-};
-var cachedServiceMap;
-function getServiceMap() {
-  if (typeof window === 'undefined') return {};
-  if (cachedServiceMap) return cachedServiceMap;
-  cachedServiceMap = extractServiceMap();
-  return cachedServiceMap;
-}
-function extractServiceMap() {
-  const location = window.location;
-  let services = window?.bootstrap?.services;
-  if (services) {
-    return services;
-  }
-  let topOrigin;
-  try {
-    const topWindow = window.top;
-    topOrigin = topWindow.location.origin;
-    services = window.top?.bootstrap?.services;
-    if (services) {
-      return services;
-    }
-  } catch (e) {}
-  if (topOrigin && topOrigin !== location.origin) {
-    throw Error(`Unexpectedly embedded by ${topOrigin} (expected ${location.origin})`,);
-  }
-  if (location.origin.endsWith('framer.com',) || location.origin.endsWith('framer.dev',)) {
-    throw Error('ServiceMap data was not provided in document',);
-  }
-  try {
-    const servicesJSON = new URLSearchParams(location.search,).get('services',) ||
-      new URLSearchParams(location.hash.substring(1,),).get('services',);
-    if (servicesJSON) {
-      services = JSON.parse(servicesJSON,);
-    }
-  } catch (e) {}
-  if (services && typeof services === 'object' && services.api) {
-    return services;
-  }
-  throw Error('ServiceMap requested but not available',);
-}
-function jsonSafeCopy(obj, depth = 0, seen = /* @__PURE__ */ new Set(),) {
-  if (obj === null) return obj;
-  if (typeof obj === 'function') return `[Function: ${obj.name ?? 'unknown'}]`;
-  if (typeof obj !== 'object') return obj;
-  if (obj instanceof Error) return `[${obj.toString()}]`;
-  if (seen.has(obj,)) return '[Circular]';
-  if (depth > 2) return '...';
-  seen.add(obj,);
-  try {
-    if ('toJSON' in obj && typeof obj.toJSON === 'function') {
-      return jsonSafeCopy(obj.toJSON(), depth + 1, seen,);
-    } else if (Array.isArray(obj,)) {
-      return obj.map((v) => jsonSafeCopy(v, depth + 1, seen,));
-    } else if (Object.getPrototypeOf(obj,) !== Object.prototype) {
-      return `[Object: ${'__class' in obj && obj.__class || obj.constructor?.name}]`;
-    } else {
-      const result = {};
-      for (const [key7, v,] of Object.entries(obj,)) {
-        result[key7] = jsonSafeCopy(v, depth + 1, seen,);
-      }
-      return result;
-    }
-  } catch (e) {
-    return `[Throws: ${e instanceof Error ? e.message : e}]`;
-  } finally {
-    seen.delete(obj,);
-  }
-}
-var levelNames = ['trace', 'debug', 'info', 'warn', 'error',];
-var postfixNames = [':trace', ':debug', ':info', ':warn', ':error',];
-function applyLogLevelSpec(spec, all,) {
-  const missingSpecs = [];
-  for (const s of spec.split(/[ ,]/u,)) {
-    let match = s.trim();
-    if (match.length === 0) continue;
-    let level = 1;
-    let inverted = false;
-    if (match.startsWith('-',)) {
-      match = match.slice(1,);
-      level = 3;
-      inverted = true;
-    }
-    for (let i = 0; i <= 4; i++) {
-      const postfix = postfixNames[i];
-      if (!postfix) continue;
-      if (match.endsWith(postfix,)) {
-        level = i;
-        if (inverted) {
-          level += 1;
-        }
-        match = match.slice(0, match.length - postfix.length,);
-        if (match.length === 0) {
-          match = '*';
-        }
-        break;
-      }
-    }
-    const regex2 = new RegExp('^' + escapeRegExp(match,).replace(/\\\*/gu, '.*',) + '$',);
-    let loggersUpdated = 0;
-    for (const logger of all) {
-      if (logger.id.match(regex2,)) {
-        logger.level = level;
-        ++loggersUpdated;
-      }
-    }
-    if (loggersUpdated === 0) {
-      missingSpecs.push(s,);
-    }
-  }
-  return missingSpecs;
-}
-var _LogEntry = class _LogEntry2 {
-  constructor(logger, level, parts,) {
-    this.logger = logger;
-    this.level = level;
-    this.parts = parts;
-    __publicField(this, 'id',);
-    __publicField(this, 'time',);
-    __publicField(this, 'stringPrefix',);
-    this.id = _LogEntry2.nextId++;
-    this.time = Date.now();
-  }
-  toMessage() {
-    if (this.stringPrefix) return this.parts;
-    const r = [new Date(this.time,).toISOString().substr(-14, 14,), levelNames[this.level] + ': [' + this.logger.id + ']',];
-    let i = 0;
-    for (; i < this.parts.length; i++) {
-      const part = this.parts[i];
-      if (typeof part === 'string') {
-        r.push(part,);
-        continue;
-      }
-      break;
-    }
-    this.stringPrefix = r.join(' ',);
-    this.parts.splice(0, i, this.stringPrefix,);
-    return this.parts;
-  }
-  toString() {
-    return this.toMessage().map((part) => {
-      const type = typeof part;
-      if (type === 'string') return part;
-      if (type === 'function') return `[Function: ${part.name ?? 'unknown'}]`;
-      if (part instanceof Error) return part.stack ?? part.toString();
-      const json = JSON.stringify(jsonSafeCopy(part,),);
-      if (json?.length > 253) {
-        return json.slice(0, 250,) + '...';
-      }
-      return json;
-    },).join(' ',);
-  }
-};
-__publicField(_LogEntry, 'nextId', 0,);
-var LogEntry = _LogEntry;
-var logLevelSpec = '*:app:info,app:info';
-var isNode = typeof process !== 'undefined' && !!process.kill;
-var isCI = isNode && false;
-if (isCI) {
-  logLevelSpec = '-:warn';
-} else if (isNode) {
-  logLevelSpec = '';
-}
-try {
-  if (typeof window !== 'undefined' && window.localStorage) {
-    logLevelSpec = window.localStorage.logLevel || logLevelSpec;
-  }
-} catch {}
-try {
-  if (typeof process !== 'undefined') {
-    logLevelSpec = process.env.DEBUG || logLevelSpec;
-  }
-} catch {}
-try {
-  if (typeof window !== 'undefined') {
-    Object.assign(window, {
-      setLogLevel,
-    },);
-  }
-} catch {}
-try {
-  if (typeof window !== 'undefined' && !!window.postMessage && window.top === window) {
-    window.addEventListener('message', (msg) => {
-      if (!msg.data || typeof msg.data !== 'object') return;
-      const {
-        loggerId,
-        level,
-        parts,
-        printed,
-      } = msg.data;
-      if (typeof loggerId !== 'string') return;
-      if (!Array.isArray(parts,) || parts.length < 1 || typeof level !== 'number') return;
-      const logger = getLogger(loggerId,);
-      if (level < 0 || level > 5) return;
-      parts[0] = parts[0].replace('[', '*[',);
-      const entry = new LogEntry(logger, level, parts,);
-      entry.stringPrefix = parts[0];
-      replayBuffer.push(entry,);
-      if (printed) return;
-      if (logger.level > level) return;
-      console?.log(...entry.toMessage(),);
-    },);
-  }
-} catch {}
-var postLogEntry;
-try {
-  if (
-    typeof window !== 'undefined' && !!window.postMessage && window.parent !== window &&
-    // Don't post messages to the top-level site from the Editor Bar
-    !window.location.pathname.startsWith('/edit',)
-  ) {
-    postLogEntry = (entry) => {
-      try {
-        const parts = entry.toMessage().map((p) => jsonSafeCopy(p,));
-        const logger = entry.logger;
-        const level = entry.level;
-        const printed = logger.level <= entry.level;
-        const data2 = {
-          loggerId: logger.id,
-          level,
-          parts,
-          printed,
-        };
-        window.parent?.postMessage(data2, getServiceMap().app,);
-      } catch {}
-    };
-  }
-} catch {}
-var loggers = {};
-var replayBuffer = [];
-var maxReplayBufferEntries = 1e3;
-function createLogEntry(logger, level, parts,) {
-  const entry = new LogEntry(logger, level, parts,);
-  replayBuffer.push(entry,);
-  postLogEntry?.(entry,);
-  while (replayBuffer.length > maxReplayBufferEntries) {
-    replayBuffer.shift();
-  }
-  return entry;
-}
-function getLogReplayBuffer(maxEntries,) {
-  if (typeof maxEntries === 'number') {
-    maxReplayBufferEntries = maxEntries;
-  }
-  return replayBuffer;
-}
-var pathRegex = /\/(?<filename>[^/.]+)(?=\.(?:debug\.)?html$)/u;
-var cachedFilename;
-function getFilenameFromWindowPathname() {
-  if (typeof window === 'undefined' || !window.location) return;
-  cachedFilename ??= pathRegex.exec(window.location.pathname,)?.groups?.filename;
-  return cachedFilename;
-}
-function getLogger(id3,) {
-  const path = getFilenameFromWindowPathname();
-  id3 = (path ? path + ':' : '') + id3;
-  const existing = loggers[id3];
-  if (existing) return existing;
-  const logger = new Logger(id3,);
-  loggers[id3] = logger;
-  applyLogLevelSpec(logLevelSpec, [logger,],);
-  postLogEntry?.(new LogEntry(logger, -1, [],),);
-  return logger;
-}
-function setLogLevel(spec, replay = true,) {
-  try {
-    if (typeof window !== 'undefined' && window.localStorage) {
-      window.localStorage.logLevel = spec;
-    }
-  } catch {}
-  const previousSpec = logLevelSpec;
-  logLevelSpec = spec;
-  const all = Object.values(loggers,);
-  for (const logger of all) {
-    logger.level = 3;
-  }
-  const missingSpecs = applyLogLevelSpec(spec, all,);
-  if (missingSpecs.length > 0) {
-    console?.warn('Some log level specs matched no loggers:', missingSpecs,);
-  }
-  if (replay && replayBuffer.length > 0) {
-    console?.log('--- LOG REPLAY ---',);
-    for (const entry of replayBuffer) {
-      if (entry.logger.level > entry.level) continue;
-      if (entry.level >= 3) {
-        console?.warn(...entry.toMessage(),);
-      } else {
-        console?.log(...entry.toMessage(),);
-      }
-    }
-    console?.log('--- END OF LOG REPLAY ---',);
-  }
-  return previousSpec;
-}
-var enrichWithLogs = (extras) => {
-  const result = {
-    ...extras,
-    logs: getLogReplayBuffer().slice(-50,).map((entry) => entry.toString().slice(0, 600,)).join('\n',),
-  };
-  if (extras.logs) {
-    console?.warn('extras.logs is reserved for log replay buffer, use another key',);
-  }
-  return result;
-};
-var Logger = class {
-  constructor(id3, errorIsCritical,) {
-    this.id = id3;
-    __publicField(this, 'level', 3,/* Warn */
-    );
-    __publicField(this, 'didLog', {},);
-    __publicField(this, 'errorIsCritical',);
-    __publicField(this, 'trace', (...parts) => {
-      if (this.level > 0) return;
-      const entry = createLogEntry(this, 0, parts,);
-      console?.log(...entry.toMessage(),);
-    },);
-    __publicField(this, 'debug', (...parts) => {
-      const entry = createLogEntry(this, 1, parts,);
-      if (this.level > 1) return;
-      console?.log(...entry.toMessage(),);
-    },);
-    __publicField(this, 'info', (...parts) => {
-      const entry = createLogEntry(this, 2, parts,);
-      if (this.level > 2) return;
-      console?.info(...entry.toMessage(),);
-    },);
-    __publicField(this, 'warn', (...parts) => {
-      const entry = createLogEntry(this, 3, parts,);
-      if (this.level > 3) return;
-      console?.warn(...entry.toMessage(),);
-    },);
-    __publicField(this, 'warnOncePerMinute', (firstPart, ...parts) => {
-      const lastLoggedTime = this.didLog[firstPart];
-      if (lastLoggedTime && lastLoggedTime > Date.now()) return;
-      this.didLog[firstPart] = Date.now() + 1e3 * 60;
-      parts.unshift(firstPart,);
-      const entry = createLogEntry(this, 3, parts,);
-      if (this.level > 3) return;
-      console?.warn(...entry.toMessage(),);
-    },);
-    __publicField(this, 'error', (...parts) => {
-      const entry = createLogEntry(this, 4, parts,);
-      if (this.level > 4) return;
-      console?.error(...entry.toMessage(),);
-    },);
-    __publicField(this, 'errorOncePerMinute', (firstPart, ...parts) => {
-      const lastLoggedTime = this.didLog[firstPart];
-      if (lastLoggedTime && lastLoggedTime > Date.now()) return;
-      this.didLog[firstPart] = Date.now() + 1e3 * 60;
-      parts.unshift(firstPart,);
-      const entry = createLogEntry(this, 4, parts,);
-      if (this.level > 4) return;
-      console?.error(...entry.toMessage(),);
-    },);
-    __publicField(this, 'reportWithoutLogging', (maybeError, extras, tags, critical,) => {
-      const enrichedExtras = enrichWithLogs(extras ?? {},);
-      const enrichedError = reportError({
-        caller: this.reportWithoutLogging,
-        error: maybeError,
-        tags: {
-          ...tags,
-          handler: 'logger',
-          where: this.id,
-        },
-        extras,
-        critical: critical ?? this.errorIsCritical,
-      },);
-      return [enrichedExtras, enrichedError,];
-    },);
-    __publicField(this, 'reportError', (maybeError, extras, tags, critical,) => {
-      const [enrichedExtras, enrichedError,] = this.reportWithoutLogging(maybeError, extras, tags, critical,);
-      if (enrichedExtras) {
-        this.error(enrichedError, enrichedExtras,);
-      } else {
-        this.error(enrichedError,);
-      }
-    },);
-    __publicField(this, 'reportErrorOncePerMinute', (error, extras,) => {
-      if (!isErrorWithMessage(error,)) return;
-      const lastLoggedTime = this.didLog[error.message];
-      if (lastLoggedTime && lastLoggedTime > Date.now()) return;
-      this.didLog[error.message] = Date.now() + 1e3 * 60;
-      this.reportError(error, extras,);
-    },);
-    __publicField(this, 'reportCriticalError', (maybeError, extras, tags,) => this.reportError(maybeError, extras, tags, true,),);
-    this.errorIsCritical = errorIsCritical ?? (id3 === 'fatal' || id3.endsWith(':fatal',));
-  }
-  extend(name,) {
-    const id3 = this.id + ':' + name;
-    return getLogger(id3,);
-  }
-  /** Returns the messages this logger created that are still in the global replay buffer. */
-  getBufferedMessages() {
-    return replayBuffer.filter((entry) => entry.logger === this);
-  }
-  /** Set new level and return previous level. */
-  setLevel(level,) {
-    const previous = this.level;
-    this.level = level;
-    return previous;
-  }
-  /** Check if a trace messages will be output. */
-  isLoggingTraceMessages() {
-    return this.level >= 0;
-  }
-};
-function isErrorWithMessage(maybeError,) {
-  return Object.prototype.hasOwnProperty.call(maybeError, 'message',);
-}
-function escapeRegExp(string,) {
-  return string.replace(/[/\-\\^$*+?.()|[\]{}]/gu, '\\$&',);
-}
-var Mixed = Symbol('Mixed',);
-var DEPENDENCIES_MODULE_NAME = 'dependencies';
-var DEPENDENCIES_MODULE_TYPE = 'config';
-var DEPENDENCIES_MODULE_TYPE_SLASH_NAME = `${DEPENDENCIES_MODULE_TYPE}/${DEPENDENCIES_MODULE_NAME}`;
-var IMPORT_MAP_FILE_NAME = 'importMap.json';
-var DEPENDENCIES_FILE_NAME = 'dependencies.json';
-var IMPORT_MAP_FILE_ID = `${DEPENDENCIES_MODULE_TYPE_SLASH_NAME}/${IMPORT_MAP_FILE_NAME}`;
-var DEPENDENCIES_FILE_ID = `${DEPENDENCIES_MODULE_TYPE_SLASH_NAME}/${DEPENDENCIES_FILE_NAME}`;
-var USE_FREEZE = false;
-var List;
-((List2) => {
-  function push(ls, ...elements) {
-    return ls.concat(elements,);
-  }
-  List2.push = push;
-  function pop(a,) {
-    return a.slice(0, -1,);
-  }
-  List2.pop = pop;
-  function unshift(ls, ...elements) {
-    return elements.concat(ls,);
-  }
-  List2.unshift = unshift;
-  function insert(a, index, ...elements) {
-    const length = a.length;
-    if (index < 0 || index > length) throw Error('index out of range: ' + index,);
-    const copy = a.slice();
-    copy.splice(index, 0, ...elements,);
-    return copy;
-  }
-  List2.insert = insert;
-  function replace(a, index, replacement,) {
-    const length = a.length;
-    if (index < 0 || index >= length) throw Error('index out of range: ' + index,);
-    const itemsToAdd = Array.isArray(replacement,) ? replacement : [replacement,];
-    const copy = a.slice();
-    copy.splice(index, 1, ...itemsToAdd,);
-    return copy;
-  }
-  List2.replace = replace;
-  function remove2(a, index,) {
-    const length = a.length;
-    if (index < 0 || index >= length) throw Error('index out of range: ' + index,);
-    const copy = a.slice();
-    copy.splice(index, 1,);
-    return copy;
-  }
-  List2.remove = remove2;
-  function move(a, from, to,) {
-    const length = a.length;
-    if (from < 0 || from >= length) throw Error('from index out of range: ' + from,);
-    if (to < 0 || to >= length) throw Error('to index out of range: ' + to,);
-    const copy = a.slice();
-    if (to === from) return copy;
-    const element = copy[from];
-    if (from < to) {
-      copy.splice(to + 1, 0, element,);
-      copy.splice(from, 1,);
-    } else {
-      copy.splice(from, 1,);
-      copy.splice(to, 0, element,);
-    }
-    return copy;
-  }
-  List2.move = move;
-  function zip(a, b,) {
-    const res = [];
-    const length = Math.min(a.length, b.length,);
-    for (let i = 0; i < length; i++) {
-      res.push([a[i], b[i],],);
-    }
-    return res;
-  }
-  List2.zip = zip;
-  function update(a, index, body,) {
-    const res = a.slice();
-    const targetElement = res[index];
-    if (targetElement === void 0) return res;
-    res[index] = body(targetElement,);
-    return res;
-  }
-  List2.update = update;
-  function unique(a,) {
-    return Array.from(new Set(a,),);
-  }
-  List2.unique = unique;
-  function union(a, ...collections) {
-    return Array.from(/* @__PURE__ */ new Set([...a, ...collections.flat(),],),);
-  }
-  List2.union = union;
-  function filter2(a, predicate,) {
-    return a.filter(predicate,);
-  }
-  List2.filter = filter2;
-})(List || (List = {}),);
-var objectHasOwnProperty = Object.prototype.hasOwnProperty;
-function hasOwnProperty(object, property,) {
-  return objectHasOwnProperty.call(object, property,);
-}
-var ValueObject;
-((ValueObject2) => {
-  function morphUsingTemplate(values, template,) {
-    for (const field of Object.keys(values,)) {
-      if (!hasOwnProperty(template, field,)) {
-        delete values[field];
-      }
-    }
-    for (const field of Object.keys(template,)) {
-      if (values[field] === void 0) {
-        values[field] = template[field];
-      }
-    }
-    Object.setPrototypeOf(values, Object.getPrototypeOf(template,),);
-    if (USE_FREEZE) {
-      Object.freeze(values,);
-    }
-    return values;
-  }
-  ValueObject2.morphUsingTemplate = morphUsingTemplate;
-  function writeOnce(object, values,) {
-    if (values) {
-      Object.assign(object, values,);
-    }
-    if (USE_FREEZE) {
-      Object.freeze(object,);
-    }
-  }
-  ValueObject2.writeOnce = writeOnce;
-  function update(object, values,) {
-    const result = Object.assign(Object.create(Object.getPrototypeOf(object,),), object, values,);
-    if (USE_FREEZE) {
-      Object.freeze(result,);
-    }
-    return result;
-  }
-  ValueObject2.update = update;
-})(ValueObject || (ValueObject = {}),);
-var ReadonlySet;
-((ReadonlySet2) => {
-  function add3(set, ...items) {
-    return /* @__PURE__ */ new Set([...set, ...items,],);
-  }
-  ReadonlySet2.add = add3;
-  function remove2(set, ...items) {
-    const result = new Set(set,);
-    for (const item of items) {
-      result.delete(item,);
-    }
-    return result;
-  }
-  ReadonlySet2.remove = remove2;
-  function union(...sets) {
-    const result = /* @__PURE__ */ new Set();
-    for (const set of sets) {
-      for (const item of set) {
-        result.add(item,);
-      }
-    }
-    return result;
-  }
-  ReadonlySet2.union = union;
-  function toggle(set, item,) {
-    if (set.has(item,)) {
-      return ReadonlySet2.remove(set, item,);
-    }
-    return ReadonlySet2.add(set, item,);
-  }
-  ReadonlySet2.toggle = toggle;
-})(ReadonlySet || (ReadonlySet = {}),);
-var ReadonlyMap;
-((ReadonlyMap2) => {
-  function merge(map2, ...otherMaps) {
-    const result = /* @__PURE__ */ new Map();
-    map2.forEach((value, key7,) => result.set(key7, value,));
-    let didMergeMaps = false;
-    for (const otherMap of otherMaps) {
-      if (!otherMap) continue;
-      otherMap.forEach((value, key7,) => result.set(key7, value,));
-      didMergeMaps = true;
-    }
-    return didMergeMaps ? result : map2;
-  }
-  ReadonlyMap2.merge = merge;
-  function set(map2, key7, value,) {
-    const result = new Map(map2,);
-    result.set(key7, value,);
-    return result;
-  }
-  ReadonlyMap2.set = set;
-  function remove2(map2, key7,) {
-    const result = new Map(map2,);
-    result.delete(key7,);
-    return result;
-  }
-  ReadonlyMap2.remove = remove2;
-})(ReadonlyMap || (ReadonlyMap = {}),);
-var ResolvablePromise = class extends Promise {
-  constructor() {
-    let res;
-    let rej;
-    super((resolve, reject,) => {
-      res = resolve;
-      rej = reject;
-    },);
-    __publicField(this, '_state', 'initial',);
-    __publicField(this, 'resolve',);
-    __publicField(this, 'reject',);
-    this.resolve = (val) => {
-      this._state = 'fulfilled';
-      res(val,);
-    };
-    this.reject = (reason) => {
-      this._state = 'rejected';
-      rej(reason,);
-    };
-  }
-  get state() {
-    return this._state;
-  }
-  /**
-   * A function that sets the state to "pending".
-   * Useful for when you want to signal that the task started but is not yet completed.
-   */
-  pending() {
-    this._state = 'pending';
-    return this;
-  }
-  isResolved() {
-    return this._state === 'fulfilled' || this._state === 'rejected';
-  }
-};
-ResolvablePromise.prototype.constructor = Promise;
-var hasNativeYield = false;
-var hasNativePostTask = false;
-var hasIsInputPending = false;
-if (typeof window !== 'undefined' && window.scheduler) {
-  hasNativeYield = 'yield' in window.scheduler;
-  hasNativePostTask = 'postTask' in window.scheduler;
-  hasIsInputPending = 'isInputPending' in window.scheduler;
-}
-var log = getLogger('task-queue',);
-function getAssetFilename(asset,) {
-  return asset.key + asset.extension;
-}
-function createAbsoluteAssetURL(filename,) {
-  const serviceMap = getServiceMap();
-  return `${serviceMap.userContent}/assets/${filename}`;
-}
-function createAbsoluteAssetURLFromAsset(asset,) {
-  return createAbsoluteAssetURL(getAssetFilename(asset,),);
-}
 var FixedSizeScaleVariants = [1, 2, 2.2,];
 var ValidSteps = [512, 1024, 2048, 4096,];
 function getVariantsDimensions(width, height,) {
@@ -29934,7 +29245,7 @@ function WithEvents(BaseComponent,) {
   (0, import_hoist_non_react_statics3.default)(withEvents, BaseComponent,);
   return withEvents;
 }
-var hasOwnProperty2 = (obj, prop,) => Object.prototype.hasOwnProperty.call(obj, prop,);
+var hasOwnProperty = (obj, prop,) => Object.prototype.hasOwnProperty.call(obj, prop,);
 var $private = /* @__PURE__ */ Symbol('private',);
 var ObservableObject = /* @__PURE__ */ (() => {
   function ObservableObject2(initial = {}, makeAnimatables = false, observeAnimatables = true,) {
@@ -29945,8 +29256,8 @@ var ObservableObject = /* @__PURE__ */ (() => {
         observers: new Observers(),
         reset() {
           for (const key7 in state) {
-            if (hasOwnProperty2(state, key7,)) {
-              const value = hasOwnProperty2(initial, key7,) ? asRecord(initial,)[key7] : void 0;
+            if (hasOwnProperty(state, key7,)) {
+              const value = hasOwnProperty(initial, key7,) ? asRecord(initial,)[key7] : void 0;
               if (value !== void 0) {
                 state[key7] = value;
               } else {
@@ -31088,7 +30399,7 @@ function withInfiniteScroll(Component18,) {
     },);
   },);
 }
-function debounce2(fn, time2,) {
+function debounce(fn, time2,) {
   let timeout;
   const debounced = (...args) => {
     safeWindow.clearTimeout(timeout,);
@@ -31154,7 +30465,7 @@ function useWheelScroll(ref, {
       clampY = clampY2,
       updateX = updateX2,
       updateY = updateY2;
-    const debouncedOnScrollEnd = debounce2(() => {
+    const debouncedOnScrollEnd = debounce(() => {
       onScrollEnd && onScrollEnd(getPointData(),);
       isWheelScrollActive.current = false;
     }, 200,);
@@ -32518,7 +31829,7 @@ var MouseWheelGestureRecognizer = class extends GestureRecognizer {
     __publicField(
       this,
       'onMouseWheelEnd',
-      debounce2((event) => {
+      debounce((event) => {
         if (this.handler && this.startEvent) {
           this.stateSwitch(16,/* Ended */
           );
@@ -34550,7 +33861,7 @@ function useLoop({
   const shouldReduceMotion = useReducedMotionConfig();
   const values = useConstant2(makeFXValues,);
   const mirrorStateRef = useRef(false,);
-  const delay3 = useDelay();
+  const delay2 = useDelay();
   const animationPromiseRef = useRef(null,);
   const animateValues = useCallback2(async () => {
     if (!loop) return;
@@ -34580,9 +33891,9 @@ function useLoop({
   const animateLoop = useCallback2(async () => {
     if (!loopEffectEnabled || !shouldRunRef.current) return;
     await animateValues();
-    await delay3(loopRepeatDelay ?? 0,);
+    await delay2(loopRepeatDelay ?? 0,);
     void animateLoop();
-  }, [animateValues, delay3, loopEffectEnabled, loopRepeatDelay,],);
+  }, [animateValues, delay2, loopEffectEnabled, loopRepeatDelay,],);
   const start2 = useCallback2(() => {
     if (shouldRunRef.current) return;
     shouldRunRef.current = true;
@@ -39634,7 +38945,7 @@ var _FetchClient = class _FetchClient2 {
     __publicField(
       this,
       'persistCache',
-      debounce2(() => {
+      debounce(() => {
         const data2 = {};
         for (const [url, responseValue,] of this.responseValues) {
           if (!responseValue) continue;
@@ -40129,7 +39440,7 @@ var Fetcher = /* @__PURE__ */ React.forwardRef(function Fetcher2({
   return cloneWithPropsAndRef(childrenWithValues, rest,);
 },);
 var callEach = (...fns) => fns.forEach((fn) => fn && fn());
-function getLogger2(name,) {
+function getLogger(name,) {
   return {
     trace(...args) {
       return runtime.getLogger(name,)?.trace(...args,);
@@ -43954,6 +43265,23 @@ var ScalarIndexOf = class _ScalarIndexOf extends ScalarNode {
     };
   }
 };
+function assert2(condition, ...msg) {
+  if (condition) return;
+  const e = Error('Assertion Error' + (msg.length > 0 ? ': ' + msg.join(' ',) : ''),);
+  if (e.stack) {
+    try {
+      const lines = e.stack.split('\n',);
+      if (lines[1]?.includes('assert',)) {
+        lines.splice(1, 1,);
+        e.stack = lines.join('\n',);
+      } else if (lines[0]?.includes('assert',)) {
+        lines.splice(0, 1,);
+        e.stack = lines.join('\n',);
+      }
+    } catch {}
+  }
+  throw e;
+}
 var ScalarIntersection = class _ScalarIntersection extends ScalarNode {
   constructor(left, right,) {
     const referencedFields = new Fields();
@@ -44867,11 +44195,11 @@ function stringifyQuery(query,) {
   }
   return autoIndentSql(queryString,);
 }
-var log2 = /* @__PURE__ */ getLogger2('query-engine',);
+var log = /* @__PURE__ */ getLogger('query-engine',);
 var QueryEngine = class {
   async evalQuery(query, locale, includeRaw,) {
-    if (log2.enabled) {
-      log2.debug(`Query:
+    if (log.enabled) {
+      log.debug(`Query:
 ${stringifyQuery(query,)}`,);
     }
     const resolver = new Resolver(query, locale,);
@@ -48386,6 +47714,56 @@ var MapWithHash = class extends Map {
     return super.clear();
   }
 };
+var cachedServiceMap;
+function getServiceMap() {
+  if (typeof window === 'undefined') return {};
+  if (cachedServiceMap) return cachedServiceMap;
+  cachedServiceMap = extractServiceMap();
+  return cachedServiceMap;
+}
+function extractServiceMap() {
+  const location = window.location;
+  let services = window?.bootstrap?.services;
+  if (services) {
+    return services;
+  }
+  let topOrigin;
+  try {
+    const topWindow = window.top;
+    topOrigin = topWindow.location.origin;
+    services = window.top?.bootstrap?.services;
+    if (services) {
+      return services;
+    }
+  } catch (e) {}
+  if (topOrigin && topOrigin !== location.origin) {
+    throw Error(`Unexpectedly embedded by ${topOrigin} (expected ${location.origin})`,);
+  }
+  if (location.origin.endsWith('framer.com',) || location.origin.endsWith('framer.dev',)) {
+    throw Error('ServiceMap data was not provided in document',);
+  }
+  try {
+    const servicesJSON = new URLSearchParams(location.search,).get('services',) ||
+      new URLSearchParams(location.hash.substring(1,),).get('services',);
+    if (servicesJSON) {
+      services = JSON.parse(servicesJSON,);
+    }
+  } catch (e) {}
+  if (services && typeof services === 'object' && services.api) {
+    return services;
+  }
+  throw Error('ServiceMap requested but not available',);
+}
+function getAssetFilename(asset,) {
+  return asset.key + asset.extension;
+}
+function createAbsoluteAssetURL(filename,) {
+  const serviceMap = getServiceMap();
+  return `${serviceMap.userContent}/assets/${filename}`;
+}
+function createAbsoluteAssetURLFromAsset(asset,) {
+  return createAbsoluteAssetURL(getAssetFilename(asset,),);
+}
 var FRAMER_VARIABLE_FONT_SUFFIX = 'Variable';
 function createCSSFamilyName(fontFamilyName, isVariable,) {
   return isVariable ? `${fontFamilyName} ${FRAMER_VARIABLE_FONT_SUFFIX}` : fontFamilyName;
@@ -48739,7 +48117,7 @@ function pickVariableVariants(currentVariant, availableVariants,) {
 function isVariableFont(font,) {
   return Boolean(font.variationAxes,);
 }
-var log3 = getLogger2('custom-font-source',);
+var log2 = getLogger('custom-font-source',);
 var customFontSelectorLegacyPrefix = 'CUSTOM;';
 var customFontSelectorPrefixV2 = 'CUSTOMV2;';
 function isCustomFontSelector(selector,) {
@@ -48917,7 +48295,7 @@ var CustomFontSource = class _CustomFontSource {
           fonts[selector] = font;
         }
       } else if (duplicateInfo) {
-        log3.warn('Duplicate font found for:', font, 'with existing font:', duplicateInfo.existingFont,);
+        log2.warn('Duplicate font found for:', font, 'with existing font:', duplicateInfo.existingFont,);
         const existingFont = duplicateInfo.existingFont;
         const newIsWoff2 = font.file?.endsWith('.woff2',) ?? false;
         const existingIsWoff2 = existingFont.file?.endsWith('.woff2',) ?? false;
@@ -52462,11 +51840,11 @@ function imagePatternPropsForFill(fill, frame2, id3, includeTransform,) {
   };
 }
 var mediaType2 = 'framer/asset-reference,';
-function isAssetReference2(value,) {
+function isAssetReference(value,) {
   return value.startsWith(`data:${mediaType2}`,);
 }
 function imageUrlForAsset(asset, pixelSize,) {
-  if (/^\w+:/u.test(asset,) && !isAssetReference2(asset,)) return asset;
+  if (/^\w+:/u.test(asset,) && !isAssetReference(asset,)) return asset;
   if (typeof pixelSize !== 'number') pixelSize = void 0;
   else if (pixelSize <= 512) pixelSize = 512;
   else if (pixelSize <= 1024) pixelSize = 1024;
@@ -54887,7 +54265,7 @@ export {
   DataContext,
   DataObserver,
   DataObserverContext,
-  debounce2 as debounce,
+  debounce,
   defaultDeviceProps,
   defaultEasing,
   defaultOffset,
@@ -55276,6 +54654,7 @@ export {
   useMultiCollectionReferenceQueryParam,
   useNavigate,
   useNavigation,
+  useNumberQueryParam,
   useObserveData,
   useOnAppear,
   useOnCurrentTargetChange,
