@@ -11342,7 +11342,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.YDINANB5.mjs
+// /:https://app.framerstatic.com/framer.ATPRB4QE.mjs
 
 import React42 from 'react';
 import { useDeferredValue, useSyncExternalStore, } from 'react';
@@ -15098,7 +15098,7 @@ function serializeSearchEntries(entries,) {
   if (entries.length === 0) return '';
   const parts = entries.map((entry) => {
     const encodedKey = encodeQueryKey(entry.key,);
-    if (entry.value === void 0) return encodedKey;
+    if (isUndefined(entry.value,)) return encodedKey;
     return `${encodedKey}=${encodeQueryComponent(entry.value,)}`;
   },);
   return `?${parts.join('&',)}`;
@@ -15220,8 +15220,8 @@ function useStringQueryParam({
   optional,
 },) {
   const initialArrayValue = useMemo(() => {
-    if (optional === true) {
-      if (initialValue === void 0) {
+    if (optional === true && isUndefined(initialValue,)) {
+      if (isUndefined(initialValue,)) {
         return void 0;
       }
       return [initialValue,];
@@ -15259,7 +15259,7 @@ function useBooleanQueryParam({
     optional,
   },);
   const value = useMemo(() => {
-    if (stringValue === void 0 && optional) return void 0;
+    if (isUndefined(stringValue,) && optional) return void 0;
     if (!stringValue) return initialValue;
     return stringValue === BOOLEAN_YES;
   }, [initialValue, optional, stringValue,],);
@@ -15267,7 +15267,7 @@ function useBooleanQueryParam({
     if (newValue === initialValue) {
       return setStringValue('',);
     }
-    if (optional === true && newValue === void 0) {
+    if (optional === true && isUndefined(newValue,)) {
       return setStringValue(void 0,);
     }
     return setStringValue(newValue ? BOOLEAN_YES : BOOLEAN_NO,);
@@ -15296,7 +15296,7 @@ function useNumberQueryParam({
   const initialStringValue = useMemo(() => {
     const initialOptional = optionalRef.current;
     const initialNumberValue = initialValueRef.current;
-    if (initialOptional === true && initialNumberValue === void 0) {
+    if (initialOptional === true && isUndefined(initialNumberValue,)) {
       return void 0;
     }
     if (!isNumber2(initialNumberValue,)) {
@@ -15312,7 +15312,7 @@ function useNumberQueryParam({
   const value = useMemo(() => {
     const initialOptional = optionalRef.current;
     const initialNumberValue = initialValueRef.current;
-    if (stringValue === void 0 && initialOptional) {
+    if (isUndefined(stringValue,) && initialOptional) {
       return void 0;
     }
     if (!stringValue) return initialNumberValue;
@@ -15322,7 +15322,7 @@ function useNumberQueryParam({
   const setValue = useCallback2((newValue) => {
     const initialOptional = optionalRef.current;
     const initialNumberValue = initialValueRef.current;
-    if (initialOptional === true && newValue === void 0) {
+    if (initialOptional === true && isUndefined(newValue,)) {
       return setStringValue(void 0,);
     }
     if (newValue === initialNumberValue) {
@@ -15333,6 +15333,79 @@ function useNumberQueryParam({
     }
     return setStringValue(serializeNumberQueryParam(newValue,),);
   }, [initialStringValue, setStringValue,],);
+  return [value, setValue,];
+}
+var dateOnlyLength = 10;
+var dateTimeLength = 16;
+var isoDateTimeCompletionTemplate = '0000-00-00T00:00:00.000Z';
+function getCompleteDateTime(value,) {
+  try {
+    const completeDate = value + isoDateTimeCompletionTemplate.slice(value.length,);
+    const date = new Date(completeDate,);
+    if (Number.isNaN(date.getTime(),)) return void 0;
+    if (!date.toISOString().startsWith(value,)) return void 0;
+    return completeDate;
+  } catch {
+    return void 0;
+  }
+}
+function parseDateQueryParam(value,) {
+  if (value.length === dateOnlyLength || value.length === dateTimeLength || value.length === isoDateTimeCompletionTemplate.length) {
+    return getCompleteDateTime(value,);
+  }
+  return void 0;
+}
+function serializeDateQueryParam(value, displayTime,) {
+  const completeDate = getCompleteDateTime(value,);
+  if (!completeDate) return void 0;
+  if (!displayTime) return completeDate.slice(0, dateOnlyLength,);
+  return completeDate.slice(0, dateTimeLength,);
+}
+function useDateQueryParam({
+  initialValue,
+  parameterName,
+  displayTime,
+  optional,
+},) {
+  const initialValueRef = useRef(initialValue,);
+  const optionalRef = useRef(optional,);
+  const displayTimeRef = useRef(displayTime ?? false,);
+  const initialStringValue = useMemo(() => {
+    const initialOptional = optionalRef.current;
+    const initialDateValue = initialValueRef.current;
+    const initialDisplayTime = displayTimeRef.current;
+    if (initialOptional === true) {
+      if (isUndefined(initialDateValue,)) return void 0;
+      return serializeDateQueryParam(initialDateValue, initialDisplayTime,);
+    }
+    if (!isString(initialDateValue,)) return '';
+    return serializeDateQueryParam(initialDateValue, initialDisplayTime,) ?? '';
+  }, [],);
+  const [stringValue, setStringValue,] = useStringQueryParam({
+    initialValue: initialStringValue,
+    parameterName,
+    optional: optionalRef.current,
+  },);
+  const value = useMemo(() => {
+    const initialOptional = optionalRef.current;
+    const initialDateValue = initialValueRef.current;
+    if (isUndefined(stringValue,) && initialOptional) {
+      return void 0;
+    }
+    if (!stringValue) return initialDateValue;
+    const parsed = parseDateQueryParam(stringValue,);
+    return parsed ?? initialDateValue;
+  }, [stringValue,],);
+  const setValue = useCallback2(async (newValue) => {
+    const initialOptional = optionalRef.current;
+    if (initialOptional === true && isUndefined(newValue,)) {
+      return setStringValue(void 0,);
+    }
+    if (!isString(newValue,)) return;
+    const serializedDate = serializeDateQueryParam(newValue, displayTimeRef.current,);
+    if (!isString(serializedDate,)) return;
+    return setStringValue(serializedDate,);
+  }, [setStringValue,],);
   return [value, setValue,];
 }
 function useCollectionReferenceQueryParam({
@@ -15349,13 +15422,13 @@ function useCollectionReferenceQueryParam({
     optional,
   },);
   const id3 = useMemo(() => {
-    if (slug === void 0) return void 0;
+    if (isUndefined(slug,)) return void 0;
     if (!slug) return initialValue || void 0;
     const cache2 = getCollectionUtilsCache2(collectionUtils, collectionId,);
     return use(cache2.getRecordIdBySlug(slug, locale,),);
   }, [collectionUtils, collectionId, initialValue, locale, slug,],);
   const setId = useCallback2(async (newId) => {
-    if (newId === void 0) {
+    if (isUndefined(newId,)) {
       await setSlug(void 0,);
       return;
     }
@@ -15375,7 +15448,7 @@ function useMultiCollectionReferenceQueryParam({
 },) {
   const collectionUtils = useCollectionUtils();
   const locale = useLocaleInfo().activeLocale ?? void 0;
-  const initialArrayValue = useRef(optional && initialValue === void 0 ? void 0 : EMPTY_ARRAY,);
+  const initialArrayValue = useRef(optional && isUndefined(initialValue,) ? void 0 : EMPTY_ARRAY,);
   const [slugs, setSlugs,] = useStringArrayQueryParam({
     initialValue: initialArrayValue.current,
     parameterName,
@@ -15383,7 +15456,7 @@ function useMultiCollectionReferenceQueryParam({
   },);
   const ids = useMemo(() => {
     if (!slugs) return initialValue;
-    if (optional && slugs.some((slug) => slug === void 0)) {
+    if (optional && slugs.some(isUndefined,)) {
       return void 0;
     }
     if (optional && slugs.length === 1 && slugs[0] === '') {
@@ -15395,7 +15468,7 @@ function useMultiCollectionReferenceQueryParam({
     return useAll(maybePromises,).filter(isString,);
   }, [collectionUtils, collectionId, initialValue, locale, optional, slugs,],);
   const setIds = useCallback2(async (newIds) => {
-    if (newIds === void 0) {
+    if (isUndefined(newIds,)) {
       await setSlugs(void 0,);
       return;
     }
@@ -52171,7 +52244,7 @@ function sizeSVG(container, props,) {
     _constraints,
   } = props;
   if (
-    svg.viewBox.baseVal?.width === 0 && svg.viewBox.baseVal?.height === 0 && isFiniteNumber(intrinsicWidth,) &&
+    svg.viewBox?.baseVal?.width === 0 && svg.viewBox?.baseVal?.height === 0 && isFiniteNumber(intrinsicWidth,) &&
     isFiniteNumber(intrinsicHeight,)
   ) {
     svg.setAttribute('viewBox', `0 0 ${intrinsicWidth} ${intrinsicHeight}`,);
@@ -54619,6 +54692,7 @@ export {
   useCustomCursors,
   useCycle,
   useDataRecord,
+  useDateQueryParam,
   useDomEvent,
   useDragControls,
   useDynamicRefs,
