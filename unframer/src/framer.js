@@ -11342,7 +11342,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.ZCYTOMDK.mjs
+// /:https://app.framerstatic.com/framer.SV4SO3WK.mjs
 
 import React42 from 'react';
 import { useDeferredValue, useSyncExternalStore, } from 'react';
@@ -15051,97 +15051,9 @@ function useMemoOne(factory, inputs,) {
   }, [cache2,],);
   return cache2.result;
 }
-function decodeQueryComponent(value,) {
-  const normalized = value.replace(/\+/g, ' ',);
-  try {
-    return decodeURIComponent(normalized,);
-  } catch {
-    return normalized;
-  }
-}
-function parseSearchString(searchString,) {
-  const questionMarkIndex = searchString.indexOf('?',);
-  const search = questionMarkIndex === -1 ? searchString : searchString.slice(questionMarkIndex + 1,);
-  if (!search) return EMPTY_ARRAY;
-  const entries = [];
-  for (const part of search.split('&',)) {
-    if (!part) continue;
-    const equalsIndex = part.indexOf('=',);
-    const rawKey = equalsIndex === -1 ? part : part.slice(0, equalsIndex,);
-    if (!rawKey) continue;
-    const key7 = decodeQueryComponent(rawKey,);
-    if (equalsIndex === -1) {
-      entries.push({
-        key: key7,
-        value: void 0,
-      },);
-    } else {
-      const rawValue = part.slice(equalsIndex + 1,);
-      const value = decodeQueryComponent(rawValue,);
-      entries.push({
-        key: key7,
-        value,
-      },);
-    }
-  }
-  return entries;
-}
-function encodeQueryComponent(value,) {
-  const encoded = new URLSearchParams([['', value,],],).toString();
-  return encoded.startsWith('=',) ? encoded.slice(1,) : encoded;
-}
-function encodeQueryKey(key7,) {
-  const encoded = new URLSearchParams([[key7, '',],],).toString();
-  return encoded.endsWith('=',) ? encoded.slice(0, -1,) : encoded;
-}
-function serializeSearchEntries(entries,) {
-  if (entries.length === 0) return '';
-  const parts = entries.map((entry) => {
-    const encodedKey = encodeQueryKey(entry.key,);
-    if (isUndefined(entry.value,)) return encodedKey;
-    return `${encodedKey}=${encodeQueryComponent(entry.value,)}`;
-  },);
-  return `?${parts.join('&',)}`;
-}
-function getQueryParamValues(entries, parameterName,) {
-  let values;
-  for (const entry of entries) {
-    if (entry.key !== parameterName) continue;
-    values ??= [];
-    values.push(entry.value,);
-  }
-  return values;
-}
-function updateQueryParamEntries(entries, parameterName, newValues,) {
-  const updated = [];
-  let didAddNewValues = false;
-  for (const entry of entries) {
-    if (entry.key !== parameterName) {
-      updated.push(entry,);
-      continue;
-    }
-    if (didAddNewValues) continue;
-    didAddNewValues = true;
-    for (const newValue of newValues) {
-      updated.push({
-        key: parameterName,
-        value: newValue,
-      },);
-    }
-  }
-  if (!didAddNewValues) {
-    for (const newValue of newValues) {
-      updated.push({
-        key: parameterName,
-        value: newValue,
-      },);
-    }
-  }
-  return updated;
-}
 var URLSearchParamsContext = /* @__PURE__ */ (() => {
   const Context2 = createContext({
-    searchEntries: EMPTY_ARRAY,
+    urlSearchParams: new URLSearchParams(),
     triggerUpdate: () => {},
   },);
   Context2.displayName = 'URLSearchParamsContext';
@@ -15171,7 +15083,7 @@ function URLSearchParamsProvider({
     onStoreChangeRef.current?.();
   }, [],);
   const value = useMemoOne(() => ({
-    searchEntries: parseSearchString(deferredSearchString,),
+    urlSearchParams: new URLSearchParams(deferredSearchString,),
     triggerUpdate,
   }), [deferredSearchString, triggerUpdate,],);
   return /* @__PURE__ */ jsx(URLSearchParamsContext.Provider, {
@@ -15180,36 +15092,47 @@ function URLSearchParamsProvider({
   },);
 }
 function useStringArrayQueryParam({
-  initialValue,
   parameterName,
-  optional,
 },) {
   const parameterNameRef = useRef(parameterName,);
   const {
-    searchEntries,
+    urlSearchParams,
     triggerUpdate,
   } = useContext(URLSearchParamsContext,);
   const value = useMemo(() => {
-    const rawValues = getQueryParamValues(searchEntries, parameterNameRef.current,);
-    if (!rawValues || rawValues.length === 0) {
-      return initialValue;
-    }
-    if (optional === true) {
-      return rawValues;
-    }
-    return rawValues.map((item) => item ?? '');
-  }, [initialValue, optional, searchEntries,],);
+    return urlSearchParams.getAll(parameterNameRef.current,);
+  }, [urlSearchParams,],);
   const setValue = useCallback2(async (newValues) => {
+    if (!isArray(newValues,)) return;
     const currentHistoryState = window.history.state;
     if (!isHistoryState(currentHistoryState,)) return;
-    const newUrl = new URL(window.location.href,);
-    const currentEntries = parseSearchString(newUrl.search,);
-    const updatedEntries = updateQueryParamEntries(currentEntries, parameterNameRef.current, newValues ?? EMPTY_ARRAY,);
-    newUrl.search = serializeSearchEntries(updatedEntries,);
+    const name = parameterNameRef.current;
+    const url = new URL(window.location.href,);
+    const next2 = new URLSearchParams();
+    let inserted = false;
+    for (const [key7, originalValue,] of url.searchParams.entries()) {
+      if (key7 !== name) {
+        next2.append(key7, originalValue,);
+        continue;
+      }
+      if (inserted) continue;
+      inserted = true;
+      for (const newValue of newValues) {
+        if (!isString(newValue,)) continue;
+        next2.append(name, newValue,);
+      }
+    }
+    if (!inserted) {
+      for (const newValue of newValues) {
+        if (!isString(newValue,)) continue;
+        next2.append(name, newValue,);
+      }
+    }
+    url.search = next2.toString();
     await yieldToMain({
       continueAfter: 'paint',
     },);
-    replaceHistoryState(currentHistoryState, newUrl.toString(),);
+    replaceHistoryState(currentHistoryState, url.toString(),);
     triggerUpdate();
   }, [triggerUpdate,],);
   return [value, setValue,];
@@ -15219,31 +15142,20 @@ function useStringQueryParam({
   parameterName,
   optional,
 },) {
-  const initialArrayValue = useMemo(() => {
-    if (optional === true && isUndefined(initialValue,)) {
-      if (isUndefined(initialValue,)) {
-        return void 0;
-      }
-      return [initialValue,];
-    }
-    return initialValue ? [initialValue,] : EMPTY_ARRAY;
-  }, [initialValue, optional,],);
+  const initialValueRef = useRef(optional ? void 0 : isString(initialValue,) ? initialValue : '',);
   const [arrayValue, setArrayValue,] = useStringArrayQueryParam({
-    initialValue: initialArrayValue,
     parameterName,
-    optional,
   },);
-  const rawValue = arrayValue?.[0];
-  const value = optional ? rawValue : rawValue ?? '';
-  const setValue = useCallback2((newValue) => {
-    if (newValue === initialValue) {
-      return setArrayValue(EMPTY_ARRAY,);
-    }
-    if (optional === true) {
-      return setArrayValue([newValue,],);
-    }
-    return setArrayValue(newValue ? [newValue,] : EMPTY_ARRAY,);
-  }, [initialValue, optional, setArrayValue,],);
+  const value = useMemo(() => {
+    if (arrayValue.length === 0) return initialValueRef.current;
+    return arrayValue[0] ?? '';
+  }, [arrayValue,],);
+  const setValue = useCallback2(async (newValue) => {
+    const initial = initialValueRef.current;
+    if (newValue === initial) return setArrayValue(EMPTY_ARRAY,);
+    if (!isString(newValue,)) return;
+    return setArrayValue([newValue,],);
+  }, [setArrayValue,],);
   return [value, setValue,];
 }
 var BOOLEAN_YES = 'yes';
@@ -15253,25 +15165,25 @@ function useBooleanQueryParam({
   parameterName,
   optional,
 },) {
+  const initialValueRef = useRef(optional ? void 0 : initialValue ? BOOLEAN_YES : BOOLEAN_NO,);
   const [stringValue, setStringValue,] = useStringQueryParam({
-    initialValue: '',
+    initialValue: initialValueRef.current,
     parameterName,
     optional,
   },);
   const value = useMemo(() => {
-    if (isUndefined(stringValue,) && optional) return void 0;
-    if (!stringValue) return initialValue;
-    return stringValue === BOOLEAN_YES;
-  }, [initialValue, optional, stringValue,],);
-  const setValue = useCallback2((newValue) => {
-    if (newValue === initialValue) {
-      return setStringValue('',);
-    }
-    if (optional === true && isUndefined(newValue,)) {
-      return setStringValue(void 0,);
-    }
+    if (stringValue === BOOLEAN_YES) return true;
+    if (stringValue === BOOLEAN_NO) return false;
+    if (isUndefined(stringValue,)) return void 0;
+    if (initialValueRef.current === BOOLEAN_YES) return true;
+    if (initialValueRef.current === BOOLEAN_NO) return false;
+    return void 0;
+  }, [stringValue,],);
+  const setValue = useCallback2(async (newValue) => {
+    if (isUndefined(newValue,)) return setStringValue(void 0,);
+    if (!isBoolean(newValue,)) return;
     return setStringValue(newValue ? BOOLEAN_YES : BOOLEAN_NO,);
-  }, [initialValue, optional, setStringValue,],);
+  }, [setStringValue,],);
   return [value, setValue,];
 }
 function parseNumberQueryParam(value,) {
@@ -15291,48 +15203,26 @@ function useNumberQueryParam({
   parameterName,
   optional,
 },) {
-  const initialValueRef = useRef(initialValue,);
-  const optionalRef = useRef(optional,);
-  const initialStringValue = useMemo(() => {
-    const initialOptional = optionalRef.current;
-    const initialNumberValue = initialValueRef.current;
-    if (initialOptional === true && isUndefined(initialNumberValue,)) {
-      return void 0;
-    }
-    if (!isNumber2(initialNumberValue,)) {
-      return '';
-    }
-    return serializeNumberQueryParam(initialNumberValue,);
-  }, [],);
+  const initialNumberValueRef = useRef(optional ? void 0 : isNumber2(initialValue,) ? initialValue : 0,);
+  const initialStringValueRef = useRef(
+    isNumber2(initialNumberValueRef.current,) ? serializeNumberQueryParam(initialNumberValueRef.current,) : void 0,
+  );
   const [stringValue, setStringValue,] = useStringQueryParam({
-    initialValue: initialStringValue,
+    initialValue: initialStringValueRef.current,
     parameterName,
-    optional: optionalRef.current,
+    optional,
   },);
   const value = useMemo(() => {
-    const initialOptional = optionalRef.current;
-    const initialNumberValue = initialValueRef.current;
-    if (isUndefined(stringValue,) && initialOptional) {
-      return void 0;
-    }
-    if (!stringValue) return initialNumberValue;
+    if (isUndefined(stringValue,)) return void 0;
     const parsed = parseNumberQueryParam(stringValue,);
-    return parsed ?? initialNumberValue;
+    if (isNumber2(parsed,)) return parsed;
+    return initialNumberValueRef.current;
   }, [stringValue,],);
-  const setValue = useCallback2((newValue) => {
-    const initialOptional = optionalRef.current;
-    const initialNumberValue = initialValueRef.current;
-    if (initialOptional === true && isUndefined(newValue,)) {
-      return setStringValue(void 0,);
-    }
-    if (newValue === initialNumberValue) {
-      return setStringValue(initialStringValue,);
-    }
-    if (!isNumber2(newValue,)) {
-      return setStringValue('',);
-    }
+  const setValue = useCallback2(async (newValue) => {
+    if (isUndefined(newValue,)) return setStringValue(void 0,);
+    if (!isNumber2(newValue,)) return;
     return setStringValue(serializeNumberQueryParam(newValue,),);
-  }, [initialStringValue, setStringValue,],);
+  }, [setStringValue,],);
   return [value, setValue,];
 }
 var dateOnlyLength = 10;
@@ -15367,40 +15257,25 @@ function useDateQueryParam({
   displayTime,
   optional,
 },) {
-  const initialValueRef = useRef(initialValue,);
-  const optionalRef = useRef(optional,);
-  const displayTimeRef = useRef(displayTime ?? false,);
-  const initialStringValue = useMemo(() => {
-    const initialOptional = optionalRef.current;
-    const initialDateValue = initialValueRef.current;
-    const initialDisplayTime = displayTimeRef.current;
-    if (initialOptional === true) {
-      if (isUndefined(initialDateValue,)) return void 0;
-      return serializeDateQueryParam(initialDateValue, initialDisplayTime,);
-    }
-    if (!isString(initialDateValue,)) return '';
-    return serializeDateQueryParam(initialDateValue, initialDisplayTime,) ?? '';
-  }, [],);
+  const displayTimeRef = useRef(isBoolean(displayTime,) ? displayTime : false,);
+  const initialStringValueRef = useRef(
+    optional || !isString(initialValue,) ? void 0 : serializeDateQueryParam(initialValue, displayTimeRef.current,),
+  );
   const [stringValue, setStringValue,] = useStringQueryParam({
-    initialValue: initialStringValue,
+    initialValue: initialStringValueRef.current,
     parameterName,
-    optional: optionalRef.current,
+    optional: isUndefined(initialStringValueRef.current,),
   },);
   const value = useMemo(() => {
-    const initialOptional = optionalRef.current;
-    const initialDateValue = initialValueRef.current;
-    if (isUndefined(stringValue,) && initialOptional) {
-      return void 0;
-    }
-    if (!stringValue) return initialDateValue;
-    const parsed = parseDateQueryParam(stringValue,);
-    return parsed ?? initialDateValue;
+    if (isUndefined(stringValue,)) return void 0;
+    const date = parseDateQueryParam(stringValue,);
+    if (isString(date,)) return date;
+    const initialDate = initialStringValueRef.current;
+    if (!isString(initialDate,)) return void 0;
+    return parseDateQueryParam(initialDate,);
   }, [stringValue,],);
   const setValue = useCallback2(async (newValue) => {
-    const initialOptional = optionalRef.current;
-    if (initialOptional === true && isUndefined(newValue,)) {
-      return setStringValue(void 0,);
-    }
+    if (isUndefined(newValue,)) return setStringValue(void 0,);
     if (!isString(newValue,)) return;
     const serializedDate = serializeDateQueryParam(newValue, displayTimeRef.current,);
     if (!isString(serializedDate,)) return;
@@ -15416,27 +15291,23 @@ function useCollectionReferenceQueryParam({
 },) {
   const collectionUtils = useCollectionUtils();
   const locale = useLocaleInfo().activeLocale ?? void 0;
+  const initialValueRef = useRef(optional ? void 0 : initialValue,);
   const [slug, setSlug,] = useStringQueryParam({
-    initialValue: '',
+    initialValue: void 0,
     parameterName,
-    optional,
+    optional: true,
   },);
   const id3 = useMemo(() => {
-    if (isUndefined(slug,)) return void 0;
-    if (!slug) return initialValue || void 0;
+    if (!isString(slug,)) return initialValueRef.current;
     const cache2 = getCollectionUtilsCache2(collectionUtils, collectionId,);
     return use(cache2.getRecordIdBySlug(slug, locale,),);
-  }, [collectionUtils, collectionId, initialValue, locale, slug,],);
+  }, [collectionUtils, collectionId, locale, slug,],);
   const setId = useCallback2(async (newId) => {
-    if (isUndefined(newId,)) {
-      await setSlug(void 0,);
-      return;
-    }
+    if (isUndefined(newId,)) return setSlug(void 0,);
     const cache2 = getCollectionUtilsCache2(collectionUtils, collectionId,);
     const newSlug = await cache2.getSlugByRecordId(newId, locale,);
-    if (isString(newSlug,)) {
-      await setSlug(newSlug,);
-    }
+    if (!isString(newSlug,)) return;
+    await setSlug(newSlug,);
   }, [collectionUtils, collectionId, locale, setSlug,],);
   return [id3, setId,];
 }
@@ -15448,39 +15319,34 @@ function useMultiCollectionReferenceQueryParam({
 },) {
   const collectionUtils = useCollectionUtils();
   const locale = useLocaleInfo().activeLocale ?? void 0;
-  const initialArrayValue = useRef(optional && isUndefined(initialValue,) ? void 0 : EMPTY_ARRAY,);
+  const initialArrayValue = useRef(optional ? void 0 : isArray(initialValue,) ? initialValue : EMPTY_ARRAY,);
   const [slugs, setSlugs,] = useStringArrayQueryParam({
-    initialValue: initialArrayValue.current,
     parameterName,
-    optional,
   },);
   const ids = useMemo(() => {
-    if (!slugs) return initialValue;
-    if (optional && slugs.some(isUndefined,)) {
-      return void 0;
-    }
-    if (optional && slugs.length === 1 && slugs[0] === '') {
-      return [];
-    }
-    if (slugs.length === 0) return initialValue;
+    if (slugs.length === 0) return initialArrayValue.current;
     const cache2 = getCollectionUtilsCache2(collectionUtils, collectionId,);
-    const maybePromises = slugs.filter(isString,).map((slug) => cache2.getRecordIdBySlug(slug, locale,));
-    return useAll(maybePromises,).filter(isString,);
-  }, [collectionUtils, collectionId, initialValue, locale, optional, slugs,],);
+    const maybePromises = slugs.filter(isNonEmptyString,).map((slug) => cache2.getRecordIdBySlug(slug, locale,));
+    const supportsOptional = isUndefined(initialArrayValue.current,);
+    const resolvedIds = useAll(maybePromises,).filter(isString,);
+    if (resolvedIds.length === 0 && supportsOptional) return void 0;
+    return resolvedIds;
+  }, [collectionUtils, collectionId, locale, slugs,],);
   const setIds = useCallback2(async (newIds) => {
-    if (isUndefined(newIds,)) {
-      await setSlugs(void 0,);
-      return;
-    }
-    if (optional && newIds.length === 0) {
-      await setSlugs(['',],);
-      return;
+    if (isUndefined(newIds,)) return setSlugs(EMPTY_ARRAY,);
+    if (!isArray(newIds,)) return;
+    const initialArray = initialArrayValue.current;
+    if (newIds.length === 0 && isArray(initialArray,) && !isEqual(newIds, initialArray,)) {
+      return setSlugs(['',],);
     }
     const cache2 = getCollectionUtilsCache2(collectionUtils, collectionId,);
     const newSlugs = await Promise.all(newIds.map((id3) => cache2.getSlugByRecordId(id3, locale,)),);
     await setSlugs(newSlugs.filter(isString,),);
-  }, [collectionUtils, collectionId, locale, setSlugs, optional,],);
+  }, [collectionUtils, collectionId, locale, setSlugs,],);
   return [ids, setIds,];
+}
+function isNonEmptyString(value,) {
+  return isString(value,) && value !== '';
 }
 function getCollectionUtilsCache2(collectionUtils, collectionId,) {
   const collectionUtilsCache = collectionUtils?.get(collectionId,);
