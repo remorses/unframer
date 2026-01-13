@@ -11342,7 +11342,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.SV4SO3WK.mjs
+// /:https://app.framerstatic.com/framer.HQJSKVCF.mjs
 
 import React42 from 'react';
 import { useDeferredValue, useSyncExternalStore, } from 'react';
@@ -38249,7 +38249,14 @@ function setTimezoneAndLocaleForTracking() {
   visitorLocale = resolvedDateTimeOptions.locale;
 }
 requestIdleCallback(setTimezoneAndLocaleForTracking,);
-var useSendPageView = (currentRoute, currentRouteId, currentPathnameWithHash, currentPathVariables, activeLocale,) => {
+var useSendPageView = (
+  currentRoute,
+  currentRouteId,
+  currentPathnameWithHash,
+  currentPathVariables,
+  activeLocale,
+  initialCollectionItemId,
+) => {
   const framerSiteId = useContext(FormContext,);
   const pageviewEventData = useRef();
   const collectionUtils = useCollectionUtils();
@@ -38282,15 +38289,18 @@ var useSendPageView = (currentRoute, currentRouteId, currentPathnameWithHash, cu
         timezone,
         locale: visitorLocale,
       };
+      const hydratedCollectionItemId = skipFirstPageView.current && initialCollectionItemId !== void 0 ? initialCollectionItemId : void 0;
       return currentRoute?.collectionId && currentPathVariables
         ? (async () => {
-          let collectionItemId = null;
-          const utils = currentRoute.collectionId && collectionUtils?.get(currentRoute.collectionId,);
-          const [slug,] = Object.values(currentPathVariables,);
-          if (utils && isString(slug,)) {
-            const maybeCollectionItemId = utils.getRecordIdBySlug(slug, activeLocale || void 0,);
-            const _collectionItemId = isPromise(maybeCollectionItemId,) ? await maybeCollectionItemId : maybeCollectionItemId;
-            collectionItemId = _collectionItemId ?? null;
+          let collectionItemId = hydratedCollectionItemId ?? null;
+          if (hydratedCollectionItemId === void 0) {
+            const utils = currentRoute.collectionId && collectionUtils?.get(currentRoute.collectionId,);
+            const [slug,] = Object.values(currentPathVariables,);
+            if (utils && isString(slug,)) {
+              const maybeCollectionItemId = utils.getRecordIdBySlug(slug, activeLocale || void 0,);
+              const _collectionItemId = isPromise(maybeCollectionItemId,) ? await maybeCollectionItemId : maybeCollectionItemId;
+              collectionItemId = _collectionItemId ?? null;
+            }
           }
           return {
             ...eventData,
@@ -38321,7 +38331,16 @@ var useSendPageView = (currentRoute, currentRouteId, currentPathnameWithHash, cu
     return () => {
       window.removeEventListener('pageshow', listener,);
     };
-  }, [currentRoute, currentRouteId, currentPathnameWithHash, currentPathVariables, activeLocale, framerSiteId, collectionUtils,],);
+  }, [
+    currentRoute,
+    currentRouteId,
+    currentPathnameWithHash,
+    currentPathVariables,
+    activeLocale,
+    framerSiteId,
+    collectionUtils,
+    initialCollectionItemId,
+  ],);
   return pageviewEventData;
 };
 function useForceUpdate3() {
@@ -38402,6 +38421,7 @@ function Router({
   collectionUtils,
   routes,
   initialLocaleId,
+  initialCollectionItemId,
   locales = EMPTY_ARRAY,
   preserveQueryParams = false,
   LayoutTemplate,
@@ -38665,7 +38685,14 @@ function Router({
   const currentPathVariables = currentPathVariablesRef.current;
   const currentRoute = routes[currentRouteId];
   const currentRoutePath = currentRoute?.path;
-  const pageviewEventData = useSendPageView(currentRoute, currentRouteId, currentPathnameWithHash, currentPathVariables, activeLocale,);
+  const pageviewEventData = useSendPageView(
+    currentRoute,
+    currentRouteId,
+    currentPathnameWithHash,
+    currentPathVariables,
+    activeLocale,
+    initialCollectionItemId,
+  );
   const isInitialNavigation = isInitialNavigationRef.current;
   useEffect(() => {
     void loadSnippets2(currentRouteId, currentPathVariables ?? {}, localeInfo.activeLocale, isInitialNavigation,);
@@ -39275,6 +39302,7 @@ function PageRoot({
   siteCanonicalURL,
   adaptLayoutToTextDirection,
   loadSnippetsModule,
+  initialCollectionItemId,
 },) {
   React42.useEffect(() => {
     if (isWebsite) return;
@@ -39295,6 +39323,7 @@ function PageRoot({
                   initialRoute: routeId,
                   initialPathVariables: pathVariables,
                   initialLocaleId: localeId,
+                  initialCollectionItemId,
                   routes,
                   collectionUtils,
                   notFoundPage,
