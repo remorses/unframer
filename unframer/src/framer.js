@@ -900,10 +900,10 @@ function findSpring({
       const delta = exponentialDecay * duration;
       const d = delta * velocity + velocity;
       const e = Math.pow(dampingRatio, 2,) * Math.pow(undampedFreq2, 2,) * duration;
-      const f = Math.exp(-delta,);
+      const f2 = Math.exp(-delta,);
       const g = calcAngularFreq(Math.pow(undampedFreq2, 2,), dampingRatio,);
       const factor = -envelope(undampedFreq2,) + safeMin > 0 ? -1 : 1;
-      return factor * ((d - e) * f) / g;
+      return factor * ((d - e) * f2) / g;
     };
   } else {
     envelope = (undampedFreq2) => {
@@ -6190,8 +6190,8 @@ function animateVariant(visualElement, variant, options = {},) {
     when,
   } = transition;
   if (when) {
-    const [first, last,] = when === 'beforeChildren' ? [getAnimation, getChildAnimations,] : [getChildAnimations, getAnimation,];
-    return first().then(() => last());
+    const [first2, last,] = when === 'beforeChildren' ? [getAnimation, getChildAnimations,] : [getChildAnimations, getAnimation,];
+    return first2().then(() => last());
   } else {
     return Promise.all([getAnimation(), getChildAnimations(options.delay,),],);
   }
@@ -11342,7 +11342,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.HQJSKVCF.mjs
+// /:https://app.framerstatic.com/framer.U5DTI4AF.mjs
 
 import React42 from 'react';
 import { useDeferredValue, useSyncExternalStore, } from 'react';
@@ -11528,9 +11528,9 @@ var require_hsluv = __commonJS({
         this.luv_u = Math.cos(hrad,) * this.lch_c;
         this.luv_v = Math.sin(hrad,) * this.lch_c;
       }
-      calculateBoundingLines(l,) {
-        const sub1 = Math.pow(l + 16, 3,) / 1560896;
-        const sub2 = sub1 > _Hsluv.epsilon ? sub1 : l / _Hsluv.kappa;
+      calculateBoundingLines(l2,) {
+        const sub1 = Math.pow(l2 + 16, 3,) / 1560896;
+        const sub2 = sub1 > _Hsluv.epsilon ? sub1 : l2 / _Hsluv.kappa;
         const s1r = sub2 * (284517 * _Hsluv.m_r0 - 94839 * _Hsluv.m_r2);
         const s2r = sub2 * (838422 * _Hsluv.m_r2 + 769860 * _Hsluv.m_r1 + 731718 * _Hsluv.m_r0);
         const s3r = sub2 * (632260 * _Hsluv.m_r2 - 126452 * _Hsluv.m_r1);
@@ -11541,17 +11541,17 @@ var require_hsluv = __commonJS({
         const s2b = sub2 * (838422 * _Hsluv.m_b2 + 769860 * _Hsluv.m_b1 + 731718 * _Hsluv.m_b0);
         const s3b = sub2 * (632260 * _Hsluv.m_b2 - 126452 * _Hsluv.m_b1);
         this.r0s = s1r / s3r;
-        this.r0i = s2r * l / s3r;
+        this.r0i = s2r * l2 / s3r;
         this.r1s = s1r / (s3r + 126452);
-        this.r1i = (s2r - 769860) * l / (s3r + 126452);
+        this.r1i = (s2r - 769860) * l2 / (s3r + 126452);
         this.g0s = s1g / s3g;
-        this.g0i = s2g * l / s3g;
+        this.g0i = s2g * l2 / s3g;
         this.g1s = s1g / (s3g + 126452);
-        this.g1i = (s2g - 769860) * l / (s3g + 126452);
+        this.g1i = (s2g - 769860) * l2 / (s3g + 126452);
         this.b0s = s1b / s3b;
-        this.b0i = s2b * l / s3b;
+        this.b0i = s2b * l2 / s3b;
         this.b1s = s1b / (s3b + 126452);
-        this.b1i = (s2b - 769860) * l / (s3b + 126452);
+        this.b1i = (s2b - 769860) * l2 / (s3b + 126452);
       }
       calcMaxChromaHpluv() {
         const r0 = _Hsluv.distanceFromOrigin(this.r0s, this.r0i,);
@@ -11746,7 +11746,7 @@ var require_eventemitter3 = __commonJS({
         handlers = this._events[evt];
       if (!handlers) return [];
       if (handlers.fn) return [handlers.fn,];
-      for (var i = 0, l = handlers.length, ee = new Array(l,); i < l; i++) {
+      for (var i = 0, l2 = handlers.length, ee = new Array(l2,); i < l2; i++) {
         ee[i] = handlers[i].fn;
       }
       return ee;
@@ -11872,11 +11872,11 @@ var require_react_is_production_min = __commonJS({
     var c = b ? Symbol.for('react.element',) : 60103;
     var d = b ? Symbol.for('react.portal',) : 60106;
     var e = b ? Symbol.for('react.fragment',) : 60107;
-    var f = b ? Symbol.for('react.strict_mode',) : 60108;
+    var f2 = b ? Symbol.for('react.strict_mode',) : 60108;
     var g = b ? Symbol.for('react.profiler',) : 60114;
     var h = b ? Symbol.for('react.provider',) : 60109;
     var k = b ? Symbol.for('react.context',) : 60110;
-    var l = b ? Symbol.for('react.async_mode',) : 60111;
+    var l2 = b ? Symbol.for('react.async_mode',) : 60111;
     var m2 = b ? Symbol.for('react.concurrent_mode',) : 60111;
     var n = b ? Symbol.for('react.forward_ref',) : 60112;
     var p = b ? Symbol.for('react.suspense',) : 60113;
@@ -11893,11 +11893,11 @@ var require_react_is_production_min = __commonJS({
         switch (u) {
           case c:
             switch (a = a.type, a) {
-              case l:
+              case l2:
               case m2:
               case e:
               case g:
-              case f:
+              case f2:
               case p:
                 return a;
               default:
@@ -11920,7 +11920,7 @@ var require_react_is_production_min = __commonJS({
     function A(a,) {
       return z(a,) === m2;
     }
-    exports.AsyncMode = l;
+    exports.AsyncMode = l2;
     exports.ConcurrentMode = m2;
     exports.ContextConsumer = k;
     exports.ContextProvider = h;
@@ -11931,10 +11931,10 @@ var require_react_is_production_min = __commonJS({
     exports.Memo = r;
     exports.Portal = d;
     exports.Profiler = g;
-    exports.StrictMode = f;
+    exports.StrictMode = f2;
     exports.Suspense = p;
     exports.isAsyncMode = function (a,) {
-      return A(a,) || z(a,) === l;
+      return A(a,) || z(a,) === l2;
     };
     exports.isConcurrentMode = A;
     exports.isContextConsumer = function (a,) {
@@ -11965,13 +11965,13 @@ var require_react_is_production_min = __commonJS({
       return z(a,) === g;
     };
     exports.isStrictMode = function (a,) {
-      return z(a,) === f;
+      return z(a,) === f2;
     };
     exports.isSuspense = function (a,) {
       return z(a,) === p;
     };
     exports.isValidElementType = function (a,) {
-      return 'string' === typeof a || 'function' === typeof a || a === e || a === m2 || a === g || a === f || a === p || a === q ||
+      return 'string' === typeof a || 'function' === typeof a || a === e || a === m2 || a === g || a === f2 || a === p || a === q ||
         'object' === typeof a && null !== a &&
           (a.$$typeof === t || a.$$typeof === r || a.$$typeof === h || a.$$typeof === k || a.$$typeof === n || a.$$typeof === w ||
             a.$$typeof === x || a.$$typeof === y || a.$$typeof === v);
@@ -12212,21 +12212,21 @@ var require_fontfaceobserver_standalone = __commonJS({
           } else {u(function () {
               function r() {
                 var d;
-                if (d = -1 != k && -1 != l || -1 != k && -1 != m2 || -1 != l && -1 != m2) {
-                  (d = k != l && k != m2 && l != m2) ||
+                if (d = -1 != k && -1 != l2 || -1 != k && -1 != m2 || -1 != l2 && -1 != m2) {
+                  (d = k != l2 && k != m2 && l2 != m2) ||
                   (null === E &&
                     (d = /AppleWebKit\/([0-9]+)(?:\.([0-9]+))/.exec(window.navigator.userAgent,),
                       E = !!d && (536 > parseInt(d[1], 10,) || 536 === parseInt(d[1], 10,) && 11 >= parseInt(d[2], 10,))),
-                    d = E && (k == y && l == y && m2 == y || k == z && l == z && m2 == z || k == A && l == A && m2 == A)), d = !d;
+                    d = E && (k == y && l2 == y && m2 == y || k == z && l2 == z && m2 == z || k == A && l2 == A && m2 == A)), d = !d;
                 }
-                d && (null !== f.parentNode && f.parentNode.removeChild(f,), clearTimeout(e,), K(b,));
+                d && (null !== f2.parentNode && f2.parentNode.removeChild(f2,), clearTimeout(e,), K(b,));
               }
               function t() {
                 if ((/* @__PURE__ */ new Date()).getTime() - J >= q) {
-                  null !== f.parentNode && f.parentNode.removeChild(f,), L(Error('' + q + 'ms timeout exceeded',),);
+                  null !== f2.parentNode && f2.parentNode.removeChild(f2,), L(Error('' + q + 'ms timeout exceeded',),);
                 } else {
                   var d = b.context.document.hidden;
-                  if (true === d || void 0 === d) k = h.g.offsetWidth, l = n.g.offsetWidth, m2 = v.g.offsetWidth, r();
+                  if (true === d || void 0 === d) k = h.g.offsetWidth, l2 = n.g.offsetWidth, m2 = v.g.offsetWidth, r();
                   e = setTimeout(t, 50,);
                 }
               }
@@ -12234,20 +12234,20 @@ var require_fontfaceobserver_standalone = __commonJS({
                 n = new w(g,),
                 v = new w(g,),
                 k = -1,
-                l = -1,
+                l2 = -1,
                 m2 = -1,
                 y = -1,
                 z = -1,
                 A = -1,
-                f = document.createElement('div',);
-              f.dir = 'ltr';
+                f2 = document.createElement('div',);
+              f2.dir = 'ltr';
               x(h, N(b, 'sans-serif',),);
               x(n, N(b, 'serif',),);
               x(v, N(b, 'monospace',),);
-              f.appendChild(h.g,);
-              f.appendChild(n.g,);
-              f.appendChild(v.g,);
-              b.context.document.body.appendChild(f,);
+              f2.appendChild(h.g,);
+              f2.appendChild(n.g,);
+              f2.appendChild(v.g,);
+              b.context.document.body.appendChild(f2,);
               y = h.g.offsetWidth;
               z = n.g.offsetWidth;
               A = v.g.offsetWidth;
@@ -12258,7 +12258,7 @@ var require_fontfaceobserver_standalone = __commonJS({
               },);
               x(h, N(b, '"' + b.family + '",sans-serif',),);
               C(n, function (d,) {
-                l = d;
+                l2 = d;
                 r();
               },);
               x(n, N(b, '"' + b.family + '",serif',),);
@@ -16741,10 +16741,10 @@ var SpringCurveValueConverter = {
         const currentDisplacement = exponentialDecay * duration;
         const d = currentDisplacement * velocity + velocity;
         const e = Math.pow(dampingRatio, 2,) * Math.pow(derivativeUndampedFrequency, 2,) * duration;
-        const f = Math.exp(-currentDisplacement,);
+        const f2 = Math.exp(-currentDisplacement,);
         const g = angularFrequency(Math.pow(derivativeUndampedFrequency, 2,), dampingRatio,);
         const factor = -envelope(derivativeUndampedFrequency,) + epsilon > 0 ? -1 : 1;
-        return factor * ((d - e) * f) / g;
+        return factor * ((d - e) * f2) / g;
       };
     } else {
       envelope = function (envelopeUndampedFrequency,) {
@@ -17269,10 +17269,10 @@ function rgbToHsluv(r, g, b,) {
     l: hsluvConverter.hsluv_l,
   };
 }
-function rgbaFromHusl(h, s, l, a = 1,) {
+function rgbaFromHusl(h, s, l2, a = 1,) {
   hsluvConverter.hsluv_h = h;
   hsluvConverter.hsluv_s = s;
-  hsluvConverter.hsluv_l = l;
+  hsluvConverter.hsluv_l = l2;
   hsluvConverter.hsluvToRgb();
   return {
     r: hsluvConverter.rgb_r * 255,
@@ -17305,19 +17305,19 @@ function rgbToHex(r, g, b, allow3Char,) {
   return hex2.join('',);
 }
 function rgbToHsl(r, g, b,) {
-  let l;
+  let l2;
   let s;
   const _r = bound01(r, 255,);
   const _g = bound01(g, 255,);
   const _b = bound01(b, 255,);
   const max = Math.max(_r, _g, _b,);
   const min = Math.min(_r, _g, _b,);
-  let h = s = l = (max + min) / 2;
+  let h = s = l2 = (max + min) / 2;
   if (max === min) {
     h = s = 0;
   } else {
     const d = max - min;
-    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    s = l2 > 0.5 ? d / (2 - max - min) : d / (max + min);
     switch (max) {
       case _r:
         h = (_g - _b) / d + (_g < _b ? 6 : 0);
@@ -17334,7 +17334,7 @@ function rgbToHsl(r, g, b,) {
   return {
     h: h * 360,
     s,
-    l,
+    l: l2,
   };
 }
 function hue2rgb(p, q, t,) {
@@ -17355,18 +17355,18 @@ function hue2rgb(p, q, t,) {
   }
   return p;
 }
-function hslToRgb(h, s, l,) {
+function hslToRgb(h, s, l2,) {
   let r;
   let g;
   let b;
   h = bound01(h, 360,);
   s = bound01(s * 100, 100,);
-  l = bound01(l * 100, 100,);
+  l2 = bound01(l2 * 100, 100,);
   if (s === 0) {
-    r = g = b = l;
+    r = g = b = l2;
   } else {
-    const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-    const p = 2 * l - q;
+    const q = l2 < 0.5 ? l2 * (1 + s) : l2 + s - l2 * s;
+    const p = 2 * l2 - q;
     r = hue2rgb(p, q, h + 1 / 3,);
     g = hue2rgb(p, q, h,);
     b = hue2rgb(p, q, h - 1 / 3,);
@@ -17414,10 +17414,10 @@ function hsvToRgb(h, s, v,) {
   s = bound01(s * 100, 100,);
   v = bound01(v * 100, 100,);
   const i = Math.floor(h,);
-  const f = h - i;
+  const f2 = h - i;
   const p = v * (1 - s);
-  const q = v * (1 - f * s);
-  const t = v * (1 - (1 - f) * s);
+  const q = v * (1 - f2 * s);
+  const t = v * (1 - (1 - f2) * s);
   const mod = i % 6;
   const r = [v, q, p, p, t, v,][mod];
   const g = [t, v, v, q, p, p,][mod];
@@ -17748,18 +17748,18 @@ function convertHsvToRgb({
   a = 1,
 },) {
   const hue = normalizeHue(h,);
-  const f = Math.abs(hue / 60 % 2 - 1,);
+  const f2 = Math.abs(hue / 60 % 2 - 1,);
   switch (Math.floor(hue / 60,)) {
     case 0:
       return {
         r: v,
-        g: v * (1 - s * f),
+        g: v * (1 - s * f2),
         b: v * (1 - s),
         a,
       };
     case 1:
       return {
-        r: v * (1 - s * f),
+        r: v * (1 - s * f2),
         g: v,
         b: v * (1 - s),
         a,
@@ -17768,19 +17768,19 @@ function convertHsvToRgb({
       return {
         r: v * (1 - s),
         g: v,
-        b: v * (1 - s * f),
+        b: v * (1 - s * f2),
         a,
       };
     case 3:
       return {
         r: v * (1 - s),
-        g: v * (1 - s * f),
+        g: v * (1 - s * f2),
         b: v,
         a,
       };
     case 4:
       return {
-        r: v * (1 - s * f),
+        r: v * (1 - s * f2),
         g: v * (1 - s),
         b: v,
         a,
@@ -17789,7 +17789,7 @@ function convertHsvToRgb({
       return {
         r: v,
         g: v * (1 - s),
-        b: v * (1 - s * f),
+        b: v * (1 - s * f2),
         a,
       };
     default:
@@ -18012,8 +18012,8 @@ var Color = /* @__PURE__ */ (() => {
     const hsl = Color2.toHsl(color2,);
     const h = Math.round(hsl.h,);
     const s = Math.round(hsl.s * 100,);
-    const l = Math.round(hsl.l * 100,);
-    return color2.a === 1 ? 'hsl(' + h + ', ' + s + '%, ' + l + '%)' : 'hsla(' + h + ', ' + s + '%, ' + l + '%, ' + color2.roundA + ')';
+    const l2 = Math.round(hsl.l * 100,);
+    return color2.a === 1 ? 'hsl(' + h + ', ' + s + '%, ' + l2 + '%)' : 'hsla(' + h + ', ' + s + '%, ' + l2 + '%, ' + color2.roundA + ')';
   };
   Color2.toHsv = (color2) => {
     const hsv = rgbToHsv(color2.r, color2.g, color2.b,);
@@ -18314,7 +18314,7 @@ function getCompleteColorFromRGB(color2,) {
 function getCompleteColorFromHSL(color2,) {
   let h;
   let s;
-  let l;
+  let l2;
   let rgb = {
     r: 0,
     g: 0,
@@ -18331,15 +18331,15 @@ function getCompleteColorFromHSL(color2,) {
   if (typeof color2.s === 'string') {
     s = numberFromString(color2.s,);
   }
-  l = isNumeric(color2.l,) ? color2.l : 0.5;
+  l2 = isNumeric(color2.l,) ? color2.l : 0.5;
   if (typeof color2.l === 'string') {
-    l = numberFromString(color2.l,);
+    l2 = numberFromString(color2.l,);
   }
-  rgb = hslToRgb(h, s, l,);
+  rgb = hslToRgb(h, s, l2,);
   hsl = {
     h,
     s,
-    l,
+    l: l2,
   };
   return {
     ...rgb,
@@ -18611,11 +18611,11 @@ var EventEmitter = class {
     this._emitter.emit(eventName, ...args,);
   }
 };
-var _raf = (f) => {
-  setTimeout(f, 1 / 60,);
+var _raf = (f2) => {
+  setTimeout(f2, 1 / 60,);
 };
 var __raf = /* @__PURE__ */ (() => safeWindow['requestAnimationFrame'] || _raf)();
-var raf = (f) => __raf(f,);
+var raf = (f2) => __raf(f2,);
 var LoopTimeStep = /* @__PURE__ */ (() => 1 / 60)();
 var Loop = class extends EventEmitter {
   /**
@@ -20913,16 +20913,16 @@ var ConstraintValues = {
     } else if (positioningParentHeight) {
       y = values.centerAnchorY * positioningParentHeight - height / 2;
     }
-    const f = {
+    const f2 = {
       x,
       y,
       width,
       height,
     };
     if (pixelAlign) {
-      return Rect.pixelAligned(f,);
+      return Rect.pixelAligned(f2,);
     }
-    return f;
+    return f2;
   },
 };
 var defaultWidth = 200;
@@ -47848,7 +47848,7 @@ var BuiltInFontSource = class {
     if (!locator) return;
     const fontFamily = this.getFontFamilyByName(locator.name,);
     if (!fontFamily) return;
-    return fontFamily.fonts.find((f) => f.selector === selector);
+    return fontFamily.fonts.find((f2) => f2.selector === selector);
   }
   getFontFamilyByName(family,) {
     return this.byFamilyName.get(family,) ?? null;
@@ -50130,7 +50130,7 @@ function withLightboxEffect(Component18,) {
       }
       : props.style;
     const layoutDependency = open ? props.layoutDependency ? `${props.layoutDependency}-open` : 'open' : props.layoutDependency;
-    const layoutId = isInTickerItem ? void 0 : props.layoutId ?? (lightbox ? fallbackLayoutId : void 0);
+    const layoutId = isInTickerItem && open ? void 0 : props.layoutId ?? (lightbox ? fallbackLayoutId : void 0);
     return /* @__PURE__ */ jsxs(Fragment, {
       children: [
         /* @__PURE__ */ jsx(Component18, {
@@ -52930,6 +52930,17 @@ var InternalID = class _InternalID {
     return res;
   }
 };
+var first = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+var letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_';
+function f() {
+  return first[Math.floor(Math.random() * first.length,)];
+}
+function l() {
+  return letters[Math.floor(Math.random() * letters.length,)];
+}
+function randomID() {
+  return f() + l() + l() + l() + l() + l() + l() + l() + l();
+}
 var PathSegmentOuter = /* @__PURE__ */ (() => {
   const _PathSegment = class _PathSegment {
     constructor(value,) {
@@ -52944,6 +52955,9 @@ var PathSegmentOuter = /* @__PURE__ */ (() => {
       __publicField(this, 'radius', 0,);
       if (value) {
         Object.assign(this, value,);
+      }
+      if (!value?.id) {
+        this.id = randomID();
       }
     }
     merge(value,) {
@@ -53021,7 +53035,6 @@ var PathSegmentOuter = /* @__PURE__ */ (() => {
     };
   },);
   let PathSegment2 = _PathSegment;
-
   PathSegment2.prototype.__class = 'PathSegment';
   return PathSegment2;
 })();
@@ -53306,11 +53319,11 @@ var SVGRoot = (props) => {
   },);
 };
 function getShapeTransform(needsScale, needsTranslate, left, top,) {
-  const l = Math.floor(left,) - left;
+  const l2 = Math.floor(left,) - left;
   const t = Math.floor(top,) - top;
   const transforms = [];
   if (needsScale) transforms.push('scale(0.5)',);
-  if (needsTranslate && (l || t)) transforms.push(`translate(${l}px, ${t}px)`,);
+  if (needsTranslate && (l2 || t)) transforms.push(`translate(${l2}px, ${t}px)`,);
   return transforms.length ? transforms.join(' ',) : void 0;
 }
 var Vector = /* @__PURE__ */ (() => {
@@ -53988,12 +54001,12 @@ function inspectObjectType(item,) {
   }
   return 'Object';
 }
-function inspect(item, max, l,) {
+function inspect(item, max, l2,) {
   if (max === void 0) {
     max = 5;
   }
-  if (l === void 0) {
-    l = 0;
+  if (l2 === void 0) {
+    l2 = 0;
   }
   if (item === null) {
     return 'null';
@@ -54013,16 +54026,16 @@ function inspect(item, max, l,) {
   if (isFunction(item,)) {
     let code = item.toString().slice('function '.length,).replace(/\n/gu, '',).replace(/\s+/gu, ' ',);
     const limit = 50;
-    if (code.length > limit && l > 0) {
+    if (code.length > limit && l2 > 0) {
       code = `${code.slice(0, limit + 1,).trim()}\u2026 }`;
     }
     return `<Function ${code}>`;
   }
   if (isArray(item,)) {
-    if (l > max) {
+    if (l2 > max) {
       return '[...]';
     }
-    return `[${item.map((i) => inspect(i, max, (l || 0) + 1,)).join(', ',)}]`;
+    return `[${item.map((i) => inspect(i, max, (l2 || 0) + 1,)).join(', ',)}]`;
   }
   if (isObject2(item,)) {
     let objectInfo;
@@ -54030,11 +54043,11 @@ function inspect(item, max, l,) {
     if (/HTML\w+?Element/u.test(objectType,)) {
       return `<${objectType}>`;
     }
-    if (l > max) {
+    if (l2 > max) {
       objectInfo = '{...}';
     } else {
       const itemKeys = Object.keys(item,);
-      objectInfo = `{${itemKeys.map((k) => `${k}:${inspect(item[k], max, (l || 0) + 1,)}`).join(', ',)}}`;
+      objectInfo = `{${itemKeys.map((k) => `${k}:${inspect(item[k], max, (l2 || 0) + 1,)}`).join(', ',)}}`;
     }
     if (objectType === 'Object') {
       return objectInfo;
