@@ -11342,7 +11342,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.U5DTI4AF.mjs
+// /:https://app.framerstatic.com/framer.ZVXOM3K6.mjs
 
 import React42 from 'react';
 import { useDeferredValue, useSyncExternalStore, } from 'react';
@@ -15219,8 +15219,7 @@ function useNumberQueryParam({
     return initialNumberValueRef.current;
   }, [stringValue,],);
   const setValue = useCallback2(async (newValue) => {
-    if (isUndefined(newValue,)) return setStringValue(void 0,);
-    if (!isNumber2(newValue,)) return;
+    if (!isNumber2(newValue,)) return setStringValue(void 0,);
     return setStringValue(serializeNumberQueryParam(newValue,),);
   }, [setStringValue,],);
   return [value, setValue,];
@@ -48373,11 +48372,11 @@ function getAssetOwnerType(asset,) {
 async function loadFontsWithOpenType(source,) {
   switch (source) {
     case 'google': {
-      const supportedFonts = await import('./framer-chunks/google-KJ7DBQC5-IN4UOEP6.js');
+      const supportedFonts = await import('./framer-chunks/google-AG6EYFMK-VXMK4LWI.js');
       return supportedFonts.default;
     }
     case 'fontshare': {
-      const supportedFonts = await import('./framer-chunks/fontshare-RQ6EHBOH-UDXL4YBX.js');
+      const supportedFonts = await import('./framer-chunks/fontshare-LTYJMI6Q-NLLRF2SZ.js');
       return supportedFonts.default;
     }
     default:
@@ -48387,11 +48386,11 @@ async function loadFontsWithOpenType(source,) {
 async function loadFontToOpenTypeFeatures(source,) {
   switch (source) {
     case 'google': {
-      const features = await import('./framer-chunks/google-JQDPZLQE-ZY6DPNHB.js');
+      const features = await import('./framer-chunks/google-EJBUPU3N-JOFVHSFQ.js');
       return features.default;
     }
     case 'fontshare': {
-      const features = await import('./framer-chunks/fontshare-RKOSZRMR-RU72PRCO.js');
+      const features = await import('./framer-chunks/fontshare-XMKN2FOD-GVCUQL37.js');
       return features.default;
     }
     case 'framer': {
@@ -48939,10 +48938,10 @@ function loadVariationAxes(source,) {
       const axes = (async () => {
         switch (source) {
           case 'google': {
-            return (await import('./framer-chunks/google-UC7HXGZC-CHF23RR4.js')).default;
+            return (await import('./framer-chunks/google-CQFUID6E-OQQXADED.js')).default;
           }
           case 'fontshare': {
-            return (await import('./framer-chunks/fontshare-7UTJKCSZ-S5PRC2HM.js')).default;
+            return (await import('./framer-chunks/fontshare-X63NXWGB-NL5Q3YUU.js')).default;
           }
           default:
             assertNever(source,);
@@ -49374,6 +49373,7 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
   } = props;
   const [hasValue, setHasValue,] = useState(!!defaultValue,);
   const [prevDefaultValue, setPrevDefaultValue,] = useState();
+  const isCanvas = useIsOnFramerCanvas();
   if (defaultValue !== prevDefaultValue) {
     setHasValue(!!defaultValue,);
     setPrevDefaultValue(defaultValue,);
@@ -49411,7 +49411,7 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
         className: inputClassName,
         defaultValue,
         maxLength,
-      }, defaultValue,)
+      }, isCanvas ? defaultValue : void 0,)
       : /* @__PURE__ */ jsx(motion.input, {
         ...dataProps,
         ...eventHandlers,
@@ -49426,7 +49426,7 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
         max,
         step: step2,
         maxLength,
-      }, defaultValue,),
+      }, isCanvas ? defaultValue : void 0,),
   },);
 },);
 var iconSize2 = 16;
