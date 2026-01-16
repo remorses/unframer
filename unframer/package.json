@@ -84,7 +84,7 @@
         "@types/node": "^22.15.21",
         "@types/react": "^19.2.7",
         "@types/react-dom": "^19.2.3",
-        "@xmorse/deployment-utils": "^0.7.1",
+        "@xmorse/deployment-utils": "^0.7.4",
         "concurrently": "^9.1.2",
         "dprint-node": "^1.0.8",
         "openai": "^4.80.1",
