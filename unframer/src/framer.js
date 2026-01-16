@@ -11342,7 +11342,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.ZVXOM3K6.mjs
+// /:https://app.framerstatic.com/framer.HF6P2ATK.mjs
 
 import React42 from 'react';
 import { useDeferredValue, useSyncExternalStore, } from 'react';
@@ -12289,6 +12289,9 @@ function isNumber2(value,) {
   return Number.isFinite(value,);
 }
 function isArray(value,) {
+  return Array.isArray(value,);
+}
+function isReadonlyArray(value,) {
   return Array.isArray(value,);
 }
 function isObject2(value,) {
@@ -44282,6 +44285,161 @@ function getCacheKey(query, locale,) {
   const localeId = locale?.id ?? 'default';
   return JSON.stringify(query, replaceCollection,) + localeId;
 }
+var queryEngine = /* @__PURE__ */ new QueryEngine();
+var queryCache = /* @__PURE__ */ new QueryCache(queryEngine,);
+function useQueryData(query,) {
+  const {
+    activeLocale,
+  } = useLocaleInfo();
+  const cached = queryCache.get(query, activeLocale,);
+  return cached.use();
+}
+function useQueryCount(query,) {
+  const countQuery = {
+    ...query,
+    select: [],
+  };
+  const collection = useQueryData(countQuery,);
+  return collection.length;
+}
+function usePreloadQuery() {
+  const {
+    activeLocale,
+  } = useLocaleInfo();
+  return useCallback2((query) => {
+    return queryCache.get(query, activeLocale,).readMaybeAsync();
+  }, [activeLocale,],);
+}
+function getWhereExpressionFromPathVariables(pathVariables, collection,) {
+  const entries = Object.entries(pathVariables ?? {},).filter(([, value,],) => {
+    if (isUndefined(value,)) return false;
+    if (isObject2(value,)) return false;
+    return true;
+  },);
+  const expressions = entries.map(([name, value,],) => ({
+    type: 'BinaryOperation',
+    operator: '==',
+    left: {
+      type: 'TypeCast',
+      value: {
+        type: 'Identifier',
+        name,
+        collection,
+      },
+      dataType: 'STRING',
+      /* String */
+    },
+    right: {
+      type: 'LiteralValue',
+      value: String(value,),
+    },
+  }));
+  if (expressions.length === 0) {
+    return {
+      type: 'LiteralValue',
+      value: false,
+    };
+  }
+  return expressions.reduce((result, expression,) => ({
+    type: 'BinaryOperation',
+    operator: 'and',
+    left: result,
+    right: expression,
+  }));
+}
+var ALL_ELEMENTS_VALUE = '__all__';
+var variableBindingHooks = {
+  ['collectionreference'/* CollectionReference */
+  ]: useFormSelectCollectionVariableBinding,
+};
+function useFormSelectVariableBinding(options,) {
+  const variableTypeRef = useRef(options.variableType,);
+  return variableBindingHooks[variableTypeRef.current](options,);
+}
+function useFormSelectCollectionVariableBinding({
+  allItemsLabel,
+  collectionData,
+  isOptional,
+  slugId,
+  titleId,
+  setValue,
+  value,
+},) {
+  const selectOptions = useCollectionSelectOptions({
+    collectionData,
+    slugId,
+    titleId,
+  },);
+  const selectValue = value === void 0 ? ALL_ELEMENTS_VALUE : value;
+  const selectOptionsIncludingOptional = useMemo(() => {
+    if (!isOptional) return selectOptions;
+    const allOption = {
+      title: allItemsLabel,
+      type: 'option',
+      value: ALL_ELEMENTS_VALUE,
+    };
+    if (!selectOptions || selectOptions.length === 0) return [allOption,];
+    return [allOption, {
+      type: 'divider',
+    }, ...selectOptions,];
+  }, [allItemsLabel, isOptional, selectOptions,],);
+  const onChange = useCallback2((event) => {
+    if (!(event.target instanceof HTMLSelectElement)) return;
+    const selectedValue = event.target.value;
+    startTransition2(() => {
+      if (selectedValue === ALL_ELEMENTS_VALUE) {
+        setValue(void 0,);
+      } else {
+        setValue(selectedValue,);
+      }
+    },);
+  }, [setValue,],);
+  return [selectValue, selectOptionsIncludingOptional, onChange,];
+}
+function useCollectionSelectOptions({
+  collectionData,
+  slugId,
+  titleId,
+},) {
+  const query = useMemo(() => ({
+    from: {
+      type: 'Collection',
+      data: collectionData,
+    },
+    select: [
+      {
+        type: 'Identifier',
+        name: 'id',
+      },
+      {
+        type: 'Identifier',
+        name: slugId,
+      },
+      ...(titleId
+        ? [{
+          type: 'Identifier',
+          name: titleId,
+        },]
+        : []),
+    ],
+  }), [collectionData, slugId, titleId,],);
+  const records = useQueryData(query,);
+  return useMemo(() => {
+    if (!Array.isArray(records,) || records.length === 0) return void 0;
+    return records.filter((record2) => typeof record2?.id === 'string').flatMap((record2) => {
+      const id3 = record2.id;
+      const title = titleId && isString(record2[titleId],) ? record2[titleId] : void 0;
+      const slug = isString(record2[slugId],) ? record2[slugId] : void 0;
+      const displayTitle = title || slug;
+      if (!displayTitle) return [];
+      return [{
+        type: 'option',
+        value: id3,
+        title: displayTitle,
+      },];
+    },);
+  }, [records, titleId, slugId,],);
+}
 function rejectPending(pendingTimers, pendingPromises,) {
   pendingTimers.forEach((t) => clearTimeout(t,));
   pendingTimers.clear();
@@ -44942,68 +45100,6 @@ function usePrototypeNavigate({
     return false;
   };
 }
-var queryEngine = /* @__PURE__ */ new QueryEngine();
-var queryCache = /* @__PURE__ */ new QueryCache(queryEngine,);
-function useQueryData(query,) {
-  const {
-    activeLocale,
-  } = useLocaleInfo();
-  const cached = queryCache.get(query, activeLocale,);
-  return cached.use();
-}
-function useQueryCount(query,) {
-  const countQuery = {
-    ...query,
-    select: [],
-  };
-  const collection = useQueryData(countQuery,);
-  return collection.length;
-}
-function usePreloadQuery() {
-  const {
-    activeLocale,
-  } = useLocaleInfo();
-  return useCallback2((query) => {
-    return queryCache.get(query, activeLocale,).readMaybeAsync();
-  }, [activeLocale,],);
-}
-function getWhereExpressionFromPathVariables(pathVariables, collection,) {
-  const entries = Object.entries(pathVariables ?? {},).filter(([, value,],) => {
-    if (isUndefined(value,)) return false;
-    if (isObject2(value,)) return false;
-    return true;
-  },);
-  const expressions = entries.map(([name, value,],) => ({
-    type: 'BinaryOperation',
-    operator: '==',
-    left: {
-      type: 'TypeCast',
-      value: {
-        type: 'Identifier',
-        name,
-        collection,
-      },
-      dataType: 'STRING',
-      /* String */
-    },
-    right: {
-      type: 'LiteralValue',
-      value: String(value,),
-    },
-  }));
-  if (expressions.length === 0) {
-    return {
-      type: 'LiteralValue',
-      value: false,
-    };
-  }
-  return expressions.reduce((result, expression,) => ({
-    type: 'BinaryOperation',
-    operator: 'and',
-    left: result,
-    right: expression,
-  }));
-}
 function useLoadMorePagination(totalSize, pageSize, hash2, paginateWithSuspendedLoadingState = false,) {
   const [isPending, startLoadingTransition,] = useTransition();
   const totalPages = Math.ceil(totalSize / pageSize,);
@@ -45028,8 +45124,8 @@ function useLoadMorePagination(totalSize, pageSize, hash2, paginateWithSuspended
       continueAfter: 'paint',
     },);
     if (currentPageRef.current >= totalPages) return;
-    const renderNextPage = (startTransition16) => {
-      startTransition16(() => {
+    const renderNextPage = (startTransition17) => {
+      startTransition17(() => {
         setCurrentPage((_currentPage) => {
           const nextPage = Math.min(_currentPage + 1, totalPages,);
           currentPageRef.current = nextPage;
@@ -49734,6 +49830,7 @@ var Select = /* @__PURE__ */ React42.forwardRef(function Select2(props, measureR
     required,
     hidden,
     defaultValue,
+    value,
     selectOptions,
     style: style2,
     onValid,
@@ -49744,7 +49841,7 @@ var Select = /* @__PURE__ */ React42.forwardRef(function Select2(props, measureR
     ...rest
   } = props;
   const eventHandlers = useCustomValidity(onValid, onInvalid, onChange, onBlur, onFocus,);
-  const key7 = Array.isArray(defaultValue,) ? defaultValue[0] : defaultValue;
+  const isCanvas = useIsOnFramerCanvas();
   if (hidden) {
     return /* @__PURE__ */ jsx(motion.input, {
       type: 'hidden',
@@ -49763,6 +49860,7 @@ var Select = /* @__PURE__ */ React42.forwardRef(function Select2(props, measureR
       required,
       className: inputClassName,
       defaultValue,
+      value,
       ...eventHandlers,
       children: selectOptions?.map((option, index,) => {
         switch (option.type) {
@@ -49780,9 +49878,15 @@ var Select = /* @__PURE__ */ React42.forwardRef(function Select2(props, measureR
             );
         }
       },),
-    }, key7,),
+    }, isCanvas ? serializeDefaultValue(defaultValue,) : void 0,),
   },);
 },);
+function serializeDefaultValue(defaultValue,) {
+  if (isReadonlyArray(defaultValue,)) return defaultValue.join('_',);
+  if (isNumber2(defaultValue,)) return String(defaultValue,);
+  if (!defaultValue) return '';
+  return defaultValue;
+}
 var selectWrapperClassName = 'framer-form-select-wrapper';
 var selectArrowSize = 16;
 var defaultSelectCaretMaskImage =
@@ -54606,6 +54710,7 @@ export {
   useDynamicRefs,
   useElementScroll,
   useForceUpdate,
+  useFormSelectVariableBinding,
   useGamepad,
   useHotkey,
   useHydratedBreakpointVariants,
