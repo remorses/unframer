@@ -12,7 +12,7 @@ import {
   __require,
   __runInitializers,
   __toESM,
-} from './framer-chunks/chunk-DBJCHRFG.js';
+} from './framer-chunks/chunk-OAKBJJLO.js';
 
 // /:https://app.framerstatic.com/chunk-2J7GL3DQ.mjs
 import { createContext, } from 'react';
@@ -29,9 +29,10 @@ import { jsxs, } from 'react/jsx-runtime';
 import { forwardRef, } from 'react';
 import { createElement, } from 'react';
 import { Component as Component2, } from 'react';
-var __unframerNavigator = typeof window !== 'undefined' ? navigator : void 0;
+var __unframerWindow = typeof window !== 'undefined' ? window : void 0;
+var __unframerNavigator = typeof __unframerWindow !== 'undefined' ? navigator : void 0;
 var LayoutGroupContext = createContext({},);
-var isBrowser = typeof window !== 'undefined';
+var isBrowser = typeof __unframerWindow !== 'undefined';
 var useIsomorphicLayoutEffect = isBrowser ? useLayoutEffect : useEffect;
 var PresenceContext = /* @__PURE__ */ createContext(null,);
 function addUniqueItem(arr, item,) {
@@ -1782,7 +1783,7 @@ function measureAllKeyframes() {
     resolversToMeasure.forEach((resolver) => resolver.measureEndState());
     resolversToMeasure.forEach((resolver) => {
       if (resolver.suspendedScrollY !== void 0) {
-        window.scrollTo(0, resolver.suspendedScrollY,);
+        __unframerWindow.scrollTo(0, resolver.suspendedScrollY,);
       }
     },);
   }
@@ -1881,7 +1882,7 @@ var isCSSVar = (name) => name.startsWith('--',);
 function setStyle(element, name, value,) {
   isCSSVar(name,) ? element.style.setProperty(name, value,) : element.style[name] = value;
 }
-var supportsScrollTimeline = /* @__PURE__ */ memo(() => window.ScrollTimeline !== void 0);
+var supportsScrollTimeline = /* @__PURE__ */ memo(() => __unframerWindow.ScrollTimeline !== void 0);
 var supportsFlags = {};
 function memoSupports(callback, supportsFlag,) {
   const memoized = /* @__PURE__ */ memo(callback,);
@@ -2523,7 +2524,7 @@ function getVariableValue(current2, element, depth = 1,) {
   );
   const [token, fallback,] = parseCSSVariable(current2,);
   if (!token) return;
-  const resolved = window.getComputedStyle(element,).getPropertyValue(token,);
+  const resolved = __unframerWindow.getComputedStyle(element,).getPropertyValue(token,);
   if (resolved) {
     const trimmed = resolved.trim();
     return isNumericalString(trimmed,) ? parseFloat(trimmed,) : trimmed;
@@ -2751,9 +2752,9 @@ var DOMKeyframesResolver = class extends KeyframeResolver {
     } = this;
     if (!element || !element.current) return;
     if (name === 'height') {
-      this.suspendedScrollY = window.pageYOffset;
+      this.suspendedScrollY = __unframerWindow.pageYOffset;
     }
-    this.measuredOrigin = positionalValues[name](element.measureViewportBox(), window.getComputedStyle(element.current,),);
+    this.measuredOrigin = positionalValues[name](element.measureViewportBox(), __unframerWindow.getComputedStyle(element.current,),);
     unresolvedKeyframes[0] = this.measuredOrigin;
     const measureKeyframe = unresolvedKeyframes[unresolvedKeyframes.length - 1];
     if (measureKeyframe !== void 0) {
@@ -2773,7 +2774,7 @@ var DOMKeyframesResolver = class extends KeyframeResolver {
     const finalKeyframe = unresolvedKeyframes[finalKeyframeIndex];
     unresolvedKeyframes[finalKeyframeIndex] = positionalValues[name](
       element.measureViewportBox(),
-      window.getComputedStyle(element.current,),
+      __unframerWindow.getComputedStyle(element.current,),
     );
     if (finalKeyframe !== null && this.finalKeyframe === void 0) {
       this.finalKeyframe = finalKeyframe;
@@ -3486,8 +3487,8 @@ function press(targetOrSelector, onPressStart, options = {},) {
     isPressing.add(target,);
     const onPressEnd = onPressStart(target, startEvent,);
     const onPointerEnd = (endEvent, success,) => {
-      window.removeEventListener('pointerup', onPointerUp,);
-      window.removeEventListener('pointercancel', onPointerCancel,);
+      __unframerWindow.removeEventListener('pointerup', onPointerUp,);
+      __unframerWindow.removeEventListener('pointercancel', onPointerCancel,);
       if (isPressing.has(target,)) {
         isPressing.delete(target,);
       }
@@ -3501,16 +3502,19 @@ function press(targetOrSelector, onPressStart, options = {},) {
       }
     };
     const onPointerUp = (upEvent) => {
-      onPointerEnd(upEvent, target === window || target === document || options.useGlobalTarget || isNodeOrChild(target, upEvent.target,),);
+      onPointerEnd(
+        upEvent,
+        target === __unframerWindow || target === document || options.useGlobalTarget || isNodeOrChild(target, upEvent.target,),
+      );
     };
     const onPointerCancel = (cancelEvent) => {
       onPointerEnd(cancelEvent, false,);
     };
-    window.addEventListener('pointerup', onPointerUp, eventOptions,);
-    window.addEventListener('pointercancel', onPointerCancel, eventOptions,);
+    __unframerWindow.addEventListener('pointerup', onPointerUp, eventOptions,);
+    __unframerWindow.addEventListener('pointercancel', onPointerCancel, eventOptions,);
   };
   targets.forEach((target) => {
-    const pointerDownTarget = options.useGlobalTarget ? window : target;
+    const pointerDownTarget = options.useGlobalTarget ? __unframerWindow : target;
     pointerDownTarget.addEventListener('pointerdown', startPress, eventOptions,);
     if (isHTMLElement(target,)) {
       target.addEventListener('focus', (event) => enableKeyboardPress(event, eventOptions,),);
@@ -3522,7 +3526,7 @@ function press(targetOrSelector, onPressStart, options = {},) {
   return cancelEvents;
 }
 function getComputedStyle2(element, name,) {
-  const computedStyle = window.getComputedStyle(element,);
+  const computedStyle = __unframerWindow.getComputedStyle(element,);
   return isCSSVar(name,) ? computedStyle.getPropertyValue(name,) : computedStyle[name];
 }
 function isSVGElement(element,) {
@@ -3591,15 +3595,15 @@ function createWindowResizeHandler() {
   windowResizeHandler = () => {
     const info = {
       get width() {
-        return window.innerWidth;
+        return __unframerWindow.innerWidth;
       },
       get height() {
-        return window.innerHeight;
+        return __unframerWindow.innerHeight;
       },
     };
     windowCallbacks.forEach((callback) => callback(info,));
   };
-  window.addEventListener('resize', windowResizeHandler,);
+  __unframerWindow.addEventListener('resize', windowResizeHandler,);
 }
 function resizeWindow(callback,) {
   windowCallbacks.add(callback,);
@@ -3607,7 +3611,7 @@ function resizeWindow(callback,) {
   return () => {
     windowCallbacks.delete(callback,);
     if (!windowCallbacks.size && typeof windowResizeHandler === 'function') {
-      window.removeEventListener('resize', windowResizeHandler,);
+      __unframerWindow.removeEventListener('resize', windowResizeHandler,);
       windowResizeHandler = void 0;
     }
   };
@@ -5268,13 +5272,13 @@ function useVisualElement(Component33, visualState, props, createVisualElement, 
   },);
   const optimisedAppearId = props[optimizedAppearDataAttribute];
   const wantsHandoff = useRef(
-    Boolean(optimisedAppearId,) && !window.MotionHandoffIsComplete?.(optimisedAppearId,) &&
-      window.MotionHasOptimisedAnimation?.(optimisedAppearId,),
+    Boolean(optimisedAppearId,) && !__unframerWindow.MotionHandoffIsComplete?.(optimisedAppearId,) &&
+      __unframerWindow.MotionHasOptimisedAnimation?.(optimisedAppearId,),
   );
   useIsomorphicLayoutEffect(() => {
     if (!visualElement) return;
     isMounted.current = true;
-    window.MotionIsMounted = true;
+    __unframerWindow.MotionIsMounted = true;
     visualElement.updateFeatures();
     visualElement.scheduleRenderMicrotask();
     if (wantsHandoff.current && visualElement.animationState) {
@@ -5288,7 +5292,7 @@ function useVisualElement(Component33, visualState, props, createVisualElement, 
     }
     if (wantsHandoff.current) {
       queueMicrotask(() => {
-        window.MotionHandoffMarkAsComplete?.(optimisedAppearId,);
+        __unframerWindow.MotionHandoffMarkAsComplete?.(optimisedAppearId,);
       },);
       wantsHandoff.current = false;
     }
@@ -5480,8 +5484,8 @@ var hasReducedMotionListener = {
 function initPrefersReducedMotion() {
   hasReducedMotionListener.current = true;
   if (!isBrowser) return;
-  if (window.matchMedia) {
-    const motionMediaQuery = window.matchMedia('(prefers-reduced-motion)',);
+  if (__unframerWindow.matchMedia) {
+    const motionMediaQuery = __unframerWindow.matchMedia('(prefers-reduced-motion)',);
     const setReducedMotionPreferences = () => prefersReducedMotion.current = motionMediaQuery.matches;
     motionMediaQuery.addEventListener('change', setReducedMotionPreferences,);
     setReducedMotionPreferences();
@@ -5692,8 +5696,8 @@ var VisualElement = class {
       this.scheduleRender();
     },);
     let removeSyncCheck;
-    if (window.MotionCheckAppearSync) {
-      removeSyncCheck = window.MotionCheckAppearSync(this, key7, value,);
+    if (__unframerWindow.MotionCheckAppearSync) {
+      removeSyncCheck = __unframerWindow.MotionCheckAppearSync(this, key7, value,);
     }
     this.valueSubscriptions.set(key7, () => {
       removeOnChange();
@@ -6119,10 +6123,10 @@ function animateTarget(visualElement, targetAndTransition, {
       continue;
     }
     let isHandoff = false;
-    if (window.MotionHandoffAnimation) {
+    if (__unframerWindow.MotionHandoffAnimation) {
       const appearId = getOptimisedAppearId(visualElement,);
       if (appearId) {
-        const startTime = window.MotionHandoffAnimation(appearId, key7, frame,);
+        const startTime = __unframerWindow.MotionHandoffAnimation(appearId, key7, frame,);
         if (startTime !== null) {
           valueTransition.startTime = startTime;
           isHandoff = true;
@@ -6866,7 +6870,7 @@ function renderHTML(
   }
 }
 function getComputedStyle3(element,) {
-  return window.getComputedStyle(element,);
+  return __unframerWindow.getComputedStyle(element,);
 }
 var HTMLVisualElement = class extends DOMVisualElement {
   constructor() {
@@ -6974,7 +6978,7 @@ var getContextWindow = ({
 var PanSession = class {
   constructor(event, handlers, {
     transformPagePoint,
-    contextWindow = window,
+    contextWindow = __unframerWindow,
     dragSnapToOrigin = false,
     distanceThreshold = 3,
   } = {},) {
@@ -6982,7 +6986,7 @@ var PanSession = class {
     this.lastMoveEvent = null;
     this.lastMoveEventInfo = null;
     this.handlers = {};
-    this.contextWindow = window;
+    this.contextWindow = __unframerWindow;
     this.updatePoint = () => {
       if (!(this.lastMoveEvent && this.lastMoveEventInfo)) return;
       const info2 = getPanInfo(this.lastMoveEventInfo, this.history,);
@@ -7040,7 +7044,7 @@ var PanSession = class {
     this.handlers = handlers;
     this.transformPagePoint = transformPagePoint;
     this.distanceThreshold = distanceThreshold;
-    this.contextWindow = contextWindow || window;
+    this.contextWindow = contextWindow || __unframerWindow;
     const info = extractEventInfo(event,);
     const initialInfo = transformPoint(info, this.transformPagePoint,);
     const {
@@ -7629,7 +7633,7 @@ var VisualElementDragControls = class {
       projection.updateLayout();
     }
     frame.read(measureDragConstraints,);
-    const stopResizeListener = addDomEvent(window, 'resize', () => this.scalePositionWithinConstraints(),);
+    const stopResizeListener = addDomEvent(__unframerWindow, 'resize', () => this.scalePositionWithinConstraints(),);
     const stopLayoutUpdateListener = projection.addEventListener('didUpdate', ({
       delta,
       hasLayoutChanged,
@@ -8171,12 +8175,12 @@ function cancelTreeOptimisedTransformAnimations(projectionNode,) {
   } = projectionNode.options;
   if (!visualElement) return;
   const appearId = getOptimisedAppearId(visualElement,);
-  if (window.MotionHasOptimisedAnimation(appearId, 'transform',)) {
+  if (__unframerWindow.MotionHasOptimisedAnimation(appearId, 'transform',)) {
     const {
       layout: layout2,
       layoutId,
     } = projectionNode.options;
-    window.MotionCancelOptimisedAnimation(appearId, 'transform', frame, !(layout2 || layoutId),);
+    __unframerWindow.MotionCancelOptimisedAnimation(appearId, 'transform', frame, !(layout2 || layoutId),);
   }
   const {
     parent,
@@ -8295,10 +8299,10 @@ function createProjectionNode2({
         let innerWidth = 0;
         const resizeUnblockUpdate = () => this.root.updateBlockedByResize = false;
         frame.read(() => {
-          innerWidth = window.innerWidth;
+          innerWidth = __unframerWindow.innerWidth;
         },);
         attachResizeListener(instance, () => {
-          const newInnerWidth = window.innerWidth;
+          const newInnerWidth = __unframerWindow.innerWidth;
           if (newInnerWidth === innerWidth) return;
           innerWidth = newInnerWidth;
           this.root.updateBlockedByResize = true;
@@ -8405,7 +8409,7 @@ function createProjectionNode2({
         this.options.onExitComplete && this.options.onExitComplete();
         return;
       }
-      if (window.MotionCancelOptimisedAnimation && !this.hasCheckedOptimisedAppear) {
+      if (__unframerWindow.MotionCancelOptimisedAnimation && !this.hasCheckedOptimisedAppear) {
         cancelTreeOptimisedTransformAnimations(this,);
       }
       !this.root.isUpdating && this.root.startUpdate();
@@ -9331,7 +9335,7 @@ var HTMLProjectionNode = createProjectionNode2({
   defaultParent: () => {
     if (!rootProjectionNode.current) {
       const documentNode = new DocumentProjectionNode({},);
-      documentNode.mount(window,);
+      documentNode.mount(__unframerWindow,);
       documentNode.setOptions({
         layoutScroll: true,
       },);
@@ -9342,7 +9346,7 @@ var HTMLProjectionNode = createProjectionNode2({
   resetTransform: (instance, value,) => {
     instance.style.transform = value !== void 0 ? value : 'none';
   },
-  checkIsScrollRoot: (instance) => Boolean(window.getComputedStyle(instance,).position === 'fixed',),
+  checkIsScrollRoot: (instance) => Boolean(__unframerWindow.getComputedStyle(instance,).position === 'fixed',),
 },);
 var drag = {
   pan: {
@@ -9825,7 +9829,7 @@ function createOnScrollHandler(element, onScroll, info, options = {},) {
 var scrollListeners = /* @__PURE__ */ new WeakMap();
 var resizeListeners = /* @__PURE__ */ new WeakMap();
 var onScrollHandlers = /* @__PURE__ */ new WeakMap();
-var getEventTarget = (element) => element === document.scrollingElement ? window : element;
+var getEventTarget = (element) => element === document.scrollingElement ? __unframerWindow : element;
 function scrollInfo(onScroll, {
   container = document.scrollingElement,
   ...options
@@ -9854,7 +9858,7 @@ function scrollInfo(onScroll, {
     const listener2 = () => frame.read(measureAll,);
     scrollListeners.set(container, listener2,);
     const target = getEventTarget(container,);
-    window.addEventListener('resize', listener2, {
+    __unframerWindow.addEventListener('resize', listener2, {
       passive: true,
     },);
     if (container !== document.documentElement) {
@@ -9878,7 +9882,7 @@ function scrollInfo(onScroll, {
     if (scrollListener) {
       getEventTarget(container,).removeEventListener('scroll', scrollListener,);
       resizeListeners.get(container,)?.();
-      window.removeEventListener('resize', scrollListener,);
+      __unframerWindow.removeEventListener('resize', scrollListener,);
     }
   };
 }
@@ -11015,10 +11019,10 @@ function handoffOptimizedAppearAnimation(elementId, valueName, frame2,) {
     startTime,
   } = optimisedAnimation;
   function cancelAnimation() {
-    window.MotionCancelOptimisedAnimation?.(elementId, valueName, frame2,);
+    __unframerWindow.MotionCancelOptimisedAnimation?.(elementId, valueName, frame2,);
   }
   animation.onfinish = cancelAnimation;
-  if (startTime === null || window.MotionHandoffIsComplete?.(elementId,)) {
+  if (startTime === null || __unframerWindow.MotionHandoffIsComplete?.(elementId,)) {
     cancelAnimation();
     return null;
   } else {
@@ -11036,12 +11040,12 @@ function resumeSuspendedAnimations() {
   suspendedAnimations.clear();
 }
 function startOptimizedAppearAnimation(element, name, keyframes2, options, onReady,) {
-  if (window.MotionIsMounted) {
+  if (__unframerWindow.MotionIsMounted) {
     return;
   }
   const id4 = element.dataset[optimizedAppearDataId];
   if (!id4) return;
-  window.MotionHandoffAnimation = handoffOptimizedAppearAnimation;
+  __unframerWindow.MotionHandoffAnimation = handoffOptimizedAppearAnimation;
   const storeId = appearStoreId(id4, name,);
   if (!readyAnimation) {
     readyAnimation = startWaapiAnimation(element, name, [keyframes2[0], keyframes2[0],], /**
@@ -11056,8 +11060,8 @@ function startOptimizedAppearAnimation(element, name, keyframes2, options, onRea
       animation: readyAnimation,
       startTime: null,
     },);
-    window.MotionHandoffAnimation = handoffOptimizedAppearAnimation;
-    window.MotionHasOptimisedAnimation = (elementId, valueName,) => {
+    __unframerWindow.MotionHandoffAnimation = handoffOptimizedAppearAnimation;
+    __unframerWindow.MotionHasOptimisedAnimation = (elementId, valueName,) => {
       if (!elementId) return false;
       if (!valueName) {
         return appearComplete.has(elementId,);
@@ -11065,15 +11069,15 @@ function startOptimizedAppearAnimation(element, name, keyframes2, options, onRea
       const animationId = appearStoreId(elementId, valueName,);
       return Boolean(appearAnimationStore.get(animationId,),);
     };
-    window.MotionHandoffMarkAsComplete = (elementId) => {
+    __unframerWindow.MotionHandoffMarkAsComplete = (elementId) => {
       if (appearComplete.has(elementId,)) {
         appearComplete.set(elementId, true,);
       }
     };
-    window.MotionHandoffIsComplete = (elementId) => {
+    __unframerWindow.MotionHandoffIsComplete = (elementId) => {
       return appearComplete.get(elementId,) === true;
     };
-    window.MotionCancelOptimisedAnimation = (elementId, valueName, frame2, canResume,) => {
+    __unframerWindow.MotionCancelOptimisedAnimation = (elementId, valueName, frame2, canResume,) => {
       const animationId = appearStoreId(elementId, valueName,);
       const data2 = appearAnimationStore.get(animationId,);
       if (!data2) return;
@@ -11092,19 +11096,19 @@ function startOptimizedAppearAnimation(element, name, keyframes2, options, onRea
       } else {
         appearAnimationStore.delete(animationId,);
         if (!appearAnimationStore.size) {
-          window.MotionCancelOptimisedAnimation = void 0;
+          __unframerWindow.MotionCancelOptimisedAnimation = void 0;
         }
       }
     };
-    window.MotionCheckAppearSync = (visualElement, valueName, value,) => {
+    __unframerWindow.MotionCheckAppearSync = (visualElement, valueName, value,) => {
       const appearId = getOptimisedAppearId(visualElement,);
       if (!appearId) return;
-      const valueIsOptimised = window.MotionHasOptimisedAnimation?.(appearId, valueName,);
+      const valueIsOptimised = __unframerWindow.MotionHasOptimisedAnimation?.(appearId, valueName,);
       const externalAnimationValue = visualElement.props.values?.[valueName];
       if (!valueIsOptimised || !externalAnimationValue) return;
       const removeSyncCheck = value.on('change', (latestValue) => {
         if (externalAnimationValue.get() !== latestValue) {
-          window.MotionCancelOptimisedAnimation?.(appearId, valueName,);
+          __unframerWindow.MotionCancelOptimisedAnimation?.(appearId, valueName,);
           removeSyncCheck();
         }
       },);
@@ -11354,7 +11358,8 @@ import { createRef, } from 'react';
 import { useTransition, } from 'react';
 import { createPortal, } from 'react-dom';
 import { cloneElement as cloneElement32, } from 'react';
-var __unframerNavigator2 = typeof window !== 'undefined' ? navigator : void 0;
+var __unframerWindow2 = typeof window !== 'undefined' ? window : void 0;
+var __unframerNavigator2 = typeof __unframerWindow2 !== 'undefined' ? navigator : void 0;
 var require_hsluv = __commonJS({
   '../../../node_modules/hsluv/dist/hsluv.cjs'(exports,) {
     'use strict';
@@ -12147,7 +12152,7 @@ var require_fontfaceobserver_standalone = __commonJS({
 
       function D(a, c, b,) {
         c = c || {};
-        b = b || window;
+        b = b || __unframerWindow2;
         this.family = a;
         this.style = c.style || 'normal';
         this.weight = c.weight || 'normal';
@@ -12160,8 +12165,8 @@ var require_fontfaceobserver_standalone = __commonJS({
         H = null;
       function I(a,) {
         null === F &&
-          (M(a,) && /Apple/.test(window.navigator.vendor,)
-            ? (a = /AppleWebKit\/([0-9]+)(?:\.([0-9]+))(?:\.([0-9]+))/.exec(window.navigator.userAgent,),
+          (M(a,) && /Apple/.test(__unframerWindow2.navigator.vendor,)
+            ? (a = /AppleWebKit\/([0-9]+)(?:\.([0-9]+))(?:\.([0-9]+))/.exec(__unframerWindow2.navigator.userAgent,),
               F = !!a && 603 > parseInt(a[1], 10,))
             : F = false);
         return F;
@@ -12215,7 +12220,7 @@ var require_fontfaceobserver_standalone = __commonJS({
                 if (d = -1 != k && -1 != l2 || -1 != k && -1 != m2 || -1 != l2 && -1 != m2) {
                   (d = k != l2 && k != m2 && l2 != m2) ||
                   (null === E &&
-                    (d = /AppleWebKit\/([0-9]+)(?:\.([0-9]+))/.exec(window.navigator.userAgent,),
+                    (d = /AppleWebKit\/([0-9]+)(?:\.([0-9]+))/.exec(__unframerWindow2.navigator.userAgent,),
                       E = !!d && (536 > parseInt(d[1], 10,) || 536 === parseInt(d[1], 10,) && 11 >= parseInt(d[2], 10,))),
                     d = E && (k == y && l2 == y && m2 == y || k == z && l2 == z && m2 == z || k == A && l2 == A && m2 == A)), d = !d;
                 }
@@ -12272,7 +12277,7 @@ var require_fontfaceobserver_standalone = __commonJS({
       };
       'object' === typeof module
         ? module.exports = D
-        : (window.FontFaceObserver = D, window.FontFaceObserver.prototype.load = D.prototype.load);
+        : (__unframerWindow2.FontFaceObserver = D, __unframerWindow2.FontFaceObserver.prototype.load = D.prototype.load);
     })();
   },
 },);
@@ -12323,15 +12328,15 @@ function isPromise(value,) {
   return value instanceof Promise;
 }
 var noop2 = () => {};
-var isWindow = typeof window !== 'undefined';
+var isWindow = typeof __unframerWindow2 !== 'undefined';
 var isBot =
   /* @__PURE__ */ (() =>
     isWindow &&
     (__unframerNavigator2.webdriver || /bot|-google|google-|yandex|ia_archiver|crawl|spider/iu.test(__unframerNavigator2.userAgent,)))();
-var supportsRequestIdleCallback = isWindow && typeof window.requestIdleCallback === 'function';
+var supportsRequestIdleCallback = isWindow && typeof __unframerWindow2.requestIdleCallback === 'function';
 var requestIdleCallback = /* @__PURE__ */ (() =>
   // eslint-disable-next-line compat/compat,framer-studio/tscompat
-  supportsRequestIdleCallback ? window.requestIdleCallback : setTimeout)();
+  supportsRequestIdleCallback ? __unframerWindow2.requestIdleCallback : setTimeout)();
 function encodeSVGForCSS(svg,) {
   return `url('data:image/svg+xml,${svg.replaceAll('#', '%23',).replaceAll('\'', '%27',)}')`;
 }
@@ -13355,7 +13360,7 @@ var mockWindow = {
   open: function (_url, _target, _features,) {},
   __framer_events: [],
 };
-var safeWindow = !isWindow ? mockWindow : window;
+var safeWindow = !isWindow ? mockWindow : __unframerWindow2;
 var pageviewEventVersion = 2;
 function sendTrackingEvent(eventType, eventData, sendOn = 'lazy',) {
   safeWindow.__framer_events?.push([eventType, eventData, sendOn,],);
@@ -14033,7 +14038,7 @@ function fillPathVariables(path, variables,) {
   },);
 }
 function forwardCurrentQueryParams(href,) {
-  const queryParamsString = typeof window !== 'undefined' ? window.location.search : '';
+  const queryParamsString = typeof __unframerWindow2 !== 'undefined' ? __unframerWindow2.location.search : '';
   if (!queryParamsString) {
     return href;
   }
@@ -14170,7 +14175,7 @@ function getSitePrefix(siteCanonicalURL,) {
   } catch {
     return '';
   }
-  if (url.pathname === '/' || window.location.origin !== url.origin) return '';
+  if (url.pathname === '/' || __unframerWindow2.location.origin !== url.origin) return '';
   return url.pathname.endsWith('/',) ? url.pathname.slice(0, -1,) : url.pathname;
 }
 var defaultSitePageEffects = {
@@ -14221,7 +14226,7 @@ function calcMaskPosition(mask,) {
   const {
     innerWidth,
     innerHeight,
-  } = window;
+  } = __unframerWindow2;
   const [x, xUnit,] = parseUnit(mask.x,);
   const [y, yUnit,] = parseUnit(mask.y,);
   return {
@@ -14271,7 +14276,7 @@ var circle = {
     if (progress2 === 'start') {
       return `clip-path: circle(0 at ${x}px ${y}px);`;
     } else {
-      const endRadius = Math.hypot(Math.max(x, window.innerWidth - x,), Math.max(y, window.innerHeight - y,),);
+      const endRadius = Math.hypot(Math.max(x, __unframerWindow2.innerWidth - x,), Math.max(y, __unframerWindow2.innerHeight - y,),);
       return `clip-path: circle(${endRadius}px at ${x}px ${y}px);`;
     }
   },
@@ -14282,8 +14287,8 @@ var inset = {
       x,
       y,
     } = calcMaskPosition(mask,);
-    const bottom = window.innerHeight - y;
-    const right = window.innerWidth - x;
+    const bottom = __unframerWindow2.innerHeight - y;
+    const right = __unframerWindow2.innerWidth - x;
     return progress2 === 'start'
       ? `clip-path: inset(${y}px ${right}px ${bottom}px ${x}px round ${mask.round}px);`
       : `clip-path: inset(0 round 0);`;
@@ -14718,8 +14723,10 @@ function isHistoryState(data2,) {
 }
 function replaceHistoryState(data2, url, ignoreReplaceStateWrapper = false,) {
   performance.mark('framer-history-replace',);
-  const replaceState = ignoreReplaceStateWrapper ? window.history.__proto__.replaceState : window.history.replaceState;
-  replaceState.call(window.history, data2, '', url,);
+  const replaceState = ignoreReplaceStateWrapper
+    ? __unframerWindow2.history.__proto__.replaceState
+    : __unframerWindow2.history.replaceState;
+  replaceState.call(__unframerWindow2.history, data2, '', url,);
 }
 var maybeHasPopstateBug = true;
 var isImpactedPopstateBugChromiumVersion = /* @__PURE__ */ (() => {
@@ -14731,9 +14738,9 @@ var isImpactedPopstateBugChromiumVersion = /* @__PURE__ */ (() => {
 })();
 async function pushHistoryState(data2, url, isNavigationTransition = false,) {
   performance.mark('framer-history-push',);
-  updateCanonicalURL(url, window.location.href,);
+  updateCanonicalURL(url, __unframerWindow2.location.href,);
   if (!isNavigationTransition) {
-    window.history.pushState(data2, '', url,);
+    __unframerWindow2.history.pushState(data2, '', url,);
     return;
   }
   let popstateCalled = false,
@@ -14748,20 +14755,20 @@ async function pushHistoryState(data2, url, isNavigationTransition = false,) {
         message: msg,
       },);
     };
-    window.addEventListener('popstate', popstateListener, {
+    __unframerWindow2.addEventListener('popstate', popstateListener, {
       once: true,
     },);
   }
   if (isImpactedPopstateBugChromiumVersion && maybeHasPopstateBug) {
-    window.history.__proto__.pushState.call(window.history, data2, '', url,);
+    __unframerWindow2.history.__proto__.pushState.call(__unframerWindow2.history, data2, '', url,);
   } else {
-    window.history.pushState(data2, '', url,);
+    __unframerWindow2.history.pushState(data2, '', url,);
   }
   if (maybeHasPopstateBug) {
     queueMicrotask(() => {
       if (popstateCalled) return;
       maybeHasPopstateBug = false;
-      window.removeEventListener('popstate', popstateListener,);
+      __unframerWindow2.removeEventListener('popstate', popstateListener,);
       return;
     },);
   }
@@ -14786,7 +14793,7 @@ function useReplaceInitialState({
     );
   }, [],);
 }
-var supportsNavigationAPI = /* @__PURE__ */ (() => isWindow && typeof window.navigation?.back === 'function')();
+var supportsNavigationAPI = /* @__PURE__ */ (() => isWindow && typeof __unframerWindow2.navigation?.back === 'function')();
 function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
   const startViewTransition2 = useViewTransition();
   const monitorNextPaintAfterRender = useMonitorNextPaintAfterRender('framer-route-change',);
@@ -14794,7 +14801,7 @@ function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
   const popStateHandler = useCallback2(async ({
     state,
   },) => {
-    if (window.navigation?.transition && window.navigation?.transition?.navigationType !== 'traverse') return;
+    if (__unframerWindow2.navigation?.transition && __unframerWindow2.navigation?.transition?.navigationType !== 'traverse') return;
     if (!isObject2(state,)) return;
     const {
       routeId,
@@ -14813,7 +14820,7 @@ function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
         routeId,
         isString(localeId,) ? localeId : void 0,
         isString(hash2,) ? hash2 : void 0,
-        window.location.pathname + window.location.search + window.location.hash,
+        __unframerWindow2.location.pathname + __unframerWindow2.location.search + __unframerWindow2.location.hash,
         isObject2(pathVariables,) ? pathVariables : void 0,
         true,
         nextRender,
@@ -14821,7 +14828,7 @@ function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
       );
     };
     const viewTransition = await startViewTransition2(currentRouteId.current, routeId, changeRoute,);
-    const navigationTransition = window.navigation?.transition;
+    const navigationTransition = __unframerWindow2.navigation?.transition;
     await (viewTransition?.updateCallbackDone ?? Promise.resolve()).then(viewTransitionReady.current?.resolve,).catch(
       viewTransitionReady.current?.reject,
     );
@@ -14832,7 +14839,7 @@ function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
       console.warn('Popstate transition failed', error,);
     }
     announceNavigation();
-    updateCanonicalURL(window.location.href,);
+    updateCanonicalURL(__unframerWindow2.location.href,);
   }, [currentRouteId, monitorNextPaintAfterRender, setCurrentRouteId, startViewTransition2,],);
   const traversalHandler = useCallback2((event) => {
     if (event.navigationType !== 'traverse' || !event.canIntercept) return;
@@ -14850,11 +14857,11 @@ function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
     },);
   }, [],);
   useEffect(() => {
-    window.addEventListener('popstate', popStateHandler,);
-    if (supportsNavigationAPI) window.navigation.addEventListener('navigate', traversalHandler,);
+    __unframerWindow2.addEventListener('popstate', popStateHandler,);
+    if (supportsNavigationAPI) __unframerWindow2.navigation.addEventListener('navigate', traversalHandler,);
     return () => {
-      window.removeEventListener('popstate', popStateHandler,);
-      if (supportsNavigationAPI) window.navigation.removeEventListener('navigate', traversalHandler,);
+      __unframerWindow2.removeEventListener('popstate', popStateHandler,);
+      if (supportsNavigationAPI) __unframerWindow2.navigation.removeEventListener('navigate', traversalHandler,);
     };
   }, [popStateHandler, traversalHandler,],);
 }
@@ -14894,9 +14901,9 @@ function getPathForRoute(route, {
   }
   const isSamePageHashNavigation = currentPath === path && resolvedHash;
   if (relative2) {
-    if (customNotFoundPagePaths.has(currentPath,) && typeof window !== 'undefined') {
+    if (customNotFoundPagePaths.has(currentPath,) && typeof __unframerWindow2 !== 'undefined') {
       const sitePrefix = getSitePrefix(siteCanonicalURL,);
-      path = computeRelativePath(window.location.pathname, sitePrefix + path,);
+      path = computeRelativePath(__unframerWindow2.location.pathname, sitePrefix + path,);
     } else {
       path = computeRelativePath(currentPath, path,);
     }
@@ -14920,7 +14927,7 @@ async function handleRedirectForMissingSlugs(route, pathVariables, nextLocale,) 
   },);
   const isRedirect = response.type === 'opaqueredirect';
   if (isRedirect) {
-    window.location.href = window.location.origin + nextLocaleWithDefaultSlugPath;
+    __unframerWindow2.location.href = __unframerWindow2.location.origin + nextLocaleWithDefaultSlugPath;
     return true;
   }
   return false;
@@ -14953,7 +14960,7 @@ async function switchLocale(options,) {
 }
 function pushLoadMoreHistory(hash2, paginationInfo,) {
   try {
-    const currentHistoryState = window.history.state;
+    const currentHistoryState = __unframerWindow2.history.state;
     if (!isHistoryState(currentHistoryState,)) return;
     const isInitialLoad = currentHistoryState?.paginationInfo === void 0 || currentHistoryState.paginationInfo[hash2] === void 0;
     const newPaginationInfo = {
@@ -14990,10 +14997,10 @@ function useNativeLoadingSpinner() {
     }
     navigationPromise.current = promise;
     navigationController.current = controller;
-    window.navigation.addEventListener('navigate', navigateListener,);
+    __unframerWindow2.navigation.addEventListener('navigate', navigateListener,);
     void updateURL(true,);
     void promise.finally(() => {
-      window.navigation.removeEventListener('navigate', navigateListener,);
+      __unframerWindow2.navigation.removeEventListener('navigate', navigateListener,);
     },);
   }, [navigateListener,],);
 }
@@ -15072,13 +15079,13 @@ function URLSearchParamsProvider({
       const handler = () => {
         onStoreChange();
       };
-      window.addEventListener('popstate', handler,);
+      __unframerWindow2.addEventListener('popstate', handler,);
       return () => {
         onStoreChangeRef.current = null;
-        window.removeEventListener('popstate', handler,);
+        __unframerWindow2.removeEventListener('popstate', handler,);
       };
     },
-    () => window.location.search,
+    () => __unframerWindow2.location.search,
     () => '',
   );
   const deferredSearchString = useDeferredValue(searchString,);
@@ -15107,10 +15114,10 @@ function useStringArrayQueryParam({
   }, [urlSearchParams,],);
   const setValue = useCallback2(async (newValues) => {
     if (!isArray(newValues,)) return;
-    const currentHistoryState = window.history.state;
+    const currentHistoryState = __unframerWindow2.history.state;
     if (!isHistoryState(currentHistoryState,)) return;
     const name = parameterNameRef.current;
-    const url = new URL(window.location.href,);
+    const url = new URL(__unframerWindow2.location.href,);
     const next2 = new URLSearchParams();
     let inserted = false;
     for (const [key7, originalValue,] of url.searchParams.entries()) {
@@ -16049,7 +16056,7 @@ function escapeStringRegExp(string,) {
   return string.replace(/[|\\{}()[\]^$+*?.]/gu, '\\$&',).replace(/-/gu, '\\x2d',);
 }
 function getVariantsFromServerTiming() {
-  if ('PerformanceServerTiming' in window) {
+  if ('PerformanceServerTiming' in __unframerWindow2) {
     const serverTiming = performance.getEntriesByType('navigation',)[0]?.serverTiming;
     if (!serverTiming || serverTiming.length === 0) return new URLSearchParams();
     const entry = serverTiming.find((it) => it.name === 'abtests');
@@ -16113,7 +16120,7 @@ function patchInitialRoute(routes, routeId,) {
   };
 }
 function patchRoutesForABTesting(routes, initialRouteId,) {
-  if (typeof window === 'undefined') return initialRouteId;
+  if (typeof __unframerWindow2 === 'undefined') return initialRouteId;
   let resolvedInitialRouteId = initialRouteId;
   if (initialRouteId) {
     patchInitialRoute(routes, initialRouteId,);
@@ -34852,9 +34859,9 @@ function isSuspense426Error(error,) {
   const minifiedMessage = 'Minified React error #426';
   return error instanceof Error && (error.message.includes(unminifiedMessage,) || error.message.includes(minifiedMessage,));
 }
-var suspendPromise = /* @__PURE__ */ (() => typeof window !== 'undefined' ? new Promise(() => {},) : null)();
+var suspendPromise = /* @__PURE__ */ (() => typeof __unframerWindow2 !== 'undefined' ? new Promise(() => {},) : null)();
 function Suspend() {
-  if (typeof window === 'undefined' || shouldSuspenseBoundariesBeActive) {
+  if (typeof __unframerWindow2 === 'undefined' || shouldSuspenseBoundariesBeActive) {
     return /* @__PURE__ */ jsx('div', {
       hidden: true,
       dangerouslySetInnerHTML: {
@@ -34957,7 +34964,7 @@ function ServerSideErrorBoundary({
   children,
   fallback = nullFallback,
 },) {
-  return typeof window === 'undefined'
+  return typeof __unframerWindow2 === 'undefined'
     ? // On the server, Suspense fallback is activated by errors. So we use the actual Suspense,
     // and render the actual error fallback if Suspense activates.
     /* @__PURE__ */
@@ -36570,7 +36577,7 @@ var GracefullyDegradingErrorBoundary = class extends Component2 {
     };
   }
   componentDidCatch(error,) {
-    window.__framer_hadFatalError = true;
+    __unframerWindow2.__framer_hadFatalError = true;
     if ('cause' in error) {
       error = error.cause;
     }
@@ -38329,9 +38336,9 @@ var useSendPageView = (
         sendTrackingEvent('published_site_pageview', eventData, 'eager',);
       }
     };
-    window.addEventListener('pageshow', listener,);
+    __unframerWindow2.addEventListener('pageshow', listener,);
     return () => {
-      window.removeEventListener('pageshow', listener,);
+      __unframerWindow2.removeEventListener('pageshow', listener,);
     };
   }, [
     currentRoute,
@@ -38356,7 +38363,7 @@ function updateScrollPosition(hash2, smoothScroll, isHistoryTransition,) {
     return;
   }
   if (isHistoryTransition) return;
-  window.scrollTo(0, 0,);
+  __unframerWindow2.scrollTo(0, 0,);
 }
 function useScheduleRenderSideEffects(dep,) {
   const actions = useRef([],);
@@ -38403,7 +38410,7 @@ function useNavigationTransition() {
     startNativeSpinner(navigationPromise, updateURL, controller,);
     await nextRender.promise;
     if (signal?.aborted) return;
-    const navigationTransition = window.navigation?.transition;
+    const navigationTransition = __unframerWindow2.navigation?.transition;
     resolveNavigationPromise();
     try {
       await navigationTransition?.finished;
@@ -38513,7 +38520,9 @@ function Router({
             preserveQueryParams,
           },);
           if (!localeResult) return;
-          const currentStatePaginationInfo = isHistoryState(window.history.state,) ? window.history.state.paginationInfo : void 0;
+          const currentStatePaginationInfo = isHistoryState(__unframerWindow2.history.state,)
+            ? __unframerWindow2.history.state.paginationInfo
+            : void 0;
           const currentPath = localeResult.path;
           isInitialNavigationRef.current = false;
           currentPathVariablesRef.current = localeResult.pathVariables;
@@ -38626,7 +38635,7 @@ function Router({
     ) {
       nextRender.ignore?.();
       const route = routes[routeId];
-      if (window.history.state?.hash !== hash2 && !disableHistory && route) {
+      if (__unframerWindow2.history.state?.hash !== hash2 && !disableHistory && route) {
         executeBeforeUrlUpdate();
         await pushRouteState(routeId, route, {
           currentRoutePath: route.path,
@@ -45817,7 +45826,7 @@ var ltrStrategy = (insetProp, lengthProp, viewportLengthProp, paddingStartProp, 
 var xStrategy = /* @__PURE__ */ (() => ltrStrategy('offsetLeft', 'offsetWidth', 'innerWidth', 'paddingLeft', 'right',))();
 var yStrategy = /* @__PURE__ */ (() => ltrStrategy('offsetTop', 'offsetHeight', 'innerHeight', 'paddingTop', 'bottom',))();
 function offsetRight(element, container,) {
-  const containerWidth = container?.offsetWidth ?? window.innerWidth;
+  const containerWidth = container?.offsetWidth ?? __unframerWindow2.innerWidth;
   return containerWidth - (element.offsetLeft + element.offsetWidth);
 }
 var xRtlStrategy = /* @__PURE__ */ (() => ({
@@ -46019,8 +46028,8 @@ function useFocusNavigation(containerRef, axis, focusOffset, offset, setHasFocus
       setHasFocus(true,);
       isFocusTrapped.current = true;
       applyFocusOffset();
-      window.addEventListener('focus', detectTrapEnd, eventOptionsWithCapture,);
-      window.addEventListener('blur', detectTrapEnd, eventOptionsWithCapture,);
+      __unframerWindow2.addEventListener('focus', detectTrapEnd, eventOptionsWithCapture,);
+      __unframerWindow2.addEventListener('blur', detectTrapEnd, eventOptionsWithCapture,);
       container.addEventListener('keydown', handleFocusNavigation, eventOptions,);
     };
     const detectTrapEnd = (event) => {
@@ -46033,8 +46042,8 @@ function useFocusNavigation(containerRef, axis, focusOffset, offset, setHasFocus
       isFocusTrapped.current = false;
       setHasFocus(false,);
       offset.set(focusOffset.get(),);
-      window.removeEventListener('focus', detectTrapEnd,);
-      window.removeEventListener('blur', detectTrapEnd,);
+      __unframerWindow2.removeEventListener('focus', detectTrapEnd,);
+      __unframerWindow2.removeEventListener('blur', detectTrapEnd,);
       container.removeEventListener('keydown', handleFocusNavigation,);
     };
     const handleFocus = (event) => {
@@ -46050,13 +46059,13 @@ function useFocusNavigation(containerRef, axis, focusOffset, offset, setHasFocus
       if (detectionEnabled) return;
       detectionEnabled = true;
       container.addEventListener('focus', handleFocus, eventOptionsWithCapture,);
-      window.addEventListener('pointermove', handlePointerMove, eventOptions,);
+      __unframerWindow2.addEventListener('pointermove', handlePointerMove, eventOptions,);
     };
     const handlePointerMove = () => {
       if (!detectionEnabled) return;
       detectionEnabled = false;
       container.removeEventListener('focus', handleFocus, true,);
-      window.removeEventListener('pointermove', handlePointerMove, eventOptions,);
+      __unframerWindow2.removeEventListener('pointermove', handlePointerMove, eventOptions,);
     };
     const handleAriaHiddenClicks = (event) => {
       const target = event.target;
@@ -46065,7 +46074,7 @@ function useFocusNavigation(containerRef, axis, focusOffset, offset, setHasFocus
         ariaHiddenAncestor.removeAttribute('aria-hidden',);
       }
     };
-    window.addEventListener('keydown', detectFocusTrapEnable, eventOptions,);
+    __unframerWindow2.addEventListener('keydown', detectFocusTrapEnable, eventOptions,);
     container.addEventListener('pointerdown', handleAriaHiddenClicks, eventOptions,);
     return () => {
       abortController.abort();
@@ -46188,7 +46197,7 @@ function TickerComponent({
   const isReducedMotion = useReducedMotion();
   const updateMeasurements = () => {
     if (!internalContainerRef.current || !listRef.current) return;
-    const direction = window.getComputedStyle(internalContainerRef.current,).direction;
+    const direction = __unframerWindow2.getComputedStyle(internalContainerRef.current,).direction;
     const {
       measureItem,
       lengthProp,
@@ -46211,13 +46220,13 @@ function TickerComponent({
         hasItemSizeChanged = true;
       }
     }
-    const containerLength = Math.min(container[lengthProp], window[viewportLengthProp],);
-    let visibleLength = overflow ? window[viewportLengthProp] : containerLength;
+    const containerLength = Math.min(container[lengthProp], __unframerWindow2[viewportLengthProp],);
+    let visibleLength = overflow ? __unframerWindow2[viewportLengthProp] : containerLength;
     if (safeMargin > 0) {
       visibleLength += safeMargin * 2;
     }
     const totalItemLength = calcTotalItemLength(itemPositions,);
-    const computedContainerStyle = window.getComputedStyle(container,);
+    const computedContainerStyle = __unframerWindow2.getComputedStyle(container,);
     const containerPaddingStart = parseInt(computedContainerStyle[paddingStartProp] ?? 0,);
     const containerPaddingEnd = parseInt(computedContainerStyle[paddingEndProp] ?? 0,);
     const inset2 = overflow ? getCumulativeInset(allItems[0],) : containerPaddingStart;
@@ -47778,22 +47787,22 @@ var MapWithHash = class extends Map {
 };
 var cachedServiceMap;
 function getServiceMap() {
-  if (typeof window === 'undefined') return {};
+  if (typeof __unframerWindow2 === 'undefined') return {};
   if (cachedServiceMap) return cachedServiceMap;
   cachedServiceMap = extractServiceMap();
   return cachedServiceMap;
 }
 function extractServiceMap() {
-  const location = window.location;
-  let services = window?.bootstrap?.services;
+  const location = __unframerWindow2.location;
+  let services = __unframerWindow2?.bootstrap?.services;
   if (services) {
     return services;
   }
   let topOrigin;
   try {
-    const topWindow = window.top;
+    const topWindow = __unframerWindow2.top;
     topOrigin = topWindow.location.origin;
-    services = window.top?.bootstrap?.services;
+    services = __unframerWindow2.top?.bootstrap?.services;
     if (services) {
       return services;
     }
@@ -48468,11 +48477,11 @@ function getAssetOwnerType(asset,) {
 async function loadFontsWithOpenType(source,) {
   switch (source) {
     case 'google': {
-      const supportedFonts = await import('./framer-chunks/google-AG6EYFMK-VXMK4LWI.js');
+      const supportedFonts = await import('./framer-chunks/google-AG6EYFMK-QBWWKKVD.js');
       return supportedFonts.default;
     }
     case 'fontshare': {
-      const supportedFonts = await import('./framer-chunks/fontshare-LTYJMI6Q-NLLRF2SZ.js');
+      const supportedFonts = await import('./framer-chunks/fontshare-LTYJMI6Q-XCFP3GWO.js');
       return supportedFonts.default;
     }
     default:
@@ -48482,15 +48491,15 @@ async function loadFontsWithOpenType(source,) {
 async function loadFontToOpenTypeFeatures(source,) {
   switch (source) {
     case 'google': {
-      const features = await import('./framer-chunks/google-EJBUPU3N-JOFVHSFQ.js');
+      const features = await import('./framer-chunks/google-EJBUPU3N-LSIK52DF.js');
       return features.default;
     }
     case 'fontshare': {
-      const features = await import('./framer-chunks/fontshare-XMKN2FOD-GVCUQL37.js');
+      const features = await import('./framer-chunks/fontshare-XMKN2FOD-D5TWBHNT.js');
       return features.default;
     }
     case 'framer': {
-      const features = await import('./framer-chunks/framer-font-D6RMCRV4-5YYG4HIW.js');
+      const features = await import('./framer-chunks/framer-font-D6RMCRV4-XCFIRDL6.js');
       return features.default;
     }
     default:
@@ -49034,10 +49043,10 @@ function loadVariationAxes(source,) {
       const axes = (async () => {
         switch (source) {
           case 'google': {
-            return (await import('./framer-chunks/google-CQFUID6E-OQQXADED.js')).default;
+            return (await import('./framer-chunks/google-CQFUID6E-C6DG6E7T.js')).default;
           }
           case 'fontshare': {
-            return (await import('./framer-chunks/fontshare-X63NXWGB-NL5Q3YUU.js')).default;
+            return (await import('./framer-chunks/fontshare-X63NXWGB-NRPGYMPJ.js')).default;
           }
           default:
             assertNever(source,);
@@ -49983,13 +49992,13 @@ function useEscToClose(isOpen, close,) {
         close();
       }
     }
-    window.addEventListener('keyup', handleKeyDown,);
-    return () => window.removeEventListener('keyup', handleKeyDown,);
+    __unframerWindow2.addEventListener('keyup', handleKeyDown,);
+    return () => __unframerWindow2.removeEventListener('keyup', handleKeyDown,);
   }, [isOpen, close,],);
 }
 function calculateImageWidth(aspectRatio2, maxWidth, totalHorizontalPadding, totalVerticalPadding,) {
-  const availableHeight = window.innerHeight - totalVerticalPadding;
-  const availableWidth = Math.min(window.innerWidth - totalHorizontalPadding, maxWidth,);
+  const availableHeight = __unframerWindow2.innerHeight - totalVerticalPadding;
+  const availableWidth = Math.min(__unframerWindow2.innerWidth - totalHorizontalPadding, maxWidth,);
   const maxWidthBasedOnHeight = availableHeight / aspectRatio2;
   return Math.min(availableWidth, maxWidthBasedOnHeight,);
 }
@@ -49998,7 +50007,7 @@ function optimisticallyDecodeImage(image, {
   height,
 },) {
   if (!image.src || !image.srcSet) return;
-  const i = new window.Image();
+  const i = new __unframerWindow2.Image();
   i.src = image.src;
   i.srcset = image.srcSet;
   i.sizes = image.sizes || '';
@@ -53388,8 +53397,8 @@ var SVGRoot = (props) => {
     viewBox: `0 0 ${width} ${height}`,
     ref,
   };
-  const needsScale = isSafari() ? window.devicePixelRatio !== 1 : window.devicePixelRatio === 1;
-  const needsTranslate = window.devicePixelRatio === 1;
+  const needsScale = isSafari() ? __unframerWindow2.devicePixelRatio !== 1 : __unframerWindow2.devicePixelRatio === 1;
+  const needsTranslate = __unframerWindow2.devicePixelRatio === 1;
   if (!needsScale && !needsTranslate) {
     return /* @__PURE__ */ jsx('svg', {
       role: 'presentation',
