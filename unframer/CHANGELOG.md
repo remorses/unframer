@@ -1,5 +1,11 @@
 # unframer
 
+## 4.0.3
+
+### Patch Changes
+
+- Reduce npm package size from 20MB to 10.5MB by excluding duplicate `src/framer-chunks` folder
+
 ## 4.0.2
 
 ### Patch Changes
