@@ -7,7 +7,6 @@ export const dispatcher = new Agent({
     keepAliveMaxTimeout: 20,
 }).compose(
     interceptors.cache({
-
         store: new FlatCacheStore({ cacheDir: `.unframer` }),
     }),
 )

@@ -39,7 +39,10 @@ export class FlatCacheStore implements CacheStore {
         return createHash('sha256').update(JSON.stringify(key)).digest('hex')
     }
 
-    private getFilePaths(key: CacheKey): { metaPath: string; bodyPath: string } {
+    private getFilePaths(key: CacheKey): {
+        metaPath: string
+        bodyPath: string
+    } {
         const hash = this.getFileHash(key)
         return {
             metaPath: join(this.cacheDir, `${hash}.json`),

@@ -1,7 +1,10 @@
 // original https://github.com/babel/babel/blob/9c77558234c87b9220604fbc1519089e2d6334e2/packages/babel-traverse/src/scope/lib/renamer.ts#L61
 import splitExportDeclaration from '@babel/helper-split-export-declaration'
-import traverse, { type Scope, visitors, type TraverseOptions } from '@babel/traverse'
-
+import traverse, {
+    type Scope,
+    visitors,
+    type TraverseOptions,
+} from '@babel/traverse'
 
 import * as t from '@babel/types'
 import { NodePath, Visitor } from '@babel/core'

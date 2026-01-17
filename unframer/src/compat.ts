@@ -1,4 +1,3 @@
-
 export function propCamelCaseJustLikeFramer(str?: string) {
     if (!str) {
         return ''
@@ -13,7 +12,6 @@ export function propCamelCaseJustLikeFramer(str?: string) {
     str = str.replace(/-([\w])/g, (g) => g[1].toUpperCase())
     // Convert underscores to camelCase (e.g. foo_bar -> fooBar)
     str = str.replace(/_([a-z])/g, (g) => g[1].toUpperCase())
-
 
     // Ensure first character is lowercase
     str = str[0].toLowerCase() + str.slice(1)

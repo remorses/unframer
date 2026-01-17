@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { dedent } from "./utils.js"
+import { dedent } from './utils.js'
 
 describe('dedent', () => {
     it('should remove common indentation from template literals', () => {
@@ -52,7 +52,6 @@ describe('dedent', () => {
     })
 
     it('should handle empty lines and preserve relative indentation', () => {
-
         const result = dedent`
             Start
 

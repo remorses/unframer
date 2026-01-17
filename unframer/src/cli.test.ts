@@ -1,8 +1,5 @@
 import { expect, test } from 'vitest'
-import {
-    extractTokenInfo,
-    findRelativeLinks,
-} from './exporter.js'
+import { extractTokenInfo, findRelativeLinks } from './exporter.js'
 import { componentCamelCase } from './typescript.js'
 
 import { componentNameToPath } from './utils.js'
@@ -39,12 +36,24 @@ test('componentCamelCase', () => {
         `"FramerNavFramerComponent"`,
     )
     // Test cases with spaces and special characters
-    expect(componentCamelCase('hero section')).toMatchInlineSnapshot(`"HeroSectionFramerComponent"`)
-    expect(componentCamelCase('hero-section with spaces')).toMatchInlineSnapshot(`"HeroSectionWithSpacesFramerComponent"`)
-    expect(componentCamelCase('component@#$name')).toMatchInlineSnapshot(`"ComponentNameFramerComponent"`)
-    expect(componentCamelCase('123-component')).toMatchInlineSnapshot(`"Framer123ComponentFramerComponent"`)
-    expect(componentCamelCase('component!!name??test')).toMatchInlineSnapshot(`"ComponentNameTestFramerComponent"`)
-    expect(componentCamelCase('  multiple   spaces  ')).toMatchInlineSnapshot(`"MultipleSpacesFramerComponent"`)
+    expect(componentCamelCase('hero section')).toMatchInlineSnapshot(
+        `"HeroSectionFramerComponent"`,
+    )
+    expect(
+        componentCamelCase('hero-section with spaces'),
+    ).toMatchInlineSnapshot(`"HeroSectionWithSpacesFramerComponent"`)
+    expect(componentCamelCase('component@#$name')).toMatchInlineSnapshot(
+        `"ComponentNameFramerComponent"`,
+    )
+    expect(componentCamelCase('123-component')).toMatchInlineSnapshot(
+        `"Framer123ComponentFramerComponent"`,
+    )
+    expect(componentCamelCase('component!!name??test')).toMatchInlineSnapshot(
+        `"ComponentNameTestFramerComponent"`,
+    )
+    expect(componentCamelCase('  multiple   spaces  ')).toMatchInlineSnapshot(
+        `"MultipleSpacesFramerComponent"`,
+    )
 })
 test('findRelativeLinks', () => {
     expect(

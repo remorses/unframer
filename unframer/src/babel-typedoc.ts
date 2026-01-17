@@ -1,4 +1,3 @@
-
 import type { PluginObj } from '@babel/core'
 import type * as BabelTypes from '@babel/types'
 
@@ -47,7 +46,9 @@ function toBlockComment(value: string): BabelTypes.CommentBlock {
     // We deliberately keep the leading '*' characters in each line so Babel
     // prints "/** … */" instead of "/* … */".
     // Add a leading asterisk if none exists to ensure JSDoc-style comments
-    const withLeadingAsterisk = cleaned.startsWith('*') ? cleaned : '*' + cleaned
+    const withLeadingAsterisk = cleaned.startsWith('*')
+        ? cleaned
+        : '*' + cleaned
     return {
         type: 'CommentBlock',
         value: withLeadingAsterisk,
@@ -56,11 +57,8 @@ function toBlockComment(value: string): BabelTypes.CommentBlock {
 
 export function babelPluginTypedoc(options: InjectTypedocOptions) {
     return function ({ types: t }: { types: typeof BabelTypes }): PluginObj {
-        const {
-            headerComment,
-            responsiveComment,
-            defaultExportComment,
-        } = options
+        const { headerComment, responsiveComment, defaultExportComment } =
+            options
 
         return {
             name: 'inject-typedoc-comments',

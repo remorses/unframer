@@ -8,17 +8,17 @@ export function componentCamelCase(str: string) {
     }
     // Take last part after slashes
     str = str.split('/').filter(Boolean).pop() || ''
-    
+
     // Replace all non-alphanumeric characters with space
     // This handles spaces, special chars, underscores, hyphens, etc.
     str = str.replace(/[^a-zA-Z0-9]+/g, ' ')
-    
+
     // Convert to camelCase: split by spaces, capitalize each word except first
     const words = str.trim().split(/\s+/).filter(Boolean)
     if (words.length === 0) {
         return 'FramerComponent'
     }
-    
+
     str = words
         .map((word, index) => {
             // First word: capitalize only if it starts with lowercase
@@ -29,12 +29,12 @@ export function componentCamelCase(str: string) {
             return word[0].toUpperCase() + word.slice(1)
         })
         .join('')
-    
+
     // If component name starts with a number, add prefix 'Framer'
     if (/^[0-9]/.test(str)) {
         str = 'Framer' + str
     }
-    
+
     str = str + 'FramerComponent'
     return str
 }
@@ -129,11 +129,13 @@ export function propControlsToTypedocComments({
             ' * width?: any',
             ' * height?: any',
             ' * layoutId?: string',
-        ].filter(Boolean).join('\n')
+        ]
+            .filter(Boolean)
+            .join('\n')
 
         // Generate header comment with type definitions
         let headerComment = ''
-        
+
         if (includeLocaleTypes) {
             headerComment += '/**\n'
             headerComment += ' * @typedef Locale\n'
@@ -141,7 +143,9 @@ export function propControlsToTypedocComments({
             // Generate union type from locales if available
             const localeType = (() => {
                 if (locales && Array.isArray(locales) && locales.length > 0) {
-                    return locales.map((locale) => `'${locale.slug}'`).join(' | ')
+                    return locales
+                        .map((locale) => `'${locale.slug}'`)
+                        .join(' | ')
                 }
                 return 'string'
             })()
@@ -149,7 +153,7 @@ export function propControlsToTypedocComments({
             headerComment += ` * ${localeType}\n`
             headerComment += ' */\n\n'
         }
-        
+
         headerComment += '/**\n'
         headerComment += ' * @typedef {{\n'
         headerComment += defaultPropsJsDoc
@@ -162,13 +166,17 @@ export function propControlsToTypedocComments({
 
         // Generate responsive comment
         let responsiveComment = '/**\n'
-        responsiveComment += ' * @type {import("unframer").UnframerBreakpoint}\n'
-        responsiveComment += ' * Represents a responsive breakpoint for unframer.\n'
+        responsiveComment +=
+            ' * @type {import("unframer").UnframerBreakpoint}\n'
+        responsiveComment +=
+            ' * Represents a responsive breakpoint for unframer.\n'
         responsiveComment += ' */\n\n'
         responsiveComment += '/**\n'
         responsiveComment += ' * @typedef VariantsMap\n'
-        responsiveComment += " * Partial record of UnframerBreakpoint to Props.variant, with a mandatory 'base' key.\n"
-        responsiveComment += " * { [key in UnframerBreakpoint]?: Props['variant'] } & { base: Props['variant'] }\n"
+        responsiveComment +=
+            " * Partial record of UnframerBreakpoint to Props.variant, with a mandatory 'base' key.\n"
+        responsiveComment +=
+            " * { [key in UnframerBreakpoint]?: Props['variant'] } & { base: Props['variant'] }\n"
         responsiveComment += ' */\n\n'
         responsiveComment += `/**\n * Renders ${componentName} for all breakpoints with a variants map. Variant prop is inferred per breakpoint.\n * @function\n * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props\n * @returns {any}\n */`
 

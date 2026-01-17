@@ -1,7 +1,5 @@
 import { BuildResult, build, context, type BuildOptions } from 'esbuild'
 
-
-
 import url from 'url'
 import { createRequire } from 'node:module'
 import { Config } from './cli.js'
@@ -1225,7 +1223,6 @@ function splitOnce(str: string, separator: string) {
 }
 
 const breakpointVariants = ['mobile', 'tablet', 'desktop']
-
 
 async function recursiveReaddir(dir: string): Promise<string[]> {
     const dirents = await fs.promises.readdir(dir, { withFileTypes: true })
