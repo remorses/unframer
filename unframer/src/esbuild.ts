@@ -263,9 +263,11 @@ export function esbuildPluginBundleDependencies({
                             define: {
                                 'import.meta.url': JSON.stringify(resolved),
                                 navigator: '__unframerNavigator',
+                                window: '__unframerWindow',
                             },
-                            // Fix lottie: https://github.com/airbnb/lottie-web/issues/3047
-                            banner: `var __unframerNavigator = typeof window !== 'undefined' ? navigator : undefined;`,
+                            // Fix lottie (navigator): https://github.com/airbnb/lottie-web/issues/3047
+                            // Fix window is undefined errors in SSR/Node environments
+                            banner: `var __unframerWindow = typeof window !== 'undefined' ? window : undefined; var __unframerNavigator = typeof __unframerWindow !== 'undefined' ? navigator : undefined;`,
                             minify: false,
                             format: 'esm',
                             jsx: 'transform',

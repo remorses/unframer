@@ -1,5 +1,11 @@
 # unframer
 
+## 4.0.2
+
+### Patch Changes
+
+- Fix "window is undefined" errors in SSR/Node environments by replacing `window` access with a safe conditional check
+
 ## 4.0.1
 
 ### Patch Changes
