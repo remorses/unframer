@@ -23,18 +23,6 @@
 }} Props
 
  */
-
-/**
- * @type {import("unframer").UnframerBreakpoint}
- * Represents a responsive breakpoint for unframer.
- */
-
-/**
- * @typedef VariantsMap
- * Partial record of UnframerBreakpoint to Props.variant, with a mandatory 'base' key.
- * { [key in UnframerBreakpoint]?: Props['variant'] } & { base: Props['variant'] }
- */
-import { Et } from "./chunks/chunk-3CPCBMG6.js";
 import { routes } from "./chunks/chunk-VG7AXKTA.js";
 import "./chunks/chunk-WSFCRVEQ.js";
 
@@ -87,6 +75,7 @@ import {
 	wrap,
 	frame,
 } from "unframer";
+import { resize } from "@motionone/dom";
 var MAX_DUPLICATED_ITEMS = 100;
 var directionTransformers = {
 	left: (offset) => `translateX(-${offset}px)`,
@@ -186,7 +175,7 @@ function Ticker(props) {
 			let initialResize = useRef(true);
 			useEffect(() => {
 				frame.read(measure);
-				return Et(parentRef.current, ({ contentSize }) => {
+				return resize(parentRef.current, ({ contentSize }) => {
 					if (
 						!initialResize.current &&
 						(contentSize.width || contentSize.height)
@@ -1794,12 +1783,23 @@ function ComponentWithRoot({ locale, ...rest }) {
 	);
 }
 /**
+ * @type {import("unframer").UnframerBreakpoint}
+ * Represents a responsive breakpoint for unframer.
+ */
+
+/**
+ * @typedef VariantsMap
+ * Partial record of UnframerBreakpoint to Props.variant, with a mandatory 'base' key.
+ * { [key in UnframerBreakpoint]?: Props['variant'] } & { base: Props['variant'] }
+ */
+
+/**
  * Renders TestimonialsFramerComponent for all breakpoints with a variants map. Variant prop is inferred per breakpoint.
  * @function
  * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props
  * @returns {any}
  */
-ComponentWithRoot.Responsive = ({ locale, ...rest }) => {
+ComponentWithRoot.Responsive = ({ locale = "", ...rest }) => {
 	return (
 		<ContextProviders
 			routes={routes}

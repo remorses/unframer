@@ -34,23 +34,12 @@
 }} Props
 
  */
-
-/**
- * @type {import("unframer").UnframerBreakpoint}
- * Represents a responsive breakpoint for unframer.
- */
-
-/**
- * @typedef VariantsMap
- * Partial record of UnframerBreakpoint to Props.variant, with a mandatory 'base' key.
- * { [key in UnframerBreakpoint]?: Props['variant'] } & { base: Props['variant'] }
- */
-import { Icon } from "./chunks/chunk-37XVHH6T.js";
+import { Icon } from "./chunks/chunk-H4EBKOKS.js";
 import {
 	NullState,
 	defaultEvents,
 	useIconSelection,
-} from "./chunks/chunk-BVM6H744.js";
+} from "./chunks/chunk-2I7CFZU4.js";
 import { routes } from "./chunks/chunk-VG7AXKTA.js";
 import "./chunks/chunk-WSFCRVEQ.js";
 
@@ -91,7 +80,7 @@ import { useState, useEffect, useRef } from "react";
 import { addPropertyControls, ControlType, RenderTarget } from "unframer";
 import { motion } from "unframer";
 
-// /:https://framer.com/m/phosphor-icons/House.js@0.0.53
+// /:https://framerusercontent.com/modules/Qc8yuHkQmGO0kFiSWbkX/i6WSiDLftYVS2GvUElTz/House.js
 var Component;
 var House_default = (React4) => {
 	if (!Component) {
@@ -2896,12 +2885,23 @@ function ComponentWithRoot({ locale, ...rest }) {
 	);
 }
 /**
+ * @type {import("unframer").UnframerBreakpoint}
+ * Represents a responsive breakpoint for unframer.
+ */
+
+/**
+ * @typedef VariantsMap
+ * Partial record of UnframerBreakpoint to Props.variant, with a mandatory 'base' key.
+ * { [key in UnframerBreakpoint]?: Props['variant'] } & { base: Props['variant'] }
+ */
+
+/**
  * Renders CardFramerComponent for all breakpoints with a variants map. Variant prop is inferred per breakpoint.
  * @function
  * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props
  * @returns {any}
  */
-ComponentWithRoot.Responsive = ({ locale, ...rest }) => {
+ComponentWithRoot.Responsive = ({ locale = "", ...rest }) => {
 	return (
 		<ContextProviders
 			routes={routes}

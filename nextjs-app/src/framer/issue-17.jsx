@@ -64,23 +64,11 @@
 }} Props
 
  */
-
-/**
- * @type {import("unframer").UnframerBreakpoint}
- * Represents a responsive breakpoint for unframer.
- */
-
-/**
- * @typedef VariantsMap
- * Partial record of UnframerBreakpoint to Props.variant, with a mandatory 'base' key.
- * { [key in UnframerBreakpoint]?: Props['variant'] } & { base: Props['variant'] }
- */
-import { Et } from "./chunks/chunk-3CPCBMG6.js";
 import {
 	NullState,
 	defaultEvents,
 	useIconSelection,
-} from "./chunks/chunk-BVM6H744.js";
+} from "./chunks/chunk-2I7CFZU4.js";
 import { routes } from "./chunks/chunk-VG7AXKTA.js";
 import { __export } from "./chunks/chunk-WSFCRVEQ.js";
 
@@ -142,6 +130,7 @@ import {
 	wrap,
 	frame,
 } from "unframer";
+import { resize } from "@motionone/dom";
 var MAX_DUPLICATED_ITEMS = 100;
 var directionTransformers = {
 	left: (offset) => `translateX(-${offset}px)`,
@@ -242,7 +231,7 @@ function Ticker(props) {
 			let initialResize = useRef(true);
 			useEffect(() => {
 				frame.read(measure);
-				return Et(parentRef.current, ({ contentSize }) => {
+				return resize(parentRef.current, ({ contentSize }) => {
 					if (
 						!initialResize.current &&
 						(contentSize.width || contentSize.height)
@@ -716,7 +705,7 @@ var isValidNumber = (value) => typeof value === "number" && !isNaN(value);
 // /:https://framerusercontent.com/modules/hINGlPO8bTElmCQj88Cm/JugGqEQxTJsYkMjY0oG0/ConversionEvent.js
 import { jsx as _jsx2 } from "react/jsx-runtime";
 
-// /:https://framer.com/m/framer/store.js@^1.0.0
+// /:https://framerusercontent.com/modules/vj7bFUjvEQFgEzNBkdoG/vf3CKm378wlVcBk7IhSU/createStore.js
 import { useState as useState2, useEffect as useEffect2 } from "react";
 import { Data, useObserveData } from "unframer";
 function createStore(state1) {
@@ -2482,7 +2471,7 @@ import {
 } from "unframer";
 import { motion as motion3 } from "unframer";
 
-// /:https://framer.com/m/phosphor-icons/House.js@0.0.57
+// /:https://framerusercontent.com/modules/Qc8yuHkQmGO0kFiSWbkX/rVmMAFttOHuuiwSg6KjZ/House.js
 var Component2;
 var IconInner;
 var Icon = (React8) => {
@@ -12732,12 +12721,23 @@ function ComponentWithRoot({ locale, ...rest }) {
 	);
 }
 /**
+ * @type {import("unframer").UnframerBreakpoint}
+ * Represents a responsive breakpoint for unframer.
+ */
+
+/**
+ * @typedef VariantsMap
+ * Partial record of UnframerBreakpoint to Props.variant, with a mandatory 'base' key.
+ * { [key in UnframerBreakpoint]?: Props['variant'] } & { base: Props['variant'] }
+ */
+
+/**
  * Renders Issue17FramerComponent for all breakpoints with a variants map. Variant prop is inferred per breakpoint.
  * @function
  * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props
  * @returns {any}
  */
-ComponentWithRoot.Responsive = ({ locale, ...rest }) => {
+ComponentWithRoot.Responsive = ({ locale = "", ...rest }) => {
 	return (
 		<ContextProviders
 			routes={routes}

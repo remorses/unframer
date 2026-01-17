@@ -5,7 +5,7 @@ import {
   NullState,
   defaultEvents,
   useIconSelection
-} from "./chunk-BVM6H744.js";
+} from "./chunk-2I7CFZU4.js";
 
 // /:https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/H4OHcdXxZyPVKySUy1y2/Phosphor.js
 import { jsx as _jsx } from "react/jsx-runtime";
@@ -14,7 +14,7 @@ import { useState, useEffect, useRef } from "react";
 import { addPropertyControls, ControlType, RenderTarget } from "unframer";
 import { motion } from "unframer";
 
-// /:https://framer.com/m/phosphor-icons/House.js@0.0.50
+// /:https://framerusercontent.com/modules/Qc8yuHkQmGO0kFiSWbkX/LM9FyulJrdV0emvUt6Oc/House.js
 var Component;
 var House_default = (React2) => {
   if (!Component) {

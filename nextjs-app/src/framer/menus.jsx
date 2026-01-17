@@ -23,22 +23,11 @@
 }} Props
 
  */
-
-/**
- * @type {import("unframer").UnframerBreakpoint}
- * Represents a responsive breakpoint for unframer.
- */
-
-/**
- * @typedef VariantsMap
- * Partial record of UnframerBreakpoint to Props.variant, with a mandatory 'base' key.
- * { [key in UnframerBreakpoint]?: Props['variant'] } & { base: Props['variant'] }
- */
 import {
 	NullState,
 	defaultEvents,
 	useIconSelection,
-} from "./chunks/chunk-BVM6H744.js";
+} from "./chunks/chunk-2I7CFZU4.js";
 import { routes } from "./chunks/chunk-VG7AXKTA.js";
 import "./chunks/chunk-WSFCRVEQ.js";
 
@@ -70,12 +59,12 @@ import { useState, useEffect, useRef } from "react";
 import { addPropertyControls, ControlType, RenderTarget } from "unframer";
 import { motion } from "unframer";
 
-// /:https://framer.com/m/hero-icons/Home.js@0.0.27
+// /:https://framerusercontent.com/modules/eTFACFXlvp5mgG2YpBpd/r3pQNmZVI0ezN9aYaWYM/Home.js
 var r;
 var l = (e) => {
 	if (!r) {
-		const t = ({ size: o = 24, ...a }, n) =>
-			e.createElement(
+		const t = ({ size: o = 24, ...a }, n) => {
+			return e.createElement(
 				"svg",
 				{
 					viewBox: "0 0 20 20",
@@ -89,6 +78,7 @@ var l = (e) => {
 					d: "M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z",
 				}),
 			);
+		};
 		r = e.forwardRef(t);
 	}
 	return r;
@@ -651,7 +641,7 @@ import {
 	Stack,
 } from "unframer";
 
-// /:https://framer.com/m/framer/useConstant.js@^1.0.0
+// /:https://framerusercontent.com/modules/e6iTGMqgmkFJvN0mYhkr/KWXeR1JD2kMVZ95etjSs/useConstant.js
 import { useRef as useRef2 } from "react";
 function useConstant(init) {
 	const ref = useRef2(null);
@@ -661,7 +651,7 @@ function useConstant(init) {
 	return ref.current;
 }
 
-// /:https://framer.com/m/framer/randomID.js@^2.0.0
+// /:https://framerusercontent.com/modules/9v9kZvfG4dVIvUGXWTUG/0XmuCxJqtgJLC9OHPU64/randomID.js
 var BASE62 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 function randomID(length = 5) {
 	return Array(length)
@@ -3687,12 +3677,23 @@ function ComponentWithRoot({ locale, ...rest }) {
 	);
 }
 /**
+ * @type {import("unframer").UnframerBreakpoint}
+ * Represents a responsive breakpoint for unframer.
+ */
+
+/**
+ * @typedef VariantsMap
+ * Partial record of UnframerBreakpoint to Props.variant, with a mandatory 'base' key.
+ * { [key in UnframerBreakpoint]?: Props['variant'] } & { base: Props['variant'] }
+ */
+
+/**
  * Renders MenusFramerComponent for all breakpoints with a variants map. Variant prop is inferred per breakpoint.
  * @function
  * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props
  * @returns {any}
  */
-ComponentWithRoot.Responsive = ({ locale, ...rest }) => {
+ComponentWithRoot.Responsive = ({ locale = "", ...rest }) => {
 	return (
 		<ContextProviders
 			routes={routes}
