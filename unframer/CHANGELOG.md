@@ -1,5 +1,17 @@
 # unframer
 
+## 4.0.0
+
+### Major Changes
+
+- **ESM-only package**: Dropped CommonJS support, package now requires `"type": "module"` in consumers
+- **Node.js 18+ required**: Uses modern ESM features like `with { type: 'json' }` import attributes
+- **Faster builds**: Uses `tsgo` (@typescript/native-preview) for compilation
+
+### Migration
+
+If you're using CommonJS, upgrade Node.js to v22.12.0+ which supports `require()` on ESM modules.
+
 ## 3.2.18
 
 ### Patch Changes

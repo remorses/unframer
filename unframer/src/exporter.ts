@@ -1,9 +1,12 @@
 import { BuildResult, build, context, type BuildOptions } from 'esbuild'
 
-import packageJson from '../package.json'
+
 
 import url from 'url'
-import { Config } from './cli'
+import { createRequire } from 'node:module'
+import { Config } from './cli.js'
+
+const require = createRequire(import.meta.url)
 
 import { Sema } from 'async-sema'
 
@@ -39,14 +42,14 @@ import {
     defaultExternalPackages,
     esbuildPluginBundleDependencies,
     resolveRedirect,
-} from './esbuild'
+} from './esbuild.js'
 import {
     ControlDescription,
     ControlType,
     PropertyControls,
     combinedCSSRules,
 } from './framer.js'
-import { notifyError } from './sentry'
+import { notifyError } from './sentry.js'
 import {
     kebabCase,
     logger,
@@ -1018,141 +1021,6 @@ export function findRelativeLinks(text: string) {
     return [...lineNumbers]
 }
 
-async function extractPropControlsSafe(text, name) {
-    try {
-        const propControlsCode = await parsePropertyControls(text)
-        // console.log('propControlsCode', propControlsCode)
-        const propControls: PropertyControls | undefined =
-            await Promise.resolve().then(async () => {
-                if (!propControlsCode) return
-                const ivm = require('isolated-vm')
-                const vm = new ivm.Isolate({ memoryLimit: 128 })
-
-                const vmContext = vm.createContextSync()
-
-                const jail = vmContext.global
-
-                let result = undefined
-                vmContext.global.setSync('__return', (x) => {
-                    result = x
-                })
-
-                const mod = vm.compileModuleSync(`${text}`)
-                await mod.instantiateSync(vmContext, (spec, mod) => {
-                    // TODO instantiate framer, react, framer-motion etc
-                    return
-                })
-                await mod.evaluate({})
-                return result
-            })
-        if (!propControls) {
-            logger.error(`no property controls found for component ${name}`)
-            return
-        }
-        return propControls
-    } catch (e: any) {
-        notifyError(error, 'typescript generation error')
-        logger.error(`Cannot get property controls for ${name}`, e.stack)
-    }
-}
-
-async function getTokensCss({
-    out,
-    result,
-}: {
-    out: string
-    result: BuildResult<{ metafile: true }>
-}) {
-    const allTokens = [] as {
-        tokenName: string
-        defaultValues: Set<string>
-        nameAnnotation?: string
-        usedBy: Set<string>
-    }[]
-    for (let file of result.outputFiles!) {
-        const code = fs.readFileSync(path.resolve(out, file.path), 'utf-8')
-        const tokens = extractTokenInfo(code)
-        // console.log('tokens', tokens)
-        for (let token of tokens) {
-            const already = allTokens.find(
-                (x) => x.tokenName === token.tokenName,
-            )
-            const filePath = path.relative(out, file.path)
-
-            const filePaths = (() => {
-                if (!filePath.startsWith('chunk-')) {
-                    return [filePath]
-                }
-                const files = Object.entries(result.metafile.outputs).filter(
-                    ([k, v]) => {
-                        const filename = path.basename(k)
-                        if (filename.startsWith('chunk-')) {
-                            return false
-                        }
-                        const doesItImport = v.imports.find(
-                            (x) => x.path === filePath,
-                        )
-                        return doesItImport
-                    },
-                )
-                return files.map(([k, v]) => k)
-            })()
-            if (!token?.tokenName?.startsWith('--token')) {
-                continue
-            }
-            if (!already) {
-                allTokens.push({
-                    tokenName: token.tokenName,
-                    defaultValues: new Set([token.defaultValue]),
-                    nameAnnotation: token.metadata?.name,
-                    usedBy: new Set([...filePaths]),
-                })
-            } else {
-                already.defaultValues.add(token.defaultValue)
-                if (!already.nameAnnotation && token.metadata?.name) {
-                    already.nameAnnotation = token.metadata.name
-                }
-                filePaths.map((x) => already.usedBy.add(x))
-            }
-        }
-    }
-    const groupedByUsers = groupBy(allTokens, (x) => {
-        const str = `/* Used by ${[...x.usedBy].sort().join(', ')} */`
-        return str
-    })
-
-    const cssStrings = [...groupedByUsers.entries()]
-        .map(([usedBy, x]) => {
-            return (
-                `    /* Used by ${[...x[0].usedBy].sort().join(', ')} */\n` +
-                [...x]
-                    .map((x) => {
-                        const possibleValues = [...x.defaultValues].sort()
-                        let comment = ''
-                        comment += x.nameAnnotation
-                            ? ` Named as ${JSON.stringify(
-                                  x.nameAnnotation,
-                              )} in Framer.`
-                            : ''
-                        comment +=
-                            possibleValues.length > 1
-                                ? ` Also seen as ${possibleValues
-                                      .slice(1)
-                                      .join(', ')}.`
-                                : ''
-
-                        return `    ${x.tokenName}: ${possibleValues[0]}; ${
-                            comment ? `/*${comment} */` : ''
-                        }`
-                    })
-                    .join('\n')
-            )
-        })
-        .join('\n')
-    const tokensCss = `:root {\n${cssStrings}\n}`
-    return tokensCss
-}
-
 const nodePath = process.argv[0] || 'node'
 
 export async function extractPropControlsUnsafe(
@@ -1170,7 +1038,7 @@ export async function extractPropControlsUnsafe(
 
     const TIMEOUT = 5 * 1000
     const UNFRAMER_MAP_PACKAGES = {
-        unframer: url.pathToFileURL(require.resolve('../esm/index.js')).href,
+        unframer: url.pathToFileURL(require.resolve('../dist/index.js')).href,
         react: url.pathToFileURL(require.resolve('react')).href,
         'react-dom': url.pathToFileURL(require.resolve('react-dom')).href,
         'react/jsx-runtime': url.pathToFileURL(
@@ -1358,42 +1226,6 @@ function splitOnce(str: string, separator: string) {
 
 const breakpointVariants = ['mobile', 'tablet', 'desktop']
 
-function getVariantsFromPropControls(propControls?: PropertyControls) {
-    if (!propControls?.variant) {
-        return null
-    }
-
-    let variants =
-        propControls.variant?.['optionTitles'] ||
-        propControls.variant?.['options'] ||
-        []
-    // Sort breakpoint-related variants first
-    return {
-        variants: variants,
-        breakpoints: variants.filter((v) =>
-            breakpointVariants.some((device) =>
-                v.toLowerCase().includes(device),
-            ),
-        ),
-    }
-}
-
-function findExampleProperty(propertyControls?: PropertyControls) {
-    if (!propertyControls) {
-        return null
-    }
-
-    const stringProp = Object.entries(propertyControls).find(([_, control]) => {
-        // console.log('control', _, control)
-        return control?.type === ControlType.String
-    })
-
-    if (!stringProp) {
-        return null
-    }
-
-    return propCamelCaseJustLikeFramer(stringProp[1]?.title || '')
-}
 
 async function recursiveReaddir(dir: string): Promise<string[]> {
     const dirents = await fs.promises.readdir(dir, { withFileTypes: true })

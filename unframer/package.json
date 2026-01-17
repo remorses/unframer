@@ -1,16 +1,17 @@
 {
     "name": "unframer",
-    "version": "3.2.18",
+    "version": "4.0.0",
+    "type": "module",
     "description": "Import Framer components directly in your React app, type safe and customizable",
     "sideEffects": false,
     "repository": "https://github.com/remorses/unframer",
     "scripts": {
-        "build": "rm -rf dist esm && pnpm tsc -m esnext --moduleResolution node --outDir esm && pnpm tsc && echo copying && cp ../README.md ./README.md && cp ./src/framer.d.ts ./dist/framer.d.ts && cp ./src/framer.d.ts ./esm/framer.d.ts && cp ./src/framer.js ./dist/framer.js && cp ./src/framer.js ./esm/framer.js && cp -r ./src/framer-chunks ./dist/framer-chunks && cp -r ./src/framer-chunks ./esm/framer-chunks",
+        "build": "rm -rf dist && pnpm tsgo && cp ../README.md ./README.md && cp ./src/framer.d.ts ./dist/framer.d.ts && cp ./src/framer.js ./dist/framer.js && cp -r ./src/framer-chunks ./dist/framer-chunks",
         "test": "vitest",
         "gen-client": "export DIR=./src/generated/ && cd ../../website && pnpm tsc; rm -rf $DIR && mkdir -p $DIR && cp ./dist/src/lib/api-client.* $DIR",
         "prepublishOnly": "pnpm tsx scripts/version-replace.ts && pnpm build",
         "download-framer": "tsx scripts/download.ts",
-        "watch": "rm -rf dist esm && pnpm concurrently 'pnpm tsc -w' 'pnpm tsc -m esnext --moduleResolution node --outDir esm --watch'"
+        "watch": "rm -rf dist && pnpm tsc -w"
     },
     "bin": "bin.js",
     "files": [
@@ -18,14 +19,13 @@
         "framer-fixed",
         "bin.js",
         "src",
-        "README.md",
-        "esm"
+        "README.md"
     ],
+    "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
     "exports": {
         ".": {
             "types": "./dist/index.d.ts",
-            "module": "./esm/index.js",
             "default": "./dist/index.js"
         },
         "./src/framer.js": {
@@ -34,7 +34,6 @@
         },
         "./dist/exporter": {
             "types": "./dist/exporter.d.ts",
-            "module": "./esm/exporter.js",
             "default": "./dist/exporter.js"
         },
         "./styles/*": {
@@ -57,7 +56,7 @@
     },
     "dependencies": {
         "@antfu/ni": "^25.0.0",
-        "@babel/core": "^7.26.7",
+        "@babel/core": "^7.28.6",
         "@biomejs/js-api": "^0.7.1",
         "@biomejs/wasm-nodejs": "^1.9.4",
         "async-sema": "^3.1.1",
@@ -69,21 +68,22 @@
         "real-framer-motion": "npm:framer-motion@^12.23.12",
         "spiceflow": "^1.17.10",
         "string-dedent": "^3.0.1",
-        "undici": "^7.10.0"
+        "undici": "^7.18.2"
     },
     "devDependencies": {
         "@babel/helper-annotate-as-pure": "^7.25.9",
         "@babel/helper-environment-visitor": "^7.24.7",
         "@babel/helper-split-export-declaration": "^7.24.7",
         "@babel/plugin-transform-react-pure-annotations": "^7.25.9",
-        "@babel/traverse": "^7.26.7",
-        "@babel/types": "^7.26.7",
+        "@babel/traverse": "^7.28.6",
+        "@babel/types": "^7.28.6",
         "@types/babel__core": "^7.20.5",
-        "@types/babel__traverse": "^7.20.6",
+        "@types/babel__traverse": "^7.28.0",
         "@types/bun": "^1.1.6",
         "@types/node": "^22.15.21",
         "@types/react": "^19.2.7",
         "@types/react-dom": "^19.2.3",
+        "@typescript/native-preview": "7.0.0-dev.20260117.1",
         "@xmorse/deployment-utils": "^0.7.4",
         "concurrently": "^9.1.2",
         "dprint-node": "^1.0.8",

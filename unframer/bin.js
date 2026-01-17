@@ -1,5 +1,5 @@
 #!/usr/bin/env node
 
-const { cli } = require('./dist/cli.js')
+import { cli } from './dist/cli.js'
 
 cli.parse()

@@ -1,14 +1,16 @@
 // original https://github.com/babel/babel/blob/9c77558234c87b9220604fbc1519089e2d6334e2/packages/babel-traverse/src/scope/lib/renamer.ts#L61
 import splitExportDeclaration from '@babel/helper-split-export-declaration'
-import type { Scope } from '@babel/traverse'
-import { visitors } from '@babel/traverse'
-import { traverseNode } from '@babel/traverse/lib/traverse-node'
+import traverse, { type Scope, visitors, type TraverseOptions } from '@babel/traverse'
+
 
 import * as t from '@babel/types'
-
 import { NodePath, Visitor } from '@babel/core'
+
+// ESM import of CommonJS module - traverse.default contains the actual traverse function
+const traverseNode = traverse.default?.node || (traverse as any).node
+
 import type { Identifier } from '@babel/types'
-import { logger } from './utils'
+import { logger } from './utils.js'
 
 const renameVisitor: Visitor<BatchRenamer> = {
     ReferencedIdentifier({ node }, state) {
@@ -157,7 +159,7 @@ export default class BatchRenamer {
 
         traverseNode(
             scope.block,
-            visitors.explode(renameVisitor),
+            visitors.explode(renameVisitor) as TraverseOptions,
             scope,
             this,
             scope.path,

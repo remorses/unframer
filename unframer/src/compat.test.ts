@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest"
-import { propCamelCaseJustLikeFramer } from "./compat"
+import { propCamelCaseJustLikeFramer } from "./compat.js"
 
 describe('propCamelCase', () => {
     test('converts dashes to camelCase', () => {

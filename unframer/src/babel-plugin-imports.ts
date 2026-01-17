@@ -5,7 +5,7 @@ import type {
     ImportDeclaration,
     ImportSpecifier
 } from '@babel/types'
-import BatchRenamer from './renamer'
+import BatchRenamer from './renamer.js'
 
 export function babelPluginDeduplicateImports({
     types: t,

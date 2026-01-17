@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest'
-import { replaceWebPageIds } from './esbuild'
+import { replaceWebPageIds } from './esbuild.js'
 import path from 'path'
 
 describe('replaceWebPageIds', () => {

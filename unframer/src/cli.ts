@@ -1,6 +1,7 @@
 import { setMaxListeners } from 'events'
-import pkg from '../package.json'
-import { blue, bgBlue, green } from 'picocolors'
+import pkg from '../package.json' with { type: 'json' }
+import pico from 'picocolors'
+const { blue, bgBlue, green } = pico
 import { fetch } from 'undici'
 import './sentry.js'
 

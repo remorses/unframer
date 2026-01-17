@@ -3,7 +3,7 @@ import { describe, test, expect } from 'vitest'
 import { transform } from '@babel/core'
 import dprint from 'dprint-node'
 import { dedent } from '../src/utils.js'
-import { babelPluginTypedoc } from '../src/babel-typedoc'
+import { babelPluginTypedoc } from "../src/babel-typedoc.js"
 
 /**
  * Helper that runs Babel with the typedoc-injection plugin and formats the

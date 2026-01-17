@@ -1,13 +1,12 @@
 import { fetch } from 'undici'
 import { RateLimit, Sema } from 'async-sema'
-import { logger, spinner } from './utils'
+import { logger, spinner } from './utils.js'
 
 import { Plugin, transform, type OnResolveArgs } from 'esbuild'
-import { resolvePackage } from './exporter'
-import { notifyError } from './sentry'
-import { dispatcher } from './undici-dispatcher'
-import { framerPackageVersions } from './framer-package-versions'
-
+import { resolvePackage } from './exporter.js'
+import { notifyError } from './sentry.js'
+import { dispatcher } from './undici-dispatcher.js'
+import { framerPackageVersions } from './framer-package-versions.js'
 
 export const defaultExternalPackages = [
     'react',
@@ -104,19 +103,32 @@ export function esbuildPluginBundleDependencies({
                     }).catch(() => '')
                     if (!installed) {
                         if (!reportedMissingPackages.has(pkg)) {
-                            const hasFramerVersion = Object.prototype.hasOwnProperty.call(framerPackageVersions, pkg)
+                            const hasFramerVersion =
+                                Object.prototype.hasOwnProperty.call(
+                                    framerPackageVersions,
+                                    pkg,
+                                )
                             if (hasFramerVersion) {
-                                const version = framerPackageVersions[pkg as keyof typeof framerPackageVersions]
-                                spinner.info(`Missing package detected: ${pkg} (using Framer version ^${version})`)
+                                const version =
+                                    framerPackageVersions[
+                                        pkg as keyof typeof framerPackageVersions
+                                    ]
+                                spinner.info(
+                                    `Missing package detected: ${pkg} (using Framer version ^${version})`,
+                                )
                             } else {
                                 spinner.info(`Missing package detected: ${pkg}`)
                             }
                             reportedMissingPackages.add(pkg)
                         }
                         // Check if we have a specific version from framerPackageVersions
-                        const packageWithVersion = Object.prototype.hasOwnProperty.call(framerPackageVersions, pkg)
-                            ? `${pkg}@^${framerPackageVersions[pkg as keyof typeof framerPackageVersions]}`
-                            : pkg
+                        const packageWithVersion =
+                            Object.prototype.hasOwnProperty.call(
+                                framerPackageVersions,
+                                pkg,
+                            )
+                                ? `${pkg}@^${framerPackageVersions[pkg as keyof typeof framerPackageVersions]}`
+                                : pkg
                         onCollectMissingPackage?.(packageWithVersion)
                     }
                     return {
@@ -142,19 +154,32 @@ export function esbuildPluginBundleDependencies({
                     }).catch(() => '')
                     if (!installed) {
                         if (!reportedMissingPackages.has(pkg)) {
-                            const hasFramerVersion = Object.prototype.hasOwnProperty.call(framerPackageVersions, pkg)
+                            const hasFramerVersion =
+                                Object.prototype.hasOwnProperty.call(
+                                    framerPackageVersions,
+                                    pkg,
+                                )
                             if (hasFramerVersion) {
-                                const version = framerPackageVersions[pkg as keyof typeof framerPackageVersions]
-                                spinner.info(`Missing package detected: ${pkg} (using Framer version ^${version})`)
+                                const version =
+                                    framerPackageVersions[
+                                        pkg as keyof typeof framerPackageVersions
+                                    ]
+                                spinner.info(
+                                    `Missing package detected: ${pkg} (using Framer version ^${version})`,
+                                )
                             } else {
                                 spinner.info(`Missing package detected: ${pkg}`)
                             }
                             reportedMissingPackages.add(pkg)
                         }
                         // Check if we have a specific version from framerPackageVersions
-                        const packageWithVersion = Object.prototype.hasOwnProperty.call(framerPackageVersions, pkg)
-                            ? `${pkg}@^${framerPackageVersions[pkg as keyof typeof framerPackageVersions]}`
-                            : pkg
+                        const packageWithVersion =
+                            Object.prototype.hasOwnProperty.call(
+                                framerPackageVersions,
+                                pkg,
+                            )
+                                ? `${pkg}@^${framerPackageVersions[pkg as keyof typeof framerPackageVersions]}`
+                                : pkg
                         onCollectMissingPackage?.(packageWithVersion)
                     }
                     return {

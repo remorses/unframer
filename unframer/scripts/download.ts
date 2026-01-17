@@ -10,9 +10,9 @@ import { build } from 'esbuild'
 import { PluginObj, transform } from '@babel/core'
 import fs from 'fs'
 import path from 'path'
-import { esbuildPluginBundleDependencies } from '../src/esbuild'
-import { logger } from '../src/utils'
-import { babelPluginDeduplicateImports } from '../src/babel-plugin-imports'
+import { esbuildPluginBundleDependencies } from "../src/esbuild.js"
+import { logger } from "../src/utils.js"
+import { babelPluginDeduplicateImports } from "../src/babel-plugin-imports.js"
 
 const __dirname = path.dirname(new URL(import.meta.url).pathname)
 
