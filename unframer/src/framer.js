@@ -11346,7 +11346,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.HF6P2ATK.mjs
+// /:https://app.framerstatic.com/framer.Z3P5JKQJ.mjs
 
 import React42 from 'react';
 import { useDeferredValue, useSyncExternalStore, } from 'react';
@@ -12664,6 +12664,7 @@ function getRouteElementId(route, hash2,) {
   return void 0;
 }
 var EMPTY_ARRAY = [];
+var EMPTY_OBJECT = {};
 function monitorINPRelatedInputs(signal,) {
   const inpRelatedInputs = ['pointerdown', 'pointerup', 'keydown', 'keyup',];
   const inpRelatedInputHandler = (event) => {
@@ -12839,11 +12840,15 @@ var DevalueError = class extends Error {
   /**
    * @param {string} message
    * @param {string[]} keys
+   * @param {any} [value] - The value that failed to be serialized
+   * @param {any} [root] - The root value being serialized
    */
-  constructor(message, keys3,) {
+  constructor(message, keys3, value, root,) {
     super(message,);
     this.name = 'DevalueError';
     this.path = keys3.join('',);
+    this.value = value;
+    this.root = root;
   }
 };
 function is_primitive(thing,) {
@@ -12992,6 +12997,7 @@ function unflatten(parsed, revivers,) {
   const values = /** @type {any[]} */
     parsed;
   const hydrated = Array(values.length,);
+  let hydrating = null;
   function hydrate(index, standalone = false,) {
     if (index === UNDEFINED) return void 0;
     if (index === NAN) return NaN;
@@ -13008,13 +13014,20 @@ function unflatten(parsed, revivers,) {
     } else if (Array.isArray(value,)) {
       if (typeof value[0] === 'string') {
         const type = value[0];
-        const reviver = revivers?.[type];
+        const reviver = revivers && Object.hasOwn(revivers, type,) ? revivers[type] : void 0;
         if (reviver) {
           let i = value[1];
           if (typeof i !== 'number') {
             i = values.push(value[1],) - 1;
           }
-          return hydrated[index] = reviver(hydrate(i,),);
+          hydrating ??= /* @__PURE__ */ new Set();
+          if (hydrating.has(i,)) {
+            throw new Error('Invalid circular reference',);
+          }
+          hydrating.add(i,);
+          hydrated[index] = reviver(hydrate(i,),);
+          hydrating.delete(i,);
+          return hydrated[index];
         }
         switch (type) {
           case 'Date':
@@ -13061,13 +13074,20 @@ function unflatten(parsed, revivers,) {
           case 'Float64Array':
           case 'BigInt64Array':
           case 'BigUint64Array': {
+            if (values[value[1]][0] !== 'ArrayBuffer') {
+              throw new Error('Invalid data',);
+            }
             const TypedArrayConstructor = globalThis[type];
-            const typedArray = new TypedArrayConstructor(hydrate(value[1],),);
+            const buffer = hydrate(value[1],);
+            const typedArray = new TypedArrayConstructor(buffer,);
             hydrated[index] = value[2] !== void 0 ? typedArray.subarray(value[2], value[3],) : typedArray;
             break;
           }
           case 'ArrayBuffer': {
             const base64 = value[1];
+            if (typeof base64 !== 'string') {
+              throw new Error('Invalid ArrayBuffer encoding',);
+            }
             const arraybuffer = decode64(base64,);
             hydrated[index] = arraybuffer;
             break;
@@ -13157,7 +13177,7 @@ function stringify(value, reducers,) {
       }
     }
     if (typeof thing === 'function') {
-      throw new DevalueError(`Cannot stringify a function`, keys3,);
+      throw new DevalueError(`Cannot stringify a function`, keys3, thing, value,);
     }
     let str = '';
     if (is_primitive(thing,)) {
@@ -13260,10 +13280,10 @@ function stringify(value, reducers,) {
           break;
         default:
           if (!is_plain_object(thing,)) {
-            throw new DevalueError(`Cannot stringify arbitrary non-POJOs`, keys3,);
+            throw new DevalueError(`Cannot stringify arbitrary non-POJOs`, keys3, thing, value,);
           }
           if (enumerable_symbols(thing,).length > 0) {
-            throw new DevalueError(`Cannot stringify POJOs with symbolic keys`, keys3,);
+            throw new DevalueError(`Cannot stringify POJOs with symbolic keys`, keys3, thing, value,);
           }
           if (Object.getPrototypeOf(thing,) === null) {
             str = '["null"';
@@ -13698,144 +13718,8 @@ function yieldToMain(options,) {
   }
   return schedulerYield(schedulerOptions,);
 }
-var pathVariablesRegExpRaw = ':([a-z]\\w*)';
-var pathVariablesRegExp = /* @__PURE__ */ new RegExp(pathVariablesRegExpRaw, 'gi',);
-async function getLocalesForCurrentRoute(activeLocale, locales, currentRoute, pathVariables, collectionUtils,) {
-  if (!currentRoute) return locales;
-  const slugByLocaleIfCollectionPage = await getSlugByLocaleIfCollectionPage(
-    activeLocale,
-    locales,
-    currentRoute,
-    pathVariables,
-    collectionUtils,
-  );
-  const includedLocalesForCurrentRoute = currentRoute.includedLocales;
-  const localesForCurrentRoute = [];
-  for (const locale of locales) {
-    if (includedLocalesForCurrentRoute) {
-      if (!includedLocalesForCurrentRoute.includes(locale.id,)) continue;
-    }
-    if (slugByLocaleIfCollectionPage) {
-      const hasSlug = slugByLocaleIfCollectionPage.has(locale.id,);
-      if (!hasSlug) continue;
-    }
-    localesForCurrentRoute.push(locale,);
-  }
-  return localesForCurrentRoute;
-}
-async function getSlugByLocaleIfCollectionPage(activeLocale, locales, currentRoute, pathVariables, collectionUtils,) {
-  const {
-    collectionId,
-  } = currentRoute;
-  if (!collectionId) return null;
-  if (!activeLocale) return null;
-  if (!pathVariables) return null;
-  const {
-    path,
-  } = currentRoute;
-  if (!path) return null;
-  const matches = Array.from(path.matchAll(pathVariablesRegExp,),);
-  const lastMatch = matches.pop();
-  if (!lastMatch) return null;
-  const pathVariableWithDelimiter = lastMatch?.[0];
-  const pathVariableValue = lastMatch?.[1];
-  if (!pathVariableWithDelimiter || !pathVariableValue) {
-    throw new Error('Failed to replace path variables: unexpected regex match group',);
-  }
-  const currentSlug = pathVariables[pathVariableValue];
-  if (!currentSlug || !isString(currentSlug,)) {
-    throw new Error(`No slug found for path variable ${pathVariableValue}`,);
-  }
-  const utils = collectionUtils?.get(collectionId,);
-  if (!utils) return null;
-  const maybeRecordId = utils.getRecordIdBySlug(currentSlug, activeLocale,);
-  const recordId = isPromise(maybeRecordId,) ? await maybeRecordId : maybeRecordId;
-  if (!recordId) return null;
-  const slugById = /* @__PURE__ */ new Map();
-  await Promise.all(locales.map(async (locale) => {
-    const maybeSlug = utils.getSlugByRecordId(recordId, locale,);
-    const slug = isPromise(maybeSlug,) ? await maybeSlug : maybeSlug;
-    if (!slug) return;
-    slugById.set(locale.id, slug,);
-  },),);
-  return slugById;
-}
-var noopAsync = async () => {};
-var defaultLocaleInfo = {
-  activeLocale: null,
-  locales: [],
-  setLocale: noopAsync,
-};
-var LocaleInfoContext = /* @__PURE__ */ (() => {
-  const Context2 = React42.createContext(defaultLocaleInfo,);
-  Context2.displayName = 'LocaleInfoContext';
-  return Context2;
-})();
-function useLocaleInfo() {
-  return React42.useContext(LocaleInfoContext,);
-}
-function useLocalesForCurrentRoute() {
-  const {
-    currentRouteId,
-    routes,
-    currentPathVariables,
-  } = useRouter();
-  const {
-    activeLocale,
-    locales,
-  } = useLocaleInfo();
-  const [localesForCurrentRoute, setLocalesForCurrentRoute,] = React42.useState(() => activeLocale ? [activeLocale,] : []);
-  const currentRoute = currentRouteId ? routes?.[currentRouteId] : void 0;
-  const collectionUtils = useCollectionUtils();
-  React42.useEffect(() => {
-    let active = true;
-    getLocalesForCurrentRoute(activeLocale, locales, currentRoute, currentPathVariables, collectionUtils,).then((localesSubset) => {
-      if (!active) return;
-      React42.startTransition(() => {
-        if (localesSubset) {
-          setLocalesForCurrentRoute(localesSubset,);
-        } else {
-          setLocalesForCurrentRoute(activeLocale ? [activeLocale,] : [],);
-        }
-      },);
-    },).catch(() => {},);
-    return () => {
-      active = false;
-    };
-  }, [activeLocale, locales, collectionUtils, currentRoute, currentPathVariables,],);
-  return localesForCurrentRoute;
-}
-function useLocalizationInfo() {
-  const {
-    activeLocale,
-    locales,
-    setLocale,
-  } = useLocaleInfo();
-  return {
-    activeLocalization: activeLocale,
-    localizations: locales,
-    setLocalization: setLocale,
-  };
-}
-function useLocaleCode() {
-  return useLocaleInfo().activeLocale?.code ?? 'en-US';
-}
-function useLocale() {
-  return useLocaleCode();
-}
-var LayoutDirectionContext = /* @__PURE__ */ (() => {
-  const Context2 = React42.createContext('ltr',);
-  Context2.displayName = 'LayoutDirectionContext';
-  return Context2;
-})();
-function useLayoutDirection() {
-  return React42.useContext(LayoutDirectionContext,);
-}
 var shouldPreloadBasedOnUA = !isBot;
 function usePreloadRoute() {
-  const {
-    activeLocale,
-  } = useLocaleInfo();
   const collectionUtils = useCollectionUtils();
   const {
     autobahnNavigation: autobahnNavigationEnabled,
@@ -13843,26 +13727,30 @@ function usePreloadRoute() {
   const {
     getRoute,
   } = useRouter();
-  return useCallback2((routeId, pathVariables, yieldBeforePreload = true,) => {
+  return useCallback2((routeId, linkContext, yieldBeforePreload = true,) => {
     if (!routeId || !getRoute) return;
     const route = getRoute(routeId,);
+    const {
+      pathVariables,
+      locale,
+    } = linkContext;
     const context = routeId && autobahnNavigationEnabled
       ? {
         routeId,
         pathVariables,
-        locale: activeLocale ?? void 0,
+        locale,
         collectionUtils,
       }
       : void 0;
     return preloadRoute(route, context, yieldBeforePreload,);
-  }, [getRoute, activeLocale, collectionUtils, autobahnNavigationEnabled,],);
+  }, [getRoute, collectionUtils, autobahnNavigationEnabled,],);
 }
 function useRoutePreloader(routeIds, enabled = true,) {
   const preload = usePreloadRoute();
   useEffect(() => {
     if (!enabled || !shouldPreloadBasedOnUA) return;
     for (const routeId of routeIds) {
-      void preload(routeId,);
+      void preload(routeId, EMPTY_OBJECT,);
     }
   }, [routeIds, enabled, preload,],);
 }
@@ -13893,7 +13781,7 @@ async function preloadRouteData(component, context,) {
     collectionUtils: context.collectionUtils,
   };
   try {
-    await loader.load({}, loaderContext,);
+    await loader.load(EMPTY_OBJECT, loaderContext,);
   } catch (e) {
     if (false) console.warn('Route data preload failed', e,);
   }
@@ -14030,6 +13918,8 @@ function normalizeString(path,) {
   return res;
 }
 var customNotFoundPagePaths = /* @__PURE__ */ new Set([`/404.html`, `/404`, `/404/`,],);
+var pathVariablesRegExpRaw = ':([a-z]\\w*)';
+var pathVariablesRegExp = /* @__PURE__ */ new RegExp(pathVariablesRegExpRaw, 'gi',);
 function fillPathVariables(path, variables,) {
   return path.replace(pathVariablesRegExp, (match, name,) => {
     const value = variables[name];
@@ -15060,6 +14950,137 @@ function useMemoOne(factory, inputs,) {
     committed.current = cache2;
   }, [cache2,],);
   return cache2.result;
+}
+async function getLocalesForCurrentRoute(activeLocale, locales, currentRoute, pathVariables, collectionUtils,) {
+  if (!currentRoute) return locales;
+  const slugByLocaleIfCollectionPage = await getSlugByLocaleIfCollectionPage(
+    activeLocale,
+    locales,
+    currentRoute,
+    pathVariables,
+    collectionUtils,
+  );
+  const includedLocalesForCurrentRoute = currentRoute.includedLocales;
+  const localesForCurrentRoute = [];
+  for (const locale of locales) {
+    if (includedLocalesForCurrentRoute) {
+      if (!includedLocalesForCurrentRoute.includes(locale.id,)) continue;
+    }
+    if (slugByLocaleIfCollectionPage) {
+      const hasSlug = slugByLocaleIfCollectionPage.has(locale.id,);
+      if (!hasSlug) continue;
+    }
+    localesForCurrentRoute.push(locale,);
+  }
+  return localesForCurrentRoute;
+}
+async function getSlugByLocaleIfCollectionPage(activeLocale, locales, currentRoute, pathVariables, collectionUtils,) {
+  const {
+    collectionId,
+  } = currentRoute;
+  if (!collectionId) return null;
+  if (!activeLocale) return null;
+  if (!pathVariables) return null;
+  const {
+    path,
+  } = currentRoute;
+  if (!path) return null;
+  const matches = Array.from(path.matchAll(pathVariablesRegExp,),);
+  const lastMatch = matches.pop();
+  if (!lastMatch) return null;
+  const pathVariableWithDelimiter = lastMatch?.[0];
+  const pathVariableValue = lastMatch?.[1];
+  if (!pathVariableWithDelimiter || !pathVariableValue) {
+    throw new Error('Failed to replace path variables: unexpected regex match group',);
+  }
+  const currentSlug = pathVariables[pathVariableValue];
+  if (!currentSlug || !isString(currentSlug,)) {
+    throw new Error(`No slug found for path variable ${pathVariableValue}`,);
+  }
+  const utils = collectionUtils?.get(collectionId,);
+  if (!utils) return null;
+  const maybeRecordId = utils.getRecordIdBySlug(currentSlug, activeLocale,);
+  const recordId = isPromise(maybeRecordId,) ? await maybeRecordId : maybeRecordId;
+  if (!recordId) return null;
+  const slugById = /* @__PURE__ */ new Map();
+  await Promise.all(locales.map(async (locale) => {
+    const maybeSlug = utils.getSlugByRecordId(recordId, locale,);
+    const slug = isPromise(maybeSlug,) ? await maybeSlug : maybeSlug;
+    if (!slug) return;
+    slugById.set(locale.id, slug,);
+  },),);
+  return slugById;
+}
+var noopAsync = async () => {};
+var defaultLocaleInfo = {
+  activeLocale: null,
+  locales: [],
+  setLocale: noopAsync,
+};
+var LocaleInfoContext = /* @__PURE__ */ (() => {
+  const Context2 = React42.createContext(defaultLocaleInfo,);
+  Context2.displayName = 'LocaleInfoContext';
+  return Context2;
+})();
+function useLocaleInfo() {
+  return React42.useContext(LocaleInfoContext,);
+}
+function useLocalesForCurrentRoute() {
+  const {
+    currentRouteId,
+    routes,
+    currentPathVariables,
+  } = useRouter();
+  const {
+    activeLocale,
+    locales,
+  } = useLocaleInfo();
+  const [localesForCurrentRoute, setLocalesForCurrentRoute,] = React42.useState(() => activeLocale ? [activeLocale,] : []);
+  const currentRoute = currentRouteId ? routes?.[currentRouteId] : void 0;
+  const collectionUtils = useCollectionUtils();
+  React42.useEffect(() => {
+    let active = true;
+    getLocalesForCurrentRoute(activeLocale, locales, currentRoute, currentPathVariables, collectionUtils,).then((localesSubset) => {
+      if (!active) return;
+      React42.startTransition(() => {
+        if (localesSubset) {
+          setLocalesForCurrentRoute(localesSubset,);
+        } else {
+          setLocalesForCurrentRoute(activeLocale ? [activeLocale,] : [],);
+        }
+      },);
+    },).catch(() => {},);
+    return () => {
+      active = false;
+    };
+  }, [activeLocale, locales, collectionUtils, currentRoute, currentPathVariables,],);
+  return localesForCurrentRoute;
+}
+function useLocalizationInfo() {
+  const {
+    activeLocale,
+    locales,
+    setLocale,
+  } = useLocaleInfo();
+  return {
+    activeLocalization: activeLocale,
+    localizations: locales,
+    setLocalization: setLocale,
+  };
+}
+function useLocaleCode() {
+  return useLocaleInfo().activeLocale?.code ?? 'en-US';
+}
+function useLocale() {
+  return useLocaleCode();
+}
+var LayoutDirectionContext = /* @__PURE__ */ (() => {
+  const Context2 = React42.createContext('ltr',);
+  Context2.displayName = 'LayoutDirectionContext';
+  return Context2;
+})();
+function useLayoutDirection() {
+  return React42.useContext(LayoutDirectionContext,);
 }
 var URLSearchParamsContext = /* @__PURE__ */ (() => {
   const Context2 = createContext({
@@ -22003,9 +22024,9 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
         ul.framer-text,
         mark.framer-text,
         span.framer-text:not([data-text-fill]) {
-            font-family: var(--framer-blockquote-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
-            font-style: var(--framer-blockquote-font-style, var(--framer-font-style, normal));
-            font-weight: var(--framer-blockquote-font-weight, var(--framer-font-weight, 400));
+            font-family: var(--framer-font-family-preview, var(--framer-blockquote-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
+            font-style: var(--framer-font-style-preview, var(--framer-blockquote-font-style, var(--framer-font-style, normal)));
+            font-weight: var(--framer-font-weight-preview, var(--framer-blockquote-font-weight, var(--framer-font-weight, 400)));
             color: var(--framer-blockquote-text-color, var(--framer-text-color, #000));
             font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
             letter-spacing: var(--framer-blockquote-letter-spacing, var(--framer-letter-spacing, 0));
@@ -22023,7 +22044,7 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             -moz-font-feature-settings: var(--framer-font-open-type-features, initial);
             -webkit-font-feature-settings: var(--framer-font-open-type-features, initial);
             font-feature-settings: var(--framer-font-open-type-features, initial);
-            font-variation-settings: var(--framer-font-variation-axes, normal);
+            font-variation-settings: var(--framer-font-variation-axes-preview, var(--framer-font-variation-axes, normal));
             text-wrap: var(--framer-text-wrap-override, var(--framer-text-wrap));
         }
     `, /* css */
@@ -22187,9 +22208,9 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
         span.framer-text[data-nested-link] span.framer-text:not([data-text-fill]) {
             /* Ensure the color is inherited from the link style rather than the parent text for nested spans */
             color: inherit;
-            font-family: var(--framer-blockquote-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
-            font-style: var(--framer-blockquote-font-style, var(--framer-link-font-style, var(--framer-font-style, normal)));
-            font-weight: var(--framer-blockquote-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400)));
+            font-family: var(--framer-font-family-preview, var(--framer-blockquote-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif))));
+            font-style: var(--framer-font-style-preview, var(--framer-blockquote-font-style, var(--framer-link-font-style, var(--framer-font-style, normal))));
+            font-weight: var(--framer-font-weight-preview, var(--framer-blockquote-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400))));
             font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-blockquote-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none)));
             /* Cursor inherit to overwrite the user agent stylesheet on rich text links. */
@@ -22271,9 +22292,9 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
         a.framer-text:hover span.framer-text:not([data-text-fill]),
         span.framer-text[data-nested-link]:hover,
         span.framer-text[data-nested-link]:hover span.framer-text:not([data-text-fill]) {
-            font-family: var(--framer-link-hover-font-family, var(--framer-blockquote-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif))));
-            font-style: var(--framer-link-hover-font-style, var(--framer-blockquote-font-style, var(--framer-link-font-style, var(--framer-font-style, normal))));
-            font-weight: var(--framer-link-hover-font-weight, var(--framer-blockquote-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400))));
+            font-family: var(--framer-font-family-preview, var(--framer-link-hover-font-family, var(--framer-blockquote-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)))));
+            font-style: var(--framer-font-style-preview, var(--framer-link-hover-font-style, var(--framer-blockquote-font-style, var(--framer-link-font-style, var(--framer-font-style, normal)))));
+            font-weight: var(--framer-font-weight-preview, var(--framer-link-hover-font-weight, var(--framer-blockquote-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400)))));
             font-size: calc(var(--framer-link-hover-font-size, var(--framer-blockquote-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-link-hover-text-transform, var(--framer-blockquote-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none))));
             border-radius: var(--framer-link-hover-text-background-radius, var(--framer-link-text-background-radius, var(--framer-text-background-radius, initial)));
@@ -22350,9 +22371,9 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
         a.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]),
         span.framer-text[data-framer-page-link-current],
         span.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]) {
-            font-family: var(--framer-link-current-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
-            font-style: var(--framer-link-current-font-style, var(--framer-link-font-style, var(--framer-font-style, normal)));
-            font-weight: var(--framer-link-current-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400)));
+            font-family: var(--framer-font-family-preview, var(--framer-link-current-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif))));
+            font-style: var(--framer-font-style-preview, var(--framer-link-current-font-style, var(--framer-link-font-style, var(--framer-font-style, normal))));
+            font-weight: var(--framer-font-weight-preview, var(--framer-link-current-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400))));
             font-size: calc(var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-link-current-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none)));
             border-radius: var(--framer-link-current-text-background-radius, var(--framer-link-text-background-radius, initial));
@@ -22445,9 +22466,9 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
         span.framer-text[data-framer-page-link-current]:hover,
         span.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]) {
             color: inherit;
-            font-family: var(--framer-link-hover-font-family, var(--framer-link-current-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif))));
-            font-style: var(--framer-link-hover-font-style, var(--framer-link-current-font-style, var(--framer-link-font-style, var(--framer-font-style, normal))));
-            font-weight: var(--framer-link-hover-font-weight, var(--framer-link-current-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400))));
+            font-family: var(--framer-font-family-preview, var(--framer-link-hover-font-family, var(--framer-link-current-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)))));
+            font-style: var(--framer-font-style-preview, var(--framer-link-hover-font-style, var(--framer-link-current-font-style, var(--framer-link-font-style, var(--framer-font-style, normal)))));
+            font-weight: var(--framer-font-weight-preview, var(--framer-link-hover-font-weight, var(--framer-link-current-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400)))));
             font-size: calc(var(--framer-link-hover-font-size, var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)))) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-link-hover-text-transform, var(--framer-link-current-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none))));
             border-radius: var(--framer-link-hover-text-background-radius, var(--framer-link-current-text-background-radius, var(--framer-link-text-background-radius, initial)));
@@ -36650,102 +36671,6 @@ function withChildrenCanSuspend(Component18,) {
     },);
   },);
 }
-var PRELOAD_AFTER_MS = 500;
-var OBSERVER_THRESHOLD = 0.9;
-var LOW_MEMORY_THRESHOLD = 1.7;
-var MAX_CONCURRENT_PRELOADS_SLOW_NETWORK = 4;
-var MAX_CONCURRENT_PRELOADS_FAST_NETWORK = Infinity;
-var nodeToRoute = /* @__PURE__ */ new WeakMap();
-var preloadedRoutes = /* @__PURE__ */ new Set();
-var routeToNodesInViewport = /* @__PURE__ */ new Map();
-function getObserveRouteForPreloadingFn() {
-  const connection = __unframerNavigator2.connection || __unframerNavigator2.mozConnection || __unframerNavigator2.webkitConnection || {};
-  const lowDeviceMemory = __unframerNavigator2.deviceMemory && __unframerNavigator2.deviceMemory > LOW_MEMORY_THRESHOLD;
-  let effectiveType, preloadDisabled, maxPreloadAmount;
-  function updateConnection() {
-    effectiveType = connection.effectiveType || '';
-    preloadDisabled = connection.saveData || effectiveType.includes('2g',);
-    maxPreloadAmount = effectiveType === '3g' || lowDeviceMemory
-      ? MAX_CONCURRENT_PRELOADS_SLOW_NETWORK
-      : MAX_CONCURRENT_PRELOADS_FAST_NETWORK;
-  }
-  connection.addEventListener?.('change', updateConnection,);
-  updateConnection();
-  const observer2 = new IntersectionObserver(onPreloadIntersectionChange, {
-    threshold: OBSERVER_THRESHOLD,
-  },);
-  let activePreloadsAmount = 0;
-  async function preloadTimeout(context, target,) {
-    if (preloadDisabled) return;
-    const {
-      routeId,
-      pathVariables,
-      preload,
-    } = context;
-    const nodesInViewport = routeToNodesInViewport.get(routeId,);
-    if (!nodesInViewport?.size || preloadedRoutes.has(routeId,)) return;
-    ++activePreloadsAmount;
-    preloadedRoutes.add(routeId,);
-    const preloadPromise = preload(routeId, pathVariables,)?.catch(() => {
-      if (false) {
-        throw new Error(
-          'Error in preloadRoute during preloadTimeout. This should never happen as it introduces bugs. Please make sure preloadRoute does not throw.',
-        );
-      }
-    },);
-    observer2.unobserve(target,);
-    nodeToRoute.delete(target,);
-    for (const node of nodesInViewport) {
-      observer2.unobserve(node,);
-      nodeToRoute.delete(node,);
-    }
-    nodesInViewport.clear();
-    routeToNodesInViewport.delete(routeId,);
-    await preloadPromise;
-    --activePreloadsAmount;
-  }
-  function onPreloadIntersectionChange(entries,) {
-    for (const entry of entries) {
-      const target = entry.target;
-      const context = nodeToRoute.get(target,);
-      if (!context || preloadedRoutes.has(context.routeId,)) {
-        observer2.unobserve(target,);
-        nodeToRoute.delete(target,);
-        continue;
-      }
-      const {
-        routeId,
-      } = context;
-      const nodes = routeToNodesInViewport.get(routeId,);
-      const amountOfNodesInViewport = routeToNodesInViewport.get(routeId,)?.size ?? 0;
-      if (entry.isIntersecting) {
-        if (activePreloadsAmount >= maxPreloadAmount) continue;
-        if (nodes) nodes.add(target,);
-        else routeToNodesInViewport.set(routeId, /* @__PURE__ */ new Set([target,],),);
-        setTimeout(preloadTimeout.bind(void 0, context, target,), PRELOAD_AFTER_MS,);
-      } else {
-        if (nodes) nodes.delete(target,);
-        if (amountOfNodesInViewport <= 1) routeToNodesInViewport.delete(routeId,);
-      }
-    }
-  }
-  return (node, preload, routeId, pathVariables,) => {
-    if (preloadedRoutes.has(routeId,)) return;
-    nodeToRoute.set(node, {
-      routeId,
-      pathVariables,
-      preload,
-    },);
-    observer2.observe(node,);
-    return () => {
-      nodeToRoute.delete(node,);
-      observer2.unobserve(node,);
-    };
-  };
-}
-var observeRouteForPreloading =
-  // this also guards `window`
-  !shouldPreloadBasedOnUA || typeof IntersectionObserver === 'undefined' ? null : /* @__PURE__ */ getObserveRouteForPreloadingFn();
 function findMatchingRouteAttributesForWebPageLink(router, currentRoute, pageLink, activeLocale, resolvedSlugs, implicitPathVariables,) {
   const {
     webPageId,
@@ -36781,10 +36706,16 @@ function findMatchingRouteAttributesForResolvedPath(router, path, implicitPathVa
     const {
       routeId,
       pathVariables,
+      localeId,
     } = inferInitialRouteFromPath(router.routes, pathname, void 0, locales,);
     const route = router.getRoute(routeId,);
     if (route) {
       const combinedPathVariables = Object.assign({}, implicitPathVariables, pathVariables,);
+      const locale = localeId
+        ? locales?.find(({
+          id: id3,
+        },) => id3 === localeId)
+        : void 0;
       return {
         routeId,
         route,
@@ -36793,6 +36724,7 @@ function findMatchingRouteAttributesForResolvedPath(router, path, implicitPathVa
         // should be resolved by getHashForRoute.
         elementId: hash2,
         pathVariables: combinedPathVariables,
+        locale,
       };
     }
   } catch {}
@@ -36837,6 +36769,7 @@ function getRouteAttributes(
     href: resolvedHref,
     elementId: resolvedHash,
     pathVariables: combinedPathVariables,
+    locale: activeLocale ?? void 0,
   };
 }
 var pathVariablesRegExp2 = /:([a-z]\w*)/gi;
@@ -36872,6 +36805,98 @@ function useLinkMatchesRoute(link,) {
   const pageLink = isString(link,) ? linkFromFramerPageLink(link,) : link;
   return isLinkToWebPage(pageLink,) ? linkMatchesRoute(route, pageLink, contextPathVariables,) : false;
 }
+var PRELOAD_AFTER_MS = 500;
+var OBSERVER_THRESHOLD = 0.9;
+var LOW_MEMORY_THRESHOLD = 1.7;
+var MAX_CONCURRENT_PRELOADS_SLOW_NETWORK = 4;
+var MAX_CONCURRENT_PRELOADS_FAST_NETWORK = Infinity;
+var nodeToRoute = /* @__PURE__ */ new WeakMap();
+var preloadedRoutes = /* @__PURE__ */ new Set();
+var routeToNodesInViewport = /* @__PURE__ */ new Map();
+function getObserveRouteForPreloadingFn() {
+  const connection = __unframerNavigator2.connection || __unframerNavigator2.mozConnection || __unframerNavigator2.webkitConnection || {};
+  const lowDeviceMemory = __unframerNavigator2.deviceMemory && __unframerNavigator2.deviceMemory > LOW_MEMORY_THRESHOLD;
+  let effectiveType, preloadDisabled, maxPreloadAmount;
+  function updateConnection() {
+    effectiveType = connection.effectiveType || '';
+    preloadDisabled = connection.saveData || effectiveType.includes('2g',);
+    maxPreloadAmount = effectiveType === '3g' || lowDeviceMemory
+      ? MAX_CONCURRENT_PRELOADS_SLOW_NETWORK
+      : MAX_CONCURRENT_PRELOADS_FAST_NETWORK;
+  }
+  connection.addEventListener?.('change', updateConnection,);
+  updateConnection();
+  const observer2 = new IntersectionObserver(onPreloadIntersectionChange, {
+    threshold: OBSERVER_THRESHOLD,
+  },);
+  let activePreloadsAmount = 0;
+  async function preloadTimeout(context, target,) {
+    if (preloadDisabled) return;
+    const {
+      id: id3,
+      preload,
+    } = context;
+    const nodesInViewport = routeToNodesInViewport.get(id3,);
+    if (!nodesInViewport?.size || preloadedRoutes.has(id3,)) return;
+    ++activePreloadsAmount;
+    preloadedRoutes.add(id3,);
+    const preloadPromise = preload()?.catch(() => {
+      if (false) {
+        throw new Error(
+          'Error in preloadRoute during preloadTimeout. This should never happen as it introduces bugs. Please make sure preloadRoute does not throw.',
+        );
+      }
+    },);
+    observer2.unobserve(target,);
+    nodeToRoute.delete(target,);
+    for (const node of nodesInViewport) {
+      observer2.unobserve(node,);
+      nodeToRoute.delete(node,);
+    }
+    nodesInViewport.clear();
+    routeToNodesInViewport.delete(id3,);
+    await preloadPromise;
+    --activePreloadsAmount;
+  }
+  function onPreloadIntersectionChange(entries,) {
+    for (const entry of entries) {
+      const target = entry.target;
+      const context = nodeToRoute.get(target,);
+      if (!context || preloadedRoutes.has(context.id,)) {
+        observer2.unobserve(target,);
+        nodeToRoute.delete(target,);
+        continue;
+      }
+      const preloadId = context.id;
+      const nodes = routeToNodesInViewport.get(preloadId,);
+      const amountOfNodesInViewport = routeToNodesInViewport.get(preloadId,)?.size ?? 0;
+      if (entry.isIntersecting) {
+        if (activePreloadsAmount >= maxPreloadAmount) continue;
+        if (nodes) nodes.add(target,);
+        else routeToNodesInViewport.set(preloadId, /* @__PURE__ */ new Set([target,],),);
+        setTimeout(preloadTimeout, PRELOAD_AFTER_MS, context, target,);
+      } else {
+        if (nodes) nodes.delete(target,);
+        if (amountOfNodesInViewport <= 1) routeToNodesInViewport.delete(preloadId,);
+      }
+    }
+  }
+  return (node, preload, id3,) => {
+    if (preloadedRoutes.has(id3,)) return;
+    nodeToRoute.set(node, {
+      id: id3,
+      preload,
+    },);
+    observer2.observe(node,);
+    return () => {
+      nodeToRoute.delete(node,);
+      observer2.unobserve(node,);
+    };
+  };
+}
+var observeRouteForPreloading =
+  // this also guards `window`
+  !shouldPreloadBasedOnUA || typeof IntersectionObserver === 'undefined' ? null : /* @__PURE__ */ getObserveRouteForPreloadingFn();
 var AnchorLinkTarget = /* @__PURE__ */ ((AnchorLinkTarget2) => {
   AnchorLinkTarget2['_blank'] = '_blank';
   AnchorLinkTarget2['_self'] = '_self';
@@ -37039,10 +37064,10 @@ function makeUrlAbsolute(href,) {
   }
 }
 function performNavigation(router, routeId, preload, elementId, combinedPathVariables, smoothScroll, beforeUrlUpdate,) {
-  void preload(routeId, combinedPathVariables, false,);
+  void preload();
   router.navigate?.(routeId, elementId, combinedPathVariables, smoothScroll, beforeUrlUpdate,);
 }
-function createOnClickLinkHandler(router, routeId, href, trackLinkClick, preload, elementId, combinedPathVariables, smoothScroll,) {
+function createOnClickLinkHandler(href, trackLinkClick, navigate,) {
   return async (event) => {
     const usedMetaKey = event.metaKey;
     const anchorElement = findAnchorElement(event.target,);
@@ -37059,7 +37084,7 @@ function createOnClickLinkHandler(router, routeId, href, trackLinkClick, preload
       return;
     }
     event.preventDefault();
-    performNavigation(router, routeId, preload, elementId, combinedPathVariables, smoothScroll, track,);
+    navigate(track,);
   };
 }
 function propsForRoutePath(href, router, currentRoute, linkOptions, preload, localeId, locales, implicitPathVariables,) {
@@ -37071,6 +37096,7 @@ function propsForRoutePath(href, router, currentRoute, linkOptions, preload, loc
     route,
     elementId,
     pathVariables,
+    locale,
   } = matchedRoute;
   if (!route) return propsForLink(href, linkOptions,);
   const path = getPathForRoute(route, {
@@ -37088,26 +37114,38 @@ function propsForRoutePath(href, router, currentRoute, linkOptions, preload, loc
     localeId,
   },);
   const anchorTarget = getTargetAttrValue(linkOptions.openInNewTab, true,);
-  return {
-    routeId,
-    href: path,
-    target: anchorTarget,
-    onClick: createOnClickLinkHandler(
+  const navigate = (beforeUrlUpdate) =>
+    performNavigation(
       router,
       routeId,
-      path,
-      linkOptions.trackLinkClick,
-      preload,
+      () =>
+        preload(routeId, {
+          pathVariables,
+          locale,
+        }, false,),
       elementId,
       pathVariables,
       linkOptions.smoothScroll,
-    ),
-    navigate: () => performNavigation(router, routeId, preload, elementId, pathVariables, linkOptions.smoothScroll,),
+      beforeUrlUpdate,
+    );
+  return {
+    href: path,
+    target: anchorTarget,
+    onClick: createOnClickLinkHandler(path, linkOptions.trackLinkClick, navigate,),
+    navigate,
     'data-framer-page-link-current': currentRoute && linkMatchesRoute(currentRoute, {
           webPageId: routeId,
           hash: elementId,
           pathVariables,
         }, implicitPathVariables,) || void 0,
+    preload: () =>
+      preload(routeId, {
+        pathVariables,
+        locale,
+      },),
+    _routeId: routeId,
+    _pathVariables: pathVariables,
+    _locale: locale,
   };
 }
 var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(function Link2({
@@ -37178,19 +37216,41 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
       implicitPathVariables,
     );
     const {
-      routeId: routeId2,
+      routeId,
       href: resolvedHref,
       elementId,
       pathVariables,
+      locale,
     } = maybeRouteAttributes;
     const anchorTarget = getTargetAttrValue(openInNewTab, true,);
+    const navigate2 = (beforeUrlUpdate) =>
+      performNavigation(
+        router,
+        routeId,
+        () =>
+          preload(routeId, {
+            pathVariables,
+            locale,
+          }, false,),
+        elementId,
+        pathVariables,
+        smoothScroll,
+        beforeUrlUpdate,
+      );
     return {
-      routeId: routeId2,
       href: resolvedHref,
       target: anchorTarget,
-      onClick: createOnClickLinkHandler(router, routeId2, resolvedHref, trackLinkClick, preload, elementId, pathVariables, smoothScroll,),
-      navigate: () => performNavigation(router, routeId2, preload, elementId, pathVariables, smoothScroll,),
+      onClick: createOnClickLinkHandler(resolvedHref, trackLinkClick, navigate2,),
       'data-framer-page-link-current': currentRoute && linkMatchesRoute(currentRoute, pageLink, implicitPathVariables,) || void 0,
+      navigate: navigate2,
+      preload: () =>
+        preload(routeId, {
+          pathVariables,
+          locale,
+        },),
+      _routeId: routeId,
+      _pathVariables: pathVariables,
+      _locale: locale,
     };
   }, [
     href,
@@ -37211,22 +37271,22 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
   const observerRef = useObserverRef(hasRef ? children.ref : void 0,);
   const {
     navigate,
-    routeId,
-    ...propsAddedByLinkExceptNavigate
+    preload: preloadFn,
+    _routeId,
+    _pathVariables,
+    _locale,
+    ...restPropsAddedByLink
   } = propsAddedByLink;
   useRefEffect(observerRef, (node) => {
-    if (node === null || !routeId) return;
-    const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
-    if (!pageLink) return;
-    const pathVariables = isString(pageLink,) ? void 0 : pageLink.pathVariables;
-    return observeRouteForPreloading?.(node, preload, routeId, pathVariables,);
-  }, [href, preload, routeId,],);
+    if (node === null || !_routeId || !preloadFn) return;
+    return observeRouteForPreloading?.(node, preloadFn, `${_routeId}:${_locale?.id}:${JSON.stringify(_pathVariables,)}`,);
+  }, [preloadFn, _routeId, _pathVariables, _locale,],);
   const isInternalNavigation = Boolean(navigate,);
   const clone = useCloneChildrenWithPropsAndRef(forwardedRef,);
   const replacedChildren = clone.cloneAsArray(children, (childProps) =>
     cloneChildPropsWithAggregatedEvents(childProps, {
       ...restProps,
-      ...rebindEventHandlersIfNeeded(propsAddedByLinkExceptNavigate, motionChild, isInternalNavigation,),
+      ...rebindEventHandlersIfNeeded(restPropsAddedByLink, motionChild, isInternalNavigation,),
     }, observerRef,),);
   return useReplaceNestedLinks(replacedChildren, scopeId, nodeId, href, propsAddedByLink, observerRef,);
 },),);
@@ -54209,7 +54269,7 @@ var package_default = {
     watch: 'jest --watch',
   },
   dependencies: {
-    devalue: '^5.4.2',
+    devalue: '^5.6.2',
     eventemitter3: '^5.0.1',
     fontfaceobserver: '2.2.0',
     'hoist-non-react-statics': '^3.3.2',
