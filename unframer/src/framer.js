@@ -9,12 +9,11 @@ import {
   __privateMethod,
   __privateSet,
   __publicField,
-  __require,
   __runInitializers,
   __toESM,
-} from './framer-chunks/chunk-OAKBJJLO.js';
+} from './framer-chunks/chunk-76VXR6QG.js';
 
-// /:https://app.framerstatic.com/chunk-2J7GL3DQ.mjs
+// /:https://app.framerstatic.com/chunk-G5LRCHUN.mjs
 import { createContext, } from 'react';
 import { useEffect, useLayoutEffect, } from 'react';
 import * as React from 'react';
@@ -31,6 +30,43 @@ import { createElement, } from 'react';
 import { Component as Component2, } from 'react';
 var __unframerWindow = typeof window !== 'undefined' ? window : void 0;
 var __unframerNavigator = typeof __unframerWindow !== 'undefined' ? navigator : void 0;
+var require_memoize_browser_cjs = __commonJS({
+  '../../../node_modules/@emotion/memoize/dist/memoize.browser.cjs.js'(exports,) {
+    'use strict';
+
+    Object.defineProperty(exports, '__esModule', {
+      value: true,
+    },);
+    function memoize3(fn,) {
+      var cache2 = {};
+      return function (arg,) {
+        if (cache2[arg] === void 0) cache2[arg] = fn(arg,);
+        return cache2[arg];
+      };
+    }
+    exports.default = memoize3;
+  },
+},);
+var require_is_prop_valid_browser_cjs = __commonJS({
+  '../../../node_modules/@emotion/is-prop-valid/dist/is-prop-valid.browser.cjs.js'(exports,) {
+    'use strict';
+
+    Object.defineProperty(exports, '__esModule', {
+      value: true,
+    },);
+    function _interopDefault(ex,) {
+      return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex;
+    }
+    var memoize3 = _interopDefault(require_memoize_browser_cjs(),);
+    var reactPropsRegex2 =
+      /^((children|dangerouslySetInnerHTML|key|ref|autoFocus|defaultValue|defaultChecked|innerHTML|suppressContentEditableWarning|suppressHydrationWarning|valueLink|accept|acceptCharset|accessKey|action|allow|allowUserMedia|allowPaymentRequest|allowFullScreen|allowTransparency|alt|async|autoComplete|autoPlay|capture|cellPadding|cellSpacing|challenge|charSet|checked|cite|classID|className|cols|colSpan|content|contentEditable|contextMenu|controls|controlsList|coords|crossOrigin|data|dateTime|decoding|default|defer|dir|disabled|download|draggable|encType|form|formAction|formEncType|formMethod|formNoValidate|formTarget|frameBorder|headers|height|hidden|high|href|hrefLang|htmlFor|httpEquiv|id|inputMode|integrity|is|keyParams|keyType|kind|label|lang|list|loading|loop|low|marginHeight|marginWidth|max|maxLength|media|mediaGroup|method|min|minLength|multiple|muted|name|nonce|noValidate|open|optimum|pattern|placeholder|playsInline|poster|preload|profile|radioGroup|readOnly|referrerPolicy|rel|required|reversed|role|rows|rowSpan|sandbox|scope|scoped|scrolling|seamless|selected|shape|size|sizes|slot|span|spellCheck|src|srcDoc|srcLang|srcSet|start|step|style|summary|tabIndex|target|title|type|useMap|value|width|wmode|wrap|about|datatype|inlist|prefix|property|resource|typeof|vocab|autoCapitalize|autoCorrect|autoSave|color|itemProp|itemScope|itemType|itemID|itemRef|on|results|security|unselectable|accentHeight|accumulate|additive|alignmentBaseline|allowReorder|alphabetic|amplitude|arabicForm|ascent|attributeName|attributeType|autoReverse|azimuth|baseFrequency|baselineShift|baseProfile|bbox|begin|bias|by|calcMode|capHeight|clip|clipPathUnits|clipPath|clipRule|colorInterpolation|colorInterpolationFilters|colorProfile|colorRendering|contentScriptType|contentStyleType|cursor|cx|cy|d|decelerate|descent|diffuseConstant|direction|display|divisor|dominantBaseline|dur|dx|dy|edgeMode|elevation|enableBackground|end|exponent|externalResourcesRequired|fill|fillOpacity|fillRule|filter|filterRes|filterUnits|floodColor|floodOpacity|focusable|fontFamily|fontSize|fontSizeAdjust|fontStretch|fontStyle|fontVariant|fontWeight|format|from|fr|fx|fy|g1|g2|glyphName|glyphOrientationHorizontal|glyphOrientationVertical|glyphRef|gradientTransform|gradientUnits|hanging|horizAdvX|horizOriginX|ideographic|imageRendering|in|in2|intercept|k|k1|k2|k3|k4|kernelMatrix|kernelUnitLength|kerning|keyPoints|keySplines|keyTimes|lengthAdjust|letterSpacing|lightingColor|limitingConeAngle|local|markerEnd|markerMid|markerStart|markerHeight|markerUnits|markerWidth|mask|maskContentUnits|maskUnits|mathematical|mode|numOctaves|offset|opacity|operator|order|orient|orientation|origin|overflow|overlinePosition|overlineThickness|panose1|paintOrder|pathLength|patternContentUnits|patternTransform|patternUnits|pointerEvents|points|pointsAtX|pointsAtY|pointsAtZ|preserveAlpha|preserveAspectRatio|primitiveUnits|r|radius|refX|refY|renderingIntent|repeatCount|repeatDur|requiredExtensions|requiredFeatures|restart|result|rotate|rx|ry|scale|seed|shapeRendering|slope|spacing|specularConstant|specularExponent|speed|spreadMethod|startOffset|stdDeviation|stemh|stemv|stitchTiles|stopColor|stopOpacity|strikethroughPosition|strikethroughThickness|string|stroke|strokeDasharray|strokeDashoffset|strokeLinecap|strokeLinejoin|strokeMiterlimit|strokeOpacity|strokeWidth|surfaceScale|systemLanguage|tableValues|targetX|targetY|textAnchor|textDecoration|textRendering|textLength|to|transform|u1|u2|underlinePosition|underlineThickness|unicode|unicodeBidi|unicodeRange|unitsPerEm|vAlphabetic|vHanging|vIdeographic|vMathematical|values|vectorEffect|version|vertAdvY|vertOriginX|vertOriginY|viewBox|viewTarget|visibility|widths|wordSpacing|writingMode|x|xHeight|x1|x2|xChannelSelector|xlinkActuate|xlinkArcrole|xlinkHref|xlinkRole|xlinkShow|xlinkTitle|xlinkType|xmlBase|xmlns|xmlnsXlink|xmlLang|xmlSpace|y|y1|y2|yChannelSelector|z|zoomAndPan|for|class|autofocus)|(([Dd][Aa][Tt][Aa]|[Aa][Rr][Ii][Aa]|x)-.*))$/;
+    var index = memoize3(function (prop,) {
+      return reactPropsRegex2.test(prop,) || prop.charCodeAt(0,) === 111 && prop.charCodeAt(1,) === 110 && prop.charCodeAt(2,) < 91;
+    },/* Z+1 */
+    );
+    exports.default = index;
+  },
+},);
 var LayoutGroupContext = createContext({},);
 var isBrowser = typeof __unframerWindow !== 'undefined';
 var useIsomorphicLayoutEffect = isBrowser ? useLayoutEffect : useEffect;
@@ -4641,7 +4677,7 @@ function loadExternalIsValidProp(isValidProp,) {
   shouldForward = (key7) => key7.startsWith('on',) ? !isValidMotionProp(key7,) : isValidProp(key7,);
 }
 try {
-  loadExternalIsValidProp(__require('@emotion/is-prop-valid',).default,);
+  loadExternalIsValidProp(require_is_prop_valid_browser_cjs().default,);
 } catch {}
 function filterProps(props, isDom, forwardMotionProps,) {
   const filteredProps2 = {};
@@ -11346,7 +11382,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.Z3P5JKQJ.mjs
+// /:https://app.framerstatic.com/framer.RCKQS3W6.mjs
 
 import React42 from 'react';
 import { useDeferredValue, useSyncExternalStore, } from 'react';
@@ -44417,13 +44453,62 @@ function getWhereExpressionFromPathVariables(pathVariables, collection,) {
   }));
 }
 var ALL_ELEMENTS_VALUE = '__all__';
+var BOOLEAN_TRUE_VALUE = '__true__';
+var BOOLEAN_FALSE_VALUE = '__false__';
 var variableBindingHooks = {
+  ['boolean'/* Boolean */
+  ]: useFormSelectBooleanVariableBinding,
   ['collectionreference'/* CollectionReference */
   ]: useFormSelectCollectionVariableBinding,
 };
 function useFormSelectVariableBinding(options,) {
   const variableTypeRef = useRef(options.variableType,);
   return variableBindingHooks[variableTypeRef.current](options,);
+}
+function useFormSelectBooleanVariableBinding({
+  allItemsLabel,
+  booleanTrueLabel,
+  booleanFalseLabel,
+  isOptional,
+  setValue,
+  value,
+},) {
+  const selectValue = useMemo(() => {
+    if (value === true) return BOOLEAN_TRUE_VALUE;
+    if (value === false) return BOOLEAN_FALSE_VALUE;
+    return isOptional ? ALL_ELEMENTS_VALUE : BOOLEAN_TRUE_VALUE;
+  }, [isOptional, value,],);
+  const selectOptions = useMemo(() =>
+    withAllOption(
+      [{
+        disabled: false,
+        title: booleanTrueLabel,
+        type: 'option',
+        value: BOOLEAN_TRUE_VALUE,
+      }, {
+        disabled: false,
+        title: booleanFalseLabel,
+        type: 'option',
+        value: BOOLEAN_FALSE_VALUE,
+      },],
+      isOptional,
+      allItemsLabel,
+      false,
+    ), [allItemsLabel, booleanTrueLabel, booleanFalseLabel, isOptional,],);
+  const onChange = useCallback2((event) => {
+    if (!(event.target instanceof HTMLSelectElement)) return;
+    const selectedValue = event.target.value;
+    startTransition2(() => {
+      if (selectedValue === ALL_ELEMENTS_VALUE) {
+        setValue(void 0,);
+      } else if (selectedValue === BOOLEAN_TRUE_VALUE) {
+        setValue(true,);
+      } else if (selectedValue === BOOLEAN_FALSE_VALUE) {
+        setValue(false,);
+      }
+    },);
+  }, [setValue,],);
+  return [selectValue, selectOptions, onChange,];
 }
 function useFormSelectCollectionVariableBinding({
   allItemsLabel,
@@ -44432,26 +44517,20 @@ function useFormSelectCollectionVariableBinding({
   slugId,
   titleId,
   setValue,
-  value,
+  value: rawValue,
 },) {
   const selectOptions = useCollectionSelectOptions({
     collectionData,
     slugId,
     titleId,
   },);
+  const value = isBoolean(rawValue,) ? void 0 : rawValue;
   const selectValue = value === void 0 ? ALL_ELEMENTS_VALUE : value;
-  const selectOptionsIncludingOptional = useMemo(() => {
-    if (!isOptional) return selectOptions;
-    const allOption = {
-      title: allItemsLabel,
-      type: 'option',
-      value: ALL_ELEMENTS_VALUE,
-    };
-    if (!selectOptions || selectOptions.length === 0) return [allOption,];
-    return [allOption, {
-      type: 'divider',
-    }, ...selectOptions,];
-  }, [allItemsLabel, isOptional, selectOptions,],);
+  const selectOptionsIncludingOptional = useMemo(() => withAllOption(selectOptions, isOptional, allItemsLabel,), [
+    allItemsLabel,
+    isOptional,
+    selectOptions,
+  ],);
   const onChange = useCallback2((event) => {
     if (!(event.target instanceof HTMLSelectElement)) return;
     const selectedValue = event.target.value;
@@ -44508,6 +44587,21 @@ function useCollectionSelectOptions({
       },];
     },);
   }, [records, titleId, slugId,],);
+}
+function withAllOption(options, isOptional, allItemsLabel, includeDivider = true,) {
+  if (isOptional !== true || !allItemsLabel) return options;
+  const allOption = {
+    title: allItemsLabel,
+    type: 'option',
+    value: ALL_ELEMENTS_VALUE,
+  };
+  if (!options || options.length === 0) return [allOption,];
+  if (includeDivider) {
+    return [allOption, {
+      type: 'divider',
+    }, ...options,];
+  }
+  return [allOption, ...options,];
 }
 function rejectPending(pendingTimers, pendingPromises,) {
   pendingTimers.forEach((t) => clearTimeout(t,));
@@ -48537,11 +48631,11 @@ function getAssetOwnerType(asset,) {
 async function loadFontsWithOpenType(source,) {
   switch (source) {
     case 'google': {
-      const supportedFonts = await import('./framer-chunks/google-AG6EYFMK-QBWWKKVD.js');
+      const supportedFonts = await import('./framer-chunks/google-VQ4ZP4WR-C2T2J24Z.js');
       return supportedFonts.default;
     }
     case 'fontshare': {
-      const supportedFonts = await import('./framer-chunks/fontshare-LTYJMI6Q-XCFP3GWO.js');
+      const supportedFonts = await import('./framer-chunks/fontshare-Q7VOJ3QT-LXRXXTSM.js');
       return supportedFonts.default;
     }
     default:
@@ -48551,15 +48645,15 @@ async function loadFontsWithOpenType(source,) {
 async function loadFontToOpenTypeFeatures(source,) {
   switch (source) {
     case 'google': {
-      const features = await import('./framer-chunks/google-EJBUPU3N-LSIK52DF.js');
+      const features = await import('./framer-chunks/google-TRAPONMP-UUEFJ4ZF.js');
       return features.default;
     }
     case 'fontshare': {
-      const features = await import('./framer-chunks/fontshare-XMKN2FOD-D5TWBHNT.js');
+      const features = await import('./framer-chunks/fontshare-LJWOE5KG-36DNQHCT.js');
       return features.default;
     }
     case 'framer': {
-      const features = await import('./framer-chunks/framer-font-D6RMCRV4-XCFIRDL6.js');
+      const features = await import('./framer-chunks/framer-font-G73BNA7N-B3OPPZB7.js');
       return features.default;
     }
     default:
@@ -49103,10 +49197,10 @@ function loadVariationAxes(source,) {
       const axes = (async () => {
         switch (source) {
           case 'google': {
-            return (await import('./framer-chunks/google-CQFUID6E-C6DG6E7T.js')).default;
+            return (await import('./framer-chunks/google-LLNWFNMY-PWPZVCX5.js')).default;
           }
           case 'fontshare': {
-            return (await import('./framer-chunks/fontshare-X63NXWGB-NRPGYMPJ.js')).default;
+            return (await import('./framer-chunks/fontshare-MHXFPDHS-VQYPAYVC.js')).default;
           }
           default:
             assertNever(source,);
@@ -54253,6 +54347,14 @@ function useInitialRouteComponent(routes, homeNodeId,) {
   }, [],);
   return RouteComponent;
 }
+function getLoader(component,) {
+  return component.loader;
+}
+function forwardLoader(component, props, context,) {
+  const loader = getLoader(component,);
+  if (!loader) return Promise.resolve(void 0,);
+  return loader.load(props, context,);
+}
 var package_default = {
   name: 'framer',
   version: '2.4.1',
@@ -54471,6 +54573,7 @@ export {
   FormContainer,
   FormPlainTextInput2 as FormPlainTextInput,
   FormSelect,
+  forwardLoader,
   fraction,
   Frame,
   frame,
