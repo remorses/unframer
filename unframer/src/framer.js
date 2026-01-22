@@ -11382,7 +11382,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.RCKQS3W6.mjs
+// /:https://app.framerstatic.com/framer.EKIGLJAE.mjs
 
 import React42 from 'react';
 import { useDeferredValue, useSyncExternalStore, } from 'react';
@@ -15172,7 +15172,6 @@ function useStringArrayQueryParam({
   const setValue = useCallback2(async (newValues) => {
     if (!isArray(newValues,)) return;
     const currentHistoryState = __unframerWindow2.history.state;
-    if (!isHistoryState(currentHistoryState,)) return;
     const name = parameterNameRef.current;
     const url = new URL(__unframerWindow2.location.href,);
     const next2 = new URLSearchParams();
@@ -37206,6 +37205,7 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
   } = useLocaleInfo();
   const resolveSlugsWithSuspense2 = useResolveSlugsWithSuspense();
   const preload = usePreloadRoute();
+  const isOnFramerCanvas = useIsOnFramerCanvas();
   const trackLinkClick = useTrackLinkClick({
     nodeId,
     clickTrackingId,
@@ -37314,7 +37314,7 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
     ...restPropsAddedByLink
   } = propsAddedByLink;
   useRefEffect(observerRef, (node) => {
-    if (node === null || !_routeId || !preloadFn) return;
+    if (node === null || !_routeId || !preloadFn || isOnFramerCanvas) return;
     return observeRouteForPreloading?.(node, preloadFn, `${_routeId}:${_locale?.id}:${JSON.stringify(_pathVariables,)}`,);
   }, [preloadFn, _routeId, _pathVariables, _locale,],);
   const isInternalNavigation = Boolean(navigate,);
