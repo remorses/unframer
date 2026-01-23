@@ -11382,7 +11382,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.EKIGLJAE.mjs
+// /:https://app.framerstatic.com/framer.UA53KO5V.mjs
 
 import React42 from 'react';
 import { useDeferredValue, useSyncExternalStore, } from 'react';
@@ -21355,6 +21355,149 @@ var ControlType = /* @__PURE__ */ ((ControlType2) => {
   ControlType2['LinkRelValues'] = 'linkrelvalues';
   return ControlType2;
 })(ControlType || {},);
+function getNavigator() {
+  return typeof __unframerNavigator2 !== 'undefined' ? __unframerNavigator2 : void 0;
+}
+function getWindow() {
+  return typeof __unframerWindow2 !== 'undefined' ? __unframerWindow2 : void 0;
+}
+var macRegex = /Mac/u;
+var winRegex = /Win/u;
+var iOSRegex = /iPhone|iPod|iPad/iu;
+var macIntelRegex = /MacIntel/iu;
+var androidRegex = /android/iu;
+function isMacOS() {
+  const nav = getNavigator();
+  return nav ? macRegex.test(nav.platform,) : false;
+}
+function isWindows() {
+  const nav = getNavigator();
+  return nav ? winRegex.test(nav.platform,) : false;
+}
+function isIOS() {
+  const nav = getNavigator();
+  if (!nav) return false;
+  if (iOSRegex.test(nav.platform,)) return true;
+  return macIntelRegex.test(nav.platform,) && nav.maxTouchPoints != null && nav.maxTouchPoints > 2;
+}
+function isAppleDevice() {
+  return isMacOS() || isIOS();
+}
+function isAndroid() {
+  const nav = getNavigator();
+  return nav ? androidRegex.test(nav.userAgent,) : false;
+}
+var edgeRegex = /Edg\//u;
+function isEdge() {
+  const nav = getNavigator();
+  return nav ? edgeRegex.test(nav.userAgent,) : false;
+}
+var chromeRegex = /Chrome/u;
+var googleVendorRegex = /Google Inc/u;
+function isChrome() {
+  const nav = getNavigator();
+  return nav ? chromeRegex.test(nav.userAgent,) && googleVendorRegex.test(nav.vendor,) && !isEdge() : false;
+}
+var appleWebKitRegex = /AppleWebKit\//u;
+function isWebKit() {
+  const nav = getNavigator();
+  return nav ? appleWebKitRegex.test(nav.userAgent,) && !isChrome() && !isEdge() : false;
+}
+var safariRegex = /Safari/u;
+var appleComputerRegex = /Apple Computer/u;
+function isSafari() {
+  const nav = getNavigator();
+  return nav ? safariRegex.test(nav.userAgent,) && appleComputerRegex.test(nav.vendor,) : false;
+}
+var firefoxRegex = /Firefox\/\d+\.\d+$/u;
+function isFirefox() {
+  const nav = getNavigator();
+  return nav ? firefoxRegex.test(nav.userAgent,) : false;
+}
+function isBrowser2() {
+  return typeof document === 'object';
+}
+var chromeVersionRegex = /Chrome\/(\d+)/u;
+function chromeMainVersion() {
+  const nav = getNavigator();
+  if (!nav) return -1;
+  const result = chromeVersionRegex.exec(nav.userAgent,);
+  if (!result || !result[1]) return -1;
+  const version2 = parseInt(result[1],);
+  return Number.isFinite(version2,) ? version2 : -1;
+}
+var safariVersionRegex = /Version\/([\d.]+)/u;
+function safariVersion() {
+  const nav = getNavigator();
+  if (!nav) return -1;
+  const result = safariVersionRegex.exec(nav.userAgent,);
+  if (result?.[1]) {
+    return parseFloat(result[1],);
+  }
+  return -1;
+}
+var framerXRegex = /FramerX/u;
+function isFramerX() {
+  const nav = getNavigator();
+  return nav ? framerXRegex.test(nav.userAgent,) : false;
+}
+function isTest() {
+  return false;
+}
+function isTouch() {
+  const win = getWindow();
+  const nav = getNavigator();
+  if (!win || !nav) return false;
+  return 'ontouchstart' in win || nav.maxTouchPoints > 0;
+}
+var tabletRegex = /tablet|iPad|Nexus 9/iu;
+var mobileRegex = /mobi/iu;
+function deviceType() {
+  const nav = getNavigator();
+  if (nav && tabletRegex.test(nav.userAgent,)) return 'tablet';
+  if (nav && mobileRegex.test(nav.userAgent,)) return 'phone';
+  return 'desktop';
+}
+function isDesktop() {
+  return deviceType() === 'desktop';
+}
+function isPhone() {
+  return deviceType() === 'phone';
+}
+function isTablet() {
+  return deviceType() === 'tablet';
+}
+function isMobile() {
+  return isPhone() || isTablet();
+}
+var embeddedRegex = /Instagram|FB_IAB\/FB4A|FBAN\/FBIOS|BytedanceWebview|Twitter|LinkedIn/iu;
+function isEmbedded() {
+  const nav = getNavigator();
+  return nav ? embeddedRegex.test(nav.userAgent,) : false;
+}
+var absoluteUrlRegex = /^[a-z]{1,8}:\/\/.*$/iu;
+function isRelativeUrl(url,) {
+  return !absoluteUrlRegex.test(url,);
+}
+function isFileUrl(url,) {
+  return url.startsWith('file://',);
+}
+function isDataUrl(url,) {
+  return url.startsWith('data:',);
+}
+var localServerUrlRegex1 = /[a-z]{1,8}:\/\/127\.0\.0\.1/iu;
+var localServerUrlRegex2 = /[a-zA-Z]{1,8}:\/\/localhost/u;
+function isLocalServerUrl(url,) {
+  return localServerUrlRegex1.test(url,) || localServerUrlRegex2.test(url,);
+}
+function isLocalUrl(url,) {
+  if (isFileUrl(url,)) return true;
+  if (isLocalServerUrl(url,)) return true;
+  return false;
+}
+function isCommandKeyPressed(event,) {
+  return isAppleDevice() ? event.metaKey : event.ctrlKey;
+}
 var StyleSheetContext = /* @__PURE__ */ React42.createContext(void 0,);
 var defaultCache = /* @__PURE__ */ new Set();
 var defaultSheet;
@@ -21384,127 +21527,6 @@ function injectCSSRule(cssRule, sheet, cache2 = defaultCache,) {
     sheet.insertRule(cssRule, sheet.cssRules.length,);
   } catch {}
 }
-var safeNavigator = typeof __unframerNavigator2 !== 'undefined' ? __unframerNavigator2 : void 0;
-var isBrowser2 = () => typeof document === 'object';
-var isWebKit = () => safeNavigator?.userAgent.includes('AppleWebKit/',) && !isChrome() && !isEdge();
-var webkitVersion = () => {
-  let version2 = -1;
-  const regexp = /AppleWebKit\/([\d.]+)/u;
-  const result = safeNavigator && regexp.exec(safeNavigator.userAgent,);
-  if (result && result[1]) {
-    version2 = parseFloat(result[1],);
-  }
-  return version2;
-};
-var safariVersion = () => {
-  let version2 = -1;
-  const regexp = /Version\/([\d.]+)/u;
-  const result = safeNavigator && regexp.exec(safeNavigator.userAgent,);
-  if (result && result[1]) {
-    version2 = parseFloat(result[1],);
-  }
-  return version2;
-};
-var isChrome = () => safeNavigator && /Chrome/u.test(safeNavigator.userAgent,) && /Google Inc/u.test(safeNavigator.vendor,) && !isEdge();
-var isSafari = () => safeNavigator && /Safari/u.test(safeNavigator.userAgent,) && /Apple Computer/u.test(safeNavigator.vendor,);
-var isFirefox = () => safeNavigator && /Firefox\/\d+\.\d+$/u.test(safeNavigator.userAgent,);
-var isFramerX = () => safeNavigator && /FramerX/u.test(safeNavigator.userAgent,);
-var isEdge = () => safeNavigator && /Edg\//u.test(safeNavigator.userAgent,);
-var isAndroid = () => safeNavigator && /android/iu.test(safeNavigator.userAgent,);
-var iOSRegex = /iPhone|iPod|iPad/iu;
-var macIntelRegex = /MacIntel/iu;
-var isIOS = () => {
-  if (!safeNavigator) return false;
-  if (iOSRegex.test(safeNavigator.platform,)) return true;
-  return macIntelRegex.test(safeNavigator.platform,) && safeNavigator.maxTouchPoints && safeNavigator.maxTouchPoints > 2;
-};
-var isMacOS = () => safeNavigator && /Mac/u.test(safeNavigator.platform,);
-var isWindows = () => safeNavigator && /Win/u.test(safeNavigator.platform,);
-var isTouch = () => safeWindow.ontouchstart === null && safeWindow.ontouchmove === null && safeWindow.ontouchend === null;
-var isDesktop = () => deviceType() === 'desktop';
-var isPhone = () => deviceType() === 'phone';
-var isTablet = () => deviceType() === 'tablet';
-var isMobile = () => isPhone() || isTablet();
-var isFileUrl = (url) => url.startsWith('file://',);
-var isDataUrl = (url) => url.startsWith('data:',);
-var isTest = () => false;
-var isRelativeUrl = (url) => !/^[a-z]{1,8}:\/\/.*$/i.test(url,);
-var isLocalServerUrl = (url) => /[a-z]{1,8}:\/\/127\.0\.0\.1/i.test(url,) || /[a-zA-Z]{1,8}:\/\/localhost/u.test(url,);
-var isLocalUrl = (url) => {
-  if (isFileUrl(url,)) return true;
-  if (isLocalServerUrl(url,)) return true;
-  return false;
-};
-var isLocalAssetUrl = (url, baseUrl,) => {
-  if (baseUrl === null) baseUrl = safeWindow.location.href;
-  if (isDataUrl(url,)) return false;
-  if (isLocalUrl(url,)) return true;
-  if (isRelativeUrl(url,) && isLocalUrl(baseUrl,)) return true;
-  return false;
-};
-var devicePixelRatio = () => safeWindow.devicePixelRatio;
-var isJP2Supported = function () {
-  if (isFirefox()) return false;
-  return isWebKit();
-};
-var isWebPSupported = () => isChrome();
-var deviceType = () => {
-  if (safeNavigator && /tablet|iPad|Nexus 9/i.test(safeNavigator.userAgent,)) return 'tablet';
-  if (safeNavigator && /mobi/iu.test(safeNavigator.userAgent,)) return 'phone';
-  return 'desktop';
-};
-var deviceOS = () => {
-  if (isMacOS()) return 'macos';
-  if (isIOS()) return 'ios';
-  if (isAndroid()) return 'android';
-  if (isWindows()) return 'windows';
-};
-var deviceFont = (os) => {
-  if (!os) {
-    os = deviceOS();
-  }
-  const fonts = {
-    apple: '-apple-system, BlinkMacSystemFont, SF Pro Text, SF UI Text, Helvetica Neue',
-    google: 'Roboto, Helvetica Neue',
-    microsoft: 'Segoe UI, Helvetica Neue',
-  };
-  if (os === 'macos') return fonts.apple;
-  if (os === 'ios') return fonts.apple;
-  if (os === 'android') return fonts.google;
-  if (os === 'windows') return fonts.microsoft;
-  return fonts.apple;
-};
-var environment = {
-  isWebKit,
-  webkitVersion,
-  isChrome,
-  isSafari,
-  isFirefox,
-  isFramerX,
-  isEdge,
-  isAndroid,
-  isIOS,
-  isMacOS,
-  isWindows,
-  isTouch,
-  isDesktop,
-  isPhone,
-  isTablet,
-  isMobile,
-  isFileUrl,
-  isDataUrl,
-  isRelativeUrl,
-  isLocalServerUrl,
-  isLocalUrl,
-  isLocalAssetUrl,
-  devicePixelRatio,
-  isJP2Supported,
-  isWebPSupported,
-  deviceType,
-  deviceOS,
-  deviceFont,
-  safariVersion,
-};
 var framerPostSSRCSSSelector = 'style[data-framer-css-ssr-minified]';
 var componentsWithServerRenderedStyles = /* @__PURE__ */ (() => {
   if (!isBrowser2()) return /* @__PURE__ */ new Set();
@@ -28447,7 +28469,7 @@ var FramerEvent = class _FramerEvent {
    * @internal
    */
   get isLeftMouseClick() {
-    if (environment.isTouch()) {
+    if (isTouch()) {
       return void 0;
     }
     if ('button' in this.originalEvent && 'buttons' in this.originalEvent && 'ctrlKey' in this.originalEvent) {
@@ -32227,7 +32249,7 @@ var TouchEventListener = class extends Component2 {
     safeWindow.removeEventListener('touchend', this.domTouchEnd,);
   }
 };
-var FramerEventListener = /* @__PURE__ */ environment.isTouch() ? TouchEventListener : MouseEventListener;
+var FramerEventListener = /* @__PURE__ */ isTouch() ? TouchEventListener : MouseEventListener;
 var directionMap = {
   horizontal: 'x',
   vertical: 'y',
@@ -32743,7 +32765,7 @@ function useEmulateTouchScroll(ref, direction, enabled,) {
         case 3:
           return;
       }
-      if (event.metaKey) return;
+      if (isCommandKeyPressed(event,)) return;
       const point2 = getEventPoint(event,);
       if (!downPoint) return;
       const offset = Point.subtract(point2, downPoint,);
@@ -32827,7 +32849,7 @@ function useEmulateTouchScroll(ref, direction, enabled,) {
     }
     function onMouseDown(event,) {
       if (!enabled) return;
-      if (event.metaKey) return;
+      if (isCommandKeyPressed(event,)) return;
       if (!canStartScrollFromElement(event.target, direction,)) {
         if (phase === 4) {
           phase = 0;
@@ -35795,8 +35817,7 @@ function useReplaceNestedLinks(children, scopeId, nodeId, href, propsAddedByLink
     if (!propsAddedByLink.href) return;
     event.preventDefault();
     event.stopPropagation();
-    const isAppleDevice = /Mac|iPod|iPhone|iPad/u.test(__unframerNavigator2.userAgent,);
-    if (isAppleDevice ? event.metaKey : event.ctrlKey) {
+    if (isCommandKeyPressed(event,)) {
       openExternalLink(propsAddedByLink.href, '', '_blank',);
       return;
     }
@@ -37104,10 +37125,10 @@ function performNavigation(router, routeId, preload, elementId, combinedPathVari
 }
 function createOnClickLinkHandler(href, trackLinkClick, navigate,) {
   return async (event) => {
-    const usedMetaKey = event.metaKey;
+    const usedCommandKey = isCommandKeyPressed(event,);
     const anchorElement = findAnchorElement(event.target,);
     const isExternalLink = !anchorElement || anchorElement.getAttribute('target',) === '_blank';
-    const shouldPerformNavigation = !usedMetaKey && !isExternalLink;
+    const shouldPerformNavigation = !usedCommandKey && !isExternalLink;
     const track = () => void trackLinkClick(href,);
     if (!shouldPerformNavigation) {
       await yieldToMain({
@@ -51051,7 +51072,7 @@ var DeprecatedRichTextInner = /* @__PURE__ */ React.forwardRef(function Text(pro
     if (container === null) return;
     function interceptPageLinks(event,) {
       const anchorElement = findAnchorElement(event.target, layoutRef.current,);
-      if (event.metaKey || !navigate || !anchorElement || anchorElement.getAttribute('target',) === '_blank') {
+      if (isCommandKeyPressed(event,) || !navigate || !anchorElement || anchorElement.getAttribute('target',) === '_blank') {
         return;
       }
       const didNavigate = navigateFromAttributes(navigate, anchorElement, implicitPathVariables,);
@@ -52814,7 +52835,7 @@ var TextInner = /* @__PURE__ */ React42.forwardRef(function Text2(props, forward
   const implicitPathVariables = useImplicitPathVariables();
   const interceptPageLinks = React42.useCallback((event) => {
     const anchorElement = findAnchorElement(event.target, layoutRef.current,);
-    if (event.metaKey || !navigate || !anchorElement) return;
+    if (isCommandKeyPressed(event,) || !navigate || !anchorElement) return;
     const didNavigate = navigateFromAttributes(navigate, anchorElement, implicitPathVariables,);
     if (didNavigate) {
       event.preventDefault();
@@ -53086,7 +53107,7 @@ var TextComponent = /* @__PURE__ */ (() => {
       alignment: void 0,
       verticalAlignment: 'top',
       shadows: [],
-      font: '16px ' + deviceFont(),
+      font: '16px Arial',
     },),
     __publicField(_a, 'defaultProps', {
       ...Layer.defaultProps,
@@ -54230,6 +54251,58 @@ function withPerformanceMarks(prefix3, callback,) {
   performance.mark(markEnd,);
   performance.measure(prefix3, markStart, markEnd,);
 }
+function deviceOS() {
+  if (isMacOS()) return 'macos';
+  if (isIOS()) return 'ios';
+  if (isAndroid()) return 'android';
+  if (isWindows()) return 'windows';
+  return void 0;
+}
+function deviceFont(os,) {
+  if (!os) {
+    os = deviceOS();
+  }
+  const fonts = {
+    apple: '-apple-system, BlinkMacSystemFont, SF Pro Text, SF UI Text, Helvetica Neue',
+    google: 'Roboto, Helvetica Neue',
+    microsoft: 'Segoe UI, Helvetica Neue',
+  };
+  if (os === 'macos') return fonts.apple;
+  if (os === 'ios') return fonts.apple;
+  if (os === 'android') return fonts.google;
+  if (os === 'windows') return fonts.microsoft;
+  return fonts.apple;
+}
+var environment = {
+  chromeMainVersion,
+  deviceFont,
+  deviceOS,
+  deviceType,
+  isAndroid,
+  isBrowser: isBrowser2,
+  isChrome,
+  isDataUrl,
+  isDesktop,
+  isEdge,
+  isEmbedded,
+  isFileUrl,
+  isFirefox,
+  isFramerX,
+  isIOS,
+  isLocalServerUrl,
+  isLocalUrl,
+  isMacOS,
+  isMobile,
+  isPhone,
+  isRelativeUrl,
+  isSafari,
+  isTablet,
+  isTest,
+  isTouch,
+  isWebKit,
+  isWindows,
+  safariVersion,
+};
 function loadJSON(url,) {
   return fetch(url, {
     mode: 'cors',
