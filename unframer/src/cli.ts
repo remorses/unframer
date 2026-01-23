@@ -4,12 +4,13 @@ import pico from 'picocolors'
 const { blue, bgBlue, green } = pico
 import { fetch } from 'undici'
 import './sentry.js'
+import { input } from '@inquirer/prompts'
 
 import { bundle, StyleToken, createExampleComponentCode } from './exporter.js'
 import { createClient } from './generated/api-client.js'
 import { generateStackblitzFiles } from './stackblitz.js'
 
-import { cac } from 'cac'
+import { cac } from '@xmorse/cac'
 import { exec } from 'child_process'
 import { promisify } from 'util'
 
@@ -27,6 +28,11 @@ import {
 import { getPackageManager } from './package-manager.js'
 import { notifyError } from './sentry.js'
 import { dispatcher } from './undici-dispatcher.js'
+import { loadConfig, saveConfig, getConfigPath } from './lib/config.js'
+import { addMcpCommands } from './lib/mcp-to-cli.js'
+import { SSEClientTransport } from '@modelcontextprotocol/sdk/client/sse.js'
+import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js'
+
 const configNames = ['unframer.config.json', 'unframer.json']
 
 export const cli = cac('unframer')
@@ -50,7 +56,7 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
     .option('--metafile', 'Generate meta.json file with build metadata', {
         default: false,
     })
-    .action(async function main(projectId, options) {
+  .action(async function main(projectId, options) {
         const external_ = options.external
         const allExternal = external_ === true
         const externalPackages: string[] = Array.isArray(external_)
@@ -177,6 +183,7 @@ function fixOldUnframerPath() {
 }
 
 const version = pkg.version
+
 
 cli.version(version).help()
 
@@ -311,6 +318,58 @@ cli.command(
             throw error
         }
     })
+
+
+cli.command(
+    'mcp login [url]',
+    'Store MCP server URL. After login, other MCP commands will appear in --help. The MCP URL is visible in the Framer MCP plugin.',
+).action(async (url?: string) => {
+    // Prompt for URL if not provided, avoids shell escaping issues with & in URLs
+    if (!url) {
+        const shortcut = process.platform === 'darwin' ? 'Cmd+K' : 'Ctrl+K'
+        console.log('\nTo get your MCP URL:')
+        console.log('  1. Go to https://framer.com and open your project')
+        console.log(`  2. Press ${shortcut} and search for "MCP" plugin`)
+        console.log('  3. Copy the URL shown in the plugin\n')
+    }
+    let mcpUrl = url
+    if (!mcpUrl) {
+        try {
+            mcpUrl = await input({ message: 'Paste MCP URL:' })
+        } catch (error) {
+            // Handle Ctrl+C gracefully
+            if (error instanceof Error && error.name === 'ExitPromptError') {
+                process.exit(0)
+            }
+            throw error
+        }
+    }
+    if (!mcpUrl) {
+        console.error('MCP URL is required')
+        process.exit(1)
+    }
+    saveConfig({ mcpUrl })
+    console.log(`MCP URL saved to ${getConfigPath()}`)
+})
+
+// Add MCP tool commands - only registered if transport is available
+await addMcpCommands({
+    cli,
+    commandPrefix: 'mcp',
+    getMcpTransport: () => {
+        const config = loadConfig()
+        if (!config.mcpUrl) {
+            return null
+        }
+        // Replace "/sse" with "/mcp" in the URL path
+        const url = new URL(config.mcpUrl)
+        if (url.pathname.endsWith('/sse')) {
+            url.pathname = url.pathname.replace(/\/sse$/, '/mcp')
+        }
+        return new StreamableHTTPClientTransport(url)
+    },
+}).catch(e => console.error(e))
+
 
 export type Config = {
     jsx?: boolean
