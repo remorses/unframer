@@ -1,5 +1,19 @@
 # unframer
 
+## 4.0.4
+
+### Minor Changes
+
+- **MCP CLI support**: Use `unframer` as a command-line client for the Framer MCP plugin
+  - Run `unframer mcp login` to connect to your Framer MCP server
+  - All MCP tools become available as CLI commands (e.g., `unframer mcp getNodeXml`, `unframer mcp updateXmlForNode`, `unframer mcp getProjectXml`)
+  - Tools are cached for 1 hour for fast subsequent calls
+  - Session ID is cached to skip MCP initialization handshake
+
+### Patch Changes
+
+- Update to latest Framer runtime
+
 ## 4.0.3
 
 ### Patch Changes

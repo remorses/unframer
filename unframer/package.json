@@ -1,6 +1,6 @@
 {
     "name": "unframer",
-    "version": "4.0.3",
+    "version": "4.0.4",
     "type": "module",
     "description": "Import Framer components directly in your React app, type safe and customizable",
     "sideEffects": false,
