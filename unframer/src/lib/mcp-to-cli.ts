@@ -1,8 +1,11 @@
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import type { Transport } from "@modelcontextprotocol/sdk/shared/transport.js";
 import type { CAC } from "@xmorse/cac";
+import { loadConfig, saveConfig, type CachedMcpTools } from "./config.js";
 
 export type { Transport };
+
+const CACHE_TTL_MS = 60 * 60 * 1000; // 1 hour
 
 export interface AddMcpCommandsOptions {
   cli: CAC;
@@ -15,8 +18,9 @@ export interface AddMcpCommandsOptions {
   /**
    * Returns a transport to connect to the MCP server, or null if not configured.
    * If null is returned, no MCP tool commands will be registered.
+   * @param sessionId - Optional session ID from cache to reuse existing session
    */
-  getMcpTransport: () => Transport | null | Promise<Transport | null>;
+  getMcpTransport: (sessionId?: string) => Transport | null | Promise<Transport | null>;
 }
 
 interface JsonSchemaProperty {
@@ -97,27 +101,61 @@ function outputResult(result: {
 
 /**
  * Adds MCP tool commands to a cac CLI instance.
- * Connects at setup time to list available tools and registers a command for each.
- * If getMcpTransport returns null, no commands are registered.
+ * Tools are cached for 1 hour to avoid connecting on every CLI invocation.
+ * Session ID is also cached to skip MCP initialization handshake.
  */
 export async function addMcpCommands(options: AddMcpCommandsOptions): Promise<void> {
   const { cli, commandPrefix, clientName = "mcp-cli-client", getMcpTransport } = options;
 
-  const transport = await getMcpTransport();
-  if (!transport) {
-    return;
+  // Try to use cached tools first
+  const config = loadConfig();
+  const cachedTools = config.cachedMcpTools;
+  const isCacheValid = cachedTools && (Date.now() - cachedTools.timestamp) < CACHE_TTL_MS;
+
+  let tools: CachedMcpTools["tools"];
+  let cachedSessionId: string | undefined;
+
+  if (isCacheValid) {
+    // Use cached tools to register commands
+    tools = cachedTools.tools;
+    cachedSessionId = cachedTools.sessionId;
+  } else {
+    // Cache invalid/missing - connect to fetch tools
+    const transport = await getMcpTransport();
+    if (!transport) {
+      return;
+    }
+
+    const client = new Client({ name: clientName, version: "1.0.0" }, { capabilities: {} });
+    try {
+      await client.connect(transport);
+      const result = await client.listTools();
+      tools = result.tools;
+
+      // Get session ID from transport if available
+      const sessionId = (transport as { sessionId?: string }).sessionId;
+
+      // Save tools and session ID to cache
+      saveConfig({
+        ...config,
+        cachedMcpTools: {
+          tools: tools.map((t) => ({
+            name: t.name,
+            description: t.description,
+            inputSchema: t.inputSchema,
+          })),
+          timestamp: Date.now(),
+          sessionId,
+        },
+      });
+      cachedSessionId = sessionId;
+    } catch (err) {
+      console.error(`Failed to connect to MCP server: ${err instanceof Error ? err.message : err}`);
+      return;
+    } finally {
+      await client.close();
+    }
   }
-
-  const client = new Client({ name: clientName, version: "1.0.0" }, { capabilities: {} });
-  try {
-    await client.connect(transport);
-  } catch (err) {
-    console.error(`Failed to connect to MCP server: ${err instanceof Error ? err.message : err}`);
-    return;
-  }
-
-
-  const { tools } = await client.listTools();
 
   for (const tool of tools) {
     const inputSchema = tool.inputSchema as InputSchema | undefined;
@@ -165,14 +203,25 @@ export async function addMcpCommands(options: AddMcpCommandsOptions): Promise<vo
     }
 
     cmd.action(async (cliOptions: Record<string, unknown>) => {
-      const args = parseToolArguments(cliOptions, inputSchema);
+      const parsedArgs = parseToolArguments(cliOptions, inputSchema);
+
+      // Connect with cached session ID to skip initialization handshake
+      const transport = await getMcpTransport(cachedSessionId);
+      if (!transport) {
+        console.error("MCP transport not available");
+        process.exit(1);
+      }
+      const actionClient = new Client({ name: clientName, version: "1.0.0" }, { capabilities: {} });
+      await actionClient.connect(transport);
 
       try {
-        const result = await client.callTool({ name: tool.name, arguments: args });
+        const result = await actionClient.callTool({ name: tool.name, arguments: parsedArgs });
         outputResult(result as { content: Array<{ type: string; text?: string }> });
       } catch (err) {
         console.error(`Error calling ${tool.name}:`, err instanceof Error ? err.message : err);
         process.exit(1);
+      } finally {
+        await actionClient.close();
       }
     });
   }

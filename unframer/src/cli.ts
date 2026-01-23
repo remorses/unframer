@@ -356,17 +356,17 @@ cli.command(
 await addMcpCommands({
     cli,
     commandPrefix: 'mcp',
-    getMcpTransport: () => {
+    getMcpTransport: (sessionId?: string) => {
         const config = loadConfig()
         if (!config.mcpUrl) {
             return null
         }
-        // Replace "/sse" with "/mcp" in the URL path
         const url = new URL(config.mcpUrl)
+        // Use /mcp endpoint for StreamableHTTP
         if (url.pathname.endsWith('/sse')) {
             url.pathname = url.pathname.replace(/\/sse$/, '/mcp')
         }
-        return new StreamableHTTPClientTransport(url)
+        return new StreamableHTTPClientTransport(url, { sessionId })
     },
 }).catch(e => console.error(e))
 
