@@ -9,12 +9,11 @@ import {
   __privateMethod,
   __privateSet,
   __publicField,
-  __require,
   __runInitializers,
   __toESM,
-} from './framer-chunks/chunk-DBJCHRFG.js';
+} from './framer-chunks/chunk-76VXR6QG.js';
 
-// /:https://app.framerstatic.com/chunk-2J7GL3DQ.mjs
+// /:https://app.framerstatic.com/chunk-G5LRCHUN.mjs
 import { createContext, } from 'react';
 import { useEffect, useLayoutEffect, } from 'react';
 import * as React from 'react';
@@ -29,9 +28,47 @@ import { jsxs, } from 'react/jsx-runtime';
 import { forwardRef, } from 'react';
 import { createElement, } from 'react';
 import { Component as Component2, } from 'react';
-var __unframerNavigator = typeof window !== 'undefined' ? navigator : void 0;
+var __unframerWindow = typeof window !== 'undefined' ? window : void 0;
+var __unframerNavigator = typeof __unframerWindow !== 'undefined' ? navigator : void 0;
+var require_memoize_browser_cjs = __commonJS({
+  '../../../node_modules/@emotion/memoize/dist/memoize.browser.cjs.js'(exports,) {
+    'use strict';
+
+    Object.defineProperty(exports, '__esModule', {
+      value: true,
+    },);
+    function memoize3(fn,) {
+      var cache2 = {};
+      return function (arg,) {
+        if (cache2[arg] === void 0) cache2[arg] = fn(arg,);
+        return cache2[arg];
+      };
+    }
+    exports.default = memoize3;
+  },
+},);
+var require_is_prop_valid_browser_cjs = __commonJS({
+  '../../../node_modules/@emotion/is-prop-valid/dist/is-prop-valid.browser.cjs.js'(exports,) {
+    'use strict';
+
+    Object.defineProperty(exports, '__esModule', {
+      value: true,
+    },);
+    function _interopDefault(ex,) {
+      return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex;
+    }
+    var memoize3 = _interopDefault(require_memoize_browser_cjs(),);
+    var reactPropsRegex2 =
+      /^((children|dangerouslySetInnerHTML|key|ref|autoFocus|defaultValue|defaultChecked|innerHTML|suppressContentEditableWarning|suppressHydrationWarning|valueLink|accept|acceptCharset|accessKey|action|allow|allowUserMedia|allowPaymentRequest|allowFullScreen|allowTransparency|alt|async|autoComplete|autoPlay|capture|cellPadding|cellSpacing|challenge|charSet|checked|cite|classID|className|cols|colSpan|content|contentEditable|contextMenu|controls|controlsList|coords|crossOrigin|data|dateTime|decoding|default|defer|dir|disabled|download|draggable|encType|form|formAction|formEncType|formMethod|formNoValidate|formTarget|frameBorder|headers|height|hidden|high|href|hrefLang|htmlFor|httpEquiv|id|inputMode|integrity|is|keyParams|keyType|kind|label|lang|list|loading|loop|low|marginHeight|marginWidth|max|maxLength|media|mediaGroup|method|min|minLength|multiple|muted|name|nonce|noValidate|open|optimum|pattern|placeholder|playsInline|poster|preload|profile|radioGroup|readOnly|referrerPolicy|rel|required|reversed|role|rows|rowSpan|sandbox|scope|scoped|scrolling|seamless|selected|shape|size|sizes|slot|span|spellCheck|src|srcDoc|srcLang|srcSet|start|step|style|summary|tabIndex|target|title|type|useMap|value|width|wmode|wrap|about|datatype|inlist|prefix|property|resource|typeof|vocab|autoCapitalize|autoCorrect|autoSave|color|itemProp|itemScope|itemType|itemID|itemRef|on|results|security|unselectable|accentHeight|accumulate|additive|alignmentBaseline|allowReorder|alphabetic|amplitude|arabicForm|ascent|attributeName|attributeType|autoReverse|azimuth|baseFrequency|baselineShift|baseProfile|bbox|begin|bias|by|calcMode|capHeight|clip|clipPathUnits|clipPath|clipRule|colorInterpolation|colorInterpolationFilters|colorProfile|colorRendering|contentScriptType|contentStyleType|cursor|cx|cy|d|decelerate|descent|diffuseConstant|direction|display|divisor|dominantBaseline|dur|dx|dy|edgeMode|elevation|enableBackground|end|exponent|externalResourcesRequired|fill|fillOpacity|fillRule|filter|filterRes|filterUnits|floodColor|floodOpacity|focusable|fontFamily|fontSize|fontSizeAdjust|fontStretch|fontStyle|fontVariant|fontWeight|format|from|fr|fx|fy|g1|g2|glyphName|glyphOrientationHorizontal|glyphOrientationVertical|glyphRef|gradientTransform|gradientUnits|hanging|horizAdvX|horizOriginX|ideographic|imageRendering|in|in2|intercept|k|k1|k2|k3|k4|kernelMatrix|kernelUnitLength|kerning|keyPoints|keySplines|keyTimes|lengthAdjust|letterSpacing|lightingColor|limitingConeAngle|local|markerEnd|markerMid|markerStart|markerHeight|markerUnits|markerWidth|mask|maskContentUnits|maskUnits|mathematical|mode|numOctaves|offset|opacity|operator|order|orient|orientation|origin|overflow|overlinePosition|overlineThickness|panose1|paintOrder|pathLength|patternContentUnits|patternTransform|patternUnits|pointerEvents|points|pointsAtX|pointsAtY|pointsAtZ|preserveAlpha|preserveAspectRatio|primitiveUnits|r|radius|refX|refY|renderingIntent|repeatCount|repeatDur|requiredExtensions|requiredFeatures|restart|result|rotate|rx|ry|scale|seed|shapeRendering|slope|spacing|specularConstant|specularExponent|speed|spreadMethod|startOffset|stdDeviation|stemh|stemv|stitchTiles|stopColor|stopOpacity|strikethroughPosition|strikethroughThickness|string|stroke|strokeDasharray|strokeDashoffset|strokeLinecap|strokeLinejoin|strokeMiterlimit|strokeOpacity|strokeWidth|surfaceScale|systemLanguage|tableValues|targetX|targetY|textAnchor|textDecoration|textRendering|textLength|to|transform|u1|u2|underlinePosition|underlineThickness|unicode|unicodeBidi|unicodeRange|unitsPerEm|vAlphabetic|vHanging|vIdeographic|vMathematical|values|vectorEffect|version|vertAdvY|vertOriginX|vertOriginY|viewBox|viewTarget|visibility|widths|wordSpacing|writingMode|x|xHeight|x1|x2|xChannelSelector|xlinkActuate|xlinkArcrole|xlinkHref|xlinkRole|xlinkShow|xlinkTitle|xlinkType|xmlBase|xmlns|xmlnsXlink|xmlLang|xmlSpace|y|y1|y2|yChannelSelector|z|zoomAndPan|for|class|autofocus)|(([Dd][Aa][Tt][Aa]|[Aa][Rr][Ii][Aa]|x)-.*))$/;
+    var index = memoize3(function (prop,) {
+      return reactPropsRegex2.test(prop,) || prop.charCodeAt(0,) === 111 && prop.charCodeAt(1,) === 110 && prop.charCodeAt(2,) < 91;
+    },/* Z+1 */
+    );
+    exports.default = index;
+  },
+},);
 var LayoutGroupContext = createContext({},);
-var isBrowser = typeof window !== 'undefined';
+var isBrowser = typeof __unframerWindow !== 'undefined';
 var useIsomorphicLayoutEffect = isBrowser ? useLayoutEffect : useEffect;
 var PresenceContext = /* @__PURE__ */ createContext(null,);
 function addUniqueItem(arr, item,) {
@@ -1782,7 +1819,7 @@ function measureAllKeyframes() {
     resolversToMeasure.forEach((resolver) => resolver.measureEndState());
     resolversToMeasure.forEach((resolver) => {
       if (resolver.suspendedScrollY !== void 0) {
-        window.scrollTo(0, resolver.suspendedScrollY,);
+        __unframerWindow.scrollTo(0, resolver.suspendedScrollY,);
       }
     },);
   }
@@ -1881,7 +1918,7 @@ var isCSSVar = (name) => name.startsWith('--',);
 function setStyle(element, name, value,) {
   isCSSVar(name,) ? element.style.setProperty(name, value,) : element.style[name] = value;
 }
-var supportsScrollTimeline = /* @__PURE__ */ memo(() => window.ScrollTimeline !== void 0);
+var supportsScrollTimeline = /* @__PURE__ */ memo(() => __unframerWindow.ScrollTimeline !== void 0);
 var supportsFlags = {};
 function memoSupports(callback, supportsFlag,) {
   const memoized = /* @__PURE__ */ memo(callback,);
@@ -2523,7 +2560,7 @@ function getVariableValue(current2, element, depth = 1,) {
   );
   const [token, fallback,] = parseCSSVariable(current2,);
   if (!token) return;
-  const resolved = window.getComputedStyle(element,).getPropertyValue(token,);
+  const resolved = __unframerWindow.getComputedStyle(element,).getPropertyValue(token,);
   if (resolved) {
     const trimmed = resolved.trim();
     return isNumericalString(trimmed,) ? parseFloat(trimmed,) : trimmed;
@@ -2751,9 +2788,9 @@ var DOMKeyframesResolver = class extends KeyframeResolver {
     } = this;
     if (!element || !element.current) return;
     if (name === 'height') {
-      this.suspendedScrollY = window.pageYOffset;
+      this.suspendedScrollY = __unframerWindow.pageYOffset;
     }
-    this.measuredOrigin = positionalValues[name](element.measureViewportBox(), window.getComputedStyle(element.current,),);
+    this.measuredOrigin = positionalValues[name](element.measureViewportBox(), __unframerWindow.getComputedStyle(element.current,),);
     unresolvedKeyframes[0] = this.measuredOrigin;
     const measureKeyframe = unresolvedKeyframes[unresolvedKeyframes.length - 1];
     if (measureKeyframe !== void 0) {
@@ -2773,7 +2810,7 @@ var DOMKeyframesResolver = class extends KeyframeResolver {
     const finalKeyframe = unresolvedKeyframes[finalKeyframeIndex];
     unresolvedKeyframes[finalKeyframeIndex] = positionalValues[name](
       element.measureViewportBox(),
-      window.getComputedStyle(element.current,),
+      __unframerWindow.getComputedStyle(element.current,),
     );
     if (finalKeyframe !== null && this.finalKeyframe === void 0) {
       this.finalKeyframe = finalKeyframe;
@@ -3486,8 +3523,8 @@ function press(targetOrSelector, onPressStart, options = {},) {
     isPressing.add(target,);
     const onPressEnd = onPressStart(target, startEvent,);
     const onPointerEnd = (endEvent, success,) => {
-      window.removeEventListener('pointerup', onPointerUp,);
-      window.removeEventListener('pointercancel', onPointerCancel,);
+      __unframerWindow.removeEventListener('pointerup', onPointerUp,);
+      __unframerWindow.removeEventListener('pointercancel', onPointerCancel,);
       if (isPressing.has(target,)) {
         isPressing.delete(target,);
       }
@@ -3501,16 +3538,19 @@ function press(targetOrSelector, onPressStart, options = {},) {
       }
     };
     const onPointerUp = (upEvent) => {
-      onPointerEnd(upEvent, target === window || target === document || options.useGlobalTarget || isNodeOrChild(target, upEvent.target,),);
+      onPointerEnd(
+        upEvent,
+        target === __unframerWindow || target === document || options.useGlobalTarget || isNodeOrChild(target, upEvent.target,),
+      );
     };
     const onPointerCancel = (cancelEvent) => {
       onPointerEnd(cancelEvent, false,);
     };
-    window.addEventListener('pointerup', onPointerUp, eventOptions,);
-    window.addEventListener('pointercancel', onPointerCancel, eventOptions,);
+    __unframerWindow.addEventListener('pointerup', onPointerUp, eventOptions,);
+    __unframerWindow.addEventListener('pointercancel', onPointerCancel, eventOptions,);
   };
   targets.forEach((target) => {
-    const pointerDownTarget = options.useGlobalTarget ? window : target;
+    const pointerDownTarget = options.useGlobalTarget ? __unframerWindow : target;
     pointerDownTarget.addEventListener('pointerdown', startPress, eventOptions,);
     if (isHTMLElement(target,)) {
       target.addEventListener('focus', (event) => enableKeyboardPress(event, eventOptions,),);
@@ -3522,7 +3562,7 @@ function press(targetOrSelector, onPressStart, options = {},) {
   return cancelEvents;
 }
 function getComputedStyle2(element, name,) {
-  const computedStyle = window.getComputedStyle(element,);
+  const computedStyle = __unframerWindow.getComputedStyle(element,);
   return isCSSVar(name,) ? computedStyle.getPropertyValue(name,) : computedStyle[name];
 }
 function isSVGElement(element,) {
@@ -3591,15 +3631,15 @@ function createWindowResizeHandler() {
   windowResizeHandler = () => {
     const info = {
       get width() {
-        return window.innerWidth;
+        return __unframerWindow.innerWidth;
       },
       get height() {
-        return window.innerHeight;
+        return __unframerWindow.innerHeight;
       },
     };
     windowCallbacks.forEach((callback) => callback(info,));
   };
-  window.addEventListener('resize', windowResizeHandler,);
+  __unframerWindow.addEventListener('resize', windowResizeHandler,);
 }
 function resizeWindow(callback,) {
   windowCallbacks.add(callback,);
@@ -3607,7 +3647,7 @@ function resizeWindow(callback,) {
   return () => {
     windowCallbacks.delete(callback,);
     if (!windowCallbacks.size && typeof windowResizeHandler === 'function') {
-      window.removeEventListener('resize', windowResizeHandler,);
+      __unframerWindow.removeEventListener('resize', windowResizeHandler,);
       windowResizeHandler = void 0;
     }
   };
@@ -4637,7 +4677,7 @@ function loadExternalIsValidProp(isValidProp,) {
   shouldForward = (key7) => key7.startsWith('on',) ? !isValidMotionProp(key7,) : isValidProp(key7,);
 }
 try {
-  loadExternalIsValidProp(__require('@emotion/is-prop-valid',).default,);
+  loadExternalIsValidProp(require_is_prop_valid_browser_cjs().default,);
 } catch {}
 function filterProps(props, isDom, forwardMotionProps,) {
   const filteredProps2 = {};
@@ -5268,13 +5308,13 @@ function useVisualElement(Component33, visualState, props, createVisualElement, 
   },);
   const optimisedAppearId = props[optimizedAppearDataAttribute];
   const wantsHandoff = useRef(
-    Boolean(optimisedAppearId,) && !window.MotionHandoffIsComplete?.(optimisedAppearId,) &&
-      window.MotionHasOptimisedAnimation?.(optimisedAppearId,),
+    Boolean(optimisedAppearId,) && !__unframerWindow.MotionHandoffIsComplete?.(optimisedAppearId,) &&
+      __unframerWindow.MotionHasOptimisedAnimation?.(optimisedAppearId,),
   );
   useIsomorphicLayoutEffect(() => {
     if (!visualElement) return;
     isMounted.current = true;
-    window.MotionIsMounted = true;
+    __unframerWindow.MotionIsMounted = true;
     visualElement.updateFeatures();
     visualElement.scheduleRenderMicrotask();
     if (wantsHandoff.current && visualElement.animationState) {
@@ -5288,7 +5328,7 @@ function useVisualElement(Component33, visualState, props, createVisualElement, 
     }
     if (wantsHandoff.current) {
       queueMicrotask(() => {
-        window.MotionHandoffMarkAsComplete?.(optimisedAppearId,);
+        __unframerWindow.MotionHandoffMarkAsComplete?.(optimisedAppearId,);
       },);
       wantsHandoff.current = false;
     }
@@ -5480,8 +5520,8 @@ var hasReducedMotionListener = {
 function initPrefersReducedMotion() {
   hasReducedMotionListener.current = true;
   if (!isBrowser) return;
-  if (window.matchMedia) {
-    const motionMediaQuery = window.matchMedia('(prefers-reduced-motion)',);
+  if (__unframerWindow.matchMedia) {
+    const motionMediaQuery = __unframerWindow.matchMedia('(prefers-reduced-motion)',);
     const setReducedMotionPreferences = () => prefersReducedMotion.current = motionMediaQuery.matches;
     motionMediaQuery.addEventListener('change', setReducedMotionPreferences,);
     setReducedMotionPreferences();
@@ -5692,8 +5732,8 @@ var VisualElement = class {
       this.scheduleRender();
     },);
     let removeSyncCheck;
-    if (window.MotionCheckAppearSync) {
-      removeSyncCheck = window.MotionCheckAppearSync(this, key7, value,);
+    if (__unframerWindow.MotionCheckAppearSync) {
+      removeSyncCheck = __unframerWindow.MotionCheckAppearSync(this, key7, value,);
     }
     this.valueSubscriptions.set(key7, () => {
       removeOnChange();
@@ -6119,10 +6159,10 @@ function animateTarget(visualElement, targetAndTransition, {
       continue;
     }
     let isHandoff = false;
-    if (window.MotionHandoffAnimation) {
+    if (__unframerWindow.MotionHandoffAnimation) {
       const appearId = getOptimisedAppearId(visualElement,);
       if (appearId) {
-        const startTime = window.MotionHandoffAnimation(appearId, key7, frame,);
+        const startTime = __unframerWindow.MotionHandoffAnimation(appearId, key7, frame,);
         if (startTime !== null) {
           valueTransition.startTime = startTime;
           isHandoff = true;
@@ -6866,7 +6906,7 @@ function renderHTML(
   }
 }
 function getComputedStyle3(element,) {
-  return window.getComputedStyle(element,);
+  return __unframerWindow.getComputedStyle(element,);
 }
 var HTMLVisualElement = class extends DOMVisualElement {
   constructor() {
@@ -6974,7 +7014,7 @@ var getContextWindow = ({
 var PanSession = class {
   constructor(event, handlers, {
     transformPagePoint,
-    contextWindow = window,
+    contextWindow = __unframerWindow,
     dragSnapToOrigin = false,
     distanceThreshold = 3,
   } = {},) {
@@ -6982,7 +7022,7 @@ var PanSession = class {
     this.lastMoveEvent = null;
     this.lastMoveEventInfo = null;
     this.handlers = {};
-    this.contextWindow = window;
+    this.contextWindow = __unframerWindow;
     this.updatePoint = () => {
       if (!(this.lastMoveEvent && this.lastMoveEventInfo)) return;
       const info2 = getPanInfo(this.lastMoveEventInfo, this.history,);
@@ -7040,7 +7080,7 @@ var PanSession = class {
     this.handlers = handlers;
     this.transformPagePoint = transformPagePoint;
     this.distanceThreshold = distanceThreshold;
-    this.contextWindow = contextWindow || window;
+    this.contextWindow = contextWindow || __unframerWindow;
     const info = extractEventInfo(event,);
     const initialInfo = transformPoint(info, this.transformPagePoint,);
     const {
@@ -7629,7 +7669,7 @@ var VisualElementDragControls = class {
       projection.updateLayout();
     }
     frame.read(measureDragConstraints,);
-    const stopResizeListener = addDomEvent(window, 'resize', () => this.scalePositionWithinConstraints(),);
+    const stopResizeListener = addDomEvent(__unframerWindow, 'resize', () => this.scalePositionWithinConstraints(),);
     const stopLayoutUpdateListener = projection.addEventListener('didUpdate', ({
       delta,
       hasLayoutChanged,
@@ -8171,12 +8211,12 @@ function cancelTreeOptimisedTransformAnimations(projectionNode,) {
   } = projectionNode.options;
   if (!visualElement) return;
   const appearId = getOptimisedAppearId(visualElement,);
-  if (window.MotionHasOptimisedAnimation(appearId, 'transform',)) {
+  if (__unframerWindow.MotionHasOptimisedAnimation(appearId, 'transform',)) {
     const {
       layout: layout2,
       layoutId,
     } = projectionNode.options;
-    window.MotionCancelOptimisedAnimation(appearId, 'transform', frame, !(layout2 || layoutId),);
+    __unframerWindow.MotionCancelOptimisedAnimation(appearId, 'transform', frame, !(layout2 || layoutId),);
   }
   const {
     parent,
@@ -8295,10 +8335,10 @@ function createProjectionNode2({
         let innerWidth = 0;
         const resizeUnblockUpdate = () => this.root.updateBlockedByResize = false;
         frame.read(() => {
-          innerWidth = window.innerWidth;
+          innerWidth = __unframerWindow.innerWidth;
         },);
         attachResizeListener(instance, () => {
-          const newInnerWidth = window.innerWidth;
+          const newInnerWidth = __unframerWindow.innerWidth;
           if (newInnerWidth === innerWidth) return;
           innerWidth = newInnerWidth;
           this.root.updateBlockedByResize = true;
@@ -8405,7 +8445,7 @@ function createProjectionNode2({
         this.options.onExitComplete && this.options.onExitComplete();
         return;
       }
-      if (window.MotionCancelOptimisedAnimation && !this.hasCheckedOptimisedAppear) {
+      if (__unframerWindow.MotionCancelOptimisedAnimation && !this.hasCheckedOptimisedAppear) {
         cancelTreeOptimisedTransformAnimations(this,);
       }
       !this.root.isUpdating && this.root.startUpdate();
@@ -9331,7 +9371,7 @@ var HTMLProjectionNode = createProjectionNode2({
   defaultParent: () => {
     if (!rootProjectionNode.current) {
       const documentNode = new DocumentProjectionNode({},);
-      documentNode.mount(window,);
+      documentNode.mount(__unframerWindow,);
       documentNode.setOptions({
         layoutScroll: true,
       },);
@@ -9342,7 +9382,7 @@ var HTMLProjectionNode = createProjectionNode2({
   resetTransform: (instance, value,) => {
     instance.style.transform = value !== void 0 ? value : 'none';
   },
-  checkIsScrollRoot: (instance) => Boolean(window.getComputedStyle(instance,).position === 'fixed',),
+  checkIsScrollRoot: (instance) => Boolean(__unframerWindow.getComputedStyle(instance,).position === 'fixed',),
 },);
 var drag = {
   pan: {
@@ -9825,7 +9865,7 @@ function createOnScrollHandler(element, onScroll, info, options = {},) {
 var scrollListeners = /* @__PURE__ */ new WeakMap();
 var resizeListeners = /* @__PURE__ */ new WeakMap();
 var onScrollHandlers = /* @__PURE__ */ new WeakMap();
-var getEventTarget = (element) => element === document.scrollingElement ? window : element;
+var getEventTarget = (element) => element === document.scrollingElement ? __unframerWindow : element;
 function scrollInfo(onScroll, {
   container = document.scrollingElement,
   ...options
@@ -9854,7 +9894,7 @@ function scrollInfo(onScroll, {
     const listener2 = () => frame.read(measureAll,);
     scrollListeners.set(container, listener2,);
     const target = getEventTarget(container,);
-    window.addEventListener('resize', listener2, {
+    __unframerWindow.addEventListener('resize', listener2, {
       passive: true,
     },);
     if (container !== document.documentElement) {
@@ -9878,7 +9918,7 @@ function scrollInfo(onScroll, {
     if (scrollListener) {
       getEventTarget(container,).removeEventListener('scroll', scrollListener,);
       resizeListeners.get(container,)?.();
-      window.removeEventListener('resize', scrollListener,);
+      __unframerWindow.removeEventListener('resize', scrollListener,);
     }
   };
 }
@@ -11015,10 +11055,10 @@ function handoffOptimizedAppearAnimation(elementId, valueName, frame2,) {
     startTime,
   } = optimisedAnimation;
   function cancelAnimation() {
-    window.MotionCancelOptimisedAnimation?.(elementId, valueName, frame2,);
+    __unframerWindow.MotionCancelOptimisedAnimation?.(elementId, valueName, frame2,);
   }
   animation.onfinish = cancelAnimation;
-  if (startTime === null || window.MotionHandoffIsComplete?.(elementId,)) {
+  if (startTime === null || __unframerWindow.MotionHandoffIsComplete?.(elementId,)) {
     cancelAnimation();
     return null;
   } else {
@@ -11036,12 +11076,12 @@ function resumeSuspendedAnimations() {
   suspendedAnimations.clear();
 }
 function startOptimizedAppearAnimation(element, name, keyframes2, options, onReady,) {
-  if (window.MotionIsMounted) {
+  if (__unframerWindow.MotionIsMounted) {
     return;
   }
   const id4 = element.dataset[optimizedAppearDataId];
   if (!id4) return;
-  window.MotionHandoffAnimation = handoffOptimizedAppearAnimation;
+  __unframerWindow.MotionHandoffAnimation = handoffOptimizedAppearAnimation;
   const storeId = appearStoreId(id4, name,);
   if (!readyAnimation) {
     readyAnimation = startWaapiAnimation(element, name, [keyframes2[0], keyframes2[0],], /**
@@ -11056,8 +11096,8 @@ function startOptimizedAppearAnimation(element, name, keyframes2, options, onRea
       animation: readyAnimation,
       startTime: null,
     },);
-    window.MotionHandoffAnimation = handoffOptimizedAppearAnimation;
-    window.MotionHasOptimisedAnimation = (elementId, valueName,) => {
+    __unframerWindow.MotionHandoffAnimation = handoffOptimizedAppearAnimation;
+    __unframerWindow.MotionHasOptimisedAnimation = (elementId, valueName,) => {
       if (!elementId) return false;
       if (!valueName) {
         return appearComplete.has(elementId,);
@@ -11065,15 +11105,15 @@ function startOptimizedAppearAnimation(element, name, keyframes2, options, onRea
       const animationId = appearStoreId(elementId, valueName,);
       return Boolean(appearAnimationStore.get(animationId,),);
     };
-    window.MotionHandoffMarkAsComplete = (elementId) => {
+    __unframerWindow.MotionHandoffMarkAsComplete = (elementId) => {
       if (appearComplete.has(elementId,)) {
         appearComplete.set(elementId, true,);
       }
     };
-    window.MotionHandoffIsComplete = (elementId) => {
+    __unframerWindow.MotionHandoffIsComplete = (elementId) => {
       return appearComplete.get(elementId,) === true;
     };
-    window.MotionCancelOptimisedAnimation = (elementId, valueName, frame2, canResume,) => {
+    __unframerWindow.MotionCancelOptimisedAnimation = (elementId, valueName, frame2, canResume,) => {
       const animationId = appearStoreId(elementId, valueName,);
       const data2 = appearAnimationStore.get(animationId,);
       if (!data2) return;
@@ -11092,19 +11132,19 @@ function startOptimizedAppearAnimation(element, name, keyframes2, options, onRea
       } else {
         appearAnimationStore.delete(animationId,);
         if (!appearAnimationStore.size) {
-          window.MotionCancelOptimisedAnimation = void 0;
+          __unframerWindow.MotionCancelOptimisedAnimation = void 0;
         }
       }
     };
-    window.MotionCheckAppearSync = (visualElement, valueName, value,) => {
+    __unframerWindow.MotionCheckAppearSync = (visualElement, valueName, value,) => {
       const appearId = getOptimisedAppearId(visualElement,);
       if (!appearId) return;
-      const valueIsOptimised = window.MotionHasOptimisedAnimation?.(appearId, valueName,);
+      const valueIsOptimised = __unframerWindow.MotionHasOptimisedAnimation?.(appearId, valueName,);
       const externalAnimationValue = visualElement.props.values?.[valueName];
       if (!valueIsOptimised || !externalAnimationValue) return;
       const removeSyncCheck = value.on('change', (latestValue) => {
         if (externalAnimationValue.get() !== latestValue) {
-          window.MotionCancelOptimisedAnimation?.(appearId, valueName,);
+          __unframerWindow.MotionCancelOptimisedAnimation?.(appearId, valueName,);
           removeSyncCheck();
         }
       },);
@@ -11342,7 +11382,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.HF6P2ATK.mjs
+// /:https://app.framerstatic.com/framer.UA53KO5V.mjs
 
 import React42 from 'react';
 import { useDeferredValue, useSyncExternalStore, } from 'react';
@@ -11354,7 +11394,8 @@ import { createRef, } from 'react';
 import { useTransition, } from 'react';
 import { createPortal, } from 'react-dom';
 import { cloneElement as cloneElement32, } from 'react';
-var __unframerNavigator2 = typeof window !== 'undefined' ? navigator : void 0;
+var __unframerWindow2 = typeof window !== 'undefined' ? window : void 0;
+var __unframerNavigator2 = typeof __unframerWindow2 !== 'undefined' ? navigator : void 0;
 var require_hsluv = __commonJS({
   '../../../node_modules/hsluv/dist/hsluv.cjs'(exports,) {
     'use strict';
@@ -12147,7 +12188,7 @@ var require_fontfaceobserver_standalone = __commonJS({
 
       function D(a, c, b,) {
         c = c || {};
-        b = b || window;
+        b = b || __unframerWindow2;
         this.family = a;
         this.style = c.style || 'normal';
         this.weight = c.weight || 'normal';
@@ -12160,8 +12201,8 @@ var require_fontfaceobserver_standalone = __commonJS({
         H = null;
       function I(a,) {
         null === F &&
-          (M(a,) && /Apple/.test(window.navigator.vendor,)
-            ? (a = /AppleWebKit\/([0-9]+)(?:\.([0-9]+))(?:\.([0-9]+))/.exec(window.navigator.userAgent,),
+          (M(a,) && /Apple/.test(__unframerWindow2.navigator.vendor,)
+            ? (a = /AppleWebKit\/([0-9]+)(?:\.([0-9]+))(?:\.([0-9]+))/.exec(__unframerWindow2.navigator.userAgent,),
               F = !!a && 603 > parseInt(a[1], 10,))
             : F = false);
         return F;
@@ -12215,7 +12256,7 @@ var require_fontfaceobserver_standalone = __commonJS({
                 if (d = -1 != k && -1 != l2 || -1 != k && -1 != m2 || -1 != l2 && -1 != m2) {
                   (d = k != l2 && k != m2 && l2 != m2) ||
                   (null === E &&
-                    (d = /AppleWebKit\/([0-9]+)(?:\.([0-9]+))/.exec(window.navigator.userAgent,),
+                    (d = /AppleWebKit\/([0-9]+)(?:\.([0-9]+))/.exec(__unframerWindow2.navigator.userAgent,),
                       E = !!d && (536 > parseInt(d[1], 10,) || 536 === parseInt(d[1], 10,) && 11 >= parseInt(d[2], 10,))),
                     d = E && (k == y && l2 == y && m2 == y || k == z && l2 == z && m2 == z || k == A && l2 == A && m2 == A)), d = !d;
                 }
@@ -12272,7 +12313,7 @@ var require_fontfaceobserver_standalone = __commonJS({
       };
       'object' === typeof module
         ? module.exports = D
-        : (window.FontFaceObserver = D, window.FontFaceObserver.prototype.load = D.prototype.load);
+        : (__unframerWindow2.FontFaceObserver = D, __unframerWindow2.FontFaceObserver.prototype.load = D.prototype.load);
     })();
   },
 },);
@@ -12323,15 +12364,15 @@ function isPromise(value,) {
   return value instanceof Promise;
 }
 var noop2 = () => {};
-var isWindow = typeof window !== 'undefined';
+var isWindow = typeof __unframerWindow2 !== 'undefined';
 var isBot =
   /* @__PURE__ */ (() =>
     isWindow &&
     (__unframerNavigator2.webdriver || /bot|-google|google-|yandex|ia_archiver|crawl|spider/iu.test(__unframerNavigator2.userAgent,)))();
-var supportsRequestIdleCallback = isWindow && typeof window.requestIdleCallback === 'function';
+var supportsRequestIdleCallback = isWindow && typeof __unframerWindow2.requestIdleCallback === 'function';
 var requestIdleCallback = /* @__PURE__ */ (() =>
   // eslint-disable-next-line compat/compat,framer-studio/tscompat
-  supportsRequestIdleCallback ? window.requestIdleCallback : setTimeout)();
+  supportsRequestIdleCallback ? __unframerWindow2.requestIdleCallback : setTimeout)();
 function encodeSVGForCSS(svg,) {
   return `url('data:image/svg+xml,${svg.replaceAll('#', '%23',).replaceAll('\'', '%27',)}')`;
 }
@@ -12659,6 +12700,7 @@ function getRouteElementId(route, hash2,) {
   return void 0;
 }
 var EMPTY_ARRAY = [];
+var EMPTY_OBJECT = {};
 function monitorINPRelatedInputs(signal,) {
   const inpRelatedInputs = ['pointerdown', 'pointerup', 'keydown', 'keyup',];
   const inpRelatedInputHandler = (event) => {
@@ -12834,11 +12876,15 @@ var DevalueError = class extends Error {
   /**
    * @param {string} message
    * @param {string[]} keys
+   * @param {any} [value] - The value that failed to be serialized
+   * @param {any} [root] - The root value being serialized
    */
-  constructor(message, keys3,) {
+  constructor(message, keys3, value, root,) {
     super(message,);
     this.name = 'DevalueError';
     this.path = keys3.join('',);
+    this.value = value;
+    this.root = root;
   }
 };
 function is_primitive(thing,) {
@@ -12987,6 +13033,7 @@ function unflatten(parsed, revivers,) {
   const values = /** @type {any[]} */
     parsed;
   const hydrated = Array(values.length,);
+  let hydrating = null;
   function hydrate(index, standalone = false,) {
     if (index === UNDEFINED) return void 0;
     if (index === NAN) return NaN;
@@ -13003,13 +13050,20 @@ function unflatten(parsed, revivers,) {
     } else if (Array.isArray(value,)) {
       if (typeof value[0] === 'string') {
         const type = value[0];
-        const reviver = revivers?.[type];
+        const reviver = revivers && Object.hasOwn(revivers, type,) ? revivers[type] : void 0;
         if (reviver) {
           let i = value[1];
           if (typeof i !== 'number') {
             i = values.push(value[1],) - 1;
           }
-          return hydrated[index] = reviver(hydrate(i,),);
+          hydrating ??= /* @__PURE__ */ new Set();
+          if (hydrating.has(i,)) {
+            throw new Error('Invalid circular reference',);
+          }
+          hydrating.add(i,);
+          hydrated[index] = reviver(hydrate(i,),);
+          hydrating.delete(i,);
+          return hydrated[index];
         }
         switch (type) {
           case 'Date':
@@ -13056,13 +13110,20 @@ function unflatten(parsed, revivers,) {
           case 'Float64Array':
           case 'BigInt64Array':
           case 'BigUint64Array': {
+            if (values[value[1]][0] !== 'ArrayBuffer') {
+              throw new Error('Invalid data',);
+            }
             const TypedArrayConstructor = globalThis[type];
-            const typedArray = new TypedArrayConstructor(hydrate(value[1],),);
+            const buffer = hydrate(value[1],);
+            const typedArray = new TypedArrayConstructor(buffer,);
             hydrated[index] = value[2] !== void 0 ? typedArray.subarray(value[2], value[3],) : typedArray;
             break;
           }
           case 'ArrayBuffer': {
             const base64 = value[1];
+            if (typeof base64 !== 'string') {
+              throw new Error('Invalid ArrayBuffer encoding',);
+            }
             const arraybuffer = decode64(base64,);
             hydrated[index] = arraybuffer;
             break;
@@ -13152,7 +13213,7 @@ function stringify(value, reducers,) {
       }
     }
     if (typeof thing === 'function') {
-      throw new DevalueError(`Cannot stringify a function`, keys3,);
+      throw new DevalueError(`Cannot stringify a function`, keys3, thing, value,);
     }
     let str = '';
     if (is_primitive(thing,)) {
@@ -13255,10 +13316,10 @@ function stringify(value, reducers,) {
           break;
         default:
           if (!is_plain_object(thing,)) {
-            throw new DevalueError(`Cannot stringify arbitrary non-POJOs`, keys3,);
+            throw new DevalueError(`Cannot stringify arbitrary non-POJOs`, keys3, thing, value,);
           }
           if (enumerable_symbols(thing,).length > 0) {
-            throw new DevalueError(`Cannot stringify POJOs with symbolic keys`, keys3,);
+            throw new DevalueError(`Cannot stringify POJOs with symbolic keys`, keys3, thing, value,);
           }
           if (Object.getPrototypeOf(thing,) === null) {
             str = '["null"';
@@ -13355,7 +13416,7 @@ var mockWindow = {
   open: function (_url, _target, _features,) {},
   __framer_events: [],
 };
-var safeWindow = !isWindow ? mockWindow : window;
+var safeWindow = !isWindow ? mockWindow : __unframerWindow2;
 var pageviewEventVersion = 2;
 function sendTrackingEvent(eventType, eventData, sendOn = 'lazy',) {
   safeWindow.__framer_events?.push([eventType, eventData, sendOn,],);
@@ -13693,144 +13754,8 @@ function yieldToMain(options,) {
   }
   return schedulerYield(schedulerOptions,);
 }
-var pathVariablesRegExpRaw = ':([a-z]\\w*)';
-var pathVariablesRegExp = /* @__PURE__ */ new RegExp(pathVariablesRegExpRaw, 'gi',);
-async function getLocalesForCurrentRoute(activeLocale, locales, currentRoute, pathVariables, collectionUtils,) {
-  if (!currentRoute) return locales;
-  const slugByLocaleIfCollectionPage = await getSlugByLocaleIfCollectionPage(
-    activeLocale,
-    locales,
-    currentRoute,
-    pathVariables,
-    collectionUtils,
-  );
-  const includedLocalesForCurrentRoute = currentRoute.includedLocales;
-  const localesForCurrentRoute = [];
-  for (const locale of locales) {
-    if (includedLocalesForCurrentRoute) {
-      if (!includedLocalesForCurrentRoute.includes(locale.id,)) continue;
-    }
-    if (slugByLocaleIfCollectionPage) {
-      const hasSlug = slugByLocaleIfCollectionPage.has(locale.id,);
-      if (!hasSlug) continue;
-    }
-    localesForCurrentRoute.push(locale,);
-  }
-  return localesForCurrentRoute;
-}
-async function getSlugByLocaleIfCollectionPage(activeLocale, locales, currentRoute, pathVariables, collectionUtils,) {
-  const {
-    collectionId,
-  } = currentRoute;
-  if (!collectionId) return null;
-  if (!activeLocale) return null;
-  if (!pathVariables) return null;
-  const {
-    path,
-  } = currentRoute;
-  if (!path) return null;
-  const matches = Array.from(path.matchAll(pathVariablesRegExp,),);
-  const lastMatch = matches.pop();
-  if (!lastMatch) return null;
-  const pathVariableWithDelimiter = lastMatch?.[0];
-  const pathVariableValue = lastMatch?.[1];
-  if (!pathVariableWithDelimiter || !pathVariableValue) {
-    throw new Error('Failed to replace path variables: unexpected regex match group',);
-  }
-  const currentSlug = pathVariables[pathVariableValue];
-  if (!currentSlug || !isString(currentSlug,)) {
-    throw new Error(`No slug found for path variable ${pathVariableValue}`,);
-  }
-  const utils = collectionUtils?.get(collectionId,);
-  if (!utils) return null;
-  const maybeRecordId = utils.getRecordIdBySlug(currentSlug, activeLocale,);
-  const recordId = isPromise(maybeRecordId,) ? await maybeRecordId : maybeRecordId;
-  if (!recordId) return null;
-  const slugById = /* @__PURE__ */ new Map();
-  await Promise.all(locales.map(async (locale) => {
-    const maybeSlug = utils.getSlugByRecordId(recordId, locale,);
-    const slug = isPromise(maybeSlug,) ? await maybeSlug : maybeSlug;
-    if (!slug) return;
-    slugById.set(locale.id, slug,);
-  },),);
-  return slugById;
-}
-var noopAsync = async () => {};
-var defaultLocaleInfo = {
-  activeLocale: null,
-  locales: [],
-  setLocale: noopAsync,
-};
-var LocaleInfoContext = /* @__PURE__ */ (() => {
-  const Context2 = React42.createContext(defaultLocaleInfo,);
-  Context2.displayName = 'LocaleInfoContext';
-  return Context2;
-})();
-function useLocaleInfo() {
-  return React42.useContext(LocaleInfoContext,);
-}
-function useLocalesForCurrentRoute() {
-  const {
-    currentRouteId,
-    routes,
-    currentPathVariables,
-  } = useRouter();
-  const {
-    activeLocale,
-    locales,
-  } = useLocaleInfo();
-  const [localesForCurrentRoute, setLocalesForCurrentRoute,] = React42.useState(() => activeLocale ? [activeLocale,] : []);
-  const currentRoute = currentRouteId ? routes?.[currentRouteId] : void 0;
-  const collectionUtils = useCollectionUtils();
-  React42.useEffect(() => {
-    let active = true;
-    getLocalesForCurrentRoute(activeLocale, locales, currentRoute, currentPathVariables, collectionUtils,).then((localesSubset) => {
-      if (!active) return;
-      React42.startTransition(() => {
-        if (localesSubset) {
-          setLocalesForCurrentRoute(localesSubset,);
-        } else {
-          setLocalesForCurrentRoute(activeLocale ? [activeLocale,] : [],);
-        }
-      },);
-    },).catch(() => {},);
-    return () => {
-      active = false;
-    };
-  }, [activeLocale, locales, collectionUtils, currentRoute, currentPathVariables,],);
-  return localesForCurrentRoute;
-}
-function useLocalizationInfo() {
-  const {
-    activeLocale,
-    locales,
-    setLocale,
-  } = useLocaleInfo();
-  return {
-    activeLocalization: activeLocale,
-    localizations: locales,
-    setLocalization: setLocale,
-  };
-}
-function useLocaleCode() {
-  return useLocaleInfo().activeLocale?.code ?? 'en-US';
-}
-function useLocale() {
-  return useLocaleCode();
-}
-var LayoutDirectionContext = /* @__PURE__ */ (() => {
-  const Context2 = React42.createContext('ltr',);
-  Context2.displayName = 'LayoutDirectionContext';
-  return Context2;
-})();
-function useLayoutDirection() {
-  return React42.useContext(LayoutDirectionContext,);
-}
 var shouldPreloadBasedOnUA = !isBot;
 function usePreloadRoute() {
-  const {
-    activeLocale,
-  } = useLocaleInfo();
   const collectionUtils = useCollectionUtils();
   const {
     autobahnNavigation: autobahnNavigationEnabled,
@@ -13838,26 +13763,30 @@ function usePreloadRoute() {
   const {
     getRoute,
   } = useRouter();
-  return useCallback2((routeId, pathVariables, yieldBeforePreload = true,) => {
+  return useCallback2((routeId, linkContext, yieldBeforePreload = true,) => {
     if (!routeId || !getRoute) return;
     const route = getRoute(routeId,);
+    const {
+      pathVariables,
+      locale,
+    } = linkContext;
     const context = routeId && autobahnNavigationEnabled
       ? {
         routeId,
         pathVariables,
-        locale: activeLocale ?? void 0,
+        locale,
         collectionUtils,
       }
       : void 0;
     return preloadRoute(route, context, yieldBeforePreload,);
-  }, [getRoute, activeLocale, collectionUtils, autobahnNavigationEnabled,],);
+  }, [getRoute, collectionUtils, autobahnNavigationEnabled,],);
 }
 function useRoutePreloader(routeIds, enabled = true,) {
   const preload = usePreloadRoute();
   useEffect(() => {
     if (!enabled || !shouldPreloadBasedOnUA) return;
     for (const routeId of routeIds) {
-      void preload(routeId,);
+      void preload(routeId, EMPTY_OBJECT,);
     }
   }, [routeIds, enabled, preload,],);
 }
@@ -13888,7 +13817,7 @@ async function preloadRouteData(component, context,) {
     collectionUtils: context.collectionUtils,
   };
   try {
-    await loader.load({}, loaderContext,);
+    await loader.load(EMPTY_OBJECT, loaderContext,);
   } catch (e) {
     if (false) console.warn('Route data preload failed', e,);
   }
@@ -14025,6 +13954,8 @@ function normalizeString(path,) {
   return res;
 }
 var customNotFoundPagePaths = /* @__PURE__ */ new Set([`/404.html`, `/404`, `/404/`,],);
+var pathVariablesRegExpRaw = ':([a-z]\\w*)';
+var pathVariablesRegExp = /* @__PURE__ */ new RegExp(pathVariablesRegExpRaw, 'gi',);
 function fillPathVariables(path, variables,) {
   return path.replace(pathVariablesRegExp, (match, name,) => {
     const value = variables[name];
@@ -14033,7 +13964,7 @@ function fillPathVariables(path, variables,) {
   },);
 }
 function forwardCurrentQueryParams(href,) {
-  const queryParamsString = typeof window !== 'undefined' ? window.location.search : '';
+  const queryParamsString = typeof __unframerWindow2 !== 'undefined' ? __unframerWindow2.location.search : '';
   if (!queryParamsString) {
     return href;
   }
@@ -14170,7 +14101,7 @@ function getSitePrefix(siteCanonicalURL,) {
   } catch {
     return '';
   }
-  if (url.pathname === '/' || window.location.origin !== url.origin) return '';
+  if (url.pathname === '/' || __unframerWindow2.location.origin !== url.origin) return '';
   return url.pathname.endsWith('/',) ? url.pathname.slice(0, -1,) : url.pathname;
 }
 var defaultSitePageEffects = {
@@ -14221,7 +14152,7 @@ function calcMaskPosition(mask,) {
   const {
     innerWidth,
     innerHeight,
-  } = window;
+  } = __unframerWindow2;
   const [x, xUnit,] = parseUnit(mask.x,);
   const [y, yUnit,] = parseUnit(mask.y,);
   return {
@@ -14271,7 +14202,7 @@ var circle = {
     if (progress2 === 'start') {
       return `clip-path: circle(0 at ${x}px ${y}px);`;
     } else {
-      const endRadius = Math.hypot(Math.max(x, window.innerWidth - x,), Math.max(y, window.innerHeight - y,),);
+      const endRadius = Math.hypot(Math.max(x, __unframerWindow2.innerWidth - x,), Math.max(y, __unframerWindow2.innerHeight - y,),);
       return `clip-path: circle(${endRadius}px at ${x}px ${y}px);`;
     }
   },
@@ -14282,8 +14213,8 @@ var inset = {
       x,
       y,
     } = calcMaskPosition(mask,);
-    const bottom = window.innerHeight - y;
-    const right = window.innerWidth - x;
+    const bottom = __unframerWindow2.innerHeight - y;
+    const right = __unframerWindow2.innerWidth - x;
     return progress2 === 'start'
       ? `clip-path: inset(${y}px ${right}px ${bottom}px ${x}px round ${mask.round}px);`
       : `clip-path: inset(0 round 0);`;
@@ -14718,8 +14649,10 @@ function isHistoryState(data2,) {
 }
 function replaceHistoryState(data2, url, ignoreReplaceStateWrapper = false,) {
   performance.mark('framer-history-replace',);
-  const replaceState = ignoreReplaceStateWrapper ? window.history.__proto__.replaceState : window.history.replaceState;
-  replaceState.call(window.history, data2, '', url,);
+  const replaceState = ignoreReplaceStateWrapper
+    ? __unframerWindow2.history.__proto__.replaceState
+    : __unframerWindow2.history.replaceState;
+  replaceState.call(__unframerWindow2.history, data2, '', url,);
 }
 var maybeHasPopstateBug = true;
 var isImpactedPopstateBugChromiumVersion = /* @__PURE__ */ (() => {
@@ -14731,9 +14664,9 @@ var isImpactedPopstateBugChromiumVersion = /* @__PURE__ */ (() => {
 })();
 async function pushHistoryState(data2, url, isNavigationTransition = false,) {
   performance.mark('framer-history-push',);
-  updateCanonicalURL(url, window.location.href,);
+  updateCanonicalURL(url, __unframerWindow2.location.href,);
   if (!isNavigationTransition) {
-    window.history.pushState(data2, '', url,);
+    __unframerWindow2.history.pushState(data2, '', url,);
     return;
   }
   let popstateCalled = false,
@@ -14748,20 +14681,20 @@ async function pushHistoryState(data2, url, isNavigationTransition = false,) {
         message: msg,
       },);
     };
-    window.addEventListener('popstate', popstateListener, {
+    __unframerWindow2.addEventListener('popstate', popstateListener, {
       once: true,
     },);
   }
   if (isImpactedPopstateBugChromiumVersion && maybeHasPopstateBug) {
-    window.history.__proto__.pushState.call(window.history, data2, '', url,);
+    __unframerWindow2.history.__proto__.pushState.call(__unframerWindow2.history, data2, '', url,);
   } else {
-    window.history.pushState(data2, '', url,);
+    __unframerWindow2.history.pushState(data2, '', url,);
   }
   if (maybeHasPopstateBug) {
     queueMicrotask(() => {
       if (popstateCalled) return;
       maybeHasPopstateBug = false;
-      window.removeEventListener('popstate', popstateListener,);
+      __unframerWindow2.removeEventListener('popstate', popstateListener,);
       return;
     },);
   }
@@ -14786,7 +14719,7 @@ function useReplaceInitialState({
     );
   }, [],);
 }
-var supportsNavigationAPI = /* @__PURE__ */ (() => isWindow && typeof window.navigation?.back === 'function')();
+var supportsNavigationAPI = /* @__PURE__ */ (() => isWindow && typeof __unframerWindow2.navigation?.back === 'function')();
 function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
   const startViewTransition2 = useViewTransition();
   const monitorNextPaintAfterRender = useMonitorNextPaintAfterRender('framer-route-change',);
@@ -14794,7 +14727,7 @@ function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
   const popStateHandler = useCallback2(async ({
     state,
   },) => {
-    if (window.navigation?.transition && window.navigation?.transition?.navigationType !== 'traverse') return;
+    if (__unframerWindow2.navigation?.transition && __unframerWindow2.navigation?.transition?.navigationType !== 'traverse') return;
     if (!isObject2(state,)) return;
     const {
       routeId,
@@ -14813,7 +14746,7 @@ function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
         routeId,
         isString(localeId,) ? localeId : void 0,
         isString(hash2,) ? hash2 : void 0,
-        window.location.pathname + window.location.search + window.location.hash,
+        __unframerWindow2.location.pathname + __unframerWindow2.location.search + __unframerWindow2.location.hash,
         isObject2(pathVariables,) ? pathVariables : void 0,
         true,
         nextRender,
@@ -14821,7 +14754,7 @@ function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
       );
     };
     const viewTransition = await startViewTransition2(currentRouteId.current, routeId, changeRoute,);
-    const navigationTransition = window.navigation?.transition;
+    const navigationTransition = __unframerWindow2.navigation?.transition;
     await (viewTransition?.updateCallbackDone ?? Promise.resolve()).then(viewTransitionReady.current?.resolve,).catch(
       viewTransitionReady.current?.reject,
     );
@@ -14832,7 +14765,7 @@ function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
       console.warn('Popstate transition failed', error,);
     }
     announceNavigation();
-    updateCanonicalURL(window.location.href,);
+    updateCanonicalURL(__unframerWindow2.location.href,);
   }, [currentRouteId, monitorNextPaintAfterRender, setCurrentRouteId, startViewTransition2,],);
   const traversalHandler = useCallback2((event) => {
     if (event.navigationType !== 'traverse' || !event.canIntercept) return;
@@ -14850,11 +14783,11 @@ function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
     },);
   }, [],);
   useEffect(() => {
-    window.addEventListener('popstate', popStateHandler,);
-    if (supportsNavigationAPI) window.navigation.addEventListener('navigate', traversalHandler,);
+    __unframerWindow2.addEventListener('popstate', popStateHandler,);
+    if (supportsNavigationAPI) __unframerWindow2.navigation.addEventListener('navigate', traversalHandler,);
     return () => {
-      window.removeEventListener('popstate', popStateHandler,);
-      if (supportsNavigationAPI) window.navigation.removeEventListener('navigate', traversalHandler,);
+      __unframerWindow2.removeEventListener('popstate', popStateHandler,);
+      if (supportsNavigationAPI) __unframerWindow2.navigation.removeEventListener('navigate', traversalHandler,);
     };
   }, [popStateHandler, traversalHandler,],);
 }
@@ -14894,9 +14827,9 @@ function getPathForRoute(route, {
   }
   const isSamePageHashNavigation = currentPath === path && resolvedHash;
   if (relative2) {
-    if (customNotFoundPagePaths.has(currentPath,) && typeof window !== 'undefined') {
+    if (customNotFoundPagePaths.has(currentPath,) && typeof __unframerWindow2 !== 'undefined') {
       const sitePrefix = getSitePrefix(siteCanonicalURL,);
-      path = computeRelativePath(window.location.pathname, sitePrefix + path,);
+      path = computeRelativePath(__unframerWindow2.location.pathname, sitePrefix + path,);
     } else {
       path = computeRelativePath(currentPath, path,);
     }
@@ -14920,7 +14853,7 @@ async function handleRedirectForMissingSlugs(route, pathVariables, nextLocale,) 
   },);
   const isRedirect = response.type === 'opaqueredirect';
   if (isRedirect) {
-    window.location.href = window.location.origin + nextLocaleWithDefaultSlugPath;
+    __unframerWindow2.location.href = __unframerWindow2.location.origin + nextLocaleWithDefaultSlugPath;
     return true;
   }
   return false;
@@ -14953,7 +14886,7 @@ async function switchLocale(options,) {
 }
 function pushLoadMoreHistory(hash2, paginationInfo,) {
   try {
-    const currentHistoryState = window.history.state;
+    const currentHistoryState = __unframerWindow2.history.state;
     if (!isHistoryState(currentHistoryState,)) return;
     const isInitialLoad = currentHistoryState?.paginationInfo === void 0 || currentHistoryState.paginationInfo[hash2] === void 0;
     const newPaginationInfo = {
@@ -14990,10 +14923,10 @@ function useNativeLoadingSpinner() {
     }
     navigationPromise.current = promise;
     navigationController.current = controller;
-    window.navigation.addEventListener('navigate', navigateListener,);
+    __unframerWindow2.navigation.addEventListener('navigate', navigateListener,);
     void updateURL(true,);
     void promise.finally(() => {
-      window.navigation.removeEventListener('navigate', navigateListener,);
+      __unframerWindow2.navigation.removeEventListener('navigate', navigateListener,);
     },);
   }, [navigateListener,],);
 }
@@ -15054,6 +14987,137 @@ function useMemoOne(factory, inputs,) {
   }, [cache2,],);
   return cache2.result;
 }
+async function getLocalesForCurrentRoute(activeLocale, locales, currentRoute, pathVariables, collectionUtils,) {
+  if (!currentRoute) return locales;
+  const slugByLocaleIfCollectionPage = await getSlugByLocaleIfCollectionPage(
+    activeLocale,
+    locales,
+    currentRoute,
+    pathVariables,
+    collectionUtils,
+  );
+  const includedLocalesForCurrentRoute = currentRoute.includedLocales;
+  const localesForCurrentRoute = [];
+  for (const locale of locales) {
+    if (includedLocalesForCurrentRoute) {
+      if (!includedLocalesForCurrentRoute.includes(locale.id,)) continue;
+    }
+    if (slugByLocaleIfCollectionPage) {
+      const hasSlug = slugByLocaleIfCollectionPage.has(locale.id,);
+      if (!hasSlug) continue;
+    }
+    localesForCurrentRoute.push(locale,);
+  }
+  return localesForCurrentRoute;
+}
+async function getSlugByLocaleIfCollectionPage(activeLocale, locales, currentRoute, pathVariables, collectionUtils,) {
+  const {
+    collectionId,
+  } = currentRoute;
+  if (!collectionId) return null;
+  if (!activeLocale) return null;
+  if (!pathVariables) return null;
+  const {
+    path,
+  } = currentRoute;
+  if (!path) return null;
+  const matches = Array.from(path.matchAll(pathVariablesRegExp,),);
+  const lastMatch = matches.pop();
+  if (!lastMatch) return null;
+  const pathVariableWithDelimiter = lastMatch?.[0];
+  const pathVariableValue = lastMatch?.[1];
+  if (!pathVariableWithDelimiter || !pathVariableValue) {
+    throw new Error('Failed to replace path variables: unexpected regex match group',);
+  }
+  const currentSlug = pathVariables[pathVariableValue];
+  if (!currentSlug || !isString(currentSlug,)) {
+    throw new Error(`No slug found for path variable ${pathVariableValue}`,);
+  }
+  const utils = collectionUtils?.get(collectionId,);
+  if (!utils) return null;
+  const maybeRecordId = utils.getRecordIdBySlug(currentSlug, activeLocale,);
+  const recordId = isPromise(maybeRecordId,) ? await maybeRecordId : maybeRecordId;
+  if (!recordId) return null;
+  const slugById = /* @__PURE__ */ new Map();
+  await Promise.all(locales.map(async (locale) => {
+    const maybeSlug = utils.getSlugByRecordId(recordId, locale,);
+    const slug = isPromise(maybeSlug,) ? await maybeSlug : maybeSlug;
+    if (!slug) return;
+    slugById.set(locale.id, slug,);
+  },),);
+  return slugById;
+}
+var noopAsync = async () => {};
+var defaultLocaleInfo = {
+  activeLocale: null,
+  locales: [],
+  setLocale: noopAsync,
+};
+var LocaleInfoContext = /* @__PURE__ */ (() => {
+  const Context2 = React42.createContext(defaultLocaleInfo,);
+  Context2.displayName = 'LocaleInfoContext';
+  return Context2;
+})();
+function useLocaleInfo() {
+  return React42.useContext(LocaleInfoContext,);
+}
+function useLocalesForCurrentRoute() {
+  const {
+    currentRouteId,
+    routes,
+    currentPathVariables,
+  } = useRouter();
+  const {
+    activeLocale,
+    locales,
+  } = useLocaleInfo();
+  const [localesForCurrentRoute, setLocalesForCurrentRoute,] = React42.useState(() => activeLocale ? [activeLocale,] : []);
+  const currentRoute = currentRouteId ? routes?.[currentRouteId] : void 0;
+  const collectionUtils = useCollectionUtils();
+  React42.useEffect(() => {
+    let active = true;
+    getLocalesForCurrentRoute(activeLocale, locales, currentRoute, currentPathVariables, collectionUtils,).then((localesSubset) => {
+      if (!active) return;
+      React42.startTransition(() => {
+        if (localesSubset) {
+          setLocalesForCurrentRoute(localesSubset,);
+        } else {
+          setLocalesForCurrentRoute(activeLocale ? [activeLocale,] : [],);
+        }
+      },);
+    },).catch(() => {},);
+    return () => {
+      active = false;
+    };
+  }, [activeLocale, locales, collectionUtils, currentRoute, currentPathVariables,],);
+  return localesForCurrentRoute;
+}
+function useLocalizationInfo() {
+  const {
+    activeLocale,
+    locales,
+    setLocale,
+  } = useLocaleInfo();
+  return {
+    activeLocalization: activeLocale,
+    localizations: locales,
+    setLocalization: setLocale,
+  };
+}
+function useLocaleCode() {
+  return useLocaleInfo().activeLocale?.code ?? 'en-US';
+}
+function useLocale() {
+  return useLocaleCode();
+}
+var LayoutDirectionContext = /* @__PURE__ */ (() => {
+  const Context2 = React42.createContext('ltr',);
+  Context2.displayName = 'LayoutDirectionContext';
+  return Context2;
+})();
+function useLayoutDirection() {
+  return React42.useContext(LayoutDirectionContext,);
+}
 var URLSearchParamsContext = /* @__PURE__ */ (() => {
   const Context2 = createContext({
     urlSearchParams: new URLSearchParams(),
@@ -15072,13 +15136,13 @@ function URLSearchParamsProvider({
       const handler = () => {
         onStoreChange();
       };
-      window.addEventListener('popstate', handler,);
+      __unframerWindow2.addEventListener('popstate', handler,);
       return () => {
         onStoreChangeRef.current = null;
-        window.removeEventListener('popstate', handler,);
+        __unframerWindow2.removeEventListener('popstate', handler,);
       };
     },
-    () => window.location.search,
+    () => __unframerWindow2.location.search,
     () => '',
   );
   const deferredSearchString = useDeferredValue(searchString,);
@@ -15107,10 +15171,9 @@ function useStringArrayQueryParam({
   }, [urlSearchParams,],);
   const setValue = useCallback2(async (newValues) => {
     if (!isArray(newValues,)) return;
-    const currentHistoryState = window.history.state;
-    if (!isHistoryState(currentHistoryState,)) return;
+    const currentHistoryState = __unframerWindow2.history.state;
     const name = parameterNameRef.current;
-    const url = new URL(window.location.href,);
+    const url = new URL(__unframerWindow2.location.href,);
     const next2 = new URLSearchParams();
     let inserted = false;
     for (const [key7, originalValue,] of url.searchParams.entries()) {
@@ -16049,7 +16112,7 @@ function escapeStringRegExp(string,) {
   return string.replace(/[|\\{}()[\]^$+*?.]/gu, '\\$&',).replace(/-/gu, '\\x2d',);
 }
 function getVariantsFromServerTiming() {
-  if ('PerformanceServerTiming' in window) {
+  if ('PerformanceServerTiming' in __unframerWindow2) {
     const serverTiming = performance.getEntriesByType('navigation',)[0]?.serverTiming;
     if (!serverTiming || serverTiming.length === 0) return new URLSearchParams();
     const entry = serverTiming.find((it) => it.name === 'abtests');
@@ -16113,7 +16176,7 @@ function patchInitialRoute(routes, routeId,) {
   };
 }
 function patchRoutesForABTesting(routes, initialRouteId,) {
-  if (typeof window === 'undefined') return initialRouteId;
+  if (typeof __unframerWindow2 === 'undefined') return initialRouteId;
   let resolvedInitialRouteId = initialRouteId;
   if (initialRouteId) {
     patchInitialRoute(routes, initialRouteId,);
@@ -21292,6 +21355,149 @@ var ControlType = /* @__PURE__ */ ((ControlType2) => {
   ControlType2['LinkRelValues'] = 'linkrelvalues';
   return ControlType2;
 })(ControlType || {},);
+function getNavigator() {
+  return typeof __unframerNavigator2 !== 'undefined' ? __unframerNavigator2 : void 0;
+}
+function getWindow() {
+  return typeof __unframerWindow2 !== 'undefined' ? __unframerWindow2 : void 0;
+}
+var macRegex = /Mac/u;
+var winRegex = /Win/u;
+var iOSRegex = /iPhone|iPod|iPad/iu;
+var macIntelRegex = /MacIntel/iu;
+var androidRegex = /android/iu;
+function isMacOS() {
+  const nav = getNavigator();
+  return nav ? macRegex.test(nav.platform,) : false;
+}
+function isWindows() {
+  const nav = getNavigator();
+  return nav ? winRegex.test(nav.platform,) : false;
+}
+function isIOS() {
+  const nav = getNavigator();
+  if (!nav) return false;
+  if (iOSRegex.test(nav.platform,)) return true;
+  return macIntelRegex.test(nav.platform,) && nav.maxTouchPoints != null && nav.maxTouchPoints > 2;
+}
+function isAppleDevice() {
+  return isMacOS() || isIOS();
+}
+function isAndroid() {
+  const nav = getNavigator();
+  return nav ? androidRegex.test(nav.userAgent,) : false;
+}
+var edgeRegex = /Edg\//u;
+function isEdge() {
+  const nav = getNavigator();
+  return nav ? edgeRegex.test(nav.userAgent,) : false;
+}
+var chromeRegex = /Chrome/u;
+var googleVendorRegex = /Google Inc/u;
+function isChrome() {
+  const nav = getNavigator();
+  return nav ? chromeRegex.test(nav.userAgent,) && googleVendorRegex.test(nav.vendor,) && !isEdge() : false;
+}
+var appleWebKitRegex = /AppleWebKit\//u;
+function isWebKit() {
+  const nav = getNavigator();
+  return nav ? appleWebKitRegex.test(nav.userAgent,) && !isChrome() && !isEdge() : false;
+}
+var safariRegex = /Safari/u;
+var appleComputerRegex = /Apple Computer/u;
+function isSafari() {
+  const nav = getNavigator();
+  return nav ? safariRegex.test(nav.userAgent,) && appleComputerRegex.test(nav.vendor,) : false;
+}
+var firefoxRegex = /Firefox\/\d+\.\d+$/u;
+function isFirefox() {
+  const nav = getNavigator();
+  return nav ? firefoxRegex.test(nav.userAgent,) : false;
+}
+function isBrowser2() {
+  return typeof document === 'object';
+}
+var chromeVersionRegex = /Chrome\/(\d+)/u;
+function chromeMainVersion() {
+  const nav = getNavigator();
+  if (!nav) return -1;
+  const result = chromeVersionRegex.exec(nav.userAgent,);
+  if (!result || !result[1]) return -1;
+  const version2 = parseInt(result[1],);
+  return Number.isFinite(version2,) ? version2 : -1;
+}
+var safariVersionRegex = /Version\/([\d.]+)/u;
+function safariVersion() {
+  const nav = getNavigator();
+  if (!nav) return -1;
+  const result = safariVersionRegex.exec(nav.userAgent,);
+  if (result?.[1]) {
+    return parseFloat(result[1],);
+  }
+  return -1;
+}
+var framerXRegex = /FramerX/u;
+function isFramerX() {
+  const nav = getNavigator();
+  return nav ? framerXRegex.test(nav.userAgent,) : false;
+}
+function isTest() {
+  return false;
+}
+function isTouch() {
+  const win = getWindow();
+  const nav = getNavigator();
+  if (!win || !nav) return false;
+  return 'ontouchstart' in win || nav.maxTouchPoints > 0;
+}
+var tabletRegex = /tablet|iPad|Nexus 9/iu;
+var mobileRegex = /mobi/iu;
+function deviceType() {
+  const nav = getNavigator();
+  if (nav && tabletRegex.test(nav.userAgent,)) return 'tablet';
+  if (nav && mobileRegex.test(nav.userAgent,)) return 'phone';
+  return 'desktop';
+}
+function isDesktop() {
+  return deviceType() === 'desktop';
+}
+function isPhone() {
+  return deviceType() === 'phone';
+}
+function isTablet() {
+  return deviceType() === 'tablet';
+}
+function isMobile() {
+  return isPhone() || isTablet();
+}
+var embeddedRegex = /Instagram|FB_IAB\/FB4A|FBAN\/FBIOS|BytedanceWebview|Twitter|LinkedIn/iu;
+function isEmbedded() {
+  const nav = getNavigator();
+  return nav ? embeddedRegex.test(nav.userAgent,) : false;
+}
+var absoluteUrlRegex = /^[a-z]{1,8}:\/\/.*$/iu;
+function isRelativeUrl(url,) {
+  return !absoluteUrlRegex.test(url,);
+}
+function isFileUrl(url,) {
+  return url.startsWith('file://',);
+}
+function isDataUrl(url,) {
+  return url.startsWith('data:',);
+}
+var localServerUrlRegex1 = /[a-z]{1,8}:\/\/127\.0\.0\.1/iu;
+var localServerUrlRegex2 = /[a-zA-Z]{1,8}:\/\/localhost/u;
+function isLocalServerUrl(url,) {
+  return localServerUrlRegex1.test(url,) || localServerUrlRegex2.test(url,);
+}
+function isLocalUrl(url,) {
+  if (isFileUrl(url,)) return true;
+  if (isLocalServerUrl(url,)) return true;
+  return false;
+}
+function isCommandKeyPressed(event,) {
+  return isAppleDevice() ? event.metaKey : event.ctrlKey;
+}
 var StyleSheetContext = /* @__PURE__ */ React42.createContext(void 0,);
 var defaultCache = /* @__PURE__ */ new Set();
 var defaultSheet;
@@ -21321,127 +21527,6 @@ function injectCSSRule(cssRule, sheet, cache2 = defaultCache,) {
     sheet.insertRule(cssRule, sheet.cssRules.length,);
   } catch {}
 }
-var safeNavigator = typeof __unframerNavigator2 !== 'undefined' ? __unframerNavigator2 : void 0;
-var isBrowser2 = () => typeof document === 'object';
-var isWebKit = () => safeNavigator?.userAgent.includes('AppleWebKit/',) && !isChrome() && !isEdge();
-var webkitVersion = () => {
-  let version2 = -1;
-  const regexp = /AppleWebKit\/([\d.]+)/u;
-  const result = safeNavigator && regexp.exec(safeNavigator.userAgent,);
-  if (result && result[1]) {
-    version2 = parseFloat(result[1],);
-  }
-  return version2;
-};
-var safariVersion = () => {
-  let version2 = -1;
-  const regexp = /Version\/([\d.]+)/u;
-  const result = safeNavigator && regexp.exec(safeNavigator.userAgent,);
-  if (result && result[1]) {
-    version2 = parseFloat(result[1],);
-  }
-  return version2;
-};
-var isChrome = () => safeNavigator && /Chrome/u.test(safeNavigator.userAgent,) && /Google Inc/u.test(safeNavigator.vendor,) && !isEdge();
-var isSafari = () => safeNavigator && /Safari/u.test(safeNavigator.userAgent,) && /Apple Computer/u.test(safeNavigator.vendor,);
-var isFirefox = () => safeNavigator && /Firefox\/\d+\.\d+$/u.test(safeNavigator.userAgent,);
-var isFramerX = () => safeNavigator && /FramerX/u.test(safeNavigator.userAgent,);
-var isEdge = () => safeNavigator && /Edg\//u.test(safeNavigator.userAgent,);
-var isAndroid = () => safeNavigator && /android/iu.test(safeNavigator.userAgent,);
-var iOSRegex = /iPhone|iPod|iPad/iu;
-var macIntelRegex = /MacIntel/iu;
-var isIOS = () => {
-  if (!safeNavigator) return false;
-  if (iOSRegex.test(safeNavigator.platform,)) return true;
-  return macIntelRegex.test(safeNavigator.platform,) && safeNavigator.maxTouchPoints && safeNavigator.maxTouchPoints > 2;
-};
-var isMacOS = () => safeNavigator && /Mac/u.test(safeNavigator.platform,);
-var isWindows = () => safeNavigator && /Win/u.test(safeNavigator.platform,);
-var isTouch = () => safeWindow.ontouchstart === null && safeWindow.ontouchmove === null && safeWindow.ontouchend === null;
-var isDesktop = () => deviceType() === 'desktop';
-var isPhone = () => deviceType() === 'phone';
-var isTablet = () => deviceType() === 'tablet';
-var isMobile = () => isPhone() || isTablet();
-var isFileUrl = (url) => url.startsWith('file://',);
-var isDataUrl = (url) => url.startsWith('data:',);
-var isTest = () => false;
-var isRelativeUrl = (url) => !/^[a-z]{1,8}:\/\/.*$/i.test(url,);
-var isLocalServerUrl = (url) => /[a-z]{1,8}:\/\/127\.0\.0\.1/i.test(url,) || /[a-zA-Z]{1,8}:\/\/localhost/u.test(url,);
-var isLocalUrl = (url) => {
-  if (isFileUrl(url,)) return true;
-  if (isLocalServerUrl(url,)) return true;
-  return false;
-};
-var isLocalAssetUrl = (url, baseUrl,) => {
-  if (baseUrl === null) baseUrl = safeWindow.location.href;
-  if (isDataUrl(url,)) return false;
-  if (isLocalUrl(url,)) return true;
-  if (isRelativeUrl(url,) && isLocalUrl(baseUrl,)) return true;
-  return false;
-};
-var devicePixelRatio = () => safeWindow.devicePixelRatio;
-var isJP2Supported = function () {
-  if (isFirefox()) return false;
-  return isWebKit();
-};
-var isWebPSupported = () => isChrome();
-var deviceType = () => {
-  if (safeNavigator && /tablet|iPad|Nexus 9/i.test(safeNavigator.userAgent,)) return 'tablet';
-  if (safeNavigator && /mobi/iu.test(safeNavigator.userAgent,)) return 'phone';
-  return 'desktop';
-};
-var deviceOS = () => {
-  if (isMacOS()) return 'macos';
-  if (isIOS()) return 'ios';
-  if (isAndroid()) return 'android';
-  if (isWindows()) return 'windows';
-};
-var deviceFont = (os) => {
-  if (!os) {
-    os = deviceOS();
-  }
-  const fonts = {
-    apple: '-apple-system, BlinkMacSystemFont, SF Pro Text, SF UI Text, Helvetica Neue',
-    google: 'Roboto, Helvetica Neue',
-    microsoft: 'Segoe UI, Helvetica Neue',
-  };
-  if (os === 'macos') return fonts.apple;
-  if (os === 'ios') return fonts.apple;
-  if (os === 'android') return fonts.google;
-  if (os === 'windows') return fonts.microsoft;
-  return fonts.apple;
-};
-var environment = {
-  isWebKit,
-  webkitVersion,
-  isChrome,
-  isSafari,
-  isFirefox,
-  isFramerX,
-  isEdge,
-  isAndroid,
-  isIOS,
-  isMacOS,
-  isWindows,
-  isTouch,
-  isDesktop,
-  isPhone,
-  isTablet,
-  isMobile,
-  isFileUrl,
-  isDataUrl,
-  isRelativeUrl,
-  isLocalServerUrl,
-  isLocalUrl,
-  isLocalAssetUrl,
-  devicePixelRatio,
-  isJP2Supported,
-  isWebPSupported,
-  deviceType,
-  deviceOS,
-  deviceFont,
-  safariVersion,
-};
 var framerPostSSRCSSSelector = 'style[data-framer-css-ssr-minified]';
 var componentsWithServerRenderedStyles = /* @__PURE__ */ (() => {
   if (!isBrowser2()) return /* @__PURE__ */ new Set();
@@ -21996,9 +22081,9 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
         ul.framer-text,
         mark.framer-text,
         span.framer-text:not([data-text-fill]) {
-            font-family: var(--framer-blockquote-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
-            font-style: var(--framer-blockquote-font-style, var(--framer-font-style, normal));
-            font-weight: var(--framer-blockquote-font-weight, var(--framer-font-weight, 400));
+            font-family: var(--framer-font-family-preview, var(--framer-blockquote-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
+            font-style: var(--framer-font-style-preview, var(--framer-blockquote-font-style, var(--framer-font-style, normal)));
+            font-weight: var(--framer-font-weight-preview, var(--framer-blockquote-font-weight, var(--framer-font-weight, 400)));
             color: var(--framer-blockquote-text-color, var(--framer-text-color, #000));
             font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
             letter-spacing: var(--framer-blockquote-letter-spacing, var(--framer-letter-spacing, 0));
@@ -22016,7 +22101,7 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             -moz-font-feature-settings: var(--framer-font-open-type-features, initial);
             -webkit-font-feature-settings: var(--framer-font-open-type-features, initial);
             font-feature-settings: var(--framer-font-open-type-features, initial);
-            font-variation-settings: var(--framer-font-variation-axes, normal);
+            font-variation-settings: var(--framer-font-variation-axes-preview, var(--framer-font-variation-axes, normal));
             text-wrap: var(--framer-text-wrap-override, var(--framer-text-wrap));
         }
     `, /* css */
@@ -22180,9 +22265,9 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
         span.framer-text[data-nested-link] span.framer-text:not([data-text-fill]) {
             /* Ensure the color is inherited from the link style rather than the parent text for nested spans */
             color: inherit;
-            font-family: var(--framer-blockquote-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
-            font-style: var(--framer-blockquote-font-style, var(--framer-link-font-style, var(--framer-font-style, normal)));
-            font-weight: var(--framer-blockquote-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400)));
+            font-family: var(--framer-font-family-preview, var(--framer-blockquote-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif))));
+            font-style: var(--framer-font-style-preview, var(--framer-blockquote-font-style, var(--framer-link-font-style, var(--framer-font-style, normal))));
+            font-weight: var(--framer-font-weight-preview, var(--framer-blockquote-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400))));
             font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-blockquote-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none)));
             /* Cursor inherit to overwrite the user agent stylesheet on rich text links. */
@@ -22264,9 +22349,9 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
         a.framer-text:hover span.framer-text:not([data-text-fill]),
         span.framer-text[data-nested-link]:hover,
         span.framer-text[data-nested-link]:hover span.framer-text:not([data-text-fill]) {
-            font-family: var(--framer-link-hover-font-family, var(--framer-blockquote-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif))));
-            font-style: var(--framer-link-hover-font-style, var(--framer-blockquote-font-style, var(--framer-link-font-style, var(--framer-font-style, normal))));
-            font-weight: var(--framer-link-hover-font-weight, var(--framer-blockquote-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400))));
+            font-family: var(--framer-font-family-preview, var(--framer-link-hover-font-family, var(--framer-blockquote-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)))));
+            font-style: var(--framer-font-style-preview, var(--framer-link-hover-font-style, var(--framer-blockquote-font-style, var(--framer-link-font-style, var(--framer-font-style, normal)))));
+            font-weight: var(--framer-font-weight-preview, var(--framer-link-hover-font-weight, var(--framer-blockquote-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400)))));
             font-size: calc(var(--framer-link-hover-font-size, var(--framer-blockquote-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-link-hover-text-transform, var(--framer-blockquote-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none))));
             border-radius: var(--framer-link-hover-text-background-radius, var(--framer-link-text-background-radius, var(--framer-text-background-radius, initial)));
@@ -22343,9 +22428,9 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
         a.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]),
         span.framer-text[data-framer-page-link-current],
         span.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]) {
-            font-family: var(--framer-link-current-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
-            font-style: var(--framer-link-current-font-style, var(--framer-link-font-style, var(--framer-font-style, normal)));
-            font-weight: var(--framer-link-current-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400)));
+            font-family: var(--framer-font-family-preview, var(--framer-link-current-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif))));
+            font-style: var(--framer-font-style-preview, var(--framer-link-current-font-style, var(--framer-link-font-style, var(--framer-font-style, normal))));
+            font-weight: var(--framer-font-weight-preview, var(--framer-link-current-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400))));
             font-size: calc(var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-link-current-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none)));
             border-radius: var(--framer-link-current-text-background-radius, var(--framer-link-text-background-radius, initial));
@@ -22438,9 +22523,9 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
         span.framer-text[data-framer-page-link-current]:hover,
         span.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]) {
             color: inherit;
-            font-family: var(--framer-link-hover-font-family, var(--framer-link-current-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif))));
-            font-style: var(--framer-link-hover-font-style, var(--framer-link-current-font-style, var(--framer-link-font-style, var(--framer-font-style, normal))));
-            font-weight: var(--framer-link-hover-font-weight, var(--framer-link-current-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400))));
+            font-family: var(--framer-font-family-preview, var(--framer-link-hover-font-family, var(--framer-link-current-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)))));
+            font-style: var(--framer-font-style-preview, var(--framer-link-hover-font-style, var(--framer-link-current-font-style, var(--framer-link-font-style, var(--framer-font-style, normal)))));
+            font-weight: var(--framer-font-weight-preview, var(--framer-link-hover-font-weight, var(--framer-link-current-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400)))));
             font-size: calc(var(--framer-link-hover-font-size, var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)))) * var(--framer-font-size-scale, 1));
             text-transform: var(--framer-link-hover-text-transform, var(--framer-link-current-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none))));
             border-radius: var(--framer-link-hover-text-background-radius, var(--framer-link-current-text-background-radius, var(--framer-link-text-background-radius, initial)));
@@ -28384,7 +28469,7 @@ var FramerEvent = class _FramerEvent {
    * @internal
    */
   get isLeftMouseClick() {
-    if (environment.isTouch()) {
+    if (isTouch()) {
       return void 0;
     }
     if ('button' in this.originalEvent && 'buttons' in this.originalEvent && 'ctrlKey' in this.originalEvent) {
@@ -32164,7 +32249,7 @@ var TouchEventListener = class extends Component2 {
     safeWindow.removeEventListener('touchend', this.domTouchEnd,);
   }
 };
-var FramerEventListener = /* @__PURE__ */ environment.isTouch() ? TouchEventListener : MouseEventListener;
+var FramerEventListener = /* @__PURE__ */ isTouch() ? TouchEventListener : MouseEventListener;
 var directionMap = {
   horizontal: 'x',
   vertical: 'y',
@@ -32680,7 +32765,7 @@ function useEmulateTouchScroll(ref, direction, enabled,) {
         case 3:
           return;
       }
-      if (event.metaKey) return;
+      if (isCommandKeyPressed(event,)) return;
       const point2 = getEventPoint(event,);
       if (!downPoint) return;
       const offset = Point.subtract(point2, downPoint,);
@@ -32764,7 +32849,7 @@ function useEmulateTouchScroll(ref, direction, enabled,) {
     }
     function onMouseDown(event,) {
       if (!enabled) return;
-      if (event.metaKey) return;
+      if (isCommandKeyPressed(event,)) return;
       if (!canStartScrollFromElement(event.target, direction,)) {
         if (phase === 4) {
           phase = 0;
@@ -34852,9 +34937,9 @@ function isSuspense426Error(error,) {
   const minifiedMessage = 'Minified React error #426';
   return error instanceof Error && (error.message.includes(unminifiedMessage,) || error.message.includes(minifiedMessage,));
 }
-var suspendPromise = /* @__PURE__ */ (() => typeof window !== 'undefined' ? new Promise(() => {},) : null)();
+var suspendPromise = /* @__PURE__ */ (() => typeof __unframerWindow2 !== 'undefined' ? new Promise(() => {},) : null)();
 function Suspend() {
-  if (typeof window === 'undefined' || shouldSuspenseBoundariesBeActive) {
+  if (typeof __unframerWindow2 === 'undefined' || shouldSuspenseBoundariesBeActive) {
     return /* @__PURE__ */ jsx('div', {
       hidden: true,
       dangerouslySetInnerHTML: {
@@ -34957,7 +35042,7 @@ function ServerSideErrorBoundary({
   children,
   fallback = nullFallback,
 },) {
-  return typeof window === 'undefined'
+  return typeof __unframerWindow2 === 'undefined'
     ? // On the server, Suspense fallback is activated by errors. So we use the actual Suspense,
     // and render the actual error fallback if Suspense activates.
     /* @__PURE__ */
@@ -35732,8 +35817,7 @@ function useReplaceNestedLinks(children, scopeId, nodeId, href, propsAddedByLink
     if (!propsAddedByLink.href) return;
     event.preventDefault();
     event.stopPropagation();
-    const isAppleDevice = /Mac|iPod|iPhone|iPad/u.test(__unframerNavigator2.userAgent,);
-    if (isAppleDevice ? event.metaKey : event.ctrlKey) {
+    if (isCommandKeyPressed(event,)) {
       openExternalLink(propsAddedByLink.href, '', '_blank',);
       return;
     }
@@ -36570,7 +36654,7 @@ var GracefullyDegradingErrorBoundary = class extends Component2 {
     };
   }
   componentDidCatch(error,) {
-    window.__framer_hadFatalError = true;
+    __unframerWindow2.__framer_hadFatalError = true;
     if ('cause' in error) {
       error = error.cause;
     }
@@ -36643,102 +36727,6 @@ function withChildrenCanSuspend(Component18,) {
     },);
   },);
 }
-var PRELOAD_AFTER_MS = 500;
-var OBSERVER_THRESHOLD = 0.9;
-var LOW_MEMORY_THRESHOLD = 1.7;
-var MAX_CONCURRENT_PRELOADS_SLOW_NETWORK = 4;
-var MAX_CONCURRENT_PRELOADS_FAST_NETWORK = Infinity;
-var nodeToRoute = /* @__PURE__ */ new WeakMap();
-var preloadedRoutes = /* @__PURE__ */ new Set();
-var routeToNodesInViewport = /* @__PURE__ */ new Map();
-function getObserveRouteForPreloadingFn() {
-  const connection = __unframerNavigator2.connection || __unframerNavigator2.mozConnection || __unframerNavigator2.webkitConnection || {};
-  const lowDeviceMemory = __unframerNavigator2.deviceMemory && __unframerNavigator2.deviceMemory > LOW_MEMORY_THRESHOLD;
-  let effectiveType, preloadDisabled, maxPreloadAmount;
-  function updateConnection() {
-    effectiveType = connection.effectiveType || '';
-    preloadDisabled = connection.saveData || effectiveType.includes('2g',);
-    maxPreloadAmount = effectiveType === '3g' || lowDeviceMemory
-      ? MAX_CONCURRENT_PRELOADS_SLOW_NETWORK
-      : MAX_CONCURRENT_PRELOADS_FAST_NETWORK;
-  }
-  connection.addEventListener?.('change', updateConnection,);
-  updateConnection();
-  const observer2 = new IntersectionObserver(onPreloadIntersectionChange, {
-    threshold: OBSERVER_THRESHOLD,
-  },);
-  let activePreloadsAmount = 0;
-  async function preloadTimeout(context, target,) {
-    if (preloadDisabled) return;
-    const {
-      routeId,
-      pathVariables,
-      preload,
-    } = context;
-    const nodesInViewport = routeToNodesInViewport.get(routeId,);
-    if (!nodesInViewport?.size || preloadedRoutes.has(routeId,)) return;
-    ++activePreloadsAmount;
-    preloadedRoutes.add(routeId,);
-    const preloadPromise = preload(routeId, pathVariables,)?.catch(() => {
-      if (false) {
-        throw new Error(
-          'Error in preloadRoute during preloadTimeout. This should never happen as it introduces bugs. Please make sure preloadRoute does not throw.',
-        );
-      }
-    },);
-    observer2.unobserve(target,);
-    nodeToRoute.delete(target,);
-    for (const node of nodesInViewport) {
-      observer2.unobserve(node,);
-      nodeToRoute.delete(node,);
-    }
-    nodesInViewport.clear();
-    routeToNodesInViewport.delete(routeId,);
-    await preloadPromise;
-    --activePreloadsAmount;
-  }
-  function onPreloadIntersectionChange(entries,) {
-    for (const entry of entries) {
-      const target = entry.target;
-      const context = nodeToRoute.get(target,);
-      if (!context || preloadedRoutes.has(context.routeId,)) {
-        observer2.unobserve(target,);
-        nodeToRoute.delete(target,);
-        continue;
-      }
-      const {
-        routeId,
-      } = context;
-      const nodes = routeToNodesInViewport.get(routeId,);
-      const amountOfNodesInViewport = routeToNodesInViewport.get(routeId,)?.size ?? 0;
-      if (entry.isIntersecting) {
-        if (activePreloadsAmount >= maxPreloadAmount) continue;
-        if (nodes) nodes.add(target,);
-        else routeToNodesInViewport.set(routeId, /* @__PURE__ */ new Set([target,],),);
-        setTimeout(preloadTimeout.bind(void 0, context, target,), PRELOAD_AFTER_MS,);
-      } else {
-        if (nodes) nodes.delete(target,);
-        if (amountOfNodesInViewport <= 1) routeToNodesInViewport.delete(routeId,);
-      }
-    }
-  }
-  return (node, preload, routeId, pathVariables,) => {
-    if (preloadedRoutes.has(routeId,)) return;
-    nodeToRoute.set(node, {
-      routeId,
-      pathVariables,
-      preload,
-    },);
-    observer2.observe(node,);
-    return () => {
-      nodeToRoute.delete(node,);
-      observer2.unobserve(node,);
-    };
-  };
-}
-var observeRouteForPreloading =
-  // this also guards `window`
-  !shouldPreloadBasedOnUA || typeof IntersectionObserver === 'undefined' ? null : /* @__PURE__ */ getObserveRouteForPreloadingFn();
 function findMatchingRouteAttributesForWebPageLink(router, currentRoute, pageLink, activeLocale, resolvedSlugs, implicitPathVariables,) {
   const {
     webPageId,
@@ -36774,10 +36762,16 @@ function findMatchingRouteAttributesForResolvedPath(router, path, implicitPathVa
     const {
       routeId,
       pathVariables,
+      localeId,
     } = inferInitialRouteFromPath(router.routes, pathname, void 0, locales,);
     const route = router.getRoute(routeId,);
     if (route) {
       const combinedPathVariables = Object.assign({}, implicitPathVariables, pathVariables,);
+      const locale = localeId
+        ? locales?.find(({
+          id: id3,
+        },) => id3 === localeId)
+        : void 0;
       return {
         routeId,
         route,
@@ -36786,6 +36780,7 @@ function findMatchingRouteAttributesForResolvedPath(router, path, implicitPathVa
         // should be resolved by getHashForRoute.
         elementId: hash2,
         pathVariables: combinedPathVariables,
+        locale,
       };
     }
   } catch {}
@@ -36830,6 +36825,7 @@ function getRouteAttributes(
     href: resolvedHref,
     elementId: resolvedHash,
     pathVariables: combinedPathVariables,
+    locale: activeLocale ?? void 0,
   };
 }
 var pathVariablesRegExp2 = /:([a-z]\w*)/gi;
@@ -36865,6 +36861,98 @@ function useLinkMatchesRoute(link,) {
   const pageLink = isString(link,) ? linkFromFramerPageLink(link,) : link;
   return isLinkToWebPage(pageLink,) ? linkMatchesRoute(route, pageLink, contextPathVariables,) : false;
 }
+var PRELOAD_AFTER_MS = 500;
+var OBSERVER_THRESHOLD = 0.9;
+var LOW_MEMORY_THRESHOLD = 1.7;
+var MAX_CONCURRENT_PRELOADS_SLOW_NETWORK = 4;
+var MAX_CONCURRENT_PRELOADS_FAST_NETWORK = Infinity;
+var nodeToRoute = /* @__PURE__ */ new WeakMap();
+var preloadedRoutes = /* @__PURE__ */ new Set();
+var routeToNodesInViewport = /* @__PURE__ */ new Map();
+function getObserveRouteForPreloadingFn() {
+  const connection = __unframerNavigator2.connection || __unframerNavigator2.mozConnection || __unframerNavigator2.webkitConnection || {};
+  const lowDeviceMemory = __unframerNavigator2.deviceMemory && __unframerNavigator2.deviceMemory > LOW_MEMORY_THRESHOLD;
+  let effectiveType, preloadDisabled, maxPreloadAmount;
+  function updateConnection() {
+    effectiveType = connection.effectiveType || '';
+    preloadDisabled = connection.saveData || effectiveType.includes('2g',);
+    maxPreloadAmount = effectiveType === '3g' || lowDeviceMemory
+      ? MAX_CONCURRENT_PRELOADS_SLOW_NETWORK
+      : MAX_CONCURRENT_PRELOADS_FAST_NETWORK;
+  }
+  connection.addEventListener?.('change', updateConnection,);
+  updateConnection();
+  const observer2 = new IntersectionObserver(onPreloadIntersectionChange, {
+    threshold: OBSERVER_THRESHOLD,
+  },);
+  let activePreloadsAmount = 0;
+  async function preloadTimeout(context, target,) {
+    if (preloadDisabled) return;
+    const {
+      id: id3,
+      preload,
+    } = context;
+    const nodesInViewport = routeToNodesInViewport.get(id3,);
+    if (!nodesInViewport?.size || preloadedRoutes.has(id3,)) return;
+    ++activePreloadsAmount;
+    preloadedRoutes.add(id3,);
+    const preloadPromise = preload()?.catch(() => {
+      if (false) {
+        throw new Error(
+          'Error in preloadRoute during preloadTimeout. This should never happen as it introduces bugs. Please make sure preloadRoute does not throw.',
+        );
+      }
+    },);
+    observer2.unobserve(target,);
+    nodeToRoute.delete(target,);
+    for (const node of nodesInViewport) {
+      observer2.unobserve(node,);
+      nodeToRoute.delete(node,);
+    }
+    nodesInViewport.clear();
+    routeToNodesInViewport.delete(id3,);
+    await preloadPromise;
+    --activePreloadsAmount;
+  }
+  function onPreloadIntersectionChange(entries,) {
+    for (const entry of entries) {
+      const target = entry.target;
+      const context = nodeToRoute.get(target,);
+      if (!context || preloadedRoutes.has(context.id,)) {
+        observer2.unobserve(target,);
+        nodeToRoute.delete(target,);
+        continue;
+      }
+      const preloadId = context.id;
+      const nodes = routeToNodesInViewport.get(preloadId,);
+      const amountOfNodesInViewport = routeToNodesInViewport.get(preloadId,)?.size ?? 0;
+      if (entry.isIntersecting) {
+        if (activePreloadsAmount >= maxPreloadAmount) continue;
+        if (nodes) nodes.add(target,);
+        else routeToNodesInViewport.set(preloadId, /* @__PURE__ */ new Set([target,],),);
+        setTimeout(preloadTimeout, PRELOAD_AFTER_MS, context, target,);
+      } else {
+        if (nodes) nodes.delete(target,);
+        if (amountOfNodesInViewport <= 1) routeToNodesInViewport.delete(preloadId,);
+      }
+    }
+  }
+  return (node, preload, id3,) => {
+    if (preloadedRoutes.has(id3,)) return;
+    nodeToRoute.set(node, {
+      id: id3,
+      preload,
+    },);
+    observer2.observe(node,);
+    return () => {
+      nodeToRoute.delete(node,);
+      observer2.unobserve(node,);
+    };
+  };
+}
+var observeRouteForPreloading =
+  // this also guards `window`
+  !shouldPreloadBasedOnUA || typeof IntersectionObserver === 'undefined' ? null : /* @__PURE__ */ getObserveRouteForPreloadingFn();
 var AnchorLinkTarget = /* @__PURE__ */ ((AnchorLinkTarget2) => {
   AnchorLinkTarget2['_blank'] = '_blank';
   AnchorLinkTarget2['_self'] = '_self';
@@ -37032,15 +37120,15 @@ function makeUrlAbsolute(href,) {
   }
 }
 function performNavigation(router, routeId, preload, elementId, combinedPathVariables, smoothScroll, beforeUrlUpdate,) {
-  void preload(routeId, combinedPathVariables, false,);
+  void preload();
   router.navigate?.(routeId, elementId, combinedPathVariables, smoothScroll, beforeUrlUpdate,);
 }
-function createOnClickLinkHandler(router, routeId, href, trackLinkClick, preload, elementId, combinedPathVariables, smoothScroll,) {
+function createOnClickLinkHandler(href, trackLinkClick, navigate,) {
   return async (event) => {
-    const usedMetaKey = event.metaKey;
+    const usedCommandKey = isCommandKeyPressed(event,);
     const anchorElement = findAnchorElement(event.target,);
     const isExternalLink = !anchorElement || anchorElement.getAttribute('target',) === '_blank';
-    const shouldPerformNavigation = !usedMetaKey && !isExternalLink;
+    const shouldPerformNavigation = !usedCommandKey && !isExternalLink;
     const track = () => void trackLinkClick(href,);
     if (!shouldPerformNavigation) {
       await yieldToMain({
@@ -37052,7 +37140,7 @@ function createOnClickLinkHandler(router, routeId, href, trackLinkClick, preload
       return;
     }
     event.preventDefault();
-    performNavigation(router, routeId, preload, elementId, combinedPathVariables, smoothScroll, track,);
+    navigate(track,);
   };
 }
 function propsForRoutePath(href, router, currentRoute, linkOptions, preload, localeId, locales, implicitPathVariables,) {
@@ -37064,6 +37152,7 @@ function propsForRoutePath(href, router, currentRoute, linkOptions, preload, loc
     route,
     elementId,
     pathVariables,
+    locale,
   } = matchedRoute;
   if (!route) return propsForLink(href, linkOptions,);
   const path = getPathForRoute(route, {
@@ -37081,26 +37170,38 @@ function propsForRoutePath(href, router, currentRoute, linkOptions, preload, loc
     localeId,
   },);
   const anchorTarget = getTargetAttrValue(linkOptions.openInNewTab, true,);
-  return {
-    routeId,
-    href: path,
-    target: anchorTarget,
-    onClick: createOnClickLinkHandler(
+  const navigate = (beforeUrlUpdate) =>
+    performNavigation(
       router,
       routeId,
-      path,
-      linkOptions.trackLinkClick,
-      preload,
+      () =>
+        preload(routeId, {
+          pathVariables,
+          locale,
+        }, false,),
       elementId,
       pathVariables,
       linkOptions.smoothScroll,
-    ),
-    navigate: () => performNavigation(router, routeId, preload, elementId, pathVariables, linkOptions.smoothScroll,),
+      beforeUrlUpdate,
+    );
+  return {
+    href: path,
+    target: anchorTarget,
+    onClick: createOnClickLinkHandler(path, linkOptions.trackLinkClick, navigate,),
+    navigate,
     'data-framer-page-link-current': currentRoute && linkMatchesRoute(currentRoute, {
           webPageId: routeId,
           hash: elementId,
           pathVariables,
         }, implicitPathVariables,) || void 0,
+    preload: () =>
+      preload(routeId, {
+        pathVariables,
+        locale,
+      },),
+    _routeId: routeId,
+    _pathVariables: pathVariables,
+    _locale: locale,
   };
 }
 var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(function Link2({
@@ -37125,6 +37226,7 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
   } = useLocaleInfo();
   const resolveSlugsWithSuspense2 = useResolveSlugsWithSuspense();
   const preload = usePreloadRoute();
+  const isOnFramerCanvas = useIsOnFramerCanvas();
   const trackLinkClick = useTrackLinkClick({
     nodeId,
     clickTrackingId,
@@ -37171,19 +37273,41 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
       implicitPathVariables,
     );
     const {
-      routeId: routeId2,
+      routeId,
       href: resolvedHref,
       elementId,
       pathVariables,
+      locale,
     } = maybeRouteAttributes;
     const anchorTarget = getTargetAttrValue(openInNewTab, true,);
+    const navigate2 = (beforeUrlUpdate) =>
+      performNavigation(
+        router,
+        routeId,
+        () =>
+          preload(routeId, {
+            pathVariables,
+            locale,
+          }, false,),
+        elementId,
+        pathVariables,
+        smoothScroll,
+        beforeUrlUpdate,
+      );
     return {
-      routeId: routeId2,
       href: resolvedHref,
       target: anchorTarget,
-      onClick: createOnClickLinkHandler(router, routeId2, resolvedHref, trackLinkClick, preload, elementId, pathVariables, smoothScroll,),
-      navigate: () => performNavigation(router, routeId2, preload, elementId, pathVariables, smoothScroll,),
+      onClick: createOnClickLinkHandler(resolvedHref, trackLinkClick, navigate2,),
       'data-framer-page-link-current': currentRoute && linkMatchesRoute(currentRoute, pageLink, implicitPathVariables,) || void 0,
+      navigate: navigate2,
+      preload: () =>
+        preload(routeId, {
+          pathVariables,
+          locale,
+        },),
+      _routeId: routeId,
+      _pathVariables: pathVariables,
+      _locale: locale,
     };
   }, [
     href,
@@ -37204,22 +37328,22 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
   const observerRef = useObserverRef(hasRef ? children.ref : void 0,);
   const {
     navigate,
-    routeId,
-    ...propsAddedByLinkExceptNavigate
+    preload: preloadFn,
+    _routeId,
+    _pathVariables,
+    _locale,
+    ...restPropsAddedByLink
   } = propsAddedByLink;
   useRefEffect(observerRef, (node) => {
-    if (node === null || !routeId) return;
-    const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
-    if (!pageLink) return;
-    const pathVariables = isString(pageLink,) ? void 0 : pageLink.pathVariables;
-    return observeRouteForPreloading?.(node, preload, routeId, pathVariables,);
-  }, [href, preload, routeId,],);
+    if (node === null || !_routeId || !preloadFn || isOnFramerCanvas) return;
+    return observeRouteForPreloading?.(node, preloadFn, `${_routeId}:${_locale?.id}:${JSON.stringify(_pathVariables,)}`,);
+  }, [preloadFn, _routeId, _pathVariables, _locale,],);
   const isInternalNavigation = Boolean(navigate,);
   const clone = useCloneChildrenWithPropsAndRef(forwardedRef,);
   const replacedChildren = clone.cloneAsArray(children, (childProps) =>
     cloneChildPropsWithAggregatedEvents(childProps, {
       ...restProps,
-      ...rebindEventHandlersIfNeeded(propsAddedByLinkExceptNavigate, motionChild, isInternalNavigation,),
+      ...rebindEventHandlersIfNeeded(restPropsAddedByLink, motionChild, isInternalNavigation,),
     }, observerRef,),);
   return useReplaceNestedLinks(replacedChildren, scopeId, nodeId, href, propsAddedByLink, observerRef,);
 },),);
@@ -38329,9 +38453,9 @@ var useSendPageView = (
         sendTrackingEvent('published_site_pageview', eventData, 'eager',);
       }
     };
-    window.addEventListener('pageshow', listener,);
+    __unframerWindow2.addEventListener('pageshow', listener,);
     return () => {
-      window.removeEventListener('pageshow', listener,);
+      __unframerWindow2.removeEventListener('pageshow', listener,);
     };
   }, [
     currentRoute,
@@ -38356,7 +38480,7 @@ function updateScrollPosition(hash2, smoothScroll, isHistoryTransition,) {
     return;
   }
   if (isHistoryTransition) return;
-  window.scrollTo(0, 0,);
+  __unframerWindow2.scrollTo(0, 0,);
 }
 function useScheduleRenderSideEffects(dep,) {
   const actions = useRef([],);
@@ -38403,7 +38527,7 @@ function useNavigationTransition() {
     startNativeSpinner(navigationPromise, updateURL, controller,);
     await nextRender.promise;
     if (signal?.aborted) return;
-    const navigationTransition = window.navigation?.transition;
+    const navigationTransition = __unframerWindow2.navigation?.transition;
     resolveNavigationPromise();
     try {
       await navigationTransition?.finished;
@@ -38513,7 +38637,9 @@ function Router({
             preserveQueryParams,
           },);
           if (!localeResult) return;
-          const currentStatePaginationInfo = isHistoryState(window.history.state,) ? window.history.state.paginationInfo : void 0;
+          const currentStatePaginationInfo = isHistoryState(__unframerWindow2.history.state,)
+            ? __unframerWindow2.history.state.paginationInfo
+            : void 0;
           const currentPath = localeResult.path;
           isInitialNavigationRef.current = false;
           currentPathVariablesRef.current = localeResult.pathVariables;
@@ -38626,7 +38752,7 @@ function Router({
     ) {
       nextRender.ignore?.();
       const route = routes[routeId];
-      if (window.history.state?.hash !== hash2 && !disableHistory && route) {
+      if (__unframerWindow2.history.state?.hash !== hash2 && !disableHistory && route) {
         executeBeforeUrlUpdate();
         await pushRouteState(routeId, route, {
           currentRoutePath: route.path,
@@ -44348,13 +44474,62 @@ function getWhereExpressionFromPathVariables(pathVariables, collection,) {
   }));
 }
 var ALL_ELEMENTS_VALUE = '__all__';
+var BOOLEAN_TRUE_VALUE = '__true__';
+var BOOLEAN_FALSE_VALUE = '__false__';
 var variableBindingHooks = {
+  ['boolean'/* Boolean */
+  ]: useFormSelectBooleanVariableBinding,
   ['collectionreference'/* CollectionReference */
   ]: useFormSelectCollectionVariableBinding,
 };
 function useFormSelectVariableBinding(options,) {
   const variableTypeRef = useRef(options.variableType,);
   return variableBindingHooks[variableTypeRef.current](options,);
+}
+function useFormSelectBooleanVariableBinding({
+  allItemsLabel,
+  booleanTrueLabel,
+  booleanFalseLabel,
+  isOptional,
+  setValue,
+  value,
+},) {
+  const selectValue = useMemo(() => {
+    if (value === true) return BOOLEAN_TRUE_VALUE;
+    if (value === false) return BOOLEAN_FALSE_VALUE;
+    return isOptional ? ALL_ELEMENTS_VALUE : BOOLEAN_TRUE_VALUE;
+  }, [isOptional, value,],);
+  const selectOptions = useMemo(() =>
+    withAllOption(
+      [{
+        disabled: false,
+        title: booleanTrueLabel,
+        type: 'option',
+        value: BOOLEAN_TRUE_VALUE,
+      }, {
+        disabled: false,
+        title: booleanFalseLabel,
+        type: 'option',
+        value: BOOLEAN_FALSE_VALUE,
+      },],
+      isOptional,
+      allItemsLabel,
+      false,
+    ), [allItemsLabel, booleanTrueLabel, booleanFalseLabel, isOptional,],);
+  const onChange = useCallback2((event) => {
+    if (!(event.target instanceof HTMLSelectElement)) return;
+    const selectedValue = event.target.value;
+    startTransition2(() => {
+      if (selectedValue === ALL_ELEMENTS_VALUE) {
+        setValue(void 0,);
+      } else if (selectedValue === BOOLEAN_TRUE_VALUE) {
+        setValue(true,);
+      } else if (selectedValue === BOOLEAN_FALSE_VALUE) {
+        setValue(false,);
+      }
+    },);
+  }, [setValue,],);
+  return [selectValue, selectOptions, onChange,];
 }
 function useFormSelectCollectionVariableBinding({
   allItemsLabel,
@@ -44363,26 +44538,20 @@ function useFormSelectCollectionVariableBinding({
   slugId,
   titleId,
   setValue,
-  value,
+  value: rawValue,
 },) {
   const selectOptions = useCollectionSelectOptions({
     collectionData,
     slugId,
     titleId,
   },);
+  const value = isBoolean(rawValue,) ? void 0 : rawValue;
   const selectValue = value === void 0 ? ALL_ELEMENTS_VALUE : value;
-  const selectOptionsIncludingOptional = useMemo(() => {
-    if (!isOptional) return selectOptions;
-    const allOption = {
-      title: allItemsLabel,
-      type: 'option',
-      value: ALL_ELEMENTS_VALUE,
-    };
-    if (!selectOptions || selectOptions.length === 0) return [allOption,];
-    return [allOption, {
-      type: 'divider',
-    }, ...selectOptions,];
-  }, [allItemsLabel, isOptional, selectOptions,],);
+  const selectOptionsIncludingOptional = useMemo(() => withAllOption(selectOptions, isOptional, allItemsLabel,), [
+    allItemsLabel,
+    isOptional,
+    selectOptions,
+  ],);
   const onChange = useCallback2((event) => {
     if (!(event.target instanceof HTMLSelectElement)) return;
     const selectedValue = event.target.value;
@@ -44439,6 +44608,21 @@ function useCollectionSelectOptions({
       },];
     },);
   }, [records, titleId, slugId,],);
+}
+function withAllOption(options, isOptional, allItemsLabel, includeDivider = true,) {
+  if (isOptional !== true || !allItemsLabel) return options;
+  const allOption = {
+    title: allItemsLabel,
+    type: 'option',
+    value: ALL_ELEMENTS_VALUE,
+  };
+  if (!options || options.length === 0) return [allOption,];
+  if (includeDivider) {
+    return [allOption, {
+      type: 'divider',
+    }, ...options,];
+  }
+  return [allOption, ...options,];
 }
 function rejectPending(pendingTimers, pendingPromises,) {
   pendingTimers.forEach((t) => clearTimeout(t,));
@@ -45817,7 +46001,7 @@ var ltrStrategy = (insetProp, lengthProp, viewportLengthProp, paddingStartProp, 
 var xStrategy = /* @__PURE__ */ (() => ltrStrategy('offsetLeft', 'offsetWidth', 'innerWidth', 'paddingLeft', 'right',))();
 var yStrategy = /* @__PURE__ */ (() => ltrStrategy('offsetTop', 'offsetHeight', 'innerHeight', 'paddingTop', 'bottom',))();
 function offsetRight(element, container,) {
-  const containerWidth = container?.offsetWidth ?? window.innerWidth;
+  const containerWidth = container?.offsetWidth ?? __unframerWindow2.innerWidth;
   return containerWidth - (element.offsetLeft + element.offsetWidth);
 }
 var xRtlStrategy = /* @__PURE__ */ (() => ({
@@ -46019,8 +46203,8 @@ function useFocusNavigation(containerRef, axis, focusOffset, offset, setHasFocus
       setHasFocus(true,);
       isFocusTrapped.current = true;
       applyFocusOffset();
-      window.addEventListener('focus', detectTrapEnd, eventOptionsWithCapture,);
-      window.addEventListener('blur', detectTrapEnd, eventOptionsWithCapture,);
+      __unframerWindow2.addEventListener('focus', detectTrapEnd, eventOptionsWithCapture,);
+      __unframerWindow2.addEventListener('blur', detectTrapEnd, eventOptionsWithCapture,);
       container.addEventListener('keydown', handleFocusNavigation, eventOptions,);
     };
     const detectTrapEnd = (event) => {
@@ -46033,8 +46217,8 @@ function useFocusNavigation(containerRef, axis, focusOffset, offset, setHasFocus
       isFocusTrapped.current = false;
       setHasFocus(false,);
       offset.set(focusOffset.get(),);
-      window.removeEventListener('focus', detectTrapEnd,);
-      window.removeEventListener('blur', detectTrapEnd,);
+      __unframerWindow2.removeEventListener('focus', detectTrapEnd,);
+      __unframerWindow2.removeEventListener('blur', detectTrapEnd,);
       container.removeEventListener('keydown', handleFocusNavigation,);
     };
     const handleFocus = (event) => {
@@ -46050,13 +46234,13 @@ function useFocusNavigation(containerRef, axis, focusOffset, offset, setHasFocus
       if (detectionEnabled) return;
       detectionEnabled = true;
       container.addEventListener('focus', handleFocus, eventOptionsWithCapture,);
-      window.addEventListener('pointermove', handlePointerMove, eventOptions,);
+      __unframerWindow2.addEventListener('pointermove', handlePointerMove, eventOptions,);
     };
     const handlePointerMove = () => {
       if (!detectionEnabled) return;
       detectionEnabled = false;
       container.removeEventListener('focus', handleFocus, true,);
-      window.removeEventListener('pointermove', handlePointerMove, eventOptions,);
+      __unframerWindow2.removeEventListener('pointermove', handlePointerMove, eventOptions,);
     };
     const handleAriaHiddenClicks = (event) => {
       const target = event.target;
@@ -46065,7 +46249,7 @@ function useFocusNavigation(containerRef, axis, focusOffset, offset, setHasFocus
         ariaHiddenAncestor.removeAttribute('aria-hidden',);
       }
     };
-    window.addEventListener('keydown', detectFocusTrapEnable, eventOptions,);
+    __unframerWindow2.addEventListener('keydown', detectFocusTrapEnable, eventOptions,);
     container.addEventListener('pointerdown', handleAriaHiddenClicks, eventOptions,);
     return () => {
       abortController.abort();
@@ -46188,7 +46372,7 @@ function TickerComponent({
   const isReducedMotion = useReducedMotion();
   const updateMeasurements = () => {
     if (!internalContainerRef.current || !listRef.current) return;
-    const direction = window.getComputedStyle(internalContainerRef.current,).direction;
+    const direction = __unframerWindow2.getComputedStyle(internalContainerRef.current,).direction;
     const {
       measureItem,
       lengthProp,
@@ -46211,13 +46395,13 @@ function TickerComponent({
         hasItemSizeChanged = true;
       }
     }
-    const containerLength = Math.min(container[lengthProp], window[viewportLengthProp],);
-    let visibleLength = overflow ? window[viewportLengthProp] : containerLength;
+    const containerLength = Math.min(container[lengthProp], __unframerWindow2[viewportLengthProp],);
+    let visibleLength = overflow ? __unframerWindow2[viewportLengthProp] : containerLength;
     if (safeMargin > 0) {
       visibleLength += safeMargin * 2;
     }
     const totalItemLength = calcTotalItemLength(itemPositions,);
-    const computedContainerStyle = window.getComputedStyle(container,);
+    const computedContainerStyle = __unframerWindow2.getComputedStyle(container,);
     const containerPaddingStart = parseInt(computedContainerStyle[paddingStartProp] ?? 0,);
     const containerPaddingEnd = parseInt(computedContainerStyle[paddingEndProp] ?? 0,);
     const inset2 = overflow ? getCumulativeInset(allItems[0],) : containerPaddingStart;
@@ -47778,22 +47962,22 @@ var MapWithHash = class extends Map {
 };
 var cachedServiceMap;
 function getServiceMap() {
-  if (typeof window === 'undefined') return {};
+  if (typeof __unframerWindow2 === 'undefined') return {};
   if (cachedServiceMap) return cachedServiceMap;
   cachedServiceMap = extractServiceMap();
   return cachedServiceMap;
 }
 function extractServiceMap() {
-  const location = window.location;
-  let services = window?.bootstrap?.services;
+  const location = __unframerWindow2.location;
+  let services = __unframerWindow2?.bootstrap?.services;
   if (services) {
     return services;
   }
   let topOrigin;
   try {
-    const topWindow = window.top;
+    const topWindow = __unframerWindow2.top;
     topOrigin = topWindow.location.origin;
-    services = window.top?.bootstrap?.services;
+    services = __unframerWindow2.top?.bootstrap?.services;
     if (services) {
       return services;
     }
@@ -48468,11 +48652,11 @@ function getAssetOwnerType(asset,) {
 async function loadFontsWithOpenType(source,) {
   switch (source) {
     case 'google': {
-      const supportedFonts = await import('./framer-chunks/google-AG6EYFMK-VXMK4LWI.js');
+      const supportedFonts = await import('./framer-chunks/google-VQ4ZP4WR-C2T2J24Z.js');
       return supportedFonts.default;
     }
     case 'fontshare': {
-      const supportedFonts = await import('./framer-chunks/fontshare-LTYJMI6Q-NLLRF2SZ.js');
+      const supportedFonts = await import('./framer-chunks/fontshare-Q7VOJ3QT-LXRXXTSM.js');
       return supportedFonts.default;
     }
     default:
@@ -48482,15 +48666,15 @@ async function loadFontsWithOpenType(source,) {
 async function loadFontToOpenTypeFeatures(source,) {
   switch (source) {
     case 'google': {
-      const features = await import('./framer-chunks/google-EJBUPU3N-JOFVHSFQ.js');
+      const features = await import('./framer-chunks/google-TRAPONMP-UUEFJ4ZF.js');
       return features.default;
     }
     case 'fontshare': {
-      const features = await import('./framer-chunks/fontshare-XMKN2FOD-GVCUQL37.js');
+      const features = await import('./framer-chunks/fontshare-LJWOE5KG-36DNQHCT.js');
       return features.default;
     }
     case 'framer': {
-      const features = await import('./framer-chunks/framer-font-D6RMCRV4-5YYG4HIW.js');
+      const features = await import('./framer-chunks/framer-font-G73BNA7N-B3OPPZB7.js');
       return features.default;
     }
     default:
@@ -49034,10 +49218,10 @@ function loadVariationAxes(source,) {
       const axes = (async () => {
         switch (source) {
           case 'google': {
-            return (await import('./framer-chunks/google-CQFUID6E-OQQXADED.js')).default;
+            return (await import('./framer-chunks/google-LLNWFNMY-PWPZVCX5.js')).default;
           }
           case 'fontshare': {
-            return (await import('./framer-chunks/fontshare-X63NXWGB-NL5Q3YUU.js')).default;
+            return (await import('./framer-chunks/fontshare-MHXFPDHS-VQYPAYVC.js')).default;
           }
           default:
             assertNever(source,);
@@ -49983,13 +50167,13 @@ function useEscToClose(isOpen, close,) {
         close();
       }
     }
-    window.addEventListener('keyup', handleKeyDown,);
-    return () => window.removeEventListener('keyup', handleKeyDown,);
+    __unframerWindow2.addEventListener('keyup', handleKeyDown,);
+    return () => __unframerWindow2.removeEventListener('keyup', handleKeyDown,);
   }, [isOpen, close,],);
 }
 function calculateImageWidth(aspectRatio2, maxWidth, totalHorizontalPadding, totalVerticalPadding,) {
-  const availableHeight = window.innerHeight - totalVerticalPadding;
-  const availableWidth = Math.min(window.innerWidth - totalHorizontalPadding, maxWidth,);
+  const availableHeight = __unframerWindow2.innerHeight - totalVerticalPadding;
+  const availableWidth = Math.min(__unframerWindow2.innerWidth - totalHorizontalPadding, maxWidth,);
   const maxWidthBasedOnHeight = availableHeight / aspectRatio2;
   return Math.min(availableWidth, maxWidthBasedOnHeight,);
 }
@@ -49998,7 +50182,7 @@ function optimisticallyDecodeImage(image, {
   height,
 },) {
   if (!image.src || !image.srcSet) return;
-  const i = new window.Image();
+  const i = new __unframerWindow2.Image();
   i.src = image.src;
   i.srcset = image.srcSet;
   i.sizes = image.sizes || '';
@@ -50888,7 +51072,7 @@ var DeprecatedRichTextInner = /* @__PURE__ */ React.forwardRef(function Text(pro
     if (container === null) return;
     function interceptPageLinks(event,) {
       const anchorElement = findAnchorElement(event.target, layoutRef.current,);
-      if (event.metaKey || !navigate || !anchorElement || anchorElement.getAttribute('target',) === '_blank') {
+      if (isCommandKeyPressed(event,) || !navigate || !anchorElement || anchorElement.getAttribute('target',) === '_blank') {
         return;
       }
       const didNavigate = navigateFromAttributes(navigate, anchorElement, implicitPathVariables,);
@@ -52651,7 +52835,7 @@ var TextInner = /* @__PURE__ */ React42.forwardRef(function Text2(props, forward
   const implicitPathVariables = useImplicitPathVariables();
   const interceptPageLinks = React42.useCallback((event) => {
     const anchorElement = findAnchorElement(event.target, layoutRef.current,);
-    if (event.metaKey || !navigate || !anchorElement) return;
+    if (isCommandKeyPressed(event,) || !navigate || !anchorElement) return;
     const didNavigate = navigateFromAttributes(navigate, anchorElement, implicitPathVariables,);
     if (didNavigate) {
       event.preventDefault();
@@ -52923,7 +53107,7 @@ var TextComponent = /* @__PURE__ */ (() => {
       alignment: void 0,
       verticalAlignment: 'top',
       shadows: [],
-      font: '16px ' + deviceFont(),
+      font: '16px Arial',
     },),
     __publicField(_a, 'defaultProps', {
       ...Layer.defaultProps,
@@ -53388,8 +53572,8 @@ var SVGRoot = (props) => {
     viewBox: `0 0 ${width} ${height}`,
     ref,
   };
-  const needsScale = isSafari() ? window.devicePixelRatio !== 1 : window.devicePixelRatio === 1;
-  const needsTranslate = window.devicePixelRatio === 1;
+  const needsScale = isSafari() ? __unframerWindow2.devicePixelRatio !== 1 : __unframerWindow2.devicePixelRatio === 1;
+  const needsTranslate = __unframerWindow2.devicePixelRatio === 1;
   if (!needsScale && !needsTranslate) {
     return /* @__PURE__ */ jsx('svg', {
       role: 'presentation',
@@ -54067,6 +54251,58 @@ function withPerformanceMarks(prefix3, callback,) {
   performance.mark(markEnd,);
   performance.measure(prefix3, markStart, markEnd,);
 }
+function deviceOS() {
+  if (isMacOS()) return 'macos';
+  if (isIOS()) return 'ios';
+  if (isAndroid()) return 'android';
+  if (isWindows()) return 'windows';
+  return void 0;
+}
+function deviceFont(os,) {
+  if (!os) {
+    os = deviceOS();
+  }
+  const fonts = {
+    apple: '-apple-system, BlinkMacSystemFont, SF Pro Text, SF UI Text, Helvetica Neue',
+    google: 'Roboto, Helvetica Neue',
+    microsoft: 'Segoe UI, Helvetica Neue',
+  };
+  if (os === 'macos') return fonts.apple;
+  if (os === 'ios') return fonts.apple;
+  if (os === 'android') return fonts.google;
+  if (os === 'windows') return fonts.microsoft;
+  return fonts.apple;
+}
+var environment = {
+  chromeMainVersion,
+  deviceFont,
+  deviceOS,
+  deviceType,
+  isAndroid,
+  isBrowser: isBrowser2,
+  isChrome,
+  isDataUrl,
+  isDesktop,
+  isEdge,
+  isEmbedded,
+  isFileUrl,
+  isFirefox,
+  isFramerX,
+  isIOS,
+  isLocalServerUrl,
+  isLocalUrl,
+  isMacOS,
+  isMobile,
+  isPhone,
+  isRelativeUrl,
+  isSafari,
+  isTablet,
+  isTest,
+  isTouch,
+  isWebKit,
+  isWindows,
+  safariVersion,
+};
 function loadJSON(url,) {
   return fetch(url, {
     mode: 'cors',
@@ -54184,6 +54420,14 @@ function useInitialRouteComponent(routes, homeNodeId,) {
   }, [],);
   return RouteComponent;
 }
+function getLoader(component,) {
+  return component.loader;
+}
+function forwardLoader(component, props, context,) {
+  const loader = getLoader(component,);
+  if (!loader) return Promise.resolve(void 0,);
+  return loader.load(props, context,);
+}
 var package_default = {
   name: 'framer',
   version: '2.4.1',
@@ -54200,7 +54444,7 @@ var package_default = {
     watch: 'jest --watch',
   },
   dependencies: {
-    devalue: '^5.4.2',
+    devalue: '^5.6.2',
     eventemitter3: '^5.0.1',
     fontfaceobserver: '2.2.0',
     'hoist-non-react-statics': '^3.3.2',
@@ -54402,6 +54646,7 @@ export {
   FormContainer,
   FormPlainTextInput2 as FormPlainTextInput,
   FormSelect,
+  forwardLoader,
   fraction,
   Frame,
   frame,
