@@ -30,7 +30,7 @@ import {
 	css2,
 	fonts,
 	fonts2,
-} from "./chunks/chunk-F3HLMXIZ.js";
+} from "./chunks/chunk-3AKTGB5Y.js";
 import { routes } from "./chunks/chunk-VG7AXKTA.js";
 import "./chunks/chunk-WSFCRVEQ.js";
 

@@ -29,7 +29,7 @@ import {
 	css2,
 	fonts,
 	fonts2,
-} from "./chunks/chunk-F3HLMXIZ.js";
+} from "./chunks/chunk-3AKTGB5Y.js";
 import { routes } from "./chunks/chunk-VG7AXKTA.js";
 import "./chunks/chunk-WSFCRVEQ.js";
 
@@ -65,7 +65,7 @@ import {
 } from "unframer";
 import * as i from "react";
 var r = {
-	j95Se8Jpd: new a(() => import("./chunks/b9ZvTRprK-0-4OJHAUAR.js")),
+	j95Se8Jpd: new a(() => import("./chunks/b9ZvTRprK-0-3QEQQGVD.js")),
 };
 var s = (e2) => {
 	let t2 = [];
