@@ -16,10 +16,13 @@
     "bin": "bin.js",
     "files": [
         "dist",
+        "!dist/framer-chunks",
+        "dist/framer-chunks/chunk-*",
         "framer-fixed",
         "bin.js",
         "src",
         "!src/framer-chunks",
+        "src/framer-chunks/chunk-*",
         "README.md"
     ],
     "main": "./dist/index.js",
