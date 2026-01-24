@@ -46,6 +46,7 @@ export function esbuildPluginBundleDependencies({
     externalizeNpm = false,
     outDir,
     onCollectMissingPackage = (pkg: string) => {},
+    onFetch = (info: { url: string; resolvedUrl: string }) => {},
 }) {
     externalPackages = [...defaultExternalPackages, ...externalPackages]
     // console.log(externalPackages)
@@ -223,6 +224,7 @@ export function esbuildPluginBundleDependencies({
                     }
                     let loader = 'jsx' as any
                     const promise = Promise.resolve().then(async () => {
+                        onFetch({ url, resolvedUrl: resolved })
                         logger.log('fetching', url, 'because of', args.path)
                         spinner.update(
                             `Fetching ${url.replace(/https?:\/\//, '')}`,

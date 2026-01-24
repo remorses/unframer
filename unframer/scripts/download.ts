@@ -57,8 +57,10 @@ export async function main({ framerTypesUrl }) {
         plugins: [
             esbuildPluginBundleDependencies({
                 externalizeNpm: true,
-
                 outDir: path.dirname(resultFile),
+                onFetch: ({ url, resolvedUrl }) => {
+                    console.log(`[FETCH] ${url}`)
+                },
             }),
         ],
         write: true,
