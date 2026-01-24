@@ -212,12 +212,15 @@ export async function addMcpCommands(options: AddMcpCommandsOptions): Promise<vo
         process.exit(1);
       }
       const actionClient = new Client({ name: clientName, version: "1.0.0" }, { capabilities: {} });
-      await actionClient.connect(transport);
 
       try {
+        await actionClient.connect(transport);
         const result = await actionClient.callTool({ name: tool.name, arguments: parsedArgs });
         outputResult(result as { content: Array<{ type: string; text?: string }> });
       } catch (err) {
+        // Clear cache on any error so next invocation starts fresh
+        const currentConfig = loadConfig();
+        saveConfig({ ...currentConfig, cachedMcpTools: undefined });
         console.error(`Error calling ${tool.name}:`, err instanceof Error ? err.message : err);
         process.exit(1);
       } finally {
