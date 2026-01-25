@@ -356,11 +356,16 @@ cli.command(
     'mcp skill',
     'Show detailed help for all MCP commands with their options.',
 ).action(() => {
+    const config = loadConfig()
+    if (!config.mcpUrl) {
+        console.log('No MCP URL configured. Run "unframer mcp login" first to connect to a Framer project.')
+        return
+    }
     const mcpCommands = cli.commands.filter(
         (cmd) => cmd.name.startsWith('mcp ') && cmd.name !== 'mcp login' && cmd.name !== 'mcp skill',
     )
     if (mcpCommands.length === 0) {
-        console.log('No MCP commands available. Run "unframer mcp login" first to connect to a Framer project.')
+        console.log('No MCP commands available. Run "unframer mcp login" first and paste there the Framer MCP url.')
         return
     }
     for (const cmd of mcpCommands) {
