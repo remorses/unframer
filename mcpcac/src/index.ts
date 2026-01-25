@@ -130,7 +130,7 @@ export interface AddMcpCommandsOptions {
 }
 
 interface JsonSchemaProperty {
-  type?: string;
+  type?: string | string[];
   description?: string;
   enum?: string[];
   default?: unknown;
@@ -140,19 +140,43 @@ interface JsonSchemaProperty {
   anyOf?: JsonSchemaProperty[];
   oneOf?: JsonSchemaProperty[];
   allOf?: JsonSchemaProperty[];
+  additionalProperties?: boolean | JsonSchemaProperty;
+}
+
+/**
+ * Check if a type field contains object or array.
+ * Handles both string ("object") and array (["object", "null"]) formats.
+ */
+function typeIncludesComplex(type: string | string[] | undefined): boolean {
+  if (!type) {
+    return false;
+  }
+  if (Array.isArray(type)) {
+    return type.some((t) => t === "object" || t === "array");
+  }
+  return type === "object" || type === "array";
 }
 
 /**
  * Check if a schema represents a complex type that should be parsed as JSON.
- * This includes direct object/array types, as well as anyOf/oneOf/allOf with object types.
+ * Handles: direct type, type arrays, anyOf/oneOf/allOf, and implicit object/array schemas.
  */
 function isComplexJsonSchema(schema: JsonSchemaProperty): boolean {
-  if (schema.type === "object" || schema.type === "array") {
+  // Direct type declaration: "object", "array", or ["object", "null"], etc.
+  if (typeIncludesComplex(schema.type)) {
     return true;
   }
-  // Check anyOf/oneOf/allOf for object types
+  // Implicit object: has properties or additionalProperties without explicit type
+  if (schema.properties || schema.additionalProperties) {
+    return true;
+  }
+  // Implicit array: has items without explicit type
+  if (schema.items) {
+    return true;
+  }
+  // Check anyOf/oneOf/allOf for complex types (recursive)
   const unionTypes = [...(schema.anyOf || []), ...(schema.oneOf || []), ...(schema.allOf || [])];
-  return unionTypes.some((s) => s.type === "object" || s.type === "array");
+  return unionTypes.some((s) => isComplexJsonSchema(s));
 }
 
 interface InputSchema {
@@ -168,6 +192,20 @@ function schemaToString(schema: JsonSchemaProperty): string {
   const compact = { ...schema };
   delete compact.description;
   return JSON.stringify(compact);
+}
+
+/**
+ * Check if a type field includes a specific type.
+ * Handles both string and array formats.
+ */
+function typeIncludes(type: string | string[] | undefined, target: string): boolean {
+  if (!type) {
+    return false;
+  }
+  if (Array.isArray(type)) {
+    return type.includes(target);
+  }
+  return type === target;
 }
 
 function parseToolArguments(
@@ -187,7 +225,7 @@ function parseToolArguments(
     if (Array.isArray(value) && value.length === 1) {
       value = value[0];
     }
-    const schemaType = schema.type || "string";
+    const schemaType = schema.type;
     if (isComplexJsonSchema(schema) && typeof value === "string") {
       try {
         args[name] = JSON.parse(value);
@@ -195,14 +233,14 @@ function parseToolArguments(
         console.error(`Invalid JSON for --${name}: ${value}`);
         process.exit(1);
       }
-    } else if ((schemaType === "number" || schemaType === "integer") && typeof value === "string") {
+    } else if ((typeIncludes(schemaType, "number") || typeIncludes(schemaType, "integer")) && typeof value === "string") {
       const num = Number(value);
       if (Number.isNaN(num)) {
         console.error(`Invalid number for --${name}: ${value}`);
         process.exit(1);
       }
       args[name] = num;
-    } else if (schemaType === "string" && typeof value === "number") {
+    } else if (typeIncludes(schemaType, "string") && typeof value === "number") {
       // cac auto-converts digit-like strings to numbers, convert back
       args[name] = String(value);
     } else {
@@ -406,10 +444,12 @@ export async function addMcpCommands(options: AddMcpCommandsOptions): Promise<vo
     if (inputSchema?.properties) {
       for (const [propName, propSchema] of Object.entries(inputSchema.properties)) {
         const isRequired = inputSchema.required?.includes(propName) ?? false;
-        const schemaType = propSchema.type || "string";
+        const schemaType = propSchema.type;
+        const isBooleanType = schemaType === "boolean" || 
+          (Array.isArray(schemaType) && schemaType.includes("boolean"));
 
         const optionStr =
-          schemaType === "boolean" ? `--${propName}` : `--${propName} <${propName}>`;
+          isBooleanType ? `--${propName}` : `--${propName} <${propName}>`;
 
         let optionDesc = propSchema.description || propName;
         if (isRequired) {
