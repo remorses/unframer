@@ -12,72 +12,53 @@
  * - **Session reuse**: MCP session IDs are cached to skip initialization handshake
  * - **Type-aware parsing**: Handles string, number, boolean, object, and array arguments
  * - **JSON schema support**: Generates CLI options from tool input schemas
+ * - **OAuth support**: Automatic OAuth authentication on 401 errors (lazy auth)
  *
  * ## Example Usage
  *
  * ```ts
  * import { cac } from '@xmorse/cac'
- * import { addMcpCommands, CachedMcpTools } from 'mcpcac'
- * import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js'
+ * import { addMcpCommands } from 'mcpcac'
  *
  * const cli = cac('mycli')
  *
- * // Your config storage (could be file, env vars, etc.)
- * let cachedTools: CachedMcpTools | undefined
- * let mcpUrl: string | undefined
- *
- * // Add basic commands
- * cli.command('login [url]', 'Store MCP server URL')
- *   .action((url) => { mcpUrl = url })
- *
- * // Add MCP tool commands dynamically
  * await addMcpCommands({
  *   cli,
  *   commandPrefix: 'mcp',
  *   clientName: 'my-mcp-client',
- *   getMcpTransport: (sessionId) => {
- *     if (!mcpUrl) return null
- *     return new StreamableHTTPClientTransport(new URL(mcpUrl), { sessionId })
+ *   getMcpUrl: () => loadConfig().mcpUrl,
+ *   oauth: {
+ *     clientName: 'My CLI',
+ *     load: () => loadConfig().mcpOauth,
+ *     save: (state) => saveConfig({ mcpOauth: state }),
  *   },
- *   loadCache: () => cachedTools,
- *   saveCache: (cache) => { cachedTools = cache },
+ *   loadCache: () => loadConfig().cachedMcpTools,
+ *   saveCache: (cache) => saveConfig({ cachedMcpTools: cache }),
+ * })
+ *
+ * // Login command just saves URL - no auth check, fast!
+ * cli.command('login [url]').action((url) => {
+ *   saveConfig({ mcpUrl: url })
+ *   console.log('URL saved.')
  * })
  *
  * cli.parse()
  * ```
  *
- * ## Generated Commands
- *
- * If the MCP server exposes tools like `getNodeXml` and `updateNode`, you'll get:
- *
- * ```bash
- * $ mycli mcp getNodeXml --nodeId "abc123"
- * $ mycli mcp updateNode --nodeId "abc123" --xml "<Frame>...</Frame>"
- * $ mycli mcp --help  # Shows all available MCP tools
- * ```
- *
- * ## How It Works
- *
- * 1. On first run, connects to MCP server and fetches tool definitions via `listTools()`
- * 2. Caches tools and session ID via the provided `saveCache` callback
- * 3. Creates CLI commands for each tool with options derived from JSON schema
- * 4. When a command runs, reconnects with cached session ID and calls `callTool()`
- * 5. Outputs tool results (text content, skips images in CLI)
- *
- * ## Argument Handling
- *
- * - **string/number/boolean**: Passed directly as CLI options
- * - **object/array**: Passed as JSON strings, e.g., `--data '{"key": "value"}'`
- * - **required fields**: Marked with "(required)" in help text
- *
  * @module mcpcac
  */
 
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
+import { StreamableHTTPClientTransport } from "@modelcontextprotocol/sdk/client/streamableHttp.js";
 import type { Transport } from "@modelcontextprotocol/sdk/shared/transport.js";
 import type { CAC } from "@xmorse/cac";
+import { FileOAuthProvider } from "./oauth-provider.js";
+import { startOAuthFlow, isAuthRequiredError } from "./auth.js";
+import type { McpOAuthConfig, McpOAuthState } from "./types.js";
 
+// Public exports - only types that consumers need
 export type { Transport };
+export type { McpOAuthConfig, McpOAuthState } from "./types.js";
 
 export interface CachedMcpTools {
   tools: Array<{
@@ -99,16 +80,44 @@ export interface AddMcpCommandsOptions {
    * @default 'mcp-cli-client'
    */
   clientName?: string;
+
+  /**
+   * Returns the MCP server URL, or undefined if not configured.
+   * Required when using the oauth option.
+   */
+  getMcpUrl?: () => string | undefined;
+
   /**
    * Returns a transport to connect to the MCP server, or null if not configured.
    * If null is returned, no MCP tool commands will be registered.
    * @param sessionId - Optional session ID from cache to reuse existing session
+   *
+   * @deprecated Use getMcpUrl + oauth instead for simpler setup
    */
-  getMcpTransport: (sessionId?: string) => Transport | null | Promise<Transport | null>;
+  getMcpTransport?: (sessionId?: string) => Transport | null | Promise<Transport | null>;
+
+  /**
+   * OAuth configuration. When provided, enables automatic OAuth authentication.
+   * 
+   * OAuth is lazy - no auth check happens on startup. Authentication is only
+   * triggered when a tool call returns 401. After successful auth, the tool
+   * call is automatically retried.
+   * 
+   * The library handles everything internally:
+   * - Detecting 401 errors
+   * - Starting local callback server on random port
+   * - Opening browser for authorization
+   * - Exchanging code for tokens
+   * - Persisting tokens via save()
+   * - Retrying the failed tool call
+   */
+  oauth?: McpOAuthConfig;
+
   /**
    * Load cached MCP tools. Return undefined if no cache exists.
    */
   loadCache: () => CachedMcpTools | undefined;
+
   /**
    * Save cached MCP tools. Pass undefined to clear the cache.
    */
@@ -135,9 +144,7 @@ interface InputSchema {
  * Convert JSON schema to compact JSON string for display
  */
 function schemaToString(schema: JsonSchemaProperty): string {
-  // Show compact JSON schema
   const compact = { ...schema };
-  // Remove verbose fields for display
   delete compact.description;
   return JSON.stringify(compact);
 }
@@ -155,9 +162,6 @@ function parseToolArguments(
     if (value === undefined) {
       continue;
     }
-    // cac wraps values in arrays when using type: [String] or type: [Number]
-    // Always unwrap single-element arrays - for object/array schema types,
-    // the inner value is a JSON string that we'll parse below
     if (Array.isArray(value) && value.length === 1) {
       value = value[0];
     }
@@ -183,7 +187,6 @@ function outputResult(result: {
     if (block.type === "text" && block.text) {
       console.log(block.text);
     } else if (block.type === "image") {
-      // Skip base64 image data in CLI output
       console.log("[Image content omitted]");
     } else {
       console.log(JSON.stringify(block, null, 2));
@@ -192,14 +195,121 @@ function outputResult(result: {
 }
 
 /**
+ * Create a transport with optional OAuth authentication
+ */
+function createTransportWithAuth(
+  url: URL,
+  sessionId: string | undefined,
+  oauthState: McpOAuthState | undefined,
+  oauth: McpOAuthConfig | undefined,
+): StreamableHTTPClientTransport {
+  let authProvider: FileOAuthProvider | undefined;
+
+  if (oauth && oauthState?.tokens) {
+    authProvider = new FileOAuthProvider({
+      serverUrl: url.toString(),
+      redirectUri: "http://localhost/callback", // Placeholder, real one set during auth flow
+      clientName: oauth.clientName,
+      tokens: oauthState.tokens,
+      clientInformation: oauthState.clientInformation,
+      codeVerifier: oauthState.codeVerifier,
+      onStateUpdated: (newState) => {
+        oauth.save(newState);
+      },
+    });
+  }
+
+  return new StreamableHTTPClientTransport(url, {
+    sessionId,
+    authProvider,
+  });
+}
+
+/**
+ * Normalize MCP URL for StreamableHTTP transport
+ */
+function normalizeUrl(mcpUrl: string): URL {
+  const url = new URL(mcpUrl);
+  if (url.pathname.endsWith("/sse")) {
+    url.pathname = url.pathname.replace(/\/sse$/, "/mcp");
+  }
+  return url;
+}
+
+/**
  * Adds MCP tool commands to a cac CLI instance.
+ * 
  * Tools are cached for 1 hour to avoid connecting on every CLI invocation.
  * Session ID is also cached to skip MCP initialization handshake.
+ * 
+ * OAuth is lazy - authentication only happens when a 401 error occurs.
+ * After successful auth, the operation is automatically retried.
  */
 export async function addMcpCommands(options: AddMcpCommandsOptions): Promise<void> {
-  const { cli, commandPrefix, clientName = "mcp-cli-client", getMcpTransport, loadCache, saveCache } = options;
+  const {
+    cli,
+    commandPrefix,
+    clientName = "mcp-cli-client",
+    getMcpUrl,
+    getMcpTransport,
+    oauth,
+    loadCache,
+    saveCache,
+  } = options;
 
-  // Try to use cached tools first
+  // Helper to get transport - supports both old and new API
+  const getTransport = async (sessionId?: string): Promise<Transport | null> => {
+    // New API: getMcpUrl + oauth
+    if (getMcpUrl) {
+      const mcpUrl = getMcpUrl();
+      if (!mcpUrl) {
+        return null;
+      }
+
+      const url = normalizeUrl(mcpUrl);
+      const oauthState = oauth?.load();
+
+      return createTransportWithAuth(url, sessionId, oauthState, oauth);
+    }
+
+    // Legacy API: getMcpTransport
+    if (getMcpTransport) {
+      return getMcpTransport(sessionId);
+    }
+
+    return null;
+  };
+
+  // Handle auth required - triggers OAuth flow internally
+  const handleAuthRequired = async (serverUrl: string): Promise<boolean> => {
+    if (!oauth) {
+      console.error("Authentication required but OAuth not configured.");
+      console.error("Add oauth config to addMcpCommands() to enable automatic authentication.");
+      return false;
+    }
+
+    console.log("\n🔐 Authentication required. Opening browser...\n");
+
+    const result = await startOAuthFlow({
+      serverUrl,
+      clientName: oauth.clientName,
+      existingState: oauth.load(),
+      onAuthUrl: oauth.onAuthUrl,
+    });
+
+    if (result.success && result.state) {
+      oauth.save(result.state);
+      oauth.onAuthSuccess?.();
+      console.log("✓ Authentication successful! Retrying...\n");
+      return true;
+    }
+
+    oauth.onAuthError?.(result.error || "Unknown error");
+    console.error(`✗ Authentication failed: ${result.error}\n`);
+    return false;
+  };
+
+  // Try to use cached tools first (fast path - no network)
   const cachedTools = loadCache();
   const isCacheValid = cachedTools && (Date.now() - cachedTools.timestamp) < CACHE_TTL_MS;
 
@@ -207,12 +317,11 @@ export async function addMcpCommands(options: AddMcpCommandsOptions): Promise<vo
   let cachedSessionId: string | undefined;
 
   if (isCacheValid) {
-    // Use cached tools to register commands
     tools = cachedTools.tools;
     cachedSessionId = cachedTools.sessionId;
   } else {
     // Cache invalid/missing - connect to fetch tools
-    const transport = await getMcpTransport();
+    const transport = await getTransport();
     if (!transport) {
       return;
     }
@@ -223,10 +332,8 @@ export async function addMcpCommands(options: AddMcpCommandsOptions): Promise<vo
       const result = await client.listTools();
       tools = result.tools;
 
-      // Get session ID from transport if available
       const sessionId = (transport as { sessionId?: string }).sessionId;
 
-      // Save tools and session ID to cache
       saveCache({
         tools: tools.map((t) => ({
           name: t.name,
@@ -238,6 +345,17 @@ export async function addMcpCommands(options: AddMcpCommandsOptions): Promise<vo
       });
       cachedSessionId = sessionId;
     } catch (err) {
+      // Check if auth is required during tool discovery
+      if (isAuthRequiredError(err) && oauth && getMcpUrl) {
+        const mcpUrl = getMcpUrl();
+        if (mcpUrl) {
+          const authSuccess = await handleAuthRequired(normalizeUrl(mcpUrl).toString());
+          if (authSuccess) {
+            // Retry after auth
+            return addMcpCommands(options);
+          }
+        }
+      }
       console.error(`Failed to connect to MCP server: ${err instanceof Error ? err.message : err}`);
       return;
     } finally {
@@ -245,6 +363,7 @@ export async function addMcpCommands(options: AddMcpCommandsOptions): Promise<vo
     }
   }
 
+  // Register CLI commands for each tool
   for (const tool of tools) {
     const inputSchema = tool.inputSchema as InputSchema | undefined;
     const cmdName = `${commandPrefix} ${tool.name}`;
@@ -252,14 +371,11 @@ export async function addMcpCommands(options: AddMcpCommandsOptions): Promise<vo
 
     const cmd = cli.command(cmdName, description);
 
-    // Add options for each property in the input schema
     if (inputSchema?.properties) {
       for (const [propName, propSchema] of Object.entries(inputSchema.properties)) {
         const isRequired = inputSchema.required?.includes(propName) ?? false;
         const schemaType = propSchema.type || "string";
 
-        // Boolean options are flags without <value>
-        // Other types use <value> syntax
         const optionStr =
           schemaType === "boolean" ? `--${propName}` : `--${propName} <${propName}>`;
 
@@ -267,14 +383,10 @@ export async function addMcpCommands(options: AddMcpCommandsOptions): Promise<vo
         if (isRequired) {
           optionDesc += " (required)";
         }
-        // Add schema hint for non-scalar types
         if (schemaType === "object" || schemaType === "array") {
           optionDesc += ` (JSON: ${schemaToString(propSchema)})`;
         }
 
-        // Build option config with type transform
-        // Use type: [Type] to prevent cac/mri from auto-converting values
-        // This wraps values in arrays which we unwrap in parseToolArguments
         const optionConfig: { default?: unknown; type?: unknown[] } = {};
         if (propSchema.default !== undefined) {
           optionConfig.default = propSchema.default;
@@ -282,7 +394,6 @@ export async function addMcpCommands(options: AddMcpCommandsOptions): Promise<vo
         if (schemaType === "number" || schemaType === "integer") {
           optionConfig.type = [Number];
         } else if (schemaType !== "boolean") {
-          // String for string/object/array types - prevents mri from mangling JSON strings
           optionConfig.type = [String];
         }
 
@@ -293,27 +404,42 @@ export async function addMcpCommands(options: AddMcpCommandsOptions): Promise<vo
     cmd.action(async (cliOptions: Record<string, unknown>) => {
       const parsedArgs = parseToolArguments(cliOptions, inputSchema);
 
-      // Connect with cached session ID to skip initialization handshake
-      const transport = await getMcpTransport(cachedSessionId);
-      if (!transport) {
-        console.error("MCP transport not available");
-        process.exit(1);
-      }
-      const actionClient = new Client({ name: clientName, version: "1.0.0" }, { capabilities: {} });
+      const executeWithRetry = async (isRetry = false): Promise<void> => {
+        const transport = await getTransport(isRetry ? undefined : cachedSessionId);
+        if (!transport) {
+          console.error("MCP transport not available. Run login command first.");
+          process.exit(1);
+        }
+        
+        const actionClient = new Client({ name: clientName, version: "1.0.0" }, { capabilities: {} });
 
-      try {
-        await actionClient.connect(transport);
-        const result = await actionClient.callTool({ name: tool.name, arguments: parsedArgs });
-        outputResult(result as { content: Array<{ type: string; text?: string }> });
-      } catch (err) {
-        // Clear cache on any error so next invocation starts fresh
-        saveCache(undefined);
-        console.error(`Error calling ${tool.name}:`, err instanceof Error ? err.message : err);
-        process.exit(1);
-      } finally {
-        await actionClient.close();
-      }
+        try {
+          await actionClient.connect(transport);
+          const result = await actionClient.callTool({ name: tool.name, arguments: parsedArgs });
+          outputResult(result as { content: Array<{ type: string; text?: string }> });
+        } catch (err) {
+          // On 401, trigger OAuth and retry (only once)
+          if (!isRetry && isAuthRequiredError(err) && oauth && getMcpUrl) {
+            const mcpUrl = getMcpUrl();
+            if (mcpUrl) {
+              const authSuccess = await handleAuthRequired(normalizeUrl(mcpUrl).toString());
+              if (authSuccess) {
+                await actionClient.close();
+                return executeWithRetry(true);
+              }
+            }
+          }
+
+          // Clear cache on error (might be stale)
+          saveCache(undefined);
+          console.error(`Error calling ${tool.name}:`, err instanceof Error ? err.message : err);
+          process.exit(1);
+        } finally {
+          await actionClient.close();
+        }
+      };
+
+      await executeWithRetry();
     });
   }
-
 }
