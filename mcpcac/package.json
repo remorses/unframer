@@ -1,6 +1,6 @@
 {
   "name": "mcpcac",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Dynamically generate CLI commands from MCP server tools",
   "type": "module",
   "main": "dist/index.js",

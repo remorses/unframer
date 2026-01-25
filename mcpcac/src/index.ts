@@ -74,7 +74,12 @@ const CACHE_TTL_MS = 60 * 60 * 1000; // 1 hour
 
 export interface AddMcpCommandsOptions {
   cli: CAC;
-  commandPrefix: string;
+  /**
+   * Prefix for all MCP tool commands.
+   * Set to empty string '' for no prefix (e.g., 'notion-search' instead of 'mcp notion-search').
+   * @default 'mcp'
+   */
+  commandPrefix?: string;
   /**
    * Name used when connecting to the MCP server.
    * @default 'mcp-cli-client'
@@ -248,7 +253,7 @@ function normalizeUrl(mcpUrl: string): URL {
 export async function addMcpCommands(options: AddMcpCommandsOptions): Promise<void> {
   const {
     cli,
-    commandPrefix,
+    commandPrefix = "mcp",
     clientName = "mcp-cli-client",
     getMcpUrl,
     getMcpTransport,
@@ -366,7 +371,7 @@ export async function addMcpCommands(options: AddMcpCommandsOptions): Promise<vo
   // Register CLI commands for each tool
   for (const tool of tools) {
     const inputSchema = tool.inputSchema as InputSchema | undefined;
-    const cmdName = `${commandPrefix} ${tool.name}`;
+    const cmdName = commandPrefix ? `${commandPrefix} ${tool.name}` : tool.name;
     const description = tool.description || `Run MCP tool ${tool.name}`;
 
     const cmd = cli.command(cmdName, description);

@@ -1,6 +1,6 @@
 {
   "name": "notion-mcp-cli",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "description": "CLI for Notion MCP with OAuth support",
   "bin": "bin.js",
@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "@xmorse/cac": "^6.0.7",
-    "mcpcac": "^0.0.1"
+    "mcpcac": "^0.0.2"
   },
   "devDependencies": {
     "@types/node": "^22.15.21",

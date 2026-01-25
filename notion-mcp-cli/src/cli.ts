@@ -3,11 +3,11 @@
  * Notion MCP CLI with OAuth support.
  *
  * Usage:
- *   notion-mcp-cli login              # Save MCP URL and authenticate
- *   notion-mcp-cli mcp notion-search  # Search Notion
- *   notion-mcp-cli mcp notion-fetch   # Fetch a page
- *   notion-mcp-cli status             # Show current config
- *   notion-mcp-cli logout             # Clear OAuth tokens
+ *   notion-mcp-cli login          # Save MCP URL and authenticate
+ *   notion-mcp-cli notion-search  # Search Notion
+ *   notion-mcp-cli notion-fetch   # Fetch a page
+ *   notion-mcp-cli status         # Show current config
+ *   notion-mcp-cli logout         # Clear OAuth tokens
  */
 
 import { cac } from "@xmorse/cac";
@@ -48,10 +48,10 @@ function saveConfig(config: Partial<NotionCliConfig>): void {
 
 const cli = cac("notion-mcp-cli");
 
-// Add MCP commands with OAuth support
+// Add MCP commands with OAuth support (no prefix - commands are top-level)
 await addMcpCommands({
   cli,
-  commandPrefix: "mcp",
+  commandPrefix: "",
   clientName: "notion-mcp-cli",
   getMcpUrl: () => loadConfig().mcpUrl,
   oauth: {
@@ -75,7 +75,7 @@ cli
     saveConfig({ mcpUrl: options.url });
     console.log(`Saved MCP URL: ${options.url}`);
     console.log(`Config file: ${CONFIG_FILE}`);
-    console.log("\nRun any mcp command to authenticate (e.g., notion-mcp-cli mcp notion-get-users)");
+    console.log("\nRun any command to authenticate (e.g., notion-mcp-cli notion-get-users)");
   });
 
 // Logout command
@@ -99,5 +99,5 @@ cli.command("status", "Show current config").action(() => {
 });
 
 cli.help();
-cli.version("0.0.1");
+cli.version("0.0.2");
 cli.parse();
