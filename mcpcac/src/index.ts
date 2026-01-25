@@ -17,7 +17,7 @@
  *
  * ```ts
  * import { cac } from '@xmorse/cac'
- * import { addMcpCommands, CachedMcpTools } from './mcp-to-cli.js'
+ * import { addMcpCommands, CachedMcpTools } from 'mcpcac'
  * import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js'
  *
  * const cli = cac('mycli')
@@ -70,7 +70,7 @@
  * - **object/array**: Passed as JSON strings, e.g., `--data '{"key": "value"}'`
  * - **required fields**: Marked with "(required)" in help text
  *
- * @module mcp-to-cli
+ * @module mcpcac
  */
 
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";

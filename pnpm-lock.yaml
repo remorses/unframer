@@ -66,6 +66,16 @@ importers:
         specifier: workspace:*
         version: link:../unframer
 
+  mcpcac:
+    dependencies:
+      '@modelcontextprotocol/sdk':
+        specifier: ^1.0.0
+        version: 1.25.3(hono@4.11.5)(zod@4.1.11)
+    devDependencies:
+      '@xmorse/cac':
+        specifier: ^6.0.7
+        version: 6.0.7
+
   nextjs-app:
     dependencies:
       '@motionone/dom':
@@ -225,6 +235,9 @@ importers:
       esbuild-plugins-node-modules-polyfill:
         specifier: ^1.6.8
         version: 1.6.8(esbuild@0.25.8)
+      mcpcac:
+        specifier: workspace:*
+        version: link:../mcpcac
       nanospinner:
         specifier: ^1.2.2
         version: 1.2.2

@@ -29,7 +29,7 @@ import { getPackageManager } from './package-manager.js'
 import { notifyError } from './sentry.js'
 import { dispatcher } from './undici-dispatcher.js'
 import { loadConfig, saveConfig, getConfigPath } from './lib/config.js'
-import { addMcpCommands } from './lib/mcp-to-cli.js'
+import { addMcpCommands } from 'mcpcac/src/index.js'
 import { SSEClientTransport } from '@modelcontextprotocol/sdk/client/sse.js'
 import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js'
 

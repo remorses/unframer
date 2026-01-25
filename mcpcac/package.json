@@ -1,0 +1,42 @@
+{
+  "name": "mcpcac",
+  "version": "0.0.1",
+  "description": "Dynamically generate CLI commands from MCP server tools",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./src/index.js": {
+      "types": "./src/index.ts",
+      "import": "./src/index.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w"
+  },
+  "keywords": [
+    "mcp",
+    "cli",
+    "cac"
+  ],
+  "author": "Tommaso De Rossi, morse <beats.by.morse@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0"
+  },
+  "peerDependencies": {
+    "@xmorse/cac": "*"
+  },
+  "devDependencies": {
+    "@xmorse/cac": "^6.0.7"
+  }
+}
