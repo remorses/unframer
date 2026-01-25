@@ -137,6 +137,22 @@ interface JsonSchemaProperty {
   properties?: Record<string, JsonSchemaProperty>;
   items?: JsonSchemaProperty;
   required?: string[];
+  anyOf?: JsonSchemaProperty[];
+  oneOf?: JsonSchemaProperty[];
+  allOf?: JsonSchemaProperty[];
+}
+
+/**
+ * Check if a schema represents a complex type that should be parsed as JSON.
+ * This includes direct object/array types, as well as anyOf/oneOf/allOf with object types.
+ */
+function isComplexJsonSchema(schema: JsonSchemaProperty): boolean {
+  if (schema.type === "object" || schema.type === "array") {
+    return true;
+  }
+  // Check anyOf/oneOf/allOf for object types
+  const unionTypes = [...(schema.anyOf || []), ...(schema.oneOf || []), ...(schema.allOf || [])];
+  return unionTypes.some((s) => s.type === "object" || s.type === "array");
 }
 
 interface InputSchema {
@@ -172,7 +188,7 @@ function parseToolArguments(
       value = value[0];
     }
     const schemaType = schema.type || "string";
-    if ((schemaType === "object" || schemaType === "array") && typeof value === "string") {
+    if (isComplexJsonSchema(schema) && typeof value === "string") {
       try {
         args[name] = JSON.parse(value);
       } catch {
@@ -399,7 +415,7 @@ export async function addMcpCommands(options: AddMcpCommandsOptions): Promise<vo
         if (isRequired) {
           optionDesc += " (required)";
         }
-        if (schemaType === "object" || schemaType === "array") {
+        if (isComplexJsonSchema(propSchema)) {
           optionDesc += ` (JSON: ${schemaToString(propSchema)})`;
         }
 
