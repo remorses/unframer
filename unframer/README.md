@@ -314,3 +314,72 @@ Here is the below landing page Lighthouse score when using Astro:
 ## Example
 
 Look at the [nextjs-app source code folder](./nextjs-app) for an example and [the deployed website here](https://unframer-nextjs-app.vercel.app/)
+
+## MCP CLI Commands
+
+Unframer can act as a command-line client for the [Framer MCP plugin](https://www.framer.com/marketplace/plugins/mcp/), allowing you to interact with your Framer project directly from the terminal.
+
+### Setup
+
+```sh
+# Login with your MCP URL (get it from the Framer MCP plugin)
+npx unframer mcp login
+# show commands usage
+npx unframer mcp skill
+```
+
+After login, all MCP commands become available. Run `npx unframer --help` to see the full list.
+
+### Example Commands
+
+```sh
+# Get project structure as XML
+npx unframer mcp getProjectXml
+
+# Get a specific node's XML by ID
+npx unframer mcp getNodeXml --nodeId "abc123"
+
+# Update node text or attributes
+npx unframer mcp updateXmlForNode --nodeId "abc123" --xml '<Text nodeId="abc123">New text</Text>'
+
+# Search for fonts
+npx unframer mcp searchFonts --query "Inter"
+
+# Export React components
+npx unframer mcp exportReactComponents
+
+# Get published website URL
+npx unframer mcp getProjectWebsiteUrl
+```
+
+### CMS Operations
+
+```sh
+# List all CMS collections
+npx unframer mcp getCMSCollections
+
+# Get items from a collection
+npx unframer mcp getCMSItems --collectionId "col123"
+
+# Create or update a CMS item
+npx unframer mcp upsertCMSItem --collectionId "col123" --slug "my-post" --fieldData '{"title": "Hello"}'
+```
+
+### Code Files
+
+```sh
+# Create a new code component
+npx unframer mcp createCodeFile --name "MyComponent.tsx" --content "export default function MyComponent() { return <div>Hello</div> }"
+
+# Read existing code file
+npx unframer mcp readCodeFile --codeFileId "code123"
+
+# Update code file content
+npx unframer mcp updateCodeFile --codeFileId "code123" --content "// updated code"
+```
+
+Run any command with `--help` for detailed options:
+
+```sh
+npx unframer mcp updateXmlForNode --help
+```
