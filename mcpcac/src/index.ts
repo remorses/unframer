@@ -167,17 +167,28 @@ function parseToolArguments(
     if (value === undefined) {
       continue;
     }
+    // Unwrap single-element arrays (cac sometimes wraps values)
     if (Array.isArray(value) && value.length === 1) {
       value = value[0];
     }
-    const type = schema.type || "string";
-    if ((type === "object" || type === "array") && typeof value === "string") {
+    const schemaType = schema.type || "string";
+    if ((schemaType === "object" || schemaType === "array") && typeof value === "string") {
       try {
         args[name] = JSON.parse(value);
       } catch {
         console.error(`Invalid JSON for --${name}: ${value}`);
         process.exit(1);
       }
+    } else if ((schemaType === "number" || schemaType === "integer") && typeof value === "string") {
+      const num = Number(value);
+      if (Number.isNaN(num)) {
+        console.error(`Invalid number for --${name}: ${value}`);
+        process.exit(1);
+      }
+      args[name] = num;
+    } else if (schemaType === "string" && typeof value === "number") {
+      // cac auto-converts digit-like strings to numbers, convert back
+      args[name] = String(value);
     } else {
       args[name] = value;
     }
@@ -392,14 +403,11 @@ export async function addMcpCommands(options: AddMcpCommandsOptions): Promise<vo
           optionDesc += ` (JSON: ${schemaToString(propSchema)})`;
         }
 
-        const optionConfig: { default?: unknown; type?: unknown[] } = {};
+        // Don't use cac's type option - it has a bug where type: [String] causes
+        // unprovided options to be set to ["undefined"] instead of being omitted
+        const optionConfig: { default?: unknown } = {};
         if (propSchema.default !== undefined) {
           optionConfig.default = propSchema.default;
-        }
-        // Only set type for numbers - cac has a bug where type: [String] causes
-        // unprovided options to be set to ["undefined"] instead of being omitted
-        if (schemaType === "number" || schemaType === "integer") {
-          optionConfig.type = [Number];
         }
 
         cmd.option(optionStr, optionDesc, optionConfig);
