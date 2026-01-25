@@ -16,8 +16,6 @@
     "bin": "bin.js",
     "files": [
         "dist",
-        "!dist/framer-chunks",
-        "dist/framer-chunks/chunk-*",
         "framer-fixed",
         "bin.js",
         "src",
