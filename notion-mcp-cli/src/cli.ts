@@ -99,5 +99,5 @@ cli.command("status", "Show current config").action(() => {
 });
 
 cli.help();
-cli.version("0.0.2");
+cli.version("0.0.3");
 cli.parse();

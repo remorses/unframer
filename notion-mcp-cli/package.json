@@ -1,9 +1,11 @@
 {
   "name": "notion-mcp-cli",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "type": "module",
   "description": "CLI for Notion MCP with OAuth support",
-  "bin": "bin.js",
+  "bin": {
+    "notion-mcp-cli": "bin.js"
+  },
   "main": "./dist/cli.js",
   "types": "./dist/cli.d.ts",
   "files": [

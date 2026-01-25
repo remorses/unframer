@@ -396,10 +396,10 @@ export async function addMcpCommands(options: AddMcpCommandsOptions): Promise<vo
         if (propSchema.default !== undefined) {
           optionConfig.default = propSchema.default;
         }
+        // Only set type for numbers - cac has a bug where type: [String] causes
+        // unprovided options to be set to ["undefined"] instead of being omitted
         if (schemaType === "number" || schemaType === "integer") {
           optionConfig.type = [Number];
-        } else if (schemaType !== "boolean") {
-          optionConfig.type = [String];
         }
 
         cmd.option(optionStr, optionDesc, optionConfig);
