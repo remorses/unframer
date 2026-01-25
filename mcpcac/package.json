@@ -21,7 +21,8 @@
   ],
   "scripts": {
     "build": "tsc",
-    "watch": "tsc -w"
+    "watch": "tsc -w",
+    "prepublishOnly": "tsc"
   },
   "keywords": [
     "mcp",

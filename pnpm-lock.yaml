@@ -118,6 +118,25 @@ importers:
         specifier: workspace:*
         version: link:../unframer
 
+  notioncli:
+    dependencies:
+      '@xmorse/cac':
+        specifier: ^6.0.7
+        version: 6.0.7
+      mcpcac:
+        specifier: workspace:*
+        version: link:../mcpcac
+    devDependencies:
+      '@types/node':
+        specifier: ^22.15.21
+        version: 22.15.21
+      tsx:
+        specifier: ^4.20.3
+        version: 4.20.3
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+
   remix-app:
     dependencies:
       '@builder.io/react-hydration-overlay':

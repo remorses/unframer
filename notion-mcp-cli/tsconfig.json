@@ -1,0 +1,18 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "target": "ESNext",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "moduleResolution": "NodeNext",
+    "module": "NodeNext",
+    "noEmit": false,
+    "skipLibCheck": true,
+    "declarationMap": true,
+    "useUnknownInCatchVariables": false,
+    "outDir": "dist"
+  },
+  "include": ["src"],
+  "exclude": ["**/node_modules", "**/.*/"]
+}
