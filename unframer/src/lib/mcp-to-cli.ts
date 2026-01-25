@@ -17,14 +17,18 @@
  *
  * ```ts
  * import { cac } from '@xmorse/cac'
- * import { addMcpCommands } from './mcp-to-cli.js'
+ * import { addMcpCommands, CachedMcpTools } from './mcp-to-cli.js'
  * import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js'
  *
  * const cli = cac('mycli')
  *
+ * // Your config storage (could be file, env vars, etc.)
+ * let cachedTools: CachedMcpTools | undefined
+ * let mcpUrl: string | undefined
+ *
  * // Add basic commands
  * cli.command('login [url]', 'Store MCP server URL')
- *   .action((url) => saveConfig({ mcpUrl: url }))
+ *   .action((url) => { mcpUrl = url })
  *
  * // Add MCP tool commands dynamically
  * await addMcpCommands({
@@ -32,10 +36,11 @@
  *   commandPrefix: 'mcp',
  *   clientName: 'my-mcp-client',
  *   getMcpTransport: (sessionId) => {
- *     const config = loadConfig()
- *     if (!config.mcpUrl) return null
- *     return new StreamableHTTPClientTransport(new URL(config.mcpUrl), { sessionId })
- *   }
+ *     if (!mcpUrl) return null
+ *     return new StreamableHTTPClientTransport(new URL(mcpUrl), { sessionId })
+ *   },
+ *   loadCache: () => cachedTools,
+ *   saveCache: (cache) => { cachedTools = cache },
  * })
  *
  * cli.parse()
@@ -54,7 +59,7 @@
  * ## How It Works
  *
  * 1. On first run, connects to MCP server and fetches tool definitions via `listTools()`
- * 2. Caches tools and session ID to `~/.unframer/config.json`
+ * 2. Caches tools and session ID via the provided `saveCache` callback
  * 3. Creates CLI commands for each tool with options derived from JSON schema
  * 4. When a command runs, reconnects with cached session ID and calls `callTool()`
  * 5. Outputs tool results (text content, skips images in CLI)
@@ -71,9 +76,18 @@
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import type { Transport } from "@modelcontextprotocol/sdk/shared/transport.js";
 import type { CAC } from "@xmorse/cac";
-import { loadConfig, saveConfig, type CachedMcpTools } from "./config.js";
 
 export type { Transport };
+
+export interface CachedMcpTools {
+  tools: Array<{
+    name: string;
+    description?: string;
+    inputSchema?: unknown;
+  }>;
+  timestamp: number;
+  sessionId?: string;
+}
 
 const CACHE_TTL_MS = 60 * 60 * 1000; // 1 hour
 
@@ -91,6 +105,14 @@ export interface AddMcpCommandsOptions {
    * @param sessionId - Optional session ID from cache to reuse existing session
    */
   getMcpTransport: (sessionId?: string) => Transport | null | Promise<Transport | null>;
+  /**
+   * Load cached MCP tools. Return undefined if no cache exists.
+   */
+  loadCache: () => CachedMcpTools | undefined;
+  /**
+   * Save cached MCP tools. Pass undefined to clear the cache.
+   */
+  saveCache: (cache: CachedMcpTools | undefined) => void;
 }
 
 interface JsonSchemaProperty {
@@ -175,11 +197,10 @@ function outputResult(result: {
  * Session ID is also cached to skip MCP initialization handshake.
  */
 export async function addMcpCommands(options: AddMcpCommandsOptions): Promise<void> {
-  const { cli, commandPrefix, clientName = "mcp-cli-client", getMcpTransport } = options;
+  const { cli, commandPrefix, clientName = "mcp-cli-client", getMcpTransport, loadCache, saveCache } = options;
 
   // Try to use cached tools first
-  const config = loadConfig();
-  const cachedTools = config.cachedMcpTools;
+  const cachedTools = loadCache();
   const isCacheValid = cachedTools && (Date.now() - cachedTools.timestamp) < CACHE_TTL_MS;
 
   let tools: CachedMcpTools["tools"];
@@ -206,17 +227,14 @@ export async function addMcpCommands(options: AddMcpCommandsOptions): Promise<vo
       const sessionId = (transport as { sessionId?: string }).sessionId;
 
       // Save tools and session ID to cache
-      saveConfig({
-        ...config,
-        cachedMcpTools: {
-          tools: tools.map((t) => ({
-            name: t.name,
-            description: t.description,
-            inputSchema: t.inputSchema,
-          })),
-          timestamp: Date.now(),
-          sessionId,
-        },
+      saveCache({
+        tools: tools.map((t) => ({
+          name: t.name,
+          description: t.description,
+          inputSchema: t.inputSchema,
+        })),
+        timestamp: Date.now(),
+        sessionId,
       });
       cachedSessionId = sessionId;
     } catch (err) {
@@ -289,8 +307,7 @@ export async function addMcpCommands(options: AddMcpCommandsOptions): Promise<vo
         outputResult(result as { content: Array<{ type: string; text?: string }> });
       } catch (err) {
         // Clear cache on any error so next invocation starts fresh
-        const currentConfig = loadConfig();
-        saveConfig({ ...currentConfig, cachedMcpTools: undefined });
+        saveCache(undefined);
         console.error(`Error calling ${tool.name}:`, err instanceof Error ? err.message : err);
         process.exit(1);
       } finally {

@@ -390,6 +390,13 @@ await addMcpCommands({
         }
         return new StreamableHTTPClientTransport(url, { sessionId })
     },
+    loadCache: () => {
+        return loadConfig().cachedMcpTools
+    },
+    saveCache: (cache) => {
+        const config = loadConfig()
+        saveConfig({ ...config, cachedMcpTools: cache })
+    },
 }).catch(e => console.error(e))
 
 
