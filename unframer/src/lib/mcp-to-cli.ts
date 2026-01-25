@@ -1,3 +1,73 @@
+/**
+ * # MCP to CLI
+ *
+ * Dynamically generates CLI commands from MCP (Model Context Protocol) server tools.
+ * This module connects to any MCP server, discovers available tools, and creates
+ * corresponding CLI commands with proper argument parsing and validation.
+ *
+ * ## Features
+ *
+ * - **Auto-discovery**: Fetches all tools from the MCP server and creates CLI commands
+ * - **Caching**: Tools are cached for 1 hour to avoid reconnecting on every invocation
+ * - **Session reuse**: MCP session IDs are cached to skip initialization handshake
+ * - **Type-aware parsing**: Handles string, number, boolean, object, and array arguments
+ * - **JSON schema support**: Generates CLI options from tool input schemas
+ *
+ * ## Example Usage
+ *
+ * ```ts
+ * import { cac } from '@xmorse/cac'
+ * import { addMcpCommands } from './mcp-to-cli.js'
+ * import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js'
+ *
+ * const cli = cac('mycli')
+ *
+ * // Add basic commands
+ * cli.command('login [url]', 'Store MCP server URL')
+ *   .action((url) => saveConfig({ mcpUrl: url }))
+ *
+ * // Add MCP tool commands dynamically
+ * await addMcpCommands({
+ *   cli,
+ *   commandPrefix: 'mcp',
+ *   clientName: 'my-mcp-client',
+ *   getMcpTransport: (sessionId) => {
+ *     const config = loadConfig()
+ *     if (!config.mcpUrl) return null
+ *     return new StreamableHTTPClientTransport(new URL(config.mcpUrl), { sessionId })
+ *   }
+ * })
+ *
+ * cli.parse()
+ * ```
+ *
+ * ## Generated Commands
+ *
+ * If the MCP server exposes tools like `getNodeXml` and `updateNode`, you'll get:
+ *
+ * ```bash
+ * $ mycli mcp getNodeXml --nodeId "abc123"
+ * $ mycli mcp updateNode --nodeId "abc123" --xml "<Frame>...</Frame>"
+ * $ mycli mcp --help  # Shows all available MCP tools
+ * ```
+ *
+ * ## How It Works
+ *
+ * 1. On first run, connects to MCP server and fetches tool definitions via `listTools()`
+ * 2. Caches tools and session ID to `~/.unframer/config.json`
+ * 3. Creates CLI commands for each tool with options derived from JSON schema
+ * 4. When a command runs, reconnects with cached session ID and calls `callTool()`
+ * 5. Outputs tool results (text content, skips images in CLI)
+ *
+ * ## Argument Handling
+ *
+ * - **string/number/boolean**: Passed directly as CLI options
+ * - **object/array**: Passed as JSON strings, e.g., `--data '{"key": "value"}'`
+ * - **required fields**: Marked with "(required)" in help text
+ *
+ * @module mcp-to-cli
+ */
+
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import type { Transport } from "@modelcontextprotocol/sdk/shared/transport.js";
 import type { CAC } from "@xmorse/cac";
