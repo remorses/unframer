@@ -322,7 +322,7 @@ cli.command(
 
 cli.command(
     'mcp login [url]',
-    'Store MCP server URL. After login, other MCP commands will appear in --help. The MCP URL is visible in the Framer MCP plugin.',
+    'Login by pasting your Framer MCP URL. Get the URL from Framer MCP plugin (Cmd/Ctrl+K > "MCP"). After login, run "unframer mcp skill" to see all available commands.',
 ).action(async (url?: string) => {
     // Prompt for URL if not provided, avoids shell escaping issues with & in URLs
     if (!url) {
@@ -350,6 +350,23 @@ cli.command(
     }
     saveConfig({ mcpUrl })
     console.log(`MCP URL saved to ${getConfigPath()}`)
+})
+
+cli.command(
+    'mcp skill',
+    'Show detailed help for all MCP commands with their options.',
+).action(() => {
+    const mcpCommands = cli.commands.filter(
+        (cmd) => cmd.name.startsWith('mcp ') && cmd.name !== 'mcp login' && cmd.name !== 'mcp skill',
+    )
+    if (mcpCommands.length === 0) {
+        console.log('No MCP commands available. Run "unframer mcp login" first to connect to a Framer project.')
+        return
+    }
+    for (const cmd of mcpCommands) {
+        cmd.outputHelp()
+        console.log('')
+    }
 })
 
 // Add MCP tool commands - only registered if transport is available
