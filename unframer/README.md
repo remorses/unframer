@@ -324,8 +324,6 @@ Unframer can act as a command-line client for the [Framer MCP plugin](https://ww
 ```sh
 # Login with your MCP URL (get it from the Framer MCP plugin)
 npx unframer mcp login
-# show commands usage
-npx unframer mcp skill
 ```
 
 After login, all MCP commands become available. Run `npx unframer --help` to see the full list.
