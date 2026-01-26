@@ -118,14 +118,14 @@ importers:
         specifier: workspace:*
         version: link:../unframer
 
-  notioncli:
+  notion-mcp-cli:
     dependencies:
       '@xmorse/cac':
         specifier: ^6.0.7
         version: 6.0.7
       mcpcac:
-        specifier: workspace:*
-        version: link:../mcpcac
+        specifier: ^0.0.2
+        version: 0.0.2(@xmorse/cac@6.0.7)(zod@4.1.11)
     devDependencies:
       '@types/node':
         specifier: ^22.15.21
@@ -4383,6 +4383,11 @@ packages:
 
   matter-js@0.20.0:
     resolution: {integrity: sha512-iC9fYR7zVT3HppNnsFsp9XOoQdQN2tUyfaKg4CHLH8bN+j6GT4Gw7IH2rP0tflAebrHFw730RR3DkVSZRX8hwA==}
+
+  mcpcac@0.0.2:
+    resolution: {integrity: sha512-hGufailsvLmLOcMfdjXeql7nTa3pGV4GUZ+0woQz6RCr8gKpl2RFpjQzFhOjWIYs+WbGUCkq98ObUN9F6B7u+g==}
+    peerDependencies:
+      '@xmorse/cac': '*'
 
   mdast-util-definitions@6.0.0:
     resolution: {integrity: sha512-scTllyX6pnYNZH/AIp/0ePz6s4cZtARxImwoPJ7kS42n+MnVsI4XbnG6d4ibehRIldYMWM2LD7ImQblVhUejVQ==}
@@ -10474,6 +10479,16 @@ snapshots:
   math-intrinsics@1.1.0: {}
 
   matter-js@0.20.0: {}
+
+  mcpcac@0.0.2(@xmorse/cac@6.0.7)(zod@4.1.11):
+    dependencies:
+      '@modelcontextprotocol/sdk': 1.25.3(hono@4.11.5)(zod@4.1.11)
+      '@xmorse/cac': 6.0.7
+    transitivePeerDependencies:
+      - '@cfworker/json-schema'
+      - hono
+      - supports-color
+      - zod
 
   mdast-util-definitions@6.0.0:
     dependencies:
