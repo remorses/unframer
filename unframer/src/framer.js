@@ -12021,7 +12021,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.UIIQFQF5.mjs
+// /:https://app.framerstatic.com/framer.LCKZAPR7.mjs
 
 import React42 from 'react';
 import { useDeferredValue, useSyncExternalStore, } from 'react';
@@ -41275,19 +41275,32 @@ var CompatibilityDatabaseCollection = class {
     return Number(left.pointer,) - Number(right.pointer,);
   }
 };
-var collectionIds = /* @__PURE__ */ new WeakMap();
+var persistedCollectionIdToSeenCollectionRef = /* @__PURE__ */ new Map();
+var collectionRefToStableCollectionId = /* @__PURE__ */ new WeakMap();
 var prefix2 = '$r_';
 function hasRandomCollectionId(id3,) {
   return id3.includes(prefix2,);
 }
-function getCollectionId(collection,) {
-  if (isAnyDatabaseCollection(collection,) && collection.id) {
+function getPersistedCollectionId(collection,) {
+  if (!isAnyDatabaseCollection(collection,)) return void 0;
+  if (!collection.id) return void 0;
+  const existingCollectionRef = persistedCollectionIdToSeenCollectionRef.get(collection.id,);
+  if (!existingCollectionRef) {
+    persistedCollectionIdToSeenCollectionRef.set(collection.id, new WeakRef(collection,),);
     return collection.id;
   }
-  const existing = collectionIds.get(collection,);
-  if (existing) return existing;
+  if (existingCollectionRef.deref() === collection) {
+    return collection.id;
+  }
+  return void 0;
+}
+function getCollectionId(collection,) {
+  const persistedId = getPersistedCollectionId(collection,);
+  if (persistedId) return persistedId;
+  const stableCollectionId = collectionRefToStableCollectionId.get(collection,);
+  if (stableCollectionId) return stableCollectionId;
   const id3 = `${prefix2}${Math.random().toString(16,).slice(2,)}`;
-  collectionIds.set(collection, id3,);
+  collectionRefToStableCollectionId.set(collection, id3,);
   return id3;
 }
 var compatibilityCache = /* @__PURE__ */ new Map();
