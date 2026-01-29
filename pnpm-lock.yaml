@@ -66,16 +66,6 @@ importers:
         specifier: workspace:*
         version: link:../unframer
 
-  mcpcac:
-    dependencies:
-      '@modelcontextprotocol/sdk':
-        specifier: ^1.0.0
-        version: 1.25.3(hono@4.11.5)(zod@4.1.11)
-    devDependencies:
-      '@xmorse/cac':
-        specifier: ^6.0.7
-        version: 6.0.7
-
   nextjs-app:
     dependencies:
       '@motionone/dom':
@@ -117,25 +107,6 @@ importers:
       unframer:
         specifier: workspace:*
         version: link:../unframer
-
-  notion-mcp-cli:
-    dependencies:
-      '@xmorse/cac':
-        specifier: ^6.0.7
-        version: 6.0.7
-      mcpcac:
-        specifier: ^0.0.2
-        version: 0.0.2(@xmorse/cac@6.0.7)(zod@4.1.11)
-    devDependencies:
-      '@types/node':
-        specifier: ^22.15.21
-        version: 22.15.21
-      tsx:
-        specifier: ^4.20.3
-        version: 4.20.3
-      typescript:
-        specifier: ^5.9.3
-        version: 5.9.3
 
   remix-app:
     dependencies:
@@ -255,8 +226,8 @@ importers:
         specifier: ^1.6.8
         version: 1.6.8(esbuild@0.25.8)
       mcpcac:
-        specifier: workspace:*
-        version: link:../mcpcac
+        specifier: ^0.0.2
+        version: 0.0.2(@xmorse/cac@6.0.7)(hono@4.11.5)(zod@4.1.11)
       nanospinner:
         specifier: ^1.2.2
         version: 1.2.2
@@ -10480,7 +10451,7 @@ snapshots:
 
   matter-js@0.20.0: {}
 
-  mcpcac@0.0.2(@xmorse/cac@6.0.7)(zod@4.1.11):
+  mcpcac@0.0.2(@xmorse/cac@6.0.7)(hono@4.11.5)(zod@4.1.11):
     dependencies:
       '@modelcontextprotocol/sdk': 1.25.3(hono@4.11.5)(zod@4.1.11)
       '@xmorse/cac': 6.0.7
