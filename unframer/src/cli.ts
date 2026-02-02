@@ -322,7 +322,7 @@ cli.command(
 
 cli.command(
     'mcp login [url]',
-    'Login by pasting your Framer MCP URL. Get the URL from Framer MCP plugin (Cmd/Ctrl+K > "MCP"). After login, run "unframer mcp skill" to see all available commands.',
+    'Login by pasting your Framer MCP URL. Get the URL from Framer MCP plugin (Cmd/Ctrl+K > "MCP"). After login, run "unframer mcp skill" to see all available commands then. This cli will let you control Framer MCP via cli commands like `unframer mcp getProjectXml`',
 ).action(async (url?: string) => {
     // Prompt for URL if not provided, avoids shell escaping issues with & in URLs
     if (!url) {
@@ -350,6 +350,8 @@ cli.command(
     }
     saveConfig({ mcpUrl })
     console.log(`MCP URL saved to ${getConfigPath()}`)
+    console.log(`Now you must run \`unframer mcp skill\` to see how to unframer CLI. Every Framer MCP command is exposed as a cli command`)
+
 })
 
 cli.command(
