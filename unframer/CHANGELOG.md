@@ -1,5 +1,14 @@
 # unframer
 
+## 4.0.5
+
+### Patch Changes
+
+- Add `mcp skill` command to show detailed help for all MCP commands
+- Extract mcp-to-cli into separate `mcpcac` package
+- Improve MCP login description with better instructions
+- Update to latest Framer runtime
+
 ## 4.0.4
 
 ### Minor Changes
