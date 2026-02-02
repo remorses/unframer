@@ -12021,7 +12021,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.LCKZAPR7.mjs
+// /:https://app.framerstatic.com/framer.IZIQYQL7.mjs
 
 import React42 from 'react';
 import { useDeferredValue, useSyncExternalStore, } from 'react';
@@ -16052,6 +16052,66 @@ function useMultiCollectionReferenceQueryParam({
 }
 function isNonEmptyString(value,) {
   return isString(value,) && value !== '';
+}
+var noOpGetOptionTitle = () => void 0;
+function useEnumQueryParam({
+  initialValue,
+  parameterName,
+  options = EMPTY_ARRAY,
+  getOptionTitle = noOpGetOptionTitle,
+  optional,
+},) {
+  useEffect(() => {
+    if (options === EMPTY_ARRAY || getOptionTitle === noOpGetOptionTitle) {
+      console.warn(
+        '[useEnumQueryParam]',
+        `The URL variable \`${parameterName}\` is misconfigured because the referenced Option field was removed from the collection. Filters using this variable are disabled, and updating the variable will have no effect.`,
+      );
+    }
+  }, [options, getOptionTitle, parameterName,],);
+  const locale = useLocaleInfo().activeLocale ?? void 0;
+  const titleToIdMap = useMemo(() => {
+    const map2 = /* @__PURE__ */ new Map();
+    for (const id3 of options) {
+      const title = getOptionTitle(id3, locale,);
+      if (!title) continue;
+      map2.set(title, id3,);
+    }
+    return map2;
+  }, [locale, options, getOptionTitle,],);
+  const initialTitle = useMemo(() => {
+    if (!initialValue) return void 0;
+    if (!options.includes(initialValue,)) return void 0;
+    return getOptionTitle(initialValue, locale,) || '';
+  }, [locale, initialValue, options, getOptionTitle,],);
+  const [titleValue, setTitleValue,] = useStringQueryParam({
+    initialValue: initialTitle,
+    parameterName,
+    optional,
+  },);
+  const value = useMemo(() => {
+    const validInitialId = initialValue && options.includes(initialValue,) ? initialValue : void 0;
+    if (isUndefined(titleValue,)) {
+      return void 0;
+    }
+    if (!titleValue) return validInitialId;
+    const resolvedId = titleToIdMap.get(titleValue,);
+    if (!resolvedId) {
+      if (optional) return void 0;
+      return validInitialId;
+    }
+    return resolvedId;
+  }, [titleValue, titleToIdMap, initialValue, options, optional,],);
+  const setValue = useCallback2(async (newValue) => {
+    if (isUndefined(newValue,)) {
+      return setTitleValue(void 0,);
+    }
+    const title = getOptionTitle(newValue, locale,);
+    if (title) {
+      return setTitleValue(title,);
+    }
+  }, [setTitleValue, locale, getOptionTitle,],);
+  return [value, setValue,];
 }
 function getCollectionUtilsCache2(collectionUtils, collectionId,) {
   const collectionUtilsCache = collectionUtils?.get(collectionId,);
@@ -56096,6 +56156,7 @@ export {
   useDragControls,
   useDynamicRefs,
   useElementScroll,
+  useEnumQueryParam,
   useForceUpdate,
   useFormSelectVariableBinding,
   useGamepad,
