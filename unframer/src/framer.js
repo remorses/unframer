@@ -12021,11 +12021,10 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.IZIQYQL7.mjs
+// /:https://app.framerstatic.com/framer.GSLWJ5W6.mjs
 
 import React42 from 'react';
-import { useDeferredValue, useSyncExternalStore, } from 'react';
-import { startTransition as startTransition2, } from 'react';
+import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
 import { Suspense as Suspense2, } from 'react';
 import { memo as memo2, } from 'react';
 import ReactDOM from 'react-dom';
@@ -15609,6 +15608,23 @@ function sendCustomTrackingEvent(eventData, nodeId, trackingId,) {
     trackingId: trackingId || null,
   }, 'eager',);
 }
+var FramerEnvironmentContext = /* @__PURE__ */ (() => {
+  const Context2 = createContext('preview',);
+  Context2.displayName = 'FramerEnvironmentContext';
+  return Context2;
+})();
+function FramerEnvironmentProvider({
+  children,
+  value,
+},) {
+  return /* @__PURE__ */ jsx(FramerEnvironmentContext.Provider, {
+    value,
+    children,
+  },);
+}
+function useFramerEnvironment() {
+  return useContext(FramerEnvironmentContext,);
+}
 function useMemoOne(factory, inputs,) {
   const initial = useState(() => ({
     inputs,
@@ -15761,7 +15777,7 @@ function useLayoutDirection() {
 var URLSearchParamsContext = /* @__PURE__ */ (() => {
   const Context2 = createContext({
     urlSearchParams: new URLSearchParams(),
-    triggerUpdate: () => {},
+    replaceSearchParams: async () => {},
   },);
   Context2.displayName = 'URLSearchParamsContext';
   return Context2;
@@ -15770,7 +15786,9 @@ function URLSearchParamsProvider({
   children,
 },) {
   const onStoreChangeRef = useRef(null,);
-  const searchString = useSyncExternalStore(
+  const isPreview = useFramerEnvironment() === 'preview';
+  const [previewSearchString, setPreviewSearchString,] = useState('',);
+  const urlSearchString = useSyncExternalStore(
     (onStoreChange) => {
       onStoreChangeRef.current = onStoreChange;
       const handler = () => {
@@ -15785,14 +15803,31 @@ function URLSearchParamsProvider({
     () => __unframerWindow2.location.search,
     () => '',
   );
+  const searchString = isPreview ? previewSearchString : urlSearchString;
   const deferredSearchString = useDeferredValue(searchString,);
-  const triggerUpdate = useCallback2(() => {
+  const replaceSearchParams = useCallback2(async (replacer) => {
+    if (isPreview) {
+      startTransition2(() => {
+        setPreviewSearchString((currentSearchString) => {
+          const currentParams = new URLSearchParams(currentSearchString,);
+          return replacer(currentParams,).toString();
+        },);
+      },);
+      return;
+    }
+    const currentHistoryState = __unframerWindow2.history.state;
+    const url = new URL(__unframerWindow2.location.href,);
+    url.search = replacer(url.searchParams,).toString();
+    await yieldToMain({
+      continueAfter: 'paint',
+    },);
+    replaceHistoryState(currentHistoryState, url.toString(),);
     onStoreChangeRef.current?.();
-  }, [],);
+  }, [isPreview,],);
   const value = useMemoOne(() => ({
     urlSearchParams: new URLSearchParams(deferredSearchString,),
-    triggerUpdate,
-  }), [deferredSearchString, triggerUpdate,],);
+    replaceSearchParams,
+  }), [deferredSearchString, replaceSearchParams,],);
   return /* @__PURE__ */ jsx(URLSearchParamsContext.Provider, {
     value,
     children,
@@ -15804,43 +15839,38 @@ function useStringArrayQueryParam({
   const parameterNameRef = useRef(parameterName,);
   const {
     urlSearchParams,
-    triggerUpdate,
+    replaceSearchParams,
   } = useContext(URLSearchParamsContext,);
   const value = useMemo(() => {
     return urlSearchParams.getAll(parameterNameRef.current,);
   }, [urlSearchParams,],);
   const setValue = useCallback2(async (newValues) => {
     if (!isArray(newValues,)) return;
-    const currentHistoryState = __unframerWindow2.history.state;
-    const name = parameterNameRef.current;
-    const url = new URL(__unframerWindow2.location.href,);
-    const next2 = new URLSearchParams();
-    let inserted = false;
-    for (const [key7, originalValue,] of url.searchParams.entries()) {
-      if (key7 !== name) {
-        next2.append(key7, originalValue,);
-        continue;
+    await replaceSearchParams((currentSearchParams) => {
+      const name = parameterNameRef.current;
+      const next2 = new URLSearchParams();
+      let inserted = false;
+      for (const [key7, originalValue,] of currentSearchParams.entries()) {
+        if (key7 !== name) {
+          next2.append(key7, originalValue,);
+          continue;
+        }
+        if (inserted) continue;
+        inserted = true;
+        for (const newValue of newValues) {
+          if (!isString(newValue,)) continue;
+          next2.append(name, newValue,);
+        }
       }
-      if (inserted) continue;
-      inserted = true;
-      for (const newValue of newValues) {
-        if (!isString(newValue,)) continue;
-        next2.append(name, newValue,);
+      if (!inserted) {
+        for (const newValue of newValues) {
+          if (!isString(newValue,)) continue;
+          next2.append(name, newValue,);
+        }
       }
-    }
-    if (!inserted) {
-      for (const newValue of newValues) {
-        if (!isString(newValue,)) continue;
-        next2.append(name, newValue,);
-      }
-    }
-    url.search = next2.toString();
-    await yieldToMain({
-      continueAfter: 'paint',
+      return next2;
     },);
-    replaceHistoryState(currentHistoryState, url.toString(),);
-    triggerUpdate();
-  }, [triggerUpdate,],);
+  }, [replaceSearchParams,],);
   return [value, setValue,];
 }
 function useStringQueryParam({
@@ -38828,6 +38858,7 @@ var TriggerState = class {
   }
   // TODO: include targetId in the trigger so we can store the invoke in local storage
   subscribe(triggerId, targetId, trigger, callback,) {
+    if (isEmptyTrigger(trigger,)) return noop2;
     const triggerEntry = this.triggers.get(triggerId,) ?? {
       status: 'pending',
       targetId,
@@ -38835,7 +38866,7 @@ var TriggerState = class {
       events: /* @__PURE__ */ new Set(),
       unsubscribeHandlers: /* @__PURE__ */ new Set(),
     };
-    if (triggerEntry.status === 'triggered') return () => {};
+    if (triggerEntry.status === 'triggered') return noop2;
     triggerEntry.callback = callback;
     triggerEntry.status = 'pending';
     this.triggers.set(triggerId, triggerEntry,);
@@ -38942,6 +38973,7 @@ var TriggerState = class {
     const cookieStrings = (__unframerWindow2.document.cookie ?? '').split(';',).map((cookie) => cookie.trim()).filter(Boolean,);
     const operatorFunction = cookies.operator === 'and' ? 'every' : 'some';
     return cookies.rules[operatorFunction]((rule) => {
+      if (!rule.key) return false;
       switch (rule.type) {
         case 'set':
           return cookieStrings.find((cookie) => cookie.startsWith(`${rule.key}=`,)) !== void 0;
@@ -38960,6 +38992,7 @@ var TriggerState = class {
     const urlParams = new URLSearchParams(__unframerWindow2.location.search ?? '',);
     const operatorFunction = params.operator === 'and' ? 'every' : 'some';
     return params.rules[operatorFunction]((rule) => {
+      if (!rule.key) return false;
       switch (rule.type) {
         case 'set':
           return urlParams.has(rule.key,);
@@ -38977,11 +39010,13 @@ var TriggerState = class {
     const currentPath = this.getCurrentRoutePath();
     if (!currentPath) return false;
     for (const routeRule of excludeRoutes ?? []) {
+      if (!routeRule.route) continue;
       const targetPath = this.resolveRoute(routeRule.route,);
       const matches = routeRule.wildcard ? currentPath.startsWith(targetPath,) : currentPath === targetPath;
       if (matches) return false;
     }
     for (const routeRule of includeRoutes ?? []) {
+      if (!routeRule.route) continue;
       const targetPath = this.resolveRoute(routeRule.route,);
       const matches = routeRule.wildcard ? currentPath.startsWith(targetPath,) : currentPath === targetPath;
       if (matches) return true;
@@ -39056,6 +39091,10 @@ function initializeScrollPercentageListener(emit,) {
 function getScrollPercentage() {
   if (typeof __unframerWindow2 === 'undefined' || !__unframerWindow2.document) return 0;
   return __unframerWindow2.scrollY / (__unframerWindow2.document.documentElement.scrollHeight - __unframerWindow2.innerHeight) * 100 || 0;
+}
+function isEmptyTrigger(trigger,) {
+  return trigger.conditions.length === 0 && !trigger.cookies?.rules.length && !trigger.urlParams?.rules.length && !trigger.pageCount &&
+    !trigger.includeRoutes?.length && !trigger.excludeRoutes?.length;
 }
 var TriggerStateContext = /* @__PURE__ */ (() => {
   const Context2 = createContext(void 0,);
@@ -46392,8 +46431,8 @@ function useLoadMorePagination(totalSize, pageSize, hash2, paginateWithSuspended
       continueAfter: 'paint',
     },);
     if (currentPageRef.current >= totalPages) return;
-    const renderNextPage = (startTransition18) => {
-      startTransition18(() => {
+    const renderNextPage = (startTransition20) => {
+      startTransition20(() => {
         setCurrentPage((_currentPage) => {
           const nextPage = Math.min(_currentPage + 1, totalPages,);
           currentPageRef.current = nextPage;
@@ -48133,6 +48172,530 @@ function withMappedReactProps(Component18, info,) {
     return /* @__PURE__ */ jsx(Component18, {
       ...props,
     },);
+  };
+}
+var shaderConfigBrand = '__framer_shaderConfig__';
+function isShaderConfig(obj,) {
+  return isObject2(obj,) && shaderConfigBrand in obj;
+}
+function defineShader(shaderConfig,) {
+  return {
+    ...shaderConfig,
+    [shaderConfigBrand]: true,
+  };
+}
+var webGLContextLostEvent = 'webglcontextlost';
+var WebGL2ShaderRenderer = class {
+  constructor(canvas, vertexSource, fragmentSource,) {
+    __publicField(this, 'gl',);
+    __publicField(this, 'program',);
+    __publicField(this, 'vao',);
+    __publicField(this, 'buffers', [],);
+    __publicField(this, 'builtInUniformLocations',);
+    __publicField(this, 'customUniformLocations',);
+    __publicField(this, 'textures', /* @__PURE__ */ new Map(),);
+    __publicField(this, 'canvas',);
+    __publicField(this, 'contextLostHandler',);
+    __publicField(this, 'disposed', false,);
+    this.canvas = canvas;
+    const gl = canvas.getContext('webgl2', {
+      alpha: true,
+      premultipliedAlpha: false,
+      antialias: true,
+    },);
+    if (!gl) {
+      throw new Error('WebGL2 not supported',);
+    }
+    this.gl = gl;
+    const vertexShader = this.compileShader(gl.VERTEX_SHADER, vertexSource,);
+    const fragmentShader = this.compileShader(gl.FRAGMENT_SHADER, fragmentSource,);
+    if (!vertexShader || !fragmentShader) {
+      this.cleanupShaders(vertexShader, fragmentShader,);
+      throw new Error('Shader compilation failed',);
+    }
+    const program = this.linkProgram(vertexShader, fragmentShader,);
+    if (!program) {
+      this.cleanupShaders(vertexShader, fragmentShader,);
+      throw new Error('Program linking failed',);
+    }
+    this.cleanupShaders(vertexShader, fragmentShader,);
+    this.program = program;
+    this.vao = this.createVertexArrayObject();
+    gl.bindVertexArray(this.vao,);
+    this.setupFullScreenQuad();
+    gl.useProgram(program,);
+    this.builtInUniformLocations = {
+      ['u_time'/* Time */
+      ]: gl.getUniformLocation(program, 'u_time',/* Time */
+      ),
+      ['u_resolution'/* Resolution */
+      ]: gl.getUniformLocation(program, 'u_resolution',/* Resolution */
+      ),
+      ['u_deltaTime'/* DeltaTime */
+      ]: gl.getUniformLocation(program, 'u_deltaTime',/* DeltaTime */
+      ),
+    };
+    this.customUniformLocations = /* @__PURE__ */ new Map();
+    gl.clearColor(0, 0, 0, 0,);
+    this.contextLostHandler = (event) => {
+      event.preventDefault();
+      this.dispose();
+    };
+    canvas.addEventListener(webGLContextLostEvent, this.contextLostHandler,);
+  }
+  /**
+   * Renders a frame with the given timing and optional custom uniforms.
+   */
+  render(elapsedTime, deltaTime, uniforms,) {
+    if (this.disposed) return;
+    const {
+      gl,
+    } = this;
+    gl.bindVertexArray(this.vao,);
+    this.updateBuiltInUniforms(elapsedTime, deltaTime,);
+    if (uniforms) {
+      let textureUnit = 0;
+      for (const uniformName in uniforms) {
+        const uniformValue = uniforms[uniformName];
+        if (!uniformValue) continue;
+        let location = this.customUniformLocations.get(uniformName,);
+        if (location === void 0) {
+          location = gl.getUniformLocation(this.program, uniformName,);
+          this.customUniformLocations.set(uniformName, location,);
+        }
+        if (uniformValue.type === 'sampler2D') {
+          this.bindTexture(uniformName, uniformValue.value, textureUnit,);
+          gl.uniform1i(location, textureUnit,);
+          textureUnit++;
+        } else {
+          this.setUniform(location, uniformValue,);
+        }
+      }
+    }
+    gl.clear(gl.COLOR_BUFFER_BIT,);
+    gl.drawArrays(gl.TRIANGLES, 0, 6,);
+  }
+  /**
+   * Syncs the canvas buffer and viewport to match display size, accounting for device pixel ratio.
+   */
+  resize() {
+    if (this.disposed) return;
+    const rect = this.canvas.getBoundingClientRect();
+    const dpr = __unframerWindow2.devicePixelRatio || 1;
+    const width = rect.width * dpr;
+    const height = rect.height * dpr;
+    this.canvas.width = width;
+    this.canvas.height = height;
+    this.gl.viewport(0, 0, width, height,);
+  }
+  /**
+   * Cleans up WebGL resources.
+   */
+  dispose() {
+    if (this.disposed) return;
+    this.disposed = true;
+    this.canvas.removeEventListener(webGLContextLostEvent, this.contextLostHandler,);
+    if (this.gl.isContextLost()) return;
+    const {
+      gl,
+    } = this;
+    for (const buffer of this.buffers) {
+      gl.deleteBuffer(buffer,);
+    }
+    for (const entry of this.textures.values()) {
+      gl.deleteTexture(entry.texture,);
+    }
+    gl.deleteVertexArray(this.vao,);
+    gl.deleteProgram(this.program,);
+  }
+  /**
+   * Compiles GLSL source code into a shader object the GPU can execute.
+   */
+  compileShader(type, source,) {
+    const {
+      gl,
+    } = this;
+    const shader = gl.createShader(type,);
+    if (!shader) return null;
+    gl.shaderSource(shader, source,);
+    gl.compileShader(shader,);
+    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS,)) {
+      gl.deleteShader(shader,);
+      return null;
+    }
+    return shader;
+  }
+  /**
+   * Marks shaders as objects to be garbage collected when not in use.
+   */
+  cleanupShaders(...shaders) {
+    const {
+      gl,
+    } = this;
+    for (const shader of shaders) {
+      if (!shader) continue;
+      gl.deleteShader(shader,);
+    }
+  }
+  /**
+   * Links compiled vertex and fragment shaders into a complete shader program.
+   */
+  linkProgram(vertexShader, fragmentShader,) {
+    const {
+      gl,
+    } = this;
+    const program = gl.createProgram();
+    if (!program) return null;
+    gl.attachShader(program, vertexShader,);
+    gl.attachShader(program, fragmentShader,);
+    gl.linkProgram(program,);
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS,)) {
+      gl.deleteProgram(program,);
+      return null;
+    }
+    return program;
+  }
+  /**
+   * Creates a new Vertex Array Object (VAO), which stores vertex attribute
+   * configuration so it can be restored with a single bindVertexArray call.
+   * We only have one geometry so the VAO stays bound, but it's the idiomatic
+   * WebGL2 approach and keeps attribute state explicitly managed.
+   */
+  createVertexArrayObject() {
+    const vao = this.gl.createVertexArray();
+    if (!vao) {
+      throw new Error('Failed to create vertex array object',);
+    }
+    return vao;
+  }
+  /**
+   * Sets up fullscreen quad geometry on the currently bound VAO.
+   * Two triangles spanning from (-1,-1) to (1,1) in clip space with UV coordinates.
+   */
+  setupFullScreenQuad() {
+    const {
+      gl,
+      program,
+    } = this;
+    const positions = new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1,],);
+    const texCoords = new Float32Array([0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1,],);
+    const positionBuffer = gl.createBuffer();
+    if (!positionBuffer) {
+      throw new Error('Failed to create position buffer',);
+    }
+    this.buffers.push(positionBuffer,);
+    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer,);
+    gl.bufferData(gl.ARRAY_BUFFER, positions, gl.STATIC_DRAW,);
+    const positionLocation = gl.getAttribLocation(program, 'a_position',);
+    gl.enableVertexAttribArray(positionLocation,);
+    gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0,);
+    const texCoordBuffer = gl.createBuffer();
+    if (!texCoordBuffer) {
+      throw new Error('Failed to create texCoord buffer',);
+    }
+    this.buffers.push(texCoordBuffer,);
+    gl.bindBuffer(gl.ARRAY_BUFFER, texCoordBuffer,);
+    gl.bufferData(gl.ARRAY_BUFFER, texCoords, gl.STATIC_DRAW,);
+    const texCoordLocation = gl.getAttribLocation(program, 'a_texCoord',);
+    gl.enableVertexAttribArray(texCoordLocation,);
+    gl.vertexAttribPointer(texCoordLocation, 2, gl.FLOAT, false, 0, 0,);
+  }
+  /**
+   * Sets a uniform value in the shader program.
+   */
+  setUniform(location, uniform,) {
+    if (location === null) return;
+    switch (uniform.type) {
+      case 'boolean':
+        this.gl.uniform1f(location, uniform.value ? 1 : 0,);
+        break;
+      case 'number':
+        this.gl.uniform1f(location, uniform.value,);
+        break;
+      case 'vec2':
+        this.gl.uniform2fv(location, uniform.value,);
+        break;
+      case 'vec3':
+        this.gl.uniform3fv(location, uniform.value,);
+        break;
+      case 'vec4':
+        this.gl.uniform4fv(location, uniform.value,);
+        break;
+    }
+  }
+  /**
+   * Creates or updates a texture from an ImageBitmap.
+   * Binds the texture to the specified texture unit.
+   */
+  bindTexture(uniformName, image, textureUnit,) {
+    const {
+      gl,
+      textures,
+    } = this;
+    let entry = textures.get(uniformName,);
+    const isNewTexture = !entry;
+    if (isNewTexture) {
+      const texture = gl.createTexture();
+      if (!texture) return;
+      entry = {
+        texture,
+        image: null,
+      };
+      textures.set(uniformName, entry,);
+    }
+    if (!entry) return;
+    gl.activeTexture(gl.TEXTURE0 + textureUnit,);
+    gl.bindTexture(gl.TEXTURE_2D, entry.texture,);
+    if (isNewTexture || entry.image !== image) {
+      entry.image = image;
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image,);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE,);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE,);
+      gl.generateMipmap(gl.TEXTURE_2D,);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR,);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR,);
+    }
+  }
+  /**
+   * Updates the built-in uniforms: u_time, u_resolution, u_deltaTime.
+   */
+  updateBuiltInUniforms(elapsedTime, deltaTime,) {
+    const {
+      gl,
+      builtInUniformLocations: locations,
+      canvas,
+    } = this;
+    if (
+      locations['u_time'/* Time */
+      ] !== null
+    ) {
+      gl.uniform1f(
+        locations['u_time'/* Time */
+        ],
+        elapsedTime,
+      );
+    }
+    if (
+      locations['u_resolution'/* Resolution */
+      ] !== null
+    ) {
+      gl.uniform2f(
+        locations['u_resolution'/* Resolution */
+        ],
+        canvas.width,
+        canvas.height,
+      );
+    }
+    if (
+      locations['u_deltaTime'/* DeltaTime */
+      ] !== null
+    ) {
+      gl.uniform1f(
+        locations['u_deltaTime'/* DeltaTime */
+        ],
+        deltaTime,
+      );
+    }
+  }
+};
+var DEFAULT_VERTEX_SHADER = `#version 300 es
+precision highp float;
+
+in vec2 a_position;
+in vec2 a_texCoord;
+
+out vec2 v_uv;
+
+void main() {
+    v_uv = a_texCoord;
+    gl_Position = vec4(a_position, 0.0, 1.0);
+}
+`;
+var DEFAULT_FRAGMENT_SHADER = `#version 300 es
+precision highp float;
+
+in vec2 v_uv;
+out vec4 fragColor;
+
+void main() {
+    fragColor = vec4(0.0);
+}
+`;
+var canvasStyle = {
+  display: 'block',
+  width: '100%',
+  height: '100%',
+};
+var timeMultiplier = 1e-3;
+function Shader({
+  style: style2,
+  width,
+  height,
+  vertexShader = DEFAULT_VERTEX_SHADER,
+  fragmentShader = DEFAULT_FRAGMENT_SHADER,
+  animated = true,
+  uniforms,
+  ...rest
+},) {
+  const canvasRef = useRef(null,);
+  const rendererRef = useRef(null,);
+  const animationFrameRef = useRef(0,);
+  const startTimeRef = useRef(0,);
+  const lastTimeRef = useRef(0,);
+  const resolvedUniforms = useResolvedUniforms(uniforms,);
+  const resolvedUniformsRef = useRef(resolvedUniforms,);
+  useLayoutEffect(() => {
+    resolvedUniformsRef.current = resolvedUniforms;
+  }, [resolvedUniforms,],);
+  const animate3 = useCallback2((time2) => {
+    const renderer = rendererRef.current;
+    if (!renderer) return;
+    const {
+      currentTime,
+      elapsedTime,
+      deltaTime,
+    } = getShaderTiming(time2, startTimeRef.current, lastTimeRef.current,);
+    lastTimeRef.current = currentTime;
+    renderer.render(elapsedTime, deltaTime, resolvedUniformsRef.current,);
+    if (animated) {
+      animationFrameRef.current = requestAnimationFrame(animate3,);
+    }
+  }, [animated,],);
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    try {
+      const renderer = new WebGL2ShaderRenderer(canvas, vertexShader, fragmentShader,);
+      rendererRef.current = renderer;
+      rendererRef.current.resize();
+      startTimeRef.current = performance.now() * timeMultiplier;
+      lastTimeRef.current = startTimeRef.current;
+      animationFrameRef.current = requestAnimationFrame(animate3,);
+    } catch {}
+    return () => {
+      cancelAnimationFrame(animationFrameRef.current,);
+      rendererRef.current?.dispose();
+      rendererRef.current = null;
+    };
+  }, [vertexShader, fragmentShader, animate3,],);
+  const handleResize = useCallback2(() => {
+    const renderer = rendererRef.current;
+    if (!renderer) return;
+    renderer.resize();
+    if (!animated) {
+      const {
+        currentTime,
+        elapsedTime,
+        deltaTime,
+      } = getShaderTiming(performance.now(), startTimeRef.current, lastTimeRef.current,);
+      lastTimeRef.current = currentTime;
+      renderer.render(elapsedTime, deltaTime, resolvedUniformsRef.current,);
+    }
+  }, [animated,],);
+  useCanvasResize(canvasRef, handleResize,);
+  return /* @__PURE__ */ jsx(FrameWithMotion2, {
+    __fromCanvasComponent: true,
+    style: {
+      ...style2,
+      overflow: 'hidden',
+    },
+    width,
+    height,
+    ...rest,
+    children: /* @__PURE__ */ jsx('canvas', {
+      ref: canvasRef,
+      style: canvasStyle,
+    },),
+  },);
+}
+function isTextureUniform(uniform,) {
+  return uniform.type === 'texture';
+}
+async function getResolvedUniforms(uniforms,) {
+  const results = await Promise.all(
+    Object.entries(uniforms,).map(async ([name, uniform,],) => {
+      if (isTextureUniform(uniform,)) {
+        const response = await fetch(uniform.value,);
+        if (!response.ok) throw new Error('Failed to load texture',);
+        const blob = await response.blob();
+        const image = await createImageBitmap(blob,);
+        return Promise.resolve([name, {
+          type: 'sampler2D',
+          value: image,
+        },],);
+      }
+      return Promise.resolve([name, uniform,],);
+    },),
+  );
+  return Object.fromEntries(results,);
+}
+function useResolvedUniforms(uniforms,) {
+  const [resolvedUniforms, setResolvedUniforms,] = useState({},);
+  useEffect(() => {
+    if (!uniforms) return;
+    const hasAnyTextures = Object.values(uniforms,).some(isTextureUniform,);
+    if (!hasAnyTextures) {
+      startTransition2(() => {
+        setResolvedUniforms(uniforms,);
+      },);
+      return;
+    }
+    let isCancelled = false;
+    async function load() {
+      if (!uniforms) return;
+      try {
+        const resolved = await getResolvedUniforms(uniforms,);
+        if (!isCancelled) {
+          startTransition2(() => {
+            setResolvedUniforms(resolved,);
+          },);
+        }
+      } catch {}
+    }
+    void load();
+    return () => {
+      isCancelled = true;
+    };
+  }, [uniforms,],);
+  return resolvedUniforms;
+}
+function useCanvasResize(canvasRef, resizeHandler,) {
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const debouncedResize = debounce(resizeHandler, 100,);
+    const resizeObserver = new ResizeObserver(debouncedResize,);
+    resizeObserver.observe(canvas,);
+    return () => {
+      resizeObserver.disconnect();
+      debouncedResize.cancel();
+    };
+  }, [canvasRef, resizeHandler,],);
+  useOnDprChange(resizeHandler,);
+}
+function useOnDprChange(callback,) {
+  useEffect(() => {
+    let dprQuery = matchMedia(`(resolution: ${__unframerWindow2.devicePixelRatio}dppx)`,);
+    const handleChange = () => {
+      callback();
+      dprQuery.removeEventListener('change', handleChange,);
+      dprQuery = matchMedia(`(resolution: ${__unframerWindow2.devicePixelRatio}dppx)`,);
+      dprQuery.addEventListener('change', handleChange,);
+    };
+    dprQuery.addEventListener('change', handleChange,);
+    return () => {
+      dprQuery.removeEventListener('change', handleChange,);
+    };
+  }, [callback,],);
+}
+function getShaderTiming(timeMs, startTime, lastTime,) {
+  const currentTime = timeMs * timeMultiplier;
+  const elapsedTime = currentTime - startTime;
+  const deltaTime = lastTime === startTime ? 1 / 60 : currentTime - lastTime;
+  return {
+    currentTime,
+    elapsedTime,
+    deltaTime,
   };
 }
 var keys2 = /* @__PURE__ */ new Set([
@@ -50733,10 +51296,12 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
     onInvalid,
     onFocus,
     onValid,
+    onClear,
     ...rest
   } = props;
   const [hasValue, setHasValue,] = useState(!!defaultValue,);
   const [prevDefaultValue, setPrevDefaultValue,] = useState();
+  const inputRef = useRef(null,);
   const isCanvas = useIsOnFramerCanvas();
   if (defaultValue !== prevDefaultValue) {
     setHasValue(!!defaultValue,);
@@ -50750,6 +51315,13 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
     onChange?.(e,);
     startTransition2(() => setHasValue(!!newValue,));
   }, [onChange,],);
+  const handleClear = useCallback2(() => {
+    if (inputRef.current) {
+      inputRef.current.value = '';
+    }
+    onClear?.();
+    startTransition2(() => setHasValue(false,));
+  }, [onClear,],);
   const eventHandlers = useCustomValidity(onValid, onInvalid, handleChange, onBlur, onFocus,);
   if (type === 'hidden') {
     return /* @__PURE__ */ jsx(motion.input, {
@@ -50759,42 +51331,72 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
     },);
   }
   const dataProps = autofillEnabled === false ? passwordManagerIgnoreDataProps : void 0;
-  return /* @__PURE__ */ jsx(motion.div, {
+  const showClear = !!onClear && hasValue;
+  return /* @__PURE__ */ jsxs(motion.div, {
     ref,
     style: style2,
-    className: cx(textInputWrapperClassName, inputWrapperClassName, className2,),
+    className: cx(textInputWrapperClassName, inputWrapperClassName, className2, onClear && hasClearButtonClassName,),
     ...rest,
-    children: type === 'textarea'
-      ? /* @__PURE__ */ jsx(motion.textarea, {
-        ...dataProps,
-        ...eventHandlers,
-        required,
-        autoFocus,
-        name: inputName,
-        placeholder,
-        className: inputClassName,
-        defaultValue,
-        maxLength,
-      }, isCanvas ? defaultValue : void 0,)
-      : /* @__PURE__ */ jsx(motion.input, {
-        ...dataProps,
-        ...eventHandlers,
-        type,
-        required,
-        autoFocus,
-        name: inputName,
-        placeholder,
-        className: cx(inputClassName, !hasValue && emptyValueClassName,),
-        defaultValue,
-        min,
-        max,
-        step: step2,
-        maxLength,
-      }, isCanvas ? defaultValue : void 0,),
+    children: [
+      type === 'textarea'
+        ? /* @__PURE__ */ jsx(motion.textarea, {
+          ref: inputRef,
+          ...dataProps,
+          ...eventHandlers,
+          required,
+          autoFocus,
+          name: inputName,
+          placeholder,
+          className: inputClassName,
+          defaultValue,
+          maxLength,
+        }, isCanvas ? defaultValue : void 0,)
+        : /* @__PURE__ */ jsx(motion.input, {
+          ref: inputRef,
+          ...dataProps,
+          ...eventHandlers,
+          type,
+          required,
+          autoFocus,
+          name: inputName,
+          placeholder,
+          className: cx(inputClassName, !hasValue && emptyValueClassName,),
+          defaultValue,
+          min,
+          max,
+          step: step2,
+          maxLength,
+        }, isCanvas ? defaultValue : void 0,),
+      showClear && /* @__PURE__ */ jsx('button', {
+        type: 'button',
+        className: clearButtonClassName,
+        onClick: handleClear,
+        'aria-label': 'Clear',
+        children: /* @__PURE__ */ jsx(ClearIcon, {},),
+      },),
+    ],
   },);
 },);
+function ClearIcon() {
+  return /* @__PURE__ */ jsx('svg', {
+    xmlns: 'http://www.w3.org/2000/svg',
+    width: '8',
+    height: '8',
+    viewBox: '0 0 8 8',
+    'aria-hidden': 'true',
+    children: /* @__PURE__ */ jsx('path', {
+      d: 'm1.5 6.5 5-5M6.5 6.5l-5-5',
+      fill: 'none',
+      stroke: 'currentColor',
+      strokeWidth: '1.5',
+      strokeLinecap: 'round',
+    },),
+  },);
+}
 var iconSize2 = 16;
 var textInputWrapperClassName = 'framer-form-text-input';
+var clearButtonClassName = 'framer-form-text-input-clear';
+var hasClearButtonClassName = 'framer-form-text-input-has-clear-button';
 var defaultTextareaResizerIcon =
   `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"><path d="m1.5 8 7-7M9 5.5l-3 3" stroke="%23999" stroke-width="1.5" stroke-linecap="round"></path></svg>`;
 var defaultTextareaResizerIconFlipped =
@@ -50928,6 +51530,33 @@ var styles = /* @__PURE__ */ (() => [
     borderStyle: css2.variable('--framer-input-focused-border-style', '--framer-input-border-style',/* BorderStyle */
     ),
     borderWidth: css2.variable('--framer-input-focused-border-width', inputBorderAllSides,),
+  },),
+  css2(`.${clearButtonClassName}`, {
+    position: 'absolute',
+    right: 0,
+    top: 0,
+    bottom: 0,
+    width: `${iconSize2}px`,
+    boxSizing: 'content-box',
+    padding: css2.variable('--framer-input-padding',/* Padding */
+    ),
+    border: 'none',
+    background: 'transparent',
+    cursor: 'pointer',
+    color: css2.variable('--framer-input-placeholder-color',/* PlaceholderColor */
+    ),
+    transition: 'color 0.15s ease',
+    outline: 'none',
+  },),
+  css2(`.${clearButtonClassName}:hover, .${clearButtonClassName}:focus-visible`, {
+    color: css2.variable('--framer-input-font-color',/* FontColor */
+    ),
+  },),
+  css2(`.${textInputWrapperClassName}.${hasClearButtonClassName} .${inputClassName}`, {
+    paddingRight: `calc(${
+      css2.variable('--framer-input-padding',/* Padding */
+      )
+    } + ${iconSize2}px + ${iconSpacing}px)`,
   },),
 ])();
 var FormPlainTextInput2 = /* @__PURE__ */ withCSS(PlainTextInput, styles, 'framer-lib-form-plain-text-input',);
@@ -55737,6 +56366,7 @@ export {
   defaultOffset,
   defaultTransformValue,
   defaultValueTypes,
+  defineShader,
   degrees,
   degreesToRadians,
   delay,
@@ -55802,6 +56432,7 @@ export {
   framerAppearIdKey,
   framerAppearTransformTemplateToken,
   framerCSSMarker,
+  FramerEnvironmentProvider,
   FramerEvent,
   FramerEventListener,
   FramerEventSession,
@@ -55899,6 +56530,7 @@ export {
   isOfAnnotatedType,
   isPrimaryPointer,
   isRelativeNumber,
+  isShaderConfig,
   isShallowEqualArray,
   isStaticRenderer,
   isStraightCurve,
@@ -56075,6 +56707,7 @@ export {
   setGlobalRenderEnvironment,
   setStyle,
   setTarget,
+  Shader,
   Shadow,
   sharedSVGManager,
   shouldOpenLinkInNewTab,
