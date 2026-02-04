@@ -12021,13 +12021,14 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.GSLWJ5W6.mjs
+// /:https://app.framerstatic.com/framer.7RTHBDVO.mjs
 
 import React42 from 'react';
-import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
+import { startTransition as startTransition2, } from 'react';
 import { Suspense as Suspense2, } from 'react';
 import { memo as memo2, } from 'react';
 import ReactDOM from 'react-dom';
+import { useSyncExternalStore, } from 'react';
 import { createRef, } from 'react';
 import { useTransition, } from 'react';
 import { createPortal, } from 'react-dom';
@@ -15608,22 +15609,22 @@ function sendCustomTrackingEvent(eventData, nodeId, trackingId,) {
     trackingId: trackingId || null,
   }, 'eager',);
 }
-var FramerEnvironmentContext = /* @__PURE__ */ (() => {
+var RenderTargetEnvironmentContext = /* @__PURE__ */ (() => {
   const Context2 = createContext('preview',);
-  Context2.displayName = 'FramerEnvironmentContext';
+  Context2.displayName = 'RenderTargetEnvironmentContext';
   return Context2;
 })();
-function FramerEnvironmentProvider({
+function RenderTargetEnvironmentProvider({
   children,
   value,
 },) {
-  return /* @__PURE__ */ jsx(FramerEnvironmentContext.Provider, {
+  return /* @__PURE__ */ jsx(RenderTargetEnvironmentContext.Provider, {
     value,
     children,
   },);
 }
-function useFramerEnvironment() {
-  return useContext(FramerEnvironmentContext,);
+function useRenderTargetEnvironment() {
+  return useContext(RenderTargetEnvironmentContext,);
 }
 function useMemoOne(factory, inputs,) {
   const initial = useState(() => ({
@@ -15785,49 +15786,49 @@ var URLSearchParamsContext = /* @__PURE__ */ (() => {
 function URLSearchParamsProvider({
   children,
 },) {
-  const onStoreChangeRef = useRef(null,);
-  const isPreview = useFramerEnvironment() === 'preview';
-  const [previewSearchString, setPreviewSearchString,] = useState('',);
-  const urlSearchString = useSyncExternalStore(
-    (onStoreChange) => {
-      onStoreChangeRef.current = onStoreChange;
-      const handler = () => {
-        onStoreChange();
-      };
-      __unframerWindow2.addEventListener('popstate', handler,);
-      return () => {
-        onStoreChangeRef.current = null;
-        __unframerWindow2.removeEventListener('popstate', handler,);
-      };
-    },
-    () => __unframerWindow2.location.search,
-    () => '',
-  );
-  const searchString = isPreview ? previewSearchString : urlSearchString;
-  const deferredSearchString = useDeferredValue(searchString,);
-  const replaceSearchParams = useCallback2(async (replacer) => {
-    if (isPreview) {
+  const [urlSearchString, setUrlSearchString,] = useState('',);
+  const renderTargetEnvironment = useRenderTargetEnvironment();
+  useEffect(() => {
+    if (renderTargetEnvironment === 'preview') return;
+    startTransition2(() => {
+      setUrlSearchString(__unframerWindow2.location.search,);
+    },);
+    const handlePopState = () => {
       startTransition2(() => {
-        setPreviewSearchString((currentSearchString) => {
+        setUrlSearchString(__unframerWindow2.location.search,);
+      },);
+    };
+    __unframerWindow2.addEventListener('popstate', handlePopState,);
+    return () => {
+      __unframerWindow2.removeEventListener('popstate', handlePopState,);
+    };
+  }, [],);
+  const replaceSearchParams = useCallback2(async (replacer) => {
+    if (renderTargetEnvironment === 'preview') {
+      startTransition2(() => {
+        setUrlSearchString((currentSearchString) => {
           const currentParams = new URLSearchParams(currentSearchString,);
           return replacer(currentParams,).toString();
         },);
       },);
       return;
     }
-    const currentHistoryState = __unframerWindow2.history.state;
-    const url = new URL(__unframerWindow2.location.href,);
-    url.search = replacer(url.searchParams,).toString();
     await yieldToMain({
       continueAfter: 'paint',
     },);
+    const currentHistoryState = __unframerWindow2.history.state;
+    const url = new URL(__unframerWindow2.location.href,);
+    const newSearchString = replacer(url.searchParams,).toString();
+    url.search = newSearchString;
     replaceHistoryState(currentHistoryState, url.toString(),);
-    onStoreChangeRef.current?.();
-  }, [isPreview,],);
+    startTransition2(() => {
+      setUrlSearchString(newSearchString,);
+    },);
+  }, [],);
   const value = useMemoOne(() => ({
-    urlSearchParams: new URLSearchParams(deferredSearchString,),
+    urlSearchParams: new URLSearchParams(urlSearchString,),
     replaceSearchParams,
-  }), [deferredSearchString, replaceSearchParams,],);
+  }), [urlSearchString, replaceSearchParams,],);
   return /* @__PURE__ */ jsx(URLSearchParamsContext.Provider, {
     value,
     children,
@@ -40467,63 +40468,68 @@ function usePrefetch() {
   return React.useCallback((request) => fetchClient.prefetch(request,), [fetchClient,],);
 }
 MotionGlobalConfig.WillChange = WillChangeMotionValue;
-function PageRoot({
-  RootComponent,
-  isWebsite,
-  routeId,
-  framerSiteId,
-  pathVariables,
-  routes,
-  collectionUtils,
-  notFoundPage,
-  isReducedMotion = false,
-  includeDataObserver = false,
-  localeId,
-  locales,
-  preserveQueryParams,
-  EditorBar,
-  defaultPageStyle,
-  disableHistory,
-  LayoutTemplate,
-  siteCanonicalURL,
-  adaptLayoutToTextDirection,
-  loadSnippetsModule,
-  initialCollectionItemId,
-},) {
+function PageRoot(props,) {
+  const {
+    RootComponent,
+    isWebsite,
+    environment: environment2,
+    routeId,
+    framerSiteId,
+    pathVariables,
+    routes,
+    collectionUtils,
+    notFoundPage,
+    isReducedMotion = false,
+    includeDataObserver = false,
+    localeId,
+    locales,
+    preserveQueryParams,
+    EditorBar,
+    defaultPageStyle,
+    disableHistory,
+    LayoutTemplate,
+    siteCanonicalURL,
+    adaptLayoutToTextDirection,
+    loadSnippetsModule,
+    initialCollectionItemId,
+  } = props;
   React42.useEffect(() => {
     if (isWebsite) return;
     MainLoop.start();
   }, [],);
   if (isWebsite) {
-    return /* @__PURE__ */ jsx(MotionConfig, {
-      reducedMotion: isReducedMotion ? 'user' : 'never',
-      children: /* @__PURE__ */ jsx(CollectionUtilsCacheProvider, {
-        collectionUtils,
-        children: /* @__PURE__ */ jsx(FetchClientProvider, {
-          children: /* @__PURE__ */ jsx(CustomCursorHost, {
-            children: /* @__PURE__ */ jsx(FormContext.Provider, {
-              value: framerSiteId,
-              children: /* @__PURE__ */ jsx(SnippetsProvider, {
-                loadSnippetsModule,
-                children: /* @__PURE__ */ jsx(Router, {
-                  initialRoute: routeId,
-                  initialPathVariables: pathVariables,
-                  initialLocaleId: localeId,
-                  initialCollectionItemId,
-                  routes,
-                  collectionUtils,
-                  notFoundPage,
-                  locales,
-                  defaultPageStyle: defaultPageStyle ?? {
-                    minHeight: '100vh',
-                    width: 'auto',
-                  },
-                  preserveQueryParams,
-                  EditorBar,
-                  disableHistory,
-                  LayoutTemplate,
-                  siteCanonicalURL,
-                  adaptLayoutToTextDirection,
+    return /* @__PURE__ */ jsx(RenderTargetEnvironmentProvider, {
+      value: environment2 ?? 'preview',
+      children: /* @__PURE__ */ jsx(MotionConfig, {
+        reducedMotion: isReducedMotion ? 'user' : 'never',
+        children: /* @__PURE__ */ jsx(CollectionUtilsCacheProvider, {
+          collectionUtils,
+          children: /* @__PURE__ */ jsx(FetchClientProvider, {
+            children: /* @__PURE__ */ jsx(CustomCursorHost, {
+              children: /* @__PURE__ */ jsx(FormContext.Provider, {
+                value: framerSiteId,
+                children: /* @__PURE__ */ jsx(SnippetsProvider, {
+                  loadSnippetsModule,
+                  children: /* @__PURE__ */ jsx(Router, {
+                    initialRoute: routeId,
+                    initialPathVariables: pathVariables,
+                    initialLocaleId: localeId,
+                    initialCollectionItemId,
+                    routes,
+                    collectionUtils,
+                    notFoundPage,
+                    locales,
+                    defaultPageStyle: defaultPageStyle ?? {
+                      minHeight: '100vh',
+                      width: 'auto',
+                    },
+                    preserveQueryParams,
+                    EditorBar,
+                    disableHistory,
+                    LayoutTemplate,
+                    siteCanonicalURL,
+                    adaptLayoutToTextDirection,
+                  },),
                 },),
               },),
             },),
@@ -48527,7 +48533,7 @@ var canvasStyle = {
   height: '100%',
 };
 var timeMultiplier = 1e-3;
-function Shader({
+var Shader = /* @__PURE__ */ forwardRef(function Shader2({
   style: style2,
   width,
   height,
@@ -48536,7 +48542,7 @@ function Shader({
   animated = true,
   uniforms,
   ...rest
-},) {
+}, ref,) {
   const canvasRef = useRef(null,);
   const rendererRef = useRef(null,);
   const animationFrameRef = useRef(0,);
@@ -48594,6 +48600,7 @@ function Shader({
   }, [animated,],);
   useCanvasResize(canvasRef, handleResize,);
   return /* @__PURE__ */ jsx(FrameWithMotion2, {
+    ref,
     __fromCanvasComponent: true,
     style: {
       ...style2,
@@ -48607,7 +48614,7 @@ function Shader({
       style: canvasStyle,
     },),
   },);
-}
+},);
 function isTextureUniform(uniform,) {
   return uniform.type === 'texture';
 }
@@ -51285,7 +51292,8 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
     style: style2,
     type,
     maxLength,
-    // We use a defaultValue instead of a value so that the input remains
+    value,
+    // We allow a defaultValue instead of a value so that the input remains
     // uncontrolled by React. This is important because we want the user
     // to be able to provide an initial value in the property panel, and for
     // the value to be editable by the user in the preview.
@@ -51299,29 +51307,29 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
     onClear,
     ...rest
   } = props;
-  const [hasValue, setHasValue,] = useState(!!defaultValue,);
+  const isControlled = value !== void 0 && defaultValue === void 0 && onChange !== void 0;
+  const [uncontrolledHasValue, setUncontrolledHasValue,] = useState(!!defaultValue,);
   const [prevDefaultValue, setPrevDefaultValue,] = useState();
   const inputRef = useRef(null,);
   const isCanvas = useIsOnFramerCanvas();
-  if (defaultValue !== prevDefaultValue) {
-    setHasValue(!!defaultValue,);
+  if (!isControlled && defaultValue !== prevDefaultValue) {
+    setUncontrolledHasValue(!!defaultValue,);
     setPrevDefaultValue(defaultValue,);
   }
   const handleChange = useCallback2(async (e) => {
-    await yieldToMain({
-      continueAfter: 'paint',
-    },);
+    if (!isControlled) {
+      await yieldToMain({
+        continueAfter: 'paint',
+      },);
+    }
     const newValue = e.target.value;
     onChange?.(e,);
-    startTransition2(() => setHasValue(!!newValue,));
-  }, [onChange,],);
+    startTransition2(() => setUncontrolledHasValue(!!newValue,));
+  }, [isControlled, onChange,],);
   const handleClear = useCallback2(() => {
-    if (inputRef.current) {
-      inputRef.current.value = '';
-    }
+    if (!isControlled) return;
     onClear?.();
-    startTransition2(() => setHasValue(false,));
-  }, [onClear,],);
+  }, [isControlled, onClear,],);
   const eventHandlers = useCustomValidity(onValid, onInvalid, handleChange, onBlur, onFocus,);
   if (type === 'hidden') {
     return /* @__PURE__ */ jsx(motion.input, {
@@ -51331,7 +51339,17 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
     },);
   }
   const dataProps = autofillEnabled === false ? passwordManagerIgnoreDataProps : void 0;
+  const hasValue = isControlled ? !!value : uncontrolledHasValue;
   const showClear = !!onClear && hasValue;
+  const valueProps = isControlled
+    ? {
+      value,
+    }
+    : {
+      defaultValue,
+      // Trick the input to update when the default value updates on the canvas.
+      key: isCanvas ? defaultValue : void 0,
+    };
   return /* @__PURE__ */ jsxs(motion.div, {
     ref,
     style: style2,
@@ -51348,9 +51366,9 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
           name: inputName,
           placeholder,
           className: inputClassName,
-          defaultValue,
+          ...valueProps,
           maxLength,
-        }, isCanvas ? defaultValue : void 0,)
+        },)
         : /* @__PURE__ */ jsx(motion.input, {
           ref: inputRef,
           ...dataProps,
@@ -51361,12 +51379,12 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
           name: inputName,
           placeholder,
           className: cx(inputClassName, !hasValue && emptyValueClassName,),
-          defaultValue,
+          ...valueProps,
           min,
           max,
           step: step2,
           maxLength,
-        }, isCanvas ? defaultValue : void 0,),
+        },),
       showClear && /* @__PURE__ */ jsx('button', {
         type: 'button',
         className: clearButtonClassName,
@@ -56432,7 +56450,6 @@ export {
   framerAppearIdKey,
   framerAppearTransformTemplateToken,
   framerCSSMarker,
-  FramerEnvironmentProvider,
   FramerEvent,
   FramerEventListener,
   FramerEventSession,
