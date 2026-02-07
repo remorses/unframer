@@ -12021,7 +12021,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.7RTHBDVO.mjs
+// /:https://app.framerstatic.com/framer.5XNLI4OV.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -22761,6 +22761,9 @@ var defaultTextFillStyle = {
 var defaultImageStyle = {
   display: 'block',
 };
+function selectComponentChild(parentSelector, childSelector,) {
+  return `${parentSelector} > ${childSelector}, ${parentSelector} > .ssr-variant > ${childSelector}`;
+}
 var richTextCSSRules = /* @__PURE__ */ (() => [
   /**
    * RichTextContainer styles can get overridden by other static or inline styles collected in
@@ -23474,17 +23477,19 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             min-width: 16ch;
             vertical-align: top;
         }
-    `, /* css */
+    `,
+  // Modules can have highly specific three-class selectors in case of PropertyOverrides, so dimension styles will only work with !important
+  /* css */
   `
-        .framer-text-module[data-width="fill"] > :first-child,
-        .framer-text-module:not([data-width="fit"])[style*="aspect-ratio"] > :first-child {
-            width: 100%;
+        ${selectComponentChild('.framer-text-module[data-width="fill"]', ':first-child',)},
+        ${selectComponentChild('.framer-text-module:not([data-width="fit"])[style*="aspect-ratio"]', ':first-child',)} {
+            width: 100% !important;
         }
     `, /* css */
   `
         @supports not (aspect-ratio: 1) {
             .framer-text-module:not([data-width="fit"])[style*="aspect-ratio"] {
-                position: relative;
+                position: relative !important;
             }
         }
     `, /* css */
@@ -23499,12 +23504,12 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
     `, /* css */
   `
         @supports not (aspect-ratio: 1) {
-            .framer-text-module[data-width="fill"] > :first-child,
-            .framer-text-module:not([data-width="fit"])[style*="aspect-ratio"] > :first-child {
+            ${selectComponentChild('.framer-text-module[data-width="fill"]', ':first-child',)},
+            ${selectComponentChild('.framer-text-module:not([data-width="fit"])[style*="aspect-ratio"]', ':first-child',)} {
                 position: absolute;
                 top: 0;
                 left: 0;
-                height: 100%;
+                height: 100% !important;
             }
         }
     `,
@@ -37370,6 +37375,35 @@ var Instance = /* @__PURE__ */ React42.forwardRef(function Instance2({
     },)
     : null;
 },);
+function AutoBreakpointVariant({
+  component,
+  props,
+},) {
+  const generatedComponentContext = useContext(GeneratedComponentContext,);
+  const element = createElement(component, props,);
+  if ('variant' in props && props.variant != null) {
+    return element;
+  }
+  if (!generatedComponentContext) return element;
+  const {
+    activeVariantId,
+    humanReadableVariantMap,
+  } = generatedComponentContext;
+  if (!activeVariantId || !humanReadableVariantMap) {
+    return element;
+  }
+  const overrides = {};
+  for (const [name, id3,] of Object.entries(humanReadableVariantMap,)) {
+    overrides[id3] = {
+      variant: name,
+    };
+  }
+  return /* @__PURE__ */ jsx(PropertyOverrides2, {
+    overrides,
+    breakpoint: activeVariantId,
+    children: element,
+  },);
+}
 var GracefullyDegradingErrorBoundary = class extends Component2 {
   constructor() {
     super(...arguments,);
@@ -42975,310 +43009,6 @@ var RelationalIntersection = class _RelationalIntersection extends RelationalNod
     return left.intersection(right,);
   }
 };
-var ScalarEquals = class _ScalarEquals extends ScalarNode {
-  constructor(left, right,) {
-    const referencedFields = new Fields();
-    referencedFields.merge(left.referencedFields,);
-    referencedFields.merge(right.referencedFields,);
-    const referencedOuterFields = new Fields();
-    referencedOuterFields.merge(left.referencedOuterFields,);
-    referencedOuterFields.merge(right.referencedOuterFields,);
-    const isSynchronous = left.isSynchronous && right.isSynchronous;
-    super(referencedFields, referencedOuterFields, isSynchronous,);
-    this.left = left;
-    this.right = right;
-    __publicField(this, 'definition', {
-      type: 'boolean',
-      isNullable: false,
-    },);
-  }
-  getHash() {
-    return calculateHash('ScalarEquals', this.left, this.right,);
-  }
-  optimize(optimizer,) {
-    const leftCost = this.left.optimize(optimizer,);
-    const rightCost = this.right.optimize(optimizer,);
-    return Cost.max(leftCost, rightCost,);
-  }
-  getOptimized() {
-    const left = this.left.getOptimized();
-    const right = this.right.getOptimized();
-    return new _ScalarEquals(left, right,);
-  }
-  *evaluate(context, tuple,) {
-    const {
-      left,
-      right,
-    } = yield* evaluateObject({
-      left: this.left.evaluate(context, tuple,),
-      right: this.right.evaluate(context, tuple,),
-    },);
-    return {
-      type: 'boolean',
-      value: DatabaseValue.equal(left, right, collation,),
-    };
-  }
-};
-var RelationalLeftJoin = class _RelationalLeftJoin extends RelationalNode {
-  constructor(left, right, constraint,) {
-    super(left.isSynchronous && right.isSynchronous && constraint.isSynchronous,);
-    this.left = left;
-    this.right = right;
-    this.constraint = constraint;
-    __publicField(this, 'leftGroup',);
-    __publicField(this, 'rightGroup',);
-    this.leftGroup = left.getGroup();
-    this.rightGroup = right.getGroup();
-  }
-  getHash() {
-    return calculateHash('RelationalLeftJoin', this.leftGroup.id, this.rightGroup.id, this.constraint,);
-  }
-  getOutputFields() {
-    const outputFields = new Fields();
-    outputFields.merge(this.leftGroup.relational.outputFields,);
-    outputFields.merge(this.rightGroup.relational.outputFields,);
-    return outputFields;
-  }
-  canProvideOrdering() {
-    return false;
-  }
-  canProvideResolvedFields() {
-    return true;
-  }
-  getChildRequiredProps(group, required,) {
-    const resolvedFields = new Fields();
-    const outputFields = group.relational.outputFields;
-    for (const field of required.resolvedFields) {
-      if (outputFields.has(field,)) {
-        resolvedFields.add(field,);
-      }
-    }
-    for (const field of this.constraint.referencedFields) {
-      if (outputFields.has(field,)) {
-        resolvedFields.add(field,);
-      }
-    }
-    const ordering = new Ordering();
-    return new RequiredProps(ordering, resolvedFields,);
-  }
-  optimize(optimizer, required,) {
-    const leftRequired = this.getChildRequiredProps(this.leftGroup, required,);
-    const leftCost = optimizer.optimizeGroup(this.leftGroup, leftRequired,);
-    const rightRequired = this.getChildRequiredProps(this.rightGroup, required,);
-    const rightCost = optimizer.optimizeGroup(this.rightGroup, rightRequired,);
-    const constraintCost = this.constraint.optimize(optimizer,);
-    return Cost.max(Cost.max(leftCost, rightCost,), constraintCost,);
-  }
-  getOptimized(required,) {
-    const leftRequired = this.getChildRequiredProps(this.leftGroup, required,);
-    const left = this.leftGroup.getOptimized(leftRequired,);
-    const rightRequired = this.getChildRequiredProps(this.rightGroup, required,);
-    const right = this.rightGroup.getOptimized(rightRequired,);
-    const constraint = this.constraint.getOptimized();
-    return new _RelationalLeftJoin(left, right, constraint,);
-  }
-  /** Optimized path for equality constraints that runs in O(n + m) time. */
-  *evaluateScalarEquals(left, right, leftConstraint, rightConstraint, context,) {
-    const joinKeyMap = /* @__PURE__ */ new Map();
-    for (const rightTuple of right.tuples) {
-      const rightValue = yield* rightConstraint.evaluate(context, rightTuple,);
-      const key7 = JSON.stringify(rightValue?.value ?? null,);
-      const tuplesForKey = joinKeyMap.get(key7,) ?? [];
-      tuplesForKey.push(rightTuple,);
-      joinKeyMap.set(key7, tuplesForKey,);
-    }
-    const outputFields = this.getOutputFields();
-    const result = new Relation(outputFields,);
-    for (const leftTuple of left.tuples) {
-      const leftValue = yield* leftConstraint.evaluate(context, leftTuple,);
-      const key7 = JSON.stringify(leftValue?.value ?? null,);
-      const matches = joinKeyMap.get(key7,) ?? [];
-      if (matches.length === 0) {
-        result.push(leftTuple,);
-      } else {
-        for (const rightTuple of matches) {
-          const joinedTuple = new Tuple();
-          joinedTuple.merge(leftTuple,);
-          joinedTuple.merge(rightTuple,);
-          result.push(joinedTuple,);
-        }
-      }
-    }
-    return result;
-  }
-  *evaluate(context,) {
-    const {
-      left,
-      right,
-    } = yield* evaluateObject({
-      left: this.left.evaluate(context,),
-      right: this.right.evaluate(context,),
-    },);
-    if (this.constraint instanceof ScalarEquals) {
-      if (
-        this.constraint.left.referencedFields.subsetOf(this.leftGroup.relational.outputFields,) &&
-        this.constraint.right.referencedFields.subsetOf(this.rightGroup.relational.outputFields,)
-      ) {
-        return yield* this.evaluateScalarEquals(left, right, this.constraint.left, this.constraint.right, context,);
-      }
-      if (
-        this.constraint.right.referencedFields.subsetOf(this.leftGroup.relational.outputFields,) &&
-        this.constraint.left.referencedFields.subsetOf(this.rightGroup.relational.outputFields,)
-      ) {
-        return yield* this.evaluateScalarEquals(left, right, this.constraint.right, this.constraint.left, context,);
-      }
-    }
-    const outputFields = this.getOutputFields();
-    const result = new Relation(outputFields,);
-    for (const leftTuple of left.tuples) {
-      let hasMatch = false;
-      for (const rightTuple of right.tuples) {
-        const tuple = new Tuple();
-        tuple.merge(leftTuple,);
-        tuple.merge(rightTuple,);
-        const value = yield* this.constraint.evaluate(context, tuple,);
-        if (valueToBoolean(value,)) {
-          result.push(tuple,);
-          hasMatch = true;
-        }
-      }
-      if (!hasMatch) {
-        result.push(leftTuple,);
-      }
-    }
-    return result;
-  }
-};
-var RelationalRightJoin = class _RelationalRightJoin extends RelationalNode {
-  constructor(left, right, constraint,) {
-    super(left.isSynchronous && right.isSynchronous && constraint.isSynchronous,);
-    this.left = left;
-    this.right = right;
-    this.constraint = constraint;
-    __publicField(this, 'leftGroup',);
-    __publicField(this, 'rightGroup',);
-    this.leftGroup = left.getGroup();
-    this.rightGroup = right.getGroup();
-  }
-  getHash() {
-    return calculateHash('RelationalRightJoin', this.leftGroup.id, this.rightGroup.id, this.constraint,);
-  }
-  getOutputFields() {
-    const outputFields = new Fields();
-    outputFields.merge(this.leftGroup.relational.outputFields,);
-    outputFields.merge(this.rightGroup.relational.outputFields,);
-    return outputFields;
-  }
-  canProvideOrdering() {
-    return false;
-  }
-  canProvideResolvedFields() {
-    return true;
-  }
-  getChildRequiredProps(group, required,) {
-    const resolvedFields = new Fields();
-    const outputFields = group.relational.outputFields;
-    for (const field of required.resolvedFields) {
-      if (outputFields.has(field,)) {
-        resolvedFields.add(field,);
-      }
-    }
-    for (const field of this.constraint.referencedFields) {
-      if (outputFields.has(field,)) {
-        resolvedFields.add(field,);
-      }
-    }
-    const ordering = new Ordering();
-    return new RequiredProps(ordering, resolvedFields,);
-  }
-  optimize(optimizer, required,) {
-    const leftRequired = this.getChildRequiredProps(this.leftGroup, required,);
-    const leftCost = optimizer.optimizeGroup(this.leftGroup, leftRequired,);
-    const rightRequired = this.getChildRequiredProps(this.rightGroup, required,);
-    const rightCost = optimizer.optimizeGroup(this.rightGroup, rightRequired,);
-    const constraintCost = this.constraint.optimize(optimizer,);
-    return Cost.max(Cost.max(leftCost, rightCost,), constraintCost,);
-  }
-  getOptimized(required,) {
-    const leftRequired = this.getChildRequiredProps(this.leftGroup, required,);
-    const left = this.leftGroup.getOptimized(leftRequired,);
-    const rightRequired = this.getChildRequiredProps(this.rightGroup, required,);
-    const right = this.rightGroup.getOptimized(rightRequired,);
-    const constraint = this.constraint.getOptimized();
-    return new _RelationalRightJoin(left, right, constraint,);
-  }
-  /** Optimized path for equality constraints that runs in O(n + m) time. */
-  *evaluateScalarEquals(left, right, leftConstraint, rightConstraint, context,) {
-    const joinKeyMap = /* @__PURE__ */ new Map();
-    for (const leftTuple of left.tuples) {
-      const leftValue = yield* leftConstraint.evaluate(context, leftTuple,);
-      const key7 = JSON.stringify(leftValue?.value ?? null,);
-      const tuplesForKey = joinKeyMap.get(key7,) ?? [];
-      tuplesForKey.push(leftTuple,);
-      joinKeyMap.set(key7, tuplesForKey,);
-    }
-    const outputFields = this.getOutputFields();
-    const result = new Relation(outputFields,);
-    for (const rightTuple of right.tuples) {
-      const rightValue = yield* rightConstraint.evaluate(context, rightTuple,);
-      const key7 = JSON.stringify(rightValue?.value ?? null,);
-      const matches = joinKeyMap.get(key7,) ?? [];
-      if (matches.length === 0) {
-        result.push(rightTuple,);
-      } else {
-        for (const leftTuple of matches) {
-          const joinedTuple = new Tuple();
-          joinedTuple.merge(rightTuple,);
-          joinedTuple.merge(leftTuple,);
-          result.push(joinedTuple,);
-        }
-      }
-    }
-    return result;
-  }
-  *evaluate(context,) {
-    const {
-      left,
-      right,
-    } = yield* evaluateObject({
-      left: this.left.evaluate(context,),
-      right: this.right.evaluate(context,),
-    },);
-    if (this.constraint instanceof ScalarEquals) {
-      if (
-        this.constraint.left.referencedFields.subsetOf(this.leftGroup.relational.outputFields,) &&
-        this.constraint.right.referencedFields.subsetOf(this.rightGroup.relational.outputFields,)
-      ) {
-        return yield* this.evaluateScalarEquals(left, right, this.constraint.left, this.constraint.right, context,);
-      }
-      if (
-        this.constraint.right.referencedFields.subsetOf(this.leftGroup.relational.outputFields,) &&
-        this.constraint.left.referencedFields.subsetOf(this.rightGroup.relational.outputFields,)
-      ) {
-        return yield* this.evaluateScalarEquals(left, right, this.constraint.right, this.constraint.left, context,);
-      }
-    }
-    const outputFields = this.getOutputFields();
-    const result = new Relation(outputFields,);
-    for (const rightTuple of right.tuples) {
-      let hasMatch = false;
-      for (const leftTuple of left.tuples) {
-        const tuple = new Tuple();
-        tuple.merge(rightTuple,);
-        tuple.merge(leftTuple,);
-        const value = yield* this.constraint.evaluate(context, tuple,);
-        if (valueToBoolean(value,)) {
-          result.push(tuple,);
-          hasMatch = true;
-        }
-      }
-      if (!hasMatch) {
-        result.push(rightTuple,);
-      }
-    }
-    return result;
-  }
-};
 var RelationalScan = class _RelationalScan extends RelationalNode {
   constructor(collection,) {
     super(false,);
@@ -43536,6 +43266,50 @@ var ScalarEndsWith = class _ScalarEndsWith extends ScalarNode {
     return {
       type: 'boolean',
       value: DatabaseValue.endsWith(source, target, collation4,),
+    };
+  }
+};
+var ScalarEquals = class _ScalarEquals extends ScalarNode {
+  constructor(left, right,) {
+    const referencedFields = new Fields();
+    referencedFields.merge(left.referencedFields,);
+    referencedFields.merge(right.referencedFields,);
+    const referencedOuterFields = new Fields();
+    referencedOuterFields.merge(left.referencedOuterFields,);
+    referencedOuterFields.merge(right.referencedOuterFields,);
+    const isSynchronous = left.isSynchronous && right.isSynchronous;
+    super(referencedFields, referencedOuterFields, isSynchronous,);
+    this.left = left;
+    this.right = right;
+    __publicField(this, 'definition', {
+      type: 'boolean',
+      isNullable: false,
+    },);
+  }
+  getHash() {
+    return calculateHash('ScalarEquals', this.left, this.right,);
+  }
+  optimize(optimizer,) {
+    const leftCost = this.left.optimize(optimizer,);
+    const rightCost = this.right.optimize(optimizer,);
+    return Cost.max(leftCost, rightCost,);
+  }
+  getOptimized() {
+    const left = this.left.getOptimized();
+    const right = this.right.getOptimized();
+    return new _ScalarEquals(left, right,);
+  }
+  *evaluate(context, tuple,) {
+    const {
+      left,
+      right,
+    } = yield* evaluateObject({
+      left: this.left.evaluate(context, tuple,),
+      right: this.right.evaluate(context, tuple,),
+    },);
+    return {
+      type: 'boolean',
+      value: DatabaseValue.equal(left, right, collation,),
     };
   }
 };
@@ -43859,10 +43633,6 @@ var Explorer = class {
   }
   explore(before,) {
     const group = before.getGroup();
-    if (before instanceof RelationalLeftJoin) {
-      const after = new RelationalRightJoin(before.right, before.left, before.constraint,);
-      this.memo.addRelational(after, group,);
-    }
     if (before instanceof RelationalFilter) {
       if (before.predicate instanceof ScalarAnd) {
         const left = this.normalizer.newRelationalFilter(before.input, before.predicate.left,);
@@ -44077,6 +43847,136 @@ var Memo = class {
     if (existing) return existing;
     this.nodes.set(hash2, node,);
     return node;
+  }
+};
+var RelationalLeftJoin = class _RelationalLeftJoin extends RelationalNode {
+  constructor(left, right, constraint,) {
+    super(left.isSynchronous && right.isSynchronous && constraint.isSynchronous,);
+    this.left = left;
+    this.right = right;
+    this.constraint = constraint;
+    __publicField(this, 'leftGroup',);
+    __publicField(this, 'rightGroup',);
+    this.leftGroup = left.getGroup();
+    this.rightGroup = right.getGroup();
+  }
+  getHash() {
+    return calculateHash('RelationalLeftJoin', this.leftGroup.id, this.rightGroup.id, this.constraint,);
+  }
+  getOutputFields() {
+    const outputFields = new Fields();
+    outputFields.merge(this.leftGroup.relational.outputFields,);
+    outputFields.merge(this.rightGroup.relational.outputFields,);
+    return outputFields;
+  }
+  canProvideOrdering() {
+    return false;
+  }
+  canProvideResolvedFields() {
+    return true;
+  }
+  getChildRequiredProps(group, required,) {
+    const resolvedFields = new Fields();
+    const outputFields = group.relational.outputFields;
+    for (const field of required.resolvedFields) {
+      if (outputFields.has(field,)) {
+        resolvedFields.add(field,);
+      }
+    }
+    for (const field of this.constraint.referencedFields) {
+      if (outputFields.has(field,)) {
+        resolvedFields.add(field,);
+      }
+    }
+    const ordering = new Ordering();
+    return new RequiredProps(ordering, resolvedFields,);
+  }
+  optimize(optimizer, required,) {
+    const leftRequired = this.getChildRequiredProps(this.leftGroup, required,);
+    const leftCost = optimizer.optimizeGroup(this.leftGroup, leftRequired,);
+    const rightRequired = this.getChildRequiredProps(this.rightGroup, required,);
+    const rightCost = optimizer.optimizeGroup(this.rightGroup, rightRequired,);
+    const constraintCost = this.constraint.optimize(optimizer,);
+    return Cost.max(Cost.max(leftCost, rightCost,), constraintCost,);
+  }
+  getOptimized(required,) {
+    const leftRequired = this.getChildRequiredProps(this.leftGroup, required,);
+    const left = this.leftGroup.getOptimized(leftRequired,);
+    const rightRequired = this.getChildRequiredProps(this.rightGroup, required,);
+    const right = this.rightGroup.getOptimized(rightRequired,);
+    const constraint = this.constraint.getOptimized();
+    return new _RelationalLeftJoin(left, right, constraint,);
+  }
+  /** Optimized path for equality constraints that runs in O(n + m) time. */
+  *evaluateScalarEquals(left, right, leftConstraint, rightConstraint, context,) {
+    const joinKeyMap = /* @__PURE__ */ new Map();
+    for (const rightTuple of right.tuples) {
+      const rightValue = yield* rightConstraint.evaluate(context, rightTuple,);
+      const key7 = JSON.stringify(rightValue?.value ?? null,);
+      const tuplesForKey = joinKeyMap.get(key7,) ?? [];
+      tuplesForKey.push(rightTuple,);
+      joinKeyMap.set(key7, tuplesForKey,);
+    }
+    const outputFields = this.getOutputFields();
+    const result = new Relation(outputFields,);
+    for (const leftTuple of left.tuples) {
+      const leftValue = yield* leftConstraint.evaluate(context, leftTuple,);
+      const key7 = JSON.stringify(leftValue?.value ?? null,);
+      const matches = joinKeyMap.get(key7,) ?? [];
+      if (matches.length === 0) {
+        result.push(leftTuple,);
+      } else {
+        for (const rightTuple of matches) {
+          const joinedTuple = new Tuple();
+          joinedTuple.merge(leftTuple,);
+          joinedTuple.merge(rightTuple,);
+          result.push(joinedTuple,);
+        }
+      }
+    }
+    return result;
+  }
+  *evaluate(context,) {
+    const {
+      left,
+      right,
+    } = yield* evaluateObject({
+      left: this.left.evaluate(context,),
+      right: this.right.evaluate(context,),
+    },);
+    if (this.constraint instanceof ScalarEquals) {
+      if (
+        this.constraint.left.referencedFields.subsetOf(this.leftGroup.relational.outputFields,) &&
+        this.constraint.right.referencedFields.subsetOf(this.rightGroup.relational.outputFields,)
+      ) {
+        return yield* this.evaluateScalarEquals(left, right, this.constraint.left, this.constraint.right, context,);
+      }
+      if (
+        this.constraint.right.referencedFields.subsetOf(this.leftGroup.relational.outputFields,) &&
+        this.constraint.left.referencedFields.subsetOf(this.rightGroup.relational.outputFields,)
+      ) {
+        return yield* this.evaluateScalarEquals(left, right, this.constraint.right, this.constraint.left, context,);
+      }
+    }
+    const outputFields = this.getOutputFields();
+    const result = new Relation(outputFields,);
+    for (const leftTuple of left.tuples) {
+      let hasMatch = false;
+      for (const rightTuple of right.tuples) {
+        const tuple = new Tuple();
+        tuple.merge(leftTuple,);
+        tuple.merge(rightTuple,);
+        const value = yield* this.constraint.evaluate(context, tuple,);
+        if (valueToBoolean(value,)) {
+          result.push(tuple,);
+          hasMatch = true;
+        }
+      }
+      if (!hasMatch) {
+        result.push(leftTuple,);
+      }
+    }
+    return result;
   }
 };
 var RelationalLimit = class _RelationalLimit extends RelationalNode {
@@ -44696,14 +44596,6 @@ var Normalizer = class {
     ) {
       const pushedFilter = this.newRelationalFilter(input.left, predicate,);
       return this.newRelationalLeftJoin(pushedFilter, input.right, input.constraint,);
-    }
-    if (
-      input instanceof RelationalRightJoin &&
-      // Check that the predicate doesn't depend on any joined field.
-      predicate.referencedFields.subsetOf(input.rightGroup.relational.outputFields,)
-    ) {
-      const pushedFilter = this.newRelationalFilter(input.right, predicate,);
-      return this.newRelationalLeftJoin(input.left, pushedFilter, input.constraint,);
     }
     const node = new RelationalFilter(input, predicate,);
     return this.finishRelational(node,);
@@ -48180,16 +48072,21 @@ function withMappedReactProps(Component18, info,) {
     },);
   };
 }
-var shaderConfigBrand = '__framer_shaderConfig__';
-function isShaderConfig(obj,) {
-  return isObject2(obj,) && shaderConfigBrand in obj;
-}
-function defineShader(shaderConfig,) {
-  return {
-    ...shaderConfig,
-    [shaderConfigBrand]: true,
-  };
-}
+var uniformPrefix = 'u_';
+var builtInUniforms = {
+  time: {
+    name: 'u_time',
+    glslType: 'float',
+  },
+  resolution: {
+    name: 'u_resolution',
+    glslType: 'vec2',
+  },
+  deltaTime: {
+    name: 'u_deltaTime',
+    glslType: 'float',
+  },
+};
 var webGLContextLostEvent = 'webglcontextlost';
 var WebGL2ShaderRenderer = class {
   constructor(canvas, vertexSource, fragmentSource,) {
@@ -48213,16 +48110,21 @@ var WebGL2ShaderRenderer = class {
       throw new Error('WebGL2 not supported',);
     }
     this.gl = gl;
-    const vertexShader = this.compileShader(gl.VERTEX_SHADER, vertexSource,);
-    const fragmentShader = this.compileShader(gl.FRAGMENT_SHADER, fragmentSource,);
-    if (!vertexShader || !fragmentShader) {
+    let vertexShader = null;
+    let fragmentShader = null;
+    try {
+      vertexShader = this.compileShader(gl.VERTEX_SHADER, vertexSource,);
+      fragmentShader = this.compileShader(gl.FRAGMENT_SHADER, fragmentSource,);
+    } catch (error) {
       this.cleanupShaders(vertexShader, fragmentShader,);
-      throw new Error('Shader compilation failed',);
+      throw error;
     }
-    const program = this.linkProgram(vertexShader, fragmentShader,);
-    if (!program) {
+    let program;
+    try {
+      program = this.linkProgram(vertexShader, fragmentShader,);
+    } catch (error) {
       this.cleanupShaders(vertexShader, fragmentShader,);
-      throw new Error('Program linking failed',);
+      throw error;
     }
     this.cleanupShaders(vertexShader, fragmentShader,);
     this.program = program;
@@ -48231,15 +48133,9 @@ var WebGL2ShaderRenderer = class {
     this.setupFullScreenQuad();
     gl.useProgram(program,);
     this.builtInUniformLocations = {
-      ['u_time'/* Time */
-      ]: gl.getUniformLocation(program, 'u_time',/* Time */
-      ),
-      ['u_resolution'/* Resolution */
-      ]: gl.getUniformLocation(program, 'u_resolution',/* Resolution */
-      ),
-      ['u_deltaTime'/* DeltaTime */
-      ]: gl.getUniformLocation(program, 'u_deltaTime',/* DeltaTime */
-      ),
+      [builtInUniforms.time.name]: gl.getUniformLocation(program, builtInUniforms.time.name,),
+      [builtInUniforms.resolution.name]: gl.getUniformLocation(program, builtInUniforms.resolution.name,),
+      [builtInUniforms.deltaTime.name]: gl.getUniformLocation(program, builtInUniforms.deltaTime.name,),
     };
     this.customUniformLocations = /* @__PURE__ */ new Map();
     gl.clearColor(0, 0, 0, 0,);
@@ -48316,18 +48212,23 @@ var WebGL2ShaderRenderer = class {
   }
   /**
    * Compiles GLSL source code into a shader object the GPU can execute.
+   * @throws Error with shader info log if compilation fails
    */
   compileShader(type, source,) {
     const {
       gl,
     } = this;
     const shader = gl.createShader(type,);
-    if (!shader) return null;
+    if (!shader) {
+      throw new Error('Failed to create shader',);
+    }
     gl.shaderSource(shader, source,);
     gl.compileShader(shader,);
     if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS,)) {
+      const info = gl.getShaderInfoLog(shader,);
       gl.deleteShader(shader,);
-      return null;
+      const shaderType = type === gl.VERTEX_SHADER ? 'Vertex' : 'Fragment';
+      throw new Error(`${shaderType} shader compilation failed: ${info}`,);
     }
     return shader;
   }
@@ -48345,19 +48246,23 @@ var WebGL2ShaderRenderer = class {
   }
   /**
    * Links compiled vertex and fragment shaders into a complete shader program.
+   * @throws Error with program info log if linking fails
    */
   linkProgram(vertexShader, fragmentShader,) {
     const {
       gl,
     } = this;
     const program = gl.createProgram();
-    if (!program) return null;
+    if (!program) {
+      throw new Error('Failed to create program',);
+    }
     gl.attachShader(program, vertexShader,);
     gl.attachShader(program, fragmentShader,);
     gl.linkProgram(program,);
     if (!gl.getProgramParameter(program, gl.LINK_STATUS,)) {
+      const info = gl.getProgramInfoLog(program,);
       gl.deleteProgram(program,);
-      return null;
+      throw new Error(`Program linking failed: ${info}`,);
     }
     return program;
   }
@@ -48415,7 +48320,7 @@ var WebGL2ShaderRenderer = class {
       case 'boolean':
         this.gl.uniform1f(location, uniform.value ? 1 : 0,);
         break;
-      case 'number':
+      case 'float':
         this.gl.uniform1f(location, uniform.value,);
         break;
       case 'vec2':
@@ -48471,39 +48376,69 @@ var WebGL2ShaderRenderer = class {
       builtInUniformLocations: locations,
       canvas,
     } = this;
-    if (
-      locations['u_time'/* Time */
-      ] !== null
-    ) {
-      gl.uniform1f(
-        locations['u_time'/* Time */
-        ],
-        elapsedTime,
-      );
+    if (locations[builtInUniforms.time.name] !== null) {
+      gl.uniform1f(locations[builtInUniforms.time.name], elapsedTime,);
     }
-    if (
-      locations['u_resolution'/* Resolution */
-      ] !== null
-    ) {
-      gl.uniform2f(
-        locations['u_resolution'/* Resolution */
-        ],
-        canvas.width,
-        canvas.height,
-      );
+    if (locations[builtInUniforms.resolution.name] !== null) {
+      gl.uniform2f(locations[builtInUniforms.resolution.name], canvas.width, canvas.height,);
     }
-    if (
-      locations['u_deltaTime'/* DeltaTime */
-      ] !== null
-    ) {
-      gl.uniform1f(
-        locations['u_deltaTime'/* DeltaTime */
-        ],
-        deltaTime,
-      );
+    if (locations[builtInUniforms.deltaTime.name] !== null) {
+      gl.uniform1f(locations[builtInUniforms.deltaTime.name], deltaTime,);
     }
   }
 };
+function controlTypeToGLSLType(controlType,) {
+  switch (controlType) {
+    case 'number':
+    case 'enum':
+      return 'float';
+    case 'boolean':
+      return 'float';
+    case 'color':
+      return 'vec4';
+    case 'responsiveimage':
+      return 'sampler2D';
+    default:
+      assertNever(controlType,);
+  }
+}
+var glslVersionDirective = '#version 300 es';
+var glslPrecisionDirective = 'precision highp float;';
+var glslUVInput = 'in vec2 v_uv;';
+var glslFragColorOutput = 'out vec4 fragColor;';
+function generateShaderHead(propertyControls,) {
+  const lines = [glslVersionDirective, glslPrecisionDirective, '', glslUVInput, glslFragColorOutput,];
+  if (propertyControls && Object.keys(propertyControls,).length > 0) {
+    lines.push('',);
+    for (const key7 in propertyControls) {
+      const control = propertyControls[key7];
+      if (!control) continue;
+      const glslType = controlTypeToGLSLType(control.type,);
+      lines.push(`uniform ${glslType} ${uniformPrefix}${key7};`,);
+    }
+  }
+  lines.push('',);
+  for (const uniform of Object.values(builtInUniforms,)) {
+    lines.push(`uniform ${uniform.glslType} ${uniform.name};`,);
+  }
+  lines.push('',);
+  return lines.join('\n',);
+}
+function prepareFragmentShader(fragment, propertyControls,) {
+  return generateShaderHead(propertyControls,) + fragment;
+}
+var shaderConfigBrand = '__framer_shaderConfig__';
+function isShaderConfig(obj,) {
+  return isObject2(obj,) && shaderConfigBrand in obj;
+}
+function defineShader(shaderConfig,) {
+  const preparedFragment = prepareFragmentShader(shaderConfig.fragment, shaderConfig.propertyControls,);
+  return {
+    ...shaderConfig,
+    fragment: preparedFragment,
+    [shaderConfigBrand]: true,
+  };
+}
 var DEFAULT_VERTEX_SHADER = `#version 300 es
 precision highp float;
 
@@ -48541,6 +48476,7 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
   fragmentShader = DEFAULT_FRAGMENT_SHADER,
   animated = true,
   uniforms,
+  onError,
   ...rest
 }, ref,) {
   const canvasRef = useRef(null,);
@@ -48577,13 +48513,17 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
       startTimeRef.current = performance.now() * timeMultiplier;
       lastTimeRef.current = startTimeRef.current;
       animationFrameRef.current = requestAnimationFrame(animate3,);
-    } catch {}
+    } catch (error) {
+      if (onError && error instanceof Error) {
+        onError(error,);
+      }
+    }
     return () => {
       cancelAnimationFrame(animationFrameRef.current,);
       rendererRef.current?.dispose();
       rendererRef.current = null;
     };
-  }, [vertexShader, fragmentShader, animate3,],);
+  }, [vertexShader, fragmentShader, animate3, onError,],);
   const handleResize = useCallback2(() => {
     const renderer = rendererRef.current;
     if (!renderer) return;
@@ -48615,51 +48555,66 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
     },),
   },);
 },);
-function isTextureUniform(uniform,) {
-  return uniform.type === 'texture';
+function colorToVec4(color2,) {
+  const rgba2 = Color.toRgb(Color(color2,),);
+  return [rgba2.r / 255, rgba2.g / 255, rgba2.b / 255, rgba2.a,];
 }
-async function getResolvedUniforms(uniforms,) {
-  const results = await Promise.all(
-    Object.entries(uniforms,).map(async ([name, uniform,],) => {
-      if (isTextureUniform(uniform,)) {
-        const response = await fetch(uniform.value,);
-        if (!response.ok) throw new Error('Failed to load texture',);
-        const blob = await response.blob();
-        const image = await createImageBitmap(blob,);
-        return Promise.resolve([name, {
-          type: 'sampler2D',
-          value: image,
-        },],);
+async function loadTexture(url,) {
+  const response = await fetch(url,);
+  if (!response.ok) throw new Error('Failed to load texture',);
+  const blob = await response.blob();
+  return createImageBitmap(blob,);
+}
+async function resolveUniform(uniform,) {
+  switch (uniform.type) {
+    case 'number':
+    case 'enum':
+      return {
+        type: 'float',
+        value: uniform.value,
+      };
+    case 'boolean':
+      return {
+        type: 'boolean',
+        value: uniform.value,
+      };
+    case 'color':
+      return {
+        type: 'vec4',
+        value: colorToVec4(uniform.value,),
+      };
+    case 'responsiveimage': {
+      let url;
+      if (isString(uniform.value,)) {
+        url = uniform.value;
+      } else if (isObject2(uniform.value,) && 'src' in uniform.value) {
+        url = uniform.value.src;
       }
-      return Promise.resolve([name, uniform,],);
-    },),
-  );
-  return Object.fromEntries(results,);
+      if (!url) return;
+      const image = await loadTexture(url,);
+      return {
+        type: 'sampler2D',
+        value: image,
+      };
+    }
+    default:
+      assertNever(uniform,);
+  }
+}
+async function resolveUniforms(uniforms,) {
+  const entries = await Promise.all(Object.entries(uniforms,).map(async ([name, uniform,],) => [name, await resolveUniform(uniform,),]),);
+  return Object.fromEntries(entries.filter(([_, value,],) => value !== void 0),);
 }
 function useResolvedUniforms(uniforms,) {
   const [resolvedUniforms, setResolvedUniforms,] = useState({},);
   useEffect(() => {
     if (!uniforms) return;
-    const hasAnyTextures = Object.values(uniforms,).some(isTextureUniform,);
-    if (!hasAnyTextures) {
-      startTransition2(() => {
-        setResolvedUniforms(uniforms,);
-      },);
-      return;
-    }
     let isCancelled = false;
-    async function load() {
-      if (!uniforms) return;
-      try {
-        const resolved = await getResolvedUniforms(uniforms,);
-        if (!isCancelled) {
-          startTransition2(() => {
-            setResolvedUniforms(resolved,);
-          },);
-        }
-      } catch {}
-    }
-    void load();
+    resolveUniforms(uniforms,).then((resolved) => {
+      if (!isCancelled) {
+        startTransition2(() => setResolvedUniforms(resolved,));
+      }
+    },).catch(() => {},);
     return () => {
       isCancelled = true;
     };
@@ -56283,6 +56238,7 @@ export {
   AsyncMotionValueAnimation,
   attachSpring,
   attrEffect,
+  AutoBreakpointVariant,
   AutomaticLayoutIds,
   axisDeltaEquals,
   axisEquals,
