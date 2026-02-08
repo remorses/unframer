@@ -711,15 +711,15 @@ body { --framer-will-change-filter-override: none; }
         }
     
 
-        .framer-text-module[data-width="fill"] > :first-child,
-        .framer-text-module:not([data-width="fit"])[style*="aspect-ratio"] > :first-child {
-            width: 100%;
+        .framer-text-module[data-width="fill"] > :first-child, .framer-text-module[data-width="fill"] > .ssr-variant > :first-child,
+        .framer-text-module:not([data-width="fit"])[style*="aspect-ratio"] > :first-child, .framer-text-module:not([data-width="fit"])[style*="aspect-ratio"] > .ssr-variant > :first-child {
+            width: 100% !important;
         }
     
 
         @supports not (aspect-ratio: 1) {
             .framer-text-module:not([data-width="fit"])[style*="aspect-ratio"] {
-                position: relative;
+                position: relative !important;
             }
         }
     
@@ -734,12 +734,12 @@ body { --framer-will-change-filter-override: none; }
     
 
         @supports not (aspect-ratio: 1) {
-            .framer-text-module[data-width="fill"] > :first-child,
-            .framer-text-module:not([data-width="fit"])[style*="aspect-ratio"] > :first-child {
+            .framer-text-module[data-width="fill"] > :first-child, .framer-text-module[data-width="fill"] > .ssr-variant > :first-child,
+            .framer-text-module:not([data-width="fit"])[style*="aspect-ratio"] > :first-child, .framer-text-module:not([data-width="fit"])[style*="aspect-ratio"] > .ssr-variant > :first-child {
                 position: absolute;
                 top: 0;
                 left: 0;
-                height: 100%;
+                height: 100% !important;
             }
         }
     
