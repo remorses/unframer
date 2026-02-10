@@ -12021,7 +12021,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.5XNLI4OV.mjs
+// /:https://app.framerstatic.com/framer.SWR2PHEV.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -14105,7 +14105,26 @@ function sendTrackingEvent(eventType, eventData, sendOn = 'lazy',) {
       );
       break;
     }
+    case 'published_site_trigger_invoke': {
+      const {
+        trackingId,
+      } = eventData;
+      if (trackingId) {
+        document.dispatchEvent(
+          new CustomEvent('framer:triggerinvoke', {
+            detail: {
+              trackingId,
+            },
+          },),
+        );
+      }
+      break;
+    }
   }
+}
+var validTrackingIdRegExp = /^[a-z0-9]+(?:-[a-z0-9]+)*$/u;
+function isValidTrackingId(trackingId,) {
+  return isString(trackingId,) && (trackingId === '' || validTrackingIdRegExp.test(trackingId,));
 }
 var HandoverDataType = {
   QueryCache: 0,
@@ -15582,10 +15601,6 @@ function slugify(value,) {
   return trimDashes(value.trim().toLowerCase().replace(unsafeSlugCharactersRegExp, '-',),);
 }
 var NodeIdContext = /* @__PURE__ */ React42.createContext(null,);
-var validTrackingIdRegExp = /^[a-z0-9]+(?:-[a-z0-9]+)*$/u;
-function isValidTrackingId(trackingId,) {
-  return trackingId === '' || validTrackingIdRegExp.test(trackingId,);
-}
 function useTracking() {
   const router = useRouter();
   const nodeId = useContext(NodeIdContext,);
@@ -38858,6 +38873,106 @@ function EditorBarLauncher({
     },),
   },);
 }
+var triggerHistoryStorageKey = 'framer:trigger-history:v1';
+var triggerHistoryStorageVersion = 1;
+var TriggerActionsStorageSymbol = /* @__PURE__ */ Symbol('TriggerStorage',);
+var TriggerActionsStorage = class {
+  constructor() {
+    __publicField(this, 'eventsToTrack', /* @__PURE__ */ new Set(),);
+    __publicField(this, 'historyEvents', /* @__PURE__ */ new Map(),);
+    __publicField(this, 'persistHistory', debounce(() => this.flushHistoryToStorage(), 250,),);
+    __publicField(this, 'onClickEvent', (event) => {
+      const detail = event.detail;
+      if (!detail?.trackingId) return;
+      this.recordHistoryEvent('click', detail.trackingId,);
+    },);
+    __publicField(this, 'onFormSubmitEvent', (event) => {
+      const detail = event.detail;
+      if (!detail?.trackingId) return;
+      this.recordHistoryEvent('form_submit', detail.trackingId,);
+    },);
+    __publicField(this, 'onStorageEvent', (event) => {
+      if (event.key !== triggerHistoryStorageKey) return;
+      const parsed = parseHistoryStorage(event.newValue,);
+      if (parsed) {
+        updateMap(this.historyEvents, parsed,);
+      }
+    },);
+    if (typeof __unframerWindow2 === 'undefined' || !__unframerWindow2.document) return;
+    this.eventsToTrack = getTriggerEventsToTrack();
+    this.initializeHistoryListeners();
+    this.loadHistoryFromStorage();
+  }
+  initializeHistoryListeners() {
+    if (typeof __unframerWindow2 === 'undefined' || !__unframerWindow2.document) return;
+    __unframerWindow2.document.addEventListener('framer:click', this.onClickEvent,);
+    __unframerWindow2.document.addEventListener('framer:formsubmit', this.onFormSubmitEvent,);
+    __unframerWindow2.addEventListener('storage', this.onStorageEvent,);
+  }
+  onTriggerInvoke(triggerTargetId,) {
+    this.recordHistoryEvent('trigger_invoke', triggerTargetId,);
+  }
+  recordHistoryEvent(eventType, id3,) {
+    if (!this.eventsToTrack.has(getKey(eventType, id3,),)) return;
+    this.historyEvents.set(getKey(eventType, id3,), Date.now(),);
+    this.persistHistory();
+  }
+  loadHistoryFromStorage() {
+    if (typeof __unframerWindow2 === 'undefined') return;
+    try {
+      const parsed = parseHistoryStorage(__unframerWindow2.localStorage.getItem(triggerHistoryStorageKey,),);
+      if (parsed) {
+        updateMap(this.historyEvents, parsed,);
+      }
+    } catch {}
+  }
+  flushHistoryToStorage() {
+    if (typeof __unframerWindow2 === 'undefined') return;
+    try {
+      __unframerWindow2.localStorage.setItem(
+        triggerHistoryStorageKey,
+        JSON.stringify({
+          version: triggerHistoryStorageVersion,
+          events: Object.fromEntries(this.historyEvents.entries(),),
+        },),
+      );
+    } catch {}
+  }
+  hasSeenEvent(eventType, id3, sinceMs,) {
+    const key7 = getKey(eventType, id3,);
+    const now2 = Date.now();
+    const seenAt = this.historyEvents.get(key7,);
+    if (seenAt === void 0) return false;
+    if (!sinceMs) return true;
+    return seenAt + sinceMs >= now2;
+  }
+};
+function parseHistoryStorage(raw,) {
+  if (!raw) return void 0;
+  try {
+    const parsed = JSON.parse(raw,);
+    if (parsed?.version !== triggerHistoryStorageVersion || !parsed.events) return void 0;
+    return new Map(Object.entries(parsed.events,),);
+  } catch {
+    return void 0;
+  }
+}
+function updateMap(map2, incoming,) {
+  for (const [key7, value,] of incoming.entries()) {
+    if ((map2.get(key7,) ?? 0) >= value) continue;
+    map2.set(key7, value,);
+  }
+}
+function getKey(eventType, id3,) {
+  return `${eventType}:${id3}`;
+}
+function getTriggerEventsToTrack() {
+  if (typeof __unframerWindow2 === 'undefined' || !__unframerWindow2.document || !(TriggerActionsStorageSymbol in __unframerWindow2)) {
+    return /* @__PURE__ */ new Set();
+  }
+  const safeWindow2 = __unframerWindow2;
+  return new Set(safeWindow2[TriggerActionsStorageSymbol],);
+}
 var cookieRegex = /^(?<key>[^=]*)=(?<value>.*)$/u;
 var TriggerState = class {
   constructor(initial,) {
@@ -38868,8 +38983,11 @@ var TriggerState = class {
     __publicField(this, 'visitedPages',);
     __publicField(this, 'maxScrollPercentage', getScrollPercentage(),);
     __publicField(this, 'onTriggerListeners', /* @__PURE__ */ new Set(),);
+    __publicField(this, 'delayTimeouts', /* @__PURE__ */ new Map(),);
     __publicField(this, 'resolveRoute',);
     __publicField(this, 'getCurrentRoutePath',);
+    __publicField(this, 'sendTrackingEvent',);
+    __publicField(this, 'storage', new TriggerActionsStorage(),);
     __publicField(this, 'onRouteChange', (currentPath) => {
       this.visitedPages.add(currentPath,);
       this.lastRouteChangeAtMs = Date.now();
@@ -38879,6 +38997,7 @@ var TriggerState = class {
     this.resolveRoute = initial.resolveRoute;
     this.getCurrentRoutePath = initial.getCurrentRoutePath;
     initial.setRouteChangeHandler(this.onRouteChange,);
+    this.sendTrackingEvent = initial.sendTrackingEvent;
   }
   get invokedTriggers() {
     return new Set(
@@ -38891,14 +39010,12 @@ var TriggerState = class {
   removeOnTriggerListener(listener,) {
     this.onTriggerListeners.delete(listener,);
   }
-  // TODO: include targetId in the trigger so we can store the invoke in local storage
   subscribe(triggerId, targetId, trigger, callback,) {
     if (isEmptyTrigger(trigger,)) return noop2;
     const triggerEntry = this.triggers.get(triggerId,) ?? {
       status: 'pending',
       targetId,
       trigger,
-      events: /* @__PURE__ */ new Set(),
       unsubscribeHandlers: /* @__PURE__ */ new Set(),
     };
     if (triggerEntry.status === 'triggered') return noop2;
@@ -38920,6 +39037,8 @@ var TriggerState = class {
     if (triggerEntry.status === 'triggered') return;
     triggerEntry.callback = void 0;
     triggerEntry.status = 'inactive';
+    clearTimeout(this.delayTimeouts.get(triggerId,),);
+    this.delayTimeouts.delete(triggerId,);
     for (const unsubscribe of triggerEntry.unsubscribeHandlers) {
       unsubscribe();
     }
@@ -38927,17 +39046,16 @@ var TriggerState = class {
   on(event, initialize, triggerId,) {
     const triggerEntry = this.triggers.get(triggerId,);
     if (!triggerEntry || triggerEntry.status !== 'pending') return;
-    const handler = () => {
+    const handler = (eventPayload) => {
       if (triggerEntry?.status !== 'pending') return;
-      triggerEntry.events.add(event,);
-      this.evaulateAndInvoke(triggerId,);
+      this.evaulateAndInvoke(triggerId, eventPayload,);
     };
     let state = this.events.get(event,);
     if (!state) {
       state = {
         handlers: /* @__PURE__ */ new Set(),
-        cleanup: initialize(() => {
-          this.events.get(event,)?.handlers?.forEach((triggerHandler) => triggerHandler());
+        cleanup: initialize((eventPayload) => {
+          this.events.get(event,)?.handlers?.forEach((triggerHandler) => triggerHandler(eventPayload,));
         },),
       };
       this.events.set(event, state,);
@@ -38962,25 +39080,25 @@ var TriggerState = class {
       }
     }
   }
-  evaluate(triggerId,) {
+  evaluate(triggerId, eventPayload,) {
     const triggerEntry = this.triggers.get(triggerId,);
     assert(triggerEntry, 'Trigger should be available in triggers map before evaluation',);
     if (triggerEntry?.status === 'triggered') return true;
     if (!this.evaluateStaticRules(triggerEntry,)) return false;
-    const firstCondition = triggerEntry.trigger.conditions[0];
+    const firstCondition = triggerEntry.trigger.interactions[0];
     if (!firstCondition) return true;
     let operator = firstCondition.operator;
-    let result = this.evaluateCondition(firstCondition, triggerEntry,);
-    for (let i = 1; i < triggerEntry.trigger.conditions.length; i++) {
-      const condition = triggerEntry.trigger.conditions[i];
+    let result = this.evaluateCondition(firstCondition, eventPayload,);
+    for (let i = 1; i < triggerEntry.trigger.interactions.length; i++) {
+      const condition = triggerEntry.trigger.interactions[i];
       assert(condition, 'Condition should be available in conditions array',);
-      const evaluatedCondition = this.evaluateCondition(condition, triggerEntry,);
+      const evaluatedCondition = this.evaluateCondition(condition, eventPayload,);
       result = operator === 'or' ? result || evaluatedCondition : result && evaluatedCondition;
       operator = condition.operator;
     }
     return result;
   }
-  evaluateCondition(condition, triggerEntry,) {
+  evaluateCondition(condition, eventPayload,) {
     switch (condition.type) {
       case 'delay': {
         const initial = condition.delayType === 'site' ? this.initializedAtMs : this.lastRouteChangeAtMs;
@@ -38990,7 +39108,8 @@ var TriggerState = class {
         this.maxScrollPercentage = Math.max(this.maxScrollPercentage, getScrollPercentage(),);
         return this.maxScrollPercentage >= condition.scrollPercentage;
       case 'exit':
-        return triggerEntry.events.has('exit',);
+        if (eventPayload?.type !== 'exit') return false;
+        return condition.exitType === 'all' ? Boolean(eventPayload.exitType,) : eventPayload.exitType === condition.exitType;
       default:
         assertNever(condition,);
     }
@@ -39000,6 +39119,18 @@ var TriggerState = class {
     if (triggerEntry.trigger.urlParams && !this.evaluateUrlParams(triggerEntry.trigger.urlParams,)) return false;
     if (triggerEntry.trigger.pageCount && this.visitedPages.size < triggerEntry.trigger.pageCount) return false;
     if (!this.evaluateRouteRules(triggerEntry.trigger.includeRoutes, triggerEntry.trigger.excludeRoutes,)) return false;
+    if (triggerEntry.trigger.schedule && !this.evaluateScheduleRules(triggerEntry.trigger.schedule,)) return false;
+    if (triggerEntry.trigger.eventHistory && !this.evaluateEventHistoryRules(triggerEntry.trigger.eventHistory,)) {
+      return false;
+    }
+    return true;
+  }
+  evaluateEventHistoryRules(eventHistory,) {
+    if (!eventHistory.length) return true;
+    for (const rule of eventHistory) {
+      const seen = this.storage.hasSeenEvent(rule.eventType, rule.eventId, rule.withinMs,);
+      if (rule.ruleType === 'seen' ? !seen : seen) return false;
+    }
     return true;
   }
   evaluateCookies(cookies,) {
@@ -39058,8 +39189,15 @@ var TriggerState = class {
     }
     return !includeRoutes?.length;
   }
-  evaulateAndInvoke(triggerId,) {
-    if (this.evaluate(triggerId,)) {
+  evaluateScheduleRules(schedule,) {
+    if (!schedule) return true;
+    const now2 = /* @__PURE__ */ new Date();
+    if (schedule.startAt && /* @__PURE__ */ new Date(`${schedule.startAt}${schedule.startAtOffset ?? ''}`,) > now2) return false;
+    if (schedule.endAt && /* @__PURE__ */ new Date(`${schedule.endAt}${schedule.endAtOffset ?? ''}`,) < now2) return false;
+    return true;
+  }
+  evaulateAndInvoke(triggerId, eventPayload,) {
+    if (this.evaluate(triggerId, eventPayload,)) {
       this.invoke(triggerId,);
     }
   }
@@ -39074,21 +39212,33 @@ var TriggerState = class {
     }
     if (options.callCallback) {
       triggerEntry.callback?.();
+      this.trackInvoke(triggerEntry,);
     }
+  }
+  trackInvoke(triggerEntry,) {
+    this.storage.onTriggerInvoke(triggerEntry.targetId,);
+    setTimeout(() => {
+      this.sendTrackingEvent({
+        trackingId: triggerEntry.trigger.trackingId,
+        nodeId: parseTriggerTargetId(triggerEntry.targetId,).nodeId ?? null,
+      },);
+    }, 20,);
   }
   register(triggerId,) {
     const triggerEntry = this.triggers.get(triggerId,);
     if (!triggerEntry || triggerEntry.status !== 'pending') return;
-    for (const condition of triggerEntry.trigger.conditions) {
+    for (const condition of triggerEntry.trigger.interactions) {
       switch (condition.type) {
         case 'delay':
           {
             const initial = condition.delayType === 'site' ? this.initializedAtMs : this.lastRouteChangeAtMs;
-            setTimeout(() => {
-              if (this.evaluate(triggerId,)) {
-                this.invoke(triggerId,);
-              }
-            }, initial + condition.delayMs - Date.now(),);
+            clearTimeout(this.delayTimeouts.get(triggerId,),);
+            this.delayTimeouts.set(
+              triggerId,
+              setTimeout(() => {
+                this.evaulateAndInvoke(triggerId,);
+              }, initial + condition.delayMs - Date.now(),),
+            );
           }
           break;
         case 'scrollPercentage':
@@ -39106,18 +39256,32 @@ var TriggerState = class {
 function initializeExitListener(emit,) {
   if (typeof __unframerWindow2 === 'undefined') return;
   const visibilityChangeHandler = () => {
-    if (document.hidden) emit();
+    if (document.hidden) {
+      emit({
+        type: 'exit',
+        exitType: 'visibilitychange',
+      },);
+    }
   };
   __unframerWindow2.document.addEventListener('visibilitychange', visibilityChangeHandler,);
-  __unframerWindow2.document.documentElement.addEventListener('mouseleave', emit,);
+  const mouseLeaveHandler = () =>
+    emit({
+      type: 'exit',
+      exitType: 'mouseleave',
+    },);
+  __unframerWindow2.document.documentElement.addEventListener('mouseleave', mouseLeaveHandler,);
   return () => {
     __unframerWindow2.document.removeEventListener('visibilitychange', visibilityChangeHandler,);
-    __unframerWindow2.document.documentElement.removeEventListener('mouseleave', emit,);
+    __unframerWindow2.document.documentElement.removeEventListener('mouseleave', mouseLeaveHandler,);
   };
 }
 function initializeScrollPercentageListener(emit,) {
   if (typeof __unframerWindow2 === 'undefined') return;
-  const debouncedEmit = debounce(emit, 100,);
+  const debouncedEmit = debounce(() =>
+    emit({
+      type: 'scrollPercentage',
+      scrollPercentage: getScrollPercentage(),
+    },), 100,);
   __unframerWindow2.document.addEventListener('scroll', debouncedEmit,);
   return () => {
     __unframerWindow2.document.removeEventListener('scroll', debouncedEmit,);
@@ -39128,8 +39292,17 @@ function getScrollPercentage() {
   return __unframerWindow2.scrollY / (__unframerWindow2.document.documentElement.scrollHeight - __unframerWindow2.innerHeight) * 100 || 0;
 }
 function isEmptyTrigger(trigger,) {
-  return trigger.conditions.length === 0 && !trigger.cookies?.rules.length && !trigger.urlParams?.rules.length && !trigger.pageCount &&
-    !trigger.includeRoutes?.length && !trigger.excludeRoutes?.length;
+  return trigger.interactions.length === 0 && !trigger.cookies?.rules.length && !trigger.urlParams?.rules.length && !trigger.pageCount &&
+    !trigger.includeRoutes?.length && !trigger.excludeRoutes?.length && !trigger.schedule?.startAt && !trigger.schedule?.endAt &&
+    // a trigger is still empty if it only has a trigger_invoke event history rule
+    !trigger.eventHistory?.some((rule) => rule.eventType !== 'trigger_invoke');
+}
+function parseTriggerTargetId(targetId,) {
+  const [nodeId, actionSuffix,] = targetId.split('-',);
+  return {
+    nodeId,
+    actionSuffix,
+  };
 }
 var TriggerStateContext = /* @__PURE__ */ (() => {
   const Context2 = createContext(void 0,);
@@ -39144,6 +39317,7 @@ function TriggerStateProvider({
   const visitedPagesRef = useRef();
   const routeChangeHandlerRef = useRef();
   const routerAPIRef = useRef(routerAPI,);
+  const triggerStateRef = useRef(null,);
   routerAPIRef.current = routerAPI;
   useEffect(() => {
     if (!currentRoutePath) return;
@@ -39160,12 +39334,27 @@ function TriggerStateProvider({
       setRouteChangeHandler: (handler) => {
         routeChangeHandlerRef.current = handler;
       },
+      sendTrackingEvent: async (event) => {
+        void sendTrackingEventForTriggerInvoke(routerAPIRef.current.pageviewEventData.current, event,);
+      },
     }),
+    triggerStateRef,
   }));
   return /* @__PURE__ */ jsx(TriggerStateContext.Provider, {
     value: initialState2,
     children,
   },);
+}
+async function sendTrackingEventForTriggerInvoke(maybePageViewEventData, event,) {
+  if (!isValidTrackingId(event.trackingId,)) return;
+  const pageViewEventData = maybePageViewEventData instanceof Promise ? await maybePageViewEventData : maybePageViewEventData;
+  if (!pageViewEventData) return;
+  sendTrackingEvent('published_site_trigger_invoke', {
+    ...pageViewEventData,
+    ...event,
+    // Don't attach a tracking ID if it's empty
+    trackingId: event.trackingId || null,
+  }, 'lazy',);
 }
 function resolveRoutePath(routerAPI, routeId, pathVariables,) {
   const route = routerAPI.getRoute(routeId,);
@@ -39174,19 +39363,21 @@ function resolveRoutePath(routerAPI, routeId, pathVariables,) {
 }
 function useTriggerState() {
   const triggerStateContext = useContext(TriggerStateContext,);
-  const triggerState = getTriggerState(triggerStateContext?.getInitialState,);
+  const triggerState = getTriggerState(triggerStateContext,);
   return triggerState;
 }
-function getTriggerState(getInitialState,) {
+function getTriggerState(triggerStateContext,) {
   if (typeof __unframerWindow2 === 'undefined' || !__unframerWindow2.document || isStaticRenderer()) return null;
-  const safeWindow2 = __unframerWindow2;
-  if ('__framerTriggers' in safeWindow2 && safeWindow2.__framerTriggers instanceof TriggerState) {
-    return safeWindow2.__framerTriggers;
+  assert(triggerStateContext, 'TriggerStateProvider is missing',);
+  const {
+    getInitialState,
+    triggerStateRef,
+  } = triggerStateContext;
+  if (triggerStateRef.current instanceof TriggerState) {
+    return triggerStateRef.current;
   }
-  assert(getInitialState, 'getInitialState should be provided or window.__framerTriggers should be already initialized',);
-  const triggerState = new TriggerState(getInitialState(),);
-  safeWindow2.__framerTriggers = triggerState;
-  return triggerState;
+  triggerStateRef.current = new TriggerState(getInitialState(),);
+  return triggerStateRef.current;
 }
 var mainTagId = 'main';
 var generatedPageDatasetKey = 'framerGeneratedPage';
@@ -45593,6 +45784,16 @@ function withAllOption(options, isOptional, allItemsLabel, includeDivider = true
   }
   return [allOption, ...options,];
 }
+function createTrigger(input,) {
+  if (typeof __unframerWindow2 === 'undefined' || !__unframerWindow2.document) return input;
+  const safeWindow2 = __unframerWindow2;
+  for (const rule of input.eventHistory ?? []) {
+    if (!rule.eventId) continue;
+    safeWindow2[TriggerActionsStorageSymbol] ??= /* @__PURE__ */ new Set();
+    safeWindow2[TriggerActionsStorageSymbol].add(`${rule.eventType}:${rule.eventId}`,);
+  }
+  return input;
+}
 function TriggerSubscription({
   triggerId,
   targetId,
@@ -48086,6 +48287,10 @@ var builtInUniforms = {
     name: 'u_deltaTime',
     glslType: 'float',
   },
+  pixelRatio: {
+    name: 'u_pixelRatio',
+    glslType: 'float',
+  },
 };
 var webGLContextLostEvent = 'webglcontextlost';
 var WebGL2ShaderRenderer = class {
@@ -48100,6 +48305,7 @@ var WebGL2ShaderRenderer = class {
     __publicField(this, 'canvas',);
     __publicField(this, 'contextLostHandler',);
     __publicField(this, 'disposed', false,);
+    __publicField(this, 'pixelRatio', __unframerWindow2.devicePixelRatio || 1,);
     this.canvas = canvas;
     const gl = canvas.getContext('webgl2', {
       alpha: true,
@@ -48136,6 +48342,7 @@ var WebGL2ShaderRenderer = class {
       [builtInUniforms.time.name]: gl.getUniformLocation(program, builtInUniforms.time.name,),
       [builtInUniforms.resolution.name]: gl.getUniformLocation(program, builtInUniforms.resolution.name,),
       [builtInUniforms.deltaTime.name]: gl.getUniformLocation(program, builtInUniforms.deltaTime.name,),
+      [builtInUniforms.pixelRatio.name]: gl.getUniformLocation(program, builtInUniforms.pixelRatio.name,),
     };
     this.customUniformLocations = /* @__PURE__ */ new Map();
     gl.clearColor(0, 0, 0, 0,);
@@ -48184,6 +48391,7 @@ var WebGL2ShaderRenderer = class {
     if (this.disposed) return;
     const rect = this.canvas.getBoundingClientRect();
     const dpr = __unframerWindow2.devicePixelRatio || 1;
+    this.pixelRatio = dpr;
     const width = rect.width * dpr;
     const height = rect.height * dpr;
     this.canvas.width = width;
@@ -48312,7 +48520,7 @@ var WebGL2ShaderRenderer = class {
     gl.vertexAttribPointer(texCoordLocation, 2, gl.FLOAT, false, 0, 0,);
   }
   /**
-   * Sets a uniform value in the shader program.
+   * Sets a non-texture uniform value in the shader program.
    */
   setUniform(location, uniform,) {
     if (location === null) return;
@@ -48323,6 +48531,9 @@ var WebGL2ShaderRenderer = class {
       case 'float':
         this.gl.uniform1f(location, uniform.value,);
         break;
+      case 'int':
+        this.gl.uniform1i(location, uniform.value,);
+        break;
       case 'vec2':
         this.gl.uniform2fv(location, uniform.value,);
         break;
@@ -48331,6 +48542,9 @@ var WebGL2ShaderRenderer = class {
         break;
       case 'vec4':
         this.gl.uniform4fv(location, uniform.value,);
+        break;
+      case 'vec4[]':
+        this.gl.uniform4fv(location, uniform.value.flat(),);
         break;
     }
   }
@@ -48367,14 +48581,12 @@ var WebGL2ShaderRenderer = class {
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR,);
     }
   }
-  /**
-   * Updates the built-in uniforms: u_time, u_resolution, u_deltaTime.
-   */
   updateBuiltInUniforms(elapsedTime, deltaTime,) {
     const {
       gl,
       builtInUniformLocations: locations,
       canvas,
+      pixelRatio,
     } = this;
     if (locations[builtInUniforms.time.name] !== null) {
       gl.uniform1f(locations[builtInUniforms.time.name], elapsedTime,);
@@ -48384,6 +48596,9 @@ var WebGL2ShaderRenderer = class {
     }
     if (locations[builtInUniforms.deltaTime.name] !== null) {
       gl.uniform1f(locations[builtInUniforms.deltaTime.name], deltaTime,);
+    }
+    if (locations[builtInUniforms.pixelRatio.name] !== null) {
+      gl.uniform1f(locations[builtInUniforms.pixelRatio.name], pixelRatio,);
     }
   }
 };
@@ -48402,19 +48617,52 @@ function controlTypeToGLSLType(controlType,) {
       assertNever(controlType,);
   }
 }
+function toUniformName(key7,) {
+  return `${uniformPrefix}${key7}`;
+}
+function toArrayLengthName(uniformName,) {
+  return `${uniformName}_length`;
+}
+function toArrayMaxLengthName(key7,) {
+  const keyAsConstantCase = key7.replace(/[a-z0-9](?=[A-Z])/g, '$&_',).toUpperCase();
+  return `NUM_${keyAsConstantCase}`;
+}
 var glslVersionDirective = '#version 300 es';
 var glslPrecisionDirective = 'precision highp float;';
 var glslUVInput = 'in vec2 v_uv;';
 var glslFragColorOutput = 'out vec4 fragColor;';
 function generateShaderHead(propertyControls,) {
   const lines = [glslVersionDirective, glslPrecisionDirective, '', glslUVInput, glslFragColorOutput,];
-  if (propertyControls && Object.keys(propertyControls,).length > 0) {
+  const values = propertyControls ? Object.values(propertyControls,) : [];
+  if (values.length > 0) {
+    const hasArrays = values.some((control) => control?.type === 'array'/* Array */
+    );
+    if (hasArrays) {
+      lines.push('',);
+      for (const key7 in propertyControls) {
+        const control = propertyControls[key7];
+        if (!control || control.type !== 'array') continue;
+        if (control.control?.type !== 'color') {
+          throw new Error(`Shader array control "${key7}" is not supported. Only color arrays may be defined.`,);
+        }
+        if (!isNumber2(control.maxCount,)) {
+          throw new Error(`Shader array control "${key7}" must have a maxCount.`,);
+        }
+        lines.push(`#define ${toArrayMaxLengthName(key7,)} ${control.maxCount}`,);
+      }
+    }
     lines.push('',);
     for (const key7 in propertyControls) {
       const control = propertyControls[key7];
       if (!control) continue;
-      const glslType = controlTypeToGLSLType(control.type,);
-      lines.push(`uniform ${glslType} ${uniformPrefix}${key7};`,);
+      if (control.type === 'array') {
+        const name = toUniformName(key7,);
+        lines.push(`uniform vec4 ${name}[${toArrayMaxLengthName(key7,)}];`,);
+        lines.push(`uniform int ${toArrayLengthName(name,)};`,);
+      } else {
+        const glslType = controlTypeToGLSLType(control.type,);
+        lines.push(`uniform ${glslType} ${toUniformName(key7,)};`,);
+      }
     }
   }
   lines.push('',);
@@ -48597,13 +48845,29 @@ async function resolveUniform(uniform,) {
         value: image,
       };
     }
+    case 'array':
+      return {
+        type: 'vec4[]',
+        value: uniform.value.map(colorToVec4,),
+      };
     default:
       assertNever(uniform,);
   }
 }
 async function resolveUniforms(uniforms,) {
-  const entries = await Promise.all(Object.entries(uniforms,).map(async ([name, uniform,],) => [name, await resolveUniform(uniform,),]),);
-  return Object.fromEntries(entries.filter(([_, value,],) => value !== void 0),);
+  const result = {};
+  for (const [name, uniform,] of Object.entries(uniforms,)) {
+    const resolved = await resolveUniform(uniform,);
+    if (!resolved) continue;
+    result[name] = resolved;
+    if (uniform.type === 'array') {
+      result[toArrayLengthName(name,)] = {
+        type: 'int',
+        value: uniform.value.length,
+      };
+    }
+  }
+  return result;
 }
 function useResolvedUniforms(uniforms,) {
   const [resolvedUniforms, setResolvedUniforms,] = useState({},);
@@ -56322,6 +56586,7 @@ export {
   createProjectionNode,
   createRenderBatcher,
   createScopedAnimate,
+  createTrigger,
   cssBackgroundSize,
   cssCollector,
   cubicBezier,
@@ -56484,6 +56749,7 @@ export {
   isDragging,
   isEasingArray,
   isElementKeyboardAccessible,
+  isEmptyTrigger,
   isEqual,
   isFiniteNumber,
   isForcedMotionValue,
