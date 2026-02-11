@@ -12021,7 +12021,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.SWR2PHEV.mjs
+// /:https://app.framerstatic.com/framer.QL25ILOB.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -51526,29 +51526,22 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
     onClear,
     ...rest
   } = props;
-  const isControlled = value !== void 0 && defaultValue === void 0 && onChange !== void 0;
-  const [uncontrolledHasValue, setUncontrolledHasValue,] = useState(!!defaultValue,);
-  const [prevDefaultValue, setPrevDefaultValue,] = useState();
+  const [internalValue, setInternalValue,] = useState(defaultValue ?? '',);
+  const [prevDefaultValue, setPrevDefaultValue,] = useState(defaultValue,);
   const inputRef = useRef(null,);
-  const isCanvas = useIsOnFramerCanvas();
-  if (!isControlled && defaultValue !== prevDefaultValue) {
-    setUncontrolledHasValue(!!defaultValue,);
+  if (defaultValue !== prevDefaultValue) {
     setPrevDefaultValue(defaultValue,);
+    setInternalValue(defaultValue ?? '',);
   }
+  const computedValue = value ?? internalValue;
   const handleChange = useCallback2(async (e) => {
-    if (!isControlled) {
-      await yieldToMain({
-        continueAfter: 'paint',
-      },);
-    }
-    const newValue = e.target.value;
+    setInternalValue(e.target.value,);
     onChange?.(e,);
-    startTransition2(() => setUncontrolledHasValue(!!newValue,));
-  }, [isControlled, onChange,],);
+  }, [onChange,],);
   const handleClear = useCallback2(() => {
-    if (!isControlled) return;
     onClear?.();
-  }, [isControlled, onClear,],);
+    startTransition2(() => setInternalValue('',));
+  }, [onClear,],);
   const eventHandlers = useCustomValidity(onValid, onInvalid, handleChange, onBlur, onFocus,);
   if (type === 'hidden') {
     return /* @__PURE__ */ jsx(motion.input, {
@@ -51558,17 +51551,8 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
     },);
   }
   const dataProps = autofillEnabled === false ? passwordManagerIgnoreDataProps : void 0;
-  const hasValue = isControlled ? !!value : uncontrolledHasValue;
+  const hasValue = !!computedValue;
   const showClear = !!onClear && hasValue;
-  const valueProps = isControlled
-    ? {
-      value,
-    }
-    : {
-      defaultValue,
-      // Trick the input to update when the default value updates on the canvas.
-      key: isCanvas ? defaultValue : void 0,
-    };
   return /* @__PURE__ */ jsxs(motion.div, {
     ref,
     style: style2,
@@ -51585,7 +51569,7 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
           name: inputName,
           placeholder,
           className: inputClassName,
-          ...valueProps,
+          value: computedValue,
           maxLength,
         },)
         : /* @__PURE__ */ jsx(motion.input, {
@@ -51598,7 +51582,7 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
           name: inputName,
           placeholder,
           className: cx(inputClassName, !hasValue && emptyValueClassName,),
-          ...valueProps,
+          value: computedValue,
           min,
           max,
           step: step2,
