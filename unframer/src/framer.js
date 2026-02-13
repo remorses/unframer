@@ -12021,7 +12021,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.QL25ILOB.mjs
+// /:https://app.framerstatic.com/framer.FPZKHWW5.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -15658,6 +15658,9 @@ function useMemoOne(factory, inputs,) {
     committed.current = cache2;
   }, [cache2,],);
   return cache2.result;
+}
+function useCallbackOne(callback, inputs,) {
+  return useMemoOne(() => callback, inputs,);
 }
 async function getLocalesForCurrentRoute(activeLocale, locales, currentRoute, pathVariables, collectionUtils,) {
   if (!currentRoute) return locales;
@@ -21478,6 +21481,28 @@ var Rect = {
         };
       }
     }
+  },
+  /** @internal */
+  closestRect: (rects, point2,) => {
+    let index = 0;
+    let rect = rects[0];
+    assert(rect, 'Rect array is empty',);
+    let distance2 = Rect.pointDistance(rect, point2,);
+    for (let candidateIndex = 1; candidateIndex < rects.length; candidateIndex += 1) {
+      const candidateRect = rects[candidateIndex];
+      assert(candidateRect,);
+      const candidateDistance = Rect.pointDistance(candidateRect, point2,);
+      if (candidateDistance < distance2) {
+        index = candidateIndex;
+        rect = candidateRect;
+        distance2 = candidateDistance;
+      }
+      if (distance2 === 0) break;
+    }
+    return {
+      rect,
+      index,
+    };
   },
 };
 var edgesInOrder = ['top', 'right', 'bottom', 'left',];
@@ -45794,6 +45819,16 @@ function createTrigger(input,) {
   }
   return input;
 }
+function useStableCallback(callback,) {
+  const ref = useRef(callback,);
+  useInsertionEffect(() => {
+    ref.current = callback;
+  }, [callback,],);
+  return useCallbackOne((...args) => {
+    const latestFn = ref.current;
+    return latestFn(...args,);
+  }, [],);
+}
 function TriggerSubscription({
   triggerId,
   targetId,
@@ -45802,7 +45837,7 @@ function TriggerSubscription({
   triggeredExternally,
 },) {
   const triggerState = useTriggerState();
-  const stableCallback = useStableCallback(callback,);
+  const stableCallback = useStableCallback(callback ?? noop2,);
   useEffect(() => {
     const unsubscribe = triggerState?.subscribe(triggerId, targetId, trigger, stableCallback,);
     return unsubscribe;
@@ -45815,11 +45850,6 @@ function TriggerSubscription({
     }
   }, [triggerState, triggerId, triggeredExternally,],);
   return null;
-}
-function useStableCallback(callback,) {
-  const latest = useRef(callback,);
-  latest.current = callback;
-  return useCallback2((...args) => latest.current?.(...args,), [],);
 }
 function useTriggers() {
   const triggerState = useTriggerState();
@@ -50414,7 +50444,7 @@ var CustomFontSource = class _CustomFontSource {
           fonts[selector] = font;
         }
       } else if (duplicateInfo) {
-        log2.warn('Duplicate font found for:', font, 'with existing font:', duplicateInfo.existingFont,);
+        log2.debug('Duplicate font found for:', font, 'with existing font:', duplicateInfo.existingFont,);
         const existingFont = duplicateInfo.existingFont;
         const newIsWoff2 = font.file?.endsWith('.woff2',) ?? false;
         const existingIsWoff2 = existingFont.file?.endsWith('.woff2',) ?? false;
@@ -52137,11 +52167,6 @@ function getTotalVerticalPadding(lightbox,) {
 function getTotalHorizontalPadding(lightbox,) {
   return getSidePadding(lightbox?.paddingLeft, lightbox?.padding,) + getSidePadding(lightbox?.paddingRight, lightbox?.padding,);
 }
-function useStableCallback2(callback,) {
-  const latest = useRef(callback,);
-  latest.current = callback;
-  return useCallback2((...args) => latest.current(...args,), [],);
-}
 function createImageWithSrcSet(lightbox, background,) {
   if (!lightbox || !background || !background.src) return background;
   const base = new URL(background.src,);
@@ -52262,7 +52287,7 @@ function withLightboxEffect(Component18,) {
       },);
     }, [lightbox, open, ref, ancestorTickerContext?.stop, isInTickerItem,],);
     const aspectRatio2 = openOverrides?.aspectRatio ?? 1;
-    const decode = useStableCallback2(() => {
+    const decode = useStableCallback(() => {
       if (!lightbox || !image || !image.src) return;
       const srcDecodePromise = decodePromiseRef.current?.[image.src];
       if (srcDecodePromise) return srcDecodePromise;
