@@ -12021,7 +12021,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.FPZKHWW5.mjs
+// /:https://app.framerstatic.com/framer.OQIYQDAT.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -13013,7 +13013,10 @@ var requestIdleCallback = /* @__PURE__ */ (() =>
   // eslint-disable-next-line compat/compat,framer-studio/tscompat
   supportsRequestIdleCallback ? __unframerWindow2.requestIdleCallback : setTimeout)();
 function encodeSVGForCSS(svg,) {
-  return `url('data:image/svg+xml,${svg.replaceAll('#', '%23',).replaceAll('\'', '%27',)}')`;
+  return `url('${encodeSVGForURL(svg,)}')`;
+}
+function encodeSVGForURL(svg,) {
+  return `data:image/svg+xml,${svg.replaceAll('#', '%23',).replaceAll('\'', '%27',).replaceAll('"', '%22',)}`;
 }
 function getPleaseReportMessage(message, error,) {
   const formattedError = error instanceof Error ? error.stack ?? error.message : error;
@@ -22105,6 +22108,7 @@ var ControlType = /* @__PURE__ */ ((ControlType2) => {
   ControlType2['Slot'] = 'slot';
   ControlType2['Array'] = 'array';
   ControlType2['EventHandler'] = 'eventhandler';
+  ControlType2['ChangeHandler'] = 'changehandler';
   ControlType2['Transition'] = 'transition';
   ControlType2['BoxShadow'] = 'boxshadow';
   ControlType2['Link'] = 'link';
@@ -22622,6 +22626,7 @@ var FormInputStyleVariableNames = /* @__PURE__ */ ((FormInputStyleVariableNames2
   FormInputStyleVariableNames2['IconBackgroundImage'] = '--framer-input-icon-image';
   FormInputStyleVariableNames2['IconMaskImage'] = '--framer-input-icon-mask-image';
   FormInputStyleVariableNames2['IconColor'] = '--framer-input-icon-color';
+  FormInputStyleVariableNames2['IconContent'] = '--framer-input-icon-content';
   FormInputStyleVariableNames2['WrapperHeight'] = '--framer-input-wrapper-height';
   return FormInputStyleVariableNames2;
 })(FormInputStyleVariableNames || {},);
@@ -22767,8 +22772,16 @@ function useCustomValidity(onValid, onInvalid, onChange, onBlur, onFocus,) {
     };
   }, [handleInvalid, handleChange, handleBlur, onFocus,],);
 }
-var iconSpacing = 10;
+var rightIconSpacing = 10;
+var leftIconSpacing = 8;
 var iconSize = 16;
+var iconImageCSS = /* @__PURE__ */ (() => ({
+  backgroundRepeat: 'no-repeat',
+  backgroundSize: `${iconSize}px`,
+  maskRepeat: 'no-repeat',
+  maskSize: `${iconSize}px`,
+  backgroundColor: css2.variable(Var.IconColor,),
+}))();
 var inputIconCSSDeclaration = /* @__PURE__ */ (() => ({
   content: '',
   display: 'block',
@@ -22781,11 +22794,7 @@ var inputIconCSSDeclaration = /* @__PURE__ */ (() => ({
   padding: css2.variable(Var.Padding,),
   border: 'none',
   pointerEvents: 'none',
-  backgroundRepeat: 'no-repeat',
-  backgroundSize: `${iconSize}px`,
-  maskRepeat: 'no-repeat',
-  maskSize: `${iconSize}px`,
-  backgroundColor: css2.variable(Var.IconColor,),
+  ...iconImageCSS,
 }))();
 function createRGBVariableFallbacks(variables, fallback,) {
   return css2.variable(...variables.flatMap((variable) => [`${variable}-rgb`, variable,]), fallback,);
@@ -23984,6 +23993,7 @@ function getControlDefaultValue(control,) {
       case 'richtext':
       case 'pagescope':
       case 'eventhandler':
+      case 'changehandler':
       case 'segmentedenum':
       case 'responsiveimage':
       case 'componentinstance':
@@ -48324,7 +48334,7 @@ var builtInUniforms = {
 };
 var webGLContextLostEvent = 'webglcontextlost';
 var WebGL2ShaderRenderer = class {
-  constructor(canvas, vertexSource, fragmentSource,) {
+  constructor(canvas, vertexSource, fragmentSource, resolutionScale = 1,) {
     __publicField(this, 'gl',);
     __publicField(this, 'program',);
     __publicField(this, 'vao',);
@@ -48336,11 +48346,16 @@ var WebGL2ShaderRenderer = class {
     __publicField(this, 'contextLostHandler',);
     __publicField(this, 'disposed', false,);
     __publicField(this, 'pixelRatio', __unframerWindow2.devicePixelRatio || 1,);
+    __publicField(this, 'resolutionScale',);
+    __publicField(this, 'lastBufferWidth', 0,);
+    __publicField(this, 'lastBufferHeight', 0,);
+    this.resolutionScale = resolutionScale;
     this.canvas = canvas;
     const gl = canvas.getContext('webgl2', {
       alpha: true,
       premultipliedAlpha: false,
-      antialias: true,
+      antialias: false,
+      powerPreference: 'default',
     },);
     if (!gl) {
       throw new Error('WebGL2 not supported',);
@@ -48420,10 +48435,16 @@ var WebGL2ShaderRenderer = class {
   resize() {
     if (this.disposed) return;
     const rect = this.canvas.getBoundingClientRect();
+    const cssWidth = Math.min(rect.width, this.canvas.offsetWidth,);
+    const cssHeight = Math.min(rect.height, this.canvas.offsetHeight,);
     const dpr = __unframerWindow2.devicePixelRatio || 1;
-    this.pixelRatio = dpr;
-    const width = rect.width * dpr;
-    const height = rect.height * dpr;
+    const effectiveDpr = Math.max(dpr * this.resolutionScale, 1,);
+    this.pixelRatio = effectiveDpr;
+    const width = cssWidth * effectiveDpr;
+    const height = cssHeight * effectiveDpr;
+    if (width === this.lastBufferWidth && height === this.lastBufferHeight) return;
+    this.lastBufferWidth = width;
+    this.lastBufferHeight = height;
     this.canvas.width = width;
     this.canvas.height = height;
     this.gl.viewport(0, 0, width, height,);
@@ -48602,6 +48623,7 @@ var WebGL2ShaderRenderer = class {
     gl.activeTexture(gl.TEXTURE0 + textureUnit,);
     gl.bindTexture(gl.TEXTURE_2D, entry.texture,);
     if (isNewTexture || entry.image !== image) {
+      entry.image?.close();
       entry.image = image;
       gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image,);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE,);
@@ -48753,6 +48775,7 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
   vertexShader = DEFAULT_VERTEX_SHADER,
   fragmentShader = DEFAULT_FRAGMENT_SHADER,
   animated = true,
+  resolutionScale,
   uniforms,
   onError,
   ...rest
@@ -48770,6 +48793,7 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
   const animate3 = useCallback2((time2) => {
     const renderer = rendererRef.current;
     if (!renderer) return;
+    renderer.resize();
     const {
       currentTime,
       elapsedTime,
@@ -48785,7 +48809,7 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
     const canvas = canvasRef.current;
     if (!canvas) return;
     try {
-      const renderer = new WebGL2ShaderRenderer(canvas, vertexShader, fragmentShader,);
+      const renderer = new WebGL2ShaderRenderer(canvas, vertexShader, fragmentShader, resolveResolutionScale(resolutionScale,),);
       rendererRef.current = renderer;
       rendererRef.current.resize();
       startTimeRef.current = performance.now() * timeMultiplier;
@@ -48801,21 +48825,19 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
       rendererRef.current?.dispose();
       rendererRef.current = null;
     };
-  }, [vertexShader, fragmentShader, animate3, onError,],);
+  }, [vertexShader, fragmentShader, resolutionScale, animate3, onError,],);
   const handleResize = useCallback2(() => {
     const renderer = rendererRef.current;
     if (!renderer) return;
     renderer.resize();
-    if (!animated) {
-      const {
-        currentTime,
-        elapsedTime,
-        deltaTime,
-      } = getShaderTiming(performance.now(), startTimeRef.current, lastTimeRef.current,);
-      lastTimeRef.current = currentTime;
-      renderer.render(elapsedTime, deltaTime, resolvedUniformsRef.current,);
-    }
-  }, [animated,],);
+    const {
+      currentTime,
+      elapsedTime,
+      deltaTime,
+    } = getShaderTiming(performance.now(), startTimeRef.current, lastTimeRef.current,);
+    lastTimeRef.current = currentTime;
+    renderer.render(elapsedTime, deltaTime, resolvedUniformsRef.current,);
+  }, [],);
   useCanvasResize(canvasRef, handleResize,);
   return /* @__PURE__ */ jsx(FrameWithMotion2, {
     ref,
@@ -48899,6 +48921,13 @@ async function resolveUniforms(uniforms,) {
   }
   return result;
 }
+function closeImageBitmaps(uniforms,) {
+  for (const uniform of Object.values(uniforms,)) {
+    if (uniform.type === 'sampler2D') {
+      uniform.value.close();
+    }
+  }
+}
 function useResolvedUniforms(uniforms,) {
   const [resolvedUniforms, setResolvedUniforms,] = useState({},);
   useEffect(() => {
@@ -48907,6 +48936,8 @@ function useResolvedUniforms(uniforms,) {
     resolveUniforms(uniforms,).then((resolved) => {
       if (!isCancelled) {
         startTransition2(() => setResolvedUniforms(resolved,));
+      } else {
+        closeImageBitmaps(resolved,);
       }
     },).catch(() => {},);
     return () => {
@@ -48919,12 +48950,10 @@ function useCanvasResize(canvasRef, resizeHandler,) {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const debouncedResize = debounce(resizeHandler, 100,);
-    const resizeObserver = new ResizeObserver(debouncedResize,);
+    const resizeObserver = new ResizeObserver(resizeHandler,);
     resizeObserver.observe(canvas,);
     return () => {
       resizeObserver.disconnect();
-      debouncedResize.cancel();
     };
   }, [canvasRef, resizeHandler,],);
   useOnDprChange(resizeHandler,);
@@ -48943,6 +48972,12 @@ function useOnDprChange(callback,) {
       dprQuery.removeEventListener('change', handleChange,);
     };
   }, [callback,],);
+}
+function resolveResolutionScale(scale2,) {
+  if (typeof scale2 === 'number') return scale2;
+  if (scale2 === 'performance') return 0.75;
+  if (scale2 === 'consistent') return 0;
+  return 1;
 }
 function getShaderTiming(timeMs, startTime, lastTime,) {
   const currentTime = timeMs * timeMultiplier;
@@ -51556,21 +51591,24 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
     onClear,
     ...rest
   } = props;
-  const [internalValue, setInternalValue,] = useState(defaultValue ?? '',);
-  const [prevDefaultValue, setPrevDefaultValue,] = useState(defaultValue,);
-  const inputRef = useRef(null,);
-  if (defaultValue !== prevDefaultValue) {
-    setPrevDefaultValue(defaultValue,);
-    setInternalValue(defaultValue ?? '',);
+  const externalValue = value ?? defaultValue;
+  const [internalValue, setInternalValue,] = useState(externalValue ?? '',);
+  const [prevExternalValue, setPrevExternalValue,] = useState(externalValue,);
+  if (externalValue !== prevExternalValue) {
+    setPrevExternalValue(externalValue,);
+    setInternalValue(externalValue ?? '',);
   }
-  const computedValue = value ?? internalValue;
-  const handleChange = useCallback2(async (e) => {
-    setInternalValue(e.target.value,);
-    onChange?.(e,);
+  const handleChange = useCallback2((event) => {
+    setInternalValue(event.target.value,);
+    if (onChange) {
+      startTransition2(() => onChange(event,));
+    }
   }, [onChange,],);
   const handleClear = useCallback2(() => {
-    onClear?.();
-    startTransition2(() => setInternalValue('',));
+    setInternalValue('',);
+    if (onClear) {
+      startTransition2(() => onClear());
+    }
   }, [onClear,],);
   const eventHandlers = useCustomValidity(onValid, onInvalid, handleChange, onBlur, onFocus,);
   if (type === 'hidden') {
@@ -51581,17 +51619,22 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
     },);
   }
   const dataProps = autofillEnabled === false ? passwordManagerIgnoreDataProps : void 0;
-  const hasValue = !!computedValue;
+  const hasValue = !!internalValue;
   const showClear = !!onClear && hasValue;
   return /* @__PURE__ */ jsxs(motion.div, {
     ref,
     style: style2,
-    className: cx(textInputWrapperClassName, inputWrapperClassName, className2, onClear && hasClearButtonClassName,),
+    className: cx(
+      textInputWrapperClassName,
+      inputWrapperClassName,
+      className2,
+      type === 'text' && textInputTypeWrapperClassName,
+      onClear && hasClearButtonClassName,
+    ),
     ...rest,
     children: [
       type === 'textarea'
         ? /* @__PURE__ */ jsx(motion.textarea, {
-          ref: inputRef,
           ...dataProps,
           ...eventHandlers,
           required,
@@ -51599,11 +51642,10 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
           name: inputName,
           placeholder,
           className: inputClassName,
-          value: computedValue,
+          value: internalValue,
           maxLength,
         },)
         : /* @__PURE__ */ jsx(motion.input, {
-          ref: inputRef,
           ...dataProps,
           ...eventHandlers,
           type,
@@ -51612,7 +51654,7 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
           name: inputName,
           placeholder,
           className: cx(inputClassName, !hasValue && emptyValueClassName,),
-          value: computedValue,
+          value: internalValue,
           min,
           max,
           step: step2,
@@ -51644,8 +51686,8 @@ function ClearIcon() {
     },),
   },);
 }
-var iconSize2 = 16;
 var textInputWrapperClassName = 'framer-form-text-input';
+var textInputTypeWrapperClassName = 'framer-form-text-input-type';
 var clearButtonClassName = 'framer-form-text-input-clear';
 var hasClearButtonClassName = 'framer-form-text-input-has-clear-button';
 var defaultTextareaResizerIcon =
@@ -51734,13 +51776,14 @@ var styles = /* @__PURE__ */ (() => [
     ),
     overflow: 'visible',
   },),
+  // Date/time input right-positioned input icon
   css2(
     `.${textInputWrapperClassName} .${inputClassName}[type="date"]::before, .${textInputWrapperClassName} .${inputClassName}[type="time"]::before`,
     {
       ...inputIconCSSDeclaration,
-      paddingLeft: `${iconSpacing}px`,
-      maskPosition: `${iconSpacing}px center`,
-      backgroundPosition: `${iconSpacing}px center`,
+      paddingLeft: `${rightIconSpacing}px`,
+      maskPosition: `${rightIconSpacing}px center`,
+      backgroundPosition: `${rightIconSpacing}px center`,
     },
   ),
   css2(`.${textInputWrapperClassName} .${inputClassName}[type="date"]::before`, {
@@ -51750,6 +51793,35 @@ var styles = /* @__PURE__ */ (() => [
   },),
   css2(`.${textInputWrapperClassName} .${inputClassName}[type="time"]::before`, {
     maskImage: css2.variable('--framer-input-icon-mask-image', encodeSVGForCSS(defaultTimeIconMaskImage,),),
+    backgroundImage: css2.variable('--framer-input-icon-image',/* IconBackgroundImage */
+    ),
+  },),
+  // type="text" input might have a left-positioned icon so we need to apply the padding to the wrapper
+  // and make icon statically positioned
+  css2(`.${textInputWrapperClassName}.${textInputTypeWrapperClassName}`, {
+    display: 'flex',
+    alignItems: 'center',
+    padding: css2.variable('--framer-input-padding',/* Padding */
+    ),
+  },),
+  css2(`.${textInputWrapperClassName} .${inputClassName}[type="text"]`, {
+    flex: 1,
+    minWidth: 0,
+    width: 'auto',
+    padding: 0,
+  },),
+  css2(`.${textInputWrapperClassName}.${textInputTypeWrapperClassName}::before`, {
+    content: css2.variable('--framer-input-icon-content', 'none',),
+    display: 'block',
+    flexShrink: 0,
+    width: `${iconSize}px`,
+    height: `${iconSize}px`,
+    marginRight: `${leftIconSpacing}px`,
+    ...iconImageCSS,
+    backgroundPosition: 'center',
+    maskPosition: 'center',
+    maskImage: css2.variable('--framer-input-icon-mask-image',/* IconMaskImage */
+    ),
     backgroundImage: css2.variable('--framer-input-icon-image',/* IconBackgroundImage */
     ),
   },),
@@ -51765,7 +51837,7 @@ var styles = /* @__PURE__ */ (() => [
     ),
     paddingTop: 0,
     paddingBottom: 0,
-    width: `${iconSize2}px`,
+    width: `${iconSize}px`,
     // Makes sure the icon hit target covers the entire height of the input.
     height: '100%',
   },),
@@ -51787,7 +51859,7 @@ var styles = /* @__PURE__ */ (() => [
     right: 0,
     top: 0,
     bottom: 0,
-    width: `${iconSize2}px`,
+    width: `${iconSize}px`,
     boxSizing: 'content-box',
     padding: css2.variable('--framer-input-padding',/* Padding */
     ),
@@ -51807,7 +51879,7 @@ var styles = /* @__PURE__ */ (() => [
     paddingRight: `calc(${
       css2.variable('--framer-input-padding',/* Padding */
       )
-    } + ${iconSize2}px + ${iconSpacing}px)`,
+    } + ${iconSize}px + ${rightIconSpacing}px)`,
   },),
 ])();
 var FormPlainTextInput2 = /* @__PURE__ */ withCSS(PlainTextInput, styles, 'framer-lib-form-plain-text-input',);
@@ -52086,9 +52158,9 @@ var styles3 = /* @__PURE__ */ (() => [
   },),
   css2(`.${selectWrapperClassName}::before`, {
     ...inputIconCSSDeclaration,
-    paddingLeft: `${iconSpacing}px`,
-    backgroundPosition: `${iconSpacing}px center`,
-    maskPosition: `${iconSpacing}px center`,
+    paddingLeft: `${rightIconSpacing}px`,
+    backgroundPosition: `${rightIconSpacing}px center`,
+    maskPosition: `${rightIconSpacing}px center`,
     backgroundImage: css2.variable('--framer-input-icon-image',/* IconBackgroundImage */
     ),
     maskImage: css2.variable('--framer-input-icon-mask-image', `url('${defaultSelectCaretMaskImage}')`,),
