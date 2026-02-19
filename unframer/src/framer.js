@@ -12021,7 +12021,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.OQIYQDAT.mjs
+// /:https://app.framerstatic.com/framer.TSSH6SWY.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -44790,8 +44790,8 @@ var ScalarVariable = class extends ScalarNode {
   }
 };
 var Normalizer = class {
-  constructor(memo4,) {
-    this.memo = memo4;
+  constructor(memo5,) {
+    this.memo = memo5;
   }
   finishRelational(node,) {
     return this.memo.addRelational(node,);
@@ -45676,6 +45676,8 @@ var variableBindingHooks = {
   ]: useFormSelectBooleanVariableBinding,
   ['collectionreference'/* CollectionReference */
   ]: useFormSelectCollectionVariableBinding,
+  ['enum'/* Enum */
+  ]: useFormSelectEnumVariableBinding,
 };
 function useFormSelectVariableBinding(options,) {
   const variableTypeRef = useRef(options.variableType,);
@@ -45741,24 +45743,41 @@ function useFormSelectCollectionVariableBinding({
     titleId,
   },);
   const value = isBoolean(rawValue,) ? void 0 : rawValue;
-  const selectValue = value === void 0 ? ALL_ELEMENTS_VALUE : value;
-  const selectOptionsIncludingOptional = useMemo(() => withAllOption(selectOptions, isOptional, allItemsLabel,), [
+  return useStringSelectBinding({
     allItemsLabel,
     isOptional,
     selectOptions,
-  ],);
-  const onChange = useCallback2((event) => {
-    if (!(event.target instanceof HTMLSelectElement)) return;
-    const selectedValue = event.target.value;
-    startTransition2(() => {
-      if (selectedValue === ALL_ELEMENTS_VALUE) {
-        setValue(void 0,);
-      } else {
-        setValue(selectedValue,);
-      }
-    },);
-  }, [setValue,],);
-  return [selectValue, selectOptionsIncludingOptional, onChange,];
+    setValue,
+    value,
+  },);
+}
+function useFormSelectEnumVariableBinding({
+  allItemsLabel,
+  options: enumOptions,
+  getOptionTitle,
+  isOptional,
+  setValue,
+  value: rawValue,
+},) {
+  const {
+    activeLocale,
+  } = useLocaleInfo();
+  const selectOptions = useMemo(() => {
+    if (!enumOptions) return void 0;
+    return enumOptions.map((enumId) => ({
+      type: 'option',
+      value: enumId,
+      title: getOptionTitle?.(enumId, activeLocale,) ?? '',
+    }));
+  }, [activeLocale, enumOptions, getOptionTitle,],);
+  const value = isString(rawValue,) ? rawValue : void 0;
+  return useStringSelectBinding({
+    allItemsLabel,
+    isOptional,
+    selectOptions,
+    setValue,
+    value,
+  },);
 }
 function useCollectionSelectOptions({
   collectionData,
@@ -45803,6 +45822,32 @@ function useCollectionSelectOptions({
       },];
     },);
   }, [records, titleId, slugId,],);
+}
+function useStringSelectBinding({
+  allItemsLabel,
+  isOptional,
+  selectOptions,
+  setValue,
+  value,
+},) {
+  const selectValue = value === void 0 ? ALL_ELEMENTS_VALUE : value;
+  const selectOptionsIncludingOptional = useMemo(() => withAllOption(selectOptions, isOptional, allItemsLabel,), [
+    allItemsLabel,
+    isOptional,
+    selectOptions,
+  ],);
+  const onChange = useCallback2((event) => {
+    if (!(event.target instanceof HTMLSelectElement)) return;
+    const selectedValue = event.target.value;
+    startTransition2(() => {
+      if (selectedValue === ALL_ELEMENTS_VALUE) {
+        setValue(void 0,);
+      } else {
+        setValue(selectedValue,);
+      }
+    },);
+  }, [setValue,],);
+  return [selectValue, selectOptionsIncludingOptional, onChange,];
 }
 function withAllOption(options, isOptional, allItemsLabel, includeDivider = true,) {
   if (isOptional !== true || !allItemsLabel) return options;
@@ -46570,8 +46615,8 @@ function useLoadMorePagination(totalSize, pageSize, hash2, paginateWithSuspended
       continueAfter: 'paint',
     },);
     if (currentPageRef.current >= totalPages) return;
-    const renderNextPage = (startTransition20) => {
-      startTransition20(() => {
+    const renderNextPage = (startTransition19) => {
+      startTransition19(() => {
         setCurrentPage((_currentPage) => {
           const nextPage = Math.min(_currentPage + 1, totalPages,);
           currentPageRef.current = nextPage;
@@ -48333,8 +48378,9 @@ var builtInUniforms = {
   },
 };
 var webGLContextLostEvent = 'webglcontextlost';
+var FALLBACK_IMAGE_PIXEL_RATIO = 1;
 var WebGL2ShaderRenderer = class {
-  constructor(canvas, vertexSource, fragmentSource, resolutionScale = 1,) {
+  constructor(canvas, vertexSource, fragmentSource, resolutionScale,) {
     __publicField(this, 'gl',);
     __publicField(this, 'program',);
     __publicField(this, 'vao',);
@@ -48345,7 +48391,11 @@ var WebGL2ShaderRenderer = class {
     __publicField(this, 'canvas',);
     __publicField(this, 'contextLostHandler',);
     __publicField(this, 'disposed', false,);
-    __publicField(this, 'pixelRatio', __unframerWindow2.devicePixelRatio || 1,);
+    __publicField(
+      this,
+      'pixelRatio',
+      typeof __unframerWindow2 !== 'undefined' ? __unframerWindow2.devicePixelRatio : FALLBACK_IMAGE_PIXEL_RATIO,
+    );
     __publicField(this, 'resolutionScale',);
     __publicField(this, 'lastBufferWidth', 0,);
     __publicField(this, 'lastBufferHeight', 0,);
@@ -48356,6 +48406,7 @@ var WebGL2ShaderRenderer = class {
       premultipliedAlpha: false,
       antialias: false,
       powerPreference: 'default',
+      preserveDrawingBuffer: canvas instanceof OffscreenCanvas,
     },);
     if (!gl) {
       throw new Error('WebGL2 not supported',);
@@ -48434,10 +48485,16 @@ var WebGL2ShaderRenderer = class {
    */
   resize() {
     if (this.disposed) return;
-    const rect = this.canvas.getBoundingClientRect();
-    const cssWidth = Math.min(rect.width, this.canvas.offsetWidth,);
-    const cssHeight = Math.min(rect.height, this.canvas.offsetHeight,);
-    const dpr = __unframerWindow2.devicePixelRatio || 1;
+    const {
+      canvas,
+    } = this;
+    if (canvas instanceof OffscreenCanvas) {
+      throw new Error('resize() is not supported for OffscreenCanvas.',);
+    }
+    const rect = canvas.getBoundingClientRect();
+    const cssWidth = Math.min(rect.width, canvas.offsetWidth,);
+    const cssHeight = Math.min(rect.height, canvas.offsetHeight,);
+    const dpr = __unframerWindow2.devicePixelRatio;
     const effectiveDpr = Math.max(dpr * this.resolutionScale, 1,);
     this.pixelRatio = effectiveDpr;
     const width = cssWidth * effectiveDpr;
@@ -48445,9 +48502,20 @@ var WebGL2ShaderRenderer = class {
     if (width === this.lastBufferWidth && height === this.lastBufferHeight) return;
     this.lastBufferWidth = width;
     this.lastBufferHeight = height;
-    this.canvas.width = width;
-    this.canvas.height = height;
+    canvas.width = width;
+    canvas.height = height;
     this.gl.viewport(0, 0, width, height,);
+  }
+  resizeOffscreenCanvas(width, height,) {
+    if (this.disposed) return;
+    this.gl.viewport(0, 0, width, height,);
+  }
+  /**
+   * Force all commands to complete execution; used for canvas fallback image generation
+   */
+  finish() {
+    if (this.disposed) return;
+    this.gl.finish();
   }
   /**
    * Cleans up WebGL resources.
@@ -48767,65 +48835,284 @@ var canvasStyle = {
   width: '100%',
   height: '100%',
 };
+var overlayStyle = {
+  position: 'absolute',
+  inset: 0,
+  zIndex: 1,
+  width: '100%',
+  height: '100%',
+};
 var timeMultiplier = 1e-3;
 var Shader = /* @__PURE__ */ forwardRef(function Shader2({
+  mode = 'instant',
+  fallbackImage,
+  optimiseSwitching,
   style: style2,
   width,
   height,
+  vertexShader,
+  fragmentShader,
+  animated,
+  uniforms,
+  onError,
+  onReady,
+  resolutionScale,
+  ...rest
+}, ref,) {
+  const shouldReduceMotion = useReducedMotionConfig();
+  const isFallbackOnly = mode === 'fallback' || shouldReduceMotion && !!fallbackImage;
+  const shaderProps = {
+    vertexShader,
+    fragmentShader,
+    animated,
+    uniforms,
+    resolutionScale,
+    onError,
+  };
+  const [isShaderReady, setIsShaderReady,] = useState(false,);
+  useLayoutEffect(() => {
+    if (isFallbackOnly) setIsShaderReady(false,);
+  }, [isFallbackOnly,],);
+  const handleShaderReady = useCallback2(() => {
+    startTransition2(() => setIsShaderReady(true,));
+    onReady?.();
+  }, [onReady,],);
+  const hideFallback = !isFallbackOnly && isShaderReady;
+  return /* @__PURE__ */ jsx(FrameWithMotion2, {
+    ref,
+    __fromCanvasComponent: true,
+    style: {
+      ...style2,
+      overflow: 'hidden',
+    },
+    width,
+    height,
+    ...rest,
+    children: optimiseSwitching
+      ? /* @__PURE__ */ jsxs(Fragment, {
+        children: [
+          !isFallbackOnly && /* @__PURE__ */ jsx(ShaderWithFallbackOverlay, {
+            mode,
+            onReady: handleShaderReady,
+            ...shaderProps,
+          },),
+          /* @__PURE__ */ jsx(ShaderSandboxFallbackImage, {
+            src: fallbackImage,
+            hidden: hideFallback,
+          },),
+        ],
+      },)
+      : isFallbackOnly
+      ? /* @__PURE__ */ jsx(ShaderFallbackImage, {
+        src: fallbackImage,
+      },)
+      : /* @__PURE__ */ jsx(ShaderWithFallbackOverlay, {
+        mode,
+        fallbackImage,
+        onReady,
+        ...shaderProps,
+      },),
+  },);
+},);
+var ShaderFallbackImage = /* @__PURE__ */ memo2(function ShaderFallbackImage2({
+  src,
+},) {
+  if (!src) return null;
+  return /* @__PURE__ */ jsx(BackgroundImageComponent, {
+    image: {
+      src,
+      fit: 'fill',
+    },
+    alt: '',
+  },);
+},);
+var sandboxFallbackImageStyle = {
+  display: 'block',
+  width: '100%',
+  height: '100%',
+  objectFit: 'cover',
+  position: 'absolute',
+  inset: 0,
+};
+var sandboxFallbackContainerStyle = {
+  position: 'absolute',
+  inset: 0,
+};
+var ShaderSandboxFallbackImage = /* @__PURE__ */ memo2(function ShaderSandboxFallbackImage2({
+  src,
+  hidden = false,
+},) {
+  const [displaySrc, setDisplaySrc,] = useState(src,);
+  const [previousSrc, setPreviousSrc,] = useState(void 0,);
+  const fadeRef = useRef(null,);
+  useEffect(() => {
+    if (src === displaySrc) return;
+    let isActive = true;
+    if (src) {
+      const img = new Image();
+      img.src = src;
+      const setSrc = () => isActive ? startTransition2(() => setDisplaySrc(src,)) : void 0;
+      if (typeof img.decode === 'function') {
+        img.decode().then(setSrc,).catch(setSrc,);
+      } else {
+        img.onload = setSrc;
+      }
+    } else {
+      startTransition2(() => setDisplaySrc(void 0,));
+    }
+    return () => {
+      isActive = false;
+    };
+  }, [src, displaySrc,],);
+  const prevDisplayRef = useRef(displaySrc,);
+  useLayoutEffect(() => {
+    if (displaySrc !== prevDisplayRef.current && prevDisplayRef.current) {
+      setPreviousSrc(prevDisplayRef.current,);
+    }
+    prevDisplayRef.current = displaySrc;
+  }, [displaySrc,],);
+  useEffect(() => {
+    const el = fadeRef.current;
+    if (!el || !previousSrc) return;
+    let cancelled = false;
+    const animation = el.animate([{
+      opacity: 0,
+    }, {
+      opacity: 1,
+    },], {
+      duration: 300,
+      easing: 'ease-in-out',
+      fill: 'forwards',
+    },);
+    animation.onfinish = () => {
+      if (!cancelled) startTransition2(() => setPreviousSrc(void 0,));
+    };
+    return () => {
+      cancelled = true;
+      animation.cancel();
+    };
+  }, [previousSrc,],);
+  if (!displaySrc) return null;
+  const containerStyle2 = {
+    ...overlayStyle,
+    opacity: hidden ? 0 : 1,
+    pointerEvents: hidden ? 'none' : 'auto',
+  };
+  return /* @__PURE__ */ jsxs('div', {
+    style: containerStyle2,
+    children: [
+      previousSrc && /* @__PURE__ */ jsx('img', {
+        src: previousSrc,
+        decoding: 'async',
+        style: sandboxFallbackImageStyle,
+        alt: '',
+      }, previousSrc,),
+      /* @__PURE__ */ jsx('div', {
+        ref: previousSrc ? fadeRef : void 0,
+        style: sandboxFallbackContainerStyle,
+        children: /* @__PURE__ */ jsx('img', {
+          src: displaySrc,
+          style: sandboxFallbackImageStyle,
+          decoding: 'async',
+          alt: '',
+        },),
+      }, displaySrc,),
+    ],
+  },);
+},);
+function ShaderCanvas({
   vertexShader = DEFAULT_VERTEX_SHADER,
   fragmentShader = DEFAULT_FRAGMENT_SHADER,
   animated = true,
   resolutionScale,
   uniforms,
   onError,
-  ...rest
-}, ref,) {
+  onReady,
+  paused = false,
+},) {
   const canvasRef = useRef(null,);
   const rendererRef = useRef(null,);
   const animationFrameRef = useRef(0,);
   const startTimeRef = useRef(0,);
   const lastTimeRef = useRef(0,);
+  const onReadyRef = useRef(onReady,);
+  useLayoutEffect(() => {
+    onReadyRef.current = onReady;
+  }, [onReady,],);
   const resolvedUniforms = useResolvedUniforms(uniforms,);
   const resolvedUniformsRef = useRef(resolvedUniforms,);
   useLayoutEffect(() => {
     resolvedUniformsRef.current = resolvedUniforms;
   }, [resolvedUniforms,],);
+  const animatedRef = useRef(animated,);
+  useLayoutEffect(() => {
+    animatedRef.current = animated;
+  }, [animated,],);
+  const pausedRef = useRef(paused,);
+  useLayoutEffect(() => {
+    pausedRef.current = paused;
+  }, [paused,],);
   const animate3 = useCallback2((time2) => {
     const renderer = rendererRef.current;
     if (!renderer) return;
     renderer.resize();
-    const {
-      currentTime,
-      elapsedTime,
-      deltaTime,
-    } = getShaderTiming(time2, startTimeRef.current, lastTimeRef.current,);
-    lastTimeRef.current = currentTime;
-    renderer.render(elapsedTime, deltaTime, resolvedUniformsRef.current,);
-    if (animated) {
+    if (pausedRef.current) {
+      const elapsedTime = lastTimeRef.current - startTimeRef.current;
+      renderer.render(elapsedTime, 0, resolvedUniformsRef.current,);
+    } else {
+      const {
+        currentTime,
+        elapsedTime,
+        deltaTime,
+      } = getShaderTiming(time2, startTimeRef.current, lastTimeRef.current,);
+      lastTimeRef.current = currentTime;
+      renderer.render(elapsedTime, deltaTime, resolvedUniformsRef.current,);
+    }
+    if (animatedRef.current || pausedRef.current) {
       animationFrameRef.current = requestAnimationFrame(animate3,);
     }
-  }, [animated,],);
+  }, [],);
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+    let cancelled = false;
     try {
       const renderer = new WebGL2ShaderRenderer(canvas, vertexShader, fragmentShader, resolveResolutionScale(resolutionScale,),);
       rendererRef.current = renderer;
-      rendererRef.current.resize();
+      renderer.resize();
       startTimeRef.current = performance.now() * timeMultiplier;
       lastTimeRef.current = startTimeRef.current;
       animationFrameRef.current = requestAnimationFrame(animate3,);
+      requestAnimationFrame(() => {
+        if (!cancelled) onReadyRef.current?.();
+      },);
     } catch (error) {
       if (onError && error instanceof Error) {
         onError(error,);
       }
     }
     return () => {
+      cancelled = true;
       cancelAnimationFrame(animationFrameRef.current,);
       rendererRef.current?.dispose();
       rendererRef.current = null;
     };
   }, [vertexShader, fragmentShader, resolutionScale, animate3, onError,],);
+  const wasAnimatedRef = useRef(animated,);
+  useEffect(() => {
+    if (animated && !wasAnimatedRef.current && rendererRef.current) {
+      animationFrameRef.current = requestAnimationFrame(animate3,);
+    }
+    wasAnimatedRef.current = animated;
+  }, [animated, animate3,],);
+  const wasPausedRef = useRef(paused,);
+  useLayoutEffect(() => {
+    if (wasPausedRef.current && !paused) {
+      startTimeRef.current = performance.now() * timeMultiplier;
+      lastTimeRef.current = startTimeRef.current;
+    }
+    wasPausedRef.current = paused;
+  }, [paused,],);
   const handleResize = useCallback2(() => {
     const renderer = rendererRef.current;
     if (!renderer) return;
@@ -48839,20 +49126,87 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
     renderer.render(elapsedTime, deltaTime, resolvedUniformsRef.current,);
   }, [],);
   useCanvasResize(canvasRef, handleResize,);
-  return /* @__PURE__ */ jsx(FrameWithMotion2, {
-    ref,
-    __fromCanvasComponent: true,
-    style: {
-      ...style2,
-      overflow: 'hidden',
-    },
-    width,
-    height,
-    ...rest,
-    children: /* @__PURE__ */ jsx('canvas', {
-      ref: canvasRef,
-      style: canvasStyle,
-    },),
+  return /* @__PURE__ */ jsx('canvas', {
+    ref: canvasRef,
+    style: canvasStyle,
+  },);
+}
+function useWhenBrowserIdle(enabled = true,) {
+  const [isIdle, setIsIdle,] = useState(!enabled,);
+  useEffect(() => {
+    if (!enabled) return;
+    const requestIdleCallback2 = supportsRequestIdleCallback ? safeWindow.requestIdleCallback : (callback) => setTimeout(callback, 1,);
+    const id3 = requestIdleCallback2(() => {
+      startTransition2(() => setIsIdle(true,));
+    },);
+    return () => {
+      if (supportsRequestIdleCallback) cancelIdleCallback(id3,);
+      else clearTimeout(id3,);
+    };
+  }, [enabled,],);
+  return isIdle;
+}
+var SHADER_PLAY_DELAY = 250;
+var ShaderWithFallbackOverlay = /* @__PURE__ */ memo2(function ShaderWithFallbackOverlay2({
+  mode,
+  fallbackImage,
+  optimiseSwitching,
+  vertexShader,
+  fragmentShader,
+  animated,
+  resolutionScale,
+  uniforms,
+  onError,
+  onReady,
+},) {
+  const isProgressive = mode === 'progressive';
+  const isIdle = useWhenBrowserIdle(isProgressive,);
+  const [isShaderReady, setIsShaderReady,] = useState(false,);
+  const [shouldPlay, setShouldPlay,] = useState(false,);
+  const onReadyRef = useRef(onReady,);
+  useLayoutEffect(() => {
+    onReadyRef.current = onReady;
+  }, [onReady,],);
+  const handleReady = useCallback2(() => {
+    startTransition2(() => setIsShaderReady(true,));
+    onReadyRef.current?.();
+  }, [],);
+  useEffect(() => {
+    if (!isProgressive || !isShaderReady) return;
+    let timeout;
+    if (SHADER_PLAY_DELAY) {
+      timeout = __unframerWindow2.setTimeout(() => {
+        startTransition2(() => setShouldPlay(true,));
+      }, SHADER_PLAY_DELAY,);
+    } else {
+      startTransition2(() => setShouldPlay(true,));
+    }
+    return () => SHADER_PLAY_DELAY ? clearTimeout(timeout,) : void 0;
+  }, [isProgressive, isShaderReady,],);
+  const paused = isProgressive && !shouldPlay;
+  return /* @__PURE__ */ jsxs(Fragment, {
+    children: [
+      isIdle && /* @__PURE__ */ jsx(ShaderCanvas, {
+        vertexShader,
+        fragmentShader,
+        animated,
+        resolutionScale,
+        paused,
+        uniforms,
+        onError,
+        onReady: handleReady,
+      },),
+      !isShaderReady && fallbackImage && /* @__PURE__ */ jsx('div', {
+        style: overlayStyle,
+        children: optimiseSwitching
+          ? /* @__PURE__ */ jsx(ShaderSandboxFallbackImage, {
+            src: fallbackImage,
+          },)
+          : /* @__PURE__ */ jsx(ShaderFallbackImage, {
+            src: fallbackImage,
+          },),
+      },),
+    ],
   },);
 },);
 function colorToVec4(color2,) {
@@ -49063,9 +49417,15 @@ var withVariantAppearEffect = (Component18) =>
         y: threshold2,
       },
     },);
+    const currentRouteKey = useCurrentRouteKey();
+    const prevRouteKey = React42.useRef(currentRouteKey,);
     React42.useEffect(() => {
       if (scrollDirection) return;
       if (!targets) return;
+      if (prevRouteKey.current !== currentRouteKey) {
+        prevRouteKey.current = currentRouteKey;
+        React42.startTransition(() => setVariant(obscuredVariantId,));
+      }
       const playedState = {};
       let currentVariant = void 0;
       return scroll((_, {
@@ -49087,7 +49447,7 @@ var withVariantAppearEffect = (Component18) =>
           setVariant(variant,);
         },);
       },);
-    }, [animateOnce, threshold2, targets, props.variant, scrollDirection, exitTarget,],);
+    }, [currentRouteKey, animateOnce, threshold2, targets, props.variant, scrollDirection, exitTarget,],);
     useScrollDirectionChange(scrollDirection, (variant) => React42.startTransition(() => setVariant(variant,)), {
       enabled: variantAppearEffectEnabled,
       repeat: !animateOnce,
@@ -49096,7 +49456,7 @@ var withVariantAppearEffect = (Component18) =>
       if (!variantAppearEffectEnabled) return;
       const useObscuredVariant = !options.targets && !options.scrollDirection;
       const target = useObscuredVariant ? options.obscuredVariantId : void 0;
-      startTransition2(() => setVariant(target,));
+      React42.startTransition(() => setVariant(target,));
     },);
     if (!('variantAppearEffectEnabled' in options) || variantAppearEffectEnabled === true) {
       return /* @__PURE__ */ jsx(Component18, {
@@ -51592,11 +51952,12 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
     ...rest
   } = props;
   const externalValue = value ?? defaultValue;
-  const [internalValue, setInternalValue,] = useState(externalValue ?? '',);
+  const normalizedExternalValue = normalizeValueForInputType(externalValue, type,);
+  const [internalValue, setInternalValue,] = useState(normalizedExternalValue ?? '',);
   const [prevExternalValue, setPrevExternalValue,] = useState(externalValue,);
   if (externalValue !== prevExternalValue) {
     setPrevExternalValue(externalValue,);
-    setInternalValue(externalValue ?? '',);
+    setInternalValue(normalizedExternalValue ?? '',);
   }
   const handleChange = useCallback2((event) => {
     setInternalValue(event.target.value,);
@@ -51670,6 +52031,11 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
     ],
   },);
 },);
+function normalizeValueForInputType(value, type,) {
+  if (!value || type !== 'date') return value;
+  if (value.includes('T',)) return value.split('T',)[0];
+  return value;
+}
 function ClearIcon() {
   return /* @__PURE__ */ jsx('svg', {
     xmlns: 'http://www.w3.org/2000/svg',
@@ -56503,8 +56869,8 @@ var package_default = {
     '@types/react': '18.2',
     '@types/react-dom': '18.2',
     '@types/yargs': '^17.0.33',
-    '@typescript-eslint/eslint-plugin': '^8.40.0',
-    '@typescript-eslint/parser': '^8.40.0',
+    '@typescript-eslint/eslint-plugin': '^8.55.0',
+    '@typescript-eslint/parser': '^8.55.0',
     chalk: '^4.1.2',
     eslint: '^8.57.1',
     'eslint-plugin-framer-studio': 'workspace:*',
