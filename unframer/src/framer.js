@@ -12021,14 +12021,14 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.TSSH6SWY.mjs
+// /:https://app.framerstatic.com/framer.AFJGHHJZ.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
+import { useSyncExternalStore, } from 'react';
 import { Suspense as Suspense2, } from 'react';
 import { memo as memo2, } from 'react';
 import ReactDOM from 'react-dom';
-import { useSyncExternalStore, } from 'react';
 import { createRef, } from 'react';
 import { useTransition, } from 'react';
 import { createPortal, } from 'react-dom';
@@ -13032,6 +13032,9 @@ ${formattedError}`
       : '.'
   }`;
 }
+var noopSubscribe = () => () => {};
+var returnTrue = () => true;
+var returnFalse = () => false;
 var lazyModulesCache = /* @__PURE__ */ new Map();
 function initLazyModulesCache() {
   if (!isWindow) return;
@@ -15592,7 +15595,7 @@ function useNativeLoadingSpinner() {
     },);
   }, [navigateListener,],);
 }
-var unsafeSlugCharactersRegExp = /[\s_?#[\]@!$&'*+,;:="<>%{}|\\^`/]+/gu;
+var unsafeSlugCharactersRegExp = /[\s?#[\]@!$&'*+,;:="<>%{}|\\^`/]+/gu;
 function trimDashes(str,) {
   let start2 = 0;
   let end = str.length;
@@ -16220,6 +16223,76 @@ function useRouteAnchor(routeId, {
     href,
   };
 }
+var replayMarker = '__f_replay';
+var replayMarkerIgnore = '__f_replay_ignore';
+function changeEvent() {
+  const event = new Event('change', {
+    bubbles: true,
+  },);
+  event[replayMarker] = 1;
+  return event;
+}
+function clickEvent() {
+  const event = new MouseEvent('click', {
+    bubbles: true,
+  },);
+  event[replayMarker] = 1;
+  return event;
+}
+function getValuePropFromElement(element,) {
+  if (element instanceof HTMLInputElement && (element.type === 'checkbox' || element.type === 'radio')) {
+    return 'checked';
+  }
+  return 'value';
+}
+function isReplayEvent(event,) {
+  return replayMarker in event && event[replayMarker] === 1;
+}
+function shouldIgnoreReplayEvent(event,) {
+  return replayMarkerIgnore in event.nativeEvent && event.nativeEvent[replayMarkerIgnore] === 1;
+}
+var isHydrationFn = () => isWindow;
+function useReplayPreHydrationInput(value,) {
+  const didReplayRef = useRef(false,);
+  const elementRef = useRef(null,);
+  const isHydration = useSyncExternalStore(noopSubscribe, returnFalse, isHydrationFn,);
+  useEffect(() => {
+    if (!isHydration) return;
+    const element = elementRef.current;
+    if (didReplayRef.current || !element) return;
+    didReplayRef.current = true;
+    const valueProp = getValuePropFromElement(element,);
+    const currentDOMValue = element[valueProp];
+    if (currentDOMValue === value) return;
+    if (element.type === 'radio' && currentDOMValue === true) {
+      element.checked = false;
+      element.dispatchEvent(clickEvent(),);
+      return;
+    }
+    if (valueProp === 'checked') {
+      const event2 = clickEvent();
+      event2[replayMarkerIgnore] = 1;
+      element.dispatchEvent(event2,);
+      element.dispatchEvent(clickEvent(),);
+      return;
+    }
+    if (element.nodeName === 'SELECT') {
+      element.dispatchEvent(changeEvent(),);
+      return;
+    }
+    const nativeInputValueSetter = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(element,), valueProp,)?.set;
+    if (!nativeInputValueSetter) return;
+    nativeInputValueSetter.call(element, '',);
+    const event = changeEvent();
+    event[replayMarkerIgnore] = 1;
+    element.dispatchEvent(event,);
+    queueMicrotask(() => {
+      nativeInputValueSetter.call(element, currentDOMValue,);
+      element.dispatchEvent(changeEvent(),);
+    },);
+  }, [isHydration,],);
+  return elementRef;
+}
 var eventsToStop = [
   'mousedown',
   'mouseup',
@@ -16252,6 +16325,7 @@ var eventsToStop = [
 ];
 var stopFn = (event) => {
   if (!event.target?.closest?.('#main',)) return;
+  if (isReplayEvent(event,)) return;
   event.stopPropagation();
   performance.mark('framer-react-event-handling-prevented',);
 };
@@ -34369,9 +34443,6 @@ function propsForBreakpoint(variant, props, overrides,) {
     ...overrides[variant],
   };
 }
-var noopSubscribe = () => () => {};
-var returnTrue = () => true;
-var returnFalse = () => false;
 var PropertyOverridesWithoutCSS = /* @__PURE__ */ React42.forwardRef(function PropertyOverrides(props, ref,) {
   const cloneWithRefs = useCloneChildrenWithPropsAndRef(ref,);
   const ancestorCtx = React42.useContext(SSRParentVariantsContext,);
@@ -38879,15 +38950,13 @@ var isPrioritized = () => {
   }
 };
 var isntPrioritized = () => !isPrioritized();
-var getServerSnapshot = () => false;
-var noOpSubscribe = () => () => {};
 function EditorBarLauncher({
   EditorBar,
   fast = false,
 },) {
   const libraryFeatures = useLibraryFeatures();
   const framerSiteId = useContext(FormContext,);
-  const enabled = useSyncExternalStore(noOpSubscribe, fast ? isPrioritized : isntPrioritized, getServerSnapshot,);
+  const enabled = useSyncExternalStore(noopSubscribe, fast ? isPrioritized : isntPrioritized, returnFalse,);
   const editorBarFeatures = useMemo(() => {
     const features = {};
     let key7;
@@ -44790,8 +44859,8 @@ var ScalarVariable = class extends ScalarNode {
   }
 };
 var Normalizer = class {
-  constructor(memo5,) {
-    this.memo = memo5;
+  constructor(memo7,) {
+    this.memo = memo7;
   }
   finishRelational(node,) {
     return this.memo.addRelational(node,);
@@ -46615,8 +46684,8 @@ function useLoadMorePagination(totalSize, pageSize, hash2, paginateWithSuspended
       continueAfter: 'paint',
     },);
     if (currentPageRef.current >= totalPages) return;
-    const renderNextPage = (startTransition19) => {
-      startTransition19(() => {
+    const renderNextPage = (startTransition222) => {
+      startTransition222(() => {
         setCurrentPage((_currentPage) => {
           const nextPage = Math.min(_currentPage + 1, totalPages,);
           currentPageRef.current = nextPage;
@@ -48378,7 +48447,6 @@ var builtInUniforms = {
   },
 };
 var webGLContextLostEvent = 'webglcontextlost';
-var FALLBACK_IMAGE_PIXEL_RATIO = 1;
 var WebGL2ShaderRenderer = class {
   constructor(canvas, vertexSource, fragmentSource, resolutionScale,) {
     __publicField(this, 'gl',);
@@ -48391,11 +48459,7 @@ var WebGL2ShaderRenderer = class {
     __publicField(this, 'canvas',);
     __publicField(this, 'contextLostHandler',);
     __publicField(this, 'disposed', false,);
-    __publicField(
-      this,
-      'pixelRatio',
-      typeof __unframerWindow2 !== 'undefined' ? __unframerWindow2.devicePixelRatio : FALLBACK_IMAGE_PIXEL_RATIO,
-    );
+    __publicField(this, 'pixelRatio', typeof __unframerWindow2 !== 'undefined' ? __unframerWindow2.devicePixelRatio : 1,);
     __publicField(this, 'resolutionScale',);
     __publicField(this, 'lastBufferWidth', 0,);
     __publicField(this, 'lastBufferHeight', 0,);
@@ -48807,113 +48871,6 @@ function defineShader(shaderConfig,) {
     [shaderConfigBrand]: true,
   };
 }
-var DEFAULT_VERTEX_SHADER = `#version 300 es
-precision highp float;
-
-in vec2 a_position;
-in vec2 a_texCoord;
-
-out vec2 v_uv;
-
-void main() {
-    v_uv = a_texCoord;
-    gl_Position = vec4(a_position, 0.0, 1.0);
-}
-`;
-var DEFAULT_FRAGMENT_SHADER = `#version 300 es
-precision highp float;
-
-in vec2 v_uv;
-out vec4 fragColor;
-
-void main() {
-    fragColor = vec4(0.0);
-}
-`;
-var canvasStyle = {
-  display: 'block',
-  width: '100%',
-  height: '100%',
-};
-var overlayStyle = {
-  position: 'absolute',
-  inset: 0,
-  zIndex: 1,
-  width: '100%',
-  height: '100%',
-};
-var timeMultiplier = 1e-3;
-var Shader = /* @__PURE__ */ forwardRef(function Shader2({
-  mode = 'instant',
-  fallbackImage,
-  optimiseSwitching,
-  style: style2,
-  width,
-  height,
-  vertexShader,
-  fragmentShader,
-  animated,
-  uniforms,
-  onError,
-  onReady,
-  resolutionScale,
-  ...rest
-}, ref,) {
-  const shouldReduceMotion = useReducedMotionConfig();
-  const isFallbackOnly = mode === 'fallback' || shouldReduceMotion && !!fallbackImage;
-  const shaderProps = {
-    vertexShader,
-    fragmentShader,
-    animated,
-    uniforms,
-    resolutionScale,
-    onError,
-  };
-  const [isShaderReady, setIsShaderReady,] = useState(false,);
-  useLayoutEffect(() => {
-    if (isFallbackOnly) setIsShaderReady(false,);
-  }, [isFallbackOnly,],);
-  const handleShaderReady = useCallback2(() => {
-    startTransition2(() => setIsShaderReady(true,));
-    onReady?.();
-  }, [onReady,],);
-  const hideFallback = !isFallbackOnly && isShaderReady;
-  return /* @__PURE__ */ jsx(FrameWithMotion2, {
-    ref,
-    __fromCanvasComponent: true,
-    style: {
-      ...style2,
-      overflow: 'hidden',
-    },
-    width,
-    height,
-    ...rest,
-    children: optimiseSwitching
-      ? /* @__PURE__ */ jsxs(Fragment, {
-        children: [
-          !isFallbackOnly && /* @__PURE__ */ jsx(ShaderWithFallbackOverlay, {
-            mode,
-            onReady: handleShaderReady,
-            ...shaderProps,
-          },),
-          /* @__PURE__ */ jsx(ShaderSandboxFallbackImage, {
-            src: fallbackImage,
-            hidden: hideFallback,
-          },),
-        ],
-      },)
-      : isFallbackOnly
-      ? /* @__PURE__ */ jsx(ShaderFallbackImage, {
-        src: fallbackImage,
-      },)
-      : /* @__PURE__ */ jsx(ShaderWithFallbackOverlay, {
-        mode,
-        fallbackImage,
-        onReady,
-        ...shaderProps,
-      },),
-  },);
-},);
 var ShaderFallbackImage = /* @__PURE__ */ memo2(function ShaderFallbackImage2({
   src,
 },) {
@@ -48926,6 +48883,103 @@ var ShaderFallbackImage = /* @__PURE__ */ memo2(function ShaderFallbackImage2({
     alt: '',
   },);
 },);
+var overlayStyle = {
+  position: 'absolute',
+  inset: 0,
+  zIndex: 1,
+  width: '100%',
+  height: '100%',
+};
+var timeMultiplier = 1e-3;
+function colorToVec4(color2,) {
+  const rgba2 = Color.toRgb(Color(color2,),);
+  return [rgba2.r / 255, rgba2.g / 255, rgba2.b / 255, rgba2.a,];
+}
+async function loadTexture(url,) {
+  const response = await fetch(url,);
+  if (!response.ok) throw new Error('Failed to load texture',);
+  const blob = await response.blob();
+  return createImageBitmap(blob,);
+}
+async function resolveUniform(uniform,) {
+  switch (uniform.type) {
+    case 'number':
+    case 'enum':
+      return {
+        type: 'float',
+        value: uniform.value,
+      };
+    case 'boolean':
+      return {
+        type: 'boolean',
+        value: uniform.value,
+      };
+    case 'color':
+      return {
+        type: 'vec4',
+        value: colorToVec4(uniform.value,),
+      };
+    case 'responsiveimage': {
+      let url;
+      if (isString(uniform.value,)) {
+        url = uniform.value;
+      } else if (isObject2(uniform.value,) && 'src' in uniform.value) {
+        url = uniform.value.src;
+      }
+      if (!url) return;
+      const image = await loadTexture(url,);
+      return {
+        type: 'sampler2D',
+        value: image,
+      };
+    }
+    case 'array':
+      return {
+        type: 'vec4[]',
+        value: uniform.value.map(colorToVec4,),
+      };
+    default:
+      assertNever(uniform,);
+  }
+}
+async function resolveUniforms(uniforms,) {
+  const result = {};
+  for (const [name, uniform,] of Object.entries(uniforms,)) {
+    const resolved = await resolveUniform(uniform,);
+    if (!resolved) continue;
+    result[name] = resolved;
+    if (uniform.type === 'array') {
+      result[toArrayLengthName(name,)] = {
+        type: 'int',
+        value: uniform.value.length,
+      };
+    }
+  }
+  return result;
+}
+function closeImageBitmaps(uniforms,) {
+  for (const uniform of Object.values(uniforms,)) {
+    if (uniform.type === 'sampler2D') {
+      uniform.value.close();
+    }
+  }
+}
+function resolveResolutionScale(scale2,) {
+  if (typeof scale2 === 'number') return scale2;
+  if (scale2 === 'performance') return 0.75;
+  if (scale2 === 'consistent') return 0;
+  return 1;
+}
+function getShaderTiming(timeMs, startTime, lastTime,) {
+  const currentTime = timeMs * timeMultiplier;
+  const elapsedTime = currentTime - startTime;
+  const deltaTime = lastTime === startTime ? 1 / 60 : currentTime - lastTime;
+  return {
+    currentTime,
+    elapsedTime,
+    deltaTime,
+  };
+}
 var sandboxFallbackImageStyle = {
   display: 'block',
   width: '100%',
@@ -49020,6 +49074,94 @@ var ShaderSandboxFallbackImage = /* @__PURE__ */ memo2(function ShaderSandboxFal
     ],
   },);
 },);
+var DEFAULT_VERTEX_SHADER = `#version 300 es
+precision highp float;
+
+in vec2 a_position;
+in vec2 a_texCoord;
+
+out vec2 v_uv;
+
+void main() {
+    v_uv = a_texCoord;
+    gl_Position = vec4(a_position, 0.0, 1.0);
+}
+`;
+var DEFAULT_FRAGMENT_SHADER = `#version 300 es
+precision highp float;
+
+in vec2 v_uv;
+out vec4 fragColor;
+
+void main() {
+    fragColor = vec4(0.0);
+}
+`;
+function useResolvedUniforms(uniforms,) {
+  const [resolvedUniforms, setResolvedUniforms,] = useState({},);
+  useEffect(() => {
+    if (!uniforms) return;
+    let isCancelled = false;
+    resolveUniforms(uniforms,).then((resolved) => {
+      if (!isCancelled) {
+        startTransition2(() => setResolvedUniforms(resolved,));
+      } else {
+        closeImageBitmaps(resolved,);
+      }
+    },).catch(() => {},);
+    return () => {
+      isCancelled = true;
+    };
+  }, [uniforms,],);
+  return resolvedUniforms;
+}
+function useCanvasResize(canvasRef, resizeHandler,) {
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const resizeObserver = new ResizeObserver(resizeHandler,);
+    resizeObserver.observe(canvas,);
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, [canvasRef, resizeHandler,],);
+  useOnDprChange(resizeHandler,);
+}
+function useOnDprChange(callback,) {
+  useEffect(() => {
+    let dprQuery = matchMedia(`(resolution: ${__unframerWindow2.devicePixelRatio}dppx)`,);
+    const handleChange = () => {
+      callback();
+      dprQuery.removeEventListener('change', handleChange,);
+      dprQuery = matchMedia(`(resolution: ${__unframerWindow2.devicePixelRatio}dppx)`,);
+      dprQuery.addEventListener('change', handleChange,);
+    };
+    dprQuery.addEventListener('change', handleChange,);
+    return () => {
+      dprQuery.removeEventListener('change', handleChange,);
+    };
+  }, [callback,],);
+}
+function useWhenBrowserIdle(enabled = true,) {
+  const [isIdle, setIsIdle,] = useState(!enabled,);
+  useEffect(() => {
+    if (!enabled) return;
+    const requestIdleCallback2 = supportsRequestIdleCallback ? safeWindow.requestIdleCallback : (callback) => setTimeout(callback, 1,);
+    const id3 = requestIdleCallback2(() => {
+      startTransition2(() => setIsIdle(true,));
+    },);
+    return () => {
+      if (supportsRequestIdleCallback) cancelIdleCallback(id3,);
+      else clearTimeout(id3,);
+    };
+  }, [enabled,],);
+  return isIdle;
+}
+var canvasStyle = {
+  display: 'block',
+  width: '100%',
+  height: '100%',
+};
 function ShaderCanvas({
   vertexShader = DEFAULT_VERTEX_SHADER,
   fragmentShader = DEFAULT_FRAGMENT_SHADER,
@@ -49131,21 +49273,6 @@ function ShaderCanvas({
     style: canvasStyle,
   },);
 }
-function useWhenBrowserIdle(enabled = true,) {
-  const [isIdle, setIsIdle,] = useState(!enabled,);
-  useEffect(() => {
-    if (!enabled) return;
-    const requestIdleCallback2 = supportsRequestIdleCallback ? safeWindow.requestIdleCallback : (callback) => setTimeout(callback, 1,);
-    const id3 = requestIdleCallback2(() => {
-      startTransition2(() => setIsIdle(true,));
-    },);
-    return () => {
-      if (supportsRequestIdleCallback) cancelIdleCallback(id3,);
-      else clearTimeout(id3,);
-    };
-  }, [enabled,],);
-  return isIdle;
-}
 var SHADER_PLAY_DELAY = 250;
 var ShaderWithFallbackOverlay = /* @__PURE__ */ memo2(function ShaderWithFallbackOverlay2({
   mode,
@@ -49209,140 +49336,86 @@ var ShaderWithFallbackOverlay = /* @__PURE__ */ memo2(function ShaderWithFallbac
     ],
   },);
 },);
-function colorToVec4(color2,) {
-  const rgba2 = Color.toRgb(Color(color2,),);
-  return [rgba2.r / 255, rgba2.g / 255, rgba2.b / 255, rgba2.a,];
-}
-async function loadTexture(url,) {
-  const response = await fetch(url,);
-  if (!response.ok) throw new Error('Failed to load texture',);
-  const blob = await response.blob();
-  return createImageBitmap(blob,);
-}
-async function resolveUniform(uniform,) {
-  switch (uniform.type) {
-    case 'number':
-    case 'enum':
-      return {
-        type: 'float',
-        value: uniform.value,
-      };
-    case 'boolean':
-      return {
-        type: 'boolean',
-        value: uniform.value,
-      };
-    case 'color':
-      return {
-        type: 'vec4',
-        value: colorToVec4(uniform.value,),
-      };
-    case 'responsiveimage': {
-      let url;
-      if (isString(uniform.value,)) {
-        url = uniform.value;
-      } else if (isObject2(uniform.value,) && 'src' in uniform.value) {
-        url = uniform.value.src;
-      }
-      if (!url) return;
-      const image = await loadTexture(url,);
-      return {
-        type: 'sampler2D',
-        value: image,
-      };
-    }
-    case 'array':
-      return {
-        type: 'vec4[]',
-        value: uniform.value.map(colorToVec4,),
-      };
-    default:
-      assertNever(uniform,);
-  }
-}
-async function resolveUniforms(uniforms,) {
-  const result = {};
-  for (const [name, uniform,] of Object.entries(uniforms,)) {
-    const resolved = await resolveUniform(uniform,);
-    if (!resolved) continue;
-    result[name] = resolved;
-    if (uniform.type === 'array') {
-      result[toArrayLengthName(name,)] = {
-        type: 'int',
-        value: uniform.value.length,
-      };
-    }
-  }
-  return result;
-}
-function closeImageBitmaps(uniforms,) {
-  for (const uniform of Object.values(uniforms,)) {
-    if (uniform.type === 'sampler2D') {
-      uniform.value.close();
-    }
-  }
-}
-function useResolvedUniforms(uniforms,) {
-  const [resolvedUniforms, setResolvedUniforms,] = useState({},);
-  useEffect(() => {
-    if (!uniforms) return;
-    let isCancelled = false;
-    resolveUniforms(uniforms,).then((resolved) => {
-      if (!isCancelled) {
-        startTransition2(() => setResolvedUniforms(resolved,));
-      } else {
-        closeImageBitmaps(resolved,);
-      }
-    },).catch(() => {},);
-    return () => {
-      isCancelled = true;
-    };
-  }, [uniforms,],);
-  return resolvedUniforms;
-}
-function useCanvasResize(canvasRef, resizeHandler,) {
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const resizeObserver = new ResizeObserver(resizeHandler,);
-    resizeObserver.observe(canvas,);
-    return () => {
-      resizeObserver.disconnect();
-    };
-  }, [canvasRef, resizeHandler,],);
-  useOnDprChange(resizeHandler,);
-}
-function useOnDprChange(callback,) {
-  useEffect(() => {
-    let dprQuery = matchMedia(`(resolution: ${__unframerWindow2.devicePixelRatio}dppx)`,);
-    const handleChange = () => {
-      callback();
-      dprQuery.removeEventListener('change', handleChange,);
-      dprQuery = matchMedia(`(resolution: ${__unframerWindow2.devicePixelRatio}dppx)`,);
-      dprQuery.addEventListener('change', handleChange,);
-    };
-    dprQuery.addEventListener('change', handleChange,);
-    return () => {
-      dprQuery.removeEventListener('change', handleChange,);
-    };
-  }, [callback,],);
-}
-function resolveResolutionScale(scale2,) {
-  if (typeof scale2 === 'number') return scale2;
-  if (scale2 === 'performance') return 0.75;
-  if (scale2 === 'consistent') return 0;
-  return 1;
-}
-function getShaderTiming(timeMs, startTime, lastTime,) {
-  const currentTime = timeMs * timeMultiplier;
-  const elapsedTime = currentTime - startTime;
-  const deltaTime = lastTime === startTime ? 1 / 60 : currentTime - lastTime;
-  return {
-    currentTime,
-    elapsedTime,
-    deltaTime,
+var Shader = /* @__PURE__ */ forwardRef(function Shader2({
+  mode = 'instant',
+  fallbackImage,
+  optimiseSwitching,
+  style: style2,
+  width,
+  height,
+  vertexShader,
+  fragmentShader,
+  animated,
+  uniforms,
+  onError,
+  onReady,
+  resolutionScale,
+  ...rest
+}, ref,) {
+  const observerRef = useObserverRef(ref,);
+  const [isIntersecting, setIsIntersecting,] = useState(false,);
+  const intersectionCallback = useCallback2((entry) => {
+    startTransition2(() => setIsIntersecting(entry.isIntersecting,));
+  }, [],);
+  useSharedIntersectionObserver(observerRef, intersectionCallback, {
+    threshold: 0,
+    enabled: true,
+  },);
+  const shouldReduceMotion = useReducedMotionConfig();
+  const isFallbackOnly = mode === 'fallback' || shouldReduceMotion && !!fallbackImage || !isIntersecting;
+  const shaderProps = {
+    vertexShader,
+    fragmentShader,
+    animated,
+    uniforms,
+    resolutionScale,
+    onError,
   };
-}
+  const [isShaderReady, setIsShaderReady,] = useState(false,);
+  useLayoutEffect(() => {
+    if (isFallbackOnly) setIsShaderReady(false,);
+  }, [isFallbackOnly,],);
+  const handleShaderReady = useCallback2(() => {
+    startTransition2(() => setIsShaderReady(true,));
+    onReady?.();
+  }, [onReady,],);
+  const hideFallback = !isFallbackOnly && isShaderReady;
+  return /* @__PURE__ */ jsx(FrameWithMotion2, {
+    ref: observerRef,
+    __fromCanvasComponent: true,
+    style: {
+      ...style2,
+      overflow: 'hidden',
+    },
+    width,
+    height,
+    ...rest,
+    children: optimiseSwitching
+      ? /* @__PURE__ */ jsxs(Fragment, {
+        children: [
+          !isFallbackOnly && /* @__PURE__ */ jsx(ShaderWithFallbackOverlay, {
+            mode,
+            onReady: handleShaderReady,
+            ...shaderProps,
+          },),
+          /* @__PURE__ */ jsx(ShaderSandboxFallbackImage, {
+            src: fallbackImage,
+            hidden: hideFallback,
+          },),
+        ],
+      },)
+      : isFallbackOnly
+      ? /* @__PURE__ */ jsx(ShaderFallbackImage, {
+        src: fallbackImage,
+      },)
+      : /* @__PURE__ */ jsx(ShaderWithFallbackOverlay, {
+        mode,
+        fallbackImage,
+        onReady,
+        ...shaderProps,
+      },),
+  },);
+},);
 var keys2 = /* @__PURE__ */ new Set([
   'visibleVariantId',
   'obscuredVariantId',
@@ -51911,6 +51984,29 @@ function CustomProperties({
     children,
   },);
 }
+var defaultGetValueFromEvent = (event) => {
+  return event.target.value;
+};
+function useOptimisticValue(externalValue, shouldSyncExternalValue, onChange, getValueFromEvent = defaultGetValueFromEvent,) {
+  const [optimisticValue, setOptimisticValue,] = React42.useState(externalValue,);
+  const [previousExternalValue, setPreviousExternalValue,] = React42.useState(externalValue,);
+  if (shouldSyncExternalValue && externalValue !== previousExternalValue) {
+    setPreviousExternalValue(externalValue,);
+    setOptimisticValue(externalValue,);
+  }
+  const handleChange = React42.useCallback((event) => {
+    if (shouldIgnoreReplayEvent(event,)) return;
+    if (shouldSyncExternalValue) {
+      setOptimisticValue(getValueFromEvent(event,),);
+    }
+    if (onChange) {
+      React42.startTransition(() => {
+        onChange(event,);
+      },);
+    }
+  }, [getValueFromEvent, onChange, shouldSyncExternalValue,],);
+  return [optimisticValue, setOptimisticValue, handleChange,];
+}
 var passwordManagerIgnoreDataProps = {
   // 1Password
   'data-1p-ignore': true,
@@ -51953,24 +52049,14 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
   } = props;
   const externalValue = value ?? defaultValue;
   const normalizedExternalValue = normalizeValueForInputType(externalValue, type,);
-  const [internalValue, setInternalValue,] = useState(normalizedExternalValue ?? '',);
-  const [prevExternalValue, setPrevExternalValue,] = useState(externalValue,);
-  if (externalValue !== prevExternalValue) {
-    setPrevExternalValue(externalValue,);
-    setInternalValue(normalizedExternalValue ?? '',);
-  }
-  const handleChange = useCallback2((event) => {
-    setInternalValue(event.target.value,);
-    if (onChange) {
-      startTransition2(() => onChange(event,));
-    }
-  }, [onChange,],);
+  const [optimisticValue, setOptimisticValue, handleChange,] = useOptimisticValue(normalizedExternalValue ?? '', true, onChange,);
+  const setInputRef = useReplayPreHydrationInput(normalizedExternalValue,);
   const handleClear = useCallback2(() => {
-    setInternalValue('',);
+    setOptimisticValue('',);
     if (onClear) {
       startTransition2(() => onClear());
     }
-  }, [onClear,],);
+  }, [onClear, setOptimisticValue,],);
   const eventHandlers = useCustomValidity(onValid, onInvalid, handleChange, onBlur, onFocus,);
   if (type === 'hidden') {
     return /* @__PURE__ */ jsx(motion.input, {
@@ -51980,7 +52066,7 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
     },);
   }
   const dataProps = autofillEnabled === false ? passwordManagerIgnoreDataProps : void 0;
-  const hasValue = !!internalValue;
+  const hasValue = !!optimisticValue;
   const showClear = !!onClear && hasValue;
   return /* @__PURE__ */ jsxs(motion.div, {
     ref,
@@ -51996,6 +52082,7 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
     children: [
       type === 'textarea'
         ? /* @__PURE__ */ jsx(motion.textarea, {
+          ref: setInputRef,
           ...dataProps,
           ...eventHandlers,
           required,
@@ -52003,10 +52090,11 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
           name: inputName,
           placeholder,
           className: inputClassName,
-          value: internalValue,
+          value: optimisticValue,
           maxLength,
         },)
         : /* @__PURE__ */ jsx(motion.input, {
+          ref: setInputRef,
           ...dataProps,
           ...eventHandlers,
           type,
@@ -52015,7 +52103,7 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
           name: inputName,
           placeholder,
           className: cx(inputClassName, !hasValue && emptyValueClassName,),
-          value: internalValue,
+          value: optimisticValue,
           min,
           max,
           step: step2,
@@ -52250,29 +52338,47 @@ var styles = /* @__PURE__ */ (() => [
 ])();
 var FormPlainTextInput2 = /* @__PURE__ */ withCSS(PlainTextInput, styles, 'framer-lib-form-plain-text-input',);
 var className = 'framer-form-boolean-input';
-var BooleanInput = /* @__PURE__ */ React42.forwardRef(function FormPlainTextInput3(props, ref,) {
+var getCheckedFromEvent = (event) => event.target.checked;
+var BooleanInput = /* @__PURE__ */ React42.forwardRef(function FormBooleanInput(props, ref,) {
   const {
     inputName,
     type = 'checkbox',
     defaultChecked,
+    checked,
     onValid,
+    onChange,
+    onBlur,
+    onFocus,
+    onInvalid,
     ...rest
   } = props;
   const isCanvas = useIsOnFramerCanvas();
+  const isControlled = !isCanvas && checked !== void 0;
+  const externalChecked = checked ?? false;
+  const [optimisticChecked, , handleChange,] = useOptimisticValue(externalChecked, isControlled, onChange, getCheckedFromEvent,);
+  const setReplayInputRef = useReplayPreHydrationInput(isControlled ? externalChecked : defaultChecked,);
+  const eventHandlers = useCustomValidity(onValid, onInvalid, handleChange, onBlur, onFocus,);
   const attributes = isCanvas
     ? {
       checked: defaultChecked,
     }
+    : isControlled
+    ? {
+      checked: optimisticChecked,
+    }
     : {
       defaultChecked,
     };
-  const eventHandlers = useCustomValidity(onValid, props.onInvalid, props.onChange, props.onBlur, props.onFocus,);
+  const setInputRef = React42.useCallback((input) => {
+    setRef2(ref, input,);
+    setRef2(setReplayInputRef, input,);
+  }, [ref, setReplayInputRef,],);
   return /* @__PURE__ */ jsx(motion.input, {
     ...rest,
     ...attributes,
     ...eventHandlers,
     readOnly: isCanvas,
-    ref,
+    ref: setInputRef,
     type,
     name: inputName,
     className: cx(className, props.className,),
@@ -52407,7 +52513,7 @@ var styles2 = /* @__PURE__ */ (() => [
     borderWidth: css2.variable('--framer-input-focused-border-width', '--framer-input-boolean-checked-border-width', inputBorderAllSides,),
   },),
 ])();
-var FormBooleanInput = /* @__PURE__ */ withCSS(BooleanInput, styles2, 'framer-lib-form-boolean-input',);
+var FormBooleanInput2 = /* @__PURE__ */ withCSS(BooleanInput, styles2, 'framer-lib-form-boolean-input',);
 var Select = /* @__PURE__ */ React42.forwardRef(function Select2(props, measureRef,) {
   const {
     autoFocus,
@@ -52426,8 +52532,12 @@ var Select = /* @__PURE__ */ React42.forwardRef(function Select2(props, measureR
     onFocus,
     ...rest
   } = props;
-  const eventHandlers = useCustomValidity(onValid, onInvalid, onChange, onBlur, onFocus,);
   const isCanvas = useIsOnFramerCanvas();
+  const isControlled = !isCanvas && value !== void 0;
+  const externalValue = value ?? '';
+  const [optimisticValue, , handleChange,] = useOptimisticValue(externalValue, isControlled, onChange,);
+  const setSelectRef = useReplayPreHydrationInput(isControlled ? externalValue : defaultValue,);
+  const eventHandlers = useCustomValidity(onValid, onInvalid, handleChange, onBlur, onFocus,);
   if (hidden) {
     return /* @__PURE__ */ jsx(motion.input, {
       type: 'hidden',
@@ -52441,12 +52551,13 @@ var Select = /* @__PURE__ */ React42.forwardRef(function Select2(props, measureR
     className: cx(inputWrapperClassName, selectWrapperClassName, className2,),
     ...rest,
     children: /* @__PURE__ */ jsx(motion.select, {
+      ref: setSelectRef,
       name: inputName,
       autoFocus,
       required,
       className: inputClassName,
       defaultValue,
-      value,
+      value: isControlled ? optimisticValue : void 0,
       ...eventHandlers,
       children: selectOptions?.map((option, index,) => {
         switch (option.type) {
@@ -52462,6 +52573,8 @@ var Select = /* @__PURE__ */ React42.forwardRef(function Select2(props, measureR
                 children: option.title ?? option.value,
               }, index,)
             );
+          default:
+            return assertNever(option,);
         }
       },),
     }, isCanvas ? serializeDefaultValue(defaultValue,) : void 0,),
@@ -53189,7 +53302,7 @@ var RelativeDate = /* @__PURE__ */ memo2(function RelativeDate2({
 },) {
   const fallbackLocale = useLocaleCode();
   const locale = externalLocale || fallbackLocale;
-  const targetDate = new Date(dateString,);
+  const targetDate = dateString ? new Date(dateString,) : null;
   const [currentDate, setCurrentDate,] = useState(getCurrentDate,);
   const interval = dateFormat === 'second' ? 1e3 : 6e4;
   useEffect(() => {
@@ -53202,6 +53315,7 @@ var RelativeDate = /* @__PURE__ */ memo2(function RelativeDate2({
       clearInterval(timeout,);
     };
   }, [interval,],);
+  if (!isValidDate(targetDate,)) return null;
   const formattedDate = targetDate.toLocaleString(locale, {
     timeZone: 'UTC',
     dateStyle: 'long',
@@ -57101,7 +57215,7 @@ export {
   FontSourceNames,
   fontStore,
   forceLayerBackingWithCSSProperties,
-  FormBooleanInput,
+  FormBooleanInput2 as FormBooleanInput,
   FormContainer,
   FormPlainTextInput2 as FormPlainTextInput,
   FormSelect,
