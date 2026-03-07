@@ -12407,7 +12407,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.EHXVWJCS.mjs
+// /:https://app.framerstatic.com/framer.GA4OK32T.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -15072,8 +15072,20 @@ function fillPathVariables(path, variables,) {
     return encodeURIComponent(value,);
   },);
 }
-function forwardCurrentQueryParams(href,) {
-  const queryParamsString = typeof __unframerWindow2 !== 'undefined' ? __unframerWindow2.location.search : '';
+function forwardCurrentQueryParams(href, ignoreBackAnchor = false,) {
+  let queryParamsString = '';
+  if (typeof __unframerWindow2 !== 'undefined') {
+    if (ignoreBackAnchor) {
+      queryParamsString = __unframerWindow2.location.search;
+    } else {
+      const backAnchor = __unframerWindow2.history?.state?.queryParamBackAnchorSearch;
+      if (backAnchor === void 0) {
+        queryParamsString = __unframerWindow2.location.search;
+      } else {
+        queryParamsString = backAnchor === '' ? '' : `?${backAnchor}`;
+      }
+    }
+  }
   if (!queryParamsString) {
     return href;
   }
@@ -15198,7 +15210,7 @@ async function getLocalizedNavigationPath({
     result.path = '/' + nextLocale.slug + result.path;
   }
   if (preserveQueryParams && result.path) {
-    result.path = forwardCurrentQueryParams(result.path,);
+    result.path = forwardCurrentQueryParams(result.path, true,);
   }
   return result;
 }
@@ -15820,9 +15832,13 @@ function useReplaceInitialState({
   useLayoutEffect(() => {
     if (disabled) return;
     performance.mark('framer-history-set-initial-state',);
+    const currentState = isObject2(__unframerWindow2.history.state,) ? __unframerWindow2.history.state : {};
+    const initialHash = __unframerWindow2.location.hash ? __unframerWindow2.location.hash.slice(1,) : void 0;
     replaceHistoryState(
       {
+        ...currentState,
         routeId,
+        hash: initialHash,
         pathVariables: initialPathVariables,
         localeId: initialLocaleId,
       },
@@ -15937,7 +15953,7 @@ function getPathForRoute(route, {
   if (pathVariables) {
     path = path.replace(pathVariablesRegExp, (m2, p1,) => String(pathVariables[p1] || m2,),);
   }
-  const isSamePageHashNavigation = currentPath === path && resolvedHash;
+  const isSamePageHashNavigation = Boolean(currentPath === path && resolvedHash,);
   if (relative2) {
     if (customNotFoundPagePaths.has(currentPath,) && typeof __unframerWindow2 !== 'undefined') {
       const sitePrefix = getSitePrefix(siteCanonicalURL,);
@@ -15947,7 +15963,7 @@ function getPathForRoute(route, {
     }
   }
   if (preserveQueryParams || isSamePageHashNavigation) {
-    path = forwardCurrentQueryParams(path,);
+    path = forwardCurrentQueryParams(path, isSamePageHashNavigation,);
   }
   if (resolvedHash) {
     path = `${path}#${resolvedHash}`;
@@ -22662,6 +22678,7 @@ var ControlType = /* @__PURE__ */ ((ControlType2) => {
   ControlType2['TrackingId'] = 'trackingid';
   ControlType2['VectorSetItem'] = 'vectorsetitem';
   ControlType2['LinkRelValues'] = 'linkrelvalues';
+  ControlType2['Location'] = 'location';
   return ControlType2;
 })(ControlType || {},);
 function getNavigator() {
@@ -23307,7 +23324,7 @@ function useCustomValidity(onValid, onInvalid, onChange, onBlur, onFocus,) {
   }, [handleInvalid, handleChange, handleBlur, onFocus,],);
 }
 var rightIconSpacing = 10;
-var leftIconSpacing = 8;
+var iconSpacing = 8;
 var iconSize = 16;
 var iconImageCSS = /* @__PURE__ */ (() => ({
   backgroundRepeat: 'no-repeat',
@@ -24508,6 +24525,7 @@ function getControlDefaultValue(control,) {
       case 'border':
         return isObject2(control.defaultValue,) ? control.defaultValue : void 0;
       case 'font':
+      case 'location':
         return isObject2(control.defaultValue,) ? control.defaultValue : void 0;
       case 'linkrelvalues':
         return isArray(control.defaultValue,) ? control.defaultValue : void 0;
@@ -40726,48 +40744,50 @@ function Router({
       value: localeInfo,
       children: /* @__PURE__ */ jsx(LayoutDirectionContext.Provider, {
         value: layoutDirection,
-        children: /* @__PURE__ */ jsx(URLSearchParamsProvider, {
-          children: /* @__PURE__ */ jsxs(TriggerStateProvider, {
-            currentRoutePath: pathWithFilledVariables,
-            routerAPI: api,
-            children: [
-              EditorBar && /* @__PURE__ */ jsx(EditorBarLauncher, {
-                EditorBar,
-                fast: true,
-              },),
-              /* @__PURE__ */ jsx(SynchronousSuspenseErrorBoundary, {
-                children: /* @__PURE__ */ jsxs(SuspenseThatPreservesDom, {
-                  children: [
-                    /* @__PURE__ */ jsxs(NotFoundErrorBoundary, {
-                      notFoundPage,
-                      defaultPageStyle,
-                      forceUpdateKey: dep,
-                      children: [
-                        /* @__PURE__ */ jsx(MarkSuspenseEffects.Start, {},),
-                        /* @__PURE__ */ jsx(WithLayoutTemplate, {
-                          LayoutTemplate,
-                          webPageId: currentRoute?.abTestingVariantId ?? currentRouteId,
-                          style: defaultPageStyle,
-                          children: (inLayoutTemplate) => {
-                            return /* @__PURE__ */ jsx(Fragment, {
-                              children: pageExistsInCurrentLocale
-                                ? renderPage(currentRoute.page, inLayoutTemplate ? templatePageStyle : defaultPageStyle,)
-                                : // LAYOUT_TEMPLATE @TODO: display: content for not found page?
-                                notFoundPage && renderPage(notFoundPage, defaultPageStyle,),
-                            }, remountKey,);
-                          },
-                        },),
-                      ],
-                    },),
-                    EditorBar && /* @__PURE__ */ jsx(EditorBarLauncher, {
-                      EditorBar,
-                    },),
-                    /* @__PURE__ */ jsx(TurnOnReactEventHandling, {},),
-                    /* @__PURE__ */ jsx(MarkSuspenseEffects.End, {},),
-                  ],
+        children: /* @__PURE__ */ jsx(CustomCursorHost, {
+          children: /* @__PURE__ */ jsx(URLSearchParamsProvider, {
+            children: /* @__PURE__ */ jsxs(TriggerStateProvider, {
+              currentRoutePath: pathWithFilledVariables,
+              routerAPI: api,
+              children: [
+                EditorBar && /* @__PURE__ */ jsx(EditorBarLauncher, {
+                  EditorBar,
+                  fast: true,
                 },),
-              },),
-            ],
+                /* @__PURE__ */ jsx(SynchronousSuspenseErrorBoundary, {
+                  children: /* @__PURE__ */ jsxs(SuspenseThatPreservesDom, {
+                    children: [
+                      /* @__PURE__ */ jsxs(NotFoundErrorBoundary, {
+                        notFoundPage,
+                        defaultPageStyle,
+                        forceUpdateKey: dep,
+                        children: [
+                          /* @__PURE__ */ jsx(MarkSuspenseEffects.Start, {},),
+                          /* @__PURE__ */ jsx(WithLayoutTemplate, {
+                            LayoutTemplate,
+                            webPageId: currentRoute?.abTestingVariantId ?? currentRouteId,
+                            style: defaultPageStyle,
+                            children: (inLayoutTemplate) => {
+                              return /* @__PURE__ */ jsx(Fragment, {
+                                children: pageExistsInCurrentLocale
+                                  ? renderPage(currentRoute.page, inLayoutTemplate ? templatePageStyle : defaultPageStyle,)
+                                  : // LAYOUT_TEMPLATE @TODO: display: content for not found page?
+                                  notFoundPage && renderPage(notFoundPage, defaultPageStyle,),
+                              }, remountKey,);
+                            },
+                          },),
+                        ],
+                      },),
+                      EditorBar && /* @__PURE__ */ jsx(EditorBarLauncher, {
+                        EditorBar,
+                      },),
+                      /* @__PURE__ */ jsx(TurnOnReactEventHandling, {},),
+                      /* @__PURE__ */ jsx(MarkSuspenseEffects.End, {},),
+                    ],
+                  },),
+                },),
+              ],
+            },),
           },),
         },),
       },),
@@ -41309,31 +41329,29 @@ function PageRoot(props,) {
         children: /* @__PURE__ */ jsx(CollectionUtilsCacheProvider, {
           collectionUtils,
           children: /* @__PURE__ */ jsx(FetchClientProvider, {
-            children: /* @__PURE__ */ jsx(CustomCursorHost, {
-              children: /* @__PURE__ */ jsx(FormContext.Provider, {
-                value: framerSiteId,
-                children: /* @__PURE__ */ jsx(SnippetsProvider, {
-                  loadSnippetsModule,
-                  children: /* @__PURE__ */ jsx(Router, {
-                    initialRoute: routeId,
-                    initialPathVariables: pathVariables,
-                    initialLocaleId: localeId,
-                    initialCollectionItemId,
-                    routes,
-                    collectionUtils,
-                    notFoundPage,
-                    locales,
-                    defaultPageStyle: defaultPageStyle ?? {
-                      minHeight: '100vh',
-                      width: 'auto',
-                    },
-                    preserveQueryParams,
-                    EditorBar,
-                    disableHistory,
-                    LayoutTemplate,
-                    siteCanonicalURL,
-                    adaptLayoutToTextDirection,
-                  },),
+            children: /* @__PURE__ */ jsx(FormContext.Provider, {
+              value: framerSiteId,
+              children: /* @__PURE__ */ jsx(SnippetsProvider, {
+                loadSnippetsModule,
+                children: /* @__PURE__ */ jsx(Router, {
+                  initialRoute: routeId,
+                  initialPathVariables: pathVariables,
+                  initialLocaleId: localeId,
+                  initialCollectionItemId,
+                  routes,
+                  collectionUtils,
+                  notFoundPage,
+                  locales,
+                  defaultPageStyle: defaultPageStyle ?? {
+                    minHeight: '100vh',
+                    width: 'auto',
+                  },
+                  preserveQueryParams,
+                  EditorBar,
+                  disableHistory,
+                  LayoutTemplate,
+                  siteCanonicalURL,
+                  adaptLayoutToTextDirection,
                 },),
               },),
             },),
@@ -49470,10 +49488,25 @@ var sandboxFallbackContainerStyle = {
 var ShaderSandboxFallbackImage = /* @__PURE__ */ memo2(function ShaderSandboxFallbackImage2({
   src,
   hidden = false,
+  onDisplaySrcChange,
 },) {
   const [displaySrc, setDisplaySrc,] = useState(src,);
   const [previousSrc, setPreviousSrc,] = useState(void 0,);
   const fadeRef = useRef(null,);
+  const onDisplaySrcChangeRef = useRef(onDisplaySrcChange,);
+  useLayoutEffect(() => {
+    onDisplaySrcChangeRef.current = onDisplaySrcChange;
+  }, [onDisplaySrcChange,],);
+  const isInitialMountRef = useRef(true,);
+  useLayoutEffect(() => {
+    if (isInitialMountRef.current) {
+      isInitialMountRef.current = false;
+      return;
+    }
+    if (!prevDisplayRef.current) {
+      onDisplaySrcChangeRef.current?.();
+    }
+  }, [displaySrc,],);
   useEffect(() => {
     if (src === displaySrc) return;
     let isActive = true;
@@ -49514,7 +49547,10 @@ var ShaderSandboxFallbackImage = /* @__PURE__ */ memo2(function ShaderSandboxFal
       fill: 'forwards',
     },);
     animation.onfinish = () => {
-      if (!cancelled) startTransition2(() => setPreviousSrc(void 0,));
+      if (!cancelled) {
+        startTransition2(() => setPreviousSrc(void 0,));
+        onDisplaySrcChangeRef.current?.();
+      }
     };
     return () => {
       cancelled = true;
@@ -49657,6 +49693,10 @@ function ShaderCanvas({
     onReadyRef.current = onReady;
   }, [onReady,],);
   const resolvedUniforms = useResolvedUniforms(uniforms,);
+  const uniformsPropRef = useRef(uniforms,);
+  useLayoutEffect(() => {
+    uniformsPropRef.current = uniforms;
+  }, [uniforms,],);
   const resolvedUniformsRef = useRef(resolvedUniforms,);
   useLayoutEffect(() => {
     resolvedUniformsRef.current = resolvedUniforms;
@@ -49669,6 +49709,7 @@ function ShaderCanvas({
   useLayoutEffect(() => {
     pausedRef.current = paused;
   }, [paused,],);
+  const readySignalledRef = useRef(false,);
   const animate3 = useCallback2((time2) => {
     const renderer = rendererRef.current;
     if (!renderer) return;
@@ -49685,6 +49726,14 @@ function ShaderCanvas({
       lastTimeRef.current = currentTime;
       renderer.render(elapsedTime, deltaTime, resolvedUniformsRef.current,);
     }
+    if (!readySignalledRef.current) {
+      const hasCustomUniforms = uniformsPropRef.current && Object.keys(uniformsPropRef.current,).length > 0;
+      const hasResolvedUniforms = Object.keys(resolvedUniformsRef.current,).length > 0;
+      if (!hasCustomUniforms || hasResolvedUniforms) {
+        readySignalledRef.current = true;
+        onReadyRef.current?.();
+      }
+    }
     if (animatedRef.current || pausedRef.current) {
       animationFrameRef.current = requestAnimationFrame(animate3,);
     }
@@ -49692,7 +49741,7 @@ function ShaderCanvas({
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    let cancelled = false;
+    readySignalledRef.current = false;
     try {
       const renderer = new WebGL2ShaderRenderer(canvas, vertexShader, fragmentShader, resolveResolutionScale(resolutionScale,),);
       rendererRef.current = renderer;
@@ -49700,16 +49749,12 @@ function ShaderCanvas({
       startTimeRef.current = performance.now() * timeMultiplier;
       lastTimeRef.current = startTimeRef.current;
       animationFrameRef.current = requestAnimationFrame(animate3,);
-      requestAnimationFrame(() => {
-        if (!cancelled) onReadyRef.current?.();
-      },);
     } catch (error) {
       if (onError && error instanceof Error) {
         onError(error,);
       }
     }
     return () => {
-      cancelled = true;
       cancelAnimationFrame(animationFrameRef.current,);
       rendererRef.current?.dispose();
       rendererRef.current = null;
@@ -49724,7 +49769,7 @@ function ShaderCanvas({
   }, [animated, animate3,],);
   const wasPausedRef = useRef(paused,);
   useLayoutEffect(() => {
-    if (wasPausedRef.current && !paused) {
+    if (wasPausedRef.current !== paused) {
       startTimeRef.current = performance.now() * timeMultiplier;
       lastTimeRef.current = startTimeRef.current;
     }
@@ -49734,13 +49779,18 @@ function ShaderCanvas({
     const renderer = rendererRef.current;
     if (!renderer) return;
     renderer.resize();
-    const {
-      currentTime,
-      elapsedTime,
-      deltaTime,
-    } = getShaderTiming(performance.now(), startTimeRef.current, lastTimeRef.current,);
-    lastTimeRef.current = currentTime;
-    renderer.render(elapsedTime, deltaTime, resolvedUniformsRef.current,);
+    if (pausedRef.current) {
+      const elapsedTime = lastTimeRef.current - startTimeRef.current;
+      renderer.render(elapsedTime, 0, resolvedUniformsRef.current,);
+    } else {
+      const {
+        currentTime,
+        elapsedTime,
+        deltaTime,
+      } = getShaderTiming(performance.now(), startTimeRef.current, lastTimeRef.current,);
+      lastTimeRef.current = currentTime;
+      renderer.render(elapsedTime, deltaTime, resolvedUniformsRef.current,);
+    }
   }, [],);
   useCanvasResize(canvasRef, handleResize,);
   return /* @__PURE__ */ jsx('canvas', {
@@ -49752,7 +49802,6 @@ var SHADER_PLAY_DELAY = 250;
 var ShaderWithFallbackOverlay = /* @__PURE__ */ memo2(function ShaderWithFallbackOverlay2({
   mode,
   fallbackImage,
-  optimiseSwitching,
   vertexShader,
   fragmentShader,
   animated,
@@ -49760,6 +49809,7 @@ var ShaderWithFallbackOverlay = /* @__PURE__ */ memo2(function ShaderWithFallbac
   uniforms,
   onError,
   onReady,
+  paused: externalPaused,
 },) {
   const isProgressive = mode === 'progressive';
   const isIdle = useWhenBrowserIdle(isProgressive,);
@@ -49785,7 +49835,7 @@ var ShaderWithFallbackOverlay = /* @__PURE__ */ memo2(function ShaderWithFallbac
     }
     return () => SHADER_PLAY_DELAY ? clearTimeout(timeout,) : void 0;
   }, [isProgressive, isShaderReady,],);
-  const paused = isProgressive && !shouldPlay;
+  const paused = isProgressive && !shouldPlay || externalPaused;
   return /* @__PURE__ */ jsxs(Fragment, {
     children: [
       isIdle && /* @__PURE__ */ jsx(ShaderCanvas, {
@@ -49800,13 +49850,9 @@ var ShaderWithFallbackOverlay = /* @__PURE__ */ memo2(function ShaderWithFallbac
       },),
       !isShaderReady && fallbackImage && /* @__PURE__ */ jsx('div', {
         style: overlayStyle,
-        children: optimiseSwitching
-          ? /* @__PURE__ */ jsx(ShaderSandboxFallbackImage, {
-            src: fallbackImage,
-          },)
-          : /* @__PURE__ */ jsx(ShaderFallbackImage, {
-            src: fallbackImage,
-          },),
+        children: /* @__PURE__ */ jsx(ShaderFallbackImage, {
+          src: fallbackImage,
+        },),
       },),
     ],
   },);
@@ -49825,6 +49871,8 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
   onError,
   onReady,
   resolutionScale,
+  paused,
+  onFallbackDisplayChange,
   ...rest
 }, ref,) {
   const observerRef = useObserverRef(ref,);
@@ -49845,6 +49893,7 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
     uniforms,
     resolutionScale,
     onError,
+    paused,
   };
   const [isShaderReady, setIsShaderReady,] = useState(false,);
   useLayoutEffect(() => {
@@ -49876,6 +49925,7 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
           /* @__PURE__ */ jsx(ShaderSandboxFallbackImage, {
             src: fallbackImage,
             hidden: hideFallback,
+            onDisplaySrcChange: onFallbackDisplayChange,
           },),
         ],
       },)
@@ -51498,7 +51548,7 @@ function getAssetOwnerType(asset,) {
 async function loadFontsWithOpenType(source,) {
   switch (source) {
     case 'google': {
-      const supportedFonts = await import('./framer-chunks/google-OH6PJH7O-YVQLVNW6.js');
+      const supportedFonts = await import('./framer-chunks/google-654GT66W-6S5WZWNS.js');
       return supportedFonts.default;
     }
     case 'fontshare': {
@@ -51512,7 +51562,7 @@ async function loadFontsWithOpenType(source,) {
 async function loadFontToOpenTypeFeatures(source,) {
   switch (source) {
     case 'google': {
-      const features = await import('./framer-chunks/google-2FSYEIRJ-BBUVVSSM.js');
+      const features = await import('./framer-chunks/google-HHQRBNOM-DLREIKWB.js');
       return features.default;
     }
     case 'fontshare': {
@@ -52064,7 +52114,7 @@ function loadVariationAxes(source,) {
       const axes = (async () => {
         switch (source) {
           case 'google': {
-            return (await import('./framer-chunks/google-IYRURLPW-NANSF7W2.js')).default;
+            return (await import('./framer-chunks/google-MNOHFPXZ-52SQ3ETO.js')).default;
           }
           case 'fontshare': {
             return (await import('./framer-chunks/fontshare-MHXFPDHS-VQYPAYVC.js')).default;
@@ -52533,6 +52583,11 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
     }
   }, [onClear, setOptimisticValue,],);
   const eventHandlers = useCustomValidity(onValid, onInvalid, handleChange, onBlur, onFocus,);
+  const handleWrapperClick = useCallback2((e) => {
+    if (e.target === e.currentTarget) {
+      setInputRef.current?.focus();
+    }
+  }, [setInputRef,],);
   if (type === 'hidden') {
     return /* @__PURE__ */ jsx(motion.input, {
       type: 'hidden',
@@ -52543,16 +52598,18 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
   const dataProps = autofillEnabled === false ? passwordManagerIgnoreDataProps : void 0;
   const hasValue = !!optimisticValue;
   const showClear = !!onClear && hasValue;
+  const wrapperClassName = cx(
+    textInputWrapperClassName,
+    inputWrapperClassName,
+    className2,
+    type === 'text' && textInputTypeWrapperClassName,
+    type === 'textarea' && textareaInputTypeWrapperClassName,
+  );
   return /* @__PURE__ */ jsxs(motion.div, {
     ref,
+    onClick: handleWrapperClick,
     style: style2,
-    className: cx(
-      textInputWrapperClassName,
-      inputWrapperClassName,
-      className2,
-      type === 'text' && textInputTypeWrapperClassName,
-      onClear && hasClearButtonClassName,
-    ),
+    className: wrapperClassName,
     ...rest,
     children: [
       type === 'textarea'
@@ -52617,8 +52674,8 @@ function ClearIcon() {
 }
 var textInputWrapperClassName = 'framer-form-text-input';
 var textInputTypeWrapperClassName = 'framer-form-text-input-type';
+var textareaInputTypeWrapperClassName = 'framer-form-textarea-input-type';
 var clearButtonClassName = 'framer-form-text-input-clear';
-var hasClearButtonClassName = 'framer-form-text-input-has-clear-button';
 var defaultTextareaResizerIcon =
   `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"><path d="m1.5 8 7-7M9 5.5l-3 3" stroke="%23999" stroke-width="1.5" stroke-linecap="round"></path></svg>`;
 var defaultTextareaResizerIconFlipped =
@@ -52652,6 +52709,28 @@ var styles = /* @__PURE__ */ (() => [
   },),
   css2(`.${textInputWrapperClassName} .${inputClassName}::placeholder`, {
     color: css2.variable('--framer-input-placeholder-color',/* PlaceholderColor */
+    ),
+  },),
+  css2(`.${textInputWrapperClassName}`, {
+    display: 'flex',
+    alignItems: 'center',
+    padding: css2.variable('--framer-input-padding',/* Padding */
+    ),
+  },),
+  css2(`.${textInputWrapperClassName} .${inputClassName}`, {
+    flex: 1,
+    minWidth: 0,
+    width: 'auto',
+    padding: 0,
+  },),
+  // Textarea can't have an icon - so paddings don't need to be on wrapper.
+  // Plus we have to deal with native resizer handle in webkit
+  css2(`.${textInputWrapperClassName}.${textareaInputTypeWrapperClassName}`, {
+    padding: 0,
+  },),
+  css2(`.${textInputWrapperClassName}.${textareaInputTypeWrapperClassName} textarea.${inputClassName}`, {
+    width: '100%',
+    padding: css2.variable('--framer-input-padding',/* Padding */
     ),
   },),
   css2(`.${textInputWrapperClassName} .${inputClassName}[type="date"], .${textInputWrapperClassName} .${inputClassName}[type="time"]`, {
@@ -52705,6 +52784,21 @@ var styles = /* @__PURE__ */ (() => [
     ),
     overflow: 'visible',
   },),
+  css2(`.${textInputWrapperClassName}.${textInputTypeWrapperClassName}::before`, {
+    content: css2.variable('--framer-input-icon-content', 'none',),
+    display: 'block',
+    flexShrink: 0,
+    width: `${iconSize}px`,
+    height: `${iconSize}px`,
+    marginRight: `${iconSpacing}px`,
+    ...iconImageCSS,
+    backgroundPosition: 'center',
+    maskPosition: 'center',
+    maskImage: css2.variable('--framer-input-icon-mask-image',/* IconMaskImage */
+    ),
+    backgroundImage: css2.variable('--framer-input-icon-image',/* IconBackgroundImage */
+    ),
+  },),
   // Date/time input right-positioned input icon
   css2(
     `.${textInputWrapperClassName} .${inputClassName}[type="date"]::before, .${textInputWrapperClassName} .${inputClassName}[type="time"]::before`,
@@ -52722,35 +52816,6 @@ var styles = /* @__PURE__ */ (() => [
   },),
   css2(`.${textInputWrapperClassName} .${inputClassName}[type="time"]::before`, {
     maskImage: css2.variable('--framer-input-icon-mask-image', encodeSVGForCSS(defaultTimeIconMaskImage,),),
-    backgroundImage: css2.variable('--framer-input-icon-image',/* IconBackgroundImage */
-    ),
-  },),
-  // type="text" input might have a left-positioned icon so we need to apply the padding to the wrapper
-  // and make icon statically positioned
-  css2(`.${textInputWrapperClassName}.${textInputTypeWrapperClassName}`, {
-    display: 'flex',
-    alignItems: 'center',
-    padding: css2.variable('--framer-input-padding',/* Padding */
-    ),
-  },),
-  css2(`.${textInputWrapperClassName} .${inputClassName}[type="text"]`, {
-    flex: 1,
-    minWidth: 0,
-    width: 'auto',
-    padding: 0,
-  },),
-  css2(`.${textInputWrapperClassName}.${textInputTypeWrapperClassName}::before`, {
-    content: css2.variable('--framer-input-icon-content', 'none',),
-    display: 'block',
-    flexShrink: 0,
-    width: `${iconSize}px`,
-    height: `${iconSize}px`,
-    marginRight: `${leftIconSpacing}px`,
-    ...iconImageCSS,
-    backgroundPosition: 'center',
-    maskPosition: 'center',
-    maskImage: css2.variable('--framer-input-icon-mask-image',/* IconMaskImage */
-    ),
     backgroundImage: css2.variable('--framer-input-icon-image',/* IconBackgroundImage */
     ),
   },),
@@ -52784,14 +52849,15 @@ var styles = /* @__PURE__ */ (() => [
     borderWidth: css2.variable('--framer-input-focused-border-width', inputBorderAllSides,),
   },),
   css2(`.${clearButtonClassName}`, {
-    position: 'absolute',
-    right: 0,
-    top: 0,
-    bottom: 0,
+    display: 'flex',
+    order: 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexShrink: 0,
     width: `${iconSize}px`,
-    boxSizing: 'content-box',
-    padding: css2.variable('--framer-input-padding',/* Padding */
-    ),
+    height: `${iconSize}px`,
+    marginLeft: `${iconSpacing}px`,
+    padding: 0,
     border: 'none',
     background: 'transparent',
     cursor: 'pointer',
@@ -52803,12 +52869,6 @@ var styles = /* @__PURE__ */ (() => [
   css2(`.${clearButtonClassName}:hover, .${clearButtonClassName}:focus-visible`, {
     color: css2.variable('--framer-input-font-color',/* FontColor */
     ),
-  },),
-  css2(`.${textInputWrapperClassName}.${hasClearButtonClassName} .${inputClassName}`, {
-    paddingRight: `calc(${
-      css2.variable('--framer-input-padding',/* Padding */
-      )
-    } + ${iconSize}px + ${rightIconSpacing}px)`,
   },),
 ])();
 var FormPlainTextInput2 = /* @__PURE__ */ withCSS(PlainTextInput, styles, 'framer-lib-form-plain-text-input',);
