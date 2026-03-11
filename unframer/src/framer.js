@@ -12407,7 +12407,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.GA4OK32T.mjs
+// /:https://app.framerstatic.com/framer.KISZQB6F.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -49048,9 +49048,8 @@ var WebGL2ShaderRenderer = class {
     if (canvas instanceof OffscreenCanvas) {
       throw new Error('resize() is not supported for OffscreenCanvas.',);
     }
-    const rect = canvas.getBoundingClientRect();
-    const cssWidth = Math.min(rect.width, canvas.offsetWidth,);
-    const cssHeight = Math.min(rect.height, canvas.offsetHeight,);
+    const cssWidth = canvas.offsetWidth;
+    const cssHeight = canvas.offsetHeight;
     const dpr = __unframerWindow2.devicePixelRatio;
     const effectiveDpr = Math.max(dpr * this.resolutionScale, 1,);
     this.pixelRatio = effectiveDpr;
@@ -49379,7 +49378,6 @@ var ShaderFallbackImage = /* @__PURE__ */ memo2(function ShaderFallbackImage2({
 var overlayStyle = {
   position: 'absolute',
   inset: 0,
-  zIndex: 1,
   width: '100%',
   height: '100%',
 };
@@ -57524,7 +57522,7 @@ var package_default = {
     eslint: '^8.57.1',
     'eslint-plugin-framer-studio': 'workspace:*',
     'framer-motion': '12.34.3',
-    immutable: '^3.8.2',
+    immutable: '^3.8.3',
     jest: '29.4.1',
     'jest-diff': '^29.3.1',
     'jest-environment-jsdom': '^29.3.1',
