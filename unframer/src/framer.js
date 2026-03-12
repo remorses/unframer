@@ -12407,7 +12407,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.KISZQB6F.mjs
+// /:https://app.framerstatic.com/framer.5X2FSYMP.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -49651,20 +49651,23 @@ function useOnDprChange(callback,) {
     };
   }, [callback,],);
 }
-function useWhenBrowserIdle(enabled = true,) {
-  const [isIdle, setIsIdle,] = useState(!enabled,);
-  useEffect(() => {
-    if (!enabled) return;
-    const requestIdleCallback2 = supportsRequestIdleCallback ? safeWindow.requestIdleCallback : (callback) => setTimeout(callback, 1,);
-    const id3 = requestIdleCallback2(() => {
-      startTransition2(() => setIsIdle(true,));
-    },);
+var SHADER_REVEAL_DELAY_MS = 300;
+function usePatchDelayShaderRender(enabled = true,) {
+  const [mayRender, setMayRender,] = useState(!enabled,);
+  useIsomorphicLayoutEffect2(() => {
+    if (!enabled) {
+      startTransition2(() => setMayRender(true,));
+      return;
+    }
+    startTransition2(() => setMayRender(false,));
+    const timeoutId = __unframerWindow2.setTimeout(() => {
+      startTransition2(() => setMayRender(true,));
+    }, SHADER_REVEAL_DELAY_MS,);
     return () => {
-      if (supportsRequestIdleCallback) cancelIdleCallback(id3,);
-      else clearTimeout(id3,);
+      clearTimeout(timeoutId,);
     };
   }, [enabled,],);
-  return isIdle;
+  return mayRender;
 }
 var canvasStyle = {
   display: 'block',
@@ -49809,10 +49812,12 @@ var ShaderWithFallbackOverlay = /* @__PURE__ */ memo2(function ShaderWithFallbac
   onReady,
   paused: externalPaused,
 },) {
-  const isProgressive = mode === 'progressive';
-  const isIdle = useWhenBrowserIdle(isProgressive,);
   const [isShaderReady, setIsShaderReady,] = useState(false,);
   const [shouldPlay, setShouldPlay,] = useState(false,);
+  const isProgressive = mode === 'progressive';
+  const hasFallbackImage = Boolean(fallbackImage,);
+  const isFallbackShown = isProgressive && hasFallbackImage;
+  const isRevealDelayComplete = usePatchDelayShaderRender(isFallbackShown,);
   const onReadyRef = useRef(onReady,);
   useLayoutEffect(() => {
     onReadyRef.current = onReady;
@@ -49822,32 +49827,44 @@ var ShaderWithFallbackOverlay = /* @__PURE__ */ memo2(function ShaderWithFallbac
     onReadyRef.current?.();
   }, [],);
   useEffect(() => {
-    if (!isProgressive || !isShaderReady) return;
-    let timeout;
-    if (SHADER_PLAY_DELAY) {
-      timeout = __unframerWindow2.setTimeout(() => {
-        startTransition2(() => setShouldPlay(true,));
-      }, SHADER_PLAY_DELAY,);
-    } else {
+    if (!isProgressive) return;
+    if (!isShaderReady || !isRevealDelayComplete) return;
+    const timeout = __unframerWindow2.setTimeout(() => {
       startTransition2(() => setShouldPlay(true,));
-    }
-    return () => SHADER_PLAY_DELAY ? clearTimeout(timeout,) : void 0;
-  }, [isProgressive, isShaderReady,],);
-  const paused = isProgressive && !shouldPlay || externalPaused;
+    }, SHADER_PLAY_DELAY,);
+    return () => {
+      clearTimeout(timeout,);
+    };
+  }, [isProgressive, isRevealDelayComplete, isShaderReady,],);
+  const shouldHideCanvas = isFallbackShown && !isRevealDelayComplete;
+  const isWaitingForPlayback = isProgressive && !shouldPlay;
+  const isPaused = shouldHideCanvas || isWaitingForPlayback || externalPaused;
+  const shouldShowFallback = hasFallbackImage && (!isRevealDelayComplete || !isShaderReady);
   return /* @__PURE__ */ jsxs(Fragment, {
     children: [
-      isIdle && /* @__PURE__ */ jsx(ShaderCanvas, {
-        vertexShader,
-        fragmentShader,
-        animated,
-        resolutionScale,
-        paused,
-        uniforms,
-        onError,
-        onReady: handleReady,
+      /* @__PURE__ */ jsx('div', {
+        style: {
+          ...overlayStyle,
+          opacity: shouldHideCanvas ? 0 : 1,
+        },
+        children: /* @__PURE__ */ jsx(ShaderCanvas, {
+          vertexShader,
+          fragmentShader,
+          animated,
+          resolutionScale,
+          paused: isPaused,
+          uniforms,
+          onError,
+          onReady: handleReady,
+        },),
       },),
-      !isShaderReady && fallbackImage && /* @__PURE__ */ jsx('div', {
-        style: overlayStyle,
+      fallbackImage && /* @__PURE__ */ jsx('div', {
+        style: {
+          ...overlayStyle,
+          opacity: shouldShowFallback ? 1 : 0,
+          transition: 'opacity 200ms ease-in-out',
+          pointerEvents: 'none',
+        },
         children: /* @__PURE__ */ jsx(ShaderFallbackImage, {
           src: fallbackImage,
         },),
@@ -49895,7 +49912,7 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
   };
   const [isShaderReady, setIsShaderReady,] = useState(false,);
   useLayoutEffect(() => {
-    if (isFallbackOnly) setIsShaderReady(false,);
+    if (isFallbackOnly) startTransition2(() => setIsShaderReady(false,));
   }, [isFallbackOnly,],);
   const handleShaderReady = useCallback2(() => {
     startTransition2(() => setIsShaderReady(true,));
