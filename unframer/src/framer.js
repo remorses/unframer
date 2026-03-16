@@ -12407,7 +12407,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.5X2FSYMP.mjs
+// /:https://app.framerstatic.com/framer.6XQGWMEC.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -36900,9 +36900,15 @@ var CustomCursorComponent = /* @__PURE__ */ memo2(function CustomCursorComponent
     document.body.classList.toggle(replaceCursorClassName, replaceNativeCursor,);
   }, [replaceNativeCursor, hasHoverCapability,],);
   const Cursor = cursor?.component;
-  const spring2 = cursor?.transition ?? {
+  const springRaw = cursor?.transition ?? {
     duration: 0,
   };
+  const spring2 = springRaw.duration !== void 0
+    ? {
+      ...springRaw,
+      duration: springRaw.duration * 1e3,
+    }
+    : springRaw;
   const sprungX = useSpring(pointerX, spring2,);
   const sprungY = useSpring(pointerY, spring2,);
   const x = useTransform(() => sprungX.get() + (cursor?.offset?.x ?? 0));
@@ -49375,6 +49381,54 @@ var ShaderFallbackImage = /* @__PURE__ */ memo2(function ShaderFallbackImage2({
     alt: '',
   },);
 },);
+function parseCSSVarRange(input, from = 0,) {
+  const varIndex = input.indexOf('var(', from,);
+  if (varIndex === -1) return null;
+  const start2 = varIndex + 4;
+  let parens = 1;
+  let commaIndex;
+  for (let index = start2; index < input.length; index++) {
+    if (input[index] === '(') {
+      parens++;
+    } else if (input[index] === ')') {
+      parens--;
+      if (parens === 0) {
+        return {
+          start: varIndex,
+          end: index + 1,
+          commaIndex,
+        };
+      }
+    } else if (commaIndex === void 0 && input[index] === ',') {
+      commaIndex = index;
+    }
+  }
+  return null;
+}
+function tokenFromVarRange(string, range,) {
+  if (!range) return {};
+  const {
+    start: start2,
+    end,
+    commaIndex,
+  } = range;
+  const metadata = string.substring(end,).trim();
+  if (!commaIndex) {
+    return {
+      customProperty: string.substring(start2 + 4, end - 1,),
+      metadata,
+    };
+  }
+  return {
+    customProperty: string.substring(start2 + 4, commaIndex,),
+    fallback: string.substring(commaIndex + 1, end - 1,).trim(),
+    metadata,
+  };
+}
+function parseCSSVariable2(token,) {
+  const range = parseCSSVarRange(token,);
+  return tokenFromVarRange(token, range,);
+}
 var overlayStyle = {
   position: 'absolute',
   inset: 0,
@@ -49382,8 +49436,18 @@ var overlayStyle = {
   height: '100%',
 };
 var timeMultiplier = 1e-3;
-function colorToVec4(color2,) {
-  const rgba2 = Color.toRgb(Color(color2,),);
+function resolveCSSVariableColor(color2, element,) {
+  const parsed = parseCSSVariable2(color2,);
+  if (!parsed.customProperty) return color2;
+  if (element) {
+    const resolved = getComputedStyle(element,).getPropertyValue(parsed.customProperty,).trim();
+    if (resolved) return P3Color.srgbFromValue(resolved,);
+  }
+  return P3Color.srgbFromValue(parsed.fallback ?? color2,);
+}
+function colorToVec4(color2, element,) {
+  const resolved = resolveCSSVariableColor(color2, element,);
+  const rgba2 = Color.toRgb(Color(resolved,),);
   return [rgba2.r / 255, rgba2.g / 255, rgba2.b / 255, rgba2.a,];
 }
 async function loadTexture(url,) {
@@ -49392,7 +49456,7 @@ async function loadTexture(url,) {
   const blob = await response.blob();
   return createImageBitmap(blob,);
 }
-async function resolveUniform(uniform,) {
+async function resolveUniform(uniform, element,) {
   switch (uniform.type) {
     case 'number':
     case 'enum':
@@ -49408,7 +49472,7 @@ async function resolveUniform(uniform,) {
     case 'color':
       return {
         type: 'vec4',
-        value: colorToVec4(uniform.value,),
+        value: colorToVec4(uniform.value, element,),
       };
     case 'responsiveimage': {
       let url;
@@ -49427,16 +49491,16 @@ async function resolveUniform(uniform,) {
     case 'array':
       return {
         type: 'vec4[]',
-        value: uniform.value.map(colorToVec4,),
+        value: uniform.value.map((color2) => colorToVec4(color2, element,)),
       };
     default:
       assertNever(uniform,);
   }
 }
-async function resolveUniforms(uniforms,) {
+async function resolveUniforms(uniforms, element,) {
   const result = {};
   for (const [name, uniform,] of Object.entries(uniforms,)) {
-    const resolved = await resolveUniform(uniform,);
+    const resolved = await resolveUniform(uniform, element,);
     if (!resolved) continue;
     result[name] = resolved;
     if (uniform.type === 'array') {
@@ -49606,12 +49670,12 @@ void main() {
     fragColor = vec4(0.0);
 }
 `;
-function useResolvedUniforms(uniforms,) {
+function useResolvedUniforms(uniforms, canvasRef,) {
   const [resolvedUniforms, setResolvedUniforms,] = useState({},);
   useEffect(() => {
     if (!uniforms) return;
     let isCancelled = false;
-    resolveUniforms(uniforms,).then((resolved) => {
+    resolveUniforms(uniforms, canvasRef.current,).then((resolved) => {
       if (!isCancelled) {
         startTransition2(() => setResolvedUniforms(resolved,));
       } else {
@@ -49621,7 +49685,7 @@ function useResolvedUniforms(uniforms,) {
     return () => {
       isCancelled = true;
     };
-  }, [uniforms,],);
+  }, [uniforms, canvasRef,],);
   return resolvedUniforms;
 }
 function useCanvasResize(canvasRef, resizeHandler,) {
@@ -49693,7 +49757,7 @@ function ShaderCanvas({
   useLayoutEffect(() => {
     onReadyRef.current = onReady;
   }, [onReady,],);
-  const resolvedUniforms = useResolvedUniforms(uniforms,);
+  const resolvedUniforms = useResolvedUniforms(uniforms, canvasRef,);
   const uniformsPropRef = useRef(uniforms,);
   useLayoutEffect(() => {
     uniformsPropRef.current = uniforms;
