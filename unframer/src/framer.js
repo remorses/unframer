@@ -12407,7 +12407,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.6XQGWMEC.mjs
+// /:https://app.framerstatic.com/framer.7YUB6IKR.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -39068,19 +39068,21 @@ var HoneypotInput = ({
     'data-bwignore': true,
   },);
 };
-function useHoneypotFields() {
+function useHoneypotFields(isEnabled,) {
   const framerSiteId = React42.useContext(FormContext,);
   const states = React42.useMemo(() =>
-    COMMON_FIELD_NAMES.map((fieldName) => {
-      return {
-        inputRef: React42.createRef(),
-        originalName: fieldName,
-        methodsUsed: {
-          setAttribute: false,
-          valueProperty: false,
-        },
-      };
-    },), [],);
+    isEnabled
+      ? COMMON_FIELD_NAMES.map((fieldName) => {
+        return {
+          inputRef: React42.createRef(),
+          originalName: fieldName,
+          methodsUsed: {
+            setAttribute: false,
+            valueProperty: false,
+          },
+        };
+      },)
+      : [], [isEnabled,],);
   const convertHoneypotFieldsForSubmission = React42.useCallback(() => {
     states.forEach((state) => {
       const currentHoneypotInput = state.inputRef.current;
@@ -39090,6 +39092,7 @@ function useHoneypotFields() {
     },);
   }, [states,],);
   const replaceHoneypotWithMetadata = React42.useCallback((formData) => {
+    if (!isEnabled) return;
     const honeypotCount = states.length;
     let honeypotFilled = 0;
     const filledFieldsData = [];
@@ -39121,7 +39124,7 @@ function useHoneypotFields() {
     formData.append(`${HONEYPOT_FIELD_NAME}_${METADATA_KEYS_ENUM.hpVersion}`, HONEYPOT_VERSION,);
     formData.append(`${HONEYPOT_FIELD_NAME}_${METADATA_KEYS_ENUM.siteId}`, framerSiteId || '',);
     formData.append(`${HONEYPOT_FIELD_NAME}_${METADATA_KEYS_ENUM.timeToSubmissionSinceModuleLoad}`, getTimeSinceModuleLoadInSeconds(),);
-  }, [states, framerSiteId,],);
+  }, [isEnabled, states, framerSiteId,],);
   return {
     states,
     convertHoneypotFieldsForSubmission,
@@ -39228,15 +39231,18 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
   onLoading,
   submitTrackingId,
   nodeId,
+  formCaptchaProvider,
+  formCaptchaSiteKey,
   ...props
 }, forwardedRef,) {
   const fallbackRef = React42.useRef(null,);
   const ref = forwardedRef ?? fallbackRef;
+  const shouldUseHoneypot = !(formCaptchaProvider && formCaptchaSiteKey);
   const {
     states: honeypotStateRefs,
     convertHoneypotFieldsForSubmission,
     replaceHoneypotWithMetadata,
-  } = useHoneypotFields();
+  } = useHoneypotFields(shouldUseHoneypot,);
   const router = useRouter();
   const currentRoute = useCurrentRoute();
   const implicitPathVariables = useImplicitPathVariables();
@@ -39372,7 +39378,7 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
     ref,
     children: [
       children(state,),
-      /* @__PURE__ */ jsx(HoneypotFields, {
+      shouldUseHoneypot && /* @__PURE__ */ jsx(HoneypotFields, {
         states: honeypotStateRefs,
       },),
     ],
@@ -39647,7 +39653,7 @@ var TriggerState = class {
     if (!triggerEntry || triggerEntry.status !== 'pending') return;
     const handler = (eventPayload) => {
       if (triggerEntry?.status !== 'pending') return;
-      this.evaulateAndInvoke(triggerId, eventPayload,);
+      this.evaluateAndInvoke(triggerId, eventPayload,);
     };
     let state = this.events.get(event,);
     if (!state) {
@@ -39675,7 +39681,7 @@ var TriggerState = class {
   reevaluatePendingTriggers() {
     for (const [triggerId, triggerEntry,] of this.triggers.entries()) {
       if (triggerEntry.status === 'pending') {
-        this.evaulateAndInvoke(triggerId,);
+        this.evaluateAndInvoke(triggerId,);
       }
     }
   }
@@ -39795,7 +39801,7 @@ var TriggerState = class {
     if (schedule.endAt && /* @__PURE__ */ new Date(`${schedule.endAt}${schedule.endAtOffset ?? ''}`,) < now2) return false;
     return true;
   }
-  evaulateAndInvoke(triggerId, eventPayload,) {
+  evaluateAndInvoke(triggerId, eventPayload,) {
     if (this.evaluate(triggerId, eventPayload,)) {
       this.invoke(triggerId,);
     }
@@ -39835,7 +39841,7 @@ var TriggerState = class {
             this.delayTimeouts.set(
               triggerId,
               setTimeout(() => {
-                this.evaulateAndInvoke(triggerId,);
+                this.evaluateAndInvoke(triggerId,);
               }, initial + condition.delayMs - Date.now(),),
             );
           }
@@ -49867,6 +49873,7 @@ var SHADER_PLAY_DELAY = 250;
 var ShaderWithFallbackOverlay = /* @__PURE__ */ memo2(function ShaderWithFallbackOverlay2({
   mode,
   fallbackImage,
+  skipInitialFallback,
   vertexShader,
   fragmentShader,
   animated,
@@ -49880,7 +49887,8 @@ var ShaderWithFallbackOverlay = /* @__PURE__ */ memo2(function ShaderWithFallbac
   const [shouldPlay, setShouldPlay,] = useState(false,);
   const isProgressive = mode === 'progressive';
   const hasFallbackImage = Boolean(fallbackImage,);
-  const isFallbackShown = isProgressive && hasFallbackImage;
+  const shouldSkipInitialFallback = Boolean(skipInitialFallback && hasFallbackImage,);
+  const isFallbackShown = isProgressive && hasFallbackImage && !shouldSkipInitialFallback;
   const isRevealDelayComplete = usePatchDelayShaderRender(isFallbackShown,);
   const onReadyRef = useRef(onReady,);
   useLayoutEffect(() => {
@@ -49903,7 +49911,7 @@ var ShaderWithFallbackOverlay = /* @__PURE__ */ memo2(function ShaderWithFallbac
   const shouldHideCanvas = isFallbackShown && !isRevealDelayComplete;
   const isWaitingForPlayback = isProgressive && !shouldPlay;
   const isPaused = shouldHideCanvas || isWaitingForPlayback || externalPaused;
-  const shouldShowFallback = hasFallbackImage && (!isRevealDelayComplete || !isShaderReady);
+  const shouldShowFallback = hasFallbackImage && !shouldSkipInitialFallback && (!isRevealDelayComplete || !isShaderReady);
   return /* @__PURE__ */ jsxs(Fragment, {
     children: [
       /* @__PURE__ */ jsx('div', {
@@ -49939,6 +49947,7 @@ var ShaderWithFallbackOverlay = /* @__PURE__ */ memo2(function ShaderWithFallbac
 var Shader = /* @__PURE__ */ forwardRef(function Shader2({
   mode = 'instant',
   fallbackImage,
+  skipInitialFallback,
   optimiseSwitching,
   style: style2,
   width,
@@ -49964,6 +49973,7 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
     enabled: true,
   },);
   const shouldReduceMotion = useReducedMotionConfig();
+  const shouldSkipInitialFallback = Boolean(skipInitialFallback && fallbackImage,);
   const isFallbackOnly = mode === 'fallback' || shouldReduceMotion && !!fallbackImage || !isIntersecting;
   const shaderProps = {
     vertexShader,
@@ -49982,11 +49992,12 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
     startTransition2(() => setIsShaderReady(true,));
     onReady?.();
   }, [onReady,],);
-  const hideFallback = !isFallbackOnly && isShaderReady;
+  const hideFallback = !isFallbackOnly && (shouldSkipInitialFallback || isShaderReady);
   return /* @__PURE__ */ jsx(FrameWithMotion2, {
     ref: observerRef,
     __fromCanvasComponent: true,
     style: {
+      borderRadius: 'inherit',
       ...style2,
       overflow: 'hidden',
     },
@@ -49998,6 +50009,7 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
         children: [
           !isFallbackOnly && /* @__PURE__ */ jsx(ShaderWithFallbackOverlay, {
             mode,
+            skipInitialFallback: shouldSkipInitialFallback,
             onReady: handleShaderReady,
             ...shaderProps,
           },),
@@ -50015,6 +50027,7 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
       : /* @__PURE__ */ jsx(ShaderWithFallbackOverlay, {
         mode,
         fallbackImage,
+        skipInitialFallback: shouldSkipInitialFallback,
         onReady,
         ...shaderProps,
       },),
