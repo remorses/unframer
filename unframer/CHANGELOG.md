@@ -1,5 +1,12 @@
 # unframer
 
+## 4.1.3
+
+1. **Updated bundled Framer runtime** — updated to framer@2.4.1 with latest Framer internals
+2. **Fixed duplicate CSS variable declarations** — when multiple Framer color tokens share the same user-facing name (e.g. two tokens both named `black` with different UUIDs), the generated CSS no longer emits duplicate `--unframer-*` declarations that silently overwrite each other
+3. **Fixed broken font unicode-range subsetting** — `@font-face` blocks were emitting `unicodeRange:` (camelCase) instead of the valid `unicode-range:` CSS property; browsers silently ignored it, so font subsetting was completely broken for all generated components
+4. **Fixed crash in TypeScript type inference** — `typescriptType()` no longer throws `Cannot read properties of undefined (reading 'type')` when a `ControlType.Array` or `ControlType.Object` control has an undefined nested control entry
+
 ## 4.1.2
 
 1. **Fixed `unframer mcp` crash on Node 22** — server-api mode no longer throws `ERR_UNKNOWN_FILE_EXTENSION` at startup. The handler code previously imported from `unframer/src/typescript` and `unframer/src/compat` which resolve to raw `.ts` files that Node 22 refuses to load. These are now exported from the main `unframer` entry point.
