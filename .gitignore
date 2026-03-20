@@ -14,3 +14,4 @@ example-framer-site
 isolate-*.log
 /test
 .vercel
+.opencode/patches
