@@ -12407,7 +12407,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.GA4OK32T.mjs
+// /:https://app.framerstatic.com/framer.URNEVXQW.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -36900,9 +36900,15 @@ var CustomCursorComponent = /* @__PURE__ */ memo2(function CustomCursorComponent
     document.body.classList.toggle(replaceCursorClassName, replaceNativeCursor,);
   }, [replaceNativeCursor, hasHoverCapability,],);
   const Cursor = cursor?.component;
-  const spring2 = cursor?.transition ?? {
+  const springRaw = cursor?.transition ?? {
     duration: 0,
   };
+  const spring2 = springRaw.duration !== void 0
+    ? {
+      ...springRaw,
+      duration: springRaw.duration * 1e3,
+    }
+    : springRaw;
   const sprungX = useSpring(pointerX, spring2,);
   const sprungY = useSpring(pointerY, spring2,);
   const x = useTransform(() => sprungX.get() + (cursor?.offset?.x ?? 0));
@@ -39062,19 +39068,21 @@ var HoneypotInput = ({
     'data-bwignore': true,
   },);
 };
-function useHoneypotFields() {
+function useHoneypotFields(isEnabled,) {
   const framerSiteId = React42.useContext(FormContext,);
   const states = React42.useMemo(() =>
-    COMMON_FIELD_NAMES.map((fieldName) => {
-      return {
-        inputRef: React42.createRef(),
-        originalName: fieldName,
-        methodsUsed: {
-          setAttribute: false,
-          valueProperty: false,
-        },
-      };
-    },), [],);
+    isEnabled
+      ? COMMON_FIELD_NAMES.map((fieldName) => {
+        return {
+          inputRef: React42.createRef(),
+          originalName: fieldName,
+          methodsUsed: {
+            setAttribute: false,
+            valueProperty: false,
+          },
+        };
+      },)
+      : [], [isEnabled,],);
   const convertHoneypotFieldsForSubmission = React42.useCallback(() => {
     states.forEach((state) => {
       const currentHoneypotInput = state.inputRef.current;
@@ -39084,6 +39092,7 @@ function useHoneypotFields() {
     },);
   }, [states,],);
   const replaceHoneypotWithMetadata = React42.useCallback((formData) => {
+    if (!isEnabled) return;
     const honeypotCount = states.length;
     let honeypotFilled = 0;
     const filledFieldsData = [];
@@ -39115,7 +39124,7 @@ function useHoneypotFields() {
     formData.append(`${HONEYPOT_FIELD_NAME}_${METADATA_KEYS_ENUM.hpVersion}`, HONEYPOT_VERSION,);
     formData.append(`${HONEYPOT_FIELD_NAME}_${METADATA_KEYS_ENUM.siteId}`, framerSiteId || '',);
     formData.append(`${HONEYPOT_FIELD_NAME}_${METADATA_KEYS_ENUM.timeToSubmissionSinceModuleLoad}`, getTimeSinceModuleLoadInSeconds(),);
-  }, [states, framerSiteId,],);
+  }, [isEnabled, states, framerSiteId,],);
   return {
     states,
     convertHoneypotFieldsForSubmission,
@@ -39222,15 +39231,18 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
   onLoading,
   submitTrackingId,
   nodeId,
+  formCaptchaProvider,
+  formCaptchaSiteKey,
   ...props
 }, forwardedRef,) {
   const fallbackRef = React42.useRef(null,);
   const ref = forwardedRef ?? fallbackRef;
+  const shouldUseHoneypot = !(formCaptchaProvider && formCaptchaSiteKey);
   const {
     states: honeypotStateRefs,
     convertHoneypotFieldsForSubmission,
     replaceHoneypotWithMetadata,
-  } = useHoneypotFields();
+  } = useHoneypotFields(shouldUseHoneypot,);
   const router = useRouter();
   const currentRoute = useCurrentRoute();
   const implicitPathVariables = useImplicitPathVariables();
@@ -39366,7 +39378,7 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
     ref,
     children: [
       children(state,),
-      /* @__PURE__ */ jsx(HoneypotFields, {
+      shouldUseHoneypot && /* @__PURE__ */ jsx(HoneypotFields, {
         states: honeypotStateRefs,
       },),
     ],
@@ -39641,7 +39653,7 @@ var TriggerState = class {
     if (!triggerEntry || triggerEntry.status !== 'pending') return;
     const handler = (eventPayload) => {
       if (triggerEntry?.status !== 'pending') return;
-      this.evaulateAndInvoke(triggerId, eventPayload,);
+      this.evaluateAndInvoke(triggerId, eventPayload,);
     };
     let state = this.events.get(event,);
     if (!state) {
@@ -39669,7 +39681,7 @@ var TriggerState = class {
   reevaluatePendingTriggers() {
     for (const [triggerId, triggerEntry,] of this.triggers.entries()) {
       if (triggerEntry.status === 'pending') {
-        this.evaulateAndInvoke(triggerId,);
+        this.evaluateAndInvoke(triggerId,);
       }
     }
   }
@@ -39789,7 +39801,7 @@ var TriggerState = class {
     if (schedule.endAt && /* @__PURE__ */ new Date(`${schedule.endAt}${schedule.endAtOffset ?? ''}`,) < now2) return false;
     return true;
   }
-  evaulateAndInvoke(triggerId, eventPayload,) {
+  evaluateAndInvoke(triggerId, eventPayload,) {
     if (this.evaluate(triggerId, eventPayload,)) {
       this.invoke(triggerId,);
     }
@@ -39829,7 +39841,7 @@ var TriggerState = class {
             this.delayTimeouts.set(
               triggerId,
               setTimeout(() => {
-                this.evaulateAndInvoke(triggerId,);
+                this.evaluateAndInvoke(triggerId,);
               }, initial + condition.delayMs - Date.now(),),
             );
           }
@@ -47177,8 +47189,8 @@ function useLoadMorePagination(totalSize, pageSize, hash2, paginateWithSuspended
       continueAfter: 'paint',
     },);
     if (currentPageRef.current >= totalPages) return;
-    const renderNextPage = (startTransition222) => {
-      startTransition222(() => {
+    const renderNextPage = (startTransition23) => {
+      startTransition23(() => {
         setCurrentPage((_currentPage) => {
           const nextPage = Math.min(_currentPage + 1, totalPages,);
           currentPageRef.current = nextPage;
@@ -48940,8 +48952,9 @@ var builtInUniforms = {
   },
 };
 var webGLContextLostEvent = 'webglcontextlost';
+var noop5 = () => {};
 var WebGL2ShaderRenderer = class {
-  constructor(canvas, vertexSource, fragmentSource, resolutionScale,) {
+  constructor(canvas, vertexSource, fragmentSource, resolutionScale, onContextLostHandler = noop5,) {
     __publicField(this, 'gl',);
     __publicField(this, 'program',);
     __publicField(this, 'vao',);
@@ -48955,9 +48968,11 @@ var WebGL2ShaderRenderer = class {
     __publicField(this, 'pixelRatio', typeof __unframerWindow2 !== 'undefined' ? __unframerWindow2.devicePixelRatio : 1,);
     __publicField(this, 'resolutionScale',);
     __publicField(this, 'lastBufferWidth', 0,);
+    __publicField(this, 'onContextLost',);
     __publicField(this, 'lastBufferHeight', 0,);
     this.resolutionScale = resolutionScale;
     this.canvas = canvas;
+    this.onContextLost = onContextLostHandler;
     const gl = canvas.getContext('webgl2', {
       alpha: true,
       premultipliedAlpha: false,
@@ -49002,6 +49017,7 @@ var WebGL2ShaderRenderer = class {
     this.contextLostHandler = (event) => {
       event.preventDefault();
       this.dispose();
+      this.onContextLost?.();
     };
     canvas.addEventListener(webGLContextLostEvent, this.contextLostHandler,);
   }
@@ -49048,9 +49064,8 @@ var WebGL2ShaderRenderer = class {
     if (canvas instanceof OffscreenCanvas) {
       throw new Error('resize() is not supported for OffscreenCanvas.',);
     }
-    const rect = canvas.getBoundingClientRect();
-    const cssWidth = Math.min(rect.width, canvas.offsetWidth,);
-    const cssHeight = Math.min(rect.height, canvas.offsetHeight,);
+    const cssWidth = canvas.offsetWidth;
+    const cssHeight = canvas.offsetHeight;
     const dpr = __unframerWindow2.devicePixelRatio;
     const effectiveDpr = Math.max(dpr * this.resolutionScale, 1,);
     this.pixelRatio = effectiveDpr;
@@ -49376,16 +49391,73 @@ var ShaderFallbackImage = /* @__PURE__ */ memo2(function ShaderFallbackImage2({
     alt: '',
   },);
 },);
+function parseCSSVarRange(input, from = 0,) {
+  const varIndex = input.indexOf('var(', from,);
+  if (varIndex === -1) return null;
+  const start2 = varIndex + 4;
+  let parens = 1;
+  let commaIndex;
+  for (let index = start2; index < input.length; index++) {
+    if (input[index] === '(') {
+      parens++;
+    } else if (input[index] === ')') {
+      parens--;
+      if (parens === 0) {
+        return {
+          start: varIndex,
+          end: index + 1,
+          commaIndex,
+        };
+      }
+    } else if (commaIndex === void 0 && input[index] === ',') {
+      commaIndex = index;
+    }
+  }
+  return null;
+}
+function tokenFromVarRange(string, range,) {
+  if (!range) return {};
+  const {
+    start: start2,
+    end,
+    commaIndex,
+  } = range;
+  const metadata = string.substring(end,).trim();
+  if (!commaIndex) {
+    return {
+      customProperty: string.substring(start2 + 4, end - 1,),
+      metadata,
+    };
+  }
+  return {
+    customProperty: string.substring(start2 + 4, commaIndex,),
+    fallback: string.substring(commaIndex + 1, end - 1,).trim(),
+    metadata,
+  };
+}
+function parseCSSVariable2(token,) {
+  const range = parseCSSVarRange(token,);
+  return tokenFromVarRange(token, range,);
+}
 var overlayStyle = {
   position: 'absolute',
   inset: 0,
-  zIndex: 1,
   width: '100%',
   height: '100%',
 };
 var timeMultiplier = 1e-3;
-function colorToVec4(color2,) {
-  const rgba2 = Color.toRgb(Color(color2,),);
+function resolveCSSVariableColor(color2, element,) {
+  const parsed = parseCSSVariable2(color2,);
+  if (!parsed.customProperty) return color2;
+  if (element) {
+    const resolved = getComputedStyle(element,).getPropertyValue(parsed.customProperty,).trim();
+    if (resolved) return P3Color.srgbFromValue(resolved,);
+  }
+  return P3Color.srgbFromValue(parsed.fallback ?? color2,);
+}
+function colorToVec4(color2, element,) {
+  const resolved = resolveCSSVariableColor(color2, element,);
+  const rgba2 = Color.toRgb(Color(resolved,),);
   return [rgba2.r / 255, rgba2.g / 255, rgba2.b / 255, rgba2.a,];
 }
 async function loadTexture(url,) {
@@ -49394,7 +49466,7 @@ async function loadTexture(url,) {
   const blob = await response.blob();
   return createImageBitmap(blob,);
 }
-async function resolveUniform(uniform,) {
+async function resolveUniform(uniform, element,) {
   switch (uniform.type) {
     case 'number':
     case 'enum':
@@ -49410,7 +49482,7 @@ async function resolveUniform(uniform,) {
     case 'color':
       return {
         type: 'vec4',
-        value: colorToVec4(uniform.value,),
+        value: colorToVec4(uniform.value, element,),
       };
     case 'responsiveimage': {
       let url;
@@ -49429,16 +49501,16 @@ async function resolveUniform(uniform,) {
     case 'array':
       return {
         type: 'vec4[]',
-        value: uniform.value.map(colorToVec4,),
+        value: uniform.value.map((color2) => colorToVec4(color2, element,)),
       };
     default:
       assertNever(uniform,);
   }
 }
-async function resolveUniforms(uniforms,) {
+async function resolveUniforms(uniforms, element,) {
   const result = {};
   for (const [name, uniform,] of Object.entries(uniforms,)) {
-    const resolved = await resolveUniform(uniform,);
+    const resolved = await resolveUniform(uniform, element,);
     if (!resolved) continue;
     result[name] = resolved;
     if (uniform.type === 'array') {
@@ -49571,7 +49643,7 @@ var ShaderSandboxFallbackImage = /* @__PURE__ */ memo2(function ShaderSandboxFal
         decoding: 'async',
         style: sandboxFallbackImageStyle,
         alt: '',
-      }, previousSrc,),
+      }, `prev-${previousSrc}`,),
       /* @__PURE__ */ jsx('div', {
         ref: previousSrc ? fadeRef : void 0,
         style: sandboxFallbackContainerStyle,
@@ -49608,12 +49680,24 @@ void main() {
     fragColor = vec4(0.0);
 }
 `;
-function useResolvedUniforms(uniforms,) {
+var slotStatus = {
+  /** No WebGL context slot allocated — show fallback image. */
+  noSlot: 0,
+  /** Slot allocated, render a single frame at t=0 and re-render on change. */
+  singleFrame: 1,
+  /** Slot allocated, run continuous rAF animation. */
+  animate: 2,
+};
+var ShaderPoolContext = /* @__PURE__ */ createContext(null,);
+function useShaderPoolContext() {
+  return useContext(ShaderPoolContext,);
+}
+function useResolvedUniforms(uniforms, canvasRef,) {
   const [resolvedUniforms, setResolvedUniforms,] = useState({},);
   useEffect(() => {
     if (!uniforms) return;
     let isCancelled = false;
-    resolveUniforms(uniforms,).then((resolved) => {
+    resolveUniforms(uniforms, canvasRef.current,).then((resolved) => {
       if (!isCancelled) {
         startTransition2(() => setResolvedUniforms(resolved,));
       } else {
@@ -49623,7 +49707,7 @@ function useResolvedUniforms(uniforms,) {
     return () => {
       isCancelled = true;
     };
-  }, [uniforms,],);
+  }, [uniforms, canvasRef,],);
   return resolvedUniforms;
 }
 function useCanvasResize(canvasRef, resizeHandler,) {
@@ -49653,20 +49737,60 @@ function useOnDprChange(callback,) {
     };
   }, [callback,],);
 }
-function useWhenBrowserIdle(enabled = true,) {
-  const [isIdle, setIsIdle,] = useState(!enabled,);
-  useEffect(() => {
-    if (!enabled) return;
-    const requestIdleCallback2 = supportsRequestIdleCallback ? safeWindow.requestIdleCallback : (callback) => setTimeout(callback, 1,);
-    const id3 = requestIdleCallback2(() => {
-      startTransition2(() => setIsIdle(true,));
-    },);
+function useShaderRenderState(poolSlot, isSelected, isMultiSelected, isIntersecting, mode, animated, fallbackImage, shouldReduceMotion,) {
+  let isFallbackOnly;
+  let effectiveAnimated;
+  let effectiveSingleFrame;
+  let effectiveMode;
+  if (poolSlot !== null) {
+    const hasSlot = poolSlot !== slotStatus.noSlot;
+    isFallbackOnly = !hasSlot || !!shouldReduceMotion && !!fallbackImage;
+    effectiveAnimated = isSelected && !isMultiSelected;
+    effectiveSingleFrame = hasSlot && !effectiveAnimated;
+    effectiveMode = 'instant';
+  } else {
+    isFallbackOnly = mode === 'fallback' || !!shouldReduceMotion && !!fallbackImage || !isIntersecting;
+    effectiveAnimated = animated ?? true;
+    effectiveSingleFrame = false;
+    effectiveMode = mode;
+  }
+  const [contextLost, setContextLost,] = useState(false,);
+  const onContextLost = useCallback2(() => {
+    startTransition2(() => setContextLost(true,));
+  }, [],);
+  useLayoutEffect(() => {
+    if (contextLost && isSelected) {
+      startTransition2(() => setContextLost(false,));
+    }
+  }, [contextLost, isSelected,],);
+  if (contextLost) {
+    isFallbackOnly = true;
+  }
+  return {
+    isFallbackOnly,
+    effectiveAnimated,
+    effectiveSingleFrame,
+    effectiveMode,
+    onContextLost,
+  };
+}
+var SHADER_REVEAL_DELAY_MS = 300;
+function usePatchDelayShaderRender(enabled = true,) {
+  const [mayRender, setMayRender,] = useState(!enabled,);
+  useIsomorphicLayoutEffect2(() => {
+    if (!enabled) {
+      startTransition2(() => setMayRender(true,));
+      return;
+    }
+    startTransition2(() => setMayRender(false,));
+    const timeoutId = __unframerWindow2.setTimeout(() => {
+      startTransition2(() => setMayRender(true,));
+    }, SHADER_REVEAL_DELAY_MS,);
     return () => {
-      if (supportsRequestIdleCallback) cancelIdleCallback(id3,);
-      else clearTimeout(id3,);
+      clearTimeout(timeoutId,);
     };
   }, [enabled,],);
-  return isIdle;
+  return mayRender;
 }
 var canvasStyle = {
   display: 'block',
@@ -49681,7 +49805,8 @@ function ShaderCanvas({
   uniforms,
   onError,
   onReady,
-  paused = false,
+  onContextLost,
+  singleFrame: singleFrame2 = false,
 },) {
   const canvasRef = useRef(null,);
   const rendererRef = useRef(null,);
@@ -49692,63 +49817,89 @@ function ShaderCanvas({
   useLayoutEffect(() => {
     onReadyRef.current = onReady;
   }, [onReady,],);
-  const resolvedUniforms = useResolvedUniforms(uniforms,);
+  const onContextLostRef = useRef(onContextLost,);
+  useLayoutEffect(() => {
+    onContextLostRef.current = onContextLost;
+  }, [onContextLost,],);
+  const resolvedUniforms = useResolvedUniforms(uniforms, canvasRef,);
   const uniformsPropRef = useRef(uniforms,);
   useLayoutEffect(() => {
     uniformsPropRef.current = uniforms;
   }, [uniforms,],);
   const resolvedUniformsRef = useRef(resolvedUniforms,);
-  useLayoutEffect(() => {
-    resolvedUniformsRef.current = resolvedUniforms;
-  }, [resolvedUniforms,],);
   const animatedRef = useRef(animated,);
   useLayoutEffect(() => {
     animatedRef.current = animated;
   }, [animated,],);
-  const pausedRef = useRef(paused,);
+  const singleFrameRef = useRef(singleFrame2,);
   useLayoutEffect(() => {
-    pausedRef.current = paused;
-  }, [paused,],);
+    singleFrameRef.current = singleFrame2;
+  }, [singleFrame2,],);
   const readySignalledRef = useRef(false,);
+  const signalReadyIfNeeded = useCallback2(() => {
+    if (readySignalledRef.current) return;
+    const hasCustomUniforms = uniformsPropRef.current && Object.keys(uniformsPropRef.current,).length > 0;
+    const hasResolvedUniforms = Object.keys(resolvedUniformsRef.current,).length > 0;
+    if (!hasCustomUniforms || hasResolvedUniforms) {
+      readySignalledRef.current = true;
+      onReadyRef.current?.();
+    }
+  }, [],);
   const animate3 = useCallback2((time2) => {
     const renderer = rendererRef.current;
     if (!renderer) return;
+    if (singleFrameRef.current) {
+      renderer.resize();
+      renderer.render(0, 0, resolvedUniformsRef.current,);
+      return;
+    }
     renderer.resize();
-    if (pausedRef.current) {
-      const elapsedTime = lastTimeRef.current - startTimeRef.current;
-      renderer.render(elapsedTime, 0, resolvedUniformsRef.current,);
-    } else {
-      const {
-        currentTime,
-        elapsedTime,
-        deltaTime,
-      } = getShaderTiming(time2, startTimeRef.current, lastTimeRef.current,);
-      lastTimeRef.current = currentTime;
-      renderer.render(elapsedTime, deltaTime, resolvedUniformsRef.current,);
-    }
-    if (!readySignalledRef.current) {
-      const hasCustomUniforms = uniformsPropRef.current && Object.keys(uniformsPropRef.current,).length > 0;
-      const hasResolvedUniforms = Object.keys(resolvedUniformsRef.current,).length > 0;
-      if (!hasCustomUniforms || hasResolvedUniforms) {
-        readySignalledRef.current = true;
-        onReadyRef.current?.();
-      }
-    }
-    if (animatedRef.current || pausedRef.current) {
+    const {
+      currentTime,
+      elapsedTime,
+      deltaTime,
+    } = getShaderTiming(time2, startTimeRef.current, lastTimeRef.current,);
+    lastTimeRef.current = currentTime;
+    renderer.render(elapsedTime, deltaTime, resolvedUniformsRef.current,);
+    signalReadyIfNeeded();
+    if (!singleFrameRef.current && animatedRef.current) {
       animationFrameRef.current = requestAnimationFrame(animate3,);
     }
-  }, [],);
+  }, [signalReadyIfNeeded,],);
+  const renderSingleFrame = useCallback2(() => {
+    const renderer = rendererRef.current;
+    if (!renderer) return;
+    renderer.resize();
+    renderer.render(0, 0, resolvedUniformsRef.current,);
+    signalReadyIfNeeded();
+  }, [signalReadyIfNeeded,],);
+  useLayoutEffect(() => {
+    resolvedUniformsRef.current = resolvedUniforms;
+    if (singleFrameRef.current && rendererRef.current) {
+      renderSingleFrame();
+    }
+  }, [resolvedUniforms, renderSingleFrame,],);
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     readySignalledRef.current = false;
     try {
-      const renderer = new WebGL2ShaderRenderer(canvas, vertexShader, fragmentShader, resolveResolutionScale(resolutionScale,),);
+      const renderer = new WebGL2ShaderRenderer(
+        canvas,
+        vertexShader,
+        fragmentShader,
+        resolveResolutionScale(resolutionScale,),
+        onContextLostRef.current,
+      );
       rendererRef.current = renderer;
       renderer.resize();
       startTimeRef.current = performance.now() * timeMultiplier;
       lastTimeRef.current = startTimeRef.current;
-      animationFrameRef.current = requestAnimationFrame(animate3,);
+      if (singleFrameRef.current) {
+        renderSingleFrame();
+      } else {
+        animationFrameRef.current = requestAnimationFrame(animate3,);
+      }
     } catch (error) {
       if (onError && error instanceof Error) {
         onError(error,);
@@ -49759,39 +49910,36 @@ function ShaderCanvas({
       rendererRef.current?.dispose();
       rendererRef.current = null;
     };
-  }, [vertexShader, fragmentShader, resolutionScale, animate3, onError,],);
+  }, [vertexShader, fragmentShader, resolutionScale, animate3, renderSingleFrame, onError,],);
   const wasAnimatedRef = useRef(animated,);
+  const wasReactiveRef = useRef(singleFrame2,);
   useEffect(() => {
-    if (animated && !wasAnimatedRef.current && rendererRef.current) {
+    const becameAnimated = animated && !wasAnimatedRef.current;
+    const leftReactive = !singleFrame2 && wasReactiveRef.current;
+    if ((becameAnimated || leftReactive) && rendererRef.current) {
+      startTimeRef.current = performance.now() * timeMultiplier;
+      lastTimeRef.current = startTimeRef.current;
       animationFrameRef.current = requestAnimationFrame(animate3,);
     }
     wasAnimatedRef.current = animated;
-  }, [animated, animate3,],);
-  const wasPausedRef = useRef(paused,);
-  useLayoutEffect(() => {
-    if (wasPausedRef.current !== paused) {
-      startTimeRef.current = performance.now() * timeMultiplier;
-      lastTimeRef.current = startTimeRef.current;
-    }
-    wasPausedRef.current = paused;
-  }, [paused,],);
+    wasReactiveRef.current = singleFrame2;
+  }, [animated, singleFrame2, animate3,],);
   const handleResize = useCallback2(() => {
     const renderer = rendererRef.current;
     if (!renderer) return;
-    renderer.resize();
-    if (pausedRef.current) {
-      const elapsedTime = lastTimeRef.current - startTimeRef.current;
-      renderer.render(elapsedTime, 0, resolvedUniformsRef.current,);
-    } else {
-      const {
-        currentTime,
-        elapsedTime,
-        deltaTime,
-      } = getShaderTiming(performance.now(), startTimeRef.current, lastTimeRef.current,);
-      lastTimeRef.current = currentTime;
-      renderer.render(elapsedTime, deltaTime, resolvedUniformsRef.current,);
+    if (singleFrameRef.current) {
+      renderSingleFrame();
+      return;
     }
-  }, [],);
+    renderer.resize();
+    const {
+      currentTime,
+      elapsedTime,
+      deltaTime,
+    } = getShaderTiming(performance.now(), startTimeRef.current, lastTimeRef.current,);
+    lastTimeRef.current = currentTime;
+    renderer.render(elapsedTime, deltaTime, resolvedUniformsRef.current,);
+  }, [renderSingleFrame,],);
   useCanvasResize(canvasRef, handleResize,);
   return /* @__PURE__ */ jsx('canvas', {
     ref: canvasRef,
@@ -49802,6 +49950,7 @@ var SHADER_PLAY_DELAY = 250;
 var ShaderWithFallbackOverlay = /* @__PURE__ */ memo2(function ShaderWithFallbackOverlay2({
   mode,
   fallbackImage,
+  skipInitialFallback,
   vertexShader,
   fragmentShader,
   animated,
@@ -49809,12 +49958,16 @@ var ShaderWithFallbackOverlay = /* @__PURE__ */ memo2(function ShaderWithFallbac
   uniforms,
   onError,
   onReady,
-  paused: externalPaused,
+  singleFrame: singleFrame2,
+  onContextLost,
 },) {
-  const isProgressive = mode === 'progressive';
-  const isIdle = useWhenBrowserIdle(isProgressive,);
   const [isShaderReady, setIsShaderReady,] = useState(false,);
   const [shouldPlay, setShouldPlay,] = useState(false,);
+  const isProgressive = mode === 'progressive';
+  const hasFallbackImage = Boolean(fallbackImage,);
+  const shouldSkipInitialFallback = Boolean(skipInitialFallback && hasFallbackImage,);
+  const isFallbackShown = isProgressive && hasFallbackImage && !shouldSkipInitialFallback;
+  const isRevealDelayComplete = usePatchDelayShaderRender(isFallbackShown,);
   const onReadyRef = useRef(onReady,);
   useLayoutEffect(() => {
     onReadyRef.current = onReady;
@@ -49824,32 +49977,45 @@ var ShaderWithFallbackOverlay = /* @__PURE__ */ memo2(function ShaderWithFallbac
     onReadyRef.current?.();
   }, [],);
   useEffect(() => {
-    if (!isProgressive || !isShaderReady) return;
-    let timeout;
-    if (SHADER_PLAY_DELAY) {
-      timeout = __unframerWindow2.setTimeout(() => {
-        startTransition2(() => setShouldPlay(true,));
-      }, SHADER_PLAY_DELAY,);
-    } else {
+    if (!isProgressive) return;
+    if (!isShaderReady || !isRevealDelayComplete) return;
+    const timeout = __unframerWindow2.setTimeout(() => {
       startTransition2(() => setShouldPlay(true,));
-    }
-    return () => SHADER_PLAY_DELAY ? clearTimeout(timeout,) : void 0;
-  }, [isProgressive, isShaderReady,],);
-  const paused = isProgressive && !shouldPlay || externalPaused;
+    }, SHADER_PLAY_DELAY,);
+    return () => {
+      clearTimeout(timeout,);
+    };
+  }, [isProgressive, isRevealDelayComplete, isShaderReady,],);
+  const shouldHideCanvas = isFallbackShown && !isRevealDelayComplete;
+  const isWaitingForPlayback = isProgressive && !shouldPlay;
+  const effectiveSingleFrame = singleFrame2 || shouldHideCanvas || isWaitingForPlayback;
+  const shouldShowFallback = hasFallbackImage && !shouldSkipInitialFallback && (!isRevealDelayComplete || !isShaderReady);
   return /* @__PURE__ */ jsxs(Fragment, {
     children: [
-      isIdle && /* @__PURE__ */ jsx(ShaderCanvas, {
-        vertexShader,
-        fragmentShader,
-        animated,
-        resolutionScale,
-        paused,
-        uniforms,
-        onError,
-        onReady: handleReady,
+      /* @__PURE__ */ jsx('div', {
+        style: {
+          ...overlayStyle,
+          opacity: shouldHideCanvas ? 0 : 1,
+        },
+        children: /* @__PURE__ */ jsx(ShaderCanvas, {
+          vertexShader,
+          fragmentShader,
+          animated,
+          resolutionScale,
+          singleFrame: effectiveSingleFrame,
+          uniforms,
+          onError,
+          onReady: handleReady,
+          onContextLost,
+        },),
       },),
-      !isShaderReady && fallbackImage && /* @__PURE__ */ jsx('div', {
-        style: overlayStyle,
+      fallbackImage && /* @__PURE__ */ jsx('div', {
+        style: {
+          ...overlayStyle,
+          opacity: shouldShowFallback ? 1 : 0,
+          transition: 'opacity 200ms ease-in-out',
+          pointerEvents: 'none',
+        },
         children: /* @__PURE__ */ jsx(ShaderFallbackImage, {
           src: fallbackImage,
         },),
@@ -49857,9 +50023,39 @@ var ShaderWithFallbackOverlay = /* @__PURE__ */ memo2(function ShaderWithFallbac
     ],
   },);
 },);
+var shaderPriority = {
+  low: 0,
+  medium: 1,
+  high: 2,
+};
+function useShaderPoolSlot(id3, isSelected, isVisible,) {
+  const pool = useShaderPoolContext();
+  const priority = isSelected ? shaderPriority.high : isVisible ? shaderPriority.medium : shaderPriority.low;
+  const [status, setStatus,] = useState(slotStatus.noSlot,);
+  useEffect(() => {
+    if (!pool || !id3) return;
+    pool.register(id3, priority,);
+    startTransition2(() => setStatus(pool.getSlotStatus(id3,),));
+    const unsub = pool.subscribe(id3, () => {
+      startTransition2(() => setStatus(pool.getSlotStatus(id3,),));
+    },);
+    return () => {
+      unsub();
+    };
+  }, [pool, id3, priority,],);
+  useEffect(() => {
+    if (!pool || !id3) return;
+    return () => {
+      pool.deregister(id3,);
+    };
+  }, [pool, id3,],);
+  if (!pool) return null;
+  return status;
+}
 var Shader = /* @__PURE__ */ forwardRef(function Shader2({
   mode = 'instant',
   fallbackImage,
+  skipInitialFallback,
   optimiseSwitching,
   style: style2,
   width,
@@ -49871,8 +50067,10 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
   onError,
   onReady,
   resolutionScale,
-  paused,
   onFallbackDisplayChange,
+  poolId,
+  isSelected = false,
+  isMultiSelected = false,
   ...rest
 }, ref,) {
   const observerRef = useObserverRef(ref,);
@@ -49884,30 +50082,40 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
     threshold: 0,
     enabled: true,
   },);
+  const autoId = useId();
+  const id3 = poolId ?? autoId;
+  const poolSlot = useShaderPoolSlot(id3, isSelected, isIntersecting,);
   const shouldReduceMotion = useReducedMotionConfig();
-  const isFallbackOnly = mode === 'fallback' || shouldReduceMotion && !!fallbackImage || !isIntersecting;
-  const shaderProps = {
-    vertexShader,
-    fragmentShader,
-    animated,
-    uniforms,
-    resolutionScale,
-    onError,
-    paused,
-  };
+  const shouldSkipInitialFallback = Boolean(skipInitialFallback && fallbackImage,);
+  const {
+    isFallbackOnly,
+    effectiveAnimated,
+    effectiveSingleFrame,
+    effectiveMode,
+    onContextLost,
+  } = useShaderRenderState(poolSlot, isSelected, isMultiSelected, isIntersecting, mode, animated, fallbackImage, shouldReduceMotion,);
   const [isShaderReady, setIsShaderReady,] = useState(false,);
   useLayoutEffect(() => {
-    if (isFallbackOnly) setIsShaderReady(false,);
+    if (isFallbackOnly) startTransition2(() => setIsShaderReady(false,));
   }, [isFallbackOnly,],);
   const handleShaderReady = useCallback2(() => {
     startTransition2(() => setIsShaderReady(true,));
     onReady?.();
   }, [onReady,],);
-  const hideFallback = !isFallbackOnly && isShaderReady;
+  const hideFallback = !isFallbackOnly && (shouldSkipInitialFallback || isShaderReady);
+  const shaderProps = {
+    vertexShader,
+    fragmentShader,
+    uniforms,
+    resolutionScale,
+    onError,
+    onContextLost,
+  };
   return /* @__PURE__ */ jsx(FrameWithMotion2, {
     ref: observerRef,
     __fromCanvasComponent: true,
     style: {
+      borderRadius: 'inherit',
       ...style2,
       overflow: 'hidden',
     },
@@ -49918,9 +50126,12 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
       ? /* @__PURE__ */ jsxs(Fragment, {
         children: [
           !isFallbackOnly && /* @__PURE__ */ jsx(ShaderWithFallbackOverlay, {
-            mode,
+            mode: effectiveMode,
+            skipInitialFallback: shouldSkipInitialFallback,
             onReady: handleShaderReady,
             ...shaderProps,
+            animated: effectiveAnimated,
+            singleFrame: effectiveSingleFrame,
           },),
           /* @__PURE__ */ jsx(ShaderSandboxFallbackImage, {
             src: fallbackImage,
@@ -49934,10 +50145,13 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
         src: fallbackImage,
       },)
       : /* @__PURE__ */ jsx(ShaderWithFallbackOverlay, {
-        mode,
+        mode: effectiveMode,
         fallbackImage,
+        skipInitialFallback: shouldSkipInitialFallback,
         onReady,
         ...shaderProps,
+        animated: effectiveAnimated,
+        singleFrame: effectiveSingleFrame,
       },),
   },);
 },);
@@ -57524,7 +57738,7 @@ var package_default = {
     eslint: '^8.57.1',
     'eslint-plugin-framer-studio': 'workspace:*',
     'framer-motion': '12.34.3',
-    immutable: '^3.8.2',
+    immutable: '^3.8.3',
     jest: '29.4.1',
     'jest-diff': '^29.3.1',
     'jest-environment-jsdom': '^29.3.1',
