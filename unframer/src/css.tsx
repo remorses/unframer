@@ -125,7 +125,7 @@ export function getFontsStyles(_fontsDefs: ComponentFontBundle[]) {
                         str += `    font-weight: ${x.weight};\n`
                     }
                     if (x.unicodeRange) {
-                        str += `    unicodeRange: ${x.unicodeRange};\n`
+                        str += `    unicode-range: ${x.unicodeRange};\n`
                     }
                     str += `}\n`
                     return str

@@ -957,7 +957,21 @@ export function getStyleTokensCss(
         return ''
     }
 
-    const lightUnframerTokens = tokens
+    // Deduplicate --unframer-* names: multiple Framer tokens can share the same
+    // user-facing name (e.g. two tokens both called "black" with different UUIDs).
+    // Keep only the first occurrence of each kebab-cased name to avoid silent
+    // CSS overwrites. The --token-{uuid} variables are always unique and unaffected.
+    const seenNames = new Set<string>()
+    const deduplicatedTokens = tokens.filter((token) => {
+        const name = kebabCase(token.name || token.id)
+        if (seenNames.has(name)) {
+            return false
+        }
+        seenNames.add(name)
+        return true
+    })
+
+    const lightUnframerTokens = deduplicatedTokens
         .map(
             (token) =>
                 '    --unframer-' +
@@ -975,7 +989,7 @@ export function getStyleTokensCss(
         )
         .join('\n')
 
-    const darkUnframerTokens = tokens
+    const darkUnframerTokens = deduplicatedTokens
         .map(
             (token) =>
                 '    --unframer-' +
