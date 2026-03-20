@@ -65,8 +65,10 @@ export function propControlsToTypedocComments({
                     return
                 }
 
-                const typescriptType = (value: ControlDescription<any>) => {
-                    value.type
+                const typescriptType = (value: ControlDescription<any>): string => {
+                    if (!value?.type) {
+                        return 'any'
+                    }
                     switch (value.type) {
                         case ControlType.Color:
                             return 'string'
@@ -106,6 +108,8 @@ export function propControlsToTypedocComments({
                             return 'any'
                         case ControlType.EventHandler:
                             return 'Function'
+                        default:
+                            return 'any'
                     }
                 }
                 let name = propCamelCaseJustLikeFramer(value.title || key || '')
