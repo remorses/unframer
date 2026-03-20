@@ -493,7 +493,7 @@ async function registerServerApiCommands() {
         (typeof mcpTools)[keyof typeof mcpTools],
     ][]) {
         const cmd = cli.command(
-            `mcp ${toolName}`,
+            `mcp ${String(toolName)}`,
             toolDef.description.split('\n')[0], // First line as short description
         )
 
@@ -580,7 +580,7 @@ async function registerServerApiCommands() {
                 // Set global framer for utility functions that use it
                 globalWithFramer.framer = framerClient
 
-                spinner.start(`Running ${toolName}...`)
+                spinner.start(`Running ${String(toolName)}...`)
                 const result = await mcpToolHandler({
                     type: toolName,
                     input: toolInput,
