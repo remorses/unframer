@@ -115,7 +115,7 @@ export function getFontsStyles(_fontsDefs: ComponentFontBundle[]) {
                     const familyName = getFontFamilyName(x)!
                     str += dedent`
                     @font-face {
-                        font-family: '${familyName}';
+                        font-family: "${familyName}";
                         src: url('${x.url}');\n
                     `
                     if (x.style) {
