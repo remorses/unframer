@@ -1,5 +1,9 @@
 # unframer
 
+## 4.1.4
+
+1. **Fixed `@font-face` breaking with font names containing apostrophes** — font names like `"Suisse Int'l Thin"` were wrapped in single quotes, producing invalid CSS (`font-family: 'Suisse Int'l Thin'`). The declaration is now wrapped in double quotes so apostrophes in font names don't terminate the string.
+
 ## 4.1.3
 
 1. **Updated bundled Framer runtime** — updated to framer@2.4.1 with latest Framer internals
