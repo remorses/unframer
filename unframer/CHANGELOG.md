@@ -1,5 +1,9 @@
 # unframer
 
+## 4.1.5
+
+1. **Fixed crash when esm.sh returns a relative redirect URL** — packages like `ogl` that redirect to a relative path (e.g. `/ogl@1.0.11/src/index.js`) no longer cause `TypeError: Failed to parse URL`. The redirect is now resolved against the original request URL before following.
+
 ## 4.1.4
 
 1. **Fixed `@font-face` breaking with font names containing apostrophes** — font names like `"Suisse Int'l Thin"` were wrapped in single quotes, producing invalid CSS (`font-family: 'Suisse Int'l Thin'`). The declaration is now wrapped in double quotes so apostrophes in font names don't terminate the string.
