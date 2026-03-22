@@ -346,8 +346,10 @@ export async function recursiveResolveRedirect(
     })
     const loc = res.headers.get('location')
     if (res.status < 400 && res.status >= 300 && loc) {
-        logger.log('following redirect', loc)
-        return recursiveResolveRedirect(res.headers.get('location') || '')
+        // Resolve relative Location headers (e.g. /ogl@1.0.11/src/index.js) against the original URL's origin
+        const resolved = new URL(loc, url).toString()
+        logger.log('following redirect', resolved)
+        return recursiveResolveRedirect(resolved)
     }
 
     return url
