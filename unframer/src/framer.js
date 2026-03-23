@@ -12407,7 +12407,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.URNEVXQW.mjs
+// /:https://app.framerstatic.com/framer.GWLHX7Z3.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -14137,7 +14137,11 @@ function unflatten(parsed, revivers,) {
             hydrated[index] = new RegExp(value[1], value[2],);
             break;
           case 'Object':
-            hydrated[index] = Object(value[1],);
+            const object = Object(value[1],);
+            if (Object.hasOwn(object, '__proto__',)) {
+              throw new Error('Cannot parse an object with a `__proto__` property',);
+            }
+            hydrated[index] = object;
             break;
           case 'BigInt':
             hydrated[index] = BigInt(value[1],);
@@ -14146,6 +14150,9 @@ function unflatten(parsed, revivers,) {
             const obj = /* @__PURE__ */ Object.create(null,);
             hydrated[index] = obj;
             for (let i = 1; i < value.length; i += 2) {
+              if (value[i] === '__proto__') {
+                throw new Error('Cannot parse an object with a `__proto__` property',);
+              }
               obj[value[i]] = hydrate(value[i + 1],);
             }
             break;
@@ -14205,10 +14212,16 @@ function unflatten(parsed, revivers,) {
         }
       } else if (value[0] === SPARSE) {
         const len = value[1];
+        if (!Number.isInteger(len,) || len < 0) {
+          throw new Error('Invalid input',);
+        }
         const array = new Array(len,);
         hydrated[index] = array;
         for (let i = 2; i < value.length; i += 2) {
           const idx = value[i];
+          if (!Number.isInteger(idx,) || idx < 0 || idx >= len) {
+            throw new Error('Invalid input',);
+          }
           array[idx] = hydrate(value[i + 1],);
         }
       } else {
@@ -49388,6 +49401,7 @@ var ShaderFallbackImage = /* @__PURE__ */ memo2(function ShaderFallbackImage2({
       src,
       fit: 'fill',
     },
+    draggable: false,
     alt: '',
   },);
 },);
@@ -49642,6 +49656,7 @@ var ShaderSandboxFallbackImage = /* @__PURE__ */ memo2(function ShaderSandboxFal
         src: previousSrc,
         decoding: 'async',
         style: sandboxFallbackImageStyle,
+        draggable: false,
         alt: '',
       }, `prev-${previousSrc}`,),
       /* @__PURE__ */ jsx('div', {
@@ -49651,6 +49666,7 @@ var ShaderSandboxFallbackImage = /* @__PURE__ */ memo2(function ShaderSandboxFal
           src: displaySrc,
           style: sandboxFallbackImageStyle,
           decoding: 'async',
+          draggable: false,
           alt: '',
         },),
       }, displaySrc,),
@@ -49944,6 +49960,7 @@ function ShaderCanvas({
   return /* @__PURE__ */ jsx('canvas', {
     ref: canvasRef,
     style: canvasStyle,
+    draggable: false,
   },);
 }
 var SHADER_PLAY_DELAY = 250;
@@ -50057,6 +50074,7 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
   fallbackImage,
   skipInitialFallback,
   optimiseSwitching,
+  placeholder,
   style: style2,
   width,
   height,
@@ -50138,6 +50156,7 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
             hidden: hideFallback,
             onDisplaySrcChange: onFallbackDisplayChange,
           },),
+          isFallbackOnly && !fallbackImage && placeholder,
         ],
       },)
       : isFallbackOnly
@@ -57711,7 +57730,7 @@ var package_default = {
     watch: 'jest --watch',
   },
   dependencies: {
-    devalue: '^5.6.3',
+    devalue: '^5.6.4',
     eventemitter3: '^5.0.1',
     fontfaceobserver: '2.2.0',
     'hoist-non-react-statics': '^3.3.2',
