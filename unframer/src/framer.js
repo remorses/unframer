@@ -12407,7 +12407,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.GWLHX7Z3.mjs
+// /:https://app.framerstatic.com/framer.SAVXKUZN.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -15077,9 +15077,9 @@ function normalizeString(path,) {
 }
 var customNotFoundPagePaths = /* @__PURE__ */ new Set([`/404.html`, `/404`, `/404/`,],);
 var pathVariablesRegExpRaw = ':([a-z]\\w*)';
-var pathVariablesRegExp = /* @__PURE__ */ new RegExp(pathVariablesRegExpRaw, 'gi',);
+var pathVariablesRegExpGlobal = /* @__PURE__ */ new RegExp(pathVariablesRegExpRaw, 'gi',);
 function fillPathVariables(path, variables,) {
-  return path.replace(pathVariablesRegExp, (match, name,) => {
+  return path.replace(pathVariablesRegExpGlobal, (match, name,) => {
     const value = variables[name];
     if (typeof value !== 'string' || value.length === 0) return match;
     return encodeURIComponent(value,);
@@ -15131,7 +15131,7 @@ async function replacePathVariables(path, currentLocale, nextLocale, defaultLoca
   const resultPathVariables = {
     ...pathVariables,
   };
-  const matches = Array.from(resultPath.matchAll(pathVariablesRegExp,),);
+  const matches = Array.from(resultPath.matchAll(pathVariablesRegExpGlobal,),);
   const replacements = await Promise.all(matches.map(async (match) => {
     const pathVariableWithDelimiter = match?.[0];
     const pathVariableValue = match?.[1];
@@ -15936,7 +15936,7 @@ function getHashForRoute(hash2, route, hashVariables,) {
   const resolvedHash = getRouteElementId(route, hash2,);
   if (!resolvedHash) return void 0;
   const variables = Object.assign({}, route?.elements, hashVariables,);
-  return resolvedHash.replace(pathVariablesRegExp, (m2, p1,) => variables[p1] ?? m2,);
+  return resolvedHash.replace(pathVariablesRegExpGlobal, (m2, p1,) => variables[p1] ?? m2,);
 }
 function getPathForRoute(route, {
   currentRoutePath,
@@ -15958,13 +15958,13 @@ function getPathForRoute(route, {
     currentPath = currentRoutePathLocalized[localeId] ?? currentPath;
   }
   if (currentPathVariables) {
-    currentPath = currentPath.replace(pathVariablesRegExp, (m2, p1,) => String(currentPathVariables[p1] || m2,),);
+    currentPath = currentPath.replace(pathVariablesRegExpGlobal, (m2, p1,) => String(currentPathVariables[p1] || m2,),);
   }
   const targetPathLocalized = localeId ? route?.pathLocalized?.[localeId] : void 0;
   const targetPath = targetPathLocalized ?? route?.path ?? '/';
   let path = targetPath;
   if (pathVariables) {
-    path = path.replace(pathVariablesRegExp, (m2, p1,) => String(pathVariables[p1] || m2,),);
+    path = path.replace(pathVariablesRegExpGlobal, (m2, p1,) => String(pathVariables[p1] || m2,),);
   }
   const isSamePageHashNavigation = Boolean(currentPath === path && resolvedHash,);
   if (relative2) {
@@ -16178,7 +16178,7 @@ async function getSlugByLocaleIfCollectionPage(activeLocale, locales, currentRou
     path,
   } = currentRoute;
   if (!path) return null;
-  const matches = Array.from(path.matchAll(pathVariablesRegExp,),);
+  const matches = Array.from(path.matchAll(pathVariablesRegExpGlobal,),);
   const lastMatch = matches.pop();
   if (!lastMatch) return null;
   const pathVariableWithDelimiter = lastMatch?.[0];
@@ -17381,7 +17381,7 @@ function pathDepth(path,) {
 function matchPath(path, routePath,) {
   const pathVariablesKeys = [];
   const safeRoutePath = escapeStringRegExp(routePath,);
-  const routePathRegExpString = safeRoutePath.replace(pathVariablesRegExp, (_, name,) => {
+  const routePathRegExpString = safeRoutePath.replace(pathVariablesRegExpGlobal, (_, name,) => {
     pathVariablesKeys.push(name,);
     return '([^/]+)';
   },);
@@ -38222,7 +38222,7 @@ function getRouteAttributes(
     locale: activeLocale ?? void 0,
   };
 }
-var pathVariablesRegExp2 = /:([a-z]\w*)/gi;
+var pathVariablesRegExp = /:([a-z]\w*)/gi;
 var PathVariablesContext = /* @__PURE__ */ createContext(void 0,);
 function useImplicitPathVariables() {
   const contextPathVariables = useContext(PathVariablesContext,);
@@ -38239,7 +38239,7 @@ function linkMatchesRoute(route, {
   if (hash2) return false;
   if (route.path && route.pathVariables) {
     const combinedPathVariable = Object.assign({}, implicitPathVariables, pathVariables,);
-    for (const [, key7,] of route.path.matchAll(pathVariablesRegExp2,)) {
+    for (const [, key7,] of route.path.matchAll(pathVariablesRegExp,)) {
       if (!key7) return false;
       if (route.pathVariables[key7] !== combinedPathVariable[key7]) {
         return false;
@@ -40631,7 +40631,7 @@ function Router({
     if (pathVariables) {
       const inUse = /* @__PURE__ */ new Set();
       const path = newRoute?.path ?? '/';
-      for (const match of path.matchAll(pathVariablesRegExp,)) {
+      for (const match of path.matchAll(pathVariablesRegExpGlobal,)) {
         const usedVariable = match[1];
         if (usedVariable === void 0) {
           throw new Error('A matching path variable should not be undefined',);
@@ -49753,7 +49753,17 @@ function useOnDprChange(callback,) {
     };
   }, [callback,],);
 }
-function useShaderRenderState(poolSlot, isSelected, isMultiSelected, isIntersecting, mode, animated, fallbackImage, shouldReduceMotion,) {
+function useShaderRenderState(
+  poolSlot,
+  isSelected,
+  isMultiSelected,
+  isIntersecting,
+  mode,
+  animated,
+  fallbackImage,
+  shouldReduceMotion,
+  skipInitialFallback,
+) {
   let isFallbackOnly;
   let effectiveAnimated;
   let effectiveSingleFrame;
@@ -49781,6 +49791,9 @@ function useShaderRenderState(poolSlot, isSelected, isMultiSelected, isIntersect
   }, [contextLost, isSelected,],);
   if (contextLost) {
     isFallbackOnly = true;
+  }
+  if (skipInitialFallback && !contextLost) {
+    isFallbackOnly = false;
   }
   return {
     isFallbackOnly,
@@ -50004,7 +50017,7 @@ var ShaderWithFallbackOverlay = /* @__PURE__ */ memo2(function ShaderWithFallbac
     };
   }, [isProgressive, isRevealDelayComplete, isShaderReady,],);
   const shouldHideCanvas = isFallbackShown && !isRevealDelayComplete;
-  const isWaitingForPlayback = isProgressive && !shouldPlay;
+  const isWaitingForPlayback = isProgressive && !shouldSkipInitialFallback && !shouldPlay;
   const effectiveSingleFrame = singleFrame2 || shouldHideCanvas || isWaitingForPlayback;
   const shouldShowFallback = hasFallbackImage && !shouldSkipInitialFallback && (!isRevealDelayComplete || !isShaderReady);
   return /* @__PURE__ */ jsxs(Fragment, {
@@ -50111,7 +50124,17 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
     effectiveSingleFrame,
     effectiveMode,
     onContextLost,
-  } = useShaderRenderState(poolSlot, isSelected, isMultiSelected, isIntersecting, mode, animated, fallbackImage, shouldReduceMotion,);
+  } = useShaderRenderState(
+    poolSlot,
+    isSelected,
+    isMultiSelected,
+    isIntersecting,
+    mode,
+    animated,
+    fallbackImage,
+    shouldReduceMotion,
+    shouldSkipInitialFallback,
+  );
   const [isShaderReady, setIsShaderReady,] = useState(false,);
   useLayoutEffect(() => {
     if (isFallbackOnly) startTransition2(() => setIsShaderReady(false,));
@@ -50134,6 +50157,7 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
     __fromCanvasComponent: true,
     style: {
       borderRadius: 'inherit',
+      cornerShape: 'inherit',
       ...style2,
       overflow: 'hidden',
     },
@@ -54255,7 +54279,7 @@ function replaceFramerPageLinks(rawHTML, getRoute, currentRoute, implicitPathVar
     let relativePath = targetPath;
     const pathVariables = Object.assign({}, implicitPathVariables, pageLink.collectionItem?.pathVariables,);
     if (Object.keys(pathVariables,).length > 0) {
-      relativePath = relativePath.replace(pathVariablesRegExp2, (_, key7,) => '' + pathVariables[key7],);
+      relativePath = relativePath.replace(pathVariablesRegExp, (_, key7,) => '' + pathVariables[key7],);
     }
     if (pageLink.collectionItem?.pathVariables) {
       const params = new URLSearchParams(pageLink.collectionItem.pathVariables,);
