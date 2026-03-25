@@ -12407,7 +12407,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.SAVXKUZN.mjs
+// /:https://app.framerstatic.com/framer.3QKF2NRX.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -49400,6 +49400,7 @@ var ShaderFallbackImage = /* @__PURE__ */ memo2(function ShaderFallbackImage2({
     image: {
       src,
       fit: 'fill',
+      loading: 'lazy',
     },
     draggable: false,
     alt: '',
@@ -49792,7 +49793,8 @@ function useShaderRenderState(
   if (contextLost) {
     isFallbackOnly = true;
   }
-  if (skipInitialFallback && !contextLost) {
+  const reducedMotionFallback = !!shouldReduceMotion && !!fallbackImage;
+  if (mode !== 'fallback' && skipInitialFallback && !contextLost && !reducedMotionFallback && isIntersecting) {
     isFallbackOnly = false;
   }
   return {
@@ -50039,7 +50041,7 @@ var ShaderWithFallbackOverlay = /* @__PURE__ */ memo2(function ShaderWithFallbac
           onContextLost,
         },),
       },),
-      fallbackImage && /* @__PURE__ */ jsx('div', {
+      fallbackImage && !shouldSkipInitialFallback && /* @__PURE__ */ jsx('div', {
         style: {
           ...overlayStyle,
           opacity: shouldShowFallback ? 1 : 0,
@@ -50086,7 +50088,6 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
   mode = 'instant',
   fallbackImage,
   skipInitialFallback,
-  optimiseSwitching,
   placeholder,
   style: style2,
   width,
@@ -50098,14 +50099,17 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
   onError,
   onReady,
   resolutionScale,
-  onFallbackDisplayChange,
   poolId,
   isSelected = false,
   isMultiSelected = false,
   ...rest
 }, ref,) {
   const observerRef = useObserverRef(ref,);
-  const [isIntersecting, setIsIntersecting,] = useState(false,);
+  const renderTargetEnvironment = useRenderTargetEnvironment();
+  const shouldSkipPreviewFallback = RenderTarget.current() === RenderTarget.preview && renderTargetEnvironment === 'preview';
+  const shouldSkipInitialFallback = Boolean(fallbackImage && (skipInitialFallback || shouldSkipPreviewFallback),);
+  const isOnCanvas = useIsOnFramerCanvas();
+  const [isIntersecting, setIsIntersecting,] = useState(shouldSkipInitialFallback,);
   const intersectionCallback = useCallback2((entry) => {
     startTransition2(() => setIsIntersecting(entry.isIntersecting,));
   }, [],);
@@ -50117,7 +50121,6 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
   const id3 = poolId ?? autoId;
   const poolSlot = useShaderPoolSlot(id3, isSelected, isIntersecting,);
   const shouldReduceMotion = useReducedMotionConfig();
-  const shouldSkipInitialFallback = Boolean(skipInitialFallback && fallbackImage,);
   const {
     isFallbackOnly,
     effectiveAnimated,
@@ -50143,7 +50146,6 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
     startTransition2(() => setIsShaderReady(true,));
     onReady?.();
   }, [onReady,],);
-  const hideFallback = !isFallbackOnly && (shouldSkipInitialFallback || isShaderReady);
   const shaderProps = {
     vertexShader,
     fragmentShader,
@@ -50152,50 +50154,74 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
     onError,
     onContextLost,
   };
-  return /* @__PURE__ */ jsx(FrameWithMotion2, {
-    ref: observerRef,
-    __fromCanvasComponent: true,
-    style: {
-      borderRadius: 'inherit',
-      cornerShape: 'inherit',
-      ...style2,
-      overflow: 'hidden',
-    },
+  const containerFrameProps = {
+    style: style2,
     width,
     height,
     ...rest,
-    children: optimiseSwitching
-      ? /* @__PURE__ */ jsxs(Fragment, {
-        children: [
-          !isFallbackOnly && /* @__PURE__ */ jsx(ShaderWithFallbackOverlay, {
-            mode: effectiveMode,
-            skipInitialFallback: shouldSkipInitialFallback,
-            onReady: handleShaderReady,
-            ...shaderProps,
-            animated: effectiveAnimated,
-            singleFrame: effectiveSingleFrame,
-          },),
-          /* @__PURE__ */ jsx(ShaderSandboxFallbackImage, {
-            src: fallbackImage,
-            hidden: hideFallback,
-            onDisplaySrcChange: onFallbackDisplayChange,
-          },),
-          isFallbackOnly && !fallbackImage && placeholder,
-        ],
-      },)
-      : isFallbackOnly
-      ? /* @__PURE__ */ jsx(ShaderFallbackImage, {
+  };
+  if (isOnCanvas) {
+    const hideFallback = !isFallbackOnly && (shouldSkipInitialFallback || isShaderReady);
+    return /* @__PURE__ */ jsxs(ShaderContainerFrame, {
+      ref: observerRef,
+      ...containerFrameProps,
+      children: [
+        !isFallbackOnly && /* @__PURE__ */ jsx(ShaderWithFallbackOverlay, {
+          mode: effectiveMode,
+          skipInitialFallback: shouldSkipInitialFallback,
+          onReady: handleShaderReady,
+          ...shaderProps,
+          animated: effectiveAnimated,
+          singleFrame: effectiveSingleFrame,
+        },),
+        /* @__PURE__ */ jsx(ShaderSandboxFallbackImage, {
+          src: fallbackImage,
+          hidden: hideFallback,
+        },),
+        isFallbackOnly && !fallbackImage && placeholder,
+      ],
+    },);
+  }
+  if (isFallbackOnly) {
+    return /* @__PURE__ */ jsx(ShaderContainerFrame, {
+      ref: observerRef,
+      ...containerFrameProps,
+      children: shouldSkipInitialFallback && !isIntersecting ? null : /* @__PURE__ */ jsx(ShaderFallbackImage, {
         src: fallbackImage,
-      },)
-      : /* @__PURE__ */ jsx(ShaderWithFallbackOverlay, {
-        mode: effectiveMode,
-        fallbackImage,
-        skipInitialFallback: shouldSkipInitialFallback,
-        onReady,
-        ...shaderProps,
-        animated: effectiveAnimated,
-        singleFrame: effectiveSingleFrame,
       },),
+    },);
+  }
+  return /* @__PURE__ */ jsx(ShaderContainerFrame, {
+    ref: observerRef,
+    ...containerFrameProps,
+    children: /* @__PURE__ */ jsx(ShaderWithFallbackOverlay, {
+      mode: effectiveMode,
+      fallbackImage,
+      skipInitialFallback: shouldSkipInitialFallback,
+      onReady,
+      ...shaderProps,
+      animated: effectiveAnimated,
+      singleFrame: effectiveSingleFrame,
+    },),
+  },);
+},);
+var ShaderContainerFrame = /* @__PURE__ */ forwardRef(function ShaderContainerFrame2({
+  children,
+  style: style2,
+  ...rest
+}, ref,) {
+  const styles4 = {
+    borderRadius: 'inherit',
+    cornerShape: 'inherit',
+    ...style2,
+    overflow: 'hidden',
+  };
+  return /* @__PURE__ */ jsx(FrameWithMotion2, {
+    ref,
+    __fromCanvasComponent: true,
+    style: styles4,
+    ...rest,
+    children,
   },);
 },);
 var keys2 = /* @__PURE__ */ new Set([
