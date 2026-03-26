@@ -12407,7 +12407,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.3QKF2NRX.mjs
+// /:https://app.framerstatic.com/framer.AMEHXMUC.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -39178,6 +39178,68 @@ function sendFormSubmitTrackingEvent(pageviewEventData, nodeId, trackingId,) {
     trackingId: trackingId || null,
   }, 'eager',);
 }
+var RECAPTCHA_SCRIPT_URL = 'https://www.google.com/recaptcha/api.js';
+function getRecaptchaScriptUrl(siteKey,) {
+  return `${RECAPTCHA_SCRIPT_URL}?render=${encodeURIComponent(siteKey,)}&badge=bottomleft`;
+}
+var captchaScriptPromises = /* @__PURE__ */ new Map();
+function loadRecaptchaScript(siteKey,) {
+  const existing = captchaScriptPromises.get(siteKey,);
+  if (existing) return existing;
+  const scriptUrl = getRecaptchaScriptUrl(siteKey,);
+  if (document.querySelector(`script[src="${scriptUrl}"]`,)) {
+    const resolved = Promise.resolve();
+    captchaScriptPromises.set(siteKey, resolved,);
+    return resolved;
+  }
+  const promise = new Promise((resolve, reject,) => {
+    const script = document.createElement('script',);
+    script.src = scriptUrl;
+    script.onload = () => resolve();
+    script.onerror = () => {
+      captchaScriptPromises.delete(siteKey,);
+      script.remove();
+      reject(new Error('Failed to load captcha script',),);
+    };
+    document.head.appendChild(script,);
+  },);
+  captchaScriptPromises.set(siteKey, promise,);
+  return promise;
+}
+function executeRecaptcha(siteKey, _action,) {
+  return new Promise((resolve, reject,) => {
+    const {
+      grecaptcha,
+    } = __unframerWindow2;
+    if (!grecaptcha) {
+      reject(new Error('Captcha script not available',),);
+      return;
+    }
+    grecaptcha.ready(() => {
+      grecaptcha.execute(siteKey,).then(resolve, reject,);
+    },);
+  },);
+}
+function useCaptcha({
+  provider,
+  siteKey,
+},) {
+  React42.useEffect(() => {
+    if (provider === 'recaptcha_v3' && siteKey) {
+      requestIdleCallback(() => {
+        loadRecaptchaScript(siteKey,).catch(() => {},);
+      },);
+    }
+  }, [provider, siteKey,],);
+  const executeChallenge = React42.useCallback(async (action) => {
+    if (provider !== 'recaptcha_v3' || !siteKey) return void 0;
+    await loadRecaptchaScript(siteKey,);
+    return executeRecaptcha(siteKey, action,);
+  }, [provider, siteKey,],);
+  return {
+    executeChallenge,
+  };
+}
 var pendingState = {
   state: 'pending',
 };
@@ -39260,6 +39322,12 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
   const currentRoute = useCurrentRoute();
   const implicitPathVariables = useImplicitPathVariables();
   const collectionUtils = useCollectionUtils();
+  const {
+    executeChallenge,
+  } = useCaptcha({
+    provider: formCaptchaProvider,
+    siteKey: formCaptchaSiteKey,
+  },);
   const [state, dispatch,] = React42.useReducer(formReducer, incompleteState,);
   const {
     activeLocale,
@@ -39337,7 +39405,7 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
         submitTrackingId,
         activeLocale,
       },);
-      await submitForm(action, data2, projectHash,);
+      await submitForm(action, data2, projectHash, executeChallenge,);
       startTransition2(() =>
         dispatch({
           type: 'success',
@@ -39409,19 +39477,24 @@ function anyEmptyRequiredFields(element,) {
   }
   return false;
 }
-async function submitForm(action, data2, projectHash,) {
+async function submitForm(action, data2, projectHash, executeChallenge,) {
   const proofOfWork = await calculateProofOfWork();
   if (!proofOfWork) {
     throw new Error('Failed to calculate proof of work',);
   }
+  const captchaToken = await executeChallenge('submit',);
+  const headers = {
+    'Framer-Site-Id': projectHash,
+    'Framer-POW': proofOfWork.secret,
+    'Framer-Form-Fields': getEncodedFormFieldsHeader(data2,),
+  };
+  if (captchaToken) {
+    headers['Framer-Captcha-Response'] = captchaToken;
+  }
   const response = await fetch(action, {
     body: data2,
     method: 'POST',
-    headers: {
-      'Framer-Site-Id': projectHash,
-      'Framer-POW': proofOfWork.secret,
-      'Framer-Form-Fields': getEncodedFormFieldsHeader(data2,),
-    },
+    headers,
   },);
   if (response.ok) {
     return response;
@@ -57788,7 +57861,7 @@ var package_default = {
   },
   devDependencies: {
     '@juggle/resize-observer': '^3.4.0',
-    '@microsoft/api-extractor': '^7.55.2',
+    '@microsoft/api-extractor': '^7.57.7',
     '@testing-library/dom': '^8.19.1',
     '@testing-library/jest-dom': '^5.16.5',
     '@testing-library/react': '^13.4.0',
