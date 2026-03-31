@@ -12407,7 +12407,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.JPN5KKA5.mjs
+// /:https://app.framerstatic.com/framer.QLF2RUNB.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -49326,7 +49326,7 @@ var WebGL2ShaderRenderer = class {
     }
   }
   /**
-   * Creates or updates a texture from an ImageBitmap.
+   * Creates or updates a texture from an HTMLImageElement or ImageBitmap.
    * Binds the texture to the specified texture unit.
    */
   bindTexture(uniformName, image, textureUnit,) {
@@ -49349,7 +49349,9 @@ var WebGL2ShaderRenderer = class {
     gl.activeTexture(gl.TEXTURE0 + textureUnit,);
     gl.bindTexture(gl.TEXTURE_2D, entry.texture,);
     if (isNewTexture || entry.image !== image) {
-      entry.image?.close();
+      if (entry.image instanceof ImageBitmap) {
+        entry.image.close();
+      }
       entry.image = image;
       gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image,);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE,);
@@ -49548,11 +49550,19 @@ function colorToVec4(color2, element,) {
   const rgba2 = Color.toRgb(Color(resolved,),);
   return [rgba2.r / 255, rgba2.g / 255, rgba2.b / 255, rgba2.a,];
 }
-async function loadTexture(url,) {
-  const response = await fetch(url,);
-  if (!response.ok) throw new Error('Failed to load texture',);
-  const blob = await response.blob();
-  return createImageBitmap(blob,);
+function loadTexture(url,) {
+  return new Promise((resolve, reject,) => {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => resolve(img,);
+    img.onerror = (event) => {
+      const message = event instanceof ErrorEvent && event.message
+        ? `Failed to load texture from "${url}": ${event.message}`
+        : `Failed to load texture from "${url}"`;
+      reject(new Error(message,),);
+    };
+    img.src = url;
+  },);
 }
 async function resolveUniform(uniform, element,) {
   switch (uniform.type) {
@@ -49612,7 +49622,7 @@ async function resolveUniforms(uniforms, element,) {
 }
 function closeImageBitmaps(uniforms,) {
   for (const uniform of Object.values(uniforms,)) {
-    if (uniform.type === 'sampler2D') {
+    if (uniform.type === 'sampler2D' && uniform.value instanceof ImageBitmap) {
       uniform.value.close();
     }
   }
@@ -52590,6 +52600,10 @@ var FontStore = class {
       }
     }
     return this.getFontshareFontsListPromise;
+  }
+  /** Ensure Google, Fontshare, and BuiltIn font sources are all populated. Idempotent. */
+  async importAllWebFonts() {
+    await Promise.all([this.importGoogleFonts(), this.importFontshareFonts(), this.importBuiltInFonts(),],);
   }
   async importBuiltInFonts() {
     if (!this.getBuiltInFontsListPromise) {
