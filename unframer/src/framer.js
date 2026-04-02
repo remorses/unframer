@@ -12407,7 +12407,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.QLF2RUNB.mjs
+// /:https://app.framerstatic.com/framer.6MFBPHCJ.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -42532,7 +42532,8 @@ function isWrappedVectorSetItemPointer(value,) {
   return isObject2(value,) && isString(value.collectionId,);
 }
 var Resolver = class {
-  constructor(query, locale,) {
+  constructor(query, locale, options = {},) {
+    this.options = options;
     __publicField(this, 'collections',);
     __publicField(this, 'richTextCache', /* @__PURE__ */ new WeakMap(),);
     __publicField(this, 'vectorSetItemCache', /* @__PURE__ */ new WeakMap(),);
@@ -42560,7 +42561,7 @@ var Resolver = class {
     this.richTextCache.set(collection, cache2,);
     const cached = cache2.get(wrapped.pointer,);
     if (cached) return cached;
-    const result = collection.resolveRichText(wrapped.pointer,);
+    const result = this.options.richTextMode === 'raw' ? wrapped.pointer : collection.resolveRichText(wrapped.pointer,);
     cache2.set(wrapped.pointer, result,);
     return result;
   }
@@ -46147,12 +46148,12 @@ function stringifyQuery(query,) {
 }
 var log = /* @__PURE__ */ getLogger('query-engine',);
 var QueryEngine = class {
-  async evalQuery(query, locale, includeRaw,) {
+  async evalQuery(query, locale, includeRaw, options = {},) {
     if (log.enabled) {
       log.debug(`Query:
 ${stringifyQuery(query,)}`,);
     }
-    const resolver = new Resolver(query, locale,);
+    const resolver = new Resolver(query, locale, options,);
     const optimizer = new Optimizer(query, locale, resolver,);
     const [root, namedFields,] = optimizer.optimize();
     const relation = await root.evaluateAsync();
@@ -46181,8 +46182,8 @@ ${stringifyQuery(query,)}`,);
   async serializeableQuery(query, locale,) {
     return this.evalQuery(query, locale, true,);
   }
-  async query(query, locale,) {
-    return this.evalQuery(query, locale, false,);
+  async query(query, locale, options,) {
+    return this.evalQuery(query, locale, false, options,);
   }
   resolveSerializableQueryResult(raw, query, locale,) {
     const resolver = new Resolver(query, locale,);
