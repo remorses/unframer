@@ -12407,7 +12407,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.6MFBPHCJ.mjs
+// /:https://app.framerstatic.com/framer.Z34RR5A4.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -48325,7 +48325,7 @@ function TickerComponent({
   const defaultOffset22 = useMotionValue(0,);
   offset ?? (offset = defaultOffset22);
   const wrappedOffset = useTransform(() => {
-    if (state.direction === 'rtl') {
+    if (state.direction === 'rtl' && axis === 'x') {
       return wrap(state.totalItemLength + gap + state.inset, state.inset, offset.get(),);
     }
     return wrap(-state.totalItemLength - gap - state.inset, -state.inset, offset.get(),);
