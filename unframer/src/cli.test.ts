@@ -33,7 +33,7 @@ test('componentCamelCase', () => {
         `"FramerNavFramerComponent"`,
     )
     expect(componentCamelCase('shared/nav/framer-nav')).toMatchInlineSnapshot(
-        `"FramerNavFramerComponent"`,
+        `"SharedNavFramerNavFramerComponent"`,
     )
     // Test cases with spaces and special characters
     expect(componentCamelCase('hero section')).toMatchInlineSnapshot(
@@ -53,6 +53,13 @@ test('componentCamelCase', () => {
     )
     expect(componentCamelCase('  multiple   spaces  ')).toMatchInlineSnapshot(
         `"MultipleSpacesFramerComponent"`,
+    )
+    // Collision case: card/work-card and cards/work-card should produce different identifiers
+    expect(componentCamelCase('card/work-card')).toMatchInlineSnapshot(
+        `"CardWorkCardFramerComponent"`,
+    )
+    expect(componentCamelCase('cards/work-card')).toMatchInlineSnapshot(
+        `"CardsWorkCardFramerComponent"`,
     )
 })
 test('findRelativeLinks', () => {

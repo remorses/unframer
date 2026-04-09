@@ -6,37 +6,32 @@ export function componentCamelCase(str: string) {
     if (!str) {
         return 'FramerComponent'
     }
-    // Take last part after slashes
-    str = str.split('/').filter(Boolean).pop() || ''
+    // Use all path segments to avoid collisions like card/work-card vs cards/work-card
+    const segments = str.split('/').filter(Boolean)
 
-    // Replace all non-alphanumeric characters with space
+    // Replace all non-alphanumeric characters with space in each segment
     // This handles spaces, special chars, underscores, hyphens, etc.
-    str = str.replace(/[^a-zA-Z0-9]+/g, ' ')
-
-    // Convert to camelCase: split by spaces, capitalize each word except first
-    const words = str.trim().split(/\s+/).filter(Boolean)
+    const words = segments
+        .flatMap((segment) =>
+            segment.replace(/[^a-zA-Z0-9]+/g, ' ').trim().split(/\s+/).filter(Boolean),
+        )
     if (words.length === 0) {
         return 'FramerComponent'
     }
 
-    str = words
-        .map((word, index) => {
-            // First word: capitalize only if it starts with lowercase
-            if (index === 0) {
-                return word[0].toUpperCase() + word.slice(1)
-            }
-            // Other words: always capitalize first letter
+    let result = words
+        .map((word) => {
             return word[0].toUpperCase() + word.slice(1)
         })
         .join('')
 
     // If component name starts with a number, add prefix 'Framer'
-    if (/^[0-9]/.test(str)) {
-        str = 'Framer' + str
+    if (/^[0-9]/.test(result)) {
+        result = 'Framer' + result
     }
 
-    str = str + 'FramerComponent'
-    return str
+    result = result + 'FramerComponent'
+    return result
 }
 
 /**
