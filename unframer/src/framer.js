@@ -12683,7 +12683,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.FEEVRYQN.mjs
+// /:https://app.framerstatic.com/framer.DLJWK7BN.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -36820,6 +36820,9 @@ function isNodeLocalToProject(scopeIdOfThisNode, scopeIdOfNearestExternalCompone
 }
 function useMaybeWrapComponentWithCodeBoundary(children, scopeId, nodeId, isAuthoredByUser, isModuleExternal, inComponentSlot,) {
   const nearestExternalComponent = useNearestExternalComponent();
+  const {
+    disableCustomCode,
+  } = useLibraryFeatures();
   if (
     // Those props will either be all undefined, which means the Container hasn’t yet been
     // re-serialized since we introduced code boundaries, and we should use the old
@@ -36829,6 +36832,22 @@ function useMaybeWrapComponentWithCodeBoundary(children, scopeId, nodeId, isAuth
   ) {
     return /* @__PURE__ */ jsx(DeprecatedContainerErrorBoundary, {
       children,
+    },);
+  }
+  if (disableCustomCode && isAuthoredByUser) {
+    return /* @__PURE__ */ jsx('div', {
+      style: {
+        padding: '12px 16px',
+        // Standard error box styles
+        borderWidth: 1,
+        borderRadius: 6,
+        borderStyle: 'solid',
+        borderColor: 'rgba(149, 149, 149, 0.15)',
+        backgroundColor: 'rgba(149, 149, 149, 0.1)',
+        fontSize: 12,
+        color: '#a5a5a5',
+      },
+      children: 'Code component disabled',
     },);
   }
   const shouldWrapWithBoundary = shouldWrapComponentWithBoundary(
@@ -47981,7 +48000,16 @@ function withCodeBoundaryForOverrides(Component18, {
   const appliedOverride = tryToApplyOverride(Component18, override,);
   let hasErrorBeenLogged = false;
   function CodeBoundaryForOverrides(props, ref,) {
+    const {
+      disableCustomCode,
+    } = useLibraryFeatures();
     const nearestExternalComponent = useNearestExternalComponent();
+    if (disableCustomCode) {
+      return /* @__PURE__ */ jsx(Component18, {
+        ...props,
+        ref,
+      },);
+    }
     const shouldWrapWithBoundary = shouldWrapOverrideWithBoundary(
       scopeId,
       nearestExternalComponent?.scopeId,
@@ -58136,12 +58164,12 @@ var package_default = {
   author: 'Framer',
   license: 'MIT',
   scripts: {
-    coverage: 'jest --coverage',
+    coverage: 'yarn :jest --coverage',
     lint: 'yarn :lint ./src --ext .ts,.tsx --format gha-codeframe --quiet --cache',
     'lint:ci': 'yarn lint --cache-strategy content --cache-location $HOME/.cache/eslint/framer-library',
     'lint:fix': 'yarn lint --fix',
-    test: 'jest',
-    watch: 'jest --watch',
+    test: 'yarn :jest',
+    watch: 'yarn :jest --watch',
   },
   dependencies: {
     devalue: '^5.6.4',
@@ -58165,14 +58193,10 @@ var package_default = {
     '@types/react': '18.2',
     '@types/react-dom': '18.2',
     '@types/yargs': '^17.0.33',
-    '@typescript-eslint/eslint-plugin': '^8.55.0',
-    '@typescript-eslint/parser': '^8.55.0',
     chalk: '^4.1.2',
-    eslint: '^8.57.1',
     'eslint-plugin-framer-studio': 'workspace:*',
     'framer-motion': '12.38.0',
     immutable: '^3.8.3',
-    jest: '29.4.1',
     'jest-diff': '^29.3.1',
     'jest-environment-jsdom': '^29.3.1',
     'jest-environment-jsdom-global': '^4.0.0',
