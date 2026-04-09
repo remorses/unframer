@@ -9,11 +9,12 @@ import {
   __privateMethod,
   __privateSet,
   __publicField,
+  __require,
   __runInitializers,
   __toESM,
-} from './framer-chunks/chunk-76VXR6QG.js';
+} from './framer-chunks/chunk-OAKBJJLO.js';
 
-// /:https://app.framerstatic.com/chunk-FBBIXJQQ.mjs
+// /:https://app.framerstatic.com/chunk-353AYBZV.mjs
 import { createContext, } from 'react';
 import { useEffect, useLayoutEffect, } from 'react';
 import * as React from 'react';
@@ -30,43 +31,6 @@ import { createElement, } from 'react';
 import { Component as Component2, } from 'react';
 var __unframerWindow = typeof window !== 'undefined' ? window : void 0;
 var __unframerNavigator = typeof __unframerWindow !== 'undefined' ? navigator : void 0;
-var require_memoize_browser_cjs = __commonJS({
-  '../../../node_modules/@emotion/memoize/dist/memoize.browser.cjs.js'(exports,) {
-    'use strict';
-
-    Object.defineProperty(exports, '__esModule', {
-      value: true,
-    },);
-    function memoize3(fn,) {
-      var cache2 = {};
-      return function (arg,) {
-        if (cache2[arg] === void 0) cache2[arg] = fn(arg,);
-        return cache2[arg];
-      };
-    }
-    exports.default = memoize3;
-  },
-},);
-var require_is_prop_valid_browser_cjs = __commonJS({
-  '../../../node_modules/@emotion/is-prop-valid/dist/is-prop-valid.browser.cjs.js'(exports,) {
-    'use strict';
-
-    Object.defineProperty(exports, '__esModule', {
-      value: true,
-    },);
-    function _interopDefault(ex,) {
-      return ex && typeof ex === 'object' && 'default' in ex ? ex['default'] : ex;
-    }
-    var memoize3 = _interopDefault(require_memoize_browser_cjs(),);
-    var reactPropsRegex2 =
-      /^((children|dangerouslySetInnerHTML|key|ref|autoFocus|defaultValue|defaultChecked|innerHTML|suppressContentEditableWarning|suppressHydrationWarning|valueLink|accept|acceptCharset|accessKey|action|allow|allowUserMedia|allowPaymentRequest|allowFullScreen|allowTransparency|alt|async|autoComplete|autoPlay|capture|cellPadding|cellSpacing|challenge|charSet|checked|cite|classID|className|cols|colSpan|content|contentEditable|contextMenu|controls|controlsList|coords|crossOrigin|data|dateTime|decoding|default|defer|dir|disabled|download|draggable|encType|form|formAction|formEncType|formMethod|formNoValidate|formTarget|frameBorder|headers|height|hidden|high|href|hrefLang|htmlFor|httpEquiv|id|inputMode|integrity|is|keyParams|keyType|kind|label|lang|list|loading|loop|low|marginHeight|marginWidth|max|maxLength|media|mediaGroup|method|min|minLength|multiple|muted|name|nonce|noValidate|open|optimum|pattern|placeholder|playsInline|poster|preload|profile|radioGroup|readOnly|referrerPolicy|rel|required|reversed|role|rows|rowSpan|sandbox|scope|scoped|scrolling|seamless|selected|shape|size|sizes|slot|span|spellCheck|src|srcDoc|srcLang|srcSet|start|step|style|summary|tabIndex|target|title|type|useMap|value|width|wmode|wrap|about|datatype|inlist|prefix|property|resource|typeof|vocab|autoCapitalize|autoCorrect|autoSave|color|itemProp|itemScope|itemType|itemID|itemRef|on|results|security|unselectable|accentHeight|accumulate|additive|alignmentBaseline|allowReorder|alphabetic|amplitude|arabicForm|ascent|attributeName|attributeType|autoReverse|azimuth|baseFrequency|baselineShift|baseProfile|bbox|begin|bias|by|calcMode|capHeight|clip|clipPathUnits|clipPath|clipRule|colorInterpolation|colorInterpolationFilters|colorProfile|colorRendering|contentScriptType|contentStyleType|cursor|cx|cy|d|decelerate|descent|diffuseConstant|direction|display|divisor|dominantBaseline|dur|dx|dy|edgeMode|elevation|enableBackground|end|exponent|externalResourcesRequired|fill|fillOpacity|fillRule|filter|filterRes|filterUnits|floodColor|floodOpacity|focusable|fontFamily|fontSize|fontSizeAdjust|fontStretch|fontStyle|fontVariant|fontWeight|format|from|fr|fx|fy|g1|g2|glyphName|glyphOrientationHorizontal|glyphOrientationVertical|glyphRef|gradientTransform|gradientUnits|hanging|horizAdvX|horizOriginX|ideographic|imageRendering|in|in2|intercept|k|k1|k2|k3|k4|kernelMatrix|kernelUnitLength|kerning|keyPoints|keySplines|keyTimes|lengthAdjust|letterSpacing|lightingColor|limitingConeAngle|local|markerEnd|markerMid|markerStart|markerHeight|markerUnits|markerWidth|mask|maskContentUnits|maskUnits|mathematical|mode|numOctaves|offset|opacity|operator|order|orient|orientation|origin|overflow|overlinePosition|overlineThickness|panose1|paintOrder|pathLength|patternContentUnits|patternTransform|patternUnits|pointerEvents|points|pointsAtX|pointsAtY|pointsAtZ|preserveAlpha|preserveAspectRatio|primitiveUnits|r|radius|refX|refY|renderingIntent|repeatCount|repeatDur|requiredExtensions|requiredFeatures|restart|result|rotate|rx|ry|scale|seed|shapeRendering|slope|spacing|specularConstant|specularExponent|speed|spreadMethod|startOffset|stdDeviation|stemh|stemv|stitchTiles|stopColor|stopOpacity|strikethroughPosition|strikethroughThickness|string|stroke|strokeDasharray|strokeDashoffset|strokeLinecap|strokeLinejoin|strokeMiterlimit|strokeOpacity|strokeWidth|surfaceScale|systemLanguage|tableValues|targetX|targetY|textAnchor|textDecoration|textRendering|textLength|to|transform|u1|u2|underlinePosition|underlineThickness|unicode|unicodeBidi|unicodeRange|unitsPerEm|vAlphabetic|vHanging|vIdeographic|vMathematical|values|vectorEffect|version|vertAdvY|vertOriginX|vertOriginY|viewBox|viewTarget|visibility|widths|wordSpacing|writingMode|x|xHeight|x1|x2|xChannelSelector|xlinkActuate|xlinkArcrole|xlinkHref|xlinkRole|xlinkShow|xlinkTitle|xlinkType|xmlBase|xmlns|xmlnsXlink|xmlLang|xmlSpace|y|y1|y2|yChannelSelector|z|zoomAndPan|for|class|autofocus)|(([Dd][Aa][Tt][Aa]|[Aa][Rr][Ii][Aa]|x)-.*))$/;
-    var index = memoize3(function (prop,) {
-      return reactPropsRegex2.test(prop,) || prop.charCodeAt(0,) === 111 && prop.charCodeAt(1,) === 110 && prop.charCodeAt(2,) < 91;
-    },/* Z+1 */
-    );
-    exports.default = index;
-  },
-},);
 var LayoutGroupContext = createContext({},);
 var isBrowser = typeof __unframerWindow !== 'undefined';
 var useIsomorphicLayoutEffect = isBrowser ? useLayoutEffect : useEffect;
@@ -205,7 +169,7 @@ var reverseEasing = (easing) => (p) => 1 - easing(1 - p,);
 var backOut = /* @__PURE__ */ cubicBezier(0.33, 1.53, 0.69, 0.99,);
 var backIn = /* @__PURE__ */ reverseEasing(backOut,);
 var backInOut = /* @__PURE__ */ mirrorEasing(backIn,);
-var anticipate = (p) => (p *= 2) < 1 ? 0.5 * backIn(p,) : 0.5 * (2 - Math.pow(2, -10 * (p - 1),));
+var anticipate = (p) => p >= 1 ? 1 : (p *= 2) < 1 ? 0.5 * backIn(p,) : 0.5 * (2 - Math.pow(2, -10 * (p - 1),));
 var circIn = (p) => 1 - Math.sin(Math.acos(p,),);
 var circOut = reverseEasing(circIn,);
 var circInOut = mirrorEasing(circIn,);
@@ -304,7 +268,7 @@ function createRenderStep(runNextFrame, stepName,) {
       const addToCurrentFrame = immediate && isProcessing;
       const queue = addToCurrentFrame ? thisFrame : nextFrame;
       if (keepAlive) toKeepAlive.add(callback,);
-      if (!queue.has(callback,)) queue.add(callback,);
+      queue.add(callback,);
       return callback;
     },
     /**
@@ -324,7 +288,9 @@ function createRenderStep(runNextFrame, stepName,) {
         return;
       }
       isProcessing = true;
-      [thisFrame, nextFrame,] = [nextFrame, thisFrame,];
+      const prevFrame = thisFrame;
+      thisFrame = nextFrame;
+      nextFrame = prevFrame;
       thisFrame.forEach(triggerCallback,);
       if (stepName && statsBuffer.value) {
         statsBuffer.value.frameloop[stepName].push(numCalls,);
@@ -365,9 +331,10 @@ function createRenderBatcher(scheduleNextBatch, allowKeepAlive,) {
     postRender,
   } = steps2;
   const processBatch = () => {
-    const timestamp = MotionGlobalConfig.useManualTiming ? state.timestamp : performance.now();
+    const useManualTiming = MotionGlobalConfig.useManualTiming;
+    const timestamp = useManualTiming ? state.timestamp : performance.now();
     runNextFrame = false;
-    if (!MotionGlobalConfig.useManualTiming) {
+    if (!useManualTiming) {
       state.delta = useDefaultElapsed ? 1e3 / 60 : Math.max(Math.min(timestamp - state.timestamp, maxElapsed,), 1,);
     }
     state.timestamp = timestamp;
@@ -635,11 +602,10 @@ function analyseComplexValue(value,) {
 function parseComplexValue(v,) {
   return analyseComplexValue(v,).values;
 }
-function createTransformer(source,) {
-  const {
-    split,
-    types,
-  } = analyseComplexValue(source,);
+function buildTransformer({
+  split,
+  types,
+},) {
   const numSections = split.length;
   return (v) => {
     let output = '';
@@ -659,11 +625,20 @@ function createTransformer(source,) {
     return output;
   };
 }
+function createTransformer(source,) {
+  return buildTransformer(analyseComplexValue(source,),);
+}
 var convertNumbersToZero = (v) => typeof v === 'number' ? 0 : color.test(v,) ? color.getAnimatableNone(v,) : v;
+var convertToZero = (value, splitBefore,) => {
+  if (typeof value === 'number') {
+    return splitBefore?.trim().endsWith('/',) ? value : 0;
+  }
+  return convertNumbersToZero(value,);
+};
 function getAnimatableNone(v,) {
-  const parsed = parseComplexValue(v,);
-  const transformer = createTransformer(v,);
-  return transformer(parsed.map(convertNumbersToZero,),);
+  const info = analyseComplexValue(v,);
+  const transformer = buildTransformer(info,);
+  return transformer(info.values.map((value, i,) => convertToZero(value, info.split[i],)),);
 }
 var complex = {
   test,
@@ -876,11 +851,6 @@ function createGeneratorEasing(options, scale2 = 100, createGenerator,) {
     duration: millisecondsToSeconds(duration,),
   };
 }
-var velocitySampleDuration = 5;
-function calcGeneratorVelocity(resolveValue, t, current2,) {
-  const prevT = Math.max(t - velocitySampleDuration, 0,);
-  return velocityPerSecond(current2 - resolveValue(prevT,), t - prevT,);
-}
 var springDefaults = {
   // Default spring physics
   stiffness: 100,
@@ -910,6 +880,17 @@ var springDefaults = {
   minDamping: 0.05,
   maxDamping: 1,
 };
+function calcAngularFreq(undampedFreq, dampingRatio,) {
+  return undampedFreq * Math.sqrt(1 - dampingRatio * dampingRatio,);
+}
+var rootIterations = 12;
+function approximateRoot(envelope, derivative, initialGuess,) {
+  let result = initialGuess;
+  for (let i = 1; i < rootIterations; i++) {
+    result = result - envelope(result,) / derivative(result,);
+  }
+  return result;
+}
 var safeMin = 1e-3;
 function findSpring({
   duration = springDefaults.duration,
@@ -975,17 +956,6 @@ function findSpring({
       duration,
     };
   }
-}
-var rootIterations = 12;
-function approximateRoot(envelope, derivative, initialGuess,) {
-  let result = initialGuess;
-  for (let i = 1; i < rootIterations; i++) {
-    result = result - envelope(result,) / derivative(result,);
-  }
-  return result;
-}
-function calcAngularFreq(undampedFreq, dampingRatio,) {
-  return undampedFreq * Math.sqrt(1 - dampingRatio * dampingRatio,);
 }
 var durationKeys = ['duration', 'bounce',];
 var physicsKeys = ['stiffness', 'damping', 'mass',];
@@ -1066,18 +1036,29 @@ function spring(optionsOrVisualDuration = springDefaults.visualDuration, bounce 
   restSpeed || (restSpeed = isGranularScale ? springDefaults.restSpeed.granular : springDefaults.restSpeed.default);
   restDelta || (restDelta = isGranularScale ? springDefaults.restDelta.granular : springDefaults.restDelta.default);
   let resolveSpring;
+  let resolveVelocity;
+  let angularFreq;
+  let A;
+  let sinCoeff;
+  let cosCoeff;
   if (dampingRatio < 1) {
-    const angularFreq = calcAngularFreq(undampedAngularFreq, dampingRatio,);
+    angularFreq = calcAngularFreq(undampedAngularFreq, dampingRatio,);
+    A = (initialVelocity + dampingRatio * undampedAngularFreq * initialDelta) / angularFreq;
     resolveSpring = (t) => {
       const envelope = Math.exp(-dampingRatio * undampedAngularFreq * t,);
-      return target -
-        envelope *
-          ((initialVelocity + dampingRatio * undampedAngularFreq * initialDelta) / angularFreq * Math.sin(angularFreq * t,) +
-            initialDelta * Math.cos(angularFreq * t,));
+      return target - envelope * (A * Math.sin(angularFreq * t,) + initialDelta * Math.cos(angularFreq * t,));
+    };
+    sinCoeff = dampingRatio * undampedAngularFreq * A + initialDelta * angularFreq;
+    cosCoeff = dampingRatio * undampedAngularFreq * initialDelta - A * angularFreq;
+    resolveVelocity = (t) => {
+      const envelope = Math.exp(-dampingRatio * undampedAngularFreq * t,);
+      return envelope * (sinCoeff * Math.sin(angularFreq * t,) + cosCoeff * Math.cos(angularFreq * t,));
     };
   } else if (dampingRatio === 1) {
     resolveSpring = (t) =>
       target - Math.exp(-undampedAngularFreq * t,) * (initialDelta + (initialVelocity + undampedAngularFreq * initialDelta) * t);
+    const C = initialVelocity + undampedAngularFreq * initialDelta;
+    resolveVelocity = (t) => Math.exp(-undampedAngularFreq * t,) * (undampedAngularFreq * C * t - initialVelocity);
   } else {
     const dampedAngularFreq = undampedAngularFreq * Math.sqrt(dampingRatio * dampingRatio - 1,);
     resolveSpring = (t) => {
@@ -1089,19 +1070,33 @@ function spring(optionsOrVisualDuration = springDefaults.visualDuration, bounce 
             dampedAngularFreq * initialDelta * Math.cosh(freqForT,)) /
           dampedAngularFreq;
     };
+    const P = (initialVelocity + dampingRatio * undampedAngularFreq * initialDelta) / dampedAngularFreq;
+    const sinhCoeff = dampingRatio * undampedAngularFreq * P - initialDelta * dampedAngularFreq;
+    const coshCoeff = dampingRatio * undampedAngularFreq * initialDelta - P * dampedAngularFreq;
+    resolveVelocity = (t) => {
+      const envelope = Math.exp(-dampingRatio * undampedAngularFreq * t,);
+      const freqForT = Math.min(dampedAngularFreq * t, 300,);
+      return envelope * (sinhCoeff * Math.sinh(freqForT,) + coshCoeff * Math.cosh(freqForT,));
+    };
   }
   const generator = {
     calculatedDuration: isResolvedFromDuration ? duration || null : null,
+    velocity: (t) => secondsToMilliseconds(resolveVelocity(t,),),
     next: (t) => {
+      if (!isResolvedFromDuration && dampingRatio < 1) {
+        const envelope = Math.exp(-dampingRatio * undampedAngularFreq * t,);
+        const sin = Math.sin(angularFreq * t,);
+        const cos = Math.cos(angularFreq * t,);
+        const current3 = target - envelope * (A * sin + initialDelta * cos);
+        const currentVelocity = secondsToMilliseconds(envelope * (sinCoeff * sin + cosCoeff * cos),);
+        state.done = Math.abs(currentVelocity,) <= restSpeed && Math.abs(target - current3,) <= restDelta;
+        state.value = state.done ? target : current3;
+        return state;
+      }
       const current2 = resolveSpring(t,);
       if (!isResolvedFromDuration) {
-        let currentVelocity = t === 0 ? initialVelocity : 0;
-        if (dampingRatio < 1) {
-          currentVelocity = t === 0 ? secondsToMilliseconds(initialVelocity,) : calcGeneratorVelocity(resolveSpring, t, current2,);
-        }
-        const isBelowVelocityThreshold = Math.abs(currentVelocity,) <= restSpeed;
-        const isBelowDisplacementThreshold = Math.abs(target - current2,) <= restDelta;
-        state.done = isBelowVelocityThreshold && isBelowDisplacementThreshold;
+        const currentVelocity = secondsToMilliseconds(resolveVelocity(t,),);
+        state.done = Math.abs(currentVelocity,) <= restSpeed && Math.abs(target - current2,) <= restDelta;
       } else {
         state.done = t >= duration;
       }
@@ -1124,6 +1119,11 @@ spring.applyToOptions = (options) => {
   options.type = 'keyframes';
   return options;
 };
+var velocitySampleDuration = 5;
+function getGeneratorVelocity(resolveValue, t, current2,) {
+  const prevT = Math.max(t - velocitySampleDuration, 0,);
+  return velocityPerSecond(current2 - resolveValue(prevT,), t - prevT,);
+}
 function inertia({
   keyframes: keyframes2,
   velocity = 0,
@@ -1167,7 +1167,7 @@ function inertia({
     timeReachedBoundary = t;
     spring$1 = spring({
       keyframes: [state.value, nearestBoundary(state.value,),],
-      velocity: calcGeneratorVelocity(calcLatest, t, state.value,),
+      velocity: getGeneratorVelocity(calcLatest, t, state.value,),
       // TODO: This should be passing * 1000
       damping: bounceDamping,
       stiffness: bounceStiffness,
@@ -1284,20 +1284,6 @@ function keyframes({
     },
   };
 }
-var frameloopDriver = (update) => {
-  const passTimestamp = ({
-    timestamp,
-  },) => update(timestamp,);
-  return {
-    start: (keepAlive = true,) => frame.update(passTimestamp, keepAlive,),
-    stop: () => cancelFrame(passTimestamp,),
-    /**
-     * If we're processing this frame we can use the
-     * framelocked timestamp to keep things in sync.
-     */
-    now: () => frameData.isProcessing ? frameData.timestamp : time.now(),
-  };
-};
 var isNotNull = (value) => value !== null;
 function getFinalKeyframe(
   keyframes2,
@@ -1313,6 +1299,20 @@ function getFinalKeyframe(
   const index = useFirstKeyframe ? 0 : resolvedKeyframes.length - 1;
   return !index || finalKeyframe === void 0 ? resolvedKeyframes[index] : finalKeyframe;
 }
+var frameloopDriver = (update) => {
+  const passTimestamp = ({
+    timestamp,
+  },) => update(timestamp,);
+  return {
+    start: (keepAlive = true,) => frame.update(passTimestamp, keepAlive,),
+    stop: () => cancelFrame(passTimestamp,),
+    /**
+     * If we're processing this frame we can use the
+     * framelocked timestamp to keep things in sync.
+     */
+    now: () => frameData.isProcessing ? frameData.timestamp : time.now(),
+  };
+};
 var transitionTypeMap = {
   decay: inertia,
   inertia,
@@ -1359,6 +1359,10 @@ var JSAnimation = class extends WithPromise {
     this.currentTime = 0;
     this.holdTime = null;
     this.playbackSpeed = 1;
+    this.delayState = {
+      done: false,
+      value: void 0,
+    };
     this.stop = () => {
       const {
         motionValue: motionValue2,
@@ -1494,13 +1498,14 @@ var JSAnimation = class extends WithPromise {
       }
       elapsed = clamp(0, 1, iterationProgress,) * resolvedDuration;
     }
-    const state = isInDelayPhase
-      ? {
-        done: false,
-        value: keyframes2[0],
-      }
-      : frameGenerator.next(elapsed,);
-    if (mixKeyframes) {
+    let state;
+    if (isInDelayPhase) {
+      this.delayState.value = keyframes2[0];
+      state = this.delayState;
+    } else {
+      state = frameGenerator.next(elapsed,);
+    }
+    if (mixKeyframes && !isInDelayPhase) {
       state.value = mixKeyframes(state.value,);
     }
     let {
@@ -1549,16 +1554,39 @@ var JSAnimation = class extends WithPromise {
     } else if (this.driver) {
       this.startTime = this.driver.now() - newTime / this.playbackSpeed;
     }
-    this.driver?.start(false,);
+    if (this.driver) {
+      this.driver.start(false,);
+    } else {
+      this.startTime = 0;
+      this.state = 'paused';
+      this.holdTime = newTime;
+      this.tick(newTime,);
+    }
+  }
+  /**
+   * Returns the generator's velocity at the current time in units/second.
+   * Uses the analytical derivative when available (springs), avoiding
+   * the MotionValue's frame-dependent velocity estimation.
+   */
+  getGeneratorVelocity() {
+    const t = this.currentTime;
+    if (t <= 0) return this.options.velocity || 0;
+    if (this.generator.velocity) {
+      return this.generator.velocity(t,);
+    }
+    const current2 = this.generator.next(t,).value;
+    return getGeneratorVelocity((s) => this.generator.next(s,).value, t, current2,);
   }
   get speed() {
     return this.playbackSpeed;
   }
   set speed(newSpeed,) {
-    this.updateTime(time.now(),);
     const hasChanged = this.playbackSpeed !== newSpeed;
+    if (hasChanged && this.driver) {
+      this.updateTime(time.now(),);
+    }
     this.playbackSpeed = newSpeed;
-    if (hasChanged) {
+    if (hasChanged && this.driver) {
       this.time = millisecondsToSeconds(this.currentTime,);
     }
   }
@@ -1766,13 +1794,21 @@ var positionalValues = {
   }, {
     paddingLeft = '0',
     paddingRight = '0',
-  },) => x.max - x.min - parseFloat(paddingLeft,) - parseFloat(paddingRight,),
+    boxSizing,
+  },) => {
+    const width = x.max - x.min;
+    return boxSizing === 'border-box' ? width : width - parseFloat(paddingLeft,) - parseFloat(paddingRight,);
+  },
   height: ({
     y,
   }, {
     paddingTop = '0',
     paddingBottom = '0',
-  },) => y.max - y.min - parseFloat(paddingTop,) - parseFloat(paddingBottom,),
+    boxSizing,
+  },) => {
+    const height = y.max - y.min;
+    return boxSizing === 'border-box' ? height : height - parseFloat(paddingTop,) - parseFloat(paddingBottom,);
+  },
   top: (_bbox, {
     top,
   },) => parseFloat(top,),
@@ -1932,6 +1968,7 @@ function memoSupports(callback, supportsFlag,) {
   return () => supportsFlags[supportsFlag] ?? memoized();
 }
 var supportsScrollTimeline = /* @__PURE__ */ memoSupports(() => __unframerWindow.ScrollTimeline !== void 0, 'scrollTimeline',);
+var supportsViewTimeline = /* @__PURE__ */ memoSupports(() => __unframerWindow.ViewTimeline !== void 0, 'viewTimeline',);
 var supportsLinearEasing = /* @__PURE__ */ memoSupports(() => {
   try {
     document.createElement('div',).animate({
@@ -2049,9 +2086,8 @@ var NativeAnimation = class extends WithPromise {
         const keyframe = getFinalKeyframe(keyframes2, this.options, finalKeyframe, this.speed,);
         if (this.updateMotionValue) {
           this.updateMotionValue(keyframe,);
-        } else {
-          setStyle(element, name, keyframe,);
         }
+        setStyle(element, name, keyframe,);
         this.animation.cancel();
       }
       onComplete?.();
@@ -2125,9 +2161,13 @@ var NativeAnimation = class extends WithPromise {
     return millisecondsToSeconds(Number(this.animation.currentTime,) || 0,);
   }
   set time(newTime,) {
+    const wasFinished = this.finishedTime !== null;
     this.manualStartTime = null;
     this.finishedTime = null;
     this.animation.currentTime = secondsToMilliseconds(newTime,);
+    if (wasFinished) {
+      this.animation.pause();
+    }
   }
   /**
    * The playback speed of the animation.
@@ -2154,6 +2194,8 @@ var NativeAnimation = class extends WithPromise {
    */
   attachTimeline({
     timeline,
+    rangeStart,
+    rangeEnd,
     observe,
   },) {
     if (this.allowFlatten) {
@@ -2164,6 +2206,8 @@ var NativeAnimation = class extends WithPromise {
     this.animation.onfinish = null;
     if (timeline && supportsScrollTimeline()) {
       this.animation.timeline = timeline;
+      if (rangeStart) this.animation.rangeStart = rangeStart;
+      if (rangeEnd) this.animation.rangeEnd = rangeEnd;
       return noop;
     } else {
       return observe(this,);
@@ -2189,7 +2233,7 @@ var NativeAnimationExtended = class extends NativeAnimation {
     replaceStringEasing(options,);
     replaceTransitionType(options,);
     super(options,);
-    if (options.startTime !== void 0) {
+    if (options.startTime !== void 0 && options.autoplay !== false) {
       this.startTime = options.startTime;
     }
     this.options = options;
@@ -2221,11 +2265,12 @@ var NativeAnimationExtended = class extends NativeAnimation {
     },);
     const sampleTime = Math.max(sampleDelta, time.now() - this.startTime,);
     const delta = clamp(0, sampleDelta, sampleTime - sampleDelta,);
-    motionValue2.setWithVelocity(
-      sampleAnimation.sample(Math.max(0, sampleTime - delta,),).value,
-      sampleAnimation.sample(sampleTime,).value,
-      delta,
-    );
+    const current2 = sampleAnimation.sample(sampleTime,).value;
+    const {
+      name,
+    } = this.options;
+    if (element && name) setStyle(element, name, current2,);
+    motionValue2.setWithVelocity(sampleAnimation.sample(Math.max(0, sampleTime - delta,),).value, current2, delta,);
     sampleAnimation.stop();
   }
 };
@@ -2233,8 +2278,30 @@ function makeAnimationInstant(options,) {
   options.duration = 0;
   options.type = 'keyframes';
 }
-var acceleratedValues = /* @__PURE__ */ new Set(['opacity', 'clipPath', 'filter', 'transform',// TODO: Could be re-enabled now we have support for linear() easing
+var acceleratedValues = /* @__PURE__ */ new Set(['opacity', 'clipPath', 'filter', 'transform',// TODO: Can be accelerated but currently disabled until https://issues.chromium.org/issues/41491098 is resolved
+  // or until we implement support for linear() easing.
   // "background-color"
+],);
+var browserColorFunctions = /^(?:oklch|oklab|lab|lch|color|color-mix|light-dark)\(/;
+function hasBrowserOnlyColors(keyframes2,) {
+  for (let i = 0; i < keyframes2.length; i++) {
+    if (typeof keyframes2[i] === 'string' && browserColorFunctions.test(keyframes2[i],)) {
+      return true;
+    }
+  }
+  return false;
+}
+var colorProperties = /* @__PURE__ */ new Set([
+  'color',
+  'backgroundColor',
+  'outlineColor',
+  'fill',
+  'stroke',
+  'borderColor',
+  'borderTopColor',
+  'borderRightColor',
+  'borderBottomColor',
+  'borderLeftColor',
 ],);
 var supportsWaapi = /* @__PURE__ */ memo(() => Object.hasOwnProperty.call(Element.prototype, 'animate',));
 function supportsBrowserAnimation(options,) {
@@ -2245,6 +2312,7 @@ function supportsBrowserAnimation(options,) {
     repeatType,
     damping,
     type,
+    keyframes: keyframes2,
   } = options;
   const subject = motionValue2?.owner?.current;
   if (!(subject instanceof HTMLElement)) {
@@ -2254,7 +2322,13 @@ function supportsBrowserAnimation(options,) {
     onUpdate,
     transformTemplate: transformTemplate2,
   } = motionValue2.owner.getProps();
-  return supportsWaapi() && name && acceleratedValues.has(name,) && (name !== 'transform' || !transformTemplate2) &&
+  return supportsWaapi() && name && (
+    /**
+     * Force WAAPI for color properties with browser-only color formats
+     * (oklch, oklab, lab, lch, etc.) that the JS animation path can't parse.
+     */
+    acceleratedValues.has(name,) || colorProperties.has(name,) && hasBrowserOnlyColors(keyframes2,)
+  ) && (name !== 'transform' || !transformTemplate2) &&
     /**
      * If we're outputting values to onUpdate then we can't use WAAPI as there's
      * no way to read the value from WAAPI every frame.
@@ -2362,7 +2436,9 @@ var AsyncMotionValueAnimation = class extends WithPromise {
       onUpdate,
     } = options;
     this.resolvedAt = time.now();
+    let canAnimateValue = true;
     if (!canAnimate(keyframes2, name, type, velocity,)) {
+      canAnimateValue = false;
       if (MotionGlobalConfig.instantAnimations || !delay2) {
         onUpdate?.(getFinalKeyframe(keyframes2, options, finalKeyframe,),);
       }
@@ -2379,14 +2455,21 @@ var AsyncMotionValueAnimation = class extends WithPromise {
       ...options,
       keyframes: keyframes2,
     };
-    const useWaapi = !isHandoff && supportsBrowserAnimation(resolvedOptions,);
+    const useWaapi = canAnimateValue && !isHandoff && supportsBrowserAnimation(resolvedOptions,);
     const element = resolvedOptions.motionValue?.owner?.current;
-    const animation = useWaapi
-      ? new NativeAnimationExtended({
-        ...resolvedOptions,
-        element,
-      },)
-      : new JSAnimation(resolvedOptions,);
+    let animation;
+    if (useWaapi) {
+      try {
+        animation = new NativeAnimationExtended({
+          ...resolvedOptions,
+          element,
+        },);
+      } catch {
+        animation = new JSAnimation(resolvedOptions,);
+      }
+    } else {
+      animation = new JSAnimation(resolvedOptions,);
+    }
     animation.finished.then(() => {
       this.notifyFinished();
     },).catch(noop,);
@@ -2557,8 +2640,11 @@ var NativeAnimationWrapper = class extends NativeAnimation {
 var animationMaps = /* @__PURE__ */ new WeakMap();
 var animationMapKey = (name, pseudoElement = '',) => `${name}:${pseudoElement}`;
 function getAnimationMap(element,) {
-  const map2 = animationMaps.get(element,) || /* @__PURE__ */ new Map();
-  animationMaps.set(element, map2,);
+  let map2 = animationMaps.get(element,);
+  if (!map2) {
+    map2 = /* @__PURE__ */ new Map();
+    animationMaps.set(element, map2,);
+  }
   return map2;
 }
 function calcChildStagger(children, child, delayChildren, staggerChildren = 0, staggerDirection = 1,) {
@@ -2628,15 +2714,6 @@ var getDefaultTransition = (valueKey, {
   }
   return ease;
 };
-var isNotNull2 = (value) => value !== null;
-function getFinalKeyframe2(keyframes2, {
-  repeat,
-  repeatType = 'loop',
-}, finalKeyframe,) {
-  const resolvedKeyframes = keyframes2.filter(isNotNull2,);
-  const index = repeat && repeatType !== 'loop' && repeat % 2 === 1 ? 0 : resolvedKeyframes.length - 1;
-  return !index || finalKeyframe === void 0 ? resolvedKeyframes[index] : finalKeyframe;
-}
 function resolveTransition(transition, parentTransition,) {
   if (transition?.inherit && parentTransition) {
     const {
@@ -2657,20 +2734,23 @@ function getValueTransition(transition, key7,) {
   }
   return valueTransition;
 }
-function isTransitionDefined({
-  when,
-  delay: _delay,
-  delayChildren,
-  staggerChildren,
-  staggerDirection,
-  repeat,
-  repeatType,
-  repeatDelay,
-  from,
-  elapsed,
-  ...transition
-},) {
-  return !!Object.keys(transition,).length;
+var orchestrationKeys = /* @__PURE__ */ new Set([
+  'when',
+  'delay',
+  'delayChildren',
+  'staggerChildren',
+  'staggerDirection',
+  'repeat',
+  'repeatType',
+  'repeatDelay',
+  'from',
+  'elapsed',
+],);
+function isTransitionDefined(transition,) {
+  for (const key7 in transition) {
+    if (!orchestrationKeys.has(key7,)) return true;
+  }
+  return false;
 }
 var animateMotionValue = (name, value, target, transition = {}, element, isHandoff,) => (onComplete) => {
   const valueTransition = getValueTransition(transition, name,) || {};
@@ -2719,7 +2799,7 @@ var animateMotionValue = (name, value, target, transition = {}, element, isHando
   }
   options.allowFlatten = !valueTransition.type && !valueTransition.ease;
   if (shouldSkip && !isHandoff && value.get() !== void 0) {
-    const finalKeyframe = getFinalKeyframe2(options.keyframes, valueTransition,);
+    const finalKeyframe = getFinalKeyframe(options.keyframes, valueTransition,);
     if (finalKeyframe !== void 0) {
       frame.update(() => {
         options.onUpdate(finalKeyframe,);
@@ -3126,9 +3206,10 @@ function animateTarget(visualElement, targetAndTransition, {
     };
     const currentValue = value.get();
     if (
-      currentValue !== void 0 && !value.isAnimating && !Array.isArray(valueTarget,) && valueTarget === currentValue &&
+      currentValue !== void 0 && !value.isAnimating() && !Array.isArray(valueTarget,) && valueTarget === currentValue &&
       !valueTransition.velocity
     ) {
+      frame.update(() => value.set(valueTarget,));
       continue;
     }
     let isHandoff = false;
@@ -3610,10 +3691,6 @@ var supportsPartialKeyframes = /* @__PURE__ */ memo(() => {
   }
   return true;
 },);
-var acceleratedValues2 = /* @__PURE__ */ new Set(['opacity', 'clipPath', 'filter', 'transform',// TODO: Can be accelerated but currently disabled until https://issues.chromium.org/issues/41491098 is resolved
-  // or until we implement support for linear() easing.
-  // "background-color"
-],);
 function resolveElements(elementOrSelector, scope, selectorCache,) {
   if (elementOrSelector == null) {
     return [];
@@ -3683,18 +3760,13 @@ var MotionValueState = class {
   get(name,) {
     return this.values.get(name,)?.value;
   }
-  destroy() {
-    for (const value of this.values.values()) {
-      value.onRemove();
-    }
-  }
 };
 function createEffect(addValue,) {
   const stateCache = /* @__PURE__ */ new WeakMap();
-  const subscriptions = [];
   return (subject, values,) => {
     const state = stateCache.get(subject,) ?? new MotionValueState();
     stateCache.set(subject, state,);
+    const subscriptions = [];
     for (const key7 in values) {
       const value = values[key7];
       const remove2 = addValue(subject, state, key7, value,);
@@ -3741,7 +3813,7 @@ var propEffect = /* @__PURE__ */ createEffect((subject, state, key7, value,) => 
   );
 },);
 function isHTMLElement(element,) {
-  return isObject(element,) && 'offsetHeight' in element;
+  return isObject(element,) && 'offsetHeight' in element && !('ownerSVGElement' in element);
 }
 var translateAlias = {
   x: 'translateX',
@@ -3766,8 +3838,7 @@ function buildTransform(state,) {
     if (!valueIsDefault) {
       transformIsDefault = false;
       const transformName = translateAlias[key7] || key7;
-      const valueToRender = state.latest[key7];
-      transform2 += `${transformName}(${valueToRender}) `;
+      transform2 += `${transformName}(${value}) `;
     }
   }
   return transformIsDefault ? 'none' : transform2.trim();
@@ -4328,17 +4399,20 @@ function attachFollow(value, source, options = {},) {
       activeAnimation.stop();
       activeAnimation = null;
     }
+    value.animation = void 0;
   };
   const startAnimation2 = () => {
-    stopAnimation2();
     const currentValue = asNumber(value.get(),);
     const targetValue = asNumber(latestValue,);
     if (currentValue === targetValue) {
+      stopAnimation2();
       return;
     }
+    const velocity = activeAnimation ? activeAnimation.getGeneratorVelocity() : value.getVelocity();
+    stopAnimation2();
     activeAnimation = new JSAnimation({
       keyframes: [currentValue, targetValue,],
-      velocity: value.getVelocity(),
+      velocity,
       // Default to spring if no type specified (matches useSpring behavior)
       type: 'spring',
       restDelta: 1e-3,
@@ -4347,19 +4421,30 @@ function attachFollow(value, source, options = {},) {
       onUpdate: latestSetter,
     },);
   };
+  const scheduleAnimation = () => {
+    startAnimation2();
+    value.animation = activeAnimation ?? void 0;
+    value['events'].animationStart?.notify();
+    activeAnimation?.then(() => {
+      value.animation = void 0;
+      value['events'].animationComplete?.notify();
+    },);
+  };
   value.attach((v, set,) => {
     latestValue = v;
     latestSetter = (latest) => set(parseValue(latest, unit,),);
-    frame.postRender(() => {
-      startAnimation2();
-      value['events'].animationStart?.notify();
-      activeAnimation?.then(() => {
-        value['events'].animationComplete?.notify();
-      },);
-    },);
+    frame.postRender(scheduleAnimation,);
   }, stopAnimation2,);
   if (isMotionValue(source,)) {
-    const removeSourceOnChange = source.on('change', (v) => value.set(parseValue(v, unit,),),);
+    let skipNextAnimation = options.skipInitialAnimation === true;
+    const removeSourceOnChange = source.on('change', (v) => {
+      if (skipNextAnimation) {
+        skipNextAnimation = false;
+        value.jump(parseValue(v, unit,), false,);
+      } else {
+        value.set(parseValue(v, unit,),);
+      }
+    },);
     const removeValueOnDestroy = value.on('destroy', removeSourceOnChange,);
     return () => {
       removeSourceOnChange();
@@ -4949,7 +5034,7 @@ var VisualElement = class {
     if (this.valueSubscriptions.has(key7,)) {
       this.valueSubscriptions.get(key7,)();
     }
-    if (value.accelerate && acceleratedValues2.has(key7,) && this.current instanceof HTMLElement) {
+    if (value.accelerate && acceleratedValues.has(key7,) && this.current instanceof HTMLElement) {
       const {
         factory,
         keyframes: keyframes2,
@@ -5359,10 +5444,8 @@ function applyTreeDeltas(box, treeScale, treePath, isSharedTransition = false,) 
       continue;
     }
     if (isSharedTransition && node.options.layoutScroll && node.scroll && node !== node.root) {
-      transformBox(box, {
-        x: -node.scroll.offset.x,
-        y: -node.scroll.offset.y,
-      },);
+      translateAxis(box.x, -node.scroll.offset.x,);
+      translateAxis(box.y, -node.scroll.offset.y,);
     }
     if (delta) {
       treeScale.x *= delta.x.scale;
@@ -5370,7 +5453,7 @@ function applyTreeDeltas(box, treeScale, treePath, isSharedTransition = false,) 
       applyBoxDelta(box, delta,);
     }
     if (isSharedTransition && hasTransform(node.latestValues,)) {
-      transformBox(box, node.latestValues,);
+      transformBox(box, node.latestValues, node.layout?.layoutBox,);
     }
   }
   if (treeScale.x < TREE_SCALE_SNAP_MAX && treeScale.x > TREE_SCALE_SNAP_MIN) {
@@ -5381,16 +5464,23 @@ function applyTreeDeltas(box, treeScale, treePath, isSharedTransition = false,) 
   }
 }
 function translateAxis(axis, distance2,) {
-  axis.min = axis.min + distance2;
-  axis.max = axis.max + distance2;
+  axis.min += distance2;
+  axis.max += distance2;
 }
 function transformAxis(axis, axisTranslate, axisScale, boxScale, axisOrigin = 0.5,) {
   const originPoint = mixNumber(axis.min, axis.max, axisOrigin,);
   applyAxisDelta(axis, axisTranslate, axisScale, originPoint, boxScale,);
 }
-function transformBox(box, transform2,) {
-  transformAxis(box.x, transform2.x, transform2.scaleX, transform2.scale, transform2.originX,);
-  transformAxis(box.y, transform2.y, transform2.scaleY, transform2.scale, transform2.originY,);
+function resolveAxisTranslate(value, axis,) {
+  if (typeof value === 'string') {
+    return parseFloat(value,) / 100 * (axis.max - axis.min);
+  }
+  return value;
+}
+function transformBox(box, transform2, sourceBox,) {
+  const resolveBox = sourceBox ?? box;
+  transformAxis(box.x, resolveAxisTranslate(transform2.x, resolveBox.x,), transform2.scaleX, transform2.scale, transform2.originX,);
+  transformAxis(box.y, resolveAxisTranslate(transform2.y, resolveBox.y,), transform2.scaleY, transform2.scale, transform2.originY,);
 }
 function measureViewportBox(instance, transformPoint2,) {
   return convertBoundingBoxToBox(transformBoxPoints(instance.getBoundingClientRect(), transformPoint2,),);
@@ -5842,6 +5932,7 @@ function createAnimationState(visualElement,) {
   let animate22 = createAnimateFunction(visualElement,);
   let state = createState();
   let isInitialRender = true;
+  let wasReset = false;
   const buildResolvedTypeValues = (type) => (acc, definition,) => {
     const resolved = resolveVariant(visualElement, definition, type === 'exit' ? visualElement.presenceContext?.custom : void 0,);
     if (resolved) {
@@ -5878,7 +5969,7 @@ function createAnimationState(visualElement,) {
       const activeDelta = type === changedActiveType ? typeState.isActive : null;
       if (activeDelta === false) removedVariantIndex = i;
       let isInherited = prop === context[type] && prop !== props[type] && propIsVariant;
-      if (isInherited && isInitialRender && visualElement.manuallyAnimateOnMount) {
+      if (isInherited && (isInitialRender || wasReset) && visualElement.manuallyAnimateOnMount) {
         isInherited = false;
       }
       typeState.protectedKeys = {
@@ -5960,7 +6051,7 @@ function createAnimationState(visualElement,) {
           ...resolvedValues,
         };
       }
-      if (isInitialRender && visualElement.blockInitialAnimation) {
+      if ((isInitialRender || wasReset) && visualElement.blockInitialAnimation) {
         shouldAnimateType = false;
       }
       const willAnimateViaParent = isInherited && variantDidChange;
@@ -5971,8 +6062,8 @@ function createAnimationState(visualElement,) {
             type,
           };
           if (
-            typeof animation === 'string' && isInitialRender && !willAnimateViaParent && visualElement.manuallyAnimateOnMount &&
-            visualElement.parent
+            typeof animation === 'string' && (isInitialRender || wasReset) && !willAnimateViaParent &&
+            visualElement.manuallyAnimateOnMount && visualElement.parent
           ) {
             const {
               parent,
@@ -6015,6 +6106,7 @@ function createAnimationState(visualElement,) {
       shouldAnimate = false;
     }
     isInitialRender = false;
+    wasReset = false;
     return shouldAnimate ? animate22(animations2,) : Promise.resolve();
   }
   function setActive(type, isActive,) {
@@ -6034,6 +6126,7 @@ function createAnimationState(visualElement,) {
     getState: () => state,
     reset: () => {
       state = createState();
+      wasReset = true;
     },
   };
 }
@@ -6106,21 +6199,23 @@ function calcBoxDelta(delta, source, target, origin,) {
   calcAxisDelta(delta.x, source.x, target.x, origin ? origin.originX : void 0,);
   calcAxisDelta(delta.y, source.y, target.y, origin ? origin.originY : void 0,);
 }
-function calcRelativeAxis(target, relative2, parent,) {
-  target.min = parent.min + relative2.min;
+function calcRelativeAxis(target, relative2, parent, anchor = 0,) {
+  const anchorPoint = anchor ? mixNumber(parent.min, parent.max, anchor,) : parent.min;
+  target.min = anchorPoint + relative2.min;
   target.max = target.min + calcLength(relative2,);
 }
-function calcRelativeBox(target, relative2, parent,) {
-  calcRelativeAxis(target.x, relative2.x, parent.x,);
-  calcRelativeAxis(target.y, relative2.y, parent.y,);
+function calcRelativeBox(target, relative2, parent, anchor,) {
+  calcRelativeAxis(target.x, relative2.x, parent.x, anchor?.x,);
+  calcRelativeAxis(target.y, relative2.y, parent.y, anchor?.y,);
 }
-function calcRelativeAxisPosition(target, layout2, parent,) {
-  target.min = layout2.min - parent.min;
+function calcRelativeAxisPosition(target, layout2, parent, anchor = 0,) {
+  const anchorPoint = anchor ? mixNumber(parent.min, parent.max, anchor,) : parent.min;
+  target.min = layout2.min - anchorPoint;
   target.max = target.min + calcLength(layout2,);
 }
-function calcRelativePosition(target, layout2, parent,) {
-  calcRelativeAxisPosition(target.x, layout2.x, parent.x,);
-  calcRelativeAxisPosition(target.y, layout2.y, parent.y,);
+function calcRelativePosition(target, layout2, parent, anchor,) {
+  calcRelativeAxisPosition(target.x, layout2.x, parent.x, anchor?.x,);
+  calcRelativeAxisPosition(target.y, layout2.y, parent.y, anchor?.y,);
 }
 function removePointDelta(point2, translate, scale2, originPoint, boxScale,) {
   point2 -= translate;
@@ -6212,8 +6307,8 @@ function buildProjectionTransform(delta, treeScale, latestTransform,) {
   }
   return transform2 || 'none';
 }
-var borders = ['TopLeft', 'TopRight', 'BottomLeft', 'BottomRight',];
-var numBorders = borders.length;
+var borderLabels = ['borderTopLeftRadius', 'borderTopRightRadius', 'borderBottomLeftRadius', 'borderBottomRightRadius',];
+var numBorders = borderLabels.length;
 var asNumber2 = (value) => typeof value === 'string' ? parseFloat(value,) : value;
 var isPx = (value) => typeof value === 'number' || px.test(value,);
 function mixValues(target, follow, lead, progress2, shouldCrossfadeOpacity, isOnlyMember,) {
@@ -6224,7 +6319,7 @@ function mixValues(target, follow, lead, progress2, shouldCrossfadeOpacity, isOn
     target.opacity = mixNumber(follow.opacity ?? 1, lead.opacity ?? 1, progress2,);
   }
   for (let i = 0; i < numBorders; i++) {
-    const borderLabel = `border${borders[i]}Radius`;
+    const borderLabel = borderLabels[i];
     let followRadius = getRadius(follow, borderLabel,);
     let leadRadius = getRadius(lead, borderLabel,);
     if (followRadius === void 0 && leadRadius === void 0) continue;
@@ -6314,45 +6409,33 @@ var NodeStack = class {
   add(node,) {
     addUniqueItem(this.members, node,);
     for (let i = this.members.length - 1; i >= 0; i--) {
-      const m2 = this.members[i];
-      if (m2 === node || m2 === this.lead || m2 === this.prevLead) continue;
-      const inst = m2.instance;
-      if (inst && inst.isConnected === false && m2.isPresent !== false && !m2.snapshot) {
-        removeItem(this.members, m2,);
+      const member = this.members[i];
+      if (member === node || member === this.lead || member === this.prevLead) continue;
+      const inst = member.instance;
+      if ((!inst || inst.isConnected === false) && !member.snapshot) {
+        removeItem(this.members, member,);
+        member.unmount();
       }
     }
     node.scheduleRender();
   }
   remove(node,) {
     removeItem(this.members, node,);
-    if (node === this.prevLead) {
-      this.prevLead = void 0;
-    }
+    if (node === this.prevLead) this.prevLead = void 0;
     if (node === this.lead) {
       const prevLead = this.members[this.members.length - 1];
-      if (prevLead) {
-        this.promote(prevLead,);
-      }
+      if (prevLead) this.promote(prevLead,);
     }
   }
   relegate(node,) {
-    const indexOfNode = this.members.findIndex((member) => node === member);
-    if (indexOfNode === 0) return false;
-    let prevLead;
-    for (let i = indexOfNode; i >= 0; i--) {
+    for (let i = this.members.indexOf(node,) - 1; i >= 0; i--) {
       const member = this.members[i];
-      const inst = member.instance;
-      if (member.isPresent !== false && (!inst || inst.isConnected !== false)) {
-        prevLead = member;
-        break;
+      if (member.isPresent !== false && member.instance?.isConnected !== false) {
+        this.promote(member,);
+        return true;
       }
     }
-    if (prevLead) {
-      this.promote(prevLead,);
-      return true;
-    } else {
-      return false;
-    }
+    return false;
   }
   promote(node, preserveFollowOpacity,) {
     const prevLead = this.lead;
@@ -6361,61 +6444,37 @@ var NodeStack = class {
     this.lead = node;
     node.show();
     if (prevLead) {
-      prevLead.instance && prevLead.scheduleRender();
+      prevLead.updateSnapshot();
       node.scheduleRender();
-      const prevDep = prevLead.options.layoutDependency;
-      const nextDep = node.options.layoutDependency;
-      const dependencyMatches = prevDep !== void 0 && nextDep !== void 0 && prevDep === nextDep;
-      if (!dependencyMatches) {
-        const prevInstance = prevLead.instance;
-        const isStale = prevInstance && prevInstance.isConnected === false && !prevLead.snapshot;
-        if (!isStale) {
-          node.resumeFrom = prevLead;
-          if (preserveFollowOpacity) {
-            node.resumeFrom.preserveOpacity = true;
-          }
-          if (prevLead.snapshot) {
-            node.snapshot = prevLead.snapshot;
-            node.snapshot.latestValues = prevLead.animationValues || prevLead.latestValues;
-          }
-          if (node.root && node.root.isUpdating) {
-            node.isLayoutDirty = true;
-          }
-        }
-      }
       const {
-        crossfade,
+        layoutDependency: prevDep,
+      } = prevLead.options;
+      const {
+        layoutDependency: nextDep,
       } = node.options;
-      if (crossfade === false) {
-        prevLead.hide();
+      if (prevDep === void 0 || prevDep !== nextDep) {
+        node.resumeFrom = prevLead;
+        if (preserveFollowOpacity) prevLead.preserveOpacity = true;
+        if (prevLead.snapshot) {
+          node.snapshot = prevLead.snapshot;
+          node.snapshot.latestValues = prevLead.animationValues || prevLead.latestValues;
+        }
+        if (node.root?.isUpdating) node.isLayoutDirty = true;
       }
+      if (node.options.crossfade === false) prevLead.hide();
     }
   }
   exitAnimationComplete() {
-    this.members.forEach((node) => {
-      const {
-        options,
-        resumingFrom,
-      } = node;
-      options.onExitComplete && options.onExitComplete();
-      if (resumingFrom) {
-        resumingFrom.options.onExitComplete && resumingFrom.options.onExitComplete();
-      }
+    this.members.forEach((member) => {
+      member.options.onExitComplete?.();
+      member.resumingFrom?.options.onExitComplete?.();
     },);
   }
   scheduleRender() {
-    this.members.forEach((node) => {
-      node.instance && node.scheduleRender(false,);
-    },);
+    this.members.forEach((member) => member.instance && member.scheduleRender(false,));
   }
-  /**
-   * Clear any leads that have been removed this render to prevent them from being
-   * used in future animations and to prevent memory leaks
-   */
   removeLeadSnapshot() {
-    if (this.lead && this.lead.snapshot) {
-      this.lead.snapshot = void 0;
-    }
+    if (this.lead?.snapshot) this.lead.snapshot = void 0;
   }
 };
 var globalProjectionState = {
@@ -6701,6 +6760,9 @@ function createProjectionNode({
       for (let i = 0; i < this.path.length; i++) {
         const node = this.path[i];
         node.shouldResetTransform = true;
+        if (typeof node.latestValues.x === 'string' || typeof node.latestValues.y === 'string') {
+          node.isLayoutDirty = true;
+        }
         node.updateScroll('snapshot',);
         if (node.options.layoutRoot) {
           node.willUpdate(false,);
@@ -6720,8 +6782,13 @@ function createProjectionNode({
       this.updateScheduled = false;
       const updateWasBlocked = this.isUpdateBlocked();
       if (updateWasBlocked) {
+        const wasBlockedByResize = this.updateBlockedByResize;
         this.unblockUpdate();
+        this.updateBlockedByResize = false;
         this.clearAllSnapshots();
+        if (wasBlockedByResize) {
+          this.nodes.forEach(forceLayoutMeasure,);
+        }
         this.nodes.forEach(clearMeasurements,);
         return;
       }
@@ -6734,6 +6801,7 @@ function createProjectionNode({
         this.nodes.forEach(clearIsLayoutDirty,);
       } else {
         this.isUpdating = false;
+        this.nodes.forEach(ensureDraggedNodesSnapshotted,);
         this.nodes.forEach(resetTransformStyle,);
         this.nodes.forEach(updateLayout,);
         this.nodes.forEach(notifyLayoutUpdate,);
@@ -6798,7 +6866,7 @@ function createProjectionNode({
       const prevLayout = this.layout;
       this.layout = this.measure(false,);
       this.layoutVersion++;
-      this.layoutCorrected = createBox();
+      if (!this.layoutCorrected) this.layoutCorrected = createBox();
       this.isLayoutDirty = false;
       this.projectionDelta = void 0;
       this.notifyListeners('measure', this.layout.layoutBox,);
@@ -6891,22 +6959,20 @@ function createProjectionNode({
       }
       return boxWithoutScroll;
     }
-    applyTransform(box, transformOnly = false,) {
-      const withTransforms = createBox();
+    applyTransform(box, transformOnly = false, output,) {
+      const withTransforms = output || createBox();
       copyBoxInto(withTransforms, box,);
       for (let i = 0; i < this.path.length; i++) {
         const node = this.path[i];
         if (!transformOnly && node.options.layoutScroll && node.scroll && node !== node.root) {
-          transformBox(withTransforms, {
-            x: -node.scroll.offset.x,
-            y: -node.scroll.offset.y,
-          },);
+          translateAxis(withTransforms.x, -node.scroll.offset.x,);
+          translateAxis(withTransforms.y, -node.scroll.offset.y,);
         }
         if (!hasTransform(node.latestValues,)) continue;
-        transformBox(withTransforms, node.latestValues,);
+        transformBox(withTransforms, node.latestValues, node.layout?.layoutBox,);
       }
       if (hasTransform(this.latestValues,)) {
-        transformBox(withTransforms, this.latestValues,);
+        transformBox(withTransforms, this.latestValues, this.layout?.layoutBox,);
       }
       return withTransforms;
     }
@@ -6915,13 +6981,14 @@ function createProjectionNode({
       copyBoxInto(boxWithoutTransform, box,);
       for (let i = 0; i < this.path.length; i++) {
         const node = this.path[i];
-        if (!node.instance) continue;
         if (!hasTransform(node.latestValues,)) continue;
-        hasScale(node.latestValues,) && node.updateSnapshot();
-        const sourceBox = createBox();
-        const nodeBox = node.measurePageBox();
-        copyBoxInto(sourceBox, nodeBox,);
-        removeBoxTransforms(boxWithoutTransform, node.latestValues, node.snapshot ? node.snapshot.layoutBox : void 0, sourceBox,);
+        let sourceBox;
+        if (node.instance) {
+          hasScale(node.latestValues,) && node.updateSnapshot();
+          sourceBox = createBox();
+          copyBoxInto(sourceBox, node.measurePageBox(),);
+        }
+        removeBoxTransforms(boxWithoutTransform, node.latestValues, node.snapshot?.layoutBox, sourceBox,);
       }
       if (hasTransform(this.latestValues,)) {
         removeBoxTransforms(boxWithoutTransform, this.latestValues,);
@@ -6976,7 +7043,7 @@ function createProjectionNode({
         this.removeRelativeTarget();
       }
       if (!this.targetDelta && !this.relativeTarget) {
-        if (relativeParent && relativeParent.layout) {
+        if (this.options.layoutAnchor !== false && relativeParent && relativeParent.layout) {
           this.createRelativeTarget(relativeParent, this.layout.layoutBox, relativeParent.layout.layoutBox,);
         } else {
           this.removeRelativeTarget();
@@ -6989,10 +7056,10 @@ function createProjectionNode({
       }
       if (this.relativeTarget && this.relativeTargetOrigin && this.relativeParent && this.relativeParent.target) {
         this.forceRelativeParentToResolveTarget();
-        calcRelativeBox(this.target, this.relativeTarget, this.relativeParent.target,);
+        calcRelativeBox(this.target, this.relativeTarget, this.relativeParent.target, this.options.layoutAnchor || void 0,);
       } else if (this.targetDelta) {
         if (Boolean(this.resumingFrom,)) {
-          this.target = this.applyTransform(this.layout.layoutBox,);
+          this.applyTransform(this.layout.layoutBox, false, this.target,);
         } else {
           copyBoxInto(this.target, this.layout.layoutBox,);
         }
@@ -7003,8 +7070,8 @@ function createProjectionNode({
       if (this.attemptToResolveRelativeTarget) {
         this.attemptToResolveRelativeTarget = false;
         if (
-          relativeParent && Boolean(relativeParent.resumingFrom,) === Boolean(this.resumingFrom,) && !relativeParent.options.layoutScroll &&
-          relativeParent.target && this.animationProgress !== 1
+          this.options.layoutAnchor !== false && relativeParent && Boolean(relativeParent.resumingFrom,) === Boolean(this.resumingFrom,) &&
+          !relativeParent.options.layoutScroll && relativeParent.target && this.animationProgress !== 1
         ) {
           this.createRelativeTarget(relativeParent, this.target, relativeParent.target,);
         } else {
@@ -7034,7 +7101,7 @@ function createProjectionNode({
       this.forceRelativeParentToResolveTarget();
       this.relativeTarget = createBox();
       this.relativeTargetOrigin = createBox();
-      calcRelativePosition(this.relativeTargetOrigin, layout2, parentLayout,);
+      calcRelativePosition(this.relativeTargetOrigin, layout2, parentLayout, this.options.layoutAnchor || void 0,);
       copyBoxInto(this.relativeTarget, this.relativeTargetOrigin,);
     }
     removeRelativeTarget() {
@@ -7150,7 +7217,12 @@ function createProjectionNode({
         mixAxisDelta(targetDelta.y, delta.y, progress2,);
         this.setTargetDelta(targetDelta,);
         if (this.relativeTarget && this.relativeTargetOrigin && this.layout && this.relativeParent && this.relativeParent.layout) {
-          calcRelativePosition(relativeLayout, this.layout.layoutBox, this.relativeParent.layout.layoutBox,);
+          calcRelativePosition(
+            relativeLayout,
+            this.layout.layoutBox,
+            this.relativeParent.layout.layoutBox,
+            this.options.layoutAnchor || void 0,
+          );
           mixBox(this.relativeTarget, this.relativeTargetOrigin, relativeLayout, progress2,);
           if (prevRelativeTarget && boxEquals(this.relativeTarget, prevRelativeTarget,)) {
             this.isProjectionDirty = false;
@@ -7448,6 +7520,9 @@ function notifyLayoutUpdate(node,) {
         axisSnapshot.min = layout2[axis].min;
         axisSnapshot.max = axisSnapshot.min + length;
       },);
+    } else if (animationType === 'x' || animationType === 'y') {
+      const snapAxis = animationType === 'x' ? 'y' : 'x';
+      copyAxisInto(isShared ? snapshot.measuredBox[snapAxis] : snapshot.layoutBox[snapAxis], layout2[snapAxis],);
     } else if (shouldAnimatePositionOnly(animationType, snapshot.layoutBox, layout2,)) {
       eachAxis((axis) => {
         const axisSnapshot = isShared ? snapshot.measuredBox[axis] : snapshot.layoutBox[axis];
@@ -7477,10 +7552,11 @@ function notifyLayoutUpdate(node,) {
           layout: parentLayout,
         } = relativeParent;
         if (parentSnapshot && parentLayout) {
+          const anchor = node.options.layoutAnchor || void 0;
           const relativeSnapshot = createBox();
-          calcRelativePosition(relativeSnapshot, snapshot.layoutBox, parentSnapshot.layoutBox,);
+          calcRelativePosition(relativeSnapshot, snapshot.layoutBox, parentSnapshot.layoutBox, anchor,);
           const relativeLayout = createBox();
-          calcRelativePosition(relativeLayout, layout2, parentLayout.layoutBox,);
+          calcRelativePosition(relativeLayout, layout2, parentLayout.layoutBox, anchor,);
           if (!boxEqualsRounded(relativeSnapshot, relativeLayout,)) {
             hasRelativeLayoutChanged = true;
           }
@@ -7531,8 +7607,18 @@ function clearSnapshot(node,) {
 function clearMeasurements(node,) {
   node.clearMeasurements();
 }
+function forceLayoutMeasure(node,) {
+  node.isLayoutDirty = true;
+  node.updateLayout();
+}
 function clearIsLayoutDirty(node,) {
   node.isLayoutDirty = false;
+}
+function ensureDraggedNodesSnapshotted(node,) {
+  if (node.isAnimationBlocked && node.layout && !node.isLayoutDirty) {
+    node.snapshot = node.layout;
+    node.isLayoutDirty = true;
+  }
 }
 function resetTransformStyle(node,) {
   const {
@@ -7941,13 +8027,14 @@ function useComposedRefs(...refs) {
 var PopChildMeasure = class extends React.Component {
   getSnapshotBeforeUpdate(prevProps,) {
     const element = this.props.childRef.current;
-    if (element && prevProps.isPresent && !this.props.isPresent && this.props.pop !== false) {
+    if (isHTMLElement(element,) && prevProps.isPresent && !this.props.isPresent && this.props.pop !== false) {
       const parent = element.offsetParent;
       const parentWidth = isHTMLElement(parent,) ? parent.offsetWidth || 0 : 0;
       const parentHeight = isHTMLElement(parent,) ? parent.offsetHeight || 0 : 0;
+      const computedStyle = getComputedStyle(element,);
       const size = this.props.sizeRef.current;
-      size.height = element.offsetHeight || 0;
-      size.width = element.offsetWidth || 0;
+      size.height = parseFloat(computedStyle.height,);
+      size.width = parseFloat(computedStyle.width,);
       size.top = element.offsetTop;
       size.left = element.offsetLeft;
       size.right = parentWidth - size.width - size.left;
@@ -8015,6 +8102,7 @@ function PopChild({
         `,);
     }
     return () => {
+      ref.current?.removeAttribute('data-motion-pop-id',);
       if (parent.contains(style2,)) {
         parent.removeChild(style2,);
       }
@@ -8200,8 +8288,8 @@ var AnimatePresence = ({
         if (exitingComponents.current.has(key7,)) {
           return;
         }
-        exitingComponents.current.add(key7,);
         if (exitComplete.has(key7,)) {
+          exitingComponents.current.add(key7,);
           exitComplete.set(key7, true,);
         } else {
           return;
@@ -8403,12 +8491,14 @@ function loadExternalIsValidProp(isValidProp,) {
   shouldForward = (key7) => key7.startsWith('on',) ? !isValidMotionProp(key7,) : isValidProp(key7,);
 }
 try {
-  loadExternalIsValidProp(require_is_prop_valid_browser_cjs().default,);
+  const emotionPkg = '@emotion/is-prop-valid';
+  loadExternalIsValidProp(__require(emotionPkg,).default,);
 } catch {}
 function filterProps(props, isDom, forwardMotionProps,) {
   const filteredProps2 = {};
   for (const key7 in props) {
     if (key7 === 'values' && typeof props.values === 'object') continue;
+    if (isMotionValue(props[key7],)) continue;
     if (
       shouldForward(key7,) || forwardMotionProps === true && isValidMotionProp(key7,) || !isDom && !isValidMotionProp(key7,) ||
       // If trying to use native HTML drag events, forward drag listeners
@@ -8710,9 +8800,6 @@ function useMotionRef(visualState, visualElement, externalRef,) {
     if (instance) {
       visualState.onMount?.(instance,);
     }
-    if (visualElement) {
-      instance ? visualElement.mount(instance,) : visualElement.unmount();
-    }
     const ref = externalRefContainer.current;
     if (typeof ref === 'function') {
       if (instance) {
@@ -8728,6 +8815,9 @@ function useMotionRef(visualState, visualElement, externalRef,) {
       }
     } else if (ref) {
       ref.current = instance;
+    }
+    if (visualElement) {
+      instance ? visualElement.mount(instance,) : visualElement.unmount();
     }
   }, [visualElement,],);
 }
@@ -8777,8 +8867,8 @@ function useVisualElement(Component33, visualState, props, createVisualElement, 
   },);
   const optimisedAppearId = props[optimizedAppearDataAttribute];
   const wantsHandoff = useRef(
-    Boolean(optimisedAppearId,) && !__unframerWindow.MotionHandoffIsComplete?.(optimisedAppearId,) &&
-      __unframerWindow.MotionHasOptimisedAnimation?.(optimisedAppearId,),
+    Boolean(optimisedAppearId,) && typeof __unframerWindow !== 'undefined' &&
+      !__unframerWindow.MotionHandoffIsComplete?.(optimisedAppearId,) && __unframerWindow.MotionHasOptimisedAnimation?.(optimisedAppearId,),
   );
   useIsomorphicLayoutEffect(() => {
     hasMountedOnce.current = true;
@@ -8814,6 +8904,7 @@ function createProjectionNode2(visualElement, props, ProjectionNodeConstructor, 
     dragConstraints,
     layoutScroll,
     layoutRoot,
+    layoutAnchor,
     layoutCrossfade,
   } = props;
   visualElement.projection = new ProjectionNodeConstructor(
@@ -8836,6 +8927,7 @@ function createProjectionNode2(visualElement, props, ProjectionNodeConstructor, 
     crossfade: layoutCrossfade,
     layoutScroll,
     layoutRoot,
+    layoutAnchor,
   },);
 }
 function getClosestProjectingNode(visualElement,) {
@@ -8866,7 +8958,7 @@ function createMotionComponent(
     } = configAndProps;
     const context = useCreateMotionContext(props,);
     const visualState = useVisualState2(props, isStatic,);
-    if (!isStatic && isBrowser) {
+    if (!isStatic && typeof __unframerWindow !== 'undefined') {
       useStrictMode(configAndProps, preloadedFeatures,);
       const layoutProjection = getProjectionFunctionality(configAndProps,);
       MeasureLayout2 = layoutProjection.MeasureLayout;
@@ -9012,6 +9104,7 @@ var ExitAnimationFeature = class extends Feature {
   constructor() {
     super(...arguments,);
     this.id = id2++;
+    this.isExitComplete = false;
   }
   update() {
     if (!this.node.presenceContext) return;
@@ -9025,9 +9118,37 @@ var ExitAnimationFeature = class extends Feature {
     if (!this.node.animationState || isPresent2 === prevIsPresent) {
       return;
     }
+    if (isPresent2 && prevIsPresent === false) {
+      if (this.isExitComplete) {
+        const {
+          initial,
+          custom,
+        } = this.node.getProps();
+        if (typeof initial === 'string') {
+          const resolved = resolveVariant(this.node, initial, custom,);
+          if (resolved) {
+            const {
+              transition,
+              transitionEnd,
+              ...target
+            } = resolved;
+            for (const key7 in target) {
+              this.node.getValue(key7,)?.jump(target[key7],);
+            }
+          }
+        }
+        this.node.animationState.reset();
+        this.node.animationState.animateChanges();
+      } else {
+        this.node.animationState.setActive('exit', false,);
+      }
+      this.isExitComplete = false;
+      return;
+    }
     const exitAnimation = this.node.animationState.setActive('exit', !isPresent2,);
     if (onExitComplete && !isPresent2) {
       exitAnimation.then(() => {
+        this.isExitComplete = true;
         onExitComplete(this.id,);
       },);
     }
@@ -9062,9 +9183,7 @@ function extractEventInfo(event,) {
     },
   };
 }
-var addPointerInfo = (handler) => {
-  return (event) => isPrimaryPointer(event,) && handler(event, extractEventInfo(event,),);
-};
+var addPointerInfo = (handler) => (event) => isPrimaryPointer(event,) && handler(event, extractEventInfo(event,),);
 function addPointerEvent(target, eventName, handler, options,) {
   return addDomEvent(target, eventName, addPointerInfo(handler,), options,);
 }
@@ -9097,6 +9216,7 @@ var PanSession = class {
     this.startEvent = null;
     this.lastMoveEvent = null;
     this.lastMoveEventInfo = null;
+    this.lastRawMoveEventInfo = null;
     this.handlers = {};
     this.contextWindow = __unframerWindow;
     this.scrollPositions = /* @__PURE__ */ new Map();
@@ -9109,6 +9229,9 @@ var PanSession = class {
     };
     this.updatePoint = () => {
       if (!(this.lastMoveEvent && this.lastMoveEventInfo)) return;
+      if (this.lastRawMoveEventInfo) {
+        this.lastMoveEventInfo = transformPoint(this.lastRawMoveEventInfo, this.transformPagePoint,);
+      }
       const info2 = getPanInfo(this.lastMoveEventInfo, this.history,);
       const isPanStarted = this.startEvent !== null;
       const isDistancePastThreshold = distance2D(info2.offset, {
@@ -9138,6 +9261,7 @@ var PanSession = class {
     };
     this.handlePointerMove = (event2, info2,) => {
       this.lastMoveEvent = event2;
+      this.lastRawMoveEventInfo = info2;
       this.lastMoveEventInfo = transformPoint(info2, this.transformPagePoint,);
       frame.update(this.updatePoint, true,);
     };
@@ -9709,7 +9833,7 @@ var VisualElementDragControls = class {
         return;
       }
       let transition = constraints && constraints[axis] || {};
-      if (dragSnapToOrigin) {
+      if (dragSnapToOrigin === true || dragSnapToOrigin === axis) {
         transition = {
           min: 0,
           max: 0,
@@ -10093,9 +10217,14 @@ var MeasureLayoutWithContext = class extends Component2 {
   }
   componentDidUpdate() {
     const {
+      visualElement,
+      layoutAnchor,
+    } = this.props;
+    const {
       projection,
-    } = this.props.visualElement;
+    } = visualElement;
     if (projection) {
+      projection.options.layoutAnchor = layoutAnchor;
       projection.root.didUpdate();
       microtask.postRender(() => {
         if (!projection.currentAnimation && projection.isLead()) {
@@ -10291,7 +10420,7 @@ var InViewFeature = class extends Feature {
     this.isInView = false;
   }
   startObserver() {
-    this.unmount();
+    this.stopObserver?.();
     const {
       viewport = {},
     } = this.node.getProps();
@@ -10327,7 +10456,7 @@ var InViewFeature = class extends Feature {
       const callback = isIntersecting ? onViewportEnter : onViewportLeave;
       callback && callback(entry,);
     };
-    return observeIntersection(this.node.current, options, onIntersectionUpdate,);
+    this.stopObserver = observeIntersection(this.node.current, options, onIntersectionUpdate,);
   }
   mount() {
     this.startObserver();
@@ -10343,7 +10472,11 @@ var InViewFeature = class extends Feature {
       this.startObserver();
     }
   }
-  unmount() {}
+  unmount() {
+    this.stopObserver?.();
+    this.hasEnteredView = false;
+    this.isInView = false;
+  }
 };
 function hasViewportOptionChanged({
   viewport = {},
@@ -10433,7 +10566,7 @@ function updateAxisInfo(element, axisName, info, time2,) {
   } = keys[axisName];
   const prev = axis.current;
   const prevTime = info.time;
-  axis.current = element[`scroll${position}`];
+  axis.current = Math.abs(element[`scroll${position}`],);
   axis.scrollLength = element[`scroll${length}`] - element[`client${length}`];
   axis.offset.length = 0;
   axis.offset[0] = 0;
@@ -10709,7 +10842,64 @@ function scrollInfo(onScroll, {
   };
 }
 function canUseNativeTimeline(target,) {
-  return typeof __unframerWindow !== 'undefined' && !target && supportsScrollTimeline();
+  if (typeof __unframerWindow === 'undefined') return false;
+  return target ? supportsViewTimeline() : supportsScrollTimeline();
+}
+var presets = [[ScrollOffset.Enter, 'entry',], [ScrollOffset.Exit, 'exit',], [ScrollOffset.Any, 'cover',], [ScrollOffset.All, 'contain',],];
+var stringToProgress = {
+  start: 0,
+  end: 1,
+};
+function parseStringOffset(s,) {
+  const parts = s.trim().split(/\s+/,);
+  if (parts.length !== 2) return void 0;
+  const a = stringToProgress[parts[0]];
+  const b = stringToProgress[parts[1]];
+  if (a === void 0 || b === void 0) return void 0;
+  return [a, b,];
+}
+function normaliseOffset(offset,) {
+  if (offset.length !== 2) return void 0;
+  const result = [];
+  for (const item of offset) {
+    if (Array.isArray(item,)) {
+      result.push(item,);
+    } else if (typeof item === 'string') {
+      const parsed = parseStringOffset(item,);
+      if (!parsed) return void 0;
+      result.push(parsed,);
+    } else {
+      return void 0;
+    }
+  }
+  return result;
+}
+function matchesPreset(offset, preset,) {
+  const normalised = normaliseOffset(offset,);
+  if (!normalised) return false;
+  for (let i = 0; i < 2; i++) {
+    const o = normalised[i];
+    const p = preset[i];
+    if (o[0] !== p[0] || o[1] !== p[1]) return false;
+  }
+  return true;
+}
+function offsetToViewTimelineRange(offset,) {
+  if (!offset) {
+    return {
+      rangeStart: 'contain 0%',
+      rangeEnd: 'contain 100%',
+    };
+  }
+  for (const [preset, name,] of presets) {
+    if (matchesPreset(offset, preset,)) {
+      return {
+        rangeStart: `${name} 0%`,
+        rangeEnd: `${name} 100%`,
+      };
+    }
+  }
+  return void 0;
 }
 var timelineCache = /* @__PURE__ */ new Map();
 function scrollTimelineFallback(options,) {
@@ -10733,28 +10923,56 @@ function getTimeline({
     axis,
   } = options;
   if (source) container = source;
-  const containerCache = timelineCache.get(container,) ?? /* @__PURE__ */ new Map();
-  timelineCache.set(container, containerCache,);
+  let containerCache = timelineCache.get(container,);
+  if (!containerCache) {
+    containerCache = /* @__PURE__ */ new Map();
+    timelineCache.set(container, containerCache,);
+  }
   const targetKey = options.target ?? 'self';
-  const targetCache = containerCache.get(targetKey,) ?? {};
+  let targetCache = containerCache.get(targetKey,);
+  if (!targetCache) {
+    targetCache = {};
+    containerCache.set(targetKey, targetCache,);
+  }
   const axisKey = axis + (options.offset ?? []).join(',',);
   if (!targetCache[axisKey]) {
-    targetCache[axisKey] = canUseNativeTimeline(options.target,)
-      ? new ScrollTimeline({
+    if (options.target && canUseNativeTimeline(options.target,)) {
+      const range = offsetToViewTimelineRange(options.offset,);
+      if (range) {
+        targetCache[axisKey] = new ViewTimeline({
+          subject: options.target,
+          axis,
+        },);
+      } else {
+        targetCache[axisKey] = scrollTimelineFallback({
+          container,
+          ...options,
+        },);
+      }
+    } else if (canUseNativeTimeline()) {
+      targetCache[axisKey] = new ScrollTimeline({
         source: container,
         axis,
-      },)
-      : scrollTimelineFallback({
+      },);
+    } else {
+      targetCache[axisKey] = scrollTimelineFallback({
         container,
         ...options,
       },);
+    }
   }
   return targetCache[axisKey];
 }
 function attachToAnimation(animation, options,) {
   const timeline = getTimeline(options,);
+  const range = options.target ? offsetToViewTimelineRange(options.offset,) : void 0;
+  const useNative = options.target ? canUseNativeTimeline(options.target,) && !!range : canUseNativeTimeline();
   return animation.attachTimeline({
-    timeline: options.target ? void 0 : timeline,
+    timeline: useNative ? timeline : void 0,
+    ...(range && useNative && {
+      rangeStart: range.rangeStart,
+      rangeEnd: range.rangeEnd,
+    }),
     observe: (valueAnimation) => {
       valueAnimation.pause();
       return observeTimeline((progress2) => {
@@ -10800,13 +11018,14 @@ var isRefPending = (ref) => {
   if (!ref) return false;
   return !ref.current;
 };
-function makeAccelerateConfig(axis, options, container,) {
+function makeAccelerateConfig(axis, options, container, target,) {
   return {
     factory: (animation) =>
       scroll(animation, {
         ...options,
         axis,
-        container,
+        container: container?.current || void 0,
+        target: target?.current || void 0,
       },),
     times: [0, 1,],
     keyframes: [0, 1,],
@@ -10814,16 +11033,19 @@ function makeAccelerateConfig(axis, options, container,) {
     duration: 1,
   };
 }
+function canAccelerateScroll(target, offset,) {
+  if (typeof __unframerWindow === 'undefined') return false;
+  return target ? supportsViewTimeline() && !!offsetToViewTimelineRange(offset,) : supportsScrollTimeline();
+}
 function useScroll({
   container,
   target,
   ...options
 } = {},) {
   const values = useConstant(createScrollMotionValues,);
-  if (!target && canUseNativeTimeline()) {
-    const resolvedContainer = container?.current || void 0;
-    values.scrollXProgress.accelerate = makeAccelerateConfig('x', options, resolvedContainer,);
-    values.scrollYProgress.accelerate = makeAccelerateConfig('y', options, resolvedContainer,);
+  if (canAccelerateScroll(target, options.offset,)) {
+    values.scrollXProgress.accelerate = makeAccelerateConfig('x', options, container, target,);
+    values.scrollYProgress.accelerate = makeAccelerateConfig('y', options, container, target,);
   }
   const scrollAnimation = useRef(null,);
   const needsStart = useRef(false,);
@@ -11040,7 +11262,7 @@ var WillChangeMotionValue = class extends MotionValue {
     this.isEnabled = false;
   }
   add(name,) {
-    if (transformProps.has(name,) || acceleratedValues2.has(name,)) {
+    if (transformProps.has(name,) || acceleratedValues.has(name,)) {
       this.isEnabled = true;
       this.update();
     }
@@ -11521,14 +11743,21 @@ function createScopedAnimate(options = {},) {
     let animations2 = [];
     let animationOnComplete;
     if (isSequence(subjectOrSequence,)) {
+      const {
+        onComplete,
+        ...sequenceOptions
+      } = optionsOrKeyframes || {};
+      if (typeof onComplete === 'function') {
+        animationOnComplete = onComplete;
+      }
       animations2 = animateSequence(
         subjectOrSequence,
         reduceMotion !== void 0
           ? {
             reduceMotion,
-            ...optionsOrKeyframes,
+            ...sequenceOptions,
           }
-          : optionsOrKeyframes,
+          : sequenceOptions,
         scope,
       );
     } else {
@@ -11923,6 +12152,45 @@ function transformViewBoxPoint(svgRef,) {
     };
   };
 }
+function correctParentTransform(parentRef,) {
+  return (point2) => {
+    const parent = parentRef.current;
+    if (!parent) return point2;
+    const inv = getInverseMatrix(parent,);
+    if (!inv) return point2;
+    const rect = parent.getBoundingClientRect();
+    const cx2 = rect.left + __unframerWindow.scrollX + rect.width / 2;
+    const cy = rect.top + __unframerWindow.scrollY + rect.height / 2;
+    const dx = point2.x - cx2;
+    const dy = point2.y - cy;
+    return {
+      x: cx2 + inv.a * dx + inv.c * dy,
+      y: cy + inv.b * dx + inv.d * dy,
+    };
+  };
+}
+function getInverseMatrix(element,) {
+  const {
+    transform: transform2,
+  } = getComputedStyle(element,);
+  if (!transform2 || transform2 === 'none') return null;
+  const match = transform2.match(/^matrix3d\((.*)\)$/u,) || transform2.match(/^matrix\((.*)\)$/u,);
+  if (!match) return null;
+  const v = match[1].split(',',).map(Number,);
+  const is3d = transform2.startsWith('matrix3d',);
+  const a = v[0],
+    b = v[1];
+  const c = is3d ? v[4] : v[2];
+  const d = is3d ? v[5] : v[3];
+  const det = a * d - b * c;
+  if (Math.abs(det,) < 1e-10) return null;
+  return {
+    a: d / det,
+    b: -b / det,
+    c: -c / det,
+    d: a / det,
+  };
+}
 var appearAnimationStore = /* @__PURE__ */ new Map();
 var appearComplete = /* @__PURE__ */ new Map();
 var appearStoreId = (elementId, valueName,) => {
@@ -12194,7 +12462,18 @@ function ReorderGroupComponent({
       const newOrder = checkReorder(order, item, offset, velocity,);
       if (order !== newOrder) {
         isReordering.current = true;
-        onReorder(newOrder.map(getValue,).filter((value) => values.indexOf(value,) !== -1),);
+        const newValues = [...values,];
+        for (let i = 0; i < newOrder.length; i++) {
+          if (order[i].value !== newOrder[i].value) {
+            const a = values.indexOf(order[i].value,);
+            const b = values.indexOf(newOrder[i].value,);
+            if (a !== -1 && b !== -1) {
+              [newValues[a], newValues[b],] = [newValues[b], newValues[a],];
+            }
+            break;
+          }
+        }
+        onReorder(newValues,);
       }
     },
   };
@@ -12225,9 +12504,6 @@ function ReorderGroupComponent({
   },);
 }
 var ReorderGroup = /* @__PURE__ */ forwardRef(ReorderGroupComponent,);
-function getValue(item,) {
-  return item.value;
-}
 function compareMin(a, b,) {
   return a.layout.min - b.layout.min;
 }
@@ -12407,7 +12683,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.URNEVXQW.mjs
+// /:https://app.framerstatic.com/framer.DLJWK7BN.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -14137,7 +14413,11 @@ function unflatten(parsed, revivers,) {
             hydrated[index] = new RegExp(value[1], value[2],);
             break;
           case 'Object':
-            hydrated[index] = Object(value[1],);
+            const object = Object(value[1],);
+            if (Object.hasOwn(object, '__proto__',)) {
+              throw new Error('Cannot parse an object with a `__proto__` property',);
+            }
+            hydrated[index] = object;
             break;
           case 'BigInt':
             hydrated[index] = BigInt(value[1],);
@@ -14146,6 +14426,9 @@ function unflatten(parsed, revivers,) {
             const obj = /* @__PURE__ */ Object.create(null,);
             hydrated[index] = obj;
             for (let i = 1; i < value.length; i += 2) {
+              if (value[i] === '__proto__') {
+                throw new Error('Cannot parse an object with a `__proto__` property',);
+              }
               obj[value[i]] = hydrate(value[i + 1],);
             }
             break;
@@ -14205,10 +14488,16 @@ function unflatten(parsed, revivers,) {
         }
       } else if (value[0] === SPARSE) {
         const len = value[1];
+        if (!Number.isInteger(len,) || len < 0) {
+          throw new Error('Invalid input',);
+        }
         const array = new Array(len,);
         hydrated[index] = array;
         for (let i = 2; i < value.length; i += 2) {
           const idx = value[i];
+          if (!Number.isInteger(idx,) || idx < 0 || idx >= len) {
+            throw new Error('Invalid input',);
+          }
           array[idx] = hydrate(value[i + 1],);
         }
       } else {
@@ -15064,9 +15353,9 @@ function normalizeString(path,) {
 }
 var customNotFoundPagePaths = /* @__PURE__ */ new Set([`/404.html`, `/404`, `/404/`,],);
 var pathVariablesRegExpRaw = ':([a-z]\\w*)';
-var pathVariablesRegExp = /* @__PURE__ */ new RegExp(pathVariablesRegExpRaw, 'gi',);
+var pathVariablesRegExpGlobal = /* @__PURE__ */ new RegExp(pathVariablesRegExpRaw, 'gi',);
 function fillPathVariables(path, variables,) {
-  return path.replace(pathVariablesRegExp, (match, name,) => {
+  return path.replace(pathVariablesRegExpGlobal, (match, name,) => {
     const value = variables[name];
     if (typeof value !== 'string' || value.length === 0) return match;
     return encodeURIComponent(value,);
@@ -15118,7 +15407,7 @@ async function replacePathVariables(path, currentLocale, nextLocale, defaultLoca
   const resultPathVariables = {
     ...pathVariables,
   };
-  const matches = Array.from(resultPath.matchAll(pathVariablesRegExp,),);
+  const matches = Array.from(resultPath.matchAll(pathVariablesRegExpGlobal,),);
   const replacements = await Promise.all(matches.map(async (match) => {
     const pathVariableWithDelimiter = match?.[0];
     const pathVariableValue = match?.[1];
@@ -15923,7 +16212,7 @@ function getHashForRoute(hash2, route, hashVariables,) {
   const resolvedHash = getRouteElementId(route, hash2,);
   if (!resolvedHash) return void 0;
   const variables = Object.assign({}, route?.elements, hashVariables,);
-  return resolvedHash.replace(pathVariablesRegExp, (m2, p1,) => variables[p1] ?? m2,);
+  return resolvedHash.replace(pathVariablesRegExpGlobal, (m2, p1,) => variables[p1] ?? m2,);
 }
 function getPathForRoute(route, {
   currentRoutePath,
@@ -15945,13 +16234,13 @@ function getPathForRoute(route, {
     currentPath = currentRoutePathLocalized[localeId] ?? currentPath;
   }
   if (currentPathVariables) {
-    currentPath = currentPath.replace(pathVariablesRegExp, (m2, p1,) => String(currentPathVariables[p1] || m2,),);
+    currentPath = currentPath.replace(pathVariablesRegExpGlobal, (m2, p1,) => String(currentPathVariables[p1] || m2,),);
   }
   const targetPathLocalized = localeId ? route?.pathLocalized?.[localeId] : void 0;
   const targetPath = targetPathLocalized ?? route?.path ?? '/';
   let path = targetPath;
   if (pathVariables) {
-    path = path.replace(pathVariablesRegExp, (m2, p1,) => String(pathVariables[p1] || m2,),);
+    path = path.replace(pathVariablesRegExpGlobal, (m2, p1,) => String(pathVariables[p1] || m2,),);
   }
   const isSamePageHashNavigation = Boolean(currentPath === path && resolvedHash,);
   if (relative2) {
@@ -16165,7 +16454,7 @@ async function getSlugByLocaleIfCollectionPage(activeLocale, locales, currentRou
     path,
   } = currentRoute;
   if (!path) return null;
-  const matches = Array.from(path.matchAll(pathVariablesRegExp,),);
+  const matches = Array.from(path.matchAll(pathVariablesRegExpGlobal,),);
   const lastMatch = matches.pop();
   if (!lastMatch) return null;
   const pathVariableWithDelimiter = lastMatch?.[0];
@@ -17368,7 +17657,7 @@ function pathDepth(path,) {
 function matchPath(path, routePath,) {
   const pathVariablesKeys = [];
   const safeRoutePath = escapeStringRegExp(routePath,);
-  const routePathRegExpString = safeRoutePath.replace(pathVariablesRegExp, (_, name,) => {
+  const routePathRegExpString = safeRoutePath.replace(pathVariablesRegExpGlobal, (_, name,) => {
     pathVariablesKeys.push(name,);
     return '([^/]+)';
   },);
@@ -36176,12 +36465,12 @@ var withParallaxTransform = withFX;
 var withStyleAppearEffect = withFX;
 var Context = /* @__PURE__ */ createContext({},);
 function ComponentPresetsProvider({
-  presets,
+  presets: presets2,
   children,
 },) {
-  const lastPresets = useRef(presets,);
-  if (!isEqual(presets, lastPresets.current, false,)) {
-    lastPresets.current = presets;
+  const lastPresets = useRef(presets2,);
+  if (!isEqual(presets2, lastPresets.current, false,)) {
+    lastPresets.current = presets2;
   }
   return /* @__PURE__ */ jsx(Context.Provider, {
     value: lastPresets.current,
@@ -36531,6 +36820,9 @@ function isNodeLocalToProject(scopeIdOfThisNode, scopeIdOfNearestExternalCompone
 }
 function useMaybeWrapComponentWithCodeBoundary(children, scopeId, nodeId, isAuthoredByUser, isModuleExternal, inComponentSlot,) {
   const nearestExternalComponent = useNearestExternalComponent();
+  const {
+    disableCustomCode,
+  } = useLibraryFeatures();
   if (
     // Those props will either be all undefined, which means the Container hasn’t yet been
     // re-serialized since we introduced code boundaries, and we should use the old
@@ -36540,6 +36832,22 @@ function useMaybeWrapComponentWithCodeBoundary(children, scopeId, nodeId, isAuth
   ) {
     return /* @__PURE__ */ jsx(DeprecatedContainerErrorBoundary, {
       children,
+    },);
+  }
+  if (disableCustomCode && isAuthoredByUser) {
+    return /* @__PURE__ */ jsx('div', {
+      style: {
+        padding: '12px 16px',
+        // Standard error box styles
+        borderWidth: 1,
+        borderRadius: 6,
+        borderStyle: 'solid',
+        borderColor: 'rgba(149, 149, 149, 0.15)',
+        backgroundColor: 'rgba(149, 149, 149, 0.1)',
+        fontSize: 12,
+        color: '#a5a5a5',
+      },
+      children: 'Code component disabled',
     },);
   }
   const shouldWrapWithBoundary = shouldWrapComponentWithBoundary(
@@ -38209,7 +38517,7 @@ function getRouteAttributes(
     locale: activeLocale ?? void 0,
   };
 }
-var pathVariablesRegExp2 = /:([a-z]\w*)/gi;
+var pathVariablesRegExp = /:([a-z]\w*)/gi;
 var PathVariablesContext = /* @__PURE__ */ createContext(void 0,);
 function useImplicitPathVariables() {
   const contextPathVariables = useContext(PathVariablesContext,);
@@ -38226,7 +38534,7 @@ function linkMatchesRoute(route, {
   if (hash2) return false;
   if (route.path && route.pathVariables) {
     const combinedPathVariable = Object.assign({}, implicitPathVariables, pathVariables,);
-    for (const [, key7,] of route.path.matchAll(pathVariablesRegExp2,)) {
+    for (const [, key7,] of route.path.matchAll(pathVariablesRegExp,)) {
       if (!key7) return false;
       if (route.pathVariables[key7] !== combinedPathVariable[key7]) {
         return false;
@@ -39165,6 +39473,68 @@ function sendFormSubmitTrackingEvent(pageviewEventData, nodeId, trackingId,) {
     trackingId: trackingId || null,
   }, 'eager',);
 }
+var RECAPTCHA_SCRIPT_URL = 'https://www.google.com/recaptcha/api.js';
+function getRecaptchaScriptUrl(siteKey,) {
+  return `${RECAPTCHA_SCRIPT_URL}?render=${encodeURIComponent(siteKey,)}&badge=bottomleft`;
+}
+var captchaScriptPromises = /* @__PURE__ */ new Map();
+function loadRecaptchaScript(siteKey,) {
+  const existing = captchaScriptPromises.get(siteKey,);
+  if (existing) return existing;
+  const scriptUrl = getRecaptchaScriptUrl(siteKey,);
+  if (document.querySelector(`script[src="${scriptUrl}"]`,)) {
+    const resolved = Promise.resolve();
+    captchaScriptPromises.set(siteKey, resolved,);
+    return resolved;
+  }
+  const promise = new Promise((resolve, reject,) => {
+    const script = document.createElement('script',);
+    script.src = scriptUrl;
+    script.onload = () => resolve();
+    script.onerror = () => {
+      captchaScriptPromises.delete(siteKey,);
+      script.remove();
+      reject(new Error('Failed to load captcha script',),);
+    };
+    document.head.appendChild(script,);
+  },);
+  captchaScriptPromises.set(siteKey, promise,);
+  return promise;
+}
+function executeRecaptcha(siteKey, _action,) {
+  return new Promise((resolve, reject,) => {
+    const {
+      grecaptcha,
+    } = __unframerWindow2;
+    if (!grecaptcha) {
+      reject(new Error('Captcha script not available',),);
+      return;
+    }
+    grecaptcha.ready(() => {
+      grecaptcha.execute(siteKey,).then(resolve, reject,);
+    },);
+  },);
+}
+function useCaptcha({
+  provider,
+  siteKey,
+},) {
+  React42.useEffect(() => {
+    if (provider === 'recaptcha_v3' && siteKey) {
+      requestIdleCallback(() => {
+        loadRecaptchaScript(siteKey,).catch(() => {},);
+      },);
+    }
+  }, [provider, siteKey,],);
+  const executeChallenge = React42.useCallback(async (action) => {
+    if (provider !== 'recaptcha_v3' || !siteKey) return void 0;
+    await loadRecaptchaScript(siteKey,);
+    return executeRecaptcha(siteKey, action,);
+  }, [provider, siteKey,],);
+  return {
+    executeChallenge,
+  };
+}
 var pendingState = {
   state: 'pending',
 };
@@ -39247,6 +39617,12 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
   const currentRoute = useCurrentRoute();
   const implicitPathVariables = useImplicitPathVariables();
   const collectionUtils = useCollectionUtils();
+  const {
+    executeChallenge,
+  } = useCaptcha({
+    provider: formCaptchaProvider,
+    siteKey: formCaptchaSiteKey,
+  },);
   const [state, dispatch,] = React42.useReducer(formReducer, incompleteState,);
   const {
     activeLocale,
@@ -39324,7 +39700,7 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
         submitTrackingId,
         activeLocale,
       },);
-      await submitForm(action, data2, projectHash,);
+      await submitForm(action, data2, projectHash, executeChallenge,);
       startTransition2(() =>
         dispatch({
           type: 'success',
@@ -39396,19 +39772,24 @@ function anyEmptyRequiredFields(element,) {
   }
   return false;
 }
-async function submitForm(action, data2, projectHash,) {
+async function submitForm(action, data2, projectHash, executeChallenge,) {
   const proofOfWork = await calculateProofOfWork();
   if (!proofOfWork) {
     throw new Error('Failed to calculate proof of work',);
   }
+  const captchaToken = await executeChallenge('submit',);
+  const headers = {
+    'Framer-Site-Id': projectHash,
+    'Framer-POW': proofOfWork.secret,
+    'Framer-Form-Fields': getEncodedFormFieldsHeader(data2,),
+  };
+  if (captchaToken) {
+    headers['Framer-Captcha-Response'] = captchaToken;
+  }
   const response = await fetch(action, {
     body: data2,
     method: 'POST',
-    headers: {
-      'Framer-Site-Id': projectHash,
-      'Framer-POW': proofOfWork.secret,
-      'Framer-Form-Fields': getEncodedFormFieldsHeader(data2,),
-    },
+    headers,
   },);
   if (response.ok) {
     return response;
@@ -40618,7 +40999,7 @@ function Router({
     if (pathVariables) {
       const inUse = /* @__PURE__ */ new Set();
       const path = newRoute?.path ?? '/';
-      for (const match of path.matchAll(pathVariablesRegExp,)) {
+      for (const match of path.matchAll(pathVariablesRegExpGlobal,)) {
         const usedVariable = match[1];
         if (usedVariable === void 0) {
           throw new Error('A matching path variable should not be undefined',);
@@ -42446,7 +42827,8 @@ function isWrappedVectorSetItemPointer(value,) {
   return isObject2(value,) && isString(value.collectionId,);
 }
 var Resolver = class {
-  constructor(query, locale,) {
+  constructor(query, locale, options = {},) {
+    this.options = options;
     __publicField(this, 'collections',);
     __publicField(this, 'richTextCache', /* @__PURE__ */ new WeakMap(),);
     __publicField(this, 'vectorSetItemCache', /* @__PURE__ */ new WeakMap(),);
@@ -42474,7 +42856,7 @@ var Resolver = class {
     this.richTextCache.set(collection, cache2,);
     const cached = cache2.get(wrapped.pointer,);
     if (cached) return cached;
-    const result = collection.resolveRichText(wrapped.pointer,);
+    const result = this.options.richTextMode === 'raw' ? wrapped.pointer : collection.resolveRichText(wrapped.pointer,);
     cache2.set(wrapped.pointer, result,);
     return result;
   }
@@ -46061,12 +46443,12 @@ function stringifyQuery(query,) {
 }
 var log = /* @__PURE__ */ getLogger('query-engine',);
 var QueryEngine = class {
-  async evalQuery(query, locale, includeRaw,) {
+  async evalQuery(query, locale, includeRaw, options = {},) {
     if (log.enabled) {
       log.debug(`Query:
 ${stringifyQuery(query,)}`,);
     }
-    const resolver = new Resolver(query, locale,);
+    const resolver = new Resolver(query, locale, options,);
     const optimizer = new Optimizer(query, locale, resolver,);
     const [root, namedFields,] = optimizer.optimize();
     const relation = await root.evaluateAsync();
@@ -46095,8 +46477,8 @@ ${stringifyQuery(query,)}`,);
   async serializeableQuery(query, locale,) {
     return this.evalQuery(query, locale, true,);
   }
-  async query(query, locale,) {
-    return this.evalQuery(query, locale, false,);
+  async query(query, locale, options,) {
+    return this.evalQuery(query, locale, false, options,);
   }
   resolveSerializableQueryResult(raw, query, locale,) {
     const resolver = new Resolver(query, locale,);
@@ -47618,7 +48000,16 @@ function withCodeBoundaryForOverrides(Component18, {
   const appliedOverride = tryToApplyOverride(Component18, override,);
   let hasErrorBeenLogged = false;
   function CodeBoundaryForOverrides(props, ref,) {
+    const {
+      disableCustomCode,
+    } = useLibraryFeatures();
     const nearestExternalComponent = useNearestExternalComponent();
+    if (disableCustomCode) {
+      return /* @__PURE__ */ jsx(Component18, {
+        ...props,
+        ref,
+      },);
+    }
     const shouldWrapWithBoundary = shouldWrapOverrideWithBoundary(
       scopeId,
       nearestExternalComponent?.scopeId,
@@ -48238,7 +48629,7 @@ function TickerComponent({
   const defaultOffset22 = useMotionValue(0,);
   offset ?? (offset = defaultOffset22);
   const wrappedOffset = useTransform(() => {
-    if (state.direction === 'rtl') {
+    if (state.direction === 'rtl' && axis === 'x') {
       return wrap(state.totalItemLength + gap + state.inset, state.inset, offset.get(),);
     }
     return wrap(-state.totalItemLength - gap - state.inset, -state.inset, offset.get(),);
@@ -49240,7 +49631,7 @@ var WebGL2ShaderRenderer = class {
     }
   }
   /**
-   * Creates or updates a texture from an ImageBitmap.
+   * Creates or updates a texture from an HTMLImageElement or ImageBitmap.
    * Binds the texture to the specified texture unit.
    */
   bindTexture(uniformName, image, textureUnit,) {
@@ -49263,7 +49654,9 @@ var WebGL2ShaderRenderer = class {
     gl.activeTexture(gl.TEXTURE0 + textureUnit,);
     gl.bindTexture(gl.TEXTURE_2D, entry.texture,);
     if (isNewTexture || entry.image !== image) {
-      entry.image?.close();
+      if (entry.image instanceof ImageBitmap) {
+        entry.image.close();
+      }
       entry.image = image;
       gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image,);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE,);
@@ -49387,7 +49780,9 @@ var ShaderFallbackImage = /* @__PURE__ */ memo2(function ShaderFallbackImage2({
     image: {
       src,
       fit: 'fill',
+      loading: 'lazy',
     },
+    draggable: false,
     alt: '',
   },);
 },);
@@ -49460,11 +49855,19 @@ function colorToVec4(color2, element,) {
   const rgba2 = Color.toRgb(Color(resolved,),);
   return [rgba2.r / 255, rgba2.g / 255, rgba2.b / 255, rgba2.a,];
 }
-async function loadTexture(url,) {
-  const response = await fetch(url,);
-  if (!response.ok) throw new Error('Failed to load texture',);
-  const blob = await response.blob();
-  return createImageBitmap(blob,);
+function loadTexture(url,) {
+  return new Promise((resolve, reject,) => {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => resolve(img,);
+    img.onerror = (event) => {
+      const message = event instanceof ErrorEvent && event.message
+        ? `Failed to load texture from "${url}": ${event.message}`
+        : `Failed to load texture from "${url}"`;
+      reject(new Error(message,),);
+    };
+    img.src = url;
+  },);
 }
 async function resolveUniform(uniform, element,) {
   switch (uniform.type) {
@@ -49524,7 +49927,7 @@ async function resolveUniforms(uniforms, element,) {
 }
 function closeImageBitmaps(uniforms,) {
   for (const uniform of Object.values(uniforms,)) {
-    if (uniform.type === 'sampler2D') {
+    if (uniform.type === 'sampler2D' && uniform.value instanceof ImageBitmap) {
       uniform.value.close();
     }
   }
@@ -49642,6 +50045,7 @@ var ShaderSandboxFallbackImage = /* @__PURE__ */ memo2(function ShaderSandboxFal
         src: previousSrc,
         decoding: 'async',
         style: sandboxFallbackImageStyle,
+        draggable: false,
         alt: '',
       }, `prev-${previousSrc}`,),
       /* @__PURE__ */ jsx('div', {
@@ -49651,6 +50055,7 @@ var ShaderSandboxFallbackImage = /* @__PURE__ */ memo2(function ShaderSandboxFal
           src: displaySrc,
           style: sandboxFallbackImageStyle,
           decoding: 'async',
+          draggable: false,
           alt: '',
         },),
       }, displaySrc,),
@@ -49737,7 +50142,17 @@ function useOnDprChange(callback,) {
     };
   }, [callback,],);
 }
-function useShaderRenderState(poolSlot, isSelected, isMultiSelected, isIntersecting, mode, animated, fallbackImage, shouldReduceMotion,) {
+function useShaderRenderState(
+  poolSlot,
+  isSelected,
+  isMultiSelected,
+  isIntersecting,
+  mode,
+  animated,
+  fallbackImage,
+  shouldReduceMotion,
+  skipInitialFallback,
+) {
   let isFallbackOnly;
   let effectiveAnimated;
   let effectiveSingleFrame;
@@ -49765,6 +50180,10 @@ function useShaderRenderState(poolSlot, isSelected, isMultiSelected, isIntersect
   }, [contextLost, isSelected,],);
   if (contextLost) {
     isFallbackOnly = true;
+  }
+  const reducedMotionFallback = !!shouldReduceMotion && !!fallbackImage;
+  if (mode !== 'fallback' && skipInitialFallback && !contextLost && !reducedMotionFallback && isIntersecting) {
+    isFallbackOnly = false;
   }
   return {
     isFallbackOnly,
@@ -49944,6 +50363,7 @@ function ShaderCanvas({
   return /* @__PURE__ */ jsx('canvas', {
     ref: canvasRef,
     style: canvasStyle,
+    draggable: false,
   },);
 }
 var SHADER_PLAY_DELAY = 250;
@@ -49987,7 +50407,7 @@ var ShaderWithFallbackOverlay = /* @__PURE__ */ memo2(function ShaderWithFallbac
     };
   }, [isProgressive, isRevealDelayComplete, isShaderReady,],);
   const shouldHideCanvas = isFallbackShown && !isRevealDelayComplete;
-  const isWaitingForPlayback = isProgressive && !shouldPlay;
+  const isWaitingForPlayback = isProgressive && !shouldSkipInitialFallback && !shouldPlay;
   const effectiveSingleFrame = singleFrame2 || shouldHideCanvas || isWaitingForPlayback;
   const shouldShowFallback = hasFallbackImage && !shouldSkipInitialFallback && (!isRevealDelayComplete || !isShaderReady);
   return /* @__PURE__ */ jsxs(Fragment, {
@@ -50009,7 +50429,7 @@ var ShaderWithFallbackOverlay = /* @__PURE__ */ memo2(function ShaderWithFallbac
           onContextLost,
         },),
       },),
-      fallbackImage && /* @__PURE__ */ jsx('div', {
+      fallbackImage && !shouldSkipInitialFallback && /* @__PURE__ */ jsx('div', {
         style: {
           ...overlayStyle,
           opacity: shouldShowFallback ? 1 : 0,
@@ -50056,7 +50476,7 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
   mode = 'instant',
   fallbackImage,
   skipInitialFallback,
-  optimiseSwitching,
+  placeholder,
   style: style2,
   width,
   height,
@@ -50067,14 +50487,17 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
   onError,
   onReady,
   resolutionScale,
-  onFallbackDisplayChange,
   poolId,
   isSelected = false,
   isMultiSelected = false,
   ...rest
 }, ref,) {
   const observerRef = useObserverRef(ref,);
-  const [isIntersecting, setIsIntersecting,] = useState(false,);
+  const renderTargetEnvironment = useRenderTargetEnvironment();
+  const shouldSkipPreviewFallback = RenderTarget.current() === RenderTarget.preview && renderTargetEnvironment === 'preview';
+  const shouldSkipInitialFallback = Boolean(fallbackImage && (skipInitialFallback || shouldSkipPreviewFallback),);
+  const isOnCanvas = useIsOnFramerCanvas();
+  const [isIntersecting, setIsIntersecting,] = useState(shouldSkipInitialFallback,);
   const intersectionCallback = useCallback2((entry) => {
     startTransition2(() => setIsIntersecting(entry.isIntersecting,));
   }, [],);
@@ -50086,14 +50509,23 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
   const id3 = poolId ?? autoId;
   const poolSlot = useShaderPoolSlot(id3, isSelected, isIntersecting,);
   const shouldReduceMotion = useReducedMotionConfig();
-  const shouldSkipInitialFallback = Boolean(skipInitialFallback && fallbackImage,);
   const {
     isFallbackOnly,
     effectiveAnimated,
     effectiveSingleFrame,
     effectiveMode,
     onContextLost,
-  } = useShaderRenderState(poolSlot, isSelected, isMultiSelected, isIntersecting, mode, animated, fallbackImage, shouldReduceMotion,);
+  } = useShaderRenderState(
+    poolSlot,
+    isSelected,
+    isMultiSelected,
+    isIntersecting,
+    mode,
+    animated,
+    fallbackImage,
+    shouldReduceMotion,
+    shouldSkipInitialFallback,
+  );
   const [isShaderReady, setIsShaderReady,] = useState(false,);
   useLayoutEffect(() => {
     if (isFallbackOnly) startTransition2(() => setIsShaderReady(false,));
@@ -50102,7 +50534,6 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
     startTransition2(() => setIsShaderReady(true,));
     onReady?.();
   }, [onReady,],);
-  const hideFallback = !isFallbackOnly && (shouldSkipInitialFallback || isShaderReady);
   const shaderProps = {
     vertexShader,
     fragmentShader,
@@ -50111,48 +50542,74 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
     onError,
     onContextLost,
   };
-  return /* @__PURE__ */ jsx(FrameWithMotion2, {
-    ref: observerRef,
-    __fromCanvasComponent: true,
-    style: {
-      borderRadius: 'inherit',
-      ...style2,
-      overflow: 'hidden',
-    },
+  const containerFrameProps = {
+    style: style2,
     width,
     height,
     ...rest,
-    children: optimiseSwitching
-      ? /* @__PURE__ */ jsxs(Fragment, {
-        children: [
-          !isFallbackOnly && /* @__PURE__ */ jsx(ShaderWithFallbackOverlay, {
-            mode: effectiveMode,
-            skipInitialFallback: shouldSkipInitialFallback,
-            onReady: handleShaderReady,
-            ...shaderProps,
-            animated: effectiveAnimated,
-            singleFrame: effectiveSingleFrame,
-          },),
-          /* @__PURE__ */ jsx(ShaderSandboxFallbackImage, {
-            src: fallbackImage,
-            hidden: hideFallback,
-            onDisplaySrcChange: onFallbackDisplayChange,
-          },),
-        ],
-      },)
-      : isFallbackOnly
-      ? /* @__PURE__ */ jsx(ShaderFallbackImage, {
+  };
+  if (isOnCanvas) {
+    const hideFallback = !isFallbackOnly && (shouldSkipInitialFallback || isShaderReady);
+    return /* @__PURE__ */ jsxs(ShaderContainerFrame, {
+      ref: observerRef,
+      ...containerFrameProps,
+      children: [
+        !isFallbackOnly && /* @__PURE__ */ jsx(ShaderWithFallbackOverlay, {
+          mode: effectiveMode,
+          skipInitialFallback: shouldSkipInitialFallback,
+          onReady: handleShaderReady,
+          ...shaderProps,
+          animated: effectiveAnimated,
+          singleFrame: effectiveSingleFrame,
+        },),
+        /* @__PURE__ */ jsx(ShaderSandboxFallbackImage, {
+          src: fallbackImage,
+          hidden: hideFallback,
+        },),
+        isFallbackOnly && !fallbackImage && placeholder,
+      ],
+    },);
+  }
+  if (isFallbackOnly) {
+    return /* @__PURE__ */ jsx(ShaderContainerFrame, {
+      ref: observerRef,
+      ...containerFrameProps,
+      children: shouldSkipInitialFallback && !isIntersecting ? null : /* @__PURE__ */ jsx(ShaderFallbackImage, {
         src: fallbackImage,
-      },)
-      : /* @__PURE__ */ jsx(ShaderWithFallbackOverlay, {
-        mode: effectiveMode,
-        fallbackImage,
-        skipInitialFallback: shouldSkipInitialFallback,
-        onReady,
-        ...shaderProps,
-        animated: effectiveAnimated,
-        singleFrame: effectiveSingleFrame,
       },),
+    },);
+  }
+  return /* @__PURE__ */ jsx(ShaderContainerFrame, {
+    ref: observerRef,
+    ...containerFrameProps,
+    children: /* @__PURE__ */ jsx(ShaderWithFallbackOverlay, {
+      mode: effectiveMode,
+      fallbackImage,
+      skipInitialFallback: shouldSkipInitialFallback,
+      onReady,
+      ...shaderProps,
+      animated: effectiveAnimated,
+      singleFrame: effectiveSingleFrame,
+    },),
+  },);
+},);
+var ShaderContainerFrame = /* @__PURE__ */ forwardRef(function ShaderContainerFrame2({
+  children,
+  style: style2,
+  ...rest
+}, ref,) {
+  const styles4 = {
+    borderRadius: 'inherit',
+    cornerShape: 'inherit',
+    ...style2,
+    overflow: 'hidden',
+  };
+  return /* @__PURE__ */ jsx(FrameWithMotion2, {
+    ref,
+    __fromCanvasComponent: true,
+    style: styles4,
+    ...rest,
+    children,
   },);
 },);
 var keys2 = /* @__PURE__ */ new Set([
@@ -51762,11 +52219,11 @@ function getAssetOwnerType(asset,) {
 async function loadFontsWithOpenType(source,) {
   switch (source) {
     case 'google': {
-      const supportedFonts = await import('./framer-chunks/google-654GT66W-6S5WZWNS.js');
+      const supportedFonts = await import('./framer-chunks/google-R6BUSN2F-2FOYDAB4.js');
       return supportedFonts.default;
     }
     case 'fontshare': {
-      const supportedFonts = await import('./framer-chunks/fontshare-Q7VOJ3QT-LXRXXTSM.js');
+      const supportedFonts = await import('./framer-chunks/fontshare-LTYJMI6Q-XCFP3GWO.js');
       return supportedFonts.default;
     }
     default:
@@ -51776,15 +52233,15 @@ async function loadFontsWithOpenType(source,) {
 async function loadFontToOpenTypeFeatures(source,) {
   switch (source) {
     case 'google': {
-      const features = await import('./framer-chunks/google-HHQRBNOM-DLREIKWB.js');
+      const features = await import('./framer-chunks/google-YUHGDXQ4-5ORV5F75.js');
       return features.default;
     }
     case 'fontshare': {
-      const features = await import('./framer-chunks/fontshare-LJWOE5KG-36DNQHCT.js');
+      const features = await import('./framer-chunks/fontshare-XMKN2FOD-D5TWBHNT.js');
       return features.default;
     }
     case 'framer': {
-      const features = await import('./framer-chunks/framer-font-G73BNA7N-B3OPPZB7.js');
+      const features = await import('./framer-chunks/framer-font-D6RMCRV4-XCFIRDL6.js');
       return features.default;
     }
     default:
@@ -52328,10 +52785,10 @@ function loadVariationAxes(source,) {
       const axes = (async () => {
         switch (source) {
           case 'google': {
-            return (await import('./framer-chunks/google-MNOHFPXZ-52SQ3ETO.js')).default;
+            return (await import('./framer-chunks/google-UUNZTU2J-CVO5HK6V.js')).default;
           }
           case 'fontshare': {
-            return (await import('./framer-chunks/fontshare-MHXFPDHS-VQYPAYVC.js')).default;
+            return (await import('./framer-chunks/fontshare-X63NXWGB-NRPGYMPJ.js')).default;
           }
           default:
             assertNever(source,);
@@ -52448,6 +52905,10 @@ var FontStore = class {
       }
     }
     return this.getFontshareFontsListPromise;
+  }
+  /** Ensure Google, Fontshare, and BuiltIn font sources are all populated. Idempotent. */
+  async importAllWebFonts() {
+    await Promise.all([this.importGoogleFonts(), this.importFontshareFonts(), this.importBuiltInFonts(),],);
   }
   async importBuiltInFonts() {
     if (!this.getBuiltInFontsListPromise) {
@@ -54236,7 +54697,7 @@ function replaceFramerPageLinks(rawHTML, getRoute, currentRoute, implicitPathVar
     let relativePath = targetPath;
     const pathVariables = Object.assign({}, implicitPathVariables, pageLink.collectionItem?.pathVariables,);
     if (Object.keys(pathVariables,).length > 0) {
-      relativePath = relativePath.replace(pathVariablesRegExp2, (_, key7,) => '' + pathVariables[key7],);
+      relativePath = relativePath.replace(pathVariablesRegExp, (_, key7,) => '' + pathVariables[key7],);
     }
     if (pageLink.collectionItem?.pathVariables) {
       const params = new URLSearchParams(pageLink.collectionItem.pathVariables,);
@@ -57703,15 +58164,15 @@ var package_default = {
   author: 'Framer',
   license: 'MIT',
   scripts: {
-    coverage: 'jest --coverage',
-    lint: 'eslint ./src --ext .ts,.tsx --format gha-codeframe --quiet --cache',
+    coverage: 'yarn :jest --coverage',
+    lint: 'yarn :lint ./src --ext .ts,.tsx --format gha-codeframe --quiet --cache',
     'lint:ci': 'yarn lint --cache-strategy content --cache-location $HOME/.cache/eslint/framer-library',
     'lint:fix': 'yarn lint --fix',
-    test: 'jest',
-    watch: 'jest --watch',
+    test: 'yarn :jest',
+    watch: 'yarn :jest --watch',
   },
   dependencies: {
-    devalue: '^5.6.3',
+    devalue: '^5.6.4',
     eventemitter3: '^5.0.1',
     fontfaceobserver: '2.2.0',
     'hoist-non-react-statics': '^3.3.2',
@@ -57719,7 +58180,7 @@ var package_default = {
   },
   devDependencies: {
     '@juggle/resize-observer': '^3.4.0',
-    '@microsoft/api-extractor': '^7.55.2',
+    '@microsoft/api-extractor': '^7.57.7',
     '@testing-library/dom': '^8.19.1',
     '@testing-library/jest-dom': '^5.16.5',
     '@testing-library/react': '^13.4.0',
@@ -57728,18 +58189,14 @@ var package_default = {
     '@types/dom-navigation': '^1.0.6',
     '@types/fontfaceobserver': '2.1',
     '@types/google.fonts': '1.0',
-    '@types/node': '24.10.9',
+    '@types/node': '24.10.15',
     '@types/react': '18.2',
     '@types/react-dom': '18.2',
     '@types/yargs': '^17.0.33',
-    '@typescript-eslint/eslint-plugin': '^8.55.0',
-    '@typescript-eslint/parser': '^8.55.0',
     chalk: '^4.1.2',
-    eslint: '^8.57.1',
     'eslint-plugin-framer-studio': 'workspace:*',
-    'framer-motion': '12.34.3',
+    'framer-motion': '12.38.0',
     immutable: '^3.8.3',
-    jest: '29.4.1',
     'jest-diff': '^29.3.1',
     'jest-environment-jsdom': '^29.3.1',
     'jest-environment-jsdom-global': '^4.0.0',
@@ -57767,7 +58224,7 @@ if (false) {
 }
 export {
   _injectRuntime,
-  acceleratedValues2 as acceleratedValues,
+  acceleratedValues,
   activeAnimations,
   addActionControls,
   addAttrValue,
@@ -57886,6 +58343,7 @@ export {
   copyBoxInto,
   correctBorderRadius,
   correctBoxShadow,
+  correctParentTransform,
   createAnimationState,
   createAxis,
   createAxisDelta,
@@ -58000,7 +58458,7 @@ export {
   getDevicePreset,
   getEasingForSegment,
   getFeatureDefinitions,
-  getFinalKeyframe2 as getFinalKeyframe,
+  getFinalKeyframe,
   getFonts,
   getFontsFromComponentPreset,
   getFontsFromSharedStyle,
@@ -58286,6 +58744,7 @@ export {
   supportsLinearEasing,
   supportsPartialKeyframes,
   supportsScrollTimeline,
+  supportsViewTimeline,
   SVG2 as SVG,
   svgEffect,
   SVGVisualElement,
