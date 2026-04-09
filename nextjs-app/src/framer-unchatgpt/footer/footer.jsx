@@ -5,36 +5,27 @@
 
 /**
  * @typedef Locale
- * A string that represents the locale.
+ * string
  */
 
 /**
- * @typedef Props
- * @property {React.ReactNode} [children] - The children components.
- * @property {Locale} [locale] - The active locale.
- * @property {React.CSSProperties} [style] - The component styles.
- * @property {string} [className] - Additional class names for the component.
- * @property {string} [id] - The component id.
- * @property {*} [width] - The component width.
- * @property {*} [height] - The component height.
- * @property {string} [layoutId] - The layout id.
- * @property {'Desktop' | 'Tablet' | 'Mobile'} [variant] - The component responsive variant; values: Desktop | Tablet | Mobile.
- * @property {'Desktop' | 'Tablet' | 'Mobile'} [variant] - Variant
- * @property {string} [ctaLink] - ctaLink
- */
+ * @typedef {{
+ * children?: React.ReactNode
+ * locale?: Locale
+ * style?: React.CSSProperties
+ * className?: string
+ * id?: string
+ * ref?: any
+ * width?: any
+ * height?: any
+ * layoutId?: string
+ * variant?: 'Desktop' | 'Tablet' | 'Mobile' // Variant
+ * ctaLink?: string // ctaLink
+}} Props
 
-/**
- * @type {import("unframer").UnframerBreakpoint}
- * Represents a responsive breakpoint for unframer.
  */
-
-/**
- * @typedef VariantsMap
- * Partial record of UnframerBreakpoint to Props.variant, with a mandatory 'base' key.
- * { [key in UnframerBreakpoint]?: Props['variant'] } & { base: Props['variant'] }
- */
-import { stdin_default as stdin_default2 } from "../chunks/chunk-M3BGVEJT.js";
-import { stdin_default } from "../chunks/chunk-YULLDWG7.js";
+import { stdin_default as stdin_default2 } from "../chunks/chunk-RBTW6WNO.js";
+import { stdin_default } from "../chunks/chunk-U2NNNZP4.js";
 import { routes } from "../chunks/chunk-LIZP5ZTP.js";
 
 // virtual:footer/footer
@@ -1021,13 +1012,23 @@ function ComponentWithRoot({ locale, ...rest }) {
 	);
 }
 /**
+ * @type {import("unframer").UnframerBreakpoint}
+ * Represents a responsive breakpoint for unframer.
+ */
+
+/**
+ * @typedef VariantsMap
+ * Partial record of UnframerBreakpoint to Props.variant, with a mandatory 'base' key.
+ * { [key in UnframerBreakpoint]?: Props['variant'] } & { base: Props['variant'] }
+ */
+
+/**
  * Renders FooterFramerComponent for all breakpoints with a variants map. Variant prop is inferred per breakpoint.
  * @function
- * @memberof FooterFramerComponent
  * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props
  * @returns {any}
  */
-ComponentWithRoot.Responsive = ({ locale, ...rest }) => {
+ComponentWithRoot.Responsive = ({ locale = "", ...rest }) => {
 	return (
 		<ContextProviders
 			routes={routes}

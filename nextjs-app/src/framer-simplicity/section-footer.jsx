@@ -23,18 +23,18 @@
 }} Props
 
  */
-import { stdin_default } from "./chunks/chunk-WTNHL2WX.js";
+import { stdin_default } from "./chunks/chunk-YELWKYT7.js";
 import {
 	className as className3,
 	css as css3,
 	fonts as fonts3,
-} from "./chunks/chunk-QYC47C72.js";
-import { className, css, fonts } from "./chunks/chunk-BEKPESE7.js";
+} from "./chunks/chunk-DNZJ42O2.js";
+import { className, css, fonts } from "./chunks/chunk-WMEDQ6XE.js";
 import {
 	className as className2,
 	css as css2,
 	fonts as fonts2,
-} from "./chunks/chunk-ZKAXZ4P5.js";
+} from "./chunks/chunk-NVMKRQF2.js";
 import { routes } from "./chunks/chunk-HEB6EHGG.js";
 
 // virtual:section-footer
@@ -79,6 +79,7 @@ import {
 	useTracking,
 } from "unframer";
 import { motion, useAnimationControls } from "unframer";
+var __unframerWindow = typeof window !== "undefined" ? window : void 0;
 var emailRegex =
 	/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 var mailchimpRegex = /^https?:\/\/([^\/]+)[^\?]+\??(.+)$/;
@@ -186,7 +187,8 @@ var Input = withCSS(
 				}
 				if (!isInternalURL(link)) {
 					const url = safeURL(link);
-					if (url && typeof window !== "undefined") window.open(url, "_blank");
+					if (url && typeof __unframerWindow !== "undefined")
+						__unframerWindow.open(url, "_blank");
 				}
 			}
 		};

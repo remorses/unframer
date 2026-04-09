@@ -24,7 +24,7 @@
 }} Props
 
  */
-import { stdin_default } from "../chunks/chunk-U2BTSRYM.js";
+import { stdin_default } from "../chunks/chunk-VRCRMMMM.js";
 import { routes } from "../chunks/chunk-HEB6EHGG.js";
 
 // virtual:elements/badge

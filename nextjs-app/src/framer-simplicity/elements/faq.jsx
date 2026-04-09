@@ -35,8 +35,8 @@
 }} Props
 
  */
-import { stdin_default } from "../chunks/chunk-3VABVIZ6.js";
-import "../chunks/chunk-ZKAXZ4P5.js";
+import { stdin_default } from "../chunks/chunk-LRVBY44O.js";
+import "../chunks/chunk-NVMKRQF2.js";
 import { routes } from "../chunks/chunk-HEB6EHGG.js";
 
 // virtual:elements/faq

@@ -24,7 +24,7 @@
 }} Props
 
  */
-import { stdin_default } from "../chunks/chunk-ZMLBQSGK.js";
+import { stdin_default } from "../chunks/chunk-M43YOBTD.js";
 import { routes } from "../chunks/chunk-HEB6EHGG.js";
 
 // virtual:navigation/hamburger

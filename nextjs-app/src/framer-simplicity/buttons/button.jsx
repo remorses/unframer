@@ -37,8 +37,8 @@
 }} Props
 
  */
-import { stdin_default } from "../chunks/chunk-D4IPCJGN.js";
-import "../chunks/chunk-BTSBQWPZ.js";
+import { stdin_default } from "../chunks/chunk-RHHS6YDG.js";
+import "../chunks/chunk-NI3BWCIH.js";
 import { routes } from "../chunks/chunk-HEB6EHGG.js";
 
 // virtual:buttons/button

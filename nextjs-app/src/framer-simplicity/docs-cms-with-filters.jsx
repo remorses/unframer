@@ -3467,7 +3467,7 @@ var t10 = (t22, e22) => async () => {
 	let r22 = await t22();
 	return r22[e22];
 };
-var e2 = () => import("./chunks/wUEEgftCv-2-NHT2AYVO.js");
+var e2 = () => import("./chunks/wUEEgftCv-2-VCGU56TC.js");
 var r2 = [t10(e2, "richText"), t10(e2, "richText1")];
 async function resolveRichText(t22) {
 	let e22 = r2[t22];

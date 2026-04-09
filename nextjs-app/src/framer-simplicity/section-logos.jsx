@@ -23,8 +23,8 @@
 }} Props
 
  */
-import { Ticker } from "./chunks/chunk-DUXOTEEB.js";
-import { className, css, fonts } from "./chunks/chunk-ZKAXZ4P5.js";
+import { Ticker } from "./chunks/chunk-UR4KJL6X.js";
+import { className, css, fonts } from "./chunks/chunk-NVMKRQF2.js";
 import { routes } from "./chunks/chunk-HEB6EHGG.js";
 
 // virtual:section-logos

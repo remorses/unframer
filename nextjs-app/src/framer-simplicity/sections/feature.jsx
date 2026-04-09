@@ -26,9 +26,9 @@
 }} Props
 
  */
-import { stdin_default } from "../chunks/chunk-KEXPIFJ3.js";
-import "../chunks/chunk-PSINJK7R.js";
-import "../chunks/chunk-ZKAXZ4P5.js";
+import { stdin_default } from "../chunks/chunk-GZWUXSMG.js";
+import "../chunks/chunk-6T2VRI6T.js";
+import "../chunks/chunk-NVMKRQF2.js";
 import { routes } from "../chunks/chunk-HEB6EHGG.js";
 
 // virtual:sections/feature
@@ -69,7 +69,7 @@ function ComponentWithRoot({ locale, ...rest }) {
  */
 
 /**
- * Renders FeatureFramerComponent for all breakpoints with a variants map. Variant prop is inferred per breakpoint.
+ * Renders SectionsFeatureFramerComponent for all breakpoints with a variants map. Variant prop is inferred per breakpoint.
  * @function
  * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props
  * @returns {any}

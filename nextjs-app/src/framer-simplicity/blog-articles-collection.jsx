@@ -3136,7 +3136,7 @@ var t10 = (t23, e22) => async () => {
 	let r22 = await t23();
 	return r22[e22];
 };
-var e2 = () => import("./chunks/pRkZD_P47-2-PCEJG23U.js");
+var e2 = () => import("./chunks/pRkZD_P47-2-FV3FH5YP.js");
 var r2 = [
 	t10(e2, "richText"),
 	t10(e2, "richText1"),

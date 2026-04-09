@@ -23,7 +23,7 @@
 }} Props
 
  */
-import { stdin_default } from "../chunks/chunk-BPH5BCDR.js";
+import { stdin_default } from "../chunks/chunk-VCVOI65W.js";
 import { routes } from "../chunks/chunk-HEB6EHGG.js";
 
 // virtual:sections/features-animation

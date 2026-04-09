@@ -5,32 +5,23 @@
 
 /**
  * @typedef Locale
- * A string that represents the locale.
+ * string
  */
 
 /**
- * @typedef Props
- * @property {React.ReactNode} [children] - The children components.
- * @property {Locale} [locale] - The active locale.
- * @property {React.CSSProperties} [style] - The component styles.
- * @property {string} [className] - Additional class names for the component.
- * @property {string} [id] - The component id.
- * @property {*} [width] - The component width.
- * @property {*} [height] - The component height.
- * @property {string} [layoutId] - The layout id.
- * @property {'Desktop' | 'Tablet' | 'Phone'} [variant] - The component responsive variant; values: Desktop | Tablet | Phone.
- * @property {'Desktop' | 'Tablet' | 'Phone'} [variant] - Variant
- */
+ * @typedef {{
+ * children?: React.ReactNode
+ * locale?: Locale
+ * style?: React.CSSProperties
+ * className?: string
+ * id?: string
+ * ref?: any
+ * width?: any
+ * height?: any
+ * layoutId?: string
+ * variant?: 'Desktop' | 'Tablet' | 'Phone' // Variant
+}} Props
 
-/**
- * @type {import("unframer").UnframerBreakpoint}
- * Represents a responsive breakpoint for unframer.
- */
-
-/**
- * @typedef VariantsMap
- * Partial record of UnframerBreakpoint to Props.variant, with a mandatory 'base' key.
- * { [key in UnframerBreakpoint]?: Props['variant'] } & { base: Props['variant'] }
  */
 import { routes } from "./chunks/chunk-LIZP5ZTP.js";
 
@@ -222,7 +213,7 @@ var paddingControl = {
 	},
 };
 
-// /:https://framer.com/m/framer/useAutoMotionValue.js@0.3.0
+// /:https://framerusercontent.com/modules/kNDwabfjDEb3vUxkQlZS/V4SPg9g59hF1vFH3ZTF0/useAutoMotionValue.js
 import {
 	useCallback as useCallback2,
 	useEffect as useEffect7,
@@ -238,7 +229,7 @@ import {
 import { MotionValue as MotionValue2 } from "unframer";
 var isMotionValue2 = (v) => v instanceof MotionValue2;
 
-// /:https://framer.com/m/framer/useAutoMotionValue.js@0.3.0
+// /:https://framerusercontent.com/modules/kNDwabfjDEb3vUxkQlZS/V4SPg9g59hF1vFH3ZTF0/useAutoMotionValue.js
 function useAutoMotionValue2(inputValue, options) {
 	const optionsRef = useRef3(options);
 	const animation = useRef3();
@@ -302,7 +293,9 @@ function useAutoMotionValue2(inputValue, options) {
 }
 
 // /:https://jspm.dev/npm:lottie-web@5.7.8!cjs
-var __unframerNavigator = typeof window !== "undefined" ? navigator : void 0;
+var __unframerWindow = typeof window !== "undefined" ? window : void 0;
+var __unframerNavigator =
+	typeof __unframerWindow !== "undefined" ? navigator : void 0;
 var _global =
 	typeof globalThis !== "undefined"
 		? globalThis
@@ -318,7 +311,7 @@ typeof __unframerNavigator !== "undefined" &&
 			root.lottie = factory(root);
 			root.bodymovin = root.lottie;
 		}
-	})(window || {}, function (window) {
+	})(__unframerWindow || {}, function (window) {
 		"use strict";
 
 		var svgNS = "http://www.w3.org/2000/svg";
@@ -21578,13 +21571,23 @@ function ComponentWithRoot({ locale, ...rest }) {
 	);
 }
 /**
+ * @type {import("unframer").UnframerBreakpoint}
+ * Represents a responsive breakpoint for unframer.
+ */
+
+/**
+ * @typedef VariantsMap
+ * Partial record of UnframerBreakpoint to Props.variant, with a mandatory 'base' key.
+ * { [key in UnframerBreakpoint]?: Props['variant'] } & { base: Props['variant'] }
+ */
+
+/**
  * Renders SectionHowItWorksFramerComponent for all breakpoints with a variants map. Variant prop is inferred per breakpoint.
  * @function
- * @memberof SectionHowItWorksFramerComponent
  * @param {Omit<Props, 'variant'> & {variants?: VariantsMap}} props
  * @returns {any}
  */
-ComponentWithRoot.Responsive = ({ locale, ...rest }) => {
+ComponentWithRoot.Responsive = ({ locale = "", ...rest }) => {
 	return (
 		<ContextProviders
 			routes={routes}

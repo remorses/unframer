@@ -23,14 +23,14 @@
 }} Props
 
  */
-import { Icon } from "./chunks/chunk-BTSBQWPZ.js";
+import { Icon } from "./chunks/chunk-NI3BWCIH.js";
 import {
 	className as className2,
 	css as css2,
 	fonts as fonts2,
-} from "./chunks/chunk-PSINJK7R.js";
-import { Ticker } from "./chunks/chunk-DUXOTEEB.js";
-import { className, css, fonts } from "./chunks/chunk-ZKAXZ4P5.js";
+} from "./chunks/chunk-6T2VRI6T.js";
+import { Ticker } from "./chunks/chunk-UR4KJL6X.js";
+import { className, css, fonts } from "./chunks/chunk-NVMKRQF2.js";
 import { routes } from "./chunks/chunk-HEB6EHGG.js";
 
 // virtual:section-large-testimonial
