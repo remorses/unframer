@@ -14,10 +14,10 @@
         "@types/react": "^19.2.7",
         "@types/react-dom": "^19.2.3",
         "astro": "^5.1.10",
-        "nextjs-app": "workspace:*",
+        "nextjs-app": "workspace:^",
         "react": "^19.2.3",
         "react-dom": "^19.2.3",
         "tailwindcss": "^3.4.17",
-        "unframer": "workspace:*"
+        "unframer": "workspace:^"
     }
 }

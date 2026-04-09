@@ -1,5 +1,14 @@
 # unframer
 
+## 4.1.6
+
+1. **Fixed duplicate import identifiers in generated example code** — projects that contain components with the same leaf name in different folders no longer produce invalid sample apps with redeclared imports. `unframer` now only folds parent folders into the generated identifier when a collision actually exists, so stable names stay unchanged for non-conflicting components.
+
+   ```bash
+   import CardWorkCardFramerComponent from './src/framer/card/work-card'
+   import CardsWorkCardFramerComponent from './src/framer/cards/work-card'
+   ```
+
 ## 4.1.5
 
 1. **Fixed crash when esm.sh returns a relative redirect URL** — packages like `ogl` that redirect to a relative path (e.g. `/ogl@1.0.11/src/index.js`) no longer cause `TypeError: Failed to parse URL`. The redirect is now resolved against the original request URL before following.

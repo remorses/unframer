@@ -20,7 +20,7 @@
     },
     "pnpm": {
         "overrides": {
-            "unframer": "workspace:*"
+            "unframer": "workspace:^"
         }
     },
     "repository": "https://github.com/remorses/",
