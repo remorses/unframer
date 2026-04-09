@@ -9,6 +9,8 @@
    import CardsWorkCardFramerComponent from './src/framer/cards/work-card'
    ```
 
+2. **Updated bundled Framer runtime** — refreshed the packaged Framer internals to the latest `framer@2.4.1` and `framer-motion` assets, including the newest bundled Google font metadata used during component exports.
+
 ## 4.1.5
 
 1. **Fixed crash when esm.sh returns a relative redirect URL** — packages like `ogl` that redirect to a relative path (e.g. `/ogl@1.0.11/src/index.js`) no longer cause `TypeError: Failed to parse URL`. The redirect is now resolved against the original request URL before following.
