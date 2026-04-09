@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest'
-import { configFromFetch } from './cli.js'
+import { configFromFetch, type Config } from './cli.js'
 import { createExampleComponentCode } from './exporter.js'
 
 describe(
@@ -72,6 +72,57 @@ describe(
                 );
               };"
             `)
+        })
+
+        test('should only disambiguate duplicate import names', async () => {
+            const config: Config = {
+                components: {
+                    'card/work-card': 'https://example.com/card',
+                    'cards/work-card': 'https://example.com/cards',
+                    'shared/nav/framer-nav': 'https://example.com/nav',
+                },
+                componentInstancesInIndexPage: [
+                    {
+                        componentId: '1',
+                        componentPathSlug: 'card/work-card',
+                        controls: {},
+                        nodeDepth: 0,
+                        pageOrdering: 0,
+                        webPageId: 'home',
+                    },
+                    {
+                        componentId: '2',
+                        componentPathSlug: 'cards/work-card',
+                        controls: {},
+                        nodeDepth: 0,
+                        pageOrdering: 1,
+                        webPageId: 'home',
+                    },
+                    {
+                        componentId: '3',
+                        componentPathSlug: 'shared/nav/framer-nav',
+                        controls: {},
+                        nodeDepth: 0,
+                        pageOrdering: 2,
+                        webPageId: 'home',
+                    },
+                ],
+            }
+
+            const { exampleCode } = await createExampleComponentCode({
+                config,
+                outDir: 'src',
+            })
+
+            expect(exampleCode).toContain(
+                "import CardWorkCardFramerComponent from './src/card/work-card'",
+            )
+            expect(exampleCode).toContain(
+                "import CardsWorkCardFramerComponent from './src/cards/work-card'",
+            )
+            expect(exampleCode).toContain(
+                "import FramerNavFramerComponent from './src/shared/nav/framer-nav'",
+            )
         })
     },
     1000 * 10,

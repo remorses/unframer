@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 import { extractTokenInfo, findRelativeLinks } from './exporter.js'
-import { componentCamelCase } from './typescript.js'
+import { componentCamelCase, componentImportedName } from './typescript.js'
 
 import { componentNameToPath } from './utils.js'
 
@@ -33,7 +33,7 @@ test('componentCamelCase', () => {
         `"FramerNavFramerComponent"`,
     )
     expect(componentCamelCase('shared/nav/framer-nav')).toMatchInlineSnapshot(
-        `"SharedNavFramerNavFramerComponent"`,
+        `"FramerNavFramerComponent"`,
     )
     // Test cases with spaces and special characters
     expect(componentCamelCase('hero section')).toMatchInlineSnapshot(
@@ -54,13 +54,29 @@ test('componentCamelCase', () => {
     expect(componentCamelCase('  multiple   spaces  ')).toMatchInlineSnapshot(
         `"MultipleSpacesFramerComponent"`,
     )
-    // Collision case: card/work-card and cards/work-card should produce different identifiers
-    expect(componentCamelCase('card/work-card')).toMatchInlineSnapshot(
-        `"CardWorkCardFramerComponent"`,
-    )
-    expect(componentCamelCase('cards/work-card')).toMatchInlineSnapshot(
-        `"CardsWorkCardFramerComponent"`,
-    )
+})
+
+test('componentImportedName only adds parents for duplicates', () => {
+    const duplicateLeafNames = new Set(['work-card'])
+
+    expect(
+        componentImportedName({
+            componentPath: 'card/work-card',
+            duplicateLeafNames,
+        }),
+    ).toMatchInlineSnapshot(`"CardWorkCardFramerComponent"`)
+    expect(
+        componentImportedName({
+            componentPath: 'cards/work-card',
+            duplicateLeafNames,
+        }),
+    ).toMatchInlineSnapshot(`"CardsWorkCardFramerComponent"`)
+    expect(
+        componentImportedName({
+            componentPath: 'shared/nav/framer-nav',
+            duplicateLeafNames,
+        }),
+    ).toMatchInlineSnapshot(`"FramerNavFramerComponent"`)
 })
 test('findRelativeLinks', () => {
     expect(

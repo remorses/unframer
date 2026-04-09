@@ -34,7 +34,7 @@ import {
 } from './css.js'
 import {
     propControlsToTypedocComments,
-    componentCamelCase,
+    componentImportedName,
 } from './typescript.js'
 import {
     defaultExternalPackages,
@@ -62,6 +62,33 @@ import { version as currentUnframerVersion } from './version.js'
 import { Biome, Distribution } from '@biomejs/js-api'
 
 let biome: Biome
+
+function createComponentImportedNameResolver(componentPaths: string[]) {
+    const leafNameCounts = componentPaths.reduce((acc, componentPath) => {
+        const leafName = componentPath.split('/').filter(Boolean).pop() || ''
+        if (!leafName) {
+            return acc
+        }
+        acc.set(leafName, (acc.get(leafName) || 0) + 1)
+        return acc
+    }, new Map<string, number>())
+    const duplicateLeafNames = new Set(
+        [...leafNameCounts.entries()]
+            .filter(([, count]) => {
+                return count > 1
+            })
+            .map(([leafName]) => {
+                return leafName
+            }),
+    )
+
+    return (componentPath: string) => {
+        return componentImportedName({
+            componentPath,
+            duplicateLeafNames,
+        })
+    }
+}
 
 export type StyleToken = {
     id: string
@@ -100,6 +127,9 @@ export async function bundle({
     metafile?: boolean
 }) {
     const { components, breakpoints, tokens, framerWebPages } = config
+    const getImportedName = createComponentImportedNameResolver(
+        Object.keys(components),
+    )
     out ||= path.resolve(process.cwd(), 'example')
     out = path.resolve(out)
     try {
@@ -480,7 +510,7 @@ export async function bundle({
                             fileName: path.basename(file.path),
                         })),
                     )
-                    const componentImportedName = componentCamelCase(name)
+                    const componentImportedName = getImportedName(name)
                     const typedocComments = propControlsToTypedocComments({
                         propertyControls: propertyControls!,
                         logger,
@@ -604,7 +634,7 @@ export async function bundle({
                     componentPathSlug: name,
                     url: v,
                     name,
-                    componentName: componentCamelCase(name),
+                        componentName: getImportedName(name),
                     propertyControls: propControls?.propertyControls,
                 }
             }),
@@ -1273,6 +1303,9 @@ export async function createExampleComponentCode({
         // Order first by nodeDepth (lower is better)
         return a.nodeDepth - b.nodeDepth || a.pageOrdering - b.pageOrdering
     })
+    const getImportedName = createComponentImportedNameResolver(
+        Object.keys(config.components || {}),
+    )
 
     // If no instances, use components directly
     if (!instances?.length) {
@@ -1283,11 +1316,11 @@ export async function createExampleComponentCode({
 
         // Generate simple example with all available components
         const imports = componentNames.map((name) => {
-            return `import ${componentCamelCase(name)} from './${outDirForExample}/${name}'`
+            return `import ${getImportedName(name)} from './${outDirForExample}/${name}'`
         })
 
         const jsx = componentNames.map((name) => {
-            return `<${componentCamelCase(name)}.Responsive />`
+            return `<${getImportedName(name)}.Responsive />`
         })
 
         let containerClasses = ''
@@ -1317,7 +1350,7 @@ export async function createExampleComponentCode({
     }
 
     const imports = instances?.map((exampleComponent) => {
-        return `import ${componentCamelCase(exampleComponent?.componentPathSlug)} from './${outDirForExample}/${
+        return `import ${getImportedName(exampleComponent?.componentPathSlug)} from './${outDirForExample}/${
             exampleComponent?.componentPathSlug
         }'`
     })
@@ -1338,7 +1371,7 @@ export async function createExampleComponentCode({
             propStr += `  ${key}={${JSON.stringify(value)}}`
         }
         if (propStr) propStr += '\n'
-        const responsiveComponent = `<${componentCamelCase(exampleComponent?.componentPathSlug)}.Responsive${propStr}/>`
+        const responsiveComponent = `<${getImportedName(exampleComponent?.componentPathSlug)}.Responsive${propStr}/>`
         return responsiveComponent
     })
     if (!jsx.join().trim()) return { outDirForExample, exampleCode: '' }

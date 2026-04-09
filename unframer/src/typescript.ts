@@ -6,15 +6,56 @@ export function componentCamelCase(str: string) {
     if (!str) {
         return 'FramerComponent'
     }
-    // Use all path segments to avoid collisions like card/work-card vs cards/work-card
-    const segments = str.split('/').filter(Boolean)
+    // Use the leaf component name by default so generated imports stay stable.
+    str = str.split('/').filter(Boolean).pop() || ''
 
-    // Replace all non-alphanumeric characters with space in each segment
+    // Replace all non-alphanumeric characters with space
     // This handles spaces, special chars, underscores, hyphens, etc.
-    const words = segments
-        .flatMap((segment) =>
-            segment.replace(/[^a-zA-Z0-9]+/g, ' ').trim().split(/\s+/).filter(Boolean),
-        )
+    const words = str.replace(/[^a-zA-Z0-9]+/g, ' ').trim().split(/\s+/).filter(Boolean)
+    if (words.length === 0) {
+        return 'FramerComponent'
+    }
+
+    str = words
+        .map((word, index) => {
+            if (index === 0) {
+                return word[0].toUpperCase() + word.slice(1)
+            }
+            return word[0].toUpperCase() + word.slice(1)
+        })
+        .join('')
+
+    // If component name starts with a number, add prefix 'Framer'
+    if (/^[0-9]/.test(str)) {
+        str = 'Framer' + str
+    }
+
+    str = str + 'FramerComponent'
+    return str
+}
+
+export function componentImportedName({
+    componentPath,
+    duplicateLeafNames,
+}: {
+    componentPath: string
+    duplicateLeafNames: ReadonlySet<string>
+}) {
+    const normalizedPath = componentPath?.replace(/\.jsx?$/, '') || ''
+    const pathSegments = normalizedPath.split('/').filter(Boolean)
+    const leafName = pathSegments[pathSegments.length - 1] || ''
+    if (!duplicateLeafNames.has(leafName)) {
+        return componentCamelCase(normalizedPath)
+    }
+
+    const words = pathSegments
+        .flatMap((segment) => {
+            return segment
+                .replace(/[^a-zA-Z0-9]+/g, ' ')
+                .trim()
+                .split(/\s+/)
+                .filter(Boolean)
+        })
     if (words.length === 0) {
         return 'FramerComponent'
     }
@@ -24,14 +65,10 @@ export function componentCamelCase(str: string) {
             return word[0].toUpperCase() + word.slice(1)
         })
         .join('')
-
-    // If component name starts with a number, add prefix 'Framer'
     if (/^[0-9]/.test(result)) {
         result = 'Framer' + result
     }
-
-    result = result + 'FramerComponent'
-    return result
+    return result + 'FramerComponent'
 }
 
 /**
