@@ -12683,7 +12683,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.DLJWK7BN.mjs
+// /:https://app.framerstatic.com/framer.EQO22L3O.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -27852,7 +27852,6 @@ function useStyleAndRect(props,) {
     if (!isRenderingStaticContent || runtime.isOnPageCanvas || inCodeComponent) {
       resultStyle.position = 'sticky';
       resultStyle.willChange = 'transform';
-      resultStyle.zIndex = 1;
       resultStyle.top = props.positionStickyTop;
       resultStyle.right = props.positionStickyRight;
       resultStyle.bottom = props.positionStickyBottom;
@@ -32159,6 +32158,21 @@ function getPoint(x, y,) {
     y: y.get(),
   };
 }
+function parseNumberRounded(value, precision = 2,) {
+  let number2 = 0;
+  if (typeof value === 'number') {
+    number2 = value;
+  } else if (typeof value === 'string') {
+    number2 = parseFloat(value,);
+  } else {
+    return void 0;
+  }
+  if (Number.isInteger(number2,)) return number2;
+  let multiplier = 1;
+  while (precision-- > 0) multiplier *= 10;
+  if (number2 < 0) multiplier *= -1;
+  return Math.round(number2 * multiplier,) / multiplier;
+}
 function hasPaddingPerSide(props,) {
   const {
     paddingPerSide,
@@ -32203,6 +32217,49 @@ function makePaddingString({
     return `${top}px`;
   }
   return `${top}px ${right}px ${bottom}px ${left}px`;
+}
+function parsePaddingString(padding,) {
+  if (padding === 'none') return null;
+  const parts = padding.trim().split(/\s+/,).map((v) => parseNumberRounded(v,));
+  const [part1, part2, part3, part4,] = parts;
+  switch (parts.length) {
+    case 1:
+      if (!isFiniteNumber(part1,)) return null;
+      return {
+        top: part1,
+        right: part1,
+        bottom: part1,
+        left: part1,
+      };
+    case 2:
+      if (!isFiniteNumber(part1,) || !isFiniteNumber(part2,)) return null;
+      return {
+        top: part1,
+        right: part2,
+        bottom: part1,
+        left: part2,
+      };
+    case 3:
+      if (!isFiniteNumber(part1,) || !isFiniteNumber(part2,) || !isFiniteNumber(part3,)) return null;
+      return {
+        top: part1,
+        right: part2,
+        bottom: part3,
+        left: part2,
+      };
+    case 4:
+      if (!isFiniteNumber(part1,) || !isFiniteNumber(part2,) || !isFiniteNumber(part3,) || !isFiniteNumber(part4,)) {
+        return null;
+      }
+      return {
+        top: part1,
+        right: part2,
+        bottom: part3,
+        left: part4,
+      };
+    default:
+      return null;
+  }
 }
 var Stack = /* @__PURE__ */ (() => {
   const StackInner = React42.forwardRef(function StackInner2(stackProps, forwardedRef,) {
@@ -49708,6 +49765,9 @@ function toUniformName(key7,) {
 function toArrayLengthName(uniformName,) {
   return `${uniformName}_length`;
 }
+function toHeightmapUniformName(key7,) {
+  return `${uniformPrefix}${key7}_heightmap`;
+}
 function toArrayMaxLengthName(key7,) {
   const keyAsConstantCase = key7.replace(/[a-z0-9](?=[A-Z])/g, '$&_',).toUpperCase();
   return `NUM_${keyAsConstantCase}`;
@@ -49716,7 +49776,7 @@ var glslVersionDirective = '#version 300 es';
 var glslPrecisionDirective = 'precision highp float;';
 var glslUVInput = 'in vec2 v_uv;';
 var glslFragColorOutput = 'out vec4 fragColor;';
-function generateShaderHead(propertyControls,) {
+function generateShaderHead(propertyControls, heightmapSource,) {
   const lines = [glslVersionDirective, glslPrecisionDirective, '', glslUVInput, glslFragColorOutput,];
   const values = propertyControls ? Object.values(propertyControls,) : [];
   if (values.length > 0) {
@@ -49750,6 +49810,9 @@ function generateShaderHead(propertyControls,) {
       }
     }
   }
+  if (heightmapSource) {
+    lines.push(`uniform sampler2D ${toHeightmapUniformName(heightmapSource,)};`,);
+  }
   lines.push('',);
   for (const uniform of Object.values(builtInUniforms,)) {
     lines.push(`uniform ${uniform.glslType} ${uniform.name};`,);
@@ -49757,15 +49820,21 @@ function generateShaderHead(propertyControls,) {
   lines.push('',);
   return lines.join('\n',);
 }
-function prepareFragmentShader(fragment, propertyControls,) {
-  return generateShaderHead(propertyControls,) + fragment;
+function prepareFragmentShader(fragment, propertyControls, heightmapSource,) {
+  return generateShaderHead(propertyControls, heightmapSource,) + fragment;
 }
 var shaderConfigBrand = '__framer_shaderConfig__';
 function isShaderConfig(obj,) {
   return isObject2(obj,) && shaderConfigBrand in obj;
 }
 function defineShader(shaderConfig,) {
-  const preparedFragment = prepareFragmentShader(shaderConfig.fragment, shaderConfig.propertyControls,);
+  if (shaderConfig.heightmapSource) {
+    const control = shaderConfig.propertyControls?.[shaderConfig.heightmapSource];
+    if (!control || control.type !== 'responsiveimage') {
+      throw new Error(`heightmapSource "${shaderConfig.heightmapSource}" must reference a ResponsiveImage property control.`,);
+    }
+  }
+  const preparedFragment = prepareFragmentShader(shaderConfig.fragment, shaderConfig.propertyControls, shaderConfig.heightmapSource,);
   return {
     ...shaderConfig,
     fragment: preparedFragment,
@@ -49834,6 +49903,154 @@ function parseCSSVariable2(token,) {
   const range = parseCSSVarRange(token,);
   return tokenFromVarRange(token, range,);
 }
+var scaledDownWorkingResolution = 1024;
+var maxCacheEntries = 20;
+var heightmapCache = /* @__PURE__ */ new Map();
+function generateHeightmap(image, getCacheKey2,) {
+  if (!isHeightMapSupportedTexImageSource(image,)) return;
+  const cacheKey = getCacheKey2?.();
+  if (cacheKey) {
+    const cached = heightmapCache.get(cacheKey,);
+    if (cached) return cached;
+  }
+  const info = getImageInfo(image,);
+  if (!info) return void 0;
+  let scale2 = scaledDownWorkingResolution / Math.min(info.width, info.height,);
+  const maxPixelCount = scaledDownWorkingResolution * scaledDownWorkingResolution;
+  const uncappedPixels = info.width * scale2 * (info.height * scale2);
+  if (uncappedPixels > maxPixelCount) {
+    scale2 *= Math.sqrt(maxPixelCount / uncappedPixels,);
+  }
+  const width = Math.max(1, Math.round(info.width * scale2,),);
+  const height = Math.max(1, Math.round(info.height * scale2,),);
+  const srcCanvas = document.createElement('canvas',);
+  srcCanvas.width = width;
+  srcCanvas.height = height;
+  const srcCtx = srcCanvas.getContext('2d',);
+  if (!srcCtx) return void 0;
+  srcCtx.drawImage(info.source, 0, 0, width, height,);
+  const pixels = srcCtx.getImageData(0, 0, width, height,).data;
+  const size = width * height;
+  const mask2 = new Uint8Array(size,);
+  for (let i = 0; i < size; i++) {
+    mask2[i] = (pixels[i * 4 + 3] ?? 0) > 0 ? 1 : 0;
+  }
+  const interior = new Uint8Array(size,);
+  for (let i = 0; i < size; i++) {
+    if (mask2[i] === 0) continue;
+    const x = i % width;
+    const y = Math.floor(i / width,);
+    if (x === 0 || x === width - 1 || y === 0 || y === height - 1) continue;
+    let isBoundary = false;
+    for (let dy = -1; dy <= 1 && !isBoundary; dy++) {
+      for (let dx = -1; dx <= 1 && !isBoundary; dx++) {
+        if (dx === 0 && dy === 0) continue;
+        if (mask2[(y + dy) * width + (x + dx)] === 0) isBoundary = true;
+      }
+    }
+    if (!isBoundary) interior[i] = 1;
+  }
+  const field = solvePoissonField(interior, width, height,);
+  let maxVal = 0;
+  for (let i = 0; i < size; i++) {
+    const v = field[i] ?? 0;
+    if (v > maxVal) maxVal = v;
+  }
+  const lowResCanvas = document.createElement('canvas',);
+  lowResCanvas.width = width;
+  lowResCanvas.height = height;
+  const lowResCtx = lowResCanvas.getContext('2d',);
+  if (!lowResCtx) return void 0;
+  const outData = lowResCtx.createImageData(width, height,);
+  for (let i = 0; i < size; i++) {
+    const normalized = maxVal > 0 ? (field[i] ?? 0) / maxVal : 0;
+    outData.data[i * 4] = Math.round(normalized * 255,);
+    outData.data[i * 4 + 1] = 255 - (pixels[i * 4 + 3] ?? 0);
+    outData.data[i * 4 + 2] = mask2[i] ? 255 : 0;
+    outData.data[i * 4 + 3] = 255;
+  }
+  lowResCtx.putImageData(outData, 0, 0,);
+  const outCanvas = document.createElement('canvas',);
+  outCanvas.width = info.width;
+  outCanvas.height = info.height;
+  const outCtx = outCanvas.getContext('2d',);
+  if (!outCtx) return void 0;
+  outCtx.imageSmoothingEnabled = true;
+  outCtx.drawImage(lowResCanvas, 0, 0, info.width, info.height,);
+  if (cacheKey) {
+    if (heightmapCache.size >= maxCacheEntries) {
+      const oldest = heightmapCache.keys().next().value;
+      if (oldest !== void 0) heightmapCache.delete(oldest,);
+    }
+    heightmapCache.set(cacheKey, outCanvas,);
+  }
+  return outCanvas;
+}
+function solvePoissonField(interior, width, height,) {
+  const size = width * height;
+  const field = new Float32Array(size,);
+  const omega = 1.95;
+  const sourceTerm = 0.01;
+  const iterations = 50;
+  const redEntries = [];
+  const blackEntries = [];
+  for (let i = 0; i < size; i++) {
+    if (interior[i] === 0) continue;
+    const x = i % width;
+    const y = Math.floor(i / width,);
+    const entries = (x + y) % 2 === 0 ? redEntries : blackEntries;
+    entries.push(i, y > 0 ? i - width : -1, y < height - 1 ? i + width : -1, x > 0 ? i - 1 : -1, x < width - 1 ? i + 1 : -1,);
+  }
+  const red = new Int32Array(redEntries,);
+  const black = new Int32Array(blackEntries,);
+  const oneMinusOmega = 1 - omega;
+  const omegaOver4 = omega / 4;
+  for (let iter = 0; iter < iterations; iter++) {
+    updatePixels(red, field, oneMinusOmega, omegaOver4, sourceTerm,);
+    updatePixels(black, field, oneMinusOmega, omegaOver4, sourceTerm,);
+  }
+  return field;
+}
+function updatePixels(pixels, field, oneMinusOmega, omegaOver4, sourceTerm,) {
+  for (let j = 0; j < pixels.length; j += 5) {
+    const idx = pixels[j] ?? 0;
+    const topIdx = pixels[j + 1] ?? -1;
+    const bottomIdx = pixels[j + 2] ?? -1;
+    const leftIdx = pixels[j + 3] ?? -1;
+    const rightIdx = pixels[j + 4] ?? -1;
+    const top = topIdx >= 0 ? field[topIdx] ?? 0 : 0;
+    const bottom = bottomIdx >= 0 ? field[bottomIdx] ?? 0 : 0;
+    const left = leftIdx >= 0 ? field[leftIdx] ?? 0 : 0;
+    const right = rightIdx >= 0 ? field[rightIdx] ?? 0 : 0;
+    field[idx] = oneMinusOmega * (field[idx] ?? 0) + omegaOver4 * (sourceTerm + top + bottom + left + right);
+  }
+}
+function getImageInfo(image,) {
+  if (image instanceof HTMLImageElement) {
+    const w = image.naturalWidth;
+    const h = image.naturalHeight;
+    return w > 0 && h > 0
+      ? {
+        source: image,
+        width: w,
+        height: h,
+      }
+      : void 0;
+  }
+  if (image instanceof HTMLCanvasElement) {
+    return image.width > 0 && image.height > 0
+      ? {
+        source: image,
+        width: image.width,
+        height: image.height,
+      }
+      : void 0;
+  }
+  return void 0;
+}
+function isHeightMapSupportedTexImageSource(image,) {
+  return image instanceof HTMLImageElement || image instanceof HTMLCanvasElement;
+}
 var overlayStyle = {
   position: 'absolute',
   inset: 0,
@@ -49859,7 +50076,7 @@ function loadTexture(url,) {
   return new Promise((resolve, reject,) => {
     const img = new Image();
     img.crossOrigin = 'anonymous';
-    img.onload = () => resolve(img,);
+    img.onload = () => resolve(rasterizeSVGAtFixedRes(img,) ?? img,);
     img.onerror = (event) => {
       const message = event instanceof ErrorEvent && event.message
         ? `Failed to load texture from "${url}": ${event.message}`
@@ -49868,6 +50085,38 @@ function loadTexture(url,) {
     };
     img.src = url;
   },);
+}
+function getTextureCacheKey(image,) {
+  if (image instanceof HTMLImageElement) return image.src || void 0;
+  if (image instanceof HTMLCanvasElement) return image.dataset.src || void 0;
+  return void 0;
+}
+var svgExtension = '.svg';
+var svgRasterSize = 4096;
+function rasterizeSVGAtFixedRes(image,) {
+  if (!isSVGSource(image.src,)) return void 0;
+  const w = image.naturalWidth;
+  const h = image.naturalHeight;
+  if (w <= 0 || h <= 0) return void 0;
+  const scale2 = svgRasterSize / Math.max(w, h,);
+  const targetW = Math.max(1, Math.round(w * scale2,),);
+  const targetH = Math.max(1, Math.round(h * scale2,),);
+  const canvas = document.createElement('canvas',);
+  canvas.width = targetW;
+  canvas.height = targetH;
+  const ctx = canvas.getContext('2d',);
+  if (!ctx) return void 0;
+  ctx.drawImage(image, 0, 0, targetW, targetH,);
+  canvas.dataset.src = image.src;
+  return canvas;
+}
+function isSVGSource(url,) {
+  try {
+    const pathname = new URL(url, 'https://placeholder',).pathname.toLowerCase();
+    return pathname.endsWith(svgExtension,);
+  } catch {
+    return url.toLowerCase().includes(svgExtension,);
+  }
 }
 async function resolveUniform(uniform, element,) {
   switch (uniform.type) {
@@ -49910,8 +50159,9 @@ async function resolveUniform(uniform, element,) {
       assertNever(uniform,);
   }
 }
-async function resolveUniforms(uniforms, element,) {
+async function resolveUniforms(uniforms, element, heightmapSource,) {
   const result = {};
+  const heightmapSourceUniform = heightmapSource ? toUniformName(heightmapSource,) : void 0;
   for (const [name, uniform,] of Object.entries(uniforms,)) {
     const resolved = await resolveUniform(uniform, element,);
     if (!resolved) continue;
@@ -49921,6 +50171,15 @@ async function resolveUniforms(uniforms, element,) {
         type: 'int',
         value: uniform.value.length,
       };
+    }
+    if (heightmapSource && heightmapSourceUniform && name === heightmapSourceUniform && resolved.type === 'sampler2D') {
+      const heightmap = generateHeightmap(resolved.value, () => getTextureCacheKey(resolved.value,),);
+      if (heightmap) {
+        result[toHeightmapUniformName(heightmapSource,)] = {
+          type: 'sampler2D',
+          value: heightmap,
+        };
+      }
     }
   }
   return result;
@@ -50097,12 +50356,12 @@ var ShaderPoolContext = /* @__PURE__ */ createContext(null,);
 function useShaderPoolContext() {
   return useContext(ShaderPoolContext,);
 }
-function useResolvedUniforms(uniforms, canvasRef,) {
+function useResolvedUniforms(uniforms, canvasRef, heightmapSource,) {
   const [resolvedUniforms, setResolvedUniforms,] = useState({},);
   useEffect(() => {
     if (!uniforms) return;
     let isCancelled = false;
-    resolveUniforms(uniforms, canvasRef.current,).then((resolved) => {
+    resolveUniforms(uniforms, canvasRef.current, heightmapSource,).then((resolved) => {
       if (!isCancelled) {
         startTransition2(() => setResolvedUniforms(resolved,));
       } else {
@@ -50112,7 +50371,7 @@ function useResolvedUniforms(uniforms, canvasRef,) {
     return () => {
       isCancelled = true;
     };
-  }, [uniforms, canvasRef,],);
+  }, [uniforms, canvasRef, heightmapSource,],);
   return resolvedUniforms;
 }
 function useCanvasResize(canvasRef, resizeHandler,) {
@@ -50226,6 +50485,7 @@ function ShaderCanvas({
   onReady,
   onContextLost,
   singleFrame: singleFrame2 = false,
+  heightmapSource,
 },) {
   const canvasRef = useRef(null,);
   const rendererRef = useRef(null,);
@@ -50240,7 +50500,7 @@ function ShaderCanvas({
   useLayoutEffect(() => {
     onContextLostRef.current = onContextLost;
   }, [onContextLost,],);
-  const resolvedUniforms = useResolvedUniforms(uniforms, canvasRef,);
+  const resolvedUniforms = useResolvedUniforms(uniforms, canvasRef, heightmapSource,);
   const uniformsPropRef = useRef(uniforms,);
   useLayoutEffect(() => {
     uniformsPropRef.current = uniforms;
@@ -50380,6 +50640,7 @@ var ShaderWithFallbackOverlay = /* @__PURE__ */ memo2(function ShaderWithFallbac
   onReady,
   singleFrame: singleFrame2,
   onContextLost,
+  heightmapSource,
 },) {
   const [isShaderReady, setIsShaderReady,] = useState(false,);
   const [shouldPlay, setShouldPlay,] = useState(false,);
@@ -50427,6 +50688,7 @@ var ShaderWithFallbackOverlay = /* @__PURE__ */ memo2(function ShaderWithFallbac
           onError,
           onReady: handleReady,
           onContextLost,
+          heightmapSource,
         },),
       },),
       fallbackImage && !shouldSkipInitialFallback && /* @__PURE__ */ jsx('div', {
@@ -50490,6 +50752,7 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
   poolId,
   isSelected = false,
   isMultiSelected = false,
+  heightmapSource,
   ...rest
 }, ref,) {
   const observerRef = useObserverRef(ref,);
@@ -50541,6 +50804,7 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
     resolutionScale,
     onError,
     onContextLost,
+    heightmapSource,
   };
   const containerFrameProps = {
     style: style2,
@@ -54842,7 +55106,6 @@ var DeprecatedRichTextInner = /* @__PURE__ */ React.forwardRef(function Text(pro
       if (!isOnCanvas || inCodeComponent) {
         style2.position = 'sticky';
         style2.willChange = 'transform';
-        style2.zIndex = 1;
         style2.top = positionStickyTop;
         style2.right = positionStickyRight;
         style2.bottom = positionStickyBottom;
@@ -55481,7 +55744,6 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
       if (!isOnCanvas || inCodeComponent) {
         containerStyle2.position = 'sticky';
         containerStyle2.willChange = 'transform';
-        containerStyle2.zIndex = 1;
         containerStyle2.top = positionStickyTop;
         containerStyle2.right = positionStickyRight;
         containerStyle2.bottom = positionStickyBottom;
@@ -56787,7 +57049,6 @@ var TextComponent = /* @__PURE__ */ (() => {
         if (!onCanvas || inCodeComponent) {
           style2.position = 'sticky';
           style2.willChange = 'transform';
-          style2.zIndex = 1;
           style2.top = positionStickyTop;
           style2.right = positionStickyRight;
           style2.bottom = positionStickyBottom;
@@ -58639,6 +58900,7 @@ export {
   parseAnimateLayoutArgs,
   parseCSSVariable,
   parseFramerPageLink,
+  parsePaddingString,
   parseValueFromTransform,
   patchBorderRadiusScaleCorrector,
   patchRoutesForABTesting,
