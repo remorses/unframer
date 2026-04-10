@@ -1349,11 +1349,25 @@ export async function createExampleComponentCode({
         }
     }
 
-    const imports = instances?.map((exampleComponent) => {
-        return `import ${getImportedName(exampleComponent?.componentPathSlug)} from './${outDirForExample}/${
-            exampleComponent?.componentPathSlug
-        }'`
-    })
+    // Deduplicate imports by componentPathSlug — the same component can be
+    // used multiple times on a page, but must only be imported once, otherwise
+    // the generated example code has duplicate identifier errors (e.g.
+    // "Identifier `Image3FramerComponent` has already been declared").
+    const seenImportSlugs = new Set<string>()
+    const imports = instances
+        ?.filter((exampleComponent) => {
+            const slug = exampleComponent?.componentPathSlug
+            if (!slug || seenImportSlugs.has(slug)) {
+                return false
+            }
+            seenImportSlugs.add(slug)
+            return true
+        })
+        .map((exampleComponent) => {
+            return `import ${getImportedName(exampleComponent?.componentPathSlug)} from './${outDirForExample}/${
+                exampleComponent?.componentPathSlug
+            }'`
+        })
 
     const jsx = instances?.map((exampleComponent) => {
         let propStr = ''

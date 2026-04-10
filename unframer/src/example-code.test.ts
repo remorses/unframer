@@ -74,6 +74,85 @@ describe(
             `)
         })
 
+        test('should deduplicate imports when the same component is used multiple times on a page', async () => {
+            // Repro: https://github.com/unframer/cooperative-walrus-79978/actions/runs/24262159135
+            // When a component (e.g. `image-3`) was referenced twice on the index
+            // page, the generated example code emitted two identical
+            // `import Image3FramerComponent from './src/image-3'` lines which
+            // made vite/rolldown fail with "Identifier has already been declared".
+            const config: Config = {
+                components: {
+                    'image-3': 'https://example.com/image-3',
+                    image: 'https://example.com/image',
+                },
+                componentInstancesInIndexPage: [
+                    {
+                        componentId: '1',
+                        componentPathSlug: 'image-3',
+                        controls: {},
+                        nodeDepth: 0,
+                        pageOrdering: 0,
+                        webPageId: 'home',
+                    },
+                    {
+                        componentId: '2',
+                        componentPathSlug: 'image',
+                        controls: {},
+                        nodeDepth: 0,
+                        pageOrdering: 1,
+                        webPageId: 'home',
+                    },
+                    {
+                        componentId: '3',
+                        componentPathSlug: 'image-3',
+                        controls: {},
+                        nodeDepth: 0,
+                        pageOrdering: 2,
+                        webPageId: 'home',
+                    },
+                ],
+            }
+
+            const { exampleCode } = await createExampleComponentCode({
+                config,
+                outDir: 'src',
+            })
+
+            expect(exampleCode).toMatchInlineSnapshot(`
+              "import './src/styles.css'
+
+              import Image3FramerComponent from './src/image-3'
+              import ImageFramerComponent from './src/image'
+
+              export default function App() {
+                return (
+                  <div className='flex flex-col items-center gap-3 '>
+                    <Image3FramerComponent.Responsive/>
+                    <ImageFramerComponent.Responsive/>
+                    <Image3FramerComponent.Responsive/>
+                  </div>
+                );
+              };"
+            `)
+
+            // Each import identifier should only appear once in the import list
+            const importLines = exampleCode
+                .split('\n')
+                .filter((line) => line.startsWith('import '))
+            const image3Imports = importLines.filter((line) => {
+                return line.includes("from './src/image-3'")
+            })
+            expect(image3Imports).toHaveLength(1)
+
+            // But the component should still render twice in JSX
+            const image3Jsx = exampleCode
+                .split('\n')
+                .filter((line) => {
+                    return line.includes('<Image3FramerComponent.Responsive')
+                })
+            expect(image3Jsx).toHaveLength(2)
+        })
+
         test('should only disambiguate duplicate import names', async () => {
             const config: Config = {
                 components: {
