@@ -14,7 +14,7 @@
     "dependencies": {
         "@motionone/dom": "^10.18.0",
         "@types/node": "22.15.21",
-        "@types/react": "19.2.7",
+        "@types/react": "19.2.14",
         "@types/react-dom": "19.2.3",
         "autoprefixer": "10.4.20",
         "concurrently-ui": "^1.2.0",
