@@ -12683,7 +12683,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.EQO22L3O.mjs
+// /:https://app.framerstatic.com/framer.4S43HVRB.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -41754,6 +41754,7 @@ function PageRoot(props,) {
     collectionUtils,
     notFoundPage,
     isReducedMotion = false,
+    skipAnimations = false,
     includeDataObserver = false,
     localeId,
     locales,
@@ -41775,7 +41776,8 @@ function PageRoot(props,) {
     return /* @__PURE__ */ jsx(RenderTargetEnvironmentProvider, {
       value: environment2 ?? 'preview',
       children: /* @__PURE__ */ jsx(MotionConfig, {
-        reducedMotion: isReducedMotion ? 'user' : 'never',
+        reducedMotion: skipAnimations ? 'always' : isReducedMotion ? 'user' : 'never',
+        skipAnimations,
         children: /* @__PURE__ */ jsx(CollectionUtilsCacheProvider, {
           collectionUtils,
           children: /* @__PURE__ */ jsx(FetchClientProvider, {
@@ -50295,7 +50297,7 @@ var ShaderSandboxFallbackImage = /* @__PURE__ */ memo2(function ShaderSandboxFal
   const containerStyle2 = {
     ...overlayStyle,
     opacity: hidden ? 0 : 1,
-    pointerEvents: hidden ? 'none' : 'auto',
+    pointerEvents: hidden ? 'none' : void 0,
   };
   return /* @__PURE__ */ jsxs('div', {
     style: containerStyle2,
@@ -50419,13 +50421,13 @@ function useShaderRenderState(
   if (poolSlot !== null) {
     const hasSlot = poolSlot !== slotStatus.noSlot;
     isFallbackOnly = !hasSlot || !!shouldReduceMotion && !!fallbackImage;
-    effectiveAnimated = isSelected && !isMultiSelected;
+    effectiveAnimated = (animated ?? true) && isSelected && !isMultiSelected;
     effectiveSingleFrame = hasSlot && !effectiveAnimated;
     effectiveMode = 'instant';
   } else {
     isFallbackOnly = mode === 'fallback' || !!shouldReduceMotion && !!fallbackImage || !isIntersecting;
     effectiveAnimated = animated ?? true;
-    effectiveSingleFrame = false;
+    effectiveSingleFrame = !effectiveAnimated;
     effectiveMode = mode;
   }
   const [contextLost, setContextLost,] = useState(false,);
@@ -50873,6 +50875,7 @@ var ShaderContainerFrame = /* @__PURE__ */ forwardRef(function ShaderContainerFr
     __fromCanvasComponent: true,
     style: styles4,
     ...rest,
+    componentType: 'Shader',
     children,
   },);
 },);
