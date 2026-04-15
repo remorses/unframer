@@ -12683,7 +12683,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.4S43HVRB.mjs
+// /:https://app.framerstatic.com/framer.YYNLSUU7.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -49528,8 +49528,17 @@ var WebGL2ShaderRenderer = class {
     canvas.height = height;
     this.gl.viewport(0, 0, width, height,);
   }
-  resizeOffscreenCanvas(width, height,) {
+  /**
+   * @param pixelDensity - The ratio between the canvas's physical pixel
+   * dimensions and the logical (CSS) dimensions the shader should assume.
+   * Surfaces as `u_pixelRatio` so shaders can derive CSS-space values via
+   * `u_resolution / u_pixelRatio`. On-screen canvases get this from
+   * `window.devicePixelRatio`; offscreen renders must supply it explicitly
+   * when the canvas is supersampled (e.g. 2x for fallback image sharpness).
+   */
+  resizeOffscreenCanvas(width, height, pixelDensity,) {
     if (this.disposed) return;
+    if (pixelDensity !== void 0) this.pixelRatio = pixelDensity;
     this.gl.viewport(0, 0, width, height,);
   }
   /**
@@ -52486,7 +52495,7 @@ function getAssetOwnerType(asset,) {
 async function loadFontsWithOpenType(source,) {
   switch (source) {
     case 'google': {
-      const supportedFonts = await import('./framer-chunks/google-R6BUSN2F-2FOYDAB4.js');
+      const supportedFonts = await import('./framer-chunks/google-OGWBHVGI-QC7UAA2X.js');
       return supportedFonts.default;
     }
     case 'fontshare': {
@@ -52500,7 +52509,7 @@ async function loadFontsWithOpenType(source,) {
 async function loadFontToOpenTypeFeatures(source,) {
   switch (source) {
     case 'google': {
-      const features = await import('./framer-chunks/google-YUHGDXQ4-5ORV5F75.js');
+      const features = await import('./framer-chunks/google-BHSMRPXK-IHHGYJRR.js');
       return features.default;
     }
     case 'fontshare': {
@@ -53052,7 +53061,7 @@ function loadVariationAxes(source,) {
       const axes = (async () => {
         switch (source) {
           case 'google': {
-            return (await import('./framer-chunks/google-UUNZTU2J-CVO5HK6V.js')).default;
+            return (await import('./framer-chunks/google-5NZOMG37-U44YENDC.js')).default;
           }
           case 'fontshare': {
             return (await import('./framer-chunks/fontshare-X63NXWGB-NRPGYMPJ.js')).default;
