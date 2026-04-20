@@ -12683,7 +12683,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.YYNLSUU7.mjs
+// /:https://app.framerstatic.com/framer.NRJGU4WV.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -58453,7 +58453,7 @@ var package_default = {
   },
   devDependencies: {
     '@juggle/resize-observer': '^3.4.0',
-    '@microsoft/api-extractor': '^7.57.7',
+    '@microsoft/api-extractor': '^7.58.2',
     '@testing-library/dom': '^8.19.1',
     '@testing-library/jest-dom': '^5.16.5',
     '@testing-library/react': '^13.4.0',
