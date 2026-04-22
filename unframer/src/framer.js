@@ -144,13 +144,13 @@ var wrap = (min, max, v,) => {
 var calcBezier = (t, a1, a2,) => (((1 - 3 * a2 + 3 * a1) * t + (3 * a2 - 6 * a1)) * t + 3 * a1) * t;
 var subdivisionPrecision = 1e-7;
 var subdivisionMaxIterations = 12;
-function binarySubdivide(x, lowerBound, upperBound, mX1, mX2,) {
+function binarySubdivide(x2, lowerBound, upperBound, mX1, mX2,) {
   let currentX;
   let currentT;
   let i = 0;
   do {
     currentT = lowerBound + (upperBound - lowerBound) / 2;
-    currentX = calcBezier(currentT, mX1, mX2,) - x;
+    currentX = calcBezier(currentT, mX1, mX2,) - x2;
     if (currentX > 0) {
       upperBound = currentT;
     } else {
@@ -1790,23 +1790,23 @@ function removeNonTranslationalTransform(visualElement,) {
 var positionalValues = {
   // Dimensions
   width: ({
-    x,
+    x: x2,
   }, {
     paddingLeft = '0',
     paddingRight = '0',
     boxSizing,
   },) => {
-    const width = x.max - x.min;
+    const width = x2.max - x2.min;
     return boxSizing === 'border-box' ? width : width - parseFloat(paddingLeft,) - parseFloat(paddingRight,);
   },
   height: ({
-    y,
+    y: y2,
   }, {
     paddingTop = '0',
     paddingBottom = '0',
     boxSizing,
   },) => {
-    const height = y.max - y.min;
+    const height = y2.max - y2.min;
     return boxSizing === 'border-box' ? height : height - parseFloat(paddingTop,) - parseFloat(paddingBottom,);
   },
   top: (_bbox, {
@@ -1816,15 +1816,15 @@ var positionalValues = {
     left,
   },) => parseFloat(left,),
   bottom: ({
-    y,
+    y: y2,
   }, {
     top,
-  },) => parseFloat(top,) + (y.max - y.min),
+  },) => parseFloat(top,) + (y2.max - y2.min),
   right: ({
-    x,
+    x: x2,
   }, {
     left,
-  },) => parseFloat(left,) + (x.max - x.min),
+  },) => parseFloat(left,) + (x2.max - x2.min),
   // Transform
   x: (_bbox, {
     transform: transform2,
@@ -5357,14 +5357,14 @@ function convertBoundingBoxToBox({
   };
 }
 function convertBoxToBoundingBox({
-  x,
-  y,
+  x: x2,
+  y: y2,
 },) {
   return {
-    top: y.min,
-    right: x.max,
-    bottom: y.max,
-    left: x.min,
+    top: y2.min,
+    right: x2.max,
+    bottom: y2.max,
+    left: x2.min,
   };
 }
 function transformBoxPoints(point2, transformPoint2,) {
@@ -5420,11 +5420,11 @@ function applyAxisDelta(axis, translate = 0, scale2 = 1, originPoint, boxScale,)
   axis.max = applyPointDelta(axis.max, translate, scale2, originPoint, boxScale,);
 }
 function applyBoxDelta(box, {
-  x,
-  y,
+  x: x2,
+  y: y2,
 },) {
-  applyAxisDelta(box.x, x.translate, x.scale, x.originPoint,);
-  applyAxisDelta(box.y, y.translate, y.scale, y.originPoint,);
+  applyAxisDelta(box.x, x2.translate, x2.scale, x2.originPoint,);
+  applyAxisDelta(box.y, y2.translate, y2.scale, y2.originPoint,);
 }
 var TREE_SCALE_SNAP_MIN = 0.999999999999;
 var TREE_SCALE_SNAP_MAX = 1.0000000000001;
@@ -5612,9 +5612,9 @@ var correctBorderRadius = {
         return latest;
       }
     }
-    const x = pixelsToPercent(latest, node.target.x,);
-    const y = pixelsToPercent(latest, node.target.y,);
-    return `${x}% ${y}%`;
+    const x2 = pixelsToPercent(latest, node.target.x,);
+    const y2 = pixelsToPercent(latest, node.target.y,);
+    return `${x2}% ${y2}%`;
   },
 };
 var correctBoxShadow = {
@@ -7446,10 +7446,10 @@ function createProjectionNode({
       }
       targetStyle.transform = transform2;
       const {
-        x,
-        y,
+        x: x2,
+        y: y2,
       } = this.projectionDelta;
-      targetStyle.transformOrigin = `${x.origin * 100}% ${y.origin * 100}% 0`;
+      targetStyle.transformOrigin = `${x2.origin * 100}% ${y2.origin * 100}% 0`;
       if (lead.animationValues) {
         targetStyle.opacity = lead === this
           ? valuesToRender.opacity ?? this.latestValues.opacity ?? 1
@@ -8083,8 +8083,8 @@ function PopChild({
       bottom,
     } = size.current;
     if (isPresent2 || pop === false || !ref.current || !width || !height) return;
-    const x = anchorX === 'left' ? `left: ${left}` : `right: ${right}`;
-    const y = anchorY === 'bottom' ? `bottom: ${bottom}` : `top: ${top}`;
+    const x2 = anchorX === 'left' ? `left: ${left}` : `right: ${right}`;
+    const y2 = anchorY === 'bottom' ? `bottom: ${bottom}` : `top: ${top}`;
     ref.current.dataset.motionPopId = id4;
     const style2 = document.createElement('style',);
     if (nonce) style2.nonce = nonce;
@@ -8096,8 +8096,8 @@ function PopChild({
             position: absolute !important;
             width: ${width}px !important;
             height: ${height}px !important;
-            ${x}px !important;
-            ${y}px !important;
+            ${x2}px !important;
+            ${y2}px !important;
           }
         `,);
     }
@@ -10599,11 +10599,11 @@ function calcInset(element, container,) {
       inset2.y += svgBoundingBox.top - parentBoundingBox.top;
     } else if (current2 instanceof SVGGraphicsElement) {
       const {
-        x,
-        y,
+        x: x2,
+        y: y2,
       } = current2.getBBox();
-      inset2.x += x;
-      inset2.y += y;
+      inset2.x += x2;
+      inset2.y += y2;
       let svg = null;
       let parent = current2.parentNode;
       while (!svg) {
@@ -11051,13 +11051,13 @@ function useScroll({
   const needsStart = useRef(false,);
   const start2 = useCallback2(() => {
     scrollAnimation.current = scroll((_progress, {
-      x,
-      y,
+      x: x2,
+      y: y2,
     },) => {
-      values.scrollX.set(x.current,);
-      values.scrollXProgress.set(x.progress,);
-      values.scrollY.set(y.current,);
-      values.scrollYProgress.set(y.progress,);
+      values.scrollX.set(x2.current,);
+      values.scrollXProgress.set(x2.progress,);
+      values.scrollY.set(y2.current,);
+      values.scrollYProgress.set(y2.progress,);
     }, {
       ...options,
       container: container?.current || void 0,
@@ -12683,7 +12683,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.EQO22L3O.mjs
+// /:https://app.framerstatic.com/framer.5QPM6PIP.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -13227,8 +13227,8 @@ var require_react_is_production_min = __commonJS({
     var t = b ? Symbol.for('react.lazy',) : 60116;
     var v = b ? Symbol.for('react.block',) : 60121;
     var w = b ? Symbol.for('react.fundamental',) : 60117;
-    var x = b ? Symbol.for('react.responder',) : 60118;
-    var y = b ? Symbol.for('react.scope',) : 60119;
+    var x2 = b ? Symbol.for('react.responder',) : 60118;
+    var y2 = b ? Symbol.for('react.scope',) : 60119;
     function z(a,) {
       if ('object' === typeof a && null !== a) {
         var u = a.$$typeof;
@@ -13316,7 +13316,7 @@ var require_react_is_production_min = __commonJS({
       return 'string' === typeof a || 'function' === typeof a || a === e || a === m2 || a === g || a === f2 || a === p || a === q ||
         'object' === typeof a && null !== a &&
           (a.$$typeof === t || a.$$typeof === r || a.$$typeof === h || a.$$typeof === k || a.$$typeof === n || a.$$typeof === w ||
-            a.$$typeof === x || a.$$typeof === y || a.$$typeof === v);
+            a.$$typeof === x2 || a.$$typeof === y2 || a.$$typeof === v);
     };
     exports.typeOf = z;
   },
@@ -13463,7 +13463,7 @@ var require_fontfaceobserver_standalone = __commonJS({
         this.g.appendChild(this.h,);
         this.g.appendChild(this.i,);
       }
-      function x(a, c,) {
+      function x2(a, c,) {
         a.g.style.cssText =
           'max-width:none;min-width:20px;min-height:20px;display:inline-block;overflow:hidden;position:absolute;width:auto;margin:0;padding:0;top:-999px;white-space:nowrap;font-synthesis:none;font:' +
           c + ';';
@@ -13559,7 +13559,7 @@ var require_fontfaceobserver_standalone = __commonJS({
                   (null === E &&
                     (d = /AppleWebKit\/([0-9]+)(?:\.([0-9]+))/.exec(__unframerWindow2.navigator.userAgent,),
                       E = !!d && (536 > parseInt(d[1], 10,) || 536 === parseInt(d[1], 10,) && 11 >= parseInt(d[2], 10,))),
-                    d = E && (k == y && l2 == y && m2 == y || k == z && l2 == z && m2 == z || k == A && l2 == A && m2 == A)), d = !d;
+                    d = E && (k == y2 && l2 == y2 && m2 == y2 || k == z && l2 == z && m2 == z || k == A && l2 == A && m2 == A)), d = !d;
                 }
                 d && (null !== f2.parentNode && f2.parentNode.removeChild(f2,), clearTimeout(e,), K(b,));
               }
@@ -13578,19 +13578,19 @@ var require_fontfaceobserver_standalone = __commonJS({
                 k = -1,
                 l2 = -1,
                 m2 = -1,
-                y = -1,
+                y2 = -1,
                 z = -1,
                 A = -1,
                 f2 = document.createElement('div',);
               f2.dir = 'ltr';
-              x(h, N(b, 'sans-serif',),);
-              x(n, N(b, 'serif',),);
-              x(v, N(b, 'monospace',),);
+              x2(h, N(b, 'sans-serif',),);
+              x2(n, N(b, 'serif',),);
+              x2(v, N(b, 'monospace',),);
               f2.appendChild(h.g,);
               f2.appendChild(n.g,);
               f2.appendChild(v.g,);
               b.context.document.body.appendChild(f2,);
-              y = h.g.offsetWidth;
+              y2 = h.g.offsetWidth;
               z = n.g.offsetWidth;
               A = v.g.offsetWidth;
               t();
@@ -13598,17 +13598,17 @@ var require_fontfaceobserver_standalone = __commonJS({
                 k = d;
                 r();
               },);
-              x(h, N(b, '"' + b.family + '",sans-serif',),);
+              x2(h, N(b, '"' + b.family + '",sans-serif',),);
               C(n, function (d,) {
                 l2 = d;
                 r();
               },);
-              x(n, N(b, '"' + b.family + '",serif',),);
+              x2(n, N(b, '"' + b.family + '",serif',),);
               C(v, function (d,) {
                 m2 = d;
                 r();
               },);
-              x(v, N(b, '"' + b.family + '",monospace',),);
+              x2(v, N(b, '"' + b.family + '",monospace',),);
             },);}
         },);
       };
@@ -14062,8 +14062,8 @@ function assert(condition, ...msg) {
   }
   throw e;
 }
-function assertNever(x, error,) {
-  throw error || new Error(x ? `Unexpected value: ${x}` : 'Application entered invalid state',);
+function assertNever(x2, error,) {
+  throw error || new Error(x2 ? `Unexpected value: ${x2}` : 'Application entered invalid state',);
 }
 var PromiseState = {
   Pending: 'pending',
@@ -15563,11 +15563,11 @@ function calcMaskPosition(mask2,) {
     innerWidth,
     innerHeight,
   } = __unframerWindow2;
-  const [x, xUnit,] = parseUnit(mask2.x,);
-  const [y, yUnit,] = parseUnit(mask2.y,);
+  const [x2, xUnit,] = parseUnit(mask2.x,);
+  const [y2, yUnit,] = parseUnit(mask2.y,);
   return {
-    x: xUnit === 'px' ? x : innerWidth * (x / 100),
-    y: yUnit === 'px' ? y : innerHeight * (y / 100),
+    x: xUnit === 'px' ? x2 : innerWidth * (x2 / 100),
+    y: yUnit === 'px' ? y2 : innerHeight * (y2 / 100),
   };
 }
 var conic = {
@@ -15606,27 +15606,27 @@ var conic = {
 var circle = {
   makeKeyframe: (mask2, progress2,) => {
     const {
-      x,
-      y,
+      x: x2,
+      y: y2,
     } = calcMaskPosition(mask2,);
     if (progress2 === 'start') {
-      return `clip-path: circle(0 at ${x}px ${y}px);`;
+      return `clip-path: circle(0 at ${x2}px ${y2}px);`;
     } else {
-      const endRadius = Math.hypot(Math.max(x, __unframerWindow2.innerWidth - x,), Math.max(y, __unframerWindow2.innerHeight - y,),);
-      return `clip-path: circle(${endRadius}px at ${x}px ${y}px);`;
+      const endRadius = Math.hypot(Math.max(x2, __unframerWindow2.innerWidth - x2,), Math.max(y2, __unframerWindow2.innerHeight - y2,),);
+      return `clip-path: circle(${endRadius}px at ${x2}px ${y2}px);`;
     }
   },
 };
 var inset = {
   makeKeyframe: (mask2, progress2,) => {
     const {
-      x,
-      y,
+      x: x2,
+      y: y2,
     } = calcMaskPosition(mask2,);
-    const bottom = __unframerWindow2.innerHeight - y;
-    const right = __unframerWindow2.innerWidth - x;
+    const bottom = __unframerWindow2.innerHeight - y2;
+    const right = __unframerWindow2.innerWidth - x2;
     return progress2 === 'start'
-      ? `clip-path: inset(${y}px ${right}px ${bottom}px ${x}px round ${mask2.round}px);`
+      ? `clip-path: inset(${y2}px ${right}px ${bottom}px ${x2}px round ${mask2.round}px);`
       : `clip-path: inset(0 round 0);`;
   },
 };
@@ -16562,8 +16562,12 @@ var URLSearchParamsContext = /* @__PURE__ */ (() => {
 function URLSearchParamsProvider({
   children,
 },) {
-  const [urlSearchString, setUrlSearchString,] = useState('',);
   const renderTargetEnvironment = useRenderTargetEnvironment();
+  const [urlSearchString, setUrlSearchString,] = useState(() => {
+    if (renderTargetEnvironment === 'preview') return '';
+    if (typeof __unframerWindow2 === 'undefined') return '';
+    return __unframerWindow2.location.search;
+  },);
   useEffect(() => {
     if (renderTargetEnvironment === 'preview') return;
     startTransition2(() => {
@@ -17718,7 +17722,7 @@ function patchRoute(routes, abTestId, abTestingVariantId,) {
   const routeId = route.abTestingParentId ?? abTestingVariantId;
   if (!routes[routeId]) return;
   const {
-    abTestingParentId,
+    abTestingParentId: _,
     ...patchingRoute
   } = route;
   const elements = routes[routeId].elements || route.elements
@@ -17751,7 +17755,7 @@ function patchInitialRoute(routes, routeId,) {
   if (!routes[routeId].abTestingParentId) return;
   const parentId = routes[routeId].abTestingParentId;
   const {
-    abTestingParentId,
+    abTestingParentId: _,
     ...route
   } = routes[routeId];
   const elements = routes[parentId]?.elements || route.elements
@@ -17986,10 +17990,10 @@ function roundWithOffset(value, offset,) {
 function roundToHalfPixel(value,) {
   return Math.round(value * 2,) / 2;
 }
-function Point(x, y,) {
+function Point(x2, y2,) {
   return {
-    x,
-    y,
+    x: x2,
+    y: y2,
   };
 }
 ((Point2) => {
@@ -18196,8 +18200,8 @@ var UnitBezier = class {
     this.b = Point.subtract(Point.multiply(Point.subtract(point2, point1,), 3,), this.c,);
     this.a = Point.subtract(Point.subtract(Point(1, 1,), this.c,), this.b,);
   }
-  solve(x, epsilon2,) {
-    return this.sampleY(this.solveForT(x, epsilon2,),);
+  solve(x2, epsilon2,) {
+    return this.sampleY(this.solveForT(x2, epsilon2,),);
   }
   sampleX(t,) {
     return ((this.a.x * t + this.b.x) * t + this.c.x) * t;
@@ -18208,25 +18212,25 @@ var UnitBezier = class {
   sampleDerivativeX(t,) {
     return (3 * this.a.x * t + 2 * this.b.x) * t + this.c.x;
   }
-  solveForT(x, epsilon2,) {
-    let t0, t1, t2, x2, d2, i;
-    t2 = x;
+  solveForT(x2, epsilon2,) {
+    let t0, t1, t2, x22, d2, i;
+    t2 = x2;
     for (i = 0; i < 8; ++i) {
-      x2 = this.sampleX(t2,) - x;
-      if (Math.abs(x2,) < epsilon2) return t2;
+      x22 = this.sampleX(t2,) - x2;
+      if (Math.abs(x22,) < epsilon2) return t2;
       d2 = this.sampleDerivativeX(t2,);
       if (Math.abs(d2,) < epsilon2) break;
-      t2 = t2 - x2 / d2;
+      t2 = t2 - x22 / d2;
     }
     t0 = 0;
     t1 = 1;
-    t2 = x;
+    t2 = x2;
     if (t2 < t0) return t0;
     if (t2 > t1) return t1;
     while (t0 < t1) {
-      x2 = this.sampleX(t2,);
-      if (Math.abs(x2 - x,) < epsilon2) return t2;
-      if (x > x2) t0 = t2;
+      x22 = this.sampleX(t2,);
+      if (Math.abs(x22 - x2,) < epsilon2) return t2;
+      if (x2 > x22) t0 = t2;
       else t1 = t2;
       t2 = (t1 - t0) * 0.5 + t0;
     }
@@ -19336,15 +19340,15 @@ var convertP3ToXyz65 = (color2) => {
   };
 };
 var convertXyz65ToRgb = ({
-  x = 0,
-  y = 0,
+  x: x2 = 0,
+  y: y2 = 0,
   z = 0,
   a = 1,
 },) => {
   return convertLrgbToRgb({
-    r: x * 3.2409699419045226 - y * 1.537383177570094 - 0.4986107602930034 * z,
-    g: x * -0.9692436362808796 + y * 1.8759675015077204 + 0.0415550574071756 * z,
-    b: x * 0.0556300796969936 - y * 0.2039769588889765 + 1.0569715142428784 * z,
+    r: x2 * 3.2409699419045226 - y2 * 1.537383177570094 - 0.4986107602930034 * z,
+    g: x2 * -0.9692436362808796 + y2 * 1.8759675015077204 + 0.0415550574071756 * z,
+    b: x2 * 0.0556300796969936 - y2 * 0.2039769588889765 + 1.0569715142428784 * z,
     a,
   },);
 };
@@ -19363,15 +19367,15 @@ var convertRgbToXyz65 = (color2) => {
   };
 };
 var convertXyz65ToP3 = ({
-  x = 0,
-  y = 0,
+  x: x2 = 0,
+  y: y2 = 0,
   z = 0,
   a = 1,
 },) => {
   return convertLrgbToRgb({
-    r: x * 2.4934969119414263 - y * 0.9313836179191242 - 0.402710784450717 * z,
-    g: x * -0.8294889695615749 + y * 1.7626640603183465 + 0.0236246858419436 * z,
-    b: x * 0.0358458302437845 - y * 0.0761723892680418 + 0.9568845240076871 * z,
+    r: x2 * 2.4934969119414263 - y2 * 0.9313836179191242 - 0.402710784450717 * z,
+    g: x2 * -0.8294889695615749 + y2 * 1.7626640603183465 + 0.0236246858419436 * z,
+    b: x2 * 0.0358458302437845 - y2 * 0.0761723892680418 + 0.9568845240076871 * z,
     a,
   },);
 };
@@ -19776,6 +19780,25 @@ var Color = /* @__PURE__ */ (() => {
       g: color2.g,
       b: color2.b,
       a: color2.a * alphaValue,
+    },);
+  };
+  Color2.alphaComposite = (top, bottom,) => {
+    if (top.a === 1) {
+      return top;
+    }
+    if (bottom.a < 1) {
+      throw new Error(
+        'Bottom color must be fully opaque for alpha blending, you should check and determine your own strategy for resolving alpha bottom layers, ie. `Color.alphaComposite(bottom, Color(\'white\'))`',
+      );
+    }
+    if (top.a === 0) {
+      return bottom;
+    }
+    return Color2({
+      r: Math.round(top.r * top.a + bottom.r * (1 - top.a),),
+      g: Math.round(top.g * top.a + bottom.g * (1 - top.a),),
+      b: Math.round(top.b * top.a + bottom.b * (1 - top.a),),
+      a: 1,
     },);
   };
   Color2.interpolate = (colorA, colorB, model = 'rgb',) => {
@@ -20799,9 +20822,9 @@ var correctBorderRadius2 = {
         const [candidate, ...rest] = latest.slice(calcPrefix.length,).split(separator2,);
         if (isUndefined(candidate,) || !px.test(candidate.trim(),)) return latest;
         const pixels = parseFloat(candidate,);
-        const x2 = pixelsToPercent2(pixels, node.target.x,);
-        const y2 = pixelsToPercent2(pixels, node.target.y,);
-        return `${reWrapInCalc(x2, rest,)} ${reWrapInCalc(y2, rest,)}`;
+        const x3 = pixelsToPercent2(pixels, node.target.x,);
+        const y3 = pixelsToPercent2(pixels, node.target.y,);
+        return `${reWrapInCalc(x3, rest,)} ${reWrapInCalc(y3, rest,)}`;
       }
       if (px.test(latest,)) {
         latest = parseFloat(latest,);
@@ -20809,9 +20832,9 @@ var correctBorderRadius2 = {
         return latest;
       }
     }
-    const x = pixelsToPercent2(latest, node.target.x,);
-    const y = pixelsToPercent2(latest, node.target.y,);
-    return `${x}% ${y}%`;
+    const x2 = pixelsToPercent2(latest, node.target.x,);
+    const y2 = pixelsToPercent2(latest, node.target.y,);
+    return `${x2}% ${y2}%`;
   },
 };
 var borderRadiusCorrectors = /* @__PURE__ */ (() => ({
@@ -21585,14 +21608,14 @@ var Line = /* @__PURE__ */ (() => {
   Line2.offset = (line, offset,) => {
     const angle = Point.angleFromX(line.a, line.b,);
     const rad = degreesToRadians(angle,);
-    const x = offset * Math.sin(rad,);
-    const y = offset * Math.cos(rad,);
+    const x2 = offset * Math.sin(rad,);
+    const y2 = offset * Math.cos(rad,);
     return Line2({
-      x: line.a.x + x,
-      y: line.a.y - y,
+      x: line.a.x + x2,
+      y: line.a.y - y2,
     }, {
-      x: line.b.x + x,
-      y: line.b.y - y,
+      x: line.b.x + x2,
+      y: line.b.y - y2,
     },);
   };
   Line2.intersection = (lineA, lineB, segments,) => {
@@ -21735,58 +21758,58 @@ var Rect = {
   },
   /** @internal */
   pixelAligned: (rect) => {
-    const x = Math.round(rect.x,);
-    const y = Math.round(rect.y,);
+    const x2 = Math.round(rect.x,);
+    const y2 = Math.round(rect.y,);
     const rectMaxX = Math.round(rect.x + rect.width,);
     const rectMaxY = Math.round(rect.y + rect.height,);
-    const width = Math.max(rectMaxX - x, 0,);
-    const height = Math.max(rectMaxY - y, 0,);
+    const width = Math.max(rectMaxX - x2, 0,);
+    const height = Math.max(rectMaxY - y2, 0,);
     return {
-      x,
-      y,
+      x: x2,
+      y: y2,
       width,
       height,
     };
   },
   /** @internal */
   halfPixelAligned: (rect) => {
-    const x = Math.round(rect.x * 2,) / 2;
-    const y = Math.round(rect.y * 2,) / 2;
+    const x2 = Math.round(rect.x * 2,) / 2;
+    const y2 = Math.round(rect.y * 2,) / 2;
     const rectMaxX = Math.round((rect.x + rect.width) * 2,) / 2;
     const rectMaxY = Math.round((rect.y + rect.height) * 2,) / 2;
-    const width = Math.max(rectMaxX - x, 1,);
-    const height = Math.max(rectMaxY - y, 1,);
+    const width = Math.max(rectMaxX - x2, 1,);
+    const height = Math.max(rectMaxY - y2, 1,);
     return {
-      x,
-      y,
+      x: x2,
+      y: y2,
       width,
       height,
     };
   },
   /** @internal */
   round: (rect, decimals = 0,) => {
-    const x = roundedNumber(rect.x, decimals,);
-    const y = roundedNumber(rect.y, decimals,);
+    const x2 = roundedNumber(rect.x, decimals,);
+    const y2 = roundedNumber(rect.y, decimals,);
     const width = roundedNumber(rect.width, decimals,);
     const height = roundedNumber(rect.height, decimals,);
     return {
-      x,
-      y,
+      x: x2,
+      y: y2,
       width,
       height,
     };
   },
   /** @internal */
   roundToOutside: (rect) => {
-    const x = Math.floor(rect.x,);
-    const y = Math.floor(rect.y,);
+    const x2 = Math.floor(rect.x,);
+    const y2 = Math.floor(rect.y,);
     const rectMaxX = Math.ceil(rect.x + rect.width,);
     const rectMaxY = Math.ceil(rect.y + rect.height,);
-    const width = Math.max(rectMaxX - x, 0,);
-    const height = Math.max(rectMaxY - y, 0,);
+    const width = Math.max(rectMaxX - x2, 0,);
+    const height = Math.max(rectMaxY - y2, 0,);
     return {
-      x,
-      y,
+      x: x2,
+      y: y2,
       width,
       height,
     };
@@ -21869,14 +21892,14 @@ var Rect = {
   fromPoints: (ps) => {
     const [tl, tr, _, bl,] = ps;
     const {
-      x,
-      y,
+      x: x2,
+      y: y2,
     } = tl;
     const width = Point.distance(tl, tr,);
     const height = Point.distance(tl, bl,);
     return {
-      x,
-      y,
+      x: x2,
+      y: y2,
       width,
       height,
     };
@@ -21900,15 +21923,15 @@ var Rect = {
   },
   /** @internal */
   intersection: (rect1, rect2,) => {
-    const x = Math.max(rect1.x, rect2.x,);
-    const x2 = Math.min(rect1.x + rect1.width, rect2.x + rect2.width,);
-    const y = Math.max(rect1.y, rect2.y,);
-    const y2 = Math.min(rect1.y + rect1.height, rect2.y + rect2.height,);
+    const x2 = Math.max(rect1.x, rect2.x,);
+    const x22 = Math.min(rect1.x + rect1.width, rect2.x + rect2.width,);
+    const y2 = Math.max(rect1.y, rect2.y,);
+    const y22 = Math.min(rect1.y + rect1.height, rect2.y + rect2.height,);
     return {
-      x,
-      y,
-      width: x2 - x,
-      height: y2 - y,
+      x: x2,
+      y: y2,
+      width: x22 - x2,
+      height: y22 - y2,
     };
   },
   /**
@@ -21985,13 +22008,13 @@ var Rect = {
       x: rect.x,
       y: rect.y + rect.height,
     },);
-    const x = Math.min(x1, x2, x3, x4,);
-    const width = Math.max(x1, x2, x3, x4,) - x;
-    const y = Math.min(y1, y2, y3, y4,);
-    const height = Math.max(y1, y2, y3, y4,) - y;
+    const x5 = Math.min(x1, x2, x3, x4,);
+    const width = Math.max(x1, x2, x3, x4,) - x5;
+    const y5 = Math.min(y1, y2, y3, y4,);
+    const height = Math.max(y1, y2, y3, y4,) - y5;
     return {
-      x,
-      y,
+      x: x5,
+      y: y5,
       width,
       height,
     };
@@ -22144,21 +22167,21 @@ var Rect = {
   },
   /** @internal */
   pointDistance: (rect, point2,) => {
-    let x = 0;
-    let y = 0;
+    let x2 = 0;
+    let y2 = 0;
     if (point2.x < rect.x) {
-      x = rect.x - point2.x;
+      x2 = rect.x - point2.x;
     } else if (point2.x > Rect.maxX(rect,)) {
-      x = point2.x - Rect.maxX(rect,);
+      x2 = point2.x - Rect.maxX(rect,);
     }
     if (point2.y < rect.y) {
-      y = rect.y - point2.y;
+      y2 = rect.y - point2.y;
     } else if (point2.y > Rect.maxY(rect,)) {
-      y = point2.y - Rect.maxY(rect,);
+      y2 = point2.y - Rect.maxY(rect,);
     }
     return Point.distance({
-      x,
-      y,
+      x: x2,
+      y: y2,
     }, {
       x: 0,
       y: 0,
@@ -22288,13 +22311,13 @@ var Rect = {
    */
   constrain: (rect, bound,) => {
     if (!bound) return rect;
-    let y = Math.max(rect.y, bound.y,);
-    y = Math.min(y, bound.y + bound.height - rect.height,);
-    let x = Math.max(rect.x, bound.x,);
-    x = Math.min(x, bound.x + bound.width - rect.width,);
+    let y2 = Math.max(rect.y, bound.y,);
+    y2 = Math.min(y2, bound.y + bound.height - rect.height,);
+    let x2 = Math.max(rect.x, bound.x,);
+    x2 = Math.min(x2, bound.x + bound.width - rect.width,);
     return {
-      x,
-      y,
+      x: x2,
+      y: y2,
       width: rect.width,
       height: rect.height,
     };
@@ -22568,8 +22591,8 @@ var ConstraintValues = {
   },
   // Returns a parent-relative rect given concrete ConstraintValues.
   toRect: (values, parentSizeInfo = null, autoSize = null, pixelAlign = false, freeSpace = null,) => {
-    let x = values.left || 0;
-    let y = values.top || 0;
+    let x2 = values.left || 0;
+    let y2 = values.top || 0;
     const {
       width,
       height,
@@ -22578,22 +22601,22 @@ var ConstraintValues = {
     const positioningParentWidth = parentSizeForPositioning ? Animatable.getNumber(parentSizeForPositioning.width,) : null;
     const positioningParentHeight = parentSizeForPositioning ? Animatable.getNumber(parentSizeForPositioning.height,) : null;
     if (values.left !== null) {
-      x = values.left;
+      x2 = values.left;
     } else if (positioningParentWidth && values.right !== null) {
-      x = positioningParentWidth - values.right - width;
+      x2 = positioningParentWidth - values.right - width;
     } else if (positioningParentWidth) {
-      x = values.centerAnchorX * positioningParentWidth - width / 2;
+      x2 = values.centerAnchorX * positioningParentWidth - width / 2;
     }
     if (values.top !== null) {
-      y = values.top;
+      y2 = values.top;
     } else if (positioningParentHeight && values.bottom !== null) {
-      y = positioningParentHeight - values.bottom - height;
+      y2 = positioningParentHeight - values.bottom - height;
     } else if (positioningParentHeight) {
-      y = values.centerAnchorY * positioningParentHeight - height / 2;
+      y2 = values.centerAnchorY * positioningParentHeight - height / 2;
     }
     const f2 = {
-      x,
-      y,
+      x: x2,
+      y: y2,
       width,
       height,
     };
@@ -26670,10 +26693,10 @@ function cssObjectFit(imageFit,) {
   }
 }
 function cssObjectPosition(positionX, positionY,) {
-  const x = positionX ?? 'center';
-  const y = positionY ?? 'center';
-  if (x === 'center' && y === 'center') return 'center';
-  return x + ' ' + y;
+  const x2 = positionX ?? 'center';
+  const y2 = positionY ?? 'center';
+  if (x2 === 'center' && y2 === 'center') return 'center';
+  return x2 + ' ' + y2;
 }
 function getImageStyle(image,) {
   return {
@@ -30395,21 +30418,21 @@ function WithDragging(Component18,) {
         }
         this.animation = null;
       },);
-      const x = this.props.left;
-      const y = this.props.top;
-      if (!x) {
+      const x2 = this.props.left;
+      const y2 = this.props.top;
+      if (!x2) {
         this.x = Animatable(0,);
-      } else if (isAnimatable2(x,)) {
-        this.x = x;
+      } else if (isAnimatable2(x2,)) {
+        this.x = x2;
       } else {
-        this.x = Animatable(x,);
+        this.x = Animatable(x2,);
       }
-      if (!y) {
+      if (!y2) {
         this.y = Animatable(0,);
-      } else if (isAnimatable2(y,)) {
-        this.y = y;
+      } else if (isAnimatable2(y2,)) {
+        this.y = y2;
       } else {
-        this.y = Animatable(y,);
+        this.y = Animatable(y2,);
       }
       this.x.onUpdate(this.onChangePosition,);
       this.y.onUpdate(this.onChangePosition,);
@@ -31549,8 +31572,8 @@ function getRotation(rotation, rotate2,) {
 }
 function collectTransformFromProps(props, rect, style2,) {
   const motionStyle = style2;
-  const x = typeof rect.x === 'number' ? `${rect.x}px` : rect.x;
-  const y = typeof rect.y === 'number' ? `${rect.y}px` : rect.y;
+  const x2 = typeof rect.x === 'number' ? `${rect.x}px` : rect.x;
+  const y2 = typeof rect.y === 'number' ? `${rect.y}px` : rect.y;
   const z = getNumber(props.z,);
   const scaleZ = getNumber(props.scaleZ,);
   const originZ = getNumber(props.originZ,);
@@ -31567,7 +31590,7 @@ function collectTransformFromProps(props, rect, style2,) {
   const force3d = RenderEnvironment.target === RenderTarget.export;
   if (force3d || z !== 0 || scaleZ !== 1 || originZ !== 0 || rotationZ !== 0 || rotationX !== 0 || rotationY !== 0) {
     style2.transform = `
-            ${`translate3d(${x}, ${y}, ${z}px)`}
+            ${`translate3d(${x2}, ${y2}, ${z}px)`}
             scale3d(${scaleX2 * scale2}, ${scaleY2 * scale2}, ${scaleZ})
             skew(${skew}deg,${skew}deg)
             skewX(${skewX}deg)
@@ -31579,7 +31602,7 @@ function collectTransformFromProps(props, rect, style2,) {
             translateZ(${-originZ}px)`;
   } else {
     style2.transform = `
-            ${`translate(${x}, ${y})`}
+            ${`translate(${x2}, ${y2})`}
             scale(${scaleX2 * scale2}, ${scaleY2 * scale2})
             skew(${skew}deg,${skew}deg)
             skewX(${skewX}deg)
@@ -32124,12 +32147,12 @@ function useWheelScroll(ref, {
     handler = (e) => {
       e.preventDefault();
       if (!isWheelScrollActive.current) {
-        const x = offsetX.get();
-        const y = offsetY.get();
-        initial.x = x;
-        initial.y = y;
-        prev.x = x;
-        prev.y = y;
+        const x2 = offsetX.get();
+        const y2 = offsetY.get();
+        initial.x = x2;
+        initial.y = y2;
+        prev.x = x2;
+        prev.y = y2;
         onScrollStart && onScrollStart(getPointData(),);
         isWheelScrollActive.current = true;
       }
@@ -32152,10 +32175,10 @@ function useWheelScroll(ref, {
     passive: false,
   },);
 }
-function getPoint(x, y,) {
+function getPoint(x2, y2,) {
   return {
-    x: x.get(),
-    y: y.get(),
+    x: x2.get(),
+    y: y2.get(),
   };
 }
 function parseNumberRounded(value, precision = 2,) {
@@ -32850,18 +32873,18 @@ var PageInner = /* @__PURE__ */ React42.forwardRef(function Page(props, forwarde
     if (props.onDragTransitionEnd) props.onDragTransitionEnd();
     if (onScrollEnd) {
       const {
-        x,
-        y,
+        x: x2,
+        y: y2,
       } = contentOffsetRef.current;
       const point2 = {
-        x: x.get(),
-        y: y.get(),
+        x: x2.get(),
+        y: y2.get(),
       };
       onScrollEnd({
         point: point2,
         velocity: {
-          x: x.getVelocity(),
-          y: y.getVelocity(),
+          x: x2.getVelocity(),
+          y: y2.getVelocity(),
         },
         offset: {
           x: point2.x - initial.x,
@@ -33071,11 +33094,12 @@ function wheelEffect(info,) {
   const originZ = (isHorizontal ? size.width : size.height) * 18 / (2 * Math.PI);
   const rotateX = isHorizontal ? 0 : normalizedOffset * -20;
   const rotateY = isHorizontal ? normalizedOffset * 20 : 0;
-  const y = isHorizontal ? 0 : normalizedOffset * -size.height;
-  const x = isHorizontal ? normalizedOffset * -size.width : 0;
+  const y2 = isHorizontal ? 0 : normalizedOffset * -size.height;
+  const x2 = isHorizontal ? normalizedOffset * -size.width : 0;
   return {
     opacity: 1 - Math.abs(normalizedOffset,) / 4,
-    transform: `translate(${x}px, ${y}px) translateZ(-${originZ}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(${originZ}px)`,
+    transform:
+      `translate(${x2}px, ${y2}px) translateZ(-${originZ}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(${originZ}px)`,
   };
 }
 function getDefaultEffect(type,) {
@@ -33150,8 +33174,8 @@ function getPageContentRects(containerRef, containerSize, direction, gap,) {
   const isHorizontal = direction === 'horizontal';
   return sizes.map((queriedSize) => {
     const size = queriedSize || containerSize;
-    const x = maxX;
-    const y = maxY;
+    const x2 = maxX;
+    const y2 = maxY;
     if (isHorizontal) {
       maxX += size.width + gap;
     } else {
@@ -33159,8 +33183,8 @@ function getPageContentRects(containerRef, containerSize, direction, gap,) {
     }
     return {
       ...size,
-      x,
-      y,
+      x: x2,
+      y: y2,
     };
   },);
 }
@@ -34012,8 +34036,8 @@ var EmulatedScrollInner = /* @__PURE__ */ React42.forwardRef(function EmulatedSc
   },);
   const defaultX = useMotionValue(typeof contentOffsetX === 'number' ? contentOffsetX : 0,);
   const defaultY = useMotionValue(typeof contentOffsetY === 'number' ? contentOffsetY : 0,);
-  const x = isMotionValue2(contentOffsetX,) ? contentOffsetX : defaultX;
-  const y = isMotionValue2(contentOffsetY,) ? contentOffsetY : defaultY;
+  const x2 = isMotionValue2(contentOffsetX,) ? contentOffsetX : defaultX;
+  const y2 = isMotionValue2(contentOffsetY,) ? contentOffsetY : defaultY;
   const measuredConstraints = useRef(null,);
   const dragControls = useDragControls();
   const isInTarget = useIsInCurrentNavigationTarget();
@@ -34057,15 +34081,15 @@ var EmulatedScrollInner = /* @__PURE__ */ React42.forwardRef(function EmulatedSc
     const currentMaxXOffset = contentRef.current.offsetWidth - containerRef.current.offsetWidth;
     const currentMaxYOffset = contentRef.current.offsetHeight - containerRef.current.offsetHeight;
     const hasSizeChanged = currentMaxXOffset !== previous?.maxXOffset || currentMaxYOffset !== previous?.maxYOffset;
-    const hasScrollOffsetChanged = previous?.x !== x.get() || previous?.y !== y.get();
+    const hasScrollOffsetChanged = previous?.x !== x2.get() || previous?.y !== y2.get();
     const shouldStayPinned = hasSizeChanged && !hasScrollOffsetChanged;
     if (mustReset || shouldUpdateOffset || shouldStayPinned) {
       const currentOffsetX = direction !== 'vertical' ? numberFromOptionalMotionValue(contentOffsetX,) : 0;
       const currentOffsetY = direction !== 'horizontal' ? numberFromOptionalMotionValue(contentOffsetY,) : 0;
       const nextXOffset = -Math.min(currentOffsetX, currentMaxXOffset,);
       const nextYOffset = -Math.min(currentOffsetY, currentMaxYOffset,);
-      x.set(nextXOffset,);
-      y.set(nextYOffset,);
+      x2.set(nextXOffset,);
+      y2.set(nextYOffset,);
       lastOffsetRef.current = {
         maxXOffset: currentMaxXOffset,
         maxYOffset: currentMaxYOffset,
@@ -34089,8 +34113,8 @@ var EmulatedScrollInner = /* @__PURE__ */ React42.forwardRef(function EmulatedSc
     if (isInTarget === false) wasInTargetRef.current = false;
   }, [isInTarget,],);
   const getLatestPoint = () => ({
-    x: x.get(),
-    y: y.get(),
+    x: x2.get(),
+    y: y2.get(),
   });
   const resetInitialPoint = useCallback2(() => {
     const point2 = getLatestPoint();
@@ -34104,8 +34128,8 @@ var EmulatedScrollInner = /* @__PURE__ */ React42.forwardRef(function EmulatedSc
     const data2 = {
       point: point2,
       velocity: {
-        x: x.getVelocity(),
-        y: y.getVelocity(),
+        x: x2.getVelocity(),
+        y: y2.getVelocity(),
       },
       offset: {
         x: point2.x - initial.x,
@@ -34119,14 +34143,14 @@ var EmulatedScrollInner = /* @__PURE__ */ React42.forwardRef(function EmulatedSc
     prev.x = point2.x;
     prev.y = point2.y;
     return data2;
-  }, [x, y,],);
+  }, [x2, y2,],);
   const updateScrollListeners = useCallback2(() => {
     onUpdate && onUpdate({
-      x: x.get(),
-      y: y.get(),
+      x: x2.get(),
+      y: y2.get(),
     },);
     onScroll && onScroll(getPointData(),);
-  }, [onScroll, onUpdate, getPointData, x, y,],);
+  }, [onScroll, onUpdate, getPointData, x2, y2,],);
   const scheduleUpdateScrollListeners = useCallback2(() => {
     frame.update(updateScrollListeners, false, true,);
   }, [updateScrollListeners,],);
@@ -34144,8 +34168,8 @@ var EmulatedScrollInner = /* @__PURE__ */ React42.forwardRef(function EmulatedSc
     initial,
     prev,
     direction,
-    offsetX: x,
-    offsetY: y,
+    offsetX: x2,
+    offsetY: y2,
     onScrollStart: onWheelScrollStart,
     onScroll,
     onScrollEnd,
@@ -34167,10 +34191,10 @@ var EmulatedScrollInner = /* @__PURE__ */ React42.forwardRef(function EmulatedSc
       }
       scheduleUpdateScrollListeners();
     };
-    const currentX = x.get();
+    const currentX = x2.get();
     if (currentX !== 0) setScrollX(currentX,);
-    return x.on('change', setScrollX,);
-  }, [x, overdragX, scheduleUpdateScrollListeners, overdragEnabled,],);
+    return x2.on('change', setScrollX,);
+  }, [x2, overdragX, scheduleUpdateScrollListeners, overdragEnabled,],);
   useIsomorphicLayoutEffect2(() => {
     const setScrollY = (yValue) => {
       const element = containerRef.current;
@@ -34185,18 +34209,18 @@ var EmulatedScrollInner = /* @__PURE__ */ React42.forwardRef(function EmulatedSc
       }
       scheduleUpdateScrollListeners();
     };
-    const currentY = y.get();
+    const currentY = y2.get();
     if (currentY !== 0) setScrollY(currentY,);
-    return y.on('change', setScrollY,);
-  }, [y, overdragY, scheduleUpdateScrollListeners, overdragEnabled,],);
+    return y2.on('change', setScrollY,);
+  }, [y2, overdragY, scheduleUpdateScrollListeners, overdragEnabled,],);
   const nativeOnScroll = React42.useCallback(() => {
     const element = containerRef.current;
     if (!(element instanceof HTMLDivElement)) return;
-    const xDelta = Math.abs(x.get() + element.scrollLeft,);
-    const yDelta = Math.abs(y.get() + element.scrollTop,);
-    if (xDelta > 1) x.set(-element.scrollLeft,);
-    if (yDelta > 1) y.set(-element.scrollTop,);
-  }, [x, y,],);
+    const xDelta = Math.abs(x2.get() + element.scrollLeft,);
+    const yDelta = Math.abs(y2.get() + element.scrollTop,);
+    if (xDelta > 1) x2.set(-element.scrollLeft,);
+    if (yDelta > 1) y2.set(-element.scrollTop,);
+  }, [x2, y2,],);
   const isEmpty2 = React42.Children.count(children,) === 0;
   const width = direction !== 'vertical' && !isEmpty2 ? 'auto' : '100%';
   const height = direction !== 'horizontal' && !isEmpty2 ? 'auto' : '100%';
@@ -34241,8 +34265,8 @@ var EmulatedScrollInner = /* @__PURE__ */ React42.forwardRef(function EmulatedSc
       onMeasureDragConstraints: setMeasureDragConstraints,
       width,
       height,
-      _dragX: x,
-      _dragY: y,
+      _dragX: x2,
+      _dragY: y2,
       position: 'relative',
       x: overdragEnabled ? overdragX : void 0,
       y: overdragEnabled ? overdragY : void 0,
@@ -36466,8 +36490,8 @@ var withFX = (Component18) =>
     addMotionValueStyle(props.style, fxValues,);
     const scale2 = useTransform(fxValues.scale, multiply,);
     const opacity = useTransform(fxValues.opacity, multiply,);
-    const x = useTransform(fxValues.x, add2,);
-    const y = useTransform(fxValues.y, add2,);
+    const x2 = useTransform(fxValues.x, add2,);
+    const y2 = useTransform(fxValues.y, add2,);
     const rotate2 = useTransform(fxValues.rotate, add2,);
     const rotateX = useTransform(fxValues.rotateX, add2,);
     const rotateY = useTransform(fxValues.rotateY, add2,);
@@ -36482,8 +36506,8 @@ var withFX = (Component18) =>
     const motionValueStyle = {
       opacity,
       scale: scale2,
-      x,
-      y,
+      x: x2,
+      y: y2,
       rotate: rotate2,
       rotateX,
       rotateY,
@@ -36549,7 +36573,7 @@ function useComponentViewport() {
 var ComponentViewportProvider = /* @__PURE__ */ React42.forwardRef(function ComponentViewportProvider2({
   width,
   height,
-  y,
+  y: y2,
   children,
   ...rest
 }, ref,) {
@@ -36557,9 +36581,9 @@ var ComponentViewportProvider = /* @__PURE__ */ React42.forwardRef(function Comp
     return {
       width,
       height,
-      y,
+      y: y2,
     };
-  }, [width, height, y,],);
+  }, [width, height, y2,],);
   const cloneWithPropsAndRef = useCloneChildrenWithPropsAndRef(ref,);
   return /* @__PURE__ */ jsx(ComponentViewportContext.Provider, {
     value: componentViewport,
@@ -37123,8 +37147,8 @@ function getCenteringTransform(placement, alignment = 'center',) {
   }
 }
 var portalIdAttribute = 'data-framer-portal-id';
-function getCursorHash(x, y,) {
-  let el = document.elementFromPoint(x, y,);
+function getCursorHash(x2, y2,) {
+  let el = document.elementFromPoint(x2, y2,);
   while (el) {
     if (el === document.body) return void 0;
     const value = el.getAttribute('data-framer-cursor',);
@@ -37172,11 +37196,11 @@ var CustomCursorComponent = /* @__PURE__ */ memo2(function CustomCursorComponent
   }, [],);
   useEffect(() => {
     if (!hasHoverCapability) return;
-    let x2 = 0;
-    let y2 = 0;
+    let x3 = 0;
+    let y3 = 0;
     function updateValues() {
-      pointerX.set(x2,);
-      pointerY.set(y2,);
+      pointerX.set(x3,);
+      pointerY.set(y3,);
       animate(opacity, 1, {
         type: 'tween',
         duration: 0.2,
@@ -37184,7 +37208,7 @@ var CustomCursorComponent = /* @__PURE__ */ memo2(function CustomCursorComponent
     }
     const updateVariant = () => {
       if (isEmptyObject(internalState.current.cursors,)) return;
-      const hash2 = getCursorHash(x2, y2,);
+      const hash2 = getCursorHash(x3, y3,);
       if (hash2 !== internalState.current.cursorHash) {
         internalState.current.cursorHash = hash2;
         frame.update(() => forceRender());
@@ -37196,8 +37220,8 @@ var CustomCursorComponent = /* @__PURE__ */ memo2(function CustomCursorComponent
         return;
       }
       frame.read(updateVariant, true,);
-      x2 = e.clientX;
-      y2 = e.clientY;
+      x3 = e.clientX;
+      y3 = e.clientY;
       frame.update(updateValues,);
     }
     function fireEventToTarget(e,) {
@@ -37276,8 +37300,8 @@ var CustomCursorComponent = /* @__PURE__ */ memo2(function CustomCursorComponent
     : springRaw;
   const sprungX = useSpring(pointerX, spring2,);
   const sprungY = useSpring(pointerY, spring2,);
-  const x = useTransform(() => sprungX.get() + (cursor?.offset?.x ?? 0));
-  const y = useTransform(() => sprungY.get() + (cursor?.offset?.y ?? 0));
+  const x2 = useTransform(() => sprungX.get() + (cursor?.offset?.x ?? 0));
+  const y2 = useTransform(() => sprungY.get() + (cursor?.offset?.y ?? 0));
   const alignment = cursor?.alignment;
   const placement = cursor?.placement;
   const transformTemplate2 = useCallback2((_, t,) => `translate(${getCenteringTransform(placement, alignment,)}) ${t}`, [
@@ -37290,8 +37314,8 @@ var CustomCursorComponent = /* @__PURE__ */ memo2(function CustomCursorComponent
       transformTemplate: transformTemplate2,
       style: {
         ...staticCursorStyle,
-        x,
-        y,
+        x: x2,
+        y: y2,
         opacity,
       },
       globalTapTarget: true,
@@ -37888,14 +37912,14 @@ function getSafePlacementFloatingPositionRect(
   };
   if (!collisionDetectionSize) return [placement, preferredRect,];
   const {
-    x,
-    y,
+    x: x2,
+    y: y2,
     placement: safePlacement,
   } = getPlacementAndOffsetAvoidingScreenCollision(preferredRect, placement, offset, collisionDetectionSize,);
   const rebasedCollisionRect = Rect.rebaseRectOnto(element, anchor, safePlacement, alignment,);
   return [safePlacement, {
-    x: preferredOffset(rebasedCollisionRect.x + x, element.width, collisionDetectionSize.width, collisionDetectionPadding,),
-    y: preferredOffset(rebasedCollisionRect.y + y, element.height, collisionDetectionSize.height, collisionDetectionPadding,),
+    x: preferredOffset(rebasedCollisionRect.x + x2, element.width, collisionDetectionSize.width, collisionDetectionPadding,),
+    y: preferredOffset(rebasedCollisionRect.y + y2, element.height, collisionDetectionSize.height, collisionDetectionPadding,),
     width: element.width,
     height: element.height,
   },];
@@ -37914,8 +37938,8 @@ function safeAreaPolygonConstraints(rect,) {
 var mouseOffset = 4;
 function polygonPoints(
   {
-    x,
-    y,
+    x: x2,
+    y: y2,
   },
   placement,
   rect,
@@ -37928,29 +37952,29 @@ function polygonPoints(
   switch (placement) {
     case 'left': {
       const mousePoint = {
-        x: constrainX(x - mouseOffset,),
-        y,
+        x: constrainX(x2 - mouseOffset,),
+        y: y2,
       };
       return [mousePoint, preferredPoint(br, bl, [mousePoint, tr,],), preferredPoint(tr, tl, [mousePoint, br,],),];
     }
     case 'right': {
       const mousePoint = {
-        x: constrainX(x + mouseOffset,),
-        y,
+        x: constrainX(x2 + mouseOffset,),
+        y: y2,
       };
       return [mousePoint, preferredPoint(bl, br, [mousePoint, tl,],), preferredPoint(tl, tr, [mousePoint, bl,],),];
     }
     case 'top': {
       const mousePoint = {
-        x,
-        y: constrainY(y - mouseOffset,),
+        x: x2,
+        y: constrainY(y2 - mouseOffset,),
       };
       return [mousePoint, preferredPoint(bl, tl, [mousePoint, br,],), preferredPoint(br, tr, [mousePoint, bl,],),];
     }
     case 'bottom': {
       const mousePoint = {
-        x,
-        y: constrainY(y + mouseOffset,),
+        x: x2,
+        y: constrainY(y2 + mouseOffset,),
       };
       return [mousePoint, preferredPoint(tl, bl, [mousePoint, tr,],), preferredPoint(tr, br, [mousePoint, tl,],),];
     }
@@ -37972,14 +37996,14 @@ function safeAreaInset(placement, delta,) {
       assertNever(placement,);
   }
 }
-function floatingPositionSafeAreaStyle(x, y, placement, anchorRect, floatingRect,) {
+function floatingPositionSafeAreaStyle(x2, y2, placement, anchorRect, floatingRect,) {
   const minX = Math.min(floatingRect.x, anchorRect.x,);
   const minY = Math.min(floatingRect.y, anchorRect.y,);
   const rect = Rect.merge(anchorRect, floatingRect,);
   const points = polygonPoints(
     {
-      x,
-      y,
+      x: x2,
+      y: y2,
     },
     placement,
     floatingRect,
@@ -38050,13 +38074,13 @@ function domReadStartAnimationFrameLoop(onRead,) {
   return () => cancelFrame(onRead,);
 }
 function domWriteCreateUpdateSafeArea(safeAreaRef,) {
-  let x = 0;
-  let y = 0;
+  let x2 = 0;
+  let y2 = 0;
   return (anchorRect, calculatedRect, placement, event,) => {
     if (!safeAreaRef.current?.style) return;
-    x = event?.clientX ?? x;
-    y = event?.clientY ?? y;
-    Object.assign(safeAreaRef.current.style, floatingPositionSafeAreaStyle(x, y, placement, anchorRect, calculatedRect,),);
+    x2 = event?.clientX ?? x2;
+    y2 = event?.clientY ?? y2;
+    Object.assign(safeAreaRef.current.style, floatingPositionSafeAreaStyle(x2, y2, placement, anchorRect, calculatedRect,),);
   };
 }
 function domWriteUpdatePosition(floatingPositionRef, position, rect, scrollX, scrollY,) {
@@ -38151,15 +38175,15 @@ function useDynamicMotionOrigin(initialPlacement, alignment,) {
   },);
 }
 function childrenWithOrigin(child, {
-  x,
-  y,
+  x: x2,
+  y: y2,
 },) {
   if (!child || !isReactChild(child,) || !isReactElement(child,)) return null;
   if (!isObject2(child.props.style,) && !isUndefined(child.props.style,)) return null;
   const style2 = {
     ...child.props.style,
-    originX: x,
-    originY: y,
+    originX: x2,
+    originY: y2,
   };
   return React42.cloneElement(child, {
     style: style2,
@@ -41754,6 +41778,7 @@ function PageRoot(props,) {
     collectionUtils,
     notFoundPage,
     isReducedMotion = false,
+    skipAnimations = false,
     includeDataObserver = false,
     localeId,
     locales,
@@ -41775,7 +41800,8 @@ function PageRoot(props,) {
     return /* @__PURE__ */ jsx(RenderTargetEnvironmentProvider, {
       value: environment2 ?? 'preview',
       children: /* @__PURE__ */ jsx(MotionConfig, {
-        reducedMotion: isReducedMotion ? 'user' : 'never',
+        reducedMotion: skipAnimations ? 'always' : isReducedMotion ? 'user' : 'never',
+        skipAnimations,
         children: /* @__PURE__ */ jsx(CollectionUtilsCacheProvider, {
           collectionUtils,
           children: /* @__PURE__ */ jsx(FetchClientProvider, {
@@ -49398,11 +49424,27 @@ var builtInUniforms = {
     name: 'u_pixelRatio',
     glslType: 'float',
   },
+  mousePosition: {
+    name: 'u_mousePosition',
+    glslType: 'vec4',
+  },
+  mousePointerDown: {
+    name: 'u_mousePointerDown',
+    glslType: 'float',
+  },
+  mouseHover: {
+    name: 'u_mouseHover',
+    glslType: 'float',
+  },
+  previousFrame: {
+    name: 'u_previousFrame',
+    glslType: 'sampler2D',
+  },
 };
 var webGLContextLostEvent = 'webglcontextlost';
 var noop5 = () => {};
 var WebGL2ShaderRenderer = class {
-  constructor(canvas, vertexSource, fragmentSource, resolutionScale, onContextLostHandler = noop5,) {
+  constructor(canvas, vertexSource, fragmentSource, resolutionScale, onContextLostHandler = noop5, feedbackLoop = false,) {
     __publicField(this, 'gl',);
     __publicField(this, 'program',);
     __publicField(this, 'vao',);
@@ -49418,9 +49460,16 @@ var WebGL2ShaderRenderer = class {
     __publicField(this, 'lastBufferWidth', 0,);
     __publicField(this, 'onContextLost',);
     __publicField(this, 'lastBufferHeight', 0,);
+    __publicField(this, 'feedbackLoopEnabled',);
+    __publicField(this, 'fbos', null,);
+    __publicField(this, 'fboTextures', null,);
+    __publicField(this, 'fboIndex', 0,);
+    __publicField(this, 'fboWidth', 0,);
+    __publicField(this, 'fboHeight', 0,);
     this.resolutionScale = resolutionScale;
     this.canvas = canvas;
     this.onContextLost = onContextLostHandler;
+    this.feedbackLoopEnabled = feedbackLoop;
     const gl = canvas.getContext('webgl2', {
       alpha: true,
       premultipliedAlpha: false,
@@ -49459,6 +49508,10 @@ var WebGL2ShaderRenderer = class {
       [builtInUniforms.resolution.name]: gl.getUniformLocation(program, builtInUniforms.resolution.name,),
       [builtInUniforms.deltaTime.name]: gl.getUniformLocation(program, builtInUniforms.deltaTime.name,),
       [builtInUniforms.pixelRatio.name]: gl.getUniformLocation(program, builtInUniforms.pixelRatio.name,),
+      [builtInUniforms.mousePosition.name]: gl.getUniformLocation(program, builtInUniforms.mousePosition.name,),
+      [builtInUniforms.mousePointerDown.name]: gl.getUniformLocation(program, builtInUniforms.mousePointerDown.name,),
+      [builtInUniforms.mouseHover.name]: gl.getUniformLocation(program, builtInUniforms.mouseHover.name,),
+      [builtInUniforms.previousFrame.name]: gl.getUniformLocation(program, builtInUniforms.previousFrame.name,),
     };
     this.customUniformLocations = /* @__PURE__ */ new Map();
     gl.clearColor(0, 0, 0, 0,);
@@ -49470,17 +49523,17 @@ var WebGL2ShaderRenderer = class {
     canvas.addEventListener(webGLContextLostEvent, this.contextLostHandler,);
   }
   /**
-   * Renders a frame with the given timing and optional custom uniforms.
+   * Renders a frame with the given timing, optional custom uniforms, and mouse input.
    */
-  render(elapsedTime, deltaTime, uniforms,) {
+  render(elapsedTime, deltaTime, uniforms, mouseInput,) {
     if (this.disposed) return;
     const {
       gl,
     } = this;
     gl.bindVertexArray(this.vao,);
-    this.updateBuiltInUniforms(elapsedTime, deltaTime,);
+    this.updateBuiltInUniforms(elapsedTime, deltaTime, mouseInput,);
+    let textureUnit = 0;
     if (uniforms) {
-      let textureUnit = 0;
       for (const uniformName in uniforms) {
         const uniformValue = uniforms[uniformName];
         if (!uniformValue) continue;
@@ -49498,8 +49551,31 @@ var WebGL2ShaderRenderer = class {
         }
       }
     }
-    gl.clear(gl.COLOR_BUFFER_BIT,);
-    gl.drawArrays(gl.TRIANGLES, 0, 6,);
+    if (this.feedbackLoopEnabled && this.fbos && this.fboTextures) {
+      const [fboA, fboB,] = this.fbos;
+      const [texA, texB,] = this.fboTextures;
+      const readTex = this.fboIndex === 0 ? texA : texB;
+      const writeFbo = this.fboIndex === 0 ? fboB : fboA;
+      const prevLocation = this.builtInUniformLocations[builtInUniforms.previousFrame.name];
+      gl.activeTexture(gl.TEXTURE0 + textureUnit,);
+      gl.bindTexture(gl.TEXTURE_2D, readTex,);
+      if (prevLocation !== null) {
+        gl.uniform1i(prevLocation, textureUnit,);
+      }
+      gl.bindFramebuffer(gl.FRAMEBUFFER, writeFbo,);
+      gl.clear(gl.COLOR_BUFFER_BIT,);
+      gl.drawArrays(gl.TRIANGLES, 0, 6,);
+      const w = this.canvas.width;
+      const h = this.canvas.height;
+      gl.bindFramebuffer(gl.READ_FRAMEBUFFER, writeFbo,);
+      gl.bindFramebuffer(gl.DRAW_FRAMEBUFFER, null,);
+      gl.blitFramebuffer(0, 0, w, h, 0, 0, w, h, gl.COLOR_BUFFER_BIT, gl.NEAREST,);
+      gl.bindFramebuffer(gl.FRAMEBUFFER, null,);
+      this.fboIndex = 1 - this.fboIndex;
+    } else {
+      gl.clear(gl.COLOR_BUFFER_BIT,);
+      gl.drawArrays(gl.TRIANGLES, 0, 6,);
+    }
   }
   /**
    * Syncs the canvas buffer and viewport to match display size, accounting for device pixel ratio.
@@ -49525,10 +49601,65 @@ var WebGL2ShaderRenderer = class {
     canvas.width = width;
     canvas.height = height;
     this.gl.viewport(0, 0, width, height,);
+    if (this.feedbackLoopEnabled) {
+      this.resizeFeedbackLoopBuffers(width, height,);
+    }
   }
-  resizeOffscreenCanvas(width, height,) {
+  /**
+   * @param pixelDensity - The ratio between the canvas's physical pixel
+   * dimensions and the logical (CSS) dimensions the shader should assume.
+   * Surfaces as `u_pixelRatio` so shaders can derive CSS-space values via
+   * `u_resolution / u_pixelRatio`. On-screen canvases get this from
+   * `window.devicePixelRatio`; offscreen renders must supply it explicitly
+   * when the canvas is supersampled (e.g. 2x for fallback image sharpness).
+   */
+  resizeOffscreenCanvas(width, height, pixelDensity,) {
     if (this.disposed) return;
+    if (pixelDensity !== void 0) this.pixelRatio = pixelDensity;
     this.gl.viewport(0, 0, width, height,);
+  }
+  /**
+   * Initializes the ping-pong framebuffers for feedback rendering.
+   * Must be called after the GL context and program are ready.
+   *
+   * Two screen-sized RGBA textures are allocated. On resize, both are cleared
+   * and recreated. On WebGL context loss, all FBO state is released.
+   */
+  initFeedbackLoopBuffers(width, height,) {
+    if (!this.feedbackLoopEnabled) return;
+    if (this.builtInUniformLocations[builtInUniforms.previousFrame.name] === null) return;
+    const {
+      gl,
+    } = this;
+    const texA = this.createFeedbackTexture(gl, width, height,);
+    const fboA = this.createFeedbackFramebuffer(gl, texA,);
+    const texB = this.createFeedbackTexture(gl, width, height,);
+    const fboB = this.createFeedbackFramebuffer(gl, texB,);
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null,);
+    gl.bindTexture(gl.TEXTURE_2D, null,);
+    this.fbos = [fboA, fboB,];
+    this.fboTextures = [texA, texB,];
+    this.fboWidth = width;
+    this.fboHeight = height;
+    this.fboIndex = 0;
+  }
+  createFeedbackTexture(gl, width, height,) {
+    const texture = gl.createTexture();
+    if (!texture) throw new Error('Failed to create feedback texture',);
+    gl.bindTexture(gl.TEXTURE_2D, texture,);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, width, height, 0, gl.RGBA, gl.UNSIGNED_BYTE, null,);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR,);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR,);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE,);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE,);
+    return texture;
+  }
+  createFeedbackFramebuffer(gl, texture,) {
+    const fbo = gl.createFramebuffer();
+    if (!fbo) throw new Error('Failed to create feedback framebuffer',);
+    gl.bindFramebuffer(gl.FRAMEBUFFER, fbo,);
+    gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, texture, 0,);
+    return fbo;
   }
   /**
    * Force all commands to complete execution; used for canvas fallback image generation
@@ -49548,6 +49679,7 @@ var WebGL2ShaderRenderer = class {
     const {
       gl,
     } = this;
+    this.disposeFeedbackLoopBuffers();
     for (const buffer of this.buffers) {
       gl.deleteBuffer(buffer,);
     }
@@ -49676,9 +49808,6 @@ var WebGL2ShaderRenderer = class {
       case 'vec2':
         this.gl.uniform2fv(location, uniform.value,);
         break;
-      case 'vec3':
-        this.gl.uniform3fv(location, uniform.value,);
-        break;
       case 'vec4':
         this.gl.uniform4fv(location, uniform.value,);
         break;
@@ -49723,7 +49852,40 @@ var WebGL2ShaderRenderer = class {
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR,);
     }
   }
-  updateBuiltInUniforms(elapsedTime, deltaTime,) {
+  resizeFeedbackLoopBuffers(width, height,) {
+    if (!this.fboTextures || width === this.fboWidth && height === this.fboHeight) return;
+    const {
+      gl,
+    } = this;
+    for (const texture of this.fboTextures) {
+      gl.bindTexture(gl.TEXTURE_2D, texture,);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, width, height, 0, gl.RGBA, gl.UNSIGNED_BYTE, null,);
+    }
+    gl.bindTexture(gl.TEXTURE_2D, null,);
+    if (this.fbos) {
+      for (const fbo of this.fbos) {
+        gl.bindFramebuffer(gl.FRAMEBUFFER, fbo,);
+        gl.clear(gl.COLOR_BUFFER_BIT,);
+      }
+      gl.bindFramebuffer(gl.FRAMEBUFFER, null,);
+    }
+    this.fboWidth = width;
+    this.fboHeight = height;
+  }
+  disposeFeedbackLoopBuffers() {
+    const {
+      gl,
+    } = this;
+    if (this.fboTextures) {
+      for (const tex of this.fboTextures) gl.deleteTexture(tex,);
+      this.fboTextures = null;
+    }
+    if (this.fbos) {
+      for (const fbo of this.fbos) gl.deleteFramebuffer(fbo,);
+      this.fbos = null;
+    }
+  }
+  updateBuiltInUniforms(elapsedTime, deltaTime, mouseInput,) {
     const {
       gl,
       builtInUniformLocations: locations,
@@ -49741,6 +49903,15 @@ var WebGL2ShaderRenderer = class {
     }
     if (locations[builtInUniforms.pixelRatio.name] !== null) {
       gl.uniform1f(locations[builtInUniforms.pixelRatio.name], pixelRatio,);
+    }
+    if (locations[builtInUniforms.mousePosition.name] !== null) {
+      gl.uniform4fv(locations[builtInUniforms.mousePosition.name], mouseInput.position,);
+    }
+    if (locations[builtInUniforms.mousePointerDown.name] !== null) {
+      gl.uniform1f(locations[builtInUniforms.mousePointerDown.name], mouseInput.pointerDown,);
+    }
+    if (locations[builtInUniforms.mouseHover.name] !== null) {
+      gl.uniform1f(locations[builtInUniforms.mouseHover.name], mouseInput.hover,);
     }
   }
 };
@@ -49938,14 +50109,14 @@ function generateHeightmap(image, getCacheKey2,) {
   const interior = new Uint8Array(size,);
   for (let i = 0; i < size; i++) {
     if (mask2[i] === 0) continue;
-    const x = i % width;
-    const y = Math.floor(i / width,);
-    if (x === 0 || x === width - 1 || y === 0 || y === height - 1) continue;
+    const x2 = i % width;
+    const y2 = Math.floor(i / width,);
+    if (x2 === 0 || x2 === width - 1 || y2 === 0 || y2 === height - 1) continue;
     let isBoundary = false;
     for (let dy = -1; dy <= 1 && !isBoundary; dy++) {
       for (let dx = -1; dx <= 1 && !isBoundary; dx++) {
         if (dx === 0 && dy === 0) continue;
-        if (mask2[(y + dy) * width + (x + dx)] === 0) isBoundary = true;
+        if (mask2[(y2 + dy) * width + (x2 + dx)] === 0) isBoundary = true;
       }
     }
     if (!isBoundary) interior[i] = 1;
@@ -49996,10 +50167,10 @@ function solvePoissonField(interior, width, height,) {
   const blackEntries = [];
   for (let i = 0; i < size; i++) {
     if (interior[i] === 0) continue;
-    const x = i % width;
-    const y = Math.floor(i / width,);
-    const entries = (x + y) % 2 === 0 ? redEntries : blackEntries;
-    entries.push(i, y > 0 ? i - width : -1, y < height - 1 ? i + width : -1, x > 0 ? i - 1 : -1, x < width - 1 ? i + 1 : -1,);
+    const x2 = i % width;
+    const y2 = Math.floor(i / width,);
+    const entries = (x2 + y2) % 2 === 0 ? redEntries : blackEntries;
+    entries.push(i, y2 > 0 ? i - width : -1, y2 < height - 1 ? i + width : -1, x2 > 0 ? i - 1 : -1, x2 < width - 1 ? i + 1 : -1,);
   }
   const red = new Int32Array(redEntries,);
   const black = new Int32Array(blackEntries,);
@@ -50058,6 +50229,12 @@ var overlayStyle = {
   height: '100%',
 };
 var timeMultiplier = 1e-3;
+var offScreen = -999;
+var defaultMouseData = {
+  position: [offScreen, offScreen, 0, 0,],
+  pointerDown: 0,
+  hover: 0,
+};
 function resolveCSSVariableColor(color2, element,) {
   const parsed = parseCSSVariable2(color2,);
   if (!parsed.customProperty) return color2;
@@ -50207,6 +50384,12 @@ function getShaderTiming(timeMs, startTime, lastTime,) {
     deltaTime,
   };
 }
+function resolveFeedbackLoop(feedbackLoop, isMouseEnabled,) {
+  if (feedbackLoop === void 0) return false;
+  if (feedbackLoop === 'always') return true;
+  if (feedbackLoop === 'onlyWhenMouseEnabled') return isMouseEnabled;
+  return false;
+}
 var sandboxFallbackImageStyle = {
   display: 'block',
   width: '100%',
@@ -50295,7 +50478,7 @@ var ShaderSandboxFallbackImage = /* @__PURE__ */ memo2(function ShaderSandboxFal
   const containerStyle2 = {
     ...overlayStyle,
     opacity: hidden ? 0 : 1,
-    pointerEvents: hidden ? 'none' : 'auto',
+    pointerEvents: hidden ? 'none' : void 0,
   };
   return /* @__PURE__ */ jsxs('div', {
     style: containerStyle2,
@@ -50419,13 +50602,13 @@ function useShaderRenderState(
   if (poolSlot !== null) {
     const hasSlot = poolSlot !== slotStatus.noSlot;
     isFallbackOnly = !hasSlot || !!shouldReduceMotion && !!fallbackImage;
-    effectiveAnimated = isSelected && !isMultiSelected;
+    effectiveAnimated = (animated ?? true) && isSelected && !isMultiSelected;
     effectiveSingleFrame = hasSlot && !effectiveAnimated;
     effectiveMode = 'instant';
   } else {
     isFallbackOnly = mode === 'fallback' || !!shouldReduceMotion && !!fallbackImage || !isIntersecting;
     effectiveAnimated = animated ?? true;
-    effectiveSingleFrame = false;
+    effectiveSingleFrame = !effectiveAnimated;
     effectiveMode = mode;
   }
   const [contextLost, setContextLost,] = useState(false,);
@@ -50486,6 +50669,8 @@ function ShaderCanvas({
   onContextLost,
   singleFrame: singleFrame2 = false,
   heightmapSource,
+  mouseDataRef,
+  feedbackLoop = false,
 },) {
   const canvasRef = useRef(null,);
   const rendererRef = useRef(null,);
@@ -50529,7 +50714,7 @@ function ShaderCanvas({
     if (!renderer) return;
     if (singleFrameRef.current) {
       renderer.resize();
-      renderer.render(0, 0, resolvedUniformsRef.current,);
+      renderer.render(0, 0, resolvedUniformsRef.current, mouseDataRef?.current ?? defaultMouseData,);
       return;
     }
     renderer.resize();
@@ -50539,19 +50724,19 @@ function ShaderCanvas({
       deltaTime,
     } = getShaderTiming(time2, startTimeRef.current, lastTimeRef.current,);
     lastTimeRef.current = currentTime;
-    renderer.render(elapsedTime, deltaTime, resolvedUniformsRef.current,);
+    renderer.render(elapsedTime, deltaTime, resolvedUniformsRef.current, mouseDataRef?.current ?? defaultMouseData,);
     signalReadyIfNeeded();
     if (!singleFrameRef.current && animatedRef.current) {
       animationFrameRef.current = requestAnimationFrame(animate3,);
     }
-  }, [signalReadyIfNeeded,],);
+  }, [signalReadyIfNeeded, mouseDataRef,],);
   const renderSingleFrame = useCallback2(() => {
     const renderer = rendererRef.current;
     if (!renderer) return;
     renderer.resize();
-    renderer.render(0, 0, resolvedUniformsRef.current,);
+    renderer.render(0, 0, resolvedUniformsRef.current, mouseDataRef?.current ?? defaultMouseData,);
     signalReadyIfNeeded();
-  }, [signalReadyIfNeeded,],);
+  }, [mouseDataRef, signalReadyIfNeeded,],);
   useLayoutEffect(() => {
     resolvedUniformsRef.current = resolvedUniforms;
     if (singleFrameRef.current && rendererRef.current) {
@@ -50569,9 +50754,11 @@ function ShaderCanvas({
         fragmentShader,
         resolveResolutionScale(resolutionScale,),
         onContextLostRef.current,
+        feedbackLoop,
       );
       rendererRef.current = renderer;
       renderer.resize();
+      if (feedbackLoop) renderer.initFeedbackLoopBuffers(canvas.width, canvas.height,);
       startTimeRef.current = performance.now() * timeMultiplier;
       lastTimeRef.current = startTimeRef.current;
       if (singleFrameRef.current) {
@@ -50589,7 +50776,7 @@ function ShaderCanvas({
       rendererRef.current?.dispose();
       rendererRef.current = null;
     };
-  }, [vertexShader, fragmentShader, resolutionScale, animate3, renderSingleFrame, onError,],);
+  }, [vertexShader, fragmentShader, resolutionScale, animate3, renderSingleFrame, onError, feedbackLoop,],);
   const wasAnimatedRef = useRef(animated,);
   const wasReactiveRef = useRef(singleFrame2,);
   useEffect(() => {
@@ -50617,8 +50804,8 @@ function ShaderCanvas({
       deltaTime,
     } = getShaderTiming(performance.now(), startTimeRef.current, lastTimeRef.current,);
     lastTimeRef.current = currentTime;
-    renderer.render(elapsedTime, deltaTime, resolvedUniformsRef.current,);
-  }, [renderSingleFrame,],);
+    renderer.render(elapsedTime, deltaTime, resolvedUniformsRef.current, mouseDataRef?.current ?? defaultMouseData,);
+  }, [mouseDataRef, renderSingleFrame,],);
   useCanvasResize(canvasRef, handleResize,);
   return /* @__PURE__ */ jsx('canvas', {
     ref: canvasRef,
@@ -50641,6 +50828,8 @@ var ShaderWithFallbackOverlay = /* @__PURE__ */ memo2(function ShaderWithFallbac
   singleFrame: singleFrame2,
   onContextLost,
   heightmapSource,
+  mouseDataRef,
+  feedbackLoop,
 },) {
   const [isShaderReady, setIsShaderReady,] = useState(false,);
   const [shouldPlay, setShouldPlay,] = useState(false,);
@@ -50689,6 +50878,8 @@ var ShaderWithFallbackOverlay = /* @__PURE__ */ memo2(function ShaderWithFallbac
           onReady: handleReady,
           onContextLost,
           heightmapSource,
+          mouseDataRef,
+          feedbackLoop,
         },),
       },),
       fallbackImage && !shouldSkipInitialFallback && /* @__PURE__ */ jsx('div', {
@@ -50705,6 +50896,151 @@ var ShaderWithFallbackOverlay = /* @__PURE__ */ memo2(function ShaderWithFallbac
     ],
   },);
 },);
+var x;
+var y;
+function initPointerTracking() {
+  x = motionValue(0,);
+  y = motionValue(0,);
+  let pointerX = 0;
+  let pointerY = 0;
+  function updatePointer() {
+    if (!x || !y) return;
+    x.set(pointerX,);
+    y.set(pointerY,);
+  }
+  if (typeof __unframerWindow2 !== 'undefined') {
+    __unframerWindow2.addEventListener(
+      'pointermove',
+      onlyMouse((event) => {
+        pointerX = event.clientX;
+        pointerY = event.clientY;
+        frame.update(updatePointer,);
+      },),
+    );
+    __unframerWindow2.addEventListener('dragover', (event) => {
+      pointerX = event.clientX;
+      pointerY = event.clientY;
+      frame.update(updatePointer,);
+    },);
+  }
+}
+function usePointerPosition(enabled = true,) {
+  if (enabled && !x) initPointerTracking();
+  return {
+    x,
+    y,
+  };
+}
+function onlyMouse(callback,) {
+  return (event) => {
+    if (event.pointerType === 'mouse') {
+      callback(event,);
+    }
+  };
+}
+var fallbackShaderMouseSpringOptions = {
+  duration: 0,
+};
+function toSpringOptions(spring2,) {
+  const resolved = spring2 ?? fallbackShaderMouseSpringOptions;
+  return resolved.duration !== void 0
+    ? {
+      ...resolved,
+      duration: resolved.duration * 1e3,
+    }
+    : resolved;
+}
+function toElementRelative(rect, clientX, clientY,) {
+  if (!rect || rect.width <= 0 || rect.height <= 0) return [offScreen, offScreen,];
+  const x2 = (clientX - rect.left) / rect.width;
+  const y2 = 1 - (clientY - rect.top) / rect.height;
+  return [x2, y2,];
+}
+function useShaderMouse(containerRef, mouseConfig,) {
+  const dataRef = useRef(defaultMouseData,);
+  const enabled = mouseConfig?.enabled ?? false;
+  const springOptions = toSpringOptions(mouseConfig?.springOptions,);
+  const rectRef = useRef(null,);
+  const updateRect = useCallback2(() => {
+    const el = containerRef.current;
+    if (el) rectRef.current = el.getBoundingClientRect();
+  }, [containerRef,],);
+  const {
+    x: trackedX,
+    y: trackedY,
+  } = usePointerPosition(enabled,);
+  const stubX = useMotionValue(0,);
+  const stubY = useMotionValue(0,);
+  const pointerX = trackedX ?? stubX;
+  const pointerY = trackedY ?? stubY;
+  const rawX = useTransform(pointerX, (x2) => toElementRelative(rectRef.current, x2, pointerY.get(),)[0],);
+  const rawY = useTransform(pointerY, (y2) => toElementRelative(rectRef.current, pointerX.get(), y2,)[1],);
+  const rawPointerDown = useMotionValue(0,);
+  const rawHover = useMotionValue(0,);
+  const smoothX = useSpring(rawX, springOptions,);
+  const smoothY = useSpring(rawY, springOptions,);
+  const smoothPointerDown = useSpring(rawPointerDown, springOptions,);
+  const smoothHover = useSpring(rawHover, springOptions,);
+  const velocityX = useVelocity(smoothX,);
+  const velocityY = useVelocity(smoothY,);
+  useEffect(() => {
+    if (!enabled) return;
+    const el = containerRef.current;
+    if (!el) return;
+    updateRect();
+    let hasEnteredOnce = false;
+    __unframerWindow2.addEventListener('scroll', updateRect, {
+      passive: true,
+      capture: true,
+    },);
+    const cleanupResize = resize(el, updateRect,);
+    const cleanupHover = hover(el, () => {
+      if (!hasEnteredOnce) {
+        hasEnteredOnce = true;
+        smoothX.jump(rawX.get(),);
+        smoothY.jump(rawY.get(),);
+      }
+      frame.update(() => rawHover.set(1,));
+      return () => frame.update(() => rawHover.set(0,));
+    },);
+    const cleanupPress = press(el, () => {
+      frame.update(() => rawPointerDown.set(1,));
+      return () => frame.update(() => rawPointerDown.set(0,));
+    },);
+    return () => {
+      __unframerWindow2.removeEventListener('scroll', updateRect, {
+        capture: true,
+      },);
+      cleanupResize();
+      cleanupHover();
+      cleanupPress();
+      dataRef.current = defaultMouseData;
+    };
+  }, [enabled, containerRef, rawX, rawY, rawPointerDown, rawHover, smoothX, smoothY, updateRect,],);
+  const syncToRef = useCallback2(() => {
+    dataRef.current = {
+      position: [smoothX.get(), smoothY.get(), velocityX.get(), velocityY.get(),],
+      pointerDown: smoothPointerDown.get(),
+      hover: smoothHover.get(),
+    };
+  }, [smoothX, smoothY, smoothPointerDown, smoothHover, velocityX, velocityY,],);
+  useConditionalAnimationFrame(enabled, syncToRef,);
+  return dataRef;
+}
+function useConditionalAnimationFrame(enabled, callback,) {
+  useEffect(() => {
+    if (!enabled) return;
+    let rafId = 0;
+    let lastTime = performance.now();
+    function tick(time2,) {
+      callback(time2, time2 - lastTime,);
+      lastTime = time2;
+      rafId = requestAnimationFrame(tick,);
+    }
+    rafId = requestAnimationFrame(tick,);
+    return () => cancelAnimationFrame(rafId,);
+  }, [enabled, callback,],);
+}
 var shaderPriority = {
   low: 0,
   medium: 1,
@@ -50753,6 +51089,8 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
   isSelected = false,
   isMultiSelected = false,
   heightmapSource,
+  mouse,
+  feedbackLoop,
   ...rest
 }, ref,) {
   const observerRef = useObserverRef(ref,);
@@ -50760,6 +51098,7 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
   const shouldSkipPreviewFallback = RenderTarget.current() === RenderTarget.preview && renderTargetEnvironment === 'preview';
   const shouldSkipInitialFallback = Boolean(fallbackImage && (skipInitialFallback || shouldSkipPreviewFallback),);
   const isOnCanvas = useIsOnFramerCanvas();
+  const mouseDataRef = useShaderMouse(observerRef, isOnCanvas ? void 0 : mouse,);
   const [isIntersecting, setIsIntersecting,] = useState(shouldSkipInitialFallback,);
   const intersectionCallback = useCallback2((entry) => {
     startTransition2(() => setIsIntersecting(entry.isIntersecting,));
@@ -50797,6 +51136,7 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
     startTransition2(() => setIsShaderReady(true,));
     onReady?.();
   }, [onReady,],);
+  const effectiveFeedbackLoop = resolveFeedbackLoop(feedbackLoop, mouse?.enabled === true,);
   const shaderProps = {
     vertexShader,
     fragmentShader,
@@ -50805,6 +51145,7 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
     onError,
     onContextLost,
     heightmapSource,
+    feedbackLoop: effectiveFeedbackLoop,
   };
   const containerFrameProps = {
     style: style2,
@@ -50825,6 +51166,7 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
           ...shaderProps,
           animated: effectiveAnimated,
           singleFrame: effectiveSingleFrame,
+          mouseDataRef,
         },),
         /* @__PURE__ */ jsx(ShaderSandboxFallbackImage, {
           src: fallbackImage,
@@ -50854,6 +51196,7 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
       ...shaderProps,
       animated: effectiveAnimated,
       singleFrame: effectiveSingleFrame,
+      mouseDataRef,
     },),
   },);
 },);
@@ -50873,6 +51216,7 @@ var ShaderContainerFrame = /* @__PURE__ */ forwardRef(function ShaderContainerFr
     __fromCanvasComponent: true,
     style: styles4,
     ...rest,
+    componentType: 'Shader',
     children,
   },);
 },);
@@ -52483,7 +52827,7 @@ function getAssetOwnerType(asset,) {
 async function loadFontsWithOpenType(source,) {
   switch (source) {
     case 'google': {
-      const supportedFonts = await import('./framer-chunks/google-R6BUSN2F-2FOYDAB4.js');
+      const supportedFonts = await import('./framer-chunks/google-OGWBHVGI-QC7UAA2X.js');
       return supportedFonts.default;
     }
     case 'fontshare': {
@@ -52497,7 +52841,7 @@ async function loadFontsWithOpenType(source,) {
 async function loadFontToOpenTypeFeatures(source,) {
   switch (source) {
     case 'google': {
-      const features = await import('./framer-chunks/google-YUHGDXQ4-5ORV5F75.js');
+      const features = await import('./framer-chunks/google-BHSMRPXK-IHHGYJRR.js');
       return features.default;
     }
     case 'fontshare': {
@@ -53049,7 +53393,7 @@ function loadVariationAxes(source,) {
       const axes = (async () => {
         switch (source) {
           case 'google': {
-            return (await import('./framer-chunks/google-UUNZTU2J-CVO5HK6V.js')).default;
+            return (await import('./framer-chunks/google-5NZOMG37-U44YENDC.js')).default;
           }
           case 'fontshare': {
             return (await import('./framer-chunks/fontshare-X63NXWGB-NRPGYMPJ.js')).default;
@@ -53811,6 +54155,13 @@ var styles = /* @__PURE__ */ (() => [
   },),
 ])();
 var FormPlainTextInput2 = /* @__PURE__ */ withCSS(PlainTextInput, styles, 'framer-lib-form-plain-text-input',);
+function useBooleanLatch(value, latchTo = true,) {
+  const [latchedValue, setLatchedValue,] = useState(value,);
+  if (latchedValue !== latchTo && latchedValue !== value) {
+    setLatchedValue(value,);
+  }
+  return latchedValue;
+}
 var className = 'framer-form-boolean-input';
 var getCheckedFromEvent = (event) => event.target.checked;
 var BooleanInput = /* @__PURE__ */ React42.forwardRef(function FormBooleanInput(props, ref,) {
@@ -53827,7 +54178,7 @@ var BooleanInput = /* @__PURE__ */ React42.forwardRef(function FormBooleanInput(
     ...rest
   } = props;
   const isCanvas = useIsOnFramerCanvas();
-  const isControlled = !isCanvas && checked !== void 0;
+  const isControlled = useBooleanLatch(!isCanvas && checked !== void 0,);
   const externalChecked = checked ?? false;
   const [optimisticChecked, , handleChange,] = useOptimisticValue(externalChecked, isControlled, onChange, getCheckedFromEvent,);
   const setReplayInputRef = useReplayPreHydrationInput(isControlled ? externalChecked : defaultChecked,);
@@ -57397,8 +57748,8 @@ var svgElementAttributeDefaults = {
 };
 function createTransformValues(baseTransform, mode,) {
   let {
-    x,
-    y,
+    x: x2,
+    y: y2,
   } = baseTransform;
   const {
     width,
@@ -57406,12 +57757,12 @@ function createTransformValues(baseTransform, mode,) {
     rotation,
   } = baseTransform;
   if (mode === 'resetXY') {
-    x = 0;
-    y = 0;
+    x2 = 0;
+    y2 = 0;
   }
   return {
-    x,
-    y,
+    x: x2,
+    y: y2,
     width,
     height,
     rotation,
@@ -57443,15 +57794,15 @@ function transformString2(transform2,) {
     return void 0;
   }
   const {
-    x,
-    y,
+    x: x2,
+    y: y2,
     rotation,
     width,
     height,
   } = transform2;
   let result;
-  if (x !== 0 || y !== 0) {
-    result = `translate(${roundedNumberString(x, 3,)} ${roundedNumberString(y, 3,)})`;
+  if (x2 !== 0 || y2 !== 0) {
+    result = `translate(${roundedNumberString(x2, 3,)} ${roundedNumberString(y2, 3,)})`;
   }
   if (rotation !== 0) {
     const roundedRotation = roundedNumberString(rotation, 4,);
@@ -57628,8 +57979,8 @@ var Vector = /* @__PURE__ */ (() => {
         transition,
         fillOpacity,
         visible,
-        x,
-        y,
+        x: x2,
+        y: y2,
         width,
         height,
       } = this.props;
@@ -57640,8 +57991,8 @@ var Vector = /* @__PURE__ */ (() => {
         target,
       } = RenderEnvironment;
       const rect = {
-        x,
-        y,
+        x: x2,
+        y: y2,
         width,
         height,
       };
@@ -57926,8 +58277,8 @@ var VectorGroup = /* @__PURE__ */ (() => {
         defaultName,
         children,
         includeTransform,
-        x,
-        y,
+        x: x2,
+        y: y2,
         width,
         height,
         rotation,
@@ -57938,8 +58289,8 @@ var VectorGroup = /* @__PURE__ */ (() => {
         target,
       } = RenderEnvironment;
       const rect = {
-        x,
-        y,
+        x: x2,
+        y: y2,
         width,
         height,
       };
@@ -58441,7 +58792,7 @@ var package_default = {
   },
   devDependencies: {
     '@juggle/resize-observer': '^3.4.0',
-    '@microsoft/api-extractor': '^7.57.7',
+    '@microsoft/api-extractor': '^7.58.2',
     '@testing-library/dom': '^8.19.1',
     '@testing-library/jest-dom': '^5.16.5',
     '@testing-library/react': '^13.4.0',
