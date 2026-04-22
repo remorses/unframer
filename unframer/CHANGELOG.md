@@ -1,5 +1,21 @@
 # unframer
 
+## 4.1.7
+
+1. **Fixed `--external` flag silently failing** — the `--external` CLI flag was parsed as an empty string when used without a package name, but the code only checked for `true`. This meant npm dependencies were always fetched from esm.sh and bundled instead of externalized, causing `ERR_MODULE_NOT_FOUND` errors during type extraction. Now `--external` correctly externalizes all npm packages:
+
+   ```bash
+   # Externalize all npm deps (now works correctly)
+   unframer <projectId> --external
+
+   # Externalize a specific package
+   unframer <projectId> --external react
+   ```
+
+2. **Fixed duplicate import errors when a component appears multiple times on a page** — when the same Framer component was used more than once on the index page (e.g. `image-3` appearing twice), the generated example code emitted duplicate `import` statements with the same identifier, causing vite/rolldown to fail with `Identifier has already been declared`. Imports are now deduplicated while keeping all JSX usages intact.
+
+3. **Updated bundled Framer runtime** — refreshed the packaged Framer internals to the latest version, including new shader features (mouse input uniforms, feedback loops, heightmap generation) and font metadata updates.
+
 ## 4.1.6
 
 1. **Fixed duplicate import identifiers in generated example code** — projects that contain components with the same leaf name in different folders no longer produce invalid sample apps with redeclared imports. `unframer` now only folds parent folders into the generated identifier when a collision actually exists, so stable names stay unchanged for non-conflicting components.
