@@ -72,6 +72,7 @@ export function esbuildPluginBundleDependencies({
                 if (signal?.aborted) {
                     throw new Error('aborted')
                 }
+
                 if (args.path.startsWith('https://')) {
                     return {
                         path: args.path,
@@ -140,6 +141,16 @@ export function esbuildPluginBundleDependencies({
 
                 // console.log('resolve', args.path)
                 if (args.path.startsWith('.') || args.path.startsWith('/')) {
+                    // esm.sh uses /*@pkg@version/path for unbundled deps; when externalizing npm,
+                    // strip the esm.sh prefix and treat as a bare npm specifier
+                    if (externalizeNpm && args.path.startsWith('/*')) {
+                        const bare = args.path.slice(2) // remove /*
+                        const pkg = getPackageName(bare)
+                        return {
+                            path: pkg,
+                            external: true,
+                        }
+                    }
                     const u = new URL(args.path, args.importer).toString()
                     // logger.log('resolve', u)
                     return {

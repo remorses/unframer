@@ -56,13 +56,12 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
     .action(async function main(projectId, options) {
         const outDir = options.outDir || defaultOutDir
         const jsx = options.jsx ?? true
-        const external_ = options.external ?? true
-        const allExternal = external_ === true
-        const externalPackages: string[] = Array.isArray(external_)
-            ? external_.filter((x) => x.trim())
-            : typeof external_ === 'string'
-              ? [external_]
-              : []
+        const external_ = options.external
+        // --external without value gives "" (optional value); treat same as undefined (all external)
+        const allExternal = !external_ || external_ === ''
+        const externalPackages: string[] = external_ && external_ !== ''
+            ? [external_]
+            : []
         try {
             if (options.debug) {
                 logger.debug = true
