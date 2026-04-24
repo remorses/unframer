@@ -12683,7 +12683,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.5QPM6PIP.mjs
+// /:https://app.framerstatic.com/framer.LKVQY2XZ.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -50624,7 +50624,9 @@ function useShaderRenderState(
     isFallbackOnly = true;
   }
   const reducedMotionFallback = !!shouldReduceMotion && !!fallbackImage;
-  if (mode !== 'fallback' && skipInitialFallback && !contextLost && !reducedMotionFallback && isIntersecting) {
+  if (
+    mode !== 'fallback' && skipInitialFallback && !contextLost && !reducedMotionFallback && isIntersecting && poolSlot !== slotStatus.noSlot
+  ) {
     isFallbackOnly = false;
   }
   return {
