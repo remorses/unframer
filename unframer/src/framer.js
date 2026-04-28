@@ -12683,7 +12683,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.LKVQY2XZ.mjs
+// /:https://app.framerstatic.com/framer.QXA2C6UX.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, } from 'react';
@@ -14063,7 +14063,13 @@ function assert(condition, ...msg) {
   throw e;
 }
 function assertNever(x2, error,) {
-  throw error || new Error(x2 ? `Unexpected value: ${x2}` : 'Application entered invalid state',);
+  if (error instanceof Error) {
+    throw error;
+  }
+  if (error !== void 0) {
+    throw new Error(String(error,),);
+  }
+  throw new Error(x2 ? `Unexpected value: ${x2}` : 'Application entered invalid state',);
 }
 var PromiseState = {
   Pending: 'pending',
@@ -56007,6 +56013,15 @@ var FitText = /* @__PURE__ */ forwardRef(function FitText2({
 },);
 var defaultFonts = [];
 var richTextContainerComponentType = 'RichTextContainer';
+function getValidRestProps(rest,) {
+  const validProps = {};
+  for (const key7 in rest) {
+    if (isValidMotionProp(key7,) || isPropValid(key7,)) {
+      validProps[key7] = rest[key7];
+    }
+  }
+  return validProps;
+}
 var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(props, forwardedRef,) {
   const {
     __fromCanvasComponent = false,
@@ -56047,7 +56062,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
     ...rest
   } = props;
   const parentSize = useParentSize();
-  const isOnCanvas = useIsOnFramerCanvas();
+  const isOnCanvas = environment2() === RenderTarget.canvas;
   const inCodeComponent = useContext(ComponentContainerContext,);
   const layoutId = useLayoutId2(props,);
   const fallbackRef = useRef(null,);
@@ -56060,7 +56075,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
     return processRichTextChildren(children, stylesPresetsClassNames, plainText, anchorLinkOffsetY, void 0, textEffect.getTokenizer(),);
   }, [children, stylesPresetsClassNames, plainText, anchorLinkOffsetY, textEffect,],);
   if (!visible) return null;
-  const isHidden = isEditable && environment2() === RenderTarget.canvas;
+  const isHidden = isEditable && isOnCanvas;
   const containerStyle2 = {
     opacity: isHidden ? 0 : opacity,
   };
@@ -56114,10 +56129,11 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
   }
   const Component18 = htmlElementAsMotionComponent(props.as,);
   const dataFramerName = rest['data-framer-name'] ?? name;
+  const validRestProps = isOnCanvas ? getValidRestProps(asRecord(rest,),) : rest;
   if (isString(props.viewBox,)) {
     if (props.as !== void 0) {
       return /* @__PURE__ */ jsx(Component18, {
-        ...rest,
+        ...validRestProps,
         ref: containerRef,
         style: containerStyle2,
         layoutId,
@@ -56136,7 +56152,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
       },);
     } else {
       return /* @__PURE__ */ jsx(FitText, {
-        ...rest,
+        ...validRestProps,
         ref: containerRef,
         style: containerStyle2,
         layoutId,
@@ -56150,7 +56166,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
     }
   }
   return /* @__PURE__ */ jsx(Component18, {
-    ...rest,
+    ...validRestProps,
     ref: containerRef,
     style: containerStyle2,
     layoutId,
