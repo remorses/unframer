@@ -12,9 +12,9 @@ import {
   __require,
   __runInitializers,
   __toESM,
-} from './framer-chunks/chunk-OAKBJJLO.js';
+} from './framer-chunks/chunk-2DZGP7C2.js';
 
-// /:https://app.framerstatic.com/chunk-353AYBZV.mjs
+// /:https://app.framerstatic.com/chunk-DMWFUAJG.mjs
 import { createContext, } from 'react';
 import { useEffect, useLayoutEffect, } from 'react';
 import * as React from 'react';
@@ -12683,11 +12683,10 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.QXA2C6UX.mjs
+// /:https://app.framerstatic.com/framer.4LL63TY5.mjs
 
 import React42 from 'react';
-import { startTransition as startTransition2, } from 'react';
-import { useSyncExternalStore, } from 'react';
+import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
 import { Suspense as Suspense2, } from 'react';
 import { memo as memo2, } from 'react';
 import ReactDOM from 'react-dom';
@@ -16046,6 +16045,9 @@ async function pushRouteState(routeId, route, {
     siteCanonicalURL,
     localeId,
   },);
+  const isSameRouteNavigation = currentRoutePath !== void 0 && currentRoutePath === path;
+  const previousState = isHistoryState(__unframerWindow2.history.state,) ? __unframerWindow2.history.state : void 0;
+  const queryParamBackAnchorSearch = isSameRouteNavigation ? previousState?.queryParamBackAnchorSearch : void 0;
   try {
     return await pushHistoryState(
       {
@@ -16053,6 +16055,7 @@ async function pushRouteState(routeId, route, {
         hash: hash2,
         pathVariables,
         localeId,
+        queryParamBackAnchorSearch,
       },
       newPath,
       isNavigationTransition,
@@ -16249,6 +16252,8 @@ function getPathForRoute(route, {
     path = path.replace(pathVariablesRegExpGlobal, (m2, p1,) => String(pathVariables[p1] || m2,),);
   }
   const isSamePageHashNavigation = Boolean(currentPath === path && resolvedHash,);
+  const isSameDynamicRouteNavigation = !isSamePageHashNavigation && pathVariables !== void 0 && currentRoutePath !== void 0 &&
+    route?.path !== void 0 && currentRoutePath === route.path && currentPath !== path;
   if (relative2) {
     if (customNotFoundPagePaths.has(currentPath,) && typeof __unframerWindow2 !== 'undefined') {
       const sitePrefix = getSitePrefix(siteCanonicalURL,);
@@ -16257,8 +16262,9 @@ function getPathForRoute(route, {
       path = computeRelativePath(currentPath, path,);
     }
   }
-  if (preserveQueryParams || isSamePageHashNavigation) {
-    path = forwardCurrentQueryParams(path, isSamePageHashNavigation,);
+  const ignoreBackAnchor = isSamePageHashNavigation || isSameDynamicRouteNavigation;
+  if (preserveQueryParams || ignoreBackAnchor) {
+    path = forwardCurrentQueryParams(path, ignoreBackAnchor,);
   }
   if (resolvedHash) {
     path = `${path}#${resolvedHash}`;
@@ -16557,6 +16563,24 @@ var LayoutDirectionContext = /* @__PURE__ */ (() => {
 function useLayoutDirection() {
   return React42.useContext(LayoutDirectionContext,);
 }
+var urlSearchStringSubscribers = /* @__PURE__ */ new Set();
+function getURLSearchStringSnapshot() {
+  return __unframerWindow2.location.search;
+}
+function getServerURLSearchStringSnapshot() {
+  return '';
+}
+function subscribeToURLSearchString(callback,) {
+  urlSearchStringSubscribers.add(callback,);
+  __unframerWindow2.addEventListener('popstate', callback,);
+  return () => {
+    urlSearchStringSubscribers.delete(callback,);
+    __unframerWindow2.removeEventListener('popstate', callback,);
+  };
+}
+function notifyURLSearchStringSubscribers() {
+  for (const subscriber of urlSearchStringSubscribers) subscriber();
+}
 var URLSearchParamsContext = /* @__PURE__ */ (() => {
   const Context2 = createContext({
     urlSearchParams: new URLSearchParams(),
@@ -16569,30 +16593,20 @@ function URLSearchParamsProvider({
   children,
 },) {
   const renderTargetEnvironment = useRenderTargetEnvironment();
-  const [urlSearchString, setUrlSearchString,] = useState(() => {
-    if (renderTargetEnvironment === 'preview') return '';
-    if (typeof __unframerWindow2 === 'undefined') return '';
-    return __unframerWindow2.location.search;
-  },);
-  useEffect(() => {
-    if (renderTargetEnvironment === 'preview') return;
-    startTransition2(() => {
-      setUrlSearchString(__unframerWindow2.location.search,);
-    },);
-    const handlePopState = () => {
-      startTransition2(() => {
-        setUrlSearchString(__unframerWindow2.location.search,);
-      },);
-    };
-    __unframerWindow2.addEventListener('popstate', handlePopState,);
-    return () => {
-      __unframerWindow2.removeEventListener('popstate', handlePopState,);
-    };
-  }, [],);
+  const isPreview = renderTargetEnvironment === 'preview';
+  const [previewURLSearchString, setPreviewURLSearchString,] = useState('',);
+  const siteURLSearchString = useSyncExternalStore(
+    subscribeToURLSearchString,
+    getURLSearchStringSnapshot,
+    getServerURLSearchStringSnapshot,
+  );
+  const deferredURLSearchString = useDeferredValue(siteURLSearchString,);
+  useRouter();
+  const urlSearchString = isPreview ? previewURLSearchString : deferredURLSearchString;
   const replaceSearchParams = useCallback2(async (replacer) => {
-    if (renderTargetEnvironment === 'preview') {
+    if (isPreview) {
       startTransition2(() => {
-        setUrlSearchString((currentSearchString) => {
+        setPreviewURLSearchString((currentSearchString) => {
           const currentParams = new URLSearchParams(currentSearchString,);
           return replacer(currentParams,).toString();
         },);
@@ -16620,10 +16634,8 @@ function URLSearchParamsProvider({
     } else {
       replaceHistoryState(nextHistoryState, urlString,);
     }
-    startTransition2(() => {
-      setUrlSearchString(newSearchString,);
-    },);
-  }, [],);
+    notifyURLSearchStringSubscribers();
+  }, [isPreview,],);
   const value = useMemoOne(() => ({
     urlSearchParams: new URLSearchParams(urlSearchString,),
     replaceSearchParams,
@@ -46651,6 +46663,12 @@ function getCacheKey(query, locale,) {
   const localeId = locale?.id ?? 'default';
   return JSON.stringify(query, replaceCollection,) + localeId;
 }
+async function executeServerDatabaseQuery(sql,) {
+  const {
+    executeServerDatabaseQuery: executeServerDatabaseQueryWithSqlite,
+  } = await import('./framer-chunks/SqliteDatabase-VAKIICSG-4V7VUOPR.js');
+  return executeServerDatabaseQueryWithSqlite(sql,);
+}
 var queryEngine = /* @__PURE__ */ new QueryEngine();
 var queryCache = /* @__PURE__ */ new QueryCache(queryEngine,);
 function useQueryData(query,) {
@@ -50545,23 +50563,36 @@ var ShaderPoolContext = /* @__PURE__ */ createContext(null,);
 function useShaderPoolContext() {
   return useContext(ShaderPoolContext,);
 }
-function useResolvedUniforms(uniforms, canvasRef, heightmapSource,) {
+function useResolvedUniforms(uniforms, canvasRef, heightmapSource, onUniformResolutionSucceeded, onUniformResolutionFailed,) {
   const [resolvedUniforms, setResolvedUniforms,] = useState({},);
+  const [haveUniformsResolved, setHaveUniformsResolved,] = useState(uniforms === void 0,);
   useEffect(() => {
-    if (!uniforms) return;
+    if (!uniforms) {
+      startTransition2(() => setHaveUniformsResolved(true,));
+      return;
+    }
     let isCancelled = false;
     resolveUniforms(uniforms, canvasRef.current, heightmapSource,).then((resolved) => {
-      if (!isCancelled) {
-        startTransition2(() => setResolvedUniforms(resolved,));
-      } else {
+      if (isCancelled) {
         closeImageBitmaps(resolved,);
+        return;
       }
-    },).catch(() => {},);
+      startTransition2(() => {
+        setResolvedUniforms(resolved,);
+        setHaveUniformsResolved(true,);
+      },);
+      onUniformResolutionSucceeded?.();
+    },).catch(() => {
+      if (!isCancelled) onUniformResolutionFailed?.();
+    },);
     return () => {
       isCancelled = true;
     };
-  }, [uniforms, canvasRef, heightmapSource,],);
-  return resolvedUniforms;
+  }, [uniforms, canvasRef, heightmapSource, onUniformResolutionSucceeded, onUniformResolutionFailed,],);
+  return {
+    resolvedUniforms,
+    haveUniformsResolved,
+  };
 }
 function useCanvasResize(canvasRef, resizeHandler,) {
   useEffect(() => {
@@ -50629,9 +50660,28 @@ function useShaderRenderState(
   if (contextLost) {
     isFallbackOnly = true;
   }
+  const [uniformResolutionFailed, setUniformResolutionFailed,] = useState(false,);
+  const onUniformResolutionFailed = useCallback2(() => {
+    startTransition2(() => setUniformResolutionFailed(true,));
+  }, [],);
+  const onUniformResolutionSucceeded = useCallback2(() => {
+    startTransition2(() => setUniformResolutionFailed(false,));
+  }, [],);
+  const wasSelectedRef = useRef(isSelected,);
+  useLayoutEffect(() => {
+    const becameSelected = !wasSelectedRef.current && isSelected;
+    wasSelectedRef.current = isSelected;
+    if (becameSelected && uniformResolutionFailed) {
+      onUniformResolutionSucceeded();
+    }
+  }, [uniformResolutionFailed, isSelected, onUniformResolutionSucceeded,],);
+  if (uniformResolutionFailed) {
+    isFallbackOnly = true;
+  }
   const reducedMotionFallback = !!shouldReduceMotion && !!fallbackImage;
   if (
-    mode !== 'fallback' && skipInitialFallback && !contextLost && !reducedMotionFallback && isIntersecting && poolSlot !== slotStatus.noSlot
+    mode !== 'fallback' && skipInitialFallback && !contextLost && !uniformResolutionFailed && !reducedMotionFallback && isIntersecting &&
+    poolSlot !== slotStatus.noSlot
   ) {
     isFallbackOnly = false;
   }
@@ -50641,6 +50691,8 @@ function useShaderRenderState(
     effectiveSingleFrame,
     effectiveMode,
     onContextLost,
+    onUniformResolutionSucceeded,
+    onUniformResolutionFailed,
   };
 }
 var SHADER_REVEAL_DELAY_MS = 300;
@@ -50675,6 +50727,8 @@ function ShaderCanvas({
   onError,
   onReady,
   onContextLost,
+  onUniformResolutionSucceeded,
+  onUniformResolutionFailed,
   singleFrame: singleFrame2 = false,
   heightmapSource,
   mouseDataRef,
@@ -50693,11 +50747,10 @@ function ShaderCanvas({
   useLayoutEffect(() => {
     onContextLostRef.current = onContextLost;
   }, [onContextLost,],);
-  const resolvedUniforms = useResolvedUniforms(uniforms, canvasRef, heightmapSource,);
-  const uniformsPropRef = useRef(uniforms,);
-  useLayoutEffect(() => {
-    uniformsPropRef.current = uniforms;
-  }, [uniforms,],);
+  const {
+    resolvedUniforms,
+    haveUniformsResolved,
+  } = useResolvedUniforms(uniforms, canvasRef, heightmapSource, onUniformResolutionSucceeded, onUniformResolutionFailed,);
   const resolvedUniformsRef = useRef(resolvedUniforms,);
   const animatedRef = useRef(animated,);
   useLayoutEffect(() => {
@@ -50709,21 +50762,27 @@ function ShaderCanvas({
   }, [singleFrame2,],);
   const readySignalledRef = useRef(false,);
   const signalReadyIfNeeded = useCallback2(() => {
-    if (readySignalledRef.current) return;
-    const hasCustomUniforms = uniformsPropRef.current && Object.keys(uniformsPropRef.current,).length > 0;
-    const hasResolvedUniforms = Object.keys(resolvedUniformsRef.current,).length > 0;
-    if (!hasCustomUniforms || hasResolvedUniforms) {
-      readySignalledRef.current = true;
-      onReadyRef.current?.();
-    }
-  }, [],);
+    if (readySignalledRef.current || !haveUniformsResolved) return;
+    readySignalledRef.current = true;
+    onReadyRef.current?.();
+  }, [haveUniformsResolved,],);
   const animate3 = useCallback2((time2) => {
     const renderer = rendererRef.current;
     if (!renderer) return;
     if (singleFrameRef.current) {
+      if (!haveUniformsResolved) return;
       renderer.resize();
       renderer.render(0, 0, resolvedUniformsRef.current, mouseDataRef?.current ?? defaultMouseData,);
+      signalReadyIfNeeded();
       return;
+    }
+    if (!haveUniformsResolved) {
+      animationFrameRef.current = requestAnimationFrame(animate3,);
+      return;
+    }
+    if (!readySignalledRef.current) {
+      startTimeRef.current = time2 * timeMultiplier;
+      lastTimeRef.current = startTimeRef.current;
     }
     renderer.resize();
     const {
@@ -50737,14 +50796,14 @@ function ShaderCanvas({
     if (!singleFrameRef.current && animatedRef.current) {
       animationFrameRef.current = requestAnimationFrame(animate3,);
     }
-  }, [signalReadyIfNeeded, mouseDataRef,],);
+  }, [haveUniformsResolved, signalReadyIfNeeded, mouseDataRef,],);
   const renderSingleFrame = useCallback2(() => {
     const renderer = rendererRef.current;
-    if (!renderer) return;
+    if (!renderer || !haveUniformsResolved) return;
     renderer.resize();
     renderer.render(0, 0, resolvedUniformsRef.current, mouseDataRef?.current ?? defaultMouseData,);
     signalReadyIfNeeded();
-  }, [mouseDataRef, signalReadyIfNeeded,],);
+  }, [haveUniformsResolved, mouseDataRef, signalReadyIfNeeded,],);
   useLayoutEffect(() => {
     resolvedUniformsRef.current = resolvedUniforms;
     if (singleFrameRef.current && rendererRef.current) {
@@ -50753,7 +50812,7 @@ function ShaderCanvas({
   }, [resolvedUniforms, renderSingleFrame,],);
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas || !haveUniformsResolved) return;
     readySignalledRef.current = false;
     try {
       const renderer = new WebGL2ShaderRenderer(
@@ -50784,7 +50843,7 @@ function ShaderCanvas({
       rendererRef.current?.dispose();
       rendererRef.current = null;
     };
-  }, [vertexShader, fragmentShader, resolutionScale, animate3, renderSingleFrame, onError, feedbackLoop,],);
+  }, [vertexShader, fragmentShader, resolutionScale, animate3, renderSingleFrame, onError, feedbackLoop, haveUniformsResolved,],);
   const wasAnimatedRef = useRef(animated,);
   const wasReactiveRef = useRef(singleFrame2,);
   useEffect(() => {
@@ -50800,7 +50859,7 @@ function ShaderCanvas({
   }, [animated, singleFrame2, animate3,],);
   const handleResize = useCallback2(() => {
     const renderer = rendererRef.current;
-    if (!renderer) return;
+    if (!renderer || !haveUniformsResolved) return;
     if (singleFrameRef.current) {
       renderSingleFrame();
       return;
@@ -50813,7 +50872,7 @@ function ShaderCanvas({
     } = getShaderTiming(performance.now(), startTimeRef.current, lastTimeRef.current,);
     lastTimeRef.current = currentTime;
     renderer.render(elapsedTime, deltaTime, resolvedUniformsRef.current, mouseDataRef?.current ?? defaultMouseData,);
-  }, [mouseDataRef, renderSingleFrame,],);
+  }, [haveUniformsResolved, mouseDataRef, renderSingleFrame,],);
   useCanvasResize(canvasRef, handleResize,);
   return /* @__PURE__ */ jsx('canvas', {
     ref: canvasRef,
@@ -50835,6 +50894,8 @@ var ShaderWithFallbackOverlay = /* @__PURE__ */ memo2(function ShaderWithFallbac
   onReady,
   singleFrame: singleFrame2,
   onContextLost,
+  onUniformResolutionSucceeded,
+  onUniformResolutionFailed,
   heightmapSource,
   mouseDataRef,
   feedbackLoop,
@@ -50885,6 +50946,8 @@ var ShaderWithFallbackOverlay = /* @__PURE__ */ memo2(function ShaderWithFallbac
           onError,
           onReady: handleReady,
           onContextLost,
+          onUniformResolutionSucceeded,
+          onUniformResolutionFailed,
           heightmapSource,
           mouseDataRef,
           feedbackLoop,
@@ -51125,6 +51188,8 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
     effectiveSingleFrame,
     effectiveMode,
     onContextLost,
+    onUniformResolutionSucceeded,
+    onUniformResolutionFailed,
   } = useShaderRenderState(
     poolSlot,
     isSelected,
@@ -51152,6 +51217,8 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
     resolutionScale,
     onError,
     onContextLost,
+    onUniformResolutionSucceeded,
+    onUniformResolutionFailed,
     heightmapSource,
     feedbackLoop: effectiveFeedbackLoop,
   };
@@ -52835,11 +52902,11 @@ function getAssetOwnerType(asset,) {
 async function loadFontsWithOpenType(source,) {
   switch (source) {
     case 'google': {
-      const supportedFonts = await import('./framer-chunks/google-OGWBHVGI-QC7UAA2X.js');
+      const supportedFonts = await import('./framer-chunks/google-3SZHWBC6-OBXS3UIH.js');
       return supportedFonts.default;
     }
     case 'fontshare': {
-      const supportedFonts = await import('./framer-chunks/fontshare-LTYJMI6Q-XCFP3GWO.js');
+      const supportedFonts = await import('./framer-chunks/fontshare-B2QLD7YB-4BZEAA37.js');
       return supportedFonts.default;
     }
     default:
@@ -52849,15 +52916,15 @@ async function loadFontsWithOpenType(source,) {
 async function loadFontToOpenTypeFeatures(source,) {
   switch (source) {
     case 'google': {
-      const features = await import('./framer-chunks/google-BHSMRPXK-IHHGYJRR.js');
+      const features = await import('./framer-chunks/google-3FCAKCAC-P5EL6KGL.js');
       return features.default;
     }
     case 'fontshare': {
-      const features = await import('./framer-chunks/fontshare-XMKN2FOD-D5TWBHNT.js');
+      const features = await import('./framer-chunks/fontshare-4THNDPMZ-BJQGNHXN.js');
       return features.default;
     }
     case 'framer': {
-      const features = await import('./framer-chunks/framer-font-D6RMCRV4-XCFIRDL6.js');
+      const features = await import('./framer-chunks/framer-font-45AI7UCZ-LU7DEIDM.js');
       return features.default;
     }
     default:
@@ -53401,10 +53468,10 @@ function loadVariationAxes(source,) {
       const axes = (async () => {
         switch (source) {
           case 'google': {
-            return (await import('./framer-chunks/google-5NZOMG37-U44YENDC.js')).default;
+            return (await import('./framer-chunks/google-GXDJLGJB-HHIXFE4M.js')).default;
           }
           case 'fontshare': {
-            return (await import('./framer-chunks/fontshare-X63NXWGB-NRPGYMPJ.js')).default;
+            return (await import('./framer-chunks/fontshare-O22OBJ3D-ALBQLFE5.js')).default;
           }
           default:
             assertNever(source,);
@@ -58802,6 +58869,7 @@ var package_default = {
     watch: 'yarn :jest --watch',
   },
   dependencies: {
+    '@sqlite.org/sqlite-wasm': '^3.50.4-build1',
     devalue: '^5.6.4',
     eventemitter3: '^5.0.1',
     fontfaceobserver: '2.2.0',
@@ -59039,6 +59107,7 @@ export {
   environment,
   ErrorPlaceholder,
   executeInRenderEnvironment,
+  executeServerDatabaseQuery,
   Feature,
   Fetcher,
   fillOffset,
