@@ -12683,7 +12683,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.4LL63TY5.mjs
+// /:https://app.framerstatic.com/framer.ZG43MVYD.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -58865,7 +58865,7 @@ var package_default = {
     lint: 'yarn :lint ./src --ext .ts,.tsx --format gha-codeframe --quiet --cache',
     'lint:ci': 'yarn lint --cache-strategy content --cache-location $HOME/.cache/eslint/framer-library',
     'lint:fix': 'yarn lint --fix',
-    test: 'yarn :jest',
+    test: 'TZ=UTC yarn :jest',
     watch: 'yarn :jest --watch',
   },
   dependencies: {
