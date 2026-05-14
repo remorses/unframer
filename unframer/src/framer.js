@@ -12683,7 +12683,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.ZG43MVYD.mjs
+// /:https://app.framerstatic.com/framer.CUOBBU6O.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -24411,36 +24411,8 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
   // Modules can have highly specific three-class selectors in case of PropertyOverrides, so dimension styles will only work with !important
   /* css */
   `
-        ${selectComponentChild('.framer-text-module[data-width="fill"]', ':first-child',)},
-        ${selectComponentChild('.framer-text-module:not([data-width="fit"])[style*="aspect-ratio"]', ':first-child',)} {
+        ${selectComponentChild('.framer-text-module[data-width="fill"]', ':first-child',)} {
             width: 100% !important;
-        }
-    `, /* css */
-  `
-        @supports not (aspect-ratio: 1) {
-            .framer-text-module:not([data-width="fit"])[style*="aspect-ratio"] {
-                position: relative !important;
-            }
-        }
-    `, /* css */
-  `
-        @supports not (aspect-ratio: 1) {
-            .framer-text-module:not([data-width="fit"])[style*="aspect-ratio"]::before {
-                content: "";
-                display: block;
-                padding-bottom: calc(100% / calc(var(--aspect-ratio)));
-            }
-        }
-    `, /* css */
-  `
-        @supports not (aspect-ratio: 1) {
-            ${selectComponentChild('.framer-text-module[data-width="fill"]', ':first-child',)},
-            ${selectComponentChild('.framer-text-module:not([data-width="fit"])[style*="aspect-ratio"]', ':first-child',)} {
-                position: absolute;
-                top: 0;
-                left: 0;
-                height: 100% !important;
-            }
         }
     `,
 ])();
@@ -49431,6 +49403,8 @@ function withMappedReactProps(Component18, info,) {
   };
 }
 var uniformPrefix = 'u_';
+var supportedBufferFormats = ['rgba8', 'r8', 'rg16f', 'rgba16f', 'rgba32f',];
+var shaderBufferFormats = /* @__PURE__ */ new Set(supportedBufferFormats,);
 var builtInUniforms = {
   time: {
     name: 'u_time',
@@ -49460,40 +49434,25 @@ var builtInUniforms = {
     name: 'u_mouseHover',
     glslType: 'float',
   },
-  previousFrame: {
-    name: 'u_previousFrame',
-    glslType: 'sampler2D',
-  },
 };
 var webGLContextLostEvent = 'webglcontextlost';
 var noop5 = () => {};
 var WebGL2ShaderRenderer = class {
-  constructor(canvas, vertexSource, fragmentSource, resolutionScale, onContextLostHandler = noop5, feedbackLoop = false,) {
+  constructor(canvas, vertexSource, fragmentSource, resolutionScale, onContextLostHandler = noop5, bufferDescriptors = [],) {
     __publicField(this, 'gl',);
-    __publicField(this, 'program',);
-    __publicField(this, 'vao',);
-    __publicField(this, 'buffers', [],);
-    __publicField(this, 'builtInUniformLocations',);
-    __publicField(this, 'customUniformLocations',);
-    __publicField(this, 'textures', /* @__PURE__ */ new Map(),);
     __publicField(this, 'canvas',);
     __publicField(this, 'contextLostHandler',);
     __publicField(this, 'disposed', false,);
     __publicField(this, 'pixelRatio', typeof __unframerWindow2 !== 'undefined' ? __unframerWindow2.devicePixelRatio : 1,);
     __publicField(this, 'resolutionScale',);
     __publicField(this, 'lastBufferWidth', 0,);
-    __publicField(this, 'onContextLost',);
     __publicField(this, 'lastBufferHeight', 0,);
-    __publicField(this, 'feedbackLoopEnabled',);
-    __publicField(this, 'fbos', null,);
-    __publicField(this, 'fboTextures', null,);
-    __publicField(this, 'fboIndex', 0,);
-    __publicField(this, 'fboWidth', 0,);
-    __publicField(this, 'fboHeight', 0,);
+    __publicField(this, 'onContextLost',);
+    __publicField(this, 'resources',);
+    __publicField(this, 'textures', /* @__PURE__ */ new Map(),);
     this.resolutionScale = resolutionScale;
     this.canvas = canvas;
     this.onContextLost = onContextLostHandler;
-    this.feedbackLoopEnabled = feedbackLoop;
     const gl = canvas.getContext('webgl2', {
       alpha: true,
       premultipliedAlpha: false,
@@ -49505,104 +49464,182 @@ var WebGL2ShaderRenderer = class {
       throw new Error('WebGL2 not supported',);
     }
     this.gl = gl;
-    let vertexShader = null;
-    let fragmentShader = null;
-    try {
-      vertexShader = this.compileShader(gl.VERTEX_SHADER, vertexSource,);
-      fragmentShader = this.compileShader(gl.FRAGMENT_SHADER, fragmentSource,);
-    } catch (error) {
-      this.cleanupShaders(vertexShader, fragmentShader,);
-      throw error;
-    }
-    let program;
-    try {
-      program = this.linkProgram(vertexShader, fragmentShader,);
-    } catch (error) {
-      this.cleanupShaders(vertexShader, fragmentShader,);
-      throw error;
-    }
-    this.cleanupShaders(vertexShader, fragmentShader,);
-    this.program = program;
-    this.vao = this.createVertexArrayObject();
-    gl.bindVertexArray(this.vao,);
-    this.setupFullScreenQuad();
-    gl.useProgram(program,);
-    this.builtInUniformLocations = {
-      [builtInUniforms.time.name]: gl.getUniformLocation(program, builtInUniforms.time.name,),
-      [builtInUniforms.resolution.name]: gl.getUniformLocation(program, builtInUniforms.resolution.name,),
-      [builtInUniforms.deltaTime.name]: gl.getUniformLocation(program, builtInUniforms.deltaTime.name,),
-      [builtInUniforms.pixelRatio.name]: gl.getUniformLocation(program, builtInUniforms.pixelRatio.name,),
-      [builtInUniforms.mousePosition.name]: gl.getUniformLocation(program, builtInUniforms.mousePosition.name,),
-      [builtInUniforms.mousePointerDown.name]: gl.getUniformLocation(program, builtInUniforms.mousePointerDown.name,),
-      [builtInUniforms.mouseHover.name]: gl.getUniformLocation(program, builtInUniforms.mouseHover.name,),
-      [builtInUniforms.previousFrame.name]: gl.getUniformLocation(program, builtInUniforms.previousFrame.name,),
-    };
-    this.customUniformLocations = /* @__PURE__ */ new Map();
-    gl.clearColor(0, 0, 0, 0,);
     this.contextLostHandler = (event) => {
       event.preventDefault();
       this.dispose();
       this.onContextLost?.();
     };
     canvas.addEventListener(webGLContextLostEvent, this.contextLostHandler,);
+    try {
+      this.resources = this.buildResources(vertexSource, fragmentSource, bufferDescriptors,);
+    } catch (error) {
+      canvas.removeEventListener(webGLContextLostEvent, this.contextLostHandler,);
+      throw error;
+    }
+    const {
+      mainPass,
+      bufferPasses,
+    } = this.resources;
+    gl.clearColor(0, 0, 0, 0,);
+    if (bufferPasses.length === 0) {
+      gl.useProgram(mainPass.program,);
+      gl.bindVertexArray(mainPass.vao,);
+    }
+  }
+  /** First texture unit available for custom samplers. Buffers occupy `[0, n)`; customs follow. */
+  get customTextureUnitBase() {
+    return this.resources.bufferPasses.length;
+  }
+  /**
+   * Allocates every GL resource the renderer needs and returns them as a `GLResources`.
+   * If any step throws, the catch deletes whatever was allocated up to that point before
+   * rethrowing — so the constructor never has to know about partial state.
+   */
+  buildResources(vertexSource, fragmentSource, bufferDescriptors,) {
+    const {
+      gl,
+      canvas,
+    } = this;
+    const offendingFloatBuffer = bufferDescriptors.find((d) => shaderBufferFormatRequiresFloatExt(d.format,));
+    if (offendingFloatBuffer && !gl.getExtension('EXT_color_buffer_float',)) {
+      throw new Error(
+        `Shader buffer "${offendingFloatBuffer.uniformName}" requested format "${offendingFloatBuffer.format}" but the EXT_color_buffer_float extension is not available.`,
+      );
+    }
+    const hasFloatLinear = !offendingFloatBuffer || !!gl.getExtension('OES_texture_float_linear',);
+    const vertexShader = this.compileShader(gl.VERTEX_SHADER, vertexSource,);
+    let mainProgram;
+    const bufferProgramPairs = [];
+    let positionBuffer;
+    let texCoordBuffer;
+    let mainPass;
+    const bufferPasses = [];
+    try {
+      mainProgram = this.linkFragmentProgram(vertexShader, fragmentSource,);
+      for (const desc of bufferDescriptors) {
+        bufferProgramPairs.push([this.linkFragmentProgram(vertexShader, desc.fragment,), desc,],);
+      }
+      positionBuffer = createStaticArrayBuffer(gl, new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1,],),);
+      texCoordBuffer = createStaticArrayBuffer(gl, new Float32Array([0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1,],),);
+      mainPass = this.buildPassState(mainProgram, bufferDescriptors, positionBuffer, texCoordBuffer,);
+      for (let textureUnit = 0; textureUnit < bufferProgramPairs.length; textureUnit++) {
+        const pair = bufferProgramPairs[textureUnit];
+        if (!pair) continue;
+        const [program, desc,] = pair;
+        bufferPasses.push(
+          this.buildBufferPass(program, desc, bufferDescriptors, hasFloatLinear, textureUnit, positionBuffer, texCoordBuffer,),
+        );
+      }
+      this.allocateBufferPassStorages(bufferPasses, canvas.width, canvas.height,);
+      this.bindStaticSamplerUnits(mainPass, bufferPasses,);
+      return {
+        positionBuffer,
+        texCoordBuffer,
+        mainPass,
+        bufferPasses,
+      };
+    } catch (error) {
+      for (const bufferPass of bufferPasses) {
+        this.disposeBufferPass(bufferPass,);
+      }
+      for (let i = bufferPasses.length; i < bufferProgramPairs.length; i++) {
+        const pair = bufferProgramPairs[i];
+        if (pair) {
+          gl.deleteProgram(pair[0],);
+        }
+      }
+      if (mainPass) {
+        this.disposePass(mainPass,);
+      } else if (mainProgram) {
+        gl.deleteProgram(mainProgram,);
+      }
+      if (texCoordBuffer) {
+        gl.deleteBuffer(texCoordBuffer,);
+      }
+      if (positionBuffer) {
+        gl.deleteBuffer(positionBuffer,);
+      }
+      throw error;
+    } finally {
+      gl.deleteShader(vertexShader,);
+    }
   }
   /**
    * Renders a frame with the given timing, optional custom uniforms, and mouse input.
+   * Branches on whether any buffers are configured: the no-buffer path is a single
+   * draw with program + VAO already bound from construction; the multi-pass path
+   * walks each buffer's FBO in declaration order before drawing the main pass.
    */
   render(elapsedTime, deltaTime, uniforms, mouseInput,) {
     if (this.disposed) return;
+    if (this.resources.bufferPasses.length === 0) {
+      this.renderSinglePass(elapsedTime, deltaTime, uniforms, mouseInput,);
+      return;
+    }
+    this.renderMultiPass(elapsedTime, deltaTime, uniforms, mouseInput,);
+  }
+  /**
+   * No-buffer hot path: program + VAO are bound once at construction, so each frame
+   * is just built-ins + custom uniforms + clear + draw.
+   */
+  renderSinglePass(elapsedTime, deltaTime, uniforms, mouseInput,) {
     const {
       gl,
+      canvas,
+      resources: {
+        mainPass,
+      },
     } = this;
-    gl.bindVertexArray(this.vao,);
-    this.updateBuiltInUniforms(elapsedTime, deltaTime, mouseInput,);
-    let textureUnit = 0;
-    if (uniforms) {
-      for (const uniformName in uniforms) {
-        const uniformValue = uniforms[uniformName];
-        if (!uniformValue) continue;
-        let location = this.customUniformLocations.get(uniformName,);
-        if (location === void 0) {
-          location = gl.getUniformLocation(this.program, uniformName,);
-          this.customUniformLocations.set(uniformName, location,);
-        }
-        if (uniformValue.type === 'sampler2D') {
-          this.bindTexture(uniformName, uniformValue.value, textureUnit,);
-          gl.uniform1i(location, textureUnit,);
-          textureUnit++;
-        } else {
-          this.setUniform(location, uniformValue,);
-        }
-      }
+    this.updatePassBuiltIns(mainPass, elapsedTime, deltaTime, mouseInput, canvas.width, canvas.height,);
+    this.applyCustomUniforms(mainPass, uniforms, this.customTextureUnitBase,);
+    gl.clear(gl.COLOR_BUFFER_BIT,);
+    gl.drawArrays(gl.TRIANGLES, 0, 6,);
+  }
+  /**
+   * Multi-pass render: each buffer in declaration order draws into its own FBO, with
+   * its just-written texture re-pinned to its reserved unit so later buffers (and the
+   * main pass) see the latest output. The main pass draws to the default framebuffer
+   * with every buffer texture still bound.
+   */
+  renderMultiPass(elapsedTime, deltaTime, uniforms, mouseInput,) {
+    const {
+      gl,
+      canvas,
+      resources: {
+        mainPass,
+        bufferPasses,
+      },
+      customTextureUnitBase,
+    } = this;
+    for (const bufferPass of bufferPasses) {
+      gl.activeTexture(gl.TEXTURE0 + bufferPass.textureUnit,);
+      gl.bindTexture(gl.TEXTURE_2D, bufferPass.textures[bufferPass.writeIdx === 0 ? 1 : 0],);
     }
-    if (this.feedbackLoopEnabled && this.fbos && this.fboTextures) {
-      const [fboA, fboB,] = this.fbos;
-      const [texA, texB,] = this.fboTextures;
-      const readTex = this.fboIndex === 0 ? texA : texB;
-      const writeFbo = this.fboIndex === 0 ? fboB : fboA;
-      const prevLocation = this.builtInUniformLocations[builtInUniforms.previousFrame.name];
-      gl.activeTexture(gl.TEXTURE0 + textureUnit,);
-      gl.bindTexture(gl.TEXTURE_2D, readTex,);
-      if (prevLocation !== null) {
-        gl.uniform1i(prevLocation, textureUnit,);
-      }
-      gl.bindFramebuffer(gl.FRAMEBUFFER, writeFbo,);
+    for (const bufferPass of bufferPasses) {
+      gl.useProgram(bufferPass.program,);
+      gl.bindVertexArray(bufferPass.vao,);
+      this.updatePassBuiltIns(bufferPass, elapsedTime, deltaTime, mouseInput, bufferPass.width, bufferPass.height,);
+      this.applyCustomUniforms(bufferPass, uniforms, customTextureUnitBase,);
+      gl.bindFramebuffer(gl.FRAMEBUFFER, bufferPass.fbos[bufferPass.writeIdx],);
+      gl.viewport(0, 0, bufferPass.width, bufferPass.height,);
       gl.clear(gl.COLOR_BUFFER_BIT,);
       gl.drawArrays(gl.TRIANGLES, 0, 6,);
-      const w = this.canvas.width;
-      const h = this.canvas.height;
-      gl.bindFramebuffer(gl.READ_FRAMEBUFFER, writeFbo,);
-      gl.bindFramebuffer(gl.DRAW_FRAMEBUFFER, null,);
-      gl.blitFramebuffer(0, 0, w, h, 0, 0, w, h, gl.COLOR_BUFFER_BIT, gl.NEAREST,);
-      gl.bindFramebuffer(gl.FRAMEBUFFER, null,);
-      this.fboIndex = 1 - this.fboIndex;
-    } else {
-      gl.clear(gl.COLOR_BUFFER_BIT,);
-      gl.drawArrays(gl.TRIANGLES, 0, 6,);
+      gl.activeTexture(gl.TEXTURE0 + bufferPass.textureUnit,);
+      gl.bindTexture(gl.TEXTURE_2D, bufferPass.textures[bufferPass.writeIdx],);
+      bufferPass.writeIdx = bufferPass.writeIdx === 0 ? 1 : 0;
     }
+    gl.useProgram(mainPass.program,);
+    gl.bindVertexArray(mainPass.vao,);
+    this.updatePassBuiltIns(mainPass, elapsedTime, deltaTime, mouseInput, canvas.width, canvas.height,);
+    this.applyCustomUniforms(mainPass, uniforms, customTextureUnitBase,);
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null,);
+    gl.viewport(0, 0, canvas.width, canvas.height,);
+    gl.clear(gl.COLOR_BUFFER_BIT,);
+    gl.drawArrays(gl.TRIANGLES, 0, 6,);
   }
   /**
    * Syncs the canvas buffer and viewport to match display size, accounting for device pixel ratio.
+   * Each buffer's render target resizes alongside (its size = canvas size × buffer.resolutionScale).
    */
   resize() {
     if (this.disposed) return;
@@ -49625,8 +49662,11 @@ var WebGL2ShaderRenderer = class {
     canvas.width = width;
     canvas.height = height;
     this.gl.viewport(0, 0, width, height,);
-    if (this.feedbackLoopEnabled) {
-      this.resizeFeedbackLoopBuffers(width, height,);
+    try {
+      this.allocateBufferPassStorages(this.resources.bufferPasses, width, height,);
+    } catch (error) {
+      this.dispose();
+      throw error;
     }
   }
   /**
@@ -49641,49 +49681,12 @@ var WebGL2ShaderRenderer = class {
     if (this.disposed) return;
     if (pixelDensity !== void 0) this.pixelRatio = pixelDensity;
     this.gl.viewport(0, 0, width, height,);
-  }
-  /**
-   * Initializes the ping-pong framebuffers for feedback rendering.
-   * Must be called after the GL context and program are ready.
-   *
-   * Two screen-sized RGBA textures are allocated. On resize, both are cleared
-   * and recreated. On WebGL context loss, all FBO state is released.
-   */
-  initFeedbackLoopBuffers(width, height,) {
-    if (!this.feedbackLoopEnabled) return;
-    if (this.builtInUniformLocations[builtInUniforms.previousFrame.name] === null) return;
-    const {
-      gl,
-    } = this;
-    const texA = this.createFeedbackTexture(gl, width, height,);
-    const fboA = this.createFeedbackFramebuffer(gl, texA,);
-    const texB = this.createFeedbackTexture(gl, width, height,);
-    const fboB = this.createFeedbackFramebuffer(gl, texB,);
-    gl.bindFramebuffer(gl.FRAMEBUFFER, null,);
-    gl.bindTexture(gl.TEXTURE_2D, null,);
-    this.fbos = [fboA, fboB,];
-    this.fboTextures = [texA, texB,];
-    this.fboWidth = width;
-    this.fboHeight = height;
-    this.fboIndex = 0;
-  }
-  createFeedbackTexture(gl, width, height,) {
-    const texture = gl.createTexture();
-    if (!texture) throw new Error('Failed to create feedback texture',);
-    gl.bindTexture(gl.TEXTURE_2D, texture,);
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, width, height, 0, gl.RGBA, gl.UNSIGNED_BYTE, null,);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR,);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR,);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE,);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE,);
-    return texture;
-  }
-  createFeedbackFramebuffer(gl, texture,) {
-    const fbo = gl.createFramebuffer();
-    if (!fbo) throw new Error('Failed to create feedback framebuffer',);
-    gl.bindFramebuffer(gl.FRAMEBUFFER, fbo,);
-    gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, texture, 0,);
-    return fbo;
+    try {
+      this.allocateBufferPassStorages(this.resources.bufferPasses, width, height,);
+    } catch (error) {
+      this.dispose();
+      throw error;
+    }
   }
   /**
    * Force all commands to complete execution; used for canvas fallback image generation
@@ -49693,7 +49696,13 @@ var WebGL2ShaderRenderer = class {
     this.gl.finish();
   }
   /**
-   * Cleans up WebGL resources.
+   * Releases every WebGL resource owned by this renderer: shared geometry buffers,
+   * user-supplied sampler textures, and each pass's program / VAO / (for buffers) FBOs
+   * and ping-pong textures.
+   *
+   * Idempotent. Safe after the WebGL context has been lost — the GPU driver already
+   * invalidated the resources, so we skip the gl.delete* calls. `disposed` gates all
+   * public methods so reads after disposal short-circuit before touching `this.resources`.
    */
   dispose() {
     if (this.disposed) return;
@@ -49702,16 +49711,152 @@ var WebGL2ShaderRenderer = class {
     if (this.gl.isContextLost()) return;
     const {
       gl,
+      resources,
     } = this;
-    this.disposeFeedbackLoopBuffers();
-    for (const buffer of this.buffers) {
-      gl.deleteBuffer(buffer,);
+    for (const bufferPass of resources.bufferPasses) this.disposeBufferPass(bufferPass,);
+    this.disposePass(resources.mainPass,);
+    gl.deleteBuffer(resources.positionBuffer,);
+    gl.deleteBuffer(resources.texCoordBuffer,);
+    for (const [, entry,] of this.textures) gl.deleteTexture(entry.texture,);
+    this.textures.clear();
+  }
+  /** Releases the program + VAO owned by any pass. Shared by main-pass and buffer-pass disposal. */
+  disposePass(pass,) {
+    const {
+      gl,
+    } = this;
+    gl.deleteVertexArray(pass.vao,);
+    gl.deleteProgram(pass.program,);
+  }
+  /** Releases everything a buffer pass owns: program + VAO (via `disposePass`), plus its ping-pong textures and FBOs. */
+  disposeBufferPass(bufferPass,) {
+    const {
+      gl,
+    } = this;
+    this.disposePass(bufferPass,);
+    for (const tex of bufferPass.textures) gl.deleteTexture(tex,);
+    for (const fbo of bufferPass.fbos) gl.deleteFramebuffer(fbo,);
+  }
+  /**
+   * Builds the GL state shared by main and buffer passes: a fresh VAO bound to the shared
+   * fullscreen-quad geometry with this program's attribute locations, plus uniform-location
+   * caches for built-ins, custom uniforms (lazy-filled on first set), and one entry per
+   * buffer's `u_<name>_buffer` sampler. Geometry buffers are passed in so this works during
+   * construction before the corresponding `this.*` fields are set.
+   */
+  buildPassState(program, bufferDescriptors, positionBuffer, texCoordBuffer,) {
+    const {
+      gl,
+    } = this;
+    const vao = gl.createVertexArray();
+    if (!vao) throw new Error('Failed to create vertex array object',);
+    gl.bindVertexArray(vao,);
+    bindFullScreenQuadAttribs(gl, program, positionBuffer, texCoordBuffer,);
+    gl.bindVertexArray(null,);
+    const builtInLocations = lookupBuiltInLocations(gl, program,);
+    const bufferSamplerLocations = /* @__PURE__ */ new Map();
+    for (const desc of bufferDescriptors) {
+      bufferSamplerLocations.set(desc.uniformName, gl.getUniformLocation(program, desc.uniformName,),);
     }
-    for (const entry of this.textures.values()) {
-      gl.deleteTexture(entry.texture,);
+    return {
+      program,
+      vao,
+      builtInLocations,
+      customLocations: /* @__PURE__ */ new Map(),
+      bufferSamplerLocations,
+    };
+  }
+  /**
+   * Extends `buildPassState` with the per-buffer ping-pong storage: two textures + two
+   * framebuffers, plus a reserved texture unit that every pass (including this buffer's
+   * own pass, for self-feedback) samples from. Texture storage stays uninitialized
+   * here — `allocateBufferPassStorage` sizes them once the canvas dimensions are known.
+   */
+  buildBufferPass(program, descriptor, bufferDescriptors, hasFloatLinear, textureUnit, positionBuffer, texCoordBuffer,) {
+    const base = this.buildPassState(program, bufferDescriptors, positionBuffer, texCoordBuffer,);
+    const {
+      gl,
+    } = this;
+    const formatGL = resolveBufferFormatGL(gl, descriptor.format,);
+    const filter2 = shaderBufferFormatRequiresFloatExt(descriptor.format,) && !hasFloatLinear ? gl.NEAREST : gl.LINEAR;
+    const texA = createBufferTexture(gl, filter2,);
+    const texB = createBufferTexture(gl, filter2,);
+    const fboA = createBufferFramebuffer(gl, texA,);
+    const fboB = createBufferFramebuffer(gl, texB,);
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null,);
+    gl.bindTexture(gl.TEXTURE_2D, null,);
+    return {
+      ...base,
+      uniformName: descriptor.uniformName,
+      resolutionScale: descriptor.resolutionScale,
+      format: descriptor.format,
+      internalFormat: formatGL.internalFormat,
+      uploadFormat: formatGL.uploadFormat,
+      pixelType: formatGL.pixelType,
+      width: 0,
+      height: 0,
+      textures: [texA, texB,],
+      fbos: [fboA, fboB,],
+      writeIdx: 0,
+      textureUnit,
+    };
+  }
+  /**
+   * Wires every `u_<bufferName>_buffer` sampler-to-unit binding once at construction.
+   * Each buffer's "current" texture stays bound to its reserved unit for the entire frame,
+   * and the unit number is fixed for the lifetime of the program — so we never need to call
+   * `gl.uniform1i` for these samplers per-frame. A buffer reading its own name during its
+   * own pass uses the same binding (the unit holds the prior-frame texture before draw
+   * and the just-written texture after).
+   */
+  bindStaticSamplerUnits(mainPass, bufferPasses,) {
+    const {
+      gl,
+    } = this;
+    const allPasses = [mainPass, ...bufferPasses,];
+    for (const pass of allPasses) {
+      gl.useProgram(pass.program,);
+      for (const bufferPass of bufferPasses) {
+        const loc = pass.bufferSamplerLocations.get(bufferPass.uniformName,);
+        if (loc) gl.uniform1i(loc, bufferPass.textureUnit,);
+      }
     }
-    gl.deleteVertexArray(this.vao,);
-    gl.deleteProgram(this.program,);
+  }
+  /** Resizes every buffer pass to the given canvas dimensions. */
+  allocateBufferPassStorages(bufferPasses, canvasWidth, canvasHeight,) {
+    for (const bufferPass of bufferPasses) {
+      this.allocateBufferPassStorage(bufferPass, canvasWidth, canvasHeight,);
+    }
+  }
+  /**
+   * Sizes the buffer's two ping-pong textures to `canvas × resolutionScale` (clamped to
+   * at least 1×1) and clears both attached FBOs so a stale prior frame doesn't leak in
+   * after a resize. Idempotent — early-returns when the requested size matches the
+   * current size.
+   */
+  allocateBufferPassStorage(bufferPass, canvasWidth, canvasHeight,) {
+    const {
+      gl,
+    } = this;
+    const w = Math.max(1, Math.floor(canvasWidth * bufferPass.resolutionScale,),);
+    const h = Math.max(1, Math.floor(canvasHeight * bufferPass.resolutionScale,),);
+    if (w === bufferPass.width && h === bufferPass.height) return;
+    bufferPass.width = w;
+    bufferPass.height = h;
+    for (const tex of bufferPass.textures) {
+      gl.bindTexture(gl.TEXTURE_2D, tex,);
+      gl.texImage2D(gl.TEXTURE_2D, 0, bufferPass.internalFormat, w, h, 0, bufferPass.uploadFormat, bufferPass.pixelType, null,);
+    }
+    gl.bindTexture(gl.TEXTURE_2D, null,);
+    const [prevX, prevY, prevW, prevH,] = gl.getParameter(gl.VIEWPORT,);
+    for (const fbo of bufferPass.fbos) {
+      gl.bindFramebuffer(gl.FRAMEBUFFER, fbo,);
+      throwIfFramebufferIncomplete(gl, bufferPass.uniformName, bufferPass.format,);
+      gl.viewport(0, 0, w, h,);
+      gl.clear(gl.COLOR_BUFFER_BIT,);
+    }
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null,);
+    gl.viewport(prevX, prevY, prevW, prevH,);
   }
   /**
    * Compiles GLSL source code into a shader object the GPU can execute.
@@ -49736,83 +49881,32 @@ var WebGL2ShaderRenderer = class {
     return shader;
   }
   /**
-   * Marks shaders as objects to be garbage collected when not in use.
+   * Compiles a fragment source, attaches it to the given vertex shader, and links them
+   * into a program. The compiled fragment shader is released in a `finally` block so
+   * we never leak it whether linking succeeds, fails, or compilation throws.
+   *
+   * @throws Error with the program info log if linking fails.
    */
-  cleanupShaders(...shaders) {
+  linkFragmentProgram(vertexShader, fragmentSource,) {
     const {
       gl,
     } = this;
-    for (const shader of shaders) {
-      if (!shader) continue;
-      gl.deleteShader(shader,);
+    const fragmentShader = this.compileShader(gl.FRAGMENT_SHADER, fragmentSource,);
+    try {
+      const program = gl.createProgram();
+      if (!program) throw new Error('Failed to create program',);
+      gl.attachShader(program, vertexShader,);
+      gl.attachShader(program, fragmentShader,);
+      gl.linkProgram(program,);
+      if (!gl.getProgramParameter(program, gl.LINK_STATUS,)) {
+        const info = gl.getProgramInfoLog(program,);
+        gl.deleteProgram(program,);
+        throw new Error(`Program linking failed: ${info}`,);
+      }
+      return program;
+    } finally {
+      gl.deleteShader(fragmentShader,);
     }
-  }
-  /**
-   * Links compiled vertex and fragment shaders into a complete shader program.
-   * @throws Error with program info log if linking fails
-   */
-  linkProgram(vertexShader, fragmentShader,) {
-    const {
-      gl,
-    } = this;
-    const program = gl.createProgram();
-    if (!program) {
-      throw new Error('Failed to create program',);
-    }
-    gl.attachShader(program, vertexShader,);
-    gl.attachShader(program, fragmentShader,);
-    gl.linkProgram(program,);
-    if (!gl.getProgramParameter(program, gl.LINK_STATUS,)) {
-      const info = gl.getProgramInfoLog(program,);
-      gl.deleteProgram(program,);
-      throw new Error(`Program linking failed: ${info}`,);
-    }
-    return program;
-  }
-  /**
-   * Creates a new Vertex Array Object (VAO), which stores vertex attribute
-   * configuration so it can be restored with a single bindVertexArray call.
-   * We only have one geometry so the VAO stays bound, but it's the idiomatic
-   * WebGL2 approach and keeps attribute state explicitly managed.
-   */
-  createVertexArrayObject() {
-    const vao = this.gl.createVertexArray();
-    if (!vao) {
-      throw new Error('Failed to create vertex array object',);
-    }
-    return vao;
-  }
-  /**
-   * Sets up fullscreen quad geometry on the currently bound VAO.
-   * Two triangles spanning from (-1,-1) to (1,1) in clip space with UV coordinates.
-   */
-  setupFullScreenQuad() {
-    const {
-      gl,
-      program,
-    } = this;
-    const positions = new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1,],);
-    const texCoords = new Float32Array([0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1,],);
-    const positionBuffer = gl.createBuffer();
-    if (!positionBuffer) {
-      throw new Error('Failed to create position buffer',);
-    }
-    this.buffers.push(positionBuffer,);
-    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer,);
-    gl.bufferData(gl.ARRAY_BUFFER, positions, gl.STATIC_DRAW,);
-    const positionLocation = gl.getAttribLocation(program, 'a_position',);
-    gl.enableVertexAttribArray(positionLocation,);
-    gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0,);
-    const texCoordBuffer = gl.createBuffer();
-    if (!texCoordBuffer) {
-      throw new Error('Failed to create texCoord buffer',);
-    }
-    this.buffers.push(texCoordBuffer,);
-    gl.bindBuffer(gl.ARRAY_BUFFER, texCoordBuffer,);
-    gl.bufferData(gl.ARRAY_BUFFER, texCoords, gl.STATIC_DRAW,);
-    const texCoordLocation = gl.getAttribLocation(program, 'a_texCoord',);
-    gl.enableVertexAttribArray(texCoordLocation,);
-    gl.vertexAttribPointer(texCoordLocation, 2, gl.FLOAT, false, 0, 0,);
   }
   /**
    * Sets a non-texture uniform value in the shader program.
@@ -49876,51 +49970,52 @@ var WebGL2ShaderRenderer = class {
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR,);
     }
   }
-  resizeFeedbackLoopBuffers(width, height,) {
-    if (!this.fboTextures || width === this.fboWidth && height === this.fboHeight) return;
+  /**
+   * Pushes user-supplied uniform values into the active program, lazy-caching their
+   * locations on first encounter. Sampler2D values are uploaded to texture units
+   * starting at `textureUnitBase` — which is `0` for the no-buffer hot path and
+   * `this.resources.bufferPasses.length` when buffers are present (so reserved buffer units come first).
+   */
+  applyCustomUniforms(pass, uniforms, textureUnitBase,) {
+    if (!uniforms) return;
     const {
       gl,
     } = this;
-    for (const texture of this.fboTextures) {
-      gl.bindTexture(gl.TEXTURE_2D, texture,);
-      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, width, height, 0, gl.RGBA, gl.UNSIGNED_BYTE, null,);
-    }
-    gl.bindTexture(gl.TEXTURE_2D, null,);
-    if (this.fbos) {
-      for (const fbo of this.fbos) {
-        gl.bindFramebuffer(gl.FRAMEBUFFER, fbo,);
-        gl.clear(gl.COLOR_BUFFER_BIT,);
+    let textureUnit = textureUnitBase;
+    for (const uniformName in uniforms) {
+      const uniformValue = uniforms[uniformName];
+      if (!uniformValue) continue;
+      let location = pass.customLocations.get(uniformName,);
+      if (location === void 0) {
+        location = gl.getUniformLocation(pass.program, uniformName,);
+        pass.customLocations.set(uniformName, location,);
       }
-      gl.bindFramebuffer(gl.FRAMEBUFFER, null,);
-    }
-    this.fboWidth = width;
-    this.fboHeight = height;
-  }
-  disposeFeedbackLoopBuffers() {
-    const {
-      gl,
-    } = this;
-    if (this.fboTextures) {
-      for (const tex of this.fboTextures) gl.deleteTexture(tex,);
-      this.fboTextures = null;
-    }
-    if (this.fbos) {
-      for (const fbo of this.fbos) gl.deleteFramebuffer(fbo,);
-      this.fbos = null;
+      if (uniformValue.type === 'sampler2D') {
+        this.bindTexture(uniformName, uniformValue.value, textureUnit,);
+        if (location !== null) gl.uniform1i(location, textureUnit,);
+        textureUnit++;
+      } else {
+        this.setUniform(location, uniformValue,);
+      }
     }
   }
-  updateBuiltInUniforms(elapsedTime, deltaTime, mouseInput,) {
+  /**
+   * Sets every built-in uniform (`u_time`, `u_resolution`, mouse, etc.) for the active
+   * program. `passWidth` / `passHeight` reflect the dimensions of THIS pass's render
+   * target — for buffer passes that's `buffer.width × buffer.height`, for the main pass
+   * it's the canvas size — so `u_resolution` always matches the framebuffer being drawn.
+   */
+  updatePassBuiltIns(pass, elapsedTime, deltaTime, mouseInput, passWidth, passHeight,) {
     const {
       gl,
-      builtInUniformLocations: locations,
-      canvas,
       pixelRatio,
     } = this;
+    const locations = pass.builtInLocations;
     if (locations[builtInUniforms.time.name] !== null) {
       gl.uniform1f(locations[builtInUniforms.time.name], elapsedTime,);
     }
     if (locations[builtInUniforms.resolution.name] !== null) {
-      gl.uniform2f(locations[builtInUniforms.resolution.name], canvas.width, canvas.height,);
+      gl.uniform2f(locations[builtInUniforms.resolution.name], passWidth, passHeight,);
     }
     if (locations[builtInUniforms.deltaTime.name] !== null) {
       gl.uniform1f(locations[builtInUniforms.deltaTime.name], deltaTime,);
@@ -49939,6 +50034,133 @@ var WebGL2ShaderRenderer = class {
     }
   }
 };
+function createStaticArrayBuffer(gl, data2,) {
+  const buffer = gl.createBuffer();
+  if (!buffer) throw new Error('Failed to create buffer',);
+  gl.bindBuffer(gl.ARRAY_BUFFER, buffer,);
+  gl.bufferData(gl.ARRAY_BUFFER, data2, gl.STATIC_DRAW,);
+  return buffer;
+}
+function bindFullScreenQuadAttribs(gl, program, positionBuffer, texCoordBuffer,) {
+  const positionLocation = gl.getAttribLocation(program, 'a_position',);
+  if (positionLocation >= 0) {
+    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer,);
+    gl.enableVertexAttribArray(positionLocation,);
+    gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0,);
+  }
+  const texCoordLocation = gl.getAttribLocation(program, 'a_texCoord',);
+  if (texCoordLocation >= 0) {
+    gl.bindBuffer(gl.ARRAY_BUFFER, texCoordBuffer,);
+    gl.enableVertexAttribArray(texCoordLocation,);
+    gl.vertexAttribPointer(texCoordLocation, 2, gl.FLOAT, false, 0, 0,);
+  }
+}
+function lookupBuiltInLocations(gl, program,) {
+  return {
+    [builtInUniforms.time.name]: gl.getUniformLocation(program, builtInUniforms.time.name,),
+    [builtInUniforms.resolution.name]: gl.getUniformLocation(program, builtInUniforms.resolution.name,),
+    [builtInUniforms.deltaTime.name]: gl.getUniformLocation(program, builtInUniforms.deltaTime.name,),
+    [builtInUniforms.pixelRatio.name]: gl.getUniformLocation(program, builtInUniforms.pixelRatio.name,),
+    [builtInUniforms.mousePosition.name]: gl.getUniformLocation(program, builtInUniforms.mousePosition.name,),
+    [builtInUniforms.mousePointerDown.name]: gl.getUniformLocation(program, builtInUniforms.mousePointerDown.name,),
+    [builtInUniforms.mouseHover.name]: gl.getUniformLocation(program, builtInUniforms.mouseHover.name,),
+  };
+}
+function createBufferTexture(gl, filter2,) {
+  const texture = gl.createTexture();
+  if (!texture) throw new Error('Failed to create buffer texture',);
+  gl.bindTexture(gl.TEXTURE_2D, texture,);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, filter2,);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, filter2,);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE,);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE,);
+  return texture;
+}
+function createBufferFramebuffer(gl, texture,) {
+  const fbo = gl.createFramebuffer();
+  if (!fbo) throw new Error('Failed to create buffer framebuffer',);
+  gl.bindFramebuffer(gl.FRAMEBUFFER, fbo,);
+  gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, texture, 0,);
+  return fbo;
+}
+function throwIfFramebufferIncomplete(gl, uniformName, format,) {
+  const status = gl.checkFramebufferStatus(gl.FRAMEBUFFER,);
+  if (status !== gl.FRAMEBUFFER_COMPLETE) {
+    throw new Error(`Shader buffer "${uniformName}" framebuffer is incomplete (format: "${format}", status: 0x${status.toString(16,)}).`,);
+  }
+}
+function resolveBufferFormatGL(gl, format,) {
+  switch (format) {
+    case 'rgba8':
+      return {
+        internalFormat: gl.RGBA8,
+        uploadFormat: gl.RGBA,
+        pixelType: gl.UNSIGNED_BYTE,
+      };
+    case 'r8':
+      return {
+        internalFormat: gl.R8,
+        uploadFormat: gl.RED,
+        pixelType: gl.UNSIGNED_BYTE,
+      };
+    case 'rg16f':
+      return {
+        internalFormat: gl.RG16F,
+        uploadFormat: gl.RG,
+        pixelType: gl.HALF_FLOAT,
+      };
+    case 'rgba16f':
+      return {
+        internalFormat: gl.RGBA16F,
+        uploadFormat: gl.RGBA,
+        pixelType: gl.HALF_FLOAT,
+      };
+    case 'rgba32f':
+      return {
+        internalFormat: gl.RGBA32F,
+        uploadFormat: gl.RGBA,
+        pixelType: gl.FLOAT,
+      };
+  }
+}
+function shaderBufferFormatRequiresFloatExt(format,) {
+  return format === 'rg16f' || format === 'rgba16f' || format === 'rgba32f';
+}
+var heightmapSuffix = '_heightmap';
+var arrayLengthSuffix = '_length';
+var bufferSuffix = '_buffer';
+var nonWordCharPattern = /\W/gu;
+function isUniformName(s,) {
+  return s.startsWith(uniformPrefix,) && s.length > uniformPrefix.length;
+}
+function isHeightmapUniformName(s,) {
+  return isUniformName(s,) && s.endsWith(heightmapSuffix,);
+}
+function isArrayLengthUniformName(s,) {
+  return isUniformName(s,) && s.endsWith(arrayLengthSuffix,);
+}
+function isBufferUniformName(s,) {
+  return isUniformName(s,) && s.endsWith(bufferSuffix,);
+}
+function sanitizeUniformKey(key7,) {
+  return key7.replace(nonWordCharPattern, '_',);
+}
+function toUniformName(key7,) {
+  return `${uniformPrefix}${sanitizeUniformKey(key7,)}`;
+}
+function toArrayLengthName(uniformName,) {
+  return `${uniformName}${arrayLengthSuffix}`;
+}
+function toHeightmapUniformName(key7,) {
+  return `${uniformPrefix}${sanitizeUniformKey(key7,)}${heightmapSuffix}`;
+}
+function toBufferUniformName(key7,) {
+  return `${uniformPrefix}${sanitizeUniformKey(key7,)}${bufferSuffix}`;
+}
+function toArrayMaxLengthName(key7,) {
+  const keyAsConstantCase = sanitizeUniformKey(key7,).replace(/[a-z0-9](?=[A-Z])/g, '$&_',).toUpperCase();
+  return `NUM_${keyAsConstantCase}`;
+}
 function controlTypeToGLSLType(controlType,) {
   switch (controlType) {
     case 'number':
@@ -49954,24 +50176,16 @@ function controlTypeToGLSLType(controlType,) {
       assertNever(controlType,);
   }
 }
-function toUniformName(key7,) {
-  return `${uniformPrefix}${key7}`;
-}
-function toArrayLengthName(uniformName,) {
-  return `${uniformName}_length`;
-}
-function toHeightmapUniformName(key7,) {
-  return `${uniformPrefix}${key7}_heightmap`;
-}
-function toArrayMaxLengthName(key7,) {
-  const keyAsConstantCase = key7.replace(/[a-z0-9](?=[A-Z])/g, '$&_',).toUpperCase();
-  return `NUM_${keyAsConstantCase}`;
-}
 var glslVersionDirective = '#version 300 es';
 var glslPrecisionDirective = 'precision highp float;';
 var glslUVInput = 'in vec2 v_uv;';
 var glslFragColorOutput = 'out vec4 fragColor;';
-function generateShaderHead(propertyControls, heightmapSource,) {
+function generateShaderHead(options = {},) {
+  const {
+    propertyControls,
+    heightmapSource,
+    bufferNames,
+  } = options;
   const lines = [glslVersionDirective, glslPrecisionDirective, '', glslUVInput, glslFragColorOutput,];
   const values = propertyControls ? Object.values(propertyControls,) : [];
   if (values.length > 0) {
@@ -50008,6 +50222,12 @@ function generateShaderHead(propertyControls, heightmapSource,) {
   if (heightmapSource) {
     lines.push(`uniform sampler2D ${toHeightmapUniformName(heightmapSource,)};`,);
   }
+  if (bufferNames && bufferNames.length > 0) {
+    lines.push('',);
+    for (const name of bufferNames) {
+      lines.push(`uniform sampler2D ${toBufferUniformName(name,)};`,);
+    }
+  }
   lines.push('',);
   for (const uniform of Object.values(builtInUniforms,)) {
     lines.push(`uniform ${uniform.glslType} ${uniform.name};`,);
@@ -50015,26 +50235,106 @@ function generateShaderHead(propertyControls, heightmapSource,) {
   lines.push('',);
   return lines.join('\n',);
 }
-function prepareFragmentShader(fragment, propertyControls, heightmapSource,) {
-  return generateShaderHead(propertyControls, heightmapSource,) + fragment;
+function prepareFragmentShader(fragment, common, options = {},) {
+  const head = generateShaderHead(options,);
+  if (!common) return head + fragment;
+  return `${head}${common}
+${fragment}`;
+}
+var defaultBufferResolutionScale = 0.5;
+var defaultBufferFormat = 'rgba8';
+function resolveBufferDescriptors(buffers, common, headOptions,) {
+  if (!buffers) return void 0;
+  return buffers.map((buffer) => ({
+    uniformName: toBufferUniformName(buffer.name,),
+    fragment: prepareFragmentShader(buffer.fragment, common, headOptions,),
+    resolutionScale: buffer.resolutionScale ?? defaultBufferResolutionScale,
+    format: buffer.format ?? defaultBufferFormat,
+  }));
 }
 var shaderConfigBrand = '__framer_shaderConfig__';
 function isShaderConfig(obj,) {
   return isObject2(obj,) && shaderConfigBrand in obj;
 }
 function defineShader(shaderConfig,) {
+  validateShaderInputs(shaderConfig,);
+  const bufferNames = shaderConfig.buffers ? shaderConfig.buffers.map((b) => b.name) : void 0;
+  const preparedMainFragment = prepareFragmentShader(shaderConfig.fragment, shaderConfig.common, {
+    propertyControls: shaderConfig.propertyControls,
+    heightmapSource: shaderConfig.heightmapSource,
+    bufferNames,
+  },);
+  const resolvedBuffers = resolveBufferDescriptors(shaderConfig.buffers, shaderConfig.common, {
+    propertyControls: shaderConfig.propertyControls,
+    heightmapSource: shaderConfig.heightmapSource,
+    bufferNames,
+  },);
+  return {
+    ...shaderConfig,
+    fragment: preparedMainFragment,
+    buffers: resolvedBuffers,
+    [shaderConfigBrand]: true,
+  };
+}
+function validateShaderInputs(shaderConfig,) {
+  const seenDerivedNames = /* @__PURE__ */ new Map();
+  if (shaderConfig.propertyControls) {
+    for (const key7 in shaderConfig.propertyControls) {
+      if (isUniformName(key7,) || key7 === uniformPrefix) {
+        throw new Error(`Property control key "${key7}" must not start with "${uniformPrefix}".`,);
+      }
+      const derivedName = toUniformName(key7,);
+      if (isHeightmapUniformName(derivedName,)) {
+        throw new Error(`Property control key "${key7}" must not end with "_heightmap".`,);
+      }
+      if (isArrayLengthUniformName(derivedName,)) {
+        throw new Error(`Property control key "${key7}" must not end with "_length".`,);
+      }
+      if (isBufferUniformName(derivedName,)) {
+        throw new Error(`Property control key "${key7}" must not end with "_buffer".`,);
+      }
+      const collidingKey = seenDerivedNames.get(derivedName,);
+      if (collidingKey !== void 0) {
+        throw new Error(`Property control keys "${collidingKey}" and "${key7}" both resolve to the same uniform "${derivedName}".`,);
+      }
+      seenDerivedNames.set(derivedName, key7,);
+    }
+  }
   if (shaderConfig.heightmapSource) {
     const control = shaderConfig.propertyControls?.[shaderConfig.heightmapSource];
     if (!control || control.type !== 'responsiveimage') {
       throw new Error(`heightmapSource "${shaderConfig.heightmapSource}" must reference a ResponsiveImage property control.`,);
     }
   }
-  const preparedFragment = prepareFragmentShader(shaderConfig.fragment, shaderConfig.propertyControls, shaderConfig.heightmapSource,);
-  return {
-    ...shaderConfig,
-    fragment: preparedFragment,
-    [shaderConfigBrand]: true,
-  };
+  if (shaderConfig.buffers) {
+    for (const buffer of shaderConfig.buffers) {
+      if (isUniformName(buffer.name,)) {
+        throw new Error(`Shader buffer name "${buffer.name}" must not start with "${uniformPrefix}".`,);
+      }
+      const derivedName = toBufferUniformName(buffer.name,);
+      const collidingName = seenDerivedNames.get(derivedName,);
+      if (collidingName !== void 0) {
+        throw new Error(
+          collidingName === buffer.name
+            ? `Duplicate shader buffer name "${buffer.name}".`
+            : `Shader buffer names "${collidingName}" and "${buffer.name}" both resolve to the same uniform "${derivedName}".`,
+        );
+      }
+      seenDerivedNames.set(derivedName, buffer.name,);
+      if (buffer.resolutionScale !== void 0) {
+        if (!isNumber2(buffer.resolutionScale,) || buffer.resolutionScale <= 0 || buffer.resolutionScale > 1) {
+          throw new Error(
+            `Shader buffer "${buffer.name}" has invalid resolutionScale ${buffer.resolutionScale}. Must be in the range (0, 1].`,
+          );
+        }
+      }
+      if (buffer.format !== void 0 && !shaderBufferFormats.has(buffer.format,)) {
+        throw new Error(
+          `Shader buffer "${buffer.name}" has invalid format "${buffer.format}". Must be one of: ${[...shaderBufferFormats,].join(', ',)}.`,
+        );
+      }
+    }
+  }
 }
 var ShaderFallbackImage = /* @__PURE__ */ memo2(function ShaderFallbackImage2({
   src,
@@ -50408,12 +50708,6 @@ function getShaderTiming(timeMs, startTime, lastTime,) {
     deltaTime,
   };
 }
-function resolveFeedbackLoop(feedbackLoop, isMouseEnabled,) {
-  if (feedbackLoop === void 0) return false;
-  if (feedbackLoop === 'always') return true;
-  if (feedbackLoop === 'onlyWhenMouseEnabled') return isMouseEnabled;
-  return false;
-}
 var sandboxFallbackImageStyle = {
   display: 'block',
   width: '100%',
@@ -50732,7 +51026,7 @@ function ShaderCanvas({
   singleFrame: singleFrame2 = false,
   heightmapSource,
   mouseDataRef,
-  feedbackLoop = false,
+  buffers,
 },) {
   const canvasRef = useRef(null,);
   const rendererRef = useRef(null,);
@@ -50766,12 +51060,42 @@ function ShaderCanvas({
     readySignalledRef.current = true;
     onReadyRef.current?.();
   }, [haveUniformsResolved,],);
+  const currentSizeRef = useRef({
+    width: 0,
+    height: 0,
+    dpr: 0,
+  },);
+  const lastAppliedSizeRef = useRef({
+    width: 0,
+    height: 0,
+    dpr: 0,
+  },);
+  const updateCurrentSize = useCallback2(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    currentSizeRef.current = {
+      width: canvas.offsetWidth,
+      height: canvas.offsetHeight,
+      dpr: __unframerWindow2.devicePixelRatio,
+    };
+  }, [],);
+  const maybeResize = useCallback2(() => {
+    const renderer = rendererRef.current;
+    if (!renderer) return;
+    const current2 = currentSizeRef.current;
+    const last = lastAppliedSizeRef.current;
+    if (current2.width === last.width && current2.height === last.height && current2.dpr === last.dpr) return;
+    renderer.resize();
+    lastAppliedSizeRef.current = {
+      ...current2,
+    };
+  }, [],);
   const animate3 = useCallback2((time2) => {
     const renderer = rendererRef.current;
     if (!renderer) return;
     if (singleFrameRef.current) {
       if (!haveUniformsResolved) return;
-      renderer.resize();
+      maybeResize();
       renderer.render(0, 0, resolvedUniformsRef.current, mouseDataRef?.current ?? defaultMouseData,);
       signalReadyIfNeeded();
       return;
@@ -50784,7 +51108,7 @@ function ShaderCanvas({
       startTimeRef.current = time2 * timeMultiplier;
       lastTimeRef.current = startTimeRef.current;
     }
-    renderer.resize();
+    maybeResize();
     const {
       currentTime,
       elapsedTime,
@@ -50796,14 +51120,14 @@ function ShaderCanvas({
     if (!singleFrameRef.current && animatedRef.current) {
       animationFrameRef.current = requestAnimationFrame(animate3,);
     }
-  }, [haveUniformsResolved, signalReadyIfNeeded, mouseDataRef,],);
+  }, [haveUniformsResolved, signalReadyIfNeeded, mouseDataRef, maybeResize,],);
   const renderSingleFrame = useCallback2(() => {
     const renderer = rendererRef.current;
     if (!renderer || !haveUniformsResolved) return;
-    renderer.resize();
+    maybeResize();
     renderer.render(0, 0, resolvedUniformsRef.current, mouseDataRef?.current ?? defaultMouseData,);
     signalReadyIfNeeded();
-  }, [haveUniformsResolved, mouseDataRef, signalReadyIfNeeded,],);
+  }, [haveUniformsResolved, mouseDataRef, signalReadyIfNeeded, maybeResize,],);
   useLayoutEffect(() => {
     resolvedUniformsRef.current = resolvedUniforms;
     if (singleFrameRef.current && rendererRef.current) {
@@ -50821,11 +51145,16 @@ function ShaderCanvas({
         fragmentShader,
         resolveResolutionScale(resolutionScale,),
         onContextLostRef.current,
-        feedbackLoop,
+        buffers,
       );
       rendererRef.current = renderer;
-      renderer.resize();
-      if (feedbackLoop) renderer.initFeedbackLoopBuffers(canvas.width, canvas.height,);
+      lastAppliedSizeRef.current = {
+        width: 0,
+        height: 0,
+        dpr: 0,
+      };
+      updateCurrentSize();
+      maybeResize();
       startTimeRef.current = performance.now() * timeMultiplier;
       lastTimeRef.current = startTimeRef.current;
       if (singleFrameRef.current) {
@@ -50843,7 +51172,18 @@ function ShaderCanvas({
       rendererRef.current?.dispose();
       rendererRef.current = null;
     };
-  }, [vertexShader, fragmentShader, resolutionScale, animate3, renderSingleFrame, onError, feedbackLoop, haveUniformsResolved,],);
+  }, [
+    vertexShader,
+    fragmentShader,
+    resolutionScale,
+    animate3,
+    renderSingleFrame,
+    onError,
+    buffers,
+    haveUniformsResolved,
+    updateCurrentSize,
+    maybeResize,
+  ],);
   const wasAnimatedRef = useRef(animated,);
   const wasReactiveRef = useRef(singleFrame2,);
   useEffect(() => {
@@ -50860,11 +51200,12 @@ function ShaderCanvas({
   const handleResize = useCallback2(() => {
     const renderer = rendererRef.current;
     if (!renderer || !haveUniformsResolved) return;
+    updateCurrentSize();
     if (singleFrameRef.current) {
       renderSingleFrame();
       return;
     }
-    renderer.resize();
+    maybeResize();
     const {
       currentTime,
       elapsedTime,
@@ -50872,7 +51213,7 @@ function ShaderCanvas({
     } = getShaderTiming(performance.now(), startTimeRef.current, lastTimeRef.current,);
     lastTimeRef.current = currentTime;
     renderer.render(elapsedTime, deltaTime, resolvedUniformsRef.current, mouseDataRef?.current ?? defaultMouseData,);
-  }, [haveUniformsResolved, mouseDataRef, renderSingleFrame,],);
+  }, [haveUniformsResolved, mouseDataRef, renderSingleFrame, updateCurrentSize, maybeResize,],);
   useCanvasResize(canvasRef, handleResize,);
   return /* @__PURE__ */ jsx('canvas', {
     ref: canvasRef,
@@ -50898,7 +51239,7 @@ var ShaderWithFallbackOverlay = /* @__PURE__ */ memo2(function ShaderWithFallbac
   onUniformResolutionFailed,
   heightmapSource,
   mouseDataRef,
-  feedbackLoop,
+  buffers,
 },) {
   const [isShaderReady, setIsShaderReady,] = useState(false,);
   const [shouldPlay, setShouldPlay,] = useState(false,);
@@ -50950,7 +51291,7 @@ var ShaderWithFallbackOverlay = /* @__PURE__ */ memo2(function ShaderWithFallbac
           onUniformResolutionFailed,
           heightmapSource,
           mouseDataRef,
-          feedbackLoop,
+          buffers,
         },),
       },),
       fallbackImage && !shouldSkipInitialFallback && /* @__PURE__ */ jsx('div', {
@@ -51161,7 +51502,7 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
   isMultiSelected = false,
   heightmapSource,
   mouse,
-  feedbackLoop,
+  buffers,
   ...rest
 }, ref,) {
   const observerRef = useObserverRef(ref,);
@@ -51209,7 +51550,6 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
     startTransition2(() => setIsShaderReady(true,));
     onReady?.();
   }, [onReady,],);
-  const effectiveFeedbackLoop = resolveFeedbackLoop(feedbackLoop, mouse?.enabled === true,);
   const shaderProps = {
     vertexShader,
     fragmentShader,
@@ -51220,7 +51560,7 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
     onUniformResolutionSucceeded,
     onUniformResolutionFailed,
     heightmapSource,
-    feedbackLoop: effectiveFeedbackLoop,
+    buffers,
   };
   const containerFrameProps = {
     style: style2,
