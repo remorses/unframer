@@ -711,36 +711,8 @@ body { --framer-will-change-filter-override: none; }
         }
     
 
-        .framer-text-module[data-width="fill"] > :first-child, .framer-text-module[data-width="fill"] > .ssr-variant > :first-child,
-        .framer-text-module:not([data-width="fit"])[style*="aspect-ratio"] > :first-child, .framer-text-module:not([data-width="fit"])[style*="aspect-ratio"] > .ssr-variant > :first-child {
+        .framer-text-module[data-width="fill"] > :first-child, .framer-text-module[data-width="fill"] > .ssr-variant > :first-child {
             width: 100% !important;
-        }
-    
-
-        @supports not (aspect-ratio: 1) {
-            .framer-text-module:not([data-width="fit"])[style*="aspect-ratio"] {
-                position: relative !important;
-            }
-        }
-    
-
-        @supports not (aspect-ratio: 1) {
-            .framer-text-module:not([data-width="fit"])[style*="aspect-ratio"]::before {
-                content: "";
-                display: block;
-                padding-bottom: calc(100% / calc(var(--aspect-ratio)));
-            }
-        }
-    
-
-        @supports not (aspect-ratio: 1) {
-            .framer-text-module[data-width="fill"] > :first-child, .framer-text-module[data-width="fill"] > .ssr-variant > :first-child,
-            .framer-text-module:not([data-width="fit"])[style*="aspect-ratio"] > :first-child, .framer-text-module:not([data-width="fit"])[style*="aspect-ratio"] > .ssr-variant > :first-child {
-                position: absolute;
-                top: 0;
-                left: 0;
-                height: 100% !important;
-            }
         }
     
 [data-framer-component-type="DeprecatedRichText"] { cursor: inherit; }
