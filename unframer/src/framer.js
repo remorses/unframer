@@ -12683,7 +12683,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.CUOBBU6O.mjs
+// /:https://app.framerstatic.com/framer.HEWIH6ZA.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -50398,16 +50398,62 @@ function parseCSSVariable2(token,) {
   const range = parseCSSVarRange(token,);
   return tokenFromVarRange(token, range,);
 }
+var maxLoadedTextures = 30;
+var maxGeneratedTextures = 20;
+var ShaderTextureCache = class {
+  constructor() {
+    __publicField(this, 'loaders', /* @__PURE__ */ new Map(),);
+    __publicField(this, 'generated', /* @__PURE__ */ new Map(),);
+  }
+  load(key7, factory,) {
+    const cached = this.loaders.get(key7,);
+    if (cached) return cached;
+    const promise = factory();
+    promise.catch(() => {
+      if (this.loaders.get(key7,) === promise) this.loaders.delete(key7,);
+    },);
+    evictOldestIfFull(this.loaders, maxLoadedTextures,);
+    this.loaders.set(key7, promise,);
+    return promise;
+  }
+  generate(key7, factory,) {
+    const cached = this.generated.get(key7,);
+    if (cached) return cached;
+    const created = factory();
+    if (!created) return void 0;
+    evictOldestIfFull(this.generated, maxGeneratedTextures,);
+    this.generated.set(key7, created,);
+    return created;
+  }
+  clear() {
+    this.loaders.clear();
+    this.generated.clear();
+  }
+  /** @internal Exposed for testing. */
+  get loadedSize() {
+    return this.loaders.size;
+  }
+  /** @internal Exposed for testing. */
+  get generatedSize() {
+    return this.generated.size;
+  }
+};
+function evictOldestIfFull(map2, max,) {
+  if (map2.size < max) return;
+  const oldest = map2.keys().next().value;
+  if (oldest !== void 0) map2.delete(oldest,);
+}
+var shaderTextureCache = /* @__PURE__ */ new ShaderTextureCache();
 var scaledDownWorkingResolution = 1024;
-var maxCacheEntries = 20;
-var heightmapCache = /* @__PURE__ */ new Map();
 function generateHeightmap(image, getCacheKey2,) {
   if (!isHeightMapSupportedTexImageSource(image,)) return;
   const cacheKey = getCacheKey2?.();
-  if (cacheKey) {
-    const cached = heightmapCache.get(cacheKey,);
-    if (cached) return cached;
-  }
+  if (!cacheKey) return buildHeightmap(image,);
+  const cached = shaderTextureCache.generate(cacheKey, () => buildHeightmap(image,),);
+  if (!(cached instanceof HTMLCanvasElement)) return void 0;
+  return cached;
+}
+function buildHeightmap(image,) {
   const info = getImageInfo(image,);
   if (!info) return void 0;
   let scale2 = scaledDownWorkingResolution / Math.min(info.width, info.height,);
@@ -50472,13 +50518,6 @@ function generateHeightmap(image, getCacheKey2,) {
   if (!outCtx) return void 0;
   outCtx.imageSmoothingEnabled = true;
   outCtx.drawImage(lowResCanvas, 0, 0, info.width, info.height,);
-  if (cacheKey) {
-    if (heightmapCache.size >= maxCacheEntries) {
-      const oldest = heightmapCache.keys().next().value;
-      if (oldest !== void 0) heightmapCache.delete(oldest,);
-    }
-    heightmapCache.set(cacheKey, outCanvas,);
-  }
   return outCanvas;
 }
 function solvePoissonField(interior, width, height,) {
@@ -50574,6 +50613,9 @@ function colorToVec4(color2, element,) {
   return [rgba2.r / 255, rgba2.g / 255, rgba2.b / 255, rgba2.a,];
 }
 function loadTexture(url,) {
+  return shaderTextureCache.load(url, () => loadTextureFromNetwork(url,),);
+}
+function loadTextureFromNetwork(url,) {
   return new Promise((resolve, reject,) => {
     const img = new Image();
     img.crossOrigin = 'anonymous';
@@ -50922,23 +50964,25 @@ function useShaderRenderState(
   isIntersecting,
   mode,
   animated,
-  fallbackImage,
-  shouldReduceMotion,
   skipInitialFallback,
+  isPreviewActive,
 ) {
+  const shouldReduceMotion = useReducedMotionConfig();
+  const shouldPauseOnFirstFrame = shouldReduceMotion === true || RenderTarget.current() === RenderTarget.export;
+  const shouldSkipFallbackOverlay = skipInitialFallback || shouldPauseOnFirstFrame;
   let isFallbackOnly;
   let effectiveAnimated;
   let effectiveSingleFrame;
   let effectiveMode;
   if (poolSlot !== null) {
     const hasSlot = poolSlot !== slotStatus.noSlot;
-    isFallbackOnly = !hasSlot || !!shouldReduceMotion && !!fallbackImage;
-    effectiveAnimated = (animated ?? true) && isSelected && !isMultiSelected;
+    isFallbackOnly = !hasSlot;
+    effectiveAnimated = (animated ?? true) && isSelected && !isMultiSelected && !shouldPauseOnFirstFrame && !isPreviewActive;
     effectiveSingleFrame = hasSlot && !effectiveAnimated;
     effectiveMode = 'instant';
   } else {
-    isFallbackOnly = mode === 'fallback' || !!shouldReduceMotion && !!fallbackImage || !isIntersecting;
-    effectiveAnimated = animated ?? true;
+    isFallbackOnly = mode === 'fallback' || !isIntersecting;
+    effectiveAnimated = (animated ?? true) && !shouldPauseOnFirstFrame && !isPreviewActive;
     effectiveSingleFrame = !effectiveAnimated;
     effectiveMode = mode;
   }
@@ -50972,9 +51016,8 @@ function useShaderRenderState(
   if (uniformResolutionFailed) {
     isFallbackOnly = true;
   }
-  const reducedMotionFallback = !!shouldReduceMotion && !!fallbackImage;
   if (
-    mode !== 'fallback' && skipInitialFallback && !contextLost && !uniformResolutionFailed && !reducedMotionFallback && isIntersecting &&
+    mode !== 'fallback' && skipInitialFallback && !contextLost && !uniformResolutionFailed && isIntersecting &&
     poolSlot !== slotStatus.noSlot
   ) {
     isFallbackOnly = false;
@@ -50984,6 +51027,7 @@ function useShaderRenderState(
     effectiveAnimated,
     effectiveSingleFrame,
     effectiveMode,
+    shouldSkipFallbackOverlay,
     onContextLost,
     onUniformResolutionSucceeded,
     onUniformResolutionFailed,
@@ -51033,6 +51077,7 @@ function ShaderCanvas({
   const animationFrameRef = useRef(0,);
   const startTimeRef = useRef(0,);
   const lastTimeRef = useRef(0,);
+  const shaderRenderedFrameRef = useRef(null,);
   const onReadyRef = useRef(onReady,);
   useLayoutEffect(() => {
     onReadyRef.current = onReady;
@@ -51059,6 +51104,10 @@ function ShaderCanvas({
     if (readySignalledRef.current || !haveUniformsResolved) return;
     readySignalledRef.current = true;
     onReadyRef.current?.();
+    shaderRenderedFrameRef.current = requestAnimationFrame(() => {
+      shaderRenderedFrameRef.current = null;
+      performance.mark?.('shader_rendered',);
+    },);
   }, [haveUniformsResolved,],);
   const currentSizeRef = useRef({
     width: 0,
@@ -51169,6 +51218,7 @@ function ShaderCanvas({
     }
     return () => {
       cancelAnimationFrame(animationFrameRef.current,);
+      if (shaderRenderedFrameRef.current !== null) cancelAnimationFrame(shaderRenderedFrameRef.current,);
       rendererRef.current?.dispose();
       rendererRef.current = null;
     };
@@ -51500,6 +51550,7 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
   poolId,
   isSelected = false,
   isMultiSelected = false,
+  isPreviewActive = false,
   heightmapSource,
   mouse,
   buffers,
@@ -51507,7 +51558,8 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
 }, ref,) {
   const observerRef = useObserverRef(ref,);
   const renderTargetEnvironment = useRenderTargetEnvironment();
-  const shouldSkipPreviewFallback = RenderTarget.current() === RenderTarget.preview && renderTargetEnvironment === 'preview';
+  const renderTarget = RenderTarget.current();
+  const shouldSkipPreviewFallback = renderTarget === RenderTarget.preview && renderTargetEnvironment === 'preview';
   const shouldSkipInitialFallback = Boolean(fallbackImage && (skipInitialFallback || shouldSkipPreviewFallback),);
   const isOnCanvas = useIsOnFramerCanvas();
   const mouseDataRef = useShaderMouse(observerRef, isOnCanvas ? void 0 : mouse,);
@@ -51522,12 +51574,15 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
   const autoId = useId();
   const id3 = poolId ?? autoId;
   const poolSlot = useShaderPoolSlot(id3, isSelected, isIntersecting,);
-  const shouldReduceMotion = useReducedMotionConfig();
+  useEffect(() => {
+    performance.mark?.('shader_register',);
+  }, [],);
   const {
     isFallbackOnly,
     effectiveAnimated,
     effectiveSingleFrame,
     effectiveMode,
+    shouldSkipFallbackOverlay,
     onContextLost,
     onUniformResolutionSucceeded,
     onUniformResolutionFailed,
@@ -51538,9 +51593,8 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
     isIntersecting,
     mode,
     animated,
-    fallbackImage,
-    shouldReduceMotion,
     shouldSkipInitialFallback,
+    isPreviewActive,
   );
   const [isShaderReady, setIsShaderReady,] = useState(false,);
   useLayoutEffect(() => {
@@ -51576,7 +51630,7 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
       children: [
         !isFallbackOnly && /* @__PURE__ */ jsx(ShaderWithFallbackOverlay, {
           mode: effectiveMode,
-          skipInitialFallback: shouldSkipInitialFallback,
+          skipInitialFallback: shouldSkipFallbackOverlay,
           onReady: handleShaderReady,
           ...shaderProps,
           animated: effectiveAnimated,
@@ -51595,7 +51649,7 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
     return /* @__PURE__ */ jsx(ShaderContainerFrame, {
       ref: observerRef,
       ...containerFrameProps,
-      children: shouldSkipInitialFallback && !isIntersecting ? null : /* @__PURE__ */ jsx(ShaderFallbackImage, {
+      children: shouldSkipFallbackOverlay && !isIntersecting ? null : /* @__PURE__ */ jsx(ShaderFallbackImage, {
         src: fallbackImage,
       },),
     },);
@@ -51606,7 +51660,7 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
     children: /* @__PURE__ */ jsx(ShaderWithFallbackOverlay, {
       mode: effectiveMode,
       fallbackImage,
-      skipInitialFallback: shouldSkipInitialFallback,
+      skipInitialFallback: shouldSkipFallbackOverlay,
       onReady,
       ...shaderProps,
       animated: effectiveAnimated,
