@@ -1,5 +1,6 @@
 import { propCamelCaseJustLikeFramer } from './compat.js'
-import { ControlDescription, ControlType, PropertyControls } from './framer.js'
+import type { ControlDescription, PropertyControls } from './framer-types.js'
+import { ControlType } from './framer-types.js'
 
 export function componentCamelCase(str: string) {
     str = str?.replace(/\.jsx?$/, '')

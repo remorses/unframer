@@ -41,12 +41,8 @@ import {
     esbuildPluginBundleDependencies,
     resolveRedirect,
 } from './esbuild.js'
-import {
-    ControlDescription,
-    ControlType,
-    PropertyControls,
-    combinedCSSRules,
-} from './framer.js'
+import type { ControlDescription, PropertyControls } from './framer-types.js'
+import { ControlType } from './framer-types.js'
 import { notifyError } from './sentry.js'
 import {
     kebabCase,

@@ -25,6 +25,7 @@
         "framer-fixed",
         "bin.js",
         "src",
+        "!src/framer-chunks",
         "README.md"
     ],
     "main": "./dist/index.js",
@@ -72,7 +73,7 @@
         "camelcase": "^9.0.0",
         "diff": "^7.0.0",
         "dom-serializer": "^2.0.0",
-        "esbuild": "^0.25.8",
+        "esbuild": "^0.28.0",
         "esbuild-plugins-node-modules-polyfill": "^1.6.8",
         "framer-api": "^0.1.2",
         "goke": "^6.8.0",
