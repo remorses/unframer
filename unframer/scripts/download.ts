@@ -34,6 +34,12 @@ export async function main({ framerTypesUrl }) {
 
     const u = new URL(framerUrl)
 
+    const chunksDir = path.resolve(out, 'framer-chunks')
+    if (fs.existsSync(chunksDir)) {
+        fs.rmSync(chunksDir, { recursive: true })
+        console.log('cleaned old framer-chunks/')
+    }
+
     const resultFile = path.resolve(out, `framer.js`)
     const result = await build({
         entryPoints: { framer: framerUrl },
