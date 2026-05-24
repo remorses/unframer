@@ -9,15 +9,15 @@
         "astro": "astro"
     },
     "dependencies": {
-        "@astrojs/react": "^4.2.3",
-        "@astrojs/tailwind": "^5.1.5",
+        "@astrojs/react": "^5.0.5",
+        "@tailwindcss/vite": "^4.3.0",
         "@types/react": "^19.2.14",
         "@types/react-dom": "^19.2.3",
-        "astro": "^5.1.10",
+        "astro": "^6.3.7",
         "nextjs-app": "workspace:^",
         "react": "^19.2.3",
         "react-dom": "^19.2.3",
-        "tailwindcss": "^3.4.17",
+        "tailwindcss": "^4.3.0",
         "unframer": "workspace:^"
     }
 }
