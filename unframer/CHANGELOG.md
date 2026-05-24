@@ -1,5 +1,12 @@
 # unframer
 
+## 4.1.8
+
+1. **Updated bundled Framer runtime** — refreshed the packaged Framer internals to `framer@2.4.1` with the latest runtime code and framer-motion assets
+2. **Fixed broken resolution for non-chunk dynamic imports** — the `files` field excluded `src/framer-chunks` then selectively re-included only `chunk-*` files, silently breaking resolution for `fontshare-*`, `google-*`, `SqliteDatabase-*`, `framer-font-*`, `sqlite-wasm-*`, and other chunk types that `framer.js` dynamically imports. All chunk types are now included
+3. **Fixed exporter and TypeScript modules pulling in the full framer.js runtime** — `exporter.ts` and `typescript.ts` imported `ControlType`, `ControlDescription`, and `PropertyControls` directly from `framer.js`, dragging in the full 360KB runtime plus all framer-chunks at bundle time. These now import from a standalone `framer-types.ts` module, avoiding the framer.js dependency entirely
+4. **Fixed old framer-chunks accumulating across runtime updates** — the download script never cleaned the `framer-chunks/` directory before writing new content-hashed chunks, causing old files to pile up across runs
+
 ## 4.1.7
 
 1. **Fixed `--external` flag silently failing** — the `--external` CLI flag was parsed as an empty string when used without a package name, but the code only checked for `true`. This meant npm dependencies were always fetched from esm.sh and bundled instead of externalized, causing `ERR_MODULE_NOT_FOUND` errors during type extraction. Now `--external` correctly externalizes all npm packages:
