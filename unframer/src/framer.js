@@ -46694,7 +46694,7 @@ function getCacheKey(query, locale,) {
 async function executeServerDatabaseQuery(sql,) {
   const {
     executeServerDatabaseQuery: executeServerDatabaseQueryWithSqlite,
-  } = await import('./framer-chunks/SqliteDatabase-VAKIICSG-4V7VUOPR.js');
+  } = await import('./framer-chunks/SqliteDatabase-VAKIICSG-R7ZS6CHH.js');
   return executeServerDatabaseQueryWithSqlite(sql,);
 }
 var queryEngine = /* @__PURE__ */ new QueryEngine();

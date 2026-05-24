@@ -12,12 +12,12 @@
         }
     },
     "scripts": {
-        "build": "rm -rf dist && pnpm tsgo && cp ../README.md ./README.md && cp ./src/framer.d.ts ./dist/framer.d.ts && cp ./src/framer.js ./dist/framer.js && cp -r ./src/framer-chunks ./dist/framer-chunks",
+        "build": "pnpm tsgo && cp ../README.md ./README.md && cp ./src/framer.d.ts ./dist/framer.d.ts && cp ./src/framer.js ./dist/framer.js && cp -r ./src/framer-chunks ./dist/framer-chunks",
         "test": "vitest",
         "gen-client": "export DIR=./src/generated/ && cd ../../website && pnpm tsc; rm -rf $DIR && mkdir -p $DIR && cp ./dist/src/lib/api-client.* $DIR",
-        "prepublishOnly": "pnpm tsx scripts/version-replace.ts && pnpm build",
+        "prepublishOnly": "rm -rf dist && pnpm tsx scripts/version-replace.ts && pnpm build",
         "download-framer": "tsx scripts/download.ts",
-        "watch": "rm -rf dist && pnpm tsc -w"
+        "watch": "pnpm tsc -w"
     },
     "bin": "bin.js",
     "files": [
