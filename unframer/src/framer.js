@@ -12,7 +12,7 @@ import {
   __require,
   __runInitializers,
   __toESM,
-} from './framer-chunks/chunk-2DZGP7C2.js';
+} from './framer-chunks/chunk-WYG6DFEF.js';
 
 // /:https://app.framerstatic.com/chunk-7KEO2DXG.mjs
 import { createContext, } from 'react';
@@ -8795,7 +8795,7 @@ var useSVGVisualState = /* @__PURE__ */ makeUseVisualState({
   scrapeMotionValuesFromProps: scrapeMotionValuesFromProps2,
   createRenderState: createSvgRenderState,
 },);
-var motionComponentSymbol = Symbol.for('motionComponentSymbol',);
+var motionComponentSymbol = /* @__PURE__ */ Symbol.for('motionComponentSymbol',);
 function useMotionRef(visualState, visualElement, externalRef,) {
   const externalRefContainer = useRef(externalRef,);
   useInsertionEffect(() => {
@@ -13266,24 +13266,24 @@ var require_react_is_production_min = __commonJS({
     'use strict';
 
     var b = 'function' === typeof Symbol && Symbol.for;
-    var c = b ? Symbol.for('react.element',) : 60103;
-    var d = b ? Symbol.for('react.portal',) : 60106;
-    var e = b ? Symbol.for('react.fragment',) : 60107;
-    var f2 = b ? Symbol.for('react.strict_mode',) : 60108;
-    var g = b ? Symbol.for('react.profiler',) : 60114;
-    var h = b ? Symbol.for('react.provider',) : 60109;
-    var k = b ? Symbol.for('react.context',) : 60110;
-    var l2 = b ? Symbol.for('react.async_mode',) : 60111;
-    var m2 = b ? Symbol.for('react.concurrent_mode',) : 60111;
-    var n = b ? Symbol.for('react.forward_ref',) : 60112;
-    var p = b ? Symbol.for('react.suspense',) : 60113;
-    var q = b ? Symbol.for('react.suspense_list',) : 60120;
-    var r = b ? Symbol.for('react.memo',) : 60115;
-    var t = b ? Symbol.for('react.lazy',) : 60116;
-    var v = b ? Symbol.for('react.block',) : 60121;
-    var w = b ? Symbol.for('react.fundamental',) : 60117;
-    var x2 = b ? Symbol.for('react.responder',) : 60118;
-    var y2 = b ? Symbol.for('react.scope',) : 60119;
+    var c = b ? /* @__PURE__ */ Symbol.for('react.element',) : 60103;
+    var d = b ? /* @__PURE__ */ Symbol.for('react.portal',) : 60106;
+    var e = b ? /* @__PURE__ */ Symbol.for('react.fragment',) : 60107;
+    var f2 = b ? /* @__PURE__ */ Symbol.for('react.strict_mode',) : 60108;
+    var g = b ? /* @__PURE__ */ Symbol.for('react.profiler',) : 60114;
+    var h = b ? /* @__PURE__ */ Symbol.for('react.provider',) : 60109;
+    var k = b ? /* @__PURE__ */ Symbol.for('react.context',) : 60110;
+    var l2 = b ? /* @__PURE__ */ Symbol.for('react.async_mode',) : 60111;
+    var m2 = b ? /* @__PURE__ */ Symbol.for('react.concurrent_mode',) : 60111;
+    var n = b ? /* @__PURE__ */ Symbol.for('react.forward_ref',) : 60112;
+    var p = b ? /* @__PURE__ */ Symbol.for('react.suspense',) : 60113;
+    var q = b ? /* @__PURE__ */ Symbol.for('react.suspense_list',) : 60120;
+    var r = b ? /* @__PURE__ */ Symbol.for('react.memo',) : 60115;
+    var t = b ? /* @__PURE__ */ Symbol.for('react.lazy',) : 60116;
+    var v = b ? /* @__PURE__ */ Symbol.for('react.block',) : 60121;
+    var w = b ? /* @__PURE__ */ Symbol.for('react.fundamental',) : 60117;
+    var x2 = b ? /* @__PURE__ */ Symbol.for('react.responder',) : 60118;
+    var y2 = b ? /* @__PURE__ */ Symbol.for('react.scope',) : 60119;
     function z(a,) {
       if ('object' === typeof a && null !== a) {
         var u = a.$$typeof;
@@ -46694,7 +46694,7 @@ function getCacheKey(query, locale,) {
 async function executeServerDatabaseQuery(sql,) {
   const {
     executeServerDatabaseQuery: executeServerDatabaseQueryWithSqlite,
-  } = await import('./framer-chunks/SqliteDatabase-VAKIICSG-R7ZS6CHH.js');
+  } = await import('./framer-chunks/SqliteDatabase-VAKIICSG-W43ZSXBO.js');
   return executeServerDatabaseQueryWithSqlite(sql,);
 }
 var queryEngine = /* @__PURE__ */ new QueryEngine();
@@ -53352,11 +53352,11 @@ function getAssetOwnerType(asset,) {
 async function loadFontsWithOpenType(source,) {
   switch (source) {
     case 'google': {
-      const supportedFonts = await import('./framer-chunks/google-3SZHWBC6-OBXS3UIH.js');
+      const supportedFonts = await import('./framer-chunks/google-3SZHWBC6-MIC5SCB4.js');
       return supportedFonts.default;
     }
     case 'fontshare': {
-      const supportedFonts = await import('./framer-chunks/fontshare-B2QLD7YB-4BZEAA37.js');
+      const supportedFonts = await import('./framer-chunks/fontshare-B2QLD7YB-ZLNQ44LW.js');
       return supportedFonts.default;
     }
     default:
@@ -53366,15 +53366,15 @@ async function loadFontsWithOpenType(source,) {
 async function loadFontToOpenTypeFeatures(source,) {
   switch (source) {
     case 'google': {
-      const features = await import('./framer-chunks/google-3FCAKCAC-P5EL6KGL.js');
+      const features = await import('./framer-chunks/google-3FCAKCAC-K2ZVMKHN.js');
       return features.default;
     }
     case 'fontshare': {
-      const features = await import('./framer-chunks/fontshare-4THNDPMZ-BJQGNHXN.js');
+      const features = await import('./framer-chunks/fontshare-4THNDPMZ-L3NZDIOE.js');
       return features.default;
     }
     case 'framer': {
-      const features = await import('./framer-chunks/framer-font-45AI7UCZ-LU7DEIDM.js');
+      const features = await import('./framer-chunks/framer-font-45AI7UCZ-Z3XHDH5K.js');
       return features.default;
     }
     default:
@@ -53918,10 +53918,10 @@ function loadVariationAxes(source,) {
       const axes = (async () => {
         switch (source) {
           case 'google': {
-            return (await import('./framer-chunks/google-GXDJLGJB-HHIXFE4M.js')).default;
+            return (await import('./framer-chunks/google-GXDJLGJB-356NWSZ7.js')).default;
           }
           case 'fontshare': {
-            return (await import('./framer-chunks/fontshare-O22OBJ3D-ALBQLFE5.js')).default;
+            return (await import('./framer-chunks/fontshare-O22OBJ3D-VY7WF3BB.js')).default;
           }
           default:
             assertNever(source,);
