@@ -1,7 +1,7 @@
-import { SpiceflowClient } from 'spiceflow/client';
+import { type SpiceflowFetch } from 'spiceflow/client';
 import type { RouteType } from 'website/src/lib/spiceflow-plugins.server';
 export type LoaderReturnType<T extends (...args: any) => any> = Awaited<ReturnType<T>>;
-export declare const pluginApiClient: SpiceflowClient.Create<RouteType>;
+export declare const pluginApiClient: SpiceflowFetch<RouteType>;
 export declare const noop: any;
 export declare function isTruthy<T>(val: T | undefined | null | false): val is T;
 export declare enum Paths {

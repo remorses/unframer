@@ -66,9 +66,6 @@ export async function websocketClientHandling({ handle, websocketId, }) {
             }
             if (payload.type === 'ready') {
                 console.log('received ready');
-                if (ws?.readyState === WebSocket.OPEN) {
-                    ws.send(JSON.stringify({ type: 'ready' }));
-                }
                 useStore.setState({ isConnected: true, error: undefined });
                 return;
             }

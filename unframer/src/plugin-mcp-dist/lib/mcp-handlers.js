@@ -5,7 +5,7 @@
 import { framer, isTextNode, isComponentNode, isColorStyle, isImageAsset, isFileAsset, } from '#framer-client';
 import dedent from 'string-dedent';
 import { createPatch } from 'diff';
-import { createSpiceflowClient } from 'spiceflow/client';
+import { createSpiceflowFetch } from 'spiceflow/client';
 import { framerLayersTreeToXml, extractObjectsFromXmlContent, TEMP_NODE_ID_PREFIX, } from './xml.js';
 import { getFramerTree, applyAttributes, getComponentPropertyControls } from './framer.js';
 import { processReactExportData } from './react-export.js';
@@ -14,7 +14,7 @@ import { codeComponentsResourceUri, mcpTools } from './schema.js';
 export { mcpTools };
 const PUBLIC_URL = process.env.PUBLIC_URL || 'https://unframer.co';
 const MCP_SESSION_ID_STORAGE_KEY = 'framer-mcp-session-id';
-const pluginApiClient = createSpiceflowClient(PUBLIC_URL, {
+const pluginApiClient = createSpiceflowFetch(PUBLIC_URL, {
     async onRequest() {
         const sessionKey = typeof localStorage === 'undefined'
             ? ''
@@ -1107,9 +1107,12 @@ export async function mcpToolHandler({ input, type, }) {
                     selectedComponentIds,
                 });
                 // Get the API client and submit the export
-                const { error, data: responseData } = await pluginApiClient.api.plugins.reactExportPlugin.upsertProject.post(data);
-                if (error) {
-                    throw new Error(error.message || 'Export failed');
+                const responseData = await pluginApiClient('/api/plugins/reactExportPlugin/upsertProject', {
+                    method: 'POST',
+                    body: data,
+                });
+                if (responseData instanceof Error) {
+                    throw new Error(responseData.message || 'Export failed');
                 }
                 const projectId = responseData.projectId;
                 const exportedNodeIds = Array.from(selectedComponentIds);
@@ -1515,9 +1518,7 @@ export async function mcpToolHandler({ input, type, }) {
                         // Search in specific field or all text fields
                         if (filter.fieldName) {
                             const fieldValue = item.fieldData[filter.fieldName];
-                            if (fieldValue &&
-                                typeof fieldValue === 'object' &&
-                                'value' in fieldValue) {
+                            if (fieldValue) {
                                 const value = String(fieldValue.value).toLowerCase();
                                 return value.includes(query);
                             }
@@ -1525,9 +1526,7 @@ export async function mcpToolHandler({ input, type, }) {
                         else {
                             // Search in all string/text fields
                             for (const [fieldName, fieldValue,] of Object.entries(item.fieldData)) {
-                                if (fieldValue &&
-                                    typeof fieldValue === 'object' &&
-                                    'value' in fieldValue) {
+                                if (fieldValue) {
                                     const value = fieldValue.value;
                                     if (typeof value === 'string' &&
                                         value.toLowerCase().includes(query)) {

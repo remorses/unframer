@@ -17,7 +17,7 @@ import { promisify } from 'util'
 
 import fs from 'fs'
 import path, { basename } from 'path'
-import { BreakpointSizes, defaultBreakpointSizes } from './css.js'
+import { BreakpointSizes, defaultBreakpointSizes } from './css-core.js'
 import {
     componentNameToPath,
     dedent,

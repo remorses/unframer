@@ -6,11 +6,24 @@ var __rewriteRelativeImportExtension = (this && this.__rewriteRelativeImportExte
     }
     return path;
 };
-import { framer, isComponentInstanceNode, isComponentNode, isFrameNode, isTextNode, supportsAspectRatio, supportsBackgroundColor, supportsBackgroundImage, supportsBorder, supportsBorderRadius, supportsFont, supportsImageRendering, supportsInlineTextStyle, supportsLayout, supportsLink, supportsLocked, supportsName, supportsOpacity, supportsOverflow, supportsPins, supportsPosition, supportsRotation, supportsSize, supportsSizeConstraints, supportsSVG, supportsTextTruncation, supportsVisible, supportsZIndex, } from '#framer-client';
+import { framer, isImageAsset, isComponentInstanceNode, isComponentNode, isFrameNode, isTextNode, supportsAspectRatio, supportsBackgroundColor, supportsBackgroundImage, supportsBorder, supportsBorderRadius, supportsFont, supportsImageRendering, supportsInlineTextStyle, supportsLayout, supportsLink, supportsLocked, supportsName, supportsOpacity, supportsOverflow, supportsPins, supportsPosition, supportsRotation, supportsSize, supportsSizeConstraints, supportsSVG, supportsTextTruncation, supportsVisible, supportsZIndex, } from '#framer-client';
 import { Sema } from 'sema4';
 import { propCamelCaseJustLikeFramer } from 'unframer';
 import { bfsFramerLayersTree } from './tree-utils.js';
 let cachedPagePaths = [];
+const componentPropertyControlsCache = new Map();
+function isImportableComponentUrl(url) {
+    try {
+        const parsed = new URL(url);
+        if (typeof window === 'undefined') {
+            return parsed.protocol === 'file:' || parsed.protocol === 'data:';
+        }
+        return true;
+    }
+    catch {
+        return true;
+    }
+}
 // Helper function to check permissions and throw error if not allowed
 function checkPermissions(...methods) {
     // Cast to the expected tuple type for isAllowedTo
@@ -86,6 +99,15 @@ export function replaceEnumIdsForControls(controls, propControls) {
 export async function getComponentPropertyControls(url) {
     if (!url)
         return { comments: undefined, propertyControls: undefined };
+    const cachedResult = componentPropertyControlsCache.get(url);
+    if (cachedResult) {
+        return cachedResult;
+    }
+    if (!isImportableComponentUrl(url)) {
+        const result = { comments: undefined, propertyControls: undefined };
+        componentPropertyControlsCache.set(url, result);
+        return result;
+    }
     try {
         const [res, paths] = await Promise.all([
             import(__rewriteRelativeImportExtension(/* @vite-ignore */ url)),
@@ -93,14 +115,18 @@ export async function getComponentPropertyControls(url) {
         ]);
         const propertyControls = res.default?.propertyControls;
         const comments = getAttributeComments(propertyControls, paths);
-        return {
+        const result = {
             comments,
             propertyControls,
         };
+        componentPropertyControlsCache.set(url, result);
+        return result;
     }
     catch (e) {
         console.log('failed to import component schema', e);
-        return { comments: undefined, propertyControls: undefined };
+        const result = { comments: undefined, propertyControls: undefined };
+        componentPropertyControlsCache.set(url, result);
+        return result;
     }
 }
 export var ControlType;
@@ -737,6 +763,30 @@ function encodeAttributeValue(value) {
     }
     return JSON.stringify(value);
 }
+function isRecord(value) {
+    return Boolean(value) && typeof value === 'object' && !Array.isArray(value);
+}
+function isAssetWithUrl(value) {
+    if (isImageAsset(value)) {
+        return true;
+    }
+    if (!isRecord(value)) {
+        return false;
+    }
+    return typeof value.url === 'string';
+}
+function normalizeAttributeValueForXml(value) {
+    if (isAssetWithUrl(value)) {
+        return value.url;
+    }
+    if (isRecord(value) && typeof value.path === 'string') {
+        return value.path;
+    }
+    if (isRecord(value) && typeof value.selector === 'string') {
+        return value.selector;
+    }
+    return value;
+}
 function isPlainObject(value) {
     if (!value || typeof value !== 'object' || Array.isArray(value)) {
         return false;
@@ -753,15 +803,16 @@ export function serializeAttributesForXml(attributes) {
         if (value === undefined) {
             continue;
         }
-        if (value &&
-            typeof value === 'object' &&
-            !Array.isArray(value) &&
-            !isPlainObject(value)) {
-            console.log('skipping non-plain object value for attribute', key, value);
+        const normalizedValue = normalizeAttributeValueForXml(value);
+        if (normalizedValue &&
+            typeof normalizedValue === 'object' &&
+            !Array.isArray(normalizedValue) &&
+            !isPlainObject(normalizedValue)) {
+            console.log('skipping non-plain object value for attribute', key, normalizedValue);
             continue;
         }
         try {
-            result[key] = encodeAttributeValue(value);
+            result[key] = encodeAttributeValue(normalizedValue);
         }
         catch {
             console.log('skipping non-serializable value for attribute', key);

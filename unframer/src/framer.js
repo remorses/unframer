@@ -37032,6 +37032,7 @@ var ContainerInner = /* @__PURE__ */ React42.forwardRef(function ContainerInner2
   return /* @__PURE__ */ jsx(MotionComponent, {
     layoutId: outerLayoutId,
     ...props,
+    suppressHydrationWarning: true,
     ref,
     children: /* @__PURE__ */ jsx(ComponentContainerContext.Provider, {
       value: true,
@@ -37080,6 +37081,7 @@ var SmartComponentScopedContainer = /* @__PURE__ */ React42.forwardRef(function 
       children: /* @__PURE__ */ jsx(Component18, {
         ...otherProps,
         ref,
+        suppressHydrationWarning: true,
         style: props.style,
         children: childrenWithCodeBoundary,
       },),

@@ -301,7 +301,7 @@ export declare function mcpToolHandler({ input, type, }: {
     fields: {
         id: string;
         name: string;
-        type: "string" | "number" | "boolean" | "date" | "file" | "array" | "enum" | "link" | "color" | "image" | "formattedText" | "collectionReference" | "multiCollectionReference";
+        type: "string" | "number" | "boolean" | "link" | "date" | "file" | "array" | "enum" | "image" | "color" | "formattedText" | "collectionReference" | "multiCollectionReference";
     }[];
     style?: undefined;
     results?: undefined;

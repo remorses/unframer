@@ -250,6 +250,32 @@ export async function fixFramerCode({ resultFile }) {
         /className: 'svgContainer',/g,
         "className: 'svgContainer', suppressHydrationWarning: true,",
     )
+    // Add suppressHydrationWarning to SmartComponentScopedContainer's motion render path.
+    // framer-motion's motion.div with layoutId renders differently during SSR (no DOM/projection)
+    // vs client hydration (projection system initialized), causing hydration mismatches in
+    // Next.js/Remix. Framer's own sites don't hit this because they control the full hydration pipeline.
+    codeAfter = codeAfter.replace(
+        /if \(props\.rendersWithMotion\) \{\s*const Component18 = htmlElementAsMotionComponent\(tagName,?\);\s*return \/\* @__PURE__ \*\/ jsx\(NodeIdContext\.Provider, \{\s*value: nodeId \?\? null,\s*children: \/\* @__PURE__ \*\/ jsx\(Component18, \{\s*\.\.\.otherProps,\s*ref,\s*style: props\.style,/,
+        `if (props.rendersWithMotion) {
+    const Component18 = htmlElementAsMotionComponent(tagName,);
+    return /* @__PURE__ */ jsx(NodeIdContext.Provider, {
+      value: nodeId ?? null,
+      children: /* @__PURE__ */ jsx(Component18, {
+        ...otherProps,
+        ref,
+        suppressHydrationWarning: true,
+        style: props.style,`,
+    )
+    // Add suppressHydrationWarning to ContainerInner's motion component render.
+    // Same reason: motion component with layoutId causes SSR/client hydration divergence.
+    codeAfter = codeAfter.replace(
+        /return \/\* @__PURE__ \*\/ jsx\(MotionComponent, \{\s*layoutId: outerLayoutId,\s*\.\.\.props,\s*ref,/,
+        `return /* @__PURE__ */ jsx(MotionComponent, {
+    layoutId: outerLayoutId,
+    ...props,
+    suppressHydrationWarning: true,
+    ref,`,
+    )
     // Fix dynamic import for lazy modules - add ignore comments so Turbopack/webpack/Vite don't try to resolve it
     codeAfter = codeAfter.replace(
         /const promise = import\(url\)\.then/g,

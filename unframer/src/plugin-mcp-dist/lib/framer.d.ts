@@ -4,11 +4,8 @@ import { FramerLayersTree } from './schema.js';
 export declare function clearUploadedImagesCache(): void;
 export declare function replaceEnumIdsForControls(controls: any, propControls?: PropertyControls): any;
 export declare function getComponentPropertyControls(url?: string | null): Promise<{
-    comments: undefined;
-    propertyControls: undefined;
-} | {
-    comments: Record<string, string>;
-    propertyControls: PropertyControls<any, any>;
+    comments: Record<string, string> | undefined;
+    propertyControls: PropertyControls | undefined;
 }>;
 export declare enum ControlType {
     Boolean = "boolean",

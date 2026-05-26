@@ -15,7 +15,7 @@ import {
     breakpointsStylesLegacy,
     defaultBreakpointSizes,
     getFontsStyles,
-} from './css.js'
+} from './css-core.js'
 import { version } from './version.js'
 
 function classNames(...args) {

@@ -31,7 +31,7 @@ import {
     getFontsStyles,
     groupBy,
     logFontsUsage,
-} from './css.js'
+} from './css-core.js'
 import {
     propControlsToTypedocComments,
     componentImportedName,

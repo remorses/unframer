@@ -1,7 +1,7 @@
 import { redirect } from 'react-router';
-import { createSpiceflowClient } from 'spiceflow/client';
+import { createSpiceflowFetch } from 'spiceflow/client';
 const PUBLIC_URL = process.env.PUBLIC_URL || 'https://unframer.co';
-export const pluginApiClient = createSpiceflowClient(PUBLIC_URL, {
+export const pluginApiClient = createSpiceflowFetch(PUBLIC_URL, {
     async onResponse(response) {
         if (response.status === 401) {
             console.log('clearing session because api returned 401');
