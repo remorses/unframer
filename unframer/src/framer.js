@@ -12739,7 +12739,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.BVYWINPW.mjs
+// /:https://app.framerstatic.com/framer.EVOIKPAA.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -20452,11 +20452,13 @@ var Loop = class extends EventEmitter {
   }
 };
 var MainLoop = /* @__PURE__ */ new Loop();
+function isScreenshotFramerHost() {
+  return safeWindow.location.origin === 'https://screenshot.framer.invalid';
+}
 var RenderEnvironment = {
   target:
-    // Enable static renderer when taking screenshots
-    // in screenshot-site lambda
-    safeWindow.location.origin === 'https://screenshot.framer.invalid' ? 'EXPORT' : 'PREVIEW',
+    // Enable the static renderer for screenshot lambdas.
+    isScreenshotFramerHost() ? 'EXPORT' : 'PREVIEW',
   zoom: 1,
 };
 function executeInRenderEnvironment(customEnvironment, task,) {
@@ -47123,7 +47125,8 @@ function activeBreakpointHashesFromWindow(breakpoints,) {
 function useHydratedBreakpointVariants(initial, mediaQueries, hydratedWithInitial = true,) {
   const isInitialNavigation = useContext(IsInitialNavigationContext,);
   const isStaticRenderer2 = useIsStaticRenderer();
-  const usesMediaQueries = !isStaticRenderer2 && isBrowser22();
+  const isScreenshotHost = isScreenshotFramerHost();
+  const usesMediaQueries = isBrowser22() && (!isStaticRenderer2 || isScreenshotHost);
   const baseVariant = useRef(usesMediaQueries ? activeMediaQueryFromWindow(mediaQueries,) ?? initial : initial,);
   const basePropsVariant = useRef(hydratedWithInitial && isInitialNavigation ? initial : baseVariant.current,);
   const forceUpdate = useForceUpdate2();
@@ -47148,13 +47151,18 @@ function useHydratedBreakpointVariants(initial, mediaQueries, hydratedWithInitia
   }, [instantTransition, forceUpdate, isStaticRenderer2,],);
   useIsomorphicLayoutEffect2(() => {
     if (!isStaticRenderer2) return;
+    if (isScreenshotHost) {
+      setActiveVariantInstant(activeMediaQueryFromWindow(mediaQueries,) ?? initial,);
+      return;
+    }
     setActiveVariantInstant(initial,);
-  }, [initial, isStaticRenderer2, setActiveVariantInstant,],);
+  }, [initial, isScreenshotHost, isStaticRenderer2, mediaQueries, setActiveVariantInstant,],);
   useIsomorphicLayoutEffect2(() => {
     if (!hydratedWithInitial || isInitialNavigation !== true) return;
     setActiveVariantInstant(baseVariant.current,);
   }, [],);
   useEffect(() => {
+    if (!usesMediaQueries || isScreenshotHost) return;
     const callbacks = [];
     for (const [variant, query,] of Object.entries(mediaQueries,)) {
       const mql = safeWindow.matchMedia(query,);
@@ -47165,7 +47173,7 @@ function useHydratedBreakpointVariants(initial, mediaQueries, hydratedWithInitia
       callbacks.push([mql, callback,],);
     }
     return () => callbacks.forEach(([mql, callback,],) => removeMQLCallback(mql, callback,));
-  }, [mediaQueries, setActiveVariantInstant,],);
+  }, [isScreenshotHost, mediaQueries, setActiveVariantInstant, usesMediaQueries,],);
   return [baseVariant.current, basePropsVariant.current,];
 }
 function addMQLCallback(mql, callback,) {
