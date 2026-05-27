@@ -8,7 +8,6 @@ import './sentry.js'
 import { input, select, password } from '@inquirer/prompts'
 
 import { bundle, StyleToken, createExampleComponentCode } from './exporter.js'
-import { createClient } from './generated/api-client.js'
 import { generateStackblitzFiles } from './stackblitz.js'
 
 import { goke, wrapJsonSchema } from 'goke'
@@ -672,38 +671,41 @@ export async function configFromFetch({
 }) {
     logger.log(`Fetching config for project ${projectId}`)
 
-    const url = process.env.UNFRAMER_SERVER_URL
-    if (url) {
-        console.log(`using server url ${url}`)
+    const baseUrl = (
+        process.env.UNFRAMER_SERVER_URL || 'https://unframer.co'
+    ).replace(/\/$/, '')
+    if (process.env.UNFRAMER_SERVER_URL) {
+        console.log(`using server url ${baseUrl}`)
     }
-    const client = await createClient({
-        url: url || 'https://unframer.co',
-        headers: {
-            'X-Agent':
-                agent ||
-                (process.env.GITHUB_ACTIONS === 'true'
-                    ? 'github-actions'
-                    : 'cli'),
-        },
-    })
 
     spinner.start(`Fetching config for project ${projectId}`)
-    const { data, error } = await client.api.plugins.reactExportPlugin
-        .project({ projectId })
-        .get()
-    if (error) {
-        if (error.status === 402) {
-            const rawValue = error.value
-            const buyUrl = rawValue?.buyUrl
+    const agentHeader =
+        agent ||
+        (process.env.GITHUB_ACTIONS === 'true' ? 'github-actions' : 'cli')
+    const response = await fetch(
+        `${baseUrl}/api/plugins/reactExportPlugin/project/${encodeURIComponent(projectId)}`,
+        { headers: { 'X-Agent': agentHeader } },
+    )
+    const text = await response.text()
+    const parsed = (() => {
+        try {
+            return JSON.parse(text)
+        } catch {
+            return text
+        }
+    })()
+
+    if (!response.ok) {
+        if (response.status === 402) {
+            const buyUrl = parsed?.buyUrl
 
             const message = (() => {
-                if (typeof rawValue === 'object' && rawValue?.message) {
-                    return String(rawValue.message)
+                if (typeof parsed === 'object' && parsed?.message) {
+                    return String(parsed.message)
                 }
                 return 'A React Export subscription is required to download components.'
             })()
 
-            // spinner.error(details)
             spinner.error(message)
             console.info('')
             console.info(
@@ -712,12 +714,12 @@ export async function configFromFetch({
             console.info(green(buyUrl))
             console.info()
             process.exit(1)
-            // throw new Error(details, { cause: error })
         }
         spinner.error('Error fetching project data:')
-        console.error(error)
-        throw error
+        console.error(parsed)
+        throw new Error(`HTTP ${response.status}`, { cause: parsed })
     }
+    const data = parsed
     spinner.info(`Got Framer project data`)
     const websiteUrl = data?.project?.websiteUrl
 

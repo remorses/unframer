@@ -536,6 +536,15 @@ export async function bundle({
                         name,
                         typedocComments,
                     }
+                } catch (e) {
+                    const name = path
+                        .relative(out, file.path)
+                        .replace(/\.jsx?$/, '')
+                    spinner.error(
+                        `Failed to extract types for ${name}: ${e instanceof Error ? e.message : e}`,
+                    )
+                    logger.log(e instanceof Error ? e.stack : e)
+                    return undefined
                 } finally {
                     sema.release()
                 }
@@ -1136,7 +1145,7 @@ export async function extractPropControlsUnsafe(
     }
 
     // console.log(stdout)
-    return safeJsonParse(stdout)
+    return safeJsonParse(stdout) || {}
 }
 
 function safeJsonParse(text) {
