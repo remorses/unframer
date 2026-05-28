@@ -12739,7 +12739,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.EVOIKPAA.mjs
+// /:https://app.framerstatic.com/framer.7GWEWZBL.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -35263,7 +35263,7 @@ function renderBranchedChildrenFromPropertyOverrides(
     if (activeVariantId && !variants.includes(activeVariantId,)) {
       continue;
     }
-    const key7 = variants.join('+',);
+    const key7 = activeVariantId ? 'active-branch' : variants.join('+',);
     let element =
       // We could omit the SSRParentVariantsContext if variants is the same as parentVariants, but that'd require
       // comparing arrays, so it might not really be an optimization. And since it's just a context, it doesn't
