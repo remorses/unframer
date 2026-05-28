@@ -285,3 +285,74 @@ function canRenderAsJsx(name: string): boolean {
     const first = name[0]
     return first.toUpperCase() === first
 }
+
+/**
+ * Injects `suppressHydrationWarning: true` into _jsx/_jsxs call props for elements
+ * that support it: lowercase HTML elements (div, span, etc.) and motion.* components.
+ * This prevents React hydration mismatch warnings caused by Framer's runtime rendering
+ * differently on server vs client (e.g. motion.div with layoutId, SVG containers, style attributes).
+ */
+export function babelPluginSuppressHydration({
+    types: t,
+}: {
+    types: typeof BabelTypes
+}): PluginObj {
+    const jsxFunctions = new Set<string>()
+
+    return {
+        name: 'suppress-hydration-warning',
+        visitor: {
+            ImportDeclaration(path) {
+                const source = path.node.source.value
+                if (
+                    source === 'react/jsx-runtime' ||
+                    source === 'react/jsx-dev-runtime'
+                ) {
+                    for (const specifier of path.node.specifiers) {
+                        if (
+                            t.isImportSpecifier(specifier) &&
+                            t.isIdentifier(specifier.imported) &&
+                            (specifier.imported.name === 'jsx' ||
+                                specifier.imported.name === 'jsxs')
+                        ) {
+                            jsxFunctions.add(specifier.local.name)
+                        }
+                    }
+                }
+            },
+            CallExpression(path) {
+                if (
+                    !t.isIdentifier(path.node.callee) ||
+                    !jsxFunctions.has(path.node.callee.name)
+                ) {
+                    return
+                }
+                const [elementArg, propsArg] = path.node.arguments
+                if (!propsArg || !t.isObjectExpression(propsArg)) {
+                    return
+                }
+                // Add to all jsx calls: lowercase HTML elements, motion.*, and capitalized
+                // components (which often forward props via spread to DOM elements).
+                // Skip if suppressHydrationWarning is already present
+                const alreadyHas = propsArg.properties.some((prop) => {
+                    return (
+                        t.isObjectProperty(prop) &&
+                        t.isIdentifier(prop.key) &&
+                        prop.key.name === 'suppressHydrationWarning'
+                    )
+                })
+                if (alreadyHas) {
+                    return
+                }
+                propsArg.properties.unshift(
+                    t.objectProperty(
+                        t.identifier('suppressHydrationWarning'),
+                        t.booleanLiteral(true),
+                    ),
+                )
+            },
+        },
+    }
+}
+
+

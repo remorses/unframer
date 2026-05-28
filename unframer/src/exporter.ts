@@ -19,6 +19,7 @@ import crypto from 'crypto'
 import { dedent } from './utils.js'
 import {
     babelPluginJsxTransform,
+    babelPluginSuppressHydration,
     removeJsxExpressionContainer,
 } from './babel-jsx.js'
 import { babelPluginTypedoc } from './babel-typedoc.js'
@@ -693,6 +694,7 @@ export async function bundle({
                 try {
                     const plugins = [
                         // babelPluginDeduplicateImports,
+                        babelPluginSuppressHydration,
                         babelPluginJsxTransform,
                         removeJsxExpressionContainer,
                     ]

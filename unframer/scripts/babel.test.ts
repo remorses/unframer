@@ -35,6 +35,7 @@ function trans(
 import { babelPluginRenameExports } from "../src/babel-plugin-imports.js"
 import {
     babelPluginJsxTransform,
+    babelPluginSuppressHydration,
     removeJsxExpressionContainer,
 } from "../src/babel-jsx.js"
 
@@ -395,6 +396,98 @@ describe('babelPluginJsxTransform', () => {
               <div>{'First element'}</div>
             </Container>
           );
+          "
+        `)
+    })
+})
+
+describe('babelPluginSuppressHydration', () => {
+    test('adds suppressHydrationWarning to lowercase HTML elements', () => {
+        expect(
+            trans(
+                dedent`
+                import { jsx as _jsx } from 'react/jsx-runtime';
+                const el = _jsx("div", { className: "container", children: "Hello" });
+                `,
+                [babelPluginSuppressHydration, ...defaultPlugins],
+            ),
+        ).toMatchInlineSnapshot(`
+          "import { jsx as _jsx, } from 'react/jsx-runtime';
+          const el = (
+            <div suppressHydrationWarning={true} className={'container'}>{'Hello'}</div>
+          );
+          "
+        `)
+    })
+
+    test('adds suppressHydrationWarning to motion.* components', () => {
+        expect(
+            trans(
+                dedent`
+                import { jsx as _jsx } from 'react/jsx-runtime';
+                const el = _jsx(motion.div, { layoutId: "x", style: { opacity: 1 } });
+                `,
+                [babelPluginSuppressHydration, ...defaultPlugins],
+            ),
+        ).toMatchInlineSnapshot(`
+          "import { jsx as _jsx, } from 'react/jsx-runtime';
+          const el = (
+            <motion.div
+              suppressHydrationWarning={true}
+              layoutId={'x'}
+              style={{ opacity: 1, }}
+            />
+          );
+          "
+        `)
+    })
+
+    test('adds to capitalized components too', () => {
+        expect(
+            trans(
+                dedent`
+                import { jsx as _jsx } from 'react/jsx-runtime';
+                const el = _jsx(Modal, { className: "modal", children: "Content" });
+                `,
+                [babelPluginSuppressHydration, ...defaultPlugins],
+            ),
+        ).toMatchInlineSnapshot(`
+          "import { jsx as _jsx, } from 'react/jsx-runtime';
+          const el = (
+            <Modal suppressHydrationWarning={true} className={'modal'}>{'Content'}</Modal>
+          );
+          "
+        `)
+    })
+
+    test('does not duplicate if already present', () => {
+        expect(
+            trans(
+                dedent`
+                import { jsx as _jsx } from 'react/jsx-runtime';
+                const el = _jsx("div", { suppressHydrationWarning: true, className: "x" });
+                `,
+                [babelPluginSuppressHydration, ...defaultPlugins],
+            ),
+        ).toMatchInlineSnapshot(`
+          "import { jsx as _jsx, } from 'react/jsx-runtime';
+          const el = <div suppressHydrationWarning={true} className={'x'} />;
+          "
+        `)
+    })
+
+    test('works with spread props', () => {
+        expect(
+            trans(
+                dedent`
+                import { jsx as _jsx } from 'react/jsx-runtime';
+                const el = _jsx("span", { ...props, children: "text" });
+                `,
+                [babelPluginSuppressHydration, ...defaultPlugins],
+            ),
+        ).toMatchInlineSnapshot(`
+          "import { jsx as _jsx, } from 'react/jsx-runtime';
+          const el = <span suppressHydrationWarning={true} {...props}>{'text'}</span>;
           "
         `)
     })
