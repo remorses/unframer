@@ -12,7 +12,7 @@
         }
     },
     "scripts": {
-        "build": "pnpm tsgo && cp ../README.md ./README.md && cp ./src/framer.d.ts ./dist/framer.d.ts && cp ./src/framer.js ./dist/framer.js && cp -r ./src/framer-chunks ./dist/framer-chunks",
+        "build": "pnpm tsgo && cp ../README.md ./README.md && cp ./src/framer.d.ts ./dist/framer.d.ts && cp ./src/framer.js ./dist/framer.js && rm -rf ./dist/framer-chunks && cp -r ./src/framer-chunks ./dist/framer-chunks",
         "test": "vitest",
         "gen-client": "export DIR=./src/generated/ && cd ../../website && pnpm tsc; rm -rf $DIR && mkdir -p $DIR && cp ./dist/src/lib/api-client.* $DIR",
         "prepublishOnly": "rm -rf dist && pnpm tsx scripts/version-replace.ts && pnpm build",
