@@ -1,4 +1,4 @@
-<div align='center'>
+<div hidden align='center'>
     <br/>
     <br/>
     <h3>unframer</h3>
@@ -297,7 +297,7 @@ If you find any errors rendering your components:
 
 ## Future Compatibility
 
-Every Framer runtime change is upstreamed automatically via Github Actions to this [file](unframer/src/framer.js) and an example app is deployed [here](https://unframer-nextjs-app.vercel.app/). This means that if something breaks it's easy to bisect the specific change and fix it.
+Every Framer runtime change is upstreamed automatically via Github Actions to this [file](https://github.com/remorses/unframer/blob/main/unframer/src/framer.js) and an example app is deployed [here](https://unframer-nextjs-app.vercel.app/). This means that if something breaks it's easy to bisect the specific change and fix it.
 
 For example in May 2024 Framer upgraded to React 19 and unframer broke, the reason was that framer runtime no longer injected ssr styles to `head` because react should do it automatically from version 19, this however broke unframer when using react 18, but i was able to quickly fix it by adding back the code to inject styles to `head` in unframer.
 
@@ -309,11 +309,11 @@ Here is the below landing page Lighthouse score when using Astro:
 
 > **Important**: For best performance in development, disable React strict mode. Strict mode causes components to mount and unmount twice, which can cause issues with Framer animations and state management.
 
-![lighthouse score](./assets/astro-performance.png)
+![lighthouse score](https://raw.githubusercontent.com/remorses/unframer/main/assets/astro-performance.png)
 
 ## Example
 
-Look at the [nextjs-app source code folder](./nextjs-app) for an example and [the deployed website here](https://unframer-nextjs-app.vercel.app/)
+Look at the [nextjs-app source code folder](https://github.com/remorses/unframer/tree/main/nextjs-app) for an example and [the deployed website here](https://unframer-nextjs-app.vercel.app/)
 
 ## MCP CLI Commands
 
