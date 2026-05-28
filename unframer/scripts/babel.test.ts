@@ -491,6 +491,77 @@ describe('babelPluginSuppressHydration', () => {
           "
         `)
     })
+
+    test('skips React.Fragment from jsx-runtime import', () => {
+        expect(
+            trans(
+                dedent`
+                import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from 'react/jsx-runtime';
+                const el = _jsxs(_Fragment, { children: [_jsx("div", { className: "a" }), _jsx("span", {})] });
+                `,
+                [babelPluginSuppressHydration, ...defaultPlugins],
+            ),
+        ).toMatchInlineSnapshot(`
+          "import {
+            Fragment as _Fragment,
+            jsx as _jsx,
+            jsxs as _jsxs,
+          } from 'react/jsx-runtime';
+          const el = (
+            <_Fragment>
+              <div suppressHydrationWarning={true} className={'a'} />
+              <span suppressHydrationWarning={true} />
+            </_Fragment>
+          );
+          "
+        `)
+    })
+
+    test('skips React.Fragment as MemberExpression', () => {
+        expect(
+            trans(
+                dedent`
+                import { jsx as _jsx, jsxs as _jsxs } from 'react/jsx-runtime';
+                import React from 'react';
+                const el = _jsxs(React.Fragment, { children: [_jsx("div", { className: "a" }), _jsx("span", {})] });
+                `,
+                [babelPluginSuppressHydration, ...defaultPlugins],
+            ),
+        ).toMatchInlineSnapshot(`
+          "import { jsx as _jsx, jsxs as _jsxs, } from 'react/jsx-runtime';
+          import React from 'react';
+          const el = (
+            <React.Fragment>
+              <div suppressHydrationWarning={true} className={'a'} />
+              <span suppressHydrationWarning={true} />
+            </React.Fragment>
+          );
+          "
+        `)
+    })
+
+    test('skips React.Fragment from react import', () => {
+        expect(
+            trans(
+                dedent`
+                import { jsx as _jsx, jsxs as _jsxs } from 'react/jsx-runtime';
+                import { Fragment } from 'react';
+                const el = _jsxs(Fragment, { children: [_jsx("div", { className: "a" }), _jsx("span", {})] });
+                `,
+                [babelPluginSuppressHydration, ...defaultPlugins],
+            ),
+        ).toMatchInlineSnapshot(`
+          "import { jsx as _jsx, jsxs as _jsxs, } from 'react/jsx-runtime';
+          import { Fragment, } from 'react';
+          const el = (
+            <Fragment>
+              <div suppressHydrationWarning={true} className={'a'} />
+              <span suppressHydrationWarning={true} />
+            </Fragment>
+          );
+          "
+        `)
+    })
 })
 
 describe('babelPluginDeduplicateImports', () => {

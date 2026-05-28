@@ -4,8 +4,12 @@ import { withCSS as withCSSOriginal } from './framer.js'
 export * from './css-core.js'
 
 /**
- * Custom withCSS function that restores the previous behavior
- * of rendering inline style tags instead of using cssCollector
+ * Custom withCSS that renders inline <style> tags for SSR instead of using
+ * framer's cssCollector. The tree structure must be identical on server and
+ * client so React's hydration and ID generation (React Aria, useId, etc.)
+ * stay consistent. Both sides render: Fragment > [style, Component].
+ * On the client the style content is empty because framer.js injects CSS
+ * via useInsertionEffect; suppressHydrationWarning covers the content diff.
  */
 export function withCSS(
     Component: any,
@@ -13,36 +17,37 @@ export function withCSS(
     componentSerializationId?: string,
 ) {
     const framerCSSMarker = 'data-framer-css-ssr'
-
-    if (typeof window !== 'undefined' && typeof window.document !== 'undefined')
-        return withCSSOriginal(Component, escapedCSS, componentSerializationId || '')
+    const id = componentSerializationId
 
     return (props: any) => {
         const isBrowser =
             typeof window !== 'undefined' &&
             typeof window.document !== 'undefined'
 
-        if (!isBrowser) {
-            const id = componentSerializationId
-            const cssContent =
-                typeof escapedCSS === 'function'
-                    ? escapedCSS('EXPORT')
-                    : Array.isArray(escapedCSS)
-                      ? escapedCSS.join('\n')
-                      : escapedCSS
+        const cssContent = (() => {
+            if (isBrowser) {
+                return ''
+            }
+            if (typeof escapedCSS === 'function') {
+                return escapedCSS('EXPORT')
+            }
+            if (Array.isArray(escapedCSS)) {
+                return escapedCSS.join('\n')
+            }
+            return escapedCSS
+        })()
 
-            return (
-                <>
-                    <style
-                        {...{ [framerCSSMarker]: true }}
-                        data-framer-component={id}
-                        dangerouslySetInnerHTML={{ __html: cssContent }}
-                    />
-                    <Component {...props} />
-                </>
-            )
-        }
-
-        return <Component {...props} />
+        return (
+            <>
+                <style
+                    suppressHydrationWarning
+                    {...{ [framerCSSMarker]: true }}
+                    data-framer-component={id}
+                    dangerouslySetInnerHTML={{ __html: cssContent }}
+                    hidden
+                />
+                <Component {...props} />
+            </>
+        )
     }
 }

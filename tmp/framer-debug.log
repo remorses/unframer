@@ -1,0 +1,533 @@
+unframer                                 |  WARN  The field "pnpm.overrides" was found in /Users/morse/Documents/GitHub/unframer-private/unframer/package.json. This will not take effect. You should configure "pnpm.overrides" at the root of the workspace instead.
+
+> website@ framer /Users/morse/Documents/GitHub/unframer-private/website
+> pnpm unframer --outDir src/framer 620e74c088cdcb26 --debug
+
+[unframer] Fetching config for project 620e74c088cdcb26
+[unframer] fetching https://framer.com/m/Tabs-Content-ehTJ.js because of https://framer.com/m/Tabs-Content-ehTJ.js
+[unframer] fetching https://framer.com/m/TopContent-Prro.js because of https://framer.com/m/TopContent-Prro.js
+[unframer] fetching https://framer.com/m/Contact-E9wf.js because of https://framer.com/m/Contact-E9wf.js
+[unframer] fetching https://framer.com/m/Footer-Wua0.js because of https://framer.com/m/Footer-Wua0.js
+[unframer] fetching https://framer.com/m/books-XFYu6o.js because of https://framer.com/m/books-XFYu6o.js
+[unframer] fetching https://framer.com/m/Logos-iDlv.js because of https://framer.com/m/Logos-iDlv.js
+[unframer] fetching https://framer.com/m/Logo-3hGB.js because of https://framer.com/m/Logo-3hGB.js
+[unframer] fetching https://framer.com/m/Navigation-DUtd.js because of https://framer.com/m/Navigation-DUtd.js
+[unframer] fetching https://framer.com/m/Testimonials-oWjl.js because of https://framer.com/m/Testimonials-oWjl.js
+[unframer] transforming https://framer.com/m/TopContent-Prro.js
+[unframer] transforming https://framer.com/m/Tabs-Content-ehTJ.js
+[unframer] transforming https://framer.com/m/Contact-E9wf.js
+[unframer] transforming https://framer.com/m/Footer-Wua0.js
+[unframer] transforming https://framer.com/m/books-XFYu6o.js
+[unframer] transforming https://framer.com/m/Logos-iDlv.js
+[unframer] transforming https://framer.com/m/Logo-3hGB.js
+[unframer] transforming https://framer.com/m/Navigation-DUtd.js
+[unframer] transforming https://framer.com/m/Testimonials-oWjl.js
+[unframer] fetching https://framerusercontent.com/modules/oqEg29VQVt2VbtmIsqXE/SajKxxZg0fiei1YiG823/nJMh_CX7C.js because of https://framerusercontent.com/modules/oqEg29VQVt2VbtmIsqXE/SajKxxZg0fiei1YiG823/nJMh_CX7C.js
+[unframer] fetching https://framerusercontent.com/modules/wKXVgYDN0EuQU5gk6YBI/7dnUNwkX9Nnz6bCFy6jm/Slhv18JJ2.js because of https://framerusercontent.com/modules/wKXVgYDN0EuQU5gk6YBI/7dnUNwkX9Nnz6bCFy6jm/Slhv18JJ2.js
+[unframer] fetching https://framerusercontent.com/modules/4hSUonWzpSrtZd1BhZvI/dM3eH9lbnopkuRZ5e9Ou/JHOLsHwUh.js because of https://framerusercontent.com/modules/4hSUonWzpSrtZd1BhZvI/dM3eH9lbnopkuRZ5e9Ou/JHOLsHwUh.js
+[unframer] fetching https://framerusercontent.com/modules/1qbAXgGNziDR6XiOmVZk/uNSFqk45hsatwMHPx1xF/Epfh4ytaH.js because of https://framerusercontent.com/modules/1qbAXgGNziDR6XiOmVZk/uNSFqk45hsatwMHPx1xF/Epfh4ytaH.js
+[unframer] fetching https://framerusercontent.com/modules/GlAbNGuJ4ndgdOMcVJvO/VF6ziCp2wILafNL27NWj/nyKzR3QQJ.js because of https://framerusercontent.com/modules/GlAbNGuJ4ndgdOMcVJvO/VF6ziCp2wILafNL27NWj/nyKzR3QQJ.js
+[unframer] fetching https://framerusercontent.com/modules/6FeTkTrrTIsnFpg6aUcE/4R5yfd8v6CFfHjIEV0TH/X7j10A94p.js because of https://framerusercontent.com/modules/6FeTkTrrTIsnFpg6aUcE/4R5yfd8v6CFfHjIEV0TH/X7j10A94p.js
+[unframer] fetching https://framerusercontent.com/modules/aaYWYRxvrQtoJZipNja3/Qp1pTxkmTxyY6cSsL4Xu/aa_cT8DFc.js because of https://framerusercontent.com/modules/aaYWYRxvrQtoJZipNja3/Qp1pTxkmTxyY6cSsL4Xu/aa_cT8DFc.js
+[unframer] transforming https://framerusercontent.com/modules/oqEg29VQVt2VbtmIsqXE/SajKxxZg0fiei1YiG823/nJMh_CX7C.js
+[unframer] transforming https://framerusercontent.com/modules/wKXVgYDN0EuQU5gk6YBI/7dnUNwkX9Nnz6bCFy6jm/Slhv18JJ2.js
+[unframer] transforming https://framerusercontent.com/modules/4hSUonWzpSrtZd1BhZvI/dM3eH9lbnopkuRZ5e9Ou/JHOLsHwUh.js
+[unframer] transforming https://framerusercontent.com/modules/1qbAXgGNziDR6XiOmVZk/uNSFqk45hsatwMHPx1xF/Epfh4ytaH.js
+[unframer] transforming https://framerusercontent.com/modules/GlAbNGuJ4ndgdOMcVJvO/VF6ziCp2wILafNL27NWj/nyKzR3QQJ.js
+[unframer] transforming https://framerusercontent.com/modules/6FeTkTrrTIsnFpg6aUcE/4R5yfd8v6CFfHjIEV0TH/X7j10A94p.js
+[unframer] transforming https://framerusercontent.com/modules/aaYWYRxvrQtoJZipNja3/Qp1pTxkmTxyY6cSsL4Xu/aa_cT8DFc.js
+[unframer] fetching https://framerusercontent.com/modules/j3JOS1ahfJTnmx8Mh2N4/k0cH5ITDTJ8pJWfpAitt/B03nkV2E9.js because of https://framerusercontent.com/modules/j3JOS1ahfJTnmx8Mh2N4/k0cH5ITDTJ8pJWfpAitt/B03nkV2E9.js
+[unframer] fetching https://framerusercontent.com/modules/nN0EIaeUgKLyFYl1Lf33/DxcLCDrg2UC2D1wEHJV1/TQjf0gwHk.js because of https://framerusercontent.com/modules/nN0EIaeUgKLyFYl1Lf33/DxcLCDrg2UC2D1wEHJV1/TQjf0gwHk.js
+[unframer] fetching https://framerusercontent.com/modules/wFLtuPT37MPlIlv8bikp/e76srTgIdDvG5U2vtDLw/GFX7FDy3k.js because of https://framerusercontent.com/modules/wFLtuPT37MPlIlv8bikp/e76srTgIdDvG5U2vtDLw/GFX7FDy3k.js
+[unframer] fetching https://framerusercontent.com/modules/D8gGqBQ1exPcQX21HXG5/mxOP9zughWqzCr7yH17p/Lmy5fz81C.js because of https://framerusercontent.com/modules/D8gGqBQ1exPcQX21HXG5/mxOP9zughWqzCr7yH17p/Lmy5fz81C.js
+[unframer] fetching https://framerusercontent.com/modules/elq2DUpkc0E7cSUtpCCg/y3qKrbWZFTqi5u9sE1bI/QKTTxLbiP.js because of https://framerusercontent.com/modules/elq2DUpkc0E7cSUtpCCg/y3qKrbWZFTqi5u9sE1bI/QKTTxLbiP.js
+[unframer] fetching https://framerusercontent.com/modules/ucITUxplkq5yt10nYlRa/EzdZDW6XqdkZZSK5BT5x/OQYfTzAgT.js because of https://framerusercontent.com/modules/ucITUxplkq5yt10nYlRa/EzdZDW6XqdkZZSK5BT5x/OQYfTzAgT.js
+[unframer] fetching https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/jyRNgY7vYWXe6t31T0wo/Ticker.js because of https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/jyRNgY7vYWXe6t31T0wo/Ticker.js
+[unframer] fetching https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/p8dptk4UIND8hbFWz9V7/Phosphor.js because of https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/p8dptk4UIND8hbFWz9V7/Phosphor.js
+[unframer] fetching https://framerusercontent.com/modules/bHJjnnHWYtIqgPHb234Y/MJlAuDG9C9wZYauJxJiP/ndFYK_ouW.js because of https://framerusercontent.com/modules/bHJjnnHWYtIqgPHb234Y/MJlAuDG9C9wZYauJxJiP/ndFYK_ouW.js
+[unframer] fetching https://framerusercontent.com/modules/8lgqrEPbAxn3wWB8nL8h/a06g6zc5i9Xp9qLjK1oB/EWDUrTm3E.js because of https://framerusercontent.com/modules/8lgqrEPbAxn3wWB8nL8h/a06g6zc5i9Xp9qLjK1oB/EWDUrTm3E.js
+[unframer] fetching https://framerusercontent.com/modules/A6CsajQJnG9pUkwZlatc/L48pimMNsc6uDEEqWtZG/jqK_GhKTO.js because of https://framerusercontent.com/modules/A6CsajQJnG9pUkwZlatc/L48pimMNsc6uDEEqWtZG/jqK_GhKTO.js
+[unframer] fetching https://framerusercontent.com/modules/9QcmqrmNsNunwZGuYus8/V6dAmR1Khj5MIVpfsdrw/pCJdZUYTb.js because of https://framerusercontent.com/modules/9QcmqrmNsNunwZGuYus8/V6dAmR1Khj5MIVpfsdrw/pCJdZUYTb.js
+[unframer] fetching https://framerusercontent.com/modules/v9UGZiwrAGRwGeu23vJT/vbHDLeTZe20o2EUpDMbT/L20veJLqr.js because of https://framerusercontent.com/modules/v9UGZiwrAGRwGeu23vJT/vbHDLeTZe20o2EUpDMbT/L20veJLqr.js
+[unframer] transforming https://framerusercontent.com/modules/j3JOS1ahfJTnmx8Mh2N4/k0cH5ITDTJ8pJWfpAitt/B03nkV2E9.js
+[unframer] transforming https://framerusercontent.com/modules/nN0EIaeUgKLyFYl1Lf33/DxcLCDrg2UC2D1wEHJV1/TQjf0gwHk.js
+[unframer] transforming https://framerusercontent.com/modules/wFLtuPT37MPlIlv8bikp/e76srTgIdDvG5U2vtDLw/GFX7FDy3k.js
+[unframer] transforming https://framerusercontent.com/modules/D8gGqBQ1exPcQX21HXG5/mxOP9zughWqzCr7yH17p/Lmy5fz81C.js
+[unframer] transforming https://framerusercontent.com/modules/elq2DUpkc0E7cSUtpCCg/y3qKrbWZFTqi5u9sE1bI/QKTTxLbiP.js
+[unframer] transforming https://framerusercontent.com/modules/ucITUxplkq5yt10nYlRa/EzdZDW6XqdkZZSK5BT5x/OQYfTzAgT.js
+[unframer] transforming https://framerusercontent.com/modules/B2xAlJLcN0gOnt11mSPw/jyRNgY7vYWXe6t31T0wo/Ticker.js
+[unframer] transforming https://framerusercontent.com/modules/tYScH7LTqUtz5KUaUAYP/p8dptk4UIND8hbFWz9V7/Phosphor.js
+[unframer] transforming https://framerusercontent.com/modules/bHJjnnHWYtIqgPHb234Y/MJlAuDG9C9wZYauJxJiP/ndFYK_ouW.js
+[unframer] transforming https://framerusercontent.com/modules/8lgqrEPbAxn3wWB8nL8h/a06g6zc5i9Xp9qLjK1oB/EWDUrTm3E.js
+[unframer] transforming https://framerusercontent.com/modules/A6CsajQJnG9pUkwZlatc/L48pimMNsc6uDEEqWtZG/jqK_GhKTO.js
+[unframer] transforming https://framerusercontent.com/modules/9QcmqrmNsNunwZGuYus8/V6dAmR1Khj5MIVpfsdrw/pCJdZUYTb.js
+[unframer] transforming https://framerusercontent.com/modules/v9UGZiwrAGRwGeu23vJT/vbHDLeTZe20o2EUpDMbT/L20veJLqr.js
+[unframer] fetching https://framerusercontent.com/modules/jR9CScU9ENU4muLF7JRH/toQuHKo7Q9cK4htODKkX/UOJBsIdXD.js because of https://framerusercontent.com/modules/jR9CScU9ENU4muLF7JRH/toQuHKo7Q9cK4htODKkX/UOJBsIdXD.js
+[unframer] transforming https://framerusercontent.com/modules/jR9CScU9ENU4muLF7JRH/toQuHKo7Q9cK4htODKkX/UOJBsIdXD.js
+[unframer] fetching https://framerusercontent.com/modules/acH0zCfSMhQ3eGHBGCyn/5gni62WsVhpXV4b11KBy/ZXy3HfPPv.js because of https://framerusercontent.com/modules/acH0zCfSMhQ3eGHBGCyn/5gni62WsVhpXV4b11KBy/ZXy3HfPPv.js
+[unframer] transforming https://framerusercontent.com/modules/acH0zCfSMhQ3eGHBGCyn/5gni62WsVhpXV4b11KBy/ZXy3HfPPv.js
+[unframer] fetching https://framerusercontent.com/modules/qhfwYuCiqzxGNYl46QMk/h5oa6ZRUri7i2JM4TbQR/PMMw2N4zu.js because of https://framerusercontent.com/modules/qhfwYuCiqzxGNYl46QMk/h5oa6ZRUri7i2JM4TbQR/PMMw2N4zu.js
+[unframer] fetching https://framerusercontent.com/modules/5Rc4A3RzO15jP4nzpdGK/WfiHNmASBA7fnb58Gyss/KcSL_pfvh.js because of https://framerusercontent.com/modules/5Rc4A3RzO15jP4nzpdGK/WfiHNmASBA7fnb58Gyss/KcSL_pfvh.js
+[unframer] fetching https://framerusercontent.com/modules/bWPDBLg1jfE0YswA8oZu/puFIxmI2pIRQb0Et88wM/SkUQLMx51.js because of https://framerusercontent.com/modules/bWPDBLg1jfE0YswA8oZu/puFIxmI2pIRQb0Et88wM/SkUQLMx51.js
+[unframer] fetching https://framerusercontent.com/modules/jzfz8rfCdVuOYIxSVrCB/8gUcxdg8B8qEsuQhCiCL/s7j24GOUQ.js because of https://framerusercontent.com/modules/jzfz8rfCdVuOYIxSVrCB/8gUcxdg8B8qEsuQhCiCL/s7j24GOUQ.js
+[unframer] fetching https://framerusercontent.com/modules/iSqzGIfO98u7zEjw00BI/sN4bP2UckHvDQ1o68XBN/bw2DJawNI.js because of https://framerusercontent.com/modules/iSqzGIfO98u7zEjw00BI/sN4bP2UckHvDQ1o68XBN/bw2DJawNI.js
+[unframer] fetching https://framerusercontent.com/modules/f0DboytQenYh21kfme7W/zb1zVBMZJKgPMiedOi0y/Feather.js because of https://framerusercontent.com/modules/f0DboytQenYh21kfme7W/zb1zVBMZJKgPMiedOi0y/Feather.js
+[unframer] fetching https://framerusercontent.com/modules/qh45N1GEnZBC2H43d2f0/3veFfKn9AgZKA9tD0K4s/U2Mz3MHmF.js because of https://framerusercontent.com/modules/qh45N1GEnZBC2H43d2f0/3veFfKn9AgZKA9tD0K4s/U2Mz3MHmF.js
+[unframer] fetching https://framerusercontent.com/modules/Ma20hU0GGRxLxZphbywl/OSpwWF91FHPVFyQJjMHt/utils.js because of https://framerusercontent.com/modules/Ma20hU0GGRxLxZphbywl/OSpwWF91FHPVFyQJjMHt/utils.js
+[unframer] transforming https://framerusercontent.com/modules/qhfwYuCiqzxGNYl46QMk/h5oa6ZRUri7i2JM4TbQR/PMMw2N4zu.js
+[unframer] transforming https://framerusercontent.com/modules/5Rc4A3RzO15jP4nzpdGK/WfiHNmASBA7fnb58Gyss/KcSL_pfvh.js
+[unframer] transforming https://framerusercontent.com/modules/bWPDBLg1jfE0YswA8oZu/puFIxmI2pIRQb0Et88wM/SkUQLMx51.js
+[unframer] transforming https://framerusercontent.com/modules/jzfz8rfCdVuOYIxSVrCB/8gUcxdg8B8qEsuQhCiCL/s7j24GOUQ.js
+[unframer] transforming https://framerusercontent.com/modules/iSqzGIfO98u7zEjw00BI/sN4bP2UckHvDQ1o68XBN/bw2DJawNI.js
+[unframer] transforming https://framerusercontent.com/modules/f0DboytQenYh21kfme7W/zb1zVBMZJKgPMiedOi0y/Feather.js
+[unframer] transforming https://framerusercontent.com/modules/qh45N1GEnZBC2H43d2f0/3veFfKn9AgZKA9tD0K4s/U2Mz3MHmF.js
+[unframer] transforming https://framerusercontent.com/modules/Ma20hU0GGRxLxZphbywl/OSpwWF91FHPVFyQJjMHt/utils.js
+[unframer] fetching https://framer.com/m/framer/icon-nullstate.js@0.7.0 because of https://framer.com/m/framer/icon-nullstate.js@0.7.0
+[unframer] transforming https://framer.com/m/framer/icon-nullstate.js@0.7.0
+[unframer] fetching https://framer.com/m/phosphor-icons/House.js@0.0.57 because of https://framer.com/m/phosphor-icons/House.js@0.0.57
+[unframer] transforming https://framer.com/m/phosphor-icons/House.js@0.0.57
+[unframer] fetching https://framerusercontent.com/modules/DyldKav0OOAWR3bCAlhK/8c3l9FzyOlGpbPncYhfc/nullstate.js because of https://framerusercontent.com/modules/DyldKav0OOAWR3bCAlhK/8c3l9FzyOlGpbPncYhfc/nullstate.js
+[unframer] transforming https://framerusercontent.com/modules/DyldKav0OOAWR3bCAlhK/8c3l9FzyOlGpbPncYhfc/nullstate.js
+[unframer] fetching https://framer.com/m/feather-icons/home.js@0.0.29 because of https://framer.com/m/feather-icons/home.js@0.0.29
+[unframer] transforming https://framer.com/m/feather-icons/home.js@0.0.29
+[unframer] fetching https://framerusercontent.com/modules/Qc8yuHkQmGO0kFiSWbkX/rVmMAFttOHuuiwSg6KjZ/House.js because of https://framerusercontent.com/modules/Qc8yuHkQmGO0kFiSWbkX/rVmMAFttOHuuiwSg6KjZ/House.js
+[unframer] transforming https://framerusercontent.com/modules/Qc8yuHkQmGO0kFiSWbkX/rVmMAFttOHuuiwSg6KjZ/House.js
+[unframer] fetching https://framerusercontent.com/modules/8tFVJ9SCM5akQRM0UzVD/YkxZV5bKC4LrRDEdvAgQ/home.js because of https://framerusercontent.com/modules/8tFVJ9SCM5akQRM0UzVD/YkxZV5bKC4LrRDEdvAgQ/home.js
+[unframer] transforming https://framerusercontent.com/modules/8tFVJ9SCM5akQRM0UzVD/YkxZV5bKC4LrRDEdvAgQ/home.js
+[unframer] writing temp JS temp_books.js
+[unframer] writing temp JS temp_navigation.js
+[unframer] writing temp JS temp_tabs-content.js
+[unframer] writing temp JS temp_footer.js
+[unframer] writing temp JS chunks/chunk-UGMVYYLA.js
+[unframer] writing temp JS temp_contact.js
+[unframer] writing temp JS temp_testimonials.js
+[unframer] writing temp JS temp_logos.js
+[unframer] writing temp JS chunks/chunk-UNZV2R7E.js
+[unframer] writing temp JS temp_logo.js
+[unframer] writing temp JS chunks/chunk-QK35C2RJ.js
+[unframer] writing temp JS temp_top-content.js
+[unframer] writing temp JS chunks/chunk-MJX6QVBH.js
+[unframer] writing temp JS chunks/chunk-NULYBL27.js
+[unframer] writing temp JS chunks/chunk-H4HRWUSE.js
+[unframer] using node path /Users/morse/Documents/GitHub/unframer-private/node_modules/node/bin/node
+[unframer] extracting types for books
+[unframer] extracting types for navigation
+[unframer] extracting types for tabs-content
+[unframer] extracting types for footer
+[unframer] extracting types for contact
+[unframer] extracting types for testimonials
+[unframer] Error: Command failed: "/Users/morse/Documents/GitHub/unframer-private/node_modules/node/bin/node" --no-warnings --input-type=module --loader "file:///Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/unframer-loader.js" -e "import('file:///Users/morse/Documents/GitHub/unframer-private/website/src/framer/temp_books.js').then(x => { console.log('__delimiter__'); console.log(JSON.stringify({propertyControls: x.default?.propertyControls, fonts: x?.default?.fonts } || {}, null, 2)) })"
+
+node:internal/process/promises:394
+    triggerUncaughtException(err, true /* fromPromise */);
+    ^
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/framer-chunks/chunk-WYG6DFEF.js' imported from /Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/framer.js
+    at finalizeResolution (node:internal/modules/esm/resolve:275:11)
+    at moduleResolve (node:internal/modules/esm/resolve:860:10)
+    at defaultResolve (node:internal/modules/esm/resolve:984:11)
+    at nextResolve (node:internal/modules/esm/hooks:748:28)
+    at resolve (file:///Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/unframer-loader.js:10:12)
+    at nextResolve (node:internal/modules/esm/hooks:748:28)
+    at Hooks.resolve (node:internal/modules/esm/hooks:240:30)
+    at MessagePort.handleMessage (node:internal/modules/esm/worker:199:24)
+    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:827:20)
+    at MessagePort.<anonymous> (node:internal/per_context/messageport:23:28) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/framer-chunks/chunk-WYG6DFEF.js'
+}
+
+Node.js v22.15.1
+
+    at genericNodeError (node:internal/errors:983:15)
+    at wrappedFn (node:internal/errors:537:14)
+    at ChildProcess.exithandler (node:child_process:414:12)
+    at ChildProcess.emit (node:events:518:28)
+    at maybeClose (node:internal/child_process:1101:16)
+    at ChildProcess._handle.onexit (node:internal/child_process:304:5)
+[unframer] no property controls found for books
+[unframer] Generated TypeDoc comments for books: true
+[unframer] extracting types for logos
+[unframer] Error: Command failed: "/Users/morse/Documents/GitHub/unframer-private/node_modules/node/bin/node" --no-warnings --input-type=module --loader "file:///Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/unframer-loader.js" -e "import('file:///Users/morse/Documents/GitHub/unframer-private/website/src/framer/temp_contact.js').then(x => { console.log('__delimiter__'); console.log(JSON.stringify({propertyControls: x.default?.propertyControls, fonts: x?.default?.fonts } || {}, null, 2)) })"
+
+node:internal/process/promises:394
+    triggerUncaughtException(err, true /* fromPromise */);
+    ^
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/framer-chunks/chunk-WYG6DFEF.js' imported from /Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/framer.js
+    at finalizeResolution (node:internal/modules/esm/resolve:275:11)
+    at moduleResolve (node:internal/modules/esm/resolve:860:10)
+    at defaultResolve (node:internal/modules/esm/resolve:984:11)
+    at nextResolve (node:internal/modules/esm/hooks:748:28)
+    at resolve (file:///Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/unframer-loader.js:10:12)
+    at nextResolve (node:internal/modules/esm/hooks:748:28)
+    at Hooks.resolve (node:internal/modules/esm/hooks:240:30)
+    at MessagePort.handleMessage (node:internal/modules/esm/worker:199:24)
+    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:827:20)
+    at MessagePort.<anonymous> (node:internal/per_context/messageport:23:28) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/framer-chunks/chunk-WYG6DFEF.js'
+}
+
+Node.js v22.15.1
+
+    at genericNodeError (node:internal/errors:983:15)
+    at wrappedFn (node:internal/errors:537:14)
+    at ChildProcess.exithandler (node:child_process:414:12)
+    at ChildProcess.emit (node:events:518:28)
+    at maybeClose (node:internal/child_process:1101:16)
+    at ChildProcess._handle.onexit (node:internal/child_process:304:5)
+[unframer] no property controls found for contact
+[unframer] Generated TypeDoc comments for contact: true
+[unframer] extracting types for logo
+[unframer] Error: Command failed: "/Users/morse/Documents/GitHub/unframer-private/node_modules/node/bin/node" --no-warnings --input-type=module --loader "file:///Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/unframer-loader.js" -e "import('file:///Users/morse/Documents/GitHub/unframer-private/website/src/framer/temp_tabs-content.js').then(x => { console.log('__delimiter__'); console.log(JSON.stringify({propertyControls: x.default?.propertyControls, fonts: x?.default?.fonts } || {}, null, 2)) })"
+
+node:internal/process/promises:394
+    triggerUncaughtException(err, true /* fromPromise */);
+    ^
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/framer-chunks/chunk-WYG6DFEF.js' imported from /Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/framer.js
+    at finalizeResolution (node:internal/modules/esm/resolve:275:11)
+    at moduleResolve (node:internal/modules/esm/resolve:860:10)
+    at defaultResolve (node:internal/modules/esm/resolve:984:11)
+    at nextResolve (node:internal/modules/esm/hooks:748:28)
+    at resolve (file:///Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/unframer-loader.js:10:12)
+    at nextResolve (node:internal/modules/esm/hooks:748:28)
+    at Hooks.resolve (node:internal/modules/esm/hooks:240:30)
+    at MessagePort.handleMessage (node:internal/modules/esm/worker:199:24)
+    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:827:20)
+    at MessagePort.<anonymous> (node:internal/per_context/messageport:23:28) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/framer-chunks/chunk-WYG6DFEF.js'
+}
+
+Node.js v22.15.1
+
+    at genericNodeError (node:internal/errors:983:15)
+    at wrappedFn (node:internal/errors:537:14)
+    at ChildProcess.exithandler (node:child_process:414:12)
+    at ChildProcess.emit (node:events:518:28)
+    at maybeClose (node:internal/child_process:1101:16)
+    at Socket.<anonymous> (node:internal/child_process:456:11)
+    at Socket.emit (node:events:518:28)
+    at Pipe.<anonymous> (node:net:351:12)
+[unframer] no property controls found for tabs-content
+[unframer] Generated TypeDoc comments for tabs-content: true
+[unframer] extracting types for top-content
+[unframer] Error: Command failed: "/Users/morse/Documents/GitHub/unframer-private/node_modules/node/bin/node" --no-warnings --input-type=module --loader "file:///Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/unframer-loader.js" -e "import('file:///Users/morse/Documents/GitHub/unframer-private/website/src/framer/temp_testimonials.js').then(x => { console.log('__delimiter__'); console.log(JSON.stringify({propertyControls: x.default?.propertyControls, fonts: x?.default?.fonts } || {}, null, 2)) })"
+
+node:internal/process/promises:394
+    triggerUncaughtException(err, true /* fromPromise */);
+    ^
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/framer-chunks/chunk-WYG6DFEF.js' imported from /Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/framer.js
+    at finalizeResolution (node:internal/modules/esm/resolve:275:11)
+    at moduleResolve (node:internal/modules/esm/resolve:860:10)
+    at defaultResolve (node:internal/modules/esm/resolve:984:11)
+    at nextResolve (node:internal/modules/esm/hooks:748:28)
+    at resolve (file:///Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/unframer-loader.js:10:12)
+    at nextResolve (node:internal/modules/esm/hooks:748:28)
+    at Hooks.resolve (node:internal/modules/esm/hooks:240:30)
+    at MessagePort.handleMessage (node:internal/modules/esm/worker:199:24)
+    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:827:20)
+    at MessagePort.<anonymous> (node:internal/per_context/messageport:23:28) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/framer-chunks/chunk-WYG6DFEF.js'
+}
+
+Node.js v22.15.1
+
+    at genericNodeError (node:internal/errors:983:15)
+    at wrappedFn (node:internal/errors:537:14)
+    at ChildProcess.exithandler (node:child_process:414:12)
+    at ChildProcess.emit (node:events:518:28)
+    at maybeClose (node:internal/child_process:1101:16)
+    at Socket.<anonymous> (node:internal/child_process:456:11)
+    at Socket.emit (node:events:518:28)
+    at Pipe.<anonymous> (node:net:351:12)
+[unframer] no property controls found for testimonials
+[unframer] Generated TypeDoc comments for testimonials: true
+[unframer] Error: Command failed: "/Users/morse/Documents/GitHub/unframer-private/node_modules/node/bin/node" --no-warnings --input-type=module --loader "file:///Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/unframer-loader.js" -e "import('file:///Users/morse/Documents/GitHub/unframer-private/website/src/framer/temp_footer.js').then(x => { console.log('__delimiter__'); console.log(JSON.stringify({propertyControls: x.default?.propertyControls, fonts: x?.default?.fonts } || {}, null, 2)) })"
+
+node:internal/process/promises:394
+    triggerUncaughtException(err, true /* fromPromise */);
+    ^
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/framer-chunks/chunk-WYG6DFEF.js' imported from /Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/framer.js
+    at finalizeResolution (node:internal/modules/esm/resolve:275:11)
+    at moduleResolve (node:internal/modules/esm/resolve:860:10)
+    at defaultResolve (node:internal/modules/esm/resolve:984:11)
+    at nextResolve (node:internal/modules/esm/hooks:748:28)
+    at resolve (file:///Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/unframer-loader.js:10:12)
+    at nextResolve (node:internal/modules/esm/hooks:748:28)
+    at Hooks.resolve (node:internal/modules/esm/hooks:240:30)
+    at MessagePort.handleMessage (node:internal/modules/esm/worker:199:24)
+    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:827:20)
+    at MessagePort.<anonymous> (node:internal/per_context/messageport:23:28) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/framer-chunks/chunk-WYG6DFEF.js'
+}
+
+Node.js v22.15.1
+
+    at genericNodeError (node:internal/errors:983:15)
+    at wrappedFn (node:internal/errors:537:14)
+    at ChildProcess.exithandler (node:child_process:414:12)
+    at ChildProcess.emit (node:events:518:28)
+    at maybeClose (node:internal/child_process:1101:16)
+    at Socket.<anonymous> (node:internal/child_process:456:11)
+    at Socket.emit (node:events:518:28)
+    at Pipe.<anonymous> (node:net:351:12)
+[unframer] no property controls found for footer
+[unframer] Generated TypeDoc comments for footer: true
+[unframer] Error: Command failed: "/Users/morse/Documents/GitHub/unframer-private/node_modules/node/bin/node" --no-warnings --input-type=module --loader "file:///Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/unframer-loader.js" -e "import('file:///Users/morse/Documents/GitHub/unframer-private/website/src/framer/temp_navigation.js').then(x => { console.log('__delimiter__'); console.log(JSON.stringify({propertyControls: x.default?.propertyControls, fonts: x?.default?.fonts } || {}, null, 2)) })"
+
+node:internal/process/promises:394
+    triggerUncaughtException(err, true /* fromPromise */);
+    ^
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/framer-chunks/chunk-WYG6DFEF.js' imported from /Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/framer.js
+    at finalizeResolution (node:internal/modules/esm/resolve:275:11)
+    at moduleResolve (node:internal/modules/esm/resolve:860:10)
+    at defaultResolve (node:internal/modules/esm/resolve:984:11)
+    at nextResolve (node:internal/modules/esm/hooks:748:28)
+    at resolve (file:///Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/unframer-loader.js:10:12)
+    at nextResolve (node:internal/modules/esm/hooks:748:28)
+    at Hooks.resolve (node:internal/modules/esm/hooks:240:30)
+    at MessagePort.handleMessage (node:internal/modules/esm/worker:199:24)
+    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:827:20)
+    at MessagePort.<anonymous> (node:internal/per_context/messageport:23:28) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/framer-chunks/chunk-WYG6DFEF.js'
+}
+
+Node.js v22.15.1
+
+    at genericNodeError (node:internal/errors:983:15)
+    at wrappedFn (node:internal/errors:537:14)
+    at ChildProcess.exithandler (node:child_process:414:12)
+    at ChildProcess.emit (node:events:518:28)
+    at maybeClose (node:internal/child_process:1101:16)
+    at ChildProcess._handle.onexit (node:internal/child_process:304:5)
+[unframer] no property controls found for navigation
+[unframer] Generated TypeDoc comments for navigation: true
+[unframer] Error: Command failed: "/Users/morse/Documents/GitHub/unframer-private/node_modules/node/bin/node" --no-warnings --input-type=module --loader "file:///Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/unframer-loader.js" -e "import('file:///Users/morse/Documents/GitHub/unframer-private/website/src/framer/temp_logo.js').then(x => { console.log('__delimiter__'); console.log(JSON.stringify({propertyControls: x.default?.propertyControls, fonts: x?.default?.fonts } || {}, null, 2)) })"
+
+node:internal/process/promises:394
+    triggerUncaughtException(err, true /* fromPromise */);
+    ^
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/framer-chunks/chunk-WYG6DFEF.js' imported from /Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/framer.js
+    at finalizeResolution (node:internal/modules/esm/resolve:275:11)
+    at moduleResolve (node:internal/modules/esm/resolve:860:10)
+    at defaultResolve (node:internal/modules/esm/resolve:984:11)
+    at nextResolve (node:internal/modules/esm/hooks:748:28)
+    at resolve (file:///Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/unframer-loader.js:10:12)
+    at nextResolve (node:internal/modules/esm/hooks:748:28)
+    at Hooks.resolve (node:internal/modules/esm/hooks:240:30)
+    at MessagePort.handleMessage (node:internal/modules/esm/worker:199:24)
+    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:827:20)
+    at MessagePort.<anonymous> (node:internal/per_context/messageport:23:28) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/framer-chunks/chunk-WYG6DFEF.js'
+}
+
+Node.js v22.15.1
+
+    at genericNodeError (node:internal/errors:983:15)
+    at wrappedFn (node:internal/errors:537:14)
+    at ChildProcess.exithandler (node:child_process:414:12)
+    at ChildProcess.emit (node:events:518:28)
+    at maybeClose (node:internal/child_process:1101:16)
+    at Socket.<anonymous> (node:internal/child_process:456:11)
+    at Socket.emit (node:events:518:28)
+    at Pipe.<anonymous> (node:net:351:12)
+[unframer] no property controls found for logo
+[unframer] Generated TypeDoc comments for logo: true
+[unframer] Error: Command failed: "/Users/morse/Documents/GitHub/unframer-private/node_modules/node/bin/node" --no-warnings --input-type=module --loader "file:///Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/unframer-loader.js" -e "import('file:///Users/morse/Documents/GitHub/unframer-private/website/src/framer/temp_logos.js').then(x => { console.log('__delimiter__'); console.log(JSON.stringify({propertyControls: x.default?.propertyControls, fonts: x?.default?.fonts } || {}, null, 2)) })"
+
+node:internal/process/promises:394
+    triggerUncaughtException(err, true /* fromPromise */);
+    ^
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/framer-chunks/chunk-WYG6DFEF.js' imported from /Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/framer.js
+    at finalizeResolution (node:internal/modules/esm/resolve:275:11)
+    at moduleResolve (node:internal/modules/esm/resolve:860:10)
+    at defaultResolve (node:internal/modules/esm/resolve:984:11)
+    at nextResolve (node:internal/modules/esm/hooks:748:28)
+    at resolve (file:///Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/unframer-loader.js:10:12)
+    at nextResolve (node:internal/modules/esm/hooks:748:28)
+    at Hooks.resolve (node:internal/modules/esm/hooks:240:30)
+    at MessagePort.handleMessage (node:internal/modules/esm/worker:199:24)
+    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:827:20)
+    at MessagePort.<anonymous> (node:internal/per_context/messageport:23:28) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/framer-chunks/chunk-WYG6DFEF.js'
+}
+
+Node.js v22.15.1
+
+    at genericNodeError (node:internal/errors:983:15)
+    at wrappedFn (node:internal/errors:537:14)
+    at ChildProcess.exithandler (node:child_process:414:12)
+    at ChildProcess.emit (node:events:518:28)
+    at maybeClose (node:internal/child_process:1101:16)
+    at ChildProcess._handle.onexit (node:internal/child_process:304:5)
+[unframer] no property controls found for logos
+[unframer] Generated TypeDoc comments for logos: true
+[unframer] Error: Command failed: "/Users/morse/Documents/GitHub/unframer-private/node_modules/node/bin/node" --no-warnings --input-type=module --loader "file:///Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/unframer-loader.js" -e "import('file:///Users/morse/Documents/GitHub/unframer-private/website/src/framer/temp_top-content.js').then(x => { console.log('__delimiter__'); console.log(JSON.stringify({propertyControls: x.default?.propertyControls, fonts: x?.default?.fonts } || {}, null, 2)) })"
+
+node:internal/process/promises:394
+    triggerUncaughtException(err, true /* fromPromise */);
+    ^
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/framer-chunks/chunk-WYG6DFEF.js' imported from /Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/framer.js
+    at finalizeResolution (node:internal/modules/esm/resolve:275:11)
+    at moduleResolve (node:internal/modules/esm/resolve:860:10)
+    at defaultResolve (node:internal/modules/esm/resolve:984:11)
+    at nextResolve (node:internal/modules/esm/hooks:748:28)
+    at resolve (file:///Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/unframer-loader.js:10:12)
+    at nextResolve (node:internal/modules/esm/hooks:748:28)
+    at Hooks.resolve (node:internal/modules/esm/hooks:240:30)
+    at MessagePort.handleMessage (node:internal/modules/esm/worker:199:24)
+    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:827:20)
+    at MessagePort.<anonymous> (node:internal/per_context/messageport:23:28) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///Users/morse/Documents/GitHub/unframer-private/unframer/unframer/dist/framer-chunks/chunk-WYG6DFEF.js'
+}
+
+Node.js v22.15.1
+
+    at genericNodeError (node:internal/errors:983:15)
+    at wrappedFn (node:internal/errors:537:14)
+    at ChildProcess.exithandler (node:child_process:414:12)
+    at ChildProcess.emit (node:events:518:28)
+    at maybeClose (node:internal/child_process:1101:16)
+    at ChildProcess._handle.onexit (node:internal/child_process:304:5)
+[unframer] no property controls found for top-content
+[unframer] Generated TypeDoc comments for top-content: true
+[unframer] 
+[unframer] Processing component: books
+[unframer]   PropData found for books, has propertyControls: false
+[unframer]   TypeDoc comments available for books
+[unframer]   Adding TypeDoc plugin for books
+[unframer] writing books.js
+[unframer] JSX file unchanged for books
+[unframer] Processing component: navigation
+[unframer]   PropData found for navigation, has propertyControls: false
+[unframer]   TypeDoc comments available for navigation
+[unframer]   Adding TypeDoc plugin for navigation
+[unframer] writing navigation.js
+[unframer] JSX file unchanged for navigation
+[unframer] Processing component: tabs-content
+[unframer]   PropData found for tabs-content, has propertyControls: false
+[unframer]   TypeDoc comments available for tabs-content
+[unframer]   Adding TypeDoc plugin for tabs-content
+[unframer] writing tabs-content.js
+[unframer] JSX file unchanged for tabs-content
+[unframer] Processing component: footer
+[unframer]   PropData found for footer, has propertyControls: false
+[unframer]   TypeDoc comments available for footer
+[unframer]   Adding TypeDoc plugin for footer
+[unframer] writing footer.js
+[unframer] JSX file unchanged for footer
+[unframer] Processing component: chunks/chunk-UGMVYYLA
+[unframer]   No propData found for chunks/chunk-UGMVYYLA
+[unframer] writing chunks/chunk-UGMVYYLA.js
+[unframer] Processing component: contact
+[unframer]   PropData found for contact, has propertyControls: false
+[unframer]   TypeDoc comments available for contact
+[unframer]   Adding TypeDoc plugin for contact
+[unframer] writing contact.js
+[unframer] JSX file unchanged for contact
+[unframer] Processing component: testimonials
+[unframer]   PropData found for testimonials, has propertyControls: false
+[unframer]   TypeDoc comments available for testimonials
+[unframer]   Adding TypeDoc plugin for testimonials
+[unframer] writing testimonials.js
+[unframer] JSX file unchanged for testimonials
+[unframer] Processing component: logos
+[unframer]   PropData found for logos, has propertyControls: false
+[unframer]   TypeDoc comments available for logos
+[unframer]   Adding TypeDoc plugin for logos
+[unframer] writing logos.js
+[unframer] JSX file unchanged for logos
+[unframer] Processing component: chunks/chunk-UNZV2R7E
+[unframer]   No propData found for chunks/chunk-UNZV2R7E
+[unframer] writing chunks/chunk-UNZV2R7E.js
+[unframer] Processing component: logo
+[unframer]   PropData found for logo, has propertyControls: false
+[unframer]   TypeDoc comments available for logo
+[unframer]   Adding TypeDoc plugin for logo
+[unframer] writing logo.js
+[unframer] JSX file unchanged for logo
+[unframer] Processing component: chunks/chunk-QK35C2RJ
+[unframer]   No propData found for chunks/chunk-QK35C2RJ
+[unframer] writing chunks/chunk-QK35C2RJ.js
+[unframer] Processing component: top-content
+[unframer]   PropData found for top-content, has propertyControls: false
+[unframer]   TypeDoc comments available for top-content
+[unframer]   Adding TypeDoc plugin for top-content
+[unframer] writing top-content.js
+[unframer] JSX file unchanged for top-content
+[unframer] Processing component: chunks/chunk-MJX6QVBH
+[unframer]   No propData found for chunks/chunk-MJX6QVBH
+[unframer] writing chunks/chunk-MJX6QVBH.js
+[unframer] Processing component: chunks/chunk-NULYBL27
+[unframer]   No propData found for chunks/chunk-NULYBL27
+[unframer] writing chunks/chunk-NULYBL27.js
+[unframer] Processing component: chunks/chunk-H4HRWUSE
+[unframer]   No propData found for chunks/chunk-H4HRWUSE
+[unframer] writing chunks/chunk-H4HRWUSE.js
+[unframer] removing temp JS file with JSX equivalent: temp_books.js
+[unframer] removing temp JS file with JSX equivalent: temp_navigation.js
+[unframer] removing temp JS file with JSX equivalent: temp_tabs-content.js
+[unframer] removing temp JS file with JSX equivalent: temp_footer.js
+[unframer] renaming temp JS file to final name: chunks/chunk-UGMVYYLA.js -> chunks/chunk-UGMVYYLA.js
+[unframer] removing temp JS file with JSX equivalent: temp_contact.js
+[unframer] removing temp JS file with JSX equivalent: temp_testimonials.js
+[unframer] removing temp JS file with JSX equivalent: temp_logos.js
+[unframer] renaming temp JS file to final name: chunks/chunk-UNZV2R7E.js -> chunks/chunk-UNZV2R7E.js
+[unframer] removing temp JS file with JSX equivalent: temp_logo.js
+[unframer] renaming temp JS file to final name: chunks/chunk-QK35C2RJ.js -> chunks/chunk-QK35C2RJ.js
+[unframer] removing temp JS file with JSX equivalent: temp_top-content.js
+[unframer] renaming temp JS file to final name: chunks/chunk-MJX6QVBH.js -> chunks/chunk-MJX6QVBH.js
+[unframer] renaming temp JS file to final name: chunks/chunk-NULYBL27.js -> chunks/chunk-NULYBL27.js
+[unframer] renaming temp JS file to final name: chunks/chunk-H4HRWUSE.js -> chunks/chunk-H4HRWUSE.js
+
+
+
+How to use the Framer components
+
+✓ Your components are exported to framer folder
+
+Each component has a .Responsive variant that allows you to
+specify different variants for different breakpoints.
+
+You can use the components like this:
+(try copy pasting the code below into your React app)
+
+import './framer/styles.css'
+
+import TabsContentFramerComponent from './framer/tabs-content'
+import NavigationFramerComponent from './framer/navigation'
+import TopContentFramerComponent from './framer/top-content'
+import FooterFramerComponent from './framer/footer'
+import TestimonialsFramerComponent from './framer/testimonials'
+import LogosFramerComponent from './framer/logos'
+
+export default function App() {
+  return (
+    <div className='flex flex-col items-center gap-3 bg-[rgb(0,_0,_0)]'>
+      <TabsContentFramerComponent.Responsive/>
+      <NavigationFramerComponent.Responsive/>
+      <TopContentFramerComponent.Responsive/>
+      <FooterFramerComponent.Responsive
+        burzVaCmv={"2024"}
+      />
+      <TestimonialsFramerComponent.Responsive/>
+      <LogosFramerComponent.Responsive
+        vNALwon5d={0}
+      />
+    </div>
+  );
+};
+
+⚠  Remember to import the styles.css file to include
+   the necessary styles for the components.
+
+To style components you can pass a style or className prop
+
+Read more on GitHub: https://github.com/remorses/unframer
+

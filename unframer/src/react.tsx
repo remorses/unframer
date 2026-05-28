@@ -153,25 +153,16 @@ export const WithFramerBreakpoints = <
     Component: T
     variants: Record<UnframerBreakpoint, ComponentPropsWithoutRef<T>['variant']>
 } & Omit<ComponentPropsWithoutRef<T>, 'variant'>): any => {
+    // getServerSnapshot must always return '' to match what the server rendered.
+    // During hydration React calls getServerSnapshot on the client too; if it
+    // returned the real breakpoint, the tree structure would differ from the
+    // server (server renders all variants, client would render only one).
     const currentBreakpoint = useSyncExternalStore(
         onResize,
         () => {
-            // console.log('window.innerWidth', window.innerWidth)
-            const breakpoint = getBreakpointNameFromWindowWidth(
-                window.innerWidth,
-            )
-            return breakpoint
+            return getBreakpointNameFromWindowWidth(window.innerWidth)
         },
-        () => {
-            if (typeof window !== 'undefined') {
-                const breakpoint = getBreakpointNameFromWindowWidth(
-                    window.innerWidth,
-                )
-                return breakpoint
-            }
-
-            return ''
-        },
+        () => '',
     )
     if (isEmpty(_breakpointsMap)) {
         // @ts-ignore

@@ -8290,7 +8290,6 @@ var AnimatePresence = ({
     forceRender,
   } = useContext(LayoutGroupContext,);
   return jsx(Fragment, {
-    suppressHydrationWarning: true,
     children: renderedChildren.map((child) => {
       const key7 = getChildKey(child,);
       const isPresent2 = propagate && !isParentPresent ? false : presentChildren === renderedChildren || presentKeys.includes(key7,);
@@ -20901,7 +20900,6 @@ function MotionSetup({
   children,
 },) {
   return /* @__PURE__ */ jsx(Fragment, {
-    suppressHydrationWarning: true,
     children,
   },);
 }
@@ -21034,7 +21032,6 @@ function LayoutIdProvider({
   const context = useContext(LayoutIdContext,);
   if (context.top) {
     return /* @__PURE__ */ jsx(Fragment, {
-      suppressHydrationWarning: true,
       children,
     },);
   }
@@ -23036,7 +23033,6 @@ var ProvideParentSize = (props) => {
   if (currentParentSize === 1) {
     return children
       ? /* @__PURE__ */ jsx(Fragment, {
-        suppressHydrationWarning: true,
         children,
       },)
       : null;
@@ -28081,7 +28077,6 @@ var VisibleFrame = /* @__PURE__ */ forwardRef(function VisibleFrame2(props, forw
   const parentSize = resolveParentSize(propsWithOverrides, unwrappedProps, rect, inCodeComponent,);
   const wrappedContent = useProvideParentSize(
     /* @__PURE__ */ jsxs(Fragment, {
-      suppressHydrationWarning: true,
       children: [
         backgroundImage
           ? /* @__PURE__ */ jsx(BackgroundImageComponent, {
@@ -31514,7 +31509,6 @@ var OuterShadowFilterElements = (props) => {
   const blurId = shadowKey.add('blur',).id;
   const floodId = shadowKey.add('flood',).id;
   return /* @__PURE__ */ jsxs(Fragment, {
-    suppressHydrationWarning: true,
     children: [
       /* @__PURE__ */ jsx('feOffset', {
         suppressHydrationWarning: true,
@@ -31570,7 +31564,6 @@ var InnerShadowFilterElements = (props) => {
   const compositeId = shadowKey.add('composite',).id;
   const floodId = shadowKey.add('flood',).id;
   return /* @__PURE__ */ jsxs(Fragment, {
-    suppressHydrationWarning: true,
     children: [
       /* @__PURE__ */ jsx('feGaussianBlur', {
         suppressHydrationWarning: true,
@@ -35266,7 +35259,6 @@ function cloneChildrenWithProps(children, props, asNode,) {
   },);
   if (asNode) return cloned;
   return /* @__PURE__ */ jsx(Fragment, {
-    suppressHydrationWarning: true,
     children: cloned,
   },);
 }
@@ -35332,7 +35324,6 @@ function createHook(forwardedRef,) {
   }
   const cloneAsElement = function cloneAsElement2(children, props,) {
     return /* @__PURE__ */ jsx(Fragment, {
-      suppressHydrationWarning: true,
       children: cloneChildrenWithPropsAndRef(children, props,),
     },);
   };
@@ -36886,7 +36877,6 @@ function SuspenseThatPreservesDom({
   const isSuspenseBoundaryDisabled = useContext(DisableSuspenseSuspenseThatPreservesDomContext,);
   if (isSuspenseBoundaryDisabled) {
     return /* @__PURE__ */ jsx(Fragment, {
-      suppressHydrationWarning: true,
       children,
     },);
   }
@@ -39781,7 +39771,6 @@ function HoneypotFields({
   states,
 },) {
   return /* @__PURE__ */ jsx(Fragment, {
-    suppressHydrationWarning: true,
     children: states.map((stateRef) =>
       // Names are unique at the moment, so using the originalName is fine
       /* @__PURE__ */
@@ -41522,7 +41511,6 @@ function Router({
                             style: defaultPageStyle,
                             children: (inLayoutTemplate) => {
                               return /* @__PURE__ */ jsx(Fragment, {
-                                suppressHydrationWarning: true,
                                 children: pageExistsInCurrentLocale
                                   ? renderPage(currentRoute.page, inLayoutTemplate ? templatePageStyle : defaultPageStyle,)
                                   : // LAYOUT_TEMPLATE @TODO: display: content for not found page?
@@ -49359,7 +49347,6 @@ function ListView({
     }
   },);
   return /* @__PURE__ */ jsxs(Fragment, {
-    suppressHydrationWarning: true,
     children: [
       /* @__PURE__ */ jsx(MotionComponent, {
         suppressHydrationWarning: true,
@@ -51677,7 +51664,6 @@ var ShaderWithFallbackOverlay = /* @__PURE__ */ memo2(function ShaderWithFallbac
   const effectiveSingleFrame = singleFrame2 || shouldHideCanvas || isWaitingForPlayback;
   const shouldShowFallback = hasFallbackImage && !shouldSkipInitialFallback && (!isRevealDelayComplete || !isShaderReady);
   return /* @__PURE__ */ jsxs(Fragment, {
-    suppressHydrationWarning: true,
     children: [
       /* @__PURE__ */ jsx('div', {
         suppressHydrationWarning: true,
@@ -55614,7 +55600,6 @@ function withLightboxEffect(Component18,) {
     const layoutDependency = open ? props.layoutDependency ? `${props.layoutDependency}-open` : 'open' : props.layoutDependency;
     const layoutId = isInTickerItem && open ? void 0 : props.layoutId ?? (lightbox ? fallbackLayoutId : void 0);
     return /* @__PURE__ */ jsxs(Fragment, {
-      suppressHydrationWarning: true,
       children: [
         /* @__PURE__ */ jsx(Component18, {
           suppressHydrationWarning: true,
@@ -55635,10 +55620,8 @@ function withLightboxEffect(Component18,) {
             },);
           },
           children: open && lightbox && image && /* @__PURE__ */ jsx(Fragment, {
-            suppressHydrationWarning: true,
             children: createPortal(
               /* @__PURE__ */ jsxs(Fragment, {
-                suppressHydrationWarning: true,
                 children: [
                   /* @__PURE__ */ jsx(motion.div, {
                     suppressHydrationWarning: true,
@@ -56474,7 +56457,6 @@ function tokenizeText(text, tokenization = 'character', elements, shouldReduceMo
         const isLastWord = wordIndex === lastWordIndex;
         const short = word.length <= 12;
         return /* @__PURE__ */ jsxs(React.Fragment, {
-          suppressHydrationWarning: true,
           children: [
             /* @__PURE__ */ jsx('span', {
               suppressHydrationWarning: true,
@@ -56509,7 +56491,6 @@ function tokenizeText(text, tokenization = 'character', elements, shouldReduceMo
         const ref = newOverrideableRef();
         elements.add(ref,);
         return /* @__PURE__ */ jsxs(React.Fragment, {
-          suppressHydrationWarning: true,
           children: [
             /* @__PURE__ */ jsx('span', {
               suppressHydrationWarning: true,
@@ -57961,7 +57942,6 @@ var SVGComponent = /* @__PURE__ */ (() => {
           outerStyle.overflow = 'hidden';
         }
         content = /* @__PURE__ */ jsxs(Fragment, {
-          suppressHydrationWarning: true,
           children: [
             fillElement,
             /* @__PURE__ */ jsx('div', {

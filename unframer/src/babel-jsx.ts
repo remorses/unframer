@@ -298,6 +298,7 @@ export function babelPluginSuppressHydration({
     types: typeof BabelTypes
 }): PluginObj {
     const jsxFunctions = new Set<string>()
+    const fragmentNames = new Set<string>()
 
     return {
         name: 'suppress-hydration-warning',
@@ -311,11 +312,28 @@ export function babelPluginSuppressHydration({
                     for (const specifier of path.node.specifiers) {
                         if (
                             t.isImportSpecifier(specifier) &&
-                            t.isIdentifier(specifier.imported) &&
-                            (specifier.imported.name === 'jsx' ||
-                                specifier.imported.name === 'jsxs')
+                            t.isIdentifier(specifier.imported)
                         ) {
-                            jsxFunctions.add(specifier.local.name)
+                            if (
+                                specifier.imported.name === 'jsx' ||
+                                specifier.imported.name === 'jsxs'
+                            ) {
+                                jsxFunctions.add(specifier.local.name)
+                            }
+                            if (specifier.imported.name === 'Fragment') {
+                                fragmentNames.add(specifier.local.name)
+                            }
+                        }
+                    }
+                }
+                if (source === 'react') {
+                    for (const specifier of path.node.specifiers) {
+                        if (
+                            t.isImportSpecifier(specifier) &&
+                            t.isIdentifier(specifier.imported) &&
+                            specifier.imported.name === 'Fragment'
+                        ) {
+                            fragmentNames.add(specifier.local.name)
                         }
                     }
                 }
@@ -331,8 +349,18 @@ export function babelPluginSuppressHydration({
                 if (!propsArg || !t.isObjectExpression(propsArg)) {
                     return
                 }
-                // Add to all jsx calls: lowercase HTML elements, motion.*, and capitalized
-                // components (which often forward props via spread to DOM elements).
+                // Skip React.Fragment — it only accepts key and children props.
+                // Handles both `Fragment` (Identifier) and `React.Fragment` (MemberExpression).
+                if (t.isIdentifier(elementArg) && fragmentNames.has(elementArg.name)) {
+                    return
+                }
+                if (
+                    t.isMemberExpression(elementArg) &&
+                    t.isIdentifier(elementArg.property) &&
+                    elementArg.property.name === 'Fragment'
+                ) {
+                    return
+                }
                 // Skip if suppressHydrationWarning is already present
                 const alreadyHas = propsArg.properties.some((prop) => {
                     return (

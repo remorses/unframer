@@ -35,6 +35,46 @@ codeAfter = codeAfter.replace(
 )
 ```
 
+## Babel plugins in babel-jsx.ts
+
+`src/babel-jsx.ts` contains babel plugins that transform the generated code. The most important ones:
+
+- **`babelPluginSuppressHydration`** — injects `suppressHydrationWarning={true}` into all jsx/jsxs calls to prevent React hydration mismatch warnings. Skips `React.Fragment` because Fragment only accepts `key` and `children` props.
+- **`babelPluginJsxTransform`** — converts `_jsx()`/`_jsxs()` call expressions back into JSX syntax for readability.
+- **`removeJsxExpressionContainer`** — unwraps unnecessary JSX expression containers.
+
+These plugins are applied in **two places**:
+1. **`scripts/download.ts`** — applies them to `framer.js` (the bundled Framer runtime)
+2. **`src/exporter.ts`** — applies them to each exported component file
+
+If you change any babel plugin in `babel-jsx.ts`, you must:
+
+```bash
+# 1. Rebuild unframer so dist/ has the updated plugin code
+cd unframer/unframer && pnpm build
+
+# 2. Re-run the download script to regenerate framer.js with the updated plugin
+cd unframer && pnpm download-framer:doppler
+
+# 3. Rebuild again so dist/framer.js has the regenerated file
+cd unframer/unframer && pnpm build
+
+# 4. Re-export website components (if testing on the website)
+cd website && doppler run -- pnpm framer
+```
+
+Forgetting step 2 means `framer.js` still has the old plugin output baked in. Forgetting step 3 means `dist/framer.js` is stale.
+
+## CRITICAL: Always rebuild after changing unframer source
+
+The unframer package builds `src/` into `dist/` via `pnpm build`. Consumers (the website, the CLI) import from `dist/`, not `src/`. If you change **any** file inside `unframer/unframer/src/` (babel plugins, exporter, CLI, framer.js, etc.) or run `download-framer`, you **must** rebuild:
+
+```bash
+cd unframer/unframer && pnpm build
+```
+
+Without this, the website and CLI still use the old `dist/` output. This applies to every change, not just babel plugins.
+
 ## CRITICAL: Never create node_modules in unframer folder
 
 **NEVER run `pnpm install` inside the unframer submodule folder!**
