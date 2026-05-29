@@ -12739,7 +12739,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.7GWEWZBL.mjs
+// /:https://app.framerstatic.com/framer.6B2WGZJM.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -48289,7 +48289,7 @@ function flattenChildrenToTickerItems(children,) {
   Children.forEach(children, (child) => {
     if (isValidElement(child,) && child.type === Fragment) {
       result.push(...flattenChildrenToTickerItems(child.props.children,),);
-    } else {
+    } else if (child) {
       result.push(child,);
     }
   },);
@@ -48376,7 +48376,7 @@ var TickerContext = /* @__PURE__ */ (() => {
 })();
 function useTicker() {
   const context = useContext(TickerContext,);
-  invariant(Boolean(context,), 'useTicker must be used within a Ticker component',);
+  invariant2(Boolean(context,), 'useTicker must be used within a Ticker component',);
   return context;
 }
 var TickerItemContext = /* @__PURE__ */ (() => {
@@ -48386,7 +48386,7 @@ var TickerItemContext = /* @__PURE__ */ (() => {
 })();
 function useTickerItem() {
   const itemContext = useContext(TickerItemContext,);
-  invariant(Boolean(itemContext,), 'useTickerItem must be used within a TickerItem',);
+  invariant2(Boolean(itemContext,), 'useTickerItem must be used within a TickerItem',);
   return itemContext;
 }
 var ltrStrategy = (insetProp, lengthProp, viewportLengthProp, paddingStartProp, direction,) => {
@@ -48479,7 +48479,7 @@ function TickerItemWrapper({
       return listSize * sign;
     }
     if (safeMargin > 0) {
-      const rightBoundary = visibleLength - inset2 + safeMargin;
+      const rightBoundary = visibleLength - safeMargin - inset2;
       if (currentOffset * sign + bounds.start >= rightBoundary) {
         return -listSize * sign;
       }
@@ -48492,7 +48492,6 @@ function TickerItemWrapper({
     if (!start2 && !end || !listSize) return 0;
     return currentOffset * sign + start2 + currentTransform * sign;
   },);
-  const offAxisSize = alignItems === 'stretch' ? '100%' : 'fit-content';
   const ariaProps = cloneIndex === void 0
     ? {
       ['aria-hidden']: false,
@@ -48502,6 +48501,8 @@ function TickerItemWrapper({
     : {
       ['aria-hidden']: true,
     };
+  const isFill = size === 'fill';
+  const offAxisSize = alignItems === 'stretch' ? '100%' : 'fit-content';
   const props = {
     className: cloneIndex === void 0 ? 'ticker-item' : 'clone-item',
     style: {
@@ -48509,7 +48510,11 @@ function TickerItemWrapper({
       flexShrink: 0,
       position: 'relative',
       flexBasis: size === 'fill' ? '100%' : void 0,
-      display: size === 'fill' ? 'flex' : void 0,
+      display: isFill ? 'grid' : void 0,
+      gridTemplateColumns: isFill ? '1fr' : void 0,
+      gridTemplateRows: isFill ? '1fr' : void 0,
+      minWidth: isFill ? 0 : void 0,
+      minHeight: isFill ? 0 : void 0,
       height: axis === 'x' ? offAxisSize : void 0,
       width: axis === 'y' ? offAxisSize : void 0,
       x: axis === 'x' ? projection : 0,
@@ -48566,7 +48571,9 @@ function useFocusNavigation(containerRef, axis, focusOffset, offset, setHasFocus
     const applyFocusOffset = () => {
       const nextFocusableElement = focusableElements[focusIndex];
       if (!nextFocusableElement) return;
-      nextFocusableElement.focus();
+      nextFocusableElement.focus({
+        preventScroll: true,
+      },);
       focusOffset.set(-nextFocusableElement[offsetProp],);
       container[scrollProp] = 0;
       frame.render(() => {
@@ -48579,7 +48586,7 @@ function useFocusNavigation(containerRef, axis, focusOffset, offset, setHasFocus
         endFocusTrap();
         const allFocusableElements = Array.from(
           document.querySelectorAll('a, button, input, textarea, select, [tabindex]:not([tabindex="-1"]), [contenteditable="true"]',),
-        ).filter(isHTMLElement,);
+        ).filter(isHTMLElement2,);
         allFocusableElements.sort(compareTabIndexes,);
         const lastFocusableElement = allFocusableElements[event.shiftKey ? 0 : allFocusableElements.length - 1];
         const initialIndex = event.shiftKey ? allFocusableElements.length - 1 : 0;
@@ -48612,7 +48619,7 @@ function useFocusNavigation(containerRef, axis, focusOffset, offset, setHasFocus
         container.querySelectorAll(
           '.ticker-item a, .ticker-item button, .ticker-item input, .ticker-item textarea, .ticker-item select, .ticker-item [tabindex]:not([tabindex="-1"]), .ticker-item [contenteditable="true"]',
         ),
-      ).filter(isHTMLElement,);
+      ).filter(isHTMLElement2,);
       focusIndex = 0;
       if (!focusableElements.length) return;
       setHasFocus(true,);
@@ -48640,7 +48647,7 @@ function useFocusNavigation(containerRef, axis, focusOffset, offset, setHasFocus
       const {
         target,
       } = event;
-      if (!isHTMLElement(target,)) return;
+      if (!isHTMLElement2(target,)) return;
       if (!isFocusTrapped.current) {
         startFocusTrap();
       }
@@ -48659,13 +48666,18 @@ function useFocusNavigation(containerRef, axis, focusOffset, offset, setHasFocus
     };
     const handleAriaHiddenClicks = (event) => {
       const target = event.target;
-      let ariaHiddenAncestor = target.closest('[aria-hidden="true"]',);
+      const ariaHiddenAncestor = target.closest('[aria-hidden="true"]',);
       if (ariaHiddenAncestor) {
         ariaHiddenAncestor.removeAttribute('aria-hidden',);
       }
     };
+    const resetScroll = () => {
+      container.scrollLeft = 0;
+      container.scrollTop = 0;
+    };
     __unframerWindow2.addEventListener('keydown', detectFocusTrapEnable, eventOptions,);
     container.addEventListener('pointerdown', handleAriaHiddenClicks, eventOptions,);
+    container.addEventListener('scroll', resetScroll, eventOptions,);
     return () => {
       abortController.abort();
       endFocusTrap();
@@ -48683,6 +48695,9 @@ function compareTabIndexes(a, b,) {
     return 1;
   }
   return 0;
+}
+function isHTMLElement2(element,) {
+  return element instanceof HTMLElement;
 }
 function calcItemLength(itemPosition,) {
   return itemPosition.end - itemPosition.start;
@@ -48722,6 +48737,8 @@ function TickerComponent({
   snap,
   safeMargin = 0,
   fade = 0,
+  fadeTransition,
+  pageTransition,
   ...props
 }, ref,) {
   const internalContainerRef = useRef(null,);
@@ -48738,6 +48755,9 @@ function TickerComponent({
     maxInset: null,
   },);
   const alignItems = alignAlias[align] || align;
+  const {
+    sign,
+  } = getLayoutStrategy(axis, state.direction,);
   if (isStatic) {
     const renderedOffset2 = useMotionValue(0,);
     return /* @__PURE__ */ jsx(TickerContext.Provider, {
@@ -48745,6 +48765,7 @@ function TickerComponent({
         ...state,
         gap,
         clampOffset: noop,
+        offset: renderedOffset2,
         renderedOffset: renderedOffset2,
       },
       children: /* @__PURE__ */ jsx(ListView, {
@@ -48764,13 +48785,14 @@ function TickerComponent({
         isStatic: true,
         as,
         fade,
+        sign,
       },),
     },);
   }
   const [hasFocus, setHasFocus,] = useState(false,);
   const velocityFactor = useMotionValue(1,);
   const defaultOffset22 = useMotionValue(0,);
-  offset ?? (offset = defaultOffset22);
+  offset ??= defaultOffset22;
   const wrappedOffset = useTransform(() => {
     if (state.direction === 'rtl' && axis === 'x') {
       return wrap(state.totalItemLength + gap + state.inset, state.inset, offset.get(),);
@@ -48848,12 +48870,9 @@ function TickerComponent({
     };
   }, [items, isInView, overflow,],);
   const isMeasured = state.totalItemLength > 0;
-  const {
-    sign,
-  } = getLayoutStrategy(axis, state.direction,);
   useAnimationFrame(
     isMeasured && isInView && offset === defaultOffset22 && !isReducedMotion
-      ? (_, delta,) => {
+      ? (_time, delta,) => {
         const frameOffset = delta / 1e3 * (velocity * sign * velocityFactor.get());
         offset.set(offset.get() - frameOffset,);
       }
@@ -48899,14 +48918,15 @@ function TickerComponent({
     }
   }
   useFocusNavigation(internalContainerRef, axis, focusOffset, offset, setHasFocus,);
-  const clampOffset = useCallback2((newOffset) => state.maxInset !== null ? clamp(-state.maxInset, 0, newOffset,) : newOffset, [
-    state.maxInset,
-  ],);
+  const clampOffset = useCallback2((offset2) => {
+    return state.maxInset !== null ? clamp(-state.maxInset, 0, offset2,) : offset2;
+  }, [state.maxInset,],);
   return /* @__PURE__ */ jsx(TickerContext.Provider, {
     value: {
       ...state,
       gap,
       clampOffset,
+      offset,
       renderedOffset,
     },
     children: /* @__PURE__ */ jsx(ListView, {
@@ -48939,6 +48959,9 @@ function TickerComponent({
       loop,
       as,
       fade,
+      sign,
+      fadeTransition,
+      pageTransition,
     },),
   },);
 }
@@ -48970,6 +48993,9 @@ function ListView({
   loop,
   as,
   fade,
+  sign,
+  fadeTransition = defaultFadeTransition,
+  pageTransition,
 },) {
   const MotionComponent = useMemo(() => motion.create(as,), [as,],);
   let dragConstraints = {};
@@ -48978,10 +49004,15 @@ function ListView({
   } = state;
   if (maxInset !== null) {
     if (axis === 'x') {
-      dragConstraints = {
-        left: maxInset * -1,
-        right: 0,
-      };
+      dragConstraints = sign > 0
+        ? {
+          left: maxInset * -1,
+          right: 0,
+        }
+        : {
+          right: maxInset,
+          left: 0,
+        };
     } else {
       dragConstraints = {
         top: maxInset * -1,
@@ -48994,7 +49025,6 @@ function ListView({
     _dragX,
     _dragY,
     dragMomentum = false,
-    onDragStart,
     onDragEnd,
     onPointerDown,
     ...remainingProps
@@ -49029,13 +49059,18 @@ function ListView({
             target = Math.abs(current2 - closestNext,) < Math.abs(current2 - closestPrev,) ? closestNext : closestPrev;
           }
         }
-        const constraints = loop ? {} : {
-          max: 0,
-          min: dragConstraints[axis === 'x' ? 'left' : 'top'],
-        };
+        const constraints = loop ? {} : sign > 0
+          ? {
+            max: 0,
+            min: dragConstraints[axis === 'x' ? 'left' : 'top'],
+          }
+          : {
+            min: 0,
+            max: dragConstraints.right,
+          };
         dragMomentumAnimation.current = animate(
           dragMotionValue,
-          clampOffset?.(target,),
+          clampOffset(target * sign,) * sign,
           snap ? pageTransition : {
             type: 'inertia',
             velocity: velocity[axis],
@@ -49067,26 +49102,28 @@ function ListView({
   },);
   useMotionValueEvent(renderedOffset, 'change', (value) => {
     if (maxInset === null) return;
-    if (value <= maxInset) {
-      if (!isAtLimits.current.start) {
-        animate(fadeStartOpacity, 1, fadeTransition,);
-        isAtLimits.current.start = true;
-      }
-    } else {
+    const maxOffset = maxInset * -1;
+    value *= sign;
+    if (value < 0) {
       if (isAtLimits.current.start) {
         animate(fadeStartOpacity, 0, fadeTransition,);
         isAtLimits.current.start = false;
       }
-    }
-    if (value >= 0) {
-      if (!isAtLimits.current.end) {
-        animate(fadeEndOpacity, 1, fadeTransition,);
-        isAtLimits.current.end = true;
-      }
     } else {
+      if (!isAtLimits.current.start) {
+        animate(fadeStartOpacity, 1, fadeTransition,);
+        isAtLimits.current.start = true;
+      }
+    }
+    if (value > maxOffset) {
       if (isAtLimits.current.end) {
         animate(fadeEndOpacity, 0, fadeTransition,);
         isAtLimits.current.end = false;
+      }
+    } else {
+      if (!isAtLimits.current.end) {
+        animate(fadeEndOpacity, 1, fadeTransition,);
+        isAtLimits.current.end = true;
       }
     }
   },);
@@ -49104,9 +49141,15 @@ function ListView({
         },
         onPointerEnter,
         onPointerLeave,
+        drag: drag2,
+        _dragX,
+        _dragY,
+        dragConstraints,
+        dragMomentum,
+        onPointerDown,
+        onDragEnd,
         children: /* @__PURE__ */ jsxs(motion.ul, {
           ref: listRef,
-          role: 'group',
           style: {
             ...listStyle,
             flexDirection: axis === 'x' ? 'row' : 'column',
@@ -49121,14 +49164,6 @@ function ListView({
             maxHeight: '100%',
             maxWidth: '100%',
           },
-          drag: drag2,
-          _dragX,
-          _dragY,
-          dragConstraints,
-          dragMomentum,
-          onPointerDown,
-          onDragStart,
-          onDragEnd,
           children: [
             items.map((item, index,) =>
               /* @__PURE__ */ jsx(TickerItemWrapper, {
@@ -49154,6 +49189,11 @@ function ListView({
     ],
   },);
 }
+function invariant2(condition, message,) {
+  if (!condition) {
+    throw new Error(message,);
+  }
+}
 var defaultBounds = {
   start: 0,
   end: 0,
@@ -49171,12 +49211,7 @@ var listStyle = {
   margin: 0,
   justifyContent: 'flex-start',
 };
-var pageTransition = {
-  type: 'spring',
-  stiffness: 400,
-  damping: 40,
-};
-var fadeTransition = {
+var defaultFadeTransition = {
   duration: 0.2,
   ease: 'linear',
 };
