@@ -986,6 +986,21 @@ export function getDarkModeSelector(opts: {
     return '.dark {\n' + content + '\n' + '}'
 }
 
+// A CSS custom property value must not contain structural characters that would
+// terminate the declaration or the surrounding `:root {}` block. Framer color
+// styles can in rare cases carry malformed color strings (e.g. text scraped from
+// a code-highlighting component), and an unescaped `}` closes the block early.
+// The leaked text then becomes a top-level class rule like `.[-:=] { -: =; }`,
+// which browsers tolerate but lightningcss (Vite's css minifier) rejects with
+// "Expected identifier in class selector". Skip such tokens to keep styles.css
+// always minifiable. See the getStyleTokensCss regression test.
+function isSafeCssColorValue(value: string | null | undefined): value is string {
+    if (typeof value !== 'string' || value === '') {
+        return false
+    }
+    return !/[;{}\n\r]/.test(value)
+}
+
 export function getStyleTokensCss(
     tokens: StyleToken[],
     darkModeType: 'class' | 'media' = 'class',
@@ -994,12 +1009,34 @@ export function getStyleTokensCss(
         return ''
     }
 
+    // Drop tokens whose color values would produce invalid CSS. Both light and
+    // dark colors must be safe, otherwise the token is skipped entirely so the
+    // --unframer-* and --token-* variables never desync.
+    const validTokens = tokens.filter((token) => {
+        if (
+            !isSafeCssColorValue(token.lightColor) ||
+            !isSafeCssColorValue(token.darkColor)
+        ) {
+            logger.log(
+                `Skipping style token ${JSON.stringify(
+                    token.name || token.id,
+                )}: unsafe color value`,
+            )
+            return false
+        }
+        return true
+    })
+
+    if (!validTokens.length) {
+        return ''
+    }
+
     // Deduplicate --unframer-* names: multiple Framer tokens can share the same
     // user-facing name (e.g. two tokens both called "black" with different UUIDs).
     // Keep only the first occurrence of each kebab-cased name to avoid silent
     // CSS overwrites. The --token-{uuid} variables are always unique and unaffected.
     const seenNames = new Set<string>()
-    const deduplicatedTokens = tokens.filter((token) => {
+    const deduplicatedTokens = validTokens.filter((token) => {
         const name = kebabCase(token.name || token.id)
         if (seenNames.has(name)) {
             return false
@@ -1019,7 +1056,7 @@ export function getStyleTokensCss(
         )
         .join('\n')
 
-    const lightTokens = tokens
+    const lightTokens = validTokens
         .map(
             (token) =>
                 '    --token-' + token.id + ': ' + token.lightColor + ';',
@@ -1037,7 +1074,7 @@ export function getStyleTokensCss(
         )
         .join('\n')
 
-    const darkTokens = tokens
+    const darkTokens = validTokens
         .map(
             (token) => '    --token-' + token.id + ': ' + token.darkColor + ';',
         )

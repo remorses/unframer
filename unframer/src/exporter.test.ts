@@ -1,6 +1,88 @@
 import { describe, test, expect } from 'vitest'
 import { replaceWebPageIds } from './esbuild.js'
+import { getStyleTokensCss } from './exporter.js'
+import { transform } from 'lightningcss'
 import path from 'path'
+
+// Regression for https://github.com/unframer/website-c50b9 CI failure:
+// a Framer color style whose color value contained CSS-structural chars (a `}`
+// followed by grammar-like text from a code-highlighting component) closed the
+// `:root {}` block early. The leaked text became a top-level class rule like
+// `.[-:=] { -: =; }`. Browsers tolerate this but lightningcss (used by Vite's
+// css minifier) rejects it with "Expected identifier in class selector".
+// getStyleTokensCss must always emit CSS that lightningcss can minify.
+describe('getStyleTokensCss', () => {
+    function assertMinifiable(css: string) {
+        // throws if lightningcss cannot parse/minify the css
+        transform({ filename: 'styles.css', code: Buffer.from(css), minify: true })
+    }
+
+    test('emits valid CSS for normal tokens', () => {
+        const css = getStyleTokensCss([
+            { id: 'abc', name: 'Primary', lightColor: '#fff', darkColor: '#000' },
+        ])
+        assertMinifiable(css)
+        expect(css).toMatchInlineSnapshot(`
+          ":root {
+              --unframer-primary: #fff;
+
+              --token-abc: #fff;
+          }
+
+          .dark {
+              --unframer-primary: #000;
+
+              --token-abc: #000;
+          }"
+        `)
+    })
+
+    test('skips tokens whose color value breaks out of the block', () => {
+        const css = getStyleTokensCss([
+            {
+                id: 'a',
+                name: 'Evil',
+                lightColor: 'red } .[-:=] { -: =',
+                darkColor: 'blue',
+            },
+            { id: 'b', name: 'Good', lightColor: '#fff', darkColor: '#000' },
+        ])
+        assertMinifiable(css)
+        expect(css).toMatchInlineSnapshot(`
+          ":root {
+              --unframer-good: #fff;
+
+              --token-b: #fff;
+          }
+
+          .dark {
+              --unframer-good: #000;
+
+              --token-b: #000;
+          }"
+        `)
+    })
+
+    test('skips tokens whose name produces an empty css variable', () => {
+        const css = getStyleTokensCss([
+            { id: 'a', name: '![a-zA-Z:_]', lightColor: '#111', darkColor: '#222' },
+        ])
+        assertMinifiable(css)
+        expect(css).toMatchInlineSnapshot(`
+          ":root {
+              --unframer-a-z-a-z: #111;
+
+              --token-a: #111;
+          }
+
+          .dark {
+              --unframer-a-z-a-z: #222;
+
+              --token-a: #222;
+          }"
+        `)
+    })
+})
 
 describe('replaceWebPageIds', () => {
     test('replaces webPageIds with paths', () => {
