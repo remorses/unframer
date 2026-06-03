@@ -737,8 +737,17 @@ export async function bundle({
                         formatted = result.content
                     }
                 } catch (e) {
+                    spinner.warn(
+                        `Babel/Biome formatting failed for ${componentName}: ${e instanceof Error ? e.message : e}`,
+                    )
+                    logger.log(e instanceof Error ? e.stack : e)
                     notifyError(e, 'babel transform and format')
                 }
+            } else if (tooBig) {
+                const sizeMB = (file.text.length / (1024 * 1024)).toFixed(2)
+                spinner.warn(
+                    `Skipping JSX formatting for ${componentName} (${sizeMB} MB exceeds ${(tooBigSize / (1024 * 1024)).toFixed(2)} MB limit)`,
+                )
             }
 
             const prefix =
@@ -752,12 +761,24 @@ export async function bundle({
             // Always write the temp .js file for type extraction
             await fs.promises.writeFile(paths.tempJsPath, codeJs, 'utf-8')
 
-            // Only write .jsx file if it's different from existing or if formatting was done
+            // Write .jsx file if formatting succeeded, or fall back to writing
+            // unformatted .js content into the .jsx path when formatting fails
+            // (babel error, component too big, etc.) but a stale .jsx already
+            // exists on disk. Without this fallback the stale .jsx keeps old
+            // chunk imports while the old chunks are deleted, breaking the build.
             if (didFormat && codeJsx !== existing) {
                 await fs.promises.writeFile(paths.jsxPath, codeJsx, 'utf-8')
                 logger.log(`Updated JSX file for ${componentName}`)
             } else if (didFormat) {
                 logger.log(`JSX file unchanged for ${componentName}`)
+            } else if (existing && codeJs !== existing) {
+                // Formatting failed but .jsx exists with stale content (e.g.
+                // old chunk hashes). Overwrite with unformatted JS so imports
+                // stay in sync with the current build's chunks.
+                await fs.promises.writeFile(paths.jsxPath, codeJs, 'utf-8')
+                logger.log(
+                    `Updated JSX file (unformatted) for ${componentName}`,
+                )
             }
         }
         spinner.stop()
