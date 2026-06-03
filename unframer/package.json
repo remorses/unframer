@@ -14,7 +14,6 @@
     "scripts": {
         "build": "pnpm tsgo && cp ../README.md ./README.md && cp ./src/framer.d.ts ./dist/framer.d.ts && cp ./src/framer.js ./dist/framer.js && rm -rf ./dist/framer-chunks && cp -r ./src/framer-chunks ./dist/framer-chunks",
         "test": "vitest",
-        "gen-client": "export DIR=./src/generated/ && cd ../../website && pnpm tsc; rm -rf $DIR && mkdir -p $DIR && cp ./dist/src/lib/api-client.* $DIR",
         "prepublishOnly": "rm -rf dist && pnpm tsx scripts/version-replace.ts && pnpm build",
         "download-framer": "tsx scripts/download.ts",
         "watch": "pnpm tsc -w"
@@ -106,8 +105,8 @@
         "lightningcss": "^1.32.0",
         "openai": "^4.80.1",
         "posthtml": "^0.16.6",
-        "react": "19.2.6",
-        "react-dom": "19.2.6",
+        "react": "19.2.7",
+        "react-dom": "19.2.7",
         "tiktoken": "^1.0.18",
         "typescript": "^5.9.3"
     }
