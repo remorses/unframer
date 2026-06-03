@@ -256,7 +256,7 @@ export async function fixFramerCode({ resultFile }) {
     codeAfter += '\n\n'
     codeAfter += dedent`
     export { Link as FramerLink  }
-    export { Router, FetchClientProvider, FormContext, LocaleInfoContext, injectCSSRule, componentsWithServerRenderedStyles, IsInitialNavigationContext }
+    export { Router, FetchClientProvider, FormContext, LocaleInfoContext, injectCSSRule, componentsWithServerRenderedStyles }
     `
     codeAfter = codeAfter.replace(toRemove, '')
 

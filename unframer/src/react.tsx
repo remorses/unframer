@@ -125,10 +125,7 @@ function removeInactiveUnframerHiddenElements() {
     const activeBreakpoint = getBreakpointNameFromWindowWidth(windowWidth)
     const activeClass = activeBreakpoint ? `unframer-${activeBreakpoint}` : null
 
-    console.log('Active unframer breakpoint class:', activeClass)
-
     document.querySelectorAll('.unframer-hidden').forEach((el) => {
-        // Merge: Only remove the element itself if it has 'unframer-hidden' and does not match the current breakpoint's class.
         if (
             el.classList.contains('unframer-hidden') &&
             activeClass &&
@@ -260,8 +257,6 @@ import {
     FramerLink as Link,
     // @ts-ignore
     LocaleInfoContext,
-    // @ts-ignore
-    IsInitialNavigationContext,
 } from './framer.js'
 
 type Routes = Record<string, { path: string }>
@@ -422,13 +417,11 @@ export function ContextProviders({
             <Hints />
             <CustomCursorHost>
                 <FormContext.Provider value={framerSiteId}>
-                    <IsInitialNavigationContext.Provider value={true}>
-                        <LocaleInfoContext value={localeInfo}>
-                            <routesContext.Provider value={routes}>
-                                {children}
-                            </routesContext.Provider>
-                        </LocaleInfoContext>
-                    </IsInitialNavigationContext.Provider>
+                    <LocaleInfoContext value={localeInfo}>
+                        <routesContext.Provider value={routes}>
+                            {children}
+                        </routesContext.Provider>
+                    </LocaleInfoContext>
                 </FormContext.Provider>
             </CustomCursorHost>
         </FetchClientProvider>
