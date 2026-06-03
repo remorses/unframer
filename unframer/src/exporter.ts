@@ -577,17 +577,28 @@ export async function bundle({
             ?.split('\n')
             .forEach((x) => logger.log(x))
 
+        function isChunkPath(filePath: string) {
+            return (
+                filePath.includes('/chunks/') ||
+                filePath.includes('\\chunks\\')
+            )
+        }
         const jsxFiles = buildResult.outputFiles
             .filter(
                 (x) =>
                     x.path.endsWith('.js') &&
+                    !isChunkPath(x.path) &&
                     fs.existsSync(getFilePaths(x.path, out).jsxPath),
             )
             .map((x) => getFilePaths(x.path, out).jsxPath)
         const outFiles = buildResult.outputFiles
             .map((x) => {
                 const paths = getFilePaths(x.path, out)
-                if (x.path.endsWith('.js') && fs.existsSync(paths.jsxPath)) {
+                if (
+                    x.path.endsWith('.js') &&
+                    !isChunkPath(x.path) &&
+                    fs.existsSync(paths.jsxPath)
+                ) {
                     return null // Will be handled by jsx files
                 }
                 return paths.finalJsPath
@@ -793,8 +804,12 @@ export async function bundle({
             if (file.path.endsWith('.js')) {
                 const paths = getFilePaths(file.path, out)
 
-                if (fs.existsSync(paths.jsxPath)) {
+                if (
+                    !isChunkPath(paths.tempJsPath) &&
+                    fs.existsSync(paths.jsxPath)
+                ) {
                     // Remove temp .js file if .jsx equivalent exists
+                    // (never applies to chunks which stay as .js)
                     logger.log(
                         'removing temp JS file with JSX equivalent:',
                         path.relative(out, paths.tempJsPath),
