@@ -260,6 +260,8 @@ import {
     FramerLink as Link,
     // @ts-ignore
     LocaleInfoContext,
+    // @ts-ignore
+    IsInitialNavigationContext,
 } from './framer.js'
 
 type Routes = Record<string, { path: string }>
@@ -420,11 +422,13 @@ export function ContextProviders({
             <Hints />
             <CustomCursorHost>
                 <FormContext.Provider value={framerSiteId}>
-                    <LocaleInfoContext value={localeInfo}>
-                        <routesContext.Provider value={routes}>
-                            {children}
-                        </routesContext.Provider>
-                    </LocaleInfoContext>
+                    <IsInitialNavigationContext.Provider value={true}>
+                        <LocaleInfoContext value={localeInfo}>
+                            <routesContext.Provider value={routes}>
+                                {children}
+                            </routesContext.Provider>
+                        </LocaleInfoContext>
+                    </IsInitialNavigationContext.Provider>
                 </FormContext.Provider>
             </CustomCursorHost>
         </FetchClientProvider>
