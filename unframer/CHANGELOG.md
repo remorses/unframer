@@ -1,5 +1,15 @@
 # unframer
 
+## 4.1.9
+
+1. **Fixed React hydration errors in exported components** — added `suppressHydrationWarning` to all generated JSX elements so server-rendered Framer components no longer produce hydration mismatch warnings. The babel plugin correctly skips `React.Fragment` (which only accepts `key` and `children`)
+2. **Fixed hydration tree structure mismatch with `withCSS`** — the server rendered `Fragment > [style, Component]` but the client rendered just `Component`, shifting every child position and breaking React Aria ID generation (e.g. HeroUI Tabs). Server and client now render the same tree shape
+3. **Fixed breakpoint hydration mismatch** — `WithFramerBreakpoints` was reading `window.innerWidth` during hydration, causing the client to render fewer variants than the server. Now returns empty string consistently during hydration
+4. **Fixed production builds crashing on unsafe Framer color tokens** — color style values containing CSS-structural characters (`;`, `{`, `}`) broke the generated `styles.css` by closing the `:root {}` block early. Vite's lightningcss minifier rejected the invalid CSS with "Expected identifier in class selector". Unsafe tokens are now filtered out with a warning
+5. **Fixed missing `styles.css` when a single component type extraction fails** — `safeJsonParse` returned `null` on malformed JSON, and the caller destructured it (`const { propertyControls } = null`), crashing the entire `Promise.all` and preventing `styles.css` from being written. A single component failure now logs and continues instead of aborting the build
+6. **Removed `spiceflow` dependency** — replaced the generated API client with a single inline `fetch()` call, removing ~1200 lines of generated code and the spiceflow runtime dependency
+7. **Updated bundled Framer runtime** — refreshed to latest `framer@2.4.1` with `suppressHydrationWarning` applied to all JSX elements in the runtime
+
 ## 4.1.8
 
 1. **Updated bundled Framer runtime** — refreshed the packaged Framer internals to `framer@2.4.1` with the latest runtime code and framer-motion assets
