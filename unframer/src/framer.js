@@ -8115,7 +8115,6 @@ function PopChild({
     };
   }, [isPresent2,],);
   return jsx(PopChildMeasure, {
-    suppressHydrationWarning: true,
     isPresent: isPresent2,
     childRef: ref,
     sizeRef: size,
@@ -8179,7 +8178,6 @@ var PresenceChild = ({
     !isPresent2 && !presenceChildren.size && onExitComplete && onExitComplete();
   }, [isPresent2,],);
   children = jsx(PopChild, {
-    suppressHydrationWarning: true,
     pop: mode === 'popLayout',
     isPresent: isPresent2,
     anchorX,
@@ -8188,7 +8186,6 @@ var PresenceChild = ({
     children,
   },);
   return jsx(PresenceContext.Provider, {
-    suppressHydrationWarning: true,
     value: context,
     children,
   },);
@@ -8315,7 +8312,6 @@ var AnimatePresence = ({
         }
       };
       return jsx(PresenceChild, {
-        suppressHydrationWarning: true,
         isPresent: isPresent2,
         initial: !isInitialRender.current || initial ? void 0 : false,
         custom,
@@ -8376,7 +8372,6 @@ var LayoutGroup = ({
     forceRender,
   }), [key7,],);
   return jsx(LayoutGroupContext.Provider, {
-    suppressHydrationWarning: true,
     value: memoizedContext,
     children,
   },);
@@ -8449,7 +8444,6 @@ function LazyMotion({
     }
   }, [],);
   return jsx(LazyContext.Provider, {
-    suppressHydrationWarning: true,
     value: {
       renderer: loadedRenderer.current,
       strict,
@@ -8541,7 +8535,6 @@ function MotionConfig({
     config.skipAnimations,
   ],);
   return jsx(MotionConfigContext.Provider, {
-    suppressHydrationWarning: true,
     value: context,
     children,
   },);
@@ -8985,12 +8978,10 @@ function createMotionComponent(
       );
     }
     return jsxs(MotionContext.Provider, {
-      suppressHydrationWarning: true,
       value: context,
       children: [
         MeasureLayout2 && context.visualElement
           ? jsx(MeasureLayout2, {
-            suppressHydrationWarning: true,
             visualElement: context.visualElement,
             ...configAndProps,
           },)
@@ -10280,7 +10271,6 @@ function MeasureLayout(props,) {
   const [isPresent2, safeToRemove,] = usePresence();
   const layoutGroup = useContext(LayoutGroupContext,);
   return jsx(MeasureLayoutWithContext, {
-    suppressHydrationWarning: true,
     ...props,
     layoutGroup,
     switchLayoutGroup: useContext(SwitchLayoutGroupContext,),
@@ -12559,13 +12549,11 @@ function ReorderGroupComponent({
     ...props.style,
   };
   return jsx(Component33, {
-    suppressHydrationWarning: true,
     ...props,
     style: groupStyle,
     ref: setRef22,
     ignoreStrict: true,
     children: jsx(ReorderContext.Provider, {
-      suppressHydrationWarning: true,
       value: context,
       children,
     },),
@@ -12717,7 +12705,6 @@ function ReorderItemComponent({
     groupRef,
   } = context;
   return jsx(Component33, {
-    suppressHydrationWarning: true,
     drag: axis,
     ...props,
     dragSnapToOrigin: true,
@@ -12752,7 +12739,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.7GWEWZBL.mjs
+// /:https://app.framerstatic.com/framer.6B2WGZJM.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -13835,7 +13822,6 @@ function lazy(factory, moduleName = 'default', cacheHash,) {
       throw load(factory,);
     }
     return /* @__PURE__ */ jsx(LoadedComponent, {
-      suppressHydrationWarning: true,
       ref,
       ...props,
     },);
@@ -14006,7 +13992,6 @@ function RouterAPIProvider({
   children,
 },) {
   return /* @__PURE__ */ jsx(RouterContext.Provider, {
-    suppressHydrationWarning: true,
     value: api,
     children,
   },);
@@ -14023,7 +14008,6 @@ function RoutesProvider({
     getRoute,
   }), [getRoute,],);
   return /* @__PURE__ */ jsx(RouterContext.Provider, {
-    suppressHydrationWarning: true,
     value: api,
     children,
   },);
@@ -15070,7 +15054,6 @@ function CollectionUtilsCacheProvider({
     };
   }, [collectionUtils,],);
   return /* @__PURE__ */ jsx(CollectionUtilsCacheContext.Provider, {
-    suppressHydrationWarning: true,
     value: getCollectionUtilsCacheMemoized,
     children,
   },);
@@ -15602,7 +15585,6 @@ function PageEffectsProvider({
   value,
 },) {
   return /* @__PURE__ */ jsx(PageEffectsContext.Provider, {
-    suppressHydrationWarning: true,
     value,
     children,
   },);
@@ -16478,7 +16460,6 @@ function RenderTargetEnvironmentProvider({
   value,
 },) {
   return /* @__PURE__ */ jsx(RenderTargetEnvironmentContext.Provider, {
-    suppressHydrationWarning: true,
     value,
     children,
   },);
@@ -16716,7 +16697,6 @@ function URLSearchParamsProvider({
     replaceSearchParams,
   }), [urlSearchString, replaceSearchParams,],);
   return /* @__PURE__ */ jsx(URLSearchParamsContext.Provider, {
-    suppressHydrationWarning: true,
     value,
     children,
   },);
@@ -17520,7 +17500,6 @@ function renderPage(Page4, defaultPageStyle,) {
     'data-framer-root': '',
   };
   return React42.isValidElement(Page4,) ? React42.cloneElement(Page4, props,) : /* @__PURE__ */ jsx(Page4, {
-    suppressHydrationWarning: true,
     ...props,
   },);
 }
@@ -21222,7 +21201,6 @@ function LayoutIdProvider({
     enabled: true,
   },).current;
   return /* @__PURE__ */ jsx(LayoutIdContext.Provider, {
-    suppressHydrationWarning: true,
     value: contextValue,
     children,
   },);
@@ -21251,7 +21229,6 @@ function AutomaticLayoutIds({
     };
   }, [enabled,],);
   return /* @__PURE__ */ jsx(LayoutIdContext.Provider, {
-    suppressHydrationWarning: true,
     ...props,
     value: contextValue,
   },);
@@ -21311,17 +21288,14 @@ function ErrorPlaceholder(props,) {
   const title = file ? `Error in ${stripSlash(file,)}` : 'Error';
   const message = error instanceof Error ? error.message : '' + error;
   return /* @__PURE__ */ jsxs('div', {
-    suppressHydrationWarning: true,
     style: errorStyle,
     children: [
       /* @__PURE__ */ jsx('div', {
-        suppressHydrationWarning: true,
         className: 'text',
         style: titleStyle,
         children: title,
       },),
       message && /* @__PURE__ */ jsx('div', {
-        suppressHydrationWarning: true,
         className: 'text',
         style: messageStyle,
         children: message,
@@ -21409,7 +21383,6 @@ var ErrorBoundary = class extends Component2 {
   render() {
     if (this.state.lastError) {
       return /* @__PURE__ */ jsx(ErrorPlaceholder, {
-        suppressHydrationWarning: true,
         error: this.state.lastError.error.message,
         file: 'Prototype',
       },);
@@ -21503,29 +21476,24 @@ function Device({
     : {};
   const screenBackground = options.deviceOptions?.transparentBackground ? 'transparent' : 'white';
   return /* @__PURE__ */ jsx('div', {
-    suppressHydrationWarning: true,
     style: {
       ...containerStyle2,
       ...resizeStyles,
     },
     ref: containerRef,
     children: /* @__PURE__ */ jsxs('div', {
-      suppressHydrationWarning: true,
       style: {
         ...deviceStyle,
       },
       ref: deviceRef,
       children: [
         handStyle && /* @__PURE__ */ jsx('div', {
-          suppressHydrationWarning: true,
           style: handStyle,
         },),
         deviceAppearance === 'external-clay' && deviceImageStyle && /* @__PURE__ */ jsx('div', {
-          suppressHydrationWarning: true,
           style: deviceImageStyle,
         },),
         /* @__PURE__ */ jsx('div', {
-          suppressHydrationWarning: true,
           style: {
             ...screenStyle,
             pointerEvents: void 0,
@@ -21533,16 +21501,13 @@ function Device({
           },
           ref: screenRef,
           children: /* @__PURE__ */ jsx(MotionConfig, {
-            suppressHydrationWarning: true,
             transformPagePoint: invertScale2,
             children: /* @__PURE__ */ jsx(ErrorBoundary, {
-              suppressHydrationWarning: true,
               children,
             },),
           },),
         },),
         deviceAppearance === 'realistic' && deviceImageStyle && /* @__PURE__ */ jsx('div', {
-          suppressHydrationWarning: true,
           style: deviceImageStyle,
         },),
       ],
@@ -23038,7 +23003,6 @@ var ProvideParentSize = (props) => {
       : null;
   }
   return /* @__PURE__ */ jsx(ConstraintsContext.Provider, {
-    suppressHydrationWarning: true,
     value,
     children,
   },);
@@ -23051,7 +23015,6 @@ function getParentHeight(parentSize,) {
 }
 function useProvideParentSize(node, parentSize,) {
   return /* @__PURE__ */ jsx(ProvideParentSize, {
-    suppressHydrationWarning: true,
     parentSize,
     children: node,
   },);
@@ -23308,7 +23271,6 @@ var withCSS = (Component18, escapedCSS, componentSerializationId,) =>
       css22.forEach((rule) => rule && injectCSSRule(rule, sheet, cache2,));
     }, [],);
     return /* @__PURE__ */ jsx(Component18, {
-      suppressHydrationWarning: true,
       ...props,
       ref,
     },);
@@ -26419,7 +26381,6 @@ var DeviceCodeComponentInner = /* @__PURE__ */ withLibraryCSS(({
   },);
   if (!deviceOptions) {
     return /* @__PURE__ */ jsx('div', {
-      suppressHydrationWarning: true,
       'data-framer-component-type': 'DeviceComponent',
       className: 'no-device',
       style: {
@@ -26427,7 +26388,6 @@ var DeviceCodeComponentInner = /* @__PURE__ */ withLibraryCSS(({
         height: '100%',
       },
       children: /* @__PURE__ */ jsx(ProvideParentSize, {
-        suppressHydrationWarning: true,
         parentSize: 1,
         children,
       },),
@@ -26441,7 +26401,6 @@ var DeviceCodeComponentInner = /* @__PURE__ */ withLibraryCSS(({
     },)
     : null;
   return /* @__PURE__ */ jsx(Device, {
-    suppressHydrationWarning: true,
     scaleTo: 'dynamic',
     deviceOptions,
     children: resizedChild,
@@ -26876,7 +26835,6 @@ function CanvasImage({
   }, [imageElement,],);
   Object.assign(imageElement.style, imageStyle,);
   return /* @__PURE__ */ jsx('div', {
-    suppressHydrationWarning: true,
     ref: wrapperRef,
     style: {
       display: 'contents',
@@ -26898,7 +26856,6 @@ function OptimizedCanvasImage({
     runtime.renderOptimizedCanvasImage(wrapper, source, imageStyle, nodeId,);
   }, [nodeId, image, source,],);
   return /* @__PURE__ */ jsx('div', {
-    suppressHydrationWarning: true,
     ref: wrapperRef,
     style: {
       display: 'contents',
@@ -26939,7 +26896,6 @@ function BackgroundImageComponent({
       needsMotion = true;
     } else if (RenderTarget.current() !== RenderTarget.canvas) {
       imageNode = /* @__PURE__ */ jsx(StaticImage, {
-        suppressHydrationWarning: true,
         image,
         avoidAsyncDecoding: RenderTarget.current() === RenderTarget.export,
         ...props,
@@ -26949,13 +26905,11 @@ function BackgroundImageComponent({
       runtime.canRenderOptimizedCanvasImage(runtime.useImageSource(image,),)
     ) {
       imageNode = /* @__PURE__ */ jsx(OptimizedCanvasImage, {
-        suppressHydrationWarning: true,
         image,
         ...props,
       },);
     } else {
       imageNode = /* @__PURE__ */ jsx(CanvasImage, {
-        suppressHydrationWarning: true,
         image,
         ...props,
       },);
@@ -26967,14 +26921,12 @@ function BackgroundImageComponent({
   };
   return needsMotion
     ? /* @__PURE__ */ jsx(motion.div, {
-      suppressHydrationWarning: true,
       layoutId,
       style: style2,
       'data-framer-background-image-wrapper': true,
       children: imageNode,
     },)
     : /* @__PURE__ */ jsx('div', {
-      suppressHydrationWarning: true,
       style: style2,
       'data-framer-background-image-wrapper': true,
       children: imageNode,
@@ -27036,13 +26988,11 @@ function Border(props,) {
   if (props.border) {
     style2.border = props.border;
     return /* @__PURE__ */ jsx(motion.div, {
-      suppressHydrationWarning: true,
       style: style2,
     },);
   }
   collectBorderStyleForProps(props, style2, false,);
   return /* @__PURE__ */ jsx(motion.div, {
-    suppressHydrationWarning: true,
     'data-frame-border': true,
     style: style2,
     layoutId,
@@ -27288,7 +27238,6 @@ var withMeasuredSize = (Component18) => (props) => {
   const fallbackWidth = props.width ?? DEFAULT_SIZE;
   const fallbackHeight = props.height ?? DEFAULT_SIZE;
   return /* @__PURE__ */ jsx('div', {
-    suppressHydrationWarning: true,
     style: {
       width: '100%',
       height: '100%',
@@ -27297,7 +27246,6 @@ var withMeasuredSize = (Component18) => (props) => {
     ref,
     ...dataProps,
     children: shouldRender && /* @__PURE__ */ jsx(Component18, {
-      suppressHydrationWarning: true,
       ...props,
       width: size?.width ?? fallbackWidth,
       height: size?.height ?? fallbackHeight,
@@ -28080,7 +28028,6 @@ var VisibleFrame = /* @__PURE__ */ forwardRef(function VisibleFrame2(props, forw
       children: [
         backgroundImage
           ? /* @__PURE__ */ jsx(BackgroundImageComponent, {
-            suppressHydrationWarning: true,
             alt: props.alt ?? '',
             image: backgroundImage,
             containerSize: rect ?? void 0,
@@ -28090,7 +28037,6 @@ var VisibleFrame = /* @__PURE__ */ forwardRef(function VisibleFrame2(props, forw
           : null,
         children,
         /* @__PURE__ */ jsx(Border, {
-          suppressHydrationWarning: true,
           ..._border,
           border,
           layoutId,
@@ -28106,7 +28052,6 @@ var VisibleFrame = /* @__PURE__ */ forwardRef(function VisibleFrame2(props, forw
     currentStyle.aspectRatio = intrinsicSize.width / intrinsicSize.height;
   }
   return /* @__PURE__ */ jsxs(MotionComponent, {
-    suppressHydrationWarning: true,
     ...dataProps,
     ...motionProps,
     layoutId,
@@ -28122,7 +28067,6 @@ var FrameWithMotionInner = /* @__PURE__ */ forwardRef(function FrameWithMotion(p
   } = props;
   if (!visible) return null;
   return /* @__PURE__ */ jsx(VisibleFrame, {
-    suppressHydrationWarning: true,
     ...props,
     ref,
   },);
@@ -28176,7 +28120,6 @@ function EmptyState({
   const childCount = React42.Children.count(children,);
   if (insideUserCodeComponent && childCount === 0) {
     return /* @__PURE__ */ jsx(FrameWithMotion2, {
-      suppressHydrationWarning: true,
       ...size,
       'data-name': 'placeholder',
     },);
@@ -28185,7 +28128,6 @@ function EmptyState({
   if (hide) return null;
   if (childCount !== 0) return null;
   return /* @__PURE__ */ jsx(FrameWithMotion2, {
-    suppressHydrationWarning: true,
     className: 'framerInternalUI-canvasPlaceholder',
     top: 0,
     left: 0,
@@ -28196,7 +28138,6 @@ function EmptyState({
       ...size,
     },
     children: /* @__PURE__ */ jsx('div', {
-      suppressHydrationWarning: true,
       style: {
         display: 'flex',
         alignItems: 'center',
@@ -28205,7 +28146,6 @@ function EmptyState({
         width: '100%',
       },
       children: /* @__PURE__ */ jsxs('div', {
-        suppressHydrationWarning: true,
         style: {
           display: 'flex',
           alignItems: 'center',
@@ -28217,11 +28157,9 @@ function EmptyState({
         },
         children: [
           /* @__PURE__ */ jsx(Title, {
-            suppressHydrationWarning: true,
             children: title,
           },),
           /* @__PURE__ */ jsx(Description, {
-            suppressHydrationWarning: true,
             children: description,
           },),
         ],
@@ -28234,7 +28172,6 @@ function Title({
   children,
 },) {
   return /* @__PURE__ */ jsx('span', {
-    suppressHydrationWarning: true,
     style: {
       display: 'flex',
       flexDirection: 'column',
@@ -28251,7 +28188,6 @@ function Description({
   children,
 },) {
   return /* @__PURE__ */ jsx('span', {
-    suppressHydrationWarning: true,
     style: {
       display: 'flex',
       flexDirection: 'column',
@@ -28333,7 +28269,6 @@ var SharedLayoutRoot = class extends Component2 {
   }
   render() {
     return /* @__PURE__ */ jsx(SharedLayoutContext.Provider, {
-      suppressHydrationWarning: true,
       value: this.sharedLayoutContext,
       children: this.props.children,
     },);
@@ -28346,7 +28281,6 @@ var rootStyles = {
 };
 function MagicMotionCrossfadeRoot(props,) {
   return /* @__PURE__ */ jsx(motion.div, {
-    suppressHydrationWarning: true,
     layoutId: TREE_ROOT_ID,
     style: rootStyles,
     children: props.children,
@@ -28631,7 +28565,6 @@ var LayoutTree = class extends Component2 {
   }
   render() {
     return /* @__PURE__ */ jsx(SwitchLayoutGroupContext.Provider, {
-      suppressHydrationWarning: true,
       value: this.switchLayoutGroupContext,
       children: this.props.children,
     },);
@@ -28640,7 +28573,6 @@ var LayoutTree = class extends Component2 {
 var SharedLayoutTree = (props) => {
   const sharedLayoutContext = React42.useContext(SharedLayoutContext,);
   return /* @__PURE__ */ jsx(LayoutTree, {
-    suppressHydrationWarning: true,
     ...props,
     sharedLayoutContext,
   },);
@@ -28699,7 +28631,6 @@ var NavigationTargetWrapper = ({
   }, [isCurrent, isOverlayed, callbacks,/* constant, so should never change */
   ],);
   return /* @__PURE__ */ jsx(NavigationTargetContext.Provider, {
-    suppressHydrationWarning: true,
     value,
     children,
   },);
@@ -28867,7 +28798,6 @@ var NavigationContainer = /* @__PURE__ */ React42.memo(function NavigationContai
   const isCurrentTarget = !!isCurrent && isPresent2;
   const forceOpacity = isCurrent && isInitial;
   return /* @__PURE__ */ jsxs(FrameWithMotion2, {
-    suppressHydrationWarning: true,
     'data-framer-component-type': 'NavigationContainerWrapper',
     width: '100%',
     height: '100%',
@@ -28886,7 +28816,6 @@ var NavigationContainer = /* @__PURE__ */ React42.memo(function NavigationContai
     },
     children: [
       isLayeredContainer && /* @__PURE__ */ jsx(FrameWithMotion2, {
-        suppressHydrationWarning: true,
         width: '100%',
         height: '100%',
         'data-framer-component-type': 'NavigationContainerBackdrop',
@@ -28904,7 +28833,6 @@ var NavigationContainer = /* @__PURE__ */ React42.memo(function NavigationContai
         onTap: !isBeingRemoved ? onTapBackdrop : void 0,
       },),
       /* @__PURE__ */ jsx(FrameWithMotion2, {
-        suppressHydrationWarning: true,
         ...layout2,
         ...animations2,
         transition: {
@@ -28932,17 +28860,13 @@ var NavigationContainer = /* @__PURE__ */ React42.memo(function NavigationContai
         'data-is-present': isPresent2 ? void 0 : false,
         ref: viewportRef,
         children: /* @__PURE__ */ jsx(ViewportContext.Provider, {
-          suppressHydrationWarning: true,
           value: viewportRef,
           children: /* @__PURE__ */ jsx(NavigationContainerContext.Provider, {
-            suppressHydrationWarning: true,
             value: isCurrentTarget,
             children: /* @__PURE__ */ jsx(NavigationTargetWrapper, {
-              suppressHydrationWarning: true,
               isCurrent: isCurrentTarget,
               isOverlayed,
               children: /* @__PURE__ */ jsx(SharedLayoutTree, {
-                suppressHydrationWarning: true,
                 isLead: isCurrent,
                 animatesLayout: !!withMagicMotion,
                 transition,
@@ -29681,7 +29605,6 @@ var Navigation = /* @__PURE__ */ (() => {
         const areMagicMotionLayersPresent = isCurrent ? false : removed;
         const withMagicMotion = historyItem?.transition?.withMagicMotion || isCurrent && !!this.state.previousTransition;
         contentContainers.push(/* @__PURE__ */ jsx(NavigationContainer, {
-          suppressHydrationWarning: true,
           id: key7,
           index: visualIndex,
           isInitial,
@@ -29700,7 +29623,6 @@ var Navigation = /* @__PURE__ */ (() => {
           withMagicMotion,
           areMagicMotionLayersPresent: areMagicMotionLayersPresent ? false : void 0,
           children: /* @__PURE__ */ jsx(MagicMotionCrossfadeRoot, {
-            suppressHydrationWarning: true,
             children: containerContent({
               component,
               transition: historyItem?.transition,
@@ -29710,7 +29632,6 @@ var Navigation = /* @__PURE__ */ (() => {
       }
       const overlayContainers = this.state.overlayStack.map((item, stackIndex,) => {
         return /* @__PURE__ */ jsx(NavigationContainer, {
-          suppressHydrationWarning: true,
           isLayeredContainer: true,
           isCurrent: stackIndex === this.state.currentOverlay,
           position: item.transition.position,
@@ -29731,7 +29652,6 @@ var Navigation = /* @__PURE__ */ (() => {
         }, item.key,);
       },);
       return /* @__PURE__ */ jsx(FrameWithMotion2, {
-        suppressHydrationWarning: true,
         'data-framer-component-type': 'NavigationRoot',
         top: 0,
         left: 0,
@@ -29745,14 +29665,11 @@ var Navigation = /* @__PURE__ */ (() => {
           ...this.props.style,
         },
         children: /* @__PURE__ */ jsx(NavigationContext.Provider, {
-          suppressHydrationWarning: true,
           value: this,
           children: /* @__PURE__ */ jsxs(IsInitialNavigationContext.Provider, {
-            suppressHydrationWarning: true,
             value: isInitial,
             children: [
               /* @__PURE__ */ jsx(NavigationContainer, {
-                suppressHydrationWarning: true,
                 isLayeredContainer: true,
                 position: void 0,
                 initialProps: {},
@@ -29765,11 +29682,8 @@ var Navigation = /* @__PURE__ */ (() => {
                 onTapBackdrop: void 0,
                 index: 0,
                 children: /* @__PURE__ */ jsx(LayoutIdProvider, {
-                  suppressHydrationWarning: true,
                   children: /* @__PURE__ */ jsx(SharedLayoutRoot, {
-                    suppressHydrationWarning: true,
                     children: /* @__PURE__ */ jsx(AnimatePresence, {
-                      suppressHydrationWarning: true,
                       presenceAffectsLayout: false,
                       children: contentContainers,
                     },),
@@ -29777,7 +29691,6 @@ var Navigation = /* @__PURE__ */ (() => {
                 },),
               },),
               /* @__PURE__ */ jsx(AnimatePresence, {
-                suppressHydrationWarning: true,
                 children: overlayContainers,
               },),
             ],
@@ -30035,7 +29948,6 @@ function NavigationWrapper(props,) {
   const resetProjection = useResetProjection();
   const skipLayoutAnimation = useInstantLayoutTransition();
   return /* @__PURE__ */ jsx(Navigation, {
-    suppressHydrationWarning: true,
     ...props,
     resetProjection,
     skipLayoutAnimation,
@@ -30062,7 +29974,6 @@ function WithNavigator(BaseComponent, navigationTransition, navigationTransition
   const InternalWithNavigator = class extends React42.Component {
     render() {
       return /* @__PURE__ */ jsx(NavigationContext.Consumer, {
-        suppressHydrationWarning: true,
         children: (navigation) => {
           const navigate = () => {
             if (navigationTransition === 'goBack') {
@@ -30116,7 +30027,6 @@ function WithNavigator(BaseComponent, navigationTransition, navigationTransition
             props.onTap = navigate;
           }
           return /* @__PURE__ */ jsx(BaseComponent, {
-            suppressHydrationWarning: true,
             ...props,
           },);
         },
@@ -30899,12 +30809,10 @@ function WithDragging(Component18,) {
       originalProps.left = this.x;
       originalProps.top = this.y;
       return /* @__PURE__ */ jsx(DraggingContext.Provider, {
-        suppressHydrationWarning: true,
         value: {
           dragging: this.state.isDragging,
         },
         children: /* @__PURE__ */ jsx(Component18, {
-          suppressHydrationWarning: true,
           ...originalProps,
         },),
       },);
@@ -31045,11 +30953,9 @@ function WithEvents(BaseComponent,) {
     }
     render() {
       return /* @__PURE__ */ jsx(DraggingContext.Consumer, {
-        suppressHydrationWarning: true,
         children: (value) => {
           this.shouldCancelTap = value.dragging;
           return /* @__PURE__ */ jsx(BaseComponent, {
-            suppressHydrationWarning: true,
             ...this.props,
             ref: this.component,
           },);
@@ -31363,7 +31269,6 @@ function shadowForShape(boxShadows, rect, shapeId, fillEnabled, strokeEnabled, s
       height: `${filterHeight.toFixed(1,)}%`,
     };
     definition.push(/* @__PURE__ */ jsxs('filter', {
-      suppressHydrationWarning: true,
       id: outsideShadowId.id,
       filterUnits: 'objectBoundingBox',
       ...svgRect,
@@ -31372,7 +31277,6 @@ function shadowForShape(boxShadows, rect, shapeId, fillEnabled, strokeEnabled, s
         filterElements,
         shadows.length > 1
           ? /* @__PURE__ */ jsx('feMerge', {
-            suppressHydrationWarning: true,
             children: mergeElements,
           },)
           : null,
@@ -31380,17 +31284,14 @@ function shadowForShape(boxShadows, rect, shapeId, fillEnabled, strokeEnabled, s
     }, outsideShadowId.id,),);
     const maskId = shapeId.add('mask',);
     maskElement = /* @__PURE__ */ jsxs('mask', {
-      suppressHydrationWarning: true,
       id: maskId.id,
       ...svgRect,
       children: [
         /* @__PURE__ */ jsx('rect', {
-          suppressHydrationWarning: true,
           ...svgRect,
           fill: 'white',
         },),
         /* @__PURE__ */ jsx('use', {
-          suppressHydrationWarning: true,
           href: shapeId.link,
           fill: 'black',
           fillOpacity: fillEnabled ? void 0 : 0,
@@ -31398,12 +31299,10 @@ function shadowForShape(boxShadows, rect, shapeId, fillEnabled, strokeEnabled, s
       ],
     },);
     outsetElement = /* @__PURE__ */ jsx('g', {
-      suppressHydrationWarning: true,
       filter: outsideShadowId.urlLink,
       ...svgShadowProps,
       mask: maskId.urlLink,
       children: /* @__PURE__ */ jsx('use', {
-        suppressHydrationWarning: true,
         ...svgStrokeAttributes,
         fill: 'black',
         fillOpacity: fillEnabled ? void 0 : 0,
@@ -31444,7 +31343,6 @@ function shadowForShape(boxShadows, rect, shapeId, fillEnabled, strokeEnabled, s
       mergeElements.push(shadowElements.mergeElement,);
     }
     definition.push(/* @__PURE__ */ jsxs('filter', {
-      suppressHydrationWarning: true,
       id: insideShadowId.id,
       x: `${filterX.toFixed(1,)}%`,
       y: `${filterY.toFixed(1,)}%`,
@@ -31456,7 +31354,6 @@ function shadowForShape(boxShadows, rect, shapeId, fillEnabled, strokeEnabled, s
         filterElements,
         insetShadows.length > 1
           ? /* @__PURE__ */ jsx('feMerge', {
-            suppressHydrationWarning: true,
             children: mergeElements,
           },)
           : null,
@@ -31467,7 +31364,6 @@ function shadowForShape(boxShadows, rect, shapeId, fillEnabled, strokeEnabled, s
       clipPath = strokeClipId.urlLink;
     }
     insetElement = /* @__PURE__ */ jsx('use', {
-      suppressHydrationWarning: true,
       fill: 'black',
       fillOpacity: '1',
       filter: insideShadowId.urlLink,
@@ -31487,12 +31383,10 @@ function shadowForShape(boxShadows, rect, shapeId, fillEnabled, strokeEnabled, s
 function outerShadowElements(shapeID, shadow, index,) {
   const shadowKey = shapeID.add('_outer_shadow' + index,);
   const filterElements = /* @__PURE__ */ jsx(OuterShadowFilterElements, {
-    suppressHydrationWarning: true,
     shadow,
     shadowKey,
   }, shadowKey.id + '-filters',);
   const mergeElement = /* @__PURE__ */ jsx('feMergeNode', {
-    suppressHydrationWarning: true,
     in: shadowKey.id,
   }, shadowKey.id + '-merge',);
   return {
@@ -31511,25 +31405,21 @@ var OuterShadowFilterElements = (props) => {
   return /* @__PURE__ */ jsxs(Fragment, {
     children: [
       /* @__PURE__ */ jsx('feOffset', {
-        suppressHydrationWarning: true,
         dx: shadow.x,
         dy: shadow.y,
         in: 'SourceAlpha',
         result: offsetId,
       },),
       /* @__PURE__ */ jsx('feGaussianBlur', {
-        suppressHydrationWarning: true,
         stdDeviation: shadow.blur / 2,
         in: offsetId,
         result: blurId,
       },),
       /* @__PURE__ */ jsx('feFlood', {
-        suppressHydrationWarning: true,
         floodColor: shadow.color,
         result: floodId,
       },),
       /* @__PURE__ */ jsx('feComposite', {
-        suppressHydrationWarning: true,
         in: floodId,
         in2: blurId,
         operator: 'in',
@@ -31541,12 +31431,10 @@ var OuterShadowFilterElements = (props) => {
 function innerShadowElements(shapeID, shadow, index,) {
   const shadowKey = shapeID.add('_inside_shadow' + index,);
   const filterElements = /* @__PURE__ */ jsx(InnerShadowFilterElements, {
-    suppressHydrationWarning: true,
     shadow,
     shadowKey,
   }, shadowKey.id + '-filters',);
   const mergeElement = /* @__PURE__ */ jsx('feMergeNode', {
-    suppressHydrationWarning: true,
     in: shadowKey.id,
   }, shadowKey.id + '-merge',);
   return {
@@ -31566,20 +31454,17 @@ var InnerShadowFilterElements = (props) => {
   return /* @__PURE__ */ jsxs(Fragment, {
     children: [
       /* @__PURE__ */ jsx('feGaussianBlur', {
-        suppressHydrationWarning: true,
         stdDeviation: shadow.blur / 2,
         in: 'SourceAlpha',
         result: blurId,
       },),
       /* @__PURE__ */ jsx('feOffset', {
-        suppressHydrationWarning: true,
         dx: shadow.x,
         dy: shadow.y,
         in: blurId,
         result: offsetId,
       },),
       /* @__PURE__ */ jsx('feComposite', {
-        suppressHydrationWarning: true,
         in: offsetId,
         in2: 'SourceAlpha',
         operator: 'arithmetic',
@@ -31588,12 +31473,10 @@ var InnerShadowFilterElements = (props) => {
         result: compositeId,
       },),
       /* @__PURE__ */ jsx('feFlood', {
-        suppressHydrationWarning: true,
         floodColor: shadow.color,
         result: floodId,
       },),
       /* @__PURE__ */ jsx('feComposite', {
-        suppressHydrationWarning: true,
         in: floodId,
         in2: compositeId,
         operator: 'in',
@@ -32038,19 +31921,16 @@ var DeprecatedFrame = /* @__PURE__ */ (() => {
         height: rect.height,
       };
       return /* @__PURE__ */ jsxs('div', {
-        suppressHydrationWarning: true,
         id: id3,
         style: style2,
         ref: this.setElement,
         className: className2,
         children: [
           /* @__PURE__ */ jsx(ProvideParentSize, {
-            suppressHydrationWarning: true,
             parentSize,
             children: this.layoutChildren(),
           },),
           /* @__PURE__ */ jsx(Border, {
-            suppressHydrationWarning: true,
             ...this.props,
           },),
         ],
@@ -32075,7 +31955,6 @@ var DeprecatedFrame = /* @__PURE__ */ (() => {
       },);
       if (children && children.length === 1 && typeof children[0] === 'string') {
         children = [/* @__PURE__ */ jsx(Center, {
-          suppressHydrationWarning: true,
           children,
         }, '0',),];
       }
@@ -32110,7 +31989,6 @@ function Center(props,) {
     fontFamily: 'Helvetica',
   }, props.style || {},);
   return /* @__PURE__ */ jsx('div', {
-    suppressHydrationWarning: true,
     style: style2,
     children: props.children,
   },);
@@ -32182,13 +32060,11 @@ var Frame = /* @__PURE__ */ (() => {
     if (isDeprecatedFrameProps(props,)) {
       const currentParentSize = props.parentSize || deprecatedParentSize(parentSize,);
       return /* @__PURE__ */ jsx(DeprecatedFrameWithEvents, {
-        suppressHydrationWarning: true,
         ...props,
         parentSize: currentParentSize,
       },);
     }
     return /* @__PURE__ */ jsx(FrameWithMotion2, {
-      suppressHydrationWarning: true,
       ...props,
       ref,
     },);
@@ -32241,7 +32117,6 @@ function withInfiniteScroll(Component18,) {
       paginationInfo: __paginationInfo,
     },);
     return /* @__PURE__ */ jsx(Component18, {
-      suppressHydrationWarning: true,
       ...props,
       ref: infiniteScrollRef,
     },);
@@ -32549,7 +32424,6 @@ var Stack = /* @__PURE__ */ (() => {
       if (styleProp?.height) contentWrapperStyle.height = styleProp?.height;
     }
     return /* @__PURE__ */ jsx(FrameWithMotion2, {
-      suppressHydrationWarning: true,
       as,
       background: fromCanvasComponent ? void 0 : 'none',
       ...props,
@@ -32560,7 +32434,6 @@ var Stack = /* @__PURE__ */ (() => {
       className: className2,
       layoutScroll: true,
       children: /* @__PURE__ */ jsx(motion.div, {
-        suppressHydrationWarning: true,
         'data-framer-stack-content-wrapper': true,
         'data-framer-stack-direction-reverse': isReverse,
         'data-framer-stack-gap-enabled': gapEnabled,
@@ -32714,7 +32587,6 @@ function wrapInGapElementForLegacyGap(children, gap, direction, justifyContent, 
     asRecord(gapStyle,)['--stack-gap-y'] = `${isVertical ? gap : 0}px`;
   }
   return /* @__PURE__ */ jsx('div', {
-    suppressHydrationWarning: true,
     'data-framer-legacy-stack-gap-enabled': gapEnabled,
     'data-framer-stack-flexbox-gap': useFlexboxGap,
     style: gapStyle,
@@ -32793,7 +32665,6 @@ function PageContainer({
   const containerWidth = hasHorizontalGap && wrapperWidth === '100%' ? `calc(100% + ${gap}px)` : wrapperWidth;
   const containerHeight = hasVerticalGap && wrapperHeight === '100%' ? `calc(100% + ${gap}px)` : wrapperHeight;
   return /* @__PURE__ */ jsx(FrameWithMotion2, {
-    suppressHydrationWarning: true,
     position: 'relative',
     'data-framer-component-type': 'PageContainer',
     width: containerWidth,
@@ -32815,7 +32686,6 @@ function PageContainer({
       paddingBottom: hasVerticalGap ? gap : 0,
     },
     children: /* @__PURE__ */ jsx(FrameWithMotion2, {
-      suppressHydrationWarning: true,
       position: 'relative',
       'data-framer-component-type': pageContentWrapperType,
       width: wrapperWidth,
@@ -33139,7 +33009,6 @@ var PageInner = /* @__PURE__ */ React42.forwardRef(function Page(props, forwarde
     }
     pageEffectValuesRef.current.push(effectDictionary,);
     return /* @__PURE__ */ jsx(PageContainer, {
-      suppressHydrationWarning: true,
       effect: effectDictionary,
       dragEnabled,
       direction,
@@ -33171,7 +33040,6 @@ var PageInner = /* @__PURE__ */ React42.forwardRef(function Page(props, forwarde
     onScrollEnd,
   },);
   return /* @__PURE__ */ jsx(FrameWithMotion2, {
-    suppressHydrationWarning: true,
     'data-framer-component-type': 'PageWrapper',
     preserve3d: false,
     perspective: hasEffect(props,) ? 1200 : void 0,
@@ -33185,7 +33053,6 @@ var PageInner = /* @__PURE__ */ React42.forwardRef(function Page(props, forwarde
     ref: containerRef,
     onLayoutMeasure: handleMeasureLifecycle,
     children: /* @__PURE__ */ jsxs(FrameWithMotion2, {
-      suppressHydrationWarning: true,
       'data-framer-component-type': 'Page',
       ref: scrollableRef,
       background: null,
@@ -33204,7 +33071,6 @@ var PageInner = /* @__PURE__ */ React42.forwardRef(function Page(props, forwarde
       },
       children: [
         /* @__PURE__ */ jsx(EmptyState, {
-          suppressHydrationWarning: true,
           title: 'Page',
           description: 'Click and drag the connector to any frame on the canvas \u2192',
           size: containerSizeRef.current,
@@ -34413,7 +34279,6 @@ var EmulatedScrollInner = /* @__PURE__ */ React42.forwardRef(function EmulatedSc
     }
     : {};
   return /* @__PURE__ */ jsx(FrameWithMotion2, {
-    suppressHydrationWarning: true,
     'data-framer-component-type': 'Scroll',
     background: 'none',
     ...containerProps,
@@ -34431,7 +34296,6 @@ var EmulatedScrollInner = /* @__PURE__ */ React42.forwardRef(function EmulatedSc
     layoutScroll: true,
     onBeforeLayoutMeasure: measureAndUpdateScrollOffset,
     children: /* @__PURE__ */ jsxs(FrameWithMotion2, {
-      suppressHydrationWarning: true,
       'data-framer-component-type': 'ScrollContentWrapper',
       animate: scrollAnimate,
       drag: dragEnabled && convertScrollDirectionToDrag(direction,),
@@ -34467,7 +34331,6 @@ var EmulatedScrollInner = /* @__PURE__ */ React42.forwardRef(function EmulatedSc
       preserve3d: containerProps.preserve3d,
       children: [
         /* @__PURE__ */ jsx(EmptyState, {
-          suppressHydrationWarning: true,
           size: {
             width: isFiniteNumber(containerProps.width,) ? containerProps.width : '100%',
             height: isFiniteNumber(containerProps.height,) ? containerProps.height : '100%',
@@ -34905,7 +34768,6 @@ var NativeScrollInner = /* @__PURE__ */ React42.forwardRef(function NativeScroll
     }
     : {};
   return /* @__PURE__ */ jsxs(FrameWithMotion2, {
-    suppressHydrationWarning: true,
     ref,
     'data-framer-component-type': 'NativeScroll',
     background: 'none',
@@ -34918,7 +34780,6 @@ var NativeScrollInner = /* @__PURE__ */ React42.forwardRef(function NativeScroll
     className: cx(className2, `direction-${direction}`, !scrollBarVisible && 'scrollbar-hidden',),
     children: [
       /* @__PURE__ */ jsx(EmptyState, {
-        suppressHydrationWarning: true,
         children,
         size: {
           width: isFiniteNumber(containerProps.width,) ? containerProps.width : '100%',
@@ -34937,13 +34798,11 @@ var Scroll = /* @__PURE__ */ (() => {
   const ScrollInner = React42.forwardRef(function ScrollInner2(props, forwardedRef,) {
     if (props.native) {
       return /* @__PURE__ */ jsx(NativeScroll2, {
-        suppressHydrationWarning: true,
         ref: forwardedRef,
         ...props,
       },);
     } else {
       return /* @__PURE__ */ jsx(EmulatedScroll2, {
-        suppressHydrationWarning: true,
         ref: forwardedRef,
         ...props,
       },);
@@ -35174,7 +35033,6 @@ var DataObserver = class extends Component2 {
       this.observers.push(observer2,);
     },);
     return /* @__PURE__ */ jsx(DataObserverContext.Provider, {
-      suppressHydrationWarning: true,
       value: {
         ...this.state,
       },
@@ -35218,7 +35076,6 @@ function WithOverride(Component18, override,) {
       ...rest
     } = props;
     return /* @__PURE__ */ jsx(Component18, {
-      suppressHydrationWarning: true,
       ...rest,
       ...overrideProps,
       _initialStyle: style2,
@@ -35413,7 +35270,6 @@ function renderBranchedChildrenFromPropertyOverrides(
       // affect the size of the generated HTML.
       /* @__PURE__ */
       jsx(SSRParentVariantsContext.Provider, {
-        suppressHydrationWarning: true,
         value: {
           primaryVariantId,
           variants: new Set(variants,),
@@ -35446,7 +35302,6 @@ function renderBranchedChildrenFromPropertyOverrides(
     return [
       ...renderedBranches,
       /* @__PURE__ */ jsx('div', {
-        suppressHydrationWarning: true,
         className: SSRVariantGroupSeparatorClassName,
       }, 'property-overrides-separator',),
     ];
@@ -35664,7 +35519,6 @@ function withOptimizedAppearEffect(Component18,) {
     }
     const disabledProps = getDisabledFXPropsInStaticRenderer(props,);
     return /* @__PURE__ */ jsx(Component18, {
-      suppressHydrationWarning: true,
       ref,
       ...props,
       ...disabledProps,
@@ -36615,7 +36469,6 @@ var withFX = (Component18) =>
   React42.forwardRef((props, forwardedRef,) => {
     if (props.__withFX) {
       return /* @__PURE__ */ jsx(Component18, {
-        suppressHydrationWarning: true,
         ...props,
         animate: void 0,
         initial: void 0,
@@ -36626,7 +36479,6 @@ var withFX = (Component18) =>
     const disabledProps = getDisabledFXPropsInStaticRenderer(props,);
     if (disabledProps) {
       return /* @__PURE__ */ jsx(Component18, {
-        suppressHydrationWarning: true,
         ...props,
         ...disabledProps,
         ref: forwardedRef,
@@ -36722,7 +36574,6 @@ var withFX = (Component18) =>
       }
       : {};
     return /* @__PURE__ */ jsx(Component18, {
-      suppressHydrationWarning: true,
       ...forwardedProps,
       ...motionGestures,
       __withFX: true,
@@ -36751,7 +36602,6 @@ function ComponentPresetsProvider({
     lastPresets.current = presets2;
   }
   return /* @__PURE__ */ jsx(Context.Provider, {
-    suppressHydrationWarning: true,
     value: lastPresets.current,
     children,
   },);
@@ -36784,7 +36634,6 @@ var ComponentViewportProvider = /* @__PURE__ */ React42.forwardRef(function Comp
   }, [width, height, y2,],);
   const cloneWithPropsAndRef = useCloneChildrenWithPropsAndRef(ref,);
   return /* @__PURE__ */ jsx(ComponentViewportContext.Provider, {
-    suppressHydrationWarning: true,
     value: componentViewport,
     children: cloneWithPropsAndRef(children, rest,),
   },);
@@ -36793,7 +36642,6 @@ var withGeneratedLayoutId = (Component18) =>
   React42.forwardRef((props, ref,) => {
     const layoutId = useLayoutId2(props,);
     return /* @__PURE__ */ jsx(Component18, {
-      suppressHydrationWarning: true,
       layoutId,
       ...props,
       layoutIdKey: void 0,
@@ -36857,7 +36705,6 @@ var suspendPromise = /* @__PURE__ */ (() => typeof __unframerWindow2 !== 'undefi
 function Suspend() {
   if (typeof __unframerWindow2 === 'undefined' || shouldSuspenseBoundariesBeActive) {
     return /* @__PURE__ */ jsx('div', {
-      suppressHydrationWarning: true,
       hidden: true,
       dangerouslySetInnerHTML: {
         __html: '<!-- SuspenseThatPreservesDOM fallback rendered -->',
@@ -36866,9 +36713,7 @@ function Suspend() {
   }
   throw suspendPromise;
 }
-var suspend = /* @__PURE__ */ jsx(Suspend, {
-  suppressHydrationWarning: true,
-},);
+var suspend = /* @__PURE__ */ jsx(Suspend, {},);
 var DisableSuspenseSuspenseThatPreservesDomContext = createContext(false,);
 DisableSuspenseSuspenseThatPreservesDomContext.displayName = 'DisableSuspenseSuspenseThatPreservesDomContext';
 function SuspenseThatPreservesDom({
@@ -36881,23 +36726,19 @@ function SuspenseThatPreservesDom({
     },);
   }
   return /* @__PURE__ */ jsx(Suspense2, {
-    suppressHydrationWarning: true,
     fallback: suspend,
     children,
   },);
 }
 function NullFallback() {
   return /* @__PURE__ */ jsx('div', {
-    suppressHydrationWarning: true,
     hidden: true,
     dangerouslySetInnerHTML: {
       __html: '<!-- Code boundary fallback rendered -->',
     },
   },);
 }
-var nullFallback = /* @__PURE__ */ jsx(NullFallback, {
-  suppressHydrationWarning: true,
-},);
+var nullFallback = /* @__PURE__ */ jsx(NullFallback, {},);
 function collectErrorToAnalytics(error, errorInfo,) {
   if (!isWindow) return;
   if (Math.random() > 0.01) return;
@@ -36926,10 +36767,8 @@ function CodeComponentBoundary({
     return children;
   }
   return /* @__PURE__ */ jsx(ServerSideErrorBoundary, {
-    suppressHydrationWarning: true,
     fallback,
     children: /* @__PURE__ */ jsx(ClientSideErrorBoundary, {
-      suppressHydrationWarning: true,
       fallback,
       getErrorMessage,
       children,
@@ -36972,7 +36811,6 @@ function ServerSideErrorBoundary({
     // and render the actual error fallback if Suspense activates.
     /* @__PURE__ */
     jsx(Suspense2, {
-      suppressHydrationWarning: true,
       fallback,
       children,
     },)
@@ -36983,7 +36821,6 @@ function ServerSideErrorBoundary({
     // (the server has Suspense, the client doesn’t).
     /* @__PURE__ */
     jsx(SuspenseThatPreservesDom, {
-      suppressHydrationWarning: true,
       children,
     },);
 }
@@ -37046,7 +36883,6 @@ function IsExternalComponent({
     parent,
   }), [scopeId, nodeId, parent,],);
   return /* @__PURE__ */ jsx(ExternalComponentContext.Provider, {
-    suppressHydrationWarning: true,
     value: newValue,
     children,
   },);
@@ -37124,13 +36960,11 @@ function useMaybeWrapComponentWithCodeBoundary(children, scopeId, nodeId, isAuth
     isUndefined(scopeId,) || isUndefined(nodeId,)
   ) {
     return /* @__PURE__ */ jsx(DeprecatedContainerErrorBoundary, {
-      suppressHydrationWarning: true,
       children,
     },);
   }
   if (disableCustomCode && isAuthoredByUser) {
     return /* @__PURE__ */ jsx('div', {
-      suppressHydrationWarning: true,
       style: {
         padding: '12px 16px',
         // Standard error box styles
@@ -37155,7 +36989,6 @@ function useMaybeWrapComponentWithCodeBoundary(children, scopeId, nodeId, isAuth
   );
   if (shouldWrapWithBoundary) {
     children = /* @__PURE__ */ jsx(CodeComponentBoundary, {
-      suppressHydrationWarning: true,
       getErrorMessage: getErrorMessageForComponent.bind(null, scopeId, nodeId,),
       fallback: null,
       children,
@@ -37163,7 +36996,6 @@ function useMaybeWrapComponentWithCodeBoundary(children, scopeId, nodeId, isAuth
   }
   if (isModuleExternal) {
     children = /* @__PURE__ */ jsx(IsExternalComponent, {
-      suppressHydrationWarning: true,
       scopeId,
       nodeId,
       children,
@@ -37200,21 +37032,16 @@ var ContainerInner = /* @__PURE__ */ React42.forwardRef(function ContainerInner2
     inComponentSlot,
   );
   return /* @__PURE__ */ jsx(MotionComponent, {
-    suppressHydrationWarning: true,
     layoutId: outerLayoutId,
     ...props,
     ref,
     children: /* @__PURE__ */ jsx(ComponentContainerContext.Provider, {
-      suppressHydrationWarning: true,
       value: true,
       children: /* @__PURE__ */ jsx(NodeIdContext.Provider, {
-        suppressHydrationWarning: true,
         value: nodeId ?? null,
         children: /* @__PURE__ */ jsx(AutomaticLayoutIds, {
-          suppressHydrationWarning: true,
           enabled: false,
           children: /* @__PURE__ */ jsx(LayoutGroup, {
-            suppressHydrationWarning: true,
             id: layoutId ?? '',
             inherit: props.layout ? true : 'id',
             children: childrenWithCodeBoundary,
@@ -37251,10 +37078,8 @@ var SmartComponentScopedContainer = /* @__PURE__ */ React42.forwardRef(function 
   if (props.rendersWithMotion) {
     const Component18 = htmlElementAsMotionComponent(tagName,);
     return /* @__PURE__ */ jsx(NodeIdContext.Provider, {
-      suppressHydrationWarning: true,
       value: nodeId ?? null,
       children: /* @__PURE__ */ jsx(Component18, {
-        suppressHydrationWarning: true,
         ...otherProps,
         ref,
         style: props.style,
@@ -37269,10 +37094,8 @@ var SmartComponentScopedContainer = /* @__PURE__ */ React42.forwardRef(function 
       ...plainHTMLRenderableProps
     } = otherProps;
     return /* @__PURE__ */ jsx(NodeIdContext.Provider, {
-      suppressHydrationWarning: true,
       value: nodeId ?? null,
       children: /* @__PURE__ */ jsx(Component18, {
-        suppressHydrationWarning: true,
         ...plainHTMLRenderableProps,
         ref,
         style: props.style,
@@ -37322,14 +37145,8 @@ var CustomCursorContextProvider = /* @__PURE__ */ memo2(function CustomCursorLis
   },);
   const shouldReduceMotion = useReducedMotionConfig();
   return /* @__PURE__ */ jsxs(CustomCursorContext.Provider, {
-    suppressHydrationWarning: true,
     value,
-    children: [
-      children,
-      !shouldReduceMotion && /* @__PURE__ */ jsx(CustomCursorComponent, {
-        suppressHydrationWarning: true,
-      },),
-    ],
+    children: [children, !shouldReduceMotion && /* @__PURE__ */ jsx(CustomCursorComponent, {},),],
   },);
 },);
 var CustomCursorHost =
@@ -37541,9 +37358,7 @@ var CustomCursorComponent = /* @__PURE__ */ memo2(function CustomCursorComponent
   ],);
   if (!hasHoverCapability || !cursor || !Cursor) return null;
   return /* @__PURE__ */ jsx(Suspense2, {
-    suppressHydrationWarning: true,
     children: /* @__PURE__ */ jsx(Cursor, {
-      suppressHydrationWarning: true,
       transformTemplate: transformTemplate2,
       style: {
         ...staticCursorStyle,
@@ -37763,7 +37578,6 @@ function ResetOuterLinkContext({
   children,
 },) {
   return /* @__PURE__ */ jsx(OuterLinkContext.Provider, {
-    suppressHydrationWarning: true,
     value: void 0,
     children,
   },);
@@ -37865,7 +37679,6 @@ function useReplaceNestedLinks(children, scopeId, nodeId, href, propsAddedByLink
     },);
   }
   return /* @__PURE__ */ jsx(OuterLinkContext.Provider, {
-    suppressHydrationWarning: true,
     value: innerLink,
     children: replacedChildren,
   },);
@@ -38553,7 +38366,6 @@ function Floating({
   const inComponent = useContext(ComponentContainerContext,);
   return ReactDOM.createPortal(
     /* @__PURE__ */ jsxs(motion.div, {
-      suppressHydrationWarning: true,
       ref: floatingPositionRef,
       className: className2,
       style: {
@@ -38572,7 +38384,6 @@ function Floating({
       children: [
         safeArea
           ? /* @__PURE__ */ jsx('div', {
-            suppressHydrationWarning: true,
             ref: safeAreaRef,
             style: {
               position: 'absolute',
@@ -38582,7 +38393,6 @@ function Floating({
           : // biome-ignore lint/a11y/useKeyWithClickEvents: overlays don't support key events yet.
           /* @__PURE__ */
           jsx('div', {
-            suppressHydrationWarning: true,
             style: {
               position: 'fixed',
               inset: 0,
@@ -38591,15 +38401,11 @@ function Floating({
             onClick: onDismiss,
           },),
         /* @__PURE__ */ jsx(FloatingStackingContext.Provider, {
-          suppressHydrationWarning: true,
           value: descendantContext,
           children: /* @__PURE__ */ jsx(ResetOuterLinkContext, {
-            suppressHydrationWarning: true,
             children: /* @__PURE__ */ jsx(InjectSelectionStyle, {
-              suppressHydrationWarning: true,
               triggerId: anchorRef.current?.id ?? void 0,
               children: /* @__PURE__ */ jsx('div', {
-                suppressHydrationWarning: true,
                 ref: contentRef,
                 children: childrenWithOrigin(children, origin,),
               },),
@@ -38617,7 +38423,6 @@ var Instance = /* @__PURE__ */ React42.forwardRef(function Instance2({
 }, ref,) {
   return Component18
     ? /* @__PURE__ */ jsx(Component18, {
-      suppressHydrationWarning: true,
       ...props,
       ref,
     },)
@@ -38647,7 +38452,6 @@ function AutoBreakpointVariant({
     };
   }
   return /* @__PURE__ */ jsx(PropertyOverrides2, {
-    suppressHydrationWarning: true,
     overrides,
     breakpoint: activeVariantId,
     children: element,
@@ -38728,16 +38532,13 @@ function ChildrenCanSuspend({
   children,
 },) {
   return /* @__PURE__ */ jsx(SuspenseThatPreservesDom, {
-    suppressHydrationWarning: true,
     children,
   },);
 }
 function withChildrenCanSuspend(Component18,) {
   return forwardRef(function withChildrenCanSuspendInner(props, ref,) {
     return /* @__PURE__ */ jsx(ChildrenCanSuspend, {
-      suppressHydrationWarning: true,
       children: /* @__PURE__ */ jsx(Component18, {
-        suppressHydrationWarning: true,
         ...props,
         ref,
       },),
@@ -39775,7 +39576,6 @@ function HoneypotFields({
       // Names are unique at the moment, so using the originalName is fine
       /* @__PURE__ */
       jsx(HoneypotInput, {
-        suppressHydrationWarning: true,
         inputStateRef: stateRef,
       }, `hp_${stateRef.originalName}`,)
     ),
@@ -40076,7 +39876,6 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
     );
   };
   return /* @__PURE__ */ jsxs(motion.form, {
-    suppressHydrationWarning: true,
     ...props,
     onSubmit: stateCanSubmitForm(state,) ? handleSubmit : preventDefault,
     onKeyDown: handleKeyDown,
@@ -40085,7 +39884,6 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
     children: [
       children(state,),
       shouldUseHoneypot && /* @__PURE__ */ jsx(HoneypotFields, {
-        suppressHydrationWarning: true,
         states: honeypotStateRefs,
       },),
     ],
@@ -40182,11 +39980,8 @@ function EditorBarLauncher({
   }, [libraryFeatures,],);
   if (!EditorBar || !framerSiteId || !enabled) return null;
   return /* @__PURE__ */ jsx(IgnoreErrors, {
-    suppressHydrationWarning: true,
     children: /* @__PURE__ */ jsx(Suspense2, {
-      suppressHydrationWarning: true,
       children: /* @__PURE__ */ jsx(EditorBar, {
-        suppressHydrationWarning: true,
         framerSiteId,
         features: editorBarFeatures,
       },),
@@ -40665,7 +40460,6 @@ function TriggerStateProvider({
     triggerStateRef,
   }));
   return /* @__PURE__ */ jsx(TriggerStateContext.Provider, {
-    suppressHydrationWarning: true,
     value: initialState2,
     children,
   },);
@@ -40722,7 +40516,6 @@ function SnippetsProvider({
   loadSnippetsModule,
 },) {
   return /* @__PURE__ */ jsx(SnippetsContext.Provider, {
-    suppressHydrationWarning: true,
     value: loadSnippetsModule,
     children,
   },);
@@ -41468,44 +41261,31 @@ function Router({
     display: 'contents',
   }));
   return /* @__PURE__ */ jsx(RouterAPIProvider, {
-    suppressHydrationWarning: true,
     api,
     children: /* @__PURE__ */ jsx(LocaleInfoContext.Provider, {
-      suppressHydrationWarning: true,
       value: localeInfo,
       children: /* @__PURE__ */ jsx(LayoutDirectionContext.Provider, {
-        suppressHydrationWarning: true,
         value: layoutDirection,
         children: /* @__PURE__ */ jsx(CustomCursorHost, {
-          suppressHydrationWarning: true,
           children: /* @__PURE__ */ jsx(URLSearchParamsProvider, {
-            suppressHydrationWarning: true,
             children: /* @__PURE__ */ jsxs(TriggerStateProvider, {
-              suppressHydrationWarning: true,
               currentRoutePath: pathWithFilledVariables,
               routerAPI: api,
               children: [
                 EditorBar && /* @__PURE__ */ jsx(EditorBarLauncher, {
-                  suppressHydrationWarning: true,
                   EditorBar,
                   fast: true,
                 },),
                 /* @__PURE__ */ jsx(SynchronousSuspenseErrorBoundary, {
-                  suppressHydrationWarning: true,
                   children: /* @__PURE__ */ jsxs(SuspenseThatPreservesDom, {
-                    suppressHydrationWarning: true,
                     children: [
                       /* @__PURE__ */ jsxs(NotFoundErrorBoundary, {
-                        suppressHydrationWarning: true,
                         notFoundPage,
                         defaultPageStyle,
                         forceUpdateKey: dep,
                         children: [
-                          /* @__PURE__ */ jsx(MarkSuspenseEffects.Start, {
-                            suppressHydrationWarning: true,
-                          },),
+                          /* @__PURE__ */ jsx(MarkSuspenseEffects.Start, {},),
                           /* @__PURE__ */ jsx(WithLayoutTemplate, {
-                            suppressHydrationWarning: true,
                             LayoutTemplate,
                             webPageId: currentRoute?.abTestingVariantId ?? currentRouteId,
                             style: defaultPageStyle,
@@ -41521,15 +41301,10 @@ function Router({
                         ],
                       },),
                       EditorBar && /* @__PURE__ */ jsx(EditorBarLauncher, {
-                        suppressHydrationWarning: true,
                         EditorBar,
                       },),
-                      /* @__PURE__ */ jsx(TurnOnReactEventHandling, {
-                        suppressHydrationWarning: true,
-                      },),
-                      /* @__PURE__ */ jsx(MarkSuspenseEffects.End, {
-                        suppressHydrationWarning: true,
-                      },),
+                      /* @__PURE__ */ jsx(TurnOnReactEventHandling, {},),
+                      /* @__PURE__ */ jsx(MarkSuspenseEffects.End, {},),
                     ],
                   },),
                 },),
@@ -41549,7 +41324,6 @@ function WithLayoutTemplate({
 },) {
   if (!LayoutTemplate) return children(false,);
   return /* @__PURE__ */ jsx(LayoutTemplate, {
-    suppressHydrationWarning: true,
     webPageId,
     style: style2,
     children,
@@ -41885,10 +41659,8 @@ var FetchClientProvider = ({
     return () => client.unmount();
   }, [client,],);
   return /* @__PURE__ */ jsx(IsRestoringCacheContext.Provider, {
-    suppressHydrationWarning: true,
     value: isRestoring,
     children: /* @__PURE__ */ jsx(FetchClientContext.Provider, {
-      suppressHydrationWarning: true,
       value: client,
       children,
     },),
@@ -42074,25 +41846,18 @@ function PageRoot(props,) {
   }, [],);
   if (isWebsite) {
     return /* @__PURE__ */ jsx(RenderTargetEnvironmentProvider, {
-      suppressHydrationWarning: true,
       value: environment2 ?? 'preview',
       children: /* @__PURE__ */ jsx(MotionConfig, {
-        suppressHydrationWarning: true,
         reducedMotion: skipAnimations ? 'always' : isReducedMotion ? 'user' : 'never',
         skipAnimations,
         children: /* @__PURE__ */ jsx(CollectionUtilsCacheProvider, {
-          suppressHydrationWarning: true,
           collectionUtils,
           children: /* @__PURE__ */ jsx(FetchClientProvider, {
-            suppressHydrationWarning: true,
             children: /* @__PURE__ */ jsx(FormContext.Provider, {
-              suppressHydrationWarning: true,
               value: framerSiteId,
               children: /* @__PURE__ */ jsx(SnippetsProvider, {
-                suppressHydrationWarning: true,
                 loadSnippetsModule,
                 children: /* @__PURE__ */ jsx(Router, {
-                  suppressHydrationWarning: true,
                   initialRoute: routeId,
                   initialPathVariables: pathVariables,
                   initialLocaleId: localeId,
@@ -42121,12 +41886,9 @@ function PageRoot(props,) {
   } else {
     const Wrapper = includeDataObserver ? DataObserver : React42.Fragment;
     return /* @__PURE__ */ jsx(Wrapper, {
-      suppressHydrationWarning: true,
       children: /* @__PURE__ */ jsx(RoutesProvider, {
-        suppressHydrationWarning: true,
         routes,
         children: /* @__PURE__ */ jsx(NavigationExport, {
-          suppressHydrationWarning: true,
           children: React42.isValidElement(RootComponent,) ? RootComponent : React42.createElement(
             // @ts-expect-error to figure out how to type this properly, as tests are using different
             // $$typeof symbol and isValidElement fails
@@ -48387,7 +48149,6 @@ function withCodeBoundaryForOverrides(Component18, {
     const nearestExternalComponent = useNearestExternalComponent();
     if (disableCustomCode) {
       return /* @__PURE__ */ jsx(Component18, {
-        suppressHydrationWarning: true,
         ...props,
         ref,
       },);
@@ -48401,18 +48162,14 @@ function withCodeBoundaryForOverrides(Component18, {
     if (shouldWrapWithBoundary) {
       if (appliedOverride.status === 'success') {
         return /* @__PURE__ */ jsx(NodeIdContext.Provider, {
-          suppressHydrationWarning: true,
           value: nodeId,
           children: /* @__PURE__ */ jsx(CodeComponentBoundary, {
-            suppressHydrationWarning: true,
             getErrorMessage: getErrorMessageForOverride.bind(null, scopeId, nodeId,),
             fallback: /* @__PURE__ */ jsx(Component18, {
-              suppressHydrationWarning: true,
               ...props,
               ref,
             },),
             children: /* @__PURE__ */ jsx(appliedOverride.Component, {
-              suppressHydrationWarning: true,
               ...props,
               ref,
             },),
@@ -48426,7 +48183,6 @@ function withCodeBoundaryForOverrides(Component18, {
           hasErrorBeenLogged = true;
         }
         return /* @__PURE__ */ jsx(Component18, {
-          suppressHydrationWarning: true,
           ...props,
           ref,
         },);
@@ -48434,10 +48190,8 @@ function withCodeBoundaryForOverrides(Component18, {
     } else {
       if (appliedOverride.status === 'success') {
         return /* @__PURE__ */ jsx(NodeIdContext.Provider, {
-          suppressHydrationWarning: true,
           value: nodeId,
           children: /* @__PURE__ */ jsx(appliedOverride.Component, {
-            suppressHydrationWarning: true,
             ...props,
             ref,
           },),
@@ -48525,7 +48279,6 @@ var withV1StrokeFX = (Component18) =>
       }
       : void 0;
     return /* @__PURE__ */ jsx(Component18, {
-      suppressHydrationWarning: true,
       ...restProps,
       ...effect,
       ref: forwardedRef,
@@ -48536,7 +48289,7 @@ function flattenChildrenToTickerItems(children,) {
   Children.forEach(children, (child) => {
     if (isValidElement(child,) && child.type === Fragment) {
       result.push(...flattenChildrenToTickerItems(child.props.children,),);
-    } else {
+    } else if (child) {
       result.push(child,);
     }
   },);
@@ -48623,7 +48376,7 @@ var TickerContext = /* @__PURE__ */ (() => {
 })();
 function useTicker() {
   const context = useContext(TickerContext,);
-  invariant(Boolean(context,), 'useTicker must be used within a Ticker component',);
+  invariant2(Boolean(context,), 'useTicker must be used within a Ticker component',);
   return context;
 }
 var TickerItemContext = /* @__PURE__ */ (() => {
@@ -48633,7 +48386,7 @@ var TickerItemContext = /* @__PURE__ */ (() => {
 })();
 function useTickerItem() {
   const itemContext = useContext(TickerItemContext,);
-  invariant(Boolean(itemContext,), 'useTickerItem must be used within a TickerItem',);
+  invariant2(Boolean(itemContext,), 'useTickerItem must be used within a TickerItem',);
   return itemContext;
 }
 var ltrStrategy = (insetProp, lengthProp, viewportLengthProp, paddingStartProp, direction,) => {
@@ -48726,7 +48479,7 @@ function TickerItemWrapper({
       return listSize * sign;
     }
     if (safeMargin > 0) {
-      const rightBoundary = visibleLength - inset2 + safeMargin;
+      const rightBoundary = visibleLength - safeMargin - inset2;
       if (currentOffset * sign + bounds.start >= rightBoundary) {
         return -listSize * sign;
       }
@@ -48739,7 +48492,6 @@ function TickerItemWrapper({
     if (!start2 && !end || !listSize) return 0;
     return currentOffset * sign + start2 + currentTransform * sign;
   },);
-  const offAxisSize = alignItems === 'stretch' ? '100%' : 'fit-content';
   const ariaProps = cloneIndex === void 0
     ? {
       ['aria-hidden']: false,
@@ -48749,6 +48501,8 @@ function TickerItemWrapper({
     : {
       ['aria-hidden']: true,
     };
+  const isFill = size === 'fill';
+  const offAxisSize = alignItems === 'stretch' ? '100%' : 'fit-content';
   const props = {
     className: cloneIndex === void 0 ? 'ticker-item' : 'clone-item',
     style: {
@@ -48756,7 +48510,11 @@ function TickerItemWrapper({
       flexShrink: 0,
       position: 'relative',
       flexBasis: size === 'fill' ? '100%' : void 0,
-      display: size === 'fill' ? 'flex' : void 0,
+      display: isFill ? 'grid' : void 0,
+      gridTemplateColumns: isFill ? '1fr' : void 0,
+      gridTemplateRows: isFill ? '1fr' : void 0,
+      minWidth: isFill ? 0 : void 0,
+      minHeight: isFill ? 0 : void 0,
       height: axis === 'x' ? offAxisSize : void 0,
       width: axis === 'y' ? offAxisSize : void 0,
       x: axis === 'x' ? projection : 0,
@@ -48765,7 +48523,6 @@ function TickerItemWrapper({
     ...ariaProps,
   };
   return /* @__PURE__ */ jsx(TickerItemContext.Provider, {
-    suppressHydrationWarning: true,
     value: {
       start: start2,
       end,
@@ -48776,7 +48533,6 @@ function TickerItemWrapper({
       props,
     },
     children: size === 'manual' ? children : /* @__PURE__ */ jsx(DefaultTickerItem, {
-      suppressHydrationWarning: true,
       children,
     },),
   },);
@@ -48788,7 +48544,6 @@ function DefaultTickerItem({
     props,
   } = useTickerItem();
   return /* @__PURE__ */ jsx(motion.li, {
-    suppressHydrationWarning: true,
     ...props,
     children,
   },);
@@ -48816,7 +48571,9 @@ function useFocusNavigation(containerRef, axis, focusOffset, offset, setHasFocus
     const applyFocusOffset = () => {
       const nextFocusableElement = focusableElements[focusIndex];
       if (!nextFocusableElement) return;
-      nextFocusableElement.focus();
+      nextFocusableElement.focus({
+        preventScroll: true,
+      },);
       focusOffset.set(-nextFocusableElement[offsetProp],);
       container[scrollProp] = 0;
       frame.render(() => {
@@ -48829,7 +48586,7 @@ function useFocusNavigation(containerRef, axis, focusOffset, offset, setHasFocus
         endFocusTrap();
         const allFocusableElements = Array.from(
           document.querySelectorAll('a, button, input, textarea, select, [tabindex]:not([tabindex="-1"]), [contenteditable="true"]',),
-        ).filter(isHTMLElement,);
+        ).filter(isHTMLElement2,);
         allFocusableElements.sort(compareTabIndexes,);
         const lastFocusableElement = allFocusableElements[event.shiftKey ? 0 : allFocusableElements.length - 1];
         const initialIndex = event.shiftKey ? allFocusableElements.length - 1 : 0;
@@ -48862,7 +48619,7 @@ function useFocusNavigation(containerRef, axis, focusOffset, offset, setHasFocus
         container.querySelectorAll(
           '.ticker-item a, .ticker-item button, .ticker-item input, .ticker-item textarea, .ticker-item select, .ticker-item [tabindex]:not([tabindex="-1"]), .ticker-item [contenteditable="true"]',
         ),
-      ).filter(isHTMLElement,);
+      ).filter(isHTMLElement2,);
       focusIndex = 0;
       if (!focusableElements.length) return;
       setHasFocus(true,);
@@ -48890,7 +48647,7 @@ function useFocusNavigation(containerRef, axis, focusOffset, offset, setHasFocus
       const {
         target,
       } = event;
-      if (!isHTMLElement(target,)) return;
+      if (!isHTMLElement2(target,)) return;
       if (!isFocusTrapped.current) {
         startFocusTrap();
       }
@@ -48909,13 +48666,18 @@ function useFocusNavigation(containerRef, axis, focusOffset, offset, setHasFocus
     };
     const handleAriaHiddenClicks = (event) => {
       const target = event.target;
-      let ariaHiddenAncestor = target.closest('[aria-hidden="true"]',);
+      const ariaHiddenAncestor = target.closest('[aria-hidden="true"]',);
       if (ariaHiddenAncestor) {
         ariaHiddenAncestor.removeAttribute('aria-hidden',);
       }
     };
+    const resetScroll = () => {
+      container.scrollLeft = 0;
+      container.scrollTop = 0;
+    };
     __unframerWindow2.addEventListener('keydown', detectFocusTrapEnable, eventOptions,);
     container.addEventListener('pointerdown', handleAriaHiddenClicks, eventOptions,);
+    container.addEventListener('scroll', resetScroll, eventOptions,);
     return () => {
       abortController.abort();
       endFocusTrap();
@@ -48933,6 +48695,9 @@ function compareTabIndexes(a, b,) {
     return 1;
   }
   return 0;
+}
+function isHTMLElement2(element,) {
+  return element instanceof HTMLElement;
 }
 function calcItemLength(itemPosition,) {
   return itemPosition.end - itemPosition.start;
@@ -48972,6 +48737,8 @@ function TickerComponent({
   snap,
   safeMargin = 0,
   fade = 0,
+  fadeTransition,
+  pageTransition,
   ...props
 }, ref,) {
   const internalContainerRef = useRef(null,);
@@ -48988,18 +48755,20 @@ function TickerComponent({
     maxInset: null,
   },);
   const alignItems = alignAlias[align] || align;
+  const {
+    sign,
+  } = getLayoutStrategy(axis, state.direction,);
   if (isStatic) {
     const renderedOffset2 = useMotionValue(0,);
     return /* @__PURE__ */ jsx(TickerContext.Provider, {
-      suppressHydrationWarning: true,
       value: {
         ...state,
         gap,
         clampOffset: noop,
+        offset: renderedOffset2,
         renderedOffset: renderedOffset2,
       },
       children: /* @__PURE__ */ jsx(ListView, {
-        suppressHydrationWarning: true,
         containerProps: props,
         containerRef,
         children,
@@ -49016,13 +48785,14 @@ function TickerComponent({
         isStatic: true,
         as,
         fade,
+        sign,
       },),
     },);
   }
   const [hasFocus, setHasFocus,] = useState(false,);
   const velocityFactor = useMotionValue(1,);
   const defaultOffset22 = useMotionValue(0,);
-  offset ?? (offset = defaultOffset22);
+  offset ??= defaultOffset22;
   const wrappedOffset = useTransform(() => {
     if (state.direction === 'rtl' && axis === 'x') {
       return wrap(state.totalItemLength + gap + state.inset, state.inset, offset.get(),);
@@ -49100,12 +48870,9 @@ function TickerComponent({
     };
   }, [items, isInView, overflow,],);
   const isMeasured = state.totalItemLength > 0;
-  const {
-    sign,
-  } = getLayoutStrategy(axis, state.direction,);
   useAnimationFrame(
     isMeasured && isInView && offset === defaultOffset22 && !isReducedMotion
-      ? (_, delta,) => {
+      ? (_time, delta,) => {
         const frameOffset = delta / 1e3 * (velocity * sign * velocityFactor.get());
         offset.set(offset.get() - frameOffset,);
       }
@@ -49130,7 +48897,6 @@ function TickerComponent({
           }
           : defaultBounds;
         clonedItems.push(/* @__PURE__ */ jsx(TickerItemWrapper, {
-          suppressHydrationWarning: true,
           offset: renderedOffset,
           axis,
           listSize: totalListSize,
@@ -49146,26 +48912,24 @@ function TickerComponent({
       },);
       const id3 = `ticker-group-${i}`;
       clonedItemGroups.push(/* @__PURE__ */ jsx(LayoutGroup, {
-        suppressHydrationWarning: true,
         id: id3,
         children: clonedItems,
       }, id3,),);
     }
   }
   useFocusNavigation(internalContainerRef, axis, focusOffset, offset, setHasFocus,);
-  const clampOffset = useCallback2((newOffset) => state.maxInset !== null ? clamp(-state.maxInset, 0, newOffset,) : newOffset, [
-    state.maxInset,
-  ],);
+  const clampOffset = useCallback2((offset2) => {
+    return state.maxInset !== null ? clamp(-state.maxInset, 0, offset2,) : offset2;
+  }, [state.maxInset,],);
   return /* @__PURE__ */ jsx(TickerContext.Provider, {
-    suppressHydrationWarning: true,
     value: {
       ...state,
       gap,
       clampOffset,
+      offset,
       renderedOffset,
     },
     children: /* @__PURE__ */ jsx(ListView, {
-      suppressHydrationWarning: true,
       containerProps: props,
       children,
       containerRef,
@@ -49195,6 +48959,9 @@ function TickerComponent({
       loop,
       as,
       fade,
+      sign,
+      fadeTransition,
+      pageTransition,
     },),
   },);
 }
@@ -49226,6 +48993,9 @@ function ListView({
   loop,
   as,
   fade,
+  sign,
+  fadeTransition = defaultFadeTransition,
+  pageTransition,
 },) {
   const MotionComponent = useMemo(() => motion.create(as,), [as,],);
   let dragConstraints = {};
@@ -49234,10 +49004,15 @@ function ListView({
   } = state;
   if (maxInset !== null) {
     if (axis === 'x') {
-      dragConstraints = {
-        left: maxInset * -1,
-        right: 0,
-      };
+      dragConstraints = sign > 0
+        ? {
+          left: maxInset * -1,
+          right: 0,
+        }
+        : {
+          right: maxInset,
+          left: 0,
+        };
     } else {
       dragConstraints = {
         top: maxInset * -1,
@@ -49250,7 +49025,6 @@ function ListView({
     _dragX,
     _dragY,
     dragMomentum = false,
-    onDragStart,
     onDragEnd,
     onPointerDown,
     ...remainingProps
@@ -49285,13 +49059,18 @@ function ListView({
             target = Math.abs(current2 - closestNext,) < Math.abs(current2 - closestPrev,) ? closestNext : closestPrev;
           }
         }
-        const constraints = loop ? {} : {
-          max: 0,
-          min: dragConstraints[axis === 'x' ? 'left' : 'top'],
-        };
+        const constraints = loop ? {} : sign > 0
+          ? {
+            max: 0,
+            min: dragConstraints[axis === 'x' ? 'left' : 'top'],
+          }
+          : {
+            min: 0,
+            max: dragConstraints.right,
+          };
         dragMomentumAnimation.current = animate(
           dragMotionValue,
-          clampOffset?.(target,),
+          clampOffset(target * sign,) * sign,
           snap ? pageTransition : {
             type: 'inertia',
             velocity: velocity[axis],
@@ -49323,33 +49102,34 @@ function ListView({
   },);
   useMotionValueEvent(renderedOffset, 'change', (value) => {
     if (maxInset === null) return;
-    if (value <= maxInset) {
-      if (!isAtLimits.current.start) {
-        animate(fadeStartOpacity, 1, fadeTransition,);
-        isAtLimits.current.start = true;
-      }
-    } else {
+    const maxOffset = maxInset * -1;
+    value *= sign;
+    if (value < 0) {
       if (isAtLimits.current.start) {
         animate(fadeStartOpacity, 0, fadeTransition,);
         isAtLimits.current.start = false;
       }
-    }
-    if (value >= 0) {
-      if (!isAtLimits.current.end) {
-        animate(fadeEndOpacity, 1, fadeTransition,);
-        isAtLimits.current.end = true;
-      }
     } else {
+      if (!isAtLimits.current.start) {
+        animate(fadeStartOpacity, 1, fadeTransition,);
+        isAtLimits.current.start = true;
+      }
+    }
+    if (value > maxOffset) {
       if (isAtLimits.current.end) {
         animate(fadeEndOpacity, 0, fadeTransition,);
         isAtLimits.current.end = false;
+      }
+    } else {
+      if (!isAtLimits.current.end) {
+        animate(fadeEndOpacity, 1, fadeTransition,);
+        isAtLimits.current.end = true;
       }
     }
   },);
   return /* @__PURE__ */ jsxs(Fragment, {
     children: [
       /* @__PURE__ */ jsx(MotionComponent, {
-        suppressHydrationWarning: true,
         ...remainingProps,
         ref: containerRef,
         style: {
@@ -49361,10 +49141,15 @@ function ListView({
         },
         onPointerEnter,
         onPointerLeave,
+        drag: drag2,
+        _dragX,
+        _dragY,
+        dragConstraints,
+        dragMomentum,
+        onPointerDown,
+        onDragEnd,
         children: /* @__PURE__ */ jsxs(motion.ul, {
-          suppressHydrationWarning: true,
           ref: listRef,
-          role: 'group',
           style: {
             ...listStyle,
             flexDirection: axis === 'x' ? 'row' : 'column',
@@ -49379,18 +49164,9 @@ function ListView({
             maxHeight: '100%',
             maxWidth: '100%',
           },
-          drag: drag2,
-          _dragX,
-          _dragY,
-          dragConstraints,
-          dragMomentum,
-          onPointerDown,
-          onDragStart,
-          onDragEnd,
           children: [
             items.map((item, index,) =>
               /* @__PURE__ */ jsx(TickerItemWrapper, {
-                suppressHydrationWarning: true,
                 axis,
                 offset: renderedOffset,
                 listSize: totalListSize,
@@ -49413,6 +49189,11 @@ function ListView({
     ],
   },);
 }
+function invariant2(condition, message,) {
+  if (!condition) {
+    throw new Error(message,);
+  }
+}
 var defaultBounds = {
   start: 0,
   end: 0,
@@ -49430,12 +49211,7 @@ var listStyle = {
   margin: 0,
   justifyContent: 'flex-start',
 };
-var pageTransition = {
-  type: 'spring',
-  stiffness: 400,
-  damping: 40,
-};
-var fadeTransition = {
+var defaultFadeTransition = {
   duration: 0.2,
   ease: 'linear',
 };
@@ -49458,7 +49234,6 @@ var BasicTicker = /* @__PURE__ */ forwardRef(function BasicTicker2(props, ref,) 
   const baseVelocity = playState === 'paused' ? 0 : tickerEffectVelocity ?? 100;
   const velocity = baseVelocity * directionModifier;
   return /* @__PURE__ */ jsx(Ticker, {
-    suppressHydrationWarning: true,
     ref,
     as: Component18,
     ...rest,
@@ -49522,7 +49297,6 @@ var DraggableTicker = /* @__PURE__ */ forwardRef(function DraggableTicker2(props
     }
   }, [playState, offsetMotionValue,],);
   return /* @__PURE__ */ jsx(Ticker, {
-    suppressHydrationWarning: true,
     ref,
     as: Component18,
     ...rest,
@@ -49569,7 +49343,6 @@ var TickerContextProvider = ({
     stop: () => startTransition2(() => onPlayStateChange('paused',)),
   }), [onPlayStateChange,],);
   return /* @__PURE__ */ jsx(TickerContext2.Provider, {
-    suppressHydrationWarning: true,
     value,
     children,
   },);
@@ -49610,10 +49383,8 @@ var Ticker2 = /* @__PURE__ */ forwardRef(function Ticker3(props, ref,) {
   };
   if (isStatic || !tickerEffectDraggable) {
     return /* @__PURE__ */ jsx(TickerContextProvider, {
-      suppressHydrationWarning: true,
       onPlayStateChange: setPlayState,
       children: /* @__PURE__ */ jsx(BasicTicker, {
-        suppressHydrationWarning: true,
         ...rest,
         style: tickerStyle,
         ref,
@@ -49628,10 +49399,8 @@ var Ticker2 = /* @__PURE__ */ forwardRef(function Ticker3(props, ref,) {
     },);
   }
   return /* @__PURE__ */ jsx(TickerContextProvider, {
-    suppressHydrationWarning: true,
     onPlayStateChange: setPlayState,
     children: /* @__PURE__ */ jsx(DraggableTicker, {
-      suppressHydrationWarning: true,
       ...rest,
       style: tickerStyle,
       ref,
@@ -49662,13 +49431,11 @@ var withTickerFX = (Component18) => {
   return (props) => {
     if (props.tickerEffectEnabled) {
       return /* @__PURE__ */ jsx(Ticker2, {
-        suppressHydrationWarning: true,
         ...props,
         as: Component18,
       },);
     }
     return /* @__PURE__ */ jsx(Component18, {
-      suppressHydrationWarning: true,
       ...props,
     },);
   };
@@ -49691,27 +49458,23 @@ var withFlowFX = (Component18) =>
         : transition, [transition, flowEffectTransition,],);
     if (!flowEffectEnabled) {
       return /* @__PURE__ */ jsx(Component18, {
-        suppressHydrationWarning: true,
         ...forwardedProps,
         ref: forwardedRef,
         transition,
       },);
     }
     let componentWithFlowEffect = /* @__PURE__ */ jsx(Component18, {
-      suppressHydrationWarning: true,
       ...forwardedProps,
       ref: forwardedRef,
     },);
     if (flowEffectTransition) {
       componentWithFlowEffect = /* @__PURE__ */ jsx(MotionConfig, {
-        suppressHydrationWarning: true,
         transition: mergedTransition,
         children: componentWithFlowEffect,
       },);
     }
     if (!isNestedFlowEffect) {
       componentWithFlowEffect = /* @__PURE__ */ jsx(LayoutGroup, {
-        suppressHydrationWarning: true,
         children: componentWithFlowEffect,
       },);
     }
@@ -49734,7 +49497,6 @@ function withMappedReactProps(Component18, info,) {
       asRecord(props,)[mapping?.[key7] ?? key7] = rawProps[key7];
     }
     return /* @__PURE__ */ jsx(Component18, {
-      suppressHydrationWarning: true,
       ...props,
     },);
   };
@@ -50678,7 +50440,6 @@ var ShaderFallbackImage = /* @__PURE__ */ memo2(function ShaderFallbackImage2({
 },) {
   if (!src) return null;
   return /* @__PURE__ */ jsx(BackgroundImageComponent, {
-    suppressHydrationWarning: true,
     image: {
       src,
       fit: 'fill',
@@ -51179,11 +50940,9 @@ var ShaderSandboxFallbackImage = /* @__PURE__ */ memo2(function ShaderSandboxFal
     pointerEvents: hidden ? 'none' : void 0,
   };
   return /* @__PURE__ */ jsxs('div', {
-    suppressHydrationWarning: true,
     style: containerStyle2,
     children: [
       previousSrc && /* @__PURE__ */ jsx('img', {
-        suppressHydrationWarning: true,
         src: previousSrc,
         decoding: 'async',
         style: sandboxFallbackImageStyle,
@@ -51191,11 +50950,9 @@ var ShaderSandboxFallbackImage = /* @__PURE__ */ memo2(function ShaderSandboxFal
         alt: '',
       }, `prev-${previousSrc}`,),
       /* @__PURE__ */ jsx('div', {
-        suppressHydrationWarning: true,
         ref: previousSrc ? fadeRef : void 0,
         style: sandboxFallbackContainerStyle,
         children: /* @__PURE__ */ jsx('img', {
-          suppressHydrationWarning: true,
           src: displaySrc,
           style: sandboxFallbackImageStyle,
           decoding: 'async',
@@ -51608,7 +51365,6 @@ function ShaderCanvas({
   }, [haveUniformsResolved, mouseDataRef, renderSingleFrame, updateCurrentSize, maybeResize,],);
   useCanvasResize(canvasRef, handleResize,);
   return /* @__PURE__ */ jsx('canvas', {
-    suppressHydrationWarning: true,
     ref: canvasRef,
     style: canvasStyle,
     draggable: false,
@@ -51666,13 +51422,11 @@ var ShaderWithFallbackOverlay = /* @__PURE__ */ memo2(function ShaderWithFallbac
   return /* @__PURE__ */ jsxs(Fragment, {
     children: [
       /* @__PURE__ */ jsx('div', {
-        suppressHydrationWarning: true,
         style: {
           ...overlayStyle,
           opacity: shouldHideCanvas ? 0 : 1,
         },
         children: /* @__PURE__ */ jsx(ShaderCanvas, {
-          suppressHydrationWarning: true,
           vertexShader,
           fragmentShader,
           animated,
@@ -51690,7 +51444,6 @@ var ShaderWithFallbackOverlay = /* @__PURE__ */ memo2(function ShaderWithFallbac
         },),
       },),
       fallbackImage && !shouldSkipInitialFallback && /* @__PURE__ */ jsx('div', {
-        suppressHydrationWarning: true,
         style: {
           ...overlayStyle,
           opacity: shouldShowFallback ? 1 : 0,
@@ -51698,7 +51451,6 @@ var ShaderWithFallbackOverlay = /* @__PURE__ */ memo2(function ShaderWithFallbac
           pointerEvents: 'none',
         },
         children: /* @__PURE__ */ jsx(ShaderFallbackImage, {
-          suppressHydrationWarning: true,
           src: fallbackImage,
         },),
       },),
@@ -51972,12 +51724,10 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
   if (isOnCanvas) {
     const hideFallback = !isFallbackOnly && (shouldSkipInitialFallback || isShaderReady);
     return /* @__PURE__ */ jsxs(ShaderContainerFrame, {
-      suppressHydrationWarning: true,
       ref: observerRef,
       ...containerFrameProps,
       children: [
         !isFallbackOnly && /* @__PURE__ */ jsx(ShaderWithFallbackOverlay, {
-          suppressHydrationWarning: true,
           mode: effectiveMode,
           skipInitialFallback: shouldSkipFallbackOverlay,
           onReady: handleShaderReady,
@@ -51987,7 +51737,6 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
           mouseDataRef,
         },),
         /* @__PURE__ */ jsx(ShaderSandboxFallbackImage, {
-          suppressHydrationWarning: true,
           src: fallbackImage,
           hidden: hideFallback,
         },),
@@ -51997,21 +51746,17 @@ var Shader = /* @__PURE__ */ forwardRef(function Shader2({
   }
   if (isFallbackOnly) {
     return /* @__PURE__ */ jsx(ShaderContainerFrame, {
-      suppressHydrationWarning: true,
       ref: observerRef,
       ...containerFrameProps,
       children: shouldSkipFallbackOverlay && !isIntersecting ? null : /* @__PURE__ */ jsx(ShaderFallbackImage, {
-        suppressHydrationWarning: true,
         src: fallbackImage,
       },),
     },);
   }
   return /* @__PURE__ */ jsx(ShaderContainerFrame, {
-    suppressHydrationWarning: true,
     ref: observerRef,
     ...containerFrameProps,
     children: /* @__PURE__ */ jsx(ShaderWithFallbackOverlay, {
-      suppressHydrationWarning: true,
       mode: effectiveMode,
       fallbackImage,
       skipInitialFallback: shouldSkipFallbackOverlay,
@@ -52035,7 +51780,6 @@ var ShaderContainerFrame = /* @__PURE__ */ forwardRef(function ShaderContainerFr
     overflow: 'hidden',
   };
   return /* @__PURE__ */ jsx(FrameWithMotion2, {
-    suppressHydrationWarning: true,
     ref,
     __fromCanvasComponent: true,
     style: styles4,
@@ -52084,7 +51828,6 @@ var withVariantAppearEffect = (Component18) =>
   React42.forwardRef((props, forwardedRef,) => {
     if (RenderTarget.current() === RenderTarget.canvas) {
       return /* @__PURE__ */ jsx(Component18, {
-        suppressHydrationWarning: true,
         ...props,
         ref: forwardedRef,
       },);
@@ -52162,14 +51905,12 @@ var withVariantAppearEffect = (Component18) =>
     },);
     if (!('variantAppearEffectEnabled' in options) || variantAppearEffectEnabled === true) {
       return /* @__PURE__ */ jsx(Component18, {
-        suppressHydrationWarning: true,
         ...rest,
         variant: activeVariant ?? props.variant,
         ref: observerRef,
       },);
     } else {
       return /* @__PURE__ */ jsx(Component18, {
-        suppressHydrationWarning: true,
         ...rest,
       },);
     }
@@ -52192,7 +51933,6 @@ var withVariantFX = (Component18) =>
       true,
     );
     return /* @__PURE__ */ jsx(Component18, {
-      suppressHydrationWarning: true,
       ...props,
       style: {
         ...props?.style,
@@ -54616,7 +54356,6 @@ function CustomProperties({
   customProperties,
 },) {
   return /* @__PURE__ */ jsx('div', {
-    suppressHydrationWarning: true,
     style: customProperties,
     children,
   },);
@@ -54702,7 +54441,6 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
   }, [setInputRef,],);
   if (type === 'hidden') {
     return /* @__PURE__ */ jsx(motion.input, {
-      suppressHydrationWarning: true,
       type: 'hidden',
       name: inputName,
       defaultValue,
@@ -54719,7 +54457,6 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
     type === 'textarea' && textareaInputTypeWrapperClassName,
   );
   return /* @__PURE__ */ jsxs(motion.div, {
-    suppressHydrationWarning: true,
     ref,
     onClick: handleWrapperClick,
     style: style2,
@@ -54728,7 +54465,6 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
     children: [
       type === 'textarea'
         ? /* @__PURE__ */ jsx(motion.textarea, {
-          suppressHydrationWarning: true,
           ref: setInputRef,
           ...dataProps,
           ...eventHandlers,
@@ -54741,7 +54477,6 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
           maxLength,
         },)
         : /* @__PURE__ */ jsx(motion.input, {
-          suppressHydrationWarning: true,
           ref: setInputRef,
           ...dataProps,
           ...eventHandlers,
@@ -54758,14 +54493,11 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
           maxLength,
         },),
       showClear && /* @__PURE__ */ jsx('button', {
-        suppressHydrationWarning: true,
         type: 'button',
         className: clearButtonClassName,
         onClick: handleClear,
         'aria-label': 'Clear',
-        children: /* @__PURE__ */ jsx(ClearIcon, {
-          suppressHydrationWarning: true,
-        },),
+        children: /* @__PURE__ */ jsx(ClearIcon, {},),
       },),
     ],
   },);
@@ -54777,14 +54509,12 @@ function normalizeValueForInputType(value, type,) {
 }
 function ClearIcon() {
   return /* @__PURE__ */ jsx('svg', {
-    suppressHydrationWarning: true,
     xmlns: 'http://www.w3.org/2000/svg',
     width: '8',
     height: '8',
     viewBox: '0 0 8 8',
     'aria-hidden': 'true',
     children: /* @__PURE__ */ jsx('path', {
-      suppressHydrationWarning: true,
       d: 'm1.5 6.5 5-5M6.5 6.5l-5-5',
       fill: 'none',
       stroke: 'currentColor',
@@ -55037,7 +54767,6 @@ var BooleanInput = /* @__PURE__ */ React42.forwardRef(function FormBooleanInput(
     setRef2(setReplayInputRef, input,);
   }, [ref, setReplayInputRef,],);
   return /* @__PURE__ */ jsx(motion.input, {
-    suppressHydrationWarning: true,
     ...rest,
     ...attributes,
     ...eventHandlers,
@@ -55204,20 +54933,17 @@ var Select = /* @__PURE__ */ React42.forwardRef(function Select2(props, measureR
   const eventHandlers = useCustomValidity(onValid, onInvalid, handleChange, onBlur, onFocus,);
   if (hidden) {
     return /* @__PURE__ */ jsx(motion.input, {
-      suppressHydrationWarning: true,
       type: 'hidden',
       name: inputName,
       defaultValue,
     },);
   }
   return /* @__PURE__ */ jsx(motion.div, {
-    suppressHydrationWarning: true,
     ref: measureRef,
     style: style2,
     className: cx(inputWrapperClassName, selectWrapperClassName, className2,),
     ...rest,
     children: /* @__PURE__ */ jsx(motion.select, {
-      suppressHydrationWarning: true,
       ref: setSelectRef,
       name: inputName,
       autoFocus,
@@ -55229,15 +54955,12 @@ var Select = /* @__PURE__ */ React42.forwardRef(function Select2(props, measureR
       children: selectOptions?.map((option, index,) => {
         switch (option.type) {
           case 'divider':
-            return /* @__PURE__ */ jsx('hr', {
-              suppressHydrationWarning: true,
-            }, index,);
+            return /* @__PURE__ */ jsx('hr', {}, index,);
           case 'option':
             return (
               // biome-ignore lint/suspicious/noArrayIndexKey: Values can be duplicated, so we could only use UUIDs here (but that isn't really better)
               /* @__PURE__ */
               jsx('option', {
-                suppressHydrationWarning: true,
                 value: option.value ?? option.title,
                 disabled: option.disabled,
                 children: option.title ?? option.value,
@@ -55602,7 +55325,6 @@ function withLightboxEffect(Component18,) {
     return /* @__PURE__ */ jsxs(Fragment, {
       children: [
         /* @__PURE__ */ jsx(Component18, {
-          suppressHydrationWarning: true,
           ...props,
           style: style2,
           onClick: handleClick,
@@ -55612,7 +55334,6 @@ function withLightboxEffect(Component18,) {
           transition,
         },),
         /* @__PURE__ */ jsx(AnimatePresence, {
-          suppressHydrationWarning: true,
           onExitComplete: () => {
             startTransition2(() => {
               setOpenOverrides(void 0,);
@@ -55624,7 +55345,6 @@ function withLightboxEffect(Component18,) {
               /* @__PURE__ */ jsxs(Fragment, {
                 children: [
                   /* @__PURE__ */ jsx(motion.div, {
-                    suppressHydrationWarning: true,
                     ...portalProps,
                     className: lightboxClassName,
                     onClick: onClose,
@@ -55640,7 +55360,6 @@ function withLightboxEffect(Component18,) {
                     exit: enterExitBackdropAnimation,
                   },),
                   /* @__PURE__ */ jsx(motion.div, {
-                    suppressHydrationWarning: true,
                     ...portalProps,
                     className: lightboxClassName,
                     style: {
@@ -55653,7 +55372,6 @@ function withLightboxEffect(Component18,) {
                       zIndex: lightbox.zIndex,
                     },
                     children: /* @__PURE__ */ jsx('div', {
-                      suppressHydrationWarning: true,
                       style: {
                         alignItems: 'center',
                         aspectRatio: aspectRatio2,
@@ -55665,7 +55383,6 @@ function withLightboxEffect(Component18,) {
                         maxWidth: lightbox.maxWidth,
                       },
                       children: /* @__PURE__ */ jsx(motion.div, {
-                        suppressHydrationWarning: true,
                         layoutId,
                         transition,
                         onClick: onOpen,
@@ -55683,7 +55400,6 @@ function withLightboxEffect(Component18,) {
                           ...border,
                         },
                         children: /* @__PURE__ */ jsx(BackgroundImageComponent, {
-                          suppressHydrationWarning: true,
                           image,
                           alt: image.alt,
                           draggable: props.draggable,
@@ -55741,14 +55457,12 @@ var Component16 = /* @__PURE__ */ React42.forwardRef(function Image2(props, ref,
   }
   const MotionComponent = htmlElementAsMotionComponent(props.as,);
   return /* @__PURE__ */ jsxs(MotionComponent, {
-    suppressHydrationWarning: true,
     ...rest,
     style: style2,
     ref,
     draggable,
     children: [
       background && /* @__PURE__ */ jsx(BackgroundImageComponent, {
-        suppressHydrationWarning: true,
         image: background,
         alt,
         draggable,
@@ -55773,7 +55487,6 @@ var ColumnMasonryLayout = /* @__PURE__ */ React42.memo(function ColumnMasonryLay
   const wrapperStyle2 = getMasonryColumnStyle(rowGap,);
   return tracks.map((trackChildren, i,) =>
     /* @__PURE__ */ jsx('div', {
-      suppressHydrationWarning: true,
       style: wrapperStyle2,
       children: trackChildren,
     }, getMasonryColumnKey(i,),)
@@ -55846,7 +55559,6 @@ var withColumnMasonryLayout = (Component18) => {
   }, ref,) {
     if (!columnMasonryLayoutEnabled) {
       return /* @__PURE__ */ jsx(Component18, {
-        suppressHydrationWarning: true,
         ref,
         style: existingStyle,
         ...rest,
@@ -55858,12 +55570,10 @@ var withColumnMasonryLayout = (Component18) => {
       gridTemplateColumns: `repeat(${trackCount}, 1fr)`,
     };
     return /* @__PURE__ */ jsx(Component18, {
-      suppressHydrationWarning: true,
       ref,
       style: mergedStyle,
       ...rest,
       children: /* @__PURE__ */ jsx(ColumnMasonryLayout, {
-        suppressHydrationWarning: true,
         trackCount,
         rowGap,
         parentIsDataRepeater,
@@ -56014,7 +55724,6 @@ var RelativeDate = /* @__PURE__ */ memo2(function RelativeDate2({
     children: [
       isWindow ? formattedRelativeDate : formattedDate,
       isWindow ? null : /* @__PURE__ */ jsx('script', {
-        suppressHydrationWarning: true,
         'data-relative-date-script': 'inline',
         dangerouslySetInnerHTML: {
           __html: createHydrationScript(targetDate, dateFormat, dateStyle, dateNumeric, dateCapitalize, locale,),
@@ -56329,7 +56038,6 @@ var DeprecatedRichTextInner = /* @__PURE__ */ React.forwardRef(function Text(pro
   collectTextShadowsForProps(props, style2,);
   Object.assign(style2, props.style,);
   return /* @__PURE__ */ jsx(motion.div, {
-    suppressHydrationWarning: true,
     id: id3,
     ref: layoutRef,
     ...rest,
@@ -56437,7 +56145,6 @@ function tokenizeText(text, tokenization = 'character', elements, shouldReduceMo
     const ref = newOverrideableRef();
     elements.add(ref,);
     return /* @__PURE__ */ jsx('span', {
-      suppressHydrationWarning: true,
       ref,
       style: style2,
       children: text,
@@ -56459,7 +56166,6 @@ function tokenizeText(text, tokenization = 'character', elements, shouldReduceMo
         return /* @__PURE__ */ jsxs(React.Fragment, {
           children: [
             /* @__PURE__ */ jsx('span', {
-              suppressHydrationWarning: true,
               style: {
                 whiteSpace: short ? 'nowrap' : 'unset',
               },
@@ -56470,7 +56176,6 @@ function tokenizeText(text, tokenization = 'character', elements, shouldReduceMo
                   // biome-ignore lint/suspicious/noArrayIndexKey: We are combining index with char.
                   /* @__PURE__ */
                   jsx('span', {
-                    suppressHydrationWarning: true,
                     ref,
                     style: style2,
                     children: char,
@@ -56493,7 +56198,6 @@ function tokenizeText(text, tokenization = 'character', elements, shouldReduceMo
         return /* @__PURE__ */ jsxs(React.Fragment, {
           children: [
             /* @__PURE__ */ jsx('span', {
-              suppressHydrationWarning: true,
               ref,
               style: style2,
               children: char,
@@ -56837,7 +56541,6 @@ var BaseSVG = /* @__PURE__ */ forwardRef(function BaseSVG2(props, forwardedRef,)
     // biome-ignore lint/a11y/noSvgWithoutTitle: FIXME: FitText might be inaccessible to screen readers because it’s wrapped in an svg
     /* @__PURE__ */
     jsx('svg', {
-      suppressHydrationWarning: true,
       ...props,
       ref: forwardedRef,
       children: props.children,
@@ -56852,12 +56555,10 @@ var FitText = /* @__PURE__ */ forwardRef(function FitText2({
   ...props
 }, forwardedRef,) {
   return /* @__PURE__ */ jsx(MotionSVG, {
-    suppressHydrationWarning: true,
     ...props,
     ref: forwardedRef,
     viewBox,
     children: /* @__PURE__ */ jsx(motion.foreignObject, {
-      suppressHydrationWarning: true,
       width: '100%',
       height: '100%',
       className: 'framer-fit-text',
@@ -56992,7 +56693,6 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
   if (isString(props.viewBox,)) {
     if (props.as !== void 0) {
       return /* @__PURE__ */ jsx(Component18, {
-        suppressHydrationWarning: true,
         ...validRestProps,
         ref: containerRef,
         style: containerStyle2,
@@ -57001,7 +56701,6 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
         'data-framer-name': dataFramerName,
         'data-framer-component-type': richTextContainerComponentType,
         children: /* @__PURE__ */ jsx(FitText, {
-          suppressHydrationWarning: true,
           viewBox,
           viewBoxScale,
           style: {
@@ -57013,7 +56712,6 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
       },);
     } else {
       return /* @__PURE__ */ jsx(FitText, {
-        suppressHydrationWarning: true,
         ...validRestProps,
         ref: containerRef,
         style: containerStyle2,
@@ -57028,7 +56726,6 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
     }
   }
   return /* @__PURE__ */ jsx(Component18, {
-    suppressHydrationWarning: true,
     ...validRestProps,
     ref: containerRef,
     style: containerStyle2,
@@ -57085,7 +56782,6 @@ function processRichTextChildren(
       props.id = slug;
       const className2 = cx('framer-text', anchorLinkStylePresetClassName,);
       const anchorLink = /* @__PURE__ */ jsx('a', {
-        suppressHydrationWarning: true,
         href: `#${slug}`,
         className: className2,
         children,
@@ -57137,7 +56833,6 @@ var RichTextInner = /* @__PURE__ */ forwardRef(function RichText({
       [isString(html,) ? 'html' : 'htmlFromDesign']: content,
     };
     return /* @__PURE__ */ jsx(DeprecatedRichText, {
-      suppressHydrationWarning: true,
       ...props,
       ...contentProp,
       ref: forwardedRef,
@@ -57158,7 +56853,6 @@ var RichTextInner = /* @__PURE__ */ forwardRef(function RichText({
     }
   }
   return /* @__PURE__ */ jsx(RichTextContainer, {
-    suppressHydrationWarning: true,
     ...props,
     ref: forwardedRef,
     children: isValidElement(content,) ? content : void 0,
@@ -57341,7 +57035,6 @@ var ImagePatternElement = ({
 },) => {
   const href = imageUrlForAsset(path,);
   return /* @__PURE__ */ jsx('pattern', {
-    suppressHydrationWarning: true,
     id: id3,
     width: repeat ? width : '100%',
     height: repeat ? height : '100%',
@@ -57350,7 +57043,6 @@ var ImagePatternElement = ({
     x: repeat ? offsetX : void 0,
     y: repeat ? offsetY : void 0,
     children: /* @__PURE__ */ jsx('image', {
-      suppressHydrationWarning: true,
       width: repeat ? width : 1,
       height: repeat ? height : 1,
       href,
@@ -57604,7 +57296,6 @@ var SVGInner = /* @__PURE__ */ forwardRef(function SVG(props, forwardedRef,) {
   const providedWindow = useProvidedWindow();
   useMeasureLayout(props, layoutRef,);
   return /* @__PURE__ */ jsx(SVGComponent, {
-    suppressHydrationWarning: true,
     ...props,
     innerRef: ref,
     parentSize,
@@ -57837,7 +57528,6 @@ var SVGComponent = /* @__PURE__ */ (() => {
           y2,
         } = elementPropertiesForLinearGradient(gradient, identifier,);
         fillElement = /* @__PURE__ */ jsx('svg', {
-          suppressHydrationWarning: true,
           ref: this.setSVGElement,
           width: '100%',
           height: '100%',
@@ -57846,7 +57536,6 @@ var SVGComponent = /* @__PURE__ */ (() => {
           },
           role: 'presentation',
           children: /* @__PURE__ */ jsx('linearGradient', {
-            suppressHydrationWarning: true,
             id: gradientId,
             x1,
             x2,
@@ -57854,7 +57543,6 @@ var SVGComponent = /* @__PURE__ */ (() => {
             y2,
             children: stops.map((stop, idx,) => {
               return /* @__PURE__ */ jsx('stop', {
-                suppressHydrationWarning: true,
                 offset: stop.position,
                 stopColor: stop.color,
                 stopOpacity: stop.alpha,
@@ -57868,7 +57556,6 @@ var SVGComponent = /* @__PURE__ */ (() => {
         outerStyle.fill = `url(#${gradientId})`;
         const elementProperties = elementPropertiesForRadialGradient(gradient, identifier,);
         fillElement = /* @__PURE__ */ jsx('svg', {
-          suppressHydrationWarning: true,
           ref: this.setSVGElement,
           width: '100%',
           height: '100%',
@@ -57877,14 +57564,12 @@ var SVGComponent = /* @__PURE__ */ (() => {
           },
           role: 'presentation',
           children: /* @__PURE__ */ jsx('radialGradient', {
-            suppressHydrationWarning: true,
             id: gradientId,
             cy: gradient.centerAnchorY,
             cx: gradient.centerAnchorX,
             r: gradient.widthFactor,
             children: elementProperties.stops.map((stop, idx,) => {
               return /* @__PURE__ */ jsx('stop', {
-                suppressHydrationWarning: true,
                 offset: stop.position,
                 stopColor: stop.color,
                 stopOpacity: stop.alpha,
@@ -57897,7 +57582,6 @@ var SVGComponent = /* @__PURE__ */ (() => {
         if (imagePattern) {
           outerStyle.fill = `url(#${imagePattern.id})`;
           fillElement = /* @__PURE__ */ jsx('svg', {
-            suppressHydrationWarning: true,
             ref: this.setSVGElement,
             width: '100%',
             height: '100%',
@@ -57906,9 +57590,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
             },
             role: 'presentation',
             children: /* @__PURE__ */ jsx('defs', {
-              suppressHydrationWarning: true,
               children: /* @__PURE__ */ jsx(ImagePatternElement, {
-                suppressHydrationWarning: true,
                 ...imagePattern,
               },),
             },),
@@ -57945,8 +57627,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
           children: [
             fillElement,
             /* @__PURE__ */ jsx('div', {
-              suppressHydrationWarning: true,
-              className: 'svgContainer',
+              className: 'svgContainer', suppressHydrationWarning: true,
               style: innerStyle,
               ref: this.container,
               dangerouslySetInnerHTML: {
@@ -57966,7 +57647,6 @@ var SVGComponent = /* @__PURE__ */ (() => {
       } = this.props;
       const hasTitleOrDescription = title || description;
       return /* @__PURE__ */ jsx(MotionComponent, {
-        suppressHydrationWarning: true,
         ...dataProps,
         ...rest,
         layoutId,
@@ -58084,7 +57764,6 @@ var TextInner = /* @__PURE__ */ React42.forwardRef(function Text2(props, forward
     return replaceFramerPageLinks(props.rawHTML, getRoute, currentRoute, implicitPathVariables,);
   }, [props.rawHTML, getRoute, currentRoute, implicitPathVariables,],);
   return /* @__PURE__ */ jsx(TextComponent, {
-    suppressHydrationWarning: true,
     ...props,
     innerRef: layoutRef,
     layoutId,
@@ -58192,7 +57871,6 @@ var TextComponent = /* @__PURE__ */ (() => {
           if (alignment) asRecord(style2,)['--framer-text-alignment'] = alignment;
           const tabIndexProps = getTabIndexProps(tabIndex,);
           return /* @__PURE__ */ jsx(motion.div, {
-            suppressHydrationWarning: true,
             layoutId,
             id: id3,
             ...tabIndexProps,
@@ -58231,7 +57909,6 @@ var TextComponent = /* @__PURE__ */ (() => {
     }
     render() {
       return /* @__PURE__ */ jsx(ComponentContainerContext.Consumer, {
-        suppressHydrationWarning: true,
         children: this.renderMain,
       },);
     }
@@ -58404,7 +58081,6 @@ function TickerItem({
     props,
   } = itemProps;
   return /* @__PURE__ */ jsx(motion.li, {
-    suppressHydrationWarning: true,
     ...props,
     style: {
       ...props.style,
@@ -58726,7 +58402,6 @@ var LinearGradientElement = class extends Component2 {
       y2,
     } = this.props;
     return /* @__PURE__ */ jsx('linearGradient', {
-      suppressHydrationWarning: true,
       id: id3,
       x1,
       x2,
@@ -58734,7 +58409,6 @@ var LinearGradientElement = class extends Component2 {
       y2,
       children: stops.map((stop, idx,) => {
         return /* @__PURE__ */ jsx('stop', {
-          suppressHydrationWarning: true,
           offset: stop.position,
           stopColor: stop.color,
           stopOpacity: stop.alpha,
@@ -58754,7 +58428,6 @@ var RadialGradientElement = class extends Component2 {
       stops,
     } = this.props;
     return /* @__PURE__ */ jsx('radialGradient', {
-      suppressHydrationWarning: true,
       id: id3,
       cy: centerAnchorY,
       cx: centerAnchorX,
@@ -58762,7 +58435,6 @@ var RadialGradientElement = class extends Component2 {
       gradientTransform: getRadialGradientTransform(heightFactor, widthFactor, centerAnchorX, centerAnchorY,),
       children: stops.map((stop, idx,) => {
         return /* @__PURE__ */ jsx('stop', {
-          suppressHydrationWarning: true,
           offset: stop.position,
           stopColor: stop.color,
           stopOpacity: stop.alpha,
@@ -58815,7 +58487,6 @@ var SVGRoot = (props) => {
   const needsTranslate = __unframerWindow2.devicePixelRatio === 1;
   if (!needsScale && !needsTranslate) {
     return /* @__PURE__ */ jsx('svg', {
-      suppressHydrationWarning: true,
       role: 'presentation',
       ...svgProps,
       style: svgStyle,
@@ -58828,7 +58499,6 @@ var SVGRoot = (props) => {
     }
     : void 0;
   return /* @__PURE__ */ jsx('svg', {
-    suppressHydrationWarning: true,
     role: 'presentation',
     ...svgProps,
     style: {
@@ -58836,7 +58506,6 @@ var SVGRoot = (props) => {
       ...svgTransform,
     },
     children: /* @__PURE__ */ jsx('g', {
-      suppressHydrationWarning: true,
       style: {
         // The default value of transform-origin is 0 0 for all SVG elements except
         // for root <svg> elements:
@@ -59000,7 +58669,6 @@ var Vector = /* @__PURE__ */ (() => {
       if (shadow.insetElement !== null || shadow.outsetElement !== null || insideStroke) {
         pathAttributes.id = internalShapeId.id;
         shapeReference = /* @__PURE__ */ jsx(motion.path, {
-          suppressHydrationWarning: true,
           ...{
             ...pathAttributes,
           },
@@ -59009,17 +58677,14 @@ var Vector = /* @__PURE__ */ (() => {
         },);
         if (shadow.needsStrokeClip || insideStroke) {
           strokeClipPath = /* @__PURE__ */ jsx('clipPath', {
-            suppressHydrationWarning: true,
             id: internalStrokeClipId.id,
             children: /* @__PURE__ */ jsx('use', {
-              suppressHydrationWarning: true,
               xlinkHref: internalShapeId.link,
             },),
           },);
         }
         if (shadow.insetElement !== null && strokeEnabled && strokeWidth && strokeWidth > 0) {
           mainElement = /* @__PURE__ */ jsx('use', {
-            suppressHydrationWarning: true,
             xlinkHref: internalShapeId.link,
             fill: vectorFill,
             fillOpacity,
@@ -59027,7 +58692,6 @@ var Vector = /* @__PURE__ */ (() => {
             name: currentName,
           },);
           strokeElement = /* @__PURE__ */ jsx('use', {
-            suppressHydrationWarning: true,
             xlinkHref: internalShapeId.link,
             clipPath: internalStrokeClipId.urlLink,
             fill: 'transparent',
@@ -59036,7 +58700,6 @@ var Vector = /* @__PURE__ */ (() => {
           },);
         } else {
           mainElement = /* @__PURE__ */ jsx('use', {
-            suppressHydrationWarning: true,
             xlinkHref: internalShapeId.link,
             fill: vectorFill,
             fillOpacity,
@@ -59049,7 +58712,6 @@ var Vector = /* @__PURE__ */ (() => {
       } else {
         pathAttributes.id = idAttribute;
         mainElement = /* @__PURE__ */ jsx(motion.path, {
-          suppressHydrationWarning: true,
           ...{
             ...pathAttributes,
             fill: vectorFill,
@@ -59063,7 +58725,6 @@ var Vector = /* @__PURE__ */ (() => {
       }
       const imagePatternElement = imagePattern
         ? /* @__PURE__ */ jsx(ImagePatternElement, {
-          suppressHydrationWarning: true,
           ...imagePattern,
           repeat: BackgroundImage.isImageObject(fill,) && fill.fit === 'tile',
         },)
@@ -59071,26 +58732,22 @@ var Vector = /* @__PURE__ */ (() => {
       let gradient;
       if (linearGradient) {
         gradient = /* @__PURE__ */ jsx(LinearGradientElement, {
-          suppressHydrationWarning: true,
           ...linearGradient,
         },);
       } else if (radialGradient) {
         gradient = /* @__PURE__ */ jsx(RadialGradientElement, {
-          suppressHydrationWarning: true,
           ...radialGradient,
         },);
       }
       let defs = null;
       if (shapeReference || strokeClipPath || shadow.definition && shadow.definition.length || gradient || imagePatternElement) {
         defs = /* @__PURE__ */ jsxs('defs', {
-          suppressHydrationWarning: true,
           children: [shapeReference, strokeClipPath, shadow.definition, gradient, imagePatternElement,],
         },);
       }
       const opacityValue = opacity ?? (variants ? 1 : void 0);
       if (defs === null && shadow.outsetElement === null && shadow.insetElement === null && strokeElement === null) {
         mainElement = /* @__PURE__ */ jsx(motion.path, {
-          suppressHydrationWarning: true,
           ...{
             ...pathAttributes,
             fill: vectorFill,
@@ -59105,7 +58762,6 @@ var Vector = /* @__PURE__ */ (() => {
         return this.renderElement(mainElement,);
       }
       return this.renderElement(/* @__PURE__ */ jsxs(motion.g, {
-        suppressHydrationWarning: true,
         opacity: opacityValue,
         variants,
         transition,
@@ -59127,7 +58783,6 @@ var Vector = /* @__PURE__ */ (() => {
       if (!isRootVectorNode) return element;
       if (includeTransform) return element;
       return /* @__PURE__ */ jsx(SVGRoot, {
-        suppressHydrationWarning: true,
         id: id3,
         width,
         height,
@@ -59230,7 +58885,6 @@ var VectorGroup = /* @__PURE__ */ (() => {
         }
       }
       return this.renderElement(/* @__PURE__ */ jsx('g', {
-        suppressHydrationWarning: true,
         transform: transformString2(transform2,),
         ...{
           name,
@@ -59254,7 +58908,6 @@ var VectorGroup = /* @__PURE__ */ (() => {
       if (!isRootVectorNode) return element;
       if (includeTransform) return element;
       return /* @__PURE__ */ jsx(SVGRoot, {
-        suppressHydrationWarning: true,
         id: id3,
         left,
         top,
