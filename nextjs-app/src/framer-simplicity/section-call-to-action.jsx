@@ -84,7 +84,10 @@ var Transition = ({ value, children }) => {
 		[JSON.stringify(transition)],
 	);
 	return (
-		<MotionConfigContext.Provider value={contextValue}>
+		<MotionConfigContext.Provider
+			suppressHydrationWarning={true}
+			value={contextValue}
+		>
 			{children}
 		</MotionConfigContext.Provider>
 	);
@@ -139,10 +142,18 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 	const defaultLayoutId = React.useId();
 	const componentViewport = useComponentViewport();
 	return (
-		<LayoutGroup id={layoutId ?? defaultLayoutId}>
-			<Variants animate={variants} initial={false}>
-				<Transition value={transition1}>
+		<LayoutGroup
+			suppressHydrationWarning={true}
+			id={layoutId ?? defaultLayoutId}
+		>
+			<Variants
+				suppressHydrationWarning={true}
+				animate={variants}
+				initial={false}
+			>
+				<Transition suppressHydrationWarning={true} value={transition1}>
 					<motion.div
+						suppressHydrationWarning={true}
 						{...restProps}
 						{...gestureHandlers}
 						className={cx(
@@ -174,18 +185,21 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 						)}
 					>
 						<motion.div
+							suppressHydrationWarning={true}
 							className={"framer-1t9su1n"}
 							data-framer-name={"Container"}
 							layoutDependency={layoutDependency}
 							layoutId={"R4lbk7Kc7"}
 						>
 							<motion.div
+								suppressHydrationWarning={true}
 								className={"framer-3tqs3h"}
 								data-framer-name={"Content"}
 								layoutDependency={layoutDependency}
 								layoutId={"bl2tXxTo2"}
 							>
 								<ComponentViewportProvider
+									suppressHydrationWarning={true}
 									height={48}
 									width={"48px"}
 									y={
@@ -220,11 +234,13 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 									)}
 								>
 									<motion.div
+										suppressHydrationWarning={true}
 										className={"framer-1tb1tyt-container"}
 										layoutDependency={layoutDependency}
 										layoutId={"w1ByoY9eg-container"}
 									>
 										{_jsx(stdin_default2, {
+											suppressHydrationWarning: true,
 											height: "100%",
 											id: "w1ByoY9eg",
 											layoutId: "w1ByoY9eg",
@@ -237,12 +253,14 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 									</motion.div>
 								</ComponentViewportProvider>
 								<motion.div
+									suppressHydrationWarning={true}
 									className={"framer-1w220hs"}
 									data-framer-name={"Content"}
 									layoutDependency={layoutDependency}
 									layoutId={"btPQXLI2j"}
 								>
 									<RichText
+										suppressHydrationWarning={true}
 										__fromCanvasComponent={true}
 										className={"framer-1vsf7d3"}
 										fonts={["FS;Satoshi-medium"]}
@@ -259,6 +277,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 									>
 										<React.Fragment>
 											<motion.h1
+												suppressHydrationWarning={true}
 												style={{
 													"--font-selector": "RlM7U2F0b3NoaS1tZWRpdW0=",
 													"--framer-font-family":
@@ -277,6 +296,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										</React.Fragment>
 									</RichText>
 									<RichText
+										suppressHydrationWarning={true}
 										__fromCanvasComponent={true}
 										className={"framer-12trm3s"}
 										fonts={["Inter"]}
@@ -291,6 +311,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 									>
 										<React.Fragment>
 											<motion.p
+												suppressHydrationWarning={true}
 												className={"framer-styles-preset-1qe6evr"}
 												data-styles-preset={"wHLHeTMJ0"}
 												style={{
@@ -305,12 +326,14 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 									</RichText>
 								</motion.div>
 								<motion.div
+									suppressHydrationWarning={true}
 									className={"framer-1wsoj09"}
 									data-framer-name={"Button"}
 									layoutDependency={layoutDependency}
 									layoutId={"HU5Goovey"}
 								>
 									<ComponentViewportProvider
+										suppressHydrationWarning={true}
 										height={68}
 										y={
 											(componentViewport?.y || 0) +
@@ -350,11 +373,13 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										)}
 									>
 										<motion.div
+											suppressHydrationWarning={true}
 											className={"framer-1ui9lfd-container"}
 											layoutDependency={layoutDependency}
 											layoutId={"jTbpir4Zg-container"}
 										>
 											{_jsx(stdin_default, {
+												suppressHydrationWarning: true,
 												GLWImmBy_: false,
 												HBR9r6Wzz: true,
 												height: "100%",
@@ -377,6 +402,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										</motion.div>
 									</ComponentViewportProvider>
 									<RichText
+										suppressHydrationWarning={true}
 										__fromCanvasComponent={true}
 										className={"framer-n449q0"}
 										fonts={["FS;Satoshi-medium"]}
@@ -393,6 +419,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 									>
 										<React.Fragment>
 											<motion.p
+												suppressHydrationWarning={true}
 												style={{
 													"--font-selector": "RlM7U2F0b3NoaS1tZWRpdW0=",
 													"--framer-font-family":
@@ -553,6 +580,7 @@ var defaultResponsiveVariants = {
 function ComponentWithRoot({ locale, ...rest }) {
 	return (
 		<ContextProviders
+			suppressHydrationWarning={true}
 			routes={routes}
 			framerSiteId={
 				"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c"
@@ -561,6 +589,7 @@ function ComponentWithRoot({ locale, ...rest }) {
 			locales={locales}
 		>
 			{jsx(stdin_default3, {
+				suppressHydrationWarning: true,
 				...rest,
 			})}
 		</ContextProviders>
@@ -586,6 +615,7 @@ function ComponentWithRoot({ locale, ...rest }) {
 ComponentWithRoot.Responsive = ({ locale = "", ...rest }) => {
 	return (
 		<ContextProviders
+			suppressHydrationWarning={true}
 			routes={routes}
 			framerSiteId={
 				"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c"
@@ -594,6 +624,7 @@ ComponentWithRoot.Responsive = ({ locale = "", ...rest }) => {
 			locales={locales}
 		>
 			<WithFramerBreakpoints
+				suppressHydrationWarning={true}
 				Component={stdin_default3}
 				variants={defaultResponsiveVariants}
 				{...rest}

@@ -146,7 +146,10 @@ var Transition = ({ value, children }) => {
 		[JSON.stringify(transition)],
 	);
 	return (
-		<MotionConfigContext.Provider value={contextValue}>
+		<MotionConfigContext.Provider
+			suppressHydrationWarning={true}
+			value={contextValue}
+		>
 			{children}
 		</MotionConfigContext.Provider>
 	);
@@ -201,10 +204,18 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 	const defaultLayoutId = React.useId();
 	const componentViewport = useComponentViewport();
 	return (
-		<LayoutGroup id={layoutId ?? defaultLayoutId}>
-			<Variants animate={variants} initial={false}>
-				<Transition value={transition1}>
+		<LayoutGroup
+			suppressHydrationWarning={true}
+			id={layoutId ?? defaultLayoutId}
+		>
+			<Variants
+				suppressHydrationWarning={true}
+				animate={variants}
+				initial={false}
+			>
+				<Transition suppressHydrationWarning={true} value={transition1}>
 					<motion.div
+						suppressHydrationWarning={true}
 						{...restProps}
 						{...gestureHandlers}
 						className={cx(
@@ -236,18 +247,21 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 						)}
 					>
 						<motion.div
+							suppressHydrationWarning={true}
 							className={"framer-26phku"}
 							data-framer-name={"Container"}
 							layoutDependency={layoutDependency}
 							layoutId={"qr3WdxNy4"}
 						>
 							<motion.div
+								suppressHydrationWarning={true}
 								className={"framer-o9dj4w"}
 								data-framer-name={"Content"}
 								layoutDependency={layoutDependency}
 								layoutId={"ffzbPWZAO"}
 							>
 								<ComponentViewportProvider
+									suppressHydrationWarning={true}
 									height={40}
 									y={
 										(componentViewport?.y || 0) +
@@ -294,11 +308,13 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 									)}
 								>
 									<motion.div
+										suppressHydrationWarning={true}
 										className={"framer-1hmgtw3-container"}
 										layoutDependency={layoutDependency}
 										layoutId={"yGLY3owe0-container"}
 									>
 										{_jsx(stdin_default, {
+											suppressHydrationWarning: true,
 											D_QyhowU2: "Create React Components from Framer",
 											height: "100%",
 											id: "yGLY3owe0",
@@ -309,6 +325,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 									</motion.div>
 								</ComponentViewportProvider>
 								<RichText
+									suppressHydrationWarning={true}
 									__fromCanvasComponent={true}
 									className={"framer-13numsb"}
 									fonts={["FS;Satoshi-medium"]}
@@ -325,6 +342,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 								>
 									<React.Fragment>
 										<motion.h2
+											suppressHydrationWarning={true}
 											style={{
 												"--font-selector": "RlM7U2F0b3NoaS1tZWRpdW0=",
 												"--framer-font-family":
@@ -343,6 +361,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 									</React.Fragment>
 								</RichText>
 								<RichText
+									suppressHydrationWarning={true}
 									__fromCanvasComponent={true}
 									className={"framer-1s60nnl"}
 									fonts={["Inter"]}
@@ -357,6 +376,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 								>
 									<React.Fragment>
 										<motion.p
+											suppressHydrationWarning={true}
 											className={"framer-styles-preset-1qe6evr"}
 											data-styles-preset={"wHLHeTMJ0"}
 											style={{
@@ -371,11 +391,13 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 								</RichText>
 							</motion.div>
 							<motion.div
+								suppressHydrationWarning={true}
 								className={"framer-1e99kdl"}
 								layoutDependency={layoutDependency}
 								layoutId={"KzK40JeD0"}
 							>
 								<Image
+									suppressHydrationWarning={true}
 									background={{
 										alt: "",
 										fit: "fill",
@@ -477,6 +499,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 									)}
 								/>
 								<motion.div
+									suppressHydrationWarning={true}
 									className={"framer-1s9vhw7"}
 									data-border={true}
 									data-framer-name={"Card"}
@@ -501,6 +524,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 									}}
 								>
 									<motion.div
+										suppressHydrationWarning={true}
 										background={{
 											alt: "",
 											fit: "fill",
@@ -515,6 +539,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										}}
 									>
 										<SVG
+											suppressHydrationWarning={true}
 											className={"framer-jz54jo"}
 											data-framer-name={"Icon"}
 											layout={"position"}
@@ -532,6 +557,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										/>
 									</motion.div>
 									<motion.div
+										suppressHydrationWarning={true}
 										className={"framer-1mjvlp2"}
 										data-border={true}
 										data-framer-name={"Number"}
@@ -554,6 +580,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										}}
 									>
 										<RichText
+											suppressHydrationWarning={true}
 											__fromCanvasComponent={true}
 											className={"framer-1to88pp"}
 											fonts={["Inter"]}
@@ -571,6 +598,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										>
 											<React.Fragment>
 												<motion.p
+													suppressHydrationWarning={true}
 													className={"framer-styles-preset-1qe6evr"}
 													data-styles-preset={"wHLHeTMJ0"}
 													style={{
@@ -584,11 +612,13 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										</RichText>
 									</motion.div>
 									<motion.div
+										suppressHydrationWarning={true}
 										className={"framer-7nlvh2"}
 										layoutDependency={layoutDependency}
 										layoutId={"OhpyJMDGf"}
 									>
 										<RichText
+											suppressHydrationWarning={true}
 											__fromCanvasComponent={true}
 											className={"framer-s46z6e"}
 											fonts={["Inter"]}
@@ -605,6 +635,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										>
 											<React.Fragment>
 												<motion.p
+													suppressHydrationWarning={true}
 													className={"framer-styles-preset-1relapz"}
 													data-styles-preset={"v6szLN4kE"}
 													style={{
@@ -617,6 +648,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											</React.Fragment>
 										</RichText>
 										<RichText
+											suppressHydrationWarning={true}
 											__fromCanvasComponent={true}
 											className={"framer-1454csd"}
 											fonts={["Inter"]}
@@ -631,6 +663,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										>
 											<React.Fragment>
 												<motion.p
+													suppressHydrationWarning={true}
 													className={"framer-styles-preset-1fgmqi7"}
 													data-styles-preset={"CWRpkcDNO"}
 												>
@@ -643,6 +676,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 									</motion.div>
 								</motion.div>
 								<motion.div
+									suppressHydrationWarning={true}
 									className={"framer-1dqizkn"}
 									data-border={true}
 									data-framer-name={"Card"}
@@ -667,6 +701,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 									}}
 								>
 									<Image
+										suppressHydrationWarning={true}
 										background={{
 											alt: "",
 											fit: "fill",
@@ -763,6 +798,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										)}
 									/>
 									<motion.div
+										suppressHydrationWarning={true}
 										className={"framer-np2fxt"}
 										data-border={true}
 										data-framer-name={"Number"}
@@ -785,6 +821,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										}}
 									>
 										<RichText
+											suppressHydrationWarning={true}
 											__fromCanvasComponent={true}
 											className={"framer-1vd6lsb"}
 											fonts={["Inter"]}
@@ -802,6 +839,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										>
 											<React.Fragment>
 												<motion.p
+													suppressHydrationWarning={true}
 													className={"framer-styles-preset-1qe6evr"}
 													data-styles-preset={"wHLHeTMJ0"}
 													style={{
@@ -815,11 +853,13 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										</RichText>
 									</motion.div>
 									<motion.div
+										suppressHydrationWarning={true}
 										className={"framer-jzwczf"}
 										layoutDependency={layoutDependency}
 										layoutId={"Rjhd2uoCy"}
 									>
 										<RichText
+											suppressHydrationWarning={true}
 											__fromCanvasComponent={true}
 											className={"framer-mm30kz"}
 											fonts={["Inter"]}
@@ -836,6 +876,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										>
 											<React.Fragment>
 												<motion.p
+													suppressHydrationWarning={true}
 													className={"framer-styles-preset-1relapz"}
 													data-styles-preset={"v6szLN4kE"}
 													style={{
@@ -848,6 +889,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											</React.Fragment>
 										</RichText>
 										<RichText
+											suppressHydrationWarning={true}
 											__fromCanvasComponent={true}
 											className={"framer-1518ltk"}
 											fonts={["Inter"]}
@@ -862,6 +904,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										>
 											<React.Fragment>
 												<motion.p
+													suppressHydrationWarning={true}
 													className={"framer-styles-preset-1fgmqi7"}
 													data-styles-preset={"CWRpkcDNO"}
 												>
@@ -874,6 +917,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 									</motion.div>
 								</motion.div>
 								<motion.div
+									suppressHydrationWarning={true}
 									className={"framer-1mnf7bs"}
 									data-border={true}
 									data-framer-name={"Card"}
@@ -898,6 +942,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 									}}
 								>
 									<Image
+										suppressHydrationWarning={true}
 										background={{
 											alt: "",
 											fit: "fill",
@@ -994,6 +1039,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										)}
 									/>
 									<motion.div
+										suppressHydrationWarning={true}
 										className={"framer-6ymp3i"}
 										data-border={true}
 										data-framer-name={"Number"}
@@ -1016,6 +1062,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										}}
 									>
 										<RichText
+											suppressHydrationWarning={true}
 											__fromCanvasComponent={true}
 											className={"framer-j7z4er"}
 											fonts={["Inter"]}
@@ -1033,6 +1080,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										>
 											<React.Fragment>
 												<motion.p
+													suppressHydrationWarning={true}
 													className={"framer-styles-preset-1qe6evr"}
 													data-styles-preset={"wHLHeTMJ0"}
 													style={{
@@ -1046,11 +1094,13 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										</RichText>
 									</motion.div>
 									<motion.div
+										suppressHydrationWarning={true}
 										className={"framer-1q4bd7x"}
 										layoutDependency={layoutDependency}
 										layoutId={"sCfSzn3KG"}
 									>
 										<RichText
+											suppressHydrationWarning={true}
 											__fromCanvasComponent={true}
 											className={"framer-fsevcb"}
 											fonts={["Inter"]}
@@ -1067,6 +1117,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										>
 											<React.Fragment>
 												<motion.p
+													suppressHydrationWarning={true}
 													className={"framer-styles-preset-1relapz"}
 													data-styles-preset={"v6szLN4kE"}
 													style={{
@@ -1079,6 +1130,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											</React.Fragment>
 										</RichText>
 										<RichText
+											suppressHydrationWarning={true}
 											__fromCanvasComponent={true}
 											className={"framer-125uoaq"}
 											fonts={["Inter"]}
@@ -1093,6 +1145,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										>
 											<React.Fragment>
 												<motion.p
+													suppressHydrationWarning={true}
 													className={"framer-styles-preset-1fgmqi7"}
 													data-styles-preset={"CWRpkcDNO"}
 												>
@@ -1261,6 +1314,7 @@ var defaultResponsiveVariants = {
 function ComponentWithRoot({ locale, ...rest }) {
 	return (
 		<ContextProviders
+			suppressHydrationWarning={true}
 			routes={routes}
 			framerSiteId={
 				"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c"
@@ -1269,6 +1323,7 @@ function ComponentWithRoot({ locale, ...rest }) {
 			locales={locales}
 		>
 			{jsx(stdin_default2, {
+				suppressHydrationWarning: true,
 				...rest,
 			})}
 		</ContextProviders>
@@ -1294,6 +1349,7 @@ function ComponentWithRoot({ locale, ...rest }) {
 ComponentWithRoot.Responsive = ({ locale = "", ...rest }) => {
 	return (
 		<ContextProviders
+			suppressHydrationWarning={true}
 			routes={routes}
 			framerSiteId={
 				"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c"
@@ -1302,6 +1358,7 @@ ComponentWithRoot.Responsive = ({ locale = "", ...rest }) => {
 			locales={locales}
 		>
 			<WithFramerBreakpoints
+				suppressHydrationWarning={true}
 				Component={stdin_default2}
 				variants={defaultResponsiveVariants}
 				{...rest}

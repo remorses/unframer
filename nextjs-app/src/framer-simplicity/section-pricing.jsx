@@ -87,7 +87,10 @@ var Transition = ({ value, children }) => {
 		[JSON.stringify(transition)],
 	);
 	return (
-		<MotionConfigContext.Provider value={contextValue}>
+		<MotionConfigContext.Provider
+			suppressHydrationWarning={true}
+			value={contextValue}
+		>
 			{children}
 		</MotionConfigContext.Provider>
 	);
@@ -142,10 +145,18 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 	const defaultLayoutId = React.useId();
 	const componentViewport = useComponentViewport();
 	return (
-		<LayoutGroup id={layoutId ?? defaultLayoutId}>
-			<Variants animate={variants} initial={false}>
-				<Transition value={transition1}>
+		<LayoutGroup
+			suppressHydrationWarning={true}
+			id={layoutId ?? defaultLayoutId}
+		>
+			<Variants
+				suppressHydrationWarning={true}
+				animate={variants}
+				initial={false}
+			>
+				<Transition suppressHydrationWarning={true} value={transition1}>
 					<motion.div
+						suppressHydrationWarning={true}
 						{...restProps}
 						{...gestureHandlers}
 						className={cx(
@@ -177,18 +188,21 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 						)}
 					>
 						<motion.div
+							suppressHydrationWarning={true}
 							className={"framer-go8kyn"}
 							data-framer-name={"Container"}
 							layoutDependency={layoutDependency}
 							layoutId={"f1in6H8XD"}
 						>
 							<motion.div
+								suppressHydrationWarning={true}
 								className={"framer-c2kt8n"}
 								data-framer-name={"Text"}
 								layoutDependency={layoutDependency}
 								layoutId={"atYrK9FeM"}
 							>
 								<ComponentViewportProvider
+									suppressHydrationWarning={true}
 									height={40}
 									y={
 										(componentViewport?.y || 0) +
@@ -235,11 +249,13 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 									)}
 								>
 									<motion.div
+										suppressHydrationWarning={true}
 										className={"framer-votmtk-container"}
 										layoutDependency={layoutDependency}
 										layoutId={"ufuWkVxti-container"}
 									>
 										{_jsx(stdin_default, {
+											suppressHydrationWarning: true,
 											D_QyhowU2: "Pricing",
 											height: "100%",
 											id: "ufuWkVxti",
@@ -250,6 +266,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 									</motion.div>
 								</ComponentViewportProvider>
 								<RichText
+									suppressHydrationWarning={true}
 									__fromCanvasComponent={true}
 									className={"framer-y2ufa3"}
 									fonts={["FS;Satoshi-medium", "GF;Instrument Serif-italic"]}
@@ -269,6 +286,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 												children: (
 													<React.Fragment>
 														<motion.h2
+															suppressHydrationWarning={true}
 															style={{
 																"--font-selector": "RlM7U2F0b3NoaS1tZWRpdW0=",
 																"--framer-font-family":
@@ -284,6 +302,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 														>
 															{"Simple pricing, no "}
 															<motion.span
+																suppressHydrationWarning={true}
 																style={{
 																	"--font-selector":
 																		"R0Y7SW5zdHJ1bWVudCBTZXJpZi1pdGFsaWM=",
@@ -304,6 +323,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 												children: (
 													<React.Fragment>
 														<motion.h2
+															suppressHydrationWarning={true}
 															style={{
 																"--font-selector": "RlM7U2F0b3NoaS1tZWRpdW0=",
 																"--framer-font-family":
@@ -319,6 +339,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 														>
 															{"Simple pricing, no "}
 															<motion.span
+																suppressHydrationWarning={true}
 																style={{
 																	"--font-selector":
 																		"R0Y7SW5zdHJ1bWVudCBTZXJpZi1pdGFsaWM=",
@@ -342,6 +363,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 								>
 									<React.Fragment>
 										<motion.h2
+											suppressHydrationWarning={true}
 											style={{
 												"--font-selector": "RlM7U2F0b3NoaS1tZWRpdW0=",
 												"--framer-font-family":
@@ -357,6 +379,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										>
 											{"Simple pricing, no "}
 											<motion.span
+												suppressHydrationWarning={true}
 												style={{
 													"--font-selector":
 														"R0Y7SW5zdHJ1bWVudCBTZXJpZi1pdGFsaWM=",
@@ -373,6 +396,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 									</React.Fragment>
 								</RichText>
 								<RichText
+									suppressHydrationWarning={true}
 									__fromCanvasComponent={true}
 									className={"framer-1msp89n"}
 									fonts={["Inter"]}
@@ -387,6 +411,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 								>
 									<React.Fragment>
 										<motion.p
+											suppressHydrationWarning={true}
 											className={"framer-styles-preset-1qe6evr"}
 											data-styles-preset={"wHLHeTMJ0"}
 											style={{
@@ -401,6 +426,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 								</RichText>
 							</motion.div>
 							<ComponentViewportProvider
+								suppressHydrationWarning={true}
 								height={632}
 								width={`min(${componentViewport?.width || "100vw"} - 160px, 1200px)`}
 								y={
@@ -442,11 +468,13 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 								)}
 							>
 								<motion.div
+									suppressHydrationWarning={true}
 									className={"framer-14fq4yr-container"}
 									layoutDependency={layoutDependency}
 									layoutId={"Qu2V8s9vy-container"}
 								>
 									{_jsx(stdin_default2, {
+										suppressHydrationWarning: true,
 										height: "100%",
 										id: "Qu2V8s9vy",
 										layoutId: "Qu2V8s9vy",
@@ -615,6 +643,7 @@ var defaultResponsiveVariants = {
 function ComponentWithRoot({ locale, ...rest }) {
 	return (
 		<ContextProviders
+			suppressHydrationWarning={true}
 			routes={routes}
 			framerSiteId={
 				"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c"
@@ -623,6 +652,7 @@ function ComponentWithRoot({ locale, ...rest }) {
 			locales={locales}
 		>
 			{jsx(stdin_default3, {
+				suppressHydrationWarning: true,
 				...rest,
 			})}
 		</ContextProviders>
@@ -648,6 +678,7 @@ function ComponentWithRoot({ locale, ...rest }) {
 ComponentWithRoot.Responsive = ({ locale = "", ...rest }) => {
 	return (
 		<ContextProviders
+			suppressHydrationWarning={true}
 			routes={routes}
 			framerSiteId={
 				"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c"
@@ -656,6 +687,7 @@ ComponentWithRoot.Responsive = ({ locale = "", ...rest }) => {
 			locales={locales}
 		>
 			<WithFramerBreakpoints
+				suppressHydrationWarning={true}
 				Component={stdin_default3}
 				variants={defaultResponsiveVariants}
 				{...rest}

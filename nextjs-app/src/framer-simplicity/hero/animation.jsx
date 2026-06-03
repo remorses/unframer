@@ -86,7 +86,10 @@ var Transition = ({ value, children }) => {
 		[JSON.stringify(transition)],
 	);
 	return (
-		<MotionConfigContext.Provider value={contextValue}>
+		<MotionConfigContext.Provider
+			suppressHydrationWarning={true}
+			value={contextValue}
+		>
 			{children}
 		</MotionConfigContext.Provider>
 	);
@@ -151,11 +154,17 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 	const componentViewport = useComponentViewport();
 	return (
 		<LayoutGroup
+			suppressHydrationWarning={true}
 			id={layoutId !== null && layoutId !== void 0 ? layoutId : defaultLayoutId}
 		>
-			<Variants animate={variants} initial={false}>
-				<Transition value={transition1}>
+			<Variants
+				suppressHydrationWarning={true}
+				animate={variants}
+				initial={false}
+			>
+				<Transition suppressHydrationWarning={true} value={transition1}>
 					<motion.div
+						suppressHydrationWarning={true}
 						{...restProps}
 						{...gestureHandlers}
 						className={cx(
@@ -183,6 +192,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 						)}
 					>
 						<Image
+							suppressHydrationWarning={true}
 							background={{
 								alt: "",
 								fit: "fill",
@@ -220,12 +230,14 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 							}}
 						/>
 						<motion.div
+							suppressHydrationWarning={true}
 							className={"framer-12nuecf"}
 							data-framer-name={"Container"}
 							layoutDependency={layoutDependency}
 							layoutId={"I6854:8695;6727:48425"}
 						>
 							<motion.div
+								suppressHydrationWarning={true}
 								className={"framer-1rg897j"}
 								data-framer-name={"Border"}
 								layoutDependency={layoutDependency}
@@ -239,6 +251,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 								}}
 							/>
 							<motion.div
+								suppressHydrationWarning={true}
 								className={"framer-x9h15w"}
 								data-border={true}
 								data-framer-name={"Tasks"}
@@ -262,18 +275,21 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 								}}
 							>
 								<motion.div
+									suppressHydrationWarning={true}
 									className={"framer-zdafkz"}
 									data-framer-name={"Header"}
 									layoutDependency={layoutDependency}
 									layoutId={"I6854:8695;6727:48209"}
 								>
 									<motion.div
+										suppressHydrationWarning={true}
 										className={"framer-do89a0"}
 										data-framer-name={"Content"}
 										layoutDependency={layoutDependency}
 										layoutId={"I6854:8695;6727:48210"}
 									>
 										<motion.div
+											suppressHydrationWarning={true}
 											className={"framer-1e7ntum"}
 											data-framer-name={"Back Button"}
 											layoutDependency={layoutDependency}
@@ -287,6 +303,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											}}
 										>
 											<SVG
+												suppressHydrationWarning={true}
 												className={"framer-1stzl70"}
 												data-framer-name={"Icon"}
 												fill={"rgb(255, 255, 255)"}
@@ -301,6 +318,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											/>
 										</motion.div>
 										<RichText
+											suppressHydrationWarning={true}
 											__fromCanvasComponent={true}
 											className={"framer-g21gc4"}
 											fonts={["FS;Satoshi-medium"]}
@@ -316,6 +334,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										>
 											<React.Fragment>
 												<motion.p
+													suppressHydrationWarning={true}
 													style={{
 														"--font-selector": "RlM7U2F0b3NoaS1tZWRpdW0=",
 														"--framer-font-family":
@@ -333,6 +352,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										</RichText>
 									</motion.div>
 									<motion.div
+										suppressHydrationWarning={true}
 										className={"framer-1nl06du"}
 										data-framer-name={"Button"}
 										layoutDependency={layoutDependency}
@@ -346,6 +366,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										}}
 									>
 										<SVG
+											suppressHydrationWarning={true}
 											className={"framer-y5mm80"}
 											data-framer-name={"Icon"}
 											fill={"rgb(255, 255, 255)"}
@@ -361,18 +382,21 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 									</motion.div>
 								</motion.div>
 								<motion.div
+									suppressHydrationWarning={true}
 									className={"framer-1q0avym"}
 									data-framer-name={"Task List"}
 									layoutDependency={layoutDependency}
 									layoutId={"I6854:8695;6727:48214"}
 								>
 									<motion.div
+										suppressHydrationWarning={true}
 										className={"framer-6sqge6"}
 										data-framer-name={"List"}
 										layoutDependency={layoutDependency}
 										layoutId={"I6854:8695;6727:48216"}
 									>
 										<motion.div
+											suppressHydrationWarning={true}
 											className={"framer-12zi75l"}
 											data-framer-name={"Item 1"}
 											layoutDependency={layoutDependency}
@@ -386,6 +410,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											}}
 										>
 											<motion.div
+												suppressHydrationWarning={true}
 												className={"framer-zq410l"}
 												data-border={true}
 												data-framer-name={"Circle"}
@@ -405,6 +430,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 												}}
 											/>
 											<RichText
+												suppressHydrationWarning={true}
 												__fromCanvasComponent={true}
 												className={"framer-9k4y6"}
 												fonts={["FS;Satoshi-medium"]}
@@ -420,6 +446,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											>
 												<React.Fragment>
 													<motion.p
+														suppressHydrationWarning={true}
 														style={{
 															"--font-selector": "RlM7U2F0b3NoaS1tZWRpdW0=",
 															"--framer-font-family":
@@ -437,6 +464,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 												</React.Fragment>
 											</RichText>
 											<motion.div
+												suppressHydrationWarning={true}
 												className={"framer-431h6o"}
 												data-framer-name={"Duplicate"}
 												layoutDependency={layoutDependency}
@@ -446,6 +474,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 												}}
 											>
 												<SVG
+													suppressHydrationWarning={true}
 													className={"framer-1rz58xp"}
 													data-framer-name={"Icon"}
 													fill={"rgba(0,0,0,1)"}
@@ -462,6 +491,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 												/>
 											</motion.div>
 											<motion.div
+												suppressHydrationWarning={true}
 												className={"framer-w9v5zx"}
 												data-framer-name={"Delete"}
 												layoutDependency={layoutDependency}
@@ -471,6 +501,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 												}}
 											>
 												<SVG
+													suppressHydrationWarning={true}
 													className={"framer-5t2kch"}
 													data-framer-name={"Icon"}
 													fill={"rgba(0,0,0,1)"}
@@ -487,6 +518,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 												/>
 											</motion.div>
 											<motion.div
+												suppressHydrationWarning={true}
 												className={"framer-19b7255"}
 												data-framer-name={"Grab"}
 												layoutDependency={layoutDependency}
@@ -496,6 +528,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 												}}
 											>
 												<SVG
+													suppressHydrationWarning={true}
 													className={"framer-dbvcqt"}
 													data-framer-name={"Icon"}
 													fill={"rgba(0,0,0,1)"}
@@ -513,6 +546,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											</motion.div>
 										</motion.div>
 										<SVG
+											suppressHydrationWarning={true}
 											className={"framer-1jqipx9"}
 											data-framer-name={"Empty Task"}
 											fill={"rgba(0,0,0,1)"}
@@ -529,6 +563,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											withExternalLayout={true}
 										/>
 										<motion.div
+											suppressHydrationWarning={true}
 											className={"framer-g473bx"}
 											data-framer-name={"Item 3"}
 											layoutDependency={layoutDependency}
@@ -543,6 +578,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											}}
 										>
 											<motion.div
+												suppressHydrationWarning={true}
 												className={"framer-ojszzp"}
 												data-border={true}
 												data-framer-name={"Circle"}
@@ -562,6 +598,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 												}}
 											/>
 											<RichText
+												suppressHydrationWarning={true}
 												__fromCanvasComponent={true}
 												className={"framer-10fojii"}
 												fonts={["FS;Satoshi-medium"]}
@@ -577,6 +614,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											>
 												<React.Fragment>
 													<motion.p
+														suppressHydrationWarning={true}
 														style={{
 															"--font-selector": "RlM7U2F0b3NoaS1tZWRpdW0=",
 															"--framer-font-family":
@@ -594,6 +632,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 												</React.Fragment>
 											</RichText>
 											<motion.div
+												suppressHydrationWarning={true}
 												className={"framer-1f2l8nl"}
 												data-framer-name={"Grab"}
 												layoutDependency={layoutDependency}
@@ -603,6 +642,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 												}}
 											>
 												<SVG
+													suppressHydrationWarning={true}
 													className={"framer-87lms0"}
 													data-framer-name={"Icon"}
 													fill={"rgba(0,0,0,1)"}
@@ -620,6 +660,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											</motion.div>
 										</motion.div>
 										<motion.div
+											suppressHydrationWarning={true}
 											className={"framer-wex0hs"}
 											data-framer-name={"Item 4"}
 											layoutDependency={layoutDependency}
@@ -633,6 +674,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											}}
 										>
 											<motion.div
+												suppressHydrationWarning={true}
 												className={"framer-1klxl8h"}
 												data-border={true}
 												data-framer-name={"Circle"}
@@ -652,6 +694,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 												}}
 											>
 												<motion.div
+													suppressHydrationWarning={true}
 													className={"framer-hbims9"}
 													data-framer-name={"Done"}
 													layoutDependency={layoutDependency}
@@ -667,6 +710,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 												/>
 											</motion.div>
 											<RichText
+												suppressHydrationWarning={true}
 												__fromCanvasComponent={true}
 												className={"framer-woen6c"}
 												fonts={["FS;Satoshi-medium"]}
@@ -682,6 +726,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											>
 												<React.Fragment>
 													<motion.p
+														suppressHydrationWarning={true}
 														style={{
 															"--font-selector": "RlM7U2F0b3NoaS1tZWRpdW0=",
 															"--framer-font-family":
@@ -699,6 +744,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 												</React.Fragment>
 											</RichText>
 											<motion.div
+												suppressHydrationWarning={true}
 												className={"framer-zg0u0e"}
 												data-framer-name={"Grab"}
 												layoutDependency={layoutDependency}
@@ -708,6 +754,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 												}}
 											>
 												<SVG
+													suppressHydrationWarning={true}
 													className={"framer-12kygj7"}
 													data-framer-name={"Icon"}
 													fill={"rgba(0,0,0,1)"}
@@ -725,6 +772,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											</motion.div>
 										</motion.div>
 										<motion.div
+											suppressHydrationWarning={true}
 											className={"framer-3wb4l"}
 											data-framer-name={"Item 5"}
 											layoutDependency={layoutDependency}
@@ -738,6 +786,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											}}
 										>
 											<motion.div
+												suppressHydrationWarning={true}
 												className={"framer-1ebxce"}
 												data-border={true}
 												data-framer-name={"task-item-5-icon-placeholder"}
@@ -757,6 +806,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 												}}
 											/>
 											<RichText
+												suppressHydrationWarning={true}
 												__fromCanvasComponent={true}
 												className={"framer-1p09rme"}
 												data-framer-name={"task-item-5-title"}
@@ -773,6 +823,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											>
 												<React.Fragment>
 													<motion.p
+														suppressHydrationWarning={true}
 														style={{
 															"--font-selector": "RlM7U2F0b3NoaS1tZWRpdW0=",
 															"--framer-font-family":
@@ -790,6 +841,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 												</React.Fragment>
 											</RichText>
 											<motion.div
+												suppressHydrationWarning={true}
 												className={"framer-9uo7hq"}
 												data-framer-name={"task-item-5-reorder-handle"}
 												layoutDependency={layoutDependency}
@@ -799,6 +851,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 												}}
 											>
 												<SVG
+													suppressHydrationWarning={true}
 													className={"framer-qfe6yn"}
 													data-framer-name={"task-item-5-reorder-handle-icon"}
 													fill={"rgba(0,0,0,1)"}
@@ -818,18 +871,21 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 									</motion.div>
 								</motion.div>
 								<motion.div
+									suppressHydrationWarning={true}
 									className={"framer-5j7yy0"}
 									data-framer-name={"Complete Bar"}
 									layoutDependency={layoutDependency}
 									layoutId={"I6854:8695;6727:48222"}
 								>
 									<motion.div
+										suppressHydrationWarning={true}
 										className={"framer-v63y6z"}
 										data-framer-name={"Footer"}
 										layoutDependency={layoutDependency}
 										layoutId={"I6854:8695;6727:48222;5237:4515"}
 									>
 										<motion.div
+											suppressHydrationWarning={true}
 											className={"framer-12a4hi1"}
 											data-framer-name={"Circle"}
 											layoutDependency={layoutDependency}
@@ -842,6 +898,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											}}
 										>
 											<SVG
+												suppressHydrationWarning={true}
 												className={"framer-19h985"}
 												data-framer-name={"Circle"}
 												fill={"rgba(0,0,0,1)"}
@@ -856,12 +913,14 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											/>
 										</motion.div>
 										<motion.div
+											suppressHydrationWarning={true}
 											className={"framer-1godxxm"}
 											data-framer-name={"Text"}
 											layoutDependency={layoutDependency}
 											layoutId={"I6854:8695;6727:48222;5237:4520"}
 										>
 											<RichText
+												suppressHydrationWarning={true}
 												__fromCanvasComponent={true}
 												className={"framer-1slajs2"}
 												fonts={["FS;Satoshi-medium"]}
@@ -878,6 +937,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											>
 												<React.Fragment>
 													<motion.p
+														suppressHydrationWarning={true}
 														style={{
 															"--font-selector": "RlM7U2F0b3NoaS1tZWRpdW0=",
 															"--framer-font-family":
@@ -899,6 +959,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 								</motion.div>
 							</motion.div>
 							<motion.div
+								suppressHydrationWarning={true}
 								className={"framer-ruqpuw"}
 								data-framer-name={"Floating Task"}
 								layoutDependency={layoutDependency}
@@ -918,6 +979,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 								transformTemplate={transformTemplate2}
 							>
 								<motion.div
+									suppressHydrationWarning={true}
 									className={"framer-pl3igj"}
 									data-border={true}
 									data-framer-name={"Circle"}
@@ -937,6 +999,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 									}}
 								/>
 								<RichText
+									suppressHydrationWarning={true}
 									__fromCanvasComponent={true}
 									className={"framer-tktec2"}
 									fonts={["FS;Satoshi-medium"]}
@@ -952,6 +1015,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 								>
 									<React.Fragment>
 										<motion.p
+											suppressHydrationWarning={true}
 											style={{
 												"--font-selector": "RlM7U2F0b3NoaS1tZWRpdW0=",
 												"--framer-font-family":
@@ -969,12 +1033,14 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 									</React.Fragment>
 								</RichText>
 								<motion.div
+									suppressHydrationWarning={true}
 									className={"framer-mvrfvi"}
 									data-framer-name={"Grab"}
 									layoutDependency={layoutDependency}
 									layoutId={"I6854:8695;6727:48282;5237:4058"}
 								>
 									<SVG
+										suppressHydrationWarning={true}
 										className={"framer-g1t7d1"}
 										data-framer-name={"Icon"}
 										fill={"rgba(0,0,0,1)"}
@@ -993,12 +1059,14 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 								</motion.div>
 							</motion.div>
 							<motion.div
+								suppressHydrationWarning={true}
 								className={"framer-ds5hn5"}
 								data-framer-name={"Cursor"}
 								layoutDependency={layoutDependency}
 								layoutId={"I6854:8695;6765:3839"}
 							>
 								<SVG
+									suppressHydrationWarning={true}
 									className={"framer-147woiw"}
 									data-framer-name={"Cursor"}
 									fill={"rgba(0,0,0,1)"}
@@ -1012,6 +1080,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 									withExternalLayout={true}
 								/>
 								<motion.div
+									suppressHydrationWarning={true}
 									className={"framer-1ck1o9z"}
 									data-framer-name={"Name"}
 									layoutDependency={layoutDependency}
@@ -1027,6 +1096,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 									transformTemplate={transformTemplate2}
 								>
 									<RichText
+										suppressHydrationWarning={true}
 										__fromCanvasComponent={true}
 										className={"framer-16ifmmi"}
 										fonts={["FS;Satoshi-medium"]}
@@ -1042,6 +1112,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 									>
 										<React.Fragment>
 											<motion.p
+												suppressHydrationWarning={true}
 												style={{
 													"--font-selector": "RlM7U2F0b3NoaS1tZWRpdW0=",
 													"--framer-font-family":
@@ -1156,6 +1227,7 @@ var defaultResponsiveVariants = {};
 function ComponentWithRoot({ locale, ...rest }) {
 	return (
 		<ContextProviders
+			suppressHydrationWarning={true}
 			routes={routes}
 			framerSiteId={
 				"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c"
@@ -1164,6 +1236,7 @@ function ComponentWithRoot({ locale, ...rest }) {
 			locales={locales}
 		>
 			{jsx(stdin_default, {
+				suppressHydrationWarning: true,
 				...rest,
 			})}
 		</ContextProviders>
@@ -1189,6 +1262,7 @@ function ComponentWithRoot({ locale, ...rest }) {
 ComponentWithRoot.Responsive = ({ locale = "", ...rest }) => {
 	return (
 		<ContextProviders
+			suppressHydrationWarning={true}
 			routes={routes}
 			framerSiteId={
 				"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c"
@@ -1197,6 +1271,7 @@ ComponentWithRoot.Responsive = ({ locale = "", ...rest }) => {
 			locales={locales}
 		>
 			<WithFramerBreakpoints
+				suppressHydrationWarning={true}
 				Component={stdin_default}
 				variants={defaultResponsiveVariants}
 				{...rest}

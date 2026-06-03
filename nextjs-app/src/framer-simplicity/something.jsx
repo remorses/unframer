@@ -37,6 +37,7 @@ function Something(props) {
 	const { tint } = props;
 	return (
 		<motion.div
+			suppressHydrationWarning={true}
 			style={{
 				margin: 50,
 				width: 100,
@@ -63,6 +64,7 @@ addPropertyControls(Something, {
 function AnotherComponent({}) {
 	return (
 		<div
+			suppressHydrationWarning={true}
 			style={{
 				width: 100,
 				height: 100,
@@ -88,6 +90,7 @@ var defaultResponsiveVariants = {};
 function ComponentWithRoot({ locale, ...rest }) {
 	return (
 		<ContextProviders
+			suppressHydrationWarning={true}
 			routes={routes}
 			framerSiteId={
 				"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c"
@@ -95,7 +98,7 @@ function ComponentWithRoot({ locale, ...rest }) {
 			locale={locale}
 			locales={locales}
 		>
-			<Something {...rest} />
+			<Something suppressHydrationWarning={true} {...rest} />
 		</ContextProviders>
 	);
 }
@@ -119,6 +122,7 @@ function ComponentWithRoot({ locale, ...rest }) {
 ComponentWithRoot.Responsive = ({ locale = "", ...rest }) => {
 	return (
 		<ContextProviders
+			suppressHydrationWarning={true}
 			routes={routes}
 			framerSiteId={
 				"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c"
@@ -127,6 +131,7 @@ ComponentWithRoot.Responsive = ({ locale = "", ...rest }) => {
 			locales={locales}
 		>
 			<WithFramerBreakpoints
+				suppressHydrationWarning={true}
 				Component={Something}
 				variants={defaultResponsiveVariants}
 				{...rest}

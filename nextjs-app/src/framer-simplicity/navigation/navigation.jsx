@@ -91,7 +91,10 @@ var Transition = ({ value, children }) => {
 		[JSON.stringify(transition)],
 	);
 	return (
-		<MotionConfigContext.Provider value={contextValue}>
+		<MotionConfigContext.Provider
+			suppressHydrationWarning={true}
+			value={contextValue}
+		>
 			{children}
 		</MotionConfigContext.Provider>
 	);
@@ -160,10 +163,18 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 	const defaultLayoutId = React.useId();
 	const componentViewport = useComponentViewport();
 	return (
-		<LayoutGroup id={layoutId ?? defaultLayoutId}>
-			<Variants animate={variants} initial={false}>
-				<Transition value={transition1}>
+		<LayoutGroup
+			suppressHydrationWarning={true}
+			id={layoutId ?? defaultLayoutId}
+		>
+			<Variants
+				suppressHydrationWarning={true}
+				animate={variants}
+				initial={false}
+			>
+				<Transition suppressHydrationWarning={true} value={transition1}>
 					<motion.nav
+						suppressHydrationWarning={true}
 						{...restProps}
 						{...gestureHandlers}
 						className={cx(
@@ -205,18 +216,21 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 					>
 						{isDisplayed() && (
 							<motion.div
+								suppressHydrationWarning={true}
 								className={"framer-vtbpkd"}
 								data-framer-name={"Logo + Hamburger (Mobile)"}
 								layoutDependency={layoutDependency}
 								layoutId={"sJXIacH81"}
 							>
 								<Link
+									suppressHydrationWarning={true}
 									href={{
 										webPageId: "augiA20Il",
 									}}
 									nodeId={"CUoFLXyU7"}
 								>
 									<SVG
+										suppressHydrationWarning={true}
 										as={"a"}
 										className={"framer-gobxtn framer-4wo7jf"}
 										data-framer-name={"Icon"}
@@ -233,6 +247,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 								</Link>
 								{isDisplayed() && (
 									<ComponentViewportProvider
+										suppressHydrationWarning={true}
 										{...addPropertyOverrides(
 											{
 												rTivEYaFN: {
@@ -251,11 +266,13 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										)}
 									>
 										<motion.div
+											suppressHydrationWarning={true}
 											className={"framer-c9ikbp-container"}
 											layoutDependency={layoutDependency}
 											layoutId={"BFZcmnjWa-container"}
 										>
 											{_jsx(stdin_default3, {
+												suppressHydrationWarning: true,
 												height: "100%",
 												id: "BFZcmnjWa",
 												layoutId: "BFZcmnjWa",
@@ -286,18 +303,21 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 						)}
 						{isDisplayed() && (
 							<motion.div
+								suppressHydrationWarning={true}
 								className={"framer-1unegbh"}
 								data-framer-name={"Links + Buttons (Mobile)"}
 								layoutDependency={layoutDependency}
 								layoutId={"NBTgmE6qp"}
 							>
 								<motion.div
+									suppressHydrationWarning={true}
 									className={"framer-1f1ima1"}
 									data-framer-name={"Links"}
 									layoutDependency={layoutDependency}
 									layoutId={"NrJ3UL2IE"}
 								>
 									<ResolveLinks
+										suppressHydrationWarning={true}
 										links={[
 											{
 												href: {
@@ -324,6 +344,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 									>
 										{(resolvedLinks) => (
 											<ComponentViewportProvider
+												suppressHydrationWarning={true}
 												height={33}
 												{...addPropertyOverrides(
 													{
@@ -353,11 +374,13 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 												)}
 											>
 												<motion.div
+													suppressHydrationWarning={true}
 													className={"framer-hsin6-container"}
 													layoutDependency={layoutDependency}
 													layoutId={"Km60IDt5_-container"}
 												>
 													{_jsx(stdin_default4, {
+														suppressHydrationWarning: true,
 														height: "100%",
 														hYoSUJrtV: false,
 														id: "Km60IDt5_",
@@ -386,6 +409,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										)}
 									</ResolveLinks>
 									<ResolveLinks
+										suppressHydrationWarning={true}
 										links={[
 											{
 												href: {
@@ -412,6 +436,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 									>
 										{(resolvedLinks1) => (
 											<ComponentViewportProvider
+												suppressHydrationWarning={true}
 												height={33}
 												{...addPropertyOverrides(
 													{
@@ -441,11 +466,13 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 												)}
 											>
 												<motion.div
+													suppressHydrationWarning={true}
 													className={"framer-1rvyyzx-container"}
 													layoutDependency={layoutDependency}
 													layoutId={"b9dag3dAl-container"}
 												>
 													{_jsx(stdin_default4, {
+														suppressHydrationWarning: true,
 														height: "100%",
 														hYoSUJrtV: false,
 														id: "b9dag3dAl",
@@ -474,6 +501,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										)}
 									</ResolveLinks>
 									<ResolveLinks
+										suppressHydrationWarning={true}
 										links={[
 											{
 												href: {
@@ -500,6 +528,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 									>
 										{(resolvedLinks2) => (
 											<ComponentViewportProvider
+												suppressHydrationWarning={true}
 												height={33}
 												{...addPropertyOverrides(
 													{
@@ -529,11 +558,13 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 												)}
 											>
 												<motion.div
+													suppressHydrationWarning={true}
 													className={"framer-1ucx235-container"}
 													layoutDependency={layoutDependency}
 													layoutId={"wAHlcrrz6-container"}
 												>
 													{_jsx(stdin_default4, {
+														suppressHydrationWarning: true,
 														height: "100%",
 														hYoSUJrtV: false,
 														id: "wAHlcrrz6",
@@ -562,6 +593,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										)}
 									</ResolveLinks>
 									<ResolveLinks
+										suppressHydrationWarning={true}
 										links={[
 											{
 												href: {
@@ -588,6 +620,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 									>
 										{(resolvedLinks3) => (
 											<ComponentViewportProvider
+												suppressHydrationWarning={true}
 												height={33}
 												{...addPropertyOverrides(
 													{
@@ -617,11 +650,13 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 												)}
 											>
 												<motion.div
+													suppressHydrationWarning={true}
 													className={"framer-t7dcj3-container"}
 													layoutDependency={layoutDependency}
 													layoutId={"ypsSdSBko-container"}
 												>
 													{_jsx(stdin_default4, {
+														suppressHydrationWarning: true,
 														height: "100%",
 														hYoSUJrtV: false,
 														id: "ypsSdSBko",
@@ -651,6 +686,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 									</ResolveLinks>
 								</motion.div>
 								<ComponentViewportProvider
+									suppressHydrationWarning={true}
 									height={68}
 									{...addPropertyOverrides(
 										{
@@ -668,11 +704,13 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 									)}
 								>
 									<motion.div
+										suppressHydrationWarning={true}
 										className={"framer-1hi8bj8-container"}
 										layoutDependency={layoutDependency}
 										layoutId={"K31x8f0G1-container"}
 									>
 										{_jsx(stdin_default, {
+											suppressHydrationWarning: true,
 											GLWImmBy_: false,
 											HBR9r6Wzz: false,
 											height: "100%",
@@ -702,18 +740,21 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 						)}
 						{isDisplayed1() && (
 							<motion.div
+								suppressHydrationWarning={true}
 								className={"framer-7ml461"}
 								data-framer-name={"Desktop"}
 								layoutDependency={layoutDependency}
 								layoutId={"ripN4Jf6Q"}
 							>
 								<motion.div
+									suppressHydrationWarning={true}
 									className={"framer-hqbspi"}
 									data-framer-name={"Logo"}
 									layoutDependency={layoutDependency}
 									layoutId={"RJytjTQle"}
 								>
 									<ResolveLinks
+										suppressHydrationWarning={true}
 										links={[
 											{
 												href: {
@@ -725,6 +766,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 									>
 										{(resolvedLinks4) => (
 											<ComponentViewportProvider
+												suppressHydrationWarning={true}
 												height={24}
 												y={
 													(componentViewport?.y || 0) +
@@ -735,11 +777,13 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 												}
 											>
 												<motion.div
+													suppressHydrationWarning={true}
 													className={"framer-13ke82n-container"}
 													layoutDependency={layoutDependency}
 													layoutId={"M_erw8N0s-container"}
 												>
 													{_jsx(stdin_default2, {
+														suppressHydrationWarning: true,
 														height: "100%",
 														id: "M_erw8N0s",
 														layoutId: "M_erw8N0s",
@@ -752,18 +796,21 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 									</ResolveLinks>
 								</motion.div>
 								<motion.div
+									suppressHydrationWarning={true}
 									className={"framer-f6b1f6"}
 									data-framer-name={"Navigation"}
 									layoutDependency={layoutDependency}
 									layoutId={"XOWPK435R"}
 								>
 									<motion.div
+										suppressHydrationWarning={true}
 										className={"framer-1q2t4wb"}
 										data-framer-name={"Links"}
 										layoutDependency={layoutDependency}
 										layoutId={"rQjMcUmnO"}
 									>
 										<ResolveLinks
+											suppressHydrationWarning={true}
 											links={[
 												{
 													href: {
@@ -776,6 +823,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										>
 											{(resolvedLinks5) => (
 												<ComponentViewportProvider
+													suppressHydrationWarning={true}
 													height={33}
 													y={
 														(componentViewport?.y || 0) +
@@ -788,11 +836,13 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 													}
 												>
 													<motion.div
+														suppressHydrationWarning={true}
 														className={"framer-df81zj-container"}
 														layoutDependency={layoutDependency}
 														layoutId={"B4qR6YG5n-container"}
 													>
 														{_jsx(stdin_default4, {
+															suppressHydrationWarning: true,
 															height: "100%",
 															hYoSUJrtV: false,
 															id: "B4qR6YG5n",
@@ -808,6 +858,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											)}
 										</ResolveLinks>
 										<ResolveLinks
+											suppressHydrationWarning={true}
 											links={[
 												{
 													href: {
@@ -820,6 +871,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										>
 											{(resolvedLinks6) => (
 												<ComponentViewportProvider
+													suppressHydrationWarning={true}
 													height={33}
 													y={
 														(componentViewport?.y || 0) +
@@ -832,11 +884,13 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 													}
 												>
 													<motion.div
+														suppressHydrationWarning={true}
 														className={"framer-p5oc65-container"}
 														layoutDependency={layoutDependency}
 														layoutId={"uc8VsxUMV-container"}
 													>
 														{_jsx(stdin_default4, {
+															suppressHydrationWarning: true,
 															height: "100%",
 															hYoSUJrtV: false,
 															id: "uc8VsxUMV",
@@ -852,6 +906,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											)}
 										</ResolveLinks>
 										<ResolveLinks
+											suppressHydrationWarning={true}
 											links={[
 												{
 													href: {
@@ -864,6 +919,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										>
 											{(resolvedLinks7) => (
 												<ComponentViewportProvider
+													suppressHydrationWarning={true}
 													height={33}
 													y={
 														(componentViewport?.y || 0) +
@@ -876,11 +932,13 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 													}
 												>
 													<motion.div
+														suppressHydrationWarning={true}
 														className={"framer-jchamd-container"}
 														layoutDependency={layoutDependency}
 														layoutId={"BO770b7_y-container"}
 													>
 														{_jsx(stdin_default4, {
+															suppressHydrationWarning: true,
 															height: "100%",
 															hYoSUJrtV: false,
 															id: "BO770b7_y",
@@ -896,6 +954,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											)}
 										</ResolveLinks>
 										<ResolveLinks
+											suppressHydrationWarning={true}
 											links={[
 												{
 													href: {
@@ -908,6 +967,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										>
 											{(resolvedLinks8) => (
 												<ComponentViewportProvider
+													suppressHydrationWarning={true}
 													height={33}
 													y={
 														(componentViewport?.y || 0) +
@@ -920,11 +980,13 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 													}
 												>
 													<motion.div
+														suppressHydrationWarning={true}
 														className={"framer-yu2hsf-container"}
 														layoutDependency={layoutDependency}
 														layoutId={"zMXedKCfl-container"}
 													>
 														{_jsx(stdin_default4, {
+															suppressHydrationWarning: true,
 															height: "100%",
 															hYoSUJrtV: false,
 															id: "zMXedKCfl",
@@ -941,6 +1003,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										</ResolveLinks>
 									</motion.div>
 									<ComponentViewportProvider
+										suppressHydrationWarning={true}
 										height={68}
 										y={
 											(componentViewport?.y || 0) +
@@ -950,11 +1013,13 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										}
 									>
 										<motion.div
+											suppressHydrationWarning={true}
 											className={"framer-li08q2-container"}
 											layoutDependency={layoutDependency}
 											layoutId={"zCVZZyU7B-container"}
 										>
 											{_jsx(stdin_default, {
+												suppressHydrationWarning: true,
 												GLWImmBy_: false,
 												HBR9r6Wzz: false,
 												height: "100%",
@@ -1059,6 +1124,7 @@ var defaultResponsiveVariants = {
 function ComponentWithRoot({ locale, ...rest }) {
 	return (
 		<ContextProviders
+			suppressHydrationWarning={true}
 			routes={routes}
 			framerSiteId={
 				"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c"
@@ -1067,6 +1133,7 @@ function ComponentWithRoot({ locale, ...rest }) {
 			locales={locales}
 		>
 			{jsx(stdin_default5, {
+				suppressHydrationWarning: true,
 				...rest,
 			})}
 		</ContextProviders>
@@ -1092,6 +1159,7 @@ function ComponentWithRoot({ locale, ...rest }) {
 ComponentWithRoot.Responsive = ({ locale = "", ...rest }) => {
 	return (
 		<ContextProviders
+			suppressHydrationWarning={true}
 			routes={routes}
 			framerSiteId={
 				"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c"
@@ -1100,6 +1168,7 @@ ComponentWithRoot.Responsive = ({ locale = "", ...rest }) => {
 			locales={locales}
 		>
 			<WithFramerBreakpoints
+				suppressHydrationWarning={true}
 				Component={stdin_default5}
 				variants={defaultResponsiveVariants}
 				{...rest}

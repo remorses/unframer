@@ -418,6 +418,7 @@ var Input = withCSS(
 		};
 		return (
 			<motion.div
+				suppressHydrationWarning={true}
 				style={{
 					...style,
 					...containerStyles,
@@ -427,6 +428,7 @@ var Input = withCSS(
 				animate={formControls}
 			>
 				<form
+					suppressHydrationWarning={true}
 					style={{
 						width: "100%",
 						height: "auto",
@@ -440,12 +442,23 @@ var Input = withCSS(
 					method={"POST"}
 				>
 					{service === "getwaitlist" && (
-						<input type={"hidden"} name={"api_key"} value={getwaitlistAPI} />
+						<input
+							suppressHydrationWarning={true}
+							type={"hidden"}
+							name={"api_key"}
+							value={getwaitlistAPI}
+						/>
 					)}
 					{service === "convertkit" && (
-						<input type={"hidden"} name={"api_key"} value={convertkitAPI} />
+						<input
+							suppressHydrationWarning={true}
+							type={"hidden"}
+							name={"api_key"}
+							value={convertkitAPI}
+						/>
 					)}
 					<motion.input
+						suppressHydrationWarning={true}
 						type={"email"}
 						name={"email"}
 						placeholder={input.placeholder}
@@ -483,6 +496,7 @@ var Input = withCSS(
 					/>
 					{!button.shouldAppear && isLoading && (
 						<Spinner
+							suppressHydrationWarning={true}
 							shouldAppear={button.shouldAppear}
 							paddingPerSide={paddingPerSide}
 							paddingTop={paddingTop}
@@ -493,6 +507,7 @@ var Input = withCSS(
 					)}
 					{button.shouldAppear && (
 						<div
+							suppressHydrationWarning={true}
 							style={{
 								position: button.isDocked ? "absolute" : "relative",
 								top: button.isDocked ? button.insetWhenDocked : 0,
@@ -501,6 +516,7 @@ var Input = withCSS(
 							}}
 						>
 							<motion.input
+								suppressHydrationWarning={true}
 								type={"submit"}
 								value={button.label}
 								style={{
@@ -523,6 +539,7 @@ var Input = withCSS(
 							/>
 							{isLoading && (
 								<div
+									suppressHydrationWarning={true}
 									style={{
 										borderRadius: button.isDocked
 											? borderRadius - button.insetWhenDocked
@@ -539,7 +556,10 @@ var Input = withCSS(
 										background: button.fill,
 									}}
 								>
-									<Spinner color={button.color} />
+									<Spinner
+										suppressHydrationWarning={true}
+										color={button.color}
+									/>
 								</div>
 							)}
 						</div>
@@ -562,6 +582,7 @@ var Spinner = (props) => {
 		: {};
 	return (
 		<motion.div
+			suppressHydrationWarning={true}
 			style={{
 				height: 16,
 				width: 16,
@@ -579,6 +600,7 @@ var Spinner = (props) => {
 			}}
 		>
 			<motion.div
+				suppressHydrationWarning={true}
 				initial={{
 					scale: 0,
 				}}
@@ -587,6 +609,7 @@ var Spinner = (props) => {
 				}}
 			>
 				<svg
+					suppressHydrationWarning={true}
 					xmlns={"http://www.w3.org/2000/svg"}
 					width={"16"}
 					height={"16"}
@@ -596,6 +619,7 @@ var Spinner = (props) => {
 					}}
 				>
 					<path
+						suppressHydrationWarning={true}
 						d={
 							"M 8 0 C 3.582 0 0 3.582 0 8 C 0 12.419 3.582 16 8 16 C 12.418 16 16 12.419 16 8 C 15.999 3.582 12.418 0 8 0 Z M 8 14 C 4.687 14 2 11.314 2 8 C 2 4.687 4.687 2 8 2 C 11.314 2 14 4.687 14 8 C 14 11.314 11.314 14 8 14 Z"
 						}
@@ -603,6 +627,7 @@ var Spinner = (props) => {
 						opacity={"0.2"}
 					/>
 					<path
+						suppressHydrationWarning={true}
 						d={
 							"M 8 0 C 12.418 0 15.999 3.582 16 8 C 16 8 16 9 15 9 C 14 9 14 8 14 8 C 14 4.687 11.314 2 8 2 C 4.687 2 2 4.687 2 8 C 2 8 2 9 1 9 C 0 9 0 8 0 8 C 0 3.582 3.582 0 8 0 Z"
 						}
@@ -1034,7 +1059,10 @@ var Transition = ({ value, children }) => {
 		[JSON.stringify(transition)],
 	);
 	return (
-		<MotionConfigContext.Provider value={contextValue}>
+		<MotionConfigContext.Provider
+			suppressHydrationWarning={true}
+			value={contextValue}
+		>
 			{children}
 		</MotionConfigContext.Provider>
 	);
@@ -1092,10 +1120,18 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 	const scopingClassNames = cx(serializationHash, ...sharedStyleClassNames);
 	const router = useRouter2();
 	return (
-		<LayoutGroup id={layoutId ?? defaultLayoutId}>
-			<Variants animate={variants} initial={false}>
-				<Transition value={transition1}>
+		<LayoutGroup
+			suppressHydrationWarning={true}
+			id={layoutId ?? defaultLayoutId}
+		>
+			<Variants
+				suppressHydrationWarning={true}
+				animate={variants}
+				initial={false}
+			>
+				<Transition suppressHydrationWarning={true} value={transition1}>
 					<motion2.footer
+						suppressHydrationWarning={true}
 						{...restProps}
 						{...gestureHandlers}
 						className={cx(
@@ -1135,6 +1171,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 						)}
 					>
 						<Image
+							suppressHydrationWarning={true}
 							background={{
 								alt: "",
 								fit: "fill",
@@ -1168,18 +1205,21 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 							}}
 						/>
 						<motion2.div
+							suppressHydrationWarning={true}
 							className={"framer-4aroaq"}
 							data-framer-name={"Container"}
 							layoutDependency={layoutDependency}
 							layoutId={"wBtGzI7cw"}
 						>
 							<motion2.div
+								suppressHydrationWarning={true}
 								className={"framer-51n2j"}
 								data-framer-name={"Logo + Socials"}
 								layoutDependency={layoutDependency}
 								layoutId={"kE9fURpZq"}
 							>
 								<ResolveLinks
+									suppressHydrationWarning={true}
 									links={[
 										{
 											href: {
@@ -1203,6 +1243,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 								>
 									{(resolvedLinks) => (
 										<ComponentViewportProvider
+											suppressHydrationWarning={true}
 											height={36}
 											width={"36px"}
 											y={
@@ -1239,6 +1280,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											)}
 										>
 											<SmartComponentScopedContainer
+												suppressHydrationWarning={true}
 												className={"framer-2j1wk2-container"}
 												layoutDependency={layoutDependency}
 												layoutId={"MQUnesvFM-container"}
@@ -1247,6 +1289,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 												scopeId={"m5keEQA6U"}
 											>
 												{_jsx2(stdin_default, {
+													suppressHydrationWarning: true,
 													height: "100%",
 													id: "MQUnesvFM",
 													layoutId: "MQUnesvFM",
@@ -1275,24 +1318,28 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 								</ResolveLinks>
 							</motion2.div>
 							<motion2.div
+								suppressHydrationWarning={true}
 								className={"framer-1hjoplj"}
 								data-framer-name={"Newsletter + Sitemap"}
 								layoutDependency={layoutDependency}
 								layoutId={"GQpNj2GWU"}
 							>
 								<motion2.div
+									suppressHydrationWarning={true}
 									className={"framer-1qeoqxl"}
 									data-framer-name={"Newsletter"}
 									layoutDependency={layoutDependency}
 									layoutId={"cFzxXrwyT"}
 								>
 									<motion2.div
+										suppressHydrationWarning={true}
 										className={"framer-35bfwh"}
 										data-framer-name={"Description"}
 										layoutDependency={layoutDependency}
 										layoutId={"uFzI4kgRx"}
 									>
 										<RichText
+											suppressHydrationWarning={true}
 											__fromCanvasComponent={true}
 											className={"framer-2q2c69"}
 											fonts={["Inter"]}
@@ -1310,6 +1357,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										>
 											<React.Fragment>
 												<motion2.p
+													suppressHydrationWarning={true}
 													className={"framer-styles-preset-1qe6evr"}
 													data-styles-preset={"wHLHeTMJ0"}
 													style={{
@@ -1323,6 +1371,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											</React.Fragment>
 										</RichText>
 										<RichText
+											suppressHydrationWarning={true}
 											__fromCanvasComponent={true}
 											className={"framer-q6t2vz"}
 											fonts={["Inter"]}
@@ -1340,6 +1389,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										>
 											<React.Fragment>
 												<motion2.p
+													suppressHydrationWarning={true}
 													className={"framer-styles-preset-1fgmqi7"}
 													data-styles-preset={"CWRpkcDNO"}
 													style={{
@@ -1355,8 +1405,9 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											</React.Fragment>
 										</RichText>
 									</motion2.div>
-									<ComponentViewportProvider>
+									<ComponentViewportProvider suppressHydrationWarning={true}>
 										<SmartComponentScopedContainer
+											suppressHydrationWarning={true}
 											className={"framer-jwpma1-container"}
 											isAuthoredByUser={true}
 											isModuleExternal={true}
@@ -1367,6 +1418,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											scopeId={"m5keEQA6U"}
 										>
 											{_jsx2(stdin_default2, {
+												suppressHydrationWarning: true,
 												button: {
 													buttonFont: {
 														fontFamily:
@@ -1448,18 +1500,21 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 									</ComponentViewportProvider>
 								</motion2.div>
 								<motion2.div
+									suppressHydrationWarning={true}
 									className={"framer-zm8v2b"}
 									data-framer-name={"Sitemap"}
 									layoutDependency={layoutDependency}
 									layoutId={"FueLQooPm"}
 								>
 									<motion2.div
+										suppressHydrationWarning={true}
 										className={"framer-1c57hm2"}
 										data-framer-name={"Account"}
 										layoutDependency={layoutDependency}
 										layoutId={"CSxEK3_yc"}
 									>
 										<RichText
+											suppressHydrationWarning={true}
 											__fromCanvasComponent={true}
 											className={"framer-jdyvvx"}
 											fonts={["Inter"]}
@@ -1477,6 +1532,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										>
 											<React.Fragment>
 												<motion2.p
+													suppressHydrationWarning={true}
 													className={"framer-styles-preset-1fgmqi7"}
 													data-styles-preset={"CWRpkcDNO"}
 													style={{
@@ -1489,12 +1545,14 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											</React.Fragment>
 										</RichText>
 										<motion2.div
+											suppressHydrationWarning={true}
 											className={"framer-h6pu6e"}
 											data-framer-name={"Pages"}
 											layoutDependency={layoutDependency}
 											layoutId={"bMKfbJv7i"}
 										>
 											<RichText
+												suppressHydrationWarning={true}
 												__fromCanvasComponent={true}
 												className={"framer-6v65zf"}
 												fonts={["Inter"]}
@@ -1508,10 +1566,12 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											>
 												<React.Fragment>
 													<motion2.p
+														suppressHydrationWarning={true}
 														className={"framer-styles-preset-14ew30v"}
 														data-styles-preset={"TQvmJK7UB"}
 													>
 														<Link
+															suppressHydrationWarning={true}
 															href={{
 																hash: ":tZ3Nk88mM",
 																webPageId: "augiA20Il",
@@ -1524,6 +1584,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 															smoothScroll={true}
 														>
 															<motion2.a
+																suppressHydrationWarning={true}
 																className={"framer-styles-preset-1fr0mxk"}
 																data-styles-preset={"QqbrxlqQv"}
 															>
@@ -1534,6 +1595,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 												</React.Fragment>
 											</RichText>
 											<RichText
+												suppressHydrationWarning={true}
 												__fromCanvasComponent={true}
 												className={"framer-1w85510"}
 												fonts={["Inter"]}
@@ -1547,10 +1609,12 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											>
 												<React.Fragment>
 													<motion2.p
+														suppressHydrationWarning={true}
 														className={"framer-styles-preset-14ew30v"}
 														data-styles-preset={"TQvmJK7UB"}
 													>
 														<Link
+															suppressHydrationWarning={true}
 															href={{
 																hash: ":sHnGLtvML",
 																webPageId: "augiA20Il",
@@ -1563,6 +1627,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 															smoothScroll={true}
 														>
 															<motion2.a
+																suppressHydrationWarning={true}
 																className={"framer-styles-preset-1fr0mxk"}
 																data-styles-preset={"QqbrxlqQv"}
 															>
@@ -1573,6 +1638,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 												</React.Fragment>
 											</RichText>
 											<RichText
+												suppressHydrationWarning={true}
 												__fromCanvasComponent={true}
 												className={"framer-1mzz3wa"}
 												fonts={["Inter"]}
@@ -1586,10 +1652,12 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											>
 												<React.Fragment>
 													<motion2.p
+														suppressHydrationWarning={true}
 														className={"framer-styles-preset-14ew30v"}
 														data-styles-preset={"TQvmJK7UB"}
 													>
 														<Link
+															suppressHydrationWarning={true}
 															href={{
 																hash: ":jEif1shEi",
 																webPageId: "augiA20Il",
@@ -1602,6 +1670,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 															smoothScroll={true}
 														>
 															<motion2.a
+																suppressHydrationWarning={true}
 																className={"framer-styles-preset-1fr0mxk"}
 																data-styles-preset={"QqbrxlqQv"}
 															>
@@ -1612,6 +1681,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 												</React.Fragment>
 											</RichText>
 											<RichText
+												suppressHydrationWarning={true}
 												__fromCanvasComponent={true}
 												className={"framer-149njf6"}
 												fonts={["Inter"]}
@@ -1625,10 +1695,12 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											>
 												<React.Fragment>
 													<motion2.p
+														suppressHydrationWarning={true}
 														className={"framer-styles-preset-14ew30v"}
 														data-styles-preset={"TQvmJK7UB"}
 													>
 														<Link
+															suppressHydrationWarning={true}
 															href={{
 																hash: ":NK_tcQhZf",
 																webPageId: "augiA20Il",
@@ -1641,6 +1713,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 															smoothScroll={true}
 														>
 															<motion2.a
+																suppressHydrationWarning={true}
 																className={"framer-styles-preset-1fr0mxk"}
 																data-styles-preset={"QqbrxlqQv"}
 															>
@@ -1653,12 +1726,14 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										</motion2.div>
 									</motion2.div>
 									<motion2.div
+										suppressHydrationWarning={true}
 										className={"framer-1pw2j6z"}
 										data-framer-name={"Information"}
 										layoutDependency={layoutDependency}
 										layoutId={"rLEHlxq9m"}
 									>
 										<RichText
+											suppressHydrationWarning={true}
 											__fromCanvasComponent={true}
 											className={"framer-1caedjc"}
 											fonts={["Inter"]}
@@ -1676,6 +1751,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										>
 											<React.Fragment>
 												<motion2.p
+													suppressHydrationWarning={true}
 													className={"framer-styles-preset-1fgmqi7"}
 													data-styles-preset={"CWRpkcDNO"}
 													style={{
@@ -1688,12 +1764,14 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											</React.Fragment>
 										</RichText>
 										<motion2.div
+											suppressHydrationWarning={true}
 											className={"framer-w2wpd5"}
 											data-framer-name={"Pages"}
 											layoutDependency={layoutDependency}
 											layoutId={"CRYUebkza"}
 										>
 											<RichText
+												suppressHydrationWarning={true}
 												__fromCanvasComponent={true}
 												className={"framer-1qpminj"}
 												fonts={["Inter"]}
@@ -1707,10 +1785,12 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											>
 												<React.Fragment>
 													<motion2.p
+														suppressHydrationWarning={true}
 														className={"framer-styles-preset-14ew30v"}
 														data-styles-preset={"TQvmJK7UB"}
 													>
 														<Link
+															suppressHydrationWarning={true}
 															href={{
 																hash: ":g_GAoicEt",
 																webPageId: "augiA20Il",
@@ -1723,6 +1803,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 															smoothScroll={true}
 														>
 															<motion2.a
+																suppressHydrationWarning={true}
 																className={"framer-styles-preset-1fr0mxk"}
 																data-styles-preset={"QqbrxlqQv"}
 															>
@@ -1733,6 +1814,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 												</React.Fragment>
 											</RichText>
 											<RichText
+												suppressHydrationWarning={true}
 												__fromCanvasComponent={true}
 												className={"framer-1kuie0d"}
 												fonts={["Inter"]}
@@ -1746,10 +1828,12 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											>
 												<React.Fragment>
 													<motion2.p
+														suppressHydrationWarning={true}
 														className={"framer-styles-preset-14ew30v"}
 														data-styles-preset={"TQvmJK7UB"}
 													>
 														<Link
+															suppressHydrationWarning={true}
 															href={{
 																webPageId: "jg9o0Jk8V",
 															}}
@@ -1761,6 +1845,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 															smoothScroll={false}
 														>
 															<motion2.a
+																suppressHydrationWarning={true}
 																className={"framer-styles-preset-1fr0mxk"}
 																data-styles-preset={"QqbrxlqQv"}
 															>
@@ -1771,6 +1856,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 												</React.Fragment>
 											</RichText>
 											<RichText
+												suppressHydrationWarning={true}
 												__fromCanvasComponent={true}
 												className={"framer-wpllre"}
 												fonts={["Inter"]}
@@ -1784,10 +1870,12 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											>
 												<React.Fragment>
 													<motion2.p
+														suppressHydrationWarning={true}
 														className={"framer-styles-preset-14ew30v"}
 														data-styles-preset={"TQvmJK7UB"}
 													>
 														<Link
+															suppressHydrationWarning={true}
 															href={{
 																webPageId: "TdQ_ISe7W",
 															}}
@@ -1799,6 +1887,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 															smoothScroll={false}
 														>
 															<motion2.a
+																suppressHydrationWarning={true}
 																className={"framer-styles-preset-1fr0mxk"}
 																data-styles-preset={"QqbrxlqQv"}
 															>
@@ -1809,6 +1898,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 												</React.Fragment>
 											</RichText>
 											<RichText
+												suppressHydrationWarning={true}
 												__fromCanvasComponent={true}
 												className={"framer-1vzi2vs"}
 												fonts={["Inter"]}
@@ -1822,10 +1912,12 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											>
 												<React.Fragment>
 													<motion2.p
+														suppressHydrationWarning={true}
 														className={"framer-styles-preset-14ew30v"}
 														data-styles-preset={"TQvmJK7UB"}
 													>
 														<Link
+															suppressHydrationWarning={true}
 															href={{
 																webPageId: "YC1NE44pE",
 															}}
@@ -1837,6 +1929,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 															smoothScroll={false}
 														>
 															<motion2.a
+																suppressHydrationWarning={true}
 																className={"framer-styles-preset-1fr0mxk"}
 																data-styles-preset={"QqbrxlqQv"}
 															>
@@ -2009,6 +2102,7 @@ var defaultResponsiveVariants = {
 function ComponentWithRoot({ locale, ...rest }) {
 	return (
 		<ContextProviders
+			suppressHydrationWarning={true}
 			routes={routes}
 			framerSiteId={
 				"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c"
@@ -2017,6 +2111,7 @@ function ComponentWithRoot({ locale, ...rest }) {
 			locales={locales}
 		>
 			{jsx(stdin_default3, {
+				suppressHydrationWarning: true,
 				...rest,
 			})}
 		</ContextProviders>
@@ -2042,6 +2137,7 @@ function ComponentWithRoot({ locale, ...rest }) {
 ComponentWithRoot.Responsive = ({ locale = "", ...rest }) => {
 	return (
 		<ContextProviders
+			suppressHydrationWarning={true}
 			routes={routes}
 			framerSiteId={
 				"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c"
@@ -2050,6 +2146,7 @@ ComponentWithRoot.Responsive = ({ locale = "", ...rest }) => {
 			locales={locales}
 		>
 			<WithFramerBreakpoints
+				suppressHydrationWarning={true}
 				Component={stdin_default3}
 				variants={defaultResponsiveVariants}
 				{...rest}

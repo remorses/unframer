@@ -93,7 +93,10 @@ var Transition = ({ value, children }) => {
 		[JSON.stringify(transition)],
 	);
 	return (
-		<MotionConfigContext.Provider value={contextValue}>
+		<MotionConfigContext.Provider
+			suppressHydrationWarning={true}
+			value={contextValue}
+		>
 			{children}
 		</MotionConfigContext.Provider>
 	);
@@ -147,10 +150,18 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 	const sharedStyleClassNames = [className];
 	const componentViewport = useComponentViewport();
 	return (
-		<LayoutGroup id={layoutId ?? defaultLayoutId}>
-			<Variants animate={variants} initial={false}>
-				<Transition value={transition1}>
+		<LayoutGroup
+			suppressHydrationWarning={true}
+			id={layoutId ?? defaultLayoutId}
+		>
+			<Variants
+				suppressHydrationWarning={true}
+				animate={variants}
+				initial={false}
+			>
+				<Transition suppressHydrationWarning={true} value={transition1}>
 					<motion.footer
+						suppressHydrationWarning={true}
 						{...restProps}
 						{...gestureHandlers}
 						className={cx(
@@ -189,12 +200,14 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 						)}
 					>
 						<motion.div
+							suppressHydrationWarning={true}
 							className={"framer-14auab3"}
 							data-framer-name={"Copyright"}
 							layoutDependency={layoutDependency}
 							layoutId={"GvbjK5Qf9"}
 						>
 							<RichText
+								suppressHydrationWarning={true}
 								__fromCanvasComponent={true}
 								className={"framer-1662h0h"}
 								fonts={["FS;Satoshi-medium"]}
@@ -210,6 +223,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 							>
 								<React.Fragment>
 									<motion.p
+										suppressHydrationWarning={true}
 										style={{
 											"--font-selector": "RlM7U2F0b3NoaS1tZWRpdW0=",
 											"--framer-font-family":
@@ -223,6 +237,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										}}
 									>
 										<Link
+											suppressHydrationWarning={true}
 											href={
 												"https://www.framer.com/marketplace/templates/simplicity/"
 											}
@@ -231,6 +246,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											smoothScroll={false}
 										>
 											<motion.a
+												suppressHydrationWarning={true}
 												className={"framer-styles-preset-1ge2maa"}
 												data-styles-preset={"UwhnZFjEy"}
 											>
@@ -241,6 +257,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 								</React.Fragment>
 							</RichText>
 							<ComponentViewportProvider
+								suppressHydrationWarning={true}
 								height={24}
 								y={
 									(componentViewport?.y || 0) +
@@ -268,11 +285,13 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 								)}
 							>
 								<motion.div
+									suppressHydrationWarning={true}
 									className={"framer-vtw8lu-container"}
 									layoutDependency={layoutDependency}
 									layoutId={"oU2Sqbr8S-container"}
 								>
 									{_jsx(stdin_default, {
+										suppressHydrationWarning: true,
 										BdwUs0U2_: addImageAlt(
 											{
 												src: "https://framerusercontent.com/images/BAAm4iLj0ZDVoNBCfkiG00pMAVw.jpg",
@@ -364,6 +383,7 @@ var defaultResponsiveVariants = {
 function ComponentWithRoot({ locale, ...rest }) {
 	return (
 		<ContextProviders
+			suppressHydrationWarning={true}
 			routes={routes}
 			framerSiteId={
 				"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c"
@@ -372,6 +392,7 @@ function ComponentWithRoot({ locale, ...rest }) {
 			locales={locales}
 		>
 			{jsx(stdin_default2, {
+				suppressHydrationWarning: true,
 				...rest,
 			})}
 		</ContextProviders>
@@ -397,6 +418,7 @@ function ComponentWithRoot({ locale, ...rest }) {
 ComponentWithRoot.Responsive = ({ locale = "", ...rest }) => {
 	return (
 		<ContextProviders
+			suppressHydrationWarning={true}
 			routes={routes}
 			framerSiteId={
 				"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c"
@@ -405,6 +427,7 @@ ComponentWithRoot.Responsive = ({ locale = "", ...rest }) => {
 			locales={locales}
 		>
 			<WithFramerBreakpoints
+				suppressHydrationWarning={true}
 				Component={stdin_default2}
 				variants={defaultResponsiveVariants}
 				{...rest}

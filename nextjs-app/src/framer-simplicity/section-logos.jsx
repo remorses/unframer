@@ -119,7 +119,10 @@ var Transition = ({ value, children }) => {
 		[JSON.stringify(transition)],
 	);
 	return (
-		<MotionConfigContext.Provider value={contextValue}>
+		<MotionConfigContext.Provider
+			suppressHydrationWarning={true}
+			value={contextValue}
+		>
 			{children}
 		</MotionConfigContext.Provider>
 	);
@@ -176,10 +179,18 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 	const sharedStyleClassNames = [className];
 	const scopingClassNames = cx(serializationHash, ...sharedStyleClassNames);
 	return (
-		<LayoutGroup id={layoutId ?? defaultLayoutId}>
-			<Variants animate={variants} initial={false}>
-				<Transition value={transition1}>
+		<LayoutGroup
+			suppressHydrationWarning={true}
+			id={layoutId ?? defaultLayoutId}
+		>
+			<Variants
+				suppressHydrationWarning={true}
+				animate={variants}
+				initial={false}
+			>
+				<Transition suppressHydrationWarning={true} value={transition1}>
 					<motion.div
+						suppressHydrationWarning={true}
 						{...restProps}
 						{...gestureHandlers}
 						className={cx(
@@ -211,12 +222,14 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 						)}
 					>
 						<motion.div
+							suppressHydrationWarning={true}
 							className={"framer-1lav5jp"}
 							data-framer-name={"Container"}
 							layoutDependency={layoutDependency}
 							layoutId={"FJHvFvak7"}
 						>
 							<MotionDivWithFXWithOptimizedAppearEffect
+								suppressHydrationWarning={true}
 								__perspectiveFX={false}
 								__smartComponentFX={true}
 								__targetOpacity={1}
@@ -230,6 +243,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 								optimized={true}
 							>
 								<RichText
+									suppressHydrationWarning={true}
 									__fromCanvasComponent={true}
 									className={"framer-1cukwhl"}
 									fonts={["Inter"]}
@@ -244,6 +258,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 								>
 									<React.Fragment>
 										<motion.p
+											suppressHydrationWarning={true}
 											className={"framer-styles-preset-1fgmqi7"}
 											data-styles-preset={"CWRpkcDNO"}
 										>
@@ -251,8 +266,9 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										</motion.p>
 									</React.Fragment>
 								</RichText>
-								<ComponentViewportProvider>
+								<ComponentViewportProvider suppressHydrationWarning={true}>
 									<SmartComponentScopedContainer
+										suppressHydrationWarning={true}
 										className={"framer-18vmn4v-container"}
 										isAuthoredByUser={true}
 										isModuleExternal={true}
@@ -263,6 +279,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										scopeId={"MPskWHg5T"}
 									>
 										<Ticker
+											suppressHydrationWarning={true}
 											alignment={"center"}
 											direction={"left"}
 											fadeOptions={{
@@ -289,6 +306,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											}}
 											slots={[
 												<SVG
+													suppressHydrationWarning={true}
 													className={"framer-1qm86zp"}
 													data-framer-name={"Placeholder Logo 3"}
 													layout={"position"}
@@ -302,6 +320,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 													withExternalLayout={true}
 												/>,
 												<SVG
+													suppressHydrationWarning={true}
 													className={"framer-1qnkvu0"}
 													data-framer-name={"Placeholder Logo 2"}
 													layout={"position"}
@@ -315,6 +334,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 													withExternalLayout={true}
 												/>,
 												<SVG
+													suppressHydrationWarning={true}
 													className={"framer-8nmu0j"}
 													data-framer-name={"Placeholder Logo 1"}
 													layout={"position"}
@@ -328,6 +348,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 													withExternalLayout={true}
 												/>,
 												<SVG
+													suppressHydrationWarning={true}
 													className={"framer-qpn3nq"}
 													data-framer-name={"Placeholder Logo 4"}
 													layout={"position"}
@@ -341,6 +362,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 													withExternalLayout={true}
 												/>,
 												<SVG
+													suppressHydrationWarning={true}
 													className={"framer-1qicr3e"}
 													data-framer-name={"Placeholder Logo 5"}
 													layout={"position"}
@@ -354,11 +376,13 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 													withExternalLayout={true}
 												/>,
 												<motion.div
+													suppressHydrationWarning={true}
 													className={"framer-72cawn"}
 													layoutDependency={layoutDependency}
 													layoutId={"tRGI7zSOG"}
 												>
 													<SVG
+														suppressHydrationWarning={true}
 														className={"framer-1lj0428"}
 														data-framer-name={"Workbase - Dark Logo"}
 														fill={"black"}
@@ -514,6 +538,7 @@ var defaultResponsiveVariants = {
 function ComponentWithRoot({ locale, ...rest }) {
 	return (
 		<ContextProviders
+			suppressHydrationWarning={true}
 			routes={routes}
 			framerSiteId={
 				"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c"
@@ -522,6 +547,7 @@ function ComponentWithRoot({ locale, ...rest }) {
 			locales={locales}
 		>
 			{jsx(stdin_default, {
+				suppressHydrationWarning: true,
 				...rest,
 			})}
 		</ContextProviders>
@@ -547,6 +573,7 @@ function ComponentWithRoot({ locale, ...rest }) {
 ComponentWithRoot.Responsive = ({ locale = "", ...rest }) => {
 	return (
 		<ContextProviders
+			suppressHydrationWarning={true}
 			routes={routes}
 			framerSiteId={
 				"080b0b6d577bdc210bd0cd32f7edde6108e985399928f17be1208fac1508931c"
@@ -555,6 +582,7 @@ ComponentWithRoot.Responsive = ({ locale = "", ...rest }) => {
 			locales={locales}
 		>
 			<WithFramerBreakpoints
+				suppressHydrationWarning={true}
 				Component={stdin_default}
 				variants={defaultResponsiveVariants}
 				{...rest}
