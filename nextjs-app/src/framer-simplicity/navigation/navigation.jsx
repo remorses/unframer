@@ -1031,7 +1031,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 												nL8OQ61g_: "House",
 												nZIvc5R21: "AppleLogo",
 												odb0bWURU:
-													"https://www.framer.com/marketplace/plugins/react-export/?via=morse",
+													"https://framer.link/TGWRs2U",
 												QQq_dHjj6: "fill",
 												rt9DsEiKG:
 													"var(--token-958d6a9e-bb7c-4a88-a47a-70db899d1dd5, rgb(36, 36, 36))",

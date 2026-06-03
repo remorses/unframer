@@ -575,7 +575,7 @@ export const mcpTools = {
         description: dedent `
             Export selected Framer components as React code. This tool will return a cli command you can run to download your Framer components as React code.
 
-            This tool uses the same logic implemented in the Framer React Export plugin: https://www.framer.com/marketplace/plugins/react-export/
+            This tool uses the same logic implemented in the Framer React Export plugin: https://framer.link/TGWRs2U
 
             You should login with the same Google account you used in Framer React Export plugin if you want to reuse your existing subscription.
 

@@ -23,7 +23,7 @@ You can watch a [Video Tutorial on YouTube here](https://www.youtube.com/watch?v
     npm install unframer react@19 react-dom@19
     ```
 
-1. Install the [`React Export` Framer plugin](https://www.framer.com/marketplace/plugins/react-export/), open it and select which components you want to export.
+1. Install the [`React Export` Framer plugin](https://framer.link/TGWRs2U), open it and select which components you want to export.
 
 1. Run the command `npx unframer {projectId} --outDir ./src/framer` to download the components and their types in the `outDir` directory.
    Run this command every time you add a new Framer component.
