@@ -12752,7 +12752,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.6B2WGZJM.mjs
+// /:https://app.framerstatic.com/framer.ORRFU74A.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -53124,6 +53124,7 @@ var BuiltInFontSource = class {
       const isVariableFont2 = Array.isArray(variationAxesData,);
       const variant = isVariableFont2 ? 'variable' : properties.font.fontSubFamily || 'regular';
       const url = createAbsoluteAssetURLFromAsset(asset,);
+      const validatedVariationAxes = validateVariationAxes(variationAxesData,);
       const font = {
         assetKey: asset.key,
         family: fontFamily,
@@ -53131,9 +53132,9 @@ var BuiltInFontSource = class {
         variant,
         file: url,
         hasOpenTypeFeatures: supportsOpenType(openTypeData,),
-        variationAxes: validateVariationAxes(variationAxesData,),
+        variationAxes: validatedVariationAxes,
         category: properties.font.fontCategory,
-        weight: variantNameToWeight(variant,),
+        weight: isVariableFont2 ? getWeightFromVariationAxes(validatedVariationAxes,) : variantNameToWeight(variant,),
         style: getFontStyle(variant,),
         cssFamilyName: createCSSFamilyName(fontName, isVariableFont2,),
       };
@@ -53153,7 +53154,8 @@ var BuiltInFontSource = class {
   }
   static parseVariant(variant,) {
     const kebabCaseVariant = variantToKebabCase(variant,);
-    const weight = variantsNameToWeight[kebabCaseVariant];
+    const isVariable = kebabCaseVariant === 'variable' || kebabCaseVariant === 'variable-italic';
+    const weight = isVariable ? 400 : variantsNameToWeight[kebabCaseVariant];
     const style2 = getFontStyle(variant,);
     return {
       weight,
@@ -53302,6 +53304,10 @@ var variantsNameToWeight = {
 function variantNameToWeight(variant,) {
   const kebabCaseVariant = variantToKebabCase(variant,);
   return variantsNameToWeight[kebabCaseVariant];
+}
+function getWeightFromVariationAxes(variationAxes,) {
+  const weightAxis = variationAxes?.find((axis) => axis.tag === 'wght');
+  return weightAxis?.defaultValue ?? 400;
 }
 function variantToKebabCase(variant,) {
   return variant.toLowerCase().replace(/\s+/gu, '-',);
