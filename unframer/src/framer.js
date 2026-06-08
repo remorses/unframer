@@ -12752,7 +12752,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.ORRFU74A.mjs
+// /:https://app.framerstatic.com/framer.4IJRBGWA.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -51837,8 +51837,10 @@ function useShaderMouse(containerRef, mouseConfig,) {
       passive: true,
       capture: true,
     },);
+    const cleanupWindowResize = resize(updateRect,);
     const cleanupResize = resize(el, updateRect,);
     const cleanupHover = hover(el, () => {
+      updateRect();
       if (!hasEnteredOnce) {
         hasEnteredOnce = true;
         smoothX.jump(rawX.get(),);
@@ -51855,6 +51857,7 @@ function useShaderMouse(containerRef, mouseConfig,) {
       __unframerWindow2.removeEventListener('scroll', updateRect, {
         capture: true,
       },);
+      cleanupWindowResize();
       cleanupResize();
       cleanupHover();
       cleanupPress();
