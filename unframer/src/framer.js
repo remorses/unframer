@@ -12752,7 +12752,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.4IJRBGWA.mjs
+// /:https://app.framerstatic.com/framer.R7XKXNUQ.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -53137,7 +53137,9 @@ var BuiltInFontSource = class {
         hasOpenTypeFeatures: supportsOpenType(openTypeData,),
         variationAxes: validatedVariationAxes,
         category: properties.font.fontCategory,
-        weight: isVariableFont2 ? getWeightFromVariationAxes(validatedVariationAxes,) : variantNameToWeight(variant,),
+        weight: isVariableFont2
+          ? getWeightFromVariationAxes(validatedVariationAxes, properties.font.faceDescriptors?.weight,)
+          : variantNameToWeight(variant,),
         style: getFontStyle(variant,),
         cssFamilyName: createCSSFamilyName(fontName, isVariableFont2,),
       };
@@ -53308,9 +53310,12 @@ function variantNameToWeight(variant,) {
   const kebabCaseVariant = variantToKebabCase(variant,);
   return variantsNameToWeight[kebabCaseVariant];
 }
-function getWeightFromVariationAxes(variationAxes,) {
-  const weightAxis = variationAxes?.find((axis) => axis.tag === 'wght');
-  return weightAxis?.defaultValue ?? 400;
+function getWeightFromVariationAxes(variationAxes, faceWeight,) {
+  const axisDefault = variationAxes?.find((axis) => axis.tag === 'wght')?.defaultValue;
+  if (axisDefault !== void 0 && axisDefault >= 1 && axisDefault <= 1e3) {
+    return axisDefault;
+  }
+  return faceWeight ?? variantNameToWeight('variable',) ?? 500;
 }
 function variantToKebabCase(variant,) {
   return variant.toLowerCase().replace(/\s+/gu, '-',);
