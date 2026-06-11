@@ -12752,7 +12752,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.R7XKXNUQ.mjs
+// /:https://app.framerstatic.com/framer.HTFCILDR.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -14252,6 +14252,15 @@ var LazyValue = class _LazyValue {
     return this.read();
   }
 };
+var UNDEFINED = -1;
+var HOLE = -2;
+var NAN = -3;
+var POSITIVE_INFINITY = -4;
+var NEGATIVE_INFINITY = -5;
+var NEGATIVE_ZERO = -6;
+var SPARSE = -7;
+var MAX_ARRAY_LEN = 2 ** 32 - 1;
+var MAX_ARRAY_INDEX = MAX_ARRAY_LEN - 1;
 var DevalueError = class extends Error {
   /**
    * @param {string} message
@@ -14268,7 +14277,7 @@ var DevalueError = class extends Error {
   }
 };
 function is_primitive(thing,) {
-  return Object(thing,) !== thing;
+  return thing === null || typeof thing !== 'object' && typeof thing !== 'function';
 }
 var object_proto_names = /* @__PURE__ */ Object.getOwnPropertyNames(Object.prototype,).sort().join('\0',);
 function is_plain_object(thing,) {
@@ -14326,105 +14335,72 @@ var is_identifier = /^[a-zA-Z_$][a-zA-Z_$0-9]*$/;
 function stringify_key(key7,) {
   return is_identifier.test(key7,) ? '.' + key7 : '[' + JSON.stringify(key7,) + ']';
 }
-function is_valid_array_index(s,) {
+function is_valid_array_index(n,) {
+  if (!Number.isInteger(n,)) return false;
+  if (n < 0) return false;
+  if (n > MAX_ARRAY_INDEX) return false;
+  return true;
+}
+function is_valid_array_len(n,) {
+  if (!Number.isInteger(n,)) return false;
+  if (n < 0) return false;
+  if (n > MAX_ARRAY_LEN) return false;
+  return true;
+}
+function is_valid_array_index_string(s,) {
   if (s.length === 0) return false;
   if (s.length > 1 && s.charCodeAt(0,) === 48) return false;
   for (let i = 0; i < s.length; i++) {
     const c = s.charCodeAt(i,);
     if (c < 48 || c > 57) return false;
   }
-  const n = +s;
-  if (n >= 2 ** 32 - 1) return false;
-  if (n < 0) return false;
-  return true;
+  return is_valid_array_index(+s,);
 }
 function valid_array_indices(array,) {
   const keys3 = Object.keys(array,);
   for (var i = keys3.length - 1; i >= 0; i--) {
-    if (is_valid_array_index(keys3[i],)) {
+    if (is_valid_array_index_string(keys3[i],)) {
       break;
     }
   }
   keys3.length = i + 1;
   return keys3;
 }
-function encode64(arraybuffer,) {
-  const dv = new DataView(arraybuffer,);
-  let binaryString = '';
-  for (let i = 0; i < arraybuffer.byteLength; i++) {
-    binaryString += String.fromCharCode(dv.getUint8(i,),);
-  }
-  return binaryToAscii(binaryString,);
+function encode_native(array_buffer,) {
+  return new Uint8Array(array_buffer,).toBase64();
 }
-function decode64(string,) {
-  const binaryString = asciiToBinary(string,);
-  const arraybuffer = new ArrayBuffer(binaryString.length,);
-  const dv = new DataView(arraybuffer,);
-  for (let i = 0; i < arraybuffer.byteLength; i++) {
-    dv.setUint8(i, binaryString.charCodeAt(i,),);
-  }
-  return arraybuffer;
+function decode_native(base64,) {
+  return Uint8Array.fromBase64(base64,).buffer;
 }
-var KEY_STRING = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
-function asciiToBinary(data2,) {
-  if (data2.length % 4 === 0) {
-    data2 = data2.replace(/==?$/, '',);
-  }
-  let output = '';
-  let buffer = 0;
-  let accumulatedBits = 0;
-  for (let i = 0; i < data2.length; i++) {
-    buffer <<= 6;
-    buffer |= KEY_STRING.indexOf(data2[i],);
-    accumulatedBits += 6;
-    if (accumulatedBits === 24) {
-      output += String.fromCharCode((buffer & 16711680) >> 16,);
-      output += String.fromCharCode((buffer & 65280) >> 8,);
-      output += String.fromCharCode(buffer & 255,);
-      buffer = accumulatedBits = 0;
-    }
-  }
-  if (accumulatedBits === 12) {
-    buffer >>= 4;
-    output += String.fromCharCode(buffer,);
-  } else if (accumulatedBits === 18) {
-    buffer >>= 2;
-    output += String.fromCharCode((buffer & 65280) >> 8,);
-    output += String.fromCharCode(buffer & 255,);
-  }
-  return output;
+function encode_buffer(array_buffer,) {
+  return Buffer.from(array_buffer,).toString('base64',);
 }
-function binaryToAscii(str,) {
-  let out = '';
-  for (let i = 0; i < str.length; i += 3) {
-    const groupsOfSix = [void 0, void 0, void 0, void 0,];
-    groupsOfSix[0] = str.charCodeAt(i,) >> 2;
-    groupsOfSix[1] = (str.charCodeAt(i,) & 3) << 4;
-    if (str.length > i + 1) {
-      groupsOfSix[1] |= str.charCodeAt(i + 1,) >> 4;
-      groupsOfSix[2] = (str.charCodeAt(i + 1,) & 15) << 2;
-    }
-    if (str.length > i + 2) {
-      groupsOfSix[2] |= str.charCodeAt(i + 2,) >> 6;
-      groupsOfSix[3] = str.charCodeAt(i + 2,) & 63;
-    }
-    for (let j = 0; j < groupsOfSix.length; j++) {
-      if (typeof groupsOfSix[j] === 'undefined') {
-        out += '=';
-      } else {
-        out += KEY_STRING[groupsOfSix[j]];
-      }
-    }
-  }
-  return out;
+function decode_buffer(base64,) {
+  return Uint8Array.from(Buffer.from(base64, 'base64',),).buffer;
 }
-var UNDEFINED = -1;
-var HOLE = -2;
-var NAN = -3;
-var POSITIVE_INFINITY = -4;
-var NEGATIVE_INFINITY = -5;
-var NEGATIVE_ZERO = -6;
-var SPARSE = -7;
+function encode_legacy(array_buffer,) {
+  const array = new Uint8Array(array_buffer,);
+  let binary = '';
+  const chunk_size = 32768;
+  for (let i = 0; i < array.length; i += chunk_size) {
+    const chunk = array.subarray(i, i + chunk_size,);
+    binary += String.fromCharCode.apply(null, chunk,);
+  }
+  return btoa(binary,);
+}
+function decode_legacy(base64,) {
+  const binary_string = atob(base64,);
+  const len = binary_string.length;
+  const array = new Uint8Array(len,);
+  for (let i = 0; i < len; i++) {
+    array[i] = binary_string.charCodeAt(i,);
+  }
+  return array.buffer;
+}
+var native = typeof Uint8Array.fromBase64 === 'function';
+var buffer = typeof process === 'object' && process.versions?.node !== void 0;
+var encode64 = native ? encode_native : buffer ? encode_buffer : encode_legacy;
+var decode64 = native ? decode_native : buffer ? decode_buffer : decode_legacy;
 function parse(serialized, revivers,) {
   return unflatten(JSON.parse(serialized,), revivers,);
 }
@@ -14489,13 +14465,14 @@ function unflatten(parsed, revivers,) {
           case 'RegExp':
             hydrated[index] = new RegExp(value[1], value[2],);
             break;
-          case 'Object':
-            const object = Object(value[1],);
-            if (Object.hasOwn(object, '__proto__',)) {
-              throw new Error('Cannot parse an object with a `__proto__` property',);
+          case 'Object': {
+            const wrapped_index = value[1];
+            if (typeof values[wrapped_index] === 'object' && values[wrapped_index][0] !== 'BigInt') {
+              throw new Error('Invalid input',);
             }
-            hydrated[index] = object;
+            hydrated[index] = Object(hydrate(wrapped_index,),);
             break;
+          }
           case 'BigInt':
             hydrated[index] = BigInt(value[1],);
             break;
@@ -14514,19 +14491,22 @@ function unflatten(parsed, revivers,) {
           case 'Uint8ClampedArray':
           case 'Int16Array':
           case 'Uint16Array':
+          case 'Float16Array':
           case 'Int32Array':
           case 'Uint32Array':
           case 'Float32Array':
           case 'Float64Array':
           case 'BigInt64Array':
-          case 'BigUint64Array': {
+          case 'BigUint64Array':
+          case 'DataView': {
             if (values[value[1]][0] !== 'ArrayBuffer') {
               throw new Error('Invalid data',);
             }
             const TypedArrayConstructor = globalThis[type];
-            const buffer = hydrate(value[1],);
-            const typedArray = new TypedArrayConstructor(buffer,);
-            hydrated[index] = value[2] !== void 0 ? typedArray.subarray(value[2], value[3],) : typedArray;
+            const buffer2 = hydrate(value[1],);
+            hydrated[index] = value[2] !== void 0
+              ? new TypedArrayConstructor(buffer2, value[2], value[3],)
+              : new TypedArrayConstructor(buffer2,);
             break;
           }
           case 'ArrayBuffer': {
@@ -14565,18 +14545,21 @@ function unflatten(parsed, revivers,) {
         }
       } else if (value[0] === SPARSE) {
         const len = value[1];
-        if (!Number.isInteger(len,) || len < 0) {
+        if (!is_valid_array_len(len,)) {
           throw new Error('Invalid input',);
         }
-        const array = new Array(len,);
+        const array = [];
         hydrated[index] = array;
+        array[MAX_ARRAY_INDEX] = void 0;
+        delete array[MAX_ARRAY_INDEX];
         for (let i = 2; i < value.length; i += 2) {
           const idx = value[i];
-          if (!Number.isInteger(idx,) || idx < 0 || idx >= len) {
+          if (!is_valid_array_index(idx,) || idx >= len) {
             throw new Error('Invalid input',);
           }
           array[idx] = hydrate(value[i + 1],);
         }
+        array.length = len;
       } else {
         const array = new Array(value.length,);
         hydrated[index] = array;
@@ -14602,6 +14585,10 @@ function unflatten(parsed, revivers,) {
   return hydrate(0,);
 }
 function stringify(value, reducers,) {
+  const stringified = run(false, value, reducers,);
+  return typeof stringified === 'string' ? stringified : `[${stringified.join(',',)}]`;
+}
+function run(async, value, reducers,) {
   const stringified = [];
   const indexes = /* @__PURE__ */ new Map();
   const custom = [];
@@ -14615,14 +14602,14 @@ function stringify(value, reducers,) {
   }
   const keys3 = [];
   let p = 0;
-  function flatten(thing,) {
+  function flatten(thing, index2,) {
     if (thing === void 0) return UNDEFINED;
     if (Number.isNaN(thing,)) return NAN;
     if (thing === Infinity) return POSITIVE_INFINITY;
     if (thing === -Infinity) return NEGATIVE_INFINITY;
     if (thing === 0 && 1 / thing < 0) return NEGATIVE_ZERO;
-    if (indexes.has(thing,)) return indexes.get(thing,);
-    const index2 = p++;
+    if (indexes.has(thing,)) return /** @type {number} */ indexes.get(thing,);
+    index2 ??= p++;
     indexes.set(thing, index2,);
     for (
       const {
@@ -14638,20 +14625,28 @@ function stringify(value, reducers,) {
     }
     if (typeof thing === 'function') {
       throw new DevalueError(`Cannot stringify a function`, keys3, thing, value,);
+    } else if (typeof thing === 'symbol') {
+      throw new DevalueError(`Cannot stringify a Symbol primitive`, keys3, thing, value,);
     }
     let str = '';
     if (is_primitive(thing,)) {
       str = stringify_primitive(thing,);
+    } else if (typeof thing.then === 'function') {
+      if (!async) {
+        throw new DevalueError(`Cannot stringify a Promise or thenable \u2014 use stringifyAsync instead`, keys3, thing, value,);
+      }
+      str = Promise.resolve(thing,).then((value2) => {
+        const i = flatten(value2, index2,);
+        if (i < 0) stringified[index2] = i;
+      },);
     } else {
       const type = get_type(thing,);
       switch (type) {
         case 'Number':
         case 'String':
         case 'Boolean':
-          str = `["Object",${stringify_primitive(thing,)}]`;
-          break;
         case 'BigInt':
-          str = `["BigInt",${thing}]`;
+          str = `["Object",${flatten(thing.valueOf(),)}]`;
           break;
         case 'Date':
           const valid = !isNaN(thing.getDate(),);
@@ -14729,19 +14724,18 @@ function stringify(value, reducers,) {
         case 'Uint8ClampedArray':
         case 'Int16Array':
         case 'Uint16Array':
+        case 'Float16Array':
         case 'Int32Array':
         case 'Uint32Array':
         case 'Float32Array':
         case 'Float64Array':
         case 'BigInt64Array':
-        case 'BigUint64Array': {
+        case 'BigUint64Array':
+        case 'DataView': {
           const typedArray = thing;
           str = '["' + type + '",' + flatten(typedArray.buffer,);
-          const a = thing.byteOffset;
-          const b = a + thing.byteLength;
-          if (a > 0 || b !== typedArray.buffer.byteLength) {
-            const m2 = +/(\d+)/.exec(type,)[1] / 8;
-            str += `,${a / m2},${b / m2}`;
+          if (typedArray.byteLength !== typedArray.buffer.byteLength) {
+            str += `,${typedArray.byteOffset},${typedArray.length}`;
           }
           str += ']';
           break;
@@ -14802,12 +14796,11 @@ function stringify(value, reducers,) {
   }
   const index = flatten(value,);
   if (index < 0) return `${index}`;
-  return `[${stringified.join(',',)}]`;
+  return stringified;
 }
 function stringify_primitive(thing,) {
   const type = typeof thing;
   if (type === 'string') return stringify_string(thing,);
-  if (thing instanceof String) return stringify_string(thing.toString(),);
   if (thing === void 0) return UNDEFINED.toString();
   if (thing === 0 && 1 / thing < 0) return NEGATIVE_ZERO.toString();
   if (type === 'bigint') return `["BigInt","${thing}"]`;
@@ -34992,8 +34985,8 @@ var Scroll = /* @__PURE__ */ (() => {
       disabledTitle: 'Off',
       defaultValue: true,
       hidden: ({
-        native,
-      },) => native === true,
+        native: native2,
+      },) => native2 === true,
     },
     dragEnabled: {
       type: 'boolean',
@@ -35009,8 +35002,8 @@ var Scroll = /* @__PURE__ */ (() => {
       disabledTitle: 'Off',
       defaultValue: true,
       hidden: ({
-        native,
-      },) => native === true,
+        native: native2,
+      },) => native2 === true,
     },
     wheelEnabled: {
       type: 'boolean',
@@ -35019,8 +35012,8 @@ var Scroll = /* @__PURE__ */ (() => {
       disabledTitle: 'Off',
       defaultValue: true,
       hidden: ({
-        native,
-      },) => native === true,
+        native: native2,
+      },) => native2 === true,
     },
     scrollBarVisible: {
       type: 'boolean',
@@ -35029,8 +35022,8 @@ var Scroll = /* @__PURE__ */ (() => {
       disabledTitle: 'Hidden',
       defaultValue: false,
       hidden: ({
-        native,
-      },) => native === false,
+        native: native2,
+      },) => native2 === false,
     },
     resetOffset: {
       type: 'boolean',
@@ -39498,8 +39491,8 @@ var maxTime = 1e4;
 function createWorkerTask() {
   return function () {
     async function sha256(text,) {
-      const buffer = new TextEncoder().encode(text,);
-      const hashBuffer = await crypto.subtle.digest('SHA-256', buffer,);
+      const buffer2 = new TextEncoder().encode(text,);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', buffer2,);
       return Array.from(new Uint8Array(hashBuffer,),).map((b) => b.toString(16,).padStart(2, '0',)).join('',);
     }
     function randomCharacters(count,) {
@@ -50407,11 +50400,11 @@ var WebGL2ShaderRenderer = class {
   }
 };
 function createStaticArrayBuffer(gl, data2,) {
-  const buffer = gl.createBuffer();
-  if (!buffer) throw new Error('Failed to create buffer',);
-  gl.bindBuffer(gl.ARRAY_BUFFER, buffer,);
+  const buffer2 = gl.createBuffer();
+  if (!buffer2) throw new Error('Failed to create buffer',);
+  gl.bindBuffer(gl.ARRAY_BUFFER, buffer2,);
   gl.bufferData(gl.ARRAY_BUFFER, data2, gl.STATIC_DRAW,);
-  return buffer;
+  return buffer2;
 }
 function bindFullScreenQuadAttribs(gl, program, positionBuffer, texCoordBuffer,) {
   const positionLocation = gl.getAttribLocation(program, 'a_position',);
@@ -50617,11 +50610,11 @@ var defaultBufferResolutionScale = 0.5;
 var defaultBufferFormat = 'rgba8';
 function resolveBufferDescriptors(buffers, common, headOptions,) {
   if (!buffers) return void 0;
-  return buffers.map((buffer) => ({
-    uniformName: toBufferUniformName(buffer.name,),
-    fragment: prepareFragmentShader(buffer.fragment, common, headOptions,),
-    resolutionScale: buffer.resolutionScale ?? defaultBufferResolutionScale,
-    format: buffer.format ?? defaultBufferFormat,
+  return buffers.map((buffer2) => ({
+    uniformName: toBufferUniformName(buffer2.name,),
+    fragment: prepareFragmentShader(buffer2.fragment, common, headOptions,),
+    resolutionScale: buffer2.resolutionScale ?? defaultBufferResolutionScale,
+    format: buffer2.format ?? defaultBufferFormat,
   }));
 }
 var shaderConfigBrand = '__framer_shaderConfig__';
@@ -50679,30 +50672,32 @@ function validateShaderInputs(shaderConfig,) {
     }
   }
   if (shaderConfig.buffers) {
-    for (const buffer of shaderConfig.buffers) {
-      if (isUniformName(buffer.name,)) {
-        throw new Error(`Shader buffer name "${buffer.name}" must not start with "${uniformPrefix}".`,);
+    for (const buffer2 of shaderConfig.buffers) {
+      if (isUniformName(buffer2.name,)) {
+        throw new Error(`Shader buffer name "${buffer2.name}" must not start with "${uniformPrefix}".`,);
       }
-      const derivedName = toBufferUniformName(buffer.name,);
+      const derivedName = toBufferUniformName(buffer2.name,);
       const collidingName = seenDerivedNames.get(derivedName,);
       if (collidingName !== void 0) {
         throw new Error(
-          collidingName === buffer.name
-            ? `Duplicate shader buffer name "${buffer.name}".`
-            : `Shader buffer names "${collidingName}" and "${buffer.name}" both resolve to the same uniform "${derivedName}".`,
+          collidingName === buffer2.name
+            ? `Duplicate shader buffer name "${buffer2.name}".`
+            : `Shader buffer names "${collidingName}" and "${buffer2.name}" both resolve to the same uniform "${derivedName}".`,
         );
       }
-      seenDerivedNames.set(derivedName, buffer.name,);
-      if (buffer.resolutionScale !== void 0) {
-        if (!isNumber2(buffer.resolutionScale,) || buffer.resolutionScale <= 0 || buffer.resolutionScale > 1) {
+      seenDerivedNames.set(derivedName, buffer2.name,);
+      if (buffer2.resolutionScale !== void 0) {
+        if (!isNumber2(buffer2.resolutionScale,) || buffer2.resolutionScale <= 0 || buffer2.resolutionScale > 1) {
           throw new Error(
-            `Shader buffer "${buffer.name}" has invalid resolutionScale ${buffer.resolutionScale}. Must be in the range (0, 1].`,
+            `Shader buffer "${buffer2.name}" has invalid resolutionScale ${buffer2.resolutionScale}. Must be in the range (0, 1].`,
           );
         }
       }
-      if (buffer.format !== void 0 && !shaderBufferFormats.has(buffer.format,)) {
+      if (buffer2.format !== void 0 && !shaderBufferFormats.has(buffer2.format,)) {
         throw new Error(
-          `Shader buffer "${buffer.name}" has invalid format "${buffer.format}". Must be one of: ${[...shaderBufferFormats,].join(', ',)}.`,
+          `Shader buffer "${buffer2.name}" has invalid format "${buffer2.format}". Must be one of: ${
+            [...shaderBufferFormats,].join(', ',)
+          }.`,
         );
       }
     }
@@ -59759,7 +59754,7 @@ var package_default = {
   },
   dependencies: {
     '@sqlite.org/sqlite-wasm': '^3.50.4-build1',
-    devalue: '^5.6.4',
+    devalue: '^5.8.1',
     eventemitter3: '^5.0.1',
     fontfaceobserver: '2.2.0',
     'hoist-non-react-statics': '^3.3.2',
