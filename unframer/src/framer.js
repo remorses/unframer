@@ -12752,7 +12752,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.HTFCILDR.mjs
+// /:https://app.framerstatic.com/framer.LHXNZH6C.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -14859,7 +14859,6 @@ var mockWindow = {
   innerHeight: 0,
   innerWidth: 0,
   SVGSVGElement: {},
-  scheduler: void 0,
   open: function (_url, _target, _features,) {},
   __framer_events: [],
 };
@@ -15146,8 +15145,12 @@ var CollectionUtilsCache = class {
     return this.callUtilsMethod('getRecordIdBySlug', slug, locale,);
   }
 };
-var canUseYield = /* @__PURE__ */ (() => safeWindow.scheduler && 'yield' in safeWindow.scheduler)();
-var canUsePostTask = /* @__PURE__ */ (() => safeWindow.scheduler && 'postTask' in safeWindow.scheduler)();
+function hasScheduler(value,) {
+  return 'scheduler' in value;
+}
+var safeWindowScheduler = /* @__PURE__ */ (() => hasScheduler(safeWindow,) ? safeWindow.scheduler : void 0)();
+var canUseYield = /* @__PURE__ */ (() => safeWindowScheduler && 'yield' in safeWindowScheduler)();
+var canUsePostTask = /* @__PURE__ */ (() => safeWindowScheduler && 'postTask' in safeWindowScheduler)();
 var pendingResolvers = /* @__PURE__ */ new Set();
 function resolvePendingPromises() {
   for (const resolve of pendingResolvers) resolve();
@@ -15203,9 +15206,9 @@ function schedulerYield(options,) {
     },);
   }
   if (canUseYield) {
-    return safeWindow.scheduler.yield(options,).catch(noop22,);
+    return safeWindowScheduler.yield(options,).catch(noop22,);
   }
-  return safeWindow.scheduler.postTask(() => {}, options,).catch(noop22,);
+  return safeWindowScheduler.postTask(() => {}, options,).catch(noop22,);
 }
 function yieldToMain(options,) {
   const {
