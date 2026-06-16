@@ -12752,7 +12752,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.LHXNZH6C.mjs
+// /:https://app.framerstatic.com/framer.QMAVLTWE.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -46868,6 +46868,10 @@ var QueryCache = class {
     this.maxSize = maxSize;
     __publicField(this, 'cache', /* @__PURE__ */ new Map(),);
     __publicField(this, 'serializedCache', handoverCollector !== void 0 ? /* @__PURE__ */ new Map() : void 0,);
+  }
+  clear() {
+    this.cache.clear();
+    this.serializedCache?.clear();
   }
   prune() {
     if (this.cache.size <= this.maxSize) return;
