@@ -12752,7 +12752,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.QMAVLTWE.mjs
+// /:https://app.framerstatic.com/framer.4UBELJNO.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -39700,21 +39700,17 @@ var HoneypotInput = ({
     'data-bwignore': true,
   },);
 };
-function useHoneypotFields(isEnabled,) {
+function useHoneypotFields() {
   const framerSiteId = React42.useContext(FormContext,);
   const states = React42.useMemo(() =>
-    isEnabled
-      ? COMMON_FIELD_NAMES.map((fieldName) => {
-        return {
-          inputRef: React42.createRef(),
-          originalName: fieldName,
-          methodsUsed: {
-            setAttribute: false,
-            valueProperty: false,
-          },
-        };
-      },)
-      : [], [isEnabled,],);
+    COMMON_FIELD_NAMES.map((fieldName) => ({
+      inputRef: React42.createRef(),
+      originalName: fieldName,
+      methodsUsed: {
+        setAttribute: false,
+        valueProperty: false,
+      },
+    })), [],);
   const convertHoneypotFieldsForSubmission = React42.useCallback(() => {
     states.forEach((state) => {
       const currentHoneypotInput = state.inputRef.current;
@@ -39724,7 +39720,6 @@ function useHoneypotFields(isEnabled,) {
     },);
   }, [states,],);
   const replaceHoneypotWithMetadata = React42.useCallback((formData) => {
-    if (!isEnabled) return;
     const honeypotCount = states.length;
     let honeypotFilled = 0;
     const filledFieldsData = [];
@@ -39756,7 +39751,7 @@ function useHoneypotFields(isEnabled,) {
     formData.append(`${HONEYPOT_FIELD_NAME}_${METADATA_KEYS_ENUM.hpVersion}`, HONEYPOT_VERSION,);
     formData.append(`${HONEYPOT_FIELD_NAME}_${METADATA_KEYS_ENUM.siteId}`, framerSiteId || '',);
     formData.append(`${HONEYPOT_FIELD_NAME}_${METADATA_KEYS_ENUM.timeToSubmissionSinceModuleLoad}`, getTimeSinceModuleLoadInSeconds(),);
-  }, [isEnabled, states, framerSiteId,],);
+  }, [states, framerSiteId,],);
   return {
     states,
     convertHoneypotFieldsForSubmission,
@@ -39797,68 +39792,6 @@ function sendFormSubmitTrackingEvent(pageviewEventData, nodeId, trackingId,) {
     nodeId: nodeId ?? null,
     trackingId: trackingId || null,
   }, 'eager',);
-}
-var RECAPTCHA_SCRIPT_URL = 'https://www.google.com/recaptcha/api.js';
-function getRecaptchaScriptUrl(siteKey,) {
-  return `${RECAPTCHA_SCRIPT_URL}?render=${encodeURIComponent(siteKey,)}&badge=bottomleft`;
-}
-var captchaScriptPromises = /* @__PURE__ */ new Map();
-function loadRecaptchaScript(siteKey,) {
-  const existing = captchaScriptPromises.get(siteKey,);
-  if (existing) return existing;
-  const scriptUrl = getRecaptchaScriptUrl(siteKey,);
-  if (document.querySelector(`script[src="${scriptUrl}"]`,)) {
-    const resolved = Promise.resolve();
-    captchaScriptPromises.set(siteKey, resolved,);
-    return resolved;
-  }
-  const promise = new Promise((resolve, reject,) => {
-    const script = document.createElement('script',);
-    script.src = scriptUrl;
-    script.onload = () => resolve();
-    script.onerror = () => {
-      captchaScriptPromises.delete(siteKey,);
-      script.remove();
-      reject(new Error('Failed to load captcha script',),);
-    };
-    document.head.appendChild(script,);
-  },);
-  captchaScriptPromises.set(siteKey, promise,);
-  return promise;
-}
-function executeRecaptcha(siteKey, _action,) {
-  return new Promise((resolve, reject,) => {
-    const {
-      grecaptcha,
-    } = __unframerWindow2;
-    if (!grecaptcha) {
-      reject(new Error('Captcha script not available',),);
-      return;
-    }
-    grecaptcha.ready(() => {
-      grecaptcha.execute(siteKey,).then(resolve, reject,);
-    },);
-  },);
-}
-function useCaptcha({
-  provider,
-  siteKey,
-},) {
-  React42.useEffect(() => {
-    if (provider === 'recaptcha_v3' && siteKey) {
-      requestIdleCallback(() => {
-        loadRecaptchaScript(siteKey,).catch(() => {},);
-      },);
-    }
-  }, [provider, siteKey,],);
-  const executeChallenge = React42.useCallback(async (action) => {
-    if (provider !== 'recaptcha_v3' || !siteKey) return void 0;
-    await loadRecaptchaScript(siteKey,);
-    return executeRecaptcha(siteKey, action,);
-  }, [provider, siteKey,],);
-  return {
-    executeChallenge,
-  };
 }
 var pendingState = {
   state: 'pending',
@@ -39926,28 +39859,19 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
   onLoading,
   submitTrackingId,
   nodeId,
-  formCaptchaProvider,
-  formCaptchaSiteKey,
   ...props
 }, forwardedRef,) {
   const fallbackRef = React42.useRef(null,);
   const ref = forwardedRef ?? fallbackRef;
-  const shouldUseHoneypot = !(formCaptchaProvider && formCaptchaSiteKey);
   const {
     states: honeypotStateRefs,
     convertHoneypotFieldsForSubmission,
     replaceHoneypotWithMetadata,
-  } = useHoneypotFields(shouldUseHoneypot,);
+  } = useHoneypotFields();
   const router = useRouter();
   const currentRoute = useCurrentRoute();
   const implicitPathVariables = useImplicitPathVariables();
   const collectionUtils = useCollectionUtils();
-  const {
-    executeChallenge,
-  } = useCaptcha({
-    provider: formCaptchaProvider,
-    siteKey: formCaptchaSiteKey,
-  },);
   const [state, dispatch,] = React42.useReducer(formReducer, incompleteState,);
   const {
     activeLocale,
@@ -40025,7 +39949,7 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
         submitTrackingId,
         activeLocale,
       },);
-      await submitForm(action, data2, projectHash, executeChallenge,);
+      await submitForm(action, data2, projectHash,);
       startTransition2(() =>
         dispatch({
           type: 'success',
@@ -40080,7 +40004,7 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
     ref,
     children: [
       children(state,),
-      shouldUseHoneypot && /* @__PURE__ */ jsx(HoneypotFields, {
+      /* @__PURE__ */ jsx(HoneypotFields, {
         suppressHydrationWarning: true,
         states: honeypotStateRefs,
       },),
@@ -40099,20 +40023,16 @@ function anyEmptyRequiredFields(element,) {
   }
   return false;
 }
-async function submitForm(action, data2, projectHash, executeChallenge,) {
+async function submitForm(action, data2, projectHash,) {
   const proofOfWork = await calculateProofOfWork();
   if (!proofOfWork) {
     throw new Error('Failed to calculate proof of work',);
   }
-  const captchaToken = await executeChallenge('submit',);
   const headers = {
     'Framer-Site-Id': projectHash,
     'Framer-POW': proofOfWork.secret,
     'Framer-Form-Fields': getEncodedFormFieldsHeader(data2,),
   };
-  if (captchaToken) {
-    headers['Framer-Captcha-Response'] = captchaToken;
-  }
   const response = await fetch(action, {
     body: data2,
     method: 'POST',
