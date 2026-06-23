@@ -707,6 +707,7 @@ body { --framer-will-change-filter-override: none; }
         td.framer-text,
         th.framer-text {
             min-width: 16ch;
+            overflow-wrap: anywhere;
             vertical-align: top;
         }
     

@@ -12752,7 +12752,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.4UBELJNO.mjs
+// /:https://app.framerstatic.com/framer.4SOIBOB7.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -23282,6 +23282,10 @@ var componentsWithServerRenderedStyles = /* @__PURE__ */ (() => {
   return new Set(componentsWithSSRStylesAttr.split(' ',),);
 })();
 var framerCSSMarker = 'data-framer-css-ssr';
+function currentCSSRenderTarget() {
+  if (isScreenshotFramerHost()) return RenderTarget.preview;
+  return RenderTarget.current();
+}
 var withCSS = (Component18, escapedCSS, componentSerializationId,) =>
   React42.forwardRef((props, ref,) => {
     const {
@@ -23290,14 +23294,14 @@ var withCSS = (Component18, escapedCSS, componentSerializationId,) =>
     } = React42.useContext(StyleSheetContext,) ?? {};
     const id3 = componentSerializationId;
     if (!isBrowser22()) {
-      if (isFunction(escapedCSS,)) escapedCSS = escapedCSS(RenderTarget.current(), props,);
+      if (isFunction(escapedCSS,)) escapedCSS = escapedCSS(currentCSSRenderTarget(), props,);
       const concatenatedCSS = Array.isArray(escapedCSS,) ? escapedCSS.join('\n',) : escapedCSS;
       cssCollector.add(concatenatedCSS, id3,);
     }
     useInsertionEffect(() => {
       if (id3 && componentsWithServerRenderedStyles.has(id3,)) return;
       const css22 = isFunction(escapedCSS,)
-        ? escapedCSS(RenderTarget.current(), props,)
+        ? escapedCSS(currentCSSRenderTarget(), props,)
         : Array.isArray(escapedCSS,)
         ? escapedCSS
         : escapedCSS.split('\n',);
@@ -24497,6 +24501,7 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
         td.framer-text,
         th.framer-text {
             min-width: 16ch;
+            overflow-wrap: anywhere;
             vertical-align: top;
         }
     `,
@@ -51810,18 +51815,12 @@ function useConditionalAnimationFrame(enabled, callback,) {
     return () => cancelAnimationFrame(rafId,);
   }, [enabled, callback,],);
 }
-var shaderPriority = {
-  low: 0,
-  medium: 1,
-  high: 2,
-};
 function useShaderPoolSlot(id3, isSelected, isVisible,) {
   const pool = useShaderPoolContext();
-  const priority = isSelected ? shaderPriority.high : isVisible ? shaderPriority.medium : shaderPriority.low;
   const [status, setStatus,] = useState(slotStatus.noSlot,);
   useEffect(() => {
     if (!pool || !id3) return;
-    pool.register(id3, priority,);
+    pool.register(id3, isSelected, isVisible,);
     startTransition2(() => setStatus(pool.getSlotStatus(id3,),));
     const unsub = pool.subscribe(id3, () => {
       startTransition2(() => setStatus(pool.getSlotStatus(id3,),));
@@ -51829,7 +51828,7 @@ function useShaderPoolSlot(id3, isSelected, isVisible,) {
     return () => {
       unsub();
     };
-  }, [pool, id3, priority,],);
+  }, [pool, id3, isSelected, isVisible,],);
   useEffect(() => {
     if (!pool || !id3) return;
     return () => {
