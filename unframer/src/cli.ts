@@ -21,6 +21,7 @@ import {
     componentNameToPath,
     dedent,
     isTruthy,
+    kebabCase,
     logger,
     sleep,
     spinner,
@@ -42,7 +43,7 @@ export const cli = goke('unframer')
 
 let defaultOutDir = 'framer'
 
-cli.command('[projectId]', 'Run unframer with optional project ID')
+cli.command('[...projectIds]', 'Run unframer with one or more project IDs')
     .option('--outDir <dir>', 'Output directory')
     .option(
         '--external [package]',
@@ -52,7 +53,7 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
     .option('--jsx', 'Output jsx code instead of minified .js code')
     .option('--debug', 'Enable debug logging')
     .option('--metafile', 'Generate meta.json file with build metadata')
-    .action(async function main(projectId, options) {
+    .action(async function main(projectIds, options) {
         const outDir = options.outDir || defaultOutDir
         const jsx = options.jsx ?? true
         const external_ = options.external
@@ -68,17 +69,35 @@ cli.command('[projectId]', 'Run unframer with optional project ID')
             const controller = new AbortController()
             const signal = controller.signal
             const watch = options.watch
-            if (projectId) {
-                const { config, cwd, websiteUrl } = await configFromFetch({
-                    allExternal,
-                    externalPackages,
-                    outDir,
-                    projectId,
-                })
+            if (projectIds.length > 0) {
+                if (watch && projectIds.length > 1) {
+                    console.error('--watch is only supported with a single project ID')
+                    process.exit(1)
+                }
+
+                // Fetch configs for all project IDs
+                const fetchResults = await Promise.all(
+                    projectIds.map((projectId) => {
+                        return configFromFetch({
+                            allExternal,
+                            externalPackages,
+                            outDir,
+                            projectId,
+                        })
+                    }),
+                )
+
+                // Merge configs when multiple projects are provided, otherwise use single config directly
+                const mergedConfig = fetchResults.length === 1
+                    ? fetchResults[0].config
+                    : mergeConfigs(fetchResults.map((r) => r.config))
+                const cwd = fetchResults[0].cwd
+                const websiteUrl = fetchResults[0].websiteUrl
+
                 const { rebuild, buildContext } = await bundle({
                     config: {
                         jsx,
-                        ...config,
+                        ...mergedConfig,
                     },
                     watch,
                     cwd,
@@ -660,6 +679,133 @@ type ComponentInstanceInPage = {
     nodeDepth: number
     // pagePath: string
     webPageId: string
+}
+
+/**
+ * Merge multiple project configs into a single Config so esbuild bundles all
+ * components together and deduplicates shared chunks automatically.
+ *
+ * - Components maps are merged; on name collision the second project's component
+ *   is prefixed with the project name to disambiguate.
+ * - First project's projectId/projectName/fullFramerProjectId are used as the
+ *   primary identifiers (framerSiteId in ContextProviders).
+ * - Arrays (componentBreakpoints, tokens, locales, framerWebPages, etc.) are concatenated.
+ */
+function mergeConfigs(configs: Config[]): Config {
+    if (configs.length === 0) {
+        throw new Error('mergeConfigs called with empty array')
+    }
+    if (configs.length === 1) {
+        return configs[0]
+    }
+
+    const first = configs[0]
+
+    // Merge components maps, disambiguating name collisions.
+    // Track rename maps per config so we can update breakpoints and instances.
+    const mergedComponents: Record<string, string> = {}
+    const renameMaps: Map<string, string>[] = []
+
+    for (const config of configs) {
+        const projectSlug = kebabCase(config.projectName || config.projectId || '')
+        const renameMap = new Map<string, string>()
+        renameMaps.push(renameMap)
+
+        for (const [name, url] of Object.entries(config.components)) {
+            if (mergedComponents[name]) {
+                // Name collision: prefix with project slug, ensure uniqueness with numeric suffix
+                const base = projectSlug ? `${projectSlug}/${name}` : `${config.projectId}/${name}`
+                const disambiguated = uniqueComponentName(base, mergedComponents)
+                logger.log(`Component name collision for "${name}", renaming to "${disambiguated}"`)
+                renameMap.set(name, disambiguated)
+                mergedComponents[disambiguated] = url
+            } else {
+                mergedComponents[name] = url
+            }
+        }
+    }
+
+    // Merge componentBreakpoints, updating componentName for any renamed components
+    const mergedBreakpoints = configs.flatMap((config, i) => {
+        const renameMap = renameMaps[i]
+        return (config.componentBreakpoints || []).map((bp) => {
+            const renamed = renameMap.get(bp.componentName)
+            if (renamed) {
+                return { ...bp, componentName: renamed }
+            }
+            return bp
+        })
+    })
+
+    // Merge tokens, deduplicate by id (keep first occurrence)
+    const seenTokenIds = new Set<string>()
+    const mergedTokens = configs.flatMap((config) => {
+        return (config.tokens || []).filter((token) => {
+            if (seenTokenIds.has(token.id)) {
+                return false
+            }
+            seenTokenIds.add(token.id)
+            return true
+        })
+    })
+
+    // Merge locales, deduplicate by code
+    const seenLocaleCodes = new Set<string>()
+    const mergedLocales = configs.flatMap((config) => {
+        return (config.locales || []).filter((locale) => {
+            if (seenLocaleCodes.has(locale.code)) {
+                return false
+            }
+            seenLocaleCodes.add(locale.code)
+            return true
+        })
+    })
+
+    // Merge framerWebPages
+    const mergedWebPages = configs.flatMap((config) => {
+        return config.framerWebPages || []
+    })
+
+    // Merge componentInstancesInIndexPage, updating componentPathSlug for renamed components
+    const mergedInstances = configs.flatMap((config, i) => {
+        const renameMap = renameMaps[i]
+        return (config.componentInstancesInIndexPage || []).map((instance) => {
+            const renamed = renameMap.get(instance.componentPathSlug)
+            if (renamed) {
+                return { ...instance, componentPathSlug: renamed }
+            }
+            return instance
+        })
+    }).sort((a, b) => {
+        return a.pageOrdering - b.pageOrdering
+    })
+
+    const projectNames = configs
+        .map((c) => c.projectName)
+        .filter(isTruthy)
+    spinner.info(`Merging ${configs.length} projects: ${projectNames.join(', ')}`)
+
+    return {
+        ...first,
+        components: mergedComponents,
+        componentBreakpoints: mergedBreakpoints,
+        tokens: mergedTokens,
+        locales: mergedLocales,
+        framerWebPages: mergedWebPages,
+        componentInstancesInIndexPage: mergedInstances,
+    }
+}
+
+/** Generate a unique component name by appending a numeric suffix if the base already exists */
+function uniqueComponentName(base: string, existing: Record<string, string>): string {
+    if (!existing[base]) {
+        return base
+    }
+    let index = 2
+    while (existing[`${base}-${index}`]) {
+        index++
+    }
+    return `${base}-${index}`
 }
 
 export async function configFromFetch({

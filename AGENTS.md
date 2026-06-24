@@ -8,7 +8,13 @@ This project is a CLI called `unframer` that downloads Framer website builder co
 
 ## Running the CLI locally
 
-To run the unframer CLI locally during development, use the bin entry point (not cli.ts directly):
+To run the unframer CLI locally during development, **always rebuild first** so `dist/` has your latest changes:
+
+```bash
+cd unframer/unframer && pnpm build
+```
+
+Then use the bin entry point (not cli.ts directly):
 
 ```bash
 tsx unframer/src/bin.ts mcp login
@@ -16,7 +22,31 @@ tsx unframer/src/bin.ts --help
 tsx unframer/src/bin.ts mcp getProjectXml
 ```
 
+Or use the workspace-linked `pnpm unframer` from any app in the monorepo (e.g. `nextjs-app/`):
+
+```bash
+pnpm unframer 080b0b6d577bdc21 --jsx --external --outDir ./src/framer-output
+```
+
 `src/cli.ts` only defines and exports the `cli` object. `src/bin.ts` imports it and calls `cli.parse()`.
+
+## Multiple project IDs
+
+The CLI supports passing multiple Framer project IDs in a single command. All components from all projects are bundled together by esbuild, which **deduplicates shared chunks automatically**.
+
+```bash
+# Single project (unchanged behavior)
+pnpm unframer 080b0b6d577bdc21 --jsx --external --outDir ./src/framer
+
+# Multiple projects merged into one output directory
+pnpm unframer 080b0b6d577bdc21 4f7c408e7441586d --jsx --external --outDir ./src/framer
+```
+
+When multiple projects have components with the same path slug (e.g. both have `navigation/navigation`), the second project's component is disambiguated by prefixing it with the project name slug (e.g. `antidetection/navigation/navigation`).
+
+The first project's `fullFramerProjectId` is used as the `framerSiteId` for all components. This only matters for Framer Forms.
+
+`--watch` is not supported with multiple project IDs.
 
 ## CRITICAL: Never edit framer.js manually
 
@@ -735,7 +765,19 @@ this url returns a single long documentation that covers your use case. always f
 
 usually you can just import the App type from the server workspace to create the client with createSpiceflowClient
 
-if you want to use the spiceflow client in a published package instead you can generate .d.ts files from the server and copy them into the workspace package, so the package does not need to depend on an unpublished private server package.
+if you want to use the spiceflow client in a published package instead we will use the pattern of generating .d.ts and copying these in the workspace package, this way the package does not need to depend on unpublished private server package.
+
+example:
+
+```json
+{
+  "scripts": {
+    "gen-client": "export DIR=../plugin-mcp/src/generated/ && cd ../website && tsc --incremental && cd ../plugin-mcp && rm -rf $DIR && mkdir -p $DIR && cp ../website/dist/src/lib/api-client.* $DIR"
+  }
+}
+```
+
+notice that if you add a route in the spiceflow server you will need to run `pnpm --filter website gen-client` to update the apiClient inside cli.
 
 ## dedent
 
