@@ -638,47 +638,16 @@ body { --framer-will-change-filter-override: none; }
         }
     
 
+        ol.framer-text > li.framer-text {
+            padding-inline-start: calc(calc(var(--max-list-digits, 1) + 1) * 1ch);
+        }
+    
+
         ol.framer-text > li.framer-text::before {
             position: absolute;
             inset-inline-start: 0;
             content: counter(list-item, var(--list-style-type)) ".";
             font-variant-numeric: tabular-nums;
-        }
-    
-
-        ol.framer-text > li.framer-text:nth-last-child(n + 10),
-        ol.framer-text > li.framer-text:nth-last-child(n + 10) ~ li {
-            padding-inline-start: 3ch;
-        }
-    
-
-        ol.framer-text > li.framer-text:nth-last-child(n + 100),
-        ol.framer-text > li.framer-text:nth-last-child(n + 100) ~ li {
-            padding-inline-start: 4ch;
-        }
-    
-
-        ol.framer-text > li.framer-text:nth-last-child(n + 1000),
-        ol.framer-text > li.framer-text:nth-last-child(n + 1000) ~ li {
-            padding-inline-start: 5ch;
-        }
-    
-
-        ol.framer-text > li.framer-text:nth-last-child(n + 10000),
-        ol.framer-text > li.framer-text:nth-last-child(n + 10000) ~ li {
-            padding-inline-start: 6ch;
-        }
-    
-
-        ol.framer-text > li.framer-text:nth-last-child(n + 100000),
-        ol.framer-text > li.framer-text:nth-last-child(n + 100000) ~ li {
-            padding-inline-start: 7ch;
-        }
-    
-
-        ol.framer-text > li.framer-text:nth-last-child(n + 1000000),
-        ol.framer-text > li.framer-text:nth-last-child(n + 1000000) ~ li {
-            padding-inline-start: 8ch;
         }
     
 

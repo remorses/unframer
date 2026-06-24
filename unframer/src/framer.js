@@ -12752,7 +12752,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.4SOIBOB7.mjs
+// /:https://app.framerstatic.com/framer.KGMHIGJX.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -23773,6 +23773,55 @@ var inputIconCSSDeclaration = /* @__PURE__ */ (() => ({
   pointerEvents: 'none',
   ...iconImageCSS,
 }))();
+var listStyleTypeProperty = '--list-style-type';
+var maxListDigitsProperty = '--max-list-digits';
+function getMaxListDigits(start2, itemCount, listStyleType,) {
+  const lastListNumber = start2 + Math.max(itemCount, 1,) - 1;
+  switch (listStyleType) {
+    case 'decimal':
+      return decimalMaxListDigits(lastListNumber,);
+    case 'lower-alpha':
+    case 'upper-alpha':
+    case 'lower-latin':
+    case 'upper-latin':
+      return alphaMaxListDigits(lastListNumber,);
+    case 'lower-roman':
+    case 'upper-roman':
+      return romanMaxListDigits(lastListNumber,);
+    default:
+      return decimalMaxListDigits(lastListNumber,);
+  }
+}
+function decimalMaxListDigits(lastListNumber,) {
+  return String(lastListNumber,).length;
+}
+function alphaMaxListDigits(lastListNumber,) {
+  let nextCharacters = 1;
+  while (letterPermutations(nextCharacters,) < lastListNumber) {
+    nextCharacters++;
+  }
+  return nextCharacters;
+}
+function letterPermutations(characters,) {
+  let permutations = 0;
+  for (let i = 0; i < characters; i++) {
+    permutations += 26 ** (i + 1);
+  }
+  return permutations;
+}
+var romanNumeralLengthThresholds = [1, 2, 3, 8, 18, 28, 38, 88, 188, 288, 388, 888,];
+function romanMaxListDigits(lastListNumber,) {
+  let maxLength = 0;
+  for (const threshold2 of romanNumeralLengthThresholds) {
+    if (lastListNumber < threshold2) return maxLength;
+    maxLength++;
+  }
+  const thousands = Math.floor((lastListNumber - 888) / 1e3,);
+  if (thousands >= 1) {
+    return Math.max(maxLength, thousands + 12,);
+  }
+  return maxLength;
+}
 function createRGBVariableFallbacks(variables, fallback,) {
   return css2.variable(...variables.flatMap((variable) => [`${variable}-rgb`, variable,]), fallback,);
 }
@@ -24421,6 +24470,11 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             list-style: none;
             padding-inline-start: 2ch;
         }
+    `, /* css */
+  `
+        ol.framer-text > li.framer-text {
+            padding-inline-start: calc(calc(var(${maxListDigitsProperty}, 1) + 1) * 1ch);
+        }
     `,
   // font-variant-numeric: tabular-nums enables monospaced numbers (which is neat in a vertical list of numbers)
   // and makes `li`s match the default browser styles better.
@@ -24431,48 +24485,6 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             inset-inline-start: 0;
             content: counter(list-item, var(--list-style-type)) ".";
             font-variant-numeric: tabular-nums;
-        }
-    `,
-  // Why this? Due to `position: absolute` (see above), if a list has a lot of items, the numbers
-  // might start overlapping the text content. This compensates for that. The trick is based on
-  // https://alistapart.com/article/quantity-queries-for-css/#section6. The trick doesn’t account
-  // for lists longer than 1,000,000 items, but if you have a list of 1,000,000 items, you’ll have
-  // other problems ¯\_(ツ)_/¯
-  /* css */
-  `
-        ol.framer-text > li.framer-text:nth-last-child(n + 10),
-        ol.framer-text > li.framer-text:nth-last-child(n + 10) ~ li {
-            padding-inline-start: 3ch;
-        }
-    `, /* css */
-  `
-        ol.framer-text > li.framer-text:nth-last-child(n + 100),
-        ol.framer-text > li.framer-text:nth-last-child(n + 100) ~ li {
-            padding-inline-start: 4ch;
-        }
-    `, /* css */
-  `
-        ol.framer-text > li.framer-text:nth-last-child(n + 1000),
-        ol.framer-text > li.framer-text:nth-last-child(n + 1000) ~ li {
-            padding-inline-start: 5ch;
-        }
-    `, /* css */
-  `
-        ol.framer-text > li.framer-text:nth-last-child(n + 10000),
-        ol.framer-text > li.framer-text:nth-last-child(n + 10000) ~ li {
-            padding-inline-start: 6ch;
-        }
-    `, /* css */
-  `
-        ol.framer-text > li.framer-text:nth-last-child(n + 100000),
-        ol.framer-text > li.framer-text:nth-last-child(n + 100000) ~ li {
-            padding-inline-start: 7ch;
-        }
-    `, /* css */
-  `
-        ol.framer-text > li.framer-text:nth-last-child(n + 1000000),
-        ol.framer-text > li.framer-text:nth-last-child(n + 1000000) ~ li {
-            padding-inline-start: 8ch;
         }
     `, /* css */
   `
@@ -57066,6 +57078,16 @@ function processRichTextChildren(
       };
       children = [anchorLink,];
     }
+    if (tag === 'ol') {
+      props.style = {
+        ...(props.style ?? {}),
+        [maxListDigitsProperty]: safeGetMaxListDigits(
+          props.start ?? 1,
+          Children.count(props.children,),
+          props.style?.[listStyleTypeProperty] ?? '',
+        ),
+      };
+    }
   }
   return cloneElement32(element, props, ...children,);
 }
@@ -57090,6 +57112,10 @@ function extractTextFromReactNode(node,) {
     return node.map(extractTextFromReactNode,).join('',);
   }
   return '';
+}
+function safeGetMaxListDigits(start2, itemCount, listStyleType,) {
+  const startNumber = Number(start2,) || 1;
+  return getMaxListDigits(startNumber, itemCount, listStyleType,);
 }
 var RichTextInner = /* @__PURE__ */ forwardRef(function RichText({
   children,
@@ -57480,7 +57506,10 @@ var SharedSVGManager = class {
     const output = [];
     output.push(`<div id="svg-templates" style="${visuallyHiddenStyle}" aria-hidden="true">`,);
     this.entries.forEach((value) => output.push(value.svg,));
-    this.vectorSetItems.forEach((value) => output.push(value.svg,));
+    this.vectorSetItems.forEach((value, revision,) => {
+      const svg = value.svg;
+      output.push(svg.includes(`id="${revision}"`,) ? svg : svg.replace(/^<svg/, `<svg id="${revision}"`,),);
+    },);
     output.push('</div>',);
     return output.join('\n',);
   }
