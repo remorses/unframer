@@ -96,6 +96,24 @@ export async function main({ framerTypesUrl }) {
         WillChange?: new (value: string) => unknown
     }
 
+    export interface FramerInjectedRuntimeImage {
+        src?: string
+        srcSet?: string
+    }
+
+    export interface FramerInjectedRuntimeRect {
+        width?: number
+        height?: number
+    }
+
+    export interface FramerInjectedRuntime {
+        imagePlaceholderSvg?: string
+        useImageSource?(image: FramerInjectedRuntimeImage, rect?: FramerInjectedRuntimeRect, nodeId?: string): string
+        useImageElement?(image: FramerInjectedRuntimeImage, rect?: FramerInjectedRuntimeRect, nodeId?: string): HTMLImageElement
+        canRenderOptimizedCanvasImage?(src?: string): boolean
+        isOnPageCanvas?: boolean
+    }
+
     export interface FramerMotionFrameData {
         delta: number
         timestamp: number
@@ -196,6 +214,7 @@ export async function main({ framerTypesUrl }) {
     export declare const frameSteps: FramerMotionFrameSteps
     export declare const time: FramerMotionTime
     export declare const visualElementStore: WeakMap<object, unknown>
+    export declare function _injectRuntime(injectedRuntime: FramerInjectedRuntime): void
 
     export * from 'real-framer-motion'
     `
