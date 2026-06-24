@@ -42,6 +42,10 @@
             "types": "./dist/exporter.d.ts",
             "default": "./dist/exporter.js"
         },
+        "./motion-internals": {
+            "types": "./dist/motion-internals.d.ts",
+            "default": "./dist/motion-internals.js"
+        },
         "./styles/*": {
             "default": "./src/styles/*"
         },

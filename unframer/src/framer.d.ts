@@ -4859,4 +4859,113 @@ export declare const withVariantFX: <T extends MotionProps>(Component: React_2.C
 export { }
 export declare const combinedCSSRules: string[]
 
+export interface FramerMotionGlobalConfig {
+    useManualTiming?: boolean
+    instantAnimations?: boolean
+    skipAnimations?: boolean
+    mix?: unknown
+    WillChange?: new (value: string) => unknown
+}
+
+export interface FramerMotionFrameData {
+    delta: number
+    timestamp: number
+    isProcessing: boolean
+}
+
+export type FramerMotionFrameCallback = (frameData: FramerMotionFrameData) => void
+
+export interface FramerMotionFrameStep {
+    schedule(callback: FramerMotionFrameCallback, keepAlive?: boolean, immediate?: boolean): FramerMotionFrameCallback
+    cancel(callback: FramerMotionFrameCallback): void
+    process(frameData: FramerMotionFrameData): void
+}
+
+export type FramerMotionFrameStepName =
+    | 'setup'
+    | 'read'
+    | 'resolveKeyframes'
+    | 'preUpdate'
+    | 'update'
+    | 'preRender'
+    | 'render'
+    | 'postRender'
+
+export type FramerMotionFrameSteps = Record<FramerMotionFrameStepName, FramerMotionFrameStep>
+
+export interface FramerMotionTime {
+    now(): number
+    set(newTime: number): void
+}
+
+export interface FramerMotionGeneratorState<Value = unknown> {
+    value: Value
+    done?: boolean
+}
+
+export interface FramerMotionGenerator<Value = unknown> {
+    calculatedDuration?: number | null
+    next(time: number): FramerMotionGeneratorState<Value>
+    velocity?(time: number): number
+}
+
+export interface FramerMotionAnimationDriver {
+    now(): number
+    start(autoplay?: boolean): void
+    stop(): void
+}
+
+export interface FramerMotionAnimationOptions<Value = unknown> {
+    keyframes: Value[]
+    autoplay?: boolean
+    delay?: number
+    repeat?: number
+    repeatDelay?: number
+    repeatType?: 'loop' | 'reverse' | 'mirror'
+    velocity?: number
+    finalKeyframe?: Value
+    startTime?: number
+    allowFlatten?: boolean
+    motionValue?: { updatedAt?: number }
+    type?: (options: FramerMotionAnimationOptions<Value>) => FramerMotionGenerator<Value>
+    driver?: (update: (timestamp: number) => void) => FramerMotionAnimationDriver
+    onUpdate?(latest: Value): void
+    onPlay?(): void
+    onComplete?(): void
+    onCancel?(): void
+    onStop?(): void
+}
+
+export declare class JSAnimation<Value = unknown> implements PromiseLike<void> {
+    constructor(options: FramerMotionAnimationOptions<Value>)
+    options: FramerMotionAnimationOptions<Value>
+    state: 'idle' | 'running' | 'paused' | 'finished'
+    currentTime: number
+    playbackSpeed: number
+    readonly duration: number
+    readonly iterationDuration: number
+    time: number
+    speed: number
+    readonly finished: Promise<void>
+    then<TResult1 = void, TResult2 = never>(
+        onfulfilled?: ((value: void) => TResult1 | PromiseLike<TResult1>) | null,
+        onrejected?: ((reason: Error) => TResult2 | PromiseLike<TResult2>) | null,
+    ): Promise<TResult1 | TResult2>
+    play(): void
+    pause(): void
+    complete(): void
+    finish(): void
+    cancel(): void
+    stop(): void
+    tick(timestamp: number, sample?: boolean): FramerMotionGeneratorState<Value>
+    sample(sampleTime: number): FramerMotionGeneratorState<Value>
+    attachTimeline(timeline: { observe(animation: JSAnimation<Value>): VoidFunction }): VoidFunction
+}
+
+export declare const MotionGlobalConfig: FramerMotionGlobalConfig
+export declare const frameData: FramerMotionFrameData
+export declare const frameSteps: FramerMotionFrameSteps
+export declare const time: FramerMotionTime
+export declare const visualElementStore: WeakMap<object, unknown>
+
 export * from 'real-framer-motion'
