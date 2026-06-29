@@ -8,8 +8,6 @@ const require = createRequire(import.meta.url)
 
 import { Sema } from 'async-sema'
 
-import { nodeModulesPolyfillPlugin } from 'esbuild-plugins-node-modules-polyfill'
-
 import { transform } from '@babel/core'
 import { exec } from 'child_process'
 import { error } from 'console'
@@ -219,7 +217,6 @@ export async function bundle({
                     missingPackages.add(pkg)
                 },
             }),
-            nodeModulesPolyfillPlugin({}),
             {
                 name: 'virtual loader',
                 setup(build) {
