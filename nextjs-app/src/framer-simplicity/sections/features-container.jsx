@@ -23,12 +23,12 @@
 }} Props
 
  */
-import { stdin_default } from "../chunks/chunk-IXXBI4JL.js";
+import { stdin_default } from "../chunks/chunk-ULIMLBG6.js";
 import "../chunks/chunk-VCVOI65W.js";
 import "../chunks/chunk-GZWUXSMG.js";
 import "../chunks/chunk-6T2VRI6T.js";
 import "../chunks/chunk-NVMKRQF2.js";
-import { routes } from "../chunks/chunk-HEB6EHGG.js";
+import { routes } from "../chunks/chunk-5YSLERUW.js";
 
 // virtual:sections/features-container
 import { Fragment } from "react";

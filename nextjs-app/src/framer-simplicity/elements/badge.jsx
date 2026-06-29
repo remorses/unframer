@@ -25,7 +25,7 @@
 
  */
 import { stdin_default } from "../chunks/chunk-VRCRMMMM.js";
-import { routes } from "../chunks/chunk-HEB6EHGG.js";
+import { routes } from "../chunks/chunk-5YSLERUW.js";
 
 // virtual:elements/badge
 import { Fragment } from "react";

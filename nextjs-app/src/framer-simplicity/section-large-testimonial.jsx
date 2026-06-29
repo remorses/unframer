@@ -23,15 +23,15 @@
 }} Props
 
  */
+import { Ticker } from "./chunks/chunk-UR4KJL6X.js";
 import { Icon } from "./chunks/chunk-NI3BWCIH.js";
 import {
 	className as className2,
 	css as css2,
 	fonts as fonts2,
 } from "./chunks/chunk-6T2VRI6T.js";
-import { Ticker } from "./chunks/chunk-UR4KJL6X.js";
 import { className, css, fonts } from "./chunks/chunk-NVMKRQF2.js";
-import { routes } from "./chunks/chunk-HEB6EHGG.js";
+import { routes } from "./chunks/chunk-5YSLERUW.js";
 
 // virtual:section-large-testimonial
 import { Fragment as Fragment2 } from "react";

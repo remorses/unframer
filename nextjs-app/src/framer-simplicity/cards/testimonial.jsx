@@ -31,7 +31,7 @@ import "../chunks/chunk-VSA5UPHY.js";
 import "../chunks/chunk-O247SMB4.js";
 import "../chunks/chunk-DNZJ42O2.js";
 import "../chunks/chunk-NVMKRQF2.js";
-import { routes } from "../chunks/chunk-HEB6EHGG.js";
+import { routes } from "../chunks/chunk-5YSLERUW.js";
 
 // virtual:cards/testimonial
 import { Fragment } from "react";

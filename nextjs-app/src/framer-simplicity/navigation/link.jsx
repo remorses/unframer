@@ -29,7 +29,7 @@
 
  */
 import { stdin_default } from "../chunks/chunk-OEIBI2DV.js";
-import { routes } from "../chunks/chunk-HEB6EHGG.js";
+import { routes } from "../chunks/chunk-5YSLERUW.js";
 
 // virtual:navigation/link
 import { Fragment } from "react";

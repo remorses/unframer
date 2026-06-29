@@ -23,14 +23,14 @@
 }} Props
 
  */
-import { className, css, fonts } from "./chunks/chunk-WMEDQ6XE.js";
-import { stdin_default } from "./chunks/chunk-VRCRMMMM.js";
 import {
 	className as className2,
 	css as css2,
 	fonts as fonts2,
-} from "./chunks/chunk-NVMKRQF2.js";
-import { routes } from "./chunks/chunk-HEB6EHGG.js";
+} from "./chunks/chunk-WMEDQ6XE.js";
+import { stdin_default } from "./chunks/chunk-VRCRMMMM.js";
+import { className, css, fonts } from "./chunks/chunk-NVMKRQF2.js";
+import { routes } from "./chunks/chunk-5YSLERUW.js";
 
 // virtual:section-how-it-works
 import { Fragment as Fragment2 } from "react";
@@ -198,7 +198,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 		variantClassNames,
 	});
 	const layoutDependency = createLayoutDependency(props, variants);
-	const sharedStyleClassNames = [className, className3, className2];
+	const sharedStyleClassNames = [className2, className3, className];
 	const scopingClassNames = cx(serializationHash, ...sharedStyleClassNames);
 	const ref1 = React.useRef(null);
 	const defaultLayoutId = React.useId();
@@ -1196,9 +1196,9 @@ var css4 = [
 	".framer-4k7qI.framer-v-wu6x6 .framer-13numsb { --framer-text-wrap: balance; max-width: unset; }",
 	".framer-4k7qI.framer-v-wu6x6 .framer-1e99kdl { grid-template-columns: repeat(1, minmax(50px, 1fr)); }",
 	".framer-4k7qI.framer-v-wu6x6 .framer-s46z6e, .framer-4k7qI.framer-v-wu6x6 .framer-mm30kz, .framer-4k7qI.framer-v-wu6x6 .framer-fsevcb { --framer-text-wrap-override: balance; }",
-	...css,
-	...css3,
 	...css2,
+	...css3,
+	...css,
 	'.framer-4k7qI[data-border="true"]::after, .framer-4k7qI [data-border="true"]::after { content: ""; border-width: var(--border-top-width, 0) var(--border-right-width, 0) var(--border-bottom-width, 0) var(--border-left-width, 0); border-color: var(--border-color, none); border-style: var(--border-style, none); width: 100%; height: 100%; position: absolute; box-sizing: border-box; left: 0; top: 0; border-radius: inherit; pointer-events: none; }',
 ];
 var FramerprCc0aVtv = withCSS(Component, css4, "framer-4k7qI");
@@ -1292,9 +1292,9 @@ addFonts(
 			],
 		},
 		...ElementsBadgeFonts,
-		...getFontsFromSharedStyle(fonts),
-		...getFontsFromSharedStyle(fonts3),
 		...getFontsFromSharedStyle(fonts2),
+		...getFontsFromSharedStyle(fonts3),
+		...getFontsFromSharedStyle(fonts),
 	],
 	{
 		supportsExplicitInterCodegen: true,

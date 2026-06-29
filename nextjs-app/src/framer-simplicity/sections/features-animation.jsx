@@ -24,7 +24,7 @@
 
  */
 import { stdin_default } from "../chunks/chunk-VCVOI65W.js";
-import { routes } from "../chunks/chunk-HEB6EHGG.js";
+import { routes } from "../chunks/chunk-5YSLERUW.js";
 
 // virtual:sections/features-animation
 import { Fragment } from "react";

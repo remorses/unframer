@@ -23,12 +23,12 @@
 }} Props
 
  */
-import { stdin_default as stdin_default4 } from "../chunks/chunk-OEIBI2DV.js";
-import { stdin_default as stdin_default3 } from "../chunks/chunk-M43YOBTD.js";
-import { stdin_default as stdin_default2 } from "../chunks/chunk-YELWKYT7.js";
-import { stdin_default } from "../chunks/chunk-RHHS6YDG.js";
+import { stdin_default } from "../chunks/chunk-M43YOBTD.js";
+import { stdin_default as stdin_default3 } from "../chunks/chunk-YELWKYT7.js";
+import { stdin_default as stdin_default2 } from "../chunks/chunk-RHHS6YDG.js";
 import "../chunks/chunk-NI3BWCIH.js";
-import { routes } from "../chunks/chunk-HEB6EHGG.js";
+import { stdin_default as stdin_default4 } from "../chunks/chunk-OEIBI2DV.js";
+import { routes } from "../chunks/chunk-5YSLERUW.js";
 
 // virtual:navigation/navigation
 import { Fragment as Fragment2 } from "react";
@@ -55,10 +55,10 @@ import {
 } from "unframer";
 import { LayoutGroup, motion, MotionConfigContext } from "unframer";
 import * as React from "react";
-var NavigationHamburgerFonts = getFonts(stdin_default3);
+var NavigationHamburgerFonts = getFonts(stdin_default);
 var NavigationLinkFonts = getFonts(stdin_default4);
-var ButtonsButtonFonts = getFonts(stdin_default);
-var ElementsLogoFonts = getFonts(stdin_default2);
+var ButtonsButtonFonts = getFonts(stdin_default2);
+var ElementsLogoFonts = getFonts(stdin_default3);
 var cycleOrder = ["g3AInmvkW", "vL5s_eZpu", "rTivEYaFN"];
 var serializationHash = "framer-9T0D4";
 var variantClassNames = {
@@ -271,7 +271,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											layoutDependency={layoutDependency}
 											layoutId={"BFZcmnjWa-container"}
 										>
-											{_jsx(stdin_default3, {
+											{_jsx(stdin_default, {
 												suppressHydrationWarning: true,
 												height: "100%",
 												id: "BFZcmnjWa",
@@ -709,7 +709,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 										layoutDependency={layoutDependency}
 										layoutId={"K31x8f0G1-container"}
 									>
-										{_jsx(stdin_default, {
+										{_jsx(stdin_default2, {
 											suppressHydrationWarning: true,
 											GLWImmBy_: false,
 											HBR9r6Wzz: false,
@@ -782,7 +782,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 													layoutDependency={layoutDependency}
 													layoutId={"M_erw8N0s-container"}
 												>
-													{_jsx(stdin_default2, {
+													{_jsx(stdin_default3, {
 														suppressHydrationWarning: true,
 														height: "100%",
 														id: "M_erw8N0s",
@@ -1018,7 +1018,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											layoutDependency={layoutDependency}
 											layoutId={"zCVZZyU7B-container"}
 										>
-											{_jsx(stdin_default, {
+											{_jsx(stdin_default2, {
 												suppressHydrationWarning: true,
 												GLWImmBy_: false,
 												HBR9r6Wzz: false,
@@ -1031,7 +1031,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 												nL8OQ61g_: "House",
 												nZIvc5R21: "AppleLogo",
 												odb0bWURU:
-													"https://framer.link/TGWRs2U",
+													"https://www.framer.com/marketplace/plugins/react-export/?via=morse",
 												QQq_dHjj6: "fill",
 												rt9DsEiKG:
 													"var(--token-958d6a9e-bb7c-4a88-a47a-70db899d1dd5, rgb(36, 36, 36))",

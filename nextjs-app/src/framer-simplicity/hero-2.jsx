@@ -23,11 +23,11 @@
 }} Props
 
  */
-import { stdin_default as stdin_default2 } from "./chunks/chunk-RHHS6YDG.js";
 import { className, css, fonts } from "./chunks/chunk-WMEDQ6XE.js";
+import { stdin_default } from "./chunks/chunk-RHHS6YDG.js";
 import "./chunks/chunk-NI3BWCIH.js";
-import { stdin_default } from "./chunks/chunk-VRCRMMMM.js";
-import { routes } from "./chunks/chunk-HEB6EHGG.js";
+import { stdin_default as stdin_default2 } from "./chunks/chunk-VRCRMMMM.js";
+import { routes } from "./chunks/chunk-5YSLERUW.js";
 
 // virtual:hero-2
 import { Fragment as Fragment2 } from "react";
@@ -55,11 +55,11 @@ import {
 } from "unframer";
 import { LayoutGroup, motion, MotionConfigContext } from "unframer";
 import * as React from "react";
-var ElementsBadgeFonts = getFonts(stdin_default);
+var ElementsBadgeFonts = getFonts(stdin_default2);
 var MotionDivWithFXWithOptimizedAppearEffect = withOptimizedAppearEffect(
 	withFX(motion.div),
 );
-var ButtonsButtonFonts = getFonts(stdin_default2);
+var ButtonsButtonFonts = getFonts(stdin_default);
 var cycleOrder = ["TrO8LcLXW", "QhqFBlzmT", "NsFw4seCf"];
 var serializationHash = "framer-5Op0x";
 var variantClassNames = {
@@ -344,7 +344,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											layoutId={"ArbFApu9Z-container"}
 											optimized={true}
 										>
-											{_jsx(stdin_default, {
+											{_jsx(stdin_default2, {
 												suppressHydrationWarning: true,
 												D_QyhowU2: "Page Not Found",
 												height: "100%",
@@ -622,7 +622,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 													layoutDependency={layoutDependency}
 													layoutId={"FBHnQI3PX-container"}
 												>
-													{_jsx(stdin_default2, {
+													{_jsx(stdin_default, {
 														suppressHydrationWarning: true,
 														GLWImmBy_: false,
 														HBR9r6Wzz: false,

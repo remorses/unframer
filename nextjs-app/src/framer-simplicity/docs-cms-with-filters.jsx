@@ -22,7 +22,7 @@
 }} Props
 
  */
-import { routes } from "./chunks/chunk-HEB6EHGG.js";
+import { routes } from "./chunks/chunk-5YSLERUW.js";
 
 // virtual:docs-cms-with-filters
 import { Fragment as Fragment3 } from "react";

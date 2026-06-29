@@ -29,7 +29,7 @@
 import { stdin_default } from "../chunks/chunk-GZWUXSMG.js";
 import "../chunks/chunk-6T2VRI6T.js";
 import "../chunks/chunk-NVMKRQF2.js";
-import { routes } from "../chunks/chunk-HEB6EHGG.js";
+import { routes } from "../chunks/chunk-5YSLERUW.js";
 
 // virtual:sections/feature
 import { Fragment } from "react";
@@ -38,7 +38,7 @@ import { WithFramerBreakpoints } from "unframer";
 import { jsx } from "react/jsx-runtime";
 var locales = [];
 var defaultResponsiveVariants = {
-	base: "t3lFA7uHU",
+	base: "vrduVgFDq",
 };
 /** @type {function(Props): any} */
 function ComponentWithRoot({ locale, ...rest }) {

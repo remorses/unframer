@@ -23,19 +23,19 @@
 }} Props
 
  */
-import { stdin_default } from "./chunks/chunk-YELWKYT7.js";
 import {
 	className as className3,
 	css as css3,
 	fonts as fonts3,
-} from "./chunks/chunk-DNZJ42O2.js";
-import { className, css, fonts } from "./chunks/chunk-WMEDQ6XE.js";
+} from "./chunks/chunk-WMEDQ6XE.js";
 import {
 	className as className2,
 	css as css2,
 	fonts as fonts2,
-} from "./chunks/chunk-NVMKRQF2.js";
-import { routes } from "./chunks/chunk-HEB6EHGG.js";
+} from "./chunks/chunk-DNZJ42O2.js";
+import { stdin_default } from "./chunks/chunk-YELWKYT7.js";
+import { className, css, fonts } from "./chunks/chunk-NVMKRQF2.js";
+import { routes } from "./chunks/chunk-5YSLERUW.js";
 
 // virtual:section-footer
 import { Fragment as Fragment2 } from "react";
@@ -1116,7 +1116,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 		variantClassNames,
 	});
 	const layoutDependency = createLayoutDependency(props, variants);
-	const sharedStyleClassNames = [className, className2, className3, className4];
+	const sharedStyleClassNames = [className3, className, className2, className4];
 	const scopingClassNames = cx(serializationHash, ...sharedStyleClassNames);
 	const router = useRouter2();
 	return (
@@ -1981,9 +1981,9 @@ var css5 = [
 	".framer-LnCNJ.framer-v-rnpsh9 .framer-zm8v2b { flex-direction: column; gap: 24px; order: 0; width: 100%; }",
 	".framer-LnCNJ.framer-v-rnpsh9 .framer-h6pu6e, .framer-LnCNJ.framer-v-rnpsh9 .framer-w2wpd5 { align-content: center; align-items: center; flex-direction: row; gap: 16px; width: 100%; }",
 	".framer-LnCNJ.framer-v-rnpsh9 .framer-1vzi2vs { flex: 1 0 0px; white-space: pre-wrap; width: 1px; word-break: break-word; word-wrap: break-word; }",
+	...css3,
 	...css,
 	...css2,
-	...css3,
 	...css4,
 	'.framer-LnCNJ[data-border="true"]::after, .framer-LnCNJ [data-border="true"]::after { content: ""; border-width: var(--border-top-width, 0) var(--border-right-width, 0) var(--border-bottom-width, 0) var(--border-left-width, 0); border-color: var(--border-color, none); border-style: var(--border-style, none); width: 100%; height: 100%; position: absolute; box-sizing: border-box; left: 0; top: 0; border-radius: inherit; pointer-events: none; }',
 ];
@@ -2079,9 +2079,9 @@ addFonts(
 		},
 		...ElementsLogoFonts,
 		...InputFonts,
+		...getFontsFromSharedStyle(fonts3),
 		...getFontsFromSharedStyle(fonts),
 		...getFontsFromSharedStyle(fonts2),
-		...getFontsFromSharedStyle(fonts3),
 		...getFontsFromSharedStyle(fonts4),
 	],
 	{

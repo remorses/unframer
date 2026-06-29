@@ -25,7 +25,7 @@
 
  */
 import { stdin_default } from "../chunks/chunk-M43YOBTD.js";
-import { routes } from "../chunks/chunk-HEB6EHGG.js";
+import { routes } from "../chunks/chunk-5YSLERUW.js";
 
 // virtual:navigation/hamburger
 import { Fragment } from "react";

@@ -25,7 +25,7 @@
  */
 import { Ticker } from "./chunks/chunk-UR4KJL6X.js";
 import { className, css, fonts } from "./chunks/chunk-NVMKRQF2.js";
-import { routes } from "./chunks/chunk-HEB6EHGG.js";
+import { routes } from "./chunks/chunk-5YSLERUW.js";
 
 // virtual:section-logos
 import { Fragment as Fragment2 } from "react";

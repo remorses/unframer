@@ -26,7 +26,7 @@
 import { stdin_default } from "../chunks/chunk-DF5DGWKN.js";
 import { className, css, fonts } from "../chunks/chunk-RVU7BYAQ.js";
 import "../chunks/chunk-DNZJ42O2.js";
-import { routes } from "../chunks/chunk-HEB6EHGG.js";
+import { routes } from "../chunks/chunk-5YSLERUW.js";
 
 // virtual:footer/copyright
 import { Fragment as Fragment2 } from "react";

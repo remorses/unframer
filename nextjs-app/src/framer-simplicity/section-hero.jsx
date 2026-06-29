@@ -26,16 +26,16 @@
 }} Props
 
  */
+import { className, css, fonts } from "./chunks/chunk-WMEDQ6XE.js";
 import {
 	className as className2,
 	css as css2,
 	fonts as fonts2,
 } from "./chunks/chunk-RVU7BYAQ.js";
-import { stdin_default as stdin_default2 } from "./chunks/chunk-RHHS6YDG.js";
-import { className, css, fonts } from "./chunks/chunk-WMEDQ6XE.js";
+import { stdin_default } from "./chunks/chunk-RHHS6YDG.js";
 import "./chunks/chunk-NI3BWCIH.js";
-import { stdin_default } from "./chunks/chunk-VRCRMMMM.js";
-import { routes } from "./chunks/chunk-HEB6EHGG.js";
+import { stdin_default as stdin_default2 } from "./chunks/chunk-VRCRMMMM.js";
+import { routes } from "./chunks/chunk-5YSLERUW.js";
 
 // virtual:section-hero
 import { Fragment as Fragment2 } from "react";
@@ -121,10 +121,10 @@ var css3 = [
 var className3 = "framer-d41tb";
 
 // /:https://framerusercontent.com/modules/AMs1BHWFE26iLmA4bGBY/MZxnJqxrMYkSma05q109/aKlzorVQO.js
-var ElementsBadgeFonts = getFonts(stdin_default);
+var ElementsBadgeFonts = getFonts(stdin_default2);
 var SmartComponentScopedContainerWithFXWithOptimizedAppearEffect =
 	withOptimizedAppearEffect(withFX(SmartComponentScopedContainer));
-var ButtonsButtonFonts = getFonts(stdin_default2);
+var ButtonsButtonFonts = getFonts(stdin_default);
 var MotionDivWithFXWithOptimizedAppearEffect = withOptimizedAppearEffect(
 	withFX(motion.div),
 );
@@ -441,7 +441,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											rendersWithMotion={true}
 											scopeId={"aKlzorVQO"}
 										>
-											{_jsx(stdin_default, {
+											{_jsx(stdin_default2, {
 												suppressHydrationWarning: true,
 												D_QyhowU2: "Export Framer Components to React",
 												height: "100%",
@@ -626,7 +626,7 @@ var Component = /* @__PURE__ */ React.forwardRef(function (props, ref) {
 											rendersWithMotion={true}
 											scopeId={"aKlzorVQO"}
 										>
-											{_jsx(stdin_default2, {
+											{_jsx(stdin_default, {
 												suppressHydrationWarning: true,
 												GLWImmBy_: false,
 												HBR9r6Wzz: false,

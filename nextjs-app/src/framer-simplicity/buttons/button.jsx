@@ -39,7 +39,7 @@
  */
 import { stdin_default } from "../chunks/chunk-RHHS6YDG.js";
 import "../chunks/chunk-NI3BWCIH.js";
-import { routes } from "../chunks/chunk-HEB6EHGG.js";
+import { routes } from "../chunks/chunk-5YSLERUW.js";
 
 // virtual:buttons/button
 import { Fragment } from "react";
