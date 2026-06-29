@@ -12,7 +12,8 @@ import {
   __require,
   __runInitializers,
   __toESM,
-} from './framer-chunks/chunk-WYG6DFEF.js';
+} from './framer-chunks/chunk-7ZLQTYXQ.js';
+import './framer-chunks/chunk-IKQSD2QC.js';
 
 // /:https://app.framerstatic.com/chunk-7KEO2DXG.mjs
 import { createContext, } from 'react';
@@ -12752,7 +12753,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.KGMHIGJX.mjs
+// /:https://app.framerstatic.com/framer.SZORHXMV.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -24074,11 +24075,11 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
         span.framer-text[data-nested-link] span.framer-text:not([data-text-fill]) {
             /* Ensure the color is inherited from the link style rather than the parent text for nested spans */
             color: inherit;
-            font-family: var(--framer-font-family-preview, var(--framer-blockquote-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif))));
-            font-style: var(--framer-font-style-preview, var(--framer-blockquote-font-style, var(--framer-link-font-style, var(--framer-font-style, normal))));
-            font-weight: var(--framer-font-weight-preview, var(--framer-blockquote-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400))));
+            font-family: var(--framer-font-family-preview, var(--framer-link-font-family, var(--framer-blockquote-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif))));
+            font-style: var(--framer-font-style-preview, var(--framer-link-font-style, var(--framer-blockquote-font-style, var(--framer-font-style, normal))));
+            font-weight: var(--framer-font-weight-preview, var(--framer-link-font-weight, var(--framer-blockquote-font-weight, var(--framer-font-weight, 400))));
             font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
-            text-transform: var(--framer-blockquote-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none)));
+            text-transform: var(--framer-link-text-transform, var(--framer-blockquote-text-transform, var(--framer-text-transform, none)));
             /* Cursor inherit to overwrite the user agent stylesheet on rich text links. */
             cursor: var(--framer-custom-cursors, pointer);
             /* Don't inherit background styles from any parent text style. */
@@ -24093,13 +24094,13 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
   `
         a.framer-text,
         span.framer-text[data-nested-link] {
-            color: var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-text-color, #000)));
-            text-decoration-line: var(--framer-blockquote-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, initial)));
-            text-decoration-style: var(--framer-blockquote-text-decoration-style, var(--framer-link-text-decoration-style, var(--framer-text-decoration-style, initial)));
-            text-decoration-color: var(--framer-blockquote-text-decoration-color, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color, initial)));
-            text-decoration-thickness: var(--framer-blockquote-text-decoration-thickness, var(--framer-link-text-decoration-thickness, var(--framer-text-decoration-thickness, initial)));
-            text-decoration-skip-ink: var(--framer-blockquote-text-decoration-skip-ink, var(--framer-link-text-decoration-skip-ink, var(--framer-text-decoration-skip-ink, initial)));
-            text-underline-offset: var(--framer-blockquote-text-decoration-offset, var(--framer-link-text-decoration-offset, var(--framer-text-decoration-offset, initial)));
+            color: var(--framer-link-text-color, var(--framer-blockquote-text-color, var(--framer-text-color, #000)));
+            text-decoration-line: var(--framer-link-text-decoration, var(--framer-blockquote-text-decoration, var(--framer-text-decoration, initial)));
+            text-decoration-style: var(--framer-link-text-decoration-style, var(--framer-blockquote-text-decoration-style, var(--framer-text-decoration-style, initial)));
+            text-decoration-color: var(--framer-link-text-decoration-color, var(--framer-blockquote-text-decoration-color, var(--framer-text-decoration-color, initial)));
+            text-decoration-thickness: var(--framer-link-text-decoration-thickness, var(--framer-blockquote-text-decoration-thickness, var(--framer-text-decoration-thickness, initial)));
+            text-decoration-skip-ink: var(--framer-link-text-decoration-skip-ink, var(--framer-blockquote-text-decoration-skip-ink, var(--framer-text-decoration-skip-ink, initial)));
+            text-underline-offset: var(--framer-link-text-decoration-offset, var(--framer-blockquote-text-decoration-offset, var(--framer-text-decoration-offset, initial)));
             /* Don't inherit background styles from any parent text style. */
             background-color: var(--framer-link-text-background-color, initial);
         }
@@ -24109,7 +24110,7 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             a.framer-text,
             span.framer-text[data-nested-link] {
                 color: ${
-    createRGBVariableFallbacks(['--framer-blockquote-text-color', '--framer-link-text-color', '--framer-text-color',], '#000',)
+    createRGBVariableFallbacks(['--framer-link-text-color', '--framer-blockquote-text-color', '--framer-text-color',], '#000',)
   };
                 background-color: ${createRGBVariableFallbacks(['--framer-link-text-background-color',], 'initial',)};
                 text-decoration-color: ${
@@ -24133,7 +24134,7 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
   `
     code.framer-text a.framer-text,
     code.framer-text span.framer-text[data-nested-link] {
-        color: var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000))));
+        color: var(--framer-link-text-color, var(--framer-blockquote-text-color, var(--framer-code-text-color, var(--framer-text-color, #000))));
     }
 `, /* css */
   `
@@ -24144,8 +24145,8 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
         code.framer-text span.framer-text[data-nested-link] span.framer-text:not([data-text-fill]) {
             color: ${
     createRGBVariableFallbacks([
-      '--framer-blockquote-text-color',
       '--framer-link-text-color',
+      '--framer-blockquote-text-color',
       '--framer-code-text-color',
       '--framer-text-color',
     ], '#000',)
@@ -24158,11 +24159,11 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
         a.framer-text:hover span.framer-text:not([data-text-fill]),
         span.framer-text[data-nested-link]:hover,
         span.framer-text[data-nested-link]:hover span.framer-text:not([data-text-fill]) {
-            font-family: var(--framer-font-family-preview, var(--framer-link-hover-font-family, var(--framer-blockquote-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)))));
-            font-style: var(--framer-font-style-preview, var(--framer-link-hover-font-style, var(--framer-blockquote-font-style, var(--framer-link-font-style, var(--framer-font-style, normal)))));
-            font-weight: var(--framer-font-weight-preview, var(--framer-link-hover-font-weight, var(--framer-blockquote-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400)))));
+            font-family: var(--framer-font-family-preview, var(--framer-link-hover-font-family, var(--framer-link-font-family, var(--framer-blockquote-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)))));
+            font-style: var(--framer-font-style-preview, var(--framer-link-hover-font-style, var(--framer-link-font-style, var(--framer-blockquote-font-style, var(--framer-font-style, normal)))));
+            font-weight: var(--framer-font-weight-preview, var(--framer-link-hover-font-weight, var(--framer-link-font-weight, var(--framer-blockquote-font-weight, var(--framer-font-weight, 400)))));
             font-size: calc(var(--framer-link-hover-font-size, var(--framer-blockquote-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
-            text-transform: var(--framer-link-hover-text-transform, var(--framer-blockquote-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none))));
+            text-transform: var(--framer-link-hover-text-transform, var(--framer-link-text-transform, var(--framer-blockquote-text-transform, var(--framer-text-transform, none))));
             border-radius: var(--framer-link-hover-text-background-radius, var(--framer-link-text-background-radius, var(--framer-text-background-radius, initial)));
             corner-shape: var(--framer-link-hover-text-background-corner-shape, var(--framer-link-text-background-corner-shape, var(--framer-text-background-corner-shape, initial)));
             padding: var(--framer-link-hover-text-background-padding, var(--framer-link-text-background-padding, var(--framer-text-background-padding, initial)));
@@ -24171,13 +24172,13 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
   `
         a.framer-text:hover,
         span.framer-text[data-nested-link]:hover {
-            color: var(--framer-link-hover-text-color, var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-text-color, #000))));
-            text-decoration-line: var(--framer-link-hover-text-decoration, var(--framer-blockquote-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, initial))));
-            text-decoration-style: var(--framer-link-hover-text-decoration-style, var(--framer-blockquote-text-decoration-style, var(--framer-link-text-decoration-style, var(--framer-text-decoration-style, initial))));
-            text-decoration-color: var(--framer-link-hover-text-decoration-color, var(--framer-blockquote-text-decoration-color, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color, initial))));
-            text-decoration-thickness: var(--framer-link-hover-text-decoration-thickness, var(--framer-blockquote-text-decoration-thickness, var(--framer-link-text-decoration-thickness, var(--framer-text-decoration-thickness, initial))));
-            text-decoration-skip-ink: var(--framer-link-hover-text-decoration-skip-ink, var(--framer-blockquote-text-decoration-skip-ink, var(--framer-link-text-decoration-skip-ink, var(--framer-text-decoration-skip-ink, initial))));
-            text-underline-offset: var(--framer-link-hover-text-decoration-offset, var(--framer-blockquote-text-decoration-offset, var(--framer-link-text-decoration-offset, var(--framer-text-decoration-offset, initial))));
+            color: var(--framer-link-hover-text-color, var(--framer-link-text-color, var(--framer-blockquote-text-color, var(--framer-text-color, #000))));
+            text-decoration-line: var(--framer-link-hover-text-decoration, var(--framer-link-text-decoration, var(--framer-blockquote-text-decoration, var(--framer-text-decoration, initial))));
+            text-decoration-style: var(--framer-link-hover-text-decoration-style, var(--framer-link-text-decoration-style, var(--framer-blockquote-text-decoration-style, var(--framer-text-decoration-style, initial))));
+            text-decoration-color: var(--framer-link-hover-text-decoration-color, var(--framer-link-text-decoration-color, var(--framer-blockquote-text-decoration-color, var(--framer-text-decoration-color, initial))));
+            text-decoration-thickness: var(--framer-link-hover-text-decoration-thickness, var(--framer-link-text-decoration-thickness, var(--framer-blockquote-text-decoration-thickness, var(--framer-text-decoration-thickness, initial))));
+            text-decoration-skip-ink: var(--framer-link-hover-text-decoration-skip-ink, var(--framer-link-text-decoration-skip-ink, var(--framer-blockquote-text-decoration-skip-ink, var(--framer-text-decoration-skip-ink, initial))));
+            text-underline-offset: var(--framer-link-hover-text-decoration-offset, var(--framer-link-text-decoration-offset, var(--framer-blockquote-text-decoration-offset, var(--framer-text-decoration-offset, initial))));
             background-color: var(--framer-link-hover-text-background-color, var(--framer-link-text-background-color, var(--framer-text-background-color, initial)));
         }
     `, /* css */
@@ -24188,8 +24189,8 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             color: ${
     createRGBVariableFallbacks([
       '--framer-link-hover-text-color',
-      '--framer-blockquote-text-color',
       '--framer-link-text-color',
+      '--framer-blockquote-text-color',
       '--framer-text-color',
     ], '#000',)
   };
@@ -24213,7 +24214,7 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
   `
         code.framer-text a.framer-text:hover,
         code.framer-text span.framer-text[data-nested-link]:hover {
-            color: var(--framer-link-hover-text-color, var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000)))));
+            color: var(--framer-link-hover-text-color, var(--framer-link-text-color, var(--framer-blockquote-text-color, var(--framer-code-text-color, var(--framer-text-color, #000)))));
         }
     `, /* css */
   `
@@ -24223,8 +24224,8 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             color: ${
     createRGBVariableFallbacks([
       '--framer-link-hover-text-color',
-      '--framer-blockquote-text-color',
       '--framer-link-text-color',
+      '--framer-blockquote-text-color',
       '--framer-code-text-color',
       '--framer-text-color',
     ], '#000',)
@@ -46871,7 +46872,7 @@ function getCacheKey(query, locale,) {
 async function executeServerDatabaseQuery(sql,) {
   const {
     executeServerDatabaseQuery: executeServerDatabaseQueryWithSqlite,
-  } = await import('./framer-chunks/SqliteDatabase-VAKIICSG-W43ZSXBO.js');
+  } = await import('./framer-chunks/SqliteDatabase-VAKIICSG-OPV4MG3Y.js');
   return executeServerDatabaseQueryWithSqlite(sql,);
 }
 var queryEngine = /* @__PURE__ */ new QueryEngine();
@@ -53637,11 +53638,11 @@ function getAssetOwnerType(asset,) {
 async function loadFontsWithOpenType(source,) {
   switch (source) {
     case 'google': {
-      const supportedFonts = await import('./framer-chunks/google-3SZHWBC6-MIC5SCB4.js');
+      const supportedFonts = await import('./framer-chunks/google-3SZHWBC6-2VTQEQ7J.js');
       return supportedFonts.default;
     }
     case 'fontshare': {
-      const supportedFonts = await import('./framer-chunks/fontshare-B2QLD7YB-ZLNQ44LW.js');
+      const supportedFonts = await import('./framer-chunks/fontshare-B2QLD7YB-5V3XZJAH.js');
       return supportedFonts.default;
     }
     default:
@@ -53651,15 +53652,15 @@ async function loadFontsWithOpenType(source,) {
 async function loadFontToOpenTypeFeatures(source,) {
   switch (source) {
     case 'google': {
-      const features = await import('./framer-chunks/google-3FCAKCAC-K2ZVMKHN.js');
+      const features = await import('./framer-chunks/google-3FCAKCAC-AM34UPJK.js');
       return features.default;
     }
     case 'fontshare': {
-      const features = await import('./framer-chunks/fontshare-4THNDPMZ-L3NZDIOE.js');
+      const features = await import('./framer-chunks/fontshare-4THNDPMZ-FLLTWCDO.js');
       return features.default;
     }
     case 'framer': {
-      const features = await import('./framer-chunks/framer-font-45AI7UCZ-Z3XHDH5K.js');
+      const features = await import('./framer-chunks/framer-font-45AI7UCZ-CKGC4MJC.js');
       return features.default;
     }
     default:
@@ -54203,10 +54204,10 @@ function loadVariationAxes(source,) {
       const axes = (async () => {
         switch (source) {
           case 'google': {
-            return (await import('./framer-chunks/google-GXDJLGJB-356NWSZ7.js')).default;
+            return (await import('./framer-chunks/google-GXDJLGJB-JNEJGCGD.js')).default;
           }
           case 'fontshare': {
-            return (await import('./framer-chunks/fontshare-O22OBJ3D-VY7WF3BB.js')).default;
+            return (await import('./framer-chunks/fontshare-O22OBJ3D-FIG3CRN3.js')).default;
           }
           default:
             assertNever(source,);
@@ -56903,7 +56904,9 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
     ...rest
   } = props;
   const parentSize = useParentSize();
-  const isOnCanvas = environment2() === RenderTarget.canvas;
+  const renderTarget = environment2();
+  const isOnCanvas = renderTarget === RenderTarget.canvas;
+  const isRenderingStaticContent = isOnCanvas || renderTarget === RenderTarget.export;
   const inCodeComponent = useContext(ComponentContainerContext,);
   const layoutId = useLayoutId2(props,);
   const fallbackRef = useRef(null,);
@@ -56950,7 +56953,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
       containerStyle2.rotate = rotation;
     }
     if (positionSticky) {
-      if (!isOnCanvas || inCodeComponent) {
+      if (!isRenderingStaticContent || inCodeComponent) {
         containerStyle2.position = 'sticky';
         containerStyle2.willChange = 'transform';
         containerStyle2.top = positionStickyTop;
@@ -58295,9 +58298,9 @@ var TextComponent = /* @__PURE__ */ (() => {
           rotate: rotate2,
         },);
       }
-      const onCanvas = RenderTarget.current() === RenderTarget.canvas;
+      const isRenderingStaticContent = isStaticRenderer();
       if (positionSticky) {
-        if (!onCanvas || inCodeComponent) {
+        if (!isRenderingStaticContent || inCodeComponent) {
           style2.position = 'sticky';
           style2.willChange = 'transform';
           style2.top = positionStickyTop;
@@ -58305,7 +58308,7 @@ var TextComponent = /* @__PURE__ */ (() => {
           style2.bottom = positionStickyBottom;
           style2.left = positionStickyLeft;
         }
-      } else if (onCanvas && (positionFixed || positionAbsolute)) {
+      } else if (RenderTarget.current() === RenderTarget.canvas && (positionFixed || positionAbsolute)) {
         style2.position = 'absolute';
       }
     }

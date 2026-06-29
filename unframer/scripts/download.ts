@@ -62,6 +62,22 @@ export async function main({ framerTypesUrl }) {
             // 'RenderEnvironment.target': JSON.stringify('PREVIEW'),
         },
         plugins: [
+            // Stub Framer editor-only modules so esbuild never fetches or
+            // bundles them. These are only used by the Framer editor (font
+            // inspector, CMS canvas preview) and are dead code in exported
+            // websites: fontStore.enabled defaults to false and is never set
+            // to true, so the font import chain is never triggered. SQLite
+            // is only used for Framer's canvas CMS preview.
+            {
+                name: 'stub-dead-framer-modules',
+                setup(build) {
+                    const deadPattern = /(google-|fontshare-|framer-font-|sqlite|default-blog)/
+                    build.onLoad({ filter: deadPattern, namespace: '/' }, (args) => {
+                        console.log(`[STUB] ${args.path}`)
+                        return { contents: 'export default {}', loader: 'js' }
+                    })
+                },
+            },
             esbuildPluginBundleDependencies({
                 externalizeNpm: true,
                 outDir: path.dirname(resultFile),
@@ -381,6 +397,7 @@ export async function fixFramerCode({ resultFile }) {
         /const promise = import\(url\)\.then/g,
         'const promise = import(/* webpackIgnore: true */ /* @vite-ignore */ url).then',
     )
+
     codeAfter += '\n\n'
     codeAfter += dedent`
     export { Link as FramerLink  }
