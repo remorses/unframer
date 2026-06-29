@@ -1,5 +1,51 @@
 # unframer
 
+## 4.2.0
+
+1. **Multiple project IDs in a single command** — pass multiple Framer project IDs to bundle all components together with automatic chunk deduplication:
+
+   ```bash
+   # Single project (unchanged)
+   unframer 080b0b6d577bdc21 --jsx --external --outDir ./src/framer
+
+   # Multiple projects merged into one output
+   unframer 080b0b6d577bdc21 4f7c408e7441586d --jsx --external --outDir ./src/framer
+   ```
+
+   When multiple projects have components with the same path slug, the second project's component is disambiguated by prefixing with the project name slug. `--watch` is not supported with multiple project IDs.
+
+2. **Framer Motion internals exported from root** — deterministic renderers (like [egaki](https://github.com/remorses/egaki)) can now import Framer Motion frame timing internals directly from `unframer`:
+
+   ```ts
+   import {
+     JSAnimation,
+     MotionGlobalConfig,
+     _injectRuntime,
+     frameData,
+     frameSteps,
+     time,
+     visualElementStore,
+   } from 'unframer'
+   ```
+
+3. **New `mcp eval` command** — run arbitrary `framer-api` code against a Framer project for quick testing and debugging:
+
+   ```bash
+   unframer mcp eval --project '<framer-project-url>' \
+     'await framer.getNodesWithType("ComponentNode")'
+
+   # Multi-line with stdin
+   echo 'await framer.getNodesWithType("WebPageNode")' | unframer mcp eval --project '<url>'
+   ```
+
+4. **Fixed stale JSX files when formatting fails** — when babel/biome formatting fails (or a component exceeds the 717KB size limit), the `.jsx` file was left unchanged with old chunk hashes, causing `UNRESOLVED_IMPORT` errors in Vite builds. Now the unformatted JS is written as a fallback so chunk imports stay in sync
+5. **Fixed chunk `.js` files accidentally deleted** — the `.jsx` equivalence check could delete chunk `.js` files if a stale `chunks/foo.jsx` existed. Chunks are now excluded from the equivalence check
+6. **Fixed hydration mismatch in `WithFramerBreakpoints`** — the `IsInitialNavigationContext` provider was missing from `ContextProviders`, causing breakpoint resolution to differ between server and client
+7. **Stubbed dead Framer editor-only modules** — font metadata, SQLite, and blog modules that are only used in the Framer editor are now stubbed at esbuild level during the download script, reducing the bundled `framer.js` size
+8. **Removed dead `esbuild-plugins-node-modules-polyfill` dependency** from the exporter
+9. **Updated bundled Framer runtime** — refreshed to the latest Framer release with newest font metadata and runtime fixes
+10. **Updated Vite peer dependency to v8** and added `react-router` as a dependency
+
 ## 4.1.9
 
 1. **Fixed React hydration errors in exported components** — added `suppressHydrationWarning` to all generated JSX elements so server-rendered Framer components no longer produce hydration mismatch warnings. The babel plugin correctly skips `React.Fragment` (which only accepts `key` and `children`)
