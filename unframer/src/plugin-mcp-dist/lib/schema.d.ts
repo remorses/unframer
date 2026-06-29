@@ -27,9 +27,9 @@ declare const textStylePropertiesSchema: z.ZodObject<{
         capitalize: "capitalize";
     }>>;
     alignment: z.ZodOptional<z.ZodEnum<{
+        right: "right";
         left: "left";
         center: "center";
-        right: "right";
         justify: "justify";
     }>>;
     decoration: z.ZodOptional<z.ZodEnum<{
@@ -139,9 +139,9 @@ export declare const mcpTools: {
                     capitalize: "capitalize";
                 }>>;
                 alignment: z.ZodOptional<z.ZodEnum<{
+                    right: "right";
                     left: "left";
                     center: "center";
-                    right: "right";
                     justify: "justify";
                 }>>;
                 decoration: z.ZodOptional<z.ZodEnum<{
@@ -291,10 +291,10 @@ export declare const mcpTools: {
                     string: "string";
                     number: "number";
                     boolean: "boolean";
+                    link: "link";
                     date: "date";
                     file: "file";
                     enum: "enum";
-                    link: "link";
                     color: "color";
                     image: "image";
                     formattedText: "formattedText";
@@ -309,6 +309,14 @@ export declare const mcpTools: {
                 }, z.core.$strip>>>;
                 collectionId: z.ZodOptional<z.ZodString>;
             }, z.core.$strip>>>>;
+        }, z.core.$strip>;
+        output: z.ZodAny;
+    };
+    createComponent: {
+        description: string;
+        input: z.ZodObject<{
+            name: z.ZodString;
+            nodeIds: z.ZodOptional<z.ZodArray<z.ZodString>>;
         }, z.core.$strip>;
         output: z.ZodAny;
     };

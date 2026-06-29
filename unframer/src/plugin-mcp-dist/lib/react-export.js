@@ -1,6 +1,9 @@
 import { framer, isFrameNode, isWebPageNode, } from '#framer-client';
 import { getComponentPropertyControls, getInstanceComponentId, getParentNodesArray, replaceEnumIdsForControls, } from './framer.js';
-import { isTruthy } from './utils.js';
+function isTruthy(val) {
+    return Boolean(val);
+}
+import { Sema } from 'sema4';
 async function getParentNodesWithOrdering(node) {
     if (typeof node === 'string') {
         node = await framer.getNode(node);
@@ -11,16 +14,12 @@ async function getParentNodesWithOrdering(node) {
     const result = [];
     let parent = await node.getParent();
     if (!parent) {
-        console.log('no parent found', node.id);
         return [];
     }
     let currentChild = node;
     while (parent) {
         const siblings = await parent.getChildren();
         const ordering = siblings.findIndex((x) => x.id === currentChild.id);
-        if (ordering === -1) {
-            console.log('no ordering found for node', currentChild.id);
-        }
         result.push({ node: parent, ordering });
         currentChild = parent;
         // if (isComponentNode(parent) || isComponentNode(parent)) {
@@ -58,51 +57,66 @@ function groupBy(items, keyFn) {
 // Main export functions
 export async function getInstancesWithOrderAndDepth({ allInstances, webPageIds, components, projectId, }) {
     const componentIds = new Set(components.map((x) => x?.id));
-    const componentsAlredyProcessed = new Set();
+    const componentsAlreadyProcessed = new Set();
+    // Limit concurrency to avoid hammering the Framer API with hundreds of
+    // parallel getParent/getChildren calls and dynamic import() fetches.
+    const semaphore = new Sema(6);
     const rawComponentInstances = await Promise.all(allInstances.map(async (x) => {
         const componentId = getInstanceComponentId(x);
         if (!componentId) {
-            console.log('no component id found for instance', x.id, x.componentIdentifier);
             return;
         }
         if (!componentIds.has(componentId) ||
-            componentsAlredyProcessed.has(componentId)) {
+            componentsAlreadyProcessed.has(componentId)) {
             return;
         }
-        const parents = await getParentNodesWithOrdering(x);
-        const parentsOrderings = parents.map((x) => x.ordering);
-        const pageParent = parents.find((x) => isWebPageNode(x.node));
-        const webPageId = pageParent?.node?.id || '';
-        const { propertyControls } = await getComponentPropertyControls(components.find((x) => x.id === componentId)?.insertURL);
-        componentsAlredyProcessed.add(componentId);
-        const styles = {
-            position: x.position ?? null,
-            top: x.top ?? null,
-            right: x.right ?? null,
-            bottom: x.bottom ?? null,
-            left: x.left ?? null,
-            centerX: x.centerX ?? null,
-            centerY: x.centerY ?? null,
-            width: x.width ?? null,
-            height: x.height ?? null,
-            minWidth: x.minWidth ?? null,
-            maxWidth: x.maxWidth ?? null,
-            minHeight: x.minHeight ?? null,
-            maxHeight: x.maxHeight ?? null,
-            aspectRatio: x.aspectRatio ?? null,
-            rotation: x.rotation ?? null,
-            opacity: x.opacity ?? null,
-        };
-        const instance = {
-            componentId,
-            controls: replaceEnumIdsForControls(x.controls, propertyControls),
-            parentsOrderings,
-            webPageId,
-            projectId,
-            nodeDepth: parents.length - 1,
-            styles,
-        };
-        return instance;
+        await semaphore.acquire();
+        try {
+            // Re-check after acquiring: another task may have processed
+            // this componentId while we were waiting on the semaphore.
+            if (componentsAlreadyProcessed.has(componentId)) {
+                return;
+            }
+            // Claim immediately so other tasks in this batch skip it
+            componentsAlreadyProcessed.add(componentId);
+            const parents = await getParentNodesWithOrdering(x);
+            const parentsOrderings = parents.map((x) => x.ordering);
+            const pageParent = parents.find((x) => isWebPageNode(x.node));
+            const webPageId = pageParent?.node?.id || '';
+            const { propertyControls } = await getComponentPropertyControls(components.find((x) => x.id === componentId)
+                ?.insertURL);
+            const styles = {
+                position: x.position ?? null,
+                top: x.top ?? null,
+                right: x.right ?? null,
+                bottom: x.bottom ?? null,
+                left: x.left ?? null,
+                centerX: x.centerX ?? null,
+                centerY: x.centerY ?? null,
+                width: x.width ?? null,
+                height: x.height ?? null,
+                minWidth: x.minWidth ?? null,
+                maxWidth: x.maxWidth ?? null,
+                minHeight: x.minHeight ?? null,
+                maxHeight: x.maxHeight ?? null,
+                aspectRatio: x.aspectRatio ?? null,
+                rotation: x.rotation ?? null,
+                opacity: x.opacity ?? null,
+            };
+            const instance = {
+                componentId,
+                controls: replaceEnumIdsForControls(x.controls, propertyControls),
+                parentsOrderings,
+                webPageId,
+                projectId,
+                nodeDepth: parents.length - 1,
+                styles,
+            };
+            return instance;
+        }
+        finally {
+            semaphore.release();
+        }
     }));
     const instancesGroups = Array.from(groupBy(rawComponentInstances.filter(isTruthy), (x) => x.webPageId).values());
     let componentInstances = instancesGroups.flatMap((group) => {
@@ -141,6 +155,9 @@ export async function getComponentsWithBreakpoints({ selectedComponentIds, compo
     if (!filteredComponents.length) {
         console.warn(`[react export] no components selected with insertUrl`);
     }
+    // Limit concurrency for breakpoint detection since each instance
+    // calls getParentNodesArray which walks the tree sequentially.
+    const bpSemaphore = new Sema(6);
     const componentsWithBreakpoints = await Promise.all(filteredComponents.map(async (component) => {
         try {
             const instances = allInstances.filter((instance) => {
@@ -150,29 +167,32 @@ export async function getComponentsWithBreakpoints({ selectedComponentIds, compo
             if (!instances.length) {
                 console.warn(`no component instances found for ${component.name}`);
             }
-            console.log(instances);
             let breakpoints = await Promise.all(instances.map(async (instance) => {
                 const variantId = String(instance.controls?.variant || '');
                 if (!variantId) {
                     return;
                 }
-                const parents = (await getParentNodesArray(instance)).reverse();
-                let [root, breakpointNode] = parents;
-                if (!isFrameNode(breakpointNode)) {
-                    breakpointNode = root;
+                await bpSemaphore.acquire();
+                try {
+                    const parents = (await getParentNodesArray(instance)).reverse();
+                    let [root, breakpointNode] = parents;
+                    if (!isFrameNode(breakpointNode)) {
+                        breakpointNode = root;
+                    }
+                    if (!isFrameNode(breakpointNode)) {
+                        return;
+                    }
+                    const breakpointName = breakpointNode?.name;
+                    let rect = await breakpointNode?.getRect();
+                    return {
+                        variantId,
+                        width: rect?.width || 0,
+                        breakpointName: breakpointName || '',
+                    };
                 }
-                if (!isFrameNode(breakpointNode)) {
-                    console.log('component instance parents', parents);
-                    console.warn('neigher first nor second root nodes are breakpoints: not frame nodes!', breakpointNode);
-                    return;
+                finally {
+                    bpSemaphore.release();
                 }
-                const breakpointName = breakpointNode?.name;
-                let rect = await breakpointNode?.getRect();
-                return {
-                    variantId,
-                    width: rect?.width || 0,
-                    breakpointName: breakpointName || '',
-                };
             }));
             const filteredBreakpoints = breakpoints.filter((x) => Boolean(x?.breakpointName && x?.width && x?.variantId));
             const deduplicatedBreakpoints = deduplicateByKey(filteredBreakpoints, (x) => x.variantId);
@@ -186,7 +206,7 @@ export async function getComponentsWithBreakpoints({ selectedComponentIds, compo
     const allBreakpointsCount = componentsWithBreakpoints.reduce((acc, curr) => acc + (curr.breakpoints?.length || 0), 0);
     console.log(`[react export] found ${allBreakpointsCount} breakpoints in ${componentsWithBreakpoints.length} components`);
     if (!allBreakpointsCount) {
-        console.error(`react export breakpoint detection is currently broken. found 0 breakpoints for components`);
+        console.warn(`[react export] found 0 breakpoints for ${componentsWithBreakpoints.length} components`);
     }
     return componentsWithBreakpoints;
 }
@@ -233,7 +253,6 @@ export async function processReactExportData({ selectedComponentIds, }) {
         publishInfo?.production?.url;
     pages = pages.sort((a, b) => (a.path?.length || 0) - (b.path?.length || 0));
     const indexPage = pages.find((x) => x);
-    console.log('backgroundColor', indexPage['backgroundColor']);
     const [pageContainer] = (await indexPage.getChildren()) || [];
     let pageBackgroundColor = '';
     if (isFrameNode(pageContainer) && pageContainer.backgroundColor) {
@@ -253,7 +272,6 @@ export async function processReactExportData({ selectedComponentIds, }) {
         console.error('error getting component instances', e);
         return [];
     });
-    console.log(`found ${componentInstances?.length} componentInstances`, componentInstances);
     return {
         projectId: fullFramerProjectId,
         projectName,

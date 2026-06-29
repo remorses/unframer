@@ -109,8 +109,16 @@ export async function getComponentPropertyControls(url) {
         return result;
     }
     try {
+        // Race the dynamic import against a 3s timeout so broken URLs don't
+        // block the entire export for seconds while the fetch times out.
+        const importPromise = import(__rewriteRelativeImportExtension(/* @vite-ignore */ url));
+        const timeoutPromise = new Promise((_, reject) => {
+            setTimeout(() => {
+                reject(new Error(`import timeout for ${url}`));
+            }, 3000);
+        });
         const [res, paths] = await Promise.all([
-            import(__rewriteRelativeImportExtension(/* @vite-ignore */ url)),
+            Promise.race([importPromise, timeoutPromise]),
             getPagePaths(),
         ]);
         const propertyControls = res.default?.propertyControls;
@@ -406,22 +414,30 @@ export async function getFramerTree({ rootNodes, recursive = true, }) {
                 console.log('node not visible', node.id);
                 return;
             }
-            const text = await node.getText();
+            // getText() can throw "Node is not a text node" for text nodes inside
+            // ComponentNode definitions (the Framer API server rejects getText on
+            // component-internal text nodes even though isTextNode returns true).
+            // In that case, push the node without text content so it still appears
+            // in the XML tree with its attributes.
+            let text = null;
+            try {
+                text = await node.getText();
+            }
+            catch {
+                console.log('getText() failed for node', node.id, node.name);
+            }
             if (!text) {
                 console.log('no text found for node', node.id, node.name);
-                return;
             }
-            if (text) {
-                tree = await push({
-                    node,
-                    tree: tree,
-                    text,
-                    nodeId: node.id,
-                    isReplica: node.isReplica,
-                    isRootNode: rootNodeIds.has(node.id),
-                    visitedComponents,
-                });
-            }
+            tree = await push({
+                node,
+                tree: tree,
+                text: text || undefined,
+                nodeId: node.id,
+                isReplica: node.isReplica,
+                isRootNode: rootNodeIds.has(node.id),
+                visitedComponents,
+            });
             // Return early for text nodes to avoid duplicate push
             return;
         }

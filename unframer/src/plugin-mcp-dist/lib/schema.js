@@ -864,6 +864,23 @@ export const mcpTools = {
         }),
         output: z.any(),
     },
+    createComponent: {
+        description: dedent `
+            Create a new reusable component in the Framer project.
+
+            Components are reusable design elements that can be instantiated across pages. After creation, use updateXmlForNode to add content inside the component, and getComponentInsertUrlAndTypes to get its insertUrl for placing instances.
+
+            Optionally move existing layers into the component by providing their node IDs.
+        `,
+        input: z.object({
+            name: z.string().describe('Name for the new component'),
+            nodeIds: z
+                .array(NodeId)
+                .optional()
+                .describe('Existing layer IDs to move into the component. Layers are moved in order.'),
+        }),
+        output: z.any(),
+    },
     createPage: {
         description: dedent `
             Create a new page in the Framer project.

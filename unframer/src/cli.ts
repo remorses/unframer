@@ -438,14 +438,15 @@ const hasMcpCommand = cliArgs.includes('mcp')
 const hasProjectOption = cliArgs.some((arg) => {
     return arg === '--project' || arg.startsWith('--project=')
 })
-const shouldUseServerApiForProjectOption = hasMcpCommand && hasProjectOption
-const mcpMode = shouldUseServerApiForProjectOption
+const hasMcpEvalCommand = hasMcpCommand && cliArgs.includes('eval')
+const hasServerApiEnv = Boolean(process.env.FRAMER_PROJECT_URL || process.env.FRAMER_API_KEY)
+const shouldUseServerApi = hasMcpCommand && (hasProjectOption || hasMcpEvalCommand || hasServerApiEnv)
+const mcpMode = shouldUseServerApi
     ? 'server-api'
     : config.mode || (config.mcpUrl ? 'plugin' : undefined)
 
 if (mcpMode === 'server-api') {
     // Server API mode - use framer-api directly
-    // Commands are registered via registerServerApiCommands below
     await registerServerApiCommands()
 } else {
     // Plugin mode - use MCP transport
@@ -486,9 +487,112 @@ async function registerServerApiCommands() {
     // Dynamic import to avoid loading framer-api in plugin mode
     const { connect } = await import('framer-api')
 
+    // `mcp eval` — run arbitrary framer-api code against a project.
+    // Useful for testing API calls before implementing them in MCP tools.
+    // The `framer` client is available as a local variable inside the evaluated code.
+    cli.command('mcp eval [code]', 'Evaluate arbitrary framer-api code against a project')
+        .option(
+            '--project <url>',
+            'Framer project URL. Also reads FRAMER_PROJECT_URL env var.',
+        )
+        .action(async (code: string | undefined, options: { project?: string }) => {
+            // Read code from argument or stdin
+            let evalCode = code
+            if (!evalCode && !process.stdin.isTTY) {
+                const chunks: Buffer[] = []
+                for await (const chunk of process.stdin) {
+                    chunks.push(chunk)
+                }
+                evalCode = Buffer.concat(chunks).toString('utf-8').trim()
+            }
+            if (!evalCode) {
+                console.error('No code provided. Pass as argument or pipe via stdin.')
+                process.exit(1)
+            }
+
+            const projectUrl =
+                options.project ||
+                process.env.FRAMER_PROJECT_URL ||
+                loadConfig().framerProjectUrl
+            const apiKey =
+                process.env.FRAMER_API_KEY || loadConfig().framerApiKey
+
+            if (!projectUrl) {
+                console.error('Project URL required. Use --project option, FRAMER_PROJECT_URL env var, or set during login.')
+                process.exit(1)
+            }
+            if (!apiKey) {
+                console.error('API key required. Set FRAMER_API_KEY env var or run `unframer mcp login` first.')
+                process.exit(1)
+            }
+
+            let framerClient: Awaited<ReturnType<typeof connect>> | undefined
+            let actionError: unknown
+
+            try {
+                spinner.start('Connecting to Framer...')
+                framerClient = await connect(projectUrl, apiKey)
+                spinner.stop('Connected')
+
+                // Build an async function body. If the code is a single expression
+                // (no semicolons and no newlines), wrap it as a return so the result is captured.
+                const isExpression = !evalCode.includes(';') && !evalCode.includes('\n')
+                const functionBody = isExpression
+                    ? `return (${evalCode})`
+                    : evalCode
+
+                const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor as
+                    new (arg: string, body: string) => (framer: unknown) => Promise<unknown>
+                const fn = new AsyncFunction('framer', functionBody)
+                const result = await fn(framerClient)
+
+                if (result !== undefined) {
+                    const output = (() => {
+                        try {
+                            return JSON.stringify(result, null, 2)
+                        } catch {
+                            return String(result)
+                        }
+                    })()
+                    console.log(output)
+                }
+            } catch (error) {
+                actionError = error
+            } finally {
+                if (framerClient) {
+                    try {
+                        await framerClient.disconnect()
+                    } catch (disconnectError) {
+                        logger.error('Failed disconnecting from Framer:', disconnectError)
+                    }
+                }
+            }
+
+            if (actionError) {
+                console.error('Eval failed:', actionError instanceof Error ? actionError.message : actionError)
+                if (actionError instanceof Error && actionError.stack) {
+                    console.error(actionError.stack)
+                }
+                process.exit(1)
+            }
+        })
+
     // Import tool definitions and handler from plugin-mcp
     // Note: Run `pnpm --filter plugin-mcp build && pnpm --filter plugin-mcp gen-unframer` first
-    const { mcpTools, mcpToolHandler } = await import('./plugin-mcp-dist/lib/mcp-handlers.js')
+    let mcpTools: Awaited<typeof import('./plugin-mcp-dist/lib/mcp-handlers.js')>['mcpTools'] | undefined
+    let mcpToolHandler: Awaited<typeof import('./plugin-mcp-dist/lib/mcp-handlers.js')>['mcpToolHandler'] | undefined
+    try {
+        const imported = await import('./plugin-mcp-dist/lib/mcp-handlers.js')
+        mcpTools = imported.mcpTools
+        mcpToolHandler = imported.mcpToolHandler
+    } catch (error) {
+        if (hasMcpEvalCommand) {
+            // eval command only needs framer-api, not plugin-mcp handlers
+            logger.log('Could not load plugin-mcp handlers:', error instanceof Error ? error.message : error)
+        } else {
+            throw new Error('Failed to load plugin-mcp handlers. Run: pnpm --filter plugin-mcp tsc --incremental && pnpm --filter plugin-mcp gen-unframer', { cause: error })
+        }
+    }
     if (!mcpTools || !mcpToolHandler) {
         return
     }
@@ -632,6 +736,7 @@ async function registerServerApiCommands() {
             }
         })
     }
+
 }
 
 export type Config = {

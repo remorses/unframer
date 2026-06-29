@@ -1,14 +1,18 @@
 import { redirect } from 'react-router';
 import { createSpiceflowFetch } from 'spiceflow/client';
+import { superjsonOnResponse } from 'website/src/lib/superjson-client';
 const PUBLIC_URL = process.env.PUBLIC_URL || 'https://unframer.co';
 export const pluginApiClient = createSpiceflowFetch(PUBLIC_URL, {
-    async onResponse(response) {
-        if (response.status === 401) {
-            console.log('clearing session because api returned 401');
-            localStorage.removeItem(LocalStorageKeys.sessionId);
-            throw redirect(withMode(Paths.login));
-        }
-    },
+    onResponse: [
+        async (response) => {
+            if (response.status === 401) {
+                console.log('clearing session because api returned 401');
+                localStorage.removeItem(LocalStorageKeys.sessionId);
+                throw redirect(withMode(Paths.login));
+            }
+        },
+        superjsonOnResponse,
+    ],
     async onRequest() {
         const { sessionKey } = getMcpPluginData();
         return {

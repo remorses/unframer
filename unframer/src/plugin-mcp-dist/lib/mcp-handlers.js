@@ -1792,6 +1792,65 @@ export async function mcpToolHandler({ input, type, }) {
                 })),
             };
         }
+        case 'createComponent': {
+            const { name, nodeIds } = input;
+            // Check permissions: createFrameNode maps to the same "createNode" permission
+            // as createComponentNode. Also check setParent if moving nodes.
+            const permissionError = nodeIds?.length
+                ? checkPermissions('createFrameNode', 'setParent')
+                : checkPermissions('createFrameNode');
+            if (permissionError)
+                return permissionError;
+            try {
+                const component = await framer.createComponentNode(name);
+                if (!component) {
+                    return `Failed to create component "${name}".`;
+                }
+                const componentId = component.id;
+                // Move existing nodes into the component if provided
+                if (nodeIds && nodeIds.length > 0) {
+                    const moveResults = [];
+                    let targetIndex = 0;
+                    for (const nodeId of nodeIds) {
+                        try {
+                            const node = await framer.getNode(nodeId);
+                            if (!node) {
+                                moveResults.push(`Node ${nodeId} not found, skipped`);
+                                continue;
+                            }
+                            await framer.setParent(nodeId, componentId, targetIndex);
+                            targetIndex += 1;
+                            moveResults.push(`Moved node ${nodeId} into component`);
+                        }
+                        catch (error) {
+                            moveResults.push(`Failed to move node ${nodeId}: ${error instanceof Error ? error.message : 'Unknown error'}`);
+                        }
+                    }
+                    const xml = await getNodeXml(componentId);
+                    return dedent `
+                        Successfully created component "${name}" with ID \`${componentId}\`.
+
+                        ${moveResults.join('\n')}
+
+                        ${xml ? `Component XML:\n${xml.xml}` : ''}
+
+                        Use getComponentInsertUrlAndTypes with ID \`${componentId}\` to get the insertUrl for placing instances of this component.
+                    `;
+                }
+                const xml = await getNodeXml(componentId);
+                return dedent `
+                    Successfully created component "${name}" with ID \`${componentId}\`.
+
+                    ${xml ? `Component XML:\n${xml.xml}` : ''}
+
+                    Use updateXmlForNode with ID \`${componentId}\` to add content inside the component.
+                    Use getComponentInsertUrlAndTypes with ID \`${componentId}\` to get the insertUrl for placing instances.
+                `;
+            }
+            catch (error) {
+                return `Failed to create component: ${error instanceof Error ? error.message : 'Unknown error'}`;
+            }
+        }
         case 'createPage': {
             const { name, type: pageType } = input;
             if (pageType === 'design') {
