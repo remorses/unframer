@@ -251,7 +251,7 @@ importers:
         version: 7.12.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       real-framer-motion:
         specifier: npm:framer-motion@^12.34.2
-        version: framer-motion@12.34.3(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+        version: framer-motion@12.34.3(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       sema4:
         specifier: ^0.1.3
         version: 0.1.3
@@ -305,8 +305,8 @@ importers:
         specifier: 7.0.0-dev.20260117.1
         version: 7.0.0-dev.20260117.1
       '@xmorse/deployment-utils':
-        specifier: ^0.7.4
-        version: 0.7.4(@types/node@22.15.21)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.48.0)(tsx@4.20.3)(yaml@2.5.1)
+        specifier: ^0.7.5
+        version: 0.7.5(@types/node@22.15.21)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.48.0)(tsx@4.20.3)(yaml@2.5.1)
       concurrently:
         specifier: ^9.1.2
         version: 9.1.2
@@ -440,6 +440,7 @@ packages:
 
   '@azure/ms-rest-js@2.7.0':
     resolution: {integrity: sha512-ngbzWbqF+NmztDOpLBVDxYM+XLcUj7nKhxGbSU9WtIsXfRB//cf2ZbAG5HkOrhU9/wd/ORRB6lM/d69RKVjiyA==}
+    deprecated: This package has been deprecated in favor of the new Azure SDK packages from [Azure SDK for JavaScript](https://github.com/azure/azure-sdk-for-js).
 
   '@azure/storage-blob@12.30.0':
     resolution: {integrity: sha512-peDCR8blSqhsAKDbpSP/o55S4sheNwSrblvCaHUZ5xUI73XA7ieUGGwrONgD/Fng0EoDe1VOa3fAQ7+WGB3Ocg==}
@@ -2576,8 +2577,8 @@ packages:
   '@webassemblyjs/wast-printer@1.14.1':
     resolution: {integrity: sha512-kPSSXE6De1XOR820C90RIo2ogvZG+c3KiHzqUoO/F34Y2shGzesfqv7o57xrxovZJH/MetF5UjroJ/R/3isoiw==}
 
-  '@xmorse/deployment-utils@0.7.4':
-    resolution: {integrity: sha512-L8/n9WmTpWEE2SpzN0RugceT4cPzxblpULv1crDrLJ1kilKAxsjFPeD4mI7CKjI7fV60iR68bhKi3RE9HE4vqg==}
+  '@xmorse/deployment-utils@0.7.5':
+    resolution: {integrity: sha512-2xF/LrbCqg9yam4OlRmuuSBVyx0TKElBg7H8v5EywqlIQnyIqd3evWmBP5YF8Wyxqb07lHOTmNC14GnAtk5XIg==}
 
   '@xtuc/ieee754@1.2.0':
     resolution: {integrity: sha512-DX8nKgqcGwsc0eJSqYt5lwP4DH5FlHnmuWWBRy7X0NcaGR0ZtuyeESgMwTYVEtxmsNGY+qit4QYT/MIYTOTPeA==}
@@ -4689,10 +4690,6 @@ packages:
     resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
     engines: {node: '>=8.6'}
 
-  picomatch@4.0.3:
-    resolution: {integrity: sha512-5gTmgEY/sqK6gFXLIsQNH19lWb4ebPDLA4SdLP7dsWkIXHWlG66oPuVvXSGFPppYZz8ZDZq0dYYrbHfBCVUb1Q==}
-    engines: {node: '>=12'}
-
   picomatch@4.0.4:
     resolution: {integrity: sha512-QP88BAKvMam/3NxH6vj2o21R6MjxZUAd6nlwAS/pnGvN9IVLocLHxGYIzFhg6fUQ+5th6P4dv4eW9jX3DSIj7A==}
     engines: {node: '>=12'}
@@ -4763,10 +4760,6 @@ packages:
 
   postcss@8.5.15:
     resolution: {integrity: sha512-FfR8sjd4em2T6fb3I2MwAJU7HWVMr9zba+enmQeeWFfCbm+UOC/0X4DS8XtpUTMwWMGbjKYP7xjfNekzyGmB3A==}
-    engines: {node: ^10 || ^12 || >=14}
-
-  postcss@8.5.6:
-    resolution: {integrity: sha512-3Ybi1tAuwAP9s0r1UQ2J4n5Y0G05bJkpUIO0/bI9MhwmD70S5aTWbXGBwxHrelT+XM1k6dM0pk+SwNkpTRN7Pg==}
     engines: {node: ^10 || ^12 || >=14}
 
   posthtml-parser@0.11.0:
@@ -4853,11 +4846,6 @@ packages:
       react: ^15.3.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
       react-dom: ^15.3.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
-  react-dom@19.2.6:
-    resolution: {integrity: sha512-0prMI+hvBbPjsWnxDLxlCGyM8PN6UuWjEUCYmZhO67xIV9Xasa/r/vDnq+Xyq4Lo27g8QSbO5YzARu0D1Sps3g==}
-    peerDependencies:
-      react: ^19.2.6
-
   react-dom@19.2.7:
     resolution: {integrity: sha512-t0BRVXvbiE/o20Hfw669rLbMCDWtYZLvmJigy2f0MxsXF+71pxhR3xOkspmsO8h3ZlNzyibAmtCa3l4lYKk6gQ==}
     peerDependencies:
@@ -4918,10 +4906,6 @@ packages:
     peerDependencies:
       react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
       react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-
-  react@19.2.6:
-    resolution: {integrity: sha512-sfWGGfavi0xr8Pg0sVsyHMAOziVYKgPLNrS7ig+ivMNb3wbCBw3KxtflsGBAwD3gYQlE/AEZsTLgToRrSCjb0Q==}
-    engines: {node: '>=0.10.0'}
 
   react@19.2.7:
     resolution: {integrity: sha512-HNe9WslTbXmFK8o8cmwgAeJFSBvt1bPdHCVKtaaV+WlAN36mpT4hcRpwbf3fY56ar2oIXzsBpOAiIRHAdY0OlQ==}
@@ -5071,10 +5055,6 @@ packages:
 
   safer-buffer@2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
-
-  sax@1.4.4:
-    resolution: {integrity: sha512-1n3r/tGXO6b6VXMdFT54SHzT9ytu9yr7TaELowdYpMqY/Ao7EnlQGmAQ1+RatX7Tkkdm6hONI2owqNx2aZj5Sw==}
-    engines: {node: '>=11.0.0'}
 
   sax@1.6.0:
     resolution: {integrity: sha512-6R3J5M4AcbtLUdZmRv2SygeVaM7IhrLXu9BmnOGmmACak8fiUtOsYNWUS4uK7upbmHIBbLBeFeI//477BKLBzA==}
@@ -5664,6 +5644,7 @@ packages:
 
   uuid@8.3.2:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
+    deprecated: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
     hasBin: true
 
   v8-to-istanbul@9.1.0:
@@ -6568,7 +6549,7 @@ snapshots:
       outdent: 0.5.0
       prettier: 2.8.8
       resolve-from: 5.0.0
-      semver: 7.7.3
+      semver: 7.8.1
 
   '@changesets/assemble-release-plan@6.0.5':
     dependencies:
@@ -6577,7 +6558,7 @@ snapshots:
       '@changesets/should-skip-package': 0.1.1
       '@changesets/types': 6.0.0
       '@manypkg/get-packages': 1.1.3
-      semver: 7.7.3
+      semver: 7.8.1
 
   '@changesets/changelog-git@0.2.0':
     dependencies:
@@ -6633,7 +6614,7 @@ snapshots:
       '@changesets/types': 6.0.0
       '@manypkg/get-packages': 1.1.3
       picocolors: 1.1.1
-      semver: 7.7.3
+      semver: 7.8.1
 
   '@changesets/get-release-plan@4.0.6':
     dependencies:
@@ -8175,7 +8156,7 @@ snapshots:
       '@webassemblyjs/ast': 1.14.1
       '@xtuc/long': 4.2.2
 
-  '@xmorse/deployment-utils@0.7.4(@types/node@22.15.21)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.48.0)(tsx@4.20.3)(yaml@2.5.1)':
+  '@xmorse/deployment-utils@0.7.5(@types/node@22.15.21)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.48.0)(tsx@4.20.3)(yaml@2.5.1)':
     dependencies:
       '@actions/cache': 3.3.0
       '@iarna/toml': 2.2.5
@@ -8191,13 +8172,14 @@ snapshots:
       picocolors: 1.1.1
       pkg-types: 2.3.0
       tempfile: 4.0.0
-      vite: 6.4.1(@types/node@22.15.21)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.48.0)(tsx@4.20.3)(yaml@2.5.1)
+      vite: 8.0.16(@types/node@22.15.21)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.48.0)(tsx@4.20.3)(yaml@2.5.1)
     transitivePeerDependencies:
       - '@types/node'
+      - '@vitejs/devtools'
       - encoding
+      - esbuild
       - jiti
       - less
-      - lightningcss
       - sass
       - sass-embedded
       - stylus
@@ -9266,10 +9248,6 @@ snapshots:
     dependencies:
       reusify: 1.0.4
 
-  fdir@6.5.0(picomatch@4.0.3):
-    optionalDependencies:
-      picomatch: 4.0.3
-
   fdir@6.5.0(picomatch@4.0.4):
     optionalDependencies:
       picomatch: 4.0.4
@@ -9372,14 +9350,14 @@ snapshots:
       devalue: 5.6.3
       std-env: 3.10.0
 
-  framer-motion@12.34.3(react-dom@19.2.6(react@19.2.6))(react@19.2.6):
+  framer-motion@12.34.3(react-dom@19.2.7(react@19.2.7))(react@19.2.7):
     dependencies:
       motion-dom: 12.34.3
       motion-utils: 12.29.2
       tslib: 2.8.1
     optionalDependencies:
-      react: 19.2.6
-      react-dom: 19.2.6(react@19.2.6)
+      react: 19.2.7
+      react-dom: 19.2.7(react@19.2.7)
 
   fresh@0.5.2: {}
 
@@ -9927,7 +9905,7 @@ snapshots:
 
   make-dir@4.0.0:
     dependencies:
-      semver: 7.7.3
+      semver: 7.8.1
 
   markdown-table@3.0.4: {}
 
@@ -10578,8 +10556,6 @@ snapshots:
 
   picomatch@2.3.1: {}
 
-  picomatch@4.0.3: {}
-
   picomatch@4.0.4: {}
 
   pify@2.3.0: {}
@@ -10642,12 +10618,6 @@ snapshots:
   postcss@8.5.15:
     dependencies:
       nanoid: 3.3.12
-      picocolors: 1.1.1
-      source-map-js: 1.2.1
-
-  postcss@8.5.6:
-    dependencies:
-      nanoid: 3.3.11
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
@@ -10735,12 +10705,6 @@ snapshots:
       - '@types/react'
       - supports-color
 
-  react-dom@19.2.6(react@19.2.6):
-    dependencies:
-      react: 19.2.6
-      scheduler: 0.27.0
-    optional: true
-
   react-dom@19.2.7(react@19.2.7):
     dependencies:
       react: 19.2.7
@@ -10795,9 +10759,6 @@ snapshots:
       memoize-one: 5.2.1
       react: 19.2.7
       react-dom: 19.2.7(react@19.2.7)
-
-  react@19.2.6:
-    optional: true
 
   react@19.2.7: {}
 
@@ -11074,8 +11035,6 @@ snapshots:
   safe-buffer@5.2.1: {}
 
   safer-buffer@2.1.2: {}
-
-  sax@1.4.4: {}
 
   sax@1.6.0: {}
 
@@ -11746,23 +11705,6 @@ snapshots:
       - supports-color
       - typescript
 
-  vite@6.4.1(@types/node@22.15.21)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.48.0)(tsx@4.20.3)(yaml@2.5.1):
-    dependencies:
-      esbuild: 0.25.12
-      fdir: 6.5.0(picomatch@4.0.3)
-      picomatch: 4.0.3
-      postcss: 8.5.6
-      rollup: 4.55.1
-      tinyglobby: 0.2.15
-    optionalDependencies:
-      '@types/node': 22.15.21
-      fsevents: 2.3.3
-      jiti: 2.7.0
-      lightningcss: 1.32.0
-      terser: 5.48.0
-      tsx: 4.20.3
-      yaml: 2.5.1
-
   vite@6.4.1(@types/node@25.9.1)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.48.0)(tsx@4.20.3)(yaml@2.5.1):
     dependencies:
       esbuild: 0.25.12
@@ -11793,6 +11735,22 @@ snapshots:
       fsevents: 2.3.3
       jiti: 2.7.0
       lightningcss: 1.32.0
+      terser: 5.48.0
+      tsx: 4.20.3
+      yaml: 2.5.1
+
+  vite@8.0.16(@types/node@22.15.21)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.48.0)(tsx@4.20.3)(yaml@2.5.1):
+    dependencies:
+      lightningcss: 1.32.0
+      picomatch: 4.0.4
+      postcss: 8.5.15
+      rolldown: 1.0.3
+      tinyglobby: 0.2.17
+    optionalDependencies:
+      '@types/node': 22.15.21
+      esbuild: 0.28.0
+      fsevents: 2.3.3
+      jiti: 2.7.0
       terser: 5.48.0
       tsx: 4.20.3
       yaml: 2.5.1
@@ -11947,7 +11905,7 @@ snapshots:
 
   xml2js@0.5.0:
     dependencies:
-      sax: 1.4.4
+      sax: 1.6.0
       xmlbuilder: 11.0.1
 
   xmlbuilder@11.0.1: {}
