@@ -2,7 +2,7 @@ import {
   __require
 } from "./chunk-IKQSD2QC.js";
 
-// /:https://app.framerstatic.com/chunk-SB6EN5U7.mjs
+// /:https://app.framerstatic.com/chunk-OIW42Q6O.mjs
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -22,7 +22,11 @@ var __require2 = /* @__PURE__ */ ((x) => typeof __require !== "undefined" ? __re
   throw Error('Dynamic require of "' + x + '" is not supported');
 });
 var __commonJS = (cb, mod) => function __require22() {
-  return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
+  try {
+    return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
+  } catch (e) {
+    throw mod = 0, e;
+  }
 };
 var __export = (target, all) => {
   for (var name in all)

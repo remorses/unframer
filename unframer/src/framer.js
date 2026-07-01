@@ -12,10 +12,10 @@ import {
   __require,
   __runInitializers,
   __toESM,
-} from './framer-chunks/chunk-7ZLQTYXQ.js';
+} from './framer-chunks/chunk-ZHL7H4DS.js';
 import './framer-chunks/chunk-IKQSD2QC.js';
 
-// /:https://app.framerstatic.com/chunk-7KEO2DXG.mjs
+// /:https://app.framerstatic.com/chunk-TFDIZ7QI.mjs
 import { createContext, } from 'react';
 import { useEffect, useLayoutEffect, } from 'react';
 import * as React from 'react';
@@ -12753,7 +12753,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.SZORHXMV.mjs
+// /:https://app.framerstatic.com/framer.WXQX7PQE.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -14154,8 +14154,8 @@ var LazyValue = class _LazyValue {
    * @param cacheHash Optional hash of the module filename, used for cache optimization. During build, this is automatically injected as a compact hash of the filename extracted from the original HTTPS URL (e.g., "YouTube.js" → hash).
    */
   constructor(resolver, cacheHash,) {
-    this.resolver = resolver;
-    this.cacheHash = cacheHash;
+    __publicField(this, 'resolver', resolver,);
+    __publicField(this, 'cacheHash', cacheHash,);
     __publicField(this, 'promiseState', PromiseState.Pending,);
     __publicField(this, 'preloadPromise',);
     __publicField(this, 'value',);
@@ -15073,7 +15073,7 @@ function useCollectionUtils() {
 }
 var CollectionUtilsCache = class {
   constructor(utilFactory, collectionId,) {
-    this.collectionId = collectionId;
+    __publicField(this, 'collectionId', collectionId,);
     __publicField(this, 'module',);
     __publicField(this, 'cacheMap', /* @__PURE__ */ new Map(),);
     this.module = new LazyValue(async () => {
@@ -18030,7 +18030,7 @@ function animatableInterpolation(value, currentInterpolation,) {
 }
 var AnimatableValue = class {
   constructor(value,) {
-    this.value = value;
+    __publicField(this, 'value', value,);
     __publicField(this, 'observers', new Observers(),);
   }
   static interpolationFor(value, currentInterpolation,) {
@@ -18229,7 +18229,7 @@ function controlPointsForCurve(curve,) {
 }
 var BezierAnimator = class {
   constructor(options, interpolation,) {
-    this.interpolation = interpolation;
+    __publicField(this, 'interpolation', interpolation,);
     __publicField(this, 'unitBezier',);
     __publicField(this, 'options',);
     __publicField(this, 'current',);
@@ -18544,7 +18544,7 @@ function isDampingDurationSpringOptions(options,) {
 }
 var SpringAnimator = class {
   constructor(options, interpolation,) {
-    this.interpolation = interpolation;
+    __publicField(this, 'interpolation', interpolation,);
     __publicField(this, 'options',);
     __publicField(this, 'current',);
     __publicField(this, 'destination',);
@@ -20601,9 +20601,9 @@ var RenderTarget = {
 };
 var AnimationDriver = class {
   constructor(animator, updateCallback, finishedCallback,) {
-    this.animator = animator;
-    this.updateCallback = updateCallback;
-    this.finishedCallback = finishedCallback;
+    __publicField(this, 'animator', animator,);
+    __publicField(this, 'updateCallback', updateCallback,);
+    __publicField(this, 'finishedCallback', finishedCallback,);
     __publicField(this, 'update', (frame2, elapsed,) => {
       if (this.animator.isFinished()) {
         this.finish();
@@ -30194,8 +30194,8 @@ var FramerEvent = class _FramerEvent {
    * @internal
    */
   constructor(originalEvent, session,) {
-    this.originalEvent = originalEvent;
-    this.session = session;
+    __publicField(this, 'originalEvent', originalEvent,);
+    __publicField(this, 'session', session,);
     __publicField(this, 'time', Date.now(),);
     __publicField(this, 'loopTime', MainLoop.time,);
     __publicField(this, 'point',);
@@ -41835,8 +41835,8 @@ var _SSRResults;
 var _onlyPrefetched;
 var RequestsObserver = class {
   constructor(client, requests,) {
-    this.client = client;
-    this.requests = requests;
+    __publicField(this, 'client', client,);
+    __publicField(this, 'requests', requests,);
     __privateAdd(this, _subscriptions, /* @__PURE__ */ new Map(),);
     __privateAdd(this, _subscribers2, /* @__PURE__ */ new Set(),);
     __privateAdd(this, _results,);
@@ -42811,8 +42811,8 @@ async function getCollectionItems(collection, locale,) {
 }
 var CompatibilityDatabaseCollection = class {
   constructor(collection, locale,) {
-    this.collection = collection;
-    this.locale = locale;
+    __publicField(this, 'collection', collection,);
+    __publicField(this, 'locale', locale,);
     __publicField(this, 'schema',);
     __publicField(this, 'indexes', [],);
     const propertyControls = getPropertyControls(collection,);
@@ -42960,7 +42960,7 @@ function getNetworkSpeed() {
 var KB = 1e3;
 var Cost = class _Cost {
   constructor(network,) {
-    this.network = network;
+    __publicField(this, 'network', network,);
   }
   static estimate(totalRequests, transferredBytes,) {
     const latency = getNetworkLatency();
@@ -42990,8 +42990,8 @@ function GroupId(id3,) {
 }
 var Group = class {
   constructor(id3, relational,) {
-    this.id = id3;
-    this.relational = relational;
+    __publicField(this, 'id', id3,);
+    __publicField(this, 'relational', relational,);
     __publicField(this, 'nodes', [],);
     __publicField(this, 'winners', /* @__PURE__ */ new Map(),);
   }
@@ -43045,7 +43045,7 @@ var Winner = class {
 };
 var AbstractNode = class {
   constructor(isSynchronous,) {
-    this.isSynchronous = isSynchronous;
+    __publicField(this, 'isSynchronous', isSynchronous,);
   }
 };
 var RelationalNode = class extends AbstractNode {
@@ -43131,7 +43131,7 @@ function isWrappedVectorSetItemPointer(value,) {
 }
 var Resolver = class {
   constructor(query, locale, options = {},) {
-    this.options = options;
+    __publicField(this, 'options', options,);
     __publicField(this, 'collections',);
     __publicField(this, 'richTextCache', /* @__PURE__ */ new WeakMap(),);
     __publicField(this, 'vectorSetItemCache', /* @__PURE__ */ new WeakMap(),);
@@ -43267,9 +43267,9 @@ function CollectionId(id3,) {
 }
 var CollectionMetadata = class {
   constructor(id3, name, data2,) {
-    this.id = id3;
-    this.name = name;
-    this.data = data2;
+    __publicField(this, 'id', id3,);
+    __publicField(this, 'name', name,);
+    __publicField(this, 'data', data2,);
     __publicField(this, 'indexes', new Indexes(),);
     __publicField(this, 'fields', new Fields(),);
   }
@@ -43279,12 +43279,12 @@ function IndexId(id3,) {
 }
 var IndexMetadata = class {
   constructor(id3, data2, collection, lookupNodes, constraint, ordering,) {
-    this.id = id3;
-    this.data = data2;
-    this.collection = collection;
-    this.lookupNodes = lookupNodes;
-    this.constraint = constraint;
-    this.ordering = ordering;
+    __publicField(this, 'id', id3,);
+    __publicField(this, 'data', data2,);
+    __publicField(this, 'collection', collection,);
+    __publicField(this, 'lookupNodes', lookupNodes,);
+    __publicField(this, 'constraint', constraint,);
+    __publicField(this, 'ordering', ordering,);
     __publicField(this, 'resolvedFields', new Fields(),);
     for (const fieldName in data2.schema) {
       for (const field of collection.fields) {
@@ -43306,10 +43306,10 @@ function FieldId(id3,) {
 }
 var FieldMetadata = class {
   constructor(id3, name, definition, collection,) {
-    this.id = id3;
-    this.name = name;
-    this.definition = definition;
-    this.collection = collection;
+    __publicField(this, 'id', id3,);
+    __publicField(this, 'name', name,);
+    __publicField(this, 'definition', definition,);
+    __publicField(this, 'collection', collection,);
   }
   getValue(item,) {
     assert(this.name, 'Can only get value of field with a name',);
@@ -43341,8 +43341,8 @@ var Fields = class extends Metadata {
 };
 var OrderingField = class {
   constructor(field, direction = 'asc',) {
-    this.field = field;
-    this.direction = direction;
+    __publicField(this, 'field', field,);
+    __publicField(this, 'direction', direction,);
   }
   getHash() {
     return calculateHash('OrderingField', this.field.id, this.direction,);
@@ -43387,8 +43387,8 @@ var Ordering = class {
 };
 var RequiredProps = class {
   constructor(ordering, resolvedFields,) {
-    this.ordering = ordering;
-    this.resolvedFields = resolvedFields;
+    __publicField(this, 'ordering', ordering,);
+    __publicField(this, 'resolvedFields', resolvedFields,);
   }
   getHash() {
     return calculateHash('RequiredProps', this.ordering, this.resolvedFields,);
@@ -43431,7 +43431,7 @@ var RequiredProps = class {
 };
 var Scope = class _Scope {
   constructor(parent,) {
-    this.parent = parent;
+    __publicField(this, 'parent', parent,);
     __publicField(this, 'node',);
     __publicField(this, 'ordering',);
     __publicField(this, 'fields', [],);
@@ -43613,8 +43613,8 @@ var Tuple = class {
 };
 var Relation = class _Relation {
   constructor(fields, tuples = [],) {
-    this.fields = fields;
-    this.tuples = tuples;
+    __publicField(this, 'fields', fields,);
+    __publicField(this, 'tuples', tuples,);
   }
   push(tuple,) {
     this.tuples.push(tuple,);
@@ -43679,8 +43679,8 @@ var Relation = class _Relation {
 };
 var ProjectionField = class {
   constructor(input, field,) {
-    this.input = input;
-    this.field = field;
+    __publicField(this, 'input', input,);
+    __publicField(this, 'field', field,);
   }
   getHash() {
     return calculateHash('ProjectionField', this.input, this.field.id,);
@@ -43693,9 +43693,9 @@ var RelationalProject = class _RelationalProject extends RelationalNode {
       isSynchronous &&= projection.input.isSynchronous;
     }
     super(isSynchronous,);
-    this.input = input;
-    this.projections = projections;
-    this.passthrough = passthrough;
+    __publicField(this, 'input', input,);
+    __publicField(this, 'projections', projections,);
+    __publicField(this, 'passthrough', passthrough,);
     __publicField(this, 'inputGroup',);
     this.inputGroup = input.getGroup();
   }
@@ -43797,9 +43797,9 @@ var collation = {
 var ScalarNode = class extends AbstractNode {
   constructor(referencedFields, referencedOuterFields, isSynchronous,) {
     super(isSynchronous,);
-    this.referencedFields = referencedFields;
-    this.referencedOuterFields = referencedOuterFields;
-    this.isSynchronous = isSynchronous;
+    __publicField(this, 'referencedFields', referencedFields,);
+    __publicField(this, 'referencedOuterFields', referencedOuterFields,);
+    __publicField(this, 'isSynchronous', isSynchronous,);
   }
   /**
    * Evaluates the node and all children synchronously. Throws an error if the
@@ -43823,8 +43823,8 @@ var collation2 = {
 };
 var CaseCondition = class {
   constructor(when, then,) {
-    this.when = when;
-    this.then = then;
+    __publicField(this, 'when', when,);
+    __publicField(this, 'then', then,);
   }
   getHash() {
     return calculateHash('CaseCondition', this.when, this.then,);
@@ -43859,9 +43859,9 @@ var ScalarCase = class _ScalarCase extends ScalarNode {
       isSynchronous &&= otherwise.isSynchronous;
     }
     super(referencedFields, referencedOuterFields, isSynchronous,);
-    this.input = input;
-    this.conditions = conditions;
-    this.otherwise = otherwise;
+    __publicField(this, 'input', input,);
+    __publicField(this, 'conditions', conditions,);
+    __publicField(this, 'otherwise', otherwise,);
     __publicField(this, 'definition', {
       type: 'unknown',
       isNullable: true,
@@ -43933,9 +43933,9 @@ var ScalarCase = class _ScalarCase extends ScalarNode {
 };
 var Builder = class {
   constructor(normalizer, query, locale,) {
-    this.normalizer = normalizer;
-    this.query = query;
-    this.locale = locale;
+    __publicField(this, 'normalizer', normalizer,);
+    __publicField(this, 'query', query,);
+    __publicField(this, 'locale', locale,);
     __publicField(this, 'collectionId', 0,);
     __publicField(this, 'indexId', 0,);
     __publicField(this, 'fieldId', 0,);
@@ -44339,7 +44339,7 @@ var Builder = class {
 };
 var Subquery = class {
   constructor(inScope,) {
-    this.inScope = inScope;
+    __publicField(this, 'inScope', inScope,);
     __publicField(this, 'referencedFields', new Fields(),);
     __publicField(this, 'referencedOuterFields', new Fields(),);
   }
@@ -44347,8 +44347,8 @@ var Subquery = class {
 var RelationalFilter = class _RelationalFilter extends RelationalNode {
   constructor(input, predicate,) {
     super(input.isSynchronous && predicate.isSynchronous,);
-    this.input = input;
-    this.predicate = predicate;
+    __publicField(this, 'input', input,);
+    __publicField(this, 'predicate', predicate,);
     __publicField(this, 'inputGroup',);
     this.inputGroup = input.getGroup();
   }
@@ -44395,8 +44395,8 @@ var RelationalFilter = class _RelationalFilter extends RelationalNode {
 var RelationalIndexLookup = class _RelationalIndexLookup extends RelationalNode {
   constructor(index, query,) {
     super(false,);
-    this.index = index;
-    this.query = query;
+    __publicField(this, 'index', index,);
+    __publicField(this, 'query', query,);
   }
   getHash() {
     return calculateHash('RelationalIndexLookup', this.index.id, ...this.query,);
@@ -44438,8 +44438,8 @@ var RelationalIndexLookup = class _RelationalIndexLookup extends RelationalNode 
 var RelationalIntersection = class _RelationalIntersection extends RelationalNode {
   constructor(left, right,) {
     super(left.isSynchronous && right.isSynchronous,);
-    this.left = left;
-    this.right = right;
+    __publicField(this, 'left', left,);
+    __publicField(this, 'right', right,);
     __publicField(this, 'leftGroup',);
     __publicField(this, 'rightGroup',);
     this.leftGroup = left.getGroup();
@@ -44497,7 +44497,7 @@ var RelationalIntersection = class _RelationalIntersection extends RelationalNod
 var RelationalScan = class _RelationalScan extends RelationalNode {
   constructor(collection,) {
     super(false,);
-    this.collection = collection;
+    __publicField(this, 'collection', collection,);
   }
   getHash() {
     return calculateHash('RelationalScan', this.collection.id,);
@@ -44536,8 +44536,8 @@ var RelationalScan = class _RelationalScan extends RelationalNode {
 var RelationalUnion = class _RelationalUnion extends RelationalNode {
   constructor(left, right,) {
     super(left.isSynchronous && right.isSynchronous,);
-    this.left = left;
-    this.right = right;
+    __publicField(this, 'left', left,);
+    __publicField(this, 'right', right,);
     __publicField(this, 'leftGroup',);
     __publicField(this, 'rightGroup',);
     this.leftGroup = left.getGroup();
@@ -44602,8 +44602,8 @@ var ScalarAnd = class _ScalarAnd extends ScalarNode {
     referencedOuterFields.merge(right.referencedOuterFields,);
     const isSynchronous = left.isSynchronous && right.isSynchronous;
     super(referencedFields, referencedOuterFields, isSynchronous,);
-    this.left = left;
-    this.right = right;
+    __publicField(this, 'left', left,);
+    __publicField(this, 'right', right,);
     __publicField(this, 'definition', {
       type: 'boolean',
       isNullable: false,
@@ -44641,8 +44641,8 @@ var ScalarConstant = class extends ScalarNode {
     const referencedFields = new Fields();
     const referencedOuterFields = new Fields();
     super(referencedFields, referencedOuterFields, true,);
-    this.definition = definition;
-    this.value = value;
+    __publicField(this, 'definition', definition,);
+    __publicField(this, 'value', value,);
   }
   getHash() {
     return calculateHash('ScalarConstant', this.definition, this.value,);
@@ -44672,8 +44672,8 @@ var ScalarContains = class _ScalarContains extends ScalarNode {
     referencedOuterFields.merge(target.referencedOuterFields,);
     const isSynchronous = source.isSynchronous && target.isSynchronous;
     super(referencedFields, referencedOuterFields, isSynchronous,);
-    this.source = source;
-    this.target = target;
+    __publicField(this, 'source', source,);
+    __publicField(this, 'target', target,);
     __publicField(this, 'definition', {
       type: 'boolean',
       isNullable: false,
@@ -44720,8 +44720,8 @@ var ScalarEndsWith = class _ScalarEndsWith extends ScalarNode {
     referencedOuterFields.merge(target.referencedOuterFields,);
     const isSynchronous = source.isSynchronous && target.isSynchronous;
     super(referencedFields, referencedOuterFields, isSynchronous,);
-    this.source = source;
-    this.target = target;
+    __publicField(this, 'source', source,);
+    __publicField(this, 'target', target,);
     __publicField(this, 'definition', {
       type: 'boolean',
       isNullable: false,
@@ -44764,8 +44764,8 @@ var ScalarEquals = class _ScalarEquals extends ScalarNode {
     referencedOuterFields.merge(right.referencedOuterFields,);
     const isSynchronous = left.isSynchronous && right.isSynchronous;
     super(referencedFields, referencedOuterFields, isSynchronous,);
-    this.left = left;
-    this.right = right;
+    __publicField(this, 'left', left,);
+    __publicField(this, 'right', right,);
     __publicField(this, 'definition', {
       type: 'boolean',
       isNullable: false,
@@ -44808,8 +44808,8 @@ var ScalarGreaterThan = class _ScalarGreaterThan extends ScalarNode {
     referencedOuterFields.merge(right.referencedOuterFields,);
     const isSynchronous = left.isSynchronous && right.isSynchronous;
     super(referencedFields, referencedOuterFields, isSynchronous,);
-    this.left = left;
-    this.right = right;
+    __publicField(this, 'left', left,);
+    __publicField(this, 'right', right,);
     __publicField(this, 'definition', {
       type: 'boolean',
       isNullable: false,
@@ -44852,8 +44852,8 @@ var ScalarGreaterThanOrEqual = class _ScalarGreaterThanOrEqual extends ScalarNod
     referencedOuterFields.merge(right.referencedOuterFields,);
     const isSynchronous = left.isSynchronous && right.isSynchronous;
     super(referencedFields, referencedOuterFields, isSynchronous,);
-    this.left = left;
-    this.right = right;
+    __publicField(this, 'left', left,);
+    __publicField(this, 'right', right,);
     __publicField(this, 'definition', {
       type: 'boolean',
       isNullable: false,
@@ -44896,8 +44896,8 @@ var ScalarLessThan = class _ScalarLessThan extends ScalarNode {
     referencedOuterFields.merge(right.referencedOuterFields,);
     const isSynchronous = left.isSynchronous && right.isSynchronous;
     super(referencedFields, referencedOuterFields, isSynchronous,);
-    this.left = left;
-    this.right = right;
+    __publicField(this, 'left', left,);
+    __publicField(this, 'right', right,);
     __publicField(this, 'definition', {
       type: 'boolean',
       isNullable: false,
@@ -44940,8 +44940,8 @@ var ScalarLessThanOrEqual = class _ScalarLessThanOrEqual extends ScalarNode {
     referencedOuterFields.merge(right.referencedOuterFields,);
     const isSynchronous = left.isSynchronous && right.isSynchronous;
     super(referencedFields, referencedOuterFields, isSynchronous,);
-    this.left = left;
-    this.right = right;
+    __publicField(this, 'left', left,);
+    __publicField(this, 'right', right,);
     __publicField(this, 'definition', {
       type: 'boolean',
       isNullable: false,
@@ -44984,8 +44984,8 @@ var ScalarNotEquals = class _ScalarNotEquals extends ScalarNode {
     referencedOuterFields.merge(right.referencedOuterFields,);
     const isSynchronous = left.isSynchronous && right.isSynchronous;
     super(referencedFields, referencedOuterFields, isSynchronous,);
-    this.left = left;
-    this.right = right;
+    __publicField(this, 'left', left,);
+    __publicField(this, 'right', right,);
     __publicField(this, 'definition', {
       type: 'boolean',
       isNullable: false,
@@ -45028,8 +45028,8 @@ var ScalarOr = class _ScalarOr extends ScalarNode {
     referencedOuterFields.merge(right.referencedOuterFields,);
     const isSynchronous = left.isSynchronous && right.isSynchronous;
     super(referencedFields, referencedOuterFields, isSynchronous,);
-    this.left = left;
-    this.right = right;
+    __publicField(this, 'left', left,);
+    __publicField(this, 'right', right,);
     __publicField(this, 'definition', {
       type: 'boolean',
       isNullable: false,
@@ -45076,8 +45076,8 @@ var ScalarStartsWith = class _ScalarStartsWith extends ScalarNode {
     referencedOuterFields.merge(target.referencedOuterFields,);
     const isSynchronous = source.isSynchronous && target.isSynchronous;
     super(referencedFields, referencedOuterFields, isSynchronous,);
-    this.source = source;
-    this.target = target;
+    __publicField(this, 'source', source,);
+    __publicField(this, 'target', target,);
     __publicField(this, 'definition', {
       type: 'boolean',
       isNullable: false,
@@ -45112,7 +45112,7 @@ var ScalarStartsWith = class _ScalarStartsWith extends ScalarNode {
 };
 var Explorer = class {
   constructor(normalizer,) {
-    this.normalizer = normalizer;
+    __publicField(this, 'normalizer', normalizer,);
     __publicField(this, 'memo',);
     this.memo = normalizer.memo;
   }
@@ -45280,7 +45280,7 @@ function createIndexQueryAll(length,) {
 }
 var RelationalProps = class {
   constructor(outputFields,) {
-    this.outputFields = outputFields;
+    __publicField(this, 'outputFields', outputFields,);
   }
   /**
    * Checks if the given relational properties are compatible with this.
@@ -45337,9 +45337,9 @@ var Memo = class {
 var RelationalLeftJoin = class _RelationalLeftJoin extends RelationalNode {
   constructor(left, right, constraint,) {
     super(left.isSynchronous && right.isSynchronous && constraint.isSynchronous,);
-    this.left = left;
-    this.right = right;
-    this.constraint = constraint;
+    __publicField(this, 'left', left,);
+    __publicField(this, 'right', right,);
+    __publicField(this, 'constraint', constraint,);
     __publicField(this, 'leftGroup',);
     __publicField(this, 'rightGroup',);
     this.leftGroup = left.getGroup();
@@ -45467,9 +45467,9 @@ var RelationalLeftJoin = class _RelationalLeftJoin extends RelationalNode {
 var RelationalLimit = class _RelationalLimit extends RelationalNode {
   constructor(input, limit, ordering,) {
     super(input.isSynchronous && limit.isSynchronous,);
-    this.input = input;
-    this.limit = limit;
-    this.ordering = ordering;
+    __publicField(this, 'input', input,);
+    __publicField(this, 'limit', limit,);
+    __publicField(this, 'ordering', ordering,);
     __publicField(this, 'inputGroup',);
     this.inputGroup = input.getGroup();
   }
@@ -45518,9 +45518,9 @@ var RelationalLimit = class _RelationalLimit extends RelationalNode {
 var RelationalOffset = class _RelationalOffset extends RelationalNode {
   constructor(input, offset, ordering,) {
     super(input.isSynchronous && offset.isSynchronous,);
-    this.input = input;
-    this.offset = offset;
-    this.ordering = ordering;
+    __publicField(this, 'input', input,);
+    __publicField(this, 'offset', offset,);
+    __publicField(this, 'ordering', ordering,);
     __publicField(this, 'inputGroup',);
     this.inputGroup = input.getGroup();
   }
@@ -45569,11 +45569,11 @@ var RelationalOffset = class _RelationalOffset extends RelationalNode {
 var ScalarArray = class _ScalarArray extends ScalarNode {
   constructor(input, namedFields, ordering, referencedFields, referencedOuterFields,) {
     super(referencedFields, referencedOuterFields, input.isSynchronous,);
-    this.input = input;
-    this.namedFields = namedFields;
-    this.ordering = ordering;
-    this.referencedFields = referencedFields;
-    this.referencedOuterFields = referencedOuterFields;
+    __publicField(this, 'input', input,);
+    __publicField(this, 'namedFields', namedFields,);
+    __publicField(this, 'ordering', ordering,);
+    __publicField(this, 'referencedFields', referencedFields,);
+    __publicField(this, 'referencedOuterFields', referencedOuterFields,);
     __publicField(this, 'inputGroup',);
     __publicField(this, 'definition',);
     this.inputGroup = input.getGroup();
@@ -45650,8 +45650,8 @@ var ScalarArray = class _ScalarArray extends ScalarNode {
 var ScalarCast = class _ScalarCast extends ScalarNode {
   constructor(input, definition,) {
     super(input.referencedFields, input.referencedOuterFields, input.isSynchronous,);
-    this.input = input;
-    this.definition = definition;
+    __publicField(this, 'input', input,);
+    __publicField(this, 'definition', definition,);
     assert(definition.isNullable, 'Unsupported non-nullable cast',);
   }
   getHash() {
@@ -45672,11 +45672,11 @@ var ScalarCast = class _ScalarCast extends ScalarNode {
 var ScalarFlatArray = class _ScalarFlatArray extends ScalarNode {
   constructor(input, field, ordering, referencedFields, referencedOuterFields,) {
     super(referencedFields, referencedOuterFields, input.isSynchronous,);
-    this.input = input;
-    this.field = field;
-    this.ordering = ordering;
-    this.referencedFields = referencedFields;
-    this.referencedOuterFields = referencedOuterFields;
+    __publicField(this, 'input', input,);
+    __publicField(this, 'field', field,);
+    __publicField(this, 'ordering', ordering,);
+    __publicField(this, 'referencedFields', referencedFields,);
+    __publicField(this, 'referencedOuterFields', referencedOuterFields,);
     __publicField(this, 'inputGroup',);
     __publicField(this, 'definition',);
     this.inputGroup = input.getGroup();
@@ -45740,8 +45740,8 @@ var ScalarIn = class _ScalarIn extends ScalarNode {
     referencedOuterFields.merge(right.referencedOuterFields,);
     const isSynchronous = left.isSynchronous && right.isSynchronous;
     super(referencedFields, referencedOuterFields, isSynchronous,);
-    this.left = left;
-    this.right = right;
+    __publicField(this, 'left', left,);
+    __publicField(this, 'right', right,);
     __publicField(this, 'definition', {
       type: 'boolean',
       isNullable: false,
@@ -45788,8 +45788,8 @@ var ScalarIndexOf = class _ScalarIndexOf extends ScalarNode {
     referencedOuterFields.merge(target.referencedOuterFields,);
     const isSynchronous = source.isSynchronous && target.isSynchronous;
     super(referencedFields, referencedOuterFields, isSynchronous,);
-    this.source = source;
-    this.target = target;
+    __publicField(this, 'source', source,);
+    __publicField(this, 'target', target,);
     __publicField(this, 'definition', {
       type: 'number',
       isNullable: false,
@@ -45849,8 +45849,8 @@ var ScalarIntersection = class _ScalarIntersection extends ScalarNode {
     referencedOuterFields.merge(right.referencedOuterFields,);
     const isSynchronous = left.isSynchronous && right.isSynchronous;
     super(referencedFields, referencedOuterFields, isSynchronous,);
-    this.left = left;
-    this.right = right;
+    __publicField(this, 'left', left,);
+    __publicField(this, 'right', right,);
     __publicField(this, 'definition', {
       type: 'array',
       definition: {
@@ -45914,7 +45914,7 @@ function databaseValueToSet(value,) {
 var ScalarLength = class _ScalarLength extends ScalarNode {
   constructor(input,) {
     super(input.referencedFields, input.referencedOuterFields, input.isSynchronous,);
-    this.input = input;
+    __publicField(this, 'input', input,);
     __publicField(this, 'definition', {
       type: 'number',
       isNullable: false,
@@ -45941,7 +45941,7 @@ var ScalarLength = class _ScalarLength extends ScalarNode {
 var ScalarNot = class _ScalarNot extends ScalarNode {
   constructor(input,) {
     super(input.referencedFields, input.referencedOuterFields, input.isSynchronous,);
-    this.input = input;
+    __publicField(this, 'input', input,);
     __publicField(this, 'definition', {
       type: 'boolean',
       isNullable: false,
@@ -45979,8 +45979,8 @@ var ScalarNotIn = class _ScalarNotIn extends ScalarNode {
     referencedOuterFields.merge(right.referencedOuterFields,);
     const isSynchronous = left.isSynchronous && right.isSynchronous;
     super(referencedFields, referencedOuterFields, isSynchronous,);
-    this.left = left;
-    this.right = right;
+    __publicField(this, 'left', left,);
+    __publicField(this, 'right', right,);
     __publicField(this, 'definition', {
       type: 'boolean',
       isNullable: false,
@@ -46024,8 +46024,8 @@ var ScalarVariable = class extends ScalarNode {
       referencedFields.add(field,);
     }
     super(referencedFields, referencedOuterFields, true,);
-    this.field = field;
-    this.isOuterField = isOuterField;
+    __publicField(this, 'field', field,);
+    __publicField(this, 'isOuterField', isOuterField,);
     __publicField(this, 'definition',);
     this.definition = field.definition;
   }
@@ -46050,7 +46050,7 @@ var ScalarVariable = class extends ScalarNode {
 };
 var Normalizer = class {
   constructor(memo7,) {
-    this.memo = memo7;
+    __publicField(this, 'memo', memo7,);
   }
   finishRelational(node,) {
     return this.memo.addRelational(node,);
@@ -46377,9 +46377,9 @@ var EnforcerNode = class extends RelationalNode {};
 var EnforcerResolve = class _EnforcerResolve extends EnforcerNode {
   constructor(input, fields, resolver,) {
     super(false,);
-    this.input = input;
-    this.fields = fields;
-    this.resolver = resolver;
+    __publicField(this, 'input', input,);
+    __publicField(this, 'fields', fields,);
+    __publicField(this, 'resolver', resolver,);
     __publicField(this, 'inputGroup',);
     this.inputGroup = input.getGroup();
   }
@@ -46464,8 +46464,8 @@ var collation9 = {
 var EnforcerSort = class _EnforcerSort extends EnforcerNode {
   constructor(input, ordering,) {
     super(input.isSynchronous,);
-    this.input = input;
-    this.ordering = ordering;
+    __publicField(this, 'input', input,);
+    __publicField(this, 'ordering', ordering,);
     __publicField(this, 'inputGroup',);
     this.inputGroup = input.getGroup();
   }
@@ -46552,9 +46552,9 @@ var EnforcerSort = class _EnforcerSort extends EnforcerNode {
 };
 var Optimizer = class {
   constructor(query, locale, resolver,) {
-    this.query = query;
-    this.locale = locale;
-    this.resolver = resolver;
+    __publicField(this, 'query', query,);
+    __publicField(this, 'locale', locale,);
+    __publicField(this, 'resolver', resolver,);
     __publicField(this, 'memo', new Memo(),);
     __publicField(this, 'normalizer', new Normalizer(this.memo,),);
     __publicField(this, 'explorer', new Explorer(this.normalizer,),);
@@ -46802,8 +46802,8 @@ function isCollection(value,) {
 }
 var QueryCache = class {
   constructor(queryEngine2, maxSize = Infinity,) {
-    this.queryEngine = queryEngine2;
-    this.maxSize = maxSize;
+    __publicField(this, 'queryEngine', queryEngine2,);
+    __publicField(this, 'maxSize', maxSize,);
     __publicField(this, 'cache', /* @__PURE__ */ new Map(),);
     __publicField(this, 'serializedCache', handoverCollector !== void 0 ? /* @__PURE__ */ new Map() : void 0,);
   }
@@ -46872,7 +46872,7 @@ function getCacheKey(query, locale,) {
 async function executeServerDatabaseQuery(sql,) {
   const {
     executeServerDatabaseQuery: executeServerDatabaseQueryWithSqlite,
-  } = await import('./framer-chunks/SqliteDatabase-VAKIICSG-OPV4MG3Y.js');
+  } = await import('./framer-chunks/SqliteDatabase-ERLSDMQG-VAOGSUQA.js');
   return executeServerDatabaseQueryWithSqlite(sql,);
 }
 var queryEngine = /* @__PURE__ */ new QueryEngine();
@@ -53638,11 +53638,11 @@ function getAssetOwnerType(asset,) {
 async function loadFontsWithOpenType(source,) {
   switch (source) {
     case 'google': {
-      const supportedFonts = await import('./framer-chunks/google-3SZHWBC6-2VTQEQ7J.js');
+      const supportedFonts = await import('./framer-chunks/google-K5SKTAAF-CGP2QMBV.js');
       return supportedFonts.default;
     }
     case 'fontshare': {
-      const supportedFonts = await import('./framer-chunks/fontshare-B2QLD7YB-5V3XZJAH.js');
+      const supportedFonts = await import('./framer-chunks/fontshare-IUGQ52HX-4JRR6JG4.js');
       return supportedFonts.default;
     }
     default:
@@ -53652,15 +53652,15 @@ async function loadFontsWithOpenType(source,) {
 async function loadFontToOpenTypeFeatures(source,) {
   switch (source) {
     case 'google': {
-      const features = await import('./framer-chunks/google-3FCAKCAC-AM34UPJK.js');
+      const features = await import('./framer-chunks/google-VWNPUY4E-XDKHAOLT.js');
       return features.default;
     }
     case 'fontshare': {
-      const features = await import('./framer-chunks/fontshare-4THNDPMZ-FLLTWCDO.js');
+      const features = await import('./framer-chunks/fontshare-W3A7DJCR-E5X2AFCU.js');
       return features.default;
     }
     case 'framer': {
-      const features = await import('./framer-chunks/framer-font-45AI7UCZ-CKGC4MJC.js');
+      const features = await import('./framer-chunks/framer-font-OKYJFYGY-3WVEN4SL.js');
       return features.default;
     }
     default:
@@ -54204,10 +54204,10 @@ function loadVariationAxes(source,) {
       const axes = (async () => {
         switch (source) {
           case 'google': {
-            return (await import('./framer-chunks/google-GXDJLGJB-JNEJGCGD.js')).default;
+            return (await import('./framer-chunks/google-KLGLJHZI-YRKRJU42.js')).default;
           }
           case 'fontshare': {
-            return (await import('./framer-chunks/fontshare-O22OBJ3D-FIG3CRN3.js')).default;
+            return (await import('./framer-chunks/fontshare-HGQXVJG5-LE2UTFPX.js')).default;
           }
           default:
             assertNever(source,);
@@ -57363,11 +57363,11 @@ var ImagePatternElement = ({
 var useDOM = /* @__PURE__ */ isBrowser22();
 var SharedSVGEntry = class {
   constructor(id3, svg, innerHTML, viewBox, count = 0,) {
-    this.id = id3;
-    this.svg = svg;
-    this.innerHTML = innerHTML;
-    this.viewBox = viewBox;
-    this.count = count;
+    __publicField(this, 'id', id3,);
+    __publicField(this, 'svg', svg,);
+    __publicField(this, 'innerHTML', innerHTML,);
+    __publicField(this, 'viewBox', viewBox,);
+    __publicField(this, 'count', count,);
   }
 };
 var visuallyHiddenStyle = 'position: absolute; overflow: hidden; bottom: 0; left: 0; width: 0; height: 0; z-index: 0; contain: strict';
@@ -58427,7 +58427,7 @@ function useSafeTickerItem() {
 var keys22 = /* @__PURE__ */ new Map();
 var InternalID = class _InternalID {
   constructor(id3,) {
-    this.id = id3;
+    __publicField(this, 'id', id3,);
     __publicField(this, '_link', null,);
     __publicField(this, '_urllink', null,);
   }

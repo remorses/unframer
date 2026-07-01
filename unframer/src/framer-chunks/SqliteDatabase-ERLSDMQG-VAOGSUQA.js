@@ -1,7 +1,7 @@
-import "./chunk-7ZLQTYXQ.js";
+import "./chunk-ZHL7H4DS.js";
 import "./chunk-IKQSD2QC.js";
 
-// /:https://app.framerstatic.com/SqliteDatabase-VAKIICSG.mjs
+// /:https://app.framerstatic.com/SqliteDatabase-ERLSDMQG.mjs
 var __unframerWindow = typeof window !== "undefined" ? window : void 0;
 var SQLITE_GROWTH_PADDING_BYTES = 1048576;
 var databaseSession;
@@ -11,9 +11,9 @@ async function createDatabaseSession() {
     throw new Error("The CMS SQLite database can only be loaded in a browser environment.");
   }
   const [{ default: initSqlite3 }, { default: defaultBlogDatabaseBytes }, { default: sqliteWasmBytes }] = await Promise.all([
-    import("./sqlite-wasm-FGP37EAY-NO5QVZDI.js"),
-    import("./default-blog-sqlite-7ZHEY3GT-TVGUYU6H.js"),
-    import("./sqlite3-SISQ6ENZ-5WRKGWTY.js")
+    import("./sqlite-wasm-IRL4SKWV-BT4WQIJJ.js"),
+    import("./default-blog-sqlite-7MS6H4RN-54OZP6FV.js"),
+    import("./sqlite3-HSNXITW6-BOB4BJ2M.js")
   ]);
   const initOptions = {
     wasmBinary: sqliteWasmBytes
