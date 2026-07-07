@@ -15,7 +15,7 @@ import {
 } from './framer-chunks/chunk-ZHL7H4DS.js';
 import './framer-chunks/chunk-IKQSD2QC.js';
 
-// /:https://app.framerstatic.com/chunk-TFDIZ7QI.mjs
+// /:https://app.framerstatic.com/chunk-U5EBFIXB.mjs
 import { createContext, } from 'react';
 import { useEffect, useLayoutEffect, } from 'react';
 import * as React from 'react';
@@ -217,10 +217,6 @@ var easingDefinitionToFunction = (definition) => {
   }
   return definition;
 };
-var statsBuffer = {
-  value: null,
-  addProjectionMetrics: null,
-};
 var stepsOrder = [
   'setup',
   // Compute
@@ -239,7 +235,7 @@ var stepsOrder = [
   'postRender',
   // Compute
 ];
-function createRenderStep(runNextFrame, stepName,) {
+function createRenderStep(runNextFrame,) {
   let thisFrame = /* @__PURE__ */ new Set();
   let nextFrame = /* @__PURE__ */ new Set();
   let isProcessing = false;
@@ -250,13 +246,11 @@ function createRenderStep(runNextFrame, stepName,) {
     timestamp: 0,
     isProcessing: false,
   };
-  let numCalls = 0;
   function triggerCallback(callback,) {
     if (toKeepAlive.has(callback,)) {
       step2.schedule(callback,);
       runNextFrame();
     }
-    numCalls++;
     callback(latestFrameData,);
   }
   const step2 = {
@@ -291,10 +285,6 @@ function createRenderStep(runNextFrame, stepName,) {
       thisFrame = nextFrame;
       nextFrame = prevFrame;
       thisFrame.forEach(triggerCallback,);
-      if (stepName && statsBuffer.value) {
-        statsBuffer.value.frameloop[stepName].push(numCalls,);
-      }
-      numCalls = 0;
       thisFrame.clear();
       isProcessing = false;
       if (flushNextFrame) {
@@ -316,7 +306,7 @@ function createRenderBatcher(scheduleNextBatch, allowKeepAlive,) {
   };
   const flagRunNextFrame = () => runNextFrame = true;
   const steps2 = stepsOrder.reduce((acc, key7,) => {
-    acc[key7] = createRenderStep(flagRunNextFrame, allowKeepAlive ? key7 : void 0,);
+    acc[key7] = createRenderStep(flagRunNextFrame,);
     return acc;
   }, {},);
   const {
@@ -400,11 +390,6 @@ var time = {
     now = newTime;
     queueMicrotask(clearTime,);
   },
-};
-var activeAnimations = {
-  layout: 0,
-  mainThread: 0,
-  waapi: 0,
 };
 var checkStringStartsWith = (token) => (key7) => typeof key7 === 'string' && key7.startsWith(token,);
 var isCSSVariableName = /* @__PURE__ */ checkStringStartsWith('--',);
@@ -1374,7 +1359,6 @@ var JSAnimation = class extends WithPromise {
       this.teardown();
       this.options.onStop?.();
     };
-    activeAnimations.mainThread++;
     this.options = options;
     this.initAnimation();
     this.play();
@@ -1644,7 +1628,6 @@ var JSAnimation = class extends WithPromise {
     this.state = 'idle';
     this.stopDriver();
     this.startTime = this.holdTime = null;
-    activeAnimations.mainThread--;
   }
   stopDriver() {
     if (!this.driver) return;
@@ -1771,7 +1754,7 @@ var transformPropOrder = [
   'skewX',
   'skewY',
 ];
-var transformProps = /* @__PURE__ */ (() => new Set(transformPropOrder,))();
+var transformProps = /* @__PURE__ */ (() => /* @__PURE__ */ new Set([...transformPropOrder, 'pathRotation',],))();
 var isNumOrPxType = (v) => v === number || v === px;
 var transformKeys = /* @__PURE__ */ new Set(['x', 'y', 'z',],);
 var nonTranslationalTransformKeys = transformPropOrder.filter((key7) => !transformKeys.has(key7,));
@@ -2019,9 +2002,6 @@ function startWaapiAnimation(element, valueName, keyframes2, {
   if (times) keyframeOptions.offset = times;
   const easing = mapEasingToNativeEasing(ease2, duration,);
   if (Array.isArray(easing,)) keyframeOptions.easing = easing;
-  if (statsBuffer.value) {
-    activeAnimations.waapi++;
-  }
   const options = {
     delay: delay2,
     duration,
@@ -2031,13 +2011,7 @@ function startWaapiAnimation(element, valueName, keyframes2, {
     direction: repeatType === 'reverse' ? 'alternate' : 'normal',
   };
   if (pseudoElement) options.pseudoElement = pseudoElement;
-  const animation = element.animate(keyframeOptions, options,);
-  if (statsBuffer.value) {
-    animation.finished.finally(() => {
-      activeAnimations.waapi--;
-    },);
-  }
-  return animation;
+  return element.animate(keyframeOptions, options,);
 }
 function isGenerator(type,) {
   return typeof type === 'function' && 'applyToOptions' in type;
@@ -2657,188 +2631,6 @@ function calcChildStagger(children, child, delayChildren, staggerChildren = 0, s
     ? index * staggerChildren
     : maxStaggerDuration - index * staggerChildren;
 }
-var splitCSSVariableRegex =
-  // eslint-disable-next-line redos-detector/no-unsafe-regex -- false positive, as it can match a lot of words
-  /^var\(--(?:([\w-]+)|([\w-]+), ?([a-zA-Z\d ()%#.,-]+))\)/u;
-function parseCSSVariable(current2,) {
-  const match = splitCSSVariableRegex.exec(current2,);
-  if (!match) return [,];
-  const [, token1, token2, fallback,] = match;
-  return [`--${token1 ?? token2}`, fallback,];
-}
-var maxDepth = 4;
-function getVariableValue(current2, element, depth = 1,) {
-  invariant(
-    depth <= maxDepth,
-    `Max CSS variable fallback depth detected in property "${current2}". This may indicate a circular fallback dependency.`,
-    'max-css-var-depth',
-  );
-  const [token, fallback,] = parseCSSVariable(current2,);
-  if (!token) return;
-  const resolved = __unframerWindow.getComputedStyle(element,).getPropertyValue(token,);
-  if (resolved) {
-    const trimmed = resolved.trim();
-    return isNumericalString(trimmed,) ? parseFloat(trimmed,) : trimmed;
-  }
-  return isCSSVariableToken(fallback,) ? getVariableValue(fallback, element, depth + 1,) : fallback;
-}
-var underDampedSpring = {
-  type: 'spring',
-  stiffness: 500,
-  damping: 25,
-  restSpeed: 10,
-};
-var criticallyDampedSpring = (target) => ({
-  type: 'spring',
-  stiffness: 550,
-  damping: target === 0 ? 2 * Math.sqrt(550,) : 30,
-  restSpeed: 10,
-});
-var keyframesTransition = {
-  type: 'keyframes',
-  duration: 0.8,
-};
-var ease = {
-  type: 'keyframes',
-  ease: [0.25, 0.1, 0.35, 1,],
-  duration: 0.3,
-};
-var getDefaultTransition = (valueKey, {
-  keyframes: keyframes2,
-},) => {
-  if (keyframes2.length > 2) {
-    return keyframesTransition;
-  } else if (transformProps.has(valueKey,)) {
-    return valueKey.startsWith('scale',) ? criticallyDampedSpring(keyframes2[1],) : underDampedSpring;
-  }
-  return ease;
-};
-function resolveTransition(transition, parentTransition,) {
-  if (transition?.inherit && parentTransition) {
-    const {
-      inherit: _,
-      ...rest
-    } = transition;
-    return {
-      ...parentTransition,
-      ...rest,
-    };
-  }
-  return transition;
-}
-function getValueTransition(transition, key7,) {
-  const valueTransition = transition?.[key7] ?? transition?.['default'] ?? transition;
-  if (valueTransition !== transition) {
-    return resolveTransition(valueTransition, transition,);
-  }
-  return valueTransition;
-}
-var orchestrationKeys = /* @__PURE__ */ new Set([
-  'when',
-  'delay',
-  'delayChildren',
-  'staggerChildren',
-  'staggerDirection',
-  'repeat',
-  'repeatType',
-  'repeatDelay',
-  'from',
-  'elapsed',
-],);
-function isTransitionDefined(transition,) {
-  for (const key7 in transition) {
-    if (!orchestrationKeys.has(key7,)) return true;
-  }
-  return false;
-}
-var animateMotionValue = (name, value, target, transition = {}, element, isHandoff,) => (onComplete) => {
-  const valueTransition = getValueTransition(transition, name,) || {};
-  const delay2 = valueTransition.delay || transition.delay || 0;
-  let {
-    elapsed = 0,
-  } = transition;
-  elapsed = elapsed - secondsToMilliseconds(delay2,);
-  const options = {
-    keyframes: Array.isArray(target,) ? target : [null, target,],
-    ease: 'easeOut',
-    velocity: value.getVelocity(),
-    ...valueTransition,
-    delay: -elapsed,
-    onUpdate: (v) => {
-      value.set(v,);
-      valueTransition.onUpdate && valueTransition.onUpdate(v,);
-    },
-    onComplete: () => {
-      onComplete();
-      valueTransition.onComplete && valueTransition.onComplete();
-    },
-    name,
-    motionValue: value,
-    element: isHandoff ? void 0 : element,
-  };
-  if (!isTransitionDefined(valueTransition,)) {
-    Object.assign(options, getDefaultTransition(name, options,),);
-  }
-  options.duration && (options.duration = secondsToMilliseconds(options.duration,));
-  options.repeatDelay && (options.repeatDelay = secondsToMilliseconds(options.repeatDelay,));
-  if (options.from !== void 0) {
-    options.keyframes[0] = options.from;
-  }
-  let shouldSkip = false;
-  if (options.type === false || options.duration === 0 && !options.repeatDelay) {
-    makeAnimationInstant(options,);
-    if (options.delay === 0) {
-      shouldSkip = true;
-    }
-  }
-  if (
-    MotionGlobalConfig.instantAnimations || MotionGlobalConfig.skipAnimations || element?.shouldSkipAnimations ||
-    valueTransition.skipAnimations
-  ) {
-    shouldSkip = true;
-    makeAnimationInstant(options,);
-    options.delay = 0;
-  }
-  options.allowFlatten = !valueTransition.type && !valueTransition.ease;
-  if (shouldSkip && !isHandoff && value.get() !== void 0) {
-    const finalKeyframe = getFinalKeyframe(options.keyframes, valueTransition,);
-    if (finalKeyframe !== void 0) {
-      frame.update(() => {
-        options.onUpdate(finalKeyframe,);
-        options.onComplete();
-      },);
-      return;
-    }
-  }
-  return valueTransition.isSync ? new JSAnimation(options,) : new AsyncMotionValueAnimation(options,);
-};
-function getValueState(visualElement,) {
-  const state = [{}, {},];
-  visualElement?.values.forEach((value, key7,) => {
-    state[0][key7] = value.get();
-    state[1][key7] = value.getVelocity();
-  },);
-  return state;
-}
-function resolveVariantFromProps(props, definition, custom, visualElement,) {
-  if (typeof definition === 'function') {
-    const [current2, velocity,] = getValueState(visualElement,);
-    definition = definition(custom !== void 0 ? custom : props.custom, current2, velocity,);
-  }
-  if (typeof definition === 'string') {
-    definition = props.variants && props.variants[definition];
-  }
-  if (typeof definition === 'function') {
-    const [current2, velocity,] = getValueState(visualElement,);
-    definition = definition(custom !== void 0 ? custom : props.custom, current2, velocity,);
-  }
-  return definition;
-}
-function resolveVariant(visualElement, definition, custom,) {
-  const props = visualElement.getProps();
-  return resolveVariantFromProps(props, definition, custom !== void 0 ? custom : props.custom, visualElement,);
-}
-var positionalKeys = /* @__PURE__ */ new Set(['width', 'height', 'top', 'left', 'right', 'bottom', ...transformPropOrder,],);
 var MAX_VELOCITY_DELTA = 30;
 var isFloat = (value) => {
   return !isNaN(parseFloat(value,),);
@@ -3121,6 +2913,337 @@ var MotionValue = class {
 function motionValue(init, options,) {
   return new MotionValue(init, options,);
 }
+function resolveTransition(transition, parentTransition,) {
+  if (transition?.inherit && parentTransition) {
+    const {
+      inherit: _,
+      ...rest
+    } = transition;
+    return {
+      ...parentTransition,
+      ...rest,
+    };
+  }
+  return transition;
+}
+function getValueTransition(transition, key7,) {
+  const valueTransition = transition?.[key7] ?? transition?.['default'] ?? transition;
+  if (valueTransition !== transition) {
+    return resolveTransition(valueTransition, transition,);
+  }
+  return valueTransition;
+}
+var underDampedSpring = {
+  type: 'spring',
+  stiffness: 500,
+  damping: 25,
+  restSpeed: 10,
+};
+var criticallyDampedSpring = (target) => ({
+  type: 'spring',
+  stiffness: 550,
+  damping: target === 0 ? 2 * Math.sqrt(550,) : 30,
+  restSpeed: 10,
+});
+var keyframesTransition = {
+  type: 'keyframes',
+  duration: 0.8,
+};
+var ease = {
+  type: 'keyframes',
+  ease: [0.25, 0.1, 0.35, 1,],
+  duration: 0.3,
+};
+var getDefaultTransition = (valueKey, {
+  keyframes: keyframes2,
+},) => {
+  if (keyframes2.length > 2) {
+    return keyframesTransition;
+  } else if (transformProps.has(valueKey,)) {
+    return valueKey.startsWith('scale',) ? criticallyDampedSpring(keyframes2[1],) : underDampedSpring;
+  }
+  return ease;
+};
+var orchestrationKeys = /* @__PURE__ */ new Set([
+  'when',
+  'delay',
+  'delayChildren',
+  'staggerChildren',
+  'staggerDirection',
+  'repeat',
+  'repeatType',
+  'repeatDelay',
+  'from',
+  'elapsed',
+],);
+function isTransitionDefined(transition,) {
+  for (const key7 in transition) {
+    if (!orchestrationKeys.has(key7,)) return true;
+  }
+  return false;
+}
+var animateMotionValue = (name, value, target, transition = {}, element, isHandoff,) => (onComplete) => {
+  const valueTransition = getValueTransition(transition, name,) || {};
+  const delay2 = valueTransition.delay || transition.delay || 0;
+  let {
+    elapsed = 0,
+  } = transition;
+  elapsed = elapsed - secondsToMilliseconds(delay2,);
+  const options = {
+    keyframes: Array.isArray(target,) ? target : [null, target,],
+    ease: 'easeOut',
+    velocity: value.getVelocity(),
+    ...valueTransition,
+    delay: -elapsed,
+    onUpdate: (v) => {
+      value.set(v,);
+      valueTransition.onUpdate && valueTransition.onUpdate(v,);
+    },
+    onComplete: () => {
+      onComplete();
+      valueTransition.onComplete && valueTransition.onComplete();
+    },
+    name,
+    motionValue: value,
+    element: isHandoff ? void 0 : element,
+  };
+  if (!isTransitionDefined(valueTransition,)) {
+    Object.assign(options, getDefaultTransition(name, options,),);
+  }
+  options.duration && (options.duration = secondsToMilliseconds(options.duration,));
+  options.repeatDelay && (options.repeatDelay = secondsToMilliseconds(options.repeatDelay,));
+  if (options.from !== void 0) {
+    options.keyframes[0] = options.from;
+  }
+  let shouldSkip = false;
+  if (options.type === false || options.duration === 0 && !options.repeatDelay) {
+    makeAnimationInstant(options,);
+    if (options.delay === 0) {
+      shouldSkip = true;
+    }
+  }
+  if (
+    MotionGlobalConfig.instantAnimations || MotionGlobalConfig.skipAnimations || element?.shouldSkipAnimations ||
+    valueTransition.skipAnimations
+  ) {
+    shouldSkip = true;
+    makeAnimationInstant(options,);
+    options.delay = 0;
+  }
+  options.allowFlatten = !valueTransition.type && !valueTransition.ease;
+  if (shouldSkip && !isHandoff && value.get() !== void 0) {
+    const finalKeyframe = getFinalKeyframe(options.keyframes, valueTransition,);
+    if (finalKeyframe !== void 0) {
+      frame.update(() => {
+        options.onUpdate(finalKeyframe,);
+        options.onComplete();
+      },);
+      return;
+    }
+  }
+  return valueTransition.isSync ? new JSAnimation(options,) : new AsyncMotionValueAnimation(options,);
+};
+var MIN_LAYOUT_DISTANCE = 20;
+function bezierPoint(t, origin, control, target,) {
+  const inv = 1 - t;
+  return inv * inv * origin + 2 * inv * t * control + t * t * target;
+}
+function bezierTangentAngle(t, originX, controlX, targetX, originY, controlY, targetY,) {
+  const dx = 2 * (1 - t) * (controlX - originX) + 2 * t * (targetX - controlX);
+  const dy = 2 * (1 - t) * (controlY - originY) + 2 * t * (targetY - controlY);
+  return Math.atan2(dy, dx,) * (180 / Math.PI);
+}
+function computeArcControlPoint(fromX, fromY, toX, toY, strength, peak,) {
+  const deltaX = toX - fromX;
+  const deltaY = toY - fromY;
+  const distance2 = Math.sqrt(deltaX * deltaX + deltaY * deltaY,);
+  if (distance2 > 0) {
+    const normalPerpX = -deltaY / distance2;
+    const normalPerpY = deltaX / distance2;
+    const desiredHeight = strength * distance2;
+    return {
+      x: fromX + deltaX * peak + normalPerpX * desiredHeight,
+      y: fromY + deltaY * peak + normalPerpY * desiredHeight,
+    };
+  }
+  return {
+    x: fromX,
+    y: fromY,
+  };
+}
+function createArcPath({
+  strength = 0.5,
+  peak = 0.5,
+  direction,
+  rotate: rotate2 = false,
+} = {},) {
+  const rotationScale = rotate2 === true ? 1 : typeof rotate2 === 'number' ? rotate2 : 0;
+  let prevBulgeSign;
+  const createInterpolator = (from, to,) => {
+    const dx = to.x - from.x;
+    const dy = to.y - from.y;
+    let signed;
+    if (direction === 'cw') {
+      signed = -strength;
+    } else if (direction === 'ccw') {
+      signed = strength;
+    } else {
+      const dom = Math.abs(dx,) >= Math.abs(dy,) ? dx : dy;
+      signed = dom < 0 ? -strength : strength;
+    }
+    let control = computeArcControlPoint(from.x, from.y, to.x, to.y, signed, peak,);
+    if (direction === void 0) {
+      const isVertical = Math.abs(dx,) < Math.abs(dy,);
+      const midX = from.x + dx * peak;
+      const midY = from.y + dy * peak;
+      const bulgeSign = isVertical ? Math.sign(control.x - midX,) : Math.sign(control.y - midY,);
+      if (prevBulgeSign !== void 0 && bulgeSign !== 0 && bulgeSign !== prevBulgeSign) {
+        signed = -signed;
+        control = computeArcControlPoint(from.x, from.y, to.x, to.y, signed, peak,);
+      } else if (bulgeSign !== 0) {
+        prevBulgeSign = bulgeSign;
+      }
+    }
+    const tangent0 = rotationScale ? bezierTangentAngle(0, from.x, control.x, to.x, from.y, control.y, to.y,) : 0;
+    const tangent1 = rotationScale ? bezierTangentAngle(1, from.x, control.x, to.x, from.y, control.y, to.y,) : 0;
+    const tangentDelta = rotationScale ? wrap(-180, 180, tangent1 - tangent0,) : 0;
+    return (t) => {
+      const out = {
+        x: bezierPoint(t, from.x, control.x, to.x,),
+        y: bezierPoint(t, from.y, control.y, to.y,),
+      };
+      if (rotationScale) {
+        const raw = bezierTangentAngle(t, from.x, control.x, to.x, from.y, control.y, to.y,);
+        const baseline = tangent0 + tangentDelta * t;
+        out.rotate = wrap(-180, 180, raw - baseline,) * rotationScale;
+      }
+      return out;
+    };
+  };
+  return createInterpolator;
+}
+function arc(options = {},) {
+  const sample = createArcPath(options,);
+  const path = {
+    interpolateProjection(delta,) {
+      const tx = delta.x.translate;
+      const ty = delta.y.translate;
+      if (Math.sqrt(tx * tx + ty * ty,) < MIN_LAYOUT_DISTANCE) {
+        return void 0;
+      }
+      return sample({
+        x: tx,
+        y: ty,
+      }, {
+        x: 0,
+        y: 0,
+      },);
+    },
+    animateVisualElement(visualElement, target, transition, delay2, animations2,) {
+      if (!('x' in target || 'y' in target)) return;
+      const xValue = visualElement.getValue('x', visualElement.latestValues['x'] ?? 0,);
+      const yValue = visualElement.getValue('y', visualElement.latestValues['y'] ?? 0,);
+      const xRaw = target.x;
+      const yRaw = target.y;
+      const xFrom = (Array.isArray(xRaw,) && xRaw[0] != null ? xRaw[0] : xValue?.get()) ?? 0;
+      const yFrom = (Array.isArray(yRaw,) && yRaw[0] != null ? yRaw[0] : yValue?.get()) ?? 0;
+      const xTo = Array.isArray(xRaw,) ? xRaw[xRaw.length - 1] : xRaw ?? xFrom;
+      const yTo = Array.isArray(yRaw,) ? yRaw[yRaw.length - 1] : yRaw ?? yFrom;
+      const interpolate2 = sample({
+        x: xFrom,
+        y: yFrom,
+      }, {
+        x: xTo,
+        y: yTo,
+      },);
+      const pathRotationValue = interpolate2(0,).rotate !== void 0 ? visualElement.getValue('pathRotation', 0,) : void 0;
+      const pathTransition = {
+        delay: delay2,
+        ...getValueTransition(transition || {}, 'x',),
+      };
+      delete pathTransition.path;
+      const progress2 = motionValue(0,);
+      progress2.start(animateMotionValue('', progress2, [0, 1e3,], {
+        ...pathTransition,
+        isSync: true,
+        velocity: 0,
+        onUpdate: (latest) => {
+          const point2 = interpolate2(latest / 1e3,);
+          xValue?.set(point2.x,);
+          yValue?.set(point2.y,);
+          if (pathRotationValue && point2.rotate !== void 0) {
+            pathRotationValue.set(point2.rotate,);
+          }
+        },
+        onComplete: () => {
+          xValue?.set(xTo,);
+          yValue?.set(yTo,);
+          pathRotationValue?.set(0,);
+        },
+        // Interrupt/cancel must clear our additive contribution
+        // so it can't linger on top of the user's `rotate`.
+        onStop: () => pathRotationValue?.set(0,),
+        onCancel: () => pathRotationValue?.set(0,),
+      },),);
+      if (progress2.animation) animations2.push(progress2.animation,);
+      delete target.x;
+      delete target.y;
+    },
+  };
+  return path;
+}
+var splitCSSVariableRegex =
+  // eslint-disable-next-line redos-detector/no-unsafe-regex -- false positive, as it can match a lot of words
+  /^var\(--(?:([\w-]+)|([\w-]+), ?([a-zA-Z\d ()%#.,-]+))\)/u;
+function parseCSSVariable(current2,) {
+  const match = splitCSSVariableRegex.exec(current2,);
+  if (!match) return [,];
+  const [, token1, token2, fallback,] = match;
+  return [`--${token1 ?? token2}`, fallback,];
+}
+var maxDepth = 4;
+function getVariableValue(current2, element, depth = 1,) {
+  invariant(
+    depth <= maxDepth,
+    `Max CSS variable fallback depth detected in property "${current2}". This may indicate a circular fallback dependency.`,
+    'max-css-var-depth',
+  );
+  const [token, fallback,] = parseCSSVariable(current2,);
+  if (!token) return;
+  const resolved = __unframerWindow.getComputedStyle(element,).getPropertyValue(token,);
+  if (resolved) {
+    const trimmed = resolved.trim();
+    return isNumericalString(trimmed,) ? parseFloat(trimmed,) : trimmed;
+  }
+  return isCSSVariableToken(fallback,) ? getVariableValue(fallback, element, depth + 1,) : fallback;
+}
+function getValueState(visualElement,) {
+  const state = [{}, {},];
+  visualElement?.values.forEach((value, key7,) => {
+    state[0][key7] = value.get();
+    state[1][key7] = value.getVelocity();
+  },);
+  return state;
+}
+function resolveVariantFromProps(props, definition, custom, visualElement,) {
+  if (typeof definition === 'function') {
+    const [current2, velocity,] = getValueState(visualElement,);
+    definition = definition(custom !== void 0 ? custom : props.custom, current2, velocity,);
+  }
+  if (typeof definition === 'string') {
+    definition = props.variants && props.variants[definition];
+  }
+  if (typeof definition === 'function') {
+    const [current2, velocity,] = getValueState(visualElement,);
+    definition = definition(custom !== void 0 ? custom : props.custom, current2, velocity,);
+  }
+  return definition;
+}
+function resolveVariant(visualElement, definition, custom,) {
+  const props = visualElement.getProps();
+  return resolveVariantFromProps(props, definition, custom !== void 0 ? custom : props.custom, visualElement,);
+}
+var positionalKeys = /* @__PURE__ */ new Set(['width', 'height', 'top', 'left', 'right', 'bottom', ...transformPropOrder,],);
 var isKeyframesTarget = (v) => {
   return Array.isArray(v,);
 };
@@ -3197,6 +3320,10 @@ function animateTarget(visualElement, targetAndTransition, {
   if (transitionOverride) transition = transitionOverride;
   const animations2 = [];
   const animationTypeState = type && visualElement.animationState && visualElement.animationState.getState()[type];
+  const path = transition?.path;
+  if (path) {
+    path.animateVisualElement(visualElement, target, transition, delay2, animations2,);
+  }
   for (const key7 in target) {
     const value = visualElement.getValue(key7, visualElement.latestValues[key7] ?? null,);
     const valueTarget = target[key7];
@@ -3327,6 +3454,12 @@ var dimensionValueTypes = [number, px, percent, degrees, vw, vh, auto,];
 var findDimensionValueType = (v) => dimensionValueTypes.find(testValueType(v,),);
 var transformValueTypes = {
   rotate: degrees,
+  /**
+   * Internal channel for `transition.path` orientToPath. Composed onto
+   * `rotate` at the transform-build sites so the user's `rotate` is
+   * never read or overwritten. Not part of `transformPropOrder`.
+   */
+  pathRotation: degrees,
   rotateX: degrees,
   rotateY: degrees,
   rotateZ: degrees,
@@ -3845,6 +3978,11 @@ function buildTransform(state,) {
       transform2 += `${transformName}(${value}) `;
     }
   }
+  const pathRotation = state.latest.pathRotation;
+  if (pathRotation) {
+    transformIsDefault = false;
+    transform2 += `rotate(${typeof pathRotation === 'number' ? `${pathRotation}deg` : pathRotation}) `;
+  }
   return transformIsDefault ? 'none' : transform2.trim();
 }
 var originProps = /* @__PURE__ */ new Set(['originX', 'originY', 'originZ',],);
@@ -4083,9 +4221,13 @@ function press(targetOrSelector, onPressStart, options = {},) {
       claimedPointerDownEvents.add(startEvent,);
     }
     const onPressEnd = onPressStart(target, startEvent,);
+    const endEventOptions = {
+      ...eventOptions,
+      capture: true,
+    };
     const onPointerEnd = (endEvent, success,) => {
-      __unframerWindow.removeEventListener('pointerup', onPointerUp,);
-      __unframerWindow.removeEventListener('pointercancel', onPointerCancel,);
+      __unframerWindow.removeEventListener('pointerup', onPointerUp, endEventOptions,);
+      __unframerWindow.removeEventListener('pointercancel', onPointerCancel, endEventOptions,);
       if (isPressing.has(target,)) {
         isPressing.delete(target,);
       }
@@ -4107,8 +4249,8 @@ function press(targetOrSelector, onPressStart, options = {},) {
     const onPointerCancel = (cancelEvent) => {
       onPointerEnd(cancelEvent, false,);
     };
-    __unframerWindow.addEventListener('pointerup', onPointerUp, eventOptions,);
-    __unframerWindow.addEventListener('pointercancel', onPointerCancel, eventOptions,);
+    __unframerWindow.addEventListener('pointerup', onPointerUp, endEventOptions,);
+    __unframerWindow.addEventListener('pointercancel', onPointerCancel, endEventOptions,);
   };
   targets.forEach((target) => {
     const pointerDownTarget = options.useGlobalTarget ? __unframerWindow : target;
@@ -4232,121 +4374,35 @@ function observeTimeline(update, timeline,) {
   frame.preUpdate(onFrame, true,);
   return () => cancelFrame(onFrame,);
 }
-function record() {
-  const {
-    value,
-  } = statsBuffer;
-  if (value === null) {
-    cancelFrame(record,);
-    return;
-  }
-  value.frameloop.rate.push(frameData.delta,);
-  value.animations.mainThread.push(activeAnimations.mainThread,);
-  value.animations.waapi.push(activeAnimations.waapi,);
-  value.animations.layout.push(activeAnimations.layout,);
-}
-function mean(values,) {
-  return values.reduce((acc, value,) => acc + value, 0,) / values.length;
-}
-function summarise(values, calcAverage = mean,) {
-  if (values.length === 0) {
-    return {
-      min: 0,
-      max: 0,
-      avg: 0,
-    };
-  }
-  return {
-    min: Math.min(...values,),
-    max: Math.max(...values,),
-    avg: calcAverage(values,),
-  };
-}
-var msToFps = (ms) => Math.round(1e3 / ms,);
+var statsBuffer = {
+  value: null,
+  addProjectionMetrics: null,
+};
 function clearStatsBuffer() {
   statsBuffer.value = null;
   statsBuffer.addProjectionMetrics = null;
-}
-function reportStats() {
-  const {
-    value,
-  } = statsBuffer;
-  if (!value) {
-    throw new Error('Stats are not being measured',);
-  }
-  clearStatsBuffer();
-  cancelFrame(record,);
-  const summary = {
-    frameloop: {
-      setup: summarise(value.frameloop.setup,),
-      rate: summarise(value.frameloop.rate,),
-      read: summarise(value.frameloop.read,),
-      resolveKeyframes: summarise(value.frameloop.resolveKeyframes,),
-      preUpdate: summarise(value.frameloop.preUpdate,),
-      update: summarise(value.frameloop.update,),
-      preRender: summarise(value.frameloop.preRender,),
-      render: summarise(value.frameloop.render,),
-      postRender: summarise(value.frameloop.postRender,),
-    },
-    animations: {
-      mainThread: summarise(value.animations.mainThread,),
-      waapi: summarise(value.animations.waapi,),
-      layout: summarise(value.animations.layout,),
-    },
-    layoutProjection: {
-      nodes: summarise(value.layoutProjection.nodes,),
-      calculatedTargetDeltas: summarise(value.layoutProjection.calculatedTargetDeltas,),
-      calculatedProjections: summarise(value.layoutProjection.calculatedProjections,),
-    },
-  };
-  const {
-    rate,
-  } = summary.frameloop;
-  rate.min = msToFps(rate.min,);
-  rate.max = msToFps(rate.max,);
-  rate.avg = msToFps(rate.avg,);
-  [rate.min, rate.max,] = [rate.max, rate.min,];
-  return summary;
 }
 function recordStats() {
   if (statsBuffer.value) {
     clearStatsBuffer();
     throw new Error('Stats are already being measured',);
   }
-  const newStatsBuffer = statsBuffer;
-  newStatsBuffer.value = {
-    frameloop: {
-      setup: [],
-      rate: [],
-      read: [],
-      resolveKeyframes: [],
-      preUpdate: [],
-      update: [],
-      preRender: [],
-      render: [],
-      postRender: [],
-    },
-    animations: {
-      mainThread: [],
-      waapi: [],
-      layout: [],
-    },
+  const buffer2 = statsBuffer;
+  buffer2.value = {
     layoutProjection: {
       nodes: [],
       calculatedTargetDeltas: [],
       calculatedProjections: [],
     },
   };
-  newStatsBuffer.addProjectionMetrics = (metrics2) => {
+  buffer2.addProjectionMetrics = (metrics2) => {
     const {
       layoutProjection,
-    } = newStatsBuffer.value;
+    } = buffer2.value;
     layoutProjection.nodes.push(metrics2.nodes,);
     layoutProjection.calculatedTargetDeltas.push(metrics2.calculatedTargetDeltas,);
     layoutProjection.calculatedProjections.push(metrics2.calculatedProjections,);
   };
-  frame.postRender(record, true,);
-  return reportStats;
 }
 function isSVGSVGElement(element,) {
   return isSVGElement(element,) && element.tagName === 'svg';
@@ -4500,28 +4556,104 @@ function attachSpring(value, source, options,) {
 var valueTypes = [...dimensionValueTypes, color, complex,];
 var findValueType = (v) => valueTypes.find(testValueType(v,),);
 function getViewAnimationLayerInfo(pseudoElement,) {
-  const match = pseudoElement.match(/::view-transition-(old|new|group|image-pair)\((.*?)\)/,);
+  const match = pseudoElement.match(
+    // `group-children` (nested transitions) before `group` so it wins.
+    /::view-transition-(old|new|group-children|group|image-pair)\((.*?)\)/,
+  );
   if (!match) return null;
   return {
     layer: match[2],
     type: match[1],
   };
 }
-function filterViewAnimations(animation,) {
-  const {
-    effect,
-  } = animation;
-  if (!effect) return false;
-  return effect.target === document.documentElement && effect.pseudoElement?.startsWith('::view-transition',);
-}
 function getViewAnimations() {
-  return document.getAnimations().filter(filterViewAnimations,);
+  return document.getAnimations().filter((animation) => {
+    const {
+      effect,
+    } = animation;
+    return !!effect && effect.target === document.documentElement && effect.pseudoElement?.startsWith('::view-transition',);
+  },);
+}
+var nameCount = 0;
+var generatedName = () => `motion-view-${nameCount++}`;
+var isGeneratedName = (name) => name.startsWith('motion-view-',);
+function tagClass(element, className2, classed,) {
+  if (!className2) return;
+  element.style?.setProperty('view-transition-class', className2,);
+  classed.push(element,);
+}
+function applyGroup(element, name, group, grouped, clipChildren,) {
+  if (!group) return;
+  element.style?.setProperty('view-transition-group', group,);
+  grouped.push(element,);
+  if (group !== 'none' && clipChildren) {
+    const style2 = getComputedStyle(element,);
+    if (style2.overflowX !== 'visible' || style2.overflowY !== 'visible') {
+      clipChildren.add(name,);
+    }
+  }
+}
+function assignViewTransitionNames(
+  definition,
+  registry,
+  assigned,
+  forcedNames,
+  className2,
+  classed = [],
+  group,
+  grouped = [],
+  clipChildren,
+) {
+  const elements = resolveElements(definition,);
+  if (forcedNames) {
+    return elements.map((element, i,) => {
+      const existing = registry.get(element,);
+      if (existing) return existing;
+      const name = forcedNames[i] ?? generatedName();
+      element.style?.setProperty('view-transition-name', name,);
+      assigned.push(element,);
+      registry.set(element, name,);
+      tagClass(element, className2, classed,);
+      applyGroup(element, name, group, grouped, clipChildren,);
+      return name;
+    },);
+  }
+  const currentNames = elements.map((element) =>
+    registry.has(element,) ? void 0 : getComputedStyle(element,).getPropertyValue('view-transition-name',)
+  );
+  return elements.map((element, i,) => {
+    const existing = registry.get(element,);
+    if (existing) return existing;
+    const current2 = currentNames[i];
+    let name;
+    if (current2 && current2 !== 'none' && current2 !== 'auto' && current2 !== 'match-element' && !isGeneratedName(current2,)) {
+      name = current2;
+    } else {
+      name = generatedName();
+      element.style?.setProperty('view-transition-name', name,);
+      assigned.push(element,);
+    }
+    registry.set(element, name,);
+    tagClass(element, className2, classed,);
+    applyGroup(element, name, group, grouped, clipChildren,);
+    return name;
+  },);
+}
+function releaseViewTransitionNames(assigned, classed = [], grouped = [],) {
+  for (const element of assigned) {
+    element.style?.removeProperty('view-transition-name',);
+  }
+  for (const element of classed) {
+    element.style?.removeProperty('view-transition-class',);
+  }
+  for (const element of grouped) {
+    element.style?.removeProperty('view-transition-group',);
+  }
 }
 function chooseLayerType(valueName,) {
   if (valueName === 'layout') return 'group';
   if (valueName === 'enter' || valueName === 'new') return 'new';
-  if (valueName === 'exit' || valueName === 'old') return 'old';
-  return 'group';
+  return 'old';
 }
 var pendingRules = {};
 var style = null;
@@ -4559,68 +4691,261 @@ function hasTarget(target, targets,) {
   return targets.has(target,) && Object.keys(targets.get(target,),).length > 0;
 }
 var definitionNames = ['layout', 'enter', 'exit', 'new', 'old',];
+var typeBuckets = {
+  group: ['layout',],
+  new: ['new', 'enter',],
+  old: ['old', 'exit',],
+};
+var ORIGIN_DEFAULTS = {
+  new: {
+    opacity: 0,
+    scale: 0.85,
+  },
+  old: {
+    opacity: 1,
+    scale: 1,
+  },
+};
+var ASPECT_TOLERANCE = 0.2;
 function startViewAnimation(builder,) {
   const {
     update,
     targets,
+    resolveDefs,
+    cropOverride,
+    pairs,
+    classNames,
+    flatGroups,
     options: defaultOptions,
   } = builder;
   if (!document.startViewTransition) {
-    return new Promise(async (resolve) => {
+    return (async () => {
       await update();
-      resolve(new GroupAnimation([],),);
-    },);
+      return new GroupAnimation([],);
+    })();
   }
-  if (!hasTarget('root', targets,)) {
-    css.set(':root', {
-      'view-transition-name': 'none',
+  const nameRegistry = /* @__PURE__ */ new Map();
+  const assigned = [];
+  const classed = [];
+  const grouped = [];
+  const clipChildren = /* @__PURE__ */ new Set();
+  const layerTargets = /* @__PURE__ */ new Map();
+  const croppedNames = /* @__PURE__ */ new Set();
+  const cropForName = /* @__PURE__ */ new Map();
+  const layerStagger = /* @__PURE__ */ new Map();
+  const pairNames = /* @__PURE__ */ new Map();
+  const pairFrom = /* @__PURE__ */ new Map();
+  const resolveLayers = (phase) => {
+    targets.forEach((target, definition,) => {
+      const className2 = classNames.get(definition,);
+      const group = definition === 'root' || !resolveDefs.has(definition,) ? void 0 : flatGroups.has(definition,) ? 'none' : 'contain';
+      let names;
+      if (definition === 'root' || !resolveDefs.has(definition,)) {
+        names = [definition,];
+      } else if (pairs.has(definition,)) {
+        if (phase === 'old') {
+          pairFrom.set(definition, resolveElements(definition,),);
+          names = assignViewTransitionNames(definition, nameRegistry, assigned, void 0, className2, classed, group, grouped, clipChildren,);
+          pairNames.set(definition, names,);
+        } else {
+          for (const el of pairFrom.get(definition,) ?? []) {
+            el.style?.removeProperty('view-transition-name',);
+            nameRegistry.delete(el,);
+          }
+          names = assignViewTransitionNames(
+            pairs.get(definition,),
+            nameRegistry,
+            assigned,
+            pairNames.get(definition,),
+            className2,
+            classed,
+            group,
+            grouped,
+            clipChildren,
+          );
+        }
+      } else {
+        names = assignViewTransitionNames(definition, nameRegistry, assigned, void 0, className2, classed, group, grouped, clipChildren,);
+      }
+      const override = cropOverride.get(definition,);
+      names.forEach((name, index,) => {
+        const existing = layerTargets.get(name,);
+        layerTargets.set(
+          name,
+          existing && existing !== target
+            ? {
+              ...existing,
+              ...target,
+            }
+            : target,
+        );
+        if (override !== void 0) cropForName.set(name, override,);
+        const stagger2 = layerStagger.get(name,) ?? {};
+        stagger2[phase] = [index, names.length,];
+        layerStagger.set(name, stagger2,);
+      },);
     },);
-  }
-  css.set('::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*)', {
-    'animation-timing-function': 'linear !important',
-  },);
-  css.commit();
-  const transition = document.startViewTransition(async () => {
-    await update();
-  },);
-  transition.finished.finally(() => {
+  };
+  const staggerPosition = (name, type,) => {
+    const stagger2 = layerStagger.get(name,);
+    const position = type === 'old' ? stagger2?.old : type === 'new' ? stagger2?.new : // group / group-children / image-pair persist across both.
+    stagger2?.new ?? stagger2?.old;
+    return position ?? [-1, 1,];
+  };
+  const resolveLayerTransition = (target, type, transitionName, index, total,) => {
+    const transition2 = mergeTransition(
+      getValueTransition(defaultOptions, transitionName,),
+      getValueTransition(layerOptions(target, type,) ?? {}, transitionName,),
+    );
+    if (typeof transition2.delay === 'function') {
+      transition2.delay = transition2.delay(index, total,);
+    }
+    return transition2;
+  };
+  const cropBox = /* @__PURE__ */ new Map();
+  const measureLayers = (phase) =>
+    nameRegistry.forEach((name, element,) => {
+      const rect = element.getBoundingClientRect?.();
+      if (rect && rect.height) {
+        const entry = cropBox.get(name,) ?? {};
+        entry[phase] = {
+          width: rect.width,
+          height: rect.height,
+        };
+        cropBox.set(name, entry,);
+      }
+    },);
+  const finalizeCrop = () => {
+    croppedNames.clear();
+    for (const name of layerStagger.keys()) {
+      if (name === 'root') continue;
+      if (cropForName.get(name,) ?? aspectChanged(name,)) {
+        croppedNames.add(name,);
+      }
+    }
+  };
+  const aspectChanged = (name) => {
+    const box = cropBox.get(name,);
+    if (!box?.old || !box?.new || !box.old.height || !box.new.height) {
+      return false;
+    }
+    return Math.abs(box.old.width / box.old.height - box.new.width / box.new.height,) > ASPECT_TOLERANCE;
+  };
+  const commitViewCSS = () => {
+    if (!hasTarget('root', targets,)) {
+      css.set(':root', {
+        'view-transition-name': 'none',
+      },);
+    }
+    css.set('::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*)', {
+      'animation-timing-function': 'linear !important',
+    },);
+    croppedNames.forEach((name) => {
+      css.set(`::view-transition-group(${name})`, {
+        overflow: 'clip',
+      },);
+      css.set(`::view-transition-old(${name}), ::view-transition-new(${name})`, {
+        width: '100%',
+        height: '100%',
+        'object-fit': 'cover',
+      },);
+    },);
+    clipChildren.forEach((name) => {
+      css.set(`::view-transition-group-children(${name})`, {
+        overflow: 'clip',
+      },);
+    },);
+    css.commit();
+  };
+  const cleanup = () => {
+    releaseViewTransitionNames(assigned, classed, grouped,);
     css.remove();
-  },);
-  return new Promise((resolve) => {
+  };
+  const callback = async () => {
+    await update();
+    resolveLayers('new',);
+    measureLayers('new',);
+    finalizeCrop();
+    commitViewCSS();
+  };
+  let transition;
+  try {
+    resolveLayers('old',);
+    measureLayers('old',);
+    commitViewCSS();
+    transition = document.startViewTransition(callback,);
+  } catch (error) {
+    cleanup();
+    return Promise.reject(error,);
+  }
+  transition.finished.finally(cleanup,);
+  return new Promise((resolve, reject,) => {
     transition.ready.then(() => {
       const generatedViewAnimations = getViewAnimations();
       const animations2 = [];
-      targets.forEach((definition, target,) => {
+      const explicitlyAnimated = /* @__PURE__ */ new Set();
+      const opacityAnimated = /* @__PURE__ */ new Set();
+      layerTargets.forEach((target, name,) => {
+        const stagger2 = layerStagger.get(name,);
+        const enterApplies = !!stagger2?.new && !stagger2?.old;
+        const exitApplies = !!stagger2?.old && !stagger2?.new;
         for (const key7 of definitionNames) {
-          if (!definition[key7]) continue;
+          if (!target[key7]) continue;
+          if (key7 === 'enter' && !enterApplies) continue;
+          if (key7 === 'exit' && !exitApplies) continue;
+          const type = chooseLayerType(key7,);
+          const [index, total,] = staggerPosition(name, type,);
+          if (index === -1) continue;
           const {
             keyframes: keyframes2,
             options,
-          } = definition[key7];
+          } = target[key7];
           for (let [valueName, valueKeyframes,] of Object.entries(keyframes2,)) {
-            if (!valueKeyframes) continue;
-            const valueOptions = {
-              ...getValueTransition(defaultOptions, valueName,),
-              ...getValueTransition(options, valueName,),
-            };
-            const type = chooseLayerType(key7,);
-            if (valueName === 'opacity' && !Array.isArray(valueKeyframes,)) {
-              const initialValue = type === 'new' ? 0 : 1;
-              valueKeyframes = [initialValue, valueKeyframes,];
+            if (valueKeyframes == null) continue;
+            if (valueName === 'x' || valueName === 'y') {
+              warnOnce(
+                false,
+                `animateView() animates view-transition layers with CSS properties; the "${valueName}" shorthand has no effect - use transform, e.g. { transform: "translateX(40px)" }.`,
+              );
+              continue;
+            }
+            if (key7 === 'new' && enterApplies && target.enter?.keyframes[valueName] != null) {
+              continue;
+            }
+            if (key7 === 'old' && exitApplies && target.exit?.keyframes[valueName] != null) {
+              continue;
+            }
+            const valueOptions = mergeTransition(getValueTransition(defaultOptions, valueName,), getValueTransition(options, valueName,),);
+            if (!Array.isArray(valueKeyframes,)) {
+              const exitValue = key7 === 'enter' ? target.exit?.keyframes[valueName] : void 0;
+              const allowDefault = valueName === 'opacity' || (type === 'new' ? enterApplies : exitApplies);
+              const from = exitValue != null
+                ? Array.isArray(exitValue,) ? exitValue[exitValue.length - 1] : exitValue
+                : allowDefault
+                ? ORIGIN_DEFAULTS[type]?.[valueName]
+                : void 0;
+              if (from !== void 0) {
+                valueKeyframes = [from, valueKeyframes,];
+              }
             }
             if (typeof valueOptions.delay === 'function') {
-              valueOptions.delay = valueOptions.delay(0, 1,);
+              valueOptions.delay = valueOptions.delay(index, total,);
             }
             valueOptions.duration && (valueOptions.duration = secondsToMilliseconds(valueOptions.duration,));
             valueOptions.delay && (valueOptions.delay = secondsToMilliseconds(valueOptions.delay,));
-            const animation = new NativeAnimation({
-              ...valueOptions,
-              element: document.documentElement,
-              name: valueName,
-              pseudoElement: `::view-transition-${type}(${target})`,
-              keyframes: valueKeyframes,
-            },);
-            animations2.push(animation,);
+            animations2.push(
+              new NativeAnimation({
+                ...valueOptions,
+                element: document.documentElement,
+                name: valueName,
+                pseudoElement: `::view-transition-${type}(${name})`,
+                keyframes: valueKeyframes,
+              },),
+            );
+            explicitlyAnimated.add(`${name}:${type}`,);
+            if (valueName === 'opacity') {
+              opacityAnimated.add(`${name}:${type}`,);
+            }
           }
         }
       },);
@@ -4636,36 +4961,66 @@ function startViewAnimation(builder,) {
         if (!pseudoElement) continue;
         const name = getViewAnimationLayerInfo(pseudoElement,);
         if (!name) continue;
-        const targetDefinition = targets.get(name.layer,);
-        if (!targetDefinition) {
-          const transitionName = name.type === 'group' ? 'layout' : '';
-          let animationTransition = {
-            ...getValueTransition(defaultOptions, transitionName,),
-          };
-          animationTransition.duration && (animationTransition.duration = secondsToMilliseconds(animationTransition.duration,));
-          animationTransition = applyGeneratorOptions(animationTransition,);
-          const easing = mapEasingToNativeEasing(animationTransition.ease, animationTransition.duration,);
-          effect.updateTiming({
-            delay: secondsToMilliseconds(animationTransition.delay ?? 0,),
-            duration: animationTransition.duration,
-            easing,
-          },);
-          animations2.push(new NativeAnimationWrapper(animation,),);
-        } else if (
-          hasOpacity(targetDefinition, 'enter',) && hasOpacity(targetDefinition, 'exit',) &&
-          effect.getKeyframes().some((keyframe) => keyframe.mixBlendMode)
-        ) {
-          animations2.push(new NativeAnimationWrapper(animation,),);
-        } else {
-          animation.cancel();
+        const targetDefinition = layerTargets.get(name.layer,);
+        if (explicitlyAnimated.has(`${name.layer}:${name.type}`,)) {
+          const isCrossfade = opacityAnimated.has(`${name.layer}:new`,) && opacityAnimated.has(`${name.layer}:old`,);
+          if (isCrossfade && effect.getKeyframes().some((keyframe) => keyframe.mixBlendMode)) {
+            animations2.push(new NativeAnimationWrapper(animation,),);
+          } else {
+            animation.cancel();
+          }
+          continue;
         }
+        const stagger2 = layerStagger.get(name.layer,);
+        const isMorphCrossfade = (name.type === 'old' || name.type === 'new') && !!stagger2?.old && !!stagger2?.new;
+        const timingType = name.type.startsWith('group',) || isMorphCrossfade ? 'group' : name.type;
+        const [index, total,] = staggerPosition(name.layer, timingType,);
+        const transitionName = timingType === 'group' ? 'layout' : '';
+        let animationTransition = resolveLayerTransition(targetDefinition, timingType, transitionName, index === -1 ? 0 : index, total,);
+        const visualDuration = animationTransition.visualDuration;
+        animationTransition.duration && (animationTransition.duration = secondsToMilliseconds(animationTransition.duration,));
+        animationTransition = applyGeneratorOptions(animationTransition,);
+        const duration = isMorphCrossfade && visualDuration !== void 0
+          ? secondsToMilliseconds(visualDuration,)
+          : animationTransition.duration;
+        const easing = isMorphCrossfade ? 'linear' : mapEasingToNativeEasing(animationTransition.ease, animationTransition.duration,);
+        effect.updateTiming({
+          delay: secondsToMilliseconds(animationTransition.delay ?? 0,),
+          duration,
+          easing,
+        },);
+        animations2.push(new NativeAnimationWrapper(animation,),);
       }
       resolve(new GroupAnimation(animations2,),);
-    },);
+    },).catch(() => (
+      /**
+       * `ready` rejects when the transition is skipped - no visual
+       * change, or superseded by an interrupting transition. The DOM
+       * update still applied, so settle with no animations rather than
+       * surfacing it as an error to an awaiting caller. A genuine
+       * failure in `update()` rejects `updateCallbackDone` (already
+       * settled by now), so propagate that instead.
+       */
+      transition.updateCallbackDone.then(() => resolve(new GroupAnimation([],),), reject,)
+    ));
   },);
 }
-function hasOpacity(target, key7,) {
-  return target?.[key7]?.keyframes.opacity;
+function layerOptions(target, type,) {
+  for (const bucket of typeBuckets[type] ?? []) {
+    const options = target?.[bucket]?.options;
+    if (options) return options;
+  }
+}
+function mergeTransition(base, override,) {
+  const merged = {
+    ...base,
+    ...override,
+  };
+  if (override.duration !== void 0) {
+    if (override.visualDuration === void 0) delete merged.visualDuration;
+    if (override.type === void 0) delete merged.type;
+  }
+  return merged;
 }
 var builders = [];
 var current = null;
@@ -4679,8 +5034,8 @@ function start(builder,) {
   current = builder;
   startViewAnimation(builder,).then((animation) => {
     builder.notifyReady(animation,);
-    animation.finished.finally(next,);
-  },);
+    return animation.finished;
+  },).catch((error) => builder.notifyReject(error,)).finally(next,);
 }
 function processQueue() {
   for (let i = builders.length - 1; i >= 0; i--) {
@@ -4710,31 +5065,94 @@ var ViewTransitionBuilder = class {
   constructor(update, options = {},) {
     this.currentSubject = 'root';
     this.targets = /* @__PURE__ */ new Map();
+    this.resolveDefs = /* @__PURE__ */ new Set();
+    this.cropOverride = /* @__PURE__ */ new Map();
+    this.pairs = /* @__PURE__ */ new Map();
+    this.classNames = /* @__PURE__ */ new Map();
+    this.flatGroups = /* @__PURE__ */ new Set();
     this.notifyReady = noop;
-    this.readyPromise = new Promise((resolve) => {
+    this.notifyReject = noop;
+    this.readyPromise = new Promise((resolve, reject,) => {
       this.notifyReady = resolve;
+      this.notifyReject = reject;
     },);
     this.update = update;
     this.options = {
       interrupt: 'wait',
       ...options,
     };
+    this.readyPromise.catch(noop,);
     addToQueue(this,);
   }
-  get(subject,) {
+  /**
+   * Target elements resolved from a selector or Element, each assigned a
+   * `view-transition-name` automatically.
+   *
+   * Passing a second target pairs them: the first is resolved in the old
+   * snapshot and the second in the new, sharing one name so two *different*
+   * elements morph into each other (e.g. `.add(card, ".modal")`). Symmetric -
+   * pass them the other way round to morph back.
+   */
+  add(subject, newSubject,) {
     this.currentSubject = subject;
+    this.resolveDefs.add(subject,);
+    if (newSubject !== void 0) this.pairs.set(subject, newSubject,);
+    if (!this.targets.has(subject,)) this.targets.set(subject, {},);
     return this;
   }
-  layout(keyframes2, options,) {
-    this.updateTarget('layout', keyframes2, options,);
+  /**
+   * Control this subject's crop (clip + `object-fit: cover` + animated
+   * corners). By default a subject auto-crops only when it actually morphs -
+   * present in both snapshots (a survivor, or an `.add(a, b)` pair). A
+   * fade-only enter/exit has no second box to crop against, so it's left to
+   * the browser default; in particular the `overflow: clip` a crop adds would
+   * otherwise clip a mis-sized enter/exit layer to nothing.
+   *
+   * `.crop(false)` forces the crop off (e.g. a text morph, where
+   * `object-fit: cover` clips glyphs as the box grows); `.crop(true)` forces
+   * it on for a non-morph the default wouldn't otherwise crop.
+   */
+  crop(enabled = true,) {
+    this.cropOverride.set(this.currentSubject, enabled,);
     return this;
   }
-  new(keyframes2, options,) {
-    this.updateTarget('new', keyframes2, options,);
+  /**
+   * By default a subject's layer nests under its nearest DOM-ancestor layer
+   * (`view-transition-group: contain`), so the ancestor's clip/transform/opacity
+   * apply to it through the transition - mirroring how the DOM actually paints,
+   * and letting a wrapper crop its child for the whole morph rather than only
+   * once the live DOM takes back over. (Needs a browser that supports nested
+   * view-transition groups; elsewhere it degrades to the flat default.)
+   *
+   * Call `.group(false)` to opt out: the layer stays flat and top-level, so it
+   * animates independently and escapes an ancestor's clip - e.g. an element
+   * that should lift out of a card and fly across, which nesting would clip.
+   */
+  group(enabled = true,) {
+    enabled ? this.flatGroups.delete(this.currentSubject,) : this.flatGroups.add(this.currentSubject,);
     return this;
   }
-  old(keyframes2, options,) {
-    this.updateTarget('old', keyframes2, options,);
+  /**
+   * Tag this subject's generated layers with a `view-transition-class`, so
+   * they can be targeted from CSS - `::view-transition-group(.name)`,
+   * `::view-transition-old/new(.name)`, `::view-transition-image-pair(.name)`
+   * - without the opaque generated `view-transition-name`. Because `.add()`
+   * can match many elements, a shared class targets them all at once (and,
+   * for a pair, both ends). The escape hatch for z-index / custom keyframes
+   * on a morph layer.
+   */
+  class(name,) {
+    this.classNames.set(this.currentSubject, name,);
+    return this;
+  }
+  /**
+   * Set the transition for this subject's morph. The morph is enabled
+   * automatically by `.add()`; this just customises its timing (duration,
+   * easing, a `delay`/`stagger`, …). On the implicit `root` subject it also
+   * opts the page into the transition (the root crossfade).
+   */
+  layout(options = {},) {
+    this.updateTarget('layout', {}, options,);
     return this;
   }
   enter(keyframes2, options,) {
@@ -4745,13 +5163,21 @@ var ViewTransitionBuilder = class {
     this.updateTarget('exit', keyframes2, options,);
     return this;
   }
-  crossfade(options,) {
-    this.updateTarget('enter', {
-      opacity: 1,
-    }, options,);
-    this.updateTarget('exit', {
-      opacity: 0,
-    }, options,);
+  /**
+   * Animate the new view directly, whether the element is appearing or
+   * persisting (unlike `.enter()`, which only fires for a pure newcomer).
+   * Pair with `.old()` for a crossfade or slide-through.
+   */
+  new(keyframes2, options,) {
+    this.updateTarget('new', keyframes2, options,);
+    return this;
+  }
+  /**
+   * Animate the old view directly, whether the element is leaving or
+   * persisting (unlike `.exit()`, which only fires for a pure leaver).
+   */
+  old(keyframes2, options,) {
+    this.updateTarget('old', keyframes2, options,);
     return this;
   }
   updateTarget(target, keyframes2, options = {},) {
@@ -4772,8 +5198,8 @@ var ViewTransitionBuilder = class {
     return this.readyPromise.then(resolve, reject,);
   }
 };
-function animateView(update, defaultOptions = {},) {
-  return new ViewTransitionBuilder(update, defaultOptions,);
+function animateView(update, options = {},) {
+  return new ViewTransitionBuilder(update, options,);
 }
 var createAxisDelta = () => ({
   translate: 0,
@@ -5531,6 +5957,11 @@ function buildTransform2(latestValues, transform2, transformTemplate2,) {
         transform2[key7] = valueAsType;
       }
     }
+  }
+  const pathRotation = latestValues.pathRotation;
+  if (pathRotation) {
+    transformIsDefault = false;
+    transformString3 += `rotate(${getValueAsType(pathRotation, numberValueTypes.pathRotation,)}) `;
   }
   transformString3 = transformString3.trim();
   if (transformTemplate2) {
@@ -6291,6 +6722,7 @@ function buildProjectionTransform(delta, treeScale, latestTransform,) {
     const {
       transformPerspective,
       rotate: rotate2,
+      pathRotation,
       rotateX,
       rotateY,
       skewX,
@@ -6298,6 +6730,7 @@ function buildProjectionTransform(delta, treeScale, latestTransform,) {
     } = latestTransform;
     if (transformPerspective) transform2 = `perspective(${transformPerspective}px) ${transform2}`;
     if (rotate2) transform2 += `rotate(${rotate2}deg) `;
+    if (pathRotation) transform2 += `rotate(${pathRotation}deg) `;
     if (rotateX) transform2 += `rotateX(${rotateX}deg) `;
     if (rotateY) transform2 += `rotateY(${rotateY}deg) `;
     if (skewX) transform2 += `skewX(${skewX}deg) `;
@@ -6363,7 +6796,7 @@ function addDomEvent(target, eventName, handler, options = {
   passive: true,
 },) {
   target.addEventListener(eventName, handler, options,);
-  return () => target.removeEventListener(eventName, handler,);
+  return () => target.removeEventListener(eventName, handler, options,);
 }
 var compareByDepth = (a, b,) => a.depth - b.depth;
 var FlatTree = class {
@@ -6699,7 +7132,7 @@ function createProjectionNode({
               animationOptions.type = false;
             }
             this.startAnimation(animationOptions,);
-            this.setAnimationOrigin(delta, hasOnlyRelativeTargetChanged,);
+            this.setAnimationOrigin(delta, hasOnlyRelativeTargetChanged, animationOptions.path,);
           } else {
             if (!hasLayoutChanged) {
               finishAnimation(this,);
@@ -7192,7 +7625,7 @@ function createProjectionNode({
       this.projectionDelta = createDelta();
       this.projectionDeltaWithTransform = createDelta();
     }
-    setAnimationOrigin(delta, hasOnlyRelativeTargetChanged = false,) {
+    setAnimationOrigin(delta, hasOnlyRelativeTargetChanged = false, pathFn,) {
       const snapshot = this.snapshot;
       const snapshotLatestValues = snapshot ? snapshot.latestValues : {};
       const mixedValues = {
@@ -7214,10 +7647,23 @@ function createProjectionNode({
       );
       this.animationProgress = 0;
       let prevRelativeTarget;
+      const interpolate2 = pathFn?.interpolateProjection(delta,);
       this.mixTargetDelta = (latest) => {
         const progress2 = latest / 1e3;
-        mixAxisDelta(targetDelta.x, delta.x, progress2,);
-        mixAxisDelta(targetDelta.y, delta.y, progress2,);
+        const point2 = interpolate2?.(progress2,);
+        if (point2) {
+          targetDelta.x.translate = point2.x;
+          targetDelta.x.scale = mixNumber(delta.x.scale, 1, progress2,);
+          targetDelta.x.origin = delta.x.origin;
+          targetDelta.x.originPoint = delta.x.originPoint;
+          targetDelta.y.translate = point2.y;
+          targetDelta.y.scale = mixNumber(delta.y.scale, 1, progress2,);
+          targetDelta.y.origin = delta.y.origin;
+          targetDelta.y.originPoint = delta.y.originPoint;
+        } else {
+          mixAxisDeltaLinear(targetDelta.x, delta.x, progress2,);
+          mixAxisDeltaLinear(targetDelta.y, delta.y, progress2,);
+        }
         this.setTargetDelta(targetDelta,);
         if (this.relativeTarget && this.relativeTargetOrigin && this.layout && this.relativeParent && this.relativeParent.layout) {
           calcRelativePosition(
@@ -7237,6 +7683,10 @@ function createProjectionNode({
           this.animationValues = mixedValues;
           mixValues(mixedValues, snapshotLatestValues, this.latestValues, progress2, shouldCrossfadeOpacity, isOnlyMember,);
         }
+        if (point2 && point2.rotate !== void 0) {
+          if (!this.animationValues) this.animationValues = mixedValues;
+          this.animationValues.pathRotation = point2.rotate;
+        }
         this.root.scheduleUpdateProjection();
         this.scheduleRender();
         this.animationProgress = progress2;
@@ -7253,7 +7703,6 @@ function createProjectionNode({
       }
       this.pendingAnimation = frame.update(() => {
         globalProjectionState.hasAnimatedSinceResize = true;
-        activeAnimations.layout++;
         this.motionValue || (this.motionValue = motionValue(0,));
         this.motionValue.jump(0, false,);
         this.currentAnimation = animateSingleValue(this.motionValue, [0, 1e3,], {
@@ -7264,11 +7713,7 @@ function createProjectionNode({
             this.mixTargetDelta(latest,);
             options.onUpdate && options.onUpdate(latest,);
           },
-          onStop: () => {
-            activeAnimations.layout--;
-          },
           onComplete: () => {
-            activeAnimations.layout--;
             options.onComplete && options.onComplete();
             this.completeAnimation();
           },
@@ -7649,7 +8094,7 @@ function resetSkewAndRotation(node,) {
 function removeLeadSnapshots(stack,) {
   stack.removeLeadSnapshot();
 }
-function mixAxisDelta(output, delta, p,) {
+function mixAxisDeltaLinear(output, delta, p,) {
   output.translate = mixNumber(delta.translate, 0, p,);
   output.scale = mixNumber(delta.scale, 1, p,);
   output.origin = delta.origin;
@@ -7743,38 +8188,169 @@ var HTMLProjectionNode = createProjectionNode({
   },
   checkIsScrollRoot: (instance) => Boolean(__unframerWindow.getComputedStyle(instance,).position === 'fixed',),
 },);
-var layoutSelector = '[data-layout], [data-layout-id]';
-var noop2 = () => {};
-function snapshotFromTarget(projection,) {
-  const target = projection.targetWithTransforms || projection.target;
-  if (!target) return void 0;
-  const measuredBox = createBox();
-  const layoutBox = createBox();
-  copyBoxInto(measuredBox, target,);
-  copyBoxInto(layoutBox, target,);
+var layoutSelector = '[data-layout],[data-layout-id]';
+var layoutNodes = /* @__PURE__ */ new WeakMap();
+var pendingBuilders;
+function collectLayoutElements(scope,) {
+  const elements = [];
+  if (scope instanceof HTMLElement && scope.matches(layoutSelector,)) {
+    elements.push(scope,);
+  }
+  scope.querySelectorAll(layoutSelector,).forEach((element) => {
+    if (element instanceof HTMLElement) elements.push(element,);
+  },);
+  return elements;
+}
+function flushPendingFrame() {
+  if (frameData.isProcessing) return;
+  const now2 = time.now();
+  frameData.delta = clamp(0, 1e3 / 60, now2 - frameData.timestamp,);
+  frameData.timestamp = now2;
+  frameData.isProcessing = true;
+  frameSteps.update.process(frameData,);
+  frameSteps.preRender.process(frameData,);
+  frameSteps.render.process(frameData,);
+  frameData.isProcessing = false;
+}
+function getProjectionParent(element,) {
+  let ancestor = element.parentElement;
+  while (ancestor) {
+    const node = layoutNodes.get(ancestor,);
+    if (node && node.instance) return node;
+    ancestor = ancestor.parentElement;
+  }
+  return void 0;
+}
+function createVisualElement() {
+  return new HTMLVisualElement({
+    props: {},
+    presenceContext: null,
+    visualState: {
+      latestValues: {},
+      renderState: {
+        transform: {},
+        transformOrigin: {},
+        style: {},
+        vars: {},
+      },
+    },
+  }, {
+    allowProjection: true,
+  },);
+}
+function readNodeOptions(element, transition,) {
+  const layoutAttr = element.getAttribute('data-layout',);
+  const layoutId = element.getAttribute('data-layout-id',) ?? void 0;
   return {
-    animationId: projection.root?.animationId ?? 0,
-    measuredBox,
-    layoutBox,
-    latestValues: projection.animationValues || projection.latestValues || {},
-    source: projection.id,
+    layoutId,
+    layout: layoutAttr !== null ? true : void 0,
+    animationType: !layoutAttr || layoutAttr === 'true' ? 'both' : layoutAttr,
+    transition,
   };
+}
+function prepareNode(element, transition,) {
+  let node = layoutNodes.get(element,);
+  if (!node) {
+    let visualElement = visualElementStore.get(element,);
+    if (!visualElement) visualElement = createVisualElement();
+    if (element.style.transform && !hasTransform(visualElement.latestValues,)) {
+      element.style.transform = '';
+    }
+    node = new HTMLProjectionNode(visualElement.latestValues, getProjectionParent(element,),);
+    visualElement.projection = node;
+    node.setOptions({
+      ...readNodeOptions(element, transition,),
+      visualElement,
+    },);
+    node.mount(element,);
+    layoutNodes.set(element, node,);
+  } else {
+    node.setOptions(readNodeOptions(element, transition,),);
+  }
+  node.isPresent = true;
+  if (node.options.onExitComplete) {
+    node.setOptions({
+      onExitComplete: void 0,
+    },);
+  }
+  return node;
+}
+function sortDocumentOrder(elements,) {
+  return [...elements,].sort((a, b,) => a.compareDocumentPosition(b,) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1);
+}
+function dropNode(element, node,) {
+  node.setOptions({
+    onExitComplete: void 0,
+  },);
+  const stack = node.getStack();
+  if (!stack || node.isLead()) node.currentAnimation?.stop();
+  node.unmount();
+  layoutNodes.delete(element,);
+}
+function flushPendingBuilders() {
+  const builders2 = pendingBuilders;
+  pendingBuilders = void 0;
+  flushPendingFrame();
+  const targets = /* @__PURE__ */ new Map();
+  for (const builder of builders2) {
+    for (const element of builder.collectTargets()) {
+      const owners = targets.get(element,);
+      owners ? owners.push(builder,) : targets.set(element, [builder,],);
+    }
+  }
+  const union = /* @__PURE__ */ new Map();
+  for (const element of sortDocumentOrder(targets.keys(),)) {
+    const owners = targets.get(element,);
+    const node = prepareNode(element, owners[owners.length - 1].transitionFor(element,),);
+    for (const owner of owners) owner.adopt(element, node,);
+    union.set(element, node,);
+  }
+  union.forEach((node) => {
+    node.isLayoutDirty = false;
+    node.willUpdate();
+  },);
+  const updatePromises = [];
+  for (const builder of builders2) {
+    const result = builder.runUpdate();
+    if (result) updatePromises.push(result,);
+  }
+  const commit = () => {
+    const newMemberIds = /* @__PURE__ */ new Set();
+    for (const builder of builders2) {
+      builder.reconcileAdditions(newMemberIds,);
+    }
+    for (const builder of builders2) {
+      builder.reconcileRemovals(newMemberIds,);
+    }
+    let root;
+    union.forEach((node) => root || (root = node.root));
+    for (const builder of builders2) root || (root = builder.getRoot());
+    root?.didUpdate();
+    microtask.render(() => {
+      for (const builder of builders2) builder.finalize();
+    },);
+  };
+  updatePromises.length ? Promise.all(updatePromises,).then(commit,) : commit();
 }
 var LayoutAnimationBuilder = class {
   constructor(scope, updateDom, defaultOptions,) {
-    this.sharedTransitions = /* @__PURE__ */ new Map();
-    this.notifyReady = noop2;
-    this.rejectReady = noop2;
     this.scope = scope;
     this.updateDom = updateDom;
     this.defaultOptions = defaultOptions;
+    this.sharedTransitions = /* @__PURE__ */ new Map();
+    this.notifyReady = () => {};
+    this.rejectReady = () => {};
+    this.tracked = /* @__PURE__ */ new Map();
+    this.restorePoints = /* @__PURE__ */ new Map();
     this.readyPromise = new Promise((resolve, reject,) => {
       this.notifyReady = resolve;
       this.rejectReady = reject;
     },);
-    frame.postRender(() => {
-      this.start().then(this.notifyReady,).catch(this.rejectReady,);
-    },);
+    if (!pendingBuilders) {
+      pendingBuilders = [];
+      queueMicrotask(flushPendingBuilders,);
+    }
+    pendingBuilders.push(this,);
   }
   shared(id4, transition,) {
     this.sharedTransitions.set(id4, transition,);
@@ -7783,102 +8359,86 @@ var LayoutAnimationBuilder = class {
   then(resolve, reject,) {
     return this.readyPromise.then(resolve, reject,);
   }
-  async start() {
-    const beforeElements = collectLayoutElements(this.scope,);
-    const beforeRecords = this.buildRecords(beforeElements,);
-    beforeRecords.forEach(({
-      projection,
-    },) => {
-      const hasCurrentAnimation = Boolean(projection.currentAnimation,);
-      const isSharedLayout = Boolean(projection.options.layoutId,);
-      if (hasCurrentAnimation && isSharedLayout) {
-        const snapshot = snapshotFromTarget(projection,);
-        if (snapshot) {
-          projection.snapshot = snapshot;
-        } else if (projection.snapshot) {
-          projection.snapshot = void 0;
-        }
-      } else if (projection.snapshot && (projection.currentAnimation || projection.isProjecting())) {
-        projection.snapshot = void 0;
-      }
-      projection.isPresent = true;
-      projection.willUpdate();
-    },);
-    await this.updateDom();
-    const afterElements = collectLayoutElements(this.scope,);
-    const afterRecords = this.buildRecords(afterElements,);
-    this.handleExitingElements(beforeRecords, afterRecords,);
-    afterRecords.forEach(({
-      projection,
-    },) => {
-      const instance = projection.instance;
-      const resumeFromInstance = projection.resumeFrom?.instance;
-      if (!instance || !resumeFromInstance) return;
-      if (!('style' in instance)) return;
-      const currentTransform = instance.style.transform;
-      const resumeFromTransform = resumeFromInstance.style.transform;
-      if (currentTransform && resumeFromTransform && currentTransform === resumeFromTransform) {
-        instance.style.transform = '';
-        instance.style.transformOrigin = '';
-      }
-    },);
-    afterRecords.forEach(({
-      projection,
-    },) => {
-      projection.isPresent = true;
-    },);
-    const root = getProjectionRoot(afterRecords, beforeRecords,);
-    root?.didUpdate();
-    await new Promise((resolve) => {
-      frame.postRender(() => resolve());
-    },);
-    const animations2 = collectAnimations(afterRecords,);
-    const animation = new GroupAnimation(animations2,);
-    return animation;
+  transitionFor(element,) {
+    const layoutId = element.getAttribute('data-layout-id',);
+    return layoutId && this.sharedTransitions.get(layoutId,) || this.defaultOptions;
   }
-  buildRecords(elements,) {
-    const records = [];
-    const recordMap = /* @__PURE__ */ new Map();
-    for (const element of elements) {
-      const parentRecord = findParentRecord(element, recordMap, this.scope,);
-      const {
-        layout: layout2,
-        layoutId,
-      } = readLayoutAttributes(element,);
-      const override = layoutId ? this.sharedTransitions.get(layoutId,) : void 0;
-      const transition = override || this.defaultOptions;
-      const record2 = getOrCreateRecord(element, parentRecord?.projection, {
-        layout: layout2,
-        layoutId,
-        animationType: typeof layout2 === 'string' ? layout2 : 'both',
-        transition,
-      },);
-      recordMap.set(element, record2,);
-      records.push(record2,);
+  adopt(element, node,) {
+    this.tracked.set(element, node,);
+    this.restorePoints.set(element, {
+      parent: element.parentElement,
+      next: element.nextSibling,
+    },);
+  }
+  collectTargets() {
+    return collectLayoutElements(this.scope,);
+  }
+  runUpdate() {
+    try {
+      const result = this.updateDom();
+      if (result && typeof result.then === 'function') {
+        return result.then(void 0, (error) => {
+          this.updateError = error;
+        },);
+      }
+    } catch (error) {
+      this.updateError = error;
     }
-    return records;
+    return void 0;
   }
-  handleExitingElements(beforeRecords, afterRecords,) {
-    const afterElementsSet = new Set(afterRecords.map((record2) => record2.element),);
-    beforeRecords.forEach((record2) => {
-      if (afterElementsSet.has(record2.element,)) return;
-      if (record2.projection.options.layoutId) {
-        record2.projection.isPresent = false;
-        record2.projection.relegate();
+  reconcileAdditions(newMemberIds,) {
+    for (const element of collectLayoutElements(this.scope,)) {
+      if (this.tracked.has(element,)) continue;
+      const node = prepareNode(element, this.transitionFor(element,),);
+      this.adopt(element, node,);
+      node.options.layoutId && newMemberIds.add(node.options.layoutId,);
+    }
+  }
+  reconcileRemovals(newMemberIds,) {
+    this.tracked.forEach((node, element,) => {
+      if (element.isConnected) return;
+      const restore = this.restorePoints.get(element,);
+      this.restorePoints.delete(element,);
+      const {
+        layoutId,
+      } = node.options;
+      const stack = node.getStack();
+      const hasSurvivor = stack && stack.members.some((member) => member !== node && member.instance?.isConnected);
+      if (layoutId && node.isLead() && hasSurvivor && !newMemberIds.has(layoutId,)) {
+        if (restore && restore.parent.isConnected) {
+          restore.parent.insertBefore(element, restore.next && restore.next.parentNode === restore.parent ? restore.next : null,);
+          node.isPresent = false;
+          node.setOptions({
+            onExitComplete: () => {
+              element.remove();
+              dropNode(element, node,);
+            },
+          },);
+          if (node.relegate()) return;
+          element.remove();
+        }
       }
-      record2.visualElement.unmount();
-      visualElementStore.delete(record2.element,);
+      dropNode(element, node,);
+      this.tracked.delete(element,);
     },);
-    const beforeElementsSet = new Set(beforeRecords.map((record2) => record2.element),);
-    afterRecords.forEach(({
-      element,
-      projection,
-    },) => {
-      if (beforeElementsSet.has(element,) && projection.resumeFrom && !projection.resumeFrom.instance && !projection.isLead()) {
-        projection.resumeFrom = void 0;
-        projection.snapshot = void 0;
+  }
+  getRoot() {
+    let root;
+    this.tracked.forEach((node) => root || (root = node.root));
+    return root;
+  }
+  finalize() {
+    if (this.updateError) {
+      this.rejectReady(this.updateError,);
+      return;
+    }
+    const animations2 = /* @__PURE__ */ new Set();
+    this.tracked.forEach((node) => {
+      if (node.instance && node.currentAnimation) {
+        animations2.add(node.currentAnimation,);
       }
     },);
+    this.notifyReady(new GroupAnimation([...animations2,],),);
   }
 };
 function parseAnimateLayoutArgs(scopeOrUpdateDom, updateDomOrOptions, options,) {
@@ -7889,99 +8449,12 @@ function parseAnimateLayoutArgs(scopeOrUpdateDom, updateDomOrOptions, options,) 
       defaultOptions: updateDomOrOptions,
     };
   }
-  const elements = resolveElements(scopeOrUpdateDom,);
-  const scope = elements[0] || document;
+  const scope = scopeOrUpdateDom instanceof Document ? scopeOrUpdateDom : resolveElements(scopeOrUpdateDom,)[0] ?? document;
   return {
     scope,
     updateDom: updateDomOrOptions,
     defaultOptions: options,
   };
-}
-function collectLayoutElements(scope,) {
-  const elements = Array.from(scope.querySelectorAll(layoutSelector,),);
-  if (scope instanceof Element && scope.matches(layoutSelector,)) {
-    if (!elements.includes(scope,)) {
-      elements.unshift(scope,);
-    }
-  }
-  return elements;
-}
-function readLayoutAttributes(element,) {
-  const layoutId = element.getAttribute('data-layout-id',) || void 0;
-  const rawLayout = element.getAttribute('data-layout',);
-  let layout2;
-  if (rawLayout === '' || rawLayout === 'true') {
-    layout2 = true;
-  } else if (rawLayout) {
-    layout2 = rawLayout;
-  }
-  return {
-    layout: layout2,
-    layoutId,
-  };
-}
-function createVisualState() {
-  return {
-    latestValues: {},
-    renderState: {
-      transform: {},
-      transformOrigin: {},
-      style: {},
-      vars: {},
-    },
-  };
-}
-function getOrCreateRecord(element, parentProjection, projectionOptions,) {
-  const existing = visualElementStore.get(element,);
-  const visualElement = existing ?? new HTMLVisualElement({
-    props: {},
-    presenceContext: null,
-    visualState: createVisualState(),
-  }, {
-    allowProjection: true,
-  },);
-  if (!existing || !visualElement.projection) {
-    visualElement.projection = new HTMLProjectionNode(visualElement.latestValues, parentProjection,);
-  }
-  visualElement.projection.setOptions({
-    ...projectionOptions,
-    visualElement,
-  },);
-  if (!visualElement.current) {
-    visualElement.mount(element,);
-  } else if (!visualElement.projection.instance) {
-    visualElement.projection.mount(element,);
-  }
-  if (!existing) {
-    visualElementStore.set(element, visualElement,);
-  }
-  return {
-    element,
-    visualElement,
-    projection: visualElement.projection,
-  };
-}
-function findParentRecord(element, recordMap, scope,) {
-  let parent = element.parentElement;
-  while (parent) {
-    const record2 = recordMap.get(parent,);
-    if (record2) return record2;
-    if (parent === scope) break;
-    parent = parent.parentElement;
-  }
-  return void 0;
-}
-function getProjectionRoot(afterRecords, beforeRecords,) {
-  const record2 = afterRecords[0] || beforeRecords[0];
-  return record2?.projection.root;
-}
-function collectAnimations(afterRecords,) {
-  const animations2 = /* @__PURE__ */ new Set();
-  afterRecords.forEach((record2) => {
-    const animation = record2.projection.currentAnimation;
-    if (animation) animations2.add(animation,);
-  },);
-  return Array.from(animations2,);
 }
 var sync = frame;
 var cancelSync = stepsOrder.reduce((acc, key7,) => {
@@ -8147,6 +8620,12 @@ var PresenceChild = ({
 },) => {
   const presenceChildren = useConstant(newChildrenMap,);
   const id4 = useId();
+  const isPresentRef = useRef(isPresent2,);
+  const onExitCompleteRef = useRef(onExitComplete,);
+  useIsomorphicLayoutEffect(() => {
+    isPresentRef.current = isPresent2;
+    onExitCompleteRef.current = onExitComplete;
+  },);
   let isReusedContext = true;
   let context = useMemo(() => {
     isReusedContext = false;
@@ -8164,7 +8643,10 @@ var PresenceChild = ({
       },
       register: (childId) => {
         presenceChildren.set(childId, false,);
-        return () => presenceChildren.delete(childId,);
+        return () => {
+          presenceChildren.delete(childId,);
+          !isPresentRef.current && !presenceChildren.size && onExitCompleteRef.current?.();
+        };
       },
     };
   }, [isPresent2, presenceChildren, onExitComplete,],);
@@ -8838,7 +9320,7 @@ function useMotionRef(visualState, visualElement, externalRef,) {
 function isRefObject(ref,) {
   return ref && typeof ref === 'object' && Object.prototype.hasOwnProperty.call(ref, 'current',);
 }
-function useVisualElement(Component33, visualState, props, createVisualElement, ProjectionNodeConstructor, isSVG,) {
+function useVisualElement(Component33, visualState, props, createVisualElement2, ProjectionNodeConstructor, isSVG,) {
   const {
     visualElement: parent,
   } = useContext(MotionContext,);
@@ -8849,9 +9331,9 @@ function useVisualElement(Component33, visualState, props, createVisualElement, 
   const skipAnimations = motionConfig.skipAnimations;
   const visualElementRef = useRef(null,);
   const hasMountedOnce = useRef(false,);
-  createVisualElement = createVisualElement || lazyContext.renderer;
-  if (!visualElementRef.current && createVisualElement) {
-    visualElementRef.current = createVisualElement(Component33, {
+  createVisualElement2 = createVisualElement2 || lazyContext.renderer;
+  if (!visualElementRef.current && createVisualElement2) {
+    visualElementRef.current = createVisualElement2(Component33, {
       visualState,
       parent,
       props,
@@ -8955,7 +9437,7 @@ function createMotionComponent(
     type,
   } = {},
   preloadedFeatures,
-  createVisualElement,
+  createVisualElement2,
 ) {
   preloadedFeatures && loadFeatures(preloadedFeatures,);
   const isSVG = type ? type === 'svg' : isSVGComponent(Component33,);
@@ -8980,7 +9462,7 @@ function createMotionComponent(
         Component33,
         visualState,
         configAndProps,
-        createVisualElement,
+        createVisualElement2,
         layoutProjection.ProjectionNode,
         isSVG,
       );
@@ -9045,13 +9527,13 @@ function getProjectionFunctionality(props,) {
     ProjectionNode: combined.ProjectionNode,
   };
 }
-function createMotionProxy(preloadedFeatures, createVisualElement,) {
+function createMotionProxy(preloadedFeatures, createVisualElement2,) {
   if (typeof Proxy === 'undefined') {
     return createMotionComponent;
   }
   const componentCache = /* @__PURE__ */ new Map();
   const factory = (Component33, options,) => {
-    return createMotionComponent(Component33, options, preloadedFeatures, createVisualElement,);
+    return createMotionComponent(Component33, options, preloadedFeatures, createVisualElement2,);
   };
   const deprecatedFactoryFunction = (Component33, options,) => {
     if (false) {
@@ -9068,7 +9550,7 @@ function createMotionProxy(preloadedFeatures, createVisualElement,) {
     get: (_target, key7,) => {
       if (key7 === 'create') return factory;
       if (!componentCache.has(key7,)) {
-        componentCache.set(key7, createMotionComponent(key7, void 0, preloadedFeatures, createVisualElement,),);
+        componentCache.set(key7, createMotionComponent(key7, void 0, preloadedFeatures, createVisualElement2,),);
       }
       return componentCache.get(key7,);
     },
@@ -9323,10 +9805,14 @@ var PanSession = class {
       onSessionStart,
     } = handlers;
     onSessionStart && onSessionStart(event, getPanInfo(initialInfo, this.history,),);
+    const eventOptions = {
+      passive: true,
+      capture: true,
+    };
     this.removeListeners = pipe(
-      addPointerEvent(this.contextWindow, 'pointermove', this.handlePointerMove,),
-      addPointerEvent(this.contextWindow, 'pointerup', this.handlePointerUp,),
-      addPointerEvent(this.contextWindow, 'pointercancel', this.handlePointerUp,),
+      addPointerEvent(this.contextWindow, 'pointermove', this.handlePointerMove, eventOptions,),
+      addPointerEvent(this.contextWindow, 'pointerup', this.handlePointerUp, eventOptions,),
+      addPointerEvent(this.contextWindow, 'pointercancel', this.handlePointerUp, eventOptions,),
     );
     if (element) {
       this.startScrollTracking(element,);
@@ -11756,9 +12242,9 @@ function animateSubject(subject, keyframes2, options, scope,) {
     invariant(Boolean(numSubjects,), 'No valid elements provided.', 'no-valid-elements',);
     for (let i = 0; i < numSubjects; i++) {
       const thisSubject = subjects[i];
-      const createVisualElement = thisSubject instanceof Element ? createDOMVisualElement : createObjectVisualElement;
+      const createVisualElement2 = thisSubject instanceof Element ? createDOMVisualElement : createObjectVisualElement;
       if (!visualElementStore.has(thisSubject,)) {
-        createVisualElement(thisSubject,);
+        createVisualElement2(thisSubject,);
       }
       const visualElement = visualElementStore.get(thisSubject,);
       const transition = {
@@ -12753,7 +13239,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.WXQX7PQE.mjs
+// /:https://app.framerstatic.com/framer.NC7OXDQS.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -13730,7 +14216,7 @@ function isPromiseLike(value,) {
 function isPromise(value,) {
   return value instanceof Promise;
 }
-var noop22 = () => {};
+var noop2 = () => {};
 var isWindow = typeof __unframerWindow2 !== 'undefined';
 var isBot =
   /* @__PURE__ */ (() =>
@@ -13779,7 +14265,7 @@ function initLazyModulesCache() {
       console.warn(`Failed to import lazy module: ${url}`, error,);
       throw error;
     },);
-    promise.catch(noop22,);
+    promise.catch(noop2,);
     lazyModulesCache.set(hash2, promise,);
   }
 }
@@ -15146,12 +15632,8 @@ var CollectionUtilsCache = class {
     return this.callUtilsMethod('getRecordIdBySlug', slug, locale,);
   }
 };
-function hasScheduler(value,) {
-  return 'scheduler' in value;
-}
-var safeWindowScheduler = /* @__PURE__ */ (() => hasScheduler(safeWindow,) ? safeWindow.scheduler : void 0)();
-var canUseYield = /* @__PURE__ */ (() => safeWindowScheduler && 'yield' in safeWindowScheduler)();
-var canUsePostTask = /* @__PURE__ */ (() => safeWindowScheduler && 'postTask' in safeWindowScheduler)();
+var canUseYield = /* @__PURE__ */ (() => safeWindow.scheduler && 'yield' in safeWindow.scheduler)();
+var canUsePostTask = /* @__PURE__ */ (() => safeWindow.scheduler && 'postTask' in safeWindow.scheduler)();
 var pendingResolvers = /* @__PURE__ */ new Set();
 function resolvePendingPromises() {
   for (const resolve of pendingResolvers) resolve();
@@ -15192,24 +15674,25 @@ function interactionResponse(options,) {
 }
 function schedulerYield(options,) {
   const priority = options?.priority;
-  const canUseModernAPI = canUseYield || canUsePostTask;
-  if (!canUseModernAPI) {
-    if (priority === 'user-blocking') {
-      return Promise.resolve();
-    }
-    return new Promise((resolve) => {
-      setTimeout(resolve, priority === 'background' ? 1 : 0,);
-    },);
-  }
+  const scheduler = safeWindow.scheduler;
   if (priority === 'background') {
-    return new Promise((resolve) => {
-      setTimeout(resolve, 1,);
-    },);
+    return timeoutYield(1,);
   }
-  if (canUseYield) {
-    return safeWindowScheduler.yield(options,).catch(noop22,);
+  if (canUseYield && scheduler) {
+    return scheduler.yield(options,).catch(noop2,);
   }
-  return safeWindowScheduler.postTask(() => {}, options,).catch(noop22,);
+  if (canUsePostTask && scheduler) {
+    return scheduler.postTask(() => {}, options,).catch(noop2,);
+  }
+  if (priority === 'user-blocking') {
+    return Promise.resolve();
+  }
+  return timeoutYield(0,);
+}
+function timeoutYield(delay2,) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, delay2,);
+  },);
 }
 function yieldToMain(options,) {
   const {
@@ -28521,7 +29004,7 @@ function _useSharedIntersectionObserver(ref, callback, options,) {
     return observeElement(observers2, key7, element, root, callback, rootMargin, threshold2,);
   }, [enabled, callback, root, rootMargin, threshold2,],);
 }
-var useSharedIntersectionObserver = typeof IntersectionObserver === 'undefined' ? noop22 : _useSharedIntersectionObserver;
+var useSharedIntersectionObserver = typeof IntersectionObserver === 'undefined' ? noop2 : _useSharedIntersectionObserver;
 var thresholds2 = /* @__PURE__ */ new Array(100,).fill(void 0,).map((_, i,) => i * 0.01);
 var ViewportContext = /* @__PURE__ */ React42.createContext(null,);
 function useAppearEffect(ref, appearCallback, options,) {
@@ -29565,12 +30048,12 @@ var NavigationConsumer = /* @__PURE__ */ (() => NavigationContext.Consumer)();
 var NavigationCallbackContext = /* @__PURE__ */ React42.createContext(void 0,);
 var NavigationCallbackProvider = /* @__PURE__ */ (() => NavigationCallbackContext.Provider)();
 var IsInitialNavigationContext = /* @__PURE__ */ React42.createContext(void 0,);
-var Navigation = /* @__PURE__ */ (() => {
-  var _lastEventTimeStamp, _a, _Navigation_instances, getStackState_fn, isSameEventTransition_fn, _navigationAction, transition_fn;
-  return _a = class extends Component2 {
+var FramerNavigation = /* @__PURE__ */ (() => {
+  var _lastEventTimeStamp, _NavigationClassImpl_instances, getStackState_fn, isSameEventTransition_fn, _navigationAction, transition_fn;
+  class NavigationClassImpl extends Component2 {
     constructor(props,) {
       super(props,);
-      __privateAdd(this, _Navigation_instances,);
+      __privateAdd(this, _NavigationClassImpl_instances,);
       __privateAdd(this, _lastEventTimeStamp, null,);
       __publicField(this, 'state', defaultState(),);
       __privateAdd(this, _navigationAction, (action2) => {
@@ -29597,7 +30080,7 @@ var Navigation = /* @__PURE__ */ (() => {
         }
       },);
       __publicField(this, 'goBack', () => {
-        if (__privateMethod(this, _Navigation_instances, isSameEventTransition_fn,).call(this,)) return;
+        if (__privateMethod(this, _NavigationClassImpl_instances, isSameEventTransition_fn,).call(this,)) return;
         __privateSet(this, _lastEventTimeStamp, globalThis.event?.timeStamp || null,);
         if (this.state.currentOverlay !== -1) {
           return __privateGet(this, _navigationAction,).call(this, {
@@ -29635,7 +30118,7 @@ var Navigation = /* @__PURE__ */ (() => {
       const key7 = component.key?.toString();
       if (!key7) return;
       if (this.state.history.length === 0) {
-        __privateMethod(this, _Navigation_instances, transition_fn,).call(this, component, TransitionDefaults.Instant,);
+        __privateMethod(this, _NavigationClassImpl_instances, transition_fn,).call(this, component, TransitionDefaults.Instant,);
       } else {
         __privateGet(this, _navigationAction,).call(this, {
           type: 'update',
@@ -29648,34 +30131,34 @@ var Navigation = /* @__PURE__ */ (() => {
       this.props.resetProjection?.();
     }
     instant(component,) {
-      __privateMethod(this, _Navigation_instances, transition_fn,).call(this, component, TransitionDefaults.Instant, void 0,);
+      __privateMethod(this, _NavigationClassImpl_instances, transition_fn,).call(this, component, TransitionDefaults.Instant, void 0,);
     }
     fade(component, options,) {
-      __privateMethod(this, _Navigation_instances, transition_fn,).call(this, component, TransitionDefaults.Fade, options,);
+      __privateMethod(this, _NavigationClassImpl_instances, transition_fn,).call(this, component, TransitionDefaults.Fade, options,);
     }
     push(component, options,) {
-      __privateMethod(this, _Navigation_instances, transition_fn,).call(this, component, pushTransition(options,), options,);
+      __privateMethod(this, _NavigationClassImpl_instances, transition_fn,).call(this, component, pushTransition(options,), options,);
     }
     modal(component, options,) {
-      __privateMethod(this, _Navigation_instances, transition_fn,).call(this, component, TransitionDefaults.Modal, options,);
+      __privateMethod(this, _NavigationClassImpl_instances, transition_fn,).call(this, component, TransitionDefaults.Modal, options,);
     }
     overlay(component, options,) {
-      __privateMethod(this, _Navigation_instances, transition_fn,).call(this, component, overlayTransition(options,), options,);
+      __privateMethod(this, _NavigationClassImpl_instances, transition_fn,).call(this, component, overlayTransition(options,), options,);
     }
     flip(component, options,) {
-      __privateMethod(this, _Navigation_instances, transition_fn,).call(this, component, flipTransition(options,), options,);
+      __privateMethod(this, _NavigationClassImpl_instances, transition_fn,).call(this, component, flipTransition(options,), options,);
     }
     magicMotion(component, options,) {
-      __privateMethod(this, _Navigation_instances, transition_fn,).call(this, component, TransitionDefaults.MagicMotion, options,);
+      __privateMethod(this, _NavigationClassImpl_instances, transition_fn,).call(this, component, TransitionDefaults.MagicMotion, options,);
     }
     customTransition(component, transition,) {
-      __privateMethod(this, _Navigation_instances, transition_fn,).call(this, component, transition,);
+      __privateMethod(this, _NavigationClassImpl_instances, transition_fn,).call(this, component, transition,);
     }
     render() {
-      const stackState = __privateMethod(this, _Navigation_instances, getStackState_fn,).call(this, {
+      const stackState = __privateMethod(this, _NavigationClassImpl_instances, getStackState_fn,).call(this, {
         overCurrentContext: false,
       },);
-      const overlayStackState = __privateMethod(this, _Navigation_instances, getStackState_fn,).call(this, {
+      const overlayStackState = __privateMethod(this, _NavigationClassImpl_instances, getStackState_fn,).call(this, {
         overCurrentContext: true,
       },);
       const activeOverlay = activeOverlayItem(overlayStackState,);
@@ -29799,69 +30282,63 @@ var Navigation = /* @__PURE__ */ (() => {
         },),
       },);
     }
-  },
-    _lastEventTimeStamp = /* @__PURE__ */ new WeakMap(),
-    _Navigation_instances = /* @__PURE__ */ new WeakSet(),
-    getStackState_fn = function (options,) {
-      const {
-        current: current2,
-        previous,
-        currentOverlay,
-        previousOverlay,
-      } = this.state;
-      if (options.overCurrentContext) {
-        return {
-          current: currentOverlay,
-          previous: previousOverlay,
-          history: this.state.overlayStack,
-        };
-      }
+  }
+  _lastEventTimeStamp = /* @__PURE__ */ new WeakMap();
+  _NavigationClassImpl_instances = /* @__PURE__ */ new WeakSet();
+  getStackState_fn = function (options,) {
+    const {
+      current: current2,
+      previous,
+      currentOverlay,
+      previousOverlay,
+    } = this.state;
+    if (options.overCurrentContext) {
       return {
-        current: current2,
-        previous,
-        history: this.state.history,
+        current: currentOverlay,
+        previous: previousOverlay,
+        history: this.state.overlayStack,
       };
-    },
-    /**
-     * To prevent bubbling events from triggering multiple transitions,
-     * we ensure that the current event has a different timestamp then the event that triggered the last transition.
-     * We use Window.event to ensure that even transitions invoked by code components - and may not pass a reference to the event - are caught.
-     * This works better than measuring the time of transition calls with performance.now()
-     * because the time between calls can get longer and longer as more screens are added to the stack,
-     * preventing a deterministic time between transitions to be used to determine if they were triggered at the same time or not.
-     */
-    isSameEventTransition_fn = function () {
-      if (!globalThis.event) return false;
-      return __privateGet(this, _lastEventTimeStamp,) === globalThis.event.timeStamp;
-    },
-    _navigationAction = /* @__PURE__ */ new WeakMap(),
-    transition_fn = function (component, transitionTraits, transitionOptions,) {
-      if (__privateMethod(this, _Navigation_instances, isSameEventTransition_fn,).call(this,)) return;
-      __privateSet(this, _lastEventTimeStamp, globalThis.event?.timeStamp || null,);
-      if (!component || !isReactChild(component,) || !isReactElement(component,)) return;
-      const transition = {
-        ...transitionTraits,
-        ...transitionOptions,
-      };
-      const overCurrentContext = !!transition.overCurrentContext;
-      if (overCurrentContext) {return __privateGet(this, _navigationAction,).call(this, {
-          type: 'addOverlay',
-          transition,
-          component,
-        },);}
-      const key7 = component.key?.toString() || `stack-${this.state.historyItemId + 1}`;
-      __privateGet(this, _navigationAction,).call(this, {
-        type: 'add',
-        key: key7,
+    }
+    return {
+      current: current2,
+      previous,
+      history: this.state.history,
+    };
+  };
+  isSameEventTransition_fn = function () {
+    if (!globalThis.event) return false;
+    return __privateGet(this, _lastEventTimeStamp,) === globalThis.event.timeStamp;
+  };
+  _navigationAction = /* @__PURE__ */ new WeakMap();
+  transition_fn = function (component, transitionTraits, transitionOptions,) {
+    if (__privateMethod(this, _NavigationClassImpl_instances, isSameEventTransition_fn,).call(this,)) return;
+    __privateSet(this, _lastEventTimeStamp, globalThis.event?.timeStamp || null,);
+    if (!component || !isReactChild(component,) || !isReactElement(component,)) return;
+    const transition = {
+      ...transitionTraits,
+      ...transitionOptions,
+    };
+    const overCurrentContext = !!transition.overCurrentContext;
+    if (overCurrentContext) {
+      return __privateGet(this, _navigationAction,).call(this, {
+        type: 'addOverlay',
         transition,
         component,
       },);
-    },
-    __publicField(_a, 'defaultProps', {
-      enabled: true,
-    },),
-    __publicField(_a, 'contextType', NavigationCallbackContext,),
-    _a;
+    }
+    const key7 = component.key?.toString() || `stack-${this.state.historyItemId + 1}`;
+    __privateGet(this, _navigationAction,).call(this, {
+      type: 'add',
+      key: key7,
+      transition,
+      component,
+    },);
+  };
+  __publicField(NavigationClassImpl, 'defaultProps', {
+    enabled: true,
+  },);
+  __publicField(NavigationClassImpl, 'contextType', NavigationCallbackContext,);
+  return NavigationClassImpl;
 })();
 var animationDefault = {
   stiffness: 500,
@@ -30045,18 +30522,28 @@ function containerContent(item,) {
 function backdropTapAction(transition, goBackAction,) {
   if (transition.goBackOnTapOutside !== false) return goBackAction;
 }
-function NavigationWrapper(props,) {
+function NavigationWrapper(props, ref,) {
   const resetProjection = useResetProjection();
   const skipLayoutAnimation = useInstantLayoutTransition();
-  return /* @__PURE__ */ jsx(Navigation, {
+  const setNavigationRef = (instance) => {
+    if (!ref) return;
+    if (typeof ref === 'function') {
+      ref(instance,);
+      return;
+    }
+    ref.current = instance;
+  };
+  return /* @__PURE__ */ jsx(FramerNavigation, {
     suppressHydrationWarning: true,
+    ref: setNavigationRef,
     ...props,
     resetProjection,
     skipLayoutAnimation,
     children: props.children,
   },);
 }
-var NavigationExport = /* @__PURE__ */ withLibraryCSS(NavigationWrapper,);
+var NavigationWithRef = /* @__PURE__ */ React42.forwardRef(NavigationWrapper,);
+var NavigationExport = /* @__PURE__ */ withLibraryCSS(NavigationWithRef,);
 var import_hoist_non_react_statics = __toESM(require_hoist_non_react_statics_cjs(), 1,);
 var NavigateTo = /* @__PURE__ */ ((NavigateTo2) => {
   NavigateTo2['Previous'] = '@Previous';
@@ -40265,14 +40752,14 @@ var TriggerState = class {
     this.onTriggerListeners.delete(listener,);
   }
   subscribe(triggerId, targetId, trigger, callback,) {
-    if (isEmptyTrigger(trigger,)) return noop22;
+    if (isEmptyTrigger(trigger,)) return noop2;
     const triggerEntry = this.triggers.get(triggerId,) ?? {
       status: 'pending',
       targetId,
       trigger,
       unsubscribeHandlers: /* @__PURE__ */ new Set(),
     };
-    if (triggerEntry.status === 'triggered') return noop22;
+    if (triggerEntry.status === 'triggered') return noop2;
     triggerEntry.callback = callback;
     triggerEntry.status = 'pending';
     this.triggers.set(triggerId, triggerEntry,);
@@ -41034,7 +41521,7 @@ function useScheduleRenderSideEffects(dep,) {
   }, [],);
 }
 function executeBeforeUrlUpdateOnce(beforeUrlUpdate,) {
-  if (!beforeUrlUpdate) return noop22;
+  if (!beforeUrlUpdate) return noop2;
   let beforeUrlUpdateExecuted = false;
   return () => {
     if (beforeUrlUpdateExecuted) return;
@@ -41063,7 +41550,7 @@ function useNavigationTransition() {
     const navigationPromise = new Promise((resolve, reject,) => {
       resolveNavigationPromise = resolve;
       signal?.addEventListener('abort', reject,);
-    },).catch(noop22,);
+    },).catch(noop2,);
     startNativeSpinner(navigationPromise, updateURL, controller,);
     await nextRender.promise;
     if (signal?.aborted) return;
@@ -45824,7 +46311,8 @@ var ScalarIndexOf = class _ScalarIndexOf extends ScalarNode {
 };
 function assert2(condition, ...msg) {
   if (condition) return;
-  const e = Error('Assertion Error' + (msg.length > 0 ? ': ' + msg.join(' ',) : ''),);
+  const parts = msg.map(evaluateMessagePart,);
+  const e = Error('Assertion Error' + (parts.length > 0 ? ': ' + parts.join(' ',) : ''),);
   if (e.stack) {
     try {
       const lines = e.stack.split('\n',);
@@ -45838,6 +46326,14 @@ function assert2(condition, ...msg) {
     } catch {}
   }
   throw e;
+}
+function evaluateMessagePart(part,) {
+  if (typeof part !== 'function') return part;
+  try {
+    return part();
+  } catch {
+    return '(assert message part threw)';
+  }
 }
 var ScalarIntersection = class _ScalarIntersection extends ScalarNode {
   constructor(left, right,) {
@@ -47078,10 +47574,10 @@ function useCollectionSelectOptions({
   const records = useQueryData(query,);
   return useMemo(() => {
     if (!Array.isArray(records,) || records.length === 0) return void 0;
-    return records.filter((record2) => typeof record2?.id === 'string').flatMap((record2) => {
-      const id3 = record2.id;
-      const title = titleId && isString(record2[titleId],) ? record2[titleId] : void 0;
-      const slug = isString(record2[slugId],) ? record2[slugId] : void 0;
+    return records.filter((record) => typeof record?.id === 'string').flatMap((record) => {
+      const id3 = record.id;
+      const title = titleId && isString(record[titleId],) ? record[titleId] : void 0;
+      const slug = isString(record[slugId],) ? record[slugId] : void 0;
       const displayTitle = title || slug;
       if (!displayTitle) return [];
       return [{
@@ -47161,7 +47657,7 @@ function TriggerSubscription({
   triggeredExternally,
 },) {
   const triggerState = useTriggerState();
-  const stableCallback = useStableCallback(callback ?? noop22,);
+  const stableCallback = useStableCallback(callback ?? noop2,);
   useEffect(() => {
     const unsubscribe = triggerState?.subscribe(triggerId, targetId, trigger, stableCallback,);
     return unsubscribe;
@@ -47420,9 +47916,9 @@ function useDataRecord(collection, variables,) {
     if (!variables) {
       return null;
     }
-    const pageRecord = collection.find((record2) => {
+    const pageRecord = collection.find((record) => {
       return Object.entries(variables,).every(([key7, value,],) => {
-        const recordValue = record2[key7];
+        const recordValue = record[key7];
         if (value === void 0 || recordValue === void 0 || isObject2(value,) || isObject2(recordValue,)) {
           return false;
         }
@@ -47890,8 +48386,8 @@ function useLoadMorePagination(totalSize, pageSize, hash2, paginateWithSuspended
       continueAfter: 'paint',
     },);
     if (currentPageRef.current >= totalPages) return;
-    const renderNextPage = (startTransition23) => {
-      startTransition23(() => {
+    const renderNextPage = (startTransition24) => {
+      startTransition24(() => {
         setCurrentPage((_currentPage) => {
           const nextPage = Math.min(_currentPage + 1, totalPages,);
           currentPageRef.current = nextPage;
@@ -49712,6 +50208,68 @@ function withMappedReactProps(Component18, info,) {
     },);
   };
 }
+function isVideoElement(value,) {
+  return typeof HTMLVideoElement !== 'undefined' && value instanceof HTMLVideoElement;
+}
+function releaseTextureValue(value,) {
+  if (typeof ImageBitmap !== 'undefined' && value instanceof ImageBitmap) {
+    value.close();
+    return;
+  }
+  if (isVideoElement(value,)) {
+    value.pause();
+    value.removeAttribute('src',);
+    value.load();
+  }
+}
+function releaseTextureUniforms(uniforms,) {
+  for (const uniform of Object.values(uniforms,)) {
+    if (uniform.type === 'sampler2D') releaseTextureValue(uniform.value,);
+  }
+}
+var videoLoadTimeoutMs = 1e4;
+function loadVideoTexture(url, signal,) {
+  return new Promise((resolve, reject,) => {
+    const video = document.createElement('video',);
+    video.crossOrigin = 'anonymous';
+    video.muted = true;
+    video.loop = true;
+    video.setAttribute('playsinline', '',);
+    video.preload = 'auto';
+    const aborted = 'Video texture load aborted';
+    if (signal?.aborted) {
+      releaseTextureValue(video,);
+      reject(new Error(aborted,),);
+      return;
+    }
+    const onAbort = () => fail(aborted,);
+    const onError = () => fail(`Failed to load video texture from "${url}"`,);
+    const timeoutId = __unframerWindow2.setTimeout(() => fail(`Timed out loading video texture from "${url}"`,), videoLoadTimeoutMs,);
+    function detach() {
+      __unframerWindow2.clearTimeout(timeoutId,);
+      signal?.removeEventListener('abort', onAbort,);
+      video.removeEventListener('error', onError,);
+    }
+    function fail(message,) {
+      detach();
+      releaseTextureValue(video,);
+      reject(new Error(message,),);
+    }
+    signal?.addEventListener('abort', onAbort, {
+      once: true,
+    },);
+    video.addEventListener('loadeddata', () => {
+      detach();
+      resolve(video,);
+    }, {
+      once: true,
+    },);
+    video.addEventListener('error', onError, {
+      once: true,
+    },);
+    video.src = url;
+  },);
+}
 var uniformPrefix = 'u_';
 var supportedBufferFormats = ['rgba8', 'r8', 'rg16f', 'rgba16f', 'rgba32f',];
 var shaderBufferFormats = /* @__PURE__ */ new Set(supportedBufferFormats,);
@@ -50018,6 +50576,9 @@ var WebGL2ShaderRenderer = class {
     if (this.disposed) return;
     this.disposed = true;
     this.canvas.removeEventListener(webGLContextLostEvent, this.contextLostHandler,);
+    for (const [, entry,] of this.textures) {
+      if (entry.source && !isVideoElement(entry.source,)) releaseTextureValue(entry.source,);
+    }
     if (this.gl.isContextLost()) return;
     const {
       gl,
@@ -50245,10 +50806,9 @@ var WebGL2ShaderRenderer = class {
     }
   }
   /**
-   * Creates or updates a texture from an HTMLImageElement or ImageBitmap.
-   * Binds the texture to the specified texture unit.
+   * Creates or updates a texture from a texture source and binds it to the given unit.
    */
-  bindTexture(uniformName, image, textureUnit,) {
+  bindTexture(uniformName, source, textureUnit,) {
     const {
       gl,
       textures,
@@ -50260,25 +50820,63 @@ var WebGL2ShaderRenderer = class {
       if (!texture) return;
       entry = {
         texture,
-        image: null,
+        source: null,
       };
       textures.set(uniformName, entry,);
     }
     if (!entry) return;
     gl.activeTexture(gl.TEXTURE0 + textureUnit,);
     gl.bindTexture(gl.TEXTURE_2D, entry.texture,);
-    if (isNewTexture || entry.image !== image) {
-      if (entry.image instanceof ImageBitmap) {
-        entry.image.close();
-      }
-      entry.image = image;
-      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image,);
+    if (isVideoElement(source,)) {
+      this.uploadVideoFrame(entry, source, isNewTexture,);
+      return;
+    }
+    if (isNewTexture || entry.source !== source) {
+      if (entry.source && !isVideoElement(entry.source,)) releaseTextureValue(entry.source,);
+      entry.source = source;
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, source,);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE,);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE,);
       gl.generateMipmap(gl.TEXTURE_2D,);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR,);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR,);
     }
+  }
+  /**
+   * Uploads the current frame of a video to the bound texture. Prefers `texSubImage2D`
+   * (pixel update) over `texImage2D` (storage realloc) once the texture is sized, and
+   * skips frames that haven't advanced. No mipmaps — regenerating them per frame is far
+   * too costly, so LINEAR filtering is the trade-off.
+   */
+  uploadVideoFrame(entry, video, isNewTexture,) {
+    const {
+      gl,
+    } = this;
+    if (video.readyState < video.HAVE_CURRENT_DATA) return;
+    if (video.seeking) return;
+    const {
+      videoWidth,
+      videoHeight,
+      currentTime,
+    } = video;
+    if (videoWidth === 0 || videoHeight === 0) return;
+    if (entry.source && entry.source !== video && !isVideoElement(entry.source,)) releaseTextureValue(entry.source,);
+    const needsAllocation = isNewTexture || entry.source !== video || entry.videoWidth !== videoWidth || entry.videoHeight !== videoHeight;
+    if (needsAllocation) {
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE,);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE,);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR,);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR,);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, video,);
+      entry.source = video;
+      entry.videoWidth = videoWidth;
+      entry.videoHeight = videoHeight;
+      entry.videoTime = currentTime;
+      return;
+    }
+    if (entry.videoTime === currentTime) return;
+    gl.texSubImage2D(gl.TEXTURE_2D, 0, 0, 0, gl.RGBA, gl.UNSIGNED_BYTE, video,);
+    entry.videoTime = currentTime;
   }
   /**
    * Pushes user-supplied uniform values into the active program, lazy-caching their
@@ -50481,6 +51079,7 @@ function controlTypeToGLSLType(controlType,) {
     case 'color':
       return 'vec4';
     case 'responsiveimage':
+    case 'file':
       return 'sampler2D';
     default:
       assertNever(controlType,);
@@ -50898,6 +51497,76 @@ function getImageInfo(image,) {
 function isHeightMapSupportedTexImageSource(image,) {
   return image instanceof HTMLImageElement || image instanceof HTMLCanvasElement;
 }
+var maxPooledVideos = 24;
+var VideoDecoderPool = class {
+  constructor() {
+    __publicField(this, 'byOwner', /* @__PURE__ */ new Map(),);
+  }
+  /**
+   * Get this shader's decoder for `url` while resolving a video uniform — created and loaded on the
+   * first request, then the same cached one every time after, so a re-resolve never restarts a playing
+   * video. Each shader gets its own decoder for a URL: a `<video>` has one playback head, so two
+   * shaders can't share play/pause/seek. Rejects — and forgets the entry so a later acquire retries —
+   * if the load fails or the pool is already full.
+   */
+  acquire(owner, url,) {
+    let owned = this.byOwner.get(owner,);
+    if (!owned) {
+      owned = /* @__PURE__ */ new Map();
+      this.byOwner.set(owner, owned,);
+    }
+    const existing = owned.get(url,);
+    if (existing) return existing.promise;
+    if (this.size >= maxPooledVideos) {
+      return Promise.reject(new Error(`Video decoder pool is full (max ${maxPooledVideos}); "${url}" falls back.`,),);
+    }
+    const controller = new AbortController();
+    const promise = loadVideoTexture(url, controller.signal,);
+    promise.catch(() => {
+      if (owned.get(url,)?.promise === promise) owned.delete(url,);
+    },);
+    owned.set(url, {
+      promise,
+      controller,
+    },);
+    return promise;
+  }
+  /**
+   * After a resolve commits, drop this shader's decoders whose URL isn't in `keepUrls` — e.g. the
+   * outgoing video after a URL swap. A no-op when the shader has nothing pooled.
+   */
+  keepOnly(owner, keepUrls,) {
+    const owned = this.byOwner.get(owner,);
+    if (!owned) return;
+    for (const [url, entry,] of owned) {
+      if (keepUrls.has(url,)) continue;
+      owned.delete(url,);
+      dispose(entry,);
+    }
+    if (owned.size === 0) this.byOwner.delete(owner,);
+  }
+  /**
+   * Dispose every decoder this shader holds — on unmount, or when a resolve fails. Decoders must be
+   * released explicitly; the browser won't free them on garbage collection alone.
+   */
+  releaseAll(owner,) {
+    const owned = this.byOwner.get(owner,);
+    if (!owned) return;
+    for (const entry of owned.values()) dispose(entry,);
+    this.byOwner.delete(owner,);
+  }
+  /** @internal Exposed for testing. */
+  get size() {
+    let total = 0;
+    for (const owned of this.byOwner.values()) total += owned.size;
+    return total;
+  }
+};
+function dispose(entry,) {
+  entry.controller.abort();
+  entry.promise.then(releaseTextureValue, () => {},);
+}
+var videoDecoderPool = /* @__PURE__ */ new VideoDecoderPool();
 var overlayStyle = {
   position: 'absolute',
   inset: 0,
@@ -50925,8 +51594,52 @@ function colorToVec4(color2, element,) {
   const rgba2 = Color.toRgb(Color(resolved,),);
   return [rgba2.r / 255, rgba2.g / 255, rgba2.b / 255, rgba2.a,];
 }
-function loadTexture(url,) {
-  return shaderTextureCache.load(url, () => loadTextureFromNetwork(url,),);
+function loadTexture(url, signal, owner,) {
+  if (isVideoSource(url,)) {
+    if (!owner) return loadVideoTexture(url, signal,);
+    if (signal?.aborted) return Promise.reject(new Error('Texture load aborted',),);
+    return abortable(videoDecoderPool.acquire(owner, url,), signal,);
+  }
+  return abortable(shaderTextureCache.load(url, () => loadTextureFromNetwork(url,),), signal,);
+}
+function abortable(promise, signal,) {
+  if (!signal) return promise;
+  return new Promise((resolve, reject,) => {
+    const onAbort = () => reject(new Error('Texture load aborted',),);
+    if (signal.aborted) {
+      onAbort();
+      return;
+    }
+    signal.addEventListener('abort', onAbort, {
+      once: true,
+    },);
+    promise.then((value) => {
+      signal.removeEventListener('abort', onAbort,);
+      resolve(value,);
+    }, (error) => {
+      signal.removeEventListener('abort', onAbort,);
+      reject(error,);
+    },);
+  },);
+}
+var videoExtensions = ['.mp4', '.m4v',];
+function isVideoSource(url,) {
+  return urlHasExtension(url, videoExtensions,);
+}
+function getTextureUrl(uniform,) {
+  const {
+    value,
+  } = uniform;
+  if (isString(value,)) return value;
+  if (isObject2(value,) && 'src' in value) return value.src;
+  return void 0;
+}
+function collectVideoUrls(uniforms,) {
+  const urls = /* @__PURE__ */ new Set();
+  for (const uniform of Object.values(uniforms,)) {
+    if (uniform.type === 'file' && isVideoSource(uniform.value,)) urls.add(uniform.value,);
+  }
+  return urls;
 }
 function loadTextureFromNetwork(url,) {
   return new Promise((resolve, reject,) => {
@@ -50942,9 +51655,9 @@ function loadTextureFromNetwork(url,) {
     img.src = url;
   },);
 }
-function getTextureCacheKey(image,) {
-  if (image instanceof HTMLImageElement) return image.src || void 0;
-  if (image instanceof HTMLCanvasElement) return image.dataset.src || void 0;
+function getTextureCacheKey(source,) {
+  if (source instanceof HTMLImageElement) return source.src || void 0;
+  if (source instanceof HTMLCanvasElement) return source.dataset.src || void 0;
   return void 0;
 }
 var svgExtension = '.svg';
@@ -50966,15 +51679,19 @@ function rasterizeSVGAtFixedRes(image,) {
   canvas.dataset.src = image.src;
   return canvas;
 }
-function isSVGSource(url,) {
+function urlHasExtension(url, extensions,) {
   try {
     const pathname = new URL(url, 'https://placeholder',).pathname.toLowerCase();
-    return pathname.endsWith(svgExtension,);
+    return extensions.some((extension) => pathname.endsWith(extension,));
   } catch {
-    return url.toLowerCase().includes(svgExtension,);
+    const lower = url.toLowerCase();
+    return extensions.some((extension) => lower.includes(extension,));
   }
 }
-async function resolveUniform(uniform, element,) {
+function isSVGSource(url,) {
+  return urlHasExtension(url, [svgExtension,],);
+}
+async function resolveUniform(uniform, element, signal, owner,) {
   switch (uniform.type) {
     case 'number':
     case 'enum':
@@ -50992,18 +51709,13 @@ async function resolveUniform(uniform, element,) {
         type: 'vec4',
         value: colorToVec4(uniform.value, element,),
       };
-    case 'responsiveimage': {
-      let url;
-      if (isString(uniform.value,)) {
-        url = uniform.value;
-      } else if (isObject2(uniform.value,) && 'src' in uniform.value) {
-        url = uniform.value.src;
-      }
+    case 'responsiveimage':
+    case 'file': {
+      const url = getTextureUrl(uniform,);
       if (!url) return;
-      const image = await loadTexture(url,);
       return {
         type: 'sampler2D',
-        value: image,
+        value: await loadTexture(url, signal, owner,),
       };
     }
     case 'array':
@@ -51015,37 +51727,36 @@ async function resolveUniform(uniform, element,) {
       assertNever(uniform,);
   }
 }
-async function resolveUniforms(uniforms, element, heightmapSource,) {
+async function resolveUniforms(uniforms, canvasRef, heightmapSource, signal,) {
   const result = {};
   const heightmapSourceUniform = heightmapSource ? toUniformName(heightmapSource,) : void 0;
-  for (const [name, uniform,] of Object.entries(uniforms,)) {
-    const resolved = await resolveUniform(uniform, element,);
-    if (!resolved) continue;
-    result[name] = resolved;
-    if (uniform.type === 'array') {
-      result[toArrayLengthName(name,)] = {
-        type: 'int',
-        value: uniform.value.length,
-      };
-    }
-    if (heightmapSource && heightmapSourceUniform && name === heightmapSourceUniform && resolved.type === 'sampler2D') {
-      const heightmap = generateHeightmap(resolved.value, () => getTextureCacheKey(resolved.value,),);
-      if (heightmap) {
-        result[toHeightmapUniformName(heightmapSource,)] = {
-          type: 'sampler2D',
-          value: heightmap,
+  const element = canvasRef?.current ?? null;
+  try {
+    for (const [name, uniform,] of Object.entries(uniforms,)) {
+      const resolved = await resolveUniform(uniform, element, signal, canvasRef,);
+      if (!resolved) continue;
+      result[name] = resolved;
+      if (uniform.type === 'array') {
+        result[toArrayLengthName(name,)] = {
+          type: 'int',
+          value: uniform.value.length,
         };
       }
+      if (heightmapSource && heightmapSourceUniform && name === heightmapSourceUniform && resolved.type === 'sampler2D') {
+        const heightmap = generateHeightmap(resolved.value, () => getTextureCacheKey(resolved.value,),);
+        if (heightmap) {
+          result[toHeightmapUniformName(heightmapSource,)] = {
+            type: 'sampler2D',
+            value: heightmap,
+          };
+        }
+      }
     }
+  } catch (error) {
+    if (!canvasRef) releaseTextureUniforms(result,);
+    throw error;
   }
   return result;
-}
-function closeImageBitmaps(uniforms,) {
-  for (const uniform of Object.values(uniforms,)) {
-    if (uniform.type === 'sampler2D' && uniform.value instanceof ImageBitmap) {
-      uniform.value.close();
-    }
-  }
 }
 function resolveResolutionScale(scale2,) {
   if (typeof scale2 === 'number') return scale2;
@@ -51216,32 +51927,43 @@ var ShaderPoolContext = /* @__PURE__ */ createContext(null,);
 function useShaderPoolContext() {
   return useContext(ShaderPoolContext,);
 }
+function useStableUniforms(uniforms,) {
+  const ref = useRef(uniforms,);
+  if (!isEqual(ref.current, uniforms,)) {
+    ref.current = uniforms;
+  }
+  return ref.current;
+}
 function useResolvedUniforms(uniforms, canvasRef, heightmapSource, onUniformResolutionSucceeded, onUniformResolutionFailed,) {
   const [resolvedUniforms, setResolvedUniforms,] = useState({},);
   const [haveUniformsResolved, setHaveUniformsResolved,] = useState(uniforms === void 0,);
+  const stableUniforms = useStableUniforms(uniforms,);
+  useEffect(() => () => videoDecoderPool.releaseAll(canvasRef,), [canvasRef,],);
   useEffect(() => {
-    if (!uniforms) {
-      startTransition2(() => setHaveUniformsResolved(true,));
+    if (!stableUniforms) {
+      videoDecoderPool.releaseAll(canvasRef,);
+      startTransition2(() => {
+        setResolvedUniforms({},);
+        setHaveUniformsResolved(true,);
+      },);
       return;
     }
-    let isCancelled = false;
-    resolveUniforms(uniforms, canvasRef.current, heightmapSource,).then((resolved) => {
-      if (isCancelled) {
-        closeImageBitmaps(resolved,);
-        return;
-      }
+    const controller = new AbortController();
+    resolveUniforms(stableUniforms, canvasRef, heightmapSource, controller.signal,).then((resolved) => {
+      if (controller.signal.aborted) return;
+      videoDecoderPool.keepOnly(canvasRef, collectVideoUrls(stableUniforms,),);
       startTransition2(() => {
         setResolvedUniforms(resolved,);
         setHaveUniformsResolved(true,);
       },);
       onUniformResolutionSucceeded?.();
     },).catch(() => {
-      if (!isCancelled) onUniformResolutionFailed?.();
+      if (controller.signal.aborted) return;
+      videoDecoderPool.releaseAll(canvasRef,);
+      onUniformResolutionFailed?.();
     },);
-    return () => {
-      isCancelled = true;
-    };
-  }, [uniforms, canvasRef, heightmapSource, onUniformResolutionSucceeded, onUniformResolutionFailed,],);
+    return () => controller.abort();
+  }, [stableUniforms, canvasRef, heightmapSource, onUniformResolutionSucceeded, onUniformResolutionFailed,],);
   return {
     resolvedUniforms,
     haveUniformsResolved,
@@ -51368,6 +52090,34 @@ function usePatchDelayShaderRender(enabled = true,) {
   }, [enabled,],);
   return mayRender;
 }
+function forEachVideoUniform(uniforms, fn,) {
+  for (const uniform of Object.values(uniforms,)) {
+    if (uniform.type === 'sampler2D' && isVideoElement(uniform.value,)) fn(uniform.value,);
+  }
+}
+function useShaderVideoPlayback(resolvedUniforms, shouldPlay, renderSingleFrame,) {
+  const wasPlayingRef = useRef(false,);
+  useLayoutEffect(() => {
+    const startedPlaying = shouldPlay && !wasPlayingRef.current;
+    wasPlayingRef.current = shouldPlay;
+    let didRewind = false;
+    forEachVideoUniform(resolvedUniforms, (video) => {
+      if (shouldPlay) {
+        if (startedPlaying) video.currentTime = 0;
+        void video.play().catch(() => {},);
+        return;
+      }
+      video.pause();
+      if (video.currentTime === 0) return;
+      video.addEventListener('seeked', () => renderSingleFrame(), {
+        once: true,
+      },);
+      video.currentTime = 0;
+      didRewind = true;
+    },);
+    if (didRewind) renderSingleFrame();
+  }, [resolvedUniforms, shouldPlay, renderSingleFrame,],);
+}
 var canvasStyle = {
   display: 'block',
   width: '100%',
@@ -51395,6 +52145,7 @@ function ShaderCanvas({
   const startTimeRef = useRef(0,);
   const lastTimeRef = useRef(0,);
   const shaderRenderedFrameRef = useRef(null,);
+  const [isRendererLive, setIsRendererLive,] = useState(false,);
   const onReadyRef = useRef(onReady,);
   useLayoutEffect(() => {
     onReadyRef.current = onReady;
@@ -51500,6 +52251,8 @@ function ShaderCanvas({
       renderSingleFrame();
     }
   }, [resolvedUniforms, renderSingleFrame,],);
+  const videosShouldPlay = animated && !singleFrame2 && haveUniformsResolved && isRendererLive;
+  useShaderVideoPlayback(resolvedUniforms, videosShouldPlay, renderSingleFrame,);
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas || !haveUniformsResolved) return;
@@ -51528,7 +52281,9 @@ function ShaderCanvas({
       } else {
         animationFrameRef.current = requestAnimationFrame(animate3,);
       }
+      startTransition2(() => setIsRendererLive(true,));
     } catch (error) {
+      startTransition2(() => setIsRendererLive(false,));
       if (onError && error instanceof Error) {
         onError(error,);
       }
@@ -53429,55 +54184,7 @@ var CustomFontSource = class _CustomFontSource {
     __publicField(this, 'byFamilyName', /* @__PURE__ */ new Map(),);
     __publicField(this, 'assetsByKey', /* @__PURE__ */ new Map(),);
   }
-  deprecatedImportFonts(assets,) {
-    this.fontFamilies.length = 0;
-    this.byFamilyName.clear();
-    this.assetsByKey.clear();
-    const fonts = [];
-    for (const asset of assets) {
-      if (!this.isValidCustomFontAsset(asset,)) {
-        continue;
-      }
-      const variationAxesData = asset.properties?.font.variationAxes;
-      const assetIsVariableFont = Array.isArray(variationAxesData,);
-      const fontName = getLegacyFontFamilyName(asset.properties,);
-      const fontFamily = this.createFontFamily(fontName,);
-      const openTypeData = asset.properties?.font.openTypeData;
-      const variant = assetIsVariableFont ? 'variable' : this.inferVariantName(fontName,);
-      const url = createAbsoluteAssetURLFromAsset(asset,);
-      const selector = _CustomFontSource.createLegacySelector(fontName,);
-      const {
-        family,
-        variant: v2Variant,
-      } = getCustomFontInfo(asset.properties.font,);
-      const v2Selector = _CustomFontSource.createSelector(family, v2Variant,);
-      const font = {
-        assetKey: asset.key,
-        family: fontFamily,
-        selector,
-        variant,
-        file: url,
-        hasOpenTypeFeatures: supportsOpenType(openTypeData,),
-        variationAxes: validateVariationAxes(variationAxesData,),
-        owner: getAssetOwnerType(asset,),
-        cssFamilyName: _CustomFontSource.cssFontFamilyFromSelector(selector,),
-        alternativeSelectors: {
-          [v2Selector]: {
-            variant: v2Variant,
-            cssFamilyName: _CustomFontSource.cssFontFamilyFromSelector(v2Selector,),
-          },
-        },
-      };
-      fontFamily.fonts.push(font,);
-      this.assetsByKey.set(asset.key, asset,);
-      fonts.push(...fontFamily.fonts,);
-    }
-    return fonts;
-  }
-  importFonts(assets, enableFontImprovements,) {
-    if (!enableFontImprovements) {
-      return this.deprecatedImportFonts(assets,);
-    }
+  importFonts(assets,) {
     this.fontFamilies.length = 0;
     this.byFamilyName.clear();
     this.assetsByKey.clear();
@@ -54346,13 +55053,13 @@ var FontStore = class {
       this.addFont(font,);
     },);
   }
-  importCustomFonts(assets, enableFontImprovements,) {
+  importCustomFonts(assets,) {
     this.bySelector.forEach((_, key7,) => {
       if (isCustomFontSelector(key7,)) {
         this.bySelector.delete(key7,);
       }
     },);
-    const importedFonts = this.custom.importFonts(assets, enableFontImprovements,);
+    const importedFonts = this.custom.importFonts(assets,);
     for (const font of importedFonts) {
       this.addFont(font,);
     }
@@ -59735,7 +60442,7 @@ var package_default = {
     '@types/yargs': '^17.0.33',
     chalk: '^4.1.2',
     'eslint-plugin-framer-studio': 'workspace:*',
-    'framer-motion': '12.39.0',
+    'framer-motion': '12.42.0',
     immutable: '^3.8.3',
     'jest-diff': '^29.3.1',
     'jest-environment-jsdom': '^29.3.1',
@@ -59743,7 +60450,7 @@ var package_default = {
     react: '^18.2.0',
     'react-dom': '^18.2.0',
     semver: '^7.7.1',
-    typescript: '^5.9.2',
+    typescript: '^6.0.3',
     yargs: '^17.7.2',
   },
   tsdoc: {
@@ -59765,7 +60472,6 @@ if (false) {
 export {
   _injectRuntime,
   acceleratedValues,
-  activeAnimations,
   addActionControls,
   addAttrValue,
   addDomEvent,
@@ -59805,6 +60511,7 @@ export {
   applyPointDelta,
   applyPxDefaults,
   applyTreeDeltas,
+  arc,
   aspectRatio,
   AsyncMotionValueAnimation,
   attachFollow,
