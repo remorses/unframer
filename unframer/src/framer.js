@@ -15,7 +15,7 @@ import {
 } from './framer-chunks/chunk-ZHL7H4DS.js';
 import './framer-chunks/chunk-IKQSD2QC.js';
 
-// /:https://app.framerstatic.com/chunk-U5EBFIXB.mjs
+// /:https://app.framerstatic.com/chunk-IVFST2BV.mjs
 import { createContext, } from 'react';
 import { useEffect, useLayoutEffect, } from 'react';
 import * as React from 'react';
@@ -3747,6 +3747,7 @@ var DOMKeyframesResolver = class extends KeyframeResolver {
     this.resolveNoneKeyframes();
   }
 };
+var cornerRadiusProps = ['borderTopLeftRadius', 'borderTopRightRadius', 'borderBottomRightRadius', 'borderBottomLeftRadius',];
 var pxValues = /* @__PURE__ */ new Set([
   // Border props
   'borderWidth',
@@ -3755,10 +3756,7 @@ var pxValues = /* @__PURE__ */ new Set([
   'borderBottomWidth',
   'borderLeftWidth',
   'borderRadius',
-  'borderTopLeftRadius',
-  'borderTopRightRadius',
-  'borderBottomRightRadius',
-  'borderBottomLeftRadius',
+  ...cornerRadiusProps,
   // Positioning props
   'width',
   'maxWidth',
@@ -4691,6 +4689,7 @@ function hasTarget(target, targets,) {
   return targets.has(target,) && Object.keys(targets.get(target,),).length > 0;
 }
 var definitionNames = ['layout', 'enter', 'exit', 'new', 'old',];
+var isSquareRadius = (radius) => radius.split(' ',).every((value) => parseFloat(value,) === 0);
 var typeBuckets = {
   group: ['layout',],
   new: ['new', 'enter',],
@@ -4802,17 +4801,39 @@ function startViewAnimation(builder,) {
     }
     return transition2;
   };
-  const cropBox = /* @__PURE__ */ new Map();
+  const resolveGroupTiming = (name) => {
+    const [index, total,] = staggerPosition(name, 'group',);
+    const transition2 = resolveLayerTransition(layerTargets.get(name,), 'group', 'layout', index === -1 ? 0 : index, total,);
+    transition2.duration && (transition2.duration = secondsToMilliseconds(transition2.duration,));
+    const {
+      delay: delay2 = 0,
+      duration,
+      ease: ease2,
+    } = applyGeneratorOptions(transition2,);
+    return {
+      delay: secondsToMilliseconds(delay2,),
+      duration,
+      ease: ease2,
+    };
+  };
+  const cropMeasurements = /* @__PURE__ */ new Map();
   const measureLayers = (phase) =>
     nameRegistry.forEach((name, element,) => {
-      const rect = element.getBoundingClientRect?.();
+      const el = element;
+      const rect = el.getBoundingClientRect?.();
       if (rect && rect.height) {
-        const entry = cropBox.get(name,) ?? {};
+        const style2 = getComputedStyle(el,);
+        const radii = {};
+        for (const corner of cornerRadiusProps) {
+          radii[corner] = style2[corner];
+        }
+        const entry = cropMeasurements.get(name,) ?? {};
         entry[phase] = {
           width: rect.width,
           height: rect.height,
+          radii,
         };
-        cropBox.set(name, entry,);
+        cropMeasurements.set(name, entry,);
       }
     },);
   const finalizeCrop = () => {
@@ -4825,7 +4846,7 @@ function startViewAnimation(builder,) {
     }
   };
   const aspectChanged = (name) => {
-    const box = cropBox.get(name,);
+    const box = cropMeasurements.get(name,);
     if (!box?.old || !box?.new || !box.old.height || !box.new.height) {
       return false;
     }
@@ -4971,26 +4992,66 @@ function startViewAnimation(builder,) {
           }
           continue;
         }
+        const opposite = name.type === 'old' ? 'new' : name.type === 'new' ? 'old' : void 0;
+        if (opposite && explicitlyAnimated.has(`${name.layer}:${opposite}`,) && !opacityAnimated.has(`${name.layer}:${opposite}`,)) {
+          animation.cancel();
+          continue;
+        }
         const stagger2 = layerStagger.get(name.layer,);
         const isMorphCrossfade = (name.type === 'old' || name.type === 'new') && !!stagger2?.old && !!stagger2?.new;
-        const timingType = name.type.startsWith('group',) || isMorphCrossfade ? 'group' : name.type;
-        const [index, total,] = staggerPosition(name.layer, timingType,);
-        const transitionName = timingType === 'group' ? 'layout' : '';
-        let animationTransition = resolveLayerTransition(targetDefinition, timingType, transitionName, index === -1 ? 0 : index, total,);
-        const visualDuration = animationTransition.visualDuration;
-        animationTransition.duration && (animationTransition.duration = secondsToMilliseconds(animationTransition.duration,));
-        animationTransition = applyGeneratorOptions(animationTransition,);
-        const duration = isMorphCrossfade && visualDuration !== void 0
-          ? secondsToMilliseconds(visualDuration,)
-          : animationTransition.duration;
-        const easing = isMorphCrossfade ? 'linear' : mapEasingToNativeEasing(animationTransition.ease, animationTransition.duration,);
-        effect.updateTiming({
-          delay: secondsToMilliseconds(animationTransition.delay ?? 0,),
-          duration,
-          easing,
-        },);
+        let timing;
+        if (name.type.startsWith('group',)) {
+          const {
+            delay: delay2,
+            duration,
+            ease: ease2,
+          } = resolveGroupTiming(name.layer,);
+          timing = {
+            delay: delay2,
+            duration,
+            easing: mapEasingToNativeEasing(ease2, duration,),
+          };
+        } else {
+          const timingType = isMorphCrossfade ? 'group' : name.type;
+          const [index, total,] = staggerPosition(name.layer, timingType,);
+          const transitionName = timingType === 'group' ? 'layout' : '';
+          let animationTransition = resolveLayerTransition(targetDefinition, timingType, transitionName, index === -1 ? 0 : index, total,);
+          const visualDuration = animationTransition.visualDuration;
+          animationTransition.duration && (animationTransition.duration = secondsToMilliseconds(animationTransition.duration,));
+          animationTransition = applyGeneratorOptions(animationTransition,);
+          timing = {
+            delay: secondsToMilliseconds(animationTransition.delay ?? 0,),
+            duration: isMorphCrossfade && visualDuration !== void 0 ? secondsToMilliseconds(visualDuration,) : animationTransition.duration,
+            easing: isMorphCrossfade ? 'linear' : mapEasingToNativeEasing(animationTransition.ease, animationTransition.duration,),
+          };
+        }
+        effect.updateTiming(timing,);
         animations2.push(new NativeAnimationWrapper(animation,),);
       }
+      cropMeasurements.forEach((entry, name,) => {
+        if (!croppedNames.has(name,)) return;
+        const {
+          delay: delay2,
+          duration,
+          ease: ease2,
+        } = resolveGroupTiming(name,);
+        for (const corner of cornerRadiusProps) {
+          const from = entry.old?.radii[corner] || entry.new?.radii[corner] || '0px';
+          const to = entry.new?.radii[corner] || entry.old?.radii[corner] || '0px';
+          if (isSquareRadius(from,) && isSquareRadius(to,)) continue;
+          animations2.push(
+            new NativeAnimation({
+              element: document.documentElement,
+              name: corner,
+              pseudoElement: `::view-transition-group(${name})`,
+              keyframes: [from, to,],
+              delay: delay2,
+              duration,
+              ease: ease2,
+            },),
+          );
+        }
+      },);
       resolve(new GroupAnimation(animations2,),);
     },).catch(() => (
       /**
@@ -6074,7 +6135,7 @@ var correctBoxShadow = {
 var scaleCorrectors = {
   borderRadius: {
     ...correctBorderRadius,
-    applyTo: ['borderTopLeftRadius', 'borderTopRightRadius', 'borderBottomLeftRadius', 'borderBottomRightRadius',],
+    applyTo: [...cornerRadiusProps,],
   },
   borderTopLeftRadius: correctBorderRadius,
   borderTopRightRadius: correctBorderRadius,
@@ -6743,8 +6804,7 @@ function buildProjectionTransform(delta, treeScale, latestTransform,) {
   }
   return transform2 || 'none';
 }
-var borderLabels = ['borderTopLeftRadius', 'borderTopRightRadius', 'borderBottomLeftRadius', 'borderBottomRightRadius',];
-var numBorders = borderLabels.length;
+var numBorders = cornerRadiusProps.length;
 var asNumber2 = (value) => typeof value === 'string' ? parseFloat(value,) : value;
 var isPx = (value) => typeof value === 'number' || px.test(value,);
 function mixValues(target, follow, lead, progress2, shouldCrossfadeOpacity, isOnlyMember,) {
@@ -6755,7 +6815,7 @@ function mixValues(target, follow, lead, progress2, shouldCrossfadeOpacity, isOn
     target.opacity = mixNumber(follow.opacity ?? 1, lead.opacity ?? 1, progress2,);
   }
   for (let i = 0; i < numBorders; i++) {
-    const borderLabel = borderLabels[i];
+    const borderLabel = cornerRadiusProps[i];
     let followRadius = getRadius(follow, borderLabel,);
     let leadRadius = getRadius(lead, borderLabel,);
     if (followRadius === void 0 && leadRadius === void 0) continue;
@@ -13239,7 +13299,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.NC7OXDQS.mjs
+// /:https://app.framerstatic.com/framer.3ZFY3AJ2.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -16630,6 +16690,22 @@ function replaceHistoryState(data2, url, ignoreReplaceStateWrapper = false,) {
     : __unframerWindow2.history.replaceState;
   replaceState.call(__unframerWindow2.history, data2, '', url,);
 }
+function afterNavigationTransition(callback,) {
+  const transition = __unframerWindow2.navigation?.transition;
+  if (!transition) {
+    callback();
+    return;
+  }
+  const run2 = () => {
+    const currentTransition = __unframerWindow2.navigation?.transition;
+    if (currentTransition && currentTransition !== transition) {
+      afterNavigationTransition(callback,);
+      return;
+    }
+    callback();
+  };
+  void transition.finished.then(run2, run2,);
+}
 var maybeHasPopstateBug = true;
 var isImpactedPopstateBugChromiumVersion = /* @__PURE__ */ (() => {
   if (typeof __unframerNavigator2 === 'undefined') return false;
@@ -16868,23 +16944,25 @@ async function switchLocale(options,) {
   return result;
 }
 function pushLoadMoreHistory(hash2, paginationInfo,) {
-  try {
-    const currentHistoryState = __unframerWindow2.history.state;
-    if (!isHistoryState(currentHistoryState,)) return;
-    const isInitialLoad = currentHistoryState?.paginationInfo === void 0 || currentHistoryState.paginationInfo[hash2] === void 0;
-    const newPaginationInfo = {
-      ...currentHistoryState.paginationInfo,
-      [hash2]: paginationInfo,
-    };
-    replaceHistoryState(
-      {
-        ...currentHistoryState,
-        paginationInfo: newPaginationInfo,
-      },
-      void 0,
-      isInitialLoad,
-    );
-  } catch {}
+  afterNavigationTransition(() => {
+    try {
+      const currentHistoryState = __unframerWindow2.history.state;
+      if (!isHistoryState(currentHistoryState,)) return;
+      const isInitialLoad = currentHistoryState?.paginationInfo === void 0 || currentHistoryState.paginationInfo[hash2] === void 0;
+      const newPaginationInfo = {
+        ...currentHistoryState.paginationInfo,
+        [hash2]: paginationInfo,
+      };
+      replaceHistoryState(
+        {
+          ...currentHistoryState,
+          paginationInfo: newPaginationInfo,
+        },
+        void 0,
+        isInitialLoad,
+      );
+    } catch {}
+  },);
 }
 function useNativeLoadingSpinner() {
   const navigationPromise = useRef(Promise.resolve(),);
@@ -43801,7 +43879,26 @@ var FieldMetadata = class {
   getValue(item,) {
     assert(this.name, 'Can only get value of field with a name',);
     const value = item.data[this.name];
+    if (!value) return null;
+    return this.wrapPointers(value,);
+  }
+  wrapPointers(value,) {
     switch (value?.type) {
+      case 'array':
+        return {
+          type: 'array',
+          value: value.value.map((item) => this.wrapPointers(item,)),
+        };
+      case 'object': {
+        const wrapped = {};
+        for (const key7 in value.value) {
+          wrapped[key7] = this.wrapPointers(value.value[key7],);
+        }
+        return {
+          type: 'object',
+          value: wrapped,
+        };
+      }
       case 'richtext': {
         assert(this.collection, 'Rich text field must have a collection',);
         return {
@@ -43817,7 +43914,7 @@ var FieldMetadata = class {
         };
       }
     }
-    return value ?? null;
+    return value;
   }
 };
 var Fields = class extends Metadata {
@@ -46916,11 +47013,7 @@ var EnforcerResolve = class _EnforcerResolve extends EnforcerNode {
     for (const tuple of input.tuples) {
       for (const field of this.fields) {
         const value = tuple.getValue(field,);
-        if (value?.type === 'richtext') {
-          this.resolver.preloadRichTextValue(value,);
-        } else if (value?.type === 'vectorsetitem') {
-          this.resolver.preloadVectorSetItemValue(value,);
-        }
+        preloadResolvedValues(value, this.resolver,);
       }
     }
     const collectionItems = yield Promise.all(
@@ -46953,6 +47046,24 @@ var EnforcerResolve = class _EnforcerResolve extends EnforcerNode {
     },);
   }
 };
+function preloadResolvedValues(value, resolver,) {
+  switch (value?.type) {
+    case 'array':
+      for (const item of value.value) preloadResolvedValues(item, resolver,);
+      return;
+    case 'object':
+      for (const key7 in value.value) {
+        preloadResolvedValues(value.value[key7], resolver,);
+      }
+      return;
+    case 'richtext':
+      resolver.preloadRichTextValue(value,);
+      return;
+    case 'vectorsetitem':
+      resolver.preloadVectorSetItemValue(value,);
+      return;
+  }
+}
 var collation9 = {
   type: 0,
   /* CaseInsensitive */
@@ -54183,12 +54294,15 @@ var CustomFontSource = class _CustomFontSource {
     __publicField(this, 'fontFamilies', [],);
     __publicField(this, 'byFamilyName', /* @__PURE__ */ new Map(),);
     __publicField(this, 'assetsByKey', /* @__PURE__ */ new Map(),);
+    __publicField(this, 'debugByFamily', /* @__PURE__ */ new Map(),);
+    __publicField(this, 'debugFamilies',);
   }
   importFonts(assets,) {
     this.fontFamilies.length = 0;
     this.byFamilyName.clear();
     this.assetsByKey.clear();
     const fonts = {};
+    const debugByFamily = /* @__PURE__ */ new Map();
     for (const asset of assets) {
       if (!this.isValidCustomFontAsset(asset,)) {
         continue;
@@ -54247,13 +54361,37 @@ var CustomFontSource = class _CustomFontSource {
         fonts[selector] = font;
       }
       this.assetsByKey.set(asset.key, asset,);
+      const debugVariant = getOrCreateDebugVariant(debugByFamily, family, variant,);
+      debugVariant.fonts.push({
+        font,
+        asset,
+        selected: false,
+      },);
     }
     for (const fontFamily of this.fontFamilies) {
       if (fontFamily.fonts.length > 0) {
         updateFontRelationships(fontFamily,);
       }
     }
+    this.debugByFamily = debugByFamily;
+    this.debugFamilies = void 0;
     return Object.values(fonts,);
+  }
+  /**
+   * Expose custom font properties and grouping decisions for the debug bar.
+   */
+  getDebugFamilies() {
+    if (this.debugFamilies) return this.debugFamilies;
+    const selectedAssets = /* @__PURE__ */ new Set();
+    for (const fontFamily of this.fontFamilies) {
+      for (const font of fontFamily.fonts) {
+        if (font.assetKey && font.owner) {
+          selectedAssets.add(`${font.assetKey}:${font.owner}`,);
+        }
+      }
+    }
+    this.debugFamilies = buildDebugFamilies(this.debugByFamily, selectedAssets,);
+    return this.debugFamilies;
   }
   static createSelector(family, variant,) {
     return `${customFontSelectorPrefixV2}${family}${variant ? ` ${variant}` : ''}`;
@@ -54341,6 +54479,38 @@ function updateFontRelationships(fontFamily,) {
 }
 function getAssetOwnerType(asset,) {
   return asset.ownerTypes.includes('team',) ? 'team' : 'project';
+}
+function getOrCreateDebugVariant(debugByFamily, family, variant,) {
+  let variantsByName = debugByFamily.get(family,);
+  if (!variantsByName) {
+    variantsByName = /* @__PURE__ */ new Map();
+    debugByFamily.set(family, variantsByName,);
+  }
+  let debugVariant = variantsByName.get(variant,);
+  if (!debugVariant) {
+    debugVariant = {
+      fonts: [],
+    };
+    variantsByName.set(variant, debugVariant,);
+  }
+  return debugVariant;
+}
+function buildDebugFamilies(debugByFamily, selectedAssets,) {
+  return Array.from(debugByFamily.entries(),).sort(([familyA,], [familyB,],) => familyA.localeCompare(familyB,)).map((
+    [family, variantsByName,],
+  ) => ({
+    family,
+    variants: Array.from(variantsByName.entries(),).sort(([variantA,], [variantB,],) => variantA.localeCompare(variantB,)).map((
+      [, debugVariant,],
+    ) => ({
+      fonts: debugVariant.fonts.map((debugFont) => ({
+        ...debugFont,
+        selected: debugFont.font.assetKey && debugFont.font.owner
+          ? selectedAssets.has(`${debugFont.font.assetKey}:${debugFont.font.owner}`,)
+          : false,
+      })),
+    })),
+  }));
 }
 async function loadFontsWithOpenType(source,) {
   switch (source) {
@@ -55071,6 +55241,9 @@ var FontStore = class {
    */
   getCustomFontsImportPromise() {
     return this.customFontsImportPromise;
+  }
+  getCustomFontDebugFamilies() {
+    return this.custom.getDebugFamilies();
   }
   getFontFamily(info,) {
     const fontFamily = this[info.source].getFontFamilyByName(info.name,);
@@ -60442,7 +60615,7 @@ var package_default = {
     '@types/yargs': '^17.0.33',
     chalk: '^4.1.2',
     'eslint-plugin-framer-studio': 'workspace:*',
-    'framer-motion': '12.42.0',
+    'framer-motion': '12.42.2',
     immutable: '^3.8.3',
     'jest-diff': '^29.3.1',
     'jest-environment-jsdom': '^29.3.1',
