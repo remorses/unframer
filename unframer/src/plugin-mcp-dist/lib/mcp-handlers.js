@@ -356,6 +356,24 @@ function checkPermissions(...methods) {
 }
 // Websocket handler function
 export async function mcpToolHandler({ input, type, }) {
+    // Validate input against zod schema before processing.
+    // Without this, malformed input (e.g., wrong parameter names, missing fields)
+    // causes cryptic runtime errors deep in handler code — like htmlparser2 crashing
+    // with "Cannot read properties of undefined (reading 'length')" when the `xml`
+    // parameter is missing from updateXmlForNode.
+    const tool = mcpTools[type];
+    if (tool?.input) {
+        const result = tool.input.safeParse(input);
+        if (!result.success) {
+            const issues = result.error.issues
+                .map((i) => {
+                return `- ${i.path.join('.')}: ${i.message}`;
+            })
+                .join('\n');
+            return `Invalid input for tool "${type}":\n${issues}\n\nExpected parameters: ${Object.keys(tool.input.shape || {}).join(', ')}`;
+        }
+        input = result.data;
+    }
     switch (type) {
         case 'getNodeXml': {
             const { nodeId } = input;

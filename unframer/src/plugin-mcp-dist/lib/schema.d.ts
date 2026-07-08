@@ -27,9 +27,9 @@ declare const textStylePropertiesSchema: z.ZodObject<{
         capitalize: "capitalize";
     }>>;
     alignment: z.ZodOptional<z.ZodEnum<{
-        right: "right";
-        left: "left";
         center: "center";
+        left: "left";
+        right: "right";
         justify: "justify";
     }>>;
     decoration: z.ZodOptional<z.ZodEnum<{
@@ -53,9 +53,9 @@ declare const textStylePropertiesSchema: z.ZodObject<{
         wavy: "wavy";
     }>>;
     decorationSkipInk: z.ZodOptional<z.ZodEnum<{
+        all: "all";
         none: "none";
         auto: "auto";
-        all: "all";
     }>>;
     decorationOffset: z.ZodOptional<z.ZodString>;
 }, z.core.$strip>;
@@ -139,9 +139,9 @@ export declare const mcpTools: {
                     capitalize: "capitalize";
                 }>>;
                 alignment: z.ZodOptional<z.ZodEnum<{
-                    right: "right";
-                    left: "left";
                     center: "center";
+                    left: "left";
+                    right: "right";
                     justify: "justify";
                 }>>;
                 decoration: z.ZodOptional<z.ZodEnum<{
@@ -165,9 +165,9 @@ export declare const mcpTools: {
                     wavy: "wavy";
                 }>>;
                 decorationSkipInk: z.ZodOptional<z.ZodEnum<{
+                    all: "all";
                     none: "none";
                     auto: "auto";
-                    all: "all";
                 }>>;
                 decorationOffset: z.ZodOptional<z.ZodString>;
             }, z.core.$strip>;
@@ -264,8 +264,8 @@ export declare const mcpTools: {
                 type: z.ZodString;
                 value: z.ZodUnknown;
                 contentType: z.ZodOptional<z.ZodEnum<{
-                    markdown: "markdown";
                     html: "html";
+                    markdown: "markdown";
                 }>>;
             }, z.core.$loose>>>;
             draft: z.ZodOptional<z.ZodBoolean>;
@@ -295,8 +295,8 @@ export declare const mcpTools: {
                     date: "date";
                     file: "file";
                     enum: "enum";
-                    color: "color";
                     image: "image";
+                    color: "color";
                     formattedText: "formattedText";
                     collectionReference: "collectionReference";
                     multiCollectionReference: "multiCollectionReference";

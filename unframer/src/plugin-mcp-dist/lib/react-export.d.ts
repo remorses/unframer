@@ -95,7 +95,7 @@ export declare function processReactExportData({ selectedComponentIds, }: {
         code: any;
         projectId: string;
     }[];
-    componentInstances: ReactExportComponentInstance[] | never[];
+    componentInstances: never[] | ReactExportComponentInstance[];
 }>;
 export {};
 //# sourceMappingURL=react-export.d.ts.map

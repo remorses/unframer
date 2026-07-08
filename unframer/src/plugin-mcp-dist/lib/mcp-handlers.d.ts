@@ -81,7 +81,7 @@ export declare function mcpToolHandler({ input, type, }: {
         path: string;
         name: string;
         fontSize: `${number}px` | `${number}rem`;
-        lineHeight: `${number}px` | `${number}%` | `${number}em`;
+        lineHeight: `${number}px` | `${number}em` | `${number}%`;
         letterSpacing: `${number}px` | `${number}em`;
         paragraphSpacing: number;
         transform: import("framer-plugin").TextTransform;
@@ -115,7 +115,7 @@ export declare function mcpToolHandler({ input, type, }: {
     results: {
         family: string;
         selector: string;
-        weight: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | null;
+        weight: 100 | 200 | 500 | 900 | 400 | 300 | 600 | 700 | 800 | null;
         style: "normal" | "italic" | null;
     }[];
     totalMatches: number;
@@ -301,7 +301,7 @@ export declare function mcpToolHandler({ input, type, }: {
     fields: {
         id: string;
         name: string;
-        type: "string" | "number" | "boolean" | "link" | "date" | "file" | "array" | "enum" | "color" | "image" | "formattedText" | "collectionReference" | "multiCollectionReference";
+        type: "string" | "number" | "boolean" | "link" | "date" | "file" | "array" | "enum" | "image" | "color" | "formattedText" | "collectionReference" | "multiCollectionReference";
     }[];
     style?: undefined;
     results?: undefined;
