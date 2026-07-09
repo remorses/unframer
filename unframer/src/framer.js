@@ -13299,7 +13299,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.3ZFY3AJ2.mjs
+// /:https://app.framerstatic.com/framer.RG3QTJBW.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -14663,9 +14663,19 @@ var useLibraryFeatures = () => {
   return context ?? {};
 };
 var defaultLocaleId = 'default';
-function assert(condition, ...msg) {
+function assert(condition, message,) {
   if (condition) return;
-  const e = Error('Assertion Error' + (msg.length > 0 ? ': ' + msg.join(' ',) : ''),);
+  if (typeof message === 'function') {
+    try {
+      message = message();
+    } catch {
+      message = '(assert message threw)';
+    }
+  }
+  if (typeof message === 'string' && message.length > 2048) {
+    message = message.slice(0, 2048,) + '\u2026';
+  }
+  const e = Error(message ? 'Assertion Error: ' + message : 'Assertion Error',);
   if (e.stack) {
     try {
       const lines = e.stack.split('\n',);
@@ -17591,7 +17601,7 @@ function useEnumQueryParam({
 }
 function getCollectionUtilsCache2(collectionUtils, collectionId,) {
   const collectionUtilsCache = collectionUtils?.get(collectionId,);
-  assert(collectionUtilsCache, 'CollectionUtilsCache not found for collectionId:', collectionId,);
+  assert(collectionUtilsCache, () => `CollectionUtilsCache not found for collectionId: ${collectionId}`,);
   return collectionUtilsCache;
 }
 function use(maybePromise,) {
@@ -23008,7 +23018,7 @@ var Rect = {
       if (!edge) continue;
       if (Line.intersection(pointToCenterLine, edge, true,)) {
         const name = edgesInOrder[i];
-        assert(name, 'Invalid edge name', edgesInOrder,);
+        assert(name, () => `Invalid edge name: ${JSON.stringify(edgesInOrder,)}`,);
         return {
           edge,
           name,
@@ -40487,7 +40497,7 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
       router.navigate?.(routeId2, elementId2, pathVariables2,);
       return;
     }
-    assert(isLinkToWebPage(link,), 'Expected link to be either a LinkToWebPage or a string', link,);
+    assert(isLinkToWebPage(link,), () => `Expected link to be either a LinkToWebPage or a string: ${JSON.stringify(link,)}`,);
     const resolvedSlugs = await resolveSlugs(link.unresolvedPathSlugs, link.unresolvedHashSlugs, activeLocale, collectionUtils,);
     const matchingRoute = findMatchingRouteAttributesForWebPageLink(
       router,
@@ -46406,10 +46416,19 @@ var ScalarIndexOf = class _ScalarIndexOf extends ScalarNode {
     };
   }
 };
-function assert2(condition, ...msg) {
+function assert2(condition, message,) {
   if (condition) return;
-  const parts = msg.map(evaluateMessagePart,);
-  const e = Error('Assertion Error' + (parts.length > 0 ? ': ' + parts.join(' ',) : ''),);
+  if (typeof message === 'function') {
+    try {
+      message = message();
+    } catch {
+      message = '(assert message threw)';
+    }
+  }
+  if (typeof message === 'string' && message.length > 2048) {
+    message = message.slice(0, 2048,) + '\u2026';
+  }
+  const e = Error(message ? 'Assertion Error: ' + message : 'Assertion Error',);
   if (e.stack) {
     try {
       const lines = e.stack.split('\n',);
@@ -46423,14 +46442,6 @@ function assert2(condition, ...msg) {
     } catch {}
   }
   throw e;
-}
-function evaluateMessagePart(part,) {
-  if (typeof part !== 'function') return part;
-  try {
-    return part();
-  } catch {
-    return '(assert message part threw)';
-  }
 }
 var ScalarIntersection = class _ScalarIntersection extends ScalarNode {
   constructor(left, right,) {
@@ -46496,10 +46507,10 @@ var ScalarIntersection = class _ScalarIntersection extends ScalarNode {
 function databaseValueToSet(value,) {
   const set = /* @__PURE__ */ new Set();
   if (!value) return set;
-  assert2(value.type === 'array', 'ScalarIntersection expects an array, got:', value.type,);
+  assert2(value.type === 'array', () => `ScalarIntersection expects an array, got: ${value.type}`,);
   for (const item of value.value) {
     if (!item) continue;
-    assert2(item.type === 'string', 'ScalarIntersection expects an array of strings, got an array with:', item.type,);
+    assert2(item.type === 'string', () => `ScalarIntersection expects an array of strings, got an array with: ${item.type}`,);
     set.add(item.value,);
   }
   return set;
