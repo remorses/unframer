@@ -13299,7 +13299,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.RG3QTJBW.mjs
+// /:https://app.framerstatic.com/framer.KD6KNS3D.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -54354,7 +54354,7 @@ var CustomFontSource = class _CustomFontSource {
       };
       const duplicateInfo = findDuplicateFont(fontFamily.fonts, font,);
       if (duplicateInfo?.projectDuplicate) {
-        if (font.owner === 'project') {
+        if (font.owner === 'team') {
           fontFamily.fonts[duplicateInfo.index] = font;
           fonts[selector] = font;
         }
@@ -54363,7 +54363,10 @@ var CustomFontSource = class _CustomFontSource {
         const existingFont = duplicateInfo.existingFont;
         const newIsWoff2 = font.file?.endsWith('.woff2',) ?? false;
         const existingIsWoff2 = existingFont.file?.endsWith('.woff2',) ?? false;
-        if (newIsWoff2 && !existingIsWoff2) {
+        const newHasBetterFormat = newIsWoff2 && !existingIsWoff2;
+        const fontsHaveEquivFormat = newIsWoff2 === existingIsWoff2;
+        const newHasAtLeastEqualOwnerPriority = font.owner === 'team' || existingFont.owner !== 'team';
+        if (newHasBetterFormat || fontsHaveEquivFormat && newHasAtLeastEqualOwnerPriority) {
           fontFamily.fonts[duplicateInfo.index] = font;
           fonts[selector] = font;
         }
@@ -55003,6 +55006,13 @@ var FontLoadingError = class extends Error {
 };
 var fontRequests = /* @__PURE__ */ new Map();
 var fontReadyPromises = /* @__PURE__ */ new Map();
+var loadedFontFaces = /* @__PURE__ */ new Map();
+function getRequestId(family, style2, weight, url,) {
+  return `${family}-${style2}-${weight}-${url}`;
+}
+function getReadyPromiseId(family, style2, weight,) {
+  return `${family}-${style2}-${weight}`;
+}
 var loadFont = (data2, doc,) => loadFontWithRetries(data2, doc,);
 async function loadFontWithRetries(data2, doc, attempt = 0,) {
   const {
@@ -55013,7 +55023,7 @@ async function loadFontWithRetries(data2, doc, attempt = 0,) {
   } = data2;
   const weight = data2.weight;
   const style2 = data2.style || 'normal';
-  const requestId = `${family}-${style2}-${weight}-${url}`;
+  const requestId = getRequestId(family, style2, weight, url,);
   if (!fontRequests.has(requestId,) || attempt > 0) {
     const fontFace = new FontFace(family, `url(${url})`, {
       weight: isString(weight,) ? weight : weight?.toString(),
@@ -55023,6 +55033,10 @@ async function loadFontWithRetries(data2, doc, attempt = 0,) {
     },);
     const readyPromise = fontFace.load().then(() => {
       doc.fonts.add(fontFace,);
+      loadedFontFaces.set(requestId, {
+        fontFace,
+        doc,
+      },);
       return isFontReady(family, style2, weight,);
     },).catch((e) => {
       if (e.name !== 'NetworkError') {
@@ -55047,7 +55061,7 @@ async function loadFontWithRetries(data2, doc, attempt = 0,) {
   await fontRequests.get(requestId,);
 }
 async function isFontReady(family, style2, weight,) {
-  const readyPromiseId = `${family}-${style2}-${weight}`;
+  const readyPromiseId = getReadyPromiseId(family, style2, weight,);
   if (!fontReadyPromises.has(readyPromiseId,)) {
     const observer2 = new import_fontfaceobserver.default(family, {
       style: style2,
@@ -55067,6 +55081,22 @@ async function isFontReady(family, style2, weight,) {
       },)
     }`,);
   }
+}
+function removeFont(data2,) {
+  const style2 = data2.style || 'normal';
+  const {
+    family,
+    url,
+    weight,
+  } = data2;
+  const requestId = getRequestId(family, style2, weight, url,);
+  const loaded = loadedFontFaces.get(requestId,);
+  if (loaded) {
+    loaded.doc.fonts.delete(loaded.fontFace,);
+    loadedFontFaces.delete(requestId,);
+  }
+  fontRequests.delete(requestId,);
+  fontReadyPromises.delete(getReadyPromiseId(family, style2, weight,),);
 }
 var framer_default = {
   'FR;Inter': [{
@@ -55235,6 +55265,12 @@ var FontStore = class {
     },);
   }
   importCustomFonts(assets,) {
+    const previouslyLoadedFonts = /* @__PURE__ */ new Map();
+    for (const selector of this.loadedSelectors) {
+      if (!isCustomFontSelector(selector,)) continue;
+      const font = this.getFontBySelector(selector,);
+      if (font) previouslyLoadedFonts.set(selector, font,);
+    }
     this.bySelector.forEach((_, key7,) => {
       if (isCustomFontSelector(key7,)) {
         this.bySelector.delete(key7,);
@@ -55243,6 +55279,19 @@ var FontStore = class {
     const importedFonts = this.custom.importFonts(assets,);
     for (const font of importedFonts) {
       this.addFont(font,);
+    }
+    for (const [selector, previousFont,] of previouslyLoadedFonts) {
+      const currentFont = this.getFontBySelector(selector,);
+      if (currentFont && currentFont.file === previousFont.file) continue;
+      this.loadedSelectors.delete(selector,);
+      if (previousFont.file) {
+        removeFont({
+          family: previousFont.cssFamilyName,
+          url: previousFont.file,
+          weight: previousFont.weight,
+          style: previousFont.style,
+        },);
+      }
     }
     this.resolveCustomFontsImportPromise();
   }
@@ -55381,18 +55430,30 @@ var FontStore = class {
       case 'google':
       case 'fontshare':
       case 'builtIn':
-      case 'custom':
+      case 'custom': {
         if (!font.file) {
           return Promise.reject(`Unable to load font: ${selector}`,);
         }
+        const requestedFile = font.file;
         await loadFont({
           family,
-          url: font.file,
+          url: requestedFile,
           weight: font.weight,
           style: font.style,
         }, document,);
+        const currentFont = this.getFontBySelector(selector,);
+        if (!currentFont || currentFont.file !== requestedFile) {
+          removeFont({
+            family,
+            url: requestedFile,
+            weight: font.weight,
+            style: font.style,
+          },);
+          return 2;
+        }
         this.loadedSelectors.add(selector,);
         return 1;
+      }
       default:
         assertNever(source,);
     }
