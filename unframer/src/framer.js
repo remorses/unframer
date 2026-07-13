@@ -12,7 +12,9 @@ import {
   __require,
   __runInitializers,
   __toESM,
-} from './framer-chunks/chunk-ZHL7H4DS.js';
+  ServerDatabaseError,
+  UnsupportedQueryError,
+} from './framer-chunks/chunk-32KK4XC6.js';
 import './framer-chunks/chunk-IKQSD2QC.js';
 
 // /:https://app.framerstatic.com/chunk-IVFST2BV.mjs
@@ -13299,7 +13301,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.KD6KNS3D.mjs
+// /:https://app.framerstatic.com/framer.CQEH5QOC.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -47487,11 +47489,105 @@ function getCacheKey(query, locale,) {
   const localeId = locale?.id ?? 'default';
   return JSON.stringify(query, replaceCollection,) + localeId;
 }
-async function executeServerDatabaseQuery(sql,) {
+async function executeServerDatabaseQuery(sql, parameters = {},) {
   const {
     executeServerDatabaseQuery: executeServerDatabaseQueryWithSqlite,
-  } = await import('./framer-chunks/SqliteDatabase-ERLSDMQG-VAOGSUQA.js');
-  return executeServerDatabaseQueryWithSqlite(sql,);
+  } = await import('./framer-chunks/SqliteDatabase-B4N3I6LN-EIMIZ6WM.js');
+  return executeServerDatabaseQueryWithSqlite(sql, parameters,);
+}
+var logger = /* @__PURE__ */ getLogger('server database',);
+function mapValue2(value, valueType,) {
+  if (value === null) return null;
+  switch (valueType) {
+    case 'boolean':
+      return mapBooleanValue(value,);
+    case 'date':
+      return mapDateValue(value,);
+    case 'number':
+      return mapNumberValue(value,);
+    case 'string':
+      return mapStringValue(value,);
+    case 'unsupported':
+      if (typeof value === 'number' || typeof value === 'string' || typeof value === 'boolean') {
+        logger.warn(new UnsupportedQueryError(`result type, returning raw.`,),);
+        return value;
+      }
+      throwUnsupportedValue(value, valueType,);
+    default:
+      assertNever(valueType, 'Unsupported server database result type',);
+  }
+}
+function mapBooleanValue(value,) {
+  if (value === 0) return false;
+  if (value === 1) return true;
+  throwUnsupportedValue(value, 'boolean',/* Boolean */
+  );
+}
+function mapDateValue(value,) {
+  if (typeof value !== 'string') {
+    throwUnsupportedValue(value, 'date',/* Date */
+    );
+  }
+  const date = new Date(value,);
+  return isValidDate(date,) ? date.toISOString() : null;
+}
+function mapNumberValue(value,) {
+  if (typeof value === 'number') return Number.isFinite(value,) ? value : null;
+  throwUnsupportedValue(value, 'number',/* Number */
+  );
+}
+function mapStringValue(value,) {
+  if (typeof value === 'string') return value;
+  throwUnsupportedValue(value, 'string',/* String */
+  );
+}
+function throwUnsupportedValue(value, type,) {
+  if (typeof value === 'object' && value !== null) {
+    if (value instanceof Uint8Array) throw new ServerDatabaseError(`cannot map Uint8Array to ${type}.`,);
+    if (value instanceof Int8Array) throw new ServerDatabaseError(`cannot map Int8Array to ${type}.`,);
+    if (value instanceof ArrayBuffer) throw new ServerDatabaseError(`cannot map ArrayBuffer to ${type}.`,);
+    throw new ServerDatabaseError(`cannot map object to ${type}.`,);
+  }
+  throw new ServerDatabaseError(`cannot map ${typeof value} to ${type}.`,);
+}
+function mapServerDatabaseRows(rows, columns,) {
+  return rows.map((row) => {
+    const mappedRow = {};
+    for (const column of columns) {
+      if (!(column.alias in row)) {
+        throw new ServerDatabaseError(`expected SQL result column "${column.alias}" for field "${column.fieldName}".`,);
+      }
+      const value = row[column.alias];
+      if (value === void 0) {
+        throw new ServerDatabaseError(
+          `expected SQL result column "${column.alias}" for field "${column.fieldName}" unexpectedly returned undefined.`,
+        );
+      }
+      mappedRow[column.fieldName] = mapValue2(value, column.valueType,);
+    }
+    return mappedRow;
+  },);
+}
+var serverDataCache = /* @__PURE__ */ new Map();
+function getCachedServerData(sql, parameters = {},) {
+  const cacheKey = getCacheKey2(sql, parameters,);
+  const cached = serverDataCache.get(cacheKey,);
+  if (cached) return cached;
+  const value = new LazyValue(() => executeServerDatabaseQuery(sql, parameters,));
+  serverDataCache.set(cacheKey, value,);
+  return value;
+}
+function getCacheKey2(sql, parameters,) {
+  return JSON.stringify([sql, parameters,],);
+}
+function preloadServerData(sql, parameters = {}, columns = [],) {
+  const result = getCachedServerData(sql, parameters,).readMaybeAsync();
+  if (isPromise(result,)) return result.then((response) => mapServerDatabaseRows(response.rows, columns,));
+  return mapServerDatabaseRows(result.rows, columns,);
+}
+function useServerData(sql, parameters, columns,) {
+  const result = getCachedServerData(sql, parameters,).use();
+  return mapServerDatabaseRows(result.rows, columns,);
 }
 var queryEngine = /* @__PURE__ */ new QueryEngine();
 var queryCache = /* @__PURE__ */ new QueryCache(queryEngine,);
@@ -51479,9 +51575,9 @@ function evictOldestIfFull(map2, max,) {
 }
 var shaderTextureCache = /* @__PURE__ */ new ShaderTextureCache();
 var scaledDownWorkingResolution = 1024;
-function generateHeightmap(image, getCacheKey2,) {
+function generateHeightmap(image, getCacheKey3,) {
   if (!isHeightMapSupportedTexImageSource(image,)) return;
-  const cacheKey = getCacheKey2?.();
+  const cacheKey = getCacheKey3?.();
   if (!cacheKey) return buildHeightmap(image,);
   const cached = shaderTextureCache.generate(cacheKey, () => buildHeightmap(image,),);
   if (!(cached instanceof HTMLCanvasElement)) return void 0;
@@ -61148,6 +61244,7 @@ export {
   positionalKeys,
   prefersReducedMotion,
   preloadImage,
+  preloadServerData,
   PresenceChild,
   PresenceContext,
   press,
@@ -61355,6 +61452,7 @@ export {
   useRouteHandler,
   useRouter,
   useScroll,
+  useServerData,
   useSiteRefs,
   useSpring,
   useStringQueryParam,

@@ -89,6 +89,21 @@ var __privateAdd = (obj, member, value) => member.has(obj) ? __typeError("Cannot
 var __privateSet = (obj, member, value, setter) => (__accessCheck(obj, member, "write to private field"), setter ? setter.call(obj, value) : member.set(obj, value), value);
 var __privateMethod = (obj, member, method) => (__accessCheck(obj, member, "access private method"), method);
 
+// /:https://app.framerstatic.com/chunk-ZAMWHC64.mjs
+var ServerDatabaseError = class extends Error {
+  constructor(...args) {
+    const [message = "error", ...rest] = args;
+    super(`server database: ${message}`, ...rest);
+    this.name = "ServerDatabaseError";
+  }
+};
+var UnsupportedQueryError = class extends ServerDatabaseError {
+  constructor(...args) {
+    const [message = "error", ...rest] = args;
+    super(`unsupported: ${message}`, ...rest);
+  }
+};
+
 export {
   __require2 as __require,
   __commonJS,
@@ -102,5 +117,7 @@ export {
   __privateGet,
   __privateAdd,
   __privateSet,
-  __privateMethod
+  __privateMethod,
+  ServerDatabaseError,
+  UnsupportedQueryError
 };
