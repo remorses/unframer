@@ -13301,7 +13301,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.CQEH5QOC.mjs
+// /:https://app.framerstatic.com/framer.NDR23UCW.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -14657,13 +14657,6 @@ function useRouteElementId(id3, targetRouteId,) {
 function useCurrentPathVariables() {
   return useCurrentRoute()?.pathVariables;
 }
-var LibraryFeaturesContext = /* @__PURE__ */ React42.createContext(void 0,);
-LibraryFeaturesContext.displayName = 'LibraryFeaturesContext';
-var LibraryFeaturesProvider = /* @__PURE__ */ (() => LibraryFeaturesContext.Provider)();
-var useLibraryFeatures = () => {
-  const context = React42.useContext(LibraryFeaturesContext,);
-  return context ?? {};
-};
 var defaultLocaleId = 'default';
 function assert(condition, message,) {
   if (condition) return;
@@ -15704,6 +15697,13 @@ var CollectionUtilsCache = class {
     return this.callUtilsMethod('getRecordIdBySlug', slug, locale,);
   }
 };
+var libraryFeatures = {};
+var getLibraryFeatures = () => {
+  return libraryFeatures;
+};
+var setLibraryFeatures = (features) => {
+  libraryFeatures = features;
+};
 var canUseYield = /* @__PURE__ */ (() => safeWindow.scheduler && 'yield' in safeWindow.scheduler)();
 var canUsePostTask = /* @__PURE__ */ (() => safeWindow.scheduler && 'postTask' in safeWindow.scheduler)();
 var pendingResolvers = /* @__PURE__ */ new Set();
@@ -15784,9 +15784,6 @@ var shouldPreloadBasedOnUA = !isBot;
 function usePreloadRoute() {
   const collectionUtils = useCollectionUtils();
   const {
-    autobahnNavigation: autobahnNavigationEnabled,
-  } = useLibraryFeatures();
-  const {
     getRoute,
   } = useRouter();
   return useCallback2((routeId, linkContext, yieldBeforePreload = true, shouldLoadRouteData = true,) => {
@@ -15796,6 +15793,7 @@ function usePreloadRoute() {
       pathVariables,
       locale,
     } = linkContext;
+    const autobahnNavigationEnabled = getLibraryFeatures().autobahnNavigation;
     return preloadRoute(
       route,
       {
@@ -15807,7 +15805,7 @@ function usePreloadRoute() {
       yieldBeforePreload,
       shouldLoadRouteData && autobahnNavigationEnabled,
     );
-  }, [getRoute, collectionUtils, autobahnNavigationEnabled,],);
+  }, [getRoute, collectionUtils,],);
 }
 function useRoutePreloader(routeIds, enabled = true,) {
   const preload = usePreloadRoute();
@@ -37704,9 +37702,6 @@ function isNodeLocalToProject(scopeIdOfThisNode, scopeIdOfNearestExternalCompone
 }
 function useMaybeWrapComponentWithCodeBoundary(children, scopeId, nodeId, isAuthoredByUser, isModuleExternal, inComponentSlot,) {
   const nearestExternalComponent = useNearestExternalComponent();
-  const {
-    disableCustomCode,
-  } = useLibraryFeatures();
   if (
     // Those props will either be all undefined, which means the Container hasn’t yet been
     // re-serialized since we introduced code boundaries, and we should use the old
@@ -37719,6 +37714,9 @@ function useMaybeWrapComponentWithCodeBoundary(children, scopeId, nodeId, isAuth
       children,
     },);
   }
+  const {
+    disableCustomCode,
+  } = getLibraryFeatures();
   if (disableCustomCode && isAuthoredByUser) {
     return /* @__PURE__ */ jsx('div', {
       suppressHydrationWarning: true,
@@ -40678,19 +40676,19 @@ function EditorBarLauncher({
   EditorBar,
   fast = false,
 },) {
-  const libraryFeatures = useLibraryFeatures();
   const framerSiteId = useContext(FormContext,);
   const enabled = useSyncExternalStore(noopSubscribe, fast ? isPrioritized : isntPrioritized, returnFalse,);
+  const libraryFeatures2 = getLibraryFeatures();
   const editorBarFeatures = useMemo(() => {
     const features = {};
     let key7;
-    for (key7 in libraryFeatures) {
-      if (libraryFeatures.hasOwnProperty(key7,) && (key7.startsWith('editorBar',) || key7.startsWith('onPage',))) {
-        features[key7] = libraryFeatures[key7];
+    for (key7 in libraryFeatures2) {
+      if (libraryFeatures2.hasOwnProperty(key7,) && (key7.startsWith('editorBar',) || key7.startsWith('onPage',))) {
+        features[key7] = libraryFeatures2[key7];
       }
     }
     return features;
-  }, [libraryFeatures,],);
+  }, [libraryFeatures2,],);
   if (!EditorBar || !framerSiteId || !enabled) return null;
   return /* @__PURE__ */ jsx(IgnoreErrors, {
     suppressHydrationWarning: true,
@@ -41684,15 +41682,12 @@ function Router({
   const scheduleSideEffect = useScheduleRenderSideEffects(dep,);
   const startNavigation = useNavigationTransition();
   const monitorNextPaintAfterRender = useMonitorNextPaintAfterRender('framer-route-change',);
-  const {
-    synchronousNavigationOnDesktop,
-  } = useLibraryFeatures();
   const transitionFn = useMemo(() => {
-    if (!synchronousNavigationOnDesktop || !isDesktop()) {
+    if (!getLibraryFeatures().synchronousNavigationOnDesktop || !isDesktop()) {
       return startTransition2;
     }
     return (fn) => fn();
-  }, [synchronousNavigationOnDesktop,],);
+  }, [],);
   const loadSnippets2 = useLoadSnippets();
   const isInitialNavigationRef = useRef(true,);
   const currentPathnameWithHashRef = useRef();
@@ -48821,10 +48816,7 @@ function useVariantState({
   const forceUpdate = useForceUpdate2();
   const isCanvas = useIsOnFramerCanvas();
   const validBaseVariants = useConstant2(() => new Set(externalCycleOrder,));
-  const {
-    yieldOnTap: yieldOnTapFeatureOn,
-  } = useLibraryFeatures();
-  useWaitForGlobalClick(yieldOnTapFeatureOn,);
+  useWaitForGlobalClick(getLibraryFeatures().yieldOnTap,);
   const runUpdateIfVisible = useUpdateIfVisible(ref,);
   const internalState = useRef({
     isHovered: false,
@@ -48865,7 +48857,7 @@ function useVariantState({
       if (clearError) internalState.current.isError = false;
       internalState.current.baseVariant = nextBase || defaultVariant2;
       internalState.current.gestureVariant = nextGesture;
-      const yieldOnTap = yieldOnTapFeatureOn && internalState.current.isPressedHasUpdated;
+      const yieldOnTap = getLibraryFeatures().yieldOnTap && internalState.current.isPressedHasUpdated;
       if (yieldOnTap && globalWaitingForClickPromise) {
         performance.mark('wait-for-tap-start',);
         await globalWaitingForClickPromise;
@@ -48891,7 +48883,7 @@ function useVariantState({
       }
       runUpdateIfVisible(() => startTransition2(forceUpdate,), checkViewport,);
     },
-    [resolveNextVariant, forceUpdate, runUpdateIfVisible, yieldOnTapFeatureOn,],
+    [resolveNextVariant, forceUpdate, runUpdateIfVisible,],
   );
   const setGestureState = useCallback2(({
     isHovered: isHovered2,
@@ -49033,10 +49025,10 @@ function withCodeBoundaryForOverrides(Component18, {
   const appliedOverride = tryToApplyOverride(Component18, override,);
   let hasErrorBeenLogged = false;
   function CodeBoundaryForOverrides(props, ref,) {
+    const nearestExternalComponent = useNearestExternalComponent();
     const {
       disableCustomCode,
-    } = useLibraryFeatures();
-    const nearestExternalComponent = useNearestExternalComponent();
+    } = getLibraryFeatures();
     if (disableCustomCode) {
       return /* @__PURE__ */ jsx(Component18, {
         suppressHydrationWarning: true,
@@ -61154,7 +61146,6 @@ export {
   lazyModulesCollector,
   LazyMotion,
   LazyValue,
-  LibraryFeaturesProvider,
   Line,
   LinearGradient,
   Link,
@@ -61307,6 +61298,7 @@ export {
   setDragLock,
   setFeatureDefinitions,
   setGlobalRenderEnvironment,
+  setLibraryFeatures,
   setStyle,
   setTarget,
   Shader,
