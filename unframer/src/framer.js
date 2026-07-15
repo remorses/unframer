@@ -13301,7 +13301,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.NDR23UCW.mjs
+// /:https://app.framerstatic.com/framer.VCH2ZBXI.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -14312,23 +14312,44 @@ var noopSubscribe = () => () => {};
 var returnTrue = () => true;
 var returnFalse = () => false;
 var lazyModulesCache = /* @__PURE__ */ new Map();
+var lazyModuleLoaders = /* @__PURE__ */ new Map();
+var requestedLazyModules = /* @__PURE__ */ new Set();
+var directLazyModulePrefix = ':';
+function preloadLazyModule(hash2, loader, source,) {
+  if (lazyModulesCache.has(hash2,)) return;
+  const promise = Promise.resolve().then(loader,).then((module) => {
+    lazyModulesCache.set(hash2, module,);
+    return module;
+  },).catch((error) => {
+    lazyModulesCache.delete(hash2,);
+    console.warn(`Failed to preload lazy module from ${source}`, error,);
+    throw error;
+  },);
+  promise.catch(noop2,);
+  lazyModulesCache.set(hash2, promise,);
+}
+function registerLazyModuleLoader(hash2, loader,) {
+  if (!isWindow) return;
+  lazyModuleLoaders.set(hash2, loader,);
+  if (requestedLazyModules.has(hash2,)) preloadLazyModule(hash2, loader, `registered loader ${hash2}`,);
+}
 function initLazyModulesCache() {
   if (!isWindow) return;
   const lazyPreloadLinks = document.querySelectorAll('[rel="modulepreload"][data-framer-lazy]',);
   for (const link of lazyPreloadLinks) {
-    const hash2 = link.getAttribute('data-framer-lazy',);
+    const lazyModuleValue = link.getAttribute('data-framer-lazy',);
     const url = link.getAttribute('href',);
-    if (!hash2 || !url) continue;
-    const promise = import(/* webpackIgnore: true */ /* @vite-ignore */ url).then((module) => {
-      lazyModulesCache.set(hash2, module,);
-      return module;
-    },).catch((error) => {
-      lazyModulesCache.delete(hash2,);
-      console.warn(`Failed to import lazy module: ${url}`, error,);
-      throw error;
-    },);
-    promise.catch(noop2,);
-    lazyModulesCache.set(hash2, promise,);
+    if (!lazyModuleValue || !url) continue;
+    const canImportDirectly = lazyModuleValue.startsWith(directLazyModulePrefix,);
+    const hash2 = canImportDirectly ? lazyModuleValue.slice(directLazyModulePrefix.length,) : lazyModuleValue;
+    if (!hash2) continue;
+    requestedLazyModules.add(hash2,);
+    const loader = lazyModuleLoaders.get(hash2,);
+    if (loader) {
+      preloadLazyModule(hash2, loader, `registered loader ${hash2}`,);
+    } else if (canImportDirectly) {
+      preloadLazyModule(hash2, () => import(url), url,);
+    }
   }
 }
 var lazyModulesCollector = isWindow ? void 0 : /* @__PURE__ */ new Set();
@@ -14343,6 +14364,7 @@ function getLoadedComponent(module, moduleName,) {
   throw new Error(`Module does not contain export '${moduleName}'`,);
 }
 function lazy(factory, moduleName = 'default', cacheHash,) {
+  if (cacheHash) registerLazyModuleLoader(cacheHash, factory,);
   let factoryPromise;
   let LoadedComponent;
   let error;
@@ -14720,6 +14742,7 @@ var LazyValue = class _LazyValue {
       }
       throw new Error('Need to call preload() before read()',);
     },);
+    if (cacheHash !== void 0) registerLazyModuleLoader(cacheHash, resolver,);
   }
   static is(value,) {
     return value instanceof _LazyValue;
