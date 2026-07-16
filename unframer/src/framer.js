@@ -13301,7 +13301,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.VCH2ZBXI.mjs
+// /:https://app.framerstatic.com/framer.AOPHMQUZ.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -15720,13 +15720,6 @@ var CollectionUtilsCache = class {
     return this.callUtilsMethod('getRecordIdBySlug', slug, locale,);
   }
 };
-var libraryFeatures = {};
-var getLibraryFeatures = () => {
-  return libraryFeatures;
-};
-var setLibraryFeatures = (features) => {
-  libraryFeatures = features;
-};
 var canUseYield = /* @__PURE__ */ (() => safeWindow.scheduler && 'yield' in safeWindow.scheduler)();
 var canUsePostTask = /* @__PURE__ */ (() => safeWindow.scheduler && 'postTask' in safeWindow.scheduler)();
 var pendingResolvers = /* @__PURE__ */ new Set();
@@ -15816,7 +15809,6 @@ function usePreloadRoute() {
       pathVariables,
       locale,
     } = linkContext;
-    const autobahnNavigationEnabled = getLibraryFeatures().autobahnNavigation;
     return preloadRoute(
       route,
       {
@@ -15826,7 +15818,7 @@ function usePreloadRoute() {
         collectionUtils,
       },
       yieldBeforePreload,
-      shouldLoadRouteData && autobahnNavigationEnabled,
+      shouldLoadRouteData,
     );
   }, [getRoute, collectionUtils,],);
 }
@@ -15879,130 +15871,13 @@ function useRouteHandler(routeId, preload = false, elementId,) {
   const handler = React42.useCallback(() => navigate?.(routeId, elementId,), [navigate, elementId, routeId,],);
   return handler;
 }
-function computeRelativePath(from, to,) {
-  if (!from.startsWith('/',) || !to.startsWith('/',)) {
-    throw new Error('from/to paths are expected to be absolute',);
-  }
-  const [fromDir,] = getDirAndFile(from,);
-  const [toDir, toFile,] = getDirAndFile(to,);
-  let relativePath = relative(fromDir, toDir,);
-  if (relativePath === '') relativePath = '.';
-  if (!relativePath.startsWith('.',) && !relativePath.startsWith('/',)) {
-    relativePath = './' + relativePath;
-  }
-  return relativePath + '/' + toFile;
-}
-function getDirAndFile(path,) {
-  const index = path.lastIndexOf('/',);
-  return [path.substring(0, index + 1,), path.substring(index + 1,),];
-}
-var CHAR_DOT = 46;
-var CHAR_FORWARD_SLASH = 47;
-var StringPrototypeCharCodeAt = (str, index,) => str.charCodeAt(index,);
-var StringPrototypeLastIndexOf = (str, searchString,) => str.lastIndexOf(searchString,);
-var StringPrototypeSlice = (str, start2, end,) => str.slice(start2, end,);
-function relative(from, to,) {
-  if (from === to) return '';
-  from = '/' + normalizeString(from,);
-  to = '/' + normalizeString(to,);
-  if (from === to) return '';
-  const fromStart = 1;
-  const fromEnd = from.length;
-  const fromLen = fromEnd - fromStart;
-  const toStart = 1;
-  const toLen = to.length - toStart;
-  const length = fromLen < toLen ? fromLen : toLen;
-  let lastCommonSep = -1;
-  let i = 0;
-  for (; i < length; i++) {
-    const fromCode = StringPrototypeCharCodeAt(from, fromStart + i,);
-    if (fromCode !== StringPrototypeCharCodeAt(to, toStart + i,)) break;
-    else if (fromCode === CHAR_FORWARD_SLASH) lastCommonSep = i;
-  }
-  if (i === length) {
-    if (toLen > length) {
-      if (StringPrototypeCharCodeAt(to, toStart + i,) === CHAR_FORWARD_SLASH) {
-        return StringPrototypeSlice(to, toStart + i + 1,);
-      }
-      if (i === 0) {
-        return StringPrototypeSlice(to, toStart + i,);
-      }
-    } else if (fromLen > length) {
-      if (StringPrototypeCharCodeAt(from, fromStart + i,) === CHAR_FORWARD_SLASH) {
-        lastCommonSep = i;
-      } else if (i === 0) {
-        lastCommonSep = 0;
-      }
-    }
-  }
-  let out = '';
-  for (i = fromStart + lastCommonSep + 1; i <= fromEnd; ++i) {
-    if (i === fromEnd || StringPrototypeCharCodeAt(from, i,) === CHAR_FORWARD_SLASH) {
-      out += out.length === 0 ? '..' : '/..';
-    }
-  }
-  return `${out}${StringPrototypeSlice(to, toStart + lastCommonSep,)}`;
-}
-var allowAboveRoot = false;
-var separator = '/';
-var isPathSeparator = (code) => code === CHAR_FORWARD_SLASH;
-function normalizeString(path,) {
-  let res = '';
-  let lastSegmentLength = 0;
-  let lastSlash = -1;
-  let dots = 0;
-  let code = 0;
-  for (let i = 0; i <= path.length; ++i) {
-    if (i < path.length) code = StringPrototypeCharCodeAt(path, i,);
-    else if (isPathSeparator(code,)) break;
-    else code = CHAR_FORWARD_SLASH;
-    if (isPathSeparator(code,)) {
-      if (lastSlash === i - 1 || dots === 1) {}
-      else if (dots === 2) {
-        if (
-          res.length < 2 || lastSegmentLength !== 2 || StringPrototypeCharCodeAt(res, res.length - 1,) !== CHAR_DOT ||
-          StringPrototypeCharCodeAt(res, res.length - 2,) !== CHAR_DOT
-        ) {
-          if (res.length > 2) {
-            const lastSlashIndex = StringPrototypeLastIndexOf(res, separator,);
-            if (lastSlashIndex === -1) {
-              res = '';
-              lastSegmentLength = 0;
-            } else {
-              res = StringPrototypeSlice(res, 0, lastSlashIndex,);
-              lastSegmentLength = res.length - 1 - StringPrototypeLastIndexOf(res, separator,);
-            }
-            lastSlash = i;
-            dots = 0;
-            continue;
-          } else if (res.length !== 0) {
-            res = '';
-            lastSegmentLength = 0;
-            lastSlash = i;
-            dots = 0;
-            continue;
-          }
-        }
-        if (allowAboveRoot) {
-          res += res.length > 0 ? `${separator}..` : '..';
-          lastSegmentLength = 2;
-        }
-      } else {
-        if (res.length > 0) res += `${separator}${StringPrototypeSlice(path, lastSlash + 1, i,)}`;
-        else res = StringPrototypeSlice(path, lastSlash + 1, i,);
-        lastSegmentLength = i - lastSlash - 1;
-      }
-      lastSlash = i;
-      dots = 0;
-    } else if (code === CHAR_DOT && dots !== -1) {
-      ++dots;
-    } else {
-      dots = -1;
-    }
-  }
-  return res;
-}
-var customNotFoundPagePaths = /* @__PURE__ */ new Set([`/404.html`, `/404`, `/404/`,],);
+var libraryFeatures = {};
+var getLibraryFeatures = () => {
+  return libraryFeatures;
+};
+var setLibraryFeatures = (features) => {
+  libraryFeatures = features;
+};
 var pathVariablesRegExpRaw = ':([a-z]\\w*)';
 var pathVariablesRegExpGlobal = /* @__PURE__ */ new RegExp(pathVariablesRegExpRaw, 'gi',);
 function fillPathVariables(path, variables,) {
@@ -16154,6 +16029,130 @@ async function getLocalizedNavigationPath({
   }
   return result;
 }
+function computeRelativePath(from, to,) {
+  if (!from.startsWith('/',) || !to.startsWith('/',)) {
+    throw new Error('from/to paths are expected to be absolute',);
+  }
+  const [fromDir,] = getDirAndFile(from,);
+  const [toDir, toFile,] = getDirAndFile(to,);
+  let relativePath = relative(fromDir, toDir,);
+  if (relativePath === '') relativePath = '.';
+  if (!relativePath.startsWith('.',) && !relativePath.startsWith('/',)) {
+    relativePath = './' + relativePath;
+  }
+  return relativePath + '/' + toFile;
+}
+function getDirAndFile(path,) {
+  const index = path.lastIndexOf('/',);
+  return [path.substring(0, index + 1,), path.substring(index + 1,),];
+}
+var CHAR_DOT = 46;
+var CHAR_FORWARD_SLASH = 47;
+var StringPrototypeCharCodeAt = (str, index,) => str.charCodeAt(index,);
+var StringPrototypeLastIndexOf = (str, searchString,) => str.lastIndexOf(searchString,);
+var StringPrototypeSlice = (str, start2, end,) => str.slice(start2, end,);
+function relative(from, to,) {
+  if (from === to) return '';
+  from = '/' + normalizeString(from,);
+  to = '/' + normalizeString(to,);
+  if (from === to) return '';
+  const fromStart = 1;
+  const fromEnd = from.length;
+  const fromLen = fromEnd - fromStart;
+  const toStart = 1;
+  const toLen = to.length - toStart;
+  const length = fromLen < toLen ? fromLen : toLen;
+  let lastCommonSep = -1;
+  let i = 0;
+  for (; i < length; i++) {
+    const fromCode = StringPrototypeCharCodeAt(from, fromStart + i,);
+    if (fromCode !== StringPrototypeCharCodeAt(to, toStart + i,)) break;
+    else if (fromCode === CHAR_FORWARD_SLASH) lastCommonSep = i;
+  }
+  if (i === length) {
+    if (toLen > length) {
+      if (StringPrototypeCharCodeAt(to, toStart + i,) === CHAR_FORWARD_SLASH) {
+        return StringPrototypeSlice(to, toStart + i + 1,);
+      }
+      if (i === 0) {
+        return StringPrototypeSlice(to, toStart + i,);
+      }
+    } else if (fromLen > length) {
+      if (StringPrototypeCharCodeAt(from, fromStart + i,) === CHAR_FORWARD_SLASH) {
+        lastCommonSep = i;
+      } else if (i === 0) {
+        lastCommonSep = 0;
+      }
+    }
+  }
+  let out = '';
+  for (i = fromStart + lastCommonSep + 1; i <= fromEnd; ++i) {
+    if (i === fromEnd || StringPrototypeCharCodeAt(from, i,) === CHAR_FORWARD_SLASH) {
+      out += out.length === 0 ? '..' : '/..';
+    }
+  }
+  return `${out}${StringPrototypeSlice(to, toStart + lastCommonSep,)}`;
+}
+var allowAboveRoot = false;
+var separator = '/';
+var isPathSeparator = (code) => code === CHAR_FORWARD_SLASH;
+function normalizeString(path,) {
+  let res = '';
+  let lastSegmentLength = 0;
+  let lastSlash = -1;
+  let dots = 0;
+  let code = 0;
+  for (let i = 0; i <= path.length; ++i) {
+    if (i < path.length) code = StringPrototypeCharCodeAt(path, i,);
+    else if (isPathSeparator(code,)) break;
+    else code = CHAR_FORWARD_SLASH;
+    if (isPathSeparator(code,)) {
+      if (lastSlash === i - 1 || dots === 1) {}
+      else if (dots === 2) {
+        if (
+          res.length < 2 || lastSegmentLength !== 2 || StringPrototypeCharCodeAt(res, res.length - 1,) !== CHAR_DOT ||
+          StringPrototypeCharCodeAt(res, res.length - 2,) !== CHAR_DOT
+        ) {
+          if (res.length > 2) {
+            const lastSlashIndex = StringPrototypeLastIndexOf(res, separator,);
+            if (lastSlashIndex === -1) {
+              res = '';
+              lastSegmentLength = 0;
+            } else {
+              res = StringPrototypeSlice(res, 0, lastSlashIndex,);
+              lastSegmentLength = res.length - 1 - StringPrototypeLastIndexOf(res, separator,);
+            }
+            lastSlash = i;
+            dots = 0;
+            continue;
+          } else if (res.length !== 0) {
+            res = '';
+            lastSegmentLength = 0;
+            lastSlash = i;
+            dots = 0;
+            continue;
+          }
+        }
+        if (allowAboveRoot) {
+          res += res.length > 0 ? `${separator}..` : '..';
+          lastSegmentLength = 2;
+        }
+      } else {
+        if (res.length > 0) res += `${separator}${StringPrototypeSlice(path, lastSlash + 1, i,)}`;
+        else res = StringPrototypeSlice(path, lastSlash + 1, i,);
+        lastSegmentLength = i - lastSlash - 1;
+      }
+      lastSlash = i;
+      dots = 0;
+    } else if (code === CHAR_DOT && dots !== -1) {
+      ++dots;
+    } else {
+      dots = -1;
+    }
+  }
+  return res;
+}
+var customNotFoundPagePaths = /* @__PURE__ */ new Set([`/404.html`, `/404`, `/404/`,],);
 function getSitePrefix(siteCanonicalURL,) {
   if (!siteCanonicalURL) return '';
   let url;
@@ -16164,6 +16163,85 @@ function getSitePrefix(siteCanonicalURL,) {
   }
   if (url.pathname === '/' || __unframerWindow2.location.origin !== url.origin) return '';
   return url.pathname.endsWith('/',) ? url.pathname.slice(0, -1,) : url.pathname;
+}
+function getHashForRoute(hash2, route, hashVariables,) {
+  const resolvedHash = getRouteElementId(route, hash2,);
+  if (!resolvedHash) return void 0;
+  const variables = Object.assign({}, route?.elements, hashVariables,);
+  return resolvedHash.replace(pathVariablesRegExpGlobal, (match, pathVariable,) => variables[pathVariable] ?? match,);
+}
+function getPathForRoute(route, {
+  currentRoutePath,
+  currentRoutePathLocalized,
+  currentPathVariables,
+  hash: hash2,
+  pathVariables,
+  hashVariables,
+  relative: relative2 = true,
+  preserveQueryParams,
+  onlyHash = false,
+  siteCanonicalURL,
+  localeId,
+},) {
+  const resolvedHash = getHashForRoute(hash2, route, hashVariables,);
+  if (onlyHash) return resolvedHash ?? '';
+  let currentPath = currentRoutePath ?? '/';
+  if (currentRoutePathLocalized && localeId) {
+    currentPath = currentRoutePathLocalized[localeId] ?? currentPath;
+  }
+  if (currentPathVariables) {
+    currentPath = currentPath.replace(
+      pathVariablesRegExpGlobal,
+      (match, pathVariable,) => String(currentPathVariables[pathVariable] || match,),
+    );
+  }
+  const targetPathLocalized = localeId ? route?.pathLocalized?.[localeId] : void 0;
+  const targetPath = targetPathLocalized ?? route?.path ?? '/';
+  let path = targetPath;
+  if (pathVariables) {
+    path = path.replace(pathVariablesRegExpGlobal, (match, pathVariable,) => String(pathVariables[pathVariable] || match,),);
+  }
+  const isSamePageHashNavigation = Boolean(currentPath === path && resolvedHash,);
+  const isSameDynamicRouteNavigation = !isSamePageHashNavigation && pathVariables !== void 0 && currentRoutePath !== void 0 &&
+    route?.path !== void 0 && currentRoutePath === route.path && currentPath !== path;
+  if (relative2) {
+    if (customNotFoundPagePaths.has(currentPath,) && typeof __unframerWindow2 !== 'undefined') {
+      const sitePrefix = getSitePrefix(siteCanonicalURL,);
+      path = computeRelativePath(__unframerWindow2.location.pathname, sitePrefix + path,);
+    } else {
+      path = computeRelativePath(currentPath, path,);
+    }
+  }
+  const ignoreBackAnchor = isSamePageHashNavigation || isSameDynamicRouteNavigation;
+  if (preserveQueryParams || ignoreBackAnchor) {
+    path = forwardCurrentQueryParams(path, ignoreBackAnchor,);
+  }
+  if (resolvedHash) {
+    path = `${path}#${resolvedHash}`;
+  }
+  return path;
+}
+var bugExistenceChecked = false;
+function logIfPopstateCalledSynchronously() {
+  if (bugExistenceChecked) return;
+  bugExistenceChecked = true;
+  let popstateCalled = false;
+  const popstateListener = () => {
+    popstateCalled = true;
+  };
+  __unframerWindow2.addEventListener('popstate', popstateListener, {
+    once: true,
+  },);
+  queueMicrotask(() => {
+    __unframerWindow2.removeEventListener('popstate', popstateListener,);
+    if (popstateCalled) {
+      const msg = 'Popstate called synchronously during pushState(). Please report this to the Framer team.';
+      console.error(msg,);
+      sendTrackingEvent('published_site_load_recoverable_error', {
+        message: msg,
+      },);
+    }
+  },);
 }
 var defaultSitePageEffects = {
   global: void 0,
@@ -16668,7 +16746,7 @@ function useMonitorNextPaintAfterRender(label,) {
     };
   }, [label,],);
 }
-async function pushRouteState(routeId, route, {
+function pushRouteState(routeId, route, {
   currentRoutePath,
   currentRoutePathLocalized,
   currentPathVariables,
@@ -16677,7 +16755,7 @@ async function pushRouteState(routeId, route, {
   localeId,
   preserveQueryParams,
   siteCanonicalURL,
-}, isNavigationTransition = false,) {
+},) {
   const {
     path,
   } = route;
@@ -16696,32 +16774,44 @@ async function pushRouteState(routeId, route, {
   const previousState = isHistoryState(__unframerWindow2.history.state,) ? __unframerWindow2.history.state : void 0;
   const queryParamBackAnchorSearch = isSameRouteNavigation ? previousState?.queryParamBackAnchorSearch : void 0;
   try {
-    return await pushHistoryState(
-      {
-        routeId,
-        hash: hash2,
-        pathVariables,
-        localeId,
-        queryParamBackAnchorSearch,
-      },
-      newPath,
-      isNavigationTransition,
-    );
+    pushHistoryState({
+      routeId,
+      hash: hash2,
+      pathVariables,
+      localeId,
+      queryParamBackAnchorSearch,
+    }, newPath,);
   } catch {}
 }
 function isHistoryState(data2,) {
   const routeIdKey = 'routeId';
   return isObject2(data2,) && isString(data2[routeIdKey],);
 }
+var hasNavigationAPI = /* @__PURE__ */ (() => isWindow && typeof __unframerWindow2.navigation?.back === 'function')();
+var isImpactedPopstateBugChromiumVersion = /* @__PURE__ */ (() => {
+  if (typeof __unframerNavigator2 === 'undefined') return false;
+  const userAgent = __unframerNavigator2.userAgent;
+  const chromePos = userAgent.indexOf('Chrome/',);
+  const chromiumVersion = +userAgent.slice(chromePos + 7, userAgent.indexOf('.', chromePos,),);
+  return chromiumVersion > 101 && chromiumVersion < 128;
+})();
+var supportsNavigationAPI = hasNavigationAPI && !isImpactedPopstateBugChromiumVersion;
 function replaceHistoryState(data2, url, ignoreReplaceStateWrapper = false,) {
   performance.mark('framer-history-replace',);
   if (url) {
     updateCanonicalURL(url, __unframerWindow2.location.href,);
   }
-  const replaceState = ignoreReplaceStateWrapper
-    ? __unframerWindow2.history.__proto__.replaceState
-    : __unframerWindow2.history.replaceState;
-  replaceState.call(__unframerWindow2.history, data2, '', url,);
+  if (getLibraryFeatures().privateRouterReplaceState) {
+    const replaceState = !url || url === __unframerWindow2.location.href
+      ? __unframerWindow2.History.prototype.replaceState.bind(__unframerWindow2.history,)
+      : __unframerWindow2.history.replaceState.bind(__unframerWindow2.history,);
+    replaceState(data2, '', url,);
+  } else {
+    const replaceState = ignoreReplaceStateWrapper
+      ? __unframerWindow2.history.__proto__.replaceState
+      : __unframerWindow2.history.replaceState;
+    replaceState.call(__unframerWindow2.history, data2, '', url,);
+  }
 }
 function afterNavigationTransition(callback,) {
   const transition = __unframerWindow2.navigation?.transition;
@@ -16739,50 +16829,11 @@ function afterNavigationTransition(callback,) {
   };
   void transition.finished.then(run2, run2,);
 }
-var maybeHasPopstateBug = true;
-var isImpactedPopstateBugChromiumVersion = /* @__PURE__ */ (() => {
-  if (typeof __unframerNavigator2 === 'undefined') return false;
-  const userAgent = __unframerNavigator2.userAgent;
-  const chromePos = userAgent.indexOf('Chrome/',);
-  const chromiumVersion = +userAgent.slice(chromePos + 7, userAgent.indexOf('.', chromePos,),);
-  return chromiumVersion > 101 && chromiumVersion < 128;
-})();
-async function pushHistoryState(data2, url, isNavigationTransition = false,) {
+function pushHistoryState(data2, url,) {
   performance.mark('framer-history-push',);
   updateCanonicalURL(url, __unframerWindow2.location.href,);
-  if (!isNavigationTransition) {
-    __unframerWindow2.history.pushState(data2, '', url,);
-    return;
-  }
-  let popstateCalled = false,
-    popstateListener;
-  if (maybeHasPopstateBug) {
-    popstateListener = () => {
-      popstateCalled = true;
-      if (isImpactedPopstateBugChromiumVersion) return;
-      const msg = 'Popstate called after intercept(). Please report this to the Framer team.';
-      console.error(msg,);
-      sendTrackingEvent('published_site_load_recoverable_error', {
-        message: msg,
-      },);
-    };
-    __unframerWindow2.addEventListener('popstate', popstateListener, {
-      once: true,
-    },);
-  }
-  if (isImpactedPopstateBugChromiumVersion && maybeHasPopstateBug) {
-    __unframerWindow2.history.__proto__.pushState.call(__unframerWindow2.history, data2, '', url,);
-  } else {
-    __unframerWindow2.history.pushState(data2, '', url,);
-  }
-  if (maybeHasPopstateBug) {
-    queueMicrotask(() => {
-      if (popstateCalled) return;
-      maybeHasPopstateBug = false;
-      __unframerWindow2.removeEventListener('popstate', popstateListener,);
-      return;
-    },);
-  }
+  logIfPopstateCalledSynchronously();
+  __unframerWindow2.history.pushState(data2, '', url,);
 }
 function useReplaceInitialState({
   disabled,
@@ -16808,7 +16859,6 @@ function useReplaceInitialState({
     );
   }, [],);
 }
-var supportsNavigationAPI = /* @__PURE__ */ (() => isWindow && typeof __unframerWindow2.navigation?.back === 'function')();
 function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
   const startViewTransition2 = useViewTransition();
   const monitorNextPaintAfterRender = useMonitorNextPaintAfterRender('framer-route-change',);
@@ -16816,7 +16866,6 @@ function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
   const popStateHandler = useCallback2(async ({
     state,
   },) => {
-    if (__unframerWindow2.navigation?.transition && __unframerWindow2.navigation?.transition?.navigationType !== 'traverse') return;
     if (!isObject2(state,)) return;
     const {
       routeId,
@@ -16843,7 +16892,7 @@ function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
       );
     };
     const viewTransition = await startViewTransition2(currentRouteId.current, routeId, changeRoute,);
-    const navigationTransition = __unframerWindow2.navigation?.transition;
+    const navigationTransition = supportsNavigationAPI ? __unframerWindow2.navigation?.transition : void 0;
     await (viewTransition?.updateCallbackDone ?? Promise.resolve()).then(viewTransitionReady.current?.resolve,).catch(
       viewTransitionReady.current?.reject,
     );
@@ -16879,60 +16928,6 @@ function usePopStateHandler(currentRouteId, setCurrentRouteId,) {
       if (supportsNavigationAPI) __unframerWindow2.navigation.removeEventListener('navigate', traversalHandler,);
     };
   }, [popStateHandler, traversalHandler,],);
-}
-function getHashForRoute(hash2, route, hashVariables,) {
-  const resolvedHash = getRouteElementId(route, hash2,);
-  if (!resolvedHash) return void 0;
-  const variables = Object.assign({}, route?.elements, hashVariables,);
-  return resolvedHash.replace(pathVariablesRegExpGlobal, (m2, p1,) => variables[p1] ?? m2,);
-}
-function getPathForRoute(route, {
-  currentRoutePath,
-  currentRoutePathLocalized,
-  currentPathVariables,
-  hash: hash2,
-  pathVariables,
-  hashVariables,
-  relative: relative2 = true,
-  preserveQueryParams,
-  onlyHash = false,
-  siteCanonicalURL,
-  localeId,
-},) {
-  const resolvedHash = getHashForRoute(hash2, route, hashVariables,);
-  if (onlyHash) return resolvedHash ?? '';
-  let currentPath = currentRoutePath ?? '/';
-  if (currentRoutePathLocalized && localeId) {
-    currentPath = currentRoutePathLocalized[localeId] ?? currentPath;
-  }
-  if (currentPathVariables) {
-    currentPath = currentPath.replace(pathVariablesRegExpGlobal, (m2, p1,) => String(currentPathVariables[p1] || m2,),);
-  }
-  const targetPathLocalized = localeId ? route?.pathLocalized?.[localeId] : void 0;
-  const targetPath = targetPathLocalized ?? route?.path ?? '/';
-  let path = targetPath;
-  if (pathVariables) {
-    path = path.replace(pathVariablesRegExpGlobal, (m2, p1,) => String(pathVariables[p1] || m2,),);
-  }
-  const isSamePageHashNavigation = Boolean(currentPath === path && resolvedHash,);
-  const isSameDynamicRouteNavigation = !isSamePageHashNavigation && pathVariables !== void 0 && currentRoutePath !== void 0 &&
-    route?.path !== void 0 && currentRoutePath === route.path && currentPath !== path;
-  if (relative2) {
-    if (customNotFoundPagePaths.has(currentPath,) && typeof __unframerWindow2 !== 'undefined') {
-      const sitePrefix = getSitePrefix(siteCanonicalURL,);
-      path = computeRelativePath(__unframerWindow2.location.pathname, sitePrefix + path,);
-    } else {
-      path = computeRelativePath(currentPath, path,);
-    }
-  }
-  const ignoreBackAnchor = isSamePageHashNavigation || isSameDynamicRouteNavigation;
-  if (preserveQueryParams || ignoreBackAnchor) {
-    path = forwardCurrentQueryParams(path, ignoreBackAnchor,);
-  }
-  if (resolvedHash) {
-    path = `${path}#${resolvedHash}`;
-  }
-  return path;
 }
 async function handleRedirectForMissingSlugs(route, pathVariables, nextLocale,) {
   if (!route.path) return false;
@@ -17012,13 +17007,13 @@ function useNativeLoadingSpinner() {
   }, [],);
   return useCallback2((promise, updateURL, controller,) => {
     if (!supportsNavigationAPI) {
-      void updateURL();
+      updateURL();
       return;
     }
     navigationPromise.current = promise;
     navigationController.current = controller;
     __unframerWindow2.navigation.addEventListener('navigate', navigateListener,);
-    void updateURL(true,);
+    updateURL();
     void promise.finally(() => {
       __unframerWindow2.navigation.removeEventListener('navigate', navigateListener,);
     },);
@@ -41779,18 +41774,14 @@ function Router({
           isInitialNavigationRef.current = false;
           currentPathVariablesRef.current = localeResult.pathVariables;
           currentLocaleIdRef.current = nextLocale.id;
-          const updateURL = async (ignorePushStateWrapper = false,) => {
+          const updateURL = () => {
             if (!currentPath) return;
-            return pushHistoryState(
-              {
-                routeId: currentRouteId2,
-                pathVariables: localeResult.pathVariables,
-                localeId: nextLocale.id,
-                paginationInfo: currentStatePaginationInfo,
-              },
-              currentPath,
-              ignorePushStateWrapper,
-            );
+            pushHistoryState({
+              routeId: currentRouteId2,
+              pathVariables: localeResult.pathVariables,
+              localeId: nextLocale.id,
+              paginationInfo: currentStatePaginationInfo,
+            }, currentPath,);
           };
           void startNavigation(
             () => {
@@ -41905,9 +41896,9 @@ function Router({
     }
     if (!newRoute) return;
     const currentRoute2 = routes[currentRouteRef.current];
-    const updateURL = async (ignorePushStateWrapper = false,) => {
+    const updateURL = () => {
       executeBeforeUrlUpdate();
-      return pushRouteState(routeId, newRoute, {
+      pushRouteState(routeId, newRoute, {
         currentRoutePath: currentRoute2?.path,
         currentPathVariables: currentPathVariables2,
         currentRoutePathLocalized: currentRoute2?.pathLocalized,
@@ -41916,7 +41907,7 @@ function Router({
         localeId: currentRouteLocaleId,
         preserveQueryParams,
         siteCanonicalURL,
-      }, ignorePushStateWrapper,);
+      },);
     };
     const pathnameWithHash = getSitePrefix(siteCanonicalURL,) + getPathForRoute(newRoute, {
       currentRoutePath: currentRoute2?.path,
