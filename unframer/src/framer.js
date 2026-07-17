@@ -1,23 +1,187 @@
-import {
-  __commonJS,
-  __decorateElement,
-  __decoratorMetadata,
-  __decoratorStart,
-  __export,
-  __privateAdd,
-  __privateGet,
-  __privateMethod,
-  __privateSet,
-  __publicField,
-  __require,
-  __runInitializers,
-  __toESM,
-  ServerDatabaseError,
-  UnsupportedQueryError,
-} from './framer-chunks/chunk-32KK4XC6.js';
-import './framer-chunks/chunk-IKQSD2QC.js';
+import { __require, } from './framer-chunks/chunk-IKQSD2QC.js';
 
-// /:https://app.framerstatic.com/chunk-IVFST2BV.mjs
+// /:https://app.framerstatic.com/chunk-R2CHKH34.mjs
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __knownSymbol = (name, symbol,) => (symbol = Symbol[name]) ? symbol : /* @__PURE__ */ Symbol.for('Symbol.' + name,);
+var __typeError = (msg) => {
+  throw TypeError(msg,);
+};
+var __defNormalProp = (obj, key7, value,) =>
+  key7 in obj
+    ? __defProp(obj, key7, {
+      enumerable: true,
+      configurable: true,
+      writable: true,
+      value,
+    },)
+    : obj[key7] = value;
+var __name = (target, value,) =>
+  __defProp(target, 'name', {
+    value,
+    configurable: true,
+  },);
+var __require2 = /* @__PURE__ */ ((x2) =>
+  typeof __require !== 'undefined' ? __require : typeof Proxy !== 'undefined'
+    ? new Proxy(x2, {
+      get: (a, b,) => (typeof __require !== 'undefined' ? __require : a)[b],
+    },)
+    : x2)(function (x2,) {
+    if (typeof __require !== 'undefined') return __require.apply(this, arguments,);
+    throw Error('Dynamic require of "' + x2 + '" is not supported',);
+  },);
+var __commonJS = (cb, mod,) =>
+  function __require22() {
+    try {
+      return mod || (0, cb[__getOwnPropNames(cb,)[0]])(
+        (mod = {
+          exports: {},
+        }).exports,
+        mod,
+      ),
+        mod.exports;
+    } catch (e) {
+      throw mod = 0, e;
+    }
+  };
+var __export = (target, all,) => {
+  for (var name in all) {
+    __defProp(target, name, {
+      get: all[name],
+      enumerable: true,
+    },);
+  }
+};
+var __copyProps = (to, from, except, desc,) => {
+  if (from && typeof from === 'object' || typeof from === 'function') {
+    for (let key7 of __getOwnPropNames(from,)) {
+      if (!__hasOwnProp.call(to, key7,) && key7 !== except) {
+        __defProp(to, key7, {
+          get: () => from[key7],
+          enumerable: !(desc = __getOwnPropDesc(from, key7,)) || desc.enumerable,
+        },);
+      }
+    }
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target,) => (target = mod != null ? __create(__getProtoOf(mod,),) : {},
+  __copyProps(
+    // If the importer is in node compatibility mode or this is not an ESM
+    // file that has been converted to a CommonJS file using a Babel-
+    // compatible transform (i.e. "__esModule" has not been set), then set
+    // "default" to the CommonJS "module.exports" for node compatibility.
+    isNodeMode || !mod || !mod.__esModule
+      ? __defProp(target, 'default', {
+        value: mod,
+        enumerable: true,
+      },)
+      : target,
+    mod,
+  ));
+var __decoratorStart = (base) => [, , , __create(base?.[__knownSymbol('metadata',)] ?? null,),];
+var __decoratorStrings = ['class', 'method', 'getter', 'setter', 'accessor', 'field', 'value', 'get', 'set',];
+var __expectFn = (fn) => fn !== void 0 && typeof fn !== 'function' ? __typeError('Function expected',) : fn;
+var __decoratorContext = (kind, name, done, metadata, fns,) => ({
+  kind: __decoratorStrings[kind],
+  name,
+  metadata,
+  addInitializer: (fn) => done._ ? __typeError('Already initialized',) : fns.push(__expectFn(fn || null,),),
+});
+var __decoratorMetadata = (array, target,) => __defNormalProp(target, __knownSymbol('metadata',), array[3],);
+var __runInitializers = (array, flags, self, value,) => {
+  for (var i = 0, fns = array[flags >> 1], n = fns && fns.length; i < n; i++) {
+    flags & 1
+      ? fns[i].call(self,)
+      : value = fns[i].call(self, value,);
+  }
+  return value;
+};
+var __decorateElement = (array, flags, name, decorators, target, extra,) => {
+  var fn,
+    it,
+    done,
+    ctx,
+    access,
+    k = flags & 7,
+    s = !!(flags & 8),
+    p = !!(flags & 16);
+  var j = k > 3 ? array.length + 1 : k ? s ? 1 : 2 : 0,
+    key7 = __decoratorStrings[k + 5];
+  var initializers = k > 3 && (array[j - 1] = []),
+    extraInitializers = array[j] || (array[j] = []);
+  var desc = k && (!p && !s && (target = target.prototype),
+    k < 5 && (k > 3 || !p) && __getOwnPropDesc(
+      k < 4 ? target : {
+        get [name]() {
+          return __privateGet(this, extra,);
+        },
+        set [name](x2,) {
+          return __privateSet(this, extra, x2,);
+        },
+      },
+      name,
+    ));
+  k ? p && k < 4 && __name(extra, (k > 2 ? 'set ' : k > 1 ? 'get ' : '') + name,) : __name(target, name,);
+  for (var i = decorators.length - 1; i >= 0; i--) {
+    ctx = __decoratorContext(k, name, done = {}, array[3], extraInitializers,);
+    if (k) {
+      ctx.static = s,
+        ctx.private = p,
+        access = ctx.access = {
+          has: p ? (x2) => __privateIn(target, x2,) : (x2) => name in x2,
+        };
+      if (k ^ 3) {
+        access.get = p
+          ? (x2) => (k ^ 1 ? __privateGet : __privateMethod)(x2, target, k ^ 4 ? extra : desc.get,)
+          : (x2) => x2[name];
+      }
+      if (k > 2) access.set = p ? (x2, y2,) => __privateSet(x2, target, y2, k ^ 4 ? extra : desc.set,) : (x2, y2,) => x2[name] = y2;
+    }
+    it = (0, decorators[i])(
+      k
+        ? k < 4 ? p ? extra : desc[key7] : k > 4 ? void 0 : {
+          get: desc.get,
+          set: desc.set,
+        }
+        : target,
+      ctx,
+    ), done._ = 1;
+    if (k ^ 4 || it === void 0) __expectFn(it,) && (k > 4 ? initializers.unshift(it,) : k ? p ? extra = it : desc[key7] = it : target = it);
+    else if (typeof it !== 'object' || it === null) __typeError('Object expected',);
+    else {__expectFn(fn = it.get,) && (desc.get = fn),
+        __expectFn(fn = it.set,) && (desc.set = fn),
+        __expectFn(fn = it.init,) && initializers.unshift(fn,);}
+  }
+  return k || __decoratorMetadata(array, target,), desc && __defProp(target, name, desc,), p ? k ^ 4 ? extra : desc : target;
+};
+var __publicField = (obj, key7, value,) => __defNormalProp(obj, typeof key7 !== 'symbol' ? key7 + '' : key7, value,);
+var __accessCheck = (obj, member, msg,) => member.has(obj,) || __typeError('Cannot ' + msg,);
+var __privateIn = (member, obj,) => Object(obj,) !== obj ? __typeError('Cannot use the "in" operator on this value',) : member.has(obj,);
+var __privateGet = (
+  obj,
+  member,
+  getter,
+) => (__accessCheck(obj, member, 'read from private field',), getter ? getter.call(obj,) : member.get(obj,));
+var __privateAdd = (obj, member, value,) =>
+  member.has(obj,)
+    ? __typeError('Cannot add the same private member more than once',)
+    : member instanceof WeakSet
+    ? member.add(obj,)
+    : member.set(obj, value,);
+var __privateSet = (
+  obj,
+  member,
+  value,
+  setter,
+) => (__accessCheck(obj, member, 'write to private field',), setter ? setter.call(obj, value,) : member.set(obj, value,), value);
+var __privateMethod = (obj, member, method,) => (__accessCheck(obj, member, 'access private method',), method);
+
+// /:https://app.framerstatic.com/chunk-TLSQBNMM.mjs
 import { createContext, } from 'react';
 import { useEffect, useLayoutEffect, } from 'react';
 import * as React from 'react';
@@ -9049,7 +9213,7 @@ function loadExternalIsValidProp(isValidProp,) {
 }
 try {
   const emotionPkg = '@emotion/is-prop-valid';
-  loadExternalIsValidProp(__require(emotionPkg,).default,);
+  loadExternalIsValidProp(__require2(emotionPkg,).default,);
 } catch {}
 function filterProps(props, isDom, forwardMotionProps,) {
   const filteredProps2 = {};
@@ -13301,7 +13465,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.AOPHMQUZ.mjs
+// /:https://app.framerstatic.com/framer.MEAD746I.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -15871,6 +16035,149 @@ function useRouteHandler(routeId, preload = false, elementId,) {
   const handler = React42.useCallback(() => navigate?.(routeId, elementId,), [navigate, elementId, routeId,],);
   return handler;
 }
+function getNavigator() {
+  return typeof __unframerNavigator2 !== 'undefined' ? __unframerNavigator2 : void 0;
+}
+function getWindow() {
+  return typeof __unframerWindow2 !== 'undefined' ? __unframerWindow2 : void 0;
+}
+var macRegex = /Mac/u;
+var winRegex = /Win/u;
+var iOSRegex = /iPhone|iPod|iPad/iu;
+var macIntelRegex = /MacIntel/iu;
+var androidRegex = /android/iu;
+function isMacOS() {
+  const nav = getNavigator();
+  return nav ? macRegex.test(nav.platform,) : false;
+}
+function isWindows() {
+  const nav = getNavigator();
+  return nav ? winRegex.test(nav.platform,) : false;
+}
+function isIOS() {
+  const nav = getNavigator();
+  if (!nav) return false;
+  if (iOSRegex.test(nav.platform,)) return true;
+  return macIntelRegex.test(nav.platform,) && nav.maxTouchPoints != null && nav.maxTouchPoints > 2;
+}
+function isAppleDevice() {
+  return isMacOS() || isIOS();
+}
+function isAndroid() {
+  const nav = getNavigator();
+  return nav ? androidRegex.test(nav.userAgent,) : false;
+}
+var edgeRegex = /Edg\//u;
+function isEdge() {
+  const nav = getNavigator();
+  return nav ? edgeRegex.test(nav.userAgent,) : false;
+}
+var chromeRegex = /Chrome/u;
+var googleVendorRegex = /Google Inc/u;
+function isChrome() {
+  const nav = getNavigator();
+  return nav ? chromeRegex.test(nav.userAgent,) && googleVendorRegex.test(nav.vendor,) && !isEdge() : false;
+}
+var appleWebKitRegex = /AppleWebKit\//u;
+function isWebKit() {
+  const nav = getNavigator();
+  return nav ? appleWebKitRegex.test(nav.userAgent,) && !isChrome() && !isEdge() : false;
+}
+var safariRegex = /Safari/u;
+var appleComputerRegex = /Apple Computer/u;
+function isSafari() {
+  const nav = getNavigator();
+  return nav ? safariRegex.test(nav.userAgent,) && appleComputerRegex.test(nav.vendor,) : false;
+}
+var firefoxRegex = /Firefox\/\d+\.\d+$/u;
+function isFirefox() {
+  const nav = getNavigator();
+  return nav ? firefoxRegex.test(nav.userAgent,) : false;
+}
+function isBrowser22() {
+  return typeof document === 'object';
+}
+var chromeVersionRegex = /Chrome\/(\d+)/u;
+function chromeMainVersion() {
+  const nav = getNavigator();
+  if (!nav) return -1;
+  const result = chromeVersionRegex.exec(nav.userAgent,);
+  if (!result || !result[1]) return -1;
+  const version2 = parseInt(result[1],);
+  return Number.isFinite(version2,) ? version2 : -1;
+}
+var safariVersionRegex = /Version\/([\d.]+)/u;
+function safariVersion() {
+  const nav = getNavigator();
+  if (!nav) return -1;
+  const result = safariVersionRegex.exec(nav.userAgent,);
+  if (result?.[1]) {
+    return parseFloat(result[1],);
+  }
+  return -1;
+}
+var framerXRegex = /FramerX/u;
+function isFramerX() {
+  const nav = getNavigator();
+  return nav ? framerXRegex.test(nav.userAgent,) : false;
+}
+function isTest() {
+  return false;
+}
+function isTouch() {
+  const win = getWindow();
+  const nav = getNavigator();
+  if (!win || !nav) return false;
+  return 'ontouchstart' in win || nav.maxTouchPoints > 0;
+}
+var tabletRegex = /tablet|iPad|Nexus 9/iu;
+var mobileRegex = /mobi/iu;
+function deviceType() {
+  const nav = getNavigator();
+  if (nav && tabletRegex.test(nav.userAgent,)) return 'tablet';
+  if (nav && mobileRegex.test(nav.userAgent,)) return 'phone';
+  return 'desktop';
+}
+function isDesktop() {
+  return deviceType() === 'desktop';
+}
+function isPhone() {
+  return deviceType() === 'phone';
+}
+function isTablet() {
+  return deviceType() === 'tablet';
+}
+function isMobile() {
+  return isPhone() || isTablet();
+}
+var embeddedRegex = /Instagram|FB_IAB\/FB4A|FBAN\/FBIOS|BytedanceWebview|Twitter|LinkedIn/iu;
+function isEmbedded() {
+  const nav = getNavigator();
+  return nav ? embeddedRegex.test(nav.userAgent,) : false;
+}
+var absoluteUrlRegex = /^[a-z]{1,8}:\/\/.*$/iu;
+function isRelativeUrl(url,) {
+  return !absoluteUrlRegex.test(url,);
+}
+function isFileUrl(url,) {
+  return url.startsWith('file://',);
+}
+function isDataUrl(url,) {
+  return url.startsWith('data:',);
+}
+var localServerUrlRegex1 = /[a-z]{1,8}:\/\/127\.0\.0\.1/iu;
+var localServerUrlRegex2 = /[a-zA-Z]{1,8}:\/\/localhost/u;
+function isLocalServerUrl(url,) {
+  return localServerUrlRegex1.test(url,) || localServerUrlRegex2.test(url,);
+}
+function isLocalUrl(url,) {
+  if (isFileUrl(url,)) return true;
+  if (isLocalServerUrl(url,)) return true;
+  return false;
+}
+function isCommandKeyPressed(event,) {
+  return isAppleDevice() ? event.metaKey : event.ctrlKey;
+}
 var libraryFeatures = {};
 var getLibraryFeatures = () => {
   return libraryFeatures;
@@ -16795,7 +17102,15 @@ var isImpactedPopstateBugChromiumVersion = /* @__PURE__ */ (() => {
   const chromiumVersion = +userAgent.slice(chromePos + 7, userAgent.indexOf('.', chromePos,),);
   return chromiumVersion > 101 && chromiumVersion < 128;
 })();
-var supportsNavigationAPI = hasNavigationAPI && !isImpactedPopstateBugChromiumVersion;
+var supportsNavigationAPI = hasNavigationAPI &&
+  // Impacted Chromium versions are treated as not supporting the Navigation API at all: they take
+  // the plain History API path where `intercept()` is never called, so the bug cannot trigger. They
+  // only lose progressive enhancements (like native spinner).
+  !isImpactedPopstateBugChromiumVersion &&
+  // Safari has a bug where a combo of a top-level wheel event listener (like one set by React) +
+  // event.intercept() causes the page to freeze on swipes back for 3 seconds: https://bugs.webkit.org/show_bug.cgi?id=319414
+  /* @__PURE__ */
+  (() => !isSafari())();
 function replaceHistoryState(data2, url, ignoreReplaceStateWrapper = false,) {
   performance.mark('framer-history-replace',);
   if (url) {
@@ -23692,149 +24007,6 @@ var ControlType = /* @__PURE__ */ ((ControlType2) => {
   ControlType2['Location'] = 'location';
   return ControlType2;
 })(ControlType || {},);
-function getNavigator() {
-  return typeof __unframerNavigator2 !== 'undefined' ? __unframerNavigator2 : void 0;
-}
-function getWindow() {
-  return typeof __unframerWindow2 !== 'undefined' ? __unframerWindow2 : void 0;
-}
-var macRegex = /Mac/u;
-var winRegex = /Win/u;
-var iOSRegex = /iPhone|iPod|iPad/iu;
-var macIntelRegex = /MacIntel/iu;
-var androidRegex = /android/iu;
-function isMacOS() {
-  const nav = getNavigator();
-  return nav ? macRegex.test(nav.platform,) : false;
-}
-function isWindows() {
-  const nav = getNavigator();
-  return nav ? winRegex.test(nav.platform,) : false;
-}
-function isIOS() {
-  const nav = getNavigator();
-  if (!nav) return false;
-  if (iOSRegex.test(nav.platform,)) return true;
-  return macIntelRegex.test(nav.platform,) && nav.maxTouchPoints != null && nav.maxTouchPoints > 2;
-}
-function isAppleDevice() {
-  return isMacOS() || isIOS();
-}
-function isAndroid() {
-  const nav = getNavigator();
-  return nav ? androidRegex.test(nav.userAgent,) : false;
-}
-var edgeRegex = /Edg\//u;
-function isEdge() {
-  const nav = getNavigator();
-  return nav ? edgeRegex.test(nav.userAgent,) : false;
-}
-var chromeRegex = /Chrome/u;
-var googleVendorRegex = /Google Inc/u;
-function isChrome() {
-  const nav = getNavigator();
-  return nav ? chromeRegex.test(nav.userAgent,) && googleVendorRegex.test(nav.vendor,) && !isEdge() : false;
-}
-var appleWebKitRegex = /AppleWebKit\//u;
-function isWebKit() {
-  const nav = getNavigator();
-  return nav ? appleWebKitRegex.test(nav.userAgent,) && !isChrome() && !isEdge() : false;
-}
-var safariRegex = /Safari/u;
-var appleComputerRegex = /Apple Computer/u;
-function isSafari() {
-  const nav = getNavigator();
-  return nav ? safariRegex.test(nav.userAgent,) && appleComputerRegex.test(nav.vendor,) : false;
-}
-var firefoxRegex = /Firefox\/\d+\.\d+$/u;
-function isFirefox() {
-  const nav = getNavigator();
-  return nav ? firefoxRegex.test(nav.userAgent,) : false;
-}
-function isBrowser22() {
-  return typeof document === 'object';
-}
-var chromeVersionRegex = /Chrome\/(\d+)/u;
-function chromeMainVersion() {
-  const nav = getNavigator();
-  if (!nav) return -1;
-  const result = chromeVersionRegex.exec(nav.userAgent,);
-  if (!result || !result[1]) return -1;
-  const version2 = parseInt(result[1],);
-  return Number.isFinite(version2,) ? version2 : -1;
-}
-var safariVersionRegex = /Version\/([\d.]+)/u;
-function safariVersion() {
-  const nav = getNavigator();
-  if (!nav) return -1;
-  const result = safariVersionRegex.exec(nav.userAgent,);
-  if (result?.[1]) {
-    return parseFloat(result[1],);
-  }
-  return -1;
-}
-var framerXRegex = /FramerX/u;
-function isFramerX() {
-  const nav = getNavigator();
-  return nav ? framerXRegex.test(nav.userAgent,) : false;
-}
-function isTest() {
-  return false;
-}
-function isTouch() {
-  const win = getWindow();
-  const nav = getNavigator();
-  if (!win || !nav) return false;
-  return 'ontouchstart' in win || nav.maxTouchPoints > 0;
-}
-var tabletRegex = /tablet|iPad|Nexus 9/iu;
-var mobileRegex = /mobi/iu;
-function deviceType() {
-  const nav = getNavigator();
-  if (nav && tabletRegex.test(nav.userAgent,)) return 'tablet';
-  if (nav && mobileRegex.test(nav.userAgent,)) return 'phone';
-  return 'desktop';
-}
-function isDesktop() {
-  return deviceType() === 'desktop';
-}
-function isPhone() {
-  return deviceType() === 'phone';
-}
-function isTablet() {
-  return deviceType() === 'tablet';
-}
-function isMobile() {
-  return isPhone() || isTablet();
-}
-var embeddedRegex = /Instagram|FB_IAB\/FB4A|FBAN\/FBIOS|BytedanceWebview|Twitter|LinkedIn/iu;
-function isEmbedded() {
-  const nav = getNavigator();
-  return nav ? embeddedRegex.test(nav.userAgent,) : false;
-}
-var absoluteUrlRegex = /^[a-z]{1,8}:\/\/.*$/iu;
-function isRelativeUrl(url,) {
-  return !absoluteUrlRegex.test(url,);
-}
-function isFileUrl(url,) {
-  return url.startsWith('file://',);
-}
-function isDataUrl(url,) {
-  return url.startsWith('data:',);
-}
-var localServerUrlRegex1 = /[a-z]{1,8}:\/\/127\.0\.0\.1/iu;
-var localServerUrlRegex2 = /[a-zA-Z]{1,8}:\/\/localhost/u;
-function isLocalServerUrl(url,) {
-  return localServerUrlRegex1.test(url,) || localServerUrlRegex2.test(url,);
-}
-function isLocalUrl(url,) {
-  if (isFileUrl(url,)) return true;
-  if (isLocalServerUrl(url,)) return true;
-  return false;
-}
-function isCommandKeyPressed(event,) {
-  return isAppleDevice() ? event.metaKey : event.ctrlKey;
-}
 var StyleSheetContext = /* @__PURE__ */ React42.createContext(void 0,);
 var defaultCache = /* @__PURE__ */ new Set();
 var defaultSheet;
@@ -47498,11 +47670,69 @@ function getCacheKey(query, locale,) {
   const localeId = locale?.id ?? 'default';
   return JSON.stringify(query, replaceCollection,) + localeId;
 }
+var ServerDatabaseError = class extends Error {
+  constructor(...args) {
+    const [message = 'error', ...rest] = args;
+    super(`server database: ${message}`, ...rest,);
+    this.name = 'ServerDatabaseError';
+  }
+};
+var UnsupportedQueryError = class extends ServerDatabaseError {
+  constructor(...args) {
+    const [message = 'error', ...rest] = args;
+    super(`unsupported: ${message}`, ...rest,);
+  }
+};
+function isServerDatabaseQueryResult(value,) {
+  return isObject2(value,) && Array.isArray(value.rows,) && value.rows.every(isObject2,);
+}
+function getServerDatabaseUrl(config,) {
+  const url = new URL(`${config.endpoint}/${config.siteId}/query`,);
+  url.searchParams.set('root', config.root,);
+  return url;
+}
+function isServerDatabaseResponse(value,) {
+  if (!isObject2(value,)) return false;
+  const hasData = 'data' in value;
+  const hasError = 'error' in value;
+  if (hasData === hasError) return false;
+  if (hasData) return isServerDatabaseQueryResult(value.data,);
+  return isObject2(value.error,) && typeof value.error.message === 'string';
+}
 async function executeServerDatabaseQuery(sql, parameters = {},) {
-  const {
-    executeServerDatabaseQuery: executeServerDatabaseQueryWithSqlite,
-  } = await import('./framer-chunks/SqliteDatabase-B4N3I6LN-EIMIZ6WM.js');
-  return executeServerDatabaseQueryWithSqlite(sql, parameters,);
+  const config = typeof __unframerWindow2 === 'undefined' ? void 0 : __unframerWindow2.__framer_serverDatabaseConfig;
+  if (!config?.endpoint || !config.siteId || !config.root) {
+    throw new ServerDatabaseError('server database is unavailable.',);
+  }
+  const url = getServerDatabaseUrl(config,);
+  const statement = {
+    sql,
+  };
+  if (!isEmptyObject(parameters,)) statement.params = parameters;
+  url.searchParams.set('statement', JSON.stringify(statement,),);
+  const response = await fetch(url.href, {
+    headers: {
+      Accept: 'application/json',
+    },
+  },);
+  const contentType = response.headers.get('content-type',)?.split(';', 1,)[0]?.trim().toLowerCase();
+  if (contentType !== 'application/json') {
+    throw new ServerDatabaseError(`server database query failed with status ${response.status}: expected JSON response`,);
+  }
+  let responseBody;
+  try {
+    responseBody = await response.json();
+  } catch {
+    throw new ServerDatabaseError(`server database query returned invalid JSON`,);
+  }
+  const serverDatabaseResponse = isServerDatabaseResponse(responseBody,) ? responseBody : void 0;
+  const data2 = serverDatabaseResponse && 'data' in serverDatabaseResponse ? serverDatabaseResponse.data : void 0;
+  const error = serverDatabaseResponse && 'error' in serverDatabaseResponse ? serverDatabaseResponse.error : void 0;
+  if (error || !response.ok) {
+    throw new ServerDatabaseError(`server database query failed with status ${response.status}${error ? `: ${error.message}` : ''}`,);
+  }
+  if (!data2) throw new ServerDatabaseError('server database query returned invalid response',);
+  return data2;
 }
 var logger = /* @__PURE__ */ getLogger('server database',);
 function mapValue2(value, valueType,) {
@@ -47551,12 +47781,6 @@ function mapStringValue(value,) {
   );
 }
 function throwUnsupportedValue(value, type,) {
-  if (typeof value === 'object' && value !== null) {
-    if (value instanceof Uint8Array) throw new ServerDatabaseError(`cannot map Uint8Array to ${type}.`,);
-    if (value instanceof Int8Array) throw new ServerDatabaseError(`cannot map Int8Array to ${type}.`,);
-    if (value instanceof ArrayBuffer) throw new ServerDatabaseError(`cannot map ArrayBuffer to ${type}.`,);
-    throw new ServerDatabaseError(`cannot map object to ${type}.`,);
-  }
   throw new ServerDatabaseError(`cannot map ${typeof value} to ${type}.`,);
 }
 function mapServerDatabaseRows(rows, columns,) {
@@ -54631,11 +54855,11 @@ function buildDebugFamilies(debugByFamily, selectedAssets,) {
 async function loadFontsWithOpenType(source,) {
   switch (source) {
     case 'google': {
-      const supportedFonts = await import('./framer-chunks/google-K5SKTAAF-CGP2QMBV.js');
+      const supportedFonts = await import('./framer-chunks/google-FGWL63I4-ZVGQVGYW.js');
       return supportedFonts.default;
     }
     case 'fontshare': {
-      const supportedFonts = await import('./framer-chunks/fontshare-IUGQ52HX-4JRR6JG4.js');
+      const supportedFonts = await import('./framer-chunks/fontshare-NODQXKXY-WFMSFOID.js');
       return supportedFonts.default;
     }
     default:
@@ -54645,15 +54869,15 @@ async function loadFontsWithOpenType(source,) {
 async function loadFontToOpenTypeFeatures(source,) {
   switch (source) {
     case 'google': {
-      const features = await import('./framer-chunks/google-VWNPUY4E-XDKHAOLT.js');
+      const features = await import('./framer-chunks/google-H6ASLDWC-BF45GPSO.js');
       return features.default;
     }
     case 'fontshare': {
-      const features = await import('./framer-chunks/fontshare-W3A7DJCR-E5X2AFCU.js');
+      const features = await import('./framer-chunks/fontshare-N6VWZXGT-SYJODM4W.js');
       return features.default;
     }
     case 'framer': {
-      const features = await import('./framer-chunks/framer-font-OKYJFYGY-3WVEN4SL.js');
+      const features = await import('./framer-chunks/framer-font-6VJIZ2IU-EDXB5C2E.js');
       return features.default;
     }
     default:
@@ -55224,10 +55448,10 @@ function loadVariationAxes(source,) {
       const axes = (async () => {
         switch (source) {
           case 'google': {
-            return (await import('./framer-chunks/google-KLGLJHZI-YRKRJU42.js')).default;
+            return (await import('./framer-chunks/google-NDSGZUS3-UI6RQJ5A.js')).default;
           }
           case 'fontshare': {
-            return (await import('./framer-chunks/fontshare-HGQXVJG5-LE2UTFPX.js')).default;
+            return (await import('./framer-chunks/fontshare-32OC4HMY-R6YSWL3H.js')).default;
           }
           default:
             assertNever(source,);
@@ -60765,7 +60989,6 @@ var package_default = {
     watch: 'yarn :jest --watch',
   },
   dependencies: {
-    '@sqlite.org/sqlite-wasm': '^3.50.4-build1',
     devalue: '^5.8.1',
     eventemitter3: '^5.0.1',
     fontfaceobserver: '2.2.0',
