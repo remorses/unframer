@@ -316,6 +316,43 @@ const purePlugin = ({}: { types: typeof t }): PluginObj => ({
     },
 })
 
+/**
+ * Framer ships a new runtime bundle every day and regularly renames or
+ * refactors the code we patch. A plain `.replace()` that stops matching is a
+ * silent no-op: the download keeps succeeding and the breakage only surfaces
+ * much later, downstream, in exported sites.
+ *
+ * This bit us twice at once in Aug 2026:
+ *   - `combinedCSSRules` became `LazyProp(() => combineCSSRules(false))`, so the
+ *     exported value turned into a `{ get value() }` object instead of string[].
+ *   - `initLazyModulesCache` went from `const promise = import(url).then` to
+ *     `preloadLazyModule(hash2, () => import(url), url)`, so the
+ *     webpackIgnore/@vite-ignore comments silently stopped being injected.
+ *
+ * The old `if (code === codeAfter) throw` guard could never fire, because
+ * codeAfter always had appended text by the time it ran. Every patch below must
+ * assert instead, so the daily workflow fails loudly the day Framer moves.
+ */
+function replaceOrThrow({
+    code,
+    find,
+    replace,
+    what,
+}: {
+    code: string
+    find: RegExp
+    replace: string
+    what: string
+}) {
+    const result = code.replace(find, replace)
+    if (result === code) {
+        throw new Error(
+            `Failed to patch framer.js: ${what}. The pattern ${find} no longer matches the Framer bundle, it probably got refactored upstream.`,
+        )
+    }
+    return result
+}
+
 export async function fixFramerCode({ resultFile }) {
     const output = fs.readFileSync(resultFile, 'utf-8')
     const babelRes = transform(output || '', {
@@ -341,10 +378,7 @@ export async function fixFramerCode({ resultFile }) {
         trailingCommas: 'always',
         semiColons: 'always',
     })
-    let codeAfter = code.replace(
-        'var combinedCSSRules =',
-        'export var combinedCSSRules =',
-    )
+    let codeAfter = code
     // this piece of code was removed in https://vercel.com/gang/unframer-nextjs-app/F8jbRtq2KZvmTYGBapgwbTVbsqyy
     // https://github.com/remorses/unframer/commit/537db6e74858b01d97cef3caeb047569bd6d3ccf
     // probably because new react version should append styles to head automatically but this does not happen now?
@@ -371,43 +405,61 @@ export async function fixFramerCode({ resultFile }) {
     }
     `
 
-    // TODO this code does not work in react strict mode, bug in framer
-    let toRemove =
-        /throw new ReferenceError\(\s*'useCloneChildrenWithPropsAndRef: You should not call cloneChildrenWithPropsAndRef more than once during the render cycle\.',\s*\)/
-    // Check if the string exists in the code before trying to remove it
-    if (!codeAfter.match(toRemove)) {
+    // NOTE: the lightningcss double var() workaround that used to live here was
+    // deleted because Framer fixed it upstream. The bundle now ships the correct
+    // `font-family: var(--framer-code-font-family, ...)` with a single var().
+    // https://github.com/parcel-bundler/lightningcss/issues/897
+
+    // Fix fetchpriority -> fetchPriority casing
+    codeAfter = replaceOrThrow({
+        code: codeAfter,
+        find: /fetchpriority: image\.fetchPriority,/g,
+        replace: 'fetchPriority: image.fetchPriority,',
+        what: 'fetchpriority -> fetchPriority casing fix',
+    })
+    // suppressHydrationWarning is handled by babelPluginSuppressHydration for all jsx calls.
+    // Add ignore comments to the lazy module dynamic import so Turbopack/webpack/Vite
+    // don't try to statically resolve the runtime url. Framer refactored
+    // initLazyModulesCache from `const promise = import(url).then` to
+    // `preloadLazyModule(hash2, () => import(url), url)`, so match on the arrow
+    // function instead of the surrounding statement.
+    codeAfter = replaceOrThrow({
+        code: codeAfter,
+        find: /\(\) => import\(url/g,
+        replace: '() => import(/* webpackIgnore: true */ /* @vite-ignore */ url',
+        what: 'webpackIgnore/@vite-ignore comments on the lazy module dynamic import',
+    })
+
+    // Framer wraps combinedCSSRules in a LazyProp getter object, see
+    // library/src/modules/LazyProp.ts. Its own getCombinedCSSRules() reads
+    // `combinedCSSRules.value`, so the declaration must be left untouched:
+    // rewriting it into a plain array silently returns undefined there and kills
+    // css injection in every exported site. Re-export the resolved array under
+    // the public name instead, so consumers keep seeing a string[].
+    if (!/var combinedCSSRules = [^\n]*LazyProp\(/.test(codeAfter)) {
         throw new Error(
-            'Could not find expected ReferenceError string in bundle',
+            'Failed to patch framer.js: could not find the `var combinedCSSRules = ... LazyProp(...)` declaration. Framer probably changed how combinedCSSRules is defined, check the bundle and update this script.',
         )
     }
 
-    // fix lightningcss bug on double var(), fix Nextjs turbopack https://github.com/parcel-bundler/lightningcss/issues/897
-    codeAfter = codeAfter.replace(
-        `font-family: var(var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)))`,
-        `font-family: var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif))`,
-    )
-    // Fix fetchpriority -> fetchPriority casing
-    codeAfter = codeAfter.replace(
-        /fetchpriority: image\.fetchPriority,/g,
-        'fetchPriority: image.fetchPriority,',
-    )
-    // suppressHydrationWarning is handled by babelPluginSuppressHydration for all jsx calls.
-    // Fix dynamic import for lazy modules - add ignore comments so Turbopack/webpack/Vite don't try to resolve it
-    codeAfter = codeAfter.replace(
-        /const promise = import\(url\)\.then/g,
-        'const promise = import(/* webpackIgnore: true */ /* @vite-ignore */ url).then',
-    )
+    // TODO this code does not work in react strict mode, bug in framer
+    const toRemove =
+        /throw new ReferenceError\(\s*'useCloneChildrenWithPropsAndRef: You should not call cloneChildrenWithPropsAndRef more than once during the render cycle\.',\s*\)/
+    codeAfter = replaceOrThrow({
+        code: codeAfter,
+        find: toRemove,
+        replace: '',
+        what: 'removal of the cloneChildrenWithPropsAndRef ReferenceError (breaks react strict mode)',
+    })
 
     codeAfter += '\n\n'
     codeAfter += dedent`
     export { Link as FramerLink  }
     export { Router, FetchClientProvider, FormContext, LocaleInfoContext, injectCSSRule, componentsWithServerRenderedStyles }
-    `
-    codeAfter = codeAfter.replace(toRemove, '')
 
-    if (code === codeAfter) {
-        throw new Error('Failed to export combinedCSSRules')
-    }
+    const unframerCombinedCSSRules = combinedCSSRules.value
+    export { unframerCombinedCSSRules as combinedCSSRules }
+    `
     code = codeAfter
     // code = code.replace(/safeToRemove\(\)/g, 'safeToRemove?.()')
     // code = '// @ts-nocheck\n' + code

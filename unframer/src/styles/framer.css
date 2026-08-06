@@ -864,63 +864,9 @@ body { --framer-will-change-filter-override: none; }
 }
 
 
-:not([data-framer-generated]) > [data-framer-stack-content-wrapper] > *,
-:not([data-framer-generated]) > [data-framer-stack-content-wrapper] > [data-framer-component-type],
-:not([data-framer-generated]) > [data-framer-stack-content-wrapper] > [data-framer-legacy-stack-gap-enabled] > *,
-:not([data-framer-generated]) > [data-framer-stack-content-wrapper] > [data-framer-legacy-stack-gap-enabled] > [data-framer-component-type] {
+[data-framer-component-type="Stack"]:not([data-framer-generated]) > *,
+[data-framer-component-type="Stack"]:not([data-framer-generated]) > [data-framer-component-type] {
     position: relative;
-}
-
-.flexbox-gap-not-supported [data-framer-legacy-stack-gap-enabled="true"] > *, [data-framer-legacy-stack-gap-enabled="true"][data-framer-stack-flexbox-gap="false"] {
-    margin-top: calc(var(--stack-gap-y) / 2);
-    margin-bottom: calc(var(--stack-gap-y) / 2);
-    margin-right: calc(var(--stack-gap-x) / 2);
-    margin-left: calc(var(--stack-gap-x) / 2);
-}
-
-[data-framer-stack-content-wrapper][data-framer-stack-gap-enabled="true"] {
-        row-gap: var(--stack-native-row-gap);
-        column-gap: var(--stack-native-column-gap);
-    }
-.flexbox-gap-not-supported [data-framer-stack-content-wrapper][data-framer-stack-gap-enabled="true"] {
-        row-gap: unset;
-        column-gap: unset;
-    }
-
-.flexbox-gap-not-supported
-[data-framer-stack-direction-reverse="false"]
-[data-framer-legacy-stack-gap-enabled="true"]
-> *:first-child,
-[data-framer-stack-direction-reverse="false"]
-[data-framer-legacy-stack-gap-enabled="true"][data-framer-stack-flexbox-gap="false"]
-> *:first-child,
-.flexbox-gap-not-supported
-[data-framer-stack-direction-reverse="true"]
-[data-framer-legacy-stack-gap-enabled="true"]
-> *:last-child,
-[data-framer-stack-direction-reverse="true"]
-[data-framer-legacy-stack-gap-enabled="true"][data-framer-stack-flexbox-gap="false"]
-> *:last-child {
-    margin-top: 0;
-    margin-left: 0;
-}
-
-.flexbox-gap-not-supported
-[data-framer-stack-direction-reverse="false"]
-[data-framer-legacy-stack-gap-enabled="true"]
-> *:last-child,
-[data-framer-stack-direction-reverse="false"]
-[data-framer-legacy-stack-gap-enabled="true"][data-framer-stack-flexbox-gap="false"]
-> *:last-child,
-.flexbox-gap-not-supported
-[data-framer-stack-direction-reverse="true"]
-[data-framer-legacy-stack-gap-enabled="true"]
-> *:first-child,
-[data-framer-stack-direction-reverse="true"]
-[data-framer-legacy-stack-gap-enabled="true"][data-framer-stack-flexbox-gap="false"]
-> *:first-child {
-    margin-right: 0;
-    margin-bottom: 0;
 }
 
 NavigationContainer
