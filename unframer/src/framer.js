@@ -1,6 +1,6 @@
 import { __require, } from './framer-chunks/chunk-IKQSD2QC.js';
 
-// /:https://app.framerstatic.com/chunk-HUEPCSC2.mjs
+// /:https://app.framerstatic.com/chunk-C4Q63SZJ.mjs
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -174,8 +174,51 @@ var __privateSet = (
   setter,
 ) => (__accessCheck(obj, member, 'write to private field',), setter ? setter.call(obj, value,) : member.set(obj, value,), value);
 var __privateMethod = (obj, member, method,) => (__accessCheck(obj, member, 'access private method',), method);
+var __using = (stack, value, async,) => {
+  if (value != null) {
+    if (typeof value !== 'object' && typeof value !== 'function') __typeError('Object expected',);
+    var dispose2, inner;
+    if (async) dispose2 = value[__knownSymbol('asyncDispose',)];
+    if (dispose2 === void 0) {
+      dispose2 = value[__knownSymbol('dispose',)];
+      if (async) inner = dispose2;
+    }
+    if (typeof dispose2 !== 'function') __typeError('Object not disposable',);
+    if (inner) {
+      dispose2 = function () {
+        try {
+          inner.call(this,);
+        } catch (e) {
+          return Promise.reject(e,);
+        }
+      };
+    }
+    stack.push([async, dispose2, value,],);
+  } else if (async) {
+    stack.push([async,],);
+  }
+  return value;
+};
+var __callDispose = (stack, error, hasError,) => {
+  var E = typeof SuppressedError === 'function' ? SuppressedError : function (e, s, m2, _,) {
+    return _ = Error(m2,), _.name = 'SuppressedError', _.error = e, _.suppressed = s, _;
+  };
+  var fail = (e) => error = hasError ? new E(e, error, 'An error was suppressed during disposal',) : (hasError = true, e);
+  var next2 = (it) => {
+    while (it = stack.pop()) {
+      try {
+        var result = it[1] && it[1].call(it[2],);
+        if (it[0]) return Promise.resolve(result,).then(next2, (e) => (fail(e,), next2()),);
+      } catch (e) {
+        fail(e,);
+      }
+    }
+    if (hasError) throw error;
+  };
+  return next2();
+};
 
-// /:https://app.framerstatic.com/chunk-ODXQNVQF.mjs
+// /:https://app.framerstatic.com/chunk-B2CCIJNA.mjs
 import { createContext, } from 'react';
 import { useEffect, useLayoutEffect, } from 'react';
 import * as React from 'react';
@@ -13459,7 +13502,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.VZC743RP.mjs
+// /:https://app.framerstatic.com/framer.QGEGKUGR.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -16036,6 +16079,17 @@ function noop3() {}
 var YIELD_TARGET_FREQUENTLY = /* @__PURE__ */ (() => 1e3 / 60)();
 var YIELD_TARGET_INFREQUENTLY = /* @__PURE__ */ (() => 1e3 / 25)();
 var HIDDEN_TAB_YIELD_TARGET = /* @__PURE__ */ (() => 500)();
+function resolveSchedulerPriority(priority,) {
+  return typeof priority === 'function' ? priority() : priority;
+}
+var schedulerPriorityRank = /* @__PURE__ */ (() => ({
+  background: 0,
+  'user-visible': 1,
+  'user-blocking': 2,
+}))();
+function isHigherSchedulerPriority(requested, current2,) {
+  return schedulerPriorityRank[requested] > schedulerPriorityRank[current2];
+}
 function getScheduler() {
   if (typeof scheduler === 'undefined') return void 0;
   return scheduler;
@@ -40427,8 +40481,23 @@ async function calculateProofOfWork() {
     },);
   },);
 }
-function getEncodedFormFieldsHeader(data2,) {
-  return Array.from(data2.keys(),).map(encodeURIComponent,).join(',',);
+var HONEYPOT_FIELD_NAME = '__framer';
+function getFormFieldNames(form,) {
+  const names = /* @__PURE__ */ new Set();
+  for (const element of form.elements) {
+    if (!isFormField(element,) || element.disabled || !element.name) continue;
+    if (element.name.startsWith(HONEYPOT_FIELD_NAME,)) continue;
+    names.add(element.name,);
+  }
+  return Array.from(names,);
+}
+function isFormField(element,) {
+  if (element instanceof HTMLSelectElement || element instanceof HTMLTextAreaElement) return true;
+  return element instanceof HTMLInputElement && !['file', 'submit', 'reset', 'button', 'image',].includes(element.type,);
+}
+function getEncodedFormFieldsHeader(fieldNames, data2,) {
+  const additionalKeys = Array.from(data2.keys(),).filter((key7) => !fieldNames.includes(key7,));
+  return [...fieldNames, ...additionalKeys,].map(encodeURIComponent,).join(',',);
 }
 function addUTMTagsToFormData(data2, document2,) {
   try {
@@ -40443,7 +40512,6 @@ function addUTMTagsToFormData(data2, document2,) {
   } catch (e) {}
 }
 var HONEYPOT_VERSION = '3';
-var HONEYPOT_FIELD_NAME = '__framer';
 var COMMON_FIELD_NAMES = [
   'website',
   'company',
@@ -40780,6 +40848,7 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
     submissionInProgressRef.current = true;
     convertHoneypotFieldsForSubmission();
     const data2 = new FormData(event.currentTarget,);
+    const fieldNames = getFormFieldNames(event.currentTarget,);
     await yieldToMain({
       priority: 'user-visible',
       continueAfter: 'paint',
@@ -40802,7 +40871,7 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
         submitTrackingId,
         activeLocale,
       },);
-      await submitForm(action, data2, projectHash,);
+      await submitForm(action, data2, fieldNames, projectHash,);
       startTransition2(() =>
         dispatch({
           type: 'success',
@@ -40876,7 +40945,7 @@ function anyEmptyRequiredFields(element,) {
   }
   return false;
 }
-async function submitForm(action, data2, projectHash,) {
+async function submitForm(action, data2, fieldNames, projectHash,) {
   const proofOfWork = await calculateProofOfWork();
   if (!proofOfWork) {
     throw new Error('Failed to calculate proof of work',);
@@ -40884,7 +40953,7 @@ async function submitForm(action, data2, projectHash,) {
   const headers = {
     'Framer-Site-Id': projectHash,
     'Framer-POW': proofOfWork.secret,
-    'Framer-Form-Fields': getEncodedFormFieldsHeader(data2,),
+    'Framer-Form-Fields': getEncodedFormFieldsHeader(fieldNames, data2,),
   };
   const response = await fetch(action, {
     body: data2,
@@ -43620,24 +43689,121 @@ function getLogger(name,) {
     },
   };
 }
+function getSymbolDispose() {
+  return Symbol.dispose ?? /* @__PURE__ */ Symbol.for('Symbol.dispose',);
+}
+var activeEvaluationContext = {
+  priority: void 0,
+  canYield: true,
+};
+function getEvaluationContextPriority() {
+  return activeEvaluationContext.priority;
+}
+function evaluationContextScope(context,) {
+  const previousContext = activeEvaluationContext;
+  activeEvaluationContext = context;
+  return {
+    [getSymbolDispose()]() {
+      activeEvaluationContext = previousContext;
+    },
+  };
+}
+function yieldToMainDuringEvaluation(
+  priority = activeEvaluationContext.priority,
+  allowCooperativeYield = activeEvaluationContext.canYield,
+) {
+  if (!allowCooperativeYield || priority === void 0) return;
+  const resolvedPriority = resolveSchedulerPriority(priority,);
+  return yieldToMain({
+    batch: true,
+    priority: resolvedPriority,
+  },);
+}
 function evaluateSync(generator,) {
-  const state = generator.next();
-  assert(state.done, 'Generator must not yield',);
-  return state.value;
-}
-async function evaluateAsync(generator, state = generator.next(),) {
-  while (!state.done) {
-    const value = await state.value;
-    state = generator.next(value,);
+  var _stack = [];
+  try {
+    const _context = __using(
+      _stack,
+      evaluationContextScope({
+        priority: activeEvaluationContext.priority,
+        canYield: false,
+      },),
+    );
+    const state = generator.next();
+    assert(state.done, 'Generator must not yield',);
+    return state.value;
+  } catch (_) {
+    var _error = _,
+      _hasError = true;
+  } finally {
+    __callDispose(_stack, _error, _hasError,);
   }
-  return state.value;
 }
-function evaluateMaybeAsync(generator,) {
-  const state = generator.next();
-  if (state.done) return state.value;
-  return evaluateAsync(generator, state,);
+async function evaluateAsync(
+  generator,
+  state,
+  priority = activeEvaluationContext.priority,
+  allowCooperativeYield = activeEvaluationContext.canYield,
+) {
+  const context = {
+    priority,
+    canYield: allowCooperativeYield,
+  };
+  let currentState = state;
+  if (currentState === void 0) {
+    var _stack = [];
+    try {
+      const _context = __using(_stack, evaluationContextScope(context,),);
+      currentState = generator.next();
+    } catch (_) {
+      var _error = _,
+        _hasError = true;
+    } finally {
+      __callDispose(_stack, _error, _hasError,);
+    }
+  }
+  while (!currentState.done) {
+    var _stack2 = [];
+    try {
+      const value = await currentState.value;
+      const yieldPromise = yieldToMainDuringEvaluation(priority, allowCooperativeYield,);
+      if (yieldPromise) await yieldPromise;
+      const _context = __using(_stack2, evaluationContextScope(context,),);
+      currentState = generator.next(value,);
+    } catch (_2) {
+      var _error2 = _2,
+        _hasError2 = true;
+    } finally {
+      __callDispose(_stack2, _error2, _hasError2,);
+    }
+  }
+  return currentState.value;
 }
-function* evaluateObject(values,) {
+function evaluateMaybeAsync(
+  generator,
+  priority = activeEvaluationContext.priority,
+  allowCooperativeYield = activeEvaluationContext.canYield,
+) {
+  var _stack = [];
+  try {
+    const _context = __using(
+      _stack,
+      evaluationContextScope({
+        priority,
+        canYield: allowCooperativeYield,
+      },),
+    );
+    const state = generator.next();
+    if (state.done) return state.value;
+    return evaluateAsync(generator, state, priority, allowCooperativeYield,);
+  } catch (_) {
+    var _error = _,
+      _hasError = true;
+  } finally {
+    __callDispose(_stack, _error, _hasError,);
+  }
+}
+function* evaluateObject(values, priority = activeEvaluationContext.priority,) {
   const result = {};
   const keys3 = Object.keys(values,);
   const promises = [];
@@ -43649,7 +43815,7 @@ function* evaluateObject(values,) {
         result[key7] = state.value;
       } else {
         promises.push(
-          evaluateAsync(generator, state,).then((value) => {
+          evaluateAsync(generator, state, priority,).then((value) => {
             result[key7] = value;
           },),
         );
@@ -43663,11 +43829,13 @@ function* evaluateObject(values,) {
   }
   return result;
 }
-function* evaluateArray(values,) {
+function* evaluateArray(values, priority = activeEvaluationContext.priority,) {
   const result = [];
   const keys3 = values.keys();
   const promises = [];
   for (const key7 of keys3) {
+    const yieldPromise = yieldToMainDuringEvaluation(priority,);
+    if (yieldPromise) yield yieldPromise;
     const generator = values[key7];
     if (isGenerator2(generator,)) {
       const state = generator.next();
@@ -43675,7 +43843,7 @@ function* evaluateArray(values,) {
         result[key7] = state.value;
       } else {
         promises.push(
-          evaluateAsync(generator, state,).then((value) => {
+          evaluateAsync(generator, state, priority,).then((value) => {
             result[key7] = value;
           },),
         );
@@ -44361,21 +44529,31 @@ var CompatibilityDatabaseCollection = class {
     }
     return richText;
   }
-  async scanItems() {
+  async scanItems(priority,) {
     const items = await getCollectionItems(this.collection, this.locale,);
-    return items.map((item, index,) => {
+    const databaseItems = [];
+    for (let index = 0; index < items.length; index++) {
+      const yieldPromise = yieldToMainDuringEvaluation(priority,);
+      if (yieldPromise) await yieldPromise;
+      const item = items[index];
+      assert(item, 'Can\'t find collection item',);
       const pointer = String(index,);
-      return this.getDatabaseItem(item, pointer,);
-    },);
+      databaseItems.push(this.getDatabaseItem(item, pointer,),);
+    }
+    return databaseItems;
   }
-  async resolveItems(pointers,) {
+  async resolveItems(pointers, priority,) {
     const items = await getCollectionItems(this.collection, this.locale,);
-    return pointers.map((pointer) => {
+    const databaseItems = [];
+    for (const pointer of pointers) {
+      const yieldPromise = yieldToMainDuringEvaluation(priority,);
+      if (yieldPromise) await yieldPromise;
       const index = Number(pointer,);
       const item = items[index];
       assert(item, 'Can\'t find collection item',);
-      return this.getDatabaseItem(item, pointer,);
-    },);
+      databaseItems.push(this.getDatabaseItem(item, pointer,),);
+    }
+    return databaseItems;
   }
   compareItems(left, right,) {
     return Number(left.pointer,) - Number(right.pointer,);
@@ -44453,6 +44631,16 @@ function calculateHash(name, ...values) {
   }
   return Hash(`${hash2})`,);
 }
+function createSchedulingPrioritySource(priority,) {
+  if (priority === void 0) return;
+  if (typeof priority !== 'function') return priority;
+  const initialPriority = priority();
+  return () => priority() ?? initialPriority;
+}
+function readExecutionPriority(priority,) {
+  if (priority === void 0) return;
+  return resolveSchedulerPriority(priority,);
+}
 function wrapRichTextPointer(collection, pointer,) {
   return {
     collectionId: getCollectionId(collection,),
@@ -44472,12 +44660,12 @@ function isWrappedVectorSetItemPointer(value,) {
   return isObject2(value,) && isString(value.collectionId,);
 }
 var Resolver = class {
-  constructor(query, locale, options = {},) {
-    this.options = options;
-    this.collections = getCollectionsFromQuery(query, locale,);
-  }
-  options;
   collections;
+  priority;
+  constructor(query, locale, priority,) {
+    this.collections = getCollectionsFromQuery(query, locale,);
+    this.priority = createSchedulingPrioritySource(priority,);
+  }
   *resolveArrayValue(value,) {
     return yield* evaluateArray(value.value.map((item) => {
       return this.resolveValue(item,);
@@ -44501,7 +44689,7 @@ var Resolver = class {
     this.richTextCache.set(collection, cache2,);
     const cached = cache2.get(wrapped.pointer,);
     if (cached) return cached;
-    const result = this.options.richTextMode === 'raw' ? wrapped.pointer : collection.resolveRichText(wrapped.pointer,);
+    const result = collection.resolveRichText(wrapped.pointer,);
     cache2.set(wrapped.pointer, result,);
     return result;
   }
@@ -45154,9 +45342,9 @@ var RelationalNode = class extends AbstractNode {
   /**
    * Evaluates the node and all children asynchronously.
    */
-  evaluateAsync() {
+  evaluateAsync(priority,) {
     const generator = this.evaluate(void 0,);
-    return evaluateAsync(generator,);
+    return evaluateAsync(generator, void 0, priority,);
   }
 };
 var ProjectionField = class {
@@ -45952,16 +46140,20 @@ var RelationalIndexLookup = class _RelationalIndexLookup extends RelationalNode 
     const index = this.index;
     const collection = index.collection;
     const outputFields = this.getOutputFields();
-    const items = yield index.data.lookupItems(this.query,);
-    const tuples = items.map((item) => {
+    const items = yield index.data.lookupItems(this.query, getEvaluationContextPriority(),);
+    const priority = getEvaluationContextPriority();
+    const tuples = [];
+    for (const item of items) {
+      const yieldPromise = yieldToMainDuringEvaluation(priority,);
+      if (yieldPromise) yield yieldPromise;
       const tuple = new Tuple();
       for (const field of index.resolvedFields) {
         const value = field.getValue(item,);
         tuple.addPointer(collection, item.pointer,);
         tuple.addValue(field, value,);
       }
-      return tuple;
-    },);
+      tuples.push(tuple,);
+    }
     return new Relation(outputFields, tuples,);
   }
 };
@@ -46053,16 +46245,20 @@ var RelationalScan = class _RelationalScan extends RelationalNode {
   *evaluate() {
     const collection = this.collection;
     const outputFields = this.getOutputFields();
-    const items = yield collection.data.scanItems();
-    const tuples = items.map((item) => {
+    const items = yield collection.data.scanItems(getEvaluationContextPriority(),);
+    const priority = getEvaluationContextPriority();
+    const tuples = [];
+    for (const item of items) {
+      const yieldPromise = yieldToMainDuringEvaluation(priority,);
+      if (yieldPromise) yield yieldPromise;
       const tuple = new Tuple();
       for (const field of outputFields) {
         const value = field.getValue(item,);
         tuple.addPointer(collection, item.pointer,);
         tuple.addValue(field, value,);
       }
-      return tuple;
-    },);
+      tuples.push(tuple,);
+    }
     return new Relation(outputFields, tuples,);
   }
 };
@@ -48124,7 +48320,7 @@ var EnforcerResolve = class _EnforcerResolve extends EnforcerNode {
           const pointer = tuple.getPointer(collection,);
           if (pointer) pointers.push(pointer,);
         }
-        const items = await collection.data.resolveItems(pointers,);
+        const items = await collection.data.resolveItems(pointers, this.resolver.priority,);
         assert(items.length === pointers.length, 'Invalid number of items',);
         return {
           collection,
@@ -48282,9 +48478,14 @@ var Optimizer = class {
   memo = new Memo();
   normalizer = new Normalizer(this.memo,);
   explorer = new Explorer(this.normalizer,);
-  optimize() {
+  optimize(priority,) {
     const builder = new Builder(this.normalizer, this.query, this.locale,);
     const outScope = builder.build();
+    const yieldPromise = yieldToMainDuringEvaluation(priority,);
+    if (yieldPromise) return yieldPromise.then(() => this.optimizeBuiltQuery(outScope,));
+    return this.optimizeBuiltQuery(outScope,);
+  }
+  optimizeBuiltQuery(outScope,) {
     const root = outScope.takeNode();
     const group = root.getGroup();
     const required = outScope.getRequiredProps();
@@ -48469,18 +48670,26 @@ function stringifyQuery(query,) {
 }
 var log = /* @__PURE__ */ getLogger('query-engine',);
 var QueryEngine = class {
-  async evalQuery(query, locale, includeRaw, options = {},) {
+  async evalQuery(query, locale, includeRaw, priority,) {
     if (log.enabled) {
       log.debug(`Query:
 ${stringifyQuery(query,)}`,);
     }
-    const resolver = new Resolver(query, locale, options,);
+    const resolver = new Resolver(query, locale, priority,);
     const optimizer = new Optimizer(query, locale, resolver,);
-    const [root, namedFields,] = optimizer.optimize();
-    const relation = await root.evaluateAsync();
+    const yieldPromise = yieldToMainDuringEvaluation(resolver.priority,);
+    if (yieldPromise) await yieldPromise;
+    const optimized = optimizer.optimize(priority,);
+    const [root, namedFields,] = isPromise(optimized,) ? await optimized : optimized;
+    const afterOptimizationYield = yieldToMainDuringEvaluation(priority,);
+    if (afterOptimizationYield) await afterOptimizationYield;
+    const relation = await root.evaluateAsync(priority,);
     const namedFieldEntries = Object.entries(namedFields,);
     const rawResults = [];
-    const maybeEvaluatedPromise = evaluateMaybeAsync(evaluateArray(relation.tuples.map((tuple) => {
+    const rowEvaluators = [];
+    for (const tuple of relation.tuples) {
+      const yieldPromise2 = yieldToMainDuringEvaluation(priority,);
+      if (yieldPromise2) await yieldPromise2;
       const object = {};
       const rawObject = {};
       for (const [fieldName, field,] of namedFieldEntries) {
@@ -48493,30 +48702,37 @@ ${stringifyQuery(query,)}`,);
       if (includeRaw) {
         rawResults.push(rawObject,);
       }
-      return evaluateObject(object,);
-    },),),);
+      rowEvaluators.push(evaluateObject(object, priority,),);
+    }
+    const maybeEvaluatedPromise = evaluateMaybeAsync(evaluateArray(rowEvaluators, priority,), priority,);
     if (includeRaw) {
       return [isPromise(maybeEvaluatedPromise,) ? await maybeEvaluatedPromise : maybeEvaluatedPromise, rawResults,];
     }
     return maybeEvaluatedPromise;
   }
-  async serializeableQuery(query, locale,) {
-    return this.evalQuery(query, locale, true,);
+  async serializeableQuery(query, locale, priority,) {
+    return this.evalQuery(query, locale, true, priority,);
   }
-  async query(query, locale, options,) {
-    return this.evalQuery(query, locale, false, options,);
+  async query(query, locale, priority,) {
+    return this.evalQuery(query, locale, false, priority,);
   }
-  resolveSerializableQueryResult(raw, query, locale,) {
-    const resolver = new Resolver(query, locale,);
-    return evaluateMaybeAsync(evaluateArray(raw.map((item) => {
-      const object = {};
-      let key7;
-      for (key7 in item) {
-        const value = item[key7];
-        object[key7] = resolver.resolveValue(value,);
-      }
-      return evaluateObject(object,);
-    },),),);
+  resolveSerializableQueryResult(raw, query, locale, priority,) {
+    const resolver = new Resolver(query, locale, priority,);
+    return evaluateMaybeAsync(
+      evaluateArray(raw.map((item) => {
+        const object = {};
+        let key7;
+        for (key7 in item) {
+          const value = item[key7];
+          object[key7] = resolver.resolveValue(value,);
+        }
+        return evaluateObject(object,);
+      },),),
+      void 0,
+      // QueryCache handover is read with LazyValue.use() during hydration, so we want them to
+      // stay synchronous.
+      false,
+    );
   }
 };
 var handoverDataType2 = /* @__PURE__ */ (() => HandoverDataType.QueryCache)();
@@ -48539,28 +48755,41 @@ var QueryCache = class {
   }
   prune() {
     if (this.cache.size <= this.maxSize) return;
-    for (const [key7, value,] of this.cache) {
+    for (const [key7, entry,] of this.cache) {
       if (this.cache.size <= this.maxSize) break;
-      if (value.state === 'pending') continue;
+      if (entry.value.state === 'pending') continue;
       this.cache.delete(key7,);
       this.serializedCache?.delete(key7,);
     }
   }
-  get(query, locale,) {
+  get(query, locale, priority,) {
     const key7 = getCacheKey(query, locale,);
     const existing = this.cache.get(key7,);
     if (existing) {
+      const requestedPriority = readExecutionPriority(priority,) ?? 'user-visible';
+      const existingPriority = readExecutionPriority(existing.priority,);
+      if (existingPriority === void 0 && priority !== void 0 && existing.value.state === 'pending') {
+        this.cache.delete(key7,);
+        return this.get(query, locale, priority,);
+      }
+      if (
+        existingPriority !== void 0 && isHigherSchedulerPriority(requestedPriority, existingPriority,) && existing.value.state === 'pending'
+      ) {
+        this.cache.delete(key7,);
+        return this.get(query, locale, requestedPriority,);
+      }
       this.cache.delete(key7,);
       this.cache.set(key7, existing,);
       if (
-        handoverCollector !== void 0 && this.serializedCache !== void 0 && !hasRandomCollectionId(key7,) && existing.state === 'fulfilled'
+        handoverCollector !== void 0 && this.serializedCache !== void 0 && !hasRandomCollectionId(key7,) &&
+        existing.value.state === 'fulfilled'
       ) {
         const cachedSerialized = this.serializedCache.get(key7,);
         if (cachedSerialized !== void 0) {
           handoverCollector.set(handoverDataType2, key7, cachedSerialized,);
         }
       }
-      return existing;
+      return existing.value;
     }
     const resolver = () => {
       const containsRandomCollectionId = hasRandomCollectionId(key7,);
@@ -48573,16 +48802,19 @@ var QueryCache = class {
         }
       }
       if (handoverCollector !== void 0 && !containsRandomCollectionId) {
-        return this.queryEngine.serializeableQuery(query, locale,).then(([queryResult, serializableResult,],) => {
+        return this.queryEngine.serializeableQuery(query, locale, priority,).then(([queryResult, serializableResult,],) => {
           this.serializedCache?.set(key7, serializableResult,);
           handoverCollector.set(handoverDataType2, key7, serializableResult,);
           return queryResult;
         },);
       }
-      return this.queryEngine.query(query, locale,);
+      return this.queryEngine.query(query, locale, priority,);
     };
     const value = new LazyValue(resolver,);
-    this.cache.set(key7, value,);
+    this.cache.set(key7, {
+      value,
+      priority,
+    },);
     this.prune();
     return value;
   }
@@ -48728,13 +48960,13 @@ function mapServerDatabaseRows(rows, columns,) {
     return mappedRow;
   },);
 }
-var collectionItemIdColumn = 'framer_collectionItemId';
-var positionIdColumn = 'framer_positionId';
-var arrayItemIdColumn = 'framer_arrayItemId';
-var joinTableIndexColumn = 'framer_index';
-var referencedCollectionItemIdColumn = 'framer_referencedCollectionItemId';
-var createdAtColumn = 'framer_createdAt';
-var updatedAtColumn = 'framer_updatedAt';
+var collectionItemIdColumn = 'id';
+var positionIdColumn = 'position';
+var arrayItemIdColumn = 'arrayItemId';
+var joinTableIndexColumn = 'index';
+var referencedCollectionItemIdColumn = 'referencedCollectionItemId';
+var createdAtColumn = 'createdAt';
+var updatedAtColumn = 'updatedAt';
 var systemColumns = [
   collectionItemIdColumn,
   positionIdColumn,
@@ -49054,13 +49286,13 @@ function useQueryCount(query,) {
   const collection = useQueryData(countQuery,);
   return collection.length;
 }
-function usePreloadQuery() {
+function usePreloadQuery(priority = 'background',) {
   const {
     activeLocale,
   } = useLocaleInfo();
   return useCallback2((query) => {
-    return queryCache.get(query, activeLocale,).readMaybeAsync();
-  }, [activeLocale,],);
+    return queryCache.get(query, activeLocale, priority,).readMaybeAsync();
+  }, [activeLocale, priority,],);
 }
 function getWhereExpressionFromPathVariables(pathVariables, collection,) {
   const entries = Object.entries(pathVariables ?? {},).filter(([, value,],) => {
@@ -55344,7 +55576,7 @@ var MapWithHash = class extends Map {
 };
 var cachedServiceMap;
 function getServiceMap() {
-  if (typeof __unframerWindow2 === 'undefined') return {};
+  if (typeof __unframerWindow2 === 'undefined') return cachedServiceMap ?? {};
   if (cachedServiceMap) return cachedServiceMap;
   cachedServiceMap = extractServiceMap();
   return cachedServiceMap;
@@ -56055,11 +56287,11 @@ function buildDebugFamilies(debugByFamily, selectedAssets,) {
 async function loadFontsWithOpenType(source,) {
   switch (source) {
     case 'google': {
-      const supportedFonts = await import('./framer-chunks/google-74O3OFST-ISURTPT6.js');
+      const supportedFonts = await import('./framer-chunks/google-YSYBFRE6-L7YAHH7V.js');
       return supportedFonts.default;
     }
     case 'fontshare': {
-      const supportedFonts = await import('./framer-chunks/fontshare-SGA6PEZ5-LVCZ4YEM.js');
+      const supportedFonts = await import('./framer-chunks/fontshare-TIA7QUPT-PUDLUTQ7.js');
       return supportedFonts.default;
     }
     default:
@@ -56069,15 +56301,15 @@ async function loadFontsWithOpenType(source,) {
 async function loadFontToOpenTypeFeatures(source,) {
   switch (source) {
     case 'google': {
-      const features = await import('./framer-chunks/google-CCGTL4SA-7W6VRTXV.js');
+      const features = await import('./framer-chunks/google-H6SFY4F5-5JSJCGDR.js');
       return features.default;
     }
     case 'fontshare': {
-      const features = await import('./framer-chunks/fontshare-HL54S5AN-IZTOM3YV.js');
+      const features = await import('./framer-chunks/fontshare-PZLWRK4B-MHMZIGTX.js');
       return features.default;
     }
     case 'framer': {
-      const features = await import('./framer-chunks/framer-font-BMV7HBFP-FY52QKVS.js');
+      const features = await import('./framer-chunks/framer-font-RD2SUPQH-Q4MS7WS6.js');
       return features.default;
     }
     default:
@@ -56639,10 +56871,10 @@ function loadVariationAxes(source,) {
       const axes = (async () => {
         switch (source) {
           case 'google': {
-            return (await import('./framer-chunks/google-7KJOMI6T-E56JOWEG.js')).default;
+            return (await import('./framer-chunks/google-EGNT223R-P4DUHBW2.js')).default;
           }
           case 'fontshare': {
-            return (await import('./framer-chunks/fontshare-RXOLKSVM-CMHTOGCS.js')).default;
+            return (await import('./framer-chunks/fontshare-SXU5BGFE-OWTMMPGS.js')).default;
           }
           default:
             assertNever(source,);
