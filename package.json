@@ -1,29 +1,30 @@
 {
-    "name": "root",
-    "private": true,
-    "scripts": {
-        "watch": "pnpm -r watch",
-        "download-framer": "pnpm --filter unframer run download-framer",
-        "download-framer:doppler": "doppler run -- pnpm download-framer",
-        "build": "pnpm --filter unframer build",
-        "release": "pnpm build && changeset",
-        "agents.md": "agentsdotmd ./UNFRAMER_AGENTS.md core.md typescript.md pnpm.md react.md vitest.md changelog.md github.md cac.md spiceflow.md dedent.md tailwind.md "
-    },
-    "devDependencies": {
-        "@changesets/cli": "^2.27.12",
-        "c8": "^10.1.3",
-        "chokidar": "^4.0.3",
-        "prettier": "^3.4.2",
-        "tsx": "^4.20.3",
-        "vite": "^8.0.16",
-        "vitest": "^3.1.4"
-    },
-    "pnpm": {
-        "overrides": {
-            "unframer": "workspace:^"
-        }
-    },
-    "repository": "https://github.com/remorses/",
-    "author": "remorses <beats.by.morse@gmail.com>",
-    "license": ""
+  "name": "root",
+  "private": true,
+  "scripts": {
+    "watch": "pnpm -r watch",
+    "download-framer": "pnpm --filter unframer run download-framer",
+    "download-framer:doppler": "doppler run -- pnpm download-framer",
+    "build": "pnpm --filter unframer build",
+    "release": "pnpm build && changeset",
+    "agents.md": "agentsdotmd ./UNFRAMER_AGENTS.md core.md typescript.md pnpm.md react.md vitest.md changelog.md github.md cac.md spiceflow.md dedent.md tailwind.md "
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.12",
+    "c8": "^10.1.3",
+    "chokidar": "^4.0.3",
+    "prettier": "^3.4.2",
+    "tsx": "^4.20.3",
+    "vite": "^8.0.16",
+    "vitest": "^3.1.4"
+  },
+  "pnpm": {
+    "overrides": {
+      "unframer": "workspace:^",
+      "fast-xml-parser": "5.7.0"
+    }
+  },
+  "repository": "https://github.com/remorses/",
+  "author": "remorses <beats.by.morse@gmail.com>",
+  "license": ""
 }
