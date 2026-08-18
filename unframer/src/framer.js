@@ -13502,7 +13502,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.QGEGKUGR.mjs
+// /:https://app.framerstatic.com/framer.QUYSSIWE.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -21095,9 +21095,8 @@ var Color = /* @__PURE__ */ (() => {
     }
     return true;
   };
-  const channelToDecimal = interpolate([0, 255,], [0, 1,],);
   function convertChannelToLinearRgb(channel,) {
-    channel = channelToDecimal(channel,);
+    channel /= 255;
     const abs = Math.abs(channel,);
     if (abs < 0.04045) return channel / 12.92;
     return (Math.sign(channel,) || 1) * Math.pow((abs + 0.055) / 1.055, 2.4,);
@@ -61490,6 +61489,19 @@ function getRadialGradientTransform(heightFactor, widthFactor, centerAnchorX, ce
   const scaleWidth = widthFactor ? heightFactor / widthFactor : 1e3;
   return `translate(${centerAnchorX}, ${centerAnchorY}) scale(1 ${scaleWidth}) translate(-${centerAnchorX}, -${centerAnchorY})`;
 }
+function getVectorHostPlacement(left, top,) {
+  const hostLeft = roundToHalfPixel(left,);
+  const hostTop = roundToHalfPixel(top,);
+  return {
+    hostLeft,
+    hostTop,
+    contentOffsetX: snapNoise(left - hostLeft,),
+    contentOffsetY: snapNoise(top - hostTop,),
+  };
+}
+function snapNoise(offset,) {
+  return Math.abs(offset,) < 1e-9 ? 0 : offset;
+}
 var SVGRoot = (props) => {
   const {
     id: id3,
@@ -61509,12 +61521,18 @@ var SVGRoot = (props) => {
     visible: true,
     _needsMeasure,
   }, ref,);
+  const {
+    hostLeft,
+    hostTop,
+    contentOffsetX,
+    contentOffsetY,
+  } = getVectorHostPlacement(left, top,);
   const svgStyle = {
     position: 'absolute',
     width,
     height,
-    left,
-    top,
+    left: hostLeft,
+    top: hostTop,
     overflow: 'visible',
     display: 'block',
     ...style2,
@@ -61528,7 +61546,8 @@ var SVGRoot = (props) => {
   };
   const needsScale = isSafari() ? __unframerWindow2.devicePixelRatio !== 1 : __unframerWindow2.devicePixelRatio === 1;
   const needsTranslate = __unframerWindow2.devicePixelRatio === 1;
-  if (!needsScale && !needsTranslate) {
+  const hasContentOffset = contentOffsetX !== 0 || contentOffsetY !== 0;
+  if (!needsScale && !needsTranslate && !hasContentOffset) {
     return /* @__PURE__ */ jsx('svg', {
       suppressHydrationWarning: true,
       role: 'presentation',
@@ -61557,18 +61576,32 @@ var SVGRoot = (props) => {
         // for root <svg> elements:
         // https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/transform-origin
         transformOrigin: 'center',
-        transform: getShapeTransform(needsScale, needsTranslate, left, top,),
+        transform: getShapeTransform({
+          needsScale,
+          needsTranslate,
+          hostLeft,
+          hostTop,
+          contentOffsetX,
+          contentOffsetY,
+        },),
       },
       children,
     },),
   },);
 };
-function getShapeTransform(needsScale, needsTranslate, left, top,) {
-  const l2 = Math.floor(left,) - left;
-  const t = Math.floor(top,) - top;
+function getShapeTransform({
+  needsScale,
+  needsTranslate,
+  hostLeft,
+  hostTop,
+  contentOffsetX,
+  contentOffsetY,
+},) {
+  const l2 = (needsTranslate ? Math.floor(hostLeft,) - hostLeft : 0) + contentOffsetX;
+  const t = (needsTranslate ? Math.floor(hostTop,) - hostTop : 0) + contentOffsetY;
   const transforms = [];
   if (needsScale) transforms.push('scale(0.5)',);
-  if (needsTranslate && (l2 || t)) transforms.push(`translate(${l2}px, ${t}px)`,);
+  if (l2 || t) transforms.push(`translate(${l2}px, ${t}px)`,);
   return transforms.length ? transforms.join(' ',) : void 0;
 }
 var Vector = /* @__PURE__ */ (() => {
@@ -62447,7 +62480,7 @@ var package_default = {
     'jest-diff': '^29.3.1',
     'jest-environment-jsdom': '^29.3.1',
     'jest-environment-jsdom-global': '^4.0.0',
-    oxlint: '^1.74.0',
+    oxlint: '^1.78.0',
     react: '^18.2.0',
     'react-dom': '^18.2.0',
     semver: '^7.7.1',
