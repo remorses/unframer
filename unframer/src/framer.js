@@ -13502,7 +13502,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.QUYSSIWE.mjs
+// /:https://app.framerstatic.com/framer.IALOKXSZ.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -43689,7 +43689,15 @@ function getLogger(name,) {
   };
 }
 function getSymbolDispose() {
-  return Symbol.dispose ?? /* @__PURE__ */ Symbol.for('Symbol.dispose',);
+  return (
+    // eslint-disable-next-line framer-studio/tscompat -- Feature-detect native Symbol.dispose; Safari has none.
+    Symbol.dispose ?? Object.defineProperty(Symbol, 'dispose', {
+      value: /* @__PURE__ */ Symbol.for('dispose',),
+      writable: false,
+      enumerable: false,
+      configurable: false,
+    },)
+  );
 }
 var activeEvaluationContext = {
   priority: void 0,
@@ -48842,11 +48850,11 @@ var UnsupportedQueryError = class extends ServerDatabaseError {
 function isServerDatabaseRawValue(value,) {
   return value === null || typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean';
 }
-function isServerDatabaseRow(value,) {
+function isServerDatabaseRawRow(value,) {
   return isObject2(value,) && Object.values(value,).every(isServerDatabaseRawValue,);
 }
-function isServerDatabaseQueryResult(value,) {
-  return isObject2(value,) && Array.isArray(value.rows,) && value.rows.every(isServerDatabaseRow,);
+function isServerDatabaseRawQueryResult(value,) {
+  return isObject2(value,) && Array.isArray(value.rows,) && value.rows.every(isServerDatabaseRawRow,);
 }
 function getServerDatabaseUrl(config,) {
   const url = new URL(`${config.endpoint}/${config.siteId}/query`,);
@@ -48858,7 +48866,7 @@ function isServerDatabaseResponse(value,) {
   const hasData = 'data' in value;
   const hasError = 'error' in value;
   if (hasData === hasError) return false;
-  if (hasData) return isServerDatabaseQueryResult(value.data,);
+  if (hasData) return isServerDatabaseRawQueryResult(value.data,);
   return isObject2(value.error,) && typeof value.error.message === 'string';
 }
 async function executeServerDatabaseQuery(sql2, parameters = {},) {
@@ -48899,8 +48907,8 @@ async function executeServerDatabaseQuery(sql2, parameters = {},) {
 var logger = /* @__PURE__ */ getLogger('server database',);
 function mapValue2(value, type,) {
   if (type === 'unsupported') {
-    logger.warn(new UnsupportedQueryError(`result type, returning raw.`,),);
-    return value;
+    logger.warn(new UnsupportedQueryError(`result type, returning null.`,),);
+    return null;
   }
   if (value === null) return null;
   switch (type) {
@@ -48910,8 +48918,13 @@ function mapValue2(value, type,) {
       return mapDateValue(value,);
     case 'number':
       return mapNumberValue(value,);
+    case 'color':
+    case 'enum':
     case 'string':
+    case 'collectionreference':
       return mapStringValue(value,);
+    case 'multicollectionreference':
+      return mapStringArrayJsonValue(value,);
     default:
       assertNever(type, 'Unsupported server database result type',);
   }
@@ -48919,29 +48932,43 @@ function mapValue2(value, type,) {
 function mapBooleanValue(value,) {
   if (value === 0) return false;
   if (value === 1) return true;
-  logger.warn(new ServerDatabaseError(`Unexpected boolean value ${value}, returning raw.`,),);
-  return value;
+  logger.warn(new ServerDatabaseError(`Unexpected boolean value ${value}, returning null.`,),);
+  return null;
 }
 function mapDateValue(value,) {
   if (typeof value !== 'string') {
-    logger.warn(new ServerDatabaseError(`Unexpected date value ${value}, returning raw.`,),);
-    return value;
+    logger.warn(new ServerDatabaseError(`Unexpected date value ${value}, returning null.`,),);
+    return null;
   }
   const date = new Date(value,);
   return isValidDate(date,) ? date.toISOString() : null;
 }
 function mapNumberValue(value,) {
   if (typeof value !== 'number') {
-    logger.warn(new ServerDatabaseError(`Unexpected number value ${value}, returning raw.`,),);
-    return value;
+    logger.warn(new ServerDatabaseError(`Unexpected number value ${value}, returning null.`,),);
+    return null;
   }
   return Number.isFinite(value,) ? value : null;
 }
 function mapStringValue(value,) {
   if (typeof value !== 'string') {
-    logger.warn(new ServerDatabaseError(`Unexpected string value ${value}, returning raw.`,),);
+    logger.warn(new ServerDatabaseError(`Unexpected string value ${value}, returning null.`,),);
+    return null;
   }
   return value;
+}
+function mapStringArrayJsonValue(value,) {
+  if (typeof value === 'string') {
+    try {
+      const parsed = JSON.parse(value,);
+      if (isStringArray(parsed,)) return parsed;
+    } catch {}
+  }
+  logger.warn(new ServerDatabaseError(`Unexpected multi reference value ${value}, returning null.`,),);
+  return null;
+}
+function isStringArray(value,) {
+  return Array.isArray(value,) && value.every((item) => typeof item === 'string');
 }
 function mapServerDatabaseRows(rows, columns,) {
   return rows.map((row) => {
@@ -48959,7 +48986,7 @@ function mapServerDatabaseRows(rows, columns,) {
     return mappedRow;
   },);
 }
-var collectionItemIdColumn = 'id';
+var collectionItemIdColumn = 'collectionItemId';
 var positionIdColumn = 'position';
 var arrayItemIdColumn = 'arrayItemId';
 var joinTableIndexColumn = 'index';
@@ -48975,7 +49002,6 @@ var systemColumns = [
   createdAtColumn,
   updatedAtColumn,
 ];
-var identifierRegex = /^[a-z]\w+$/iu;
 var SafeSql = class extends String {};
 function isSafeSql(value,) {
   return value instanceof SafeSql;
@@ -49011,6 +49037,7 @@ function join(queries, separator3,) {
   }
   return result;
 }
+var identifierRegex = /^[a-z][\w/]+$/iu;
 function assertIdentifier(identifierString,) {
   if (!identifierRegex.test(identifierString,)) {
     throw new Error(
@@ -49089,17 +49116,18 @@ function serializeSql(sqlQuery,) {
     parameters,
   };
 }
-function compileFromClause(collectionId, references,) {
-  const joinParts = [sql.identifier(collectionId,),];
+function compileFromClause(table, alias2, references, joinType,) {
+  const source = sql.identifier(table,);
+  const joinParts = [alias2 === void 0 ? source : sql`${source} AS ${sql.alias(alias2,)}`,];
   for (const [joinAlias, reference,] of references) {
     joinParts.push(
-      sql`${sql.identifier(reference.referencedCollectionId,)} AS ${sql.alias(joinAlias,)} ON ${
+      sql`${sql.identifier(`${reference.referencedCollectionId}/items`,)} AS ${sql.alias(joinAlias,)} ON ${
         sql.qualifiedIdentifier(reference.qualifier, reference.identifier,)
       } = ${sql.qualifiedIdentifier(joinAlias, collectionItemIdColumn,)}`,
     );
   }
   return {
-    query: sql`FROM ${sql.join(joinParts, ' LEFT JOIN ',)}`,
+    query: sql`FROM ${sql.join(joinParts, joinType,)}`,
   };
 }
 function compileLimitAndOffsetClause() {
@@ -49107,27 +49135,68 @@ function compileLimitAndOffsetClause() {
     query: sql`LIMIT 5000`,
   };
 }
-function compileOrderByClause(collectionId,) {
+function compileOrderByClause(qualifier2, column,) {
   return {
-    query: sql`ORDER BY ${sql.qualifiedIdentifier(collectionId, positionIdColumn,)}`,
+    query: sql`ORDER BY ${sql.qualifiedIdentifier(qualifier2, column,)}`,
   };
 }
-function resolveSelect({
+function compileMultiReferenceExpression(qualifier2, collectionId, fieldId, referencedCollectionId,) {
+  const sideTable = `${collectionId}/itemMultiCollectionReferences/${fieldId}`;
+  const joinAlias = `${qualifier2}.${fieldId}`;
+  const selectClause = compileMultiReferenceSelectClause(sideTable, joinAlias, referencedCollectionId,);
+  const fromClause = compileFromClause(sideTable, void 0, selectClause.references, ' JOIN ',);
+  const whereClause = compileMultiReferenceWhereClause(sideTable, qualifier2,);
+  return sql`(${selectClause.query} ${fromClause.query} ${whereClause.query})`;
+}
+function compileMultiReferenceSelectClause(sideTable, joinAlias, referencedCollectionId,) {
+  const references = /* @__PURE__ */ new Map([[joinAlias, {
+    qualifier: sideTable,
+    identifier: referencedCollectionItemIdColumn,
+    referencedCollectionId,
+  },],],);
+  const orderByClause = compileOrderByClause(sideTable, joinTableIndexColumn,);
+  return {
+    query: sql`SELECT json_group_array(${sql.qualifiedIdentifier(joinAlias, collectionItemIdColumn,)} ${orderByClause.query})`,
+    references,
+  };
+}
+function compileMultiReferenceWhereClause(sideTable, qualifier2,) {
+  return {
+    query: sql`WHERE ${sql.qualifiedIdentifier(sideTable, collectionItemIdColumn,)} = ${
+      sql.qualifiedIdentifier(qualifier2, collectionItemIdColumn,)
+    }`,
+  };
+}
+function compileSelectClause({
   collectionId,
   columns,
 }, serverCollections,) {
   const references = /* @__PURE__ */ new Map();
-  const resolvedSelects = [];
+  const resultColumns = [];
+  const selectParts = [];
   for (const column of columns) {
-    const resolvedSelect = resolveColumn(collectionId, column, serverCollections, references,);
-    if (resolvedSelect) resolvedSelects.push(resolvedSelect,);
+    const compiledColumn = compileColumn(collectionId, column, serverCollections, references,);
+    if (!compiledColumn) continue;
+    resultColumns.push({
+      fieldName: column.alias,
+      type: compiledColumn.type,
+    },);
+    selectParts.push(sql`${compiledColumn.expression} AS ${sql.alias(column.alias,)}`,);
+  }
+  if (selectParts.length === 0) {
+    warnOnce2(
+      new ServerDatabaseError('Query selects no columns, falling back to \'*\'. We should always select at least the identity column.',)
+        .toString(),
+    );
+    selectParts.push(sql`*`,);
   }
   return {
+    query: sql`SELECT ${sql.join(selectParts, ', ',)}`,
+    columns: resultColumns,
     references,
-    selectedColumns: resolvedSelects,
   };
 }
-function resolveColumn(rootCollectionId, column, serverCollections, references,) {
+function compileColumn(rootCollectionId, column, serverCollections, references,) {
   const {
     alias: alias2,
   } = column;
@@ -49135,9 +49204,7 @@ function resolveColumn(rootCollectionId, column, serverCollections, references,)
   const tailFieldId = referencePath.pop();
   if (!tailFieldId) {
     return {
-      alias: alias2,
-      qualifier: rootCollectionId,
-      identifier: collectionItemIdColumn,
+      expression: sql.qualifiedIdentifier(rootCollectionId, collectionItemIdColumn,),
       type: 'string',
       /* String */
     };
@@ -49147,12 +49214,12 @@ function resolveColumn(rootCollectionId, column, serverCollections, references,)
   for (const referenceFieldId of referencePath) {
     const field = serverCollections[collectionId]?.fields[referenceFieldId];
     if (!field) {
-      warnOnce2(new ServerDatabaseError(`Field ${referenceFieldId} in column ${alias2} does not exist.`,).toString(),);
+      warnOnce2(new ServerDatabaseError(`Field ${referenceFieldId} for column ${alias2} does not exist.`,).toString(),);
       return void 0;
     }
     if (field.type !== 'collectionreference') {
       warnOnce2(
-        new ServerDatabaseError(`Intermediate field ${referenceFieldId} in column ${alias2} is not a reference field.`,).toString(),
+        new ServerDatabaseError(`Intermediate field ${referenceFieldId} for column ${alias2} is not a single reference field.`,).toString(),
       );
       return void 0;
     }
@@ -49167,7 +49234,7 @@ function resolveColumn(rootCollectionId, column, serverCollections, references,)
   }
   const tailField = serverCollections[collectionId]?.fields[tailFieldId];
   if (!tailField) {
-    warnOnce2(new ServerDatabaseError(`Field ${tailFieldId} in column ${alias2} does not exist.`,).toString(),);
+    warnOnce2(new ServerDatabaseError(`Field ${tailFieldId} for column ${alias2} does not exist.`,).toString(),);
     return void 0;
   }
   if (tailField.type === 'collectionreference') {
@@ -49178,54 +49245,30 @@ function resolveColumn(rootCollectionId, column, serverCollections, references,)
       referencedCollectionId: tailField.referencedCollectionId,
     },);
     return {
-      alias: alias2,
-      qualifier: newQualifier,
-      identifier: collectionItemIdColumn,
-      type: 'string',
-      /* String */
+      expression: sql.qualifiedIdentifier(newQualifier, collectionItemIdColumn,),
+      type: 'collectionreference',
+      /* CollectionReference */
+    };
+  }
+  if (tailField.type === 'multicollectionreference') {
+    return {
+      expression: compileMultiReferenceExpression(qualifier2, collectionId, tailFieldId, tailField.referencedCollectionId,),
+      type: 'multicollectionreference',
+      /* MultiCollectionReference */
     };
   }
   return {
-    alias: alias2,
-    qualifier: qualifier2,
-    identifier: tailFieldId,
+    expression: sql.qualifiedIdentifier(qualifier2, tailFieldId,),
     type: tailField.type,
-  };
-}
-function compileSelectClause(selectedColumns,) {
-  const columns = [];
-  const selectParts = [];
-  for (const selectedColumn of selectedColumns) {
-    columns.push({
-      fieldName: selectedColumn.alias,
-      type: selectedColumn.type,
-    },);
-    const qualifiedIdentifier2 = sql.qualifiedIdentifier(selectedColumn.qualifier, selectedColumn.identifier,);
-    selectParts.push(sql`${qualifiedIdentifier2} AS ${sql.alias(selectedColumn.alias,)}`,);
-  }
-  if (selectParts.length === 0) {
-    warnOnce2(
-      new ServerDatabaseError('Query selects no columns, falling back to \'*\'. We should always select at least the identity column.',)
-        .toString(),
-    );
-    selectParts.push(sql`*`,);
-  }
-  return {
-    query: sql`SELECT ${sql.join(selectParts, ', ',)}`,
-    columns,
   };
 }
 function compileQuery(serverQuery, serverCollections,) {
   const {
     collectionId,
   } = serverQuery;
-  const {
-    references,
-    selectedColumns,
-  } = resolveSelect(serverQuery, serverCollections,);
-  const selectClause = compileSelectClause(selectedColumns,);
-  const fromClause = compileFromClause(collectionId, references,);
-  const orderByClause = compileOrderByClause(collectionId,);
+  const selectClause = compileSelectClause(serverQuery, serverCollections,);
+  const fromClause = compileFromClause(`${collectionId}/items`, collectionId, selectClause.references, ' LEFT JOIN ',);
+  const orderByClause = compileOrderByClause(collectionId, positionIdColumn,);
   const limitAndOffsetClause = compileLimitAndOffsetClause();
   const sqlQuery = sql`${selectClause.query} ${fromClause.query} ${orderByClause.query} ${limitAndOffsetClause.query}`;
   return {
@@ -56580,8 +56623,13 @@ var GoogleFontSource = class _GoogleFontSource {
   name = 'google';
   fontFamilies = [];
   byFamilyName = /* @__PURE__ */ new Map();
+  supportedSubsetsByFamilyName = /* @__PURE__ */ new Map();
   getFontFamilyByName(family,) {
     return this.byFamilyName.get(family,) ?? null;
+  }
+  /** Returns Google Fonts subsets that a given font family includes. The return value looks like ["latin", "latin-ext", "japanese"] or similar. */
+  getSupportedSubsetsByFamilyName(family,) {
+    return this.supportedSubsetsByFamilyName.get(family,) ?? [];
   }
   static parseVariant(variant,) {
     if (variant === 'regular') {
@@ -56637,6 +56685,7 @@ var GoogleFontSource = class _GoogleFontSource {
   async importFonts(webFonts, webFontsWithAxes, fontsToVariationAxes,) {
     this.fontFamilies.length = 0;
     this.byFamilyName.clear();
+    this.supportedSubsetsByFamilyName.clear();
     const fontsWithOpenType = await loadFontsWithOpenType('google',/* Google */
     );
     const fonts = [];
@@ -56645,6 +56694,7 @@ var GoogleFontSource = class _GoogleFontSource {
     for (const webFontName in webFontsMap) {
       const webFont = webFontsMap[webFontName];
       if (!webFont) continue;
+      this.supportedSubsetsByFamilyName.set(webFont.family, webFont.subsets ?? [],);
       let fontFamily = this.getFontFamilyByName(webFont.family,);
       if (!fontFamily) {
         fontFamily = this.addFontFamily(webFont.family,);
@@ -61191,6 +61241,7 @@ var PathSegmentOuter = /* @__PURE__ */ (() => {
     // Describes the in tangent of the segment.
     handleInY = 0;
     radius = 0;
+    radiusSmoothing = void 0;
     constructor(value,) {
       if (value) {
         Object.assign(this, value,);
