@@ -13502,7 +13502,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.IALOKXSZ.mjs
+// /:https://app.framerstatic.com/framer.274G56QY.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -43689,15 +43689,15 @@ function getLogger(name,) {
   };
 }
 function getSymbolDispose() {
-  return (
-    // eslint-disable-next-line framer-studio/tscompat -- Feature-detect native Symbol.dispose; Safari has none.
-    Symbol.dispose ?? Object.defineProperty(Symbol, 'dispose', {
-      value: /* @__PURE__ */ Symbol.for('dispose',),
+  if (!Symbol.dispose) {
+    Object.defineProperty(Symbol, 'dispose', {
+      value: /* @__PURE__ */ Symbol.for('Symbol.dispose',),
       writable: false,
       enumerable: false,
       configurable: false,
-    },)
-  );
+    },);
+  }
+  return Symbol.dispose;
 }
 var activeEvaluationContext = {
   priority: void 0,
