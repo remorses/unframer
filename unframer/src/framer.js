@@ -13502,7 +13502,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.274G56QY.mjs
+// /:https://app.framerstatic.com/framer.OIOL7VKM.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -16237,24 +16237,19 @@ function usePreloadRoute() {
   const {
     getRoute,
   } = useRouter();
-  return useCallback2((routeId, linkContext, yieldBeforePreload = true, shouldLoadRouteData = true,) => {
+  return useCallback2((routeId, linkContext, options,) => {
     if (!routeId || !getRoute) return;
     const route = getRoute(routeId,);
     const {
       pathVariables,
       locale,
     } = linkContext;
-    return preloadRoute(
-      route,
-      {
-        routeId,
-        pathVariables,
-        locale,
-        collectionUtils,
-      },
-      yieldBeforePreload,
-      shouldLoadRouteData,
-    );
+    return preloadRoute(route, {
+      routeId,
+      pathVariables,
+      locale,
+      collectionUtils,
+    }, options,);
   }, [getRoute, collectionUtils,],);
 }
 function useRoutePreloader(routeIds, enabled = true,) {
@@ -16266,23 +16261,30 @@ function useRoutePreloader(routeIds, enabled = true,) {
     }
   }, [routeIds, enabled, preload,],);
 }
-async function preloadRoute(route, context, yieldBeforePreload = true, shouldLoadRouteData = true,) {
+async function preloadRoute(route, context, options = {},) {
   if (!shouldPreloadBasedOnUA || !route) return;
+  const {
+    priority = 'background',
+    yieldBeforePreload = true,
+    shouldLoadRouteData = true,
+  } = options;
   const component = route.page;
   if (!component || !isLazyComponentType(component,)) return;
   if (yieldBeforePreload) {
-    await yieldToMain();
+    await yieldToMain({
+      priority,
+    },);
   }
   try {
     const loadedComponent = await component.preload();
     if (shouldLoadRouteData && context && loadedComponent) {
-      await loadRouteData(loadedComponent, context,);
+      await loadRouteData(loadedComponent, context, priority,);
     }
   } catch (e) {
     if (false) console.warn('Preload failed', route, e,);
   }
 }
-async function loadRouteData(component, context,) {
+async function loadRouteData(component, context, priority,) {
   const loader = component.loader;
   if (!loader?.load) return;
   const loaderContext = {
@@ -16290,6 +16292,7 @@ async function loadRouteData(component, context,) {
     pathVariables: context.pathVariables ?? {},
     routeId: context.routeId,
     locale: context.locale,
+    priority,
     collectionUtils: context.collectionUtils,
   };
   try {
@@ -17447,6 +17450,7 @@ async function getSlugByLocaleIfCollectionPage(activeLocale, locales, currentRou
 }
 var noopAsync = async () => {};
 var defaultLocaleInfo = {
+  contentLocale: null,
   activeLocale: null,
   locales: [],
   setLocale: noopAsync,
@@ -33164,17 +33168,18 @@ function useInfiniteScroll({
       return;
     }
     isVisibleRef.current = true;
-    loadMore();
+    void loadMore();
     return;
   }, [loadMore,],);
   useEffect(() => {
     frame.postRender(() => {
       frame.render(() => {
         if (isVisibleRef.current) {
-          loadMore();
+          void loadMore();
         }
       },);
     },);
+    void paginationInfo.currentPage;
   }, [paginationInfo.currentPage, loadMore,],);
   useSharedIntersectionObserver(observerRef, callback, {
     rootMargin,
@@ -40099,7 +40104,12 @@ function propsForRoutePath(href, router, currentRoute, linkOptions, preload, loc
     performNavigation(
       router,
       routeId,
-      () => preload(routeId, linkContext, false, !isBlankTarget,),
+      () =>
+        preload(routeId, linkContext, {
+          priority: 'user-blocking',
+          yieldBeforePreload: false,
+          shouldLoadRouteData: !isBlankTarget,
+        },),
       elementId,
       pathVariables,
       linkOptions.smoothScroll,
@@ -40115,7 +40125,12 @@ function propsForRoutePath(href, router, currentRoute, linkOptions, preload, loc
           hash: elementId,
           pathVariables,
         }, implicitPathVariables,) || void 0,
-    preload: () => preload(routeId, linkContext, true, !isBlankTarget,),
+    preload: () =>
+      preload(routeId, linkContext, {
+        priority: 'background',
+        yieldBeforePreload: true,
+        shouldLoadRouteData: !isBlankTarget,
+      },),
     _routeId: routeId,
     _pathVariables: pathVariables,
     _locale: locale,
@@ -40206,7 +40221,12 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
       performNavigation(
         router,
         routeId,
-        () => preload(routeId, linkContext, false, !isBlankTarget,),
+        () =>
+          preload(routeId, linkContext, {
+            priority: 'user-blocking',
+            yieldBeforePreload: false,
+            shouldLoadRouteData: !isBlankTarget,
+          },),
         elementId,
         pathVariables,
         smoothScroll,
@@ -40218,7 +40238,12 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
       onClick: createOnClickLinkHandler(resolvedHref, trackLinkClick, navigate2,),
       'data-framer-page-link-current': currentRoute && linkMatchesRoute(currentRoute, pageLink, implicitPathVariables,) || void 0,
       navigate: navigate2,
-      preload: () => preload(routeId, linkContext, true, !isBlankTarget,),
+      preload: () =>
+        preload(routeId, linkContext, {
+          priority: 'background',
+          yieldBeforePreload: true,
+          shouldLoadRouteData: !isBlankTarget,
+        },),
       _routeId: routeId,
       _pathVariables: pathVariables,
       _locale: locale,
@@ -42607,6 +42632,12 @@ function Router({
   } = useNavigationTransition(usesCustomScrollRestoration,);
   const scheduleNavigationScroll = scrollRestoration.scheduleScroll;
   const currentLocaleId = currentLocaleIdRef.current;
+  const currentRouteId = currentRouteRef.current;
+  const currentRoute = routes[currentRouteId];
+  const currentRoutePath = currentRoute?.path;
+  if (!currentRoute) {
+    throw new Error(`Router cannot find route for ${currentRouteId}`,);
+  }
   const activeLocale = useMemo(() => {
     return locales.find(({
       id: id3,
@@ -42615,6 +42646,22 @@ function Router({
       return id3 === currentLocaleId;
     },) ?? null;
   }, [currentLocaleId, locales,],);
+  const pageExistsInCurrentLocale = !activeLocale || !currentRoute.includedLocales ||
+    currentRoute.includedLocales.includes(activeLocale.id,);
+  const contentLocale = useMemo(() => {
+    if (!activeLocale) return null;
+    let contentLocaleId;
+    if (pageExistsInCurrentLocale) {
+      contentLocaleId = currentRoute?.canonicalLocaleIdByLocaleId?.[activeLocale.id];
+    } else {
+      const notFoundRouteEntry = Object.values(routes,).find((route) => route.path && customNotFoundPagePaths.has(route.path,));
+      contentLocaleId = notFoundRouteEntry?.canonicalLocaleIdByLocaleId?.[activeLocale.id];
+    }
+    if (!contentLocaleId) return activeLocale;
+    return locales.find(({
+      id: id3,
+    },) => id3 === contentLocaleId) ?? activeLocale;
+  }, [activeLocale, currentRoute, locales, pageExistsInCurrentLocale, routes,],);
   const textDirection = activeLocale?.textDirection ?? 'ltr';
   const layoutDirection = adaptLayoutToTextDirection ? textDirection : 'ltr';
   useLayoutEffect(() => {
@@ -42625,6 +42672,7 @@ function Router({
   const localeInfo = useMemo(() => {
     return {
       activeLocale,
+      contentLocale,
       locales,
       setLocale: async (localeOrLocaleId) => {
         const nextRender = monitorNextPaintAfterRender({
@@ -42700,6 +42748,7 @@ function Router({
     };
   }, [
     activeLocale,
+    contentLocale,
     disableHistory,
     forceUpdate,
     locales,
@@ -42911,11 +42960,8 @@ function Router({
     scheduleNavigationScroll,
   ],);
   const getRoute = useGetRouteCallback(routes,);
-  const currentRouteId = currentRouteRef.current;
   const currentPathnameWithHash = routerPathnameWithHashRef.current;
   const currentPathVariables = currentPathVariablesRef.current;
-  const currentRoute = routes[currentRouteId];
-  const currentRoutePath = currentRoute?.path;
   const pageviewEventData = useSendPageView(
     currentRoute,
     currentRouteId,
@@ -42951,11 +42997,6 @@ function Router({
     pageviewEventData,
     isInitialNavigation,
   ],);
-  if (!currentRoute) {
-    throw new Error(`Router cannot find route for ${currentRouteId}`,);
-  }
-  const pageExistsInCurrentLocale = !activeLocale || !currentRoute.includedLocales ||
-    currentRoute.includedLocales.includes(activeLocale.id,);
   const pathWithFilledVariables = currentRoutePath && currentPathVariables
     ? fillPathVariables(currentRoutePath, currentPathVariables,)
     : currentRoutePath;
@@ -48904,8 +48945,16 @@ async function executeServerDatabaseQuery(sql2, parameters = {},) {
   if (!data2) throw new ServerDatabaseError('Query returned invalid response',);
   return data2;
 }
+function mapValueToRaw(value,) {
+  if (value === null || typeof value === 'string' || typeof value === 'number') return value;
+  if (typeof value === 'boolean') return value ? 1 : 0;
+  return JSON.stringify(value,);
+}
+function mapParametersToRaw(parameters,) {
+  return Object.fromEntries(Object.entries(parameters,).map(([name, value,],) => [name, mapValueToRaw(value,),]),);
+}
 var logger = /* @__PURE__ */ getLogger('server database',);
-function mapValue2(value, type,) {
+function mapValueFromRaw(value, type,) {
   if (type === 'unsupported') {
     logger.warn(new UnsupportedQueryError(`result type, returning null.`,),);
     return null;
@@ -48925,6 +48974,8 @@ function mapValue2(value, type,) {
       return mapStringValue(value,);
     case 'multicollectionreference':
       return mapStringArrayJsonValue(value,);
+    case 'responsiveimage':
+      return mapImageJsonValue(value,);
     default:
       assertNever(type, 'Unsupported server database result type',);
   }
@@ -48941,14 +48992,18 @@ function mapDateValue(value,) {
     return null;
   }
   const date = new Date(value,);
-  return isValidDate(date,) ? date.toISOString() : null;
+  if (!isValidDate(date,)) {
+    logger.warn(new ServerDatabaseError(`Unexpected date value ${value}, returning null.`,),);
+    return null;
+  }
+  return date.toISOString();
 }
 function mapNumberValue(value,) {
   if (typeof value !== 'number') {
     logger.warn(new ServerDatabaseError(`Unexpected number value ${value}, returning null.`,),);
     return null;
   }
-  return Number.isFinite(value,) ? value : null;
+  return value;
 }
 function mapStringValue(value,) {
   if (typeof value !== 'string') {
@@ -48970,7 +49025,20 @@ function mapStringArrayJsonValue(value,) {
 function isStringArray(value,) {
   return Array.isArray(value,) && value.every((item) => typeof item === 'string');
 }
-function mapServerDatabaseRows(rows, columns,) {
+function mapImageJsonValue(value,) {
+  if (typeof value === 'string') {
+    try {
+      const parsed = JSON.parse(value,);
+      if (isImageValue(parsed,)) return parsed;
+    } catch {}
+  }
+  logger.warn(new ServerDatabaseError(`Unexpected image value ${value}, returning null.`,),);
+  return null;
+}
+function isImageValue(value,) {
+  return isObject2(value,) && typeof value.src === 'string';
+}
+function mapRowsFromRaw(rows, columns,) {
   return rows.map((row) => {
     const mappedRow = {};
     for (const column of columns) {
@@ -48981,7 +49049,7 @@ function mapServerDatabaseRows(rows, columns,) {
       if (value === void 0) {
         throw new ServerDatabaseError(`Expected SQL result column "${column.fieldName}" returned undefined.`,);
       }
-      mappedRow[column.fieldName] = mapValue2(value, column.type,);
+      mappedRow[column.fieldName] = mapValueFromRaw(value, column.type,);
     }
     return mappedRow;
   },);
@@ -49296,9 +49364,9 @@ function preloadServerData(query, collections,) {
     },
     columns,
   } = compileQuery(query, collections,);
-  const result = getCachedServerData(sql2, parameters,).readMaybeAsync();
-  if (isPromise(result,)) return result.then((response) => mapServerDatabaseRows(response.rows, columns,));
-  return mapServerDatabaseRows(result.rows, columns,);
+  const result = getCachedServerData(sql2, mapParametersToRaw(parameters,),).readMaybeAsync();
+  if (isPromise(result,)) return result.then((response) => mapRowsFromRaw(response.rows, columns,));
+  return mapRowsFromRaw(result.rows, columns,);
 }
 function useServerData(query, collections,) {
   const {
@@ -49308,8 +49376,8 @@ function useServerData(query, collections,) {
     },
     columns,
   } = compileQuery(query, collections,);
-  const result = getCachedServerData(sql2, parameters,).use();
-  return mapServerDatabaseRows(result.rows, columns,);
+  const result = getCachedServerData(sql2, mapParametersToRaw(parameters,),).use();
+  return mapRowsFromRaw(result.rows, columns,);
 }
 var queryEngine = /* @__PURE__ */ new QueryEngine();
 var queryCache = /* @__PURE__ */ new QueryCache(queryEngine,);
@@ -50302,13 +50370,26 @@ function usePrototypeNavigate({
     return false;
   };
 }
+function getPersistedCurrentPage(hash2,) {
+  if (typeof __unframerWindow2 === 'undefined') return void 0;
+  const currentPage = readHistoryState()?.paginationInfo?.[hash2]?.currentPage;
+  return typeof currentPage === 'number' ? currentPage : void 0;
+}
+function getInitialCurrentPage(isInitialNavigation, hash2,) {
+  if (isInitialNavigation) {
+    return 1;
+  }
+  return getPersistedCurrentPage(hash2,) ?? 1;
+}
 function useLoadMorePagination(totalSize, pageSize, hash2, paginateWithSuspendedLoadingState = false,) {
+  const {
+    isInitialNavigation = true,
+  } = useRouter();
   const [isPending, startLoadingTransition,] = useTransition();
   const totalPages = Math.ceil(totalSize / pageSize,);
-  const [currentPage, setCurrentPage,] = useState(
-    // oxlint-disable-next-line framer-studio/eslint-no-restricted-syntax
-    globalThis?.history?.state?.paginationInfo?.[hash2]?.currentPage ?? 1,
-  );
+  const persistedPage = getPersistedCurrentPage(hash2,);
+  const pendingRestorePageRef = useRef(isInitialNavigation ? persistedPage : void 0,);
+  const [currentPage, setCurrentPage,] = useState(() => getInitialCurrentPage(isInitialNavigation, hash2,));
   const currentPageRef = useRef(currentPage,);
   const paginationInfo = useMemo(() => {
     return {
@@ -50318,27 +50399,44 @@ function useLoadMorePagination(totalSize, pageSize, hash2, paginateWithSuspended
     };
   }, [currentPage, totalPages, isPending,],);
   useIsomorphicLayoutEffect2(() => {
+    const pendingRestorePage = pendingRestorePageRef.current;
+    if (pendingRestorePage !== void 0 && pendingRestorePage !== currentPageRef.current) return;
+    pendingRestorePageRef.current = void 0;
     pushLoadMoreHistory(hash2, paginationInfo,);
   }, [hash2, paginationInfo,],);
+  useEffect(function restorePersistedPageAfterHydration() {
+    if (!isInitialNavigation) return;
+    const pendingRestorePage = pendingRestorePageRef.current;
+    if (pendingRestorePage === void 0 || pendingRestorePage === currentPageRef.current) {
+      pendingRestorePageRef.current = void 0;
+      return;
+    }
+    currentPageRef.current = pendingRestorePage;
+    startTransition2(() => setCurrentPage(pendingRestorePage,));
+  }, [isInitialNavigation,],);
   const onCanvas = useIsOnFramerCanvas();
+  const loadMoreInFlightRef = useRef(false,);
   const loadMore = useCallback2(async () => {
     if (onCanvas) return;
     if (currentPageRef.current >= totalPages) return;
-    await yieldToMain({
-      priority: 'user-blocking',
-      continueAfter: 'paint',
-    },);
-    if (currentPageRef.current >= totalPages) return;
-    const renderNextPage = (startTransition25) => {
+    if (loadMoreInFlightRef.current) return;
+    loadMoreInFlightRef.current = true;
+    try {
+      await yieldToMain({
+        priority: 'user-blocking',
+        continueAfter: 'paint',
+      },);
+      if (currentPageRef.current >= totalPages) return;
       const nextPage = Math.min(currentPageRef.current + 1, totalPages,);
       currentPageRef.current = nextPage;
-      startTransition25(() => {
+      const schedulePageRender = paginateWithSuspendedLoadingState ? startLoadingTransition : startTransition2;
+      schedulePageRender(() => {
         setCurrentPage(nextPage,);
       },);
-    };
-    if (!paginateWithSuspendedLoadingState) return renderNextPage(startTransition2,);
-    return renderNextPage(startLoadingTransition,);
-  }, [totalPages, paginateWithSuspendedLoadingState,],);
+    } finally {
+      loadMoreInFlightRef.current = false;
+    }
+  }, [totalPages, paginateWithSuspendedLoadingState, onCanvas,],);
   return {
     paginationInfo,
     loadMore,
@@ -62473,6 +62571,48 @@ function useInitialRouteComponent(routes, homeNodeId,) {
   }, [],);
   return RouteComponent;
 }
+function runWithYield(task, scheduling,) {
+  const yieldPromise = yieldToMain({
+    batch: true,
+    priority: scheduling.priority,
+    signal: scheduling.signal,
+  },);
+  if (!yieldPromise) return task();
+  return yieldPromise.then(task,);
+}
+async function runTasksWithYield(tasks, scheduling,) {
+  const settledTasks = [];
+  let isFirstTask = true;
+  for (const task of tasks) {
+    if (!isFirstTask) {
+      const yieldPromise = yieldToMain({
+        batch: true,
+        priority: scheduling.priority,
+        signal: scheduling.signal,
+      },);
+      if (yieldPromise) await yieldPromise;
+    }
+    isFirstTask = false;
+    try {
+      const maybeValue = task();
+      settledTasks.push(
+        Promise.resolve(maybeValue,).then((value) => ({
+          status: 'fulfilled',
+          value,
+        }), (reason) => ({
+          status: 'rejected',
+          reason,
+        }),),
+      );
+    } catch (reason) {
+      settledTasks.push(Promise.resolve({
+        status: 'rejected',
+        reason,
+      },),);
+    }
+  }
+  return Promise.all(settledTasks,);
+}
 function addLoader(component, loaderFn,) {
   Object.assign(component, {
     loader: {
@@ -63037,6 +63177,8 @@ export {
   roundedNumber,
   roundedNumberString,
   roundWithOffset,
+  runTasksWithYield,
+  runWithYield,
   safeCSSValue,
   scale,
   scaleCorrectors,
