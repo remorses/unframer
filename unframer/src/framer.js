@@ -13502,7 +13502,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.OIOL7VKM.mjs
+// /:https://app.framerstatic.com/framer.4ROTUDA5.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -58020,6 +58020,7 @@ var Select = /* @__PURE__ */ React42.forwardRef(function Select2(props, measureR
     defaultValue,
     value,
     selectOptions,
+    textAlignment,
     style: style2,
     onValid,
     onChange,
@@ -58029,6 +58030,7 @@ var Select = /* @__PURE__ */ React42.forwardRef(function Select2(props, measureR
     ...rest
   } = props;
   const isCanvas = useIsOnFramerCanvas();
+  const layoutDirection = useLayoutDirection();
   const isControlled = !isCanvas && value !== void 0;
   const externalValue = value ?? '';
   const [optimisticValue, , handleChange,] = useOptimisticValue(externalValue, isControlled, onChange,);
@@ -58046,7 +58048,12 @@ var Select = /* @__PURE__ */ React42.forwardRef(function Select2(props, measureR
     suppressHydrationWarning: true,
     ref: measureRef,
     style: style2,
-    className: cx(inputWrapperClassName, selectWrapperClassName, className2,),
+    className: cx(
+      inputWrapperClassName,
+      selectWrapperClassName,
+      isCaretOnLeft(textAlignment, layoutDirection,) && caretOnLeftClassName,
+      className2,
+    ),
     ...rest,
     children: /* @__PURE__ */ jsx(motion.select, {
       suppressHydrationWarning: true,
@@ -58088,7 +58095,25 @@ function serializeDefaultValue(defaultValue,) {
   if (defaultValue === '') return '__empty__';
   return defaultValue;
 }
+function isCaretOnLeft(alignment, direction,) {
+  switch (alignment) {
+    case 'left':
+      return false;
+    case 'right':
+      return true;
+    case 'end':
+      return direction === 'ltr';
+    case void 0:
+    case 'start':
+    case 'center':
+    case 'justify':
+      return direction === 'rtl';
+    default:
+      return assertNever(alignment,);
+  }
+}
 var selectWrapperClassName = 'framer-form-select-wrapper';
+var caretOnLeftClassName = 'framer-form-select-caret-left';
 var selectArrowSize = 16;
 var defaultSelectCaretMaskImage =
   /* @__PURE__ */ (() =>
@@ -58145,6 +58170,22 @@ var styles3 = /* @__PURE__ */ (() => [
     backgroundImage: css2.variable('--framer-input-icon-image',/* IconBackgroundImage */
     ),
     maskImage: css2.variable('--framer-input-icon-mask-image', `url('${defaultSelectCaretMaskImage}')`,),
+  },),
+  css2(`.${caretOnLeftClassName}`, {
+    padding: css2.variable('--framer-input-padding',/* Padding */
+    ),
+    paddingTop: 0,
+    paddingRight: 0,
+    paddingBottom: 0,
+  },),
+  css2(`.${caretOnLeftClassName}::before`, {
+    left: 0,
+    right: 'auto',
+    padding: css2.variable('--framer-input-padding',/* Padding */
+    ),
+    paddingRight: `${rightIconSpacing}px`,
+    backgroundPosition: `right ${rightIconSpacing}px center`,
+    maskPosition: `right ${rightIconSpacing}px center`,
   },),
   css2(`.${selectWrapperClassName} select:required:invalid`, {
     color: css2.variable('--framer-input-invalid-text-color',/* InvalidTextColor */
