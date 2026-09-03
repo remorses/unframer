@@ -13502,7 +13502,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.EZZSESII.mjs
+// /:https://app.framerstatic.com/framer.FA4L5YJY.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -18107,11 +18107,28 @@ function getSitePrefix(siteCanonicalURL,) {
   if (url.pathname === '/' || __unframerWindow2.location.origin !== url.origin) return '';
   return url.pathname.endsWith('/',) ? url.pathname.slice(0, -1,) : url.pathname;
 }
+function resolveHash(template, variables,) {
+  const resolvedHash = template.replace(pathVariablesRegExpGlobal, (match, pathVariable,) => variables[pathVariable] ?? match,);
+  if (resolvedHash.includes(':',)) return void 0;
+  return resolvedHash;
+}
 function getHashForRoute(hash2, route, hashVariables,) {
-  const resolvedHash = getRouteElementId(route, hash2,);
-  if (!resolvedHash) return void 0;
-  const variables = Object.assign({}, route?.elements, hashVariables,);
-  return resolvedHash.replace(pathVariablesRegExpGlobal, (match, pathVariable,) => variables[pathVariable] ?? match,);
+  const variables = Object.assign({}, route.elements, hashVariables,);
+  if (hash2.startsWith(':',)) {
+    const nodeId = hash2.slice(1,);
+    const pattern = route.elementPatterns?.[nodeId];
+    if (pattern) {
+      return resolveHash(pattern, variables,);
+    }
+  }
+  if (hash2.includes(':',)) {
+    return resolveHash(hash2, variables,);
+  }
+  const element = route.elements?.[hash2];
+  if (element) {
+    return resolveHash(element, variables,);
+  }
+  return hash2;
 }
 function getPathForRoute(route, {
   currentRoutePath,
@@ -18127,7 +18144,10 @@ function getPathForRoute(route, {
   localeId,
   localeSlug,
 },) {
-  const resolvedHash = getHashForRoute(hash2, route, hashVariables,);
+  let resolvedHash;
+  if (hash2 && route) {
+    resolvedHash = getHashForRoute(hash2, route, hashVariables,);
+  }
   if (onlyHash) return resolvedHash ?? '';
   let currentPath = currentRoutePath ?? '/';
   if (currentRoutePathLocalized && localeId) {
@@ -38595,10 +38615,14 @@ function getRouteFromPageLink(pageLink, router, currentRoute, locales,) {
     if (pathnameWithQueryParams === void 0) return;
     const [pathname,] = pathnameWithQueryParams.split('?', 2,);
     if (pathname === void 0) return;
-    const {
-      routeId,
-    } = inferInitialRouteFromPath(router.routes, pathname, void 0, locales,);
-    return router.getRoute(routeId,);
+    try {
+      const {
+        routeId,
+      } = inferInitialRouteFromPath(router.routes, pathname, pathname === '', locales,);
+      return router.getRoute(routeId,);
+    } catch {
+      return;
+    }
   }
   const {
     webPageId,
@@ -39726,11 +39750,12 @@ function findMatchingRouteAttributesForResolvedPath(router, path, implicitPathVa
     assert(pathnameWithQueryParams !== void 0, 'A href must have a defined pathname.',);
     const [pathname,] = pathnameWithQueryParams.split('?', 2,);
     assert(pathname !== void 0, 'A href must have a defined pathname.',);
+    const allowRootRouteFallback = pathname === '';
     const {
       routeId,
       pathVariables,
       localeId,
-    } = inferInitialRouteFromPath(router.routes, pathname, void 0, locales,);
+    } = inferInitialRouteFromPath(router.routes, pathname, allowRootRouteFallback, locales,);
     const route = router.getRoute(routeId,);
     if (route) {
       const combinedPathVariables = Object.assign({}, implicitPathVariables, pathVariables,);
@@ -49165,7 +49190,7 @@ function mapValueFromRaw(value, type,) {
     case 'responsiveimage':
       return mapImageJsonValue(value,);
     default:
-      assertNever(type, 'Unsupported server database result type',);
+      assertNever(type, 'Unknown server query result type',);
   }
 }
 function mapBooleanValue(value,) {
@@ -49284,12 +49309,15 @@ function sqlTemplate(strings, ...queriesAndParameters) {
   },);
   return result;
 }
-function join(queries, separator3,) {
+function join(queries, separator3, emptyFallback,) {
   const result = [];
   for (const query of queries) {
     if (result.length > 0) result.push(new SafeSql(separator3,),);
     if (Array.isArray(query,)) result.push(...query,);
     else result.push(query,);
+  }
+  if (result.length === 0 && emptyFallback) {
+    result.push(new SafeSql(emptyFallback,),);
   }
   return result;
 }
@@ -49383,7 +49411,7 @@ function compileFromClause(table, alias2, references, joinType,) {
     );
   }
   return {
-    query: sql`FROM ${sql.join(joinParts, joinType,)}`,
+    query: sql`FROM ${sql.join(joinParts, joinType, '(SELECT 0 WHERE 0)',)}`,
   };
 }
 function compileLimitAndOffsetClause() {
@@ -49394,6 +49422,55 @@ function compileLimitAndOffsetClause() {
 function compileOrderByClause(qualifier2, column,) {
   return {
     query: sql`ORDER BY ${sql.qualifiedIdentifier(qualifier2, column,)}`,
+  };
+}
+function resolveFieldPath(rootCollectionId, fieldPath, serverCollections, references,) {
+  const referencePath = [...fieldPath,];
+  const tailFieldId = referencePath.pop();
+  if (tailFieldId === void 0) {
+    return {
+      qualifier: rootCollectionId,
+      collectionId: rootCollectionId,
+      tailFieldId: collectionItemIdColumn,
+      tailField: {
+        type: 'collectionreference',
+        referencedCollectionId: rootCollectionId,
+      },
+    };
+  }
+  let collectionId = rootCollectionId;
+  let qualifier2 = collectionId;
+  for (const referenceFieldId of referencePath) {
+    const field = serverCollections[collectionId]?.fields[referenceFieldId];
+    if (!field) {
+      warnOnce2(
+        new ServerDatabaseError(`Intermediate field ${referenceFieldId} does not exist in collection ${collectionId}.`,).toString(),
+      );
+      return void 0;
+    }
+    if (field.type !== 'collectionreference') {
+      warnOnce2(new ServerDatabaseError(`Intermediate field ${referenceFieldId} is not a single reference field.`,).toString(),);
+      return void 0;
+    }
+    const newQualifier = `${qualifier2}.${referenceFieldId}`;
+    references.set(newQualifier, {
+      qualifier: qualifier2,
+      identifier: referenceFieldId,
+      referencedCollectionId: field.referencedCollectionId,
+    },);
+    qualifier2 = newQualifier;
+    collectionId = field.referencedCollectionId;
+  }
+  const tailField = serverCollections[collectionId]?.fields[tailFieldId];
+  if (!tailField) {
+    warnOnce2(new ServerDatabaseError(`Field ${tailFieldId} does not exist in collection ${collectionId}.`,).toString(),);
+    return void 0;
+  }
+  return {
+    qualifier: qualifier2,
+    collectionId,
+    tailFieldId,
+    tailField,
   };
 }
 function compileMultiReferenceExpression(qualifier2, collectionId, fieldId, referencedCollectionId,) {
@@ -49423,11 +49500,14 @@ function compileMultiReferenceWhereClause(sideTable, qualifier2,) {
     }`,
   };
 }
-function compileSelectClause({
-  collectionId,
-  columns,
-}, serverCollections,) {
-  const references = /* @__PURE__ */ new Map();
+function compileSelectClause(
+  {
+    collectionId,
+    columns,
+  },
+  serverCollections,
+  references,
+) {
   const resultColumns = [];
   const selectParts = [];
   for (const column of columns) {
@@ -49440,60 +49520,23 @@ function compileSelectClause({
     selectParts.push(sql`${compiledColumn.expression} AS ${sql.alias(column.alias,)}`,);
   }
   if (selectParts.length === 0) {
-    warnOnce2(
-      new ServerDatabaseError('Query selects no columns, falling back to \'*\'. We should always select at least the identity column.',)
-        .toString(),
-    );
-    selectParts.push(sql`*`,);
+    warnOnce2(new ServerDatabaseError('Query selects no column.',).toString(),);
   }
   return {
-    query: sql`SELECT ${sql.join(selectParts, ', ',)}`,
+    query: sql`SELECT ${sql.join(selectParts, ', ', '1',)}`,
     columns: resultColumns,
-    references,
   };
 }
 function compileColumn(rootCollectionId, column, serverCollections, references,) {
+  const resolved = resolveFieldPath(rootCollectionId, column.fieldPath, serverCollections, references,);
+  if (!resolved) return void 0;
   const {
-    alias: alias2,
-  } = column;
-  const referencePath = [...column.fieldPath,];
-  const tailFieldId = referencePath.pop();
-  if (!tailFieldId) {
-    return {
-      expression: sql.qualifiedIdentifier(rootCollectionId, collectionItemIdColumn,),
-      type: 'string',
-      /* String */
-    };
-  }
-  let collectionId = rootCollectionId;
-  let qualifier2 = collectionId;
-  for (const referenceFieldId of referencePath) {
-    const field = serverCollections[collectionId]?.fields[referenceFieldId];
-    if (!field) {
-      warnOnce2(new ServerDatabaseError(`Field ${referenceFieldId} for column ${alias2} does not exist.`,).toString(),);
-      return void 0;
-    }
-    if (field.type !== 'collectionreference') {
-      warnOnce2(
-        new ServerDatabaseError(`Intermediate field ${referenceFieldId} for column ${alias2} is not a single reference field.`,).toString(),
-      );
-      return void 0;
-    }
-    const newQualifier = `${qualifier2}.${referenceFieldId}`;
-    references.set(newQualifier, {
-      qualifier: qualifier2,
-      identifier: referenceFieldId,
-      referencedCollectionId: field.referencedCollectionId,
-    },);
-    qualifier2 = newQualifier;
-    collectionId = field.referencedCollectionId;
-  }
-  const tailField = serverCollections[collectionId]?.fields[tailFieldId];
-  if (!tailField) {
-    warnOnce2(new ServerDatabaseError(`Field ${tailFieldId} for column ${alias2} does not exist.`,).toString(),);
-    return void 0;
-  }
-  if (tailField.type === 'collectionreference') {
+    qualifier: qualifier2,
+    collectionId,
+    tailFieldId,
+    tailField,
+  } = resolved;
+  if (tailField.type === 'collectionreference' && tailFieldId !== collectionItemIdColumn) {
     const newQualifier = `${qualifier2}.${tailFieldId}`;
     references.set(newQualifier, {
       qualifier: qualifier2,
@@ -49518,15 +49561,190 @@ function compileColumn(rootCollectionId, column, serverCollections, references,)
     type: tailField.type,
   };
 }
+function compileWhereClause(collectionId, filters, serverCollections, references,) {
+  const conditions = [];
+  for (const filter2 of filters.conditions) {
+    const condition = compileFilter(collectionId, filter2, serverCollections, references,);
+    if (condition) conditions.push(condition,);
+  }
+  return {
+    query: sql`WHERE ${sql.join(conditions, getJoinOperator(filters.operator,), '1',)}`,
+  };
+}
+function getJoinOperator(filterOperator,) {
+  switch (filterOperator) {
+    case 'any':
+      return ' OR ';
+    case 'all':
+      return ' AND ';
+  }
+}
+function compileFilter(collectionId, filter2, serverCollections, references,) {
+  const resolved = resolveFieldPath(collectionId, filter2.fieldPath, serverCollections, references,);
+  if (!resolved) return void 0;
+  if (resolved.tailField.type === 'unsupported') {
+    warnOnce2(new UnsupportedQueryError(`filter field type.`,).toString(),);
+    return void 0;
+  }
+  let parameterName = filter2.fieldPath.join('_',) || resolved.tailFieldId;
+  let currentStep = compileField(resolved,);
+  for (const transform2 of filter2.transforms) {
+    parameterName += `_${transform2.name}`;
+    currentStep = compileTransform(transform2, currentStep, parameterName,);
+    if (!currentStep) return void 0;
+  }
+  if (currentStep.type !== 'boolean') {
+    warnOnce2(new ServerDatabaseError(`Filter chain on ${currentStep.type} field does not result in a boolean.`,).toString(),);
+    return void 0;
+  }
+  return currentStep.inputToleratingNull().expression;
+}
+var Step = class {
+  #expression;
+  #type;
+  #nullable;
+  constructor(init,) {
+    this.#expression = init.expression;
+    this.#type = init.type;
+    this.#nullable = init.nullable;
+  }
+  /**
+   * Get the input to be used in a context that carries through NULL representing false,
+   * or correctly handles NULL representing false (e.g. `WHERE`/`AND` coercing to false).
+   */
+  inputToleratingNull() {
+    return {
+      expression: this.#expression,
+      nullable: this.#nullable,
+    };
+  }
+  /**
+   * Get the input to be used in a context that misbehaves on a NULL representing false (e.g. `= NULL`).
+   */
+  inputSensitiveToNull() {
+    if (this.#nullable === 'treat-as-false') {
+      return {
+        expression: sql`(${this.#expression} IS TRUE)`,
+        nullable: 'no',
+      };
+    }
+    return {
+      expression: this.#expression,
+      nullable: this.#nullable,
+    };
+  }
+  get type() {
+    return this.#type;
+  }
+};
+function treatNullInputAsFalse(input,) {
+  switch (input.nullable) {
+    case 'yes':
+    case 'treat-as-false':
+      return 'treat-as-false';
+    case 'no':
+      return 'no';
+  }
+}
+function treatNullValueAsFalse(value,) {
+  if (value === null) {
+    return 'treat-as-false';
+  }
+  return 'no';
+}
+function compileField({
+  qualifier: qualifier2,
+  collectionId,
+  tailFieldId,
+  tailField,
+},) {
+  if (tailField.type === 'multicollectionreference') {
+    return new Step({
+      expression: compileMultiReferenceExpression(qualifier2, collectionId, tailFieldId, tailField.referencedCollectionId,),
+      type: tailField.type,
+      nullable: 'no',
+    },);
+  }
+  return new Step({
+    expression: sql.qualifiedIdentifier(qualifier2, tailFieldId,),
+    type: tailField.type,
+    nullable: 'yes',
+  },);
+}
+function compileTransform(transform2, previousStep, parameterName,) {
+  if (transform2.value === void 0) return void 0;
+  switch (transform2.name) {
+    case 'equals':
+      return compileEquals(previousStep, parameterName, transform2.value,);
+    case 'isIncludedIn':
+      return compileIsIncludedIn(previousStep, parameterName, transform2.value,);
+    case 'contains':
+      return compileContains(previousStep, parameterName, transform2.value,);
+    default:
+      warnOnce2(new UnsupportedQueryError(`filter transform.`,).toString(),);
+      return void 0;
+  }
+}
+function compileEquals(previousStep, parameterName, value,) {
+  const input = previousStep.inputSensitiveToNull();
+  if (value === null) {
+    return new Step({
+      expression: sql`${input.expression} IS NULL`,
+      type: 'boolean',
+      nullable: 'no',
+    },);
+  }
+  if (previousStep.type === 'string' && typeof value === 'string') {
+    return new Step({
+      expression: sql`LOWER(${input.expression}) = LOWER(${sql.parameter(parameterName, value,)})`,
+      type: 'boolean',
+      nullable: treatNullInputAsFalse(input,),
+    },);
+  }
+  return new Step({
+    expression: sql`${input.expression} = ${sql.parameter(parameterName, value,)}`,
+    type: 'boolean',
+    nullable: treatNullInputAsFalse(input,),
+  },);
+}
+function compileIsIncludedIn(previousStep, parameterName, value,) {
+  const input = previousStep.inputToleratingNull();
+  return new Step({
+    expression: sql`${input.expression} IN (SELECT value FROM json_each(${sql.parameter(parameterName, value,)}))`,
+    type: 'boolean',
+    nullable: treatNullInputAsFalse(input,),
+  },);
+}
+function compileContains(previousStep, parameterName, value,) {
+  switch (previousStep.type) {
+    case 'multicollectionreference': {
+      return new Step({
+        expression: sql`${
+          sql.parameter(parameterName, value,)
+        } IN (SELECT value FROM json_each(${previousStep.inputToleratingNull().expression}))`,
+        type: 'boolean',
+        nullable: treatNullValueAsFalse(value,),
+      },);
+    }
+    case 'string':
+      warnOnce2(new UnsupportedQueryError(`contains filter on a ${previousStep.type} field.`,).toString(),);
+      return void 0;
+    default:
+      warnOnce2(new ServerDatabaseError(`Contains filter on a ${previousStep.type} field.`,).toString(),);
+      return void 0;
+  }
+}
 function compileQuery(serverQuery, serverCollections,) {
   const {
     collectionId,
   } = serverQuery;
-  const selectClause = compileSelectClause(serverQuery, serverCollections,);
-  const fromClause = compileFromClause(`${collectionId}/items`, collectionId, selectClause.references, ' LEFT JOIN ',);
+  const references = /* @__PURE__ */ new Map();
+  const selectClause = compileSelectClause(serverQuery, serverCollections, references,);
+  const whereClause = compileWhereClause(collectionId, serverQuery.filters, serverCollections, references,);
+  const fromClause = compileFromClause(`${collectionId}/items`, collectionId, references, ' LEFT JOIN ',);
   const orderByClause = compileOrderByClause(collectionId, positionIdColumn,);
   const limitAndOffsetClause = compileLimitAndOffsetClause();
-  const sqlQuery = sql`${selectClause.query} ${fromClause.query} ${orderByClause.query} ${limitAndOffsetClause.query}`;
+  const sqlQuery = sql`${selectClause.query} ${fromClause.query} ${whereClause.query} ${orderByClause.query} ${limitAndOffsetClause.query}`;
   return {
     query: serializeSql(sqlQuery,),
     columns: selectClause.columns,
