@@ -398,6 +398,79 @@ async function push({ node, tree, text, nodeId, isRootNode = false, visitedCompo
     }
     return tree;
 }
+// Framer only fully loads the "scope" of the canvas root (the page or component
+// currently open on the canvas). Nodes on every other page live in a partially
+// loaded scope, and for those `framer.getNode(id)` returns null even though the
+// node exists and is editable. `getNodesWithType` is not scope limited, so it is
+// the only reliable project wide lookup.
+//
+// Measured against a real multi page project (framer-api, 1382 nodes): getNode
+// returned null for every node of a non active page, while the getNodesWithType
+// calls below returned all of them in ~2s. Build the index once per tool call and
+// reuse it, never memoize it across calls or it goes stale.
+const indexedNodeTypes = [
+    'FrameNode',
+    'TextNode',
+    'SVGNode',
+    'ComponentInstanceNode',
+    'WebPageNode',
+    'DesignPageNode',
+    'ComponentNode',
+];
+export function createNodeResolver() {
+    let index;
+    async function buildIndex() {
+        const built = new Map();
+        for (const type of indexedNodeTypes) {
+            const nodes = await framer.getNodesWithType(type);
+            for (const node of nodes) {
+                built.set(node.id, node);
+            }
+        }
+        return built;
+    }
+    return {
+        async get(nodeId) {
+            const direct = await framer.getNode(nodeId);
+            if (direct) {
+                return direct;
+            }
+            index ??= await buildIndex();
+            return index.get(nodeId) ?? null;
+        },
+    };
+}
+// `getParent()` returns null outside the loaded scope, so it cannot say where a node
+// currently lives. Reading a parent's children works in every scope, so child
+// membership is the check used instead.
+//
+// This throws when the children cannot be read. It must never answer "not a child"
+// for a failed read: callers use the answer to decide whether to move a node, and a
+// wrong "no" moves nodes that are already in place and deletes freshly created ones.
+export function createChildIndex(resolver) {
+    const childIdsByParent = new Map();
+    return {
+        async get(parentId) {
+            const cached = childIdsByParent.get(parentId);
+            if (cached) {
+                return cached;
+            }
+            const parent = await resolver.get(parentId);
+            if (!parent?.getChildren) {
+                throw new Error(`Cannot read the children of ${parentId}: no node with this ID exists in the project.`);
+            }
+            const children = await parent.getChildren();
+            const childIds = children.map((child) => child.id);
+            childIdsByParent.set(parentId, childIds);
+            return childIds;
+        },
+        // Any structural write can change several parents at once (the node leaves one
+        // and joins another), so drop the whole cache rather than guess which.
+        invalidate() {
+            childIdsByParent.clear();
+        },
+    };
+}
 export async function getFramerTree({ rootNodes, recursive = true, }) {
     const timeId = `getFramerTree-${Date.now()}-${Math.random().toString(36).slice(2)}`;
     console.time(timeId);
@@ -854,9 +927,12 @@ function onlyChangedKeys(oldObj, newObj) {
     }
     return changes;
 }
+// Returns the attribute keys that were actually written to Framer. Attributes that
+// already hold the requested value are filtered out by onlyChangedKeys, so callers
+// must not report a successful update just because they passed attributes in.
 export async function applyAttributes(node, _attributes) {
     if (!node || !_attributes || !Object.keys(_attributes).length) {
-        return;
+        return [];
     }
     // Check permissions before proceeding
     checkPermissions('Node.setAttributes');
@@ -1014,11 +1090,13 @@ export async function applyAttributes(node, _attributes) {
                 controlsAttrs[key] = value;
             }
         }
+        const writtenKeys = [];
         // Apply node-level attributes
         const changedNodeAttrs = onlyChangedKeys(node, nodeAttrs);
         if (Object.keys(changedNodeAttrs).length > 0) {
             console.log(`Setting attributes on ${node.__class} (${node.id}):`, changedNodeAttrs);
             await node.setAttributes(changedNodeAttrs);
+            writtenKeys.push(...Object.keys(changedNodeAttrs));
         }
         // Apply controls
         if (Object.keys(controlsAttrs).length > 0) {
@@ -1029,16 +1107,18 @@ export async function applyAttributes(node, _attributes) {
                 };
                 console.log(`Setting controls on ${node.__class} (${node.id}):`, controlsUpdate);
                 await node.setAttributes(controlsUpdate);
+                writtenKeys.push(...Object.keys(changedControls));
             }
         }
+        return writtenKeys;
     }
-    else {
-        // For non-component instance nodes, apply all attributes directly
-        const changedNodeAttrs = onlyChangedKeys(node, decodedAttrs);
-        if (Object.keys(changedNodeAttrs).length > 0) {
-            await node.setAttributes(changedNodeAttrs);
-        }
+    // For non-component instance nodes, apply all attributes directly
+    const changedNodeAttrs = onlyChangedKeys(node, decodedAttrs);
+    if (Object.keys(changedNodeAttrs).length === 0) {
+        return [];
     }
+    await node.setAttributes(changedNodeAttrs);
+    return Object.keys(changedNodeAttrs);
 }
 // Helper functions that need to be in this package
 async function collectGenerator(gen) {

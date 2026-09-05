@@ -11,6 +11,12 @@ const emptySelection = async () => {
 const noOpZoomIntoView = async () => {
     return;
 };
+// The server API has no canvas, so it cannot move the canvas root to another page.
+// Callers use navigateTo to load a page scope before structural edits; here it is a
+// no-op and those edits fail later with an explicit message instead of a TypeError.
+const noOpNavigateTo = async () => {
+    return;
+};
 function getRuntimeFramer() {
     const globalWithFramer = globalThis;
     if (!globalWithFramer.framer) {
@@ -34,6 +40,9 @@ export const framer = new Proxy({}, {
             }
             if (property === 'zoomIntoView') {
                 return noOpZoomIntoView;
+            }
+            if (property === 'navigateTo') {
+                return noOpNavigateTo;
             }
         }
         if (typeof value === 'function') {

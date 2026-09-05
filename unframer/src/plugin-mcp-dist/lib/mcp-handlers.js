@@ -7,7 +7,7 @@ import dedent from 'string-dedent';
 import { createPatch } from 'diff';
 import { createSpiceflowFetch } from 'spiceflow/client';
 import { framerLayersTreeToXml, extractObjectsFromXmlContent, TEMP_NODE_ID_PREFIX, } from './xml.js';
-import { getFramerTree, applyAttributes, getComponentPropertyControls } from './framer.js';
+import { getFramerTree, applyAttributes, getComponentPropertyControls, createNodeResolver, createChildIndex, } from './framer.js';
 import { processReactExportData } from './react-export.js';
 import { propControlsToTypedocComments, componentCamelCase } from 'unframer';
 import { codeComponentsResourceUri, mcpTools } from './schema.js';
@@ -186,8 +186,8 @@ function stripVersionFromUrl(url) {
     return atIndex !== -1 ? url.substring(0, atIndex) : url;
 }
 // Helper function to get XML for a node
-async function getNodeXml(nodeId, maxCharacters = 15000) {
-    const node = await framer.getNode(nodeId);
+async function getNodeXml(nodeId, maxCharacters = 15000, resolver = createNodeResolver()) {
+    const node = await resolver.get(nodeId);
     if (!node) {
         return null;
     }
@@ -217,13 +217,52 @@ async function getAddedNodesDuring(callback) {
     const newNodes = childrenAfter.filter((child) => !idsBefore.has(child.id));
     return newNodes;
 }
-// Helper function to create a new Framer node based on its type
-async function createFramerNode({ extractedNode, parentId, }) {
+// Framer silently ignores structural writes that target a partially loaded scope:
+// `setParent` resolves without moving anything and `createFrameNode(attrs, parentId)`
+// drops the new node under the canvas root instead of the requested parent. Both
+// only work for the page or component currently open on the canvas. Always verify
+// the parent afterwards so the tool reports a real failure instead of pretending.
+async function offScopeHint() {
+    const canvasRootId = await framer
+        .getCanvasRoot()
+        .then((root) => root.id)
+        .catch(() => undefined);
+    const open = canvasRootId
+        ? `the page or component currently open on the canvas (${canvasRootId})`
+        : 'the page or component currently open on the canvas';
+    return `Framer can only move and create layers inside ${open}, and this node is not in it. Open that page in Framer, then retry.`;
+}
+async function assertParent({ nodeId, parentId, children, }) {
+    // Reads the parent fresh: a failed read throws instead of being read as "the move
+    // did not land", so callers never destroy or re-move a correctly placed node.
+    children.invalidate();
+    const childIds = await children.get(parentId);
+    if (childIds.includes(nodeId)) {
+        return;
+    }
+    throw new Error(`Framer did not move node ${nodeId} into parent ${parentId}. ${await offScopeHint()}`);
+}
+async function setParentOrThrow({ nodeId, parentId, index, children, }) {
+    await framer.setParent(nodeId, parentId, index);
+    await assertParent({ nodeId, parentId, children });
+}
+// Helper function to create a new Framer node based on its type.
+// `onCreated` fires as soon as Framer hands back a node id, before parenting and
+// verification, so the caller can roll the node back if a later step throws. Without
+// it a failed setParent leaves an orphan layer on the canvas root.
+async function createFramerNode({ extractedNode, parentId, resolver, children, onCreated, }) {
     const { nodeType, attributes, newContent } = extractedNode;
     switch (nodeType) {
         case 'Frame': {
             const newFrame = await framer.createFrameNode(attributes, parentId);
-            return newFrame ? { id: newFrame.id, type: 'Frame' } : null;
+            if (!newFrame) {
+                return null;
+            }
+            onCreated(newFrame.id);
+            // createFrameNode ignores parentId outside the loaded scope and drops the
+            // node on the canvas root instead, so the placement has to be checked.
+            await assertParent({ nodeId: newFrame.id, parentId, children });
+            return { id: newFrame.id, type: 'Frame' };
         }
         case 'Text': {
             // Text nodes need special handling
@@ -233,11 +272,12 @@ async function createFramerNode({ extractedNode, parentId, }) {
             });
             const newNodeId = newNodes[0]?.id;
             if (newNodeId) {
+                onCreated(newNodeId);
                 // Move to correct parent
-                await framer.setParent(newNodeId, parentId);
+                await setParentOrThrow({ nodeId: newNodeId, parentId, children });
                 // Apply attributes if any
                 if (Object.keys(attributes).length > 0) {
-                    const node = await framer.getNode(newNodeId);
+                    const node = await resolver.get(newNodeId);
                     await applyAttributes(node, attributes);
                 }
                 return { id: newNodeId, type: 'Text' };
@@ -252,14 +292,15 @@ async function createFramerNode({ extractedNode, parentId, }) {
             });
             const newNodeId = newNodes[0]?.id;
             if (newNodeId) {
+                onCreated(newNodeId);
                 // Move to correct parent
-                await framer.setParent(newNodeId, parentId);
+                await setParentOrThrow({ nodeId: newNodeId, parentId, children });
                 // Apply remaining attributes
                 const remainingAttrs = { ...attributes };
                 delete remainingAttrs.svg;
                 delete remainingAttrs.name;
                 if (Object.keys(remainingAttrs).length > 0) {
-                    const node = await framer.getNode(newNodeId);
+                    const node = await resolver.get(newNodeId);
                     await applyAttributes(node, remainingAttrs);
                 }
                 return { id: newNodeId, type: 'SVG' };
@@ -271,7 +312,7 @@ async function createFramerNode({ extractedNode, parentId, }) {
             // If no insertUrl, try to find it from componentId
             if (!insertUrl && attributes.componentId) {
                 // First try to get it as a component node
-                const node = await framer.getNode(attributes.componentId);
+                const node = await resolver.get(attributes.componentId);
                 if (node && isComponentNode(node) && node.insertURL) {
                     insertUrl = node.insertURL;
                 }
@@ -328,8 +369,9 @@ async function createFramerNode({ extractedNode, parentId, }) {
                 nodeId = instance.id;
                 nodeType = 'ComponentInstance';
             }
+            onCreated(nodeId);
             // Move to correct parent
-            await framer.setParent(nodeId, parentId);
+            await setParentOrThrow({ nodeId, parentId, children });
             return { id: nodeId, type: nodeType };
         }
         default:
@@ -586,27 +628,58 @@ export async function mcpToolHandler({ input, type, }) {
             if (rootNodeId.startsWith('/')) {
                 return `Node ID cannot start with a slash. It should be a valid node ID, not a color style or text path. To update styles use 'manageColorStyle' or 'manageTextStyle' tools.`;
             }
-            // Zoom into the node before making changes if requested
-            if (zoomIntoView) {
+            const resolver = createNodeResolver();
+            const children = createChildIndex(resolver);
+            // Structural writes (setParent, createFrameNode with a parentId) silently
+            // do nothing outside the loaded canvas root, and navigating is the only way
+            // to load another scope. Only navigate when the target really is out of
+            // scope: navigation takes over the page the user is looking at, and Framer
+            // may restart the plugin in another mode. A direct getNode hit proves the
+            // node is in the loaded scope, so the common case never navigates.
+            const isRootInLoadedScope = Boolean(await framer.getNode(rootNodeId));
+            if (isRootInLoadedScope) {
+                if (zoomIntoView) {
+                    try {
+                        await framer.zoomIntoView(rootNodeId, { maxZoom: 0.9 });
+                    }
+                    catch (error) {
+                        // Don't fail the entire operation if zooming fails
+                        console.warn('Failed to zoom into view:', error);
+                    }
+                }
+            }
+            else {
+                // navigateTo does not exist in server-api mode (no canvas to move), so
+                // this is a no-op there and structural writes fail loudly instead.
                 try {
-                    await framer.zoomIntoView(rootNodeId, { maxZoom: 0.9 });
+                    await framer.navigateTo(rootNodeId, {
+                        select: false,
+                        zoomIntoView: zoomIntoView ? { maxZoom: 0.9 } : false,
+                    });
                 }
                 catch (error) {
-                    // Don't fail the entire operation if zooming fails
-                    console.warn('Failed to zoom into view:', error);
+                    console.warn('Failed to navigate to node:', error);
                 }
             }
             // Get the original XML before making changes
-            const originalResult = await getNodeXml(rootNodeId, Infinity);
+            const originalResult = await getNodeXml(rootNodeId, Infinity, resolver);
             const originalXml = originalResult?.xml || '';
             // Extract nodes from the provided XML with node creation enabled
             const extractedNodes = extractObjectsFromXmlContent(xml, {
                 enableNodeCreation: true,
             });
             const results = [];
+            // Nodes whose attributes already held the requested values. Kept apart
+            // from `results` so the final message can say "nothing to change" instead
+            // of blaming made up attributes.
+            const alreadyUpToDateNodeIds = [];
             const nodesToReorder = [];
             // Phase 0: Create new nodes (nodes with temp IDs)
             const tempIdToRealId = new Map();
+            // Every node Framer actually created, recorded before parenting so a
+            // half-created node is still rolled back. tempIdToRealId only gets an entry
+            // once creation fully succeeded, so it cannot drive the rollback.
+            const createdNodeIds = [];
             for (const extractedNode of extractedNodes) {
                 // Check if this is a new node (has temp ID)
                 if (extractedNode.nodeId.startsWith(TEMP_NODE_ID_PREFIX)) {
@@ -621,6 +694,11 @@ export async function mcpToolHandler({ input, type, }) {
                         const newNode = await createFramerNode({
                             extractedNode,
                             parentId,
+                            resolver,
+                            children,
+                            onCreated: (nodeId) => {
+                                createdNodeIds.push(nodeId);
+                            },
                         });
                         if (newNode) {
                             // Map temp ID to real ID
@@ -660,10 +738,10 @@ export async function mcpToolHandler({ input, type, }) {
                         await framer.notify(`Failed to create ${extractedNode.nodeType || 'node'}: ${errorMessage}`, {
                             variant: 'error',
                         });
-                        // Rollback all created nodes using tempIdToRealId values
-                        for (const nodeId of tempIdToRealId.values()) {
+                        // Rollback every node Framer created during this call
+                        for (const nodeId of createdNodeIds) {
                             try {
-                                const node = await framer.getNode(nodeId);
+                                const node = await resolver.get(nodeId);
                                 if (node) {
                                     await node.remove();
                                 }
@@ -685,9 +763,9 @@ export async function mcpToolHandler({ input, type, }) {
                 }
                 const targetNodeId = extractedNode.nodeId || rootNodeId;
                 try {
-                    const node = await framer.getNode(targetNodeId);
+                    const node = await resolver.get(targetNodeId);
                     if (!node) {
-                        results.push(`Node with ID ${targetNodeId} not found.`);
+                        results.push(`Failed to process node ${targetNodeId}: no node with this ID exists in the project.`);
                         continue;
                     }
                     // Update text content for text nodes
@@ -698,17 +776,27 @@ export async function mcpToolHandler({ input, type, }) {
                     // Apply attributes
                     if (extractedNode.attributes &&
                         Object.keys(extractedNode.attributes).length > 0) {
-                        await applyAttributes(node, extractedNode.attributes);
-                        results.push(`Updated attributes for node ${targetNodeId}`);
+                        const changedKeys = await applyAttributes(node, extractedNode.attributes);
+                        if (changedKeys.length > 0) {
+                            results.push(`Updated attributes for node ${targetNodeId}: ${changedKeys.join(', ')}`);
+                        }
+                        else {
+                            alreadyUpToDateNodeIds.push(targetNodeId);
+                        }
                     }
-                    // Check if parent needs to change
-                    if (extractedNode.parentId && node.getParent) {
-                        const currentParent = await node.getParent();
-                        const currentParentId = currentParent?.id;
-                        if (currentParentId !== extractedNode.parentId) {
+                    // Check if parent needs to change. A failed children read throws
+                    // out of this block instead of being read as "not a child", which
+                    // would move nodes that are already in the right place.
+                    if (extractedNode.parentId) {
+                        const siblingIds = await children.get(extractedNode.parentId);
+                        if (!siblingIds.includes(targetNodeId)) {
                             // Move to new parent without specifying position yet
-                            await framer.setParent(targetNodeId, extractedNode.parentId);
-                            results.push(`Moved node ${targetNodeId} from parent ${currentParentId || 'none'} to ${extractedNode.parentId}`);
+                            await setParentOrThrow({
+                                nodeId: targetNodeId,
+                                parentId: extractedNode.parentId,
+                                children,
+                            });
+                            results.push(`Moved node ${targetNodeId} into ${extractedNode.parentId}`);
                         }
                         // Queue for reordering if sibling info is provided
                         if (extractedNode.beforeNodeId ||
@@ -732,28 +820,25 @@ export async function mcpToolHandler({ input, type, }) {
             // been moved yet, and index calculations would be incorrect during the moving process.
             for (const reorderInfo of nodesToReorder) {
                 try {
-                    const parent = await framer.getNode(reorderInfo.parentId);
-                    if (!parent)
-                        continue;
-                    const siblings = await parent.getChildren();
+                    const siblings = await children.get(reorderInfo.parentId);
                     let targetIndex;
                     if (reorderInfo.beforeNodeId) {
                         // Place after the beforeNode
-                        const beforeIndex = siblings.findIndex((s) => s.id === reorderInfo.beforeNodeId);
+                        const beforeIndex = siblings.indexOf(reorderInfo.beforeNodeId);
                         if (beforeIndex !== -1) {
                             targetIndex = beforeIndex + 1;
                         }
                     }
                     else if (reorderInfo.afterNodeId) {
                         // Place before the afterNode
-                        const afterIndex = siblings.findIndex((s) => s.id === reorderInfo.afterNodeId);
+                        const afterIndex = siblings.indexOf(reorderInfo.afterNodeId);
                         if (afterIndex !== -1) {
                             targetIndex = afterIndex;
                         }
                     }
                     if (targetIndex !== undefined) {
                         // Get current index
-                        const currentIndex = siblings.findIndex((s) => s.id === reorderInfo.nodeId);
+                        const currentIndex = siblings.indexOf(reorderInfo.nodeId);
                         // Only reorder if position needs to change
                         if (currentIndex !== -1 &&
                             currentIndex !== targetIndex) {
@@ -767,7 +852,12 @@ export async function mcpToolHandler({ input, type, }) {
                             if (currentIndex < targetIndex) {
                                 targetIndex -= 1;
                             }
-                            await framer.setParent(reorderInfo.nodeId, reorderInfo.parentId, targetIndex);
+                            await setParentOrThrow({
+                                nodeId: reorderInfo.nodeId,
+                                parentId: reorderInfo.parentId,
+                                index: targetIndex,
+                                children,
+                            });
                             results.push(`Reordered node ${reorderInfo.nodeId} within parent ${reorderInfo.parentId} to index ${targetIndex}`);
                         }
                     }
@@ -777,13 +867,19 @@ export async function mcpToolHandler({ input, type, }) {
                 }
             }
             // Get the updated XML for the primary node
-            const updatedResult = await getNodeXml(rootNodeId, Infinity);
+            const updatedResult = await getNodeXml(rootNodeId, Infinity, resolver);
             const updatedXml = updatedResult?.xml || '';
             // Check if there were actual changes by comparing XML
             const hasChanges = originalXml.trim() !== updatedXml.trim();
+            // Some nodes can land while others fail, so a changed XML alone must not be
+            // reported as a full success or the agent stops chasing the failures.
+            const hasErrors = results.some((r) => r.startsWith('Failed '));
             if (hasChanges && updatedResult) {
+                const header = hasErrors
+                    ? 'Partially updated, some operations failed:'
+                    : 'Successfully updated:';
                 const resultMessage = results.length > 0
-                    ? `Successfully updated:\n${results.join('\n')}`
+                    ? `${header}\n${results.join('\n')}`
                     : 'Successfully updated';
                 // Create a diff patch showing the changes with more context
                 const patch = createPatch('node.xml', originalXml, updatedXml, 'Before', 'After', { context: 20 });
@@ -793,9 +889,14 @@ export async function mcpToolHandler({ input, type, }) {
                     : '';
                 return `${resultMessage}\n\nXML Changes:\n${patch}${zoomNote}`;
             }
-            const hasErrors = results.some((r) => r.startsWith('Failed '));
             if (hasErrors) {
                 return `Encountered errors while updating:\n${results.join('\n')}`;
+            }
+            if (alreadyUpToDateNodeIds.length > 0) {
+                return `No changes were made: every attribute already had the requested value on ${alreadyUpToDateNodeIds.join(', ')}. Call getNodeXml to read the current values before deciding what to change.`;
+            }
+            if (results.length > 0) {
+                return `Framer reported these operations but the XML of ${rootNodeId} is unchanged:\n${results.join('\n')}`;
             }
             return 'No changes were made! Make sure you are not using made up attributes, follow the outlined attributes only.';
         }
@@ -1063,7 +1164,7 @@ export async function mcpToolHandler({ input, type, }) {
             const permissionError = checkPermissions('Node.remove');
             if (permissionError)
                 return permissionError;
-            const node = await framer.getNode(nodeId);
+            const node = await createNodeResolver().get(nodeId);
             if (!node) {
                 return `Node with ID ${nodeId} not found.`;
             }
@@ -1076,24 +1177,30 @@ export async function mcpToolHandler({ input, type, }) {
             const permissionError = checkPermissions('Node.clone', 'setParent');
             if (permissionError)
                 return permissionError;
-            const node = await framer.getNode(nodeId);
+            const resolver = createNodeResolver();
+            const node = await resolver.get(nodeId);
             if (!node) {
                 return `Node with ID ${nodeId} not found.`;
             }
             try {
+                // getParent() returns null for nodes outside the loaded canvas scope,
+                // and cloning needs that scope anyway, so say which case it is.
                 const parent = await node.getParent();
                 if (!parent) {
-                    throw new Error('No parent found for node');
+                    throw new Error(`Cannot read the parent of ${nodeId}. ${await offScopeHint()}`);
                 }
-                let cloned = await node.clone();
+                const cloned = await node.clone();
                 if (!cloned) {
                     throw new Error('No new node cloned found');
                 }
-                await framer.setParent(cloned.id, parent.id);
-                if (!cloned) {
-                    return `Failed to duplicate node ${nodeId}: The operation returned null.`;
-                }
-                return `Here is the new node XML:\n\n` + getNodeXml(cloned.id);
+                const children = createChildIndex(resolver);
+                await setParentOrThrow({
+                    nodeId: cloned.id,
+                    parentId: parent.id,
+                    children,
+                });
+                const clonedXml = await getNodeXml(cloned.id, undefined, resolver);
+                return `Here is the new node XML:\n\n${clonedXml?.xml || ''}`;
             }
             catch (error) {
                 return `Failed to duplicate node ${nodeId}: ${error instanceof Error ? error.message : 'Unknown error'}`;
@@ -1260,8 +1367,10 @@ export async function mcpToolHandler({ input, type, }) {
             try {
                 // Build array of component info objects
                 const components = [];
-                // First try as component node
-                const node = await framer.getNode(id);
+                // First try as component node. Component IDs come from getProjectXml,
+                // which lists them via getNodesWithType, so they routinely point
+                // outside the loaded canvas scope where framer.getNode returns null.
+                const node = await createNodeResolver().get(id);
                 if (node) {
                     // Check if it's a component node
                     if (!isComponentNode(node)) {
@@ -1828,15 +1937,22 @@ export async function mcpToolHandler({ input, type, }) {
                 // Move existing nodes into the component if provided
                 if (nodeIds && nodeIds.length > 0) {
                     const moveResults = [];
+                    const resolver = createNodeResolver();
+                    const children = createChildIndex(resolver);
                     let targetIndex = 0;
                     for (const nodeId of nodeIds) {
                         try {
-                            const node = await framer.getNode(nodeId);
+                            const node = await resolver.get(nodeId);
                             if (!node) {
                                 moveResults.push(`Node ${nodeId} not found, skipped`);
                                 continue;
                             }
-                            await framer.setParent(nodeId, componentId, targetIndex);
+                            await setParentOrThrow({
+                                nodeId,
+                                parentId: componentId,
+                                index: targetIndex,
+                                children,
+                            });
                             targetIndex += 1;
                             moveResults.push(`Moved node ${nodeId} into component`);
                         }

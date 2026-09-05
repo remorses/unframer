@@ -41,6 +41,15 @@ export declare enum ControlType {
 export declare function getAttributeComments(controls?: PropertyControls, availablePagePaths?: string[]): Record<string, string>;
 export declare function getInstanceComponentId(componentInstance: AnyNode): string | undefined;
 export declare function isNodeZoomable(node: AnyNode): Promise<boolean>;
+export declare function createNodeResolver(): {
+    get(nodeId: string): Promise<AnyNode | null>;
+};
+export type NodeResolver = ReturnType<typeof createNodeResolver>;
+export declare function createChildIndex(resolver: NodeResolver): {
+    get(parentId: string): Promise<string[]>;
+    invalidate(): void;
+};
+export type ChildIndex = ReturnType<typeof createChildIndex>;
 export declare function getFramerTree({ rootNodes, recursive, }: {
     rootNodes: AnyNode[];
     recursive?: boolean;
@@ -61,6 +70,6 @@ export declare const ATTRIBUTE_DEFAULTS: {
     readonly gridFillHeight: true;
 };
 export declare function serializeAttributesForXml(attributes?: Record<string, any>): Record<string, string>;
-export declare function applyAttributes(node?: AnyNode | null, _attributes?: Record<string, any>): Promise<void>;
+export declare function applyAttributes(node?: AnyNode | null, _attributes?: Record<string, any>): Promise<string[]>;
 export declare function getParentNodesArray(node: any): Promise<AnyNode[]>;
 //# sourceMappingURL=framer.d.ts.map

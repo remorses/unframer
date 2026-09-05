@@ -1,7 +1,7 @@
 // Validates Framer attribute serialization for MCP link control values.
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { connect } from 'framer-api';
-import { getComponentPropertyControls, serializeAttributesForXml, } from './framer.js';
+import { createChildIndex, getComponentPropertyControls, serializeAttributesForXml, } from './framer.js';
 const defaultServerApiProjectUrl = 'https://framer.com/projects/Framer-MCP-project-Designor-Framer-Template-copy--lfAw10qcrLpLLEznmZmo-irrP1?node=CpFAHygNJ';
 describe('typedControls shape', () => {
     let framerClient;
@@ -208,6 +208,50 @@ describe('serializeAttributesForXml', () => {
             comments: undefined,
             propertyControls: undefined,
         });
+    });
+});
+// Framer returns null from getNode and empty/failing reads for nodes outside the
+// loaded canvas scope. createChildIndex must never turn a failed read into the answer
+// "this node is not a child": callers use that answer to decide whether to move a node,
+// and a wrong "no" moves nodes already in place and deletes freshly created ones.
+describe('createChildIndex', () => {
+    function fakeResolver(nodes) {
+        return {
+            async get(nodeId) {
+                return nodes[nodeId] ?? null;
+            },
+        };
+    }
+    it('returns child ids and caches the read', async () => {
+        let reads = 0;
+        const children = createChildIndex(fakeResolver({
+            parent: {
+                async getChildren() {
+                    reads += 1;
+                    return [{ id: 'a' }, { id: 'b' }];
+                },
+            },
+        }));
+        expect(await children.get('parent')).toEqual(['a', 'b']);
+        expect(await children.get('parent')).toEqual(['a', 'b']);
+        expect(reads).toBe(1);
+        children.invalidate();
+        await children.get('parent');
+        expect(reads).toBe(2);
+    });
+    it('throws instead of answering "not a child" when the node is unresolvable', async () => {
+        const children = createChildIndex(fakeResolver({}));
+        await expect(children.get('missing')).rejects.toThrow('no node with this ID exists in the project');
+    });
+    it('propagates a failing getChildren instead of swallowing it', async () => {
+        const children = createChildIndex(fakeResolver({
+            parent: {
+                async getChildren() {
+                    throw new Error('Accessing children of a partially loaded scope is not allowed.');
+                },
+            },
+        }));
+        await expect(children.get('parent')).rejects.toThrow('partially loaded scope');
     });
 });
 //# sourceMappingURL=framer.test.js.map
