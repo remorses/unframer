@@ -1,4 +1,19 @@
 import { useStore } from './store.js';
+const CLOSE_ABNORMAL = 1006;
+const CLOSE_MESSAGE_TOO_BIG = 1009;
+const CLOSE_INTERNAL_ERROR = 1011;
+const CLOSE_ANOTHER_PLUGIN = 4009;
+function sendJson(socket, value) {
+    if (!socket || socket.readyState !== WebSocket.OPEN) {
+        return;
+    }
+    try {
+        socket.send(JSON.stringify(value));
+    }
+    catch (err) {
+        console.error('Failed to send websocket message', err);
+    }
+}
 // Global variable to track the active cleanup function
 let cleanupFunction = undefined;
 // Global WebSocket instance to check connection state
@@ -37,17 +52,13 @@ export async function websocketClientHandling({ handle, websocketId, }) {
         ws.onopen = () => {
             console.log('websocket client connected', websocketId);
             reconnectInterval = 3000;
-            if (ws?.readyState === WebSocket.OPEN) {
-                ws.send(JSON.stringify({ type: 'ready' }));
-            }
+            sendJson(ws, { type: 'ready' });
             useStore.setState({ isSocketOpen: true, error: undefined });
             // Setup ping interval
             if (pingInterval)
                 clearInterval(pingInterval);
             pingInterval = setInterval(() => {
-                if (ws?.readyState === WebSocket.OPEN) {
-                    ws.send(JSON.stringify({ type: 'ping' }));
-                }
+                sendJson(ws, { type: 'ping' });
             }, 5 * 1000);
         };
         ws.onmessage = async (event) => {
@@ -77,32 +88,33 @@ export async function websocketClientHandling({ handle, websocketId, }) {
             try {
                 const output = await handle(payload);
                 console.log(`websocket message handled`, payload.type, output);
-                if (ws?.readyState === WebSocket.OPEN) {
-                    ws.send(JSON.stringify({
-                        id,
-                        payload: {
-                            input: payload.input,
-                            type: payload.type,
-                            output,
-                        },
-                    }));
-                }
+                sendJson(ws, {
+                    id,
+                    payload: {
+                        input: payload.input,
+                        type: payload.type,
+                        output,
+                    },
+                });
             }
             catch (e) {
                 console.error(`websocket error`, e);
-                if (ws?.readyState === WebSocket.OPEN) {
-                    ws.send(JSON.stringify({
-                        id,
-                        error: e instanceof Error ? e.message : String(e),
-                    }));
-                }
+                sendJson(ws, {
+                    id,
+                    error: e instanceof Error ? e.message : String(e),
+                });
             }
         };
         ws.onerror = (error) => {
             console.error('websocket error', error);
         };
         ws.onclose = (event) => {
-            console.log(`websocket client disconnected (${event.code}), reconnecting in ${reconnectInterval}ms`);
+            const isolateDropped = event.code === CLOSE_ABNORMAL ||
+                event.code === CLOSE_MESSAGE_TOO_BIG ||
+                event.code === CLOSE_INTERNAL_ERROR;
+            console.log(isolateDropped
+                ? `websocket isolate dropped (${event.code}), reconnecting in ${reconnectInterval}ms`
+                : `websocket client disconnected (${event.code}), reconnecting in ${reconnectInterval}ms`);
             useStore.setState({
                 isConnected: false,
                 isSocketOpen: false,
@@ -115,7 +127,7 @@ export async function websocketClientHandling({ handle, websocketId, }) {
             // Clear connection state
             cleanupFunction = undefined;
             ws = undefined;
-            if (event.code === 4009) {
+            if (event.code === CLOSE_ANOTHER_PLUGIN) {
                 const errorMessage = 'Another MCP plugin has connected. Please keep only one open. Then try reopening this plugin';
                 console.error(errorMessage);
                 useStore.setState({
@@ -123,7 +135,6 @@ export async function websocketClientHandling({ handle, websocketId, }) {
                     isSocketOpen: false,
                     error: errorMessage,
                 });
-                // Prevent further reconnect attempts when this error occurs
                 shouldReconnect = false;
             }
             if (reconnectTimeout) {

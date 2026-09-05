@@ -27,8 +27,8 @@ declare const textStylePropertiesSchema: z.ZodObject<{
         capitalize: "capitalize";
     }>>;
     alignment: z.ZodOptional<z.ZodEnum<{
-        center: "center";
         left: "left";
+        center: "center";
         right: "right";
         justify: "justify";
     }>>;
@@ -53,9 +53,9 @@ declare const textStylePropertiesSchema: z.ZodObject<{
         wavy: "wavy";
     }>>;
     decorationSkipInk: z.ZodOptional<z.ZodEnum<{
-        all: "all";
         none: "none";
         auto: "auto";
+        all: "all";
     }>>;
     decorationOffset: z.ZodOptional<z.ZodString>;
 }, z.core.$strip>;
@@ -139,8 +139,8 @@ export declare const mcpTools: {
                     capitalize: "capitalize";
                 }>>;
                 alignment: z.ZodOptional<z.ZodEnum<{
-                    center: "center";
                     left: "left";
+                    center: "center";
                     right: "right";
                     justify: "justify";
                 }>>;
@@ -165,9 +165,9 @@ export declare const mcpTools: {
                     wavy: "wavy";
                 }>>;
                 decorationSkipInk: z.ZodOptional<z.ZodEnum<{
-                    all: "all";
                     none: "none";
                     auto: "auto";
+                    all: "all";
                 }>>;
                 decorationOffset: z.ZodOptional<z.ZodString>;
             }, z.core.$strip>;
@@ -264,8 +264,8 @@ export declare const mcpTools: {
                 type: z.ZodString;
                 value: z.ZodUnknown;
                 contentType: z.ZodOptional<z.ZodEnum<{
-                    html: "html";
                     markdown: "markdown";
+                    html: "html";
                 }>>;
             }, z.core.$loose>>>;
             draft: z.ZodOptional<z.ZodBoolean>;
@@ -291,12 +291,12 @@ export declare const mcpTools: {
                     string: "string";
                     number: "number";
                     boolean: "boolean";
-                    link: "link";
                     date: "date";
                     file: "file";
                     enum: "enum";
-                    image: "image";
+                    link: "link";
                     color: "color";
+                    image: "image";
                     formattedText: "formattedText";
                     collectionReference: "collectionReference";
                     multiCollectionReference: "multiCollectionReference";
