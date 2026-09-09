@@ -13502,7 +13502,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.NNV2MXZK.mjs
+// /:https://app.framerstatic.com/framer.H2AS4HXK.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -16386,6 +16386,25 @@ async function getLocalizedNavigationPath({
   }
   return result;
 }
+async function getCollectionItemRecordId({
+  activeLocale,
+  collectionUtils,
+  currentRoute,
+  pathVariables,
+},) {
+  const collectionId = currentRoute?.collectionId;
+  if (!collectionId) return;
+  const utils = collectionUtils?.get(collectionId,);
+  if (!utils) return;
+  if (!pathVariables || !currentRoute?.path) return;
+  const matches = Array.from(currentRoute.path.matchAll(pathVariablesRegExpGlobal,),);
+  const lastMatch = matches.at(-1,);
+  const pathVariableValue = lastMatch?.[1];
+  if (!pathVariableValue) return;
+  const currentSlug = pathVariables[pathVariableValue];
+  if (!isString(currentSlug,)) return;
+  return utils.getRecordIdBySlug(currentSlug, activeLocale ?? void 0,);
+}
 async function getCollectionItemContentLocaleId({
   activeLocale,
   collectionUtils,
@@ -16397,15 +16416,12 @@ async function getCollectionItemContentLocaleId({
   if (!collectionId) return;
   const utils = collectionUtils?.get(collectionId,);
   if (!utils?.getContentLocaleIdByRecordId) return;
-  if (!pathVariables || !currentRoute?.path) return;
-  const matches = Array.from(currentRoute.path.matchAll(pathVariablesRegExpGlobal,),);
-  const lastMatch = matches.at(-1,);
-  const pathVariableValue = lastMatch?.[1];
-  if (!pathVariableValue) return;
-  const currentSlug = pathVariables[pathVariableValue];
-  if (!isString(currentSlug,)) return;
-  const maybeRecordId = utils.getRecordIdBySlug(currentSlug, activeLocale,);
-  const recordId = isPromise(maybeRecordId,) ? await maybeRecordId : maybeRecordId;
+  const recordId = await getCollectionItemRecordId({
+    activeLocale,
+    collectionUtils,
+    currentRoute,
+    pathVariables,
+  },);
   if (!recordId) return;
   return utils.getContentLocaleIdByRecordId(recordId, activeLocale,);
 }
@@ -16633,6 +16649,8 @@ async function preloadRoute(route, context, options = {},) {
   } = options;
   const component = route.page;
   if (!component || !isLazyComponentType(component,)) return;
+  const needsRouteData = shouldLoadRouteData && Boolean(context,);
+  if (component.getStatus().hasLoaded && !needsRouteData) return;
   if (yieldBeforePreload) {
     await yieldToMain({
       priority,
@@ -16640,7 +16658,7 @@ async function preloadRoute(route, context, options = {},) {
   }
   try {
     const loadedComponent = await component.preload();
-    if (shouldLoadRouteData && context && loadedComponent) {
+    if (needsRouteData && context && loadedComponent) {
       await loadRouteData(loadedComponent, route, context, priority,);
     }
   } catch (e) {
@@ -19045,6 +19063,51 @@ function matchPath(path, routePath,) {
 }
 function escapeStringRegExp(string,) {
   return string.replace(/[|\\{}()[\]^$+*?.]/gu, '\\$&',).replace(/-/gu, '\\x2d',);
+}
+async function resolveInitialRouteContentState({
+  routes,
+  routeId,
+  pathVariables,
+  localeId,
+  locales,
+  collectionUtils,
+},) {
+  const route = routes[routeId];
+  const resolvedLocales = locales ?? [];
+  const collectionUtilsCache = {
+    get: createCollectionUtilsCache(collectionUtils,),
+  };
+  const defaultLocale = resolvedLocales.find(({
+    id: id3,
+  },) => id3 === defaultLocaleId);
+  const activeLocale = resolvedLocales.find(({
+    id: id3,
+  },) => id3 === (localeId ?? defaultLocaleId)) ?? null;
+  const itemRecordIdPromise = route?.collectionId
+    ? getCollectionItemRecordId({
+      activeLocale,
+      collectionUtils: collectionUtilsCache,
+      currentRoute: route,
+      pathVariables,
+    },)
+    : Promise.resolve(void 0,);
+  const collectionItemId = itemRecordIdPromise.then((recordId) => recordId ?? null).catch((error) => {
+    console.error(getPleaseReportMessage('Failed to resolve the initial collection item id.', error,),);
+    return null;
+  },);
+  const contentState = await resolveRouteContentState({
+    activeLocale,
+    defaultLocale,
+    collectionUtilsCache,
+    locales: resolvedLocales,
+    pathVariables,
+    route,
+    routeId,
+  },);
+  return {
+    ...contentState,
+    collectionItemId,
+  };
 }
 function getVariantsFromServerTiming() {
   if ('PerformanceServerTiming' in __unframerWindow2) {
@@ -49903,7 +49966,7 @@ function compileFilter(collectionId, filter2, serverCollections, references,) {
   }
   let parameterName = filter2.fieldPath.join('_',) || resolved.tailFieldId;
   let currentStep = compileField(resolved,);
-  for (const transform2 of filter2.transforms) {
+  for (const transform2 of preOptimizeTransforms(currentStep, filter2.transforms,)) {
     parameterName += `_${transform2.name}`;
     currentStep = compileTransform(transform2, currentStep, parameterName,);
     if (!currentStep) return void 0;
@@ -49913,6 +49976,15 @@ function compileFilter(collectionId, filter2, serverCollections, references,) {
     return void 0;
   }
   return currentStep.inputToleratingNull().expression;
+}
+function preOptimizeTransforms(currentStep, transforms,) {
+  if (currentStep.type === 'boolean' && transforms.length === 0) {
+    return [{
+      name: 'equals',
+      value: true,
+    },];
+  }
+  return transforms;
 }
 var Step = class {
   #expression;
@@ -63924,6 +63996,7 @@ export {
   ResetOuterLinkContext,
   resize,
   resolveElements,
+  resolveInitialRouteContentState,
   resolveLink,
   ResolveLinks,
   resolveMotionValue,
