@@ -419,14 +419,23 @@ export async function fixFramerCode({ resultFile }) {
     })
     // suppressHydrationWarning is handled by babelPluginSuppressHydration for all jsx calls.
     // Add ignore comments to the lazy module dynamic import so Turbopack/webpack/Vite
-    // don't try to statically resolve the runtime url. Framer refactored
-    // initLazyModulesCache from `const promise = import(url).then` to
-    // `preloadLazyModule(hash2, () => import(url), url)`, so match on the arrow
-    // function instead of the surrounding statement.
+    // don't try to statically resolve the runtime url.
+    //
+    // This call keeps getting reshaped upstream:
+    //   - `const promise = import(url).then` (original)
+    //   - `preloadLazyModule(hash2, () => import(url), url)` (Aug 2026)
+    //   - Sep 2026: Framer started shipping its own `/* @vite-ignore */` inside
+    //     the import, and dprint then breaks the call over several lines, so
+    //     neither `import(url` nor `() => import(url` matched anymore.
+    //
+    // Match the whole `import( <any comments> url )` call and rewrite it to a
+    // single line carrying both comments, so the patch survives Framer adding,
+    // removing or reordering its own ignore comments. Only the lazy module
+    // import uses the `url` identifier, the font chunk imports use literals.
     codeAfter = replaceOrThrow({
         code: codeAfter,
-        find: /\(\) => import\(url/g,
-        replace: '() => import(/* webpackIgnore: true */ /* @vite-ignore */ url',
+        find: /import\(\s*(?:\/\*[\s\S]*?\*\/\s*)*url\s*\)/g,
+        replace: 'import(/* webpackIgnore: true */ /* @vite-ignore */ url)',
         what: 'webpackIgnore/@vite-ignore comments on the lazy module dynamic import',
     })
 
