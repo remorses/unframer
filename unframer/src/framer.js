@@ -13502,7 +13502,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.QGEGKUGR.mjs
+// /:https://app.framerstatic.com/framer.Q7UYC2X2.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -13515,344 +13515,6 @@ import { createPortal, } from 'react-dom';
 import { cloneElement as cloneElement32, } from 'react';
 var __unframerWindow2 = typeof window !== 'undefined' ? window : void 0;
 var __unframerNavigator2 = typeof __unframerWindow2 !== 'undefined' ? navigator : void 0;
-var require_hsluv = __commonJS({
-  '../../../node_modules/hsluv/dist/hsluv.cjs'(exports,) {
-    'use strict';
-
-    Object.defineProperty(exports, '__esModule', {
-      value: true,
-    },);
-    exports.Hsluv = void 0;
-    var Hsluv2 = class _Hsluv {
-      constructor() {
-        this.hex = '#000000';
-        this.rgb_r = 0;
-        this.rgb_g = 0;
-        this.rgb_b = 0;
-        this.xyz_x = 0;
-        this.xyz_y = 0;
-        this.xyz_z = 0;
-        this.luv_l = 0;
-        this.luv_u = 0;
-        this.luv_v = 0;
-        this.lch_l = 0;
-        this.lch_c = 0;
-        this.lch_h = 0;
-        this.hsluv_h = 0;
-        this.hsluv_s = 0;
-        this.hsluv_l = 0;
-        this.hpluv_h = 0;
-        this.hpluv_p = 0;
-        this.hpluv_l = 0;
-        this.r0s = 0;
-        this.r0i = 0;
-        this.r1s = 0;
-        this.r1i = 0;
-        this.g0s = 0;
-        this.g0i = 0;
-        this.g1s = 0;
-        this.g1i = 0;
-        this.b0s = 0;
-        this.b0i = 0;
-        this.b1s = 0;
-        this.b1i = 0;
-      }
-      static fromLinear(c,) {
-        if (c <= 31308e-7) {
-          return 12.92 * c;
-        } else {
-          return 1.055 * Math.pow(c, 1 / 2.4,) - 0.055;
-        }
-      }
-      static toLinear(c,) {
-        if (c > 0.04045) {
-          return Math.pow((c + 0.055) / 1.055, 2.4,);
-        } else {
-          return c / 12.92;
-        }
-      }
-      static yToL(Y,) {
-        if (Y <= _Hsluv.epsilon) {
-          return Y / _Hsluv.refY * _Hsluv.kappa;
-        } else {
-          return 116 * Math.pow(Y / _Hsluv.refY, 1 / 3,) - 16;
-        }
-      }
-      static lToY(L,) {
-        if (L <= 8) {
-          return _Hsluv.refY * L / _Hsluv.kappa;
-        } else {
-          return _Hsluv.refY * Math.pow((L + 16) / 116, 3,);
-        }
-      }
-      static rgbChannelToHex(chan,) {
-        const c = Math.round(chan * 255,);
-        const digit2 = c % 16;
-        const digit1 = (c - digit2) / 16 | 0;
-        return _Hsluv.hexChars.charAt(digit1,) + _Hsluv.hexChars.charAt(digit2,);
-      }
-      static hexToRgbChannel(hex2, offset,) {
-        const digit1 = _Hsluv.hexChars.indexOf(hex2.charAt(offset,),);
-        const digit2 = _Hsluv.hexChars.indexOf(hex2.charAt(offset + 1,),);
-        const n = digit1 * 16 + digit2;
-        return n / 255;
-      }
-      static distanceFromOriginAngle(slope, intercept, angle,) {
-        const d = intercept / (Math.sin(angle,) - slope * Math.cos(angle,));
-        if (d < 0) {
-          return Infinity;
-        } else {
-          return d;
-        }
-      }
-      static distanceFromOrigin(slope, intercept,) {
-        return Math.abs(intercept,) / Math.sqrt(Math.pow(slope, 2,) + 1,);
-      }
-      static min6(f1, f2, f3, f4, f5, f6,) {
-        return Math.min(f1, Math.min(f2, Math.min(f3, Math.min(f4, Math.min(f5, f6,),),),),);
-      }
-      rgbToHex() {
-        this.hex = '#';
-        this.hex += _Hsluv.rgbChannelToHex(this.rgb_r,);
-        this.hex += _Hsluv.rgbChannelToHex(this.rgb_g,);
-        this.hex += _Hsluv.rgbChannelToHex(this.rgb_b,);
-      }
-      hexToRgb() {
-        this.hex = this.hex.toLowerCase();
-        this.rgb_r = _Hsluv.hexToRgbChannel(this.hex, 1,);
-        this.rgb_g = _Hsluv.hexToRgbChannel(this.hex, 3,);
-        this.rgb_b = _Hsluv.hexToRgbChannel(this.hex, 5,);
-      }
-      xyzToRgb() {
-        this.rgb_r = _Hsluv.fromLinear(_Hsluv.m_r0 * this.xyz_x + _Hsluv.m_r1 * this.xyz_y + _Hsluv.m_r2 * this.xyz_z,);
-        this.rgb_g = _Hsluv.fromLinear(_Hsluv.m_g0 * this.xyz_x + _Hsluv.m_g1 * this.xyz_y + _Hsluv.m_g2 * this.xyz_z,);
-        this.rgb_b = _Hsluv.fromLinear(_Hsluv.m_b0 * this.xyz_x + _Hsluv.m_b1 * this.xyz_y + _Hsluv.m_b2 * this.xyz_z,);
-      }
-      rgbToXyz() {
-        const lr = _Hsluv.toLinear(this.rgb_r,);
-        const lg = _Hsluv.toLinear(this.rgb_g,);
-        const lb = _Hsluv.toLinear(this.rgb_b,);
-        this.xyz_x = 0.41239079926595 * lr + 0.35758433938387 * lg + 0.18048078840183 * lb;
-        this.xyz_y = 0.21263900587151 * lr + 0.71516867876775 * lg + 0.072192315360733 * lb;
-        this.xyz_z = 0.019330818715591 * lr + 0.11919477979462 * lg + 0.95053215224966 * lb;
-      }
-      xyzToLuv() {
-        const divider = this.xyz_x + 15 * this.xyz_y + 3 * this.xyz_z;
-        let varU = 4 * this.xyz_x;
-        let varV = 9 * this.xyz_y;
-        if (divider !== 0) {
-          varU /= divider;
-          varV /= divider;
-        } else {
-          varU = NaN;
-          varV = NaN;
-        }
-        this.luv_l = _Hsluv.yToL(this.xyz_y,);
-        if (this.luv_l === 0) {
-          this.luv_u = 0;
-          this.luv_v = 0;
-        } else {
-          this.luv_u = 13 * this.luv_l * (varU - _Hsluv.refU);
-          this.luv_v = 13 * this.luv_l * (varV - _Hsluv.refV);
-        }
-      }
-      luvToXyz() {
-        if (this.luv_l === 0) {
-          this.xyz_x = 0;
-          this.xyz_y = 0;
-          this.xyz_z = 0;
-          return;
-        }
-        const varU = this.luv_u / (13 * this.luv_l) + _Hsluv.refU;
-        const varV = this.luv_v / (13 * this.luv_l) + _Hsluv.refV;
-        this.xyz_y = _Hsluv.lToY(this.luv_l,);
-        this.xyz_x = 0 - 9 * this.xyz_y * varU / ((varU - 4) * varV - varU * varV);
-        this.xyz_z = (9 * this.xyz_y - 15 * varV * this.xyz_y - varV * this.xyz_x) / (3 * varV);
-      }
-      luvToLch() {
-        this.lch_l = this.luv_l;
-        this.lch_c = Math.sqrt(this.luv_u * this.luv_u + this.luv_v * this.luv_v,);
-        if (this.lch_c < 1e-8) {
-          this.lch_h = 0;
-        } else {
-          const hrad = Math.atan2(this.luv_v, this.luv_u,);
-          this.lch_h = hrad * 180 / Math.PI;
-          if (this.lch_h < 0) {
-            this.lch_h = 360 + this.lch_h;
-          }
-        }
-      }
-      lchToLuv() {
-        const hrad = this.lch_h / 180 * Math.PI;
-        this.luv_l = this.lch_l;
-        this.luv_u = Math.cos(hrad,) * this.lch_c;
-        this.luv_v = Math.sin(hrad,) * this.lch_c;
-      }
-      calculateBoundingLines(l2,) {
-        const sub1 = Math.pow(l2 + 16, 3,) / 1560896;
-        const sub2 = sub1 > _Hsluv.epsilon ? sub1 : l2 / _Hsluv.kappa;
-        const s1r = sub2 * (284517 * _Hsluv.m_r0 - 94839 * _Hsluv.m_r2);
-        const s2r = sub2 * (838422 * _Hsluv.m_r2 + 769860 * _Hsluv.m_r1 + 731718 * _Hsluv.m_r0);
-        const s3r = sub2 * (632260 * _Hsluv.m_r2 - 126452 * _Hsluv.m_r1);
-        const s1g = sub2 * (284517 * _Hsluv.m_g0 - 94839 * _Hsluv.m_g2);
-        const s2g = sub2 * (838422 * _Hsluv.m_g2 + 769860 * _Hsluv.m_g1 + 731718 * _Hsluv.m_g0);
-        const s3g = sub2 * (632260 * _Hsluv.m_g2 - 126452 * _Hsluv.m_g1);
-        const s1b = sub2 * (284517 * _Hsluv.m_b0 - 94839 * _Hsluv.m_b2);
-        const s2b = sub2 * (838422 * _Hsluv.m_b2 + 769860 * _Hsluv.m_b1 + 731718 * _Hsluv.m_b0);
-        const s3b = sub2 * (632260 * _Hsluv.m_b2 - 126452 * _Hsluv.m_b1);
-        this.r0s = s1r / s3r;
-        this.r0i = s2r * l2 / s3r;
-        this.r1s = s1r / (s3r + 126452);
-        this.r1i = (s2r - 769860) * l2 / (s3r + 126452);
-        this.g0s = s1g / s3g;
-        this.g0i = s2g * l2 / s3g;
-        this.g1s = s1g / (s3g + 126452);
-        this.g1i = (s2g - 769860) * l2 / (s3g + 126452);
-        this.b0s = s1b / s3b;
-        this.b0i = s2b * l2 / s3b;
-        this.b1s = s1b / (s3b + 126452);
-        this.b1i = (s2b - 769860) * l2 / (s3b + 126452);
-      }
-      calcMaxChromaHpluv() {
-        const r0 = _Hsluv.distanceFromOrigin(this.r0s, this.r0i,);
-        const r1 = _Hsluv.distanceFromOrigin(this.r1s, this.r1i,);
-        const g0 = _Hsluv.distanceFromOrigin(this.g0s, this.g0i,);
-        const g1 = _Hsluv.distanceFromOrigin(this.g1s, this.g1i,);
-        const b0 = _Hsluv.distanceFromOrigin(this.b0s, this.b0i,);
-        const b1 = _Hsluv.distanceFromOrigin(this.b1s, this.b1i,);
-        return _Hsluv.min6(r0, r1, g0, g1, b0, b1,);
-      }
-      calcMaxChromaHsluv(h,) {
-        const hueRad = h / 360 * Math.PI * 2;
-        const r0 = _Hsluv.distanceFromOriginAngle(this.r0s, this.r0i, hueRad,);
-        const r1 = _Hsluv.distanceFromOriginAngle(this.r1s, this.r1i, hueRad,);
-        const g0 = _Hsluv.distanceFromOriginAngle(this.g0s, this.g0i, hueRad,);
-        const g1 = _Hsluv.distanceFromOriginAngle(this.g1s, this.g1i, hueRad,);
-        const b0 = _Hsluv.distanceFromOriginAngle(this.b0s, this.b0i, hueRad,);
-        const b1 = _Hsluv.distanceFromOriginAngle(this.b1s, this.b1i, hueRad,);
-        return _Hsluv.min6(r0, r1, g0, g1, b0, b1,);
-      }
-      hsluvToLch() {
-        if (this.hsluv_l > 99.9999999) {
-          this.lch_l = 100;
-          this.lch_c = 0;
-        } else if (this.hsluv_l < 1e-8) {
-          this.lch_l = 0;
-          this.lch_c = 0;
-        } else {
-          this.lch_l = this.hsluv_l;
-          this.calculateBoundingLines(this.hsluv_l,);
-          const max = this.calcMaxChromaHsluv(this.hsluv_h,);
-          this.lch_c = max / 100 * this.hsluv_s;
-        }
-        this.lch_h = this.hsluv_h;
-      }
-      lchToHsluv() {
-        if (this.lch_l > 99.9999999) {
-          this.hsluv_s = 0;
-          this.hsluv_l = 100;
-        } else if (this.lch_l < 1e-8) {
-          this.hsluv_s = 0;
-          this.hsluv_l = 0;
-        } else {
-          this.calculateBoundingLines(this.lch_l,);
-          const max = this.calcMaxChromaHsluv(this.lch_h,);
-          this.hsluv_s = this.lch_c / max * 100;
-          this.hsluv_l = this.lch_l;
-        }
-        this.hsluv_h = this.lch_h;
-      }
-      hpluvToLch() {
-        if (this.hpluv_l > 99.9999999) {
-          this.lch_l = 100;
-          this.lch_c = 0;
-        } else if (this.hpluv_l < 1e-8) {
-          this.lch_l = 0;
-          this.lch_c = 0;
-        } else {
-          this.lch_l = this.hpluv_l;
-          this.calculateBoundingLines(this.hpluv_l,);
-          const max = this.calcMaxChromaHpluv();
-          this.lch_c = max / 100 * this.hpluv_p;
-        }
-        this.lch_h = this.hpluv_h;
-      }
-      lchToHpluv() {
-        if (this.lch_l > 99.9999999) {
-          this.hpluv_p = 0;
-          this.hpluv_l = 100;
-        } else if (this.lch_l < 1e-8) {
-          this.hpluv_p = 0;
-          this.hpluv_l = 0;
-        } else {
-          this.calculateBoundingLines(this.lch_l,);
-          const max = this.calcMaxChromaHpluv();
-          this.hpluv_p = this.lch_c / max * 100;
-          this.hpluv_l = this.lch_l;
-        }
-        this.hpluv_h = this.lch_h;
-      }
-      hsluvToRgb() {
-        this.hsluvToLch();
-        this.lchToLuv();
-        this.luvToXyz();
-        this.xyzToRgb();
-      }
-      hpluvToRgb() {
-        this.hpluvToLch();
-        this.lchToLuv();
-        this.luvToXyz();
-        this.xyzToRgb();
-      }
-      hsluvToHex() {
-        this.hsluvToRgb();
-        this.rgbToHex();
-      }
-      hpluvToHex() {
-        this.hpluvToRgb();
-        this.rgbToHex();
-      }
-      rgbToHsluv() {
-        this.rgbToXyz();
-        this.xyzToLuv();
-        this.luvToLch();
-        this.lchToHpluv();
-        this.lchToHsluv();
-      }
-      rgbToHpluv() {
-        this.rgbToXyz();
-        this.xyzToLuv();
-        this.luvToLch();
-        this.lchToHpluv();
-        this.lchToHpluv();
-      }
-      hexToHsluv() {
-        this.hexToRgb();
-        this.rgbToHsluv();
-      }
-      hexToHpluv() {
-        this.hexToRgb();
-        this.rgbToHpluv();
-      }
-    };
-    exports.Hsluv = Hsluv2;
-    Hsluv2.hexChars = '0123456789abcdef';
-    Hsluv2.refY = 1;
-    Hsluv2.refU = 0.19783000664283;
-    Hsluv2.refV = 0.46831999493879;
-    Hsluv2.kappa = 903.2962962;
-    Hsluv2.epsilon = 0.0088564516;
-    Hsluv2.m_r0 = 3.240969941904521;
-    Hsluv2.m_r1 = -1.537383177570093;
-    Hsluv2.m_r2 = -0.498610760293;
-    Hsluv2.m_g0 = -0.96924363628087;
-    Hsluv2.m_g1 = 1.87596750150772;
-    Hsluv2.m_g2 = 0.041555057407175;
-    Hsluv2.m_b0 = 0.055630079696993;
-    Hsluv2.m_b1 = -0.20397695888897;
-    Hsluv2.m_b2 = 1.056971514242878;
-  },
-},);
 var require_eventemitter3 = __commonJS({
   '../../../node_modules/eventemitter3/index.js'(exports, module,) {
     'use strict';
@@ -14549,7 +14211,8 @@ function initLazyModulesCache() {
     if (loader) {
       preloadLazyModule(hash2, loader, `registered loader ${hash2}`,);
     } else if (canImportDirectly) {
-      preloadLazyModule(hash2, () => import(/* webpackIgnore: true */ /* @vite-ignore */ url), url,);
+      preloadLazyModule(hash2, () =>
+        import(/* webpackIgnore: true */ /* @vite-ignore */ url), url,);
     }
   }
 }
@@ -14592,7 +14255,7 @@ function lazy(factory, moduleName = 'default', cacheHash,) {
     return factoryPromise;
   };
   let hasRendered = false;
-  const Component18 = forwardRef(function LazyWithPreload(props, ref,) {
+  const Component17 = forwardRef(function LazyWithPreload(props, ref,) {
     useEffect(() => {
       hasRendered = true;
     }, [],);
@@ -14612,17 +14275,17 @@ function lazy(factory, moduleName = 'default', cacheHash,) {
       ...props,
     },);
   },);
-  Component18.preload = () => {
+  Component17.preload = () => {
     updateFromCache();
     return load(factory,);
   };
-  Component18.getStatus = () => {
+  Component17.getStatus = () => {
     return {
       hasLoaded: LoadedComponent !== void 0,
       hasRendered,
     };
   };
-  return Component18;
+  return Component17;
 }
 var objectKeys = Object.keys;
 function hasProp(o, prop,) {
@@ -14806,6 +14469,7 @@ function useCurrentRoute() {
   const override = useContext(CurrentRouteContext,);
   const id3 = override?.routeId ?? router.currentRouteId;
   const pathVariables = override?.routeId ? override.pathVariables : router.currentPathVariables;
+  const canonicalPathVariables = override?.routeId ? void 0 : router.currentCanonicalPathVariables;
   const route = id3 ? router.getRoute?.(id3,) : void 0;
   return useMemo(() => {
     if (!id3 || !route) return void 0;
@@ -14813,8 +14477,9 @@ function useCurrentRoute() {
       ...route,
       id: id3,
       pathVariables,
+      canonicalPathVariables,
     };
-  }, [id3, pathVariables, route,],);
+  }, [canonicalPathVariables, id3, pathVariables, route,],);
 }
 function useCurrentRouteKey() {
   const currentRoute = useCurrentRoute();
@@ -15817,7 +15482,7 @@ function makeHandoverKey(method, collectionId, localeKey, id3,) {
   return `${method}|${collectionId}|${localeKey}|${id3}`;
 }
 var utilsCache = /* @__PURE__ */ new WeakMap();
-function getCollectionUtilsCache(collectionUtils,) {
+function createCollectionUtilsCache(collectionUtils,) {
   return (collectionId) => {
     if (!collectionUtils) return;
     const utilsFactory = collectionUtils[collectionId];
@@ -15835,7 +15500,7 @@ function CollectionUtilsCacheProvider({
 },) {
   const getCollectionUtilsCacheMemoized = useMemo(() => {
     return {
-      get: getCollectionUtilsCache(collectionUtils,),
+      get: createCollectionUtilsCache(collectionUtils,),
     };
   }, [collectionUtils,],);
   return /* @__PURE__ */ jsx(CollectionUtilsCacheContext.Provider, {
@@ -15894,7 +15559,7 @@ var CollectionUtilsCache = class {
     const utilsIsPromise = isPromise(maybeUtils,);
     let maybeResult;
     try {
-      maybeResult = utilsIsPromise ? maybeUtils.then((utils) => utils?.[method](id3, locale,)) : maybeUtils?.[method](id3, locale,);
+      maybeResult = utilsIsPromise ? maybeUtils.then((utils) => utils?.[method]?.(id3, locale,)) : maybeUtils?.[method]?.(id3, locale,);
     } catch (error) {
       console.error(getPleaseReportMessage('Failed to call CollectionUtils method.', error,),);
       maybeResult = void 0;
@@ -15906,17 +15571,18 @@ var CollectionUtilsCache = class {
       this.cacheMap.set(entryKey, maybeResult,);
       return;
     }
-    const lazyValue = new LazyValue(() =>
-      maybeResult.then((result) => {
+    const lazyValue = new LazyValue(async () => {
+      try {
+        const result = isPromise(maybeResult,) ? await maybeResult : maybeResult;
         if (handoverCollector !== void 0) {
           handoverCollector.set(handoverDataType, entryKey, result,);
         }
         return result;
-      },).catch((error) => {
+      } catch (error) {
         console.error(getPleaseReportMessage('Failed to call CollectionUtils method.', error,),);
         return void 0;
-      },)
-    );
+      }
+    },);
     this.cacheMap.set(entryKey, lazyValue,);
     return lazyValue.readMaybeAsync();
   }
@@ -15925,6 +15591,9 @@ var CollectionUtilsCache = class {
   }
   getRecordIdBySlug(slug, locale,) {
     return this.callUtilsMethod('getRecordIdBySlug', slug, locale,);
+  }
+  getContentLocaleIdByRecordId(recordId, locale,) {
+    return this.callUtilsMethod('getContentLocaleIdByRecordId', recordId, locale,);
   }
 };
 function delay2(ms,) {
@@ -15999,7 +15668,7 @@ function chromeMainVersion() {
   const nav = getNavigator();
   if (!nav) return -1;
   const result = chromeVersionRegex.exec(nav.userAgent,);
-  if (!result || !result[1]) return -1;
+  if (!result?.[1]) return -1;
   const version2 = parseInt(result[1],);
   return Number.isFinite(version2,) ? version2 : -1;
 }
@@ -16076,6 +15745,7 @@ function isCommandKeyPressed(event,) {
   return isAppleDevice() ? event.metaKey : event.ctrlKey;
 }
 function noop3() {}
+async function noopAsync() {}
 var YIELD_TARGET_FREQUENTLY = /* @__PURE__ */ (() => 1e3 / 60)();
 var YIELD_TARGET_INFREQUENTLY = /* @__PURE__ */ (() => 1e3 / 25)();
 var HIDDEN_TAB_YIELD_TARGET = /* @__PURE__ */ (() => 500)();
@@ -16231,97 +15901,6 @@ var scheduleFrameRead = (callback) => {
   );
 };
 var yieldToMain = /* @__PURE__ */ createYieldToMain(scheduleFrameRead,);
-var shouldPreloadBasedOnUA = !isBot;
-function usePreloadRoute() {
-  const collectionUtils = useCollectionUtils();
-  const {
-    getRoute,
-  } = useRouter();
-  return useCallback2((routeId, linkContext, yieldBeforePreload = true, shouldLoadRouteData = true,) => {
-    if (!routeId || !getRoute) return;
-    const route = getRoute(routeId,);
-    const {
-      pathVariables,
-      locale,
-    } = linkContext;
-    return preloadRoute(
-      route,
-      {
-        routeId,
-        pathVariables,
-        locale,
-        collectionUtils,
-      },
-      yieldBeforePreload,
-      shouldLoadRouteData,
-    );
-  }, [getRoute, collectionUtils,],);
-}
-function useRoutePreloader(routeIds, enabled = true,) {
-  const preload = usePreloadRoute();
-  useEffect(() => {
-    if (!enabled || !shouldPreloadBasedOnUA) return;
-    for (const routeId of routeIds) {
-      void preload(routeId, {},);
-    }
-  }, [routeIds, enabled, preload,],);
-}
-async function preloadRoute(route, context, yieldBeforePreload = true, shouldLoadRouteData = true,) {
-  if (!shouldPreloadBasedOnUA || !route) return;
-  const component = route.page;
-  if (!component || !isLazyComponentType(component,)) return;
-  if (yieldBeforePreload) {
-    await yieldToMain();
-  }
-  try {
-    const loadedComponent = await component.preload();
-    if (shouldLoadRouteData && context && loadedComponent) {
-      await loadRouteData(loadedComponent, context,);
-    }
-  } catch (e) {
-    if (false) console.warn('Preload failed', route, e,);
-  }
-}
-async function loadRouteData(component, context,) {
-  const loader = component.loader;
-  if (!loader?.load) return;
-  const loaderContext = {
-    signal: context.signal ?? new AbortController().signal,
-    pathVariables: context.pathVariables ?? {},
-    routeId: context.routeId,
-    locale: context.locale,
-    collectionUtils: context.collectionUtils,
-  };
-  try {
-    await loader.load({}, loaderContext,);
-  } catch (e) {
-    if (false) console.warn('Route data preload failed', e,);
-  }
-}
-function useRouteHandler(routeId, preload = false, elementId,) {
-  const {
-    navigate,
-  } = useRouter();
-  useRoutePreloader([routeId,], preload,);
-  const handler = React42.useCallback(() => navigate?.(routeId, elementId,), [navigate, elementId, routeId,],);
-  return handler;
-}
-var libraryFeatures = {};
-var getLibraryFeatures = () => {
-  return libraryFeatures;
-};
-var setLibraryFeatures = (features) => {
-  libraryFeatures = features;
-};
-var pathVariablesRegExpRaw = ':([a-z]\\w*)';
-var pathVariablesRegExpGlobal = /* @__PURE__ */ new RegExp(pathVariablesRegExpRaw, 'gi',);
-function fillPathVariables(path, variables,) {
-  return path.replace(pathVariablesRegExpGlobal, (match, name,) => {
-    const value = variables[name];
-    if (typeof value !== 'string' || value.length === 0) return match;
-    return encodeURIComponent(value,);
-  },);
-}
 function forwardCurrentQueryParams(href, ignoreBackAnchor = false,) {
   let queryParamsString = '';
   if (typeof __unframerWindow2 !== 'undefined') {
@@ -16362,6 +15941,8 @@ function forwardQueryParams(queryParamsString, href,) {
   }
   return baseUrl + '?' + newSearchString + hash2;
 }
+var pathVariablesRegExpRaw = ':([a-z]\\w*)';
+var pathVariablesRegExpGlobal = /* @__PURE__ */ new RegExp(pathVariablesRegExpRaw, 'gi',);
 async function replacePathVariables(path, currentLocale, nextLocale, defaultLocale, collectionId, pathVariables, collectionUtils,) {
   let resultPath = path;
   let isMissingInLocale = false;
@@ -16467,6 +16048,329 @@ async function getLocalizedNavigationPath({
     result.path = forwardCurrentQueryParams(result.path, true,);
   }
   return result;
+}
+async function getCollectionItemRecordId({
+  activeLocale,
+  collectionUtils,
+  currentRoute,
+  pathVariables,
+},) {
+  const collectionId = currentRoute?.collectionId;
+  if (!collectionId) return;
+  const utils = collectionUtils?.get(collectionId,);
+  if (!utils) return;
+  if (!pathVariables || !currentRoute?.path) return;
+  const matches = Array.from(currentRoute.path.matchAll(pathVariablesRegExpGlobal,),);
+  const lastMatch = matches.at(-1,);
+  const pathVariableValue = lastMatch?.[1];
+  if (!pathVariableValue) return;
+  const currentSlug = pathVariables[pathVariableValue];
+  if (!isString(currentSlug,)) return;
+  return utils.getRecordIdBySlug(currentSlug, activeLocale ?? void 0,);
+}
+async function getCollectionItemContentLocaleId({
+  activeLocale,
+  collectionUtils,
+  currentRoute,
+  pathVariables,
+},) {
+  if (!activeLocale || activeLocale.id === defaultLocaleId) return;
+  const collectionId = currentRoute?.collectionId;
+  if (!collectionId) return;
+  const utils = collectionUtils?.get(collectionId,);
+  if (!utils?.getContentLocaleIdByRecordId) return;
+  const recordId = await getCollectionItemRecordId({
+    activeLocale,
+    collectionUtils,
+    currentRoute,
+    pathVariables,
+  },);
+  if (!recordId) return;
+  return utils.getContentLocaleIdByRecordId(recordId, activeLocale,);
+}
+async function resolveRouteContentState({
+  activeLocale,
+  defaultLocale,
+  collectionUtilsCache,
+  locales,
+  pathVariables,
+  route,
+  routeId,
+},) {
+  if (!activeLocale || !route) return {};
+  const collectionContentLocaleId = await getCollectionItemContentLocaleId({
+    activeLocale,
+    collectionUtils: collectionUtilsCache,
+    currentRoute: route,
+    pathVariables,
+  },);
+  const contentLocaleId = collectionContentLocaleId ?? route.canonicalLocaleIdByLocaleId?.[activeLocale.id];
+  const contentLocale = contentLocaleId
+    ? locales.find(({
+      id: id3,
+    },) => id3 === contentLocaleId)
+    : void 0;
+  if (!contentLocale || contentLocale.id === activeLocale.id) {
+    return {
+      contentLocaleId,
+    };
+  }
+  const {
+    pathVariables: canonicalPathVariables,
+  } = await getLocalizedNavigationPath({
+    currentLocale: activeLocale,
+    nextLocale: contentLocale,
+    defaultLocale,
+    route,
+    routeId,
+    pathVariables,
+    collectionUtils: collectionUtilsCache,
+    preserveQueryParams: false,
+  },);
+  return !isEqual(canonicalPathVariables ?? {}, pathVariables ?? {}, false,)
+    ? {
+      contentLocaleId,
+      canonicalPathVariables,
+    }
+    : {
+      contentLocaleId,
+    };
+}
+async function getLocalesForCurrentRoute(activeLocale, locales, currentRoute, pathVariables, collectionUtils,) {
+  if (!currentRoute) return locales;
+  const slugByLocaleIfCollectionPage = await getSlugByLocaleIfCollectionPage(
+    activeLocale,
+    locales,
+    currentRoute,
+    pathVariables,
+    collectionUtils,
+  );
+  const includedLocalesForCurrentRoute = currentRoute.includedLocales;
+  const localesForCurrentRoute = [];
+  for (const locale of locales) {
+    if (includedLocalesForCurrentRoute) {
+      if (!includedLocalesForCurrentRoute.includes(locale.id,)) continue;
+    }
+    if (slugByLocaleIfCollectionPage) {
+      const hasSlug = slugByLocaleIfCollectionPage.has(locale.id,);
+      if (!hasSlug) continue;
+    }
+    localesForCurrentRoute.push(locale,);
+  }
+  return localesForCurrentRoute;
+}
+async function getSlugByLocaleIfCollectionPage(activeLocale, locales, currentRoute, pathVariables, collectionUtils,) {
+  const {
+    collectionId,
+  } = currentRoute;
+  if (!collectionId) return null;
+  if (!activeLocale) return null;
+  if (!pathVariables) return null;
+  const {
+    path,
+  } = currentRoute;
+  if (!path) return null;
+  const matches = Array.from(path.matchAll(pathVariablesRegExpGlobal,),);
+  const lastMatch = matches.pop();
+  if (!lastMatch) return null;
+  const pathVariableWithDelimiter = lastMatch?.[0];
+  const pathVariableValue = lastMatch?.[1];
+  if (!pathVariableWithDelimiter || !pathVariableValue) {
+    throw new Error('Failed to replace path variables: unexpected regex match group',);
+  }
+  const currentSlug = pathVariables[pathVariableValue];
+  if (!currentSlug || !isString(currentSlug,)) {
+    throw new Error(`No slug found for path variable ${pathVariableValue}`,);
+  }
+  const utils = collectionUtils?.get(collectionId,);
+  if (!utils) return null;
+  const maybeRecordId = utils.getRecordIdBySlug(currentSlug, activeLocale,);
+  const recordId = isPromise(maybeRecordId,) ? await maybeRecordId : maybeRecordId;
+  if (!recordId) return null;
+  const slugById = /* @__PURE__ */ new Map();
+  await Promise.all(locales.map(async (locale) => {
+    const maybeSlug = utils.getSlugByRecordId(recordId, locale,);
+    const slug = isPromise(maybeSlug,) ? await maybeSlug : maybeSlug;
+    if (!slug) return;
+    slugById.set(locale.id, slug,);
+  },),);
+  return slugById;
+}
+var noopAsync2 = async () => {};
+var defaultLocaleInfo = {
+  contentLocale: null,
+  activeLocale: null,
+  locales: [],
+  setLocale: noopAsync2,
+};
+var LocaleInfoContext = /* @__PURE__ */ (() => {
+  const Context2 = React42.createContext(defaultLocaleInfo,);
+  Context2.displayName = 'LocaleInfoContext';
+  return Context2;
+})();
+function useLocaleInfo() {
+  return React42.useContext(LocaleInfoContext,);
+}
+function useLocalesForCurrentRoute() {
+  const {
+    currentRouteId,
+    routes,
+    currentPathVariables,
+  } = useRouter();
+  const {
+    activeLocale,
+    locales,
+  } = useLocaleInfo();
+  const [localesForCurrentRoute, setLocalesForCurrentRoute,] = React42.useState(() => activeLocale ? [activeLocale,] : []);
+  const currentRoute = currentRouteId ? routes?.[currentRouteId] : void 0;
+  const collectionUtils = useCollectionUtils();
+  React42.useEffect(() => {
+    let active = true;
+    getLocalesForCurrentRoute(activeLocale, locales, currentRoute, currentPathVariables, collectionUtils,).then((localesSubset) => {
+      if (!active) return;
+      React42.startTransition(() => {
+        if (localesSubset) {
+          setLocalesForCurrentRoute(localesSubset,);
+        } else {
+          setLocalesForCurrentRoute(activeLocale ? [activeLocale,] : [],);
+        }
+      },);
+    },).catch(() => {},);
+    return () => {
+      active = false;
+    };
+  }, [activeLocale, locales, collectionUtils, currentRoute, currentPathVariables,],);
+  return localesForCurrentRoute;
+}
+function useLocalizationInfo() {
+  const {
+    activeLocale,
+    locales,
+    setLocale,
+  } = useLocaleInfo();
+  return {
+    activeLocalization: activeLocale,
+    localizations: locales,
+    setLocalization: setLocale,
+  };
+}
+function useLocaleCode() {
+  return useLocaleInfo().activeLocale?.code ?? 'en-US';
+}
+function useLocale() {
+  return useLocaleCode();
+}
+var LayoutDirectionContext = /* @__PURE__ */ (() => {
+  const Context2 = React42.createContext('ltr',);
+  Context2.displayName = 'LayoutDirectionContext';
+  return Context2;
+})();
+function useLayoutDirection() {
+  return React42.useContext(LayoutDirectionContext,);
+}
+var shouldPreloadBasedOnUA = !isBot;
+function usePreloadRoute() {
+  const collectionUtils = useCollectionUtils();
+  const {
+    getRoute,
+  } = useRouter();
+  const {
+    activeLocale,
+    locales,
+  } = useLocaleInfo();
+  return useCallback2((routeId, linkContext, options,) => {
+    if (!routeId || !getRoute) return;
+    const route = getRoute(routeId,);
+    const {
+      pathVariables,
+    } = linkContext;
+    const locale = linkContext.locale ?? activeLocale ?? void 0;
+    return preloadRoute(route, {
+      routeId,
+      pathVariables,
+      locale,
+      locales,
+      collectionUtils,
+    }, options,);
+  }, [getRoute, collectionUtils, activeLocale, locales,],);
+}
+function useRoutePreloader(routeIds, enabled = true,) {
+  const preload = usePreloadRoute();
+  useEffect(() => {
+    if (!enabled || !shouldPreloadBasedOnUA) return;
+    for (const routeId of routeIds) {
+      void preload(routeId, {},);
+    }
+  }, [routeIds, enabled, preload,],);
+}
+async function preloadRoute(route, context, options = {},) {
+  if (!shouldPreloadBasedOnUA || !route) return;
+  const {
+    priority = 'background',
+    yieldBeforePreload = true,
+    shouldLoadRouteData = true,
+  } = options;
+  const component = route.page;
+  if (!component || !isLazyComponentType(component,)) return;
+  const needsRouteData = shouldLoadRouteData && Boolean(context,);
+  if (component.getStatus().hasLoaded && !needsRouteData) return;
+  if (yieldBeforePreload) {
+    await yieldToMain({
+      priority,
+    },);
+  }
+  try {
+    const loadedComponent = await component.preload();
+    if (needsRouteData && context && loadedComponent) {
+      await loadRouteData(loadedComponent, route, context, priority,);
+    }
+  } catch (e) {
+    if (false) console.warn('Preload failed', route, e,);
+  }
+}
+async function loadRouteData(component, route, context, priority,) {
+  const loader = component.loader;
+  if (!loader?.load) return;
+  const {
+    canonicalPathVariables,
+  } = await resolveRouteContentState({
+    activeLocale: context.locale ?? null,
+    defaultLocale: context.locales?.find((locale) => locale.id === defaultLocaleId),
+    collectionUtilsCache: context.collectionUtils,
+    locales: context.locales ?? [],
+    pathVariables: context.pathVariables,
+    route,
+    routeId: context.routeId,
+  },);
+  const loaderContext = {
+    signal: context.signal ?? new AbortController().signal,
+    pathVariables: context.pathVariables ?? {},
+    canonicalPathVariables,
+    routeId: context.routeId,
+    locale: context.locale,
+    priority,
+    collectionUtils: context.collectionUtils,
+  };
+  try {
+    await loader.load({}, loaderContext,);
+  } catch (e) {
+    if (false) console.warn('Route data preload failed', e,);
+  }
+}
+function useRouteHandler(routeId, preload = false, elementId,) {
+  const {
+    navigate,
+  } = useRouter();
+  useRoutePreloader([routeId,], preload,);
+  const handler = React42.useCallback(() => navigate?.(routeId, elementId,), [navigate, elementId, routeId,],);
+  return handler;
+}
+function fillPathVariables(path, variables,) {
+  return path.replace(pathVariablesRegExpGlobal, (match, name,) => {
+    const value = variables[name];
+    if (typeof value !== 'string' || value.length === 0) return match;
+    return encodeURIComponent(value,);
+  },);
 }
 var bugExistenceChecked = false;
 function logIfPopstateCalledSynchronously() {
@@ -16917,8 +16821,66 @@ function updateCanonicalURL(url, prevUrl,) {
     canonical.setAttribute('href', newURL.toString(),);
   },);
 }
+function syncGeneratedCanonicalURL(url, prevUrl,) {
+  requestIdleCallback(() => {
+    const generatedCanonical = document.querySelector(`link[rel='canonical'][data-framer-generated-canonical]`,);
+    if (!url || document.querySelector(`link[rel='canonical']:not([data-framer-generated-canonical])`,)) {
+      generatedCanonical?.remove();
+      return;
+    }
+    const newURL = new URL(url, prevUrl ?? document.baseURI,);
+    newURL.search = '';
+    newURL.hash = '';
+    const canonical = generatedCanonical ?? document.createElement('link',);
+    canonical.setAttribute('rel', 'canonical',);
+    canonical.setAttribute('data-framer-generated-canonical', '',);
+    canonical.setAttribute('href', newURL.toString(),);
+    document.head.append(canonical,);
+  },);
+}
+function syncGeneratedHreflangLinks(links,) {
+  requestIdleCallback(() => {
+    const generatedLinks = Array.from(document.querySelectorAll(`link[rel='alternate'][hreflang][data-framer-generated-hreflang]`,),);
+    if (document.querySelector(`link[rel='canonical']:not([data-framer-generated-canonical])`,)) {
+      for (const link of generatedLinks) link.remove();
+      return;
+    }
+    const generatedLinkByHrefLang = /* @__PURE__ */ new Map();
+    for (const link of generatedLinks) {
+      const hreflang = link.getAttribute('hreflang',);
+      if (hreflang) generatedLinkByHrefLang.set(hreflang, link,);
+    }
+    const nextHrefLangs = /* @__PURE__ */ new Set();
+    for (
+      const {
+        href,
+        hrefLang,
+      } of links
+    ) {
+      nextHrefLangs.add(hrefLang,);
+      const link = generatedLinkByHrefLang.get(hrefLang,) ?? document.createElement('link',);
+      link.setAttribute('rel', 'alternate',);
+      link.setAttribute('data-framer-generated-hreflang', '',);
+      link.setAttribute('href', href,);
+      link.setAttribute('hreflang', hrefLang,);
+      document.head.append(link,);
+    }
+    for (const link of generatedLinks) {
+      const hrefLang = link.getAttribute('hreflang',);
+      if (!hrefLang || !nextHrefLangs.has(hrefLang,)) link.remove();
+    }
+  },);
+}
 var announceDiv;
 var announceNavigation = () => {
+  const title = document.title;
+  if (!title) return;
+  if (document.ariaNotify) {
+    document.ariaNotify(title, {
+      priority: 'high',
+    },);
+    return;
+  }
   if (!announceDiv) {
     announceDiv = document.createElement('div',);
     announceDiv.setAttribute('aria-live', 'assertive',);
@@ -16928,7 +16890,7 @@ var announceNavigation = () => {
     document.body.append(announceDiv,);
   }
   setTimeout(() => {
-    announceDiv.textContent = document.title;
+    announceDiv.textContent = title;
   }, 60,);
 };
 function useAfterPaintEffect(effectFn, deps, options, useEffectFn = useLayoutEffect,) {
@@ -17048,22 +17010,17 @@ var useNavigationAPI = hasNavigationAPI &&
   // event.intercept() causes the page to freeze on swipes back for 3 seconds: https://bugs.webkit.org/show_bug.cgi?id=319414
   /* @__PURE__ */
   (() => !isSafari())();
-function replaceHistoryState(data2, url, ignoreReplaceStateWrapper = false,) {
+function replaceHistoryState(data2, url,) {
   performance.mark('framer-history-replace',);
   setLastKnownHistoryState(withCurrentEntryId(data2, readHistoryState(),),);
   if (url) {
     updateCanonicalURL(url, __unframerWindow2.location.href,);
   }
-  let replaceState;
-  if (getLibraryFeatures().privateRouterReplaceState) {
-    replaceState = !url || url === __unframerWindow2.location.href
-      ? __unframerWindow2.History.prototype.replaceState
-      : __unframerWindow2.history.replaceState;
-  } else {
-    replaceState = ignoreReplaceStateWrapper ? __unframerWindow2.History.prototype.replaceState : __unframerWindow2.history.replaceState;
-  }
+  const replaceState = !url || url === __unframerWindow2.location.href
+    ? __unframerWindow2.History.prototype.replaceState.bind(__unframerWindow2.history,)
+    : __unframerWindow2.history.replaceState.bind(__unframerWindow2.history,);
   try {
-    replaceState.call(__unframerWindow2.history, lastKnownHistoryState, '', url,);
+    replaceState(lastKnownHistoryState, '', url,);
   } catch {}
 }
 function repairHashHistoryState(data2,) {
@@ -17101,23 +17058,23 @@ function useReplaceInitialState({
   routeId,
   initialPathVariables,
   initialLocaleId,
+  initialContentLocaleId,
+  initialCanonicalPathVariables,
 },) {
   useLayoutEffect(() => {
     if (disabled) return;
     performance.mark('framer-history-set-initial-state',);
     const initialHash = __unframerWindow2.location.hash ? __unframerWindow2.location.hash.slice(1,) : void 0;
     const retainedHistoryState = readHistoryState();
-    replaceHistoryState(
-      {
-        ...retainedHistoryState,
-        routeId,
-        hash: initialHash,
-        pathVariables: initialPathVariables,
-        localeId: initialLocaleId,
-      },
-      void 0,
-      true,
-    );
+    replaceHistoryState({
+      ...retainedHistoryState,
+      routeId,
+      hash: initialHash,
+      pathVariables: initialPathVariables,
+      localeId: initialLocaleId,
+      contentLocaleId: initialContentLocaleId,
+      canonicalPathVariables: initialCanonicalPathVariables,
+    },);
   }, [],);
 }
 function usePopStateHandler(scrollRestoration, currentRouteId, setCurrentRouteId,) {
@@ -17153,6 +17110,8 @@ function usePopStateHandler(scrollRestoration, currentRouteId, setCurrentRouteId
       hash: hash2,
       pathVariables,
       localeId,
+      contentLocaleId,
+      canonicalPathVariables,
     } = state;
     const resolvedHash = isString(hash2,) ? hash2 : __unframerWindow2.location.hash ? __unframerWindow2.location.hash.slice(1,) : void 0;
     let didStartRouteChange = false;
@@ -17164,6 +17123,8 @@ function usePopStateHandler(scrollRestoration, currentRouteId, setCurrentRouteId
         resolvedHash,
         __unframerWindow2.location.pathname + __unframerWindow2.location.search + __unframerWindow2.location.hash,
         isObject2(pathVariables,) ? pathVariables : void 0,
+        contentLocaleId,
+        canonicalPathVariables,
         true,
         nextRender,
         false,
@@ -17216,10 +17177,10 @@ function usePopStateHandler(scrollRestoration, currentRouteId, setCurrentRouteId
     };
   }, [popStateHandler, traversalHandler,],);
 }
-async function handleRedirectForMissingSlugs(route, pathVariables, nextLocale,) {
+async function handleRedirectForMissingSlugs(route, pathVariables, nextLocale, sitePrefix,) {
   if (!route.path) return false;
   if (!pathVariables) return false;
-  const nextLocaleWithDefaultSlugPath = prependLocaleSlug(fillPathVariables(route.path, pathVariables,), nextLocale.slug,);
+  const nextLocaleWithDefaultSlugPath = sitePrefix + prependLocaleSlug(fillPathVariables(route.path, pathVariables,), nextLocale.slug,);
   const response = await fetch(nextLocaleWithDefaultSlugPath, {
     method: 'HEAD',
     redirect: 'manual',
@@ -17240,7 +17201,10 @@ function useSwitchLocale() {
     },);
   }, [collectionUtils,],);
 }
-async function switchLocale(options,) {
+async function switchLocale({
+  sitePrefix,
+  ...options
+},) {
   const result = await getLocalizedNavigationPath(options,);
   if (!result) return;
   try {
@@ -17251,7 +17215,7 @@ async function switchLocale(options,) {
       throw new Error('Expected result.path to be a string',);
     }
     if (result.isMissingInLocale) {
-      const hasRedirect = await handleRedirectForMissingSlugs(options.route, result.pathVariables, options.nextLocale,);
+      const hasRedirect = await handleRedirectForMissingSlugs(options.route, result.pathVariables, options.nextLocale, sitePrefix,);
       if (hasRedirect) return;
     }
   } catch {}
@@ -17264,19 +17228,14 @@ function pushLoadMoreHistory(hash2, paginationInfo,) {
     const currentHistoryState = readHistoryState();
     if (!currentHistoryState) return;
     if (getEntryId(currentHistoryState,) !== scheduledEntryId) return;
-    const isInitialLoad = currentHistoryState.paginationInfo === void 0 || currentHistoryState.paginationInfo[hash2] === void 0;
     const newPaginationInfo = {
       ...currentHistoryState.paginationInfo,
       [hash2]: paginationInfo,
     };
-    replaceHistoryState(
-      {
-        ...currentHistoryState,
-        paginationInfo: newPaginationInfo,
-      },
-      void 0,
-      isInitialLoad,
-    );
+    replaceHistoryState({
+      ...currentHistoryState,
+      paginationInfo: newPaginationInfo,
+    },);
   },);
 }
 function useCommitNavigationURL(usesCustomScrollRestoration,) {
@@ -17384,137 +17343,6 @@ function useMemoOne(factory, inputs,) {
 }
 function useCallbackOne(callback, inputs,) {
   return useMemoOne(() => callback, inputs,);
-}
-async function getLocalesForCurrentRoute(activeLocale, locales, currentRoute, pathVariables, collectionUtils,) {
-  if (!currentRoute) return locales;
-  const slugByLocaleIfCollectionPage = await getSlugByLocaleIfCollectionPage(
-    activeLocale,
-    locales,
-    currentRoute,
-    pathVariables,
-    collectionUtils,
-  );
-  const includedLocalesForCurrentRoute = currentRoute.includedLocales;
-  const localesForCurrentRoute = [];
-  for (const locale of locales) {
-    if (includedLocalesForCurrentRoute) {
-      if (!includedLocalesForCurrentRoute.includes(locale.id,)) continue;
-    }
-    if (slugByLocaleIfCollectionPage) {
-      const hasSlug = slugByLocaleIfCollectionPage.has(locale.id,);
-      if (!hasSlug) continue;
-    }
-    localesForCurrentRoute.push(locale,);
-  }
-  return localesForCurrentRoute;
-}
-async function getSlugByLocaleIfCollectionPage(activeLocale, locales, currentRoute, pathVariables, collectionUtils,) {
-  const {
-    collectionId,
-  } = currentRoute;
-  if (!collectionId) return null;
-  if (!activeLocale) return null;
-  if (!pathVariables) return null;
-  const {
-    path,
-  } = currentRoute;
-  if (!path) return null;
-  const matches = Array.from(path.matchAll(pathVariablesRegExpGlobal,),);
-  const lastMatch = matches.pop();
-  if (!lastMatch) return null;
-  const pathVariableWithDelimiter = lastMatch?.[0];
-  const pathVariableValue = lastMatch?.[1];
-  if (!pathVariableWithDelimiter || !pathVariableValue) {
-    throw new Error('Failed to replace path variables: unexpected regex match group',);
-  }
-  const currentSlug = pathVariables[pathVariableValue];
-  if (!currentSlug || !isString(currentSlug,)) {
-    throw new Error(`No slug found for path variable ${pathVariableValue}`,);
-  }
-  const utils = collectionUtils?.get(collectionId,);
-  if (!utils) return null;
-  const maybeRecordId = utils.getRecordIdBySlug(currentSlug, activeLocale,);
-  const recordId = isPromise(maybeRecordId,) ? await maybeRecordId : maybeRecordId;
-  if (!recordId) return null;
-  const slugById = /* @__PURE__ */ new Map();
-  await Promise.all(locales.map(async (locale) => {
-    const maybeSlug = utils.getSlugByRecordId(recordId, locale,);
-    const slug = isPromise(maybeSlug,) ? await maybeSlug : maybeSlug;
-    if (!slug) return;
-    slugById.set(locale.id, slug,);
-  },),);
-  return slugById;
-}
-var noopAsync = async () => {};
-var defaultLocaleInfo = {
-  activeLocale: null,
-  locales: [],
-  setLocale: noopAsync,
-};
-var LocaleInfoContext = /* @__PURE__ */ (() => {
-  const Context2 = React42.createContext(defaultLocaleInfo,);
-  Context2.displayName = 'LocaleInfoContext';
-  return Context2;
-})();
-function useLocaleInfo() {
-  return React42.useContext(LocaleInfoContext,);
-}
-function useLocalesForCurrentRoute() {
-  const {
-    currentRouteId,
-    routes,
-    currentPathVariables,
-  } = useRouter();
-  const {
-    activeLocale,
-    locales,
-  } = useLocaleInfo();
-  const [localesForCurrentRoute, setLocalesForCurrentRoute,] = React42.useState(() => activeLocale ? [activeLocale,] : []);
-  const currentRoute = currentRouteId ? routes?.[currentRouteId] : void 0;
-  const collectionUtils = useCollectionUtils();
-  React42.useEffect(() => {
-    let active = true;
-    getLocalesForCurrentRoute(activeLocale, locales, currentRoute, currentPathVariables, collectionUtils,).then((localesSubset) => {
-      if (!active) return;
-      React42.startTransition(() => {
-        if (localesSubset) {
-          setLocalesForCurrentRoute(localesSubset,);
-        } else {
-          setLocalesForCurrentRoute(activeLocale ? [activeLocale,] : [],);
-        }
-      },);
-    },).catch(() => {},);
-    return () => {
-      active = false;
-    };
-  }, [activeLocale, locales, collectionUtils, currentRoute, currentPathVariables,],);
-  return localesForCurrentRoute;
-}
-function useLocalizationInfo() {
-  const {
-    activeLocale,
-    locales,
-    setLocale,
-  } = useLocaleInfo();
-  return {
-    activeLocalization: activeLocale,
-    localizations: locales,
-    setLocalization: setLocale,
-  };
-}
-function useLocaleCode() {
-  return useLocaleInfo().activeLocale?.code ?? 'en-US';
-}
-function useLocale() {
-  return useLocaleCode();
-}
-var LayoutDirectionContext = /* @__PURE__ */ (() => {
-  const Context2 = React42.createContext('ltr',);
-  Context2.displayName = 'LayoutDirectionContext';
-  return Context2;
-})();
-function useLayoutDirection() {
-  return React42.useContext(LayoutDirectionContext,);
 }
 var urlSearchStringSubscribers = /* @__PURE__ */ new Set();
 function getURLSearchStringSnapshot() {
@@ -17813,12 +17641,12 @@ function useCollectionReferenceQueryParam({
   },);
   const id3 = useMemo(() => {
     if (!isString(slug,)) return initialValueRef.current;
-    const cache2 = getCollectionUtilsCache2(collectionUtils, collectionId,);
+    const cache2 = getCollectionUtilsCache(collectionUtils, collectionId,);
     return use(cache2.getRecordIdBySlug(slug, locale,),);
   }, [collectionUtils, collectionId, locale, slug,],);
   const setId = useCallback2(async (newId) => {
     if (isUndefined(newId,)) return setSlug(void 0,);
-    const cache2 = getCollectionUtilsCache2(collectionUtils, collectionId,);
+    const cache2 = getCollectionUtilsCache(collectionUtils, collectionId,);
     const newSlug = await cache2.getSlugByRecordId(newId, locale,);
     if (!isString(newSlug,)) return;
     await setSlug(newSlug,);
@@ -17839,7 +17667,7 @@ function useMultiCollectionReferenceQueryParam({
   },);
   const ids = useMemo(() => {
     if (slugs.length === 0) return initialArrayValue.current;
-    const cache2 = getCollectionUtilsCache2(collectionUtils, collectionId,);
+    const cache2 = getCollectionUtilsCache(collectionUtils, collectionId,);
     const maybePromises = slugs.filter(isNonEmptyString,).map((slug) => cache2.getRecordIdBySlug(slug, locale,));
     const supportsOptional = isUndefined(initialArrayValue.current,);
     const resolvedIds = useAll(maybePromises,).filter(isString,);
@@ -17853,7 +17681,7 @@ function useMultiCollectionReferenceQueryParam({
     if (newIds.length === 0 && isArray(initialArray,) && !isEqual(newIds, initialArray,)) {
       return setSlugs(['',],);
     }
-    const cache2 = getCollectionUtilsCache2(collectionUtils, collectionId,);
+    const cache2 = getCollectionUtilsCache(collectionUtils, collectionId,);
     const newSlugs = await Promise.all(newIds.map((id3) => cache2.getSlugByRecordId(id3, locale,)),);
     await setSlugs(newSlugs.filter(isString,),);
   }, [collectionUtils, collectionId, locale, setSlugs,],);
@@ -17922,7 +17750,7 @@ function useEnumQueryParam({
   }, [setTitleValue, locale, getOptionTitle,],);
   return [value, setValue,];
 }
-function getCollectionUtilsCache2(collectionUtils, collectionId,) {
+function getCollectionUtilsCache(collectionUtils, collectionId,) {
   const collectionUtilsCache = collectionUtils?.get(collectionId,);
   assert(collectionUtilsCache, () => `CollectionUtilsCache not found for collectionId: ${collectionId}`,);
   return collectionUtilsCache;
@@ -18074,11 +17902,28 @@ function getSitePrefix(siteCanonicalURL,) {
   if (url.pathname === '/' || __unframerWindow2.location.origin !== url.origin) return '';
   return url.pathname.endsWith('/',) ? url.pathname.slice(0, -1,) : url.pathname;
 }
+function resolveHash(template, variables,) {
+  const resolvedHash = template.replace(pathVariablesRegExpGlobal, (match, pathVariable,) => variables[pathVariable] ?? match,);
+  if (resolvedHash.includes(':',)) return void 0;
+  return resolvedHash;
+}
 function getHashForRoute(hash2, route, hashVariables,) {
-  const resolvedHash = getRouteElementId(route, hash2,);
-  if (!resolvedHash) return void 0;
-  const variables = Object.assign({}, route?.elements, hashVariables,);
-  return resolvedHash.replace(pathVariablesRegExpGlobal, (match, pathVariable,) => variables[pathVariable] ?? match,);
+  const variables = Object.assign({}, route.elements, hashVariables,);
+  if (hash2.startsWith(':',)) {
+    const nodeId = hash2.slice(1,);
+    const pattern = route.elementPatterns?.[nodeId];
+    if (pattern) {
+      return resolveHash(pattern, variables,);
+    }
+  }
+  if (hash2.includes(':',)) {
+    return resolveHash(hash2, variables,);
+  }
+  const element = route.elements?.[hash2];
+  if (element) {
+    return resolveHash(element, variables,);
+  }
+  return hash2;
 }
 function getPathForRoute(route, {
   currentRoutePath,
@@ -18094,7 +17939,10 @@ function getPathForRoute(route, {
   localeId,
   localeSlug,
 },) {
-  const resolvedHash = getHashForRoute(hash2, route, hashVariables,);
+  let resolvedHash;
+  if (hash2 && route) {
+    resolvedHash = getHashForRoute(hash2, route, hashVariables,);
+  }
   if (onlyHash) return resolvedHash ?? '';
   let currentPath = currentRoutePath ?? '/';
   if (currentRoutePathLocalized && localeId) {
@@ -18887,15 +18735,97 @@ function matchPath(path, routePath,) {
 function escapeStringRegExp(string,) {
   return string.replace(/[|\\{}()[\]^$+*?.]/gu, '\\$&',).replace(/-/gu, '\\x2d',);
 }
-function getVariantsFromServerTiming() {
-  if ('PerformanceServerTiming' in __unframerWindow2) {
-    const serverTiming = performance.getEntriesByType('navigation',)[0]?.serverTiming;
-    if (!serverTiming || serverTiming.length === 0) return new URLSearchParams();
-    const entry = serverTiming.find((it) => it.name === 'abtests');
-    if (!entry) return new URLSearchParams();
-    return new URLSearchParams(entry.description,);
+async function resolveInitialRouteContentState({
+  routes,
+  routeId,
+  pathVariables,
+  localeId,
+  locales,
+  collectionUtils,
+},) {
+  const route = routes[routeId];
+  const resolvedLocales = locales ?? [];
+  const collectionUtilsCache = {
+    get: createCollectionUtilsCache(collectionUtils,),
+  };
+  const defaultLocale = resolvedLocales.find(({
+    id: id3,
+  },) => id3 === defaultLocaleId);
+  const activeLocale = resolvedLocales.find(({
+    id: id3,
+  },) => id3 === (localeId ?? defaultLocaleId)) ?? null;
+  const itemRecordIdPromise = route?.collectionId
+    ? getCollectionItemRecordId({
+      activeLocale,
+      collectionUtils: collectionUtilsCache,
+      currentRoute: route,
+      pathVariables,
+    },)
+    : Promise.resolve(void 0,);
+  const collectionItemId = itemRecordIdPromise.then((recordId) => recordId ?? null).catch((error) => {
+    console.error(getPleaseReportMessage('Failed to resolve the initial collection item id.', error,),);
+    return null;
+  },);
+  const contentState = await resolveRouteContentState({
+    activeLocale,
+    defaultLocale,
+    collectionUtilsCache,
+    locales: resolvedLocales,
+    pathVariables,
+    route,
+    routeId,
+  },);
+  return {
+    ...contentState,
+    collectionItemId,
+  };
+}
+function unquoteServerTimingParameterValue(value,) {
+  return value.startsWith('"',) && value.endsWith('"',) ? value.slice(1, -1,) : value;
+}
+function getServerTimingEntries(serverTimingHeader,) {
+  const entries = /* @__PURE__ */ new Map();
+  if (!serverTimingHeader) return entries;
+  for (const serverTimingMetric of serverTimingHeader.split(',',)) {
+    const [rawName, ...parameters] = serverTimingMetric.split(';',);
+    const name = rawName?.trim().toLowerCase();
+    if (!name) continue;
+    let description = '';
+    for (const parameter2 of parameters) {
+      const separatorIndex = parameter2.indexOf('=',);
+      if (separatorIndex === -1) continue;
+      const parameterName = parameter2.slice(0, separatorIndex,).trim();
+      if (parameterName.toLowerCase() !== 'desc') continue;
+      description = unquoteServerTimingParameterValue(parameter2.slice(separatorIndex + 1,).trim(),);
+    }
+    entries.set(name, description,);
   }
-  return new URLSearchParams();
+  return entries;
+}
+function getServerTimingEntry(name, serverTimingHeader,) {
+  const metricName = name.toLowerCase();
+  const description = getServerTimingEntries(serverTimingHeader,).get(metricName,);
+  if (description === void 0) return void 0;
+  return {
+    name: metricName,
+    description,
+  };
+}
+function getNavigationServerTimingEntry(name,) {
+  if (typeof __unframerWindow2 === 'undefined' || typeof performance === 'undefined') return void 0;
+  if (!('PerformanceServerTiming' in __unframerWindow2)) return void 0;
+  const serverTiming = performance.getEntriesByType('navigation',)[0]?.serverTiming;
+  if (!serverTiming || serverTiming.length === 0) return void 0;
+  const entry = serverTiming.find((serverTimingEntry) => serverTimingEntry.name === name);
+  if (!entry) return void 0;
+  return {
+    name: entry.name,
+    description: entry.description,
+  };
+}
+function getVariantsFromServerTiming() {
+  const entry = getNavigationServerTimingEntry('abtests',);
+  return new URLSearchParams(entry?.description,);
 }
 function patchRoute(routes, abTestId, abTestingVariantId,) {
   const route = routes[abTestingVariantId];
@@ -19457,77 +19387,6 @@ var Integrator = class {
     return output;
   }
 };
-var FrictionAnimator = class {
-  options;
-  state;
-  integrator;
-  constructor(options,) {
-    this.options = {
-      velocity: 0,
-      friction: 2,
-      tolerance: 1 / 10,
-    };
-    Object.assign(this.options, options,);
-    this.state = {
-      x: 0,
-      v: this.options.velocity,
-    };
-    this.integrator = new Integrator((state) => -(this.options.friction * state.v));
-  }
-  setFrom(value,) {
-    this.state.x = value;
-  }
-  setTo(value,) {}
-  setVelocity(velocity,) {
-    this.state.v = velocity;
-  }
-  getState() {
-    return this.state;
-  }
-  isReady() {
-    return true;
-  }
-  next(delta,) {
-    this.state = this.integrator.integrateState(this.state, delta,);
-    return this.state.x;
-  }
-  isFinished() {
-    return Math.abs(this.state.v,) < this.options.tolerance;
-  }
-};
-function isInterpolatable(value,) {
-  return typeof value === 'function' && value.interpolationFor && typeof value.interpolationFor === 'function';
-}
-var Interpolation = {
-  /**
-   * @param from -
-   * @param to -
-   * @internal
-   */
-  handleUndefined: (from, to,) => {
-    if (from === void 0) {
-      from = to;
-    }
-    if (to === void 0) {
-      to = from;
-    }
-    return [from, to,];
-  },
-};
-var NumberInterpolation = {
-  interpolate(from, to,) {
-    [from, to,] = Interpolation.handleUndefined(from, to,);
-    const a1 = from;
-    const b1 = to - a1;
-    return (progress2) => {
-      const value = a1 + b1 * progress2;
-      return value;
-    };
-  },
-  difference(from, to,) {
-    return to - from;
-  },
-};
 var epsilon = 1e-3;
 var minDuration = 0.01;
 var maxDuration2 = 10;
@@ -19541,7 +19400,7 @@ function approximateRoot2(func, derivative, initialGuess, times = 12,) {
   return result;
 }
 function angularFrequency(undampedFrequency, dampingRatio,) {
-  return undampedFrequency * Math.sqrt(1 - Math.pow(dampingRatio, 2,),);
+  return undampedFrequency * Math.sqrt(1 - dampingRatio ** 2,);
 }
 var SpringCurveValueConverter = {
   computeDampingRatio: (tension, friction, mass = 1,) => {
@@ -19555,7 +19414,7 @@ var SpringCurveValueConverter = {
     const dampingRatio = SpringCurveValueConverter.computeDampingRatio(tension, friction,);
     const undampedFrequency = Math.sqrt(tension / mass,);
     if (dampingRatio < 1) {
-      const a = Math.sqrt(1 - Math.pow(dampingRatio, 2,),);
+      const a = Math.sqrt(1 - dampingRatio ** 2,);
       const b = velocity / (a * undampedFrequency);
       const c = dampingRatio / a;
       const d = -((b - c) / epsilon);
@@ -19585,9 +19444,9 @@ var SpringCurveValueConverter = {
         const exponentialDecay = derivativeUndampedFrequency * dampingRatio;
         const currentDisplacement = exponentialDecay * duration;
         const d = currentDisplacement * velocity + velocity;
-        const e = Math.pow(dampingRatio, 2,) * Math.pow(derivativeUndampedFrequency, 2,) * duration;
+        const e = dampingRatio ** 2 * derivativeUndampedFrequency ** 2 * duration;
         const f2 = Math.exp(-currentDisplacement,);
-        const g = angularFrequency(Math.pow(derivativeUndampedFrequency, 2,), dampingRatio,);
+        const g = angularFrequency(derivativeUndampedFrequency ** 2, dampingRatio,);
         const factor = -envelope(derivativeUndampedFrequency,) + epsilon > 0 ? -1 : 1;
         return factor * ((d - e) * f2) / g;
       };
@@ -19599,7 +19458,7 @@ var SpringCurveValueConverter = {
       };
       derivative = function (derivativeUndampedFrequency,) {
         const a = Math.exp(-derivativeUndampedFrequency * duration,);
-        const b = (velocity - derivativeUndampedFrequency) * Math.pow(duration, 2,);
+        const b = (velocity - derivativeUndampedFrequency) * duration ** 2;
         return a * b;
       };
     }
@@ -19611,7 +19470,7 @@ var SpringCurveValueConverter = {
     const initialGuess = 5 / duration;
     const undampedFrequency = approximateRoot2(envelope, derivative, initialGuess,);
     if (!Number.isNaN(undampedFrequency,)) {
-      result.tension = Math.pow(undampedFrequency, 2,) * mass;
+      result.tension = undampedFrequency ** 2 * mass;
       result.friction = dampingRatio * 2 * Math.sqrt(mass * result.tension,);
     }
     return result;
@@ -19711,185 +19570,6 @@ var SpringAnimator = class {
     }
     this.interpolator = this.interpolation.interpolate(this.current, this.destination,);
   }
-};
-var Defaults = {
-  velocity: 0,
-  min: 0,
-  max: 0,
-  momentum: {
-    friction: 2,
-    tolerance: 10,
-  },
-  bounce: {
-    tension: 500,
-    friction: 10,
-    tolerance: 1,
-  },
-};
-var InertialScrollAnimator = class {
-  options;
-  current;
-  frictionAnimator;
-  springAnimator;
-  useSpring;
-  constructor(options,) {
-    this.options = Object.assign({
-      ...Defaults,
-    }, options,);
-    this.frictionAnimator = new FrictionAnimator({
-      friction: this.options.momentum.friction,
-      tolerance: this.options.momentum.tolerance,
-      velocity: this.options.velocity,
-    },);
-    this.springAnimator = new SpringAnimator({
-      tension: this.options.bounce.tension,
-      friction: this.options.bounce.friction,
-      tolerance: this.options.bounce.tolerance,
-      velocity: this.options.velocity,
-    }, NumberInterpolation,);
-    this.useSpring = false;
-  }
-  isReady() {
-    return true;
-  }
-  next(delta,) {
-    this.current = this.currentAnimator.next(delta,);
-    if (!this.useSpring) {
-      this.tryTransitionToSpring();
-    }
-    return this.current;
-  }
-  get currentAnimator() {
-    if (this.useSpring) {
-      return this.springAnimator;
-    }
-    return this.frictionAnimator;
-  }
-  isFinished() {
-    return this.currentAnimator.isFinished();
-  }
-  get state() {
-    return this.currentAnimator.getState();
-  }
-  setFrom(value,) {
-    this.setState({
-      x: value,
-      v: this.state.v,
-    },);
-  }
-  setState(state,) {
-    this.frictionAnimator.setFrom(state.x,);
-    this.frictionAnimator.setVelocity(state.v,);
-    if (this.isValidState()) {
-      return this.tryTransitionToSpring();
-    } else {
-      let bound = 0;
-      if (this.state.x <= this.options.min) {
-        bound = this.options.min;
-      }
-      if (this.state.x >= this.options.max) {
-        bound = this.options.max;
-      }
-      return this.transitionToSpring(bound,);
-    }
-  }
-  setTo(destination,) {
-    this.frictionAnimator.setTo(destination,);
-    this.springAnimator.setTo(destination,);
-  }
-  setLimits(min, max,) {
-    this.options.min = min;
-    this.options.max = max;
-  }
-  // If the position is outside the min and max bounds, and traveling
-  // further away, then transition from friction to spring animation
-  tryTransitionToSpring() {
-    const belowMinWithVelocity = this.state.x < this.options.min && this.state.v <= 0;
-    const aboveMaxWithVelocity = this.state.x > this.options.max && this.state.v >= 0;
-    if (belowMinWithVelocity || aboveMaxWithVelocity) {
-      let bound;
-      if (belowMinWithVelocity) {
-        bound = this.options.min;
-      } else {
-        bound = this.options.max;
-      }
-      this.transitionToSpring(bound,);
-    } else {
-      this.useSpring = false;
-    }
-  }
-  transitionToSpring(bound,) {
-    this.springAnimator.setFrom(this.state.x,);
-    this.springAnimator.setVelocity(this.state.v,);
-    this.springAnimator.setTo(bound,);
-    this.useSpring = true;
-  }
-  // If the position is outside the min and max bounds, but traveling
-  // back towards the bounds, check if the velocity is sufficient to
-  // carry the position back within bounds. If it is, let friction do the
-  // work. If not, the state is invalid, so use the spring.
-  isValidState() {
-    const belowMinTravelingBack = this.state.x < this.options.min && this.state.v > 0;
-    const aboveMaxTravelingBack = this.state.x > this.options.max && this.state.v < 0;
-    if (belowMinTravelingBack || aboveMaxTravelingBack) {
-      let bound;
-      if (belowMinTravelingBack) {
-        bound = this.options.min;
-      } else {
-        bound = this.options.max;
-      }
-      const friction = this.frictionAnimator.options.friction;
-      const solution = 1 - friction * (bound - this.state.x) / this.state.v;
-      return solution > 0;
-    }
-    return true;
-  }
-  // The math behind _isValidState:
-  //
-  // 1. Integrate the friction animator's acceleration to find velocity
-  //
-  //         a = - k * v
-  //     dv/dt = - k * v
-  // Int(dv/v) = - k * Int(dt)
-  //      ln v = - k * t + C
-  //
-  // => Solve for C at t = 0
-  //
-  // ln v(0) = - k * 0 + C
-  // ln v(0) = C
-  //
-  // => Plug C back into v(t)
-  //
-  //     ln v = - k * t + ln v(0)
-  // e^(ln v) = e^(- k * t) + e^(ln v(0))
-  //        v = v(0) * e^(- k * t)
-  //
-  // 2. Integrate velocity to find position
-  //
-  // Int(v) = v(0) * Int(e^(- k * t))
-  //      x = - v(0) * e^(-k * t) / k + C
-  //
-  // => Solve for C at t = 0
-  //
-  //            x(0) = - v(0) * e^(-k * 0) / k + C
-  //            x(0) = - v(0) / k + C
-  // x(0) + v(0) / k = C
-  //
-  // => Plug C back into x(t)
-  //
-  // x = - v(0) * e^(-k * t) / k + x(0) + v(0) / k
-  //
-  // 3. Check if a (real) solution exists for t for position x
-  //
-  //                                x = - v(0) * e^(-k * t) / k + x(0) + v(0) / k
-  //                         x - x(0) = - v(0) * e^(-k * t) / k + v(0) / k
-  //                   k * (x - x(0)) = - v(0) * e^(-k * t) + v(0)
-  //            k * (x - x(0)) - v(0) = - v(0) * e^(-k * t)
-  // (k * (x - x(0)) - v(0)) / - v(0) = e^(-k * t)
-  //       1 - (k * (x - x(0)) / v(0) = e^(-k * t)
-  //   ln(1 - (k * (x - x(0)) / v(0)) = -k * t
-  //
-  // Therefore, a real solution exists if 1 - (k * (x - x(0)) / v(0) > 0
 };
 var cssNames = {
   aliceblue: 'f0f8ff',
@@ -20102,7 +19782,333 @@ var ColorMixModelType = /* @__PURE__ */ ((ColorMixModelType2) => {
   ColorMixModelType2['HUSL'] = 'husl';
   return ColorMixModelType2;
 })(ColorMixModelType || {},);
-var Hsluv = /* @__PURE__ */ (() => require_hsluv().Hsluv)();
+var Hsluv = class _Hsluv {
+  constructor() {
+    this.hex = '#000000';
+    this.rgb_r = 0;
+    this.rgb_g = 0;
+    this.rgb_b = 0;
+    this.xyz_x = 0;
+    this.xyz_y = 0;
+    this.xyz_z = 0;
+    this.luv_l = 0;
+    this.luv_u = 0;
+    this.luv_v = 0;
+    this.lch_l = 0;
+    this.lch_c = 0;
+    this.lch_h = 0;
+    this.hsluv_h = 0;
+    this.hsluv_s = 0;
+    this.hsluv_l = 0;
+    this.hpluv_h = 0;
+    this.hpluv_p = 0;
+    this.hpluv_l = 0;
+    this.r0s = 0;
+    this.r0i = 0;
+    this.r1s = 0;
+    this.r1i = 0;
+    this.g0s = 0;
+    this.g0i = 0;
+    this.g1s = 0;
+    this.g1i = 0;
+    this.b0s = 0;
+    this.b0i = 0;
+    this.b1s = 0;
+    this.b1i = 0;
+  }
+  static fromLinear(c,) {
+    if (c <= 31308e-7) {
+      return 12.92 * c;
+    } else {
+      return 1.055 * Math.pow(c, 1 / 2.4,) - 0.055;
+    }
+  }
+  static toLinear(c,) {
+    if (c > 0.04045) {
+      return Math.pow((c + 0.055) / 1.055, 2.4,);
+    } else {
+      return c / 12.92;
+    }
+  }
+  static yToL(Y,) {
+    if (Y <= _Hsluv.epsilon) {
+      return Y / _Hsluv.refY * _Hsluv.kappa;
+    } else {
+      return 116 * Math.pow(Y / _Hsluv.refY, 1 / 3,) - 16;
+    }
+  }
+  static lToY(L,) {
+    if (L <= 8) {
+      return _Hsluv.refY * L / _Hsluv.kappa;
+    } else {
+      return _Hsluv.refY * Math.pow((L + 16) / 116, 3,);
+    }
+  }
+  static rgbChannelToHex(chan,) {
+    const c = Math.round(chan * 255,);
+    const digit2 = c % 16;
+    const digit1 = (c - digit2) / 16 | 0;
+    return _Hsluv.hexChars.charAt(digit1,) + _Hsluv.hexChars.charAt(digit2,);
+  }
+  static hexToRgbChannel(hex2, offset,) {
+    const digit1 = _Hsluv.hexChars.indexOf(hex2.charAt(offset,),);
+    const digit2 = _Hsluv.hexChars.indexOf(hex2.charAt(offset + 1,),);
+    const n = digit1 * 16 + digit2;
+    return n / 255;
+  }
+  static distanceFromOriginAngle(slope, intercept, angle,) {
+    const d = intercept / (Math.sin(angle,) - slope * Math.cos(angle,));
+    if (d < 0) {
+      return Infinity;
+    } else {
+      return d;
+    }
+  }
+  static distanceFromOrigin(slope, intercept,) {
+    return Math.abs(intercept,) / Math.sqrt(Math.pow(slope, 2,) + 1,);
+  }
+  static min6(f1, f2, f3, f4, f5, f6,) {
+    return Math.min(f1, Math.min(f2, Math.min(f3, Math.min(f4, Math.min(f5, f6,),),),),);
+  }
+  rgbToHex() {
+    this.hex = '#';
+    this.hex += _Hsluv.rgbChannelToHex(this.rgb_r,);
+    this.hex += _Hsluv.rgbChannelToHex(this.rgb_g,);
+    this.hex += _Hsluv.rgbChannelToHex(this.rgb_b,);
+  }
+  hexToRgb() {
+    this.hex = this.hex.toLowerCase();
+    this.rgb_r = _Hsluv.hexToRgbChannel(this.hex, 1,);
+    this.rgb_g = _Hsluv.hexToRgbChannel(this.hex, 3,);
+    this.rgb_b = _Hsluv.hexToRgbChannel(this.hex, 5,);
+  }
+  xyzToRgb() {
+    this.rgb_r = _Hsluv.fromLinear(_Hsluv.m_r0 * this.xyz_x + _Hsluv.m_r1 * this.xyz_y + _Hsluv.m_r2 * this.xyz_z,);
+    this.rgb_g = _Hsluv.fromLinear(_Hsluv.m_g0 * this.xyz_x + _Hsluv.m_g1 * this.xyz_y + _Hsluv.m_g2 * this.xyz_z,);
+    this.rgb_b = _Hsluv.fromLinear(_Hsluv.m_b0 * this.xyz_x + _Hsluv.m_b1 * this.xyz_y + _Hsluv.m_b2 * this.xyz_z,);
+  }
+  rgbToXyz() {
+    const lr = _Hsluv.toLinear(this.rgb_r,);
+    const lg = _Hsluv.toLinear(this.rgb_g,);
+    const lb = _Hsluv.toLinear(this.rgb_b,);
+    this.xyz_x = 0.41239079926595 * lr + 0.35758433938387 * lg + 0.18048078840183 * lb;
+    this.xyz_y = 0.21263900587151 * lr + 0.71516867876775 * lg + 0.072192315360733 * lb;
+    this.xyz_z = 0.019330818715591 * lr + 0.11919477979462 * lg + 0.95053215224966 * lb;
+  }
+  xyzToLuv() {
+    const divider = this.xyz_x + 15 * this.xyz_y + 3 * this.xyz_z;
+    let varU = 4 * this.xyz_x;
+    let varV = 9 * this.xyz_y;
+    if (divider !== 0) {
+      varU /= divider;
+      varV /= divider;
+    } else {
+      varU = NaN;
+      varV = NaN;
+    }
+    this.luv_l = _Hsluv.yToL(this.xyz_y,);
+    if (this.luv_l === 0) {
+      this.luv_u = 0;
+      this.luv_v = 0;
+    } else {
+      this.luv_u = 13 * this.luv_l * (varU - _Hsluv.refU);
+      this.luv_v = 13 * this.luv_l * (varV - _Hsluv.refV);
+    }
+  }
+  luvToXyz() {
+    if (this.luv_l === 0) {
+      this.xyz_x = 0;
+      this.xyz_y = 0;
+      this.xyz_z = 0;
+      return;
+    }
+    const varU = this.luv_u / (13 * this.luv_l) + _Hsluv.refU;
+    const varV = this.luv_v / (13 * this.luv_l) + _Hsluv.refV;
+    this.xyz_y = _Hsluv.lToY(this.luv_l,);
+    this.xyz_x = 0 - 9 * this.xyz_y * varU / ((varU - 4) * varV - varU * varV);
+    this.xyz_z = (9 * this.xyz_y - 15 * varV * this.xyz_y - varV * this.xyz_x) / (3 * varV);
+  }
+  luvToLch() {
+    this.lch_l = this.luv_l;
+    this.lch_c = Math.sqrt(this.luv_u * this.luv_u + this.luv_v * this.luv_v,);
+    if (this.lch_c < 1e-8) {
+      this.lch_h = 0;
+    } else {
+      const hrad = Math.atan2(this.luv_v, this.luv_u,);
+      this.lch_h = hrad * 180 / Math.PI;
+      if (this.lch_h < 0) {
+        this.lch_h = 360 + this.lch_h;
+      }
+    }
+  }
+  lchToLuv() {
+    const hrad = this.lch_h / 180 * Math.PI;
+    this.luv_l = this.lch_l;
+    this.luv_u = Math.cos(hrad,) * this.lch_c;
+    this.luv_v = Math.sin(hrad,) * this.lch_c;
+  }
+  calculateBoundingLines(l2,) {
+    const sub1 = Math.pow(l2 + 16, 3,) / 1560896;
+    const sub2 = sub1 > _Hsluv.epsilon ? sub1 : l2 / _Hsluv.kappa;
+    const s1r = sub2 * (284517 * _Hsluv.m_r0 - 94839 * _Hsluv.m_r2);
+    const s2r = sub2 * (838422 * _Hsluv.m_r2 + 769860 * _Hsluv.m_r1 + 731718 * _Hsluv.m_r0);
+    const s3r = sub2 * (632260 * _Hsluv.m_r2 - 126452 * _Hsluv.m_r1);
+    const s1g = sub2 * (284517 * _Hsluv.m_g0 - 94839 * _Hsluv.m_g2);
+    const s2g = sub2 * (838422 * _Hsluv.m_g2 + 769860 * _Hsluv.m_g1 + 731718 * _Hsluv.m_g0);
+    const s3g = sub2 * (632260 * _Hsluv.m_g2 - 126452 * _Hsluv.m_g1);
+    const s1b = sub2 * (284517 * _Hsluv.m_b0 - 94839 * _Hsluv.m_b2);
+    const s2b = sub2 * (838422 * _Hsluv.m_b2 + 769860 * _Hsluv.m_b1 + 731718 * _Hsluv.m_b0);
+    const s3b = sub2 * (632260 * _Hsluv.m_b2 - 126452 * _Hsluv.m_b1);
+    this.r0s = s1r / s3r;
+    this.r0i = s2r * l2 / s3r;
+    this.r1s = s1r / (s3r + 126452);
+    this.r1i = (s2r - 769860) * l2 / (s3r + 126452);
+    this.g0s = s1g / s3g;
+    this.g0i = s2g * l2 / s3g;
+    this.g1s = s1g / (s3g + 126452);
+    this.g1i = (s2g - 769860) * l2 / (s3g + 126452);
+    this.b0s = s1b / s3b;
+    this.b0i = s2b * l2 / s3b;
+    this.b1s = s1b / (s3b + 126452);
+    this.b1i = (s2b - 769860) * l2 / (s3b + 126452);
+  }
+  calcMaxChromaHpluv() {
+    const r0 = _Hsluv.distanceFromOrigin(this.r0s, this.r0i,);
+    const r1 = _Hsluv.distanceFromOrigin(this.r1s, this.r1i,);
+    const g0 = _Hsluv.distanceFromOrigin(this.g0s, this.g0i,);
+    const g1 = _Hsluv.distanceFromOrigin(this.g1s, this.g1i,);
+    const b0 = _Hsluv.distanceFromOrigin(this.b0s, this.b0i,);
+    const b1 = _Hsluv.distanceFromOrigin(this.b1s, this.b1i,);
+    return _Hsluv.min6(r0, r1, g0, g1, b0, b1,);
+  }
+  calcMaxChromaHsluv(h,) {
+    const hueRad = h / 360 * Math.PI * 2;
+    const r0 = _Hsluv.distanceFromOriginAngle(this.r0s, this.r0i, hueRad,);
+    const r1 = _Hsluv.distanceFromOriginAngle(this.r1s, this.r1i, hueRad,);
+    const g0 = _Hsluv.distanceFromOriginAngle(this.g0s, this.g0i, hueRad,);
+    const g1 = _Hsluv.distanceFromOriginAngle(this.g1s, this.g1i, hueRad,);
+    const b0 = _Hsluv.distanceFromOriginAngle(this.b0s, this.b0i, hueRad,);
+    const b1 = _Hsluv.distanceFromOriginAngle(this.b1s, this.b1i, hueRad,);
+    return _Hsluv.min6(r0, r1, g0, g1, b0, b1,);
+  }
+  hsluvToLch() {
+    if (this.hsluv_l > 99.9999999) {
+      this.lch_l = 100;
+      this.lch_c = 0;
+    } else if (this.hsluv_l < 1e-8) {
+      this.lch_l = 0;
+      this.lch_c = 0;
+    } else {
+      this.lch_l = this.hsluv_l;
+      this.calculateBoundingLines(this.hsluv_l,);
+      const max = this.calcMaxChromaHsluv(this.hsluv_h,);
+      this.lch_c = max / 100 * this.hsluv_s;
+    }
+    this.lch_h = this.hsluv_h;
+  }
+  lchToHsluv() {
+    if (this.lch_l > 99.9999999) {
+      this.hsluv_s = 0;
+      this.hsluv_l = 100;
+    } else if (this.lch_l < 1e-8) {
+      this.hsluv_s = 0;
+      this.hsluv_l = 0;
+    } else {
+      this.calculateBoundingLines(this.lch_l,);
+      const max = this.calcMaxChromaHsluv(this.lch_h,);
+      this.hsluv_s = this.lch_c / max * 100;
+      this.hsluv_l = this.lch_l;
+    }
+    this.hsluv_h = this.lch_h;
+  }
+  hpluvToLch() {
+    if (this.hpluv_l > 99.9999999) {
+      this.lch_l = 100;
+      this.lch_c = 0;
+    } else if (this.hpluv_l < 1e-8) {
+      this.lch_l = 0;
+      this.lch_c = 0;
+    } else {
+      this.lch_l = this.hpluv_l;
+      this.calculateBoundingLines(this.hpluv_l,);
+      const max = this.calcMaxChromaHpluv();
+      this.lch_c = max / 100 * this.hpluv_p;
+    }
+    this.lch_h = this.hpluv_h;
+  }
+  lchToHpluv() {
+    if (this.lch_l > 99.9999999) {
+      this.hpluv_p = 0;
+      this.hpluv_l = 100;
+    } else if (this.lch_l < 1e-8) {
+      this.hpluv_p = 0;
+      this.hpluv_l = 0;
+    } else {
+      this.calculateBoundingLines(this.lch_l,);
+      const max = this.calcMaxChromaHpluv();
+      this.hpluv_p = this.lch_c / max * 100;
+      this.hpluv_l = this.lch_l;
+    }
+    this.hpluv_h = this.lch_h;
+  }
+  hsluvToRgb() {
+    this.hsluvToLch();
+    this.lchToLuv();
+    this.luvToXyz();
+    this.xyzToRgb();
+  }
+  hpluvToRgb() {
+    this.hpluvToLch();
+    this.lchToLuv();
+    this.luvToXyz();
+    this.xyzToRgb();
+  }
+  hsluvToHex() {
+    this.hsluvToRgb();
+    this.rgbToHex();
+  }
+  hpluvToHex() {
+    this.hpluvToRgb();
+    this.rgbToHex();
+  }
+  rgbToHsluv() {
+    this.rgbToXyz();
+    this.xyzToLuv();
+    this.luvToLch();
+    this.lchToHpluv();
+    this.lchToHsluv();
+  }
+  rgbToHpluv() {
+    this.rgbToXyz();
+    this.xyzToLuv();
+    this.luvToLch();
+    this.lchToHpluv();
+    this.lchToHpluv();
+  }
+  hexToHsluv() {
+    this.hexToRgb();
+    this.rgbToHsluv();
+  }
+  hexToHpluv() {
+    this.hexToRgb();
+    this.rgbToHpluv();
+  }
+};
+Hsluv.hexChars = '0123456789abcdef';
+Hsluv.refY = 1;
+Hsluv.refU = 0.19783000664283;
+Hsluv.refV = 0.46831999493879;
+Hsluv.kappa = 903.2962962;
+Hsluv.epsilon = 0.0088564516;
+Hsluv.m_r0 = 3.240969941904521;
+Hsluv.m_r1 = -1.537383177570093;
+Hsluv.m_r2 = -0.498610760293;
+Hsluv.m_g0 = -0.96924363628087;
+Hsluv.m_g1 = 1.87596750150772;
+Hsluv.m_g2 = 0.041555057407175;
+Hsluv.m_b0 = 0.055630079696993;
+Hsluv.m_b1 = -0.20397695888897;
+Hsluv.m_b2 = 1.056971514242878;
 var hsluvConverter = /* @__PURE__ */ new Hsluv();
 function rgbToHsluv(r, g, b,) {
   hsluvConverter.rgb_r = r / 255;
@@ -21075,9 +21081,9 @@ var Color = /* @__PURE__ */ (() => {
     const deltaR = colorA.r - colorB.r;
     const deltaG = colorA.g - colorB.g;
     const deltaB = colorA.b - colorB.b;
-    const deltaR2 = Math.pow(deltaR, 2,);
-    const deltaG2 = Math.pow(deltaG, 2,);
-    const deltaB2 = Math.pow(deltaB, 2,);
+    const deltaR2 = deltaR ** 2;
+    const deltaG2 = deltaG ** 2;
+    const deltaB2 = deltaB ** 2;
     return Math.sqrt(2 * deltaR2 + 4 * deltaG2 + 3 * deltaB2 + _r * (deltaR2 - deltaB2) / 256,);
   };
   Color2.equal = (colorA, colorB, tolerance = 0.1,) => {
@@ -21095,12 +21101,11 @@ var Color = /* @__PURE__ */ (() => {
     }
     return true;
   };
-  const channelToDecimal = interpolate([0, 255,], [0, 1,],);
   function convertChannelToLinearRgb(channel,) {
-    channel = channelToDecimal(channel,);
+    channel /= 255;
     const abs = Math.abs(channel,);
     if (abs < 0.04045) return channel / 12.92;
-    return (Math.sign(channel,) || 1) * Math.pow((abs + 0.055) / 1.055, 2.4,);
+    return (Math.sign(channel,) || 1) * ((abs + 0.055) / 1.055) ** 2.4;
   }
   Color2.luminance = (color2) => {
     const {
@@ -21224,6 +21229,25 @@ function correctAlpha(alphaValue,) {
   }
   return alphaValue;
 }
+function isInterpolatable(value,) {
+  return typeof value === 'function' && value.interpolationFor && typeof value.interpolationFor === 'function';
+}
+var Interpolation = {
+  /**
+   * @param from -
+   * @param to -
+   * @internal
+   */
+  handleUndefined: (from, to,) => {
+    if (from === void 0) {
+      from = to;
+    }
+    if (to === void 0) {
+      to = from;
+    }
+    return [from, to,];
+  },
+};
 var ColorInterpolation = (type = 'husl',) => {
   return {
     interpolate(from, to,) {
@@ -21246,6 +21270,20 @@ var NoInterpolation = {
   // oxlint-disable-next-line typescript/no-explicit-any - TODO: To be fixed
   difference(from, to,) {
     return from === to ? 0 : 1;
+  },
+};
+var NumberInterpolation = {
+  interpolate(from, to,) {
+    [from, to,] = Interpolation.handleUndefined(from, to,);
+    const a1 = from;
+    const b1 = to - a1;
+    return (progress2) => {
+      const value = a1 + b1 * progress2;
+      return value;
+    };
+  },
+  difference(from, to,) {
+    return to - from;
   },
 };
 var ObjectInterpolation = (valueInterpolation) => {
@@ -21276,7 +21314,7 @@ var ObjectInterpolation = (valueInterpolation) => {
       let sum = 0;
       for (const key7 in from) {
         const difference = valueInterpolation.difference(from[key7], to[key7],);
-        sum += Math.pow(difference, 2,);
+        sum += difference ** 2;
       }
       return Math.sqrt(sum,);
     },
@@ -21342,7 +21380,7 @@ var ValueInterpolation = class _ValueInterpolation {
 };
 var AnyInterpolation = /* @__PURE__ */ new ValueInterpolation();
 var isMotionValue2 = (v) => v instanceof MotionValue;
-var Defaults2 = /* @__PURE__ */ (() => ({
+var Defaults = /* @__PURE__ */ (() => ({
   delta: 1 / 60,
   maxValues: 1e4,
 }))();
@@ -21354,7 +21392,7 @@ var PrecalculatedAnimator = class {
   options;
   constructor(options,) {
     this.options = {
-      ...Defaults2,
+      ...Defaults,
       ...options,
     };
     this.animator = options.animator;
@@ -21737,7 +21775,7 @@ var AnimationDriver = class {
 var MainLoopAnimationDriver = class extends AnimationDriver {
   play() {
     if (RenderEnvironment.target !== RenderTarget.preview) {
-      this.finishedCallback && this.finishedCallback(false,);
+      this.finishedCallback?.(false,);
       return;
     }
     MainLoop.on('update', this.update,);
@@ -21845,7 +21883,7 @@ var FramerAnimation = class _FramerAnimation {
       switch (value) {
         case 'idle':
           if (oldValue === 'running') {
-            this.oncancel && this.oncancel();
+            this.oncancel?.();
           }
           this.readyResolve && this.readyResolve();
           this.resetReadyPromise();
@@ -21855,7 +21893,7 @@ var FramerAnimation = class _FramerAnimation {
             console.warn('Bad state transition',);
             break;
           }
-          this.onfinish && this.onfinish();
+          this.onfinish?.();
           this.finishedResolve && this.finishedResolve();
           break;
         case 'running':
@@ -22822,11 +22860,1897 @@ function getDeviceStyle({
     },
   };
 }
-function isFiniteNumber(value,) {
-  return Number.isFinite(value,);
+var defaultPresetId = 'iphone-12-pro';
+var presetsBase = /* @__PURE__ */ (() => ({
+  iPhonePro: {
+    // Screen mask takes care of the rounded screen corners for iPhones Pro,
+    // and actually using a radius here produces visual artifacts in Chrome.
+    screenRadius: (
+      /* 38 */
+      0
+    ),
+    clayBezelLeft: 21,
+    clayBezelRight: 21,
+    clayBezelTop: 21,
+    clayBezelBottom: 21,
+    clayBezelRadius: 38 + 21,
+  },
+  iPhone8: {
+    screenRadius: 0,
+    clayBezelLeft: 24,
+    clayBezelRight: 24,
+    clayBezelTop: 96,
+    clayBezelBottom: 96,
+    clayBezelRadius: 38 * 1.5,
+  },
+  iPadPro: {
+    screenRadius: 25,
+    clayBezelLeft: 38,
+    clayBezelRight: 38,
+    clayBezelTop: 38,
+    clayBezelBottom: 38,
+    clayBezelRadius: 25 + 38,
+  },
+  desktop: {
+    clayBezelLeft: 20,
+    clayBezelRight: 20,
+    clayBezelTop: 20,
+    clayBezelBottom: 20,
+    clayBezelRadius: 20,
+  },
+}))();
+var devicePresets = /* @__PURE__ */ (() => [{
+  id: 'iphone-12',
+  title: 'iPhone 12',
+  screenRadius: 0,
+  clayBezelLeft: 22,
+  clayBezelRight: 22,
+  clayBezelTop: 22,
+  clayBezelBottom: 22,
+  clayBezelRadius: 66,
+  screenWidth: 390,
+  screenHeight: 844,
+  externalClay: {
+    width: 500,
+    height: 974,
+    screenOffsetTop: 65,
+    screenOffsetLeft: 55,
+  },
+  screenMask:
+    '<g style="transform: scale(0.5);"><path d="M171.2 0c2.3 0 4 .5 5.4 1.3 1.6 1 2.8 2.2 3.7 3.8.8 1.6 1.2 2.3 1.2 4.9 0 12 2.2 19 6.2 26.5s9.8 13.3 17.3 17.4c7.5 4 15.8 6.1 30.6 6.1h311.5c14.3 0 22.5-2.2 29.9-6.1 7.5-4 13.3-10 17.3-17.4 4-7.5 6.2-14.5 6.2-26.5 0-2.6.4-3.2 1.1-4.9.8-1.6 2-2.9 3.4-3.8 1.4-.8 3.2-1.3 5.4-1.3h54.2c40.1 0 54.7 4.2 69.4 12a81.8 81.8 0 0134 34c7.8 14.7 12 29.3 12 69.4v1457.2c0 40.1-4.2 54.7-12 69.4a81.8 81.8 0 01-34 34c-14.7 7.8-29.3 12-69.4 12H115.4c-40.1 0-54.7-4.2-69.4-12a81.8 81.8 0 01-34-34c-7.8-14.7-12-29.3-12-69.4V115.4C0 75.3 4.2 60.7 12 46a81.8 81.8 0 0134-34C60.7 4.2 75.3 0 115.4 0h55.4z" fill="#000" fill-rule="evenodd"/></g>',
+  realisticImage: {
+    width: 490,
+    height: 944,
+    screenOffsetLeft: 50,
+    screenOffsetTop: 50,
+    availableColors: [{
+      id: 'black',
+      title: 'Black',
+      colorValue: '#2E2C36',
+    }, {
+      id: 'white',
+      title: 'White',
+      colorValue: '#F7F3F0',
+    }, {
+      id: 'blue',
+      title: 'Blue',
+      colorValue: '#14496D',
+    }, {
+      id: 'green',
+      title: 'Green',
+      colorValue: '#DAF0D9',
+    }, {
+      id: 'red',
+      title: 'Red',
+      colorValue: '#DB4141',
+    },],
+    handOffset: {
+      left: 29,
+      right: 29,
+      bottom: 29,
+    },
+  },
+}, {
+  id: 'iphone-12-mini',
+  title: 'iPhone 12 Mini',
+  screenRadius: 0,
+  clayBezelLeft: 22,
+  clayBezelRight: 22,
+  clayBezelTop: 22,
+  clayBezelBottom: 22,
+  clayBezelRadius: 66,
+  screenWidth: 360,
+  screenHeight: 780,
+  externalClay: {
+    width: 450,
+    height: 890,
+    screenOffsetTop: 55,
+    screenOffsetLeft: 45,
+  },
+  screenMask:
+    '<g style="transform: scale(0.5);"><path d="M142 18c0 19 14 47 43 48h349c31 0 44-29 44-48 0-12 4-18 14-18h18c38 0 52 4 66 11 14 8 25 19 33 33v1c7 14 11 28 11 65v1340c0 38-4 52-11 66-8 14-19 25-33 33h-1c-14 7-28 11-65 11H110c-38 0-52-4-66-11-14-8-25-19-33-33v-1c-7-13-11-27-11-64V110c0-38 4-52 11-66 8-14 19-25 33-33h1C58 4 72 0 109 0h16c11 0 17 6 17 18z" fill="#000" fill-rule="evenodd"/></g>',
+  realisticImage: {
+    width: 460,
+    height: 880,
+    screenOffsetLeft: 50,
+    screenOffsetTop: 50,
+    availableColors: [{
+      id: 'black',
+      title: 'Black',
+      colorValue: '#2E2C36',
+    }, {
+      id: 'white',
+      title: 'White',
+      colorValue: '#F7F3F0',
+    }, {
+      id: 'blue',
+      title: 'Blue',
+      colorValue: '#14496D',
+    }, {
+      id: 'green',
+      title: 'Green',
+      colorValue: '#DAF0D9',
+    }, {
+      id: 'red',
+      title: 'Red',
+      colorValue: '#DB4141',
+    },],
+    handOffset: {
+      left: 31.5,
+      right: 30.5,
+      bottom: 30,
+    },
+  },
+}, {
+  id: 'iphone-12-pro',
+  title: 'iPhone 12 Pro',
+  screenRadius: 0,
+  clayBezelLeft: 22,
+  clayBezelRight: 22,
+  clayBezelTop: 22,
+  clayBezelBottom: 22,
+  clayBezelRadius: 66,
+  screenWidth: 390,
+  screenHeight: 844,
+  externalClay: {
+    width: 494,
+    height: 968,
+    screenOffsetTop: 62,
+    screenOffsetLeft: 52,
+  },
+  screenMask:
+    '<g style="transform: scale(0.5);"><path d="M171.2 0c2.3 0 4 .5 5.4 1.3 1.6 1 2.8 2.2 3.7 3.8.8 1.6 1.2 2.3 1.2 4.9 0 12 2.2 19 6.2 26.5s9.8 13.3 17.3 17.4c7.5 4 15.8 6.1 30.6 6.1h311.5c14.3 0 22.5-2.2 29.9-6.1 7.5-4 13.3-10 17.3-17.4 4-7.5 6.2-14.5 6.2-26.5 0-2.6.4-3.2 1.1-4.9.8-1.6 2-2.9 3.4-3.8 1.4-.8 3.2-1.3 5.4-1.3h54.2c40.1 0 54.7 4.2 69.4 12a81.8 81.8 0 0134 34c7.8 14.7 12 29.3 12 69.4v1457.2c0 40.1-4.2 54.7-12 69.4a81.8 81.8 0 01-34 34c-14.7 7.8-29.3 12-69.4 12H115.4c-40.1 0-54.7-4.2-69.4-12a81.8 81.8 0 01-34-34c-7.8-14.7-12-29.3-12-69.4V115.4C0 75.3 4.2 60.7 12 46a81.8 81.8 0 0134-34C60.7 4.2 75.3 0 115.4 0h55.4z" fill="#000" fill-rule="evenodd"/></g>',
+  realisticImage: {
+    width: 490,
+    height: 944,
+    screenOffsetLeft: 50,
+    screenOffsetTop: 50,
+    availableColors: [{
+      id: 'graphite',
+      title: 'Graphite',
+      colorValue: '#585753',
+    }, {
+      id: 'silver',
+      title: 'Silver',
+      colorValue: '#E5E6E1',
+    }, {
+      id: 'pacific-blue',
+      title: 'Pacific Blue',
+      colorValue: '#415D6C',
+    }, {
+      id: 'gold',
+      title: 'Gold',
+      colorValue: '#FCECD5',
+    },],
+    handOffset: {
+      left: 29,
+      right: 29,
+      bottom: 29,
+    },
+  },
+}, {
+  id: 'iphone-12-pro-max',
+  title: 'iPhone 12 Pro Max',
+  screenRadius: 50,
+  // to prevent leaking pixel in the corners, see https://github.com/framer/company/issues/20429
+  clayBezelLeft: 22,
+  clayBezelRight: 22,
+  clayBezelTop: 22,
+  clayBezelBottom: 22,
+  clayBezelRadius: 66,
+  screenWidth: 428,
+  screenHeight: 926,
+  externalClay: {
+    width: 532,
+    height: 1050,
+    screenOffsetTop: 62,
+    screenOffsetLeft: 52,
+  },
+  screenMask:
+    '<path d="M102 0c6 0 7 3 7 9 0 10 7 23 24 23h164c13 0 22-12 22-23 0-6 1-9 7-9h34c24 0 32 2 41 7s15 11 20 20 7 17 7 41v790c0 24-2 32-7 41s-11 15-20 20-17 7-41 7H68c-24 0-32-2-41-7s-15-11-20-20-7-17-7-41V68c0-24 2-32 7-41S18 12 27 7s17-7 41-7h34z" fill="#000" fill-rule="evenodd"/>',
+  realisticImage: {
+    width: 528,
+    height: 1026,
+    screenOffsetLeft: 50,
+    screenOffsetTop: 50,
+    availableColors: [{
+      id: 'graphite',
+      title: 'Graphite',
+      colorValue: '#585753',
+    }, {
+      id: 'silver',
+      title: 'Silver',
+      colorValue: '#E5E6E1',
+    }, {
+      id: 'pacific-blue',
+      title: 'Pacific Blue',
+      colorValue: '#415D6C',
+    }, {
+      id: 'gold',
+      title: 'Gold',
+      colorValue: '#FCECD5',
+    },],
+    handOffset: {
+      left: 28.5,
+      right: 28,
+      bottom: 29,
+    },
+  },
+}, {
+  id: 'iphone-11',
+  title: 'iPhone 11',
+  // Screen mask takes care of the rounded screen corners for iPhones Pro,
+  // and actually using a radius here produces visual artifacts in Chrome.
+  screenRadius: (
+    /* 38 */
+    0
+  ),
+  clayBezelLeft: 35.5,
+  clayBezelRight: 35.5,
+  clayBezelTop: 35.5,
+  clayBezelBottom: 35.5,
+  clayBezelRadius: 77,
+  screenWidth: 414,
+  screenHeight: 896,
+  externalClay: {
+    width: 524,
+    height: 1026,
+    screenOffsetTop: 65,
+    screenOffsetLeft: 55,
+  },
+  screenMask:
+    '<path d="M85.5 0C89.1 0 92 3 92 6.5c.3 6 1.5 10 3.4 13.5 2.2 4.1 5.5 7.4 9.6 9.6 4.2 2.2 8.9 3.4 17 3.4h170c8.1 0 12.8-1.2 17-3.4 4.1-2.2 7.4-5.5 9.6-9.6A31 31 0 00322 6.5c0-3.6 3-6.5 6.5-6.5h32.3c18.5 0 25.2 2 32 5.5 6.7 3.7 12 9 15.7 15.7 3.6 6.8 5.5 13.5 5.5 32v789.6c0 18.5-2 25.2-5.5 32-3.7 6.7-9 12-15.7 15.7-6.8 3.6-13.5 5.5-32 5.5H53.2c-18.5 0-25.2-2-32-5.5-6.7-3.7-12-9-15.7-15.7C2 868 0 861.3 0 842.8V53.2c0-18.5 2-25.2 5.5-32 3.7-6.7 9-12 15.7-15.7C28 2 34.7 0 53.2 0h32.3z" fill="#000" fill-rule="nonzero"/>',
+  realisticImage: {
+    width: 514,
+    height: 996,
+    screenOffsetLeft: 50,
+    screenOffsetTop: 50,
+    availableColors: [{
+      id: 'black',
+      title: 'Black',
+      colorValue: '#202120',
+    }, {
+      id: 'white',
+      title: 'White',
+      colorValue: '#F9F6EF',
+    }, {
+      id: 'purple',
+      title: 'Purple',
+      colorValue: '#D1CDDB',
+    }, {
+      id: 'green',
+      title: 'Green',
+      colorValue: '#ADE0CD',
+    }, {
+      id: 'red',
+      title: 'Red',
+      colorValue: '#B90D2E',
+    }, {
+      id: 'yellow',
+      title: 'Yellow',
+      colorValue: '#FFE680',
+    },],
+    handOffset: {
+      left: 14.5,
+      right: 14.5,
+      bottom: 14.5,
+    },
+  },
+}, {
+  id: 'iphone-11-pro',
+  title: 'iPhone 11 Pro',
+  ...presetsBase.iPhonePro,
+  screenWidth: 375,
+  screenHeight: 812,
+  externalClay: {
+    width: 485,
+    height: 942,
+    screenOffsetTop: 65,
+    screenOffsetLeft: 55,
+  },
+  screenMask:
+    '<path d="M292 8.668V9c0 9.266-7.07 21-23.332 21h-162C90.402 30 83.332 18.266 83.332 9v-.332c0-4.285 0-8.668-7.664-8.668H43.332C16.312 0 0 16.313 0 43.332v725.336C0 795.688 16.313 812 43.332 812h288.336c27.02 0 43.332-16.313 43.332-43.332V43.332C375 16.312 358.687 0 331.668 0h-32C292 0 292 4.383 292 8.668zm0 0"/>',
+  realisticImage: {
+    width: 475,
+    height: 912,
+    screenOffsetLeft: 50,
+    screenOffsetTop: 50,
+    availableColors: [{
+      id: 'space-grey',
+      title: 'Space Grey',
+      colorValue: '#52514F',
+    }, {
+      id: 'silver',
+      title: 'Silver',
+      colorValue: '#EBEBE3',
+    }, {
+      id: 'gold',
+      title: 'Gold',
+      colorValue: '#FBD7BD',
+    }, {
+      id: 'midnight-green',
+      title: 'Midnight Green',
+      colorValue: '#4F5850',
+    },],
+    handOffset: {
+      left: 24.5,
+      right: 24.5,
+      bottom: 23.5,
+    },
+  },
+}, {
+  id: 'iphone-11-pro-max',
+  title: 'iPhone 11 Pro Max',
+  ...presetsBase.iPhonePro,
+  screenWidth: 414,
+  screenHeight: 896,
+  externalClay: {
+    width: 524,
+    height: 1026,
+    screenOffsetTop: 65,
+    screenOffsetLeft: 55,
+  },
+  screenMask:
+    '<path d="M96 0c3.313 0 5.91 2.688 6 6 .18 6.645 1.191 10.148 2.938 13.41 1.917 3.586 4.73 6.402 8.316 8.317 3.586 1.918 7.441 2.941 15.445 2.941h156.602c8.004 0 11.86-1.023 15.445-2.941 3.586-1.915 6.399-4.73 8.317-8.317 1.746-3.265 2.746-6.758 2.937-13.41.094-3.313 2.688-6 6-6h46.004c17.387 0 23.687 1.809 30.043 5.21 6.355 3.4 11.344 8.388 14.742 14.743C412.191 26.31 414 32.61 414 49.996v796.008c0 17.387-1.809 23.687-5.21 30.043-3.4 6.355-8.388 11.344-14.743 14.742-6.356 3.402-12.656 5.211-30.043 5.211H49.996c-17.387 0-23.687-1.809-30.043-5.21-6.355-3.4-11.344-8.388-14.742-14.743C1.809 869.69 0 863.39 0 846.004V49.996C0 32.61 1.809 26.31 5.21 19.953c3.4-6.355 8.388-11.344 14.743-14.742C26.31 1.809 32.61 0 49.996 0zm0 0"/>',
+  realisticImage: {
+    width: 514,
+    height: 996,
+    screenOffsetLeft: 50,
+    screenOffsetTop: 50,
+    availableColors: [{
+      id: 'space-grey',
+      title: 'Space Grey',
+      colorValue: '#52514F',
+    }, {
+      id: 'silver',
+      title: 'Silver',
+      colorValue: '#EBEBE3',
+    }, {
+      id: 'gold',
+      title: 'Gold',
+      colorValue: '#FBD7BD',
+    }, {
+      id: 'midnight-green',
+      title: 'Midnight Green',
+      colorValue: '#4F5850',
+    },],
+    handOffset: {
+      left: 23.5,
+      right: 24.5,
+      bottom: 24,
+    },
+  },
+}, {
+  id: 'iphone-8',
+  title: 'iPhone 8',
+  ...presetsBase.iPhone8,
+  screenWidth: 375,
+  screenHeight: 667,
+  externalClay: {
+    width: 491,
+    height: 971,
+    screenOffsetLeft: 58,
+    screenOffsetTop: 152,
+  },
+  realisticImage: {
+    width: 475,
+    height: 927,
+    screenOffsetLeft: 50,
+    screenOffsetTop: 130,
+    availableColors: [{
+      id: 'space-grey',
+      title: 'Space Grey',
+      colorValue: '#28282A',
+    }, {
+      id: 'silver',
+      title: 'Silver',
+      colorValue: '#DFE1E2',
+    }, {
+      id: 'gold',
+      title: 'Gold',
+      colorValue: '#F6E6DB',
+    },],
+    handOffset: {
+      left: 22,
+      right: 22,
+      bottom: 18.5,
+    },
+  },
+}, {
+  id: 'iphone-8-plus',
+  title: 'iPhone 8 Plus',
+  ...presetsBase.iPhone8,
+  screenWidth: 414,
+  screenHeight: 736,
+  externalClay: {
+    width: 530,
+    height: 1064,
+    screenOffsetLeft: 58,
+    screenOffsetTop: 164,
+  },
+  realisticImage: {
+    width: 514,
+    height: 996,
+    screenOffsetLeft: 50,
+    screenOffsetTop: 130,
+    availableColors: [{
+      id: 'space-grey',
+      title: 'Space Grey',
+      colorValue: '#28282A',
+    }, {
+      id: 'silver',
+      title: 'Silver',
+      colorValue: '#DFE1E2',
+    }, {
+      id: 'gold',
+      title: 'Gold',
+      colorValue: '#F6E6DB',
+    },],
+    handOffset: {
+      left: 21,
+      right: 20.5,
+      bottom: 19,
+    },
+  },
+}, {
+  id: 'iphone-se',
+  title: 'iPhone SE',
+  screenWidth: 320,
+  screenHeight: 568,
+  screenRadius: 0,
+  clayBezelLeft: 20,
+  clayBezelRight: 20,
+  clayBezelTop: 112,
+  clayBezelBottom: 112,
+  clayBezelRadius: 38 * 1.5,
+  externalClay: {
+    width: 436,
+    height: 872,
+    screenOffsetLeft: 58,
+    screenOffsetTop: 152,
+  },
+  realisticImage: {
+    width: 420,
+    height: 828,
+    screenOffsetLeft: 50,
+    screenOffsetTop: 130,
+    availableColors: [{
+      id: 'space-grey',
+      title: 'Space Grey',
+      colorValue: '#C3C4C8',
+    }, {
+      id: 'silver',
+      title: 'Silver',
+      colorValue: '#E1E2E4',
+    }, {
+      id: 'gold',
+      title: 'Gold',
+      colorValue: '#EFD8BD',
+    }, {
+      id: 'rose-gold',
+      title: 'Rose Gold',
+      colorValue: '#F7CFCA',
+    },],
+    handOffset: {
+      left: 22,
+      right: 22,
+      bottom: 26.5,
+    },
+  },
+}, {
+  id: 'samsung-galaxy-s7',
+  title: 'Samsung Galaxy S7',
+  screenRadius: 0,
+  clayBezelLeft: 22,
+  clayBezelRight: 22,
+  clayBezelTop: 22,
+  clayBezelBottom: 22,
+  clayBezelRadius: 66,
+  screenWidth: 360,
+  screenHeight: 640,
+  externalClay: {
+    width: 454,
+    height: 880,
+    screenOffsetTop: 120,
+    screenOffsetLeft: 47,
+  },
+  realisticImage: {
+    width: 440,
+    height: 860,
+    screenOffsetLeft: 40,
+    screenOffsetTop: 110,
+    availableColors: [{
+      id: 'black',
+      title: 'Black',
+      colorValue: '#2E2C36',
+    }, {
+      id: 'white',
+      title: 'White',
+      colorValue: '#F7F3F0',
+    }, {
+      id: 'silver',
+      title: 'Silver',
+      colorValue: '#E5E6E1',
+    }, {
+      id: 'gold',
+      title: 'Gold',
+      colorValue: '#FCECD5',
+    },],
+    handOffset: {
+      left: 26,
+      right: 25.5,
+      bottom: 32,
+    },
+  },
+}, // deprecated
+{
+  id: 'samsung-note-10',
+  title: 'Samsung Note 10',
+  screenWidth: 360,
+  screenHeight: 760,
+  screenRadius: 10,
+  clayBezelLeft: 7,
+  clayBezelRight: 7,
+  clayBezelTop: 15,
+  clayBezelBottom: 15,
+  clayBezelRadius: 15,
+}, {
+  id: 'pixel-5',
+  title: 'Google Pixel 5',
+  screenRadius: 31,
+  clayBezelLeft: 22,
+  clayBezelRight: 22,
+  clayBezelTop: 22,
+  clayBezelBottom: 22,
+  clayBezelRadius: 66,
+  screenWidth: 360,
+  screenHeight: 780,
+  externalClay: {
+    width: 460,
+    height: 900,
+    screenOffsetTop: 60,
+    screenOffsetLeft: 50,
+  },
+  realisticImage: {
+    width: 920 / 2,
+    height: 1760 / 2,
+    screenOffsetLeft: 100 / 2,
+    screenOffsetTop: 100 / 2,
+    availableColors: [{
+      id: 'just-black',
+      title: 'Just Black',
+      colorValue: '#2E2C36',
+    }, {
+      id: 'sorta-sage',
+      title: 'Sorta Sage',
+      colorValue: '#B7C9C0',
+    },],
+    handOffset: {
+      left: 31.5,
+      right: 31,
+      bottom: 31,
+      /* 1t */
+    },
+  },
+}, {
+  id: 'pixel-4',
+  title: 'Google Pixel 4',
+  screenWidth: 360,
+  screenHeight: 760,
+  screenRadius: 34,
+  clayBezelLeft: 10,
+  clayBezelRight: 10,
+  clayBezelTop: 50,
+  clayBezelBottom: 25,
+  clayBezelRadius: 50,
+  externalClay: {
+    width: 460,
+    height: 938,
+    screenOffsetLeft: 50,
+    screenOffsetTop: 89,
+  },
+  realisticImage: {
+    width: 460,
+    height: 920,
+    screenOffsetLeft: 50,
+    screenOffsetTop: 80,
+    availableColors: [{
+      id: 'clearly-white',
+      title: 'Clearly White',
+      colorValue: '#EAEDF2',
+    }, {
+      id: 'just-black',
+      title: 'Just Black',
+      colorValue: '#1A1A1A',
+    }, {
+      id: 'oh-so-orange',
+      title: 'Oh So Orange',
+      colorValue: '#FF7A68',
+    },],
+    handOffset: {
+      left: 35.5,
+      right: 35.5,
+      bottom: 57,
+      /* 1t */
+    },
+  },
+}, // Desktop ------------------------------------------------------------------------------------------------------------------------
+{
+  id: 'macbook-air',
+  title: 'MacBook Air',
+  screenWidth: 1440,
+  screenHeight: 900,
+  disableRotation: true,
+  externalClay: {
+    width: 1890,
+    height: 1125,
+    screenOffsetLeft: 225,
+    screenOffsetTop: 98,
+  },
+  realisticImage: {
+    width: 3848 / 2,
+    height: 2240 / 2,
+    screenOffsetLeft: 484 / 2,
+    screenOffsetTop: 196 / 2,
+    availableColors: [{
+      id: 'silver',
+      title: 'Silver',
+      colorValue: '#E5E6E1',
+    }, {
+      id: 'space-grey',
+      title: 'Space Grey',
+      colorValue: '#B1B5B7',
+    }, {
+      id: 'gold',
+      title: 'Gold',
+      colorValue: '#FCECD5',
+    },],
+  },
+}, {
+  id: 'macbook-pro-13',
+  title: `MacBook Pro 13"`,
+  screenWidth: 1440,
+  screenHeight: 900,
+  disableRotation: true,
+  externalClay: {
+    width: 1914,
+    height: 1169,
+    screenOffsetLeft: 236,
+    screenOffsetTop: 109,
+  },
+  realisticImage: {
+    width: 3916 / 2,
+    height: 2330 / 2,
+    screenOffsetLeft: 518 / 2,
+    screenOffsetTop: 218 / 2,
+    availableColors: [{
+      id: 'silver',
+      title: 'Silver',
+      colorValue: '#E5E6E1',
+    }, {
+      id: 'space-grey',
+      title: 'Space Grey',
+      colorValue: '#B1B5B7',
+    },],
+  },
+}, {
+  id: 'macbook-pro-16',
+  title: `MacBook Pro 16"`,
+  screenWidth: 1536,
+  screenHeight: 960,
+  disableRotation: true,
+  externalClay: {
+    width: 1984,
+    height: 1179,
+    screenOffsetLeft: 225,
+    screenOffsetTop: 78,
+  },
+  realisticImage: {
+    width: 4032 / 2,
+    height: 2348 / 2,
+    screenOffsetLeft: 480 / 2,
+    screenOffsetTop: 148 / 2,
+    availableColors: [{
+      id: 'silver',
+      title: 'Silver',
+      colorValue: '#E5E6E1',
+    }, {
+      id: 'space-grey',
+      title: 'Space Grey',
+      colorValue: '#B1B5B7',
+    },],
+  },
+}, {
+  id: 'imac-21-5',
+  title: `iMac 21.5"`,
+  screenWidth: 2048,
+  screenHeight: 1152,
+  disableRotation: true,
+  externalClay: {
+    width: 2288,
+    height: 1892,
+    screenOffsetLeft: 120,
+    screenOffsetTop: 120,
+  },
+  realisticImage: {
+    width: 4562 / 2,
+    height: 3796 / 2,
+    screenOffsetLeft: 232 / 2,
+    screenOffsetTop: 244 / 2,
+  },
+}, {
+  id: 'imac-27',
+  title: `iMac 27"`,
+  screenWidth: 2560,
+  screenHeight: 1440,
+  disableRotation: true,
+  externalClay: {
+    width: 2848,
+    height: 2351,
+    screenOffsetLeft: 144,
+    screenOffsetTop: 151,
+  },
+  realisticImage: {
+    width: 5676 / 2,
+    height: 4720 / 2,
+    screenOffsetLeft: 278 / 2,
+    screenOffsetTop: 292 / 2,
+    availableColors: [{
+      id: 'silver',
+      title: 'Silver',
+      colorValue: '#E5E6E1',
+    }, {
+      id: 'pro',
+      title: 'Pro',
+      colorValue: '#5F5E63',
+    },],
+  },
+}, {
+  id: 'pro-display-xdr',
+  title: `Pro Display XDR`,
+  screenWidth: 3008,
+  screenHeight: 1692,
+  disableRotation: true,
+  externalClay: {
+    width: 3148,
+    height: 2325,
+    screenOffsetLeft: 70,
+    screenOffsetTop: 60,
+  },
+  realisticImage: {
+    width: 6276 / 2,
+    height: 4695 / 2,
+    screenOffsetLeft: 130 / 2,
+    screenOffsetTop: 130 / 2,
+  },
+}, {
+  id: 'dell-xps',
+  title: `Dell XPS`,
+  screenWidth: 1920,
+  screenHeight: 1080,
+  disableRotation: true,
+  externalClay: {
+    width: 2624,
+    height: 1381,
+    screenOffsetLeft: 352,
+    screenOffsetTop: 57,
+  },
+  realisticImage: {
+    width: 5412 / 2,
+    height: 2746 / 2,
+    screenOffsetLeft: 786 / 2,
+    screenOffsetTop: 108 / 2,
+  },
+}, {
+  id: 'surface-book',
+  title: `Microsoft Surface Book`,
+  screenWidth: 1500,
+  screenHeight: 1e3,
+  disableRotation: true,
+  externalClay: {
+    width: 2089,
+    height: 1234,
+    screenOffsetLeft: 296,
+    screenOffsetTop: 93,
+  },
+  realisticImage: {
+    width: 4200 / 2,
+    height: 2508 / 2,
+    screenOffsetLeft: 600 / 2,
+    screenOffsetTop: 210 / 2,
+  },
+}, // Tablets ------------------------------------------------------------------------------------------------------------------------
+{
+  id: 'ipad',
+  title: 'iPad',
+  screenRadius: 0,
+  screenWidth: 810,
+  screenHeight: 1080,
+  clayBezelLeft: 30,
+  clayBezelRight: 30,
+  clayBezelTop: 95,
+  clayBezelBottom: 95,
+  clayBezelRadius: 0,
+  externalClay: {
+    width: 966,
+    height: 1378,
+    screenOffsetLeft: 78,
+    screenOffsetTop: 149,
+  },
+  realisticImage: {
+    width: 1920 / 2,
+    height: 2720 / 2,
+    screenOffsetLeft: 75,
+    screenOffsetTop: 140,
+    availableColors: [{
+      id: 'space-grey',
+      title: 'Space Grey',
+      colorValue: '#C3C4C8',
+    }, {
+      id: 'silver',
+      title: 'Silver',
+      colorValue: '#E1E2E4',
+    }, {
+      id: 'gold',
+      title: 'Gold',
+      colorValue: '#EFD8BD',
+    },],
+  },
+}, {
+  id: 'ipad-mini',
+  title: 'iPad Mini',
+  screenRadius: 0,
+  clayBezelLeft: 49,
+  clayBezelRight: 49,
+  clayBezelTop: 49,
+  clayBezelBottom: 49,
+  clayBezelRadius: 49,
+  screenWidth: 768,
+  screenHeight: 1024,
+  externalClay: {
+    width: 924,
+    height: 1384,
+    screenOffsetLeft: 78,
+    screenOffsetTop: 180,
+  },
+  realisticImage: {
+    width: 1856 / 2,
+    height: 2728 / 2,
+    screenOffsetLeft: 160 / 2,
+    screenOffsetTop: 340 / 2,
+    availableColors: [{
+      id: 'space-grey',
+      title: 'Space Grey',
+      colorValue: '#C3C4C8',
+    }, {
+      id: 'silver',
+      title: 'Silver',
+      colorValue: '#E1E2E4',
+    }, {
+      id: 'gold',
+      title: 'Gold',
+      colorValue: '#EFD8BD',
+    },],
+  },
+}, {
+  id: 'ipad-air',
+  title: 'iPad Air',
+  screenRadius: 18,
+  clayBezelLeft: 49,
+  clayBezelRight: 49,
+  clayBezelTop: 49,
+  clayBezelBottom: 49,
+  clayBezelRadius: 49,
+  screenWidth: 820,
+  screenHeight: 1180,
+  externalClay: {
+    width: 994,
+    height: 1374,
+    screenOffsetLeft: 87,
+    screenOffsetTop: 97,
+  },
+  realisticImage: {
+    width: 1960 / 2,
+    height: 2680 / 2,
+    screenOffsetLeft: 160 / 2,
+    screenOffsetTop: 160 / 2,
+    availableColors: [{
+      id: 'space-grey',
+      title: 'Space Grey',
+      colorValue: '#C3C4C8',
+    }, {
+      id: 'silver',
+      title: 'Silver',
+      colorValue: '#E1E2E4',
+    }, {
+      id: 'rose-gold',
+      title: 'Rose Gold',
+      colorValue: '#ECCBC4',
+    }, {
+      id: 'blue',
+      title: 'Blue',
+      colorValue: '#CBDAE6',
+    }, {
+      id: 'green',
+      title: 'Green',
+      colorValue: '#DAF0D9',
+    },],
+  },
+}, {
+  id: 'ipad-pro-11',
+  title: 'iPad Pro 11\u2033',
+  screenRadius: 17,
+  clayBezelLeft: 49,
+  clayBezelRight: 49,
+  clayBezelTop: 49,
+  clayBezelBottom: 49,
+  clayBezelRadius: 49,
+  screenWidth: 834,
+  screenHeight: 1194,
+  externalClay: {
+    width: 990,
+    height: 1370,
+    screenOffsetLeft: 78,
+    screenOffsetTop: 88,
+  },
+  realisticImage: {
+    width: 1968 / 2,
+    height: 2688 / 2,
+    screenOffsetLeft: 75,
+    screenOffsetTop: 75,
+    availableColors: [{
+      id: 'space-grey',
+      title: 'Space Grey',
+      colorValue: '#C3C4C8',
+    }, {
+      id: 'silver',
+      title: 'Silver',
+      colorValue: '#E1E2E4',
+    },],
+  },
+}, {
+  id: 'ipad-pro-12-9',
+  title: 'iPad Pro 12.9\u2033',
+  ...presetsBase.iPadPro,
+  screenRadius: 17,
+  screenWidth: 1024,
+  screenHeight: 1366,
+  externalClay: {
+    width: 1180,
+    height: 1542,
+    screenOffsetLeft: 78,
+    screenOffsetTop: 88,
+  },
+  realisticImage: {
+    width: 2348 / 2,
+    height: 3032 / 2,
+    screenOffsetLeft: 75,
+    screenOffsetTop: 75,
+    availableColors: [{
+      id: 'space-grey',
+      title: 'Space Grey',
+      colorValue: '#C3C4C8',
+    }, {
+      id: 'silver',
+      title: 'Silver',
+      colorValue: '#E1E2E4',
+    },],
+  },
+}, {
+  id: 'surface-3',
+  title: 'Microsoft Surface 3',
+  screenRadius: 0,
+  clayBezelLeft: 49,
+  clayBezelRight: 49,
+  clayBezelTop: 49,
+  clayBezelBottom: 49,
+  clayBezelRadius: 49,
+  screenWidth: 960,
+  screenHeight: 640,
+  externalClay: {
+    width: 1184,
+    height: 864,
+    screenOffsetLeft: 112,
+    screenOffsetTop: 112,
+  },
+  realisticImage: {
+    width: 2280 / 2,
+    height: 1580 / 2,
+    screenOffsetLeft: 180 / 2,
+    screenOffsetTop: 150 / 2,
+  },
+}, {
+  id: 'surface-pro-4',
+  title: 'Microsoft Surface Pro 4',
+  screenRadius: 0,
+  clayBezelLeft: 49,
+  clayBezelRight: 49,
+  clayBezelTop: 49,
+  clayBezelBottom: 49,
+  clayBezelRadius: 49,
+  screenWidth: 1368,
+  screenHeight: 912,
+  externalClay: {
+    width: 1592,
+    height: 1136,
+    screenOffsetLeft: 112,
+    screenOffsetTop: 112,
+  },
+  realisticImage: {
+    width: 3176 / 2,
+    height: 2224 / 2,
+    screenOffsetLeft: 220 / 2,
+    screenOffsetTop: 200 / 2,
+  },
+}, // Watches ------------------------------------------------------------------------------------------------------------------------
+{
+  id: 'apple-watch-44',
+  title: `Apple Watch 44mm`,
+  screenRadius: 33,
+  screenWidth: 184,
+  screenHeight: 224,
+  disableRotation: true,
+  externalClay: {
+    width: 298,
+    height: 502,
+    screenOffsetLeft: 57,
+    screenOffsetTop: 129,
+  },
+  realisticImage: {
+    width: 548 / 2,
+    height: 908 / 2,
+    screenOffsetLeft: 90 / 2,
+    screenOffsetTop: 230 / 2,
+    availableColors: [{
+      id: 'black',
+      title: 'Black',
+      colorValue: '#2E2C36',
+    }, {
+      id: 'white',
+      title: 'White',
+      colorValue: '#F7F3F0',
+    }, {
+      id: 'yellow',
+      title: 'Yellow',
+      colorValue: '#FDDC6C',
+    }, {
+      id: 'orange',
+      title: 'Orange',
+      colorValue: '#F35C56',
+    },],
+  },
+}, {
+  id: 'apple-watch-40',
+  title: `Apple Watch 40mm`,
+  screenRadius: 27,
+  screenWidth: 162,
+  screenHeight: 197,
+  disableRotation: true,
+  externalClay: {
+    width: 280,
+    height: 463,
+    screenOffsetLeft: 59,
+    screenOffsetTop: 124,
+  },
+  realisticImage: {
+    width: 504 / 2,
+    height: 854 / 2,
+    screenOffsetLeft: 90 / 2,
+    screenOffsetTop: 230 / 2,
+    availableColors: [{
+      id: 'black',
+      title: 'Black',
+      colorValue: '#2E2C36',
+    }, {
+      id: 'white',
+      title: 'White',
+      colorValue: '#F7F3F0',
+    }, {
+      id: 'yellow',
+      title: 'Yellow',
+      colorValue: '#FDDC6C',
+    }, {
+      id: 'orange',
+      title: 'Orange',
+      colorValue: '#F35C56',
+    },],
+  },
+}, // TVs ------------------------------------------------------------------------------------------------------------------------
+{
+  id: 'tv-full-hd',
+  title: `Full HD`,
+  screenRadius: 0,
+  screenWidth: 1920,
+  screenHeight: 1080,
+  externalClay: {
+    width: 1968,
+    height: 1168,
+    screenOffsetLeft: 24,
+    screenOffsetTop: 12,
+  },
+  realisticImage: {
+    width: 4040 / 2,
+    height: 2360 / 2,
+    screenOffsetLeft: 100 / 2,
+    screenOffsetTop: 100 / 2,
+  },
+}, {
+  id: 'tv-4k',
+  title: `4K`,
+  screenRadius: 0,
+  screenWidth: 3840,
+  screenHeight: 2160,
+  externalClay: {
+    width: 3908,
+    height: 2308,
+    screenOffsetLeft: 34,
+    screenOffsetTop: 24,
+  },
+  realisticImage: {
+    width: 7960 / 2,
+    height: 4600 / 2,
+    screenOffsetLeft: 140 / 2,
+    screenOffsetTop: 140 / 2,
+  },
+}, // Old devices ------------------------------------------------------------------------------------------------------------------------
+// deprecated
+{
+  id: '720p',
+  title: '720p',
+  ...presetsBase.desktop,
+  screenWidth: 720,
+  screenHeight: 1280,
+}, // deprecated
+{
+  id: '900p',
+  title: '900p',
+  ...presetsBase.desktop,
+  screenWidth: 900,
+  screenHeight: 1440,
+}, // deprecated
+{
+  id: '1080p',
+  title: '1080p',
+  ...presetsBase.desktop,
+  screenWidth: 1080,
+  screenHeight: 1920,
+}, // deprecated
+{
+  id: '1440p',
+  title: '1440p',
+  ...presetsBase.desktop,
+  screenWidth: 1440,
+  screenHeight: 2560,
+}, // deprecated
+{
+  id: '4k',
+  title: '4K',
+  ...presetsBase.desktop,
+  screenWidth: 2160,
+  screenHeight: 3840,
+},])();
+var deviceCodeComponentPresetIds = [
+  'iphone-12',
+  'iphone-12-mini',
+  'iphone-12-pro',
+  'iphone-11',
+  'iphone-11-pro',
+  'iphone-11-pro-max',
+  'iphone-8',
+  'iphone-8-plus',
+  'iphone-se',
+  'samsung-note-10',
+  'pixel-4',
+  'ipad',
+  'ipad-pro-11',
+  'ipad-pro-12-9',
+  '720p',
+  '900p',
+  '1080p',
+  '1440p',
+  '4k',
+];
+var devicePresetsMap = /* @__PURE__ */ devicePresets.reduce((map2, preset,) => {
+  map2[preset.id] = preset;
+  return map2;
+}, {},);
+function getDevicePreset(presetId,) {
+  return devicePresetsMap[presetId] ?? devicePresetsMap[defaultPresetId];
 }
-function finiteNumber(value,) {
-  return isFiniteNumber(value,) ? value : void 0;
+var defaultDeviceProps = {
+  preset: defaultPresetId,
+  customWidth: 375,
+  customHeight: 800,
+  customBezel: 20,
+  isMixedBezel: false,
+  bezelTop: 20,
+  bezelRight: 20,
+  bezelBottom: 20,
+  bezelLeft: 20,
+  customBezelRadius: 20,
+  customScreenRadius: 0,
+  orientation: 'portrait',
+  skin: 'clay',
+  theme: 'dark',
+  shadow: true,
+  backgroundColor: void 0,
+};
+function convertPropsToDeviceOptions(props, {
+  forceOldClay = false,
+} = {},) {
+  if (props.preset === 'no-device') {
+    return;
+  }
+  let preset;
+  if (props.preset === 'custom') {
+    preset = {
+      screenWidth: props.customWidth,
+      screenHeight: props.customHeight,
+      screenRadius: props.customScreenRadius,
+      clayBezelTop: props.isMixedBezel ? props.bezelTop : props.customBezel,
+      clayBezelRight: props.isMixedBezel ? props.bezelRight : props.customBezel,
+      clayBezelBottom: props.isMixedBezel ? props.bezelBottom : props.customBezel,
+      clayBezelLeft: props.isMixedBezel ? props.bezelLeft : props.customBezel,
+      clayBezelRadius: props.customBezelRadius,
+    };
+  } else {
+    preset = getDevicePreset(props.preset,);
+  }
+  const colors = getColorsFromTheme(props.theme,);
+  const shadowColor = colors.shadowColor;
+  const shadow = props.shadow ? `0 10px 30px ${shadowColor}` : void 0;
+  const rotate2 = !preset.disableRotation && (props.orientation === 'landscape' || props.rotated);
+  let deviceWidth;
+  let deviceHeight;
+  let screenOffsetTop;
+  let screenOffsetLeft;
+  let colorId = props.colorId;
+  let appearance;
+  if ((props.skin === void 0 || props.skin === 'realistic') && preset.realisticImage && props.preset) {
+    deviceWidth = preset.realisticImage.width;
+    deviceHeight = preset.realisticImage.height;
+    screenOffsetTop = preset.realisticImage.screenOffsetTop;
+    screenOffsetLeft = preset.realisticImage.screenOffsetLeft;
+    colorId = colorId ?? colorIdForTheme(props.theme, preset.realisticImage.availableColors,);
+    appearance = {
+      type: 'realistic',
+      imageUrl: colorId
+        ? `https://preview.framercdn.com/images/devices/${props.preset}-${colorId}.png`
+        : `https://preview.framercdn.com/images/devices/${props.preset}.png`,
+      imageWidth: preset.realisticImage.width,
+      imageHeight: preset.realisticImage.height,
+      rotateImage: rotate2,
+    };
+  } else {
+    deviceWidth = preset.screenWidth + (preset.clayBezelLeft ?? 0) + (preset.clayBezelRight ?? 0);
+    deviceHeight = preset.screenHeight + (preset.clayBezelTop ?? 0) + (preset.clayBezelBottom ?? 0);
+    screenOffsetTop = preset.clayBezelTop ?? 0;
+    screenOffsetLeft = preset.clayBezelLeft ?? 0;
+    if (preset.externalClay && !forceOldClay) {
+      deviceWidth = preset.externalClay.width;
+      deviceHeight = preset.externalClay.height;
+      screenOffsetTop = preset.externalClay.screenOffsetTop;
+      screenOffsetLeft = preset.externalClay.screenOffsetLeft;
+      appearance = {
+        type: 'external-clay',
+        imageUrl: `https://preview.framercdn.com/images/devices/${props.preset}-${props.theme}.svg`,
+        imageWidth: preset.externalClay.width,
+        imageHeight: preset.externalClay.height,
+        rotateImage: rotate2,
+      };
+    } else {
+      appearance = {
+        type: 'clay',
+        bezelRadius: preset.clayBezelRadius !== void 0 ? `${preset.clayBezelRadius}px` : void 0,
+        bezelColor: colors.bezelColor,
+        bezelShadeColor: colors.bezelShadeColor,
+      };
+    }
+  }
+  let screenWidth = preset.screenWidth;
+  let screenHeight = preset.screenHeight;
+  if (rotate2) {
+    const screenOffsetRight = deviceWidth - screenWidth - screenOffsetLeft;
+    [deviceWidth, deviceHeight,] = [deviceHeight, deviceWidth,];
+    [screenWidth, screenHeight,] = [screenHeight, screenWidth,];
+    [screenOffsetTop, screenOffsetLeft,] = [screenOffsetRight, screenOffsetTop,];
+  }
+  const handOffset = preset.realisticImage?.handOffset;
+  return {
+    deviceWidth,
+    deviceHeight,
+    appearance,
+    screenWidth,
+    screenHeight,
+    screenOffsetTop,
+    screenOffsetLeft,
+    screenRadius: preset.screenRadius !== void 0 ? `${preset.screenRadius}px` : void 0,
+    screenMaskImage: appearance.type !== 'realistic' && preset.screenMask
+      ? makeScreenMaskImage({
+        mask: preset.screenMask,
+        // width/height of the mask = screen width/height pre-rotation
+        width: preset.screenWidth,
+        height: preset.screenHeight,
+        rotate: rotate2,
+      },)
+      : void 0,
+    screenColor: colors.screenColor,
+    shadow,
+    hand: props.hand !== void 0 && supportsHand(props,)
+      ? {
+        imageUrl: `https://preview.framercdn.com/images/hands/${props.hand}.png`,
+        offsetLeft: handOffset?.left,
+        offsetRight: handOffset?.right,
+        offsetBottom: handOffset?.bottom,
+      }
+      : void 0,
+    background: props.backgroundColor,
+    theme: props.theme,
+    colorId,
+  };
+}
+function makeScreenMaskImage({
+  mask: mask2,
+  width,
+  height,
+  rotate: rotate2 = false,
+},) {
+  const transform2 = rotate2
+    ? // Rotate 90 degrees counter-clockwise around (0,0), then move the
+    // result down into the viewport (rightmost transform is applied first).
+    `transform="translate(0 ${width}) rotate(-90)"`
+    : '';
+  return encodeSVGForCSS(
+    `<svg xmlns="http://www.w3.org/2000/svg" viewport="0 0 ${width} ${height}" preserveAspectRatio="none"><g x="0" y="0" ${transform2}>${mask2}</g></svg>`,
+  );
+}
+var lightColors = /* @__PURE__ */ new Set(['white', 'silver', 'clearly-white', 'sorta-sage',],);
+var darkColors = /* @__PURE__ */ new Set(['black', 'space-grey', 'graphite', 'just-black', 'pro',],);
+function colorIdForTheme(theme, availableColors,) {
+  if (!availableColors) return;
+  const colors = theme === 'light' ? lightColors : darkColors;
+  for (const color2 of availableColors) {
+    if (colors.has(color2.id,)) {
+      return color2.id;
+    }
+  }
+  return availableColors[0]?.id;
+}
+function supportsHand({
+  preset: presetId,
+  skin,
+  orientation = 'portrait',
+},) {
+  if (!presetId || presetId === 'custom' || presetId === 'no-device' || orientation === 'landscape') return false;
+  const preset = getDevicePreset(presetId,);
+  return skin !== 'clay' && preset.realisticImage?.handOffset !== void 0;
+}
+function isStaticRenderer() {
+  const currentTarget = RenderTarget.current();
+  return currentTarget === RenderTarget.canvas || currentTarget === RenderTarget.export;
+}
+function useIsStaticRenderer() {
+  const [isStatic,] = useState(() => isStaticRenderer());
+  return isStatic;
+}
+var asRecord = (object) => object;
+function memoize(fn,) {
+  const cache2 = Object.create(Object.prototype,);
+  return (arg) => {
+    if (cache2[arg] === void 0) cache2[arg] = fn(arg,);
+    return cache2[arg];
+  };
+}
+var reactPropsRegex =
+  /^(?:children|dangerouslySetInnerHTML|key|ref|autoFocus|defaultValue|defaultChecked|innerHTML|suppressContentEditableWarning|suppressHydrationWarning|valueLink|abbr|accept|acceptCharset|accessKey|action|allow|allowUserMedia|allowPaymentRequest|allowFullScreen|allowTransparency|alt|async|autoComplete|autoPlay|capture|cellPadding|cellSpacing|challenge|charSet|checked|cite|classID|className|cols|colSpan|content|contentEditable|contextMenu|controls|controlsList|coords|crossOrigin|data|dateTime|decoding|default|defer|dir|disabled|disablePictureInPicture|download|draggable|encType|enterKeyHint|form|formAction|formEncType|formMethod|formNoValidate|formTarget|frameBorder|headers|height|hidden|high|href|hrefLang|htmlFor|httpEquiv|id|inputMode|integrity|is|keyParams|keyType|kind|label|lang|list|loading|loop|low|marginHeight|marginWidth|max|maxLength|media|mediaGroup|method|min|minLength|multiple|muted|name|nonce|noValidate|open|optimum|pattern|placeholder|playsInline|poster|preload|profile|radioGroup|readOnly|referrerPolicy|rel|required|reversed|role|rows|rowSpan|sandbox|scope|scoped|scrolling|seamless|selected|shape|size|sizes|slot|span|spellCheck|src|srcDoc|srcLang|srcSet|start|step|style|summary|tabIndex|target|title|translate|type|useMap|value|width|wmode|wrap|about|datatype|inlist|prefix|property|resource|typeof|vocab|autoCapitalize|autoCorrect|autoSave|color|incremental|fallback|inert|itemProp|itemScope|itemType|itemID|itemRef|on|option|results|security|unselectable|accentHeight|accumulate|additive|alignmentBaseline|allowReorder|alphabetic|amplitude|arabicForm|ascent|attributeName|attributeType|autoReverse|azimuth|baseFrequency|baselineShift|baseProfile|bbox|begin|bias|by|calcMode|capHeight|clip|clipPathUnits|clipPath|clipRule|colorInterpolation|colorInterpolationFilters|colorProfile|colorRendering|contentScriptType|contentStyleType|cursor|cx|cy|[dkrxyz]|decelerate|descent|diffuseConstant|direction|display|divisor|dominantBaseline|dur|dx|dy|edgeMode|elevation|enableBackground|end|exponent|externalResourcesRequired|fill|fillOpacity|fillRule|filter|filterRes|filterUnits|floodColor|floodOpacity|focusable|fontFamily|fontSize|fontSizeAdjust|fontStretch|fontStyle|fontVariant|fontWeight|format|from|fr|fx|fy|g1|g2|glyphName|glyphOrientationHorizontal|glyphOrientationVertical|glyphRef|gradientTransform|gradientUnits|hanging|horizAdvX|horizOriginX|ideographic|imageRendering|in|in2|intercept|k1|k2|k3|k4|kernelMatrix|kernelUnitLength|kerning|keyPoints|keySplines|keyTimes|lengthAdjust|letterSpacing|lightingColor|limitingConeAngle|local|markerEnd|markerMid|markerStart|markerHeight|markerUnits|markerWidth|mask|maskContentUnits|maskUnits|mathematical|mode|numOctaves|offset|opacity|operator|order|orient|orientation|origin|overflow|overlinePosition|overlineThickness|panose1|paintOrder|pathLength|patternContentUnits|patternTransform|patternUnits|pointerEvents|points|pointsAtX|pointsAtY|pointsAtZ|preserveAlpha|preserveAspectRatio|primitiveUnits|radius|refX|refY|renderingIntent|repeatCount|repeatDur|requiredExtensions|requiredFeatures|restart|result|rotate|rx|ry|scale|seed|shapeRendering|slope|spacing|specularConstant|specularExponent|speed|spreadMethod|startOffset|stdDeviation|stemh|stemv|stitchTiles|stopColor|stopOpacity|strikethroughPosition|strikethroughThickness|string|stroke|strokeDasharray|strokeDashoffset|strokeLinecap|strokeLinejoin|strokeMiterlimit|strokeOpacity|strokeWidth|surfaceScale|systemLanguage|tableValues|targetX|targetY|textAnchor|textDecoration|textRendering|textLength|to|transform|u1|u2|underlinePosition|underlineThickness|unicode|unicodeBidi|unicodeRange|unitsPerEm|vAlphabetic|vHanging|vIdeographic|vMathematical|values|vectorEffect|version|vertAdvY|vertOriginX|vertOriginY|viewBox|viewTarget|visibility|widths|wordSpacing|writingMode|xHeight|x1|x2|xChannelSelector|xlinkActuate|xlinkArcrole|xlinkHref|xlinkRole|xlinkShow|xlinkTitle|xlinkType|xmlBase|xmlns|xmlnsXlink|xmlLang|xmlSpace|y1|y2|yChannelSelector|zoomAndPan|for|class|autofocus|(?:[Dd][Aa][Tt][Aa]|[Aa][Rr][Ii][Aa]|x)-.*)$/u;
+var isPropValid = /* @__PURE__ */ memoize((prop) =>
+  reactPropsRegex.test(prop,) || prop.charCodeAt(0,) === 111 && prop.charCodeAt(1,) === 110 && prop.charCodeAt(2,) < 91
+);
+var mockWithWarning = (message) => {
+  return () => {
+    warnOnce2(message,);
+  };
+};
+var mockWithoutWarning = () => {
+  return () => {};
+};
+var implementation = {
+  // We need a default implementation for useImageSource and useImageElement as it is used for
+  // rendering image backgrounds which would break otherwise. The default value is used for HTML
+  // export and when using the library without Framer.
+  imagePlaceholderSvg:
+    `<svg xmlns="http://www.w3.org/2000/svg" width="126" height="126"><path id="a" d="M126 0v21.584L21.584 126H0v-17.585L108.415 0H126Zm0 108.414V126h-17.586L126 108.414Zm0-84v39.171L63.585 126H24.414L126 24.414Zm0 42v39.17L105.584 126h-39.17L126 66.414ZM105.586 0 0 105.586V66.415L66.415 0h39.171Zm-42 0L0 63.586V24.415L24.415 0h39.171Zm-42 0L0 21.586V0h21.586Z" fill="rgb(136, 136, 136, 0.2)" fill-rule="evenodd"/></svg>`,
+  useImageSource(image,) {
+    return image.src ?? '';
+  },
+  useImageElement(image, rect, nodeId,) {
+    const src = runtime.useImageSource(image, rect, nodeId,);
+    return useMemo(() => {
+      const element = new Image();
+      element.src = src;
+      if (image.srcSet) element.srcset = image.srcSet;
+      return element;
+    }, [src, image.srcSet,],);
+  },
+  canRenderOptimizedCanvasImage() {
+    return false;
+  },
+  isOnPageCanvas: false,
+};
+var isRuntimeInjected = false;
+var runtimeProxy = {
+  get(target, key7, reciever,) {
+    if (Reflect.has(target, key7,)) {
+      return Reflect.get(target, key7, reciever,);
+    }
+    if (['getLogger',].includes(String(key7,),)) {
+      return mockWithoutWarning();
+    }
+    if (isRuntimeInjected) {
+      return mockWithWarning(`${String(key7,)} is not available in this version of Framer.`,);
+    }
+    return mockWithWarning(`${String(key7,)} is only available inside of Framer. https://www.framer.com/`,);
+  },
+};
+var runtime = /* @__PURE__ */ new Proxy(implementation, runtimeProxy,);
+function _injectRuntime(injectedRuntime,) {
+  Object.assign(implementation, injectedRuntime,);
+  isRuntimeInjected = true;
+}
+var cornerPropertiesToInherit = {
+  borderRadius: 'inherit',
+  cornerShape: 'inherit',
+};
+var FixedSizeScaleVariants = [1, 2, 2.2,];
+var ValidSteps = [512, 1024, 2048, 4096,];
+function getVariantsDimensions(width, height,) {
+  if (width === void 0 || height === void 0) return;
+  let lead = width,
+    follow = height,
+    orient = 0;
+  if (height > width) {
+    lead = height;
+    follow = width;
+    orient = 1;
+  }
+  const ratio = lead / follow;
+  const sizes = [];
+  for (const step2 of ValidSteps) {
+    if (lead <= step2) return sizes;
+    sizes.push({
+      maxSideSize: step2,
+      width: orient === 0 ? step2 : Math.trunc(step2 / ratio,),
+    },);
+  }
+  return sizes;
+}
+function urlWithScaleDownTo(url, scaleDownTo,) {
+  try {
+    const urlObj = new URL(url,);
+    if (scaleDownTo) {
+      urlObj.searchParams.set('scale-down-to', `${scaleDownTo}`,);
+    } else {
+      urlObj.searchParams.delete('scale-down-to',);
+    }
+    return urlObj.toString();
+  } catch {
+    return url;
+  }
+}
+var MinVariantSizeForSourceSet = 512;
+function getResponsiveSrcSet(source, image, variants,) {
+  if (!variants || variants.length === 0) return void 0;
+  if (!image.pixelWidth) return void 0;
+  const srcSet = [];
+  for (const variant of variants) {
+    if (variant.width < MinVariantSizeForSourceSet) continue;
+    const url = urlWithScaleDownTo(source, variant.maxSideSize,);
+    srcSet.push(`${url} ${variant.width}w`,);
+  }
+  srcSet.push(`${urlWithScaleDownTo(source, null,)} ${image.pixelWidth}w`,);
+  return srcSet.join(', ',) || void 0;
+}
+function getFixedSrcSets(source, image, nodeFixedSize,) {
+  if (!image.pixelWidth || !image.pixelHeight) return void 0;
+  if (!nodeFixedSize?.width || !nodeFixedSize?.height) return void 0;
+  const srcSet = [];
+  const imageMaxSide = Math.max(image.pixelWidth, image.pixelHeight,);
+  const scaleRatio = Math.max(nodeFixedSize.width / image.pixelWidth, nodeFixedSize.height / image.pixelHeight,);
+  for (const variant of FixedSizeScaleVariants) {
+    const scaleMaxSideSizeTo = Math.round(imageMaxSide * variant * scaleRatio,);
+    const url = urlWithScaleDownTo(source, scaleMaxSideSizeTo,);
+    srcSet.push({
+      src: url,
+      scale: variant,
+    },);
+  }
+  return srcSet;
+}
+function getSrcSet(nodeFixedSize, image, source,) {
+  if (!['auto', 'lossless',].includes(image.preferredSize ?? '',)) {
+    return {
+      src: source,
+      srcSet: void 0,
+    };
+  }
+  if (nodeFixedSize) {
+    const fixedSrcSets = getFixedSrcSets(source, image, nodeFixedSize,);
+    if (!fixedSrcSets?.length) {
+      return {
+        src: source,
+        srcSet: void 0,
+      };
+    }
+    const [x1, ...rest] = fixedSrcSets;
+    return {
+      src: x1?.src,
+      srcSet: rest.map(({
+        src,
+        scale: scale2,
+      },) => `${src} ${scale2}x`).join(', ',),
+    };
+  } else {
+    const variants = getVariantsDimensions(image.pixelWidth, image.pixelHeight,);
+    return {
+      src: source,
+      srcSet: getResponsiveSrcSet(source, image, variants,),
+    };
+  }
+}
+var wrapperStyle = /* @__PURE__ */ (() => ({
+  position: 'absolute',
+  ...cornerPropertiesToInherit,
+  top: 0,
+  right: 0,
+  bottom: 0,
+  left: 0,
+}))();
+function getPlaceholderStyle() {
+  return {
+    backgroundRepeat: 'repeat',
+    backgroundPosition: 'left top',
+    backgroundSize: '64px auto',
+    backgroundImage: encodeSVGForCSS(runtime.imagePlaceholderSvg,),
+  };
+}
+function cssObjectFit(imageFit,) {
+  switch (imageFit) {
+    case 'fit':
+      return 'contain';
+    case 'stretch':
+      return 'fill';
+    default:
+      return 'cover';
+  }
+}
+function cssObjectPosition(positionX, positionY,) {
+  const x2 = positionX ?? 'center';
+  const y2 = positionY ?? 'center';
+  if (x2 === 'center' && y2 === 'center') return 'center';
+  return x2 + ' ' + y2;
+}
+function getImageStyle(image,) {
+  return {
+    display: 'block',
+    width: '100%',
+    height: '100%',
+    ...cornerPropertiesToInherit,
+    objectPosition: cssObjectPosition(image.positionX, image.positionY,),
+    objectFit: cssObjectFit(image.fit,),
+  };
+}
+function useDecodingAttribute(avoidAsyncDecoding,) {
+  const currentDecoding = React42.useRef(avoidAsyncDecoding ? 'auto' : 'async',);
+  const switchDecodingToAuto = useCallback2((node) => {
+    currentDecoding.current = 'auto';
+    node.decoding = 'auto';
+  }, [],);
+  const onImageLoad = useCallback2((event) => {
+    switchDecodingToAuto(event.currentTarget,);
+  }, [switchDecodingToAuto,],);
+  const onImageMount = useCallback2((node) => {
+    if (node?.complete) switchDecodingToAuto(node,);
+  }, [switchDecodingToAuto,],);
+  return {
+    decoding: currentDecoding.current,
+    onImageLoad,
+    onImageMount,
+  };
+}
+function StaticImage({
+  image,
+  containerSize,
+  nodeId,
+  alt,
+  draggable,
+  avoidAsyncDecoding,
+},) {
+  const source = runtime.useImageSource(image, containerSize, nodeId,);
+  const imageStyle = getImageStyle(image,);
+  const {
+    decoding,
+    onImageLoad,
+    onImageMount,
+  } = useDecodingAttribute(avoidAsyncDecoding,);
+  const {
+    srcSet,
+    src,
+  } = !('srcSet' in image) ? getSrcSet(image.nodeFixedSize, image, source,) : {
+    src: source,
+    srcSet: image.srcSet,
+  };
+  return (
+    // oxlint-disable-next-line framer-studio/require-async-decoding -- we conditionally apply it
+    /* @__PURE__ */
+    jsx('img', {
+      suppressHydrationWarning: true,
+      ref: onImageMount,
+      decoding,
+      fetchPriority: image.fetchPriority,
+      loading: image.loading,
+      width: image.pixelWidth,
+      height: image.pixelHeight,
+      sizes: srcSet ? image.sizes : void 0,
+      srcSet,
+      src,
+      onLoad: onImageLoad,
+      alt: alt ?? image.alt ?? '',
+      style: imageStyle,
+      draggable,
+    },)
+  );
+}
+function CanvasImage({
+  image,
+  containerSize,
+  nodeId,
+},) {
+  const wrapperRef = React42.useRef(null,);
+  const imageElement = runtime.useImageElement(image, containerSize, nodeId,);
+  const imageStyle = getImageStyle(image,);
+  React42.useLayoutEffect(() => {
+    const wrapper = wrapperRef.current;
+    if (wrapper === null) return;
+    wrapper.appendChild(imageElement,);
+    return () => {
+      wrapper.removeChild(imageElement,);
+    };
+  }, [imageElement,],);
+  Object.assign(imageElement.style, imageStyle,);
+  return /* @__PURE__ */ jsx('div', {
+    suppressHydrationWarning: true,
+    ref: wrapperRef,
+    style: {
+      display: 'contents',
+      ...cornerPropertiesToInherit,
+    },
+  },);
+}
+function OptimizedCanvasImage({
+  nodeId,
+  image,
+  containerSize,
+},) {
+  const wrapperRef = React42.useRef(null,);
+  const source = runtime.useImageSource(image, containerSize, nodeId,);
+  React42.useLayoutEffect(() => {
+    const wrapper = wrapperRef.current;
+    if (wrapper === null) return;
+    const imageStyle = getImageStyle(image,);
+    runtime.renderOptimizedCanvasImage(wrapper, source, imageStyle, nodeId,);
+  }, [nodeId, image, source,],);
+  return /* @__PURE__ */ jsx('div', {
+    suppressHydrationWarning: true,
+    ref: wrapperRef,
+    style: {
+      display: 'contents',
+      ...cornerPropertiesToInherit,
+    },
+  },);
+}
+function BackgroundImageComponent({
+  layoutId,
+  image,
+  ...props
+},) {
+  if (layoutId) {
+    layoutId += '-background';
+  }
+  let fallbackWrapperStyles = null;
+  let needsMotion = !!layoutId;
+  let imageNode = null;
+  if (isString(image.src,)) {
+    if (image.fit === 'tile' && image.pixelWidth && image.pixelHeight) {
+      const backgroundSize = isNumber2(image.backgroundSize,) ? image.backgroundSize : 1;
+      const tileSize = {
+        width: Math.round(backgroundSize * image.pixelWidth,),
+        height: Math.round(backgroundSize * image.pixelHeight,),
+      };
+      const roundedBackgroundSize = roundToHalfPixel(backgroundSize * (image.pixelWidth / 2),);
+      const imageSource = runtime.useImageSource(image, tileSize,);
+      fallbackWrapperStyles = {
+        ...wrapperStyle,
+        backgroundImage: `url(${imageSource})`,
+        backgroundRepeat: 'repeat',
+        backgroundPosition: cssObjectPosition(image.positionX, image.positionY,),
+        opacity: void 0,
+        border: 0,
+        backgroundSize: `${roundedBackgroundSize}px auto`,
+      };
+      imageNode = null;
+      needsMotion = true;
+    } else if (RenderTarget.current() !== RenderTarget.canvas) {
+      imageNode = /* @__PURE__ */ jsx(StaticImage, {
+        suppressHydrationWarning: true,
+        image,
+        avoidAsyncDecoding: RenderTarget.current() === RenderTarget.export,
+        ...props,
+      },);
+    } else if (runtime.canRenderOptimizedCanvasImage(runtime.useImageSource(image,),)) {
+      imageNode = /* @__PURE__ */ jsx(OptimizedCanvasImage, {
+        suppressHydrationWarning: true,
+        image,
+        ...props,
+      },);
+    } else {
+      imageNode = /* @__PURE__ */ jsx(CanvasImage, {
+        suppressHydrationWarning: true,
+        image,
+        ...props,
+      },);
+    }
+  }
+  const style2 = imageNode ? wrapperStyle : fallbackWrapperStyles ?? {
+    ...wrapperStyle,
+    ...getPlaceholderStyle(),
+  };
+  return needsMotion
+    ? /* @__PURE__ */ jsx(motion.div, {
+      suppressHydrationWarning: true,
+      layoutId,
+      style: style2,
+      'data-framer-background-image-wrapper': true,
+      children: imageNode,
+    },)
+    : /* @__PURE__ */ jsx('div', {
+      suppressHydrationWarning: true,
+      style: style2,
+      'data-framer-background-image-wrapper': true,
+      children: imageNode,
+    },);
+}
+function collectBorderStyleForProps(props, style2, collapseEqualBorders = true,) {
+  const {
+    borderWidth,
+    borderStyle,
+    borderColor,
+  } = props;
+  if (!borderWidth) {
+    return;
+  }
+  let borderTop;
+  let borderBottom;
+  let borderLeft;
+  let borderRight;
+  if (typeof borderWidth === 'number') {
+    borderTop =
+      borderBottom =
+      borderLeft =
+      borderRight =
+        borderWidth;
+  } else {
+    borderTop = borderWidth.top || 0;
+    borderBottom = borderWidth.bottom || 0;
+    borderLeft = borderWidth.left || 0;
+    borderRight = borderWidth.right || 0;
+  }
+  if (borderTop === 0 && borderBottom === 0 && borderLeft === 0 && borderRight === 0) {
+    return;
+  }
+  if (collapseEqualBorders && borderTop === borderBottom && borderTop === borderLeft && borderTop === borderRight) {
+    style2.border = `${borderTop}px ${borderStyle} ${borderColor}`;
+    return;
+  }
+  style2.borderStyle = props.borderStyle;
+  style2.borderColor = props.borderColor;
+  style2.borderTopWidth = `${borderTop}px`;
+  style2.borderBottomWidth = `${borderBottom}px`;
+  style2.borderLeftWidth = `${borderLeft}px`;
+  style2.borderRightWidth = `${borderRight}px`;
+}
+function Border(props,) {
+  const layoutId = props.layoutId ? `${props.layoutId}-border` : void 0;
+  if (!props.borderWidth) {
+    return null;
+  }
+  const style2 = {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    ...cornerPropertiesToInherit,
+    pointerEvents: 'none',
+  };
+  if (props.border) {
+    style2.border = props.border;
+    return /* @__PURE__ */ jsx(motion.div, {
+      suppressHydrationWarning: true,
+      style: style2,
+    },);
+  }
+  collectBorderStyleForProps(props, style2, false,);
+  return /* @__PURE__ */ jsx(motion.div, {
+    suppressHydrationWarning: true,
+    'data-frame-border': true,
+    style: style2,
+    layoutId,
+  },);
+}
+var key = 'src';
+var BackgroundImage = {
+  isImageObject: function (image,) {
+    if (!image || typeof image === 'string') return false;
+    return typeof image === 'object' && key in image;
+  },
+};
+function applyForwardOverrides(background, props,) {
+  const {
+    _forwardedOverrideId,
+    _forwardedOverrides,
+    id: id3,
+  } = props;
+  const forwardedOverrideId = _forwardedOverrideId ?? id3;
+  const src = _forwardedOverrides && forwardedOverrideId ? _forwardedOverrides[forwardedOverrideId] : void 0;
+  if (src && typeof src === 'string') {
+    background = {
+      ...background,
+      src,
+    };
+  }
+  return background;
+}
+function backgroundImageFromProps(props,) {
+  const {
+    background,
+    image,
+  } = props;
+  if (image !== void 0 && background && !BackgroundImage.isImageObject(background,)) {
+    return;
+  }
+  let backgroundImage = null;
+  if (isString(image,)) {
+    backgroundImage = {
+      alt: '',
+      src: image,
+    };
+  } else {
+    backgroundImage = Animatable.get(background, null,);
+  }
+  if (!BackgroundImage.isImageObject(backgroundImage,)) {
+    return;
+  }
+  return applyForwardOverrides(backgroundImage, props,);
 }
 function isEmpty(obj,) {
   return !obj || !Object.keys(obj,).length && obj.constructor === Object;
@@ -22836,6 +24760,12 @@ function isReactElement(test2,) {
 }
 function isReactChild(test2,) {
   return test2 !== null && typeof test2 !== 'undefined' && typeof test2 !== 'boolean' && !isEmpty(test2,);
+}
+function isFiniteNumber(value,) {
+  return Number.isFinite(value,);
+}
+function finiteNumber(value,) {
+  return isFiniteNumber(value,) ? value : void 0;
 }
 function degreesToRadians(degrees2,) {
   return degrees2 * (Math.PI / 180);
@@ -24201,45 +26131,25 @@ function isAutoSized({
 },) {
   return width === 'auto' || width === 'min-content' || height === 'auto' || height === 'min-content';
 }
-var ControlType = /* @__PURE__ */ ((ControlType2) => {
-  ControlType2['Boolean'] = 'boolean';
-  ControlType2['Number'] = 'number';
-  ControlType2['String'] = 'string';
-  ControlType2['RichText'] = 'richtext';
-  ControlType2['FusedNumber'] = 'fusednumber';
-  ControlType2['Enum'] = 'enum';
-  ControlType2['SegmentedEnum'] = 'segmentedenum';
-  ControlType2['Color'] = 'color';
-  ControlType2['Image'] = 'image';
-  ControlType2['ResponsiveImage'] = 'responsiveimage';
-  ControlType2['File'] = 'file';
-  ControlType2['ComponentInstance'] = 'componentinstance';
-  ControlType2['Slot'] = 'slot';
-  ControlType2['Array'] = 'array';
-  ControlType2['EventHandler'] = 'eventhandler';
-  ControlType2['ChangeHandler'] = 'changehandler';
-  ControlType2['Transition'] = 'transition';
-  ControlType2['BoxShadow'] = 'boxshadow';
-  ControlType2['Link'] = 'link';
-  ControlType2['Date'] = 'date';
-  ControlType2['Object'] = 'object';
-  ControlType2['Font'] = 'font';
-  ControlType2['PageScope'] = 'pagescope';
-  ControlType2['ScrollSectionRef'] = 'scrollsectionref';
-  ControlType2['CustomCursor'] = 'customcursor';
-  ControlType2['Border'] = 'border';
-  ControlType2['Cursor'] = 'cursor';
-  ControlType2['Padding'] = 'padding';
-  ControlType2['BorderRadius'] = 'borderradius';
-  ControlType2['Gap'] = 'gap';
-  ControlType2['CollectionReference'] = 'collectionreference';
-  ControlType2['MultiCollectionReference'] = 'multicollectionreference';
-  ControlType2['TrackingId'] = 'trackingid';
-  ControlType2['VectorSetItem'] = 'vectorsetitem';
-  ControlType2['LinkRelValues'] = 'linkrelvalues';
-  ControlType2['Location'] = 'location';
-  return ControlType2;
-})(ControlType || {},);
+function getIntrinsicSizeForBackgroundImage(background,) {
+  if (!background) return void 0;
+  if (background.pixelHeight && background.pixelWidth) {
+    return {
+      width: background.pixelWidth,
+      height: background.pixelHeight,
+    };
+  }
+  if (background.src === void 0) {
+    return {
+      width: 1,
+      height: 1,
+    };
+  }
+  return void 0;
+}
+function htmlElementAsMotionComponent(asElem,) {
+  return asElem && asElem !== 'search' && asElem !== 'slot' && asElem !== 'template' ? motion[asElem] : motion['div'];
+}
 function LazyProp(factory,) {
   let initialized = false;
   let value;
@@ -24294,7 +26204,7 @@ function currentCSSRenderTarget() {
   if (isScreenshotFramerHost()) return RenderTarget.preview;
   return RenderTarget.current();
 }
-var withCSS = (Component18, escapedCSS, componentSerializationId,) =>
+var withCSS = (Component17, escapedCSS, componentSerializationId,) =>
   React42.forwardRef((props, ref,) => {
     const {
       sheet,
@@ -24315,7 +26225,7 @@ var withCSS = (Component18, escapedCSS, componentSerializationId,) =>
         : escapedCSS.split('\n',);
       css22.forEach((rule) => rule && injectCSSRule(rule, sheet, cache2,));
     }, [],);
-    return /* @__PURE__ */ jsx(Component18, {
+    return /* @__PURE__ */ jsx(Component17, {
       suppressHydrationWarning: true,
       ...props,
       ref,
@@ -25808,2228 +27718,8 @@ var combinedCSSRulesForPreview = /* @__PURE__ */ LazyProp(() => combineCSSRules(
 function getCombinedCSSRules() {
   return RenderTarget.current() === RenderTarget.preview ? combinedCSSRulesForPreview.value : combinedCSSRules.value;
 }
-function withLibraryCSS(Component18,) {
-  return withCSS(Component18, getCombinedCSSRules, 'framer-lib-combinedCSSRules',);
-}
-function isReactComponent(component,) {
-  return isObject2(component,) || isFunction(component,);
-}
-var optionalKey = 'optional';
-function controlIsOptional(control,) {
-  return !!control && optionalKey in control && control[optionalKey] === true;
-}
-function shouldBeNever(_,) {}
-function getControlDefaultValue(control,) {
-  try {
-    switch (control.type) {
-      case 'string':
-      case 'collectionreference':
-      case 'color':
-      case 'date':
-      case 'link':
-      case 'boxshadow':
-      case 'padding':
-      case 'borderradius':
-      case 'gap':
-        return isString(control.defaultValue,) ? control.defaultValue : void 0;
-      case 'boolean':
-        return isBoolean(control.defaultValue,) ? control.defaultValue : void 0;
-      case 'enum':
-        if (isUndefined(control.defaultValue,)) return void 0;
-        return control.options.includes(control.defaultValue,) ? control.defaultValue : void 0;
-      case 'fusednumber':
-      case 'number':
-        return isNumber2(control.defaultValue,) ? control.defaultValue : void 0;
-      case 'transition':
-        return isObject2(control.defaultValue,) ? control.defaultValue : void 0;
-      case 'border':
-        return isObject2(control.defaultValue,) ? control.defaultValue : void 0;
-      case 'font':
-      case 'location':
-        return isObject2(control.defaultValue,) ? control.defaultValue : void 0;
-      case 'linkrelvalues':
-        return isArray(control.defaultValue,) ? control.defaultValue : void 0;
-      case 'multicollectionreference':
-        return isArray(control.defaultValue,) ? control.defaultValue : void 0;
-      case 'object': {
-        const value = isObject2(control.defaultValue,) ? control.defaultValue : {};
-        if (isObject2(control.controls,)) {
-          applyControlDefaultsToDefaultProps(value, control.controls,);
-        }
-        return value;
-      }
-      case 'array':
-        return isArray(control.defaultValue,) ? control.defaultValue : void 0;
-      case 'file':
-      case 'image':
-      case 'richtext':
-      case 'pagescope':
-      case 'eventhandler':
-      case 'changehandler':
-      case 'segmentedenum':
-      case 'responsiveimage':
-      case 'componentinstance':
-      case 'slot':
-      case 'scrollsectionref':
-      case 'customcursor':
-      case 'cursor':
-      case 'trackingid':
-      case 'vectorsetitem':
-        return void 0;
-      // No default
-      default:
-        shouldBeNever(control,);
-        return void 0;
-    }
-  } catch {
-    return void 0;
-  }
-}
-function applyControlDefaultsToDefaultProps(defaultProps, controls,) {
-  for (const controlKey in controls) {
-    const control = controls[controlKey];
-    if (!control) continue;
-    const currentDefault = defaultProps[controlKey];
-    if (!isUndefined(currentDefault,)) continue;
-    if (controlIsOptional(control,)) continue;
-    const defaultValue = getControlDefaultValue(control,);
-    if (isUndefined(defaultValue,)) continue;
-    defaultProps[controlKey] = defaultValue;
-  }
-}
-function getDefaultProps(component,) {
-  if (isObject2(component.defaultProps,)) {
-    return component.defaultProps;
-  }
-  const defaultProps = {};
-  component.defaultProps = defaultProps;
-  return defaultProps;
-}
-function applyControlDefaultsToReactDefaultProps(component, controls,) {
-  if (!isReactComponent(component,)) return;
-  const defaultProps = getDefaultProps(component,);
-  applyControlDefaultsToDefaultProps(defaultProps, controls,);
-}
-function addPropertyControls(component, propertyControls,) {
-  Object.assign(component, {
-    propertyControls,
-  },);
-  applyControlDefaultsToReactDefaultProps(component, propertyControls,);
-}
-function getPropertyControls(component,) {
-  return component.propertyControls;
-}
-var defaultPresetId = 'iphone-12-pro';
-var presetsBase = /* @__PURE__ */ (() => ({
-  iPhonePro: {
-    // Screen mask takes care of the rounded screen corners for iPhones Pro,
-    // and actually using a radius here produces visual artifacts in Chrome.
-    screenRadius: (
-      /* 38 */
-      0
-    ),
-    clayBezelLeft: 21,
-    clayBezelRight: 21,
-    clayBezelTop: 21,
-    clayBezelBottom: 21,
-    clayBezelRadius: 38 + 21,
-  },
-  iPhone8: {
-    screenRadius: 0,
-    clayBezelLeft: 24,
-    clayBezelRight: 24,
-    clayBezelTop: 96,
-    clayBezelBottom: 96,
-    clayBezelRadius: 38 * 1.5,
-  },
-  iPadPro: {
-    screenRadius: 25,
-    clayBezelLeft: 38,
-    clayBezelRight: 38,
-    clayBezelTop: 38,
-    clayBezelBottom: 38,
-    clayBezelRadius: 25 + 38,
-  },
-  desktop: {
-    clayBezelLeft: 20,
-    clayBezelRight: 20,
-    clayBezelTop: 20,
-    clayBezelBottom: 20,
-    clayBezelRadius: 20,
-  },
-}))();
-var devicePresets = /* @__PURE__ */ (() => [{
-  id: 'iphone-12',
-  title: 'iPhone 12',
-  screenRadius: 0,
-  clayBezelLeft: 22,
-  clayBezelRight: 22,
-  clayBezelTop: 22,
-  clayBezelBottom: 22,
-  clayBezelRadius: 66,
-  screenWidth: 390,
-  screenHeight: 844,
-  externalClay: {
-    width: 500,
-    height: 974,
-    screenOffsetTop: 65,
-    screenOffsetLeft: 55,
-  },
-  screenMask:
-    '<g style="transform: scale(0.5);"><path d="M171.2 0c2.3 0 4 .5 5.4 1.3 1.6 1 2.8 2.2 3.7 3.8.8 1.6 1.2 2.3 1.2 4.9 0 12 2.2 19 6.2 26.5s9.8 13.3 17.3 17.4c7.5 4 15.8 6.1 30.6 6.1h311.5c14.3 0 22.5-2.2 29.9-6.1 7.5-4 13.3-10 17.3-17.4 4-7.5 6.2-14.5 6.2-26.5 0-2.6.4-3.2 1.1-4.9.8-1.6 2-2.9 3.4-3.8 1.4-.8 3.2-1.3 5.4-1.3h54.2c40.1 0 54.7 4.2 69.4 12a81.8 81.8 0 0134 34c7.8 14.7 12 29.3 12 69.4v1457.2c0 40.1-4.2 54.7-12 69.4a81.8 81.8 0 01-34 34c-14.7 7.8-29.3 12-69.4 12H115.4c-40.1 0-54.7-4.2-69.4-12a81.8 81.8 0 01-34-34c-7.8-14.7-12-29.3-12-69.4V115.4C0 75.3 4.2 60.7 12 46a81.8 81.8 0 0134-34C60.7 4.2 75.3 0 115.4 0h55.4z" fill="#000" fill-rule="evenodd"/></g>',
-  realisticImage: {
-    width: 490,
-    height: 944,
-    screenOffsetLeft: 50,
-    screenOffsetTop: 50,
-    availableColors: [{
-      id: 'black',
-      title: 'Black',
-      colorValue: '#2E2C36',
-    }, {
-      id: 'white',
-      title: 'White',
-      colorValue: '#F7F3F0',
-    }, {
-      id: 'blue',
-      title: 'Blue',
-      colorValue: '#14496D',
-    }, {
-      id: 'green',
-      title: 'Green',
-      colorValue: '#DAF0D9',
-    }, {
-      id: 'red',
-      title: 'Red',
-      colorValue: '#DB4141',
-    },],
-    handOffset: {
-      left: 29,
-      right: 29,
-      bottom: 29,
-    },
-  },
-}, {
-  id: 'iphone-12-mini',
-  title: 'iPhone 12 Mini',
-  screenRadius: 0,
-  clayBezelLeft: 22,
-  clayBezelRight: 22,
-  clayBezelTop: 22,
-  clayBezelBottom: 22,
-  clayBezelRadius: 66,
-  screenWidth: 360,
-  screenHeight: 780,
-  externalClay: {
-    width: 450,
-    height: 890,
-    screenOffsetTop: 55,
-    screenOffsetLeft: 45,
-  },
-  screenMask:
-    '<g style="transform: scale(0.5);"><path d="M142 18c0 19 14 47 43 48h349c31 0 44-29 44-48 0-12 4-18 14-18h18c38 0 52 4 66 11 14 8 25 19 33 33v1c7 14 11 28 11 65v1340c0 38-4 52-11 66-8 14-19 25-33 33h-1c-14 7-28 11-65 11H110c-38 0-52-4-66-11-14-8-25-19-33-33v-1c-7-13-11-27-11-64V110c0-38 4-52 11-66 8-14 19-25 33-33h1C58 4 72 0 109 0h16c11 0 17 6 17 18z" fill="#000" fill-rule="evenodd"/></g>',
-  realisticImage: {
-    width: 460,
-    height: 880,
-    screenOffsetLeft: 50,
-    screenOffsetTop: 50,
-    availableColors: [{
-      id: 'black',
-      title: 'Black',
-      colorValue: '#2E2C36',
-    }, {
-      id: 'white',
-      title: 'White',
-      colorValue: '#F7F3F0',
-    }, {
-      id: 'blue',
-      title: 'Blue',
-      colorValue: '#14496D',
-    }, {
-      id: 'green',
-      title: 'Green',
-      colorValue: '#DAF0D9',
-    }, {
-      id: 'red',
-      title: 'Red',
-      colorValue: '#DB4141',
-    },],
-    handOffset: {
-      left: 31.5,
-      right: 30.5,
-      bottom: 30,
-    },
-  },
-}, {
-  id: 'iphone-12-pro',
-  title: 'iPhone 12 Pro',
-  screenRadius: 0,
-  clayBezelLeft: 22,
-  clayBezelRight: 22,
-  clayBezelTop: 22,
-  clayBezelBottom: 22,
-  clayBezelRadius: 66,
-  screenWidth: 390,
-  screenHeight: 844,
-  externalClay: {
-    width: 494,
-    height: 968,
-    screenOffsetTop: 62,
-    screenOffsetLeft: 52,
-  },
-  screenMask:
-    '<g style="transform: scale(0.5);"><path d="M171.2 0c2.3 0 4 .5 5.4 1.3 1.6 1 2.8 2.2 3.7 3.8.8 1.6 1.2 2.3 1.2 4.9 0 12 2.2 19 6.2 26.5s9.8 13.3 17.3 17.4c7.5 4 15.8 6.1 30.6 6.1h311.5c14.3 0 22.5-2.2 29.9-6.1 7.5-4 13.3-10 17.3-17.4 4-7.5 6.2-14.5 6.2-26.5 0-2.6.4-3.2 1.1-4.9.8-1.6 2-2.9 3.4-3.8 1.4-.8 3.2-1.3 5.4-1.3h54.2c40.1 0 54.7 4.2 69.4 12a81.8 81.8 0 0134 34c7.8 14.7 12 29.3 12 69.4v1457.2c0 40.1-4.2 54.7-12 69.4a81.8 81.8 0 01-34 34c-14.7 7.8-29.3 12-69.4 12H115.4c-40.1 0-54.7-4.2-69.4-12a81.8 81.8 0 01-34-34c-7.8-14.7-12-29.3-12-69.4V115.4C0 75.3 4.2 60.7 12 46a81.8 81.8 0 0134-34C60.7 4.2 75.3 0 115.4 0h55.4z" fill="#000" fill-rule="evenodd"/></g>',
-  realisticImage: {
-    width: 490,
-    height: 944,
-    screenOffsetLeft: 50,
-    screenOffsetTop: 50,
-    availableColors: [{
-      id: 'graphite',
-      title: 'Graphite',
-      colorValue: '#585753',
-    }, {
-      id: 'silver',
-      title: 'Silver',
-      colorValue: '#E5E6E1',
-    }, {
-      id: 'pacific-blue',
-      title: 'Pacific Blue',
-      colorValue: '#415D6C',
-    }, {
-      id: 'gold',
-      title: 'Gold',
-      colorValue: '#FCECD5',
-    },],
-    handOffset: {
-      left: 29,
-      right: 29,
-      bottom: 29,
-    },
-  },
-}, {
-  id: 'iphone-12-pro-max',
-  title: 'iPhone 12 Pro Max',
-  screenRadius: 50,
-  // to prevent leaking pixel in the corners, see https://github.com/framer/company/issues/20429
-  clayBezelLeft: 22,
-  clayBezelRight: 22,
-  clayBezelTop: 22,
-  clayBezelBottom: 22,
-  clayBezelRadius: 66,
-  screenWidth: 428,
-  screenHeight: 926,
-  externalClay: {
-    width: 532,
-    height: 1050,
-    screenOffsetTop: 62,
-    screenOffsetLeft: 52,
-  },
-  screenMask:
-    '<path d="M102 0c6 0 7 3 7 9 0 10 7 23 24 23h164c13 0 22-12 22-23 0-6 1-9 7-9h34c24 0 32 2 41 7s15 11 20 20 7 17 7 41v790c0 24-2 32-7 41s-11 15-20 20-17 7-41 7H68c-24 0-32-2-41-7s-15-11-20-20-7-17-7-41V68c0-24 2-32 7-41S18 12 27 7s17-7 41-7h34z" fill="#000" fill-rule="evenodd"/>',
-  realisticImage: {
-    width: 528,
-    height: 1026,
-    screenOffsetLeft: 50,
-    screenOffsetTop: 50,
-    availableColors: [{
-      id: 'graphite',
-      title: 'Graphite',
-      colorValue: '#585753',
-    }, {
-      id: 'silver',
-      title: 'Silver',
-      colorValue: '#E5E6E1',
-    }, {
-      id: 'pacific-blue',
-      title: 'Pacific Blue',
-      colorValue: '#415D6C',
-    }, {
-      id: 'gold',
-      title: 'Gold',
-      colorValue: '#FCECD5',
-    },],
-    handOffset: {
-      left: 28.5,
-      right: 28,
-      bottom: 29,
-    },
-  },
-}, {
-  id: 'iphone-11',
-  title: 'iPhone 11',
-  // Screen mask takes care of the rounded screen corners for iPhones Pro,
-  // and actually using a radius here produces visual artifacts in Chrome.
-  screenRadius: (
-    /* 38 */
-    0
-  ),
-  clayBezelLeft: 35.5,
-  clayBezelRight: 35.5,
-  clayBezelTop: 35.5,
-  clayBezelBottom: 35.5,
-  clayBezelRadius: 77,
-  screenWidth: 414,
-  screenHeight: 896,
-  externalClay: {
-    width: 524,
-    height: 1026,
-    screenOffsetTop: 65,
-    screenOffsetLeft: 55,
-  },
-  screenMask:
-    '<path d="M85.5 0C89.1 0 92 3 92 6.5c.3 6 1.5 10 3.4 13.5 2.2 4.1 5.5 7.4 9.6 9.6 4.2 2.2 8.9 3.4 17 3.4h170c8.1 0 12.8-1.2 17-3.4 4.1-2.2 7.4-5.5 9.6-9.6A31 31 0 00322 6.5c0-3.6 3-6.5 6.5-6.5h32.3c18.5 0 25.2 2 32 5.5 6.7 3.7 12 9 15.7 15.7 3.6 6.8 5.5 13.5 5.5 32v789.6c0 18.5-2 25.2-5.5 32-3.7 6.7-9 12-15.7 15.7-6.8 3.6-13.5 5.5-32 5.5H53.2c-18.5 0-25.2-2-32-5.5-6.7-3.7-12-9-15.7-15.7C2 868 0 861.3 0 842.8V53.2c0-18.5 2-25.2 5.5-32 3.7-6.7 9-12 15.7-15.7C28 2 34.7 0 53.2 0h32.3z" fill="#000" fill-rule="nonzero"/>',
-  realisticImage: {
-    width: 514,
-    height: 996,
-    screenOffsetLeft: 50,
-    screenOffsetTop: 50,
-    availableColors: [{
-      id: 'black',
-      title: 'Black',
-      colorValue: '#202120',
-    }, {
-      id: 'white',
-      title: 'White',
-      colorValue: '#F9F6EF',
-    }, {
-      id: 'purple',
-      title: 'Purple',
-      colorValue: '#D1CDDB',
-    }, {
-      id: 'green',
-      title: 'Green',
-      colorValue: '#ADE0CD',
-    }, {
-      id: 'red',
-      title: 'Red',
-      colorValue: '#B90D2E',
-    }, {
-      id: 'yellow',
-      title: 'Yellow',
-      colorValue: '#FFE680',
-    },],
-    handOffset: {
-      left: 14.5,
-      right: 14.5,
-      bottom: 14.5,
-    },
-  },
-}, {
-  id: 'iphone-11-pro',
-  title: 'iPhone 11 Pro',
-  ...presetsBase.iPhonePro,
-  screenWidth: 375,
-  screenHeight: 812,
-  externalClay: {
-    width: 485,
-    height: 942,
-    screenOffsetTop: 65,
-    screenOffsetLeft: 55,
-  },
-  screenMask:
-    '<path d="M292 8.668V9c0 9.266-7.07 21-23.332 21h-162C90.402 30 83.332 18.266 83.332 9v-.332c0-4.285 0-8.668-7.664-8.668H43.332C16.312 0 0 16.313 0 43.332v725.336C0 795.688 16.313 812 43.332 812h288.336c27.02 0 43.332-16.313 43.332-43.332V43.332C375 16.312 358.687 0 331.668 0h-32C292 0 292 4.383 292 8.668zm0 0"/>',
-  realisticImage: {
-    width: 475,
-    height: 912,
-    screenOffsetLeft: 50,
-    screenOffsetTop: 50,
-    availableColors: [{
-      id: 'space-grey',
-      title: 'Space Grey',
-      colorValue: '#52514F',
-    }, {
-      id: 'silver',
-      title: 'Silver',
-      colorValue: '#EBEBE3',
-    }, {
-      id: 'gold',
-      title: 'Gold',
-      colorValue: '#FBD7BD',
-    }, {
-      id: 'midnight-green',
-      title: 'Midnight Green',
-      colorValue: '#4F5850',
-    },],
-    handOffset: {
-      left: 24.5,
-      right: 24.5,
-      bottom: 23.5,
-    },
-  },
-}, {
-  id: 'iphone-11-pro-max',
-  title: 'iPhone 11 Pro Max',
-  ...presetsBase.iPhonePro,
-  screenWidth: 414,
-  screenHeight: 896,
-  externalClay: {
-    width: 524,
-    height: 1026,
-    screenOffsetTop: 65,
-    screenOffsetLeft: 55,
-  },
-  screenMask:
-    '<path d="M96 0c3.313 0 5.91 2.688 6 6 .18 6.645 1.191 10.148 2.938 13.41 1.917 3.586 4.73 6.402 8.316 8.317 3.586 1.918 7.441 2.941 15.445 2.941h156.602c8.004 0 11.86-1.023 15.445-2.941 3.586-1.915 6.399-4.73 8.317-8.317 1.746-3.265 2.746-6.758 2.937-13.41.094-3.313 2.688-6 6-6h46.004c17.387 0 23.687 1.809 30.043 5.21 6.355 3.4 11.344 8.388 14.742 14.743C412.191 26.31 414 32.61 414 49.996v796.008c0 17.387-1.809 23.687-5.21 30.043-3.4 6.355-8.388 11.344-14.743 14.742-6.356 3.402-12.656 5.211-30.043 5.211H49.996c-17.387 0-23.687-1.809-30.043-5.21-6.355-3.4-11.344-8.388-14.742-14.743C1.809 869.69 0 863.39 0 846.004V49.996C0 32.61 1.809 26.31 5.21 19.953c3.4-6.355 8.388-11.344 14.743-14.742C26.31 1.809 32.61 0 49.996 0zm0 0"/>',
-  realisticImage: {
-    width: 514,
-    height: 996,
-    screenOffsetLeft: 50,
-    screenOffsetTop: 50,
-    availableColors: [{
-      id: 'space-grey',
-      title: 'Space Grey',
-      colorValue: '#52514F',
-    }, {
-      id: 'silver',
-      title: 'Silver',
-      colorValue: '#EBEBE3',
-    }, {
-      id: 'gold',
-      title: 'Gold',
-      colorValue: '#FBD7BD',
-    }, {
-      id: 'midnight-green',
-      title: 'Midnight Green',
-      colorValue: '#4F5850',
-    },],
-    handOffset: {
-      left: 23.5,
-      right: 24.5,
-      bottom: 24,
-    },
-  },
-}, {
-  id: 'iphone-8',
-  title: 'iPhone 8',
-  ...presetsBase.iPhone8,
-  screenWidth: 375,
-  screenHeight: 667,
-  externalClay: {
-    width: 491,
-    height: 971,
-    screenOffsetLeft: 58,
-    screenOffsetTop: 152,
-  },
-  realisticImage: {
-    width: 475,
-    height: 927,
-    screenOffsetLeft: 50,
-    screenOffsetTop: 130,
-    availableColors: [{
-      id: 'space-grey',
-      title: 'Space Grey',
-      colorValue: '#28282A',
-    }, {
-      id: 'silver',
-      title: 'Silver',
-      colorValue: '#DFE1E2',
-    }, {
-      id: 'gold',
-      title: 'Gold',
-      colorValue: '#F6E6DB',
-    },],
-    handOffset: {
-      left: 22,
-      right: 22,
-      bottom: 18.5,
-    },
-  },
-}, {
-  id: 'iphone-8-plus',
-  title: 'iPhone 8 Plus',
-  ...presetsBase.iPhone8,
-  screenWidth: 414,
-  screenHeight: 736,
-  externalClay: {
-    width: 530,
-    height: 1064,
-    screenOffsetLeft: 58,
-    screenOffsetTop: 164,
-  },
-  realisticImage: {
-    width: 514,
-    height: 996,
-    screenOffsetLeft: 50,
-    screenOffsetTop: 130,
-    availableColors: [{
-      id: 'space-grey',
-      title: 'Space Grey',
-      colorValue: '#28282A',
-    }, {
-      id: 'silver',
-      title: 'Silver',
-      colorValue: '#DFE1E2',
-    }, {
-      id: 'gold',
-      title: 'Gold',
-      colorValue: '#F6E6DB',
-    },],
-    handOffset: {
-      left: 21,
-      right: 20.5,
-      bottom: 19,
-    },
-  },
-}, {
-  id: 'iphone-se',
-  title: 'iPhone SE',
-  screenWidth: 320,
-  screenHeight: 568,
-  screenRadius: 0,
-  clayBezelLeft: 20,
-  clayBezelRight: 20,
-  clayBezelTop: 112,
-  clayBezelBottom: 112,
-  clayBezelRadius: 38 * 1.5,
-  externalClay: {
-    width: 436,
-    height: 872,
-    screenOffsetLeft: 58,
-    screenOffsetTop: 152,
-  },
-  realisticImage: {
-    width: 420,
-    height: 828,
-    screenOffsetLeft: 50,
-    screenOffsetTop: 130,
-    availableColors: [{
-      id: 'space-grey',
-      title: 'Space Grey',
-      colorValue: '#C3C4C8',
-    }, {
-      id: 'silver',
-      title: 'Silver',
-      colorValue: '#E1E2E4',
-    }, {
-      id: 'gold',
-      title: 'Gold',
-      colorValue: '#EFD8BD',
-    }, {
-      id: 'rose-gold',
-      title: 'Rose Gold',
-      colorValue: '#F7CFCA',
-    },],
-    handOffset: {
-      left: 22,
-      right: 22,
-      bottom: 26.5,
-    },
-  },
-}, {
-  id: 'samsung-galaxy-s7',
-  title: 'Samsung Galaxy S7',
-  screenRadius: 0,
-  clayBezelLeft: 22,
-  clayBezelRight: 22,
-  clayBezelTop: 22,
-  clayBezelBottom: 22,
-  clayBezelRadius: 66,
-  screenWidth: 360,
-  screenHeight: 640,
-  externalClay: {
-    width: 454,
-    height: 880,
-    screenOffsetTop: 120,
-    screenOffsetLeft: 47,
-  },
-  realisticImage: {
-    width: 440,
-    height: 860,
-    screenOffsetLeft: 40,
-    screenOffsetTop: 110,
-    availableColors: [{
-      id: 'black',
-      title: 'Black',
-      colorValue: '#2E2C36',
-    }, {
-      id: 'white',
-      title: 'White',
-      colorValue: '#F7F3F0',
-    }, {
-      id: 'silver',
-      title: 'Silver',
-      colorValue: '#E5E6E1',
-    }, {
-      id: 'gold',
-      title: 'Gold',
-      colorValue: '#FCECD5',
-    },],
-    handOffset: {
-      left: 26,
-      right: 25.5,
-      bottom: 32,
-    },
-  },
-}, // deprecated
-{
-  id: 'samsung-note-10',
-  title: 'Samsung Note 10',
-  screenWidth: 360,
-  screenHeight: 760,
-  screenRadius: 10,
-  clayBezelLeft: 7,
-  clayBezelRight: 7,
-  clayBezelTop: 15,
-  clayBezelBottom: 15,
-  clayBezelRadius: 15,
-}, {
-  id: 'pixel-5',
-  title: 'Google Pixel 5',
-  screenRadius: 31,
-  clayBezelLeft: 22,
-  clayBezelRight: 22,
-  clayBezelTop: 22,
-  clayBezelBottom: 22,
-  clayBezelRadius: 66,
-  screenWidth: 360,
-  screenHeight: 780,
-  externalClay: {
-    width: 460,
-    height: 900,
-    screenOffsetTop: 60,
-    screenOffsetLeft: 50,
-  },
-  realisticImage: {
-    width: 920 / 2,
-    height: 1760 / 2,
-    screenOffsetLeft: 100 / 2,
-    screenOffsetTop: 100 / 2,
-    availableColors: [{
-      id: 'just-black',
-      title: 'Just Black',
-      colorValue: '#2E2C36',
-    }, {
-      id: 'sorta-sage',
-      title: 'Sorta Sage',
-      colorValue: '#B7C9C0',
-    },],
-    handOffset: {
-      left: 31.5,
-      right: 31,
-      bottom: 31,
-      /* 1t */
-    },
-  },
-}, {
-  id: 'pixel-4',
-  title: 'Google Pixel 4',
-  screenWidth: 360,
-  screenHeight: 760,
-  screenRadius: 34,
-  clayBezelLeft: 10,
-  clayBezelRight: 10,
-  clayBezelTop: 50,
-  clayBezelBottom: 25,
-  clayBezelRadius: 50,
-  externalClay: {
-    width: 460,
-    height: 938,
-    screenOffsetLeft: 50,
-    screenOffsetTop: 89,
-  },
-  realisticImage: {
-    width: 460,
-    height: 920,
-    screenOffsetLeft: 50,
-    screenOffsetTop: 80,
-    availableColors: [{
-      id: 'clearly-white',
-      title: 'Clearly White',
-      colorValue: '#EAEDF2',
-    }, {
-      id: 'just-black',
-      title: 'Just Black',
-      colorValue: '#1A1A1A',
-    }, {
-      id: 'oh-so-orange',
-      title: 'Oh So Orange',
-      colorValue: '#FF7A68',
-    },],
-    handOffset: {
-      left: 35.5,
-      right: 35.5,
-      bottom: 57,
-      /* 1t */
-    },
-  },
-}, // Desktop ------------------------------------------------------------------------------------------------------------------------
-{
-  id: 'macbook-air',
-  title: 'MacBook Air',
-  screenWidth: 1440,
-  screenHeight: 900,
-  disableRotation: true,
-  externalClay: {
-    width: 1890,
-    height: 1125,
-    screenOffsetLeft: 225,
-    screenOffsetTop: 98,
-  },
-  realisticImage: {
-    width: 3848 / 2,
-    height: 2240 / 2,
-    screenOffsetLeft: 484 / 2,
-    screenOffsetTop: 196 / 2,
-    availableColors: [{
-      id: 'silver',
-      title: 'Silver',
-      colorValue: '#E5E6E1',
-    }, {
-      id: 'space-grey',
-      title: 'Space Grey',
-      colorValue: '#B1B5B7',
-    }, {
-      id: 'gold',
-      title: 'Gold',
-      colorValue: '#FCECD5',
-    },],
-  },
-}, {
-  id: 'macbook-pro-13',
-  title: `MacBook Pro 13"`,
-  screenWidth: 1440,
-  screenHeight: 900,
-  disableRotation: true,
-  externalClay: {
-    width: 1914,
-    height: 1169,
-    screenOffsetLeft: 236,
-    screenOffsetTop: 109,
-  },
-  realisticImage: {
-    width: 3916 / 2,
-    height: 2330 / 2,
-    screenOffsetLeft: 518 / 2,
-    screenOffsetTop: 218 / 2,
-    availableColors: [{
-      id: 'silver',
-      title: 'Silver',
-      colorValue: '#E5E6E1',
-    }, {
-      id: 'space-grey',
-      title: 'Space Grey',
-      colorValue: '#B1B5B7',
-    },],
-  },
-}, {
-  id: 'macbook-pro-16',
-  title: `MacBook Pro 16"`,
-  screenWidth: 1536,
-  screenHeight: 960,
-  disableRotation: true,
-  externalClay: {
-    width: 1984,
-    height: 1179,
-    screenOffsetLeft: 225,
-    screenOffsetTop: 78,
-  },
-  realisticImage: {
-    width: 4032 / 2,
-    height: 2348 / 2,
-    screenOffsetLeft: 480 / 2,
-    screenOffsetTop: 148 / 2,
-    availableColors: [{
-      id: 'silver',
-      title: 'Silver',
-      colorValue: '#E5E6E1',
-    }, {
-      id: 'space-grey',
-      title: 'Space Grey',
-      colorValue: '#B1B5B7',
-    },],
-  },
-}, {
-  id: 'imac-21-5',
-  title: `iMac 21.5"`,
-  screenWidth: 2048,
-  screenHeight: 1152,
-  disableRotation: true,
-  externalClay: {
-    width: 2288,
-    height: 1892,
-    screenOffsetLeft: 120,
-    screenOffsetTop: 120,
-  },
-  realisticImage: {
-    width: 4562 / 2,
-    height: 3796 / 2,
-    screenOffsetLeft: 232 / 2,
-    screenOffsetTop: 244 / 2,
-  },
-}, {
-  id: 'imac-27',
-  title: `iMac 27"`,
-  screenWidth: 2560,
-  screenHeight: 1440,
-  disableRotation: true,
-  externalClay: {
-    width: 2848,
-    height: 2351,
-    screenOffsetLeft: 144,
-    screenOffsetTop: 151,
-  },
-  realisticImage: {
-    width: 5676 / 2,
-    height: 4720 / 2,
-    screenOffsetLeft: 278 / 2,
-    screenOffsetTop: 292 / 2,
-    availableColors: [{
-      id: 'silver',
-      title: 'Silver',
-      colorValue: '#E5E6E1',
-    }, {
-      id: 'pro',
-      title: 'Pro',
-      colorValue: '#5F5E63',
-    },],
-  },
-}, {
-  id: 'pro-display-xdr',
-  title: `Pro Display XDR`,
-  screenWidth: 3008,
-  screenHeight: 1692,
-  disableRotation: true,
-  externalClay: {
-    width: 3148,
-    height: 2325,
-    screenOffsetLeft: 70,
-    screenOffsetTop: 60,
-  },
-  realisticImage: {
-    width: 6276 / 2,
-    height: 4695 / 2,
-    screenOffsetLeft: 130 / 2,
-    screenOffsetTop: 130 / 2,
-  },
-}, {
-  id: 'dell-xps',
-  title: `Dell XPS`,
-  screenWidth: 1920,
-  screenHeight: 1080,
-  disableRotation: true,
-  externalClay: {
-    width: 2624,
-    height: 1381,
-    screenOffsetLeft: 352,
-    screenOffsetTop: 57,
-  },
-  realisticImage: {
-    width: 5412 / 2,
-    height: 2746 / 2,
-    screenOffsetLeft: 786 / 2,
-    screenOffsetTop: 108 / 2,
-  },
-}, {
-  id: 'surface-book',
-  title: `Microsoft Surface Book`,
-  screenWidth: 1500,
-  screenHeight: 1e3,
-  disableRotation: true,
-  externalClay: {
-    width: 2089,
-    height: 1234,
-    screenOffsetLeft: 296,
-    screenOffsetTop: 93,
-  },
-  realisticImage: {
-    width: 4200 / 2,
-    height: 2508 / 2,
-    screenOffsetLeft: 600 / 2,
-    screenOffsetTop: 210 / 2,
-  },
-}, // Tablets ------------------------------------------------------------------------------------------------------------------------
-{
-  id: 'ipad',
-  title: 'iPad',
-  screenRadius: 0,
-  screenWidth: 810,
-  screenHeight: 1080,
-  clayBezelLeft: 30,
-  clayBezelRight: 30,
-  clayBezelTop: 95,
-  clayBezelBottom: 95,
-  clayBezelRadius: 0,
-  externalClay: {
-    width: 966,
-    height: 1378,
-    screenOffsetLeft: 78,
-    screenOffsetTop: 149,
-  },
-  realisticImage: {
-    width: 1920 / 2,
-    height: 2720 / 2,
-    screenOffsetLeft: 75,
-    screenOffsetTop: 140,
-    availableColors: [{
-      id: 'space-grey',
-      title: 'Space Grey',
-      colorValue: '#C3C4C8',
-    }, {
-      id: 'silver',
-      title: 'Silver',
-      colorValue: '#E1E2E4',
-    }, {
-      id: 'gold',
-      title: 'Gold',
-      colorValue: '#EFD8BD',
-    },],
-  },
-}, {
-  id: 'ipad-mini',
-  title: 'iPad Mini',
-  screenRadius: 0,
-  clayBezelLeft: 49,
-  clayBezelRight: 49,
-  clayBezelTop: 49,
-  clayBezelBottom: 49,
-  clayBezelRadius: 49,
-  screenWidth: 768,
-  screenHeight: 1024,
-  externalClay: {
-    width: 924,
-    height: 1384,
-    screenOffsetLeft: 78,
-    screenOffsetTop: 180,
-  },
-  realisticImage: {
-    width: 1856 / 2,
-    height: 2728 / 2,
-    screenOffsetLeft: 160 / 2,
-    screenOffsetTop: 340 / 2,
-    availableColors: [{
-      id: 'space-grey',
-      title: 'Space Grey',
-      colorValue: '#C3C4C8',
-    }, {
-      id: 'silver',
-      title: 'Silver',
-      colorValue: '#E1E2E4',
-    }, {
-      id: 'gold',
-      title: 'Gold',
-      colorValue: '#EFD8BD',
-    },],
-  },
-}, {
-  id: 'ipad-air',
-  title: 'iPad Air',
-  screenRadius: 18,
-  clayBezelLeft: 49,
-  clayBezelRight: 49,
-  clayBezelTop: 49,
-  clayBezelBottom: 49,
-  clayBezelRadius: 49,
-  screenWidth: 820,
-  screenHeight: 1180,
-  externalClay: {
-    width: 994,
-    height: 1374,
-    screenOffsetLeft: 87,
-    screenOffsetTop: 97,
-  },
-  realisticImage: {
-    width: 1960 / 2,
-    height: 2680 / 2,
-    screenOffsetLeft: 160 / 2,
-    screenOffsetTop: 160 / 2,
-    availableColors: [{
-      id: 'space-grey',
-      title: 'Space Grey',
-      colorValue: '#C3C4C8',
-    }, {
-      id: 'silver',
-      title: 'Silver',
-      colorValue: '#E1E2E4',
-    }, {
-      id: 'rose-gold',
-      title: 'Rose Gold',
-      colorValue: '#ECCBC4',
-    }, {
-      id: 'blue',
-      title: 'Blue',
-      colorValue: '#CBDAE6',
-    }, {
-      id: 'green',
-      title: 'Green',
-      colorValue: '#DAF0D9',
-    },],
-  },
-}, {
-  id: 'ipad-pro-11',
-  title: 'iPad Pro 11\u2033',
-  screenRadius: 17,
-  clayBezelLeft: 49,
-  clayBezelRight: 49,
-  clayBezelTop: 49,
-  clayBezelBottom: 49,
-  clayBezelRadius: 49,
-  screenWidth: 834,
-  screenHeight: 1194,
-  externalClay: {
-    width: 990,
-    height: 1370,
-    screenOffsetLeft: 78,
-    screenOffsetTop: 88,
-  },
-  realisticImage: {
-    width: 1968 / 2,
-    height: 2688 / 2,
-    screenOffsetLeft: 75,
-    screenOffsetTop: 75,
-    availableColors: [{
-      id: 'space-grey',
-      title: 'Space Grey',
-      colorValue: '#C3C4C8',
-    }, {
-      id: 'silver',
-      title: 'Silver',
-      colorValue: '#E1E2E4',
-    },],
-  },
-}, {
-  id: 'ipad-pro-12-9',
-  title: 'iPad Pro 12.9\u2033',
-  ...presetsBase.iPadPro,
-  screenRadius: 17,
-  screenWidth: 1024,
-  screenHeight: 1366,
-  externalClay: {
-    width: 1180,
-    height: 1542,
-    screenOffsetLeft: 78,
-    screenOffsetTop: 88,
-  },
-  realisticImage: {
-    width: 2348 / 2,
-    height: 3032 / 2,
-    screenOffsetLeft: 75,
-    screenOffsetTop: 75,
-    availableColors: [{
-      id: 'space-grey',
-      title: 'Space Grey',
-      colorValue: '#C3C4C8',
-    }, {
-      id: 'silver',
-      title: 'Silver',
-      colorValue: '#E1E2E4',
-    },],
-  },
-}, {
-  id: 'surface-3',
-  title: 'Microsoft Surface 3',
-  screenRadius: 0,
-  clayBezelLeft: 49,
-  clayBezelRight: 49,
-  clayBezelTop: 49,
-  clayBezelBottom: 49,
-  clayBezelRadius: 49,
-  screenWidth: 960,
-  screenHeight: 640,
-  externalClay: {
-    width: 1184,
-    height: 864,
-    screenOffsetLeft: 112,
-    screenOffsetTop: 112,
-  },
-  realisticImage: {
-    width: 2280 / 2,
-    height: 1580 / 2,
-    screenOffsetLeft: 180 / 2,
-    screenOffsetTop: 150 / 2,
-  },
-}, {
-  id: 'surface-pro-4',
-  title: 'Microsoft Surface Pro 4',
-  screenRadius: 0,
-  clayBezelLeft: 49,
-  clayBezelRight: 49,
-  clayBezelTop: 49,
-  clayBezelBottom: 49,
-  clayBezelRadius: 49,
-  screenWidth: 1368,
-  screenHeight: 912,
-  externalClay: {
-    width: 1592,
-    height: 1136,
-    screenOffsetLeft: 112,
-    screenOffsetTop: 112,
-  },
-  realisticImage: {
-    width: 3176 / 2,
-    height: 2224 / 2,
-    screenOffsetLeft: 220 / 2,
-    screenOffsetTop: 200 / 2,
-  },
-}, // Watches ------------------------------------------------------------------------------------------------------------------------
-{
-  id: 'apple-watch-44',
-  title: `Apple Watch 44mm`,
-  screenRadius: 33,
-  screenWidth: 184,
-  screenHeight: 224,
-  disableRotation: true,
-  externalClay: {
-    width: 298,
-    height: 502,
-    screenOffsetLeft: 57,
-    screenOffsetTop: 129,
-  },
-  realisticImage: {
-    width: 548 / 2,
-    height: 908 / 2,
-    screenOffsetLeft: 90 / 2,
-    screenOffsetTop: 230 / 2,
-    availableColors: [{
-      id: 'black',
-      title: 'Black',
-      colorValue: '#2E2C36',
-    }, {
-      id: 'white',
-      title: 'White',
-      colorValue: '#F7F3F0',
-    }, {
-      id: 'yellow',
-      title: 'Yellow',
-      colorValue: '#FDDC6C',
-    }, {
-      id: 'orange',
-      title: 'Orange',
-      colorValue: '#F35C56',
-    },],
-  },
-}, {
-  id: 'apple-watch-40',
-  title: `Apple Watch 40mm`,
-  screenRadius: 27,
-  screenWidth: 162,
-  screenHeight: 197,
-  disableRotation: true,
-  externalClay: {
-    width: 280,
-    height: 463,
-    screenOffsetLeft: 59,
-    screenOffsetTop: 124,
-  },
-  realisticImage: {
-    width: 504 / 2,
-    height: 854 / 2,
-    screenOffsetLeft: 90 / 2,
-    screenOffsetTop: 230 / 2,
-    availableColors: [{
-      id: 'black',
-      title: 'Black',
-      colorValue: '#2E2C36',
-    }, {
-      id: 'white',
-      title: 'White',
-      colorValue: '#F7F3F0',
-    }, {
-      id: 'yellow',
-      title: 'Yellow',
-      colorValue: '#FDDC6C',
-    }, {
-      id: 'orange',
-      title: 'Orange',
-      colorValue: '#F35C56',
-    },],
-  },
-}, // TVs ------------------------------------------------------------------------------------------------------------------------
-{
-  id: 'tv-full-hd',
-  title: `Full HD`,
-  screenRadius: 0,
-  screenWidth: 1920,
-  screenHeight: 1080,
-  externalClay: {
-    width: 1968,
-    height: 1168,
-    screenOffsetLeft: 24,
-    screenOffsetTop: 12,
-  },
-  realisticImage: {
-    width: 4040 / 2,
-    height: 2360 / 2,
-    screenOffsetLeft: 100 / 2,
-    screenOffsetTop: 100 / 2,
-  },
-}, {
-  id: 'tv-4k',
-  title: `4K`,
-  screenRadius: 0,
-  screenWidth: 3840,
-  screenHeight: 2160,
-  externalClay: {
-    width: 3908,
-    height: 2308,
-    screenOffsetLeft: 34,
-    screenOffsetTop: 24,
-  },
-  realisticImage: {
-    width: 7960 / 2,
-    height: 4600 / 2,
-    screenOffsetLeft: 140 / 2,
-    screenOffsetTop: 140 / 2,
-  },
-}, // Old devices ------------------------------------------------------------------------------------------------------------------------
-// deprecated
-{
-  id: '720p',
-  title: '720p',
-  ...presetsBase.desktop,
-  screenWidth: 720,
-  screenHeight: 1280,
-}, // deprecated
-{
-  id: '900p',
-  title: '900p',
-  ...presetsBase.desktop,
-  screenWidth: 900,
-  screenHeight: 1440,
-}, // deprecated
-{
-  id: '1080p',
-  title: '1080p',
-  ...presetsBase.desktop,
-  screenWidth: 1080,
-  screenHeight: 1920,
-}, // deprecated
-{
-  id: '1440p',
-  title: '1440p',
-  ...presetsBase.desktop,
-  screenWidth: 1440,
-  screenHeight: 2560,
-}, // deprecated
-{
-  id: '4k',
-  title: '4K',
-  ...presetsBase.desktop,
-  screenWidth: 2160,
-  screenHeight: 3840,
-},])();
-var deviceCodeComponentPresetIds = [
-  'iphone-12',
-  'iphone-12-mini',
-  'iphone-12-pro',
-  'iphone-11',
-  'iphone-11-pro',
-  'iphone-11-pro-max',
-  'iphone-8',
-  'iphone-8-plus',
-  'iphone-se',
-  'samsung-note-10',
-  'pixel-4',
-  'ipad',
-  'ipad-pro-11',
-  'ipad-pro-12-9',
-  '720p',
-  '900p',
-  '1080p',
-  '1440p',
-  '4k',
-];
-var devicePresetsMap = /* @__PURE__ */ devicePresets.reduce((map2, preset,) => {
-  map2[preset.id] = preset;
-  return map2;
-}, {},);
-function getDevicePreset(presetId,) {
-  return devicePresetsMap[presetId] ?? devicePresetsMap[defaultPresetId];
-}
-var defaultDeviceProps = {
-  preset: defaultPresetId,
-  customWidth: 375,
-  customHeight: 800,
-  customBezel: 20,
-  isMixedBezel: false,
-  bezelTop: 20,
-  bezelRight: 20,
-  bezelBottom: 20,
-  bezelLeft: 20,
-  customBezelRadius: 20,
-  customScreenRadius: 0,
-  orientation: 'portrait',
-  skin: 'clay',
-  theme: 'dark',
-  shadow: true,
-  backgroundColor: void 0,
-};
-function convertPropsToDeviceOptions(props, {
-  forceOldClay = false,
-} = {},) {
-  if (props.preset === 'no-device') {
-    return;
-  }
-  let preset;
-  if (props.preset === 'custom') {
-    preset = {
-      screenWidth: props.customWidth,
-      screenHeight: props.customHeight,
-      screenRadius: props.customScreenRadius,
-      clayBezelTop: props.isMixedBezel ? props.bezelTop : props.customBezel,
-      clayBezelRight: props.isMixedBezel ? props.bezelRight : props.customBezel,
-      clayBezelBottom: props.isMixedBezel ? props.bezelBottom : props.customBezel,
-      clayBezelLeft: props.isMixedBezel ? props.bezelLeft : props.customBezel,
-      clayBezelRadius: props.customBezelRadius,
-    };
-  } else {
-    preset = getDevicePreset(props.preset,);
-  }
-  const colors = getColorsFromTheme(props.theme,);
-  const shadowColor = colors.shadowColor;
-  const shadow = props.shadow ? `0 10px 30px ${shadowColor}` : void 0;
-  const rotate2 = !preset.disableRotation && (props.orientation === 'landscape' || props.rotated);
-  let deviceWidth;
-  let deviceHeight;
-  let screenOffsetTop;
-  let screenOffsetLeft;
-  let colorId = props.colorId;
-  let appearance;
-  if ((props.skin === void 0 || props.skin === 'realistic') && preset.realisticImage && props.preset) {
-    deviceWidth = preset.realisticImage.width;
-    deviceHeight = preset.realisticImage.height;
-    screenOffsetTop = preset.realisticImage.screenOffsetTop;
-    screenOffsetLeft = preset.realisticImage.screenOffsetLeft;
-    colorId = colorId ?? colorIdForTheme(props.theme, preset.realisticImage.availableColors,);
-    appearance = {
-      type: 'realistic',
-      imageUrl: colorId
-        ? `https://preview.framercdn.com/images/devices/${props.preset}-${colorId}.png`
-        : `https://preview.framercdn.com/images/devices/${props.preset}.png`,
-      imageWidth: preset.realisticImage.width,
-      imageHeight: preset.realisticImage.height,
-      rotateImage: rotate2,
-    };
-  } else {
-    deviceWidth = preset.screenWidth + (preset.clayBezelLeft ?? 0) + (preset.clayBezelRight ?? 0);
-    deviceHeight = preset.screenHeight + (preset.clayBezelTop ?? 0) + (preset.clayBezelBottom ?? 0);
-    screenOffsetTop = preset.clayBezelTop ?? 0;
-    screenOffsetLeft = preset.clayBezelLeft ?? 0;
-    if (preset.externalClay && !forceOldClay) {
-      deviceWidth = preset.externalClay.width;
-      deviceHeight = preset.externalClay.height;
-      screenOffsetTop = preset.externalClay.screenOffsetTop;
-      screenOffsetLeft = preset.externalClay.screenOffsetLeft;
-      appearance = {
-        type: 'external-clay',
-        imageUrl: `https://preview.framercdn.com/images/devices/${props.preset}-${props.theme}.svg`,
-        imageWidth: preset.externalClay.width,
-        imageHeight: preset.externalClay.height,
-        rotateImage: rotate2,
-      };
-    } else {
-      appearance = {
-        type: 'clay',
-        bezelRadius: preset.clayBezelRadius !== void 0 ? `${preset.clayBezelRadius}px` : void 0,
-        bezelColor: colors.bezelColor,
-        bezelShadeColor: colors.bezelShadeColor,
-      };
-    }
-  }
-  let screenWidth = preset.screenWidth;
-  let screenHeight = preset.screenHeight;
-  if (rotate2) {
-    const screenOffsetRight = deviceWidth - screenWidth - screenOffsetLeft;
-    [deviceWidth, deviceHeight,] = [deviceHeight, deviceWidth,];
-    [screenWidth, screenHeight,] = [screenHeight, screenWidth,];
-    [screenOffsetTop, screenOffsetLeft,] = [screenOffsetRight, screenOffsetTop,];
-  }
-  const handOffset = preset.realisticImage?.handOffset;
-  return {
-    deviceWidth,
-    deviceHeight,
-    appearance,
-    screenWidth,
-    screenHeight,
-    screenOffsetTop,
-    screenOffsetLeft,
-    screenRadius: preset.screenRadius !== void 0 ? `${preset.screenRadius}px` : void 0,
-    screenMaskImage: appearance.type !== 'realistic' && preset.screenMask
-      ? makeScreenMaskImage({
-        mask: preset.screenMask,
-        // width/height of the mask = screen width/height pre-rotation
-        width: preset.screenWidth,
-        height: preset.screenHeight,
-        rotate: rotate2,
-      },)
-      : void 0,
-    screenColor: colors.screenColor,
-    shadow,
-    hand: props.hand !== void 0 && supportsHand(props,)
-      ? {
-        imageUrl: `https://preview.framercdn.com/images/hands/${props.hand}.png`,
-        offsetLeft: handOffset?.left,
-        offsetRight: handOffset?.right,
-        offsetBottom: handOffset?.bottom,
-      }
-      : void 0,
-    background: props.backgroundColor,
-    theme: props.theme,
-    colorId,
-  };
-}
-function makeScreenMaskImage({
-  mask: mask2,
-  width,
-  height,
-  rotate: rotate2 = false,
-},) {
-  const transform2 = rotate2
-    ? // Rotate 90 degrees counter-clockwise around (0,0), then move the
-    // result down into the viewport (rightmost transform is applied first).
-    `transform="translate(0 ${width}) rotate(-90)"`
-    : '';
-  return encodeSVGForCSS(
-    `<svg xmlns="http://www.w3.org/2000/svg" viewport="0 0 ${width} ${height}" preserveAspectRatio="none"><g x="0" y="0" ${transform2}>${mask2}</g></svg>`,
-  );
-}
-var lightColors = /* @__PURE__ */ new Set(['white', 'silver', 'clearly-white', 'sorta-sage',],);
-var darkColors = /* @__PURE__ */ new Set(['black', 'space-grey', 'graphite', 'just-black', 'pro',],);
-function colorIdForTheme(theme, availableColors,) {
-  if (!availableColors) return;
-  const colors = theme === 'light' ? lightColors : darkColors;
-  for (const color2 of availableColors) {
-    if (colors.has(color2.id,)) {
-      return color2.id;
-    }
-  }
-  return availableColors[0]?.id;
-}
-function supportsHand({
-  preset: presetId,
-  skin,
-  orientation = 'portrait',
-},) {
-  if (!presetId || presetId === 'custom' || presetId === 'no-device' || orientation === 'landscape') return false;
-  const preset = getDevicePreset(presetId,);
-  return skin !== 'clay' && preset.realisticImage?.handOffset !== void 0;
-}
-function applyMetaTag(name, props,) {
-  let tag = document.querySelector(`meta[name="${name}"]`,);
-  if (!tag) {
-    tag = document.createElement('meta',);
-    document.getElementsByTagName('head',)[0]?.appendChild(tag,);
-    tag.setAttribute('name', name,);
-  }
-  for (const [k, v,] of Object.entries(props,)) {
-    tag.setAttribute(k, v,);
-  }
-}
-function usePrototypingMetaTags() {
-  React42.useEffect(() => {
-    applyMetaTag('mobile-web-app-capable', {
-      content: 'yes',
-    },);
-    applyMetaTag('apple-mobile-web-app-capable', {
-      content: 'yes',
-    },);
-    applyMetaTag('apple-mobile-web-app-status-bar-style', {
-      content: 'black-translucent',
-    },);
-    applyMetaTag('viewport', {
-      content: 'viewport-fit=cover, user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1',
-    },);
-  }, [],);
-}
-var DeviceCodeComponentInner = /* @__PURE__ */ withLibraryCSS(({
-  children,
-  ...props
-},) => {
-  usePrototypingMetaTags();
-  const deviceOptions = convertPropsToDeviceOptions(props, {
-    forceOldClay: true,
-  },);
-  if (!deviceOptions) {
-    return /* @__PURE__ */ jsx('div', {
-      suppressHydrationWarning: true,
-      'data-framer-component-type': 'DeviceComponent',
-      className: 'no-device',
-      style: {
-        width: '100%',
-        height: '100%',
-      },
-      children: /* @__PURE__ */ jsx(ProvideParentSize, {
-        suppressHydrationWarning: true,
-        parentSize: 1,
-        children,
-      },),
-    },);
-  }
-  const child = Array.isArray(children,) ? children[0] : children;
-  const resizedChild = child && React42.isValidElement(child,)
-    ? React42.cloneElement(child, {
-      width: deviceOptions.screenWidth,
-      height: deviceOptions.screenHeight,
-    },)
-    : null;
-  return /* @__PURE__ */ jsx(Device, {
-    suppressHydrationWarning: true,
-    scaleTo: 'dynamic',
-    deviceOptions,
-    children: resizedChild,
-  },);
-},);
-var DeviceCodeComponent = /* @__PURE__ */ (() => {
-  const {
-    componentWidth: defaultWidth2,
-    componentHeight: defaultHeight2,
-  } = getComponentSize(convertPropsToDeviceOptions(defaultDeviceProps, {
-    forceOldClay: true,
-  },),);
-  DeviceCodeComponentInner.defaultProps = {
-    width: defaultWidth2,
-    height: defaultHeight2,
-    ...defaultDeviceProps,
-  };
-  const deviceCodeComponentPresets = devicePresets.filter((preset) => deviceCodeComponentPresetIds.includes(preset.id,));
-  addPropertyControls(DeviceCodeComponentInner, {
-    children: {
-      title: 'Content',
-      type: 'slot',
-      maxCount: 1,
-    },
-    preset: {
-      type: 'enum',
-      options: ['no-device', 'custom',].concat(deviceCodeComponentPresets.map((preset) => preset.id),),
-      optionTitles: ['No Device', 'Custom',].concat(deviceCodeComponentPresets.map((preset) => preset.title),),
-    },
-    customWidth: {
-      title: 'Width',
-      type: 'number',
-      min: 0,
-      displayStepper: true,
-      hidden: (props) => props.preset !== 'custom',
-    },
-    customHeight: {
-      title: 'Height',
-      type: 'number',
-      min: 0,
-      displayStepper: true,
-      hidden: (props) => props.preset !== 'custom',
-    },
-    customBezel: {
-      title: 'Bezel',
-      type: 'fusednumber',
-      min: 0,
-      toggleKey: 'isMixedBezel',
-      toggleTitles: ['a', 'b',],
-      valueKeys: ['bezelTop', 'bezelRight', 'bezelBottom', 'bezelLeft',],
-      valueLabels: ['T', 'R', 'B', 'L',],
-      hidden: (props) => props.preset !== 'custom',
-    },
-    customBezelRadius: {
-      title: 'Bezel Radius',
-      type: 'number',
-      min: 0,
-      displayStepper: true,
-      hidden: (props) => props.preset !== 'custom',
-    },
-    customScreenRadius: {
-      title: 'Screen Radius',
-      type: 'number',
-      min: 0,
-      displayStepper: true,
-      hidden: (props) => props.preset !== 'custom',
-    },
-    orientation: {
-      type: 'enum',
-      displaySegmentedControl: true,
-      options: ['portrait', 'landscape',],
-      optionTitles: ['Portrait', 'Landscape',],
-      optionIcons: ['orientation-portrait', 'orientation-landscape',],
-      hidden: (props) => !!props.preset && !supportsOrientation(props.preset,),
-    },
-    skin: {
-      title: 'Device',
-      type: 'enum',
-      displaySegmentedControl: true,
-      options: ['realistic', 'clay',],
-      optionTitles: ['Realistic', 'Clay',],
-      defaultValue: 'clay',
-      hidden: (props) => !!props.preset && !supportsRealisticSkin(props.preset,),
-    },
-    theme: {
-      type: 'enum',
-      displaySegmentedControl: true,
-      options: ['light', 'dark',],
-      optionTitles: ['Light', 'Dark',],
-      hidden: (props) => !!props.preset && !supportsThemes(props.preset, props.skin,),
-    },
-    shadow: {
-      type: 'boolean',
-      enabledTitle: 'On',
-      disabledTitle: 'Off',
-      hidden: ({
-        skin,
-        preset,
-      },) => preset !== 'custom' && skin === 'realistic' || preset === 'no-device',
-    },
-    hand: {
-      type: 'enum',
-      options: [null, 'hand-1', 'hand-2',],
-      optionTitles: ['None', 'Model 1', 'Model 2',],
-      hidden: (props) => !supportsHand(props,),
-    },
-    backgroundColor: {
-      type: 'color',
-      title: 'Background',
-      optional: true,
-      hidden: ({
-        preset,
-      },) => preset === 'no-device',
-    },
-  },);
-  return DeviceCodeComponentInner;
-})();
-function supportsOrientation(presetId,) {
-  if (presetId === 'no-device') return false;
-  if (presetId === 'custom') return true;
-  const preset = getDevicePreset(presetId,);
-  return !preset.disableRotation;
-}
-function supportsRealisticSkin(presetId,) {
-  if (presetId === 'custom' || presetId === 'no-device') return false;
-  const preset = getDevicePreset(presetId,);
-  return !!preset.realisticImage;
-}
-function supportsThemes(presetId, skin,) {
-  if (presetId === 'no-device') return false;
-  if (presetId === 'custom' || skin !== 'realistic') return true;
-  const preset = getDevicePreset(presetId,);
-  const realisticImage = preset.realisticImage;
-  if (realisticImage === void 0) {
-    return true;
-  }
-  if (colorIdForTheme('dark', realisticImage.availableColors,) !== void 0) {
-    return true;
-  }
-  return false;
-}
-function isStaticRenderer() {
-  const currentTarget = RenderTarget.current();
-  return currentTarget === RenderTarget.canvas || currentTarget === RenderTarget.export;
-}
-function useIsStaticRenderer() {
-  const [isStatic,] = useState(() => isStaticRenderer());
-  return isStatic;
-}
-var asRecord = (object) => object;
-function memoize(fn,) {
-  const cache2 = Object.create(Object.prototype,);
-  return (arg) => {
-    if (cache2[arg] === void 0) cache2[arg] = fn(arg,);
-    return cache2[arg];
-  };
-}
-var reactPropsRegex =
-  /^(?:children|dangerouslySetInnerHTML|key|ref|autoFocus|defaultValue|defaultChecked|innerHTML|suppressContentEditableWarning|suppressHydrationWarning|valueLink|abbr|accept|acceptCharset|accessKey|action|allow|allowUserMedia|allowPaymentRequest|allowFullScreen|allowTransparency|alt|async|autoComplete|autoPlay|capture|cellPadding|cellSpacing|challenge|charSet|checked|cite|classID|className|cols|colSpan|content|contentEditable|contextMenu|controls|controlsList|coords|crossOrigin|data|dateTime|decoding|default|defer|dir|disabled|disablePictureInPicture|download|draggable|encType|enterKeyHint|form|formAction|formEncType|formMethod|formNoValidate|formTarget|frameBorder|headers|height|hidden|high|href|hrefLang|htmlFor|httpEquiv|id|inputMode|integrity|is|keyParams|keyType|kind|label|lang|list|loading|loop|low|marginHeight|marginWidth|max|maxLength|media|mediaGroup|method|min|minLength|multiple|muted|name|nonce|noValidate|open|optimum|pattern|placeholder|playsInline|poster|preload|profile|radioGroup|readOnly|referrerPolicy|rel|required|reversed|role|rows|rowSpan|sandbox|scope|scoped|scrolling|seamless|selected|shape|size|sizes|slot|span|spellCheck|src|srcDoc|srcLang|srcSet|start|step|style|summary|tabIndex|target|title|translate|type|useMap|value|width|wmode|wrap|about|datatype|inlist|prefix|property|resource|typeof|vocab|autoCapitalize|autoCorrect|autoSave|color|incremental|fallback|inert|itemProp|itemScope|itemType|itemID|itemRef|on|option|results|security|unselectable|accentHeight|accumulate|additive|alignmentBaseline|allowReorder|alphabetic|amplitude|arabicForm|ascent|attributeName|attributeType|autoReverse|azimuth|baseFrequency|baselineShift|baseProfile|bbox|begin|bias|by|calcMode|capHeight|clip|clipPathUnits|clipPath|clipRule|colorInterpolation|colorInterpolationFilters|colorProfile|colorRendering|contentScriptType|contentStyleType|cursor|cx|cy|[dkrxyz]|decelerate|descent|diffuseConstant|direction|display|divisor|dominantBaseline|dur|dx|dy|edgeMode|elevation|enableBackground|end|exponent|externalResourcesRequired|fill|fillOpacity|fillRule|filter|filterRes|filterUnits|floodColor|floodOpacity|focusable|fontFamily|fontSize|fontSizeAdjust|fontStretch|fontStyle|fontVariant|fontWeight|format|from|fr|fx|fy|g1|g2|glyphName|glyphOrientationHorizontal|glyphOrientationVertical|glyphRef|gradientTransform|gradientUnits|hanging|horizAdvX|horizOriginX|ideographic|imageRendering|in|in2|intercept|k1|k2|k3|k4|kernelMatrix|kernelUnitLength|kerning|keyPoints|keySplines|keyTimes|lengthAdjust|letterSpacing|lightingColor|limitingConeAngle|local|markerEnd|markerMid|markerStart|markerHeight|markerUnits|markerWidth|mask|maskContentUnits|maskUnits|mathematical|mode|numOctaves|offset|opacity|operator|order|orient|orientation|origin|overflow|overlinePosition|overlineThickness|panose1|paintOrder|pathLength|patternContentUnits|patternTransform|patternUnits|pointerEvents|points|pointsAtX|pointsAtY|pointsAtZ|preserveAlpha|preserveAspectRatio|primitiveUnits|radius|refX|refY|renderingIntent|repeatCount|repeatDur|requiredExtensions|requiredFeatures|restart|result|rotate|rx|ry|scale|seed|shapeRendering|slope|spacing|specularConstant|specularExponent|speed|spreadMethod|startOffset|stdDeviation|stemh|stemv|stitchTiles|stopColor|stopOpacity|strikethroughPosition|strikethroughThickness|string|stroke|strokeDasharray|strokeDashoffset|strokeLinecap|strokeLinejoin|strokeMiterlimit|strokeOpacity|strokeWidth|surfaceScale|systemLanguage|tableValues|targetX|targetY|textAnchor|textDecoration|textRendering|textLength|to|transform|u1|u2|underlinePosition|underlineThickness|unicode|unicodeBidi|unicodeRange|unitsPerEm|vAlphabetic|vHanging|vIdeographic|vMathematical|values|vectorEffect|version|vertAdvY|vertOriginX|vertOriginY|viewBox|viewTarget|visibility|widths|wordSpacing|writingMode|xHeight|x1|x2|xChannelSelector|xlinkActuate|xlinkArcrole|xlinkHref|xlinkRole|xlinkShow|xlinkTitle|xlinkType|xmlBase|xmlns|xmlnsXlink|xmlLang|xmlSpace|y1|y2|yChannelSelector|zoomAndPan|for|class|autofocus|(?:[Dd][Aa][Tt][Aa]|[Aa][Rr][Ii][Aa]|x)-.*)$/u;
-var isPropValid = /* @__PURE__ */ memoize((prop) =>
-  reactPropsRegex.test(prop,) || prop.charCodeAt(0,) === 111 && prop.charCodeAt(1,) === 110 && prop.charCodeAt(2,) < 91
-);
-var mockWithWarning = (message) => {
-  return () => {
-    warnOnce2(message,);
-  };
-};
-var mockWithoutWarning = () => {
-  return () => {};
-};
-var implementation = {
-  // We need a default implementation for useImageSource and useImageElement as it is used for
-  // rendering image backgrounds which would break otherwise. The default value is used for HTML
-  // export and when using the library without Framer.
-  imagePlaceholderSvg:
-    `<svg xmlns="http://www.w3.org/2000/svg" width="126" height="126"><path id="a" d="M126 0v21.584L21.584 126H0v-17.585L108.415 0H126Zm0 108.414V126h-17.586L126 108.414Zm0-84v39.171L63.585 126H24.414L126 24.414Zm0 42v39.17L105.584 126h-39.17L126 66.414ZM105.586 0 0 105.586V66.415L66.415 0h39.171Zm-42 0L0 63.586V24.415L24.415 0h39.171Zm-42 0L0 21.586V0h21.586Z" fill="rgb(136, 136, 136, 0.2)" fill-rule="evenodd"/></svg>`,
-  useImageSource(image,) {
-    return image.src ?? '';
-  },
-  useImageElement(image, rect, nodeId,) {
-    const src = runtime.useImageSource(image, rect, nodeId,);
-    return useMemo(() => {
-      const element = new Image();
-      element.src = src;
-      if (image.srcSet) element.srcset = image.srcSet;
-      return element;
-    }, [src, image.srcSet,],);
-  },
-  canRenderOptimizedCanvasImage() {
-    return false;
-  },
-  isOnPageCanvas: false,
-};
-var isRuntimeInjected = false;
-var runtimeProxy = {
-  get(target, key7, reciever,) {
-    if (Reflect.has(target, key7,)) {
-      return Reflect.get(target, key7, reciever,);
-    }
-    if (['getLogger',].includes(String(key7,),)) {
-      return mockWithoutWarning();
-    }
-    if (isRuntimeInjected) {
-      return mockWithWarning(`${String(key7,)} is not available in this version of Framer.`,);
-    }
-    return mockWithWarning(`${String(key7,)} is only available inside of Framer. https://www.framer.com/`,);
-  },
-};
-var runtime = /* @__PURE__ */ new Proxy(implementation, runtimeProxy,);
-function _injectRuntime(injectedRuntime,) {
-  Object.assign(implementation, injectedRuntime,);
-  isRuntimeInjected = true;
-}
-var cornerPropertiesToInherit = {
-  borderRadius: 'inherit',
-  cornerShape: 'inherit',
-};
-var FixedSizeScaleVariants = [1, 2, 2.2,];
-var ValidSteps = [512, 1024, 2048, 4096,];
-function getVariantsDimensions(width, height,) {
-  if (width === void 0 || height === void 0) return;
-  let lead = width,
-    follow = height,
-    orient = 0;
-  if (height > width) {
-    lead = height;
-    follow = width;
-    orient = 1;
-  }
-  const ratio = lead / follow;
-  const sizes = [];
-  for (const step2 of ValidSteps) {
-    if (lead <= step2) return sizes;
-    sizes.push({
-      maxSideSize: step2,
-      width: orient === 0 ? step2 : Math.trunc(step2 / ratio,),
-    },);
-  }
-  return sizes;
-}
-function urlWithScaleDownTo(url, scaleDownTo,) {
-  try {
-    const urlObj = new URL(url,);
-    if (scaleDownTo) {
-      urlObj.searchParams.set('scale-down-to', `${scaleDownTo}`,);
-    } else {
-      urlObj.searchParams.delete('scale-down-to',);
-    }
-    return urlObj.toString();
-  } catch {
-    return url;
-  }
-}
-var MinVariantSizeForSourceSet = 512;
-function getResponsiveSrcSet(source, image, variants,) {
-  if (!variants || variants.length === 0) return void 0;
-  if (!image.pixelWidth) return void 0;
-  const srcSet = [];
-  for (const variant of variants) {
-    if (variant.width < MinVariantSizeForSourceSet) continue;
-    const url = urlWithScaleDownTo(source, variant.maxSideSize,);
-    srcSet.push(`${url} ${variant.width}w`,);
-  }
-  srcSet.push(`${urlWithScaleDownTo(source, null,)} ${image.pixelWidth}w`,);
-  return srcSet.join(', ',) || void 0;
-}
-function getFixedSrcSets(source, image, nodeFixedSize,) {
-  if (!image.pixelWidth || !image.pixelHeight) return void 0;
-  if (!nodeFixedSize?.width || !nodeFixedSize?.height) return void 0;
-  const srcSet = [];
-  const imageMaxSide = Math.max(image.pixelWidth, image.pixelHeight,);
-  const scaleRatio = Math.max(nodeFixedSize.width / image.pixelWidth, nodeFixedSize.height / image.pixelHeight,);
-  for (const variant of FixedSizeScaleVariants) {
-    const scaleMaxSideSizeTo = Math.round(imageMaxSide * variant * scaleRatio,);
-    const url = urlWithScaleDownTo(source, scaleMaxSideSizeTo,);
-    srcSet.push({
-      src: url,
-      scale: variant,
-    },);
-  }
-  return srcSet;
-}
-function getSrcSet(nodeFixedSize, image, source,) {
-  if (!['auto', 'lossless',].includes(image.preferredSize ?? '',)) {
-    return {
-      src: source,
-      srcSet: void 0,
-    };
-  }
-  if (nodeFixedSize) {
-    const fixedSrcSets = getFixedSrcSets(source, image, nodeFixedSize,);
-    if (!fixedSrcSets?.length) {
-      return {
-        src: source,
-        srcSet: void 0,
-      };
-    }
-    const [x1, ...rest] = fixedSrcSets;
-    return {
-      src: x1?.src,
-      srcSet: rest.map(({
-        src,
-        scale: scale2,
-      },) => `${src} ${scale2}x`).join(', ',),
-    };
-  } else {
-    const variants = getVariantsDimensions(image.pixelWidth, image.pixelHeight,);
-    return {
-      src: source,
-      srcSet: getResponsiveSrcSet(source, image, variants,),
-    };
-  }
-}
-var wrapperStyle = /* @__PURE__ */ (() => ({
-  position: 'absolute',
-  ...cornerPropertiesToInherit,
-  top: 0,
-  right: 0,
-  bottom: 0,
-  left: 0,
-}))();
-function getPlaceholderStyle() {
-  return {
-    backgroundRepeat: 'repeat',
-    backgroundPosition: 'left top',
-    backgroundSize: '64px auto',
-    backgroundImage: encodeSVGForCSS(runtime.imagePlaceholderSvg,),
-  };
-}
-function cssObjectFit(imageFit,) {
-  switch (imageFit) {
-    case 'fit':
-      return 'contain';
-    case 'stretch':
-      return 'fill';
-    default:
-      return 'cover';
-  }
-}
-function cssObjectPosition(positionX, positionY,) {
-  const x2 = positionX ?? 'center';
-  const y2 = positionY ?? 'center';
-  if (x2 === 'center' && y2 === 'center') return 'center';
-  return x2 + ' ' + y2;
-}
-function getImageStyle(image,) {
-  return {
-    display: 'block',
-    width: '100%',
-    height: '100%',
-    ...cornerPropertiesToInherit,
-    objectPosition: cssObjectPosition(image.positionX, image.positionY,),
-    objectFit: cssObjectFit(image.fit,),
-  };
-}
-function useDecodingAttribute(avoidAsyncDecoding,) {
-  const currentDecoding = React42.useRef(avoidAsyncDecoding ? 'auto' : 'async',);
-  const switchDecodingToAuto = useCallback2((node) => {
-    currentDecoding.current = 'auto';
-    node.decoding = 'auto';
-  }, [],);
-  const onImageLoad = useCallback2((event) => {
-    switchDecodingToAuto(event.currentTarget,);
-  }, [switchDecodingToAuto,],);
-  const onImageMount = useCallback2((node) => {
-    if (node?.complete) switchDecodingToAuto(node,);
-  }, [switchDecodingToAuto,],);
-  return {
-    decoding: currentDecoding.current,
-    onImageLoad,
-    onImageMount,
-  };
-}
-function StaticImage({
-  image,
-  containerSize,
-  nodeId,
-  alt,
-  draggable,
-  avoidAsyncDecoding,
-},) {
-  const source = runtime.useImageSource(image, containerSize, nodeId,);
-  const imageStyle = getImageStyle(image,);
-  const {
-    decoding,
-    onImageLoad,
-    onImageMount,
-  } = useDecodingAttribute(avoidAsyncDecoding,);
-  const {
-    srcSet,
-    src,
-  } = !('srcSet' in image) ? getSrcSet(image.nodeFixedSize, image, source,) : {
-    src: source,
-    srcSet: image.srcSet,
-  };
-  return (
-    // oxlint-disable-next-line framer-studio/require-async-decoding -- we conditionally apply it
-    /* @__PURE__ */
-    jsx('img', {
-      suppressHydrationWarning: true,
-      ref: onImageMount,
-      decoding,
-      fetchPriority: image.fetchPriority,
-      loading: image.loading,
-      width: image.pixelWidth,
-      height: image.pixelHeight,
-      sizes: srcSet ? image.sizes : void 0,
-      srcSet,
-      src,
-      onLoad: onImageLoad,
-      alt: alt ?? image.alt ?? '',
-      style: imageStyle,
-      draggable,
-    },)
-  );
-}
-function CanvasImage({
-  image,
-  containerSize,
-  nodeId,
-},) {
-  const wrapperRef = React42.useRef(null,);
-  const imageElement = runtime.useImageElement(image, containerSize, nodeId,);
-  const imageStyle = getImageStyle(image,);
-  React42.useLayoutEffect(() => {
-    const wrapper = wrapperRef.current;
-    if (wrapper === null) return;
-    wrapper.appendChild(imageElement,);
-    return () => {
-      wrapper.removeChild(imageElement,);
-    };
-  }, [imageElement,],);
-  Object.assign(imageElement.style, imageStyle,);
-  return /* @__PURE__ */ jsx('div', {
-    suppressHydrationWarning: true,
-    ref: wrapperRef,
-    style: {
-      display: 'contents',
-      ...cornerPropertiesToInherit,
-    },
-  },);
-}
-function OptimizedCanvasImage({
-  nodeId,
-  image,
-  containerSize,
-},) {
-  const wrapperRef = React42.useRef(null,);
-  const source = runtime.useImageSource(image, containerSize, nodeId,);
-  React42.useLayoutEffect(() => {
-    const wrapper = wrapperRef.current;
-    if (wrapper === null) return;
-    const imageStyle = getImageStyle(image,);
-    runtime.renderOptimizedCanvasImage(wrapper, source, imageStyle, nodeId,);
-  }, [nodeId, image, source,],);
-  return /* @__PURE__ */ jsx('div', {
-    suppressHydrationWarning: true,
-    ref: wrapperRef,
-    style: {
-      display: 'contents',
-      ...cornerPropertiesToInherit,
-    },
-  },);
-}
-function BackgroundImageComponent({
-  layoutId,
-  image,
-  ...props
-},) {
-  if (layoutId) {
-    layoutId += '-background';
-  }
-  let fallbackWrapperStyles = null;
-  let needsMotion = !!layoutId;
-  let imageNode = null;
-  if (isString(image.src,)) {
-    if (image.fit === 'tile' && image.pixelWidth && image.pixelHeight) {
-      const backgroundSize = isNumber2(image.backgroundSize,) ? image.backgroundSize : 1;
-      const tileSize = {
-        width: Math.round(backgroundSize * image.pixelWidth,),
-        height: Math.round(backgroundSize * image.pixelHeight,),
-      };
-      const roundedBackgroundSize = roundToHalfPixel(backgroundSize * (image.pixelWidth / 2),);
-      const imageSource = runtime.useImageSource(image, tileSize,);
-      fallbackWrapperStyles = {
-        ...wrapperStyle,
-        backgroundImage: `url(${imageSource})`,
-        backgroundRepeat: 'repeat',
-        backgroundPosition: cssObjectPosition(image.positionX, image.positionY,),
-        opacity: void 0,
-        border: 0,
-        backgroundSize: `${roundedBackgroundSize}px auto`,
-      };
-      imageNode = null;
-      needsMotion = true;
-    } else if (RenderTarget.current() !== RenderTarget.canvas) {
-      imageNode = /* @__PURE__ */ jsx(StaticImage, {
-        suppressHydrationWarning: true,
-        image,
-        avoidAsyncDecoding: RenderTarget.current() === RenderTarget.export,
-        ...props,
-      },);
-    } else if (runtime.canRenderOptimizedCanvasImage(runtime.useImageSource(image,),)) {
-      imageNode = /* @__PURE__ */ jsx(OptimizedCanvasImage, {
-        suppressHydrationWarning: true,
-        image,
-        ...props,
-      },);
-    } else {
-      imageNode = /* @__PURE__ */ jsx(CanvasImage, {
-        suppressHydrationWarning: true,
-        image,
-        ...props,
-      },);
-    }
-  }
-  const style2 = imageNode ? wrapperStyle : fallbackWrapperStyles ?? {
-    ...wrapperStyle,
-    ...getPlaceholderStyle(),
-  };
-  return needsMotion
-    ? /* @__PURE__ */ jsx(motion.div, {
-      suppressHydrationWarning: true,
-      layoutId,
-      style: style2,
-      'data-framer-background-image-wrapper': true,
-      children: imageNode,
-    },)
-    : /* @__PURE__ */ jsx('div', {
-      suppressHydrationWarning: true,
-      style: style2,
-      'data-framer-background-image-wrapper': true,
-      children: imageNode,
-    },);
-}
-function collectBorderStyleForProps(props, style2, collapseEqualBorders = true,) {
-  const {
-    borderWidth,
-    borderStyle,
-    borderColor,
-  } = props;
-  if (!borderWidth) {
-    return;
-  }
-  let borderTop;
-  let borderBottom;
-  let borderLeft;
-  let borderRight;
-  if (typeof borderWidth === 'number') {
-    borderTop =
-      borderBottom =
-      borderLeft =
-      borderRight =
-        borderWidth;
-  } else {
-    borderTop = borderWidth.top || 0;
-    borderBottom = borderWidth.bottom || 0;
-    borderLeft = borderWidth.left || 0;
-    borderRight = borderWidth.right || 0;
-  }
-  if (borderTop === 0 && borderBottom === 0 && borderLeft === 0 && borderRight === 0) {
-    return;
-  }
-  if (collapseEqualBorders && borderTop === borderBottom && borderTop === borderLeft && borderTop === borderRight) {
-    style2.border = `${borderTop}px ${borderStyle} ${borderColor}`;
-    return;
-  }
-  style2.borderStyle = props.borderStyle;
-  style2.borderColor = props.borderColor;
-  style2.borderTopWidth = `${borderTop}px`;
-  style2.borderBottomWidth = `${borderBottom}px`;
-  style2.borderLeftWidth = `${borderLeft}px`;
-  style2.borderRightWidth = `${borderRight}px`;
-}
-function Border(props,) {
-  const layoutId = props.layoutId ? `${props.layoutId}-border` : void 0;
-  if (!props.borderWidth) {
-    return null;
-  }
-  const style2 = {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    ...cornerPropertiesToInherit,
-    pointerEvents: 'none',
-  };
-  if (props.border) {
-    style2.border = props.border;
-    return /* @__PURE__ */ jsx(motion.div, {
-      suppressHydrationWarning: true,
-      style: style2,
-    },);
-  }
-  collectBorderStyleForProps(props, style2, false,);
-  return /* @__PURE__ */ jsx(motion.div, {
-    suppressHydrationWarning: true,
-    'data-frame-border': true,
-    style: style2,
-    layoutId,
-  },);
-}
-var key = 'src';
-var BackgroundImage = {
-  isImageObject: function (image,) {
-    if (!image || typeof image === 'string') return false;
-    return typeof image === 'object' && key in image;
-  },
-};
-function applyForwardOverrides(background, props,) {
-  const {
-    _forwardedOverrideId,
-    _forwardedOverrides,
-    id: id3,
-  } = props;
-  const forwardedOverrideId = _forwardedOverrideId ?? id3;
-  const src = _forwardedOverrides && forwardedOverrideId ? _forwardedOverrides[forwardedOverrideId] : void 0;
-  if (src && typeof src === 'string') {
-    background = {
-      ...background,
-      src,
-    };
-  }
-  return background;
-}
-function backgroundImageFromProps(props,) {
-  const {
-    background,
-    image,
-  } = props;
-  if (image !== void 0 && background && !BackgroundImage.isImageObject(background,)) {
-    return;
-  }
-  let backgroundImage = null;
-  if (isString(image,)) {
-    backgroundImage = {
-      alt: '',
-      src: image,
-    };
-  } else {
-    backgroundImage = Animatable.get(background, null,);
-  }
-  if (!BackgroundImage.isImageObject(backgroundImage,)) {
-    return;
-  }
-  return applyForwardOverrides(backgroundImage, props,);
-}
-function getIntrinsicSizeForBackgroundImage(background,) {
-  if (!background) return void 0;
-  if (background.pixelHeight && background.pixelWidth) {
-    return {
-      width: background.pixelWidth,
-      height: background.pixelHeight,
-    };
-  }
-  if (background.src === void 0) {
-    return {
-      width: 1,
-      height: 1,
-    };
-  }
-  return void 0;
-}
-function htmlElementAsMotionComponent(asElem,) {
-  return asElem && asElem !== 'search' && asElem !== 'slot' && asElem !== 'template' ? motion[asElem] : motion['div'];
+function withLibraryCSS(Component17,) {
+  return withCSS(Component17, getCombinedCSSRules, 'framer-lib-combinedCSSRules',);
 }
 var isChrome2 = /* @__PURE__ */ isChrome();
 function collectLayoutHintDataProps(props, center,) {
@@ -28049,7 +27739,7 @@ function nodeIdFromString(str,) {
 }
 function countNodeRender() {
   if (true) return;
-  const perf = asRecord(safeWindow,)['perf'];
+  const perf = asRecord(safeWindow,).perf;
   if (!perf) return;
   perf.nodeRender();
 }
@@ -28198,7 +27888,7 @@ function useMeasuredSize(ref,) {
   return size.current;
 }
 var SIZE_COMPATIBILITY_WRAPPER_ATTRIBUTE = 'data-framer-size-compatibility-wrapper';
-var withMeasuredSize = (Component18) => (props) => {
+var withMeasuredSize = (Component17) => (props) => {
   const ref = React42.useRef(null,);
   const size = useMeasuredSize(ref,);
   const dataProps = {
@@ -28216,7 +27906,7 @@ var withMeasuredSize = (Component18) => (props) => {
     },
     ref,
     ...dataProps,
-    children: shouldRender && /* @__PURE__ */ jsx(Component18, {
+    children: shouldRender && /* @__PURE__ */ jsx(Component17, {
       suppressHydrationWarning: true,
       ...props,
       width: size?.width ?? fallbackWidth,
@@ -28348,7 +28038,7 @@ var Layer = /* @__PURE__ */ (() => {
     }
     /** @internal */
     componentDidUpdate(prevProps,) {
-      if (asRecord(this.props,)['clip'] && asRecord(this.props,)['radius'] === 0 && asRecord(prevProps,)['radius'] !== 0) {
+      if (asRecord(this.props,).clip && asRecord(this.props,).radius === 0 && asRecord(prevProps,).radius !== 0) {
         resetSetStyle(this.layerElement, 'overflow', 'hidden', false,);
       }
     }
@@ -28690,7 +28380,7 @@ function getStyleForFrameProps(props,) {
   extractStyleFromProps(props, 'position', style2,);
   extractStyleFromProps(props, 'overflow', style2,);
   extractStyleFromProps(props, 'opacity', style2,);
-  if (!props._border || !props._border.borderWidth) extractStyleFromProps(props, 'border', style2,);
+  if (!props._border?.borderWidth) extractStyleFromProps(props, 'border', style2,);
   extractStyleFromProps(props, 'borderRadius', style2,);
   extractStyleFromProps(props, 'radius', style2, 'borderRadius',);
   extractStyleFromProps(props, 'color', style2,);
@@ -30109,7 +29799,7 @@ var TransitionDefaults = {
   },
 };
 function pushTransition(options,) {
-  const side = options && options.appearsFrom ? options.appearsFrom : 'right';
+  const side = options?.appearsFrom ? options.appearsFrom : 'right';
   switch (side) {
     case 'right':
       return TransitionDefaults.PushLeft;
@@ -30122,7 +29812,7 @@ function pushTransition(options,) {
   }
 }
 function overlayTransition(options,) {
-  const side = options && options.appearsFrom ? options.appearsFrom : 'bottom';
+  const side = options?.appearsFrom ? options.appearsFrom : 'bottom';
   switch (side) {
     case 'right':
       return TransitionDefaults.OverlayLeft;
@@ -30135,7 +29825,7 @@ function overlayTransition(options,) {
   }
 }
 function flipTransition(options,) {
-  const side = options && options.appearsFrom ? options.appearsFrom : 'bottom';
+  const side = options?.appearsFrom ? options.appearsFrom : 'bottom';
   switch (side) {
     case 'right':
       return TransitionDefaults.FlipLeft;
@@ -30223,7 +29913,7 @@ function add(currentState, key7, transition, component,) {
   currentState.history = currentState.history.slice(0, currentState.current + 1,);
   currentState.visualIndex = Math.max(currentState.history.length, 0,);
   const currentItem = currentState.history[currentState.history.length - 1];
-  const isCurrentScreen = currentItem && currentItem.key === key7;
+  const isCurrentScreen = currentItem?.key === key7;
   currentState.overlayStack = [];
   if (isCurrentScreen && currentState.currentOverlay > -1) {
     return {
@@ -30299,7 +29989,7 @@ function forward(currentState,) {
   return nextState;
 }
 function remove(currentState,) {
-  const history = [...currentState.history.slice(0, currentState.current + 1,),];
+  const history = currentState.history.slice(0, currentState.current + 1,);
   if (history.length === 1) return;
   const currentItem = history.pop();
   if (!currentItem) return;
@@ -30515,7 +30205,7 @@ var FramerNavigation = /* @__PURE__ */ (() => {
       this.context?.(historyItem.key,);
     }
     UNSAFE_componentWillReceiveProps(props,) {
-      const component = props['children'];
+      const component = props.children;
       if (!isReactChild(component,) || !isReactElement(component,)) return;
       const key7 = component.key?.toString();
       if (!key7) return;
@@ -30799,16 +30489,16 @@ function activeOverlayItem(overlayStack,) {
 function transitionPropsForStackWrapper({
   currentOverlayItem,
 },) {
-  return currentOverlayItem && currentOverlayItem.transition.exit;
+  return currentOverlayItem?.transition?.exit;
 }
 function animationForStackWrapper({
   currentOverlayItem,
   previousOverlayItem,
 },) {
-  if (currentOverlayItem && currentOverlayItem.transition.animation) {
+  if (currentOverlayItem?.transition?.animation) {
     return currentOverlayItem.transition.animation;
   }
-  if (previousOverlayItem && previousOverlayItem.transition.animation) {
+  if (previousOverlayItem?.transition?.animation) {
     return previousOverlayItem.transition.animation;
   }
   return animationDefault;
@@ -30818,7 +30508,7 @@ function backfaceVisibleForStackWrapper({
   previousOverlayItem,
 },) {
   if (currentOverlayItem) return currentOverlayItem.transition.backfaceVisible;
-  return previousOverlayItem && previousOverlayItem.transition.backfaceVisible;
+  return previousOverlayItem?.transition?.backfaceVisible;
 }
 function backdropColorForTransition(transition,) {
   if (transition.backdropColor) return transition.backdropColor;
@@ -30832,19 +30522,19 @@ function getBackfaceVisibleForOverlay(containerIndex, stackState,) {
   } = stackState;
   if (containerIndex === current2) {
     const navigationItem = history[containerIndex];
-    if (navigationItem && navigationItem.transition) {
+    if (navigationItem?.transition) {
       return navigationItem.transition.backfaceVisible;
     }
     return true;
   } else if (containerIndex < current2) {
     const navigationItem = history[containerIndex + 1];
-    if (navigationItem && navigationItem.transition) {
+    if (navigationItem?.transition) {
       return navigationItem.transition.backfaceVisible;
     }
     return true;
   } else {
     const navigationItem = history[containerIndex];
-    if (navigationItem && navigationItem.transition) {
+    if (navigationItem?.transition) {
       return navigationItem.transition.backfaceVisible;
     }
     return true;
@@ -30874,12 +30564,12 @@ function transitionPropsForOverlay(overlayIndex, stackState,) {
     return;
   } else if (overlayIndex < current2) {
     const navigationItem = history[overlayIndex + 1];
-    if (navigationItem && navigationItem.transition) {
+    if (navigationItem?.transition) {
       return navigationItem.transition.exit;
     }
   } else {
     const navigationItem = history[overlayIndex];
-    if (navigationItem && navigationItem.transition) {
+    if (navigationItem?.transition) {
       return navigationItem.transition.enter;
     }
   }
@@ -30893,12 +30583,12 @@ function animationPropsForContainer(containerIndex, stackState,) {
   const containerCurrent = previous > current2 ? previous : current2;
   if (containerIndex < containerCurrent) {
     const navigationItem = history[containerIndex + 1];
-    if (navigationItem && navigationItem.transition.animation) {
+    if (navigationItem?.transition?.animation) {
       return navigationItem.transition.animation;
     }
   } else if (containerIndex !== containerCurrent) {
     const navigationItem = history[containerIndex];
-    if (navigationItem && navigationItem.transition.animation) {
+    if (navigationItem?.transition?.animation) {
       return navigationItem.transition.animation;
     }
   } else {
@@ -30976,7 +30666,7 @@ function NavigationWrapper(props, ref,) {
     ...props,
     resetProjection,
     skipLayoutAnimation,
-    children: props.children,
+    children: props['children'],
   },);
 }
 var NavigationWithRef = /* @__PURE__ */ React42.forwardRef(NavigationWrapper,);
@@ -31077,6 +30767,354 @@ function transitionDirectionToSide(direction,) {
   }
 }
 var AnimateSharedLayout = (props) => props.children;
+var ControlType = /* @__PURE__ */ ((ControlType2) => {
+  ControlType2['Boolean'] = 'boolean';
+  ControlType2['Number'] = 'number';
+  ControlType2['String'] = 'string';
+  ControlType2['RichText'] = 'richtext';
+  ControlType2['FusedNumber'] = 'fusednumber';
+  ControlType2['Enum'] = 'enum';
+  ControlType2['SegmentedEnum'] = 'segmentedenum';
+  ControlType2['Color'] = 'color';
+  ControlType2['Image'] = 'image';
+  ControlType2['ResponsiveImage'] = 'responsiveimage';
+  ControlType2['File'] = 'file';
+  ControlType2['ComponentInstance'] = 'componentinstance';
+  ControlType2['Slot'] = 'slot';
+  ControlType2['Array'] = 'array';
+  ControlType2['EventHandler'] = 'eventhandler';
+  ControlType2['ChangeHandler'] = 'changehandler';
+  ControlType2['Transition'] = 'transition';
+  ControlType2['BoxShadow'] = 'boxshadow';
+  ControlType2['Link'] = 'link';
+  ControlType2['Date'] = 'date';
+  ControlType2['Object'] = 'object';
+  ControlType2['Font'] = 'font';
+  ControlType2['PageScope'] = 'pagescope';
+  ControlType2['ScrollSectionRef'] = 'scrollsectionref';
+  ControlType2['CustomCursor'] = 'customcursor';
+  ControlType2['Border'] = 'border';
+  ControlType2['Cursor'] = 'cursor';
+  ControlType2['Padding'] = 'padding';
+  ControlType2['BorderRadius'] = 'borderradius';
+  ControlType2['Gap'] = 'gap';
+  ControlType2['CollectionReference'] = 'collectionreference';
+  ControlType2['MultiCollectionReference'] = 'multicollectionreference';
+  ControlType2['TrackingId'] = 'trackingid';
+  ControlType2['VectorSetItem'] = 'vectorsetitem';
+  ControlType2['LinkRelValues'] = 'linkrelvalues';
+  ControlType2['Location'] = 'location';
+  return ControlType2;
+})(ControlType || {},);
+function isReactComponent(component,) {
+  return isObject2(component,) || isFunction(component,);
+}
+var optionalKey = 'optional';
+function controlIsOptional(control,) {
+  return !!control && optionalKey in control && control[optionalKey] === true;
+}
+function shouldBeNever(_,) {}
+function getControlDefaultValue(control,) {
+  try {
+    switch (control.type) {
+      case 'string':
+      case 'collectionreference':
+      case 'color':
+      case 'date':
+      case 'link':
+      case 'boxshadow':
+      case 'padding':
+      case 'borderradius':
+      case 'gap':
+        return isString(control.defaultValue,) ? control.defaultValue : void 0;
+      case 'boolean':
+        return isBoolean(control.defaultValue,) ? control.defaultValue : void 0;
+      case 'enum':
+        if (isUndefined(control.defaultValue,)) return void 0;
+        return control.options.includes(control.defaultValue,) ? control.defaultValue : void 0;
+      case 'fusednumber':
+      case 'number':
+        return isNumber2(control.defaultValue,) ? control.defaultValue : void 0;
+      case 'transition':
+        return isObject2(control.defaultValue,) ? control.defaultValue : void 0;
+      case 'border':
+        return isObject2(control.defaultValue,) ? control.defaultValue : void 0;
+      case 'font':
+      case 'location':
+        return isObject2(control.defaultValue,) ? control.defaultValue : void 0;
+      case 'linkrelvalues':
+        return isArray(control.defaultValue,) ? control.defaultValue : void 0;
+      case 'multicollectionreference':
+        return isArray(control.defaultValue,) ? control.defaultValue : void 0;
+      case 'object': {
+        const value = isObject2(control.defaultValue,) ? control.defaultValue : {};
+        if (isObject2(control.controls,)) {
+          applyControlDefaultsToDefaultProps(value, control.controls,);
+        }
+        return value;
+      }
+      case 'array':
+        return isArray(control.defaultValue,) ? control.defaultValue : void 0;
+      case 'file':
+      case 'image':
+      case 'richtext':
+      case 'pagescope':
+      case 'eventhandler':
+      case 'changehandler':
+      case 'segmentedenum':
+      case 'responsiveimage':
+      case 'componentinstance':
+      case 'slot':
+      case 'scrollsectionref':
+      case 'customcursor':
+      case 'cursor':
+      case 'trackingid':
+      case 'vectorsetitem':
+        return void 0;
+      // No default
+      default:
+        shouldBeNever(control,);
+        return void 0;
+    }
+  } catch {
+    return void 0;
+  }
+}
+function applyControlDefaultsToDefaultProps(defaultProps, controls,) {
+  for (const controlKey in controls) {
+    const control = controls[controlKey];
+    if (!control) continue;
+    const currentDefault = defaultProps[controlKey];
+    if (!isUndefined(currentDefault,)) continue;
+    if (controlIsOptional(control,)) continue;
+    const defaultValue = getControlDefaultValue(control,);
+    if (isUndefined(defaultValue,)) continue;
+    defaultProps[controlKey] = defaultValue;
+  }
+}
+function getDefaultProps(component,) {
+  if (isObject2(component.defaultProps,)) {
+    return component.defaultProps;
+  }
+  const defaultProps = {};
+  component.defaultProps = defaultProps;
+  return defaultProps;
+}
+function applyControlDefaultsToReactDefaultProps(component, controls,) {
+  if (!isReactComponent(component,)) return;
+  const defaultProps = getDefaultProps(component,);
+  applyControlDefaultsToDefaultProps(defaultProps, controls,);
+}
+function addPropertyControls(component, propertyControls,) {
+  Object.assign(component, {
+    propertyControls,
+  },);
+  applyControlDefaultsToReactDefaultProps(component, propertyControls,);
+}
+function getPropertyControls(component,) {
+  return component.propertyControls;
+}
+function applyMetaTag(name, props,) {
+  let tag = document.querySelector(`meta[name="${name}"]`,);
+  if (!tag) {
+    tag = document.createElement('meta',);
+    document.getElementsByTagName('head',)[0]?.appendChild(tag,);
+    tag.setAttribute('name', name,);
+  }
+  for (const [k, v,] of Object.entries(props,)) {
+    tag.setAttribute(k, v,);
+  }
+}
+function usePrototypingMetaTags() {
+  React42.useEffect(() => {
+    applyMetaTag('mobile-web-app-capable', {
+      content: 'yes',
+    },);
+    applyMetaTag('apple-mobile-web-app-capable', {
+      content: 'yes',
+    },);
+    applyMetaTag('apple-mobile-web-app-status-bar-style', {
+      content: 'black-translucent',
+    },);
+    applyMetaTag('viewport', {
+      content: 'viewport-fit=cover, user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1',
+    },);
+  }, [],);
+}
+var DeviceCodeComponentInner = /* @__PURE__ */ withLibraryCSS(({
+  children,
+  ...props
+},) => {
+  usePrototypingMetaTags();
+  const deviceOptions = convertPropsToDeviceOptions(props, {
+    forceOldClay: true,
+  },);
+  if (!deviceOptions) {
+    return /* @__PURE__ */ jsx('div', {
+      suppressHydrationWarning: true,
+      'data-framer-component-type': 'DeviceComponent',
+      className: 'no-device',
+      style: {
+        width: '100%',
+        height: '100%',
+      },
+      children: /* @__PURE__ */ jsx(ProvideParentSize, {
+        suppressHydrationWarning: true,
+        parentSize: 1,
+        children,
+      },),
+    },);
+  }
+  const child = Array.isArray(children,) ? children[0] : children;
+  const resizedChild = child && React42.isValidElement(child,)
+    ? React42.cloneElement(child, {
+      width: deviceOptions.screenWidth,
+      height: deviceOptions.screenHeight,
+    },)
+    : null;
+  return /* @__PURE__ */ jsx(Device, {
+    suppressHydrationWarning: true,
+    scaleTo: 'dynamic',
+    deviceOptions,
+    children: resizedChild,
+  },);
+},);
+var DeviceCodeComponent = /* @__PURE__ */ (() => {
+  const {
+    componentWidth: defaultWidth2,
+    componentHeight: defaultHeight2,
+  } = getComponentSize(convertPropsToDeviceOptions(defaultDeviceProps, {
+    forceOldClay: true,
+  },),);
+  DeviceCodeComponentInner.defaultProps = {
+    width: defaultWidth2,
+    height: defaultHeight2,
+    ...defaultDeviceProps,
+  };
+  const deviceCodeComponentPresets = devicePresets.filter((preset) => deviceCodeComponentPresetIds.includes(preset.id,));
+  addPropertyControls(DeviceCodeComponentInner, {
+    children: {
+      title: 'Content',
+      type: 'slot',
+      maxCount: 1,
+    },
+    preset: {
+      type: 'enum',
+      options: ['no-device', 'custom',].concat(deviceCodeComponentPresets.map((preset) => preset.id),),
+      optionTitles: ['No Device', 'Custom',].concat(deviceCodeComponentPresets.map((preset) => preset.title),),
+    },
+    customWidth: {
+      title: 'Width',
+      type: 'number',
+      min: 0,
+      displayStepper: true,
+      hidden: (props) => props.preset !== 'custom',
+    },
+    customHeight: {
+      title: 'Height',
+      type: 'number',
+      min: 0,
+      displayStepper: true,
+      hidden: (props) => props.preset !== 'custom',
+    },
+    customBezel: {
+      title: 'Bezel',
+      type: 'fusednumber',
+      min: 0,
+      toggleKey: 'isMixedBezel',
+      toggleTitles: ['a', 'b',],
+      valueKeys: ['bezelTop', 'bezelRight', 'bezelBottom', 'bezelLeft',],
+      valueLabels: ['T', 'R', 'B', 'L',],
+      hidden: (props) => props.preset !== 'custom',
+    },
+    customBezelRadius: {
+      title: 'Bezel Radius',
+      type: 'number',
+      min: 0,
+      displayStepper: true,
+      hidden: (props) => props.preset !== 'custom',
+    },
+    customScreenRadius: {
+      title: 'Screen Radius',
+      type: 'number',
+      min: 0,
+      displayStepper: true,
+      hidden: (props) => props.preset !== 'custom',
+    },
+    orientation: {
+      type: 'enum',
+      displaySegmentedControl: true,
+      options: ['portrait', 'landscape',],
+      optionTitles: ['Portrait', 'Landscape',],
+      optionIcons: ['orientation-portrait', 'orientation-landscape',],
+      hidden: (props) => !!props.preset && !supportsOrientation(props.preset,),
+    },
+    skin: {
+      title: 'Device',
+      type: 'enum',
+      displaySegmentedControl: true,
+      options: ['realistic', 'clay',],
+      optionTitles: ['Realistic', 'Clay',],
+      defaultValue: 'clay',
+      hidden: (props) => !!props.preset && !supportsRealisticSkin(props.preset,),
+    },
+    theme: {
+      type: 'enum',
+      displaySegmentedControl: true,
+      options: ['light', 'dark',],
+      optionTitles: ['Light', 'Dark',],
+      hidden: (props) => !!props.preset && !supportsThemes(props.preset, props.skin,),
+    },
+    shadow: {
+      type: 'boolean',
+      enabledTitle: 'On',
+      disabledTitle: 'Off',
+      hidden: ({
+        skin,
+        preset,
+      },) => preset !== 'custom' && skin === 'realistic' || preset === 'no-device',
+    },
+    hand: {
+      type: 'enum',
+      options: [null, 'hand-1', 'hand-2',],
+      optionTitles: ['None', 'Model 1', 'Model 2',],
+      hidden: (props) => !supportsHand(props,),
+    },
+    backgroundColor: {
+      type: 'color',
+      title: 'Background',
+      optional: true,
+      hidden: ({
+        preset,
+      },) => preset === 'no-device',
+    },
+  },);
+  return DeviceCodeComponentInner;
+})();
+function supportsOrientation(presetId,) {
+  if (presetId === 'no-device') return false;
+  if (presetId === 'custom') return true;
+  const preset = getDevicePreset(presetId,);
+  return !preset.disableRotation;
+}
+function supportsRealisticSkin(presetId,) {
+  if (presetId === 'custom' || presetId === 'no-device') return false;
+  const preset = getDevicePreset(presetId,);
+  return !!preset.realisticImage;
+}
+function supportsThemes(presetId, skin,) {
+  if (presetId === 'no-device') return false;
+  if (presetId === 'custom' || skin !== 'realistic') return true;
+  const preset = getDevicePreset(presetId,);
+  const realisticImage = preset.realisticImage;
+  if (realisticImage === void 0) {
+    return true;
+  }
+  if (colorIdForTheme('dark', realisticImage.availableColors,) !== void 0) {
+    return true;
+  }
+  return false;
+}
 var import_hoist_non_react_statics3 = __toESM(require_hoist_non_react_statics_cjs(), 1,);
 function pointForEvent(event, customTarget = null,) {
   let target;
@@ -31120,13 +31158,13 @@ var FramerEvent = class _FramerEvent {
   constructor(originalEvent, session,) {
     this.originalEvent = originalEvent;
     this.session = session;
-    const customTarget = session && session.startEvent && session.startEvent.target || originalEvent.target;
+    const customTarget = session?.startEvent?.target || originalEvent.target;
     const eventLike = _FramerEvent.eventLikeFromOriginalEvent(originalEvent,);
     this.point = pointForEvent(eventLike, customTarget,);
-    const deviceTarget = session && session.originElement ? session.originElement : document.body;
+    const deviceTarget = session?.originElement ? session.originElement : document.body;
     this.devicePoint = pointForEvent(eventLike, deviceTarget,);
     this.target = originalEvent.target || null;
-    const lastEvent = session && session.lastEvent;
+    const lastEvent = session?.lastEvent;
     if (originalEvent instanceof WheelEvent) {
       this.delta = {
         x: originalEvent.deltaX,
@@ -31170,7 +31208,7 @@ var FramerEvent = class _FramerEvent {
   static eventLikeFromOriginalEvent(originalEvent,) {
     if ('touches' in originalEvent) {
       let touches = originalEvent.touches;
-      if (!touches || !touches.length) {
+      if (!touches?.length) {
         if (originalEvent.changedTouches && originalEvent.changedTouches.length) {
           touches = originalEvent.changedTouches;
         }
@@ -31225,6 +31263,223 @@ var FramerEvent = class _FramerEvent {
   }
 };
 var import_hoist_non_react_statics2 = __toESM(require_hoist_non_react_statics_cjs(), 1,);
+var FrictionAnimator = class {
+  options;
+  state;
+  integrator;
+  constructor(options,) {
+    this.options = {
+      velocity: 0,
+      friction: 2,
+      tolerance: 1 / 10,
+    };
+    Object.assign(this.options, options,);
+    this.state = {
+      x: 0,
+      v: this.options.velocity,
+    };
+    this.integrator = new Integrator((state) => -(this.options.friction * state.v));
+  }
+  setFrom(value,) {
+    this.state.x = value;
+  }
+  setTo(value,) {}
+  setVelocity(velocity,) {
+    this.state.v = velocity;
+  }
+  getState() {
+    return this.state;
+  }
+  isReady() {
+    return true;
+  }
+  next(delta,) {
+    this.state = this.integrator.integrateState(this.state, delta,);
+    return this.state.x;
+  }
+  isFinished() {
+    return Math.abs(this.state.v,) < this.options.tolerance;
+  }
+};
+var Defaults2 = {
+  velocity: 0,
+  min: 0,
+  max: 0,
+  momentum: {
+    friction: 2,
+    tolerance: 10,
+  },
+  bounce: {
+    tension: 500,
+    friction: 10,
+    tolerance: 1,
+  },
+};
+var InertialScrollAnimator = class {
+  options;
+  current;
+  frictionAnimator;
+  springAnimator;
+  useSpring;
+  constructor(options,) {
+    this.options = Object.assign({
+      ...Defaults2,
+    }, options,);
+    this.frictionAnimator = new FrictionAnimator({
+      friction: this.options.momentum.friction,
+      tolerance: this.options.momentum.tolerance,
+      velocity: this.options.velocity,
+    },);
+    this.springAnimator = new SpringAnimator({
+      tension: this.options.bounce.tension,
+      friction: this.options.bounce.friction,
+      tolerance: this.options.bounce.tolerance,
+      velocity: this.options.velocity,
+    }, NumberInterpolation,);
+    this.useSpring = false;
+  }
+  isReady() {
+    return true;
+  }
+  next(delta,) {
+    this.current = this.currentAnimator.next(delta,);
+    if (!this.useSpring) {
+      this.tryTransitionToSpring();
+    }
+    return this.current;
+  }
+  get currentAnimator() {
+    if (this.useSpring) {
+      return this.springAnimator;
+    }
+    return this.frictionAnimator;
+  }
+  isFinished() {
+    return this.currentAnimator.isFinished();
+  }
+  get state() {
+    return this.currentAnimator.getState();
+  }
+  setFrom(value,) {
+    this.setState({
+      x: value,
+      v: this.state.v,
+    },);
+  }
+  setState(state,) {
+    this.frictionAnimator.setFrom(state.x,);
+    this.frictionAnimator.setVelocity(state.v,);
+    if (this.isValidState()) {
+      return this.tryTransitionToSpring();
+    } else {
+      let bound = 0;
+      if (this.state.x <= this.options.min) {
+        bound = this.options.min;
+      }
+      if (this.state.x >= this.options.max) {
+        bound = this.options.max;
+      }
+      return this.transitionToSpring(bound,);
+    }
+  }
+  setTo(destination,) {
+    this.frictionAnimator.setTo(destination,);
+    this.springAnimator.setTo(destination,);
+  }
+  setLimits(min, max,) {
+    this.options.min = min;
+    this.options.max = max;
+  }
+  // If the position is outside the min and max bounds, and traveling
+  // further away, then transition from friction to spring animation
+  tryTransitionToSpring() {
+    const belowMinWithVelocity = this.state.x < this.options.min && this.state.v <= 0;
+    const aboveMaxWithVelocity = this.state.x > this.options.max && this.state.v >= 0;
+    if (belowMinWithVelocity || aboveMaxWithVelocity) {
+      let bound;
+      if (belowMinWithVelocity) {
+        bound = this.options.min;
+      } else {
+        bound = this.options.max;
+      }
+      this.transitionToSpring(bound,);
+    } else {
+      this.useSpring = false;
+    }
+  }
+  transitionToSpring(bound,) {
+    this.springAnimator.setFrom(this.state.x,);
+    this.springAnimator.setVelocity(this.state.v,);
+    this.springAnimator.setTo(bound,);
+    this.useSpring = true;
+  }
+  // If the position is outside the min and max bounds, but traveling
+  // back towards the bounds, check if the velocity is sufficient to
+  // carry the position back within bounds. If it is, let friction do the
+  // work. If not, the state is invalid, so use the spring.
+  isValidState() {
+    const belowMinTravelingBack = this.state.x < this.options.min && this.state.v > 0;
+    const aboveMaxTravelingBack = this.state.x > this.options.max && this.state.v < 0;
+    if (belowMinTravelingBack || aboveMaxTravelingBack) {
+      let bound;
+      if (belowMinTravelingBack) {
+        bound = this.options.min;
+      } else {
+        bound = this.options.max;
+      }
+      const friction = this.frictionAnimator.options.friction;
+      const solution = 1 - friction * (bound - this.state.x) / this.state.v;
+      return solution > 0;
+    }
+    return true;
+  }
+  // The math behind _isValidState:
+  //
+  // 1. Integrate the friction animator's acceleration to find velocity
+  //
+  //         a = - k * v
+  //     dv/dt = - k * v
+  // Int(dv/v) = - k * Int(dt)
+  //      ln v = - k * t + C
+  //
+  // => Solve for C at t = 0
+  //
+  // ln v(0) = - k * 0 + C
+  // ln v(0) = C
+  //
+  // => Plug C back into v(t)
+  //
+  //     ln v = - k * t + ln v(0)
+  // e^(ln v) = e^(- k * t) + e^(ln v(0))
+  //        v = v(0) * e^(- k * t)
+  //
+  // 2. Integrate velocity to find position
+  //
+  // Int(v) = v(0) * Int(e^(- k * t))
+  //      x = - v(0) * e^(-k * t) / k + C
+  //
+  // => Solve for C at t = 0
+  //
+  //            x(0) = - v(0) * e^(-k * 0) / k + C
+  //            x(0) = - v(0) / k + C
+  // x(0) + v(0) / k = C
+  //
+  // => Plug C back into x(t)
+  //
+  // x = - v(0) * e^(-k * t) / k + x(0) + v(0) / k
+  //
+  // 3. Check if a (real) solution exists for t for position x
+  //
+  //                                x = - v(0) * e^(-k * t) / k + x(0) + v(0) / k
+  //                         x - x(0) = - v(0) * e^(-k * t) / k + v(0) / k
+  //                   k * (x - x(0)) = - v(0) * e^(-k * t) + v(0)
+  //            k * (x - x(0)) - v(0) = - v(0) * e^(-k * t)
+  // (k * (x - x(0)) - v(0)) / - v(0) = e^(-k * t)
+  //       1 - (k * (x - x(0)) / v(0) = e^(-k * t)
+  //   ln(1 - (k * (x - x(0)) / v(0)) = -k * t
+  //
+  // Therefore, a real solution exists if 1 - (k * (x - x(0)) / v(0) > 0
+};
 var clamp2 = (value, a, b,) => {
   const min = Math.min(a, b,);
   const max = Math.max(a, b,);
@@ -31239,7 +31494,7 @@ var clamp2 = (value, a, b,) => {
 var DraggingContext = /* @__PURE__ */ React42.createContext({
   dragging: false,
 },);
-function WithDragging(Component18,) {
+function WithDragging(Component17,) {
   class WithDraggingHOC extends React42.Component {
     static draggingDefaultProps = {
       momentum: true,
@@ -31272,7 +31527,7 @@ function WithDragging(Component18,) {
       constraints: {},
       mouseWheel: false,
     };
-    static defaultProps = Object.assign({}, Component18.defaultProps, WithDraggingHOC.draggingDefaultProps,);
+    static defaultProps = Object.assign({}, Component17.defaultProps, WithDraggingHOC.draggingDefaultProps,);
     state = {
       isDragging: false,
     };
@@ -31894,7 +32149,7 @@ function WithDragging(Component18,) {
         value: {
           dragging: this.state.isDragging,
         },
-        children: /* @__PURE__ */ jsx(Component18, {
+        children: /* @__PURE__ */ jsx(Component17, {
           suppressHydrationWarning: true,
           ...originalProps,
         },),
@@ -31902,7 +32157,7 @@ function WithDragging(Component18,) {
     }
   }
   const withDragging = WithDraggingHOC;
-  (0, import_hoist_non_react_statics2.default)(withDragging, Component18,);
+  (0, import_hoist_non_react_statics2.default)(withDragging, Component17,);
   return withDragging;
 }
 var hoverProps = {
@@ -32568,7 +32823,7 @@ function calcRealisticShadowSpread(diffusion,) {
   return mix(-maxSpread, 0, diffusion,);
 }
 function localShadowFrame(shadow, frame2, isSVG = false,) {
-  if (!isSVG && asRecord(shadow,)['inset']) return null;
+  if (!isSVG && asRecord(shadow,).inset) return null;
   let growth = shadow.blur;
   let minX;
   let maxX;
@@ -32962,8 +33217,8 @@ var DeprecatedFrame = /* @__PURE__ */ (() => {
       const {
         target,
       } = RenderEnvironment;
-      this.propsObserverCancel && this.propsObserverCancel();
-      this.sizeObserverCancel && this.sizeObserverCancel();
+      this.propsObserverCancel?.();
+      this.sizeObserverCancel?.();
       if (target === RenderTarget.preview) {
         this.propsObserver = ObservableObject(this.props, true,);
         this.propsObserverCancel = ObservableObject.addObserver(this.propsObserver, this.onPropsChange,);
@@ -32987,9 +33242,9 @@ var DeprecatedFrame = /* @__PURE__ */ (() => {
       this.updateStyle();
     };
     componentWillUnmount() {
-      this.propsObserverCancel && this.propsObserverCancel();
+      this.propsObserverCancel?.();
       this.propsObserverCancel = void 0;
-      this.sizeObserverCancel && this.sizeObserverCancel();
+      this.sizeObserverCancel?.();
       this.sizeObserverCancel = void 0;
     }
     render() {
@@ -33044,7 +33299,7 @@ var DeprecatedFrame = /* @__PURE__ */ (() => {
           return child;
         }
       },);
-      if (children && children.length === 1 && typeof children[0] === 'string') {
+      if (children?.length === 1 && typeof children[0] === 'string') {
         children = [/* @__PURE__ */ jsx(Center, {
           suppressHydrationWarning: true,
           children,
@@ -33152,56 +33407,6 @@ var Frame = /* @__PURE__ */ (() => {
   return FrameInner;
 })();
 var Draggable = /* @__PURE__ */ WithDragging(DeprecatedFrameWithEvents,);
-function useInfiniteScroll({
-  ref: observerRef,
-  loadMore,
-  rootMargin = '0px',
-  paginationInfo,
-},) {
-  const isVisibleRef = useRef(false,);
-  const callback = React42.useCallback((entry) => {
-    if (!entry.isIntersecting) {
-      isVisibleRef.current = false;
-      return;
-    }
-    isVisibleRef.current = true;
-    loadMore();
-    return;
-  }, [loadMore,],);
-  useEffect(() => {
-    frame.postRender(() => {
-      frame.render(() => {
-        if (isVisibleRef.current) {
-          loadMore();
-        }
-      },);
-    },);
-  }, [paginationInfo.currentPage, loadMore,],);
-  useSharedIntersectionObserver(observerRef, callback, {
-    rootMargin,
-    enabled: paginationInfo.currentPage < paginationInfo.totalPages,
-  },);
-}
-function withInfiniteScroll(Component18,) {
-  return React42.forwardRef(({
-    __paginationInfo,
-    __loadMore,
-    ...props
-  }, ref,) => {
-    const infiniteScrollRef = useObserverRef(ref,);
-    useInfiniteScroll({
-      rootMargin: '500px',
-      loadMore: __loadMore,
-      ref: infiniteScrollRef,
-      paginationInfo: __paginationInfo,
-    },);
-    return /* @__PURE__ */ jsx(Component18, {
-      suppressHydrationWarning: true,
-      ...props,
-      ref: infiniteScrollRef,
-    },);
-  },);
-}
 function debounce(fn, time2,) {
   let timeout;
   const debounced = (...args) => {
@@ -33269,7 +33474,7 @@ function useWheelScroll(ref, {
       updateX = updateX2,
       updateY = updateY2;
     const debouncedOnScrollEnd = debounce(() => {
-      onScrollEnd && onScrollEnd(getPointData(),);
+      onScrollEnd?.(getPointData(),);
       isWheelScrollActive.current = false;
     }, 200,);
     handler = (e) => {
@@ -33281,7 +33486,7 @@ function useWheelScroll(ref, {
         initial.y = y2;
         prev.x = x2;
         prev.y = y2;
-        onScrollStart && onScrollStart(getPointData(),);
+        onScrollStart?.(getPointData(),);
         isWheelScrollActive.current = true;
       }
       switch (direction) {
@@ -33295,7 +33500,7 @@ function useWheelScroll(ref, {
           updateX2(e.deltaX,);
           updateY2(e.deltaY,);
       }
-      onScroll && onScroll(getPointData(),);
+      onScroll?.(getPointData(),);
       debouncedOnScrollEnd();
     };
   }
@@ -33371,7 +33576,7 @@ function makePaddingString({
 }
 function parsePaddingString(padding,) {
   if (padding === 'none') return null;
-  const parts = padding.trim().split(/\s+/,).map((v) => parseNumberRounded(v,));
+  const parts = padding.trim().split(/\s+/u,).map((v) => parseNumberRounded(v,));
   const [part1, part2, part3, part4,] = parts;
   switch (parts.length) {
     case 1:
@@ -34544,511 +34749,57 @@ var Page3 = /* @__PURE__ */ (() => {
   Page2.supportsConstraints = true;
   return Page2;
 })();
-function stateName(state,) {
-  switch (state) {
-    case 2:
-      return 'Possible';
-    case 4:
-      return 'Began';
-    case 8:
-      return 'Changed';
-    case 16:
-      return 'Ended';
-    case 32:
-      return 'Failed';
-    case 64:
-      return 'Cancelled';
-    case 128:
-      return 'Recognized';
-    default:
-      return 'Unknown';
-  }
+function useInfiniteScroll({
+  ref: observerRef,
+  loadMore,
+  rootMargin = '0px',
+  paginationInfo,
+},) {
+  const isVisibleRef = useRef(false,);
+  const callback = React42.useCallback((entry) => {
+    if (!entry.isIntersecting) {
+      isVisibleRef.current = false;
+      return;
+    }
+    isVisibleRef.current = true;
+    void loadMore();
+    return;
+  }, [loadMore,],);
+  useEffect(() => {
+    frame.postRender(() => {
+      frame.render(() => {
+        if (isVisibleRef.current) {
+          void loadMore();
+        }
+      },);
+    },);
+    void paginationInfo.currentPage;
+  }, [paginationInfo.currentPage, loadMore,],);
+  useSharedIntersectionObserver(observerRef, callback, {
+    rootMargin,
+    enabled: paginationInfo.currentPage < paginationInfo.totalPages,
+  },);
 }
-function containsBitmask(value, bitmask,) {
-  return (value & bitmask) !== 0;
+function withInfiniteScroll(Component17,) {
+  return React42.forwardRef(({
+    __paginationInfo,
+    __loadMore,
+    ...props
+  }, ref,) => {
+    const infiniteScrollRef = useObserverRef(ref,);
+    useInfiniteScroll({
+      rootMargin: '500px',
+      loadMore: __loadMore,
+      ref: infiniteScrollRef,
+      paginationInfo: __paginationInfo,
+    },);
+    return /* @__PURE__ */ jsx(Component17, {
+      suppressHydrationWarning: true,
+      ...props,
+      ref: infiniteScrollRef,
+    },);
+  },);
 }
-var GestureRecognizer = class {
-  _state = 2;
-  get state() {
-    return this._state;
-  }
-  setState(state,) {
-    this._state = state;
-  }
-  handler = null;
-  preventers = [];
-  get isPrevented() {
-    let prevented = false;
-    for (const recognizer of this.preventers) {
-      if (recognizer.state & (4 | 8 | 16)) {
-        prevented = true;
-        break;
-      }
-    }
-    return prevented;
-  }
-  canBePreventedBy(recognizer,) {
-    this.preventers.push(recognizer,);
-  }
-  hasState(bitmask,) {
-    return containsBitmask(this.state, bitmask,);
-  }
-  stateSwitch(newState,) {
-    let allowedStates;
-    switch (this.state) {
-      case 2:
-        allowedStates = 4 | 128 | 32;
-        break;
-      case 4:
-        allowedStates = 8 | 64 | 16;
-        break;
-      case 8:
-        allowedStates = 8 | 64 | 16;
-        break;
-      case 128:
-      case 16:
-      case 64:
-      case 32:
-        allowedStates = 2;
-        break;
-      default:
-        allowedStates = 0;
-    }
-    if (!containsBitmask(newState, allowedStates,)) {
-      console.warn(`Unallowed state change from ${stateName(this.state,)} to ${stateName(newState,)}`,);
-      return;
-    }
-    this.setState(newState,);
-  }
-  cancel() {
-    if (
-      this.hasState(4 | 8,/* Changed */
-      )
-    ) {
-      this.setState(64,/* Cancelled */
-      );
-    }
-    this.reset();
-  }
-  reset() {
-    if (
-      !this.hasState(2,/* Possible */
-      )
-    ) {
-      this.stateSwitch(2,/* Possible */
-      );
-    }
-  }
-};
-var MouseWheelGestureRecognizer = class extends GestureRecognizer {
-  startEvent = null;
-  eventType = 'mousewheel';
-  pointerSessionBegan(session, event,) {}
-  pointerSessionMoved(session, event,) {}
-  pointerSessionEnded(session, event,) {}
-  mouseWheel(session, event,) {
-    if (!this.handler) return;
-    if (
-      this.hasState(2,/* Possible */
-      )
-    ) {
-      this.startEvent = event;
-      this.stateSwitch(4,/* Began */
-      );
-      this.handler.gestureBegan(this.eventType, event, this.startEvent.target,);
-      return;
-    }
-    if (
-      this.hasState(4 | 8,/* Changed */
-      ) && this.startEvent
-    ) {
-      this.stateSwitch(8,/* Changed */
-      );
-      this.handler.gestureChanged(this.eventType, event, this.startEvent.target,);
-    }
-    this.onMouseWheelEnd(event,);
-  }
-  onMouseWheelEnd = debounce((event) => {
-    if (this.handler && this.startEvent) {
-      this.stateSwitch(16,/* Ended */
-      );
-      this.handler.gestureEnded(this.eventType, event, this.startEvent.target,);
-      this.startEvent = null;
-      this.reset();
-    }
-  }, 300,);
-};
-var PanGestureRecognizer = class extends GestureRecognizer {
-  startEvent = null;
-  eventType = 'pan';
-  pointerSessionBegan(session, event,) {
-    this.recognize(session, event,);
-  }
-  pointerSessionMoved(session, event,) {
-    this.recognize(session, event,);
-  }
-  pointerSessionEnded(session, event,) {
-    this.panend(event,);
-  }
-  recognize(session, event,) {
-    if (Math.abs(event.delta.x,) > 0 || Math.abs(event.delta.y,) > 0) {
-      if (this.startEvent) {
-        this.pan(event,);
-      } else {
-        this.panstart(event,);
-      }
-    }
-  }
-  reset() {
-    this.startEvent = null;
-    super.reset();
-  }
-  panstart(event,) {
-    if (
-      !this.hasState(2,/* Possible */
-      ) || event.isLeftMouseClick !== void 0 && !event.isLeftMouseClick
-    ) {
-      return;
-    }
-    this.stateSwitch(4,/* Began */
-    );
-    this.startEvent = event;
-    if (this.handler && this.startEvent.target) {
-      this.handler.gestureBegan(this.eventType, event, this.startEvent.target,);
-    }
-  }
-  pan(event,) {
-    if (
-      !this.hasState(4 | 8,/* Changed */
-      )
-    ) {
-      return;
-    }
-    if (!this.startEvent) {
-      return;
-    }
-    this.stateSwitch(8,/* Changed */
-    );
-    if (this.handler && this.startEvent.target) {
-      this.handler.gestureChanged(this.eventType, event, this.startEvent.target,);
-    }
-  }
-  panend(event,) {
-    if (
-      !this.hasState(4 | 8,/* Changed */
-      )
-    ) {
-      return;
-    }
-    if (!this.startEvent) {
-      return;
-    }
-    this.stateSwitch(16,/* Ended */
-    );
-    if (this.handler && this.startEvent.target) {
-      this.handler.gestureEnded(this.eventType, event, this.startEvent.target,);
-    }
-  }
-};
-var TapGestureRecognizer = class extends GestureRecognizer {
-  eventType = 'tap';
-  pointerSessionBegan(session, event,) {
-    if (this.handler && (event.isLeftMouseClick === void 0 || event.isLeftMouseClick)) {
-      this.handler.gestureBegan(this.eventType, event, null,);
-    }
-  }
-  pointerSessionMoved(session, event,) {}
-  pointerSessionEnded(session, event,) {
-    if (this.isPrevented) {
-      this.stateSwitch(32,/* Failed */
-      );
-    } else if (!session.startEvent || session.startEvent.target === event.target) {
-      this.stateSwitch(128,/* Recognized */
-      );
-      if (this.handler) {
-        this.handler.gestureChanged(this.eventType, event, null,);
-      }
-    } else {
-      this.stateSwitch(32,/* Failed */
-      );
-    }
-    if (this.handler) {
-      this.handler.gestureEnded(this.eventType, event, null,);
-    }
-  }
-};
-var FramerEventSession = class {
-  events = [];
-  recognizers = [];
-  mouseWheelRecognizer = new MouseWheelGestureRecognizer();
-  dispatcher;
-  /**
-   * @internal
-   */
-  originElement;
-  get isStarted() {
-    return this.events.length !== 0;
-  }
-  get startEvent() {
-    return this.isStarted ? this.events[0] : void 0;
-  }
-  get lastEvent() {
-    return this.events[this.events.length - 1];
-  }
-  constructor(dispatcher, customOrigin,) {
-    this.dispatcher = dispatcher;
-    if (customOrigin) {
-      this.originElement = customOrigin;
-    } else {
-      this.originElement = document.body;
-    }
-    const pan = new PanGestureRecognizer();
-    const tap = new TapGestureRecognizer();
-    pan.handler = this;
-    tap.handler = this;
-    this.mouseWheelRecognizer.handler = this;
-    this.recognizers = [tap, pan,];
-  }
-  // Event handling
-  processEvent(event,) {
-    this.events.push(event,);
-    return event;
-  }
-  pointerDown(event,) {
-    if (this.isStarted) {
-      return;
-    }
-    this.processEvent(event,);
-    this.recognizers.map((r) => {
-      r.cancel();
-      r.pointerSessionBegan(this, event,);
-    },);
-  }
-  pointerMove(event,) {
-    if (!this.isStarted) {
-      return;
-    }
-    this.processEvent(event,);
-    this.recognizers.map((r) => {
-      r.pointerSessionMoved(this, event,);
-    },);
-  }
-  pointerUp(event,) {
-    if (!this.isStarted) {
-      return;
-    }
-    this.processEvent(event,);
-    this.recognizers.map((r) => {
-      r.pointerSessionEnded(this, event,);
-    },);
-    this.clearEvents();
-    this.recognizers.map((r) => {
-      r.reset();
-    },);
-  }
-  mouseWheel(event,) {
-    this.processEvent(event,);
-    this.mouseWheelRecognizer.mouseWheel(this, event,);
-    this.clearEvents();
-  }
-  clearEvents() {
-    this.events = [];
-  }
-  dispatch(type, event, target = null,) {
-    const dispatchTarget = target || this.startEvent && this.startEvent.target || event.target;
-    if (dispatchTarget) {
-      this.dispatcher(type, event, dispatchTarget,);
-    }
-  }
-  // Gesture Handler
-  gestureBegan(type, event, target,) {
-    this.dispatch(`${type}start`, event, target,);
-  }
-  gestureChanged(type, event, target,) {
-    this.dispatch(type, event, target,);
-  }
-  gestureEnded(type, event, target,) {
-    this.dispatch(`${type}end`, event, target,);
-  }
-  // Calculatinos
-  /**
-   * Average velocity over last n seconds in pixels per second.
-   * @param n - number of events to use for calculation
-   */
-  velocity(t = Loop.TimeStep * 2,) {
-    if (!this.isStarted || this.events.length < 2) {
-      return {
-        x: 0,
-        y: 0,
-      };
-    }
-    const events = this.events;
-    let i = events.length - 1;
-    let event = null;
-    while (i >= 0) {
-      event = events[i] ?? null;
-      if (!event || MainLoop.time - event.loopTime > t) {
-        break;
-      }
-      i--;
-    }
-    if (!event) {
-      return {
-        x: 0,
-        y: 0,
-      };
-    }
-    const current2 = events[events.length - 1];
-    if (!current2) {
-      return {
-        x: 0,
-        y: 0,
-      };
-    }
-    const time2 = (MainLoop.time - event.loopTime) * 1e3;
-    if (time2 === 0) {
-      return {
-        x: 0,
-        y: 0,
-      };
-    }
-    const velocity = {
-      x: (current2.devicePoint.x - event.devicePoint.x) / time2,
-      y: (current2.devicePoint.y - event.devicePoint.y) / time2,
-    };
-    if (velocity.x === Infinity) {
-      velocity.x = 0;
-    }
-    if (velocity.y === Infinity) {
-      velocity.y = 0;
-    }
-    return velocity;
-  }
-  offset(event,) {
-    if (!this.startEvent) {
-      return {
-        x: 0,
-        y: 0,
-      };
-    }
-    const subtract = (pointA, pointB,) => {
-      return {
-        x: pointA.x - pointB.x,
-        y: pointA.y - pointB.y,
-      };
-    };
-    return subtract(event.devicePoint, this.startEvent.devicePoint,);
-  }
-};
-var MouseEventListener = class extends Component2 {
-  /**
-   * @internal
-   */
-  render() {
-    return this.props.children;
-  }
-  /**
-   * @internal
-   */
-  componentDidMount() {
-    safeWindow.addEventListener('mousedown', this.domMouseDown,);
-    safeWindow.addEventListener('wheel', this.domMouseWheel,);
-  }
-  /**
-   * @internal
-   */
-  componentWillUnmount() {
-    safeWindow.removeEventListener('mousemove', this.domMouseMove,);
-    safeWindow.removeEventListener('mousedown', this.domMouseDown,);
-    safeWindow.removeEventListener('mouseup', this.domMouseUp,);
-    safeWindow.removeEventListener('wheel', this.domMouseWheel,);
-  }
-  /**
-   * @internal
-   */
-  domMouseDown = (originalEvent) => {
-    safeWindow.addEventListener('mousemove', this.domMouseMove,);
-    safeWindow.addEventListener('mouseup', this.domMouseUp,);
-    const event = new FramerEvent(originalEvent, this.props.session,);
-    this.props.session.pointerDown(event,);
-  };
-  /**
-   * @internal
-   */
-  domMouseMove = (originalEvent) => {
-    const leftMouseButtonOnlyDown = originalEvent.buttons === void 0 ? originalEvent.which === 1 : originalEvent.buttons === 1;
-    if (!leftMouseButtonOnlyDown) {
-      this.domMouseUp(originalEvent,);
-      return;
-    }
-    const event = new FramerEvent(originalEvent, this.props.session,);
-    this.props.session.pointerMove(event,);
-  };
-  /**
-   * @internal
-   */
-  domMouseUp = (originalEvent) => {
-    safeWindow.removeEventListener('mousemove', this.domMouseMove,);
-    safeWindow.removeEventListener('mouseup', this.domMouseUp,);
-    const event = new FramerEvent(originalEvent, this.props.session,);
-    this.props.session.pointerUp(event,);
-  };
-  /**
-   * @internal
-   */
-  domMouseWheel = (originalEvent) => {
-    const event = new FramerEvent(originalEvent, this.props.session,);
-    this.props.session.mouseWheel(event,);
-  };
-};
-var TouchEventListener = class extends Component2 {
-  /**
-   * @internal
-   */
-  render() {
-    return this.props.children;
-  }
-  /**
-   * @internal
-   */
-  componentDidMount() {
-    safeWindow.addEventListener('touchstart', this.domTouchStart,);
-  }
-  /**
-   * @internal
-   */
-  componentWillUnmount() {
-    safeWindow.removeEventListener('touchstart', this.domTouchStart,);
-    safeWindow.removeEventListener('touchmove', this.domTouchMove,);
-    safeWindow.removeEventListener('touchend', this.domTouchEnd,);
-  }
-  /**
-   * @internal
-   */
-  domTouchStart = (originalEvent) => {
-    safeWindow.addEventListener('touchmove', this.domTouchMove,);
-    safeWindow.addEventListener('touchend', this.domTouchEnd,);
-    const event = new FramerEvent(originalEvent, this.props.session,);
-    this.props.session.pointerDown(event,);
-  };
-  /**
-   * @internal
-   */
-  domTouchMove = (originalEvent) => {
-    const event = new FramerEvent(originalEvent, this.props.session,);
-    this.props.session.pointerMove(event,);
-  };
-  /**
-   * @internal
-   */
-  domTouchEnd = (originalEvent) => {
-    safeWindow.removeEventListener('touchmove', this.domTouchMove,);
-    safeWindow.removeEventListener('touchend', this.domTouchEnd,);
-    const event = new FramerEvent(originalEvent, this.props.session,);
-    this.props.session.pointerUp(event,);
-  };
-};
-var FramerEventListener = /* @__PURE__ */ isTouch() ? TouchEventListener : MouseEventListener;
 var directionMap = {
   horizontal: 'x',
   vertical: 'y',
@@ -35235,21 +34986,21 @@ var EmulatedScrollInner = /* @__PURE__ */ React42.forwardRef(function EmulatedSc
     return data2;
   }, [x2, y2,],);
   const updateScrollListeners = useCallback2(() => {
-    onUpdate && onUpdate({
+    onUpdate?.({
       x: x2.get(),
       y: y2.get(),
     },);
-    onScroll && onScroll(getPointData(),);
+    onScroll?.(getPointData(),);
   }, [onScroll, onUpdate, getPointData, x2, y2,],);
   const scheduleUpdateScrollListeners = useCallback2(() => {
     frame.update(updateScrollListeners, false, true,);
   }, [updateScrollListeners,],);
   const onMotionDragStart = (event, info,) => {
     resetInitialPoint();
-    onDragStart && onDragStart(event, info,);
-    onScrollStart && onScrollStart(info,);
+    onDragStart?.(event, info,);
+    onScrollStart?.(info,);
   };
-  const onMotionDragTransitionEnd = () => onScrollEnd && onScrollEnd(getPointData(),);
+  const onMotionDragTransitionEnd = () => onScrollEnd?.(getPointData(),);
   const onWheelScrollStart = (info) => {
     onScrollStart?.(info,);
   };
@@ -35545,7 +35296,7 @@ function setPointerEvents(element, value,) {
   }
 }
 function getPointerEvents(element,) {
-  return element?.style?.['pointerEvents'];
+  return element?.style?.pointerEvents;
 }
 var emptyObject = /* @__PURE__ */ Object.freeze({},);
 function useEmulateTouchScroll(ref, direction, enabled,) {
@@ -36113,7 +35864,7 @@ function convertColorProps(props,) {
   }
   return props;
 }
-function WithOverride(Component18, override,) {
+function WithOverride(Component17, override,) {
   const useOverride = typeof override === 'function' ? (props) => override(convertColorProps(props,),) : () => convertColorProps(override,);
   const ComponentWithOverride = function (props,) {
     useContext(DataObserverContext,);
@@ -36122,15 +35873,15 @@ function WithOverride(Component18, override,) {
       style: style2,
       ...rest
     } = props;
-    return /* @__PURE__ */ jsx(Component18, {
+    return /* @__PURE__ */ jsx(Component17, {
       suppressHydrationWarning: true,
       ...rest,
       ...overrideProps,
       _initialStyle: style2,
     },);
   };
-  (0, import_hoist_non_react_statics4.default)(ComponentWithOverride, Component18,);
-  ComponentWithOverride['displayName'] = `WithOverride(${Component18.displayName || Component18.name})`;
+  (0, import_hoist_non_react_statics4.default)(ComponentWithOverride, Component17,);
+  ComponentWithOverride['displayName'] = `WithOverride(${Component17.displayName || Component17.name})`;
   return ComponentWithOverride;
 }
 var prefix = '__framer__';
@@ -36542,7 +36293,7 @@ var AnimationCollector = class {
   }
 };
 var framerAppearEffects = /* @__PURE__ */ new AnimationCollector();
-function withOptimizedAppearEffect(Component18,) {
+function withOptimizedAppearEffect(Component17,) {
   return React42.forwardRef(({
     optimized,
     ...props
@@ -36564,7 +36315,7 @@ function withOptimizedAppearEffect(Component18,) {
       );
     }
     const disabledProps = getDisabledFXPropsInStaticRenderer(props,);
-    return /* @__PURE__ */ jsx(Component18, {
+    return /* @__PURE__ */ jsx(Component17, {
       suppressHydrationWarning: true,
       ref,
       ...props,
@@ -37038,7 +36789,7 @@ function createTransformInputRange(transformTargets, threshold2 = 0, callback,) 
       ref: targetRef,
       offset,
     } = transformTargets[index] ?? {};
-    if (!targetRef || !targetRef.current) continue;
+    if (!targetRef?.current) continue;
     const offsetTop = calcOffsetTop(targetRef.current, document.documentElement,);
     const top = offsetTop - scrollObserverOffset - (offset ?? 0) - threshold2;
     const height = targetRef.current?.clientHeight ?? 0;
@@ -37516,10 +37267,10 @@ function addMotionValueStyle(style2, values,) {
 function isVariantOrVariantList2(value,) {
   return isString(value,) || Array.isArray(value,);
 }
-var withFX = (Component18) =>
+var withFX = (Component17) =>
   React42.forwardRef((props, forwardedRef,) => {
     if (props.__withFX) {
-      return /* @__PURE__ */ jsx(Component18, {
+      return /* @__PURE__ */ jsx(Component17, {
         suppressHydrationWarning: true,
         ...props,
         animate: void 0,
@@ -37530,7 +37281,7 @@ var withFX = (Component18) =>
     }
     const disabledProps = getDisabledFXPropsInStaticRenderer(props,);
     if (disabledProps) {
-      return /* @__PURE__ */ jsx(Component18, {
+      return /* @__PURE__ */ jsx(Component17, {
         suppressHydrationWarning: true,
         ...props,
         ...disabledProps,
@@ -37626,7 +37377,7 @@ var withFX = (Component18) =>
         exit,
       }
       : {};
-    return /* @__PURE__ */ jsx(Component18, {
+    return /* @__PURE__ */ jsx(Component17, {
       suppressHydrationWarning: true,
       ...forwardedProps,
       ...motionGestures,
@@ -37646,6 +37397,511 @@ var withFX = (Component18) =>
   },);
 var withParallaxTransform = withFX;
 var withStyleAppearEffect = withFX;
+var MouseEventListener = class extends Component2 {
+  /**
+   * @internal
+   */
+  render() {
+    return this.props.children;
+  }
+  /**
+   * @internal
+   */
+  componentDidMount() {
+    safeWindow.addEventListener('mousedown', this.domMouseDown,);
+    safeWindow.addEventListener('wheel', this.domMouseWheel,);
+  }
+  /**
+   * @internal
+   */
+  componentWillUnmount() {
+    safeWindow.removeEventListener('mousemove', this.domMouseMove,);
+    safeWindow.removeEventListener('mousedown', this.domMouseDown,);
+    safeWindow.removeEventListener('mouseup', this.domMouseUp,);
+    safeWindow.removeEventListener('wheel', this.domMouseWheel,);
+  }
+  /**
+   * @internal
+   */
+  domMouseDown = (originalEvent) => {
+    safeWindow.addEventListener('mousemove', this.domMouseMove,);
+    safeWindow.addEventListener('mouseup', this.domMouseUp,);
+    const event = new FramerEvent(originalEvent, this.props.session,);
+    this.props.session.pointerDown(event,);
+  };
+  /**
+   * @internal
+   */
+  domMouseMove = (originalEvent) => {
+    const leftMouseButtonOnlyDown = originalEvent.buttons === void 0 ? originalEvent.which === 1 : originalEvent.buttons === 1;
+    if (!leftMouseButtonOnlyDown) {
+      this.domMouseUp(originalEvent,);
+      return;
+    }
+    const event = new FramerEvent(originalEvent, this.props.session,);
+    this.props.session.pointerMove(event,);
+  };
+  /**
+   * @internal
+   */
+  domMouseUp = (originalEvent) => {
+    safeWindow.removeEventListener('mousemove', this.domMouseMove,);
+    safeWindow.removeEventListener('mouseup', this.domMouseUp,);
+    const event = new FramerEvent(originalEvent, this.props.session,);
+    this.props.session.pointerUp(event,);
+  };
+  /**
+   * @internal
+   */
+  domMouseWheel = (originalEvent) => {
+    const event = new FramerEvent(originalEvent, this.props.session,);
+    this.props.session.mouseWheel(event,);
+  };
+};
+var TouchEventListener = class extends Component2 {
+  /**
+   * @internal
+   */
+  render() {
+    return this.props.children;
+  }
+  /**
+   * @internal
+   */
+  componentDidMount() {
+    safeWindow.addEventListener('touchstart', this.domTouchStart,);
+  }
+  /**
+   * @internal
+   */
+  componentWillUnmount() {
+    safeWindow.removeEventListener('touchstart', this.domTouchStart,);
+    safeWindow.removeEventListener('touchmove', this.domTouchMove,);
+    safeWindow.removeEventListener('touchend', this.domTouchEnd,);
+  }
+  /**
+   * @internal
+   */
+  domTouchStart = (originalEvent) => {
+    safeWindow.addEventListener('touchmove', this.domTouchMove,);
+    safeWindow.addEventListener('touchend', this.domTouchEnd,);
+    const event = new FramerEvent(originalEvent, this.props.session,);
+    this.props.session.pointerDown(event,);
+  };
+  /**
+   * @internal
+   */
+  domTouchMove = (originalEvent) => {
+    const event = new FramerEvent(originalEvent, this.props.session,);
+    this.props.session.pointerMove(event,);
+  };
+  /**
+   * @internal
+   */
+  domTouchEnd = (originalEvent) => {
+    safeWindow.removeEventListener('touchmove', this.domTouchMove,);
+    safeWindow.removeEventListener('touchend', this.domTouchEnd,);
+    const event = new FramerEvent(originalEvent, this.props.session,);
+    this.props.session.pointerUp(event,);
+  };
+};
+var FramerEventListener = /* @__PURE__ */ isTouch() ? TouchEventListener : MouseEventListener;
+function stateName(state,) {
+  switch (state) {
+    case 2:
+      return 'Possible';
+    case 4:
+      return 'Began';
+    case 8:
+      return 'Changed';
+    case 16:
+      return 'Ended';
+    case 32:
+      return 'Failed';
+    case 64:
+      return 'Cancelled';
+    case 128:
+      return 'Recognized';
+    default:
+      return 'Unknown';
+  }
+}
+function containsBitmask(value, bitmask,) {
+  return (value & bitmask) !== 0;
+}
+var GestureRecognizer = class {
+  _state = 2;
+  get state() {
+    return this._state;
+  }
+  setState(state,) {
+    this._state = state;
+  }
+  handler = null;
+  preventers = [];
+  get isPrevented() {
+    let prevented = false;
+    for (const recognizer of this.preventers) {
+      if (recognizer.state & (4 | 8 | 16)) {
+        prevented = true;
+        break;
+      }
+    }
+    return prevented;
+  }
+  canBePreventedBy(recognizer,) {
+    this.preventers.push(recognizer,);
+  }
+  hasState(bitmask,) {
+    return containsBitmask(this.state, bitmask,);
+  }
+  stateSwitch(newState,) {
+    let allowedStates;
+    switch (this.state) {
+      case 2:
+        allowedStates = 4 | 128 | 32;
+        break;
+      case 4:
+        allowedStates = 8 | 64 | 16;
+        break;
+      case 8:
+        allowedStates = 8 | 64 | 16;
+        break;
+      case 128:
+      case 16:
+      case 64:
+      case 32:
+        allowedStates = 2;
+        break;
+      default:
+        allowedStates = 0;
+    }
+    if (!containsBitmask(newState, allowedStates,)) {
+      console.warn(`Unallowed state change from ${stateName(this.state,)} to ${stateName(newState,)}`,);
+      return;
+    }
+    this.setState(newState,);
+  }
+  cancel() {
+    if (
+      this.hasState(4 | 8,/* Changed */
+      )
+    ) {
+      this.setState(64,/* Cancelled */
+      );
+    }
+    this.reset();
+  }
+  reset() {
+    if (
+      !this.hasState(2,/* Possible */
+      )
+    ) {
+      this.stateSwitch(2,/* Possible */
+      );
+    }
+  }
+};
+var MouseWheelGestureRecognizer = class extends GestureRecognizer {
+  startEvent = null;
+  eventType = 'mousewheel';
+  pointerSessionBegan(session, event,) {}
+  pointerSessionMoved(session, event,) {}
+  pointerSessionEnded(session, event,) {}
+  mouseWheel(session, event,) {
+    if (!this.handler) return;
+    if (
+      this.hasState(2,/* Possible */
+      )
+    ) {
+      this.startEvent = event;
+      this.stateSwitch(4,/* Began */
+      );
+      this.handler.gestureBegan(this.eventType, event, this.startEvent.target,);
+      return;
+    }
+    if (
+      this.hasState(4 | 8,/* Changed */
+      ) && this.startEvent
+    ) {
+      this.stateSwitch(8,/* Changed */
+      );
+      this.handler.gestureChanged(this.eventType, event, this.startEvent.target,);
+    }
+    this.onMouseWheelEnd(event,);
+  }
+  onMouseWheelEnd = debounce((event) => {
+    if (this.handler && this.startEvent) {
+      this.stateSwitch(16,/* Ended */
+      );
+      this.handler.gestureEnded(this.eventType, event, this.startEvent.target,);
+      this.startEvent = null;
+      this.reset();
+    }
+  }, 300,);
+};
+var PanGestureRecognizer = class extends GestureRecognizer {
+  startEvent = null;
+  eventType = 'pan';
+  pointerSessionBegan(session, event,) {
+    this.recognize(session, event,);
+  }
+  pointerSessionMoved(session, event,) {
+    this.recognize(session, event,);
+  }
+  pointerSessionEnded(session, event,) {
+    this.panend(event,);
+  }
+  recognize(session, event,) {
+    if (Math.abs(event.delta.x,) > 0 || Math.abs(event.delta.y,) > 0) {
+      if (this.startEvent) {
+        this.pan(event,);
+      } else {
+        this.panstart(event,);
+      }
+    }
+  }
+  reset() {
+    this.startEvent = null;
+    super.reset();
+  }
+  panstart(event,) {
+    if (
+      !this.hasState(2,/* Possible */
+      ) || event.isLeftMouseClick !== void 0 && !event.isLeftMouseClick
+    ) {
+      return;
+    }
+    this.stateSwitch(4,/* Began */
+    );
+    this.startEvent = event;
+    if (this.handler && this.startEvent.target) {
+      this.handler.gestureBegan(this.eventType, event, this.startEvent.target,);
+    }
+  }
+  pan(event,) {
+    if (
+      !this.hasState(4 | 8,/* Changed */
+      )
+    ) {
+      return;
+    }
+    if (!this.startEvent) {
+      return;
+    }
+    this.stateSwitch(8,/* Changed */
+    );
+    if (this.handler && this.startEvent.target) {
+      this.handler.gestureChanged(this.eventType, event, this.startEvent.target,);
+    }
+  }
+  panend(event,) {
+    if (
+      !this.hasState(4 | 8,/* Changed */
+      )
+    ) {
+      return;
+    }
+    if (!this.startEvent) {
+      return;
+    }
+    this.stateSwitch(16,/* Ended */
+    );
+    if (this.handler && this.startEvent.target) {
+      this.handler.gestureEnded(this.eventType, event, this.startEvent.target,);
+    }
+  }
+};
+var TapGestureRecognizer = class extends GestureRecognizer {
+  eventType = 'tap';
+  pointerSessionBegan(session, event,) {
+    if (this.handler && (event.isLeftMouseClick === void 0 || event.isLeftMouseClick)) {
+      this.handler.gestureBegan(this.eventType, event, null,);
+    }
+  }
+  pointerSessionMoved(session, event,) {}
+  pointerSessionEnded(session, event,) {
+    if (this.isPrevented) {
+      this.stateSwitch(32,/* Failed */
+      );
+    } else if (!session.startEvent || session.startEvent.target === event.target) {
+      this.stateSwitch(128,/* Recognized */
+      );
+      if (this.handler) {
+        this.handler.gestureChanged(this.eventType, event, null,);
+      }
+    } else {
+      this.stateSwitch(32,/* Failed */
+      );
+    }
+    if (this.handler) {
+      this.handler.gestureEnded(this.eventType, event, null,);
+    }
+  }
+};
+var FramerEventSession = class {
+  events = [];
+  recognizers = [];
+  mouseWheelRecognizer = new MouseWheelGestureRecognizer();
+  dispatcher;
+  /**
+   * @internal
+   */
+  originElement;
+  get isStarted() {
+    return this.events.length !== 0;
+  }
+  get startEvent() {
+    return this.isStarted ? this.events[0] : void 0;
+  }
+  get lastEvent() {
+    return this.events[this.events.length - 1];
+  }
+  constructor(dispatcher, customOrigin,) {
+    this.dispatcher = dispatcher;
+    if (customOrigin) {
+      this.originElement = customOrigin;
+    } else {
+      this.originElement = document.body;
+    }
+    const pan = new PanGestureRecognizer();
+    const tap = new TapGestureRecognizer();
+    pan.handler = this;
+    tap.handler = this;
+    this.mouseWheelRecognizer.handler = this;
+    this.recognizers = [tap, pan,];
+  }
+  // Event handling
+  processEvent(event,) {
+    this.events.push(event,);
+    return event;
+  }
+  pointerDown(event,) {
+    if (this.isStarted) {
+      return;
+    }
+    this.processEvent(event,);
+    this.recognizers.map((r) => {
+      r.cancel();
+      r.pointerSessionBegan(this, event,);
+    },);
+  }
+  pointerMove(event,) {
+    if (!this.isStarted) {
+      return;
+    }
+    this.processEvent(event,);
+    this.recognizers.map((r) => {
+      r.pointerSessionMoved(this, event,);
+    },);
+  }
+  pointerUp(event,) {
+    if (!this.isStarted) {
+      return;
+    }
+    this.processEvent(event,);
+    this.recognizers.map((r) => {
+      r.pointerSessionEnded(this, event,);
+    },);
+    this.clearEvents();
+    this.recognizers.map((r) => {
+      r.reset();
+    },);
+  }
+  mouseWheel(event,) {
+    this.processEvent(event,);
+    this.mouseWheelRecognizer.mouseWheel(this, event,);
+    this.clearEvents();
+  }
+  clearEvents() {
+    this.events = [];
+  }
+  dispatch(type, event, target = null,) {
+    const dispatchTarget = target || this.startEvent?.target || event.target;
+    if (dispatchTarget) {
+      this.dispatcher(type, event, dispatchTarget,);
+    }
+  }
+  // Gesture Handler
+  gestureBegan(type, event, target,) {
+    this.dispatch(`${type}start`, event, target,);
+  }
+  gestureChanged(type, event, target,) {
+    this.dispatch(type, event, target,);
+  }
+  gestureEnded(type, event, target,) {
+    this.dispatch(`${type}end`, event, target,);
+  }
+  // Calculatinos
+  /**
+   * Average velocity over last n seconds in pixels per second.
+   * @param n - number of events to use for calculation
+   */
+  velocity(t = Loop.TimeStep * 2,) {
+    if (!this.isStarted || this.events.length < 2) {
+      return {
+        x: 0,
+        y: 0,
+      };
+    }
+    const events = this.events;
+    let i = events.length - 1;
+    let event = null;
+    while (i >= 0) {
+      event = events[i] ?? null;
+      if (!event || MainLoop.time - event.loopTime > t) {
+        break;
+      }
+      i--;
+    }
+    if (!event) {
+      return {
+        x: 0,
+        y: 0,
+      };
+    }
+    const current2 = events[events.length - 1];
+    if (!current2) {
+      return {
+        x: 0,
+        y: 0,
+      };
+    }
+    const time2 = (MainLoop.time - event.loopTime) * 1e3;
+    if (time2 === 0) {
+      return {
+        x: 0,
+        y: 0,
+      };
+    }
+    const velocity = {
+      x: (current2.devicePoint.x - event.devicePoint.x) / time2,
+      y: (current2.devicePoint.y - event.devicePoint.y) / time2,
+    };
+    if (velocity.x === Infinity) {
+      velocity.x = 0;
+    }
+    if (velocity.y === Infinity) {
+      velocity.y = 0;
+    }
+    return velocity;
+  }
+  offset(event,) {
+    if (!this.startEvent) {
+      return {
+        x: 0,
+        y: 0,
+      };
+    }
+    const subtract = (pointA, pointB,) => {
+      return {
+        x: pointA.x - pointB.x,
+        y: pointA.y - pointB.y,
+      };
+    };
+    return subtract(event.devicePoint, this.startEvent.devicePoint,);
+  }
+};
 var Context = /* @__PURE__ */ createContext({},);
 function ComponentPresetsProvider({
   presets: presets2,
@@ -37694,10 +37950,10 @@ var ComponentViewportProvider = /* @__PURE__ */ React42.forwardRef(function Comp
     children: cloneWithPropsAndRef(children, rest,),
   },);
 },);
-var withGeneratedLayoutId = (Component18) =>
+var withGeneratedLayoutId = (Component17) =>
   React42.forwardRef((props, ref,) => {
     const layoutId = useLayoutId2(props,);
-    return /* @__PURE__ */ jsx(Component18, {
+    return /* @__PURE__ */ jsx(Component17, {
       suppressHydrationWarning: true,
       layoutId,
       ...props,
@@ -37706,6 +37962,13 @@ var withGeneratedLayoutId = (Component18) =>
       ref,
     },);
   },);
+var libraryFeatures = {};
+var getLibraryFeatures = () => {
+  return libraryFeatures;
+};
+var setLibraryFeatures = (features) => {
+  libraryFeatures = features;
+};
 var shouldSuspenseBoundariesBeActive = false;
 var SynchronousSuspenseErrorBoundary = class extends Component2 {
   state = {
@@ -38145,11 +38408,11 @@ var SmartComponentScopedContainer = /* @__PURE__ */ React42.forwardRef(function 
   );
   const tagName = props.as ?? 'div';
   if (props.rendersWithMotion) {
-    const Component18 = htmlElementAsMotionComponent(tagName,);
+    const Component17 = htmlElementAsMotionComponent(tagName,);
     return /* @__PURE__ */ jsx(NodeIdContext.Provider, {
       suppressHydrationWarning: true,
       value: nodeId ?? null,
-      children: /* @__PURE__ */ jsx(Component18, {
+      children: /* @__PURE__ */ jsx(Component17, {
         suppressHydrationWarning: true,
         ...otherProps,
         ref,
@@ -38158,7 +38421,7 @@ var SmartComponentScopedContainer = /* @__PURE__ */ React42.forwardRef(function 
       },),
     },);
   } else {
-    const Component18 = tagName;
+    const Component17 = tagName;
     const {
       layoutId,
       layoutDependency,
@@ -38167,7 +38430,7 @@ var SmartComponentScopedContainer = /* @__PURE__ */ React42.forwardRef(function 
     return /* @__PURE__ */ jsx(NodeIdContext.Provider, {
       suppressHydrationWarning: true,
       value: nodeId ?? null,
-      children: /* @__PURE__ */ jsx(Component18, {
+      children: /* @__PURE__ */ jsx(Component17, {
         suppressHydrationWarning: true,
         ...plainHTMLRenderableProps,
         ref,
@@ -38555,10 +38818,14 @@ function getRouteFromPageLink(pageLink, router, currentRoute, locales,) {
     if (pathnameWithQueryParams === void 0) return;
     const [pathname,] = pathnameWithQueryParams.split('?', 2,);
     if (pathname === void 0) return;
-    const {
-      routeId,
-    } = inferInitialRouteFromPath(router.routes, pathname, void 0, locales,);
-    return router.getRoute(routeId,);
+    try {
+      const {
+        routeId,
+      } = inferInitialRouteFromPath(router.routes, pathname, pathname === '', locales,);
+      return router.getRoute(routeId,);
+    } catch {
+      return;
+    }
   }
   const {
     webPageId,
@@ -38639,7 +38906,7 @@ function navigateFromAttributes(navigate, element, implicitPathVariables,) {
     const href = element.getAttribute('href',);
     if (!href) return false;
     const link = parseFramerPageLink(href,);
-    if (!link || !link.target) return false;
+    if (!link?.target) return false;
     routeId = link.target;
     elementId = link.element ?? void 0;
     pathVariables = link.collectionItem?.pathVariables;
@@ -38712,7 +38979,7 @@ function useReplaceNestedLinks(children, scopeId, nodeId, href, propsAddedByLink
       return;
     }
     if (route) {
-      propsAddedByLink.navigate?.();
+      void propsAddedByLink.navigate?.();
     } else {
       openExternalLink(propsAddedByLink.href, propsAddedByLink.rel, propsAddedByLink.target,);
     }
@@ -38729,7 +38996,7 @@ function useReplaceNestedLinks(children, scopeId, nodeId, href, propsAddedByLink
     event.preventDefault();
     event.stopPropagation();
     if (route) {
-      propsAddedByLink.navigate?.();
+      void propsAddedByLink.navigate?.();
     } else {
       openExternalLink(propsAddedByLink.href, propsAddedByLink.rel, propsAddedByLink.target,);
     }
@@ -39525,11 +39792,11 @@ function Floating({
   );
 }
 var Instance = /* @__PURE__ */ React42.forwardRef(function Instance2({
-  Component: Component18,
+  Component: Component17,
   ...props
 }, ref,) {
-  return Component18
-    ? /* @__PURE__ */ jsx(Component18, {
+  return Component17
+    ? /* @__PURE__ */ jsx(Component17, {
       suppressHydrationWarning: true,
       ...props,
       ref,
@@ -39622,6 +39889,13 @@ var GracefullyDegradingErrorBoundary = class extends Component2 {
     );
   }
 };
+var currentSiteId;
+function setCurrentSiteId(siteId,) {
+  currentSiteId = siteId;
+}
+function getCurrentSiteId() {
+  return currentSiteId;
+}
 function findAnchorElement(target, withinElement,) {
   if (target instanceof HTMLAnchorElement) {
     return target;
@@ -39642,11 +39916,11 @@ function ChildrenCanSuspend({
     children,
   },);
 }
-function withChildrenCanSuspend(Component18,) {
+function withChildrenCanSuspend(Component17,) {
   return forwardRef(function withChildrenCanSuspendInner(props, ref,) {
     return /* @__PURE__ */ jsx(ChildrenCanSuspend, {
       suppressHydrationWarning: true,
-      children: /* @__PURE__ */ jsx(Component18, {
+      children: /* @__PURE__ */ jsx(Component17, {
         suppressHydrationWarning: true,
         ...props,
         ref,
@@ -39686,11 +39960,12 @@ function findMatchingRouteAttributesForResolvedPath(router, path, implicitPathVa
     assert(pathnameWithQueryParams !== void 0, 'A href must have a defined pathname.',);
     const [pathname,] = pathnameWithQueryParams.split('?', 2,);
     assert(pathname !== void 0, 'A href must have a defined pathname.',);
+    const allowRootRouteFallback = pathname === '';
     const {
       routeId,
       pathVariables,
       localeId,
-    } = inferInitialRouteFromPath(router.routes, pathname, void 0, locales,);
+    } = inferInitialRouteFromPath(router.routes, pathname, allowRootRouteFallback, locales,);
     const route = router.getRoute(routeId,);
     if (route) {
       const combinedPathVariables = Object.assign({}, implicitPathVariables, pathVariables,);
@@ -39788,6 +40063,137 @@ function useLinkMatchesRoute(link,) {
   const pageLink = isString(link,) ? linkFromFramerPageLink(link,) : link;
   return isLinkToWebPage(pageLink,) ? linkMatchesRoute(route, pageLink, contextPathVariables,) : false;
 }
+var navigationChecks = /* @__PURE__ */ new Map();
+var retryDelayMs = 500;
+var waitForNavigationResolutionTimeoutMs = 500;
+var navigationCheckEnabled;
+var safariOnlyEnablement = false;
+function hasServerOnlyRoutes() {
+  return Boolean(getNavigationServerTimingEntry('ss-only-routes',),);
+}
+function normalizeUrl(url,) {
+  if (typeof __unframerWindow2 === 'undefined') return void 0;
+  const baseUrl = __unframerWindow2.location.href;
+  let normalizedUrl;
+  try {
+    normalizedUrl = new URL(url, baseUrl,);
+  } catch {
+    return void 0;
+  }
+  normalizedUrl.hash = '';
+  return normalizedUrl;
+}
+function isExternalRewrite(serverTimingHeader,) {
+  return getServerTimingEntry('rewrite', serverTimingHeader,)?.description === 'external';
+}
+function isNavigationCheckEnabled() {
+  if (!getLibraryFeatures().checkServerSideRouter) return false;
+  if (navigationCheckEnabled === void 0) {
+    const serverOnlyRoutes = hasServerOnlyRoutes();
+    safariOnlyEnablement = !serverOnlyRoutes && isSafari() && safariVersion() < 16.4;
+    navigationCheckEnabled = serverOnlyRoutes || safariOnlyEnablement;
+  }
+  return navigationCheckEnabled;
+}
+function mapResponseToNavigationResolution(response, probedUrl,) {
+  if (response.type === 'opaqueredirect') {
+    return {
+      decision: 'server',
+    };
+  }
+  if (!response.ok) {
+    return {
+      decision: 'server',
+    };
+  }
+  const redirectLocation = response.headers.get('Framer-Location',);
+  if (redirectLocation) {
+    try {
+      return {
+        decision: 'server',
+        redirectUrl: new URL(redirectLocation, probedUrl,).href,
+      };
+    } catch {
+      return {
+        decision: 'server',
+      };
+    }
+  }
+  const responseSiteId = response.headers.get('Framer-Site-Id',);
+  if (responseSiteId === null) {
+    return {
+      decision: isExternalRewrite(response.headers.get('server-timing',),) ? 'server' : 'client',
+    };
+  }
+  return {
+    decision: responseSiteId === getCurrentSiteId() ? 'client' : 'server',
+  };
+}
+async function probe(url,) {
+  const response = await fetch(url, {
+    method: 'HEAD',
+    redirect: 'manual',
+    credentials: 'same-origin',
+    headers: {
+      'Framer-Navigation': 'true',
+    },
+  },);
+  if (safariOnlyEnablement) {
+    if (response.type !== 'opaqueredirect' && response.status !== 0 && response.ok && !response.headers.has('Framer-Location',)) {
+      safariOnlyEnablement = false;
+      if (!getServerTimingEntry('ss-only-routes', response.headers.get('server-timing',),)) {
+        navigationCheckEnabled = false;
+      }
+    }
+  }
+  if (response.status >= 500) throw new Error(`Transient response status ${response.status}`,);
+  return mapResponseToNavigationResolution(response, url,);
+}
+function cacheNavigationResolution(urlKey, resolution,) {
+  if (navigationChecks.has(urlKey,)) navigationChecks.set(urlKey, resolution,);
+}
+async function retryNavigationCheck(urlKey,) {
+  await delay2(retryDelayMs,);
+  try {
+    cacheNavigationResolution(urlKey, await probe(urlKey,),);
+  } catch {
+    navigationChecks.delete(urlKey,);
+  }
+}
+async function runNavigationCheck(urlKey,) {
+  try {
+    const resolution = await probe(urlKey,);
+    cacheNavigationResolution(urlKey, resolution,);
+    return resolution;
+  } catch {
+    void retryNavigationCheck(urlKey,);
+    return {
+      decision: 'server',
+    };
+  }
+}
+function startNavigationCheck(url,) {
+  if (!isNavigationCheckEnabled()) return;
+  const normalizedUrl = normalizeUrl(url,);
+  if (!normalizedUrl || normalizedUrl.origin !== __unframerWindow2.location.origin) return;
+  const urlKey = normalizedUrl.href;
+  if (navigationChecks.has(urlKey,)) return;
+  navigationChecks.set(urlKey, runNavigationCheck(urlKey,),);
+}
+function getNavigationResolution(url,) {
+  const normalizedUrl = normalizeUrl(url,);
+  if (!normalizedUrl) return void 0;
+  const navigationCheck = navigationChecks.get(normalizedUrl.href,);
+  return navigationCheck && !isPromise(navigationCheck,) ? navigationCheck : void 0;
+}
+async function waitForNavigationResolution(url,) {
+  const normalizedUrl = normalizeUrl(url,);
+  if (!normalizedUrl) return void 0;
+  const navigationCheck = navigationChecks.get(normalizedUrl.href,);
+  if (!navigationCheck) return void 0;
+  if (!isPromise(navigationCheck,)) return navigationCheck;
+  return Promise.race([navigationCheck, delay2(waitForNavigationResolutionTimeoutMs,).then(() => void 0),],);
+}
 var PRELOAD_AFTER_MS = 500;
 var OBSERVER_THRESHOLD = 0.9;
 var LOW_MEMORY_THRESHOLD = 1.7;
@@ -39796,6 +40202,10 @@ var MAX_CONCURRENT_PRELOADS_FAST_NETWORK = Infinity;
 var nodeToRoute = /* @__PURE__ */ new WeakMap();
 var preloadedRoutes = /* @__PURE__ */ new Set();
 var routeToNodesInViewport = /* @__PURE__ */ new Map();
+function startNavigationCheckFromNode(node,) {
+  if (!(node instanceof HTMLAnchorElement) || !node.href) return;
+  startNavigationCheck(node.href,);
+}
 function getObserveRouteForPreloadingFn() {
   const connection = __unframerNavigator2.connection || __unframerNavigator2.mozConnection || __unframerNavigator2.webkitConnection || {};
   const lowDeviceMemory = __unframerNavigator2.deviceMemory && __unframerNavigator2.deviceMemory > LOW_MEMORY_THRESHOLD;
@@ -39815,6 +40225,7 @@ function getObserveRouteForPreloadingFn() {
   let activePreloadsAmount = 0;
   async function preloadTimeout(context, target,) {
     if (preloadDisabled) return;
+    startNavigationCheckFromNode(target,);
     const {
       id: id3,
       preload,
@@ -40061,8 +40472,65 @@ function createOnClickLinkHandler(href, trackLinkClick, navigate,) {
       return;
     }
     event.preventDefault();
-    navigate(track,);
+    void navigate(track,);
   };
+}
+function createNavigate(href, navigationUrl, navigateOnClient,) {
+  return async (beforeUrlUpdate) => {
+    const resolution = await resolveNavigation(navigationUrl,);
+    if (resolution.decision === 'client') {
+      navigateOnClient(beforeUrlUpdate,);
+      return;
+    }
+    void performServerNavigation(href, beforeUrlUpdate, resolution.redirectUrl,);
+  };
+}
+async function resolveNavigation(navigationUrl,) {
+  if (!navigationUrl || !isNavigationCheckEnabled()) {
+    return {
+      decision: 'client',
+    };
+  }
+  const resolution = getNavigationResolution(navigationUrl,);
+  if (resolution) return resolution;
+  startNavigationCheck(navigationUrl,);
+  return (await waitForNavigationResolution(navigationUrl,)) ?? {
+    decision: 'server',
+  };
+}
+async function performServerNavigation(href, beforeUrlUpdate, redirectUrl,) {
+  await yieldToMain({
+    priority: 'user-blocking',
+    ensureContinueBeforeUnload: true,
+    continueAfter: 'paint',
+  },);
+  beforeUrlUpdate?.();
+  __unframerWindow2.location.assign(getServerNavigationUrl(href, redirectUrl,),);
+}
+function getServerNavigationUrl(href, redirectUrl,) {
+  if (!redirectUrl) return href;
+  try {
+    const clickedUrl = new URL(href, __unframerWindow2.location.href,);
+    const destinationUrl = new URL(redirectUrl,);
+    if (clickedUrl.hash && !destinationUrl.hash) destinationUrl.hash = clickedUrl.hash;
+    return destinationUrl.href;
+  } catch {
+    return redirectUrl;
+  }
+}
+function getNavigationUrl(href, isBlankTarget,) {
+  if (isBlankTarget || typeof __unframerWindow2 === 'undefined') return void 0;
+  const baseUrl = __unframerWindow2.location.href;
+  let url;
+  try {
+    url = new URL(href, baseUrl,);
+  } catch {
+    return void 0;
+  }
+  const currentUrl = new URL(baseUrl,);
+  if (url.origin !== currentUrl.origin) return void 0;
+  if (url.pathname === currentUrl.pathname && url.search === currentUrl.search) return void 0;
+  return url.href;
 }
 function propsForRoutePath(href, router, currentRoute, linkOptions, preload, localeId, locales, implicitPathVariables,) {
   if (!currentRoute) return propsForLink(href, linkOptions,);
@@ -40092,20 +40560,30 @@ function propsForRoutePath(href, router, currentRoute, linkOptions, preload, loc
   },);
   const anchorTarget = getTargetAttrValue(linkOptions.openInNewTab, true,);
   const isBlankTarget = anchorTarget === '_blank';
+  const navigationUrl = getNavigationUrl(path, isBlankTarget,);
   const linkContext = {
     pathVariables,
     locale,
   };
-  const navigate = (beforeUrlUpdate) =>
-    performNavigation(
-      router,
-      routeId,
-      () => preload(routeId, linkContext, false, !isBlankTarget,),
-      elementId,
-      pathVariables,
-      linkOptions.smoothScroll,
-      beforeUrlUpdate,
-    );
+  const navigate = createNavigate(
+    path,
+    navigationUrl,
+    (beforeUrlUpdate) =>
+      performNavigation(
+        router,
+        routeId,
+        () =>
+          preload(routeId, linkContext, {
+            priority: 'user-blocking',
+            yieldBeforePreload: false,
+            shouldLoadRouteData: !isBlankTarget,
+          },),
+        elementId,
+        pathVariables,
+        linkOptions.smoothScroll,
+        beforeUrlUpdate,
+      ),
+  );
   return {
     href: path,
     target: anchorTarget,
@@ -40116,10 +40594,16 @@ function propsForRoutePath(href, router, currentRoute, linkOptions, preload, loc
           hash: elementId,
           pathVariables,
         }, implicitPathVariables,) || void 0,
-    preload: () => preload(routeId, linkContext, true, !isBlankTarget,),
+    preload: () =>
+      preload(routeId, linkContext, {
+        priority: 'background',
+        yieldBeforePreload: true,
+        shouldLoadRouteData: !isBlankTarget,
+      },),
     _routeId: routeId,
     _pathVariables: pathVariables,
     _locale: locale,
+    _navigationUrl: navigationUrl,
   };
 }
 var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(function Link2({
@@ -40199,30 +40683,46 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
     } = maybeRouteAttributes;
     const anchorTarget = getTargetAttrValue(openInNewTab, true,);
     const isBlankTarget = anchorTarget === '_blank';
+    const navigationUrl = getNavigationUrl(resolvedHref, isBlankTarget,);
     const linkContext = {
       pathVariables,
       locale,
     };
-    const navigate2 = (beforeUrlUpdate) =>
-      performNavigation(
-        router,
-        routeId,
-        () => preload(routeId, linkContext, false, !isBlankTarget,),
-        elementId,
-        pathVariables,
-        smoothScroll,
-        beforeUrlUpdate,
-      );
+    const navigate2 = createNavigate(
+      resolvedHref,
+      navigationUrl,
+      (beforeUrlUpdate) =>
+        performNavigation(
+          router,
+          routeId,
+          () =>
+            preload(routeId, linkContext, {
+              priority: 'user-blocking',
+              yieldBeforePreload: false,
+              shouldLoadRouteData: !isBlankTarget,
+            },),
+          elementId,
+          pathVariables,
+          smoothScroll,
+          beforeUrlUpdate,
+        ),
+    );
     return {
       href: resolvedHref,
       target: anchorTarget,
       onClick: createOnClickLinkHandler(resolvedHref, trackLinkClick, navigate2,),
       'data-framer-page-link-current': currentRoute && linkMatchesRoute(currentRoute, pageLink, implicitPathVariables,) || void 0,
       navigate: navigate2,
-      preload: () => preload(routeId, linkContext, true, !isBlankTarget,),
+      preload: () =>
+        preload(routeId, linkContext, {
+          priority: 'background',
+          yieldBeforePreload: true,
+          shouldLoadRouteData: !isBlankTarget,
+        },),
       _routeId: routeId,
       _pathVariables: pathVariables,
       _locale: locale,
+      _navigationUrl: navigationUrl,
     };
   }, [
     href,
@@ -40247,12 +40747,13 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
     _routeId,
     _pathVariables,
     _locale,
+    _navigationUrl,
     ...restPropsAddedByLink
   } = propsAddedByLink;
   useRefEffect(observerRef, (node) => {
-    if (node === null || !_routeId || !preloadFn || isOnFramerCanvas) return;
+    if (node === null || !_routeId || !preloadFn || !_navigationUrl || isOnFramerCanvas) return;
     return observeRouteForPreloading?.(node, preloadFn, `${_routeId}:${_locale?.id}:${JSON.stringify(_pathVariables,)}`,);
-  }, [preloadFn, _routeId, _pathVariables, _locale, isOnFramerCanvas,],);
+  }, [preloadFn, _routeId, _pathVariables, _locale, _navigationUrl, isOnFramerCanvas,],);
   const isInternalNavigation = Boolean(navigate,);
   const clone = useCloneChildrenWithPropsAndRef(forwardedRef,);
   const replacedChildren = clone.cloneAsArray(children, (childProps) =>
@@ -41196,7 +41697,7 @@ var TriggerState = class {
   }
   on(event, initialize, triggerId,) {
     const triggerEntry = this.triggers.get(triggerId,);
-    if (!triggerEntry || triggerEntry.status !== 'pending') return;
+    if (triggerEntry?.status !== 'pending') return;
     const handler = (eventPayload) => {
       if (triggerEntry?.status !== 'pending') return;
       this.evaluateAndInvoke(triggerId, eventPayload,);
@@ -41381,7 +41882,7 @@ var TriggerState = class {
     callCallback: true,
   },) {
     const triggerEntry = this.triggers.get(triggerId,);
-    if (!triggerEntry || triggerEntry.status !== 'pending') return;
+    if (triggerEntry?.status !== 'pending') return;
     triggerEntry.status = 'triggered';
     for (const listener of this.onTriggerListeners) {
       listener(triggerId,);
@@ -41402,7 +41903,7 @@ var TriggerState = class {
   }
   register(triggerId,) {
     const triggerEntry = this.triggers.get(triggerId,);
-    if (!triggerEntry || triggerEntry.status !== 'pending') return;
+    if (triggerEntry?.status !== 'pending') return;
     for (const condition of triggerEntry.trigger.interactions) {
       switch (condition.type) {
         case 'delay':
@@ -41482,15 +41983,7 @@ function parseTriggerTargetId(targetId,) {
   };
 }
 function getServerTimingCountry() {
-  if (typeof __unframerWindow2 === 'undefined' || !__unframerWindow2.performance) return void 0;
-  const performanceEntry = __unframerWindow2.performance.getEntriesByType('navigation',)[0];
-  if (!hasServerTiming(performanceEntry,)) return void 0;
-  const countryEntry = performanceEntry.serverTiming.find((entry) => entry.name === 'country');
-  if (!countryEntry) return void 0;
-  return countryEntry.description;
-}
-function hasServerTiming(performanceEntry,) {
-  return Boolean(performanceEntry && 'serverTiming' in performanceEntry,);
+  return getNavigationServerTimingEntry('country',)?.description;
 }
 var europeanUnionCountriesInEurope = [
   'AT',
@@ -41823,7 +42316,7 @@ async function sendTrackingEventForTriggerInvoke(maybePageViewEventData, event,)
 }
 function resolveRoutePath(routerAPI, routeId, pathVariables,) {
   const route = routerAPI.getRoute(routeId,);
-  if (!route || !route.path) return '';
+  if (!route?.path) return '';
   return pathVariables ? fillPathVariables(route.path, pathVariables,) : route.path;
 }
 function useTriggerState() {
@@ -41843,6 +42336,414 @@ function getTriggerState(triggerStateContext,) {
   }
   triggerStateRef.current = new TriggerState(getInitialState(),);
   return triggerStateRef.current;
+}
+function isSamePage(a, b,) {
+  if (a.routeId !== b.routeId) return false;
+  if (a.pathVariables === b.pathVariables) return true;
+  const aPathVariables = a.pathVariables || {};
+  const bPathVariables = b.pathVariables || {};
+  return aPathVariables.length === bPathVariables.length &&
+    Object.keys(aPathVariables,).every((key7) => aPathVariables[key7] === bPathVariables[key7]);
+}
+var timezone = null;
+var visitorLocale = null;
+function setTimezoneAndLocaleForTracking() {
+  const resolvedDateTimeOptions = Intl.DateTimeFormat().resolvedOptions();
+  timezone = resolvedDateTimeOptions.timeZone;
+  visitorLocale = resolvedDateTimeOptions.locale;
+}
+requestIdleCallback(setTimezoneAndLocaleForTracking,);
+var useSendPageView = (
+  currentRoute,
+  currentRouteId,
+  currentPathnameWithHash,
+  currentPathVariables,
+  activeLocale,
+  initialCollectionItemId,
+) => {
+  const framerSiteId = useContext(FormContext,);
+  const pageviewEventData = useRef();
+  const collectionUtils = useCollectionUtils();
+  const skipFirstPageView = useRef(true,);
+  useEffect(() => {
+    function getFullPageviewEventData() {
+      if (!timezone || !visitorLocale) setTimezoneAndLocaleForTracking();
+      const currentLocation = currentPathnameWithHash ? new URL(currentPathnameWithHash, safeWindow.location.href,) : safeWindow.location;
+      const eventData = {
+        version: pageviewEventVersion,
+        abTestId: currentRoute?.abTestId,
+        framerSiteId: framerSiteId ?? null,
+        // If we are in a variant route, let's use the variant ID as the route ID instead, so that the analytics panel will be able to show the correct tracking data.
+        webPageId: currentRoute?.abTestingVariantId ?? currentRouteId,
+        routePath: currentRoute?.path || '/',
+        collectionItemId: null,
+        framerLocale: activeLocale?.code || null,
+        referrer: null,
+        // The first pageview event will always be sent before hydration, in a script in `exportToHTML.ts`.
+        url: currentLocation.href,
+        hostname: currentLocation.hostname,
+        // Capture the current location before the user moves to a new page to prevent
+        // tracking wrong pathnames due to a race condition caused by async operations
+        // when resolving the collection item ID below
+        pathname: currentLocation.pathname,
+        search: currentLocation.search || null,
+        hash: currentLocation.hash || null,
+        timezone,
+        locale: visitorLocale,
+      };
+      const hydratedCollectionItemId = skipFirstPageView.current && initialCollectionItemId !== void 0 ? initialCollectionItemId : void 0;
+      return currentRoute?.collectionId && currentPathVariables
+        ? (async () => {
+          let collectionItemId = hydratedCollectionItemId ?? null;
+          if (hydratedCollectionItemId === void 0) {
+            const utils = currentRoute.collectionId && collectionUtils?.get(currentRoute.collectionId,);
+            const [slug,] = Object.values(currentPathVariables,);
+            if (utils && isString(slug,)) {
+              const maybeCollectionItemId = utils.getRecordIdBySlug(slug, activeLocale || void 0,);
+              const _collectionItemId = isPromise(maybeCollectionItemId,) ? await maybeCollectionItemId : maybeCollectionItemId;
+              collectionItemId = _collectionItemId ?? null;
+            }
+          }
+          return {
+            ...eventData,
+            collectionItemId,
+          };
+        })()
+        : eventData;
+    }
+    void (async () => {
+      const eventDataOrPromise = pageviewEventData.current = getFullPageviewEventData();
+      const eventData = eventDataOrPromise instanceof Promise ? await eventDataOrPromise : eventDataOrPromise;
+      pageviewEventData.current = eventData;
+      if (skipFirstPageView.current) {
+        skipFirstPageView.current = false;
+      } else {
+        sendTrackingEvent('published_site_pageview', eventData, 'eager',);
+      }
+    })();
+    const listener = async (event) => {
+      if (event.persisted) {
+        const eventDataOrPromise = pageviewEventData.current = getFullPageviewEventData();
+        const eventData = eventDataOrPromise instanceof Promise ? await eventDataOrPromise : eventDataOrPromise;
+        pageviewEventData.current = eventData;
+        sendTrackingEvent('published_site_pageview', eventData, 'eager',);
+      }
+    };
+    __unframerWindow2.addEventListener('pageshow', listener,);
+    return () => {
+      __unframerWindow2.removeEventListener('pageshow', listener,);
+    };
+  }, [
+    currentRoute,
+    currentRouteId,
+    currentPathnameWithHash,
+    currentPathVariables,
+    activeLocale,
+    framerSiteId,
+    collectionUtils,
+    initialCollectionItemId,
+  ],);
+  return pageviewEventData;
+};
+function pushLocaleHistoryState({
+  routeId,
+  url,
+  pathVariables,
+  localeId,
+  contentLocaleId,
+  canonicalPathVariables,
+},) {
+  pushHistoryState({
+    routeId,
+    pathVariables,
+    localeId,
+    paginationInfo: readHistoryState()?.paginationInfo,
+    contentLocaleId,
+    canonicalPathVariables,
+  }, url,);
+}
+function pushRouteState(routeId, route, options,) {
+  const {
+    path,
+  } = route;
+  if (!path) return;
+  const {
+    historyPath,
+    hash: hash2,
+    pathVariables,
+    localeId,
+    currentRoutePath,
+    contentLocaleId,
+    canonicalPathVariables,
+  } = options;
+  const isSameRouteNavigation = currentRoutePath !== void 0 && currentRoutePath === path;
+  const previousState = readHistoryState();
+  const queryParamBackAnchorSearch = isSameRouteNavigation ? previousState?.queryParamBackAnchorSearch : void 0;
+  pushHistoryState({
+    routeId,
+    hash: hash2,
+    pathVariables,
+    contentLocaleId,
+    canonicalPathVariables,
+    localeId,
+    queryParamBackAnchorSearch,
+  }, historyPath,);
+}
+function pushSamePageHashState(routeId, route, options, beforePush,) {
+  const currentHistoryState = readHistoryState();
+  if (!route.path || currentHistoryState?.hash === options.hash) return;
+  beforePush?.();
+  pushHistoryState({
+    routeId,
+    hash: options.hash,
+    pathVariables: options.pathVariables,
+    localeId: options.localeId,
+    queryParamBackAnchorSearch: currentHistoryState?.queryParamBackAnchorSearch,
+    paginationInfo: currentHistoryState?.paginationInfo,
+    contentLocaleId: currentHistoryState?.contentLocaleId,
+    canonicalPathVariables: currentHistoryState?.canonicalPathVariables,
+  }, getPathForRoute(route, options,),);
+}
+var lastScrollPositionReplaceStateTime = 0;
+var legacySafariScrollPositionReplaceStateInterval = 500;
+var modernSafariScrollPositionReplaceStateInterval = 200;
+function getSafariScrollPositionReplaceStateInterval() {
+  return safariVersion() >= 17 ? modernSafariScrollPositionReplaceStateInterval : legacySafariScrollPositionReplaceStateInterval;
+}
+function setupScrollRestoration(trackScrollPosition = updateScrollPosition,) {
+  const restoreFromBackForwardCache = (event) => {
+    if (!event.persisted) return;
+    restoreScrollPosition();
+  };
+  if (isSafari()) {
+    __unframerWindow2.addEventListener('pageshow', restoreFromBackForwardCache,);
+    lastScrollPositionReplaceStateTime = Date.now() - getSafariScrollPositionReplaceStateInterval();
+  }
+  const enableBrowserScrollRestoration = disableBrowserScrollRestoration();
+  const cleanupTracking = setupContinuousScrollTracking(trackScrollPosition,);
+  return function cleanup() {
+    __unframerWindow2.removeEventListener('pageshow', restoreFromBackForwardCache,);
+    enableBrowserScrollRestoration();
+    cleanupTracking();
+  };
+}
+function disableBrowserScrollRestoration() {
+  const originalScrollRestoration = __unframerWindow2.history.scrollRestoration;
+  __unframerWindow2.history.scrollRestoration = 'manual';
+  return function cleanup() {
+    __unframerWindow2.history.scrollRestoration = originalScrollRestoration;
+  };
+}
+function isScrollPosition(value,) {
+  return isObject2(value,) && typeof value.x === 'number' && typeof value.y === 'number';
+}
+function getCurrentWindowScrollPosition() {
+  return {
+    x: __unframerWindow2.scrollX,
+    y: __unframerWindow2.scrollY,
+  };
+}
+function getSavedScrollPosition() {
+  const currentState = readHistoryState();
+  if (!currentState) return;
+  const {
+    scrollPosition,
+  } = currentState;
+  if (!isScrollPosition(scrollPosition,)) return;
+  return scrollPosition;
+}
+function replaceScrollPositionForCurrentEntry(position,) {
+  const currentState = readHistoryState();
+  if (!currentState) return;
+  replaceHistoryState({
+    ...currentState,
+    scrollPosition: position,
+  },);
+  if (isSafari()) lastScrollPositionReplaceStateTime = Date.now();
+}
+function updateScrollPosition(position, flush = false,) {
+  const savedPosition = getSavedScrollPosition();
+  const shouldUpdate = !savedPosition || savedPosition.x !== position.x || savedPosition.y !== position.y;
+  if (!shouldUpdate) return;
+  if (isSafari() && !flush) {
+    const scrollPositionReplaceStateInterval = getSafariScrollPositionReplaceStateInterval();
+    const timeSinceLastReplaceState = Date.now() - lastScrollPositionReplaceStateTime;
+    if (timeSinceLastReplaceState < scrollPositionReplaceStateInterval) return;
+  }
+  replaceScrollPositionForCurrentEntry(position,);
+}
+function setupContinuousScrollTracking(trackScrollPosition,) {
+  const persistScrollPosition = () => {
+    trackScrollPosition(getCurrentWindowScrollPosition(),);
+  };
+  const flushScrollPosition = () => {
+    trackScrollPosition(getCurrentWindowScrollPosition(), true,);
+  };
+  const onDocumentVisibilityChange = () => {
+    if (document.visibilityState !== 'hidden') return;
+    flushScrollPosition();
+  };
+  document.addEventListener('visibilitychange', onDocumentVisibilityChange,);
+  __unframerWindow2.addEventListener('pagehide', flushScrollPosition,);
+  const cleanupVisibilityTracking = () => {
+    document.removeEventListener('visibilitychange', onDocumentVisibilityChange,);
+    __unframerWindow2.removeEventListener('pagehide', flushScrollPosition,);
+  };
+  const hasScrollEndEvent = 'onscrollend' in __unframerWindow2;
+  if (!hasScrollEndEvent) {
+    const cleanupScrollTracking = setupScrollEndFallbackTracking(persistScrollPosition,);
+    return function cleanup() {
+      cleanupVisibilityTracking();
+      cleanupScrollTracking();
+    };
+  }
+  __unframerWindow2.addEventListener('scrollend', persistScrollPosition,);
+  return function cleanup() {
+    cleanupVisibilityTracking();
+    __unframerWindow2.removeEventListener('scrollend', persistScrollPosition,);
+  };
+}
+function setupScrollEndFallbackTracking(onScrollEnd,) {
+  let timeoutId;
+  let scheduledEntryId;
+  function cancelScheduledScrollEnd() {
+    clearTimeout(timeoutId,);
+    timeoutId = void 0;
+    scheduledEntryId = void 0;
+  }
+  const trackScrollPosition = () => {
+    const entryId = scheduledEntryId;
+    cancelScheduledScrollEnd();
+    if (entryId === void 0 || getEntryId(readHistoryState(),) !== entryId) return;
+    onScrollEnd();
+  };
+  const scrollHandler = () => {
+    const currentEntryId = getEntryId(readHistoryState(),);
+    if (currentEntryId === void 0) {
+      cancelScheduledScrollEnd();
+      return;
+    }
+    clearTimeout(timeoutId,);
+    scheduledEntryId = currentEntryId;
+    const quietPeriod = isSafari() ? getSafariScrollPositionReplaceStateInterval() : 100;
+    timeoutId = __unframerWindow2.setTimeout(trackScrollPosition, quietPeriod,);
+  };
+  __unframerWindow2.addEventListener('scroll', scrollHandler,);
+  return function cleanup() {
+    __unframerWindow2.removeEventListener('scroll', scrollHandler,);
+    cancelScheduledScrollEnd();
+  };
+}
+function restoreScrollPosition() {
+  const savedPosition = getSavedScrollPosition();
+  if (!savedPosition) return false;
+  __unframerWindow2.scrollTo(savedPosition.x, savedPosition.y,);
+  return true;
+}
+function scrollElementIntoView(element, shouldSmoothScroll,) {
+  const scrollIntoViewOptions = shouldSmoothScroll
+    ? {
+      behavior: 'smooth',
+      block: 'start',
+      inline: 'nearest',
+    }
+    : void 0;
+  element.scrollIntoView(scrollIntoViewOptions,);
+}
+function tryScrollToHash(hash2, shouldSmoothScroll,) {
+  const element = hash2 && document.getElementById(hash2,);
+  if (element) {
+    scrollElementIntoView(element, shouldSmoothScroll,);
+    return true;
+  }
+}
+function updateScrollForNavigation(hash2, shouldSmoothScroll, behavior,) {
+  if (behavior === 'preserve-scroll-position') return;
+  frame.render(
+    () => {
+      if (behavior === 'restore-scroll-position' && restoreScrollPosition()) return;
+      if (tryScrollToHash(hash2, shouldSmoothScroll,)) return;
+      __unframerWindow2.scrollTo(0, 0,);
+    },
+    false,
+    true,
+  );
+}
+function restoreInitialScroll(hash2, shouldSmoothScroll,) {
+  frame.read(() => {
+    if (__unframerWindow2.scrollY !== 0 || __unframerWindow2.scrollX !== 0) return;
+    frame.render(
+      () => {
+        if (restoreScrollPosition()) return;
+        tryScrollToHash(hash2, shouldSmoothScroll,);
+      },
+      false,
+      true,
+    );
+  },);
+}
+function useScrollRestoration(disableHistory,) {
+  const isScrollRestorationEnabled = getLibraryFeatures().scrollRestoration;
+  const pendingNavigationScrollRef = useRef(void 0,);
+  const isScrollTrackingPausedRef = useRef(false,);
+  const isCustomScrollRestorationConfigured = Boolean(isScrollRestorationEnabled && !disableHistory,);
+  const scheduleScroll = useCallback2((request) => {
+    pendingNavigationScrollRef.current = request;
+    if (!isCustomScrollRestorationConfigured) return;
+    isScrollTrackingPausedRef.current = true;
+  }, [isCustomScrollRestorationConfigured,],);
+  const trackScrollPosition = useCallback2((position, flush = false,) => {
+    if (isScrollTrackingPausedRef.current) return;
+    updateScrollPosition(position, flush,);
+  }, [],);
+  const onHistoryTraversal = useCallback2(() => {
+    if (!isCustomScrollRestorationConfigured) return;
+    isScrollTrackingPausedRef.current = true;
+  }, [isCustomScrollRestorationConfigured,],);
+  const isNavigationCommitPending = useCallback2(
+    () => pendingNavigationScrollRef.current !== void 0 || isScrollTrackingPausedRef.current,
+    [],
+  );
+  const commitNavigationScroll = useCallback2((routeId, remountKey,) => {
+    const request = pendingNavigationScrollRef.current;
+    if (!request || request.routeId !== routeId || request.remountKey !== remountKey) return;
+    pendingNavigationScrollRef.current = void 0;
+    isScrollTrackingPausedRef.current = false;
+    updateScrollForNavigation(request.hash, request.shouldSmoothScroll, request.behavior,);
+  }, [],);
+  useLayoutEffect(() => {
+    if (!isCustomScrollRestorationConfigured) return;
+    return setupScrollRestoration(trackScrollPosition,);
+  }, [isCustomScrollRestorationConfigured, trackScrollPosition,],);
+  return {
+    usesCustomScrollRestoration: isCustomScrollRestorationConfigured,
+    isNavigationCommitPending,
+    onHistoryTraversal,
+    scheduleScroll,
+    commitNavigationScroll,
+  };
+}
+function ScrollRestorationEffects({
+  currentRouteId,
+  remountKey,
+  scrollRestoration,
+},) {
+  const {
+    commitNavigationScroll,
+    usesCustomScrollRestoration,
+  } = scrollRestoration;
+  useLayoutEffect(() => {
+    commitNavigationScroll(currentRouteId, remountKey,);
+  },);
+  useEffect(() => {
+    if (!usesCustomScrollRestoration) return;
+    restoreInitialScroll(__unframerWindow2.location.hash.slice(1,) || void 0, false,);
+  }, [],);
+  return null;
+}
+function useForceUpdate3() {
+  const [_, setForcedRenderCount,] = React42.useState(0,);
+  return [_, React42.useCallback(() => setForcedRenderCount((v) => v + 1), [],),];
 }
 var mainTagId = 'main';
 var generatedPageDatasetKey = 'framerGeneratedPage';
@@ -42087,16 +42988,16 @@ function findInsertReferece(snippetId, sorting, start2, end,) {
 }
 function useLoadSnippets() {
   const loadSnippetsModule = useSnippets();
-  return useCallback2(async (pageId, pathVariables, activeLocale, isInitialNavigation,) => {
+  return useCallback2(async (pageId, pathVariables, contentLocale, isInitialNavigation,) => {
     if (!loadSnippetsModule) return;
     const mainTag = document.getElementById(mainTagId,);
-    const isGeneratedPage = mainTag && mainTag.dataset[generatedPageDatasetKey] !== void 0;
+    const isGeneratedPage = mainTag?.dataset[generatedPageDatasetKey] !== void 0;
     if (isInitialNavigation && isGeneratedPage) return;
     const {
       getSnippets,
       snippetsSorting,
     } = await loadSnippetsModule.readMaybeAsync();
-    const snippets = await getSnippets(pageId, pathVariables, activeLocale,);
+    const snippets = await getSnippets(pageId, pathVariables, contentLocale,);
     for (const key7 in snippets) {
       const placement = key7;
       const snippetsForPlacement = snippets[placement];
@@ -42105,407 +43006,148 @@ function useLoadSnippets() {
     }
   }, [loadSnippetsModule,],);
 }
-function isSamePage(a, b,) {
-  if (a.routeId !== b.routeId) return false;
-  if (a.pathVariables === b.pathVariables) return true;
-  const aPathVariables = a.pathVariables || {};
-  const bPathVariables = b.pathVariables || {};
-  return aPathVariables.length === bPathVariables.length &&
-    Object.keys(aPathVariables,).every((key7) => aPathVariables[key7] === bPathVariables[key7]);
+function canonicalURLForPath(path, canonicalURL,) {
+  if (path.startsWith('/',)) {
+    path = '.' + path;
+  }
+  const baseURL = new URL(canonicalURL,);
+  if (!baseURL.pathname.endsWith('/',)) {
+    baseURL.pathname += '/';
+  }
+  const url = new URL(path, baseURL,);
+  return url.href;
 }
-var timezone = null;
-var visitorLocale = null;
-function setTimezoneAndLocaleForTracking() {
-  const resolvedDateTimeOptions = Intl.DateTimeFormat().resolvedOptions();
-  timezone = resolvedDateTimeOptions.timeZone;
-  visitorLocale = resolvedDateTimeOptions.locale;
-}
-requestIdleCallback(setTimezoneAndLocaleForTracking,);
-var useSendPageView = (
+async function prepareSyncLocaleMetadataAction({
+  siteCanonicalURL,
+  activeLocale,
+  contentLocale,
   currentRoute,
   currentRouteId,
-  currentPathnameWithHash,
   currentPathVariables,
+  locales,
+  collectionUtils,
+},) {
+  if (!siteCanonicalURL || !activeLocale || !contentLocale || !currentRoute) return;
+  let generatedCanonicalURL;
+  const hreflangLinks = [];
+  const defaultLocale = locales.find((locale) => locale.id === defaultLocaleId);
+  const {
+    path: localizedNavigationPath,
+  } = await getLocalizedNavigationPath({
+    currentLocale: activeLocale,
+    nextLocale: contentLocale,
+    defaultLocale,
+    route: currentRoute,
+    routeId: currentRouteId,
+    pathVariables: currentPathVariables,
+    collectionUtils,
+    preserveQueryParams: false,
+  },);
+  if (localizedNavigationPath) {
+    generatedCanonicalURL = canonicalURLForPath(localizedNavigationPath, siteCanonicalURL,);
+  }
+  let xDefaultHref;
+  for (const locale of locales) {
+    if (currentRoute.includedLocales && !currentRoute.includedLocales.includes(locale.id,)) continue;
+    const {
+      path,
+    } = await getLocalizedNavigationPath({
+      currentLocale: activeLocale,
+      nextLocale: locale,
+      defaultLocale,
+      route: currentRoute,
+      routeId: currentRouteId,
+      pathVariables: currentPathVariables,
+      collectionUtils,
+      preserveQueryParams: false,
+    },);
+    if (!path) continue;
+    const href = canonicalURLForPath(path, siteCanonicalURL,);
+    hreflangLinks.push({
+      href,
+      hrefLang: locale.code,
+    },);
+    if (locale.id === defaultLocaleId) xDefaultHref = href;
+  }
+  if (xDefaultHref) {
+    hreflangLinks.push({
+      href: xDefaultHref,
+      hrefLang: 'x-default',
+    },);
+  }
+  return () => {
+    syncGeneratedCanonicalURL(generatedCanonicalURL, __unframerWindow2.location.href,);
+    syncGeneratedHreflangLinks(hreflangLinks,);
+  };
+}
+function useRouteLocaleContentSync({
   activeLocale,
-  initialCollectionItemId,
-) => {
-  const framerSiteId = useContext(FormContext,);
-  const pageviewEventData = useRef();
-  const collectionUtils = useCollectionUtils();
-  const skipFirstPageView = useRef(true,);
+  contentLocale,
+  currentPathVariables,
+  currentRoute,
+  currentRouteId,
+  isInitialNavigation,
+  locales,
+  siteCanonicalURL,
+},) {
+  const collectionUtilsCache = useCollectionUtils();
+  const loadSnippets2 = useLoadSnippets();
   useEffect(() => {
-    function getFullPageviewEventData() {
-      if (!timezone || !visitorLocale) setTimezoneAndLocaleForTracking();
-      const currentLocation = currentPathnameWithHash ? new URL(currentPathnameWithHash, safeWindow.location.href,) : safeWindow.location;
-      const eventData = {
-        version: pageviewEventVersion,
-        abTestId: currentRoute?.abTestId,
-        framerSiteId: framerSiteId ?? null,
-        // If we are in a variant route, let's use the variant ID as the route ID instead, so that the analytics panel will be able to show the correct tracking data.
-        webPageId: currentRoute?.abTestingVariantId ?? currentRouteId,
-        routePath: currentRoute?.path || '/',
-        collectionItemId: null,
-        framerLocale: activeLocale?.code || null,
-        referrer: null,
-        // The first pageview event will always be sent before hydration, in a script in `exportToHTML.ts`.
-        url: currentLocation.href,
-        hostname: currentLocation.hostname,
-        // Capture the current location before the user moves to a new page to prevent
-        // tracking wrong pathnames due to a race condition caused by async operations
-        // when resolving the collection item ID below
-        pathname: currentLocation.pathname,
-        search: currentLocation.search || null,
-        hash: currentLocation.hash || null,
-        timezone,
-        locale: visitorLocale,
-      };
-      const hydratedCollectionItemId = skipFirstPageView.current && initialCollectionItemId !== void 0 ? initialCollectionItemId : void 0;
-      return currentRoute?.collectionId && currentPathVariables
-        ? (async () => {
-          let collectionItemId = hydratedCollectionItemId ?? null;
-          if (hydratedCollectionItemId === void 0) {
-            const utils = currentRoute.collectionId && collectionUtils?.get(currentRoute.collectionId,);
-            const [slug,] = Object.values(currentPathVariables,);
-            if (utils && isString(slug,)) {
-              const maybeCollectionItemId = utils.getRecordIdBySlug(slug, activeLocale || void 0,);
-              const _collectionItemId = isPromise(maybeCollectionItemId,) ? await maybeCollectionItemId : maybeCollectionItemId;
-              collectionItemId = _collectionItemId ?? null;
-            }
-          }
-          return {
-            ...eventData,
-            collectionItemId,
-          };
-        })()
-        : eventData;
+    let isCurrent = true;
+    const markAsStale = () => void (isCurrent = false);
+    if (!activeLocale || !contentLocale) {
+      void loadSnippets2(currentRouteId, currentPathVariables ?? {}, activeLocale, isInitialNavigation,).catch((error) => {
+        if (!isCurrent) return;
+        collectErrorToAnalytics(error,);
+      },);
+      return markAsStale;
     }
-    void (async () => {
-      const eventDataOrPromise = pageviewEventData.current = getFullPageviewEventData();
-      const eventData = eventDataOrPromise instanceof Promise ? await eventDataOrPromise : eventDataOrPromise;
-      pageviewEventData.current = eventData;
-      if (skipFirstPageView.current) {
-        skipFirstPageView.current = false;
-      } else {
-        sendTrackingEvent('published_site_pageview', eventData, 'eager',);
-      }
-    })();
-    const listener = async (event) => {
-      if (event.persisted) {
-        const eventDataOrPromise = pageviewEventData.current = getFullPageviewEventData();
-        const eventData = eventDataOrPromise instanceof Promise ? await eventDataOrPromise : eventDataOrPromise;
-        pageviewEventData.current = eventData;
-        sendTrackingEvent('published_site_pageview', eventData, 'eager',);
-      }
-    };
-    __unframerWindow2.addEventListener('pageshow', listener,);
-    return () => {
-      __unframerWindow2.removeEventListener('pageshow', listener,);
-    };
+    const promiseOfPathVariables = activeLocale.id === contentLocale.id ? noopAsync() : getLocalizedNavigationPath({
+      currentLocale: activeLocale,
+      nextLocale: contentLocale,
+      defaultLocale: locales.find(({
+        id: id3,
+      },) => id3 === defaultLocaleId),
+      route: currentRoute,
+      routeId: currentRouteId,
+      pathVariables: currentPathVariables,
+      collectionUtils: collectionUtilsCache,
+      preserveQueryParams: false,
+    },);
+    void promiseOfPathVariables.then(async (result) => {
+      if (!isCurrent) return;
+      const pathVariables = result ? result.pathVariables : currentPathVariables;
+      await loadSnippets2(currentRouteId, pathVariables ?? {}, contentLocale, isInitialNavigation,);
+      if (!isCurrent) return;
+      const syncLocaleMetadata = await prepareSyncLocaleMetadataAction({
+        siteCanonicalURL,
+        activeLocale,
+        contentLocale,
+        currentRoute,
+        currentRouteId,
+        currentPathVariables,
+        locales,
+        collectionUtils: collectionUtilsCache,
+      },);
+      if (!isCurrent) return;
+      syncLocaleMetadata?.();
+    },).catch((error) => {
+      if (!isCurrent) return;
+      collectErrorToAnalytics(error,);
+    },);
+    return markAsStale;
   }, [
+    activeLocale,
+    collectionUtilsCache,
+    contentLocale,
+    currentPathVariables,
     currentRoute,
     currentRouteId,
-    currentPathnameWithHash,
-    currentPathVariables,
-    activeLocale,
-    framerSiteId,
-    collectionUtils,
-    initialCollectionItemId,
+    isInitialNavigation,
+    loadSnippets2,
+    locales,
+    siteCanonicalURL,
   ],);
-  return pageviewEventData;
-};
-function pushLocaleHistoryState({
-  routeId,
-  url,
-  pathVariables,
-  localeId,
-},) {
-  pushHistoryState({
-    routeId,
-    pathVariables,
-    localeId,
-    paginationInfo: readHistoryState()?.paginationInfo,
-  }, url,);
-}
-function pushRouteState(routeId, route, options,) {
-  const {
-    path,
-  } = route;
-  if (!path) return;
-  const {
-    historyPath,
-    hash: hash2,
-    pathVariables,
-    localeId,
-    currentRoutePath,
-  } = options;
-  const isSameRouteNavigation = currentRoutePath !== void 0 && currentRoutePath === path;
-  const previousState = readHistoryState();
-  const queryParamBackAnchorSearch = isSameRouteNavigation ? previousState?.queryParamBackAnchorSearch : void 0;
-  pushHistoryState({
-    routeId,
-    hash: hash2,
-    pathVariables,
-    localeId,
-    queryParamBackAnchorSearch,
-  }, historyPath,);
-}
-function pushSamePageHashState(routeId, route, options, beforePush,) {
-  const currentHistoryState = readHistoryState();
-  if (!route.path || currentHistoryState?.hash === options.hash) return;
-  beforePush?.();
-  pushHistoryState({
-    routeId,
-    hash: options.hash,
-    pathVariables: options.pathVariables,
-    localeId: options.localeId,
-    queryParamBackAnchorSearch: currentHistoryState?.queryParamBackAnchorSearch,
-    paginationInfo: currentHistoryState?.paginationInfo,
-  }, getPathForRoute(route, options,),);
-}
-var lastScrollPositionReplaceStateTime = 0;
-var legacySafariScrollPositionReplaceStateInterval = 500;
-var modernSafariScrollPositionReplaceStateInterval = 200;
-function getSafariScrollPositionReplaceStateInterval() {
-  return safariVersion() >= 17 ? modernSafariScrollPositionReplaceStateInterval : legacySafariScrollPositionReplaceStateInterval;
-}
-function setupScrollRestoration(trackScrollPosition = updateScrollPosition,) {
-  const restoreFromBackForwardCache = (event) => {
-    if (!event.persisted) return;
-    restoreScrollPosition();
-  };
-  if (isSafari()) {
-    __unframerWindow2.addEventListener('pageshow', restoreFromBackForwardCache,);
-    lastScrollPositionReplaceStateTime = Date.now() - getSafariScrollPositionReplaceStateInterval();
-  }
-  const enableBrowserScrollRestoration = disableBrowserScrollRestoration();
-  const cleanupTracking = setupContinuousScrollTracking(trackScrollPosition,);
-  return function cleanup() {
-    __unframerWindow2.removeEventListener('pageshow', restoreFromBackForwardCache,);
-    enableBrowserScrollRestoration();
-    cleanupTracking();
-  };
-}
-function disableBrowserScrollRestoration() {
-  const originalScrollRestoration = __unframerWindow2.history.scrollRestoration;
-  __unframerWindow2.history.scrollRestoration = 'manual';
-  return function cleanup() {
-    __unframerWindow2.history.scrollRestoration = originalScrollRestoration;
-  };
-}
-function isScrollPosition(value,) {
-  return isObject2(value,) && typeof value.x === 'number' && typeof value.y === 'number';
-}
-function getCurrentWindowScrollPosition() {
-  return {
-    x: __unframerWindow2.scrollX,
-    y: __unframerWindow2.scrollY,
-  };
-}
-function getSavedScrollPosition() {
-  const currentState = readHistoryState();
-  if (!currentState) return;
-  const {
-    scrollPosition,
-  } = currentState;
-  if (!isScrollPosition(scrollPosition,)) return;
-  return scrollPosition;
-}
-function replaceScrollPositionForCurrentEntry(position,) {
-  const currentState = readHistoryState();
-  if (!currentState) return;
-  replaceHistoryState(
-    {
-      ...currentState,
-      scrollPosition: position,
-    },
-    void 0,
-    true,
-  );
-  if (isSafari()) lastScrollPositionReplaceStateTime = Date.now();
-}
-function updateScrollPosition(position, flush = false,) {
-  const savedPosition = getSavedScrollPosition();
-  const shouldUpdate = !savedPosition || savedPosition.x !== position.x || savedPosition.y !== position.y;
-  if (!shouldUpdate) return;
-  if (isSafari() && !flush) {
-    const scrollPositionReplaceStateInterval = getSafariScrollPositionReplaceStateInterval();
-    const timeSinceLastReplaceState = Date.now() - lastScrollPositionReplaceStateTime;
-    if (timeSinceLastReplaceState < scrollPositionReplaceStateInterval) return;
-  }
-  replaceScrollPositionForCurrentEntry(position,);
-}
-function setupContinuousScrollTracking(trackScrollPosition,) {
-  const persistScrollPosition = () => {
-    trackScrollPosition(getCurrentWindowScrollPosition(),);
-  };
-  const flushScrollPosition = () => {
-    trackScrollPosition(getCurrentWindowScrollPosition(), true,);
-  };
-  const onDocumentVisibilityChange = () => {
-    if (document.visibilityState !== 'hidden') return;
-    flushScrollPosition();
-  };
-  document.addEventListener('visibilitychange', onDocumentVisibilityChange,);
-  __unframerWindow2.addEventListener('pagehide', flushScrollPosition,);
-  const cleanupVisibilityTracking = () => {
-    document.removeEventListener('visibilitychange', onDocumentVisibilityChange,);
-    __unframerWindow2.removeEventListener('pagehide', flushScrollPosition,);
-  };
-  const hasScrollEndEvent = 'onscrollend' in __unframerWindow2;
-  if (!hasScrollEndEvent) {
-    const cleanupScrollTracking = setupScrollEndFallbackTracking(persistScrollPosition,);
-    return function cleanup() {
-      cleanupVisibilityTracking();
-      cleanupScrollTracking();
-    };
-  }
-  __unframerWindow2.addEventListener('scrollend', persistScrollPosition,);
-  return function cleanup() {
-    cleanupVisibilityTracking();
-    __unframerWindow2.removeEventListener('scrollend', persistScrollPosition,);
-  };
-}
-function setupScrollEndFallbackTracking(onScrollEnd,) {
-  let timeoutId;
-  let scheduledEntryId;
-  function cancelScheduledScrollEnd() {
-    clearTimeout(timeoutId,);
-    timeoutId = void 0;
-    scheduledEntryId = void 0;
-  }
-  const trackScrollPosition = () => {
-    const entryId = scheduledEntryId;
-    cancelScheduledScrollEnd();
-    if (entryId === void 0 || getEntryId(readHistoryState(),) !== entryId) return;
-    onScrollEnd();
-  };
-  const scrollHandler = () => {
-    const currentEntryId = getEntryId(readHistoryState(),);
-    if (currentEntryId === void 0) {
-      cancelScheduledScrollEnd();
-      return;
-    }
-    clearTimeout(timeoutId,);
-    scheduledEntryId = currentEntryId;
-    const quietPeriod = isSafari() ? getSafariScrollPositionReplaceStateInterval() : 100;
-    timeoutId = __unframerWindow2.setTimeout(trackScrollPosition, quietPeriod,);
-  };
-  __unframerWindow2.addEventListener('scroll', scrollHandler,);
-  return function cleanup() {
-    __unframerWindow2.removeEventListener('scroll', scrollHandler,);
-    cancelScheduledScrollEnd();
-  };
-}
-function restoreScrollPosition() {
-  const savedPosition = getSavedScrollPosition();
-  if (!savedPosition) return false;
-  __unframerWindow2.scrollTo(savedPosition.x, savedPosition.y,);
-  return true;
-}
-function scrollElementIntoView(element, shouldSmoothScroll,) {
-  const scrollIntoViewOptions = shouldSmoothScroll
-    ? {
-      behavior: 'smooth',
-      block: 'start',
-      inline: 'nearest',
-    }
-    : void 0;
-  element.scrollIntoView(scrollIntoViewOptions,);
-}
-function tryScrollToHash(hash2, shouldSmoothScroll,) {
-  const element = hash2 && document.getElementById(hash2,);
-  if (element) {
-    scrollElementIntoView(element, shouldSmoothScroll,);
-    return true;
-  }
-}
-function updateScrollForNavigation(hash2, shouldSmoothScroll, behavior,) {
-  if (behavior === 'preserve-scroll-position') return;
-  frame.render(
-    () => {
-      if (behavior === 'restore-scroll-position' && restoreScrollPosition()) return;
-      if (tryScrollToHash(hash2, shouldSmoothScroll,)) return;
-      __unframerWindow2.scrollTo(0, 0,);
-    },
-    false,
-    true,
-  );
-}
-function restoreInitialScroll(hash2, shouldSmoothScroll,) {
-  frame.read(() => {
-    if (__unframerWindow2.scrollY !== 0 || __unframerWindow2.scrollX !== 0) return;
-    frame.render(
-      () => {
-        if (restoreScrollPosition()) return;
-        tryScrollToHash(hash2, shouldSmoothScroll,);
-      },
-      false,
-      true,
-    );
-  },);
-}
-function useScrollRestoration(disableHistory,) {
-  const isScrollRestorationEnabled = getLibraryFeatures().scrollRestoration;
-  const pendingNavigationScrollRef = useRef(void 0,);
-  const isScrollTrackingPausedRef = useRef(false,);
-  const isCustomScrollRestorationConfigured = Boolean(isScrollRestorationEnabled && !disableHistory,);
-  const scheduleScroll = useCallback2((request) => {
-    pendingNavigationScrollRef.current = request;
-    if (!isCustomScrollRestorationConfigured) return;
-    isScrollTrackingPausedRef.current = true;
-  }, [isCustomScrollRestorationConfigured,],);
-  const trackScrollPosition = useCallback2((position, flush = false,) => {
-    if (isScrollTrackingPausedRef.current) return;
-    updateScrollPosition(position, flush,);
-  }, [],);
-  const onHistoryTraversal = useCallback2(() => {
-    if (!isCustomScrollRestorationConfigured) return;
-    isScrollTrackingPausedRef.current = true;
-  }, [isCustomScrollRestorationConfigured,],);
-  const isNavigationCommitPending = useCallback2(
-    () => pendingNavigationScrollRef.current !== void 0 || isScrollTrackingPausedRef.current,
-    [],
-  );
-  const commitNavigationScroll = useCallback2((routeId, remountKey,) => {
-    const request = pendingNavigationScrollRef.current;
-    if (!request || request.routeId !== routeId || request.remountKey !== remountKey) return;
-    pendingNavigationScrollRef.current = void 0;
-    isScrollTrackingPausedRef.current = false;
-    updateScrollForNavigation(request.hash, request.shouldSmoothScroll, request.behavior,);
-  }, [],);
-  useLayoutEffect(() => {
-    if (!isCustomScrollRestorationConfigured) return;
-    return setupScrollRestoration(trackScrollPosition,);
-  }, [isCustomScrollRestorationConfigured, trackScrollPosition,],);
-  return {
-    usesCustomScrollRestoration: isCustomScrollRestorationConfigured,
-    isNavigationCommitPending,
-    onHistoryTraversal,
-    scheduleScroll,
-    commitNavigationScroll,
-  };
-}
-function ScrollRestorationEffects({
-  currentRouteId,
-  remountKey,
-  scrollRestoration,
-},) {
-  const {
-    commitNavigationScroll,
-    usesCustomScrollRestoration,
-  } = scrollRestoration;
-  useLayoutEffect(() => {
-    commitNavigationScroll(currentRouteId, remountKey,);
-  },);
-  useEffect(() => {
-    if (!usesCustomScrollRestoration) return;
-    restoreInitialScroll(__unframerWindow2.location.hash.slice(1,) || void 0, false,);
-  }, [],);
-  return null;
-}
-function useForceUpdate3() {
-  const [_, setForcedRenderCount,] = React42.useState(0,);
-  return [_, React42.useCallback(() => setForcedRenderCount((v) => v + 1), [],),];
 }
 function executeBeforeUrlUpdateOnce(beforeUrlUpdate,) {
   if (!beforeUrlUpdate) return noop2;
@@ -42568,7 +43210,9 @@ function Router({
   routes,
   initialLocaleId,
   initialCollectionItemId,
+  initialContentLocaleIdOverride,
   locales = EMPTY_ARRAY,
+  initialCanonicalPathVariables,
   preserveQueryParams = false,
   LayoutTemplate,
   EditorBar,
@@ -42581,6 +43225,8 @@ function Router({
     routeId: initialRoute,
     initialPathVariables,
     initialLocaleId,
+    initialContentLocaleId: initialContentLocaleIdOverride,
+    initialCanonicalPathVariables,
   },);
   const startViewTransition2 = useViewTransition();
   const [dep, forceUpdate,] = useForceUpdate3();
@@ -42591,11 +43237,12 @@ function Router({
     }
     return (fn) => fn();
   }, [],);
-  const loadSnippets2 = useLoadSnippets();
   const isInitialNavigationRef = useRef(true,);
   const routerPathnameWithHashRef = useRef();
+  const localeSwitchRequestIndexRef = useRef(0,);
   const currentRouteRef = useRef(initialRoute,);
   const currentPathVariablesRef = useRef(initialPathVariables,);
+  const pendingNavigationResolutionRef = useRef();
   const currentLocaleIdRef = useRef(initialLocaleId,);
   const scrollRestoration = useScrollRestoration(disableHistory,);
   const {
@@ -42606,8 +43253,21 @@ function Router({
     startNavigation,
     cancelPendingNavigation,
   } = useNavigationTransition(usesCustomScrollRestoration,);
+  const collectionUtilsCache = useCollectionUtils();
   const scheduleNavigationScroll = scrollRestoration.scheduleScroll;
   const currentLocaleId = currentLocaleIdRef.current;
+  const currentRouteId = currentRouteRef.current;
+  const currentPathVariables = currentPathVariablesRef.current;
+  const currentRoute = routes[currentRouteId];
+  const currentRoutePath = currentRoute?.path;
+  if (!currentRoute) {
+    throw new Error(`Router cannot find route for ${currentRouteId}`,);
+  }
+  const defaultLocale = useMemo(() => {
+    return locales.find(({
+      id: id3,
+    },) => id3 === defaultLocaleId);
+  }, [locales,],);
   const activeLocale = useMemo(() => {
     return locales.find(({
       id: id3,
@@ -42616,6 +43276,19 @@ function Router({
       return id3 === currentLocaleId;
     },) ?? null;
   }, [currentLocaleId, locales,],);
+  const {
+    contentLocale,
+    currentCanonicalPathVariables,
+    pageExistsInCurrentLocale,
+    setRouteContentState,
+  } = useRouteContentState({
+    activeLocale,
+    currentRoute,
+    initialCanonicalPathVariables,
+    initialContentLocaleIdOverride,
+    locales,
+    routes,
+  },);
   const textDirection = activeLocale?.textDirection ?? 'ltr';
   const layoutDirection = adaptLayoutToTextDirection ? textDirection : 'ltr';
   useLayoutEffect(() => {
@@ -42626,8 +43299,10 @@ function Router({
   const localeInfo = useMemo(() => {
     return {
       activeLocale,
+      contentLocale,
       locales,
       setLocale: async (localeOrLocaleId) => {
+        const requestIndex = ++localeSwitchRequestIndexRef.current;
         const nextRender = monitorNextPaintAfterRender({
           localized: true,
         },);
@@ -42635,22 +43310,30 @@ function Router({
           priority: 'user-blocking',
           continueAfter: 'paint',
         },);
+        if (requestIndex !== localeSwitchRequestIndexRef.current) {
+          nextRender.ignore?.();
+          return;
+        }
         let localeId;
         if (isString(localeOrLocaleId,)) {
           localeId = localeOrLocaleId;
         } else if (isObject2(localeOrLocaleId,)) {
           localeId = localeOrLocaleId.id;
         }
-        const defaultLocale = locales.find(({
-          id: id3,
-        },) => id3 === defaultLocaleId);
         const nextLocale = locales.find(({
           id: id3,
         },) => id3 === localeId);
-        if (!nextLocale) return;
+        if (!nextLocale) {
+          nextRender.ignore?.();
+          return;
+        }
         const currentRouteId2 = currentRouteRef.current;
         const currentRoute2 = routes[currentRouteId2];
-        if (!currentRoute2) return;
+        if (!currentRoute2) {
+          nextRender.ignore?.();
+          return;
+        }
+        const sitePrefix = getSitePrefix(siteCanonicalURL,);
         try {
           const localeResult = await switchLocale2({
             currentLocale: activeLocale,
@@ -42660,13 +43343,34 @@ function Router({
             defaultLocale,
             pathVariables: currentPathVariablesRef.current,
             preserveQueryParams,
+            sitePrefix,
           },);
-          if (!localeResult) return;
-          const currentPath = localeResult.path;
+          if (!localeResult || requestIndex !== localeSwitchRequestIndexRef.current) {
+            nextRender.ignore?.();
+            return;
+          }
+          const currentPath = localeResult.path && sitePrefix + localeResult.path;
+          const {
+            contentLocaleId,
+            canonicalPathVariables,
+          } = await resolveRouteContentState({
+            activeLocale: nextLocale,
+            defaultLocale,
+            collectionUtilsCache,
+            locales,
+            pathVariables: localeResult.pathVariables,
+            route: currentRoute2,
+            routeId: currentRouteId2,
+          },);
+          if (requestIndex !== localeSwitchRequestIndexRef.current) {
+            nextRender.ignore?.();
+            return;
+          }
           isInitialNavigationRef.current = false;
-          currentPathVariablesRef.current = localeResult.pathVariables;
           currentLocaleIdRef.current = nextLocale.id;
           routerPathnameWithHashRef.current = currentPath;
+          currentPathVariablesRef.current = localeResult.pathVariables;
+          setRouteContentState(contentLocaleId, canonicalPathVariables,);
           const nextPathWithFilledVariables = currentRoute2.path && localeResult.pathVariables
             ? fillPathVariables(currentRoute2.path, localeResult.pathVariables,)
             : currentRoute2.path;
@@ -42684,6 +43388,8 @@ function Router({
                 url: currentPath,
                 pathVariables: localeResult.pathVariables,
                 localeId: nextLocale.id,
+                contentLocaleId,
+                canonicalPathVariables,
               },);
             }
             : void 0;
@@ -42696,15 +43402,20 @@ function Router({
             disableHistory ? void 0 : updateURL,
             false,
           );
-        } catch {}
+        } catch {
+          nextRender.ignore?.();
+        }
       },
     };
   }, [
     activeLocale,
+    defaultLocale,
+    contentLocale,
     disableHistory,
     forceUpdate,
     locales,
     preserveQueryParams,
+    setRouteContentState,
     routes,
     scheduleNavigationScroll,
     startNavigation,
@@ -42712,17 +43423,33 @@ function Router({
     monitorNextPaintAfterRender,
     transitionFn,
     switchLocale2,
+    collectionUtilsCache,
+    siteCanonicalURL,
   ],);
   const setCurrentRouteId = useCallback2(
-    (routeId, localeId, hash2, pathnameWithHash, pathVariables, isHistoryTransition, nextRender, shouldSmoothScroll, updateURL,) => {
+    (
+      routeId,
+      localeId,
+      hash2,
+      pathnameWithHash,
+      pathVariables,
+      contentLocaleId,
+      canonicalPathVariables,
+      isHistoryTransition,
+      nextRender,
+      shouldSmoothScroll,
+      updateURL,
+    ) => {
       isInitialNavigationRef.current = false;
       const currentRouteId2 = currentRouteRef.current;
       const route = routes[routeId];
       const resolvedHash = getRouteElementId(route, hash2,);
       const pathWithFilledVariables2 = route?.path && pathVariables ? fillPathVariables(route.path, pathVariables,) : route?.path;
       currentRouteRef.current = routeId;
-      currentPathVariablesRef.current = pathVariables;
       currentLocaleIdRef.current = localeId;
+      currentPathVariablesRef.current = pathVariables;
+      pendingNavigationResolutionRef.current = void 0;
+      setRouteContentState(contentLocaleId, canonicalPathVariables,);
       routerPathnameWithHashRef.current = pathnameWithHash;
       scheduleNavigationScroll({
         routeId,
@@ -42749,6 +43476,7 @@ function Router({
     },
     [
       forceUpdate,
+      setRouteContentState,
       routes,
       usesCustomScrollRestoration,
       scheduleNavigationScroll,
@@ -42813,11 +43541,11 @@ function Router({
       pathVariables = Object.fromEntries(Object.entries(pathVariables,).filter(([key7,],) => inUse.has(key7,)),);
     }
     const routeElementId = getRouteElementId(newRoute, hash2,);
-    const currentPathVariables2 = currentPathVariablesRef.current;
+    const sourcePathVariables = currentPathVariablesRef.current;
     const currentRouteLocaleId = currentLocaleIdRef.current;
-    const isSamePageNavigation = isSamePage({
+    const isSamePageNavigation = pendingNavigationResolutionRef.current === void 0 && isSamePage({
       routeId: currentRouteRef.current,
-      pathVariables: currentPathVariables2,
+      pathVariables: sourcePathVariables,
     }, {
       routeId,
       pathVariables,
@@ -42847,7 +43575,7 @@ function Router({
         pushSamePageHashState(routeId, route, {
           currentRoutePath: route.path,
           currentRoutePathLocalized: route.pathLocalized,
-          currentPathVariables: currentPathVariables2,
+          currentPathVariables: sourcePathVariables,
           pathVariables,
           hash: hash2,
           localeId: currentRouteLocaleId,
@@ -42865,7 +43593,7 @@ function Router({
     const pathnameWithHash = getSitePrefix(siteCanonicalURL,) + getPathForRoute(newRoute, {
       currentRoutePath: currentRoute2?.path,
       currentRoutePathLocalized: currentRoute2?.pathLocalized,
-      currentPathVariables: currentPathVariables2,
+      currentPathVariables: sourcePathVariables,
       hash: hash2,
       pathVariables,
       localeId: currentRouteLocaleId,
@@ -42877,6 +43605,21 @@ function Router({
       // We need an absolute path for the hash
       siteCanonicalURL,
     },);
+    const navigationResolution = {};
+    pendingNavigationResolutionRef.current = navigationResolution;
+    const {
+      contentLocaleId,
+      canonicalPathVariables,
+    } = await resolveRouteContentState({
+      activeLocale,
+      defaultLocale,
+      collectionUtilsCache,
+      locales,
+      pathVariables,
+      route: newRoute,
+      routeId,
+    },);
+    if (pendingNavigationResolutionRef.current !== navigationResolution) return;
     const updateURL = () => {
       executeBeforeUrlUpdate();
       pushRouteState(routeId, newRoute, {
@@ -42884,6 +43627,8 @@ function Router({
         currentRoutePath: currentRoute2?.path,
         hash: hash2,
         pathVariables,
+        contentLocaleId,
+        canonicalPathVariables,
         localeId: currentRouteLocaleId,
       },);
     };
@@ -42893,6 +43638,8 @@ function Router({
       hash2,
       pathnameWithHash,
       pathVariables,
+      contentLocaleId,
+      canonicalPathVariables,
       false,
       nextRender,
       shouldSmoothScroll,
@@ -42910,13 +43657,12 @@ function Router({
     usesCustomScrollRestoration,
     isNavigationCommitPending,
     scheduleNavigationScroll,
+    collectionUtilsCache,
+    defaultLocale,
+    activeLocale,
   ],);
   const getRoute = useGetRouteCallback(routes,);
-  const currentRouteId = currentRouteRef.current;
   const currentPathnameWithHash = routerPathnameWithHashRef.current;
-  const currentPathVariables = currentPathVariablesRef.current;
-  const currentRoute = routes[currentRouteId];
-  const currentRoutePath = currentRoute?.path;
   const pageviewEventData = useSendPageView(
     currentRoute,
     currentRouteId,
@@ -42926,14 +43672,22 @@ function Router({
     initialCollectionItemId,
   );
   const isInitialNavigation = isInitialNavigationRef.current;
-  useEffect(() => {
-    void loadSnippets2(currentRouteId, currentPathVariables ?? {}, localeInfo.activeLocale, isInitialNavigation,);
-  }, [loadSnippets2, currentRouteId, currentPathVariables, localeInfo, isInitialNavigation,],);
+  useRouteLocaleContentSync({
+    activeLocale,
+    contentLocale,
+    currentPathVariables,
+    currentRoute,
+    currentRouteId,
+    isInitialNavigation,
+    locales,
+    siteCanonicalURL,
+  },);
   const api = useMemo(() => ({
     navigate,
     getRoute,
     currentRouteId,
     currentPathVariables,
+    currentCanonicalPathVariables,
     routes,
     collectionUtils,
     preserveQueryParams,
@@ -42945,6 +43699,7 @@ function Router({
     getRoute,
     currentRouteId,
     currentPathVariables,
+    currentCanonicalPathVariables,
     routes,
     collectionUtils,
     preserveQueryParams,
@@ -42952,11 +43707,6 @@ function Router({
     pageviewEventData,
     isInitialNavigation,
   ],);
-  if (!currentRoute) {
-    throw new Error(`Router cannot find route for ${currentRouteId}`,);
-  }
-  const pageExistsInCurrentLocale = !activeLocale || !currentRoute.includedLocales ||
-    currentRoute.includedLocales.includes(activeLocale.id,);
   const pathWithFilledVariables = currentRoutePath && currentPathVariables
     ? fillPathVariables(currentRoutePath, currentPathVariables,)
     : currentRoutePath;
@@ -43058,6 +43808,44 @@ function WithLayoutTemplate({
     style: style2,
     children,
   },);
+}
+function useRouteContentState({
+  activeLocale,
+  currentRoute,
+  initialCanonicalPathVariables,
+  initialContentLocaleIdOverride,
+  locales,
+  routes,
+},) {
+  const currentCanonicalPathVariablesRef = useRef(initialCanonicalPathVariables,);
+  const overrideContentLocaleIdRef = useRef(initialContentLocaleIdOverride,);
+  const overrideContentLocaleId = overrideContentLocaleIdRef.current;
+  const pageExistsInCurrentLocale = !activeLocale || !currentRoute.includedLocales ||
+    currentRoute.includedLocales.includes(activeLocale.id,);
+  const contentLocale = useMemo(() => {
+    if (!activeLocale) return null;
+    let contentLocaleId;
+    if (pageExistsInCurrentLocale) {
+      contentLocaleId = overrideContentLocaleId ?? currentRoute?.canonicalLocaleIdByLocaleId?.[activeLocale.id];
+    } else {
+      const notFoundRouteEntry = Object.values(routes,).find((route) => route.path && customNotFoundPagePaths.has(route.path,));
+      contentLocaleId = notFoundRouteEntry?.canonicalLocaleIdByLocaleId?.[activeLocale.id];
+    }
+    if (!contentLocaleId) return activeLocale;
+    return locales.find(({
+      id: id3,
+    },) => id3 === contentLocaleId) ?? activeLocale;
+  }, [activeLocale, currentRoute, locales, overrideContentLocaleId, pageExistsInCurrentLocale, routes,],);
+  const setRouteContentState = useCallback2((contentLocaleId, canonicalPathVariables,) => {
+    overrideContentLocaleIdRef.current = contentLocaleId;
+    currentCanonicalPathVariablesRef.current = canonicalPathVariables;
+  }, [],);
+  return {
+    contentLocale,
+    currentCanonicalPathVariables: currentCanonicalPathVariablesRef.current,
+    pageExistsInCurrentLocale,
+    setRouteContentState,
+  };
 }
 function preloadImage(url,) {
   return new Promise((resolve, reject,) => {
@@ -43531,6 +44319,7 @@ function PageRoot(props,) {
     routeId,
     framerSiteId,
     pathVariables,
+    canonicalPathVariables,
     routes,
     collectionUtils,
     notFoundPage,
@@ -43548,6 +44337,7 @@ function PageRoot(props,) {
     adaptLayoutToTextDirection,
     loadSnippetsModule,
     initialCollectionItemId,
+    initialContentLocaleIdOverride,
   } = props;
   React42.useEffect(() => {
     if (isWebsite) return;
@@ -43576,8 +44366,10 @@ function PageRoot(props,) {
                   suppressHydrationWarning: true,
                   initialRoute: routeId,
                   initialPathVariables: pathVariables,
+                  initialCanonicalPathVariables: canonicalPathVariables,
                   initialLocaleId: localeId,
                   initialCollectionItemId,
+                  initialContentLocaleIdOverride,
                   routes,
                   collectionUtils,
                   notFoundPage,
@@ -43666,7 +44458,7 @@ var Fetcher = /* @__PURE__ */ React.forwardRef(function Fetcher2({
   const childrenWithValues = useFetchRequestsForChildren(requests, disabled, children,);
   return cloneWithPropsAndRef(childrenWithValues, rest,);
 },);
-var callEach = (...fns) => fns.forEach((fn) => fn && fn());
+var callEach = (...fns) => fns.forEach((fn) => fn?.());
 function getLogger(name,) {
   return {
     trace(...args) {
@@ -43690,7 +44482,15 @@ function getLogger(name,) {
   };
 }
 function getSymbolDispose() {
-  return Symbol.dispose ?? /* @__PURE__ */ Symbol.for('Symbol.dispose',);
+  if (!Symbol.dispose) {
+    Object.defineProperty(Symbol, 'dispose', {
+      value: /* @__PURE__ */ Symbol.for('Symbol.dispose',),
+      writable: false,
+      enumerable: false,
+      configurable: false,
+    },);
+  }
+  return Symbol.dispose;
 }
 var activeEvaluationContext = {
   priority: void 0,
@@ -48841,13 +49641,13 @@ var UnsupportedQueryError = class extends ServerDatabaseError {
   }
 };
 function isServerDatabaseRawValue(value,) {
-  return value === null || typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean';
+  return value === null || typeof value === 'string' || typeof value === 'number';
 }
-function isServerDatabaseRow(value,) {
+function isServerDatabaseRawRow(value,) {
   return isObject2(value,) && Object.values(value,).every(isServerDatabaseRawValue,);
 }
-function isServerDatabaseQueryResult(value,) {
-  return isObject2(value,) && Array.isArray(value.rows,) && value.rows.every(isServerDatabaseRow,);
+function isServerDatabaseRawQueryResult(value,) {
+  return isObject2(value,) && Array.isArray(value.rows,) && value.rows.every(isServerDatabaseRawRow,);
 }
 function getServerDatabaseUrl(config,) {
   const url = new URL(`${config.endpoint}/${config.siteId}/query`,);
@@ -48859,7 +49659,7 @@ function isServerDatabaseResponse(value,) {
   const hasData = 'data' in value;
   const hasError = 'error' in value;
   if (hasData === hasError) return false;
-  if (hasData) return isServerDatabaseQueryResult(value.data,);
+  if (hasData) return isServerDatabaseRawQueryResult(value.data,);
   return isObject2(value.error,) && typeof value.error.message === 'string';
 }
 async function executeServerDatabaseQuery(sql2, parameters = {},) {
@@ -48897,11 +49697,19 @@ async function executeServerDatabaseQuery(sql2, parameters = {},) {
   if (!data2) throw new ServerDatabaseError('Query returned invalid response',);
   return data2;
 }
+function mapValueToRaw(value,) {
+  if (value === null || typeof value === 'string' || typeof value === 'number') return value;
+  if (typeof value === 'boolean') return value ? 1 : 0;
+  return JSON.stringify(value,);
+}
+function mapParametersToRaw(parameters,) {
+  return Object.fromEntries(Object.entries(parameters,).map(([name, value,],) => [name, mapValueToRaw(value,),]),);
+}
 var logger = /* @__PURE__ */ getLogger('server database',);
-function mapValue2(value, type,) {
+function mapValueFromRaw(value, type,) {
   if (type === 'unsupported') {
-    logger.warn(new UnsupportedQueryError(`result type, returning raw.`,),);
-    return value;
+    logger.warn(new UnsupportedQueryError(`result type, returning null.`,),);
+    return null;
   }
   if (value === null) return null;
   switch (type) {
@@ -48911,56 +49719,155 @@ function mapValue2(value, type,) {
       return mapDateValue(value,);
     case 'number':
       return mapNumberValue(value,);
+    case 'color':
+    case 'enum':
+    case 'file':
     case 'string':
+    case 'collectionreference':
       return mapStringValue(value,);
+    case 'multicollectionreference':
+      return mapStringArrayJsonValue(value,);
+    case 'responsiveimage':
+      return mapImageJsonValue(value,);
+    case 'link':
+      return mapLinkJsonValue(value,);
+    case 'vectorsetitem':
+      return mapVectorSetItemValue(value,);
     default:
-      assertNever(type, 'Unsupported server database result type',);
+      assertNever(type, 'Unknown server query result type',);
   }
 }
 function mapBooleanValue(value,) {
   if (value === 0) return false;
   if (value === 1) return true;
-  logger.warn(new ServerDatabaseError(`Unexpected boolean value ${value}, returning raw.`,),);
-  return value;
+  logger.warn(new ServerDatabaseError(`Unexpected boolean value ${value}, returning null.`,),);
+  return null;
 }
 function mapDateValue(value,) {
   if (typeof value !== 'string') {
-    logger.warn(new ServerDatabaseError(`Unexpected date value ${value}, returning raw.`,),);
-    return value;
+    logger.warn(new ServerDatabaseError(`Unexpected date value ${value}, returning null.`,),);
+    return null;
   }
   const date = new Date(value,);
-  return isValidDate(date,) ? date.toISOString() : null;
+  if (!isValidDate(date,)) {
+    logger.warn(new ServerDatabaseError(`Unexpected date value ${value}, returning null.`,),);
+    return null;
+  }
+  return date.toISOString();
 }
 function mapNumberValue(value,) {
   if (typeof value !== 'number') {
-    logger.warn(new ServerDatabaseError(`Unexpected number value ${value}, returning raw.`,),);
-    return value;
-  }
-  return Number.isFinite(value,) ? value : null;
-}
-function mapStringValue(value,) {
-  if (typeof value !== 'string') {
-    logger.warn(new ServerDatabaseError(`Unexpected string value ${value}, returning raw.`,),);
+    logger.warn(new ServerDatabaseError(`Unexpected number value ${value}, returning null.`,),);
+    return null;
   }
   return value;
 }
-function mapServerDatabaseRows(rows, columns,) {
-  return rows.map((row) => {
-    const mappedRow = {};
-    for (const column of columns) {
-      if (!(column.fieldName in row)) {
-        throw new ServerDatabaseError(`Expected SQL result column "${column.fieldName}".`,);
-      }
-      const value = row[column.fieldName];
-      if (value === void 0) {
-        throw new ServerDatabaseError(`Expected SQL result column "${column.fieldName}" returned undefined.`,);
-      }
-      mappedRow[column.fieldName] = mapValue2(value, column.type,);
-    }
-    return mappedRow;
-  },);
+function mapStringValue(value,) {
+  if (typeof value !== 'string') {
+    logger.warn(new ServerDatabaseError(`Unexpected string value ${value}, returning null.`,),);
+    return null;
+  }
+  return value;
 }
-var collectionItemIdColumn = 'id';
+function mapStringArrayJsonValue(value,) {
+  if (typeof value === 'string') {
+    try {
+      const parsed = JSON.parse(value,);
+      if (isStringArray(parsed,)) return parsed;
+    } catch {}
+  }
+  logger.warn(new ServerDatabaseError(`Unexpected multi reference value ${value}, returning null.`,),);
+  return null;
+}
+function isStringArray(value,) {
+  return Array.isArray(value,) && value.every((item) => typeof item === 'string');
+}
+function mapImageJsonValue(value,) {
+  if (typeof value === 'string') {
+    try {
+      const parsed = JSON.parse(value,);
+      if (isImageValue(parsed,)) return parsed;
+    } catch {}
+  }
+  logger.warn(new ServerDatabaseError(`Unexpected image value ${value}, returning null.`,),);
+  return null;
+}
+function isImageValue(value,) {
+  return isObject2(value,) && typeof value.src === 'string';
+}
+function mapLinkJsonValue(value,) {
+  if (typeof value === 'string') {
+    try {
+      const parsed = JSON.parse(value,);
+      if (typeof parsed === 'string' || isLinkToWebPage(parsed,)) return parsed;
+    } catch {}
+  }
+  logger.warn(new ServerDatabaseError(`Unexpected link value ${value}, returning null.`,),);
+  return null;
+}
+function mapVectorSetItemValue(value,) {
+  if (typeof value !== 'string') {
+    logger.warn(new ServerDatabaseError(`Unexpected vector set item value ${value}, returning null.`,),);
+    return null;
+  }
+  const moduleImport = isWindow ? __unframerWindow2.__framer_serverDatabaseModuleImports?.[value] : void 0;
+  if (!moduleImport) {
+    logger.warn(new ServerDatabaseError(`Missing module import for vector set item ${value}, returning null.`,),);
+    return null;
+  }
+  const moduleExport = moduleImport.readMaybeAsync();
+  if (isPromise(moduleExport,)) {
+    return moduleExport.then((loadedExport) => mapVectorSetItemExport(loadedExport, value,));
+  }
+  return mapVectorSetItemExport(moduleExport, value,);
+}
+function mapVectorSetItemExport(moduleExport, identifier2,) {
+  if (moduleExport === void 0) {
+    logger.warn(new ServerDatabaseError(`Missing vector set item export for ${identifier2}, returning null.`,),);
+    return null;
+  }
+  return moduleExport;
+}
+function mapRowsFromRaw(rows, columns,) {
+  const mappedRows = [];
+  const pendingRows = [];
+  for (const [index, row,] of rows.entries()) {
+    const mappedRow = mapRowFromRaw(row, columns,);
+    if (isPromise(mappedRow,)) {
+      pendingRows.push(mappedRow.then((resolvedRow) => {
+        mappedRows[index] = resolvedRow;
+      },),);
+    } else {
+      mappedRows[index] = mappedRow;
+    }
+  }
+  if (pendingRows.length === 0) return mappedRows;
+  return Promise.all(pendingRows,).then(() => mappedRows);
+}
+function mapRowFromRaw(row, columns,) {
+  const mappedRow = {};
+  const pendingValues = [];
+  for (const column of columns) {
+    if (!(column.fieldName in row)) {
+      throw new ServerDatabaseError(`Expected SQL result column "${column.fieldName}".`,);
+    }
+    const value = row[column.fieldName];
+    if (value === void 0) {
+      throw new ServerDatabaseError(`Expected SQL result column "${column.fieldName}" returned undefined.`,);
+    }
+    const mappedValue = mapValueFromRaw(value, column.type,);
+    if (isPromise(mappedValue,)) {
+      pendingValues.push(mappedValue.then((resolvedValue) => {
+        mappedRow[column.fieldName] = resolvedValue;
+      },),);
+    } else {
+      mappedRow[column.fieldName] = mappedValue;
+    }
+  }
+  if (pendingValues.length === 0) return mappedRow;
+  return Promise.all(pendingValues,).then(() => mappedRow);
+}
+var collectionItemIdColumn = 'collectionItemId';
 var positionIdColumn = 'position';
 var arrayItemIdColumn = 'arrayItemId';
 var joinTableIndexColumn = 'index';
@@ -48976,42 +49883,46 @@ var systemColumns = [
   createdAtColumn,
   updatedAtColumn,
 ];
-var identifierRegex = /^[a-z]\w+$/iu;
-var SafeSql = class extends String {};
+var BaseSafeSql = class extends String {};
 function isSafeSql(value,) {
-  return value instanceof SafeSql;
+  return value instanceof BaseSafeSql;
 }
-function sqlTemplate(strings, ...queriesAndParameters) {
+var SafeSql = class extends BaseSafeSql {};
+function sqlTemplate(strings, ...statementsAndParameters) {
   assert2(strings[0] !== void 0, 'sql template literal must have at least one string part',);
   const result = [new SafeSql(strings[0],),];
-  queriesAndParameters.forEach((subqueryOrParameter, i,) => {
-    assert2(strings[i + 1] !== void 0, 'sql template literal must have a string part after each query or parameter',);
+  statementsAndParameters.forEach((statementOrParameter, i,) => {
+    assert2(strings[i + 1] !== void 0, 'sql template literal must have a string part after each statement or parameter',);
     const nextStringPart = new SafeSql(strings[i + 1],);
-    if (Array.isArray(subqueryOrParameter,)) {
-      result.push(...subqueryOrParameter, nextStringPart,);
+    if (Array.isArray(statementOrParameter,)) {
+      result.push(...statementOrParameter, nextStringPart,);
       return;
     }
-    if (subqueryOrParameter instanceof SafeSql) {
-      result.push(subqueryOrParameter, nextStringPart,);
+    if (statementOrParameter instanceof BaseSafeSql) {
+      result.push(statementOrParameter, nextStringPart,);
       return;
     }
-    if (isSqlParameter(subqueryOrParameter,)) {
-      result.push(subqueryOrParameter, nextStringPart,);
+    if (isSqlParameter(statementOrParameter,)) {
+      result.push(statementOrParameter, nextStringPart,);
       return;
     }
-    assertNever2(subqueryOrParameter, 'Unknown value in sql template literal',);
+    assertNever2(statementOrParameter, 'Unknown value in sql template literal',);
   },);
   return result;
 }
-function join(queries, separator3,) {
+function join(statements, separator3, emptyFallback,) {
   const result = [];
-  for (const query of queries) {
+  for (const statement of statements) {
     if (result.length > 0) result.push(new SafeSql(separator3,),);
-    if (Array.isArray(query,)) result.push(...query,);
-    else result.push(query,);
+    if (Array.isArray(statement,)) result.push(...statement,);
+    else result.push(statement,);
+  }
+  if (result.length === 0 && emptyFallback) {
+    result.push(new SafeSql(emptyFallback,),);
   }
   return result;
 }
+var identifierRegex = /^[a-z][\w/]+$/iu;
 function assertIdentifier(identifierString,) {
   if (!identifierRegex.test(identifierString,)) {
     throw new Error(
@@ -49062,10 +49973,10 @@ var parameterRegex = /^\w+$/u;
 function isSqlParameter(value,) {
   return typeof value === 'object' && value !== null && 'name' in value && 'value' in value;
 }
-function serializeSql(sqlQuery,) {
+function serializeSql(statement,) {
   let sql2 = '';
   const parameters = {};
-  for (const part of Array.isArray(sqlQuery,) ? sqlQuery : [sqlQuery,]) {
+  for (const part of Array.isArray(statement,) ? statement : [statement,]) {
     if (isSafeSql(part,)) {
       sql2 += part;
       continue;
@@ -49083,64 +49994,49 @@ function serializeSql(sqlQuery,) {
       parameters[name] = part.value;
       continue;
     }
-    assertNever2(part, 'Unknown part in SQL query',);
+    assertNever2(part, 'Unknown part in SQL statement',);
   }
   return {
     sql: sql2,
     parameters,
   };
 }
-function compileFromClause(collectionId, references,) {
-  const joinParts = [sql.identifier(collectionId,),];
+function compileFromClause(table, alias2, references, joinType,) {
+  const source = sql.identifier(table,);
+  const joinParts = [alias2 === void 0 ? source : sql`${source} AS ${sql.alias(alias2,)}`,];
   for (const [joinAlias, reference,] of references) {
     joinParts.push(
-      sql`${sql.identifier(reference.referencedCollectionId,)} AS ${sql.alias(joinAlias,)} ON ${
+      sql`${sql.identifier(`${reference.referencedCollectionId}/items`,)} AS ${sql.alias(joinAlias,)} ON ${
         sql.qualifiedIdentifier(reference.qualifier, reference.identifier,)
       } = ${sql.qualifiedIdentifier(joinAlias, collectionItemIdColumn,)}`,
     );
   }
   return {
-    query: sql`FROM ${sql.join(joinParts, ' LEFT JOIN ',)}`,
+    statement: sql`FROM ${sql.join(joinParts, joinType, '(SELECT 0 WHERE 0)',)}`,
   };
 }
 function compileLimitAndOffsetClause() {
   return {
-    query: sql`LIMIT 5000`,
+    statement: sql`LIMIT 5000`,
   };
 }
-function compileOrderByClause(collectionId,) {
+function compileOrderByClause(qualifier2, column,) {
   return {
-    query: sql`ORDER BY ${sql.qualifiedIdentifier(collectionId, positionIdColumn,)}`,
+    statement: sql`ORDER BY ${sql.qualifiedIdentifier(qualifier2, column,)}`,
   };
 }
-function resolveSelect({
-  collectionId,
-  columns,
-}, serverCollections,) {
-  const references = /* @__PURE__ */ new Map();
-  const resolvedSelects = [];
-  for (const column of columns) {
-    const resolvedSelect = resolveColumn(collectionId, column, serverCollections, references,);
-    if (resolvedSelect) resolvedSelects.push(resolvedSelect,);
-  }
-  return {
-    references,
-    selectedColumns: resolvedSelects,
-  };
-}
-function resolveColumn(rootCollectionId, column, serverCollections, references,) {
-  const {
-    alias: alias2,
-  } = column;
-  const referencePath = [...column.fieldPath,];
+function resolveFieldPath(rootCollectionId, fieldPath, serverCollections, references,) {
+  const referencePath = [...fieldPath,];
   const tailFieldId = referencePath.pop();
-  if (!tailFieldId) {
+  if (tailFieldId === void 0) {
     return {
-      alias: alias2,
       qualifier: rootCollectionId,
-      identifier: collectionItemIdColumn,
-      type: 'string',
-      /* String */
+      collectionId: rootCollectionId,
+      tailFieldId: collectionItemIdColumn,
+      tailField: {
+        type: 'collectionreference',
+        referencedCollectionId: rootCollectionId,
+      },
     };
   }
   let collectionId = rootCollectionId;
@@ -49148,13 +50044,13 @@ function resolveColumn(rootCollectionId, column, serverCollections, references,)
   for (const referenceFieldId of referencePath) {
     const field = serverCollections[collectionId]?.fields[referenceFieldId];
     if (!field) {
-      warnOnce2(new ServerDatabaseError(`Field ${referenceFieldId} in column ${alias2} does not exist.`,).toString(),);
+      warnOnce2(
+        new ServerDatabaseError(`Intermediate field ${referenceFieldId} does not exist in collection ${collectionId}.`,).toString(),
+      );
       return void 0;
     }
     if (field.type !== 'collectionreference') {
-      warnOnce2(
-        new ServerDatabaseError(`Intermediate field ${referenceFieldId} in column ${alias2} is not a reference field.`,).toString(),
-      );
+      warnOnce2(new ServerDatabaseError(`Intermediate field ${referenceFieldId} is not a single reference field.`,).toString(),);
       return void 0;
     }
     const newQualifier = `${qualifier2}.${referenceFieldId}`;
@@ -49168,10 +50064,80 @@ function resolveColumn(rootCollectionId, column, serverCollections, references,)
   }
   const tailField = serverCollections[collectionId]?.fields[tailFieldId];
   if (!tailField) {
-    warnOnce2(new ServerDatabaseError(`Field ${tailFieldId} in column ${alias2} does not exist.`,).toString(),);
+    warnOnce2(new ServerDatabaseError(`Field ${tailFieldId} does not exist in collection ${collectionId}.`,).toString(),);
     return void 0;
   }
-  if (tailField.type === 'collectionreference') {
+  return {
+    qualifier: qualifier2,
+    collectionId,
+    tailFieldId,
+    tailField,
+  };
+}
+function compileMultiReferenceExpression(qualifier2, collectionId, fieldId, referencedCollectionId,) {
+  const sideTable = `${collectionId}/itemMultiCollectionReferences/${fieldId}`;
+  const joinAlias = `${qualifier2}.${fieldId}`;
+  const selectClause = compileMultiReferenceSelectClause(sideTable, joinAlias, referencedCollectionId,);
+  const fromClause = compileFromClause(sideTable, void 0, selectClause.references, ' JOIN ',);
+  const whereClause = compileMultiReferenceWhereClause(sideTable, qualifier2,);
+  return sql`(${selectClause.statement} ${fromClause.statement} ${whereClause.statement})`;
+}
+function compileMultiReferenceSelectClause(sideTable, joinAlias, referencedCollectionId,) {
+  const references = /* @__PURE__ */ new Map([[joinAlias, {
+    qualifier: sideTable,
+    identifier: referencedCollectionItemIdColumn,
+    referencedCollectionId,
+  },],],);
+  const orderByClause = compileOrderByClause(sideTable, joinTableIndexColumn,);
+  return {
+    statement: sql`SELECT json_group_array(${sql.qualifiedIdentifier(joinAlias, collectionItemIdColumn,)} ${orderByClause.statement})`,
+    references,
+  };
+}
+function compileMultiReferenceWhereClause(sideTable, qualifier2,) {
+  return {
+    statement: sql`WHERE ${sql.qualifiedIdentifier(sideTable, collectionItemIdColumn,)} = ${
+      sql.qualifiedIdentifier(qualifier2, collectionItemIdColumn,)
+    }`,
+  };
+}
+function compileSelectClause(
+  {
+    collectionId,
+    columns,
+  },
+  serverCollections,
+  references,
+) {
+  const resultColumns = [];
+  const selectParts = [];
+  for (const column of columns) {
+    const compiledColumn = compileColumn(collectionId, column, serverCollections, references,);
+    if (!compiledColumn) continue;
+    resultColumns.push({
+      fieldName: column.alias,
+      type: compiledColumn.type,
+    },);
+    selectParts.push(sql`${compiledColumn.expression} AS ${sql.alias(column.alias,)}`,);
+  }
+  if (selectParts.length === 0) {
+    warnOnce2(new ServerDatabaseError('Query selects no column.',).toString(),);
+  }
+  return {
+    statement: sql`SELECT ${sql.join(selectParts, ', ', '1',)}`,
+    columns: resultColumns,
+  };
+}
+function compileColumn(rootCollectionId, column, serverCollections, references,) {
+  const resolved = resolveFieldPath(rootCollectionId, column.fieldPath, serverCollections, references,);
+  if (!resolved) return void 0;
+  const {
+    qualifier: qualifier2,
+    collectionId,
+    tailFieldId,
+    tailField,
+  } = resolved;
+  if (tailField.type === 'collectionreference' && tailFieldId !== collectionItemIdColumn) {
     const newQualifier = `${qualifier2}.${tailFieldId}`;
     references.set(newQualifier, {
       qualifier: qualifier2,
@@ -49179,95 +50145,251 @@ function resolveColumn(rootCollectionId, column, serverCollections, references,)
       referencedCollectionId: tailField.referencedCollectionId,
     },);
     return {
-      alias: alias2,
-      qualifier: newQualifier,
-      identifier: collectionItemIdColumn,
-      type: 'string',
-      /* String */
+      expression: sql.qualifiedIdentifier(newQualifier, collectionItemIdColumn,),
+      type: 'collectionreference',
+      /* CollectionReference */
+    };
+  }
+  if (tailField.type === 'multicollectionreference') {
+    return {
+      expression: compileMultiReferenceExpression(qualifier2, collectionId, tailFieldId, tailField.referencedCollectionId,),
+      type: 'multicollectionreference',
+      /* MultiCollectionReference */
     };
   }
   return {
-    alias: alias2,
-    qualifier: qualifier2,
-    identifier: tailFieldId,
+    expression: sql.qualifiedIdentifier(qualifier2, tailFieldId,),
     type: tailField.type,
   };
 }
-function compileSelectClause(selectedColumns,) {
-  const columns = [];
-  const selectParts = [];
-  for (const selectedColumn of selectedColumns) {
-    columns.push({
-      fieldName: selectedColumn.alias,
-      type: selectedColumn.type,
-    },);
-    const qualifiedIdentifier2 = sql.qualifiedIdentifier(selectedColumn.qualifier, selectedColumn.identifier,);
-    selectParts.push(sql`${qualifiedIdentifier2} AS ${sql.alias(selectedColumn.alias,)}`,);
-  }
-  if (selectParts.length === 0) {
-    warnOnce2(
-      new ServerDatabaseError('Query selects no columns, falling back to \'*\'. We should always select at least the identity column.',)
-        .toString(),
-    );
-    selectParts.push(sql`*`,);
+function compileWhereClause(collectionId, filters, serverCollections, references,) {
+  const conditions = [];
+  for (const filter2 of filters.conditions) {
+    const condition = compileFilter(collectionId, filter2, serverCollections, references,);
+    if (condition) conditions.push(condition,);
   }
   return {
-    query: sql`SELECT ${sql.join(selectParts, ', ',)}`,
-    columns,
+    statement: sql`WHERE ${sql.join(conditions, getJoinOperator(filters.operator,), '1',)}`,
   };
+}
+function getJoinOperator(filterOperator,) {
+  switch (filterOperator) {
+    case 'any':
+      return ' OR ';
+    case 'all':
+      return ' AND ';
+  }
+}
+function compileFilter(collectionId, filter2, serverCollections, references,) {
+  const resolved = resolveFieldPath(collectionId, filter2.fieldPath, serverCollections, references,);
+  if (!resolved) return void 0;
+  if (resolved.tailField.type === 'unsupported') {
+    warnOnce2(new UnsupportedQueryError(`filter field type.`,).toString(),);
+    return void 0;
+  }
+  let parameterName = filter2.fieldPath.join('_',) || resolved.tailFieldId;
+  let currentStep = compileField(resolved,);
+  for (const transform2 of preOptimizeTransforms(currentStep, filter2.transforms,)) {
+    parameterName += `_${transform2.name}`;
+    currentStep = compileTransform(transform2, currentStep, parameterName,);
+    if (!currentStep) return void 0;
+  }
+  if (currentStep.type !== 'boolean') {
+    warnOnce2(new ServerDatabaseError(`Filter chain on ${currentStep.type} field does not result in a boolean.`,).toString(),);
+    return void 0;
+  }
+  return currentStep.inputToleratingNull().expression;
+}
+function preOptimizeTransforms(currentStep, transforms,) {
+  if (currentStep.type === 'boolean' && transforms.length === 0) {
+    return [{
+      name: 'equals',
+      value: true,
+    },];
+  }
+  return transforms;
+}
+var Step = class {
+  #expression;
+  #type;
+  #nullable;
+  constructor(init,) {
+    this.#expression = init.expression;
+    this.#type = init.type;
+    this.#nullable = init.nullable;
+  }
+  /**
+   * Get the input to be used in a context that carries through NULL representing false,
+   * or correctly handles NULL representing false (e.g. `WHERE`/`AND` coercing to false).
+   */
+  inputToleratingNull() {
+    return {
+      expression: this.#expression,
+      nullable: this.#nullable,
+    };
+  }
+  /**
+   * Get the input to be used in a context that misbehaves on a NULL representing false (e.g. `= NULL`).
+   */
+  inputSensitiveToNull() {
+    if (this.#nullable === 'treat-as-false') {
+      return {
+        expression: sql`(${this.#expression} IS TRUE)`,
+        nullable: 'no',
+      };
+    }
+    return {
+      expression: this.#expression,
+      nullable: this.#nullable,
+    };
+  }
+  get type() {
+    return this.#type;
+  }
+};
+function treatNullInputAsFalse(input,) {
+  switch (input.nullable) {
+    case 'yes':
+    case 'treat-as-false':
+      return 'treat-as-false';
+    case 'no':
+      return 'no';
+  }
+}
+function treatNullValueAsFalse(value,) {
+  if (value === null) {
+    return 'treat-as-false';
+  }
+  return 'no';
+}
+function compileField({
+  qualifier: qualifier2,
+  collectionId,
+  tailFieldId,
+  tailField,
+},) {
+  if (tailField.type === 'multicollectionreference') {
+    return new Step({
+      expression: compileMultiReferenceExpression(qualifier2, collectionId, tailFieldId, tailField.referencedCollectionId,),
+      type: tailField.type,
+      nullable: 'no',
+    },);
+  }
+  return new Step({
+    expression: sql.qualifiedIdentifier(qualifier2, tailFieldId,),
+    type: tailField.type,
+    nullable: 'yes',
+  },);
+}
+function compileTransform(transform2, previousStep, parameterName,) {
+  if (transform2.value === void 0) return void 0;
+  switch (transform2.name) {
+    case 'equals':
+      return compileEquals(previousStep, parameterName, transform2.value,);
+    case 'isIncludedIn':
+      return compileIsIncludedIn(previousStep, parameterName, transform2.value,);
+    case 'contains':
+      return compileContains(previousStep, parameterName, transform2.value,);
+    default:
+      warnOnce2(new UnsupportedQueryError(`filter transform.`,).toString(),);
+      return void 0;
+  }
+}
+function compileEquals(previousStep, parameterName, value,) {
+  const input = previousStep.inputSensitiveToNull();
+  if (value === null) {
+    return new Step({
+      expression: sql`${input.expression} IS NULL`,
+      type: 'boolean',
+      nullable: 'no',
+    },);
+  }
+  if (previousStep.type === 'string' && typeof value === 'string') {
+    return new Step({
+      expression: sql`LOWER(${input.expression}) = LOWER(${sql.parameter(parameterName, value,)})`,
+      type: 'boolean',
+      nullable: treatNullInputAsFalse(input,),
+    },);
+  }
+  return new Step({
+    expression: sql`${input.expression} = ${sql.parameter(parameterName, value,)}`,
+    type: 'boolean',
+    nullable: treatNullInputAsFalse(input,),
+  },);
+}
+function compileIsIncludedIn(previousStep, parameterName, value,) {
+  const input = previousStep.inputToleratingNull();
+  return new Step({
+    expression: sql`${input.expression} IN (SELECT value FROM json_each(${sql.parameter(parameterName, value,)}))`,
+    type: 'boolean',
+    nullable: treatNullInputAsFalse(input,),
+  },);
+}
+function compileContains(previousStep, parameterName, value,) {
+  switch (previousStep.type) {
+    case 'multicollectionreference': {
+      return new Step({
+        expression: sql`${
+          sql.parameter(parameterName, value,)
+        } IN (SELECT value FROM json_each(${previousStep.inputToleratingNull().expression}))`,
+        type: 'boolean',
+        nullable: treatNullValueAsFalse(value,),
+      },);
+    }
+    case 'string':
+      warnOnce2(new UnsupportedQueryError(`contains filter on a ${previousStep.type} field.`,).toString(),);
+      return void 0;
+    default:
+      warnOnce2(new ServerDatabaseError(`Contains filter on a ${previousStep.type} field.`,).toString(),);
+      return void 0;
+  }
 }
 function compileQuery(serverQuery, serverCollections,) {
   const {
     collectionId,
   } = serverQuery;
-  const {
-    references,
-    selectedColumns,
-  } = resolveSelect(serverQuery, serverCollections,);
-  const selectClause = compileSelectClause(selectedColumns,);
-  const fromClause = compileFromClause(collectionId, references,);
-  const orderByClause = compileOrderByClause(collectionId,);
+  const references = /* @__PURE__ */ new Map();
+  const selectClause = compileSelectClause(serverQuery, serverCollections, references,);
+  const whereClause = compileWhereClause(collectionId, serverQuery.filters, serverCollections, references,);
+  const fromClause = compileFromClause(`${collectionId}/items`, collectionId, references, ' LEFT JOIN ',);
+  const orderByClause = compileOrderByClause(collectionId, positionIdColumn,);
   const limitAndOffsetClause = compileLimitAndOffsetClause();
-  const sqlQuery = sql`${selectClause.query} ${fromClause.query} ${orderByClause.query} ${limitAndOffsetClause.query}`;
+  const statement =
+    sql`${selectClause.statement} ${fromClause.statement} ${whereClause.statement} ${orderByClause.statement} ${limitAndOffsetClause.statement}`;
   return {
-    query: serializeSql(sqlQuery,),
+    statement: serializeSql(statement,),
     columns: selectClause.columns,
   };
 }
 var serverDataCache = /* @__PURE__ */ new Map();
-function getCachedServerData(sql2, parameters = {},) {
+function getCachedServerData(sql2, parameters, columns,) {
   const cacheKey = getCacheKey2(sql2, parameters,);
   const cached = serverDataCache.get(cacheKey,);
   if (cached) return cached;
-  const value = new LazyValue(() => executeServerDatabaseQuery(sql2, parameters,));
+  const value = new LazyValue(() =>
+    executeServerDatabaseQuery(sql2, parameters,).then((response) => mapRowsFromRaw(response.rows, columns,))
+  );
   serverDataCache.set(cacheKey, value,);
   return value;
 }
 function getCacheKey2(sql2, parameters,) {
   return JSON.stringify([sql2, parameters,],);
 }
-function preloadServerData(query, collections,) {
+function getServerData(query, collections,) {
   const {
-    query: {
+    statement: {
       sql: sql2,
       parameters,
     },
     columns,
   } = compileQuery(query, collections,);
-  const result = getCachedServerData(sql2, parameters,).readMaybeAsync();
-  if (isPromise(result,)) return result.then((response) => mapServerDatabaseRows(response.rows, columns,));
-  return mapServerDatabaseRows(result.rows, columns,);
+  return getCachedServerData(sql2, mapParametersToRaw(parameters,), columns,);
+}
+function preloadServerData(query, collections,) {
+  return getServerData(query, collections,).readMaybeAsync();
 }
 function useServerData(query, collections,) {
-  const {
-    query: {
-      sql: sql2,
-      parameters,
-    },
-    columns,
-  } = compileQuery(query, collections,);
-  const result = getCachedServerData(sql2, parameters,).use();
-  return mapServerDatabaseRows(result.rows, columns,);
+  return getServerData(query, collections,).use();
 }
 var queryEngine = /* @__PURE__ */ new QueryEngine();
 var queryCache = /* @__PURE__ */ new QueryCache(queryEngine,);
@@ -50203,12 +51325,12 @@ function usePrototypeNavigate({
       navigation.goBack();
       return false;
     }
-    const Component18 = typeof target === 'string'
+    const Component17 = typeof target === 'string'
       ? await componentForRoute(getRoute?.(target,),).catch(() => {},)
       : React42.isValidElement(target,)
       ? target
       : null;
-    if (!Component18) return;
+    if (!Component17) return;
     const {
       appearsFrom,
       backdropColor,
@@ -50217,40 +51339,40 @@ function usePrototypeNavigate({
     const transitionType = options.transition || 'instant';
     switch (transitionType) {
       case 'instant':
-        navigation.instant(Component18,);
+        navigation.instant(Component17,);
         break;
       case 'fade':
-        navigation.fade(Component18, {
+        navigation.fade(Component17, {
           animation,
         },);
         break;
       case 'push':
-        navigation.push(Component18, {
+        navigation.push(Component17, {
           appearsFrom,
           animation,
         },);
         break;
       case 'flip':
-        navigation.flip(Component18, {
+        navigation.flip(Component17, {
           appearsFrom,
           animation,
         },);
         break;
       case 'magicMotion':
-        navigation.magicMotion(Component18, {
+        navigation.magicMotion(Component17, {
           animation,
         },);
         break;
       // Overlay stack navigation doesn't support updating the browser's
       // path.
       case 'modal':
-        navigation.modal(Component18, {
+        navigation.modal(Component17, {
           backdropColor,
           animation,
         },);
         break;
       case 'overlay':
-        navigation.overlay(Component18, {
+        navigation.overlay(Component17, {
           appearsFrom,
           backdropColor,
           animation,
@@ -50260,13 +51382,26 @@ function usePrototypeNavigate({
     return false;
   };
 }
+function getPersistedCurrentPage(hash2,) {
+  if (typeof __unframerWindow2 === 'undefined') return void 0;
+  const currentPage = readHistoryState()?.paginationInfo?.[hash2]?.currentPage;
+  return typeof currentPage === 'number' ? currentPage : void 0;
+}
+function getInitialCurrentPage(isInitialNavigation, hash2,) {
+  if (isInitialNavigation) {
+    return 1;
+  }
+  return getPersistedCurrentPage(hash2,) ?? 1;
+}
 function useLoadMorePagination(totalSize, pageSize, hash2, paginateWithSuspendedLoadingState = false,) {
+  const {
+    isInitialNavigation = true,
+  } = useRouter();
   const [isPending, startLoadingTransition,] = useTransition();
   const totalPages = Math.ceil(totalSize / pageSize,);
-  const [currentPage, setCurrentPage,] = useState(
-    // oxlint-disable-next-line framer-studio/eslint-no-restricted-syntax
-    globalThis?.history?.state?.paginationInfo?.[hash2]?.currentPage ?? 1,
-  );
+  const persistedPage = getPersistedCurrentPage(hash2,);
+  const pendingRestorePageRef = useRef(isInitialNavigation ? persistedPage : void 0,);
+  const [currentPage, setCurrentPage,] = useState(() => getInitialCurrentPage(isInitialNavigation, hash2,));
   const currentPageRef = useRef(currentPage,);
   const paginationInfo = useMemo(() => {
     return {
@@ -50276,27 +51411,44 @@ function useLoadMorePagination(totalSize, pageSize, hash2, paginateWithSuspended
     };
   }, [currentPage, totalPages, isPending,],);
   useIsomorphicLayoutEffect2(() => {
+    const pendingRestorePage = pendingRestorePageRef.current;
+    if (pendingRestorePage !== void 0 && pendingRestorePage !== currentPageRef.current) return;
+    pendingRestorePageRef.current = void 0;
     pushLoadMoreHistory(hash2, paginationInfo,);
   }, [hash2, paginationInfo,],);
+  useEffect(function restorePersistedPageAfterHydration() {
+    if (!isInitialNavigation) return;
+    const pendingRestorePage = pendingRestorePageRef.current;
+    if (pendingRestorePage === void 0 || pendingRestorePage === currentPageRef.current) {
+      pendingRestorePageRef.current = void 0;
+      return;
+    }
+    currentPageRef.current = pendingRestorePage;
+    startTransition2(() => setCurrentPage(pendingRestorePage,));
+  }, [isInitialNavigation,],);
   const onCanvas = useIsOnFramerCanvas();
+  const loadMoreInFlightRef = useRef(false,);
   const loadMore = useCallback2(async () => {
     if (onCanvas) return;
     if (currentPageRef.current >= totalPages) return;
-    await yieldToMain({
-      priority: 'user-blocking',
-      continueAfter: 'paint',
-    },);
-    if (currentPageRef.current >= totalPages) return;
-    const renderNextPage = (startTransition25) => {
+    if (loadMoreInFlightRef.current) return;
+    loadMoreInFlightRef.current = true;
+    try {
+      await yieldToMain({
+        priority: 'user-blocking',
+        continueAfter: 'paint',
+      },);
+      if (currentPageRef.current >= totalPages) return;
       const nextPage = Math.min(currentPageRef.current + 1, totalPages,);
       currentPageRef.current = nextPage;
-      startTransition25(() => {
+      const schedulePageRender = paginateWithSuspendedLoadingState ? startLoadingTransition : startTransition2;
+      schedulePageRender(() => {
         setCurrentPage(nextPage,);
       },);
-    };
-    if (!paginateWithSuspendedLoadingState) return renderNextPage(startTransition2,);
-    return renderNextPage(startLoadingTransition,);
-  }, [totalPages, paginateWithSuspendedLoadingState,],);
+    } finally {
+      loadMoreInFlightRef.current = false;
+    }
+  }, [totalPages, paginateWithSuspendedLoadingState, onCanvas,],);
   return {
     paginationInfo,
     loadMore,
@@ -50699,16 +51851,16 @@ function safeCSSValue(value,) {
   if (reUnsafeCharacters.test(value,)) return 'none';
   return value;
 }
-function withCodeBoundaryForOverrides(Component18, {
+function withCodeBoundaryForOverrides(Component17, {
   scopeId,
   nodeId,
   override,
   inComponentSlot,
 },) {
   if (!shouldEnableCodeBoundaries()) {
-    return override(Component18,);
+    return override(Component17,);
   }
-  const appliedOverride = tryToApplyOverride(Component18, override,);
+  const appliedOverride = tryToApplyOverride(Component17, override,);
   let hasErrorBeenLogged = false;
   function CodeBoundaryForOverrides(props, ref,) {
     const nearestExternalComponent = useNearestExternalComponent();
@@ -50716,7 +51868,7 @@ function withCodeBoundaryForOverrides(Component18, {
       disableCustomCode,
     } = getLibraryFeatures();
     if (disableCustomCode) {
-      return /* @__PURE__ */ jsx(Component18, {
+      return /* @__PURE__ */ jsx(Component17, {
         suppressHydrationWarning: true,
         ...props,
         ref,
@@ -50736,7 +51888,7 @@ function withCodeBoundaryForOverrides(Component18, {
           children: /* @__PURE__ */ jsx(CodeComponentBoundary, {
             suppressHydrationWarning: true,
             getErrorMessage: getErrorMessageForOverride.bind(null, scopeId, nodeId,),
-            fallback: /* @__PURE__ */ jsx(Component18, {
+            fallback: /* @__PURE__ */ jsx(Component17, {
               suppressHydrationWarning: true,
               ...props,
               ref,
@@ -50755,7 +51907,7 @@ function withCodeBoundaryForOverrides(Component18, {
           collectErrorToAnalytics(appliedOverride.error,);
           hasErrorBeenLogged = true;
         }
-        return /* @__PURE__ */ jsx(Component18, {
+        return /* @__PURE__ */ jsx(Component17, {
           suppressHydrationWarning: true,
           ...props,
           ref,
@@ -50779,9 +51931,9 @@ function withCodeBoundaryForOverrides(Component18, {
   }
   return React42.forwardRef(CodeBoundaryForOverrides,);
 }
-function tryToApplyOverride(Component18, override,) {
+function tryToApplyOverride(Component17, override,) {
   try {
-    const ComponentWithOverrides = override(Component18,);
+    const ComponentWithOverrides = override(Component17,);
     return {
       status: 'success',
       Component: ComponentWithOverrides,
@@ -50801,7 +51953,7 @@ function singleFrame() {
     frame.postRender(() => resolve());
   },);
 }
-var withV1StrokeFX = (Component18) =>
+var withV1StrokeFX = (Component17) =>
   forwardRef((props, forwardedRef,) => {
     const {
       strokeEffectLength,
@@ -50854,7 +52006,7 @@ var withV1StrokeFX = (Component18) =>
         strokeDashoffset: value,
       }
       : void 0;
-    return /* @__PURE__ */ jsx(Component18, {
+    return /* @__PURE__ */ jsx(Component17, {
       suppressHydrationWarning: true,
       ...restProps,
       ...effect,
@@ -51818,14 +52970,14 @@ var BasicTicker = /* @__PURE__ */ forwardRef(function BasicTicker2(props, ref,) 
     playState,
     ...rest
   } = props;
-  const Component18 = asProp ?? motion.div;
+  const Component17 = asProp ?? motion.div;
   const isStatic = useIsStaticRenderer();
   const baseVelocity = playState === 'paused' ? 0 : tickerEffectVelocity ?? 100;
   const velocity = baseVelocity * directionModifier;
   return /* @__PURE__ */ jsx(Ticker, {
     suppressHydrationWarning: true,
     ref,
-    as: Component18,
+    as: Component17,
     ...rest,
     gap,
     axis,
@@ -51851,7 +53003,7 @@ var DraggableTicker = /* @__PURE__ */ forwardRef(function DraggableTicker2(props
     playState,
     ...rest
   } = props;
-  const Component18 = asProp ?? motion.div;
+  const Component17 = asProp ?? motion.div;
   const layoutDirection = useLayoutDirection();
   const layoutDirectionModifier = layoutDirection === 'rtl' && axis === 'x' ? -1 : 1;
   const baseVelocity = playState === 'paused' ? 0 : tickerEffectVelocity ?? 100;
@@ -51889,7 +53041,7 @@ var DraggableTicker = /* @__PURE__ */ forwardRef(function DraggableTicker2(props
   return /* @__PURE__ */ jsx(Ticker, {
     suppressHydrationWarning: true,
     ref,
-    as: Component18,
+    as: Component17,
     ...rest,
     gap,
     axis,
@@ -52023,22 +53175,22 @@ function getGap(gap, axis,) {
 function naNToUndefined(value,) {
   return Number.isNaN(value,) ? void 0 : value;
 }
-var withTickerFX = (Component18) => {
+var withTickerFX = (Component17) => {
   return (props) => {
     if (props.tickerEffectEnabled) {
       return /* @__PURE__ */ jsx(Ticker2, {
         suppressHydrationWarning: true,
         ...props,
-        as: Component18,
+        as: Component17,
       },);
     }
-    return /* @__PURE__ */ jsx(Component18, {
+    return /* @__PURE__ */ jsx(Component17, {
       suppressHydrationWarning: true,
       ...props,
     },);
   };
 };
-var withFlowFX = (Component18) =>
+var withFlowFX = (Component17) =>
   React42.forwardRef((props, forwardedRef,) => {
     const {
       flowEffectEnabled,
@@ -52055,14 +53207,14 @@ var withFlowFX = (Component18) =>
         }
         : transition, [transition, flowEffectTransition,],);
     if (!flowEffectEnabled) {
-      return /* @__PURE__ */ jsx(Component18, {
+      return /* @__PURE__ */ jsx(Component17, {
         suppressHydrationWarning: true,
         ...forwardedProps,
         ref: forwardedRef,
         transition,
       },);
     }
-    let componentWithFlowEffect = /* @__PURE__ */ jsx(Component18, {
+    let componentWithFlowEffect = /* @__PURE__ */ jsx(Component17, {
       suppressHydrationWarning: true,
       ...forwardedProps,
       ref: forwardedRef,
@@ -52091,14 +53243,14 @@ function extractMappingFromInfo(info,) {
     return void 0;
   }
 }
-function withMappedReactProps(Component18, info,) {
+function withMappedReactProps(Component17, info,) {
   return (rawProps) => {
     const props = {};
     const mapping = extractMappingFromInfo(info,);
     for (const key7 in rawProps) {
       asRecord(props,)[mapping?.[key7] ?? key7] = rawProps[key7];
     }
-    return /* @__PURE__ */ jsx(Component18, {
+    return /* @__PURE__ */ jsx(Component17, {
       suppressHydrationWarning: true,
       ...props,
     },);
@@ -52962,7 +54114,7 @@ function toBufferUniformName(key7,) {
   return `${uniformPrefix}${sanitizeUniformKey(key7,)}${bufferSuffix}`;
 }
 function toArrayMaxLengthName(key7,) {
-  const keyAsConstantCase = sanitizeUniformKey(key7,).replace(/[a-z0-9](?=[A-Z])/g, '$&_',).toUpperCase();
+  const keyAsConstantCase = sanitizeUniformKey(key7,).replace(/[a-z0-9](?=[A-Z])/gu, '$&_',).toUpperCase();
   return `NUM_${keyAsConstantCase}`;
 }
 function controlTypeToGLSLType(controlType,) {
@@ -54697,10 +55849,10 @@ function createInputOutputRanges2(transformTargets, threshold2, exitTarget,) {
     outputRange: [-1, -1, ...outputRange,],
   };
 }
-var withVariantAppearEffect = (Component18) =>
+var withVariantAppearEffect = (Component17) =>
   React42.forwardRef((props, forwardedRef,) => {
     if (RenderTarget.current() === RenderTarget.canvas) {
-      return /* @__PURE__ */ jsx(Component18, {
+      return /* @__PURE__ */ jsx(Component17, {
         suppressHydrationWarning: true,
         ...props,
         ref: forwardedRef,
@@ -54778,20 +55930,20 @@ var withVariantAppearEffect = (Component18) =>
       React42.startTransition(() => setVariant(target,));
     },);
     if (!('variantAppearEffectEnabled' in options) || variantAppearEffectEnabled === true) {
-      return /* @__PURE__ */ jsx(Component18, {
+      return /* @__PURE__ */ jsx(Component17, {
         suppressHydrationWarning: true,
         ...rest,
         variant: activeVariant ?? props.variant,
         ref: observerRef,
       },);
     } else {
-      return /* @__PURE__ */ jsx(Component18, {
+      return /* @__PURE__ */ jsx(Component17, {
         suppressHydrationWarning: true,
         ...rest,
       },);
     }
   },);
-var withVariantFX = (Component18) =>
+var withVariantFX = (Component17) =>
   React42.forwardRef(({
     initial,
     animate: animate3,
@@ -54808,7 +55960,7 @@ var withVariantFX = (Component18) =>
       observerRef,
       true,
     );
-    return /* @__PURE__ */ jsx(Component18, {
+    return /* @__PURE__ */ jsx(Component17, {
       suppressHydrationWarning: true,
       ...props,
       style: {
@@ -56581,8 +57733,13 @@ var GoogleFontSource = class _GoogleFontSource {
   name = 'google';
   fontFamilies = [];
   byFamilyName = /* @__PURE__ */ new Map();
+  supportedSubsetsByFamilyName = /* @__PURE__ */ new Map();
   getFontFamilyByName(family,) {
     return this.byFamilyName.get(family,) ?? null;
+  }
+  /** Returns Google Fonts subsets that a given font family includes. The return value looks like ["latin", "latin-ext", "japanese"] or similar. */
+  getSupportedSubsetsByFamilyName(family,) {
+    return this.supportedSubsetsByFamilyName.get(family,) ?? [];
   }
   static parseVariant(variant,) {
     if (variant === 'regular') {
@@ -56638,6 +57795,7 @@ var GoogleFontSource = class _GoogleFontSource {
   async importFonts(webFonts, webFontsWithAxes, fontsToVariationAxes,) {
     this.fontFamilies.length = 0;
     this.byFamilyName.clear();
+    this.supportedSubsetsByFamilyName.clear();
     const fontsWithOpenType = await loadFontsWithOpenType('google',/* Google */
     );
     const fonts = [];
@@ -56646,6 +57804,7 @@ var GoogleFontSource = class _GoogleFontSource {
     for (const webFontName in webFontsMap) {
       const webFont = webFontsMap[webFontName];
       if (!webFont) continue;
+      this.supportedSubsetsByFamilyName.set(webFont.family, webFont.subsets ?? [],);
       let fontFamily = this.getFontFamilyByName(webFont.family,);
       if (!fontFamily) {
         fontFamily = this.addFontFamily(webFont.family,);
@@ -57873,6 +59032,7 @@ var Select = /* @__PURE__ */ React42.forwardRef(function Select2(props, measureR
     defaultValue,
     value,
     selectOptions,
+    textAlignment,
     style: style2,
     onValid,
     onChange,
@@ -57882,6 +59042,7 @@ var Select = /* @__PURE__ */ React42.forwardRef(function Select2(props, measureR
     ...rest
   } = props;
   const isCanvas = useIsOnFramerCanvas();
+  const layoutDirection = useLayoutDirection();
   const isControlled = !isCanvas && value !== void 0;
   const externalValue = value ?? '';
   const [optimisticValue, , handleChange,] = useOptimisticValue(externalValue, isControlled, onChange,);
@@ -57899,7 +59060,12 @@ var Select = /* @__PURE__ */ React42.forwardRef(function Select2(props, measureR
     suppressHydrationWarning: true,
     ref: measureRef,
     style: style2,
-    className: cx(inputWrapperClassName, selectWrapperClassName, className2,),
+    className: cx(
+      inputWrapperClassName,
+      selectWrapperClassName,
+      isCaretOnLeft(textAlignment, layoutDirection,) && caretOnLeftClassName,
+      className2,
+    ),
     ...rest,
     children: /* @__PURE__ */ jsx(motion.select, {
       suppressHydrationWarning: true,
@@ -57941,7 +59107,25 @@ function serializeDefaultValue(defaultValue,) {
   if (defaultValue === '') return '__empty__';
   return defaultValue;
 }
+function isCaretOnLeft(alignment, direction,) {
+  switch (alignment) {
+    case 'left':
+      return false;
+    case 'right':
+      return true;
+    case 'end':
+      return direction === 'ltr';
+    case void 0:
+    case 'start':
+    case 'center':
+    case 'justify':
+      return direction === 'rtl';
+    default:
+      return assertNever(alignment,);
+  }
+}
 var selectWrapperClassName = 'framer-form-select-wrapper';
+var caretOnLeftClassName = 'framer-form-select-caret-left';
 var selectArrowSize = 16;
 var defaultSelectCaretMaskImage =
   /* @__PURE__ */ (() =>
@@ -57998,6 +59182,22 @@ var styles3 = /* @__PURE__ */ (() => [
     backgroundImage: css2.variable('--framer-input-icon-image',/* IconBackgroundImage */
     ),
     maskImage: css2.variable('--framer-input-icon-mask-image', `url('${defaultSelectCaretMaskImage}')`,),
+  },),
+  css2(`.${caretOnLeftClassName}`, {
+    padding: css2.variable('--framer-input-padding',/* Padding */
+    ),
+    paddingTop: 0,
+    paddingRight: 0,
+    paddingBottom: 0,
+  },),
+  css2(`.${caretOnLeftClassName}::before`, {
+    left: 0,
+    right: 'auto',
+    padding: css2.variable('--framer-input-padding',/* Padding */
+    ),
+    paddingRight: `${rightIconSpacing}px`,
+    backgroundPosition: `right ${rightIconSpacing}px center`,
+    maskPosition: `right ${rightIconSpacing}px center`,
   },),
   css2(`.${selectWrapperClassName} select:required:invalid`, {
     color: css2.variable('--framer-input-invalid-text-color',/* InvalidTextColor */
@@ -58074,7 +59274,7 @@ function getTotalHorizontalPadding(lightbox,) {
   return getSidePadding(lightbox?.paddingLeft, lightbox?.padding,) + getSidePadding(lightbox?.paddingRight, lightbox?.padding,);
 }
 function createImageWithSrcSet(lightbox, background,) {
-  if (!lightbox || !background || !background.src) return background;
+  if (!lightbox || !background?.src) return background;
   const base = new URL(background.src,);
   base.searchParams.delete('scale-down-to',);
   base.searchParams.delete('lossless',);
@@ -58137,7 +59337,7 @@ var enterExitBackdropAnimation = {
 var targetBackdropAnimation = {
   opacity: 1,
 };
-function withLightboxEffect(Component18,) {
+function withLightboxEffect(Component17,) {
   return forwardRef(function LightboxEffect({
     lightbox,
     lightboxClassName,
@@ -58194,7 +59394,7 @@ function withLightboxEffect(Component18,) {
     }, [lightbox, open, ref, ancestorTickerContext?.stop, isInTickerItem,],);
     const aspectRatio2 = openOverrides?.aspectRatio ?? 1;
     const decode = useStableCallback(() => {
-      if (!lightbox || !image || !image.src) return;
+      if (!lightbox || !image?.src) return;
       const srcDecodePromise = decodePromiseRef.current?.[image.src];
       if (srcDecodePromise) return srcDecodePromise;
       const width = calculateImageWidth(
@@ -58286,7 +59486,7 @@ function withLightboxEffect(Component18,) {
     const layoutId = isInTickerItem && open ? void 0 : props.layoutId ?? (lightbox ? fallbackLayoutId : void 0);
     return /* @__PURE__ */ jsxs(Fragment, {
       children: [
-        /* @__PURE__ */ jsx(Component18, {
+        /* @__PURE__ */ jsx(Component17, {
           suppressHydrationWarning: true,
           ...props,
           style: style2,
@@ -58386,7 +59586,7 @@ function withLightboxEffect(Component18,) {
     },);
   },);
 }
-var Component16 = /* @__PURE__ */ React42.forwardRef(function Image2(props, ref,) {
+var Component15 = /* @__PURE__ */ React42.forwardRef(function Image2(props, ref,) {
   const {
     background,
     children,
@@ -58444,7 +59644,7 @@ var Component16 = /* @__PURE__ */ React42.forwardRef(function Image2(props, ref,
     ],
   },);
 },);
-var Image3 = /* @__PURE__ */ withLightboxEffect(Component16,);
+var Image3 = /* @__PURE__ */ withLightboxEffect(Component15,);
 var ColumnMasonryLayout = /* @__PURE__ */ React42.memo(function ColumnMasonryLayout2({
   trackCount,
   rowGap,
@@ -58520,7 +59720,7 @@ function pickMasonryTrack(trackCount, childIndex,) {
   if (trackCount <= 0) return 0;
   return childIndex % trackCount;
 }
-var withColumnMasonryLayout = (Component18) => {
+var withColumnMasonryLayout = (Component17) => {
   return forwardRef(function MasonryLayout({
     columnMasonryLayoutEnabled,
     trackCount = 1,
@@ -58532,7 +59732,7 @@ var withColumnMasonryLayout = (Component18) => {
     ...rest
   }, ref,) {
     if (!columnMasonryLayoutEnabled) {
-      return /* @__PURE__ */ jsx(Component18, {
+      return /* @__PURE__ */ jsx(Component17, {
         suppressHydrationWarning: true,
         ref,
         style: existingStyle,
@@ -58544,7 +59744,7 @@ var withColumnMasonryLayout = (Component18) => {
       ...existingStyle,
       gridTemplateColumns: `repeat(${trackCount}, 1fr)`,
     };
-    return /* @__PURE__ */ jsx(Component18, {
+    return /* @__PURE__ */ jsx(Component17, {
       suppressHydrationWarning: true,
       ref,
       style: mergedStyle,
@@ -58839,7 +60039,7 @@ function replaceFramerPageLinks(rawHTML, getRoute, currentRoute, implicitPathVar
     if (tag.toLowerCase() !== 'a') return original;
     const href = value1 || value2;
     const pageLink = parseFramerPageLink(href.replace(/&amp;/gu, '&',),);
-    if (!pageLink || !pageLink.target) return original;
+    if (!pageLink?.target) return original;
     const targetRoute = getRoute(pageLink.target,);
     if (!isRoute(targetRoute,) || !isRoute(currentRoute,)) return original;
     const targetPath = targetRoute.path;
@@ -59226,7 +60426,7 @@ function transformString(effect,) {
   return transforms.join(' ',);
 }
 function getInitialEffectStyle(canPlay, canAnimate2, effect, shouldReduceMotion,) {
-  if (!effect || !effect.effect) return void 0;
+  if (!effect?.effect) return void 0;
   const type = effect.type;
   switch (type) {
     case 'appear':
@@ -59684,12 +60884,12 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
   if (layoutId) {
     rest.layout = 'preserve-aspect';
   }
-  const Component18 = htmlElementAsMotionComponent(props.as,);
+  const Component17 = htmlElementAsMotionComponent(props.as,);
   const dataFramerName = rest['data-framer-name'] ?? name;
   const validRestProps = isOnCanvas ? getValidRestProps(asRecord(rest,),) : rest;
   if (isString(props.viewBox,)) {
     if (props.as !== void 0) {
-      return /* @__PURE__ */ jsx(Component18, {
+      return /* @__PURE__ */ jsx(Component17, {
         suppressHydrationWarning: true,
         ...validRestProps,
         ref: containerRef,
@@ -59725,7 +60925,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
       },);
     }
   }
-  return /* @__PURE__ */ jsx(Component18, {
+  return /* @__PURE__ */ jsx(Component17, {
     suppressHydrationWarning: true,
     ...validRestProps,
     ref: containerRef,
@@ -59777,7 +60977,7 @@ function processRichTextChildren(
     if (tokenizer && depth === 0 && !onlyLineBreaks) Object.assign(props, tokenizer.props(props.style,),);
     const isHeading = elementType === 'h1' || elementType === 'h2' || elementType === 'h3' || elementType === 'h4' ||
       elementType === 'h5' || elementType === 'h6';
-    const anchorLinkStylePresetClassName = stylesPresetsClassNames?.['anchor'];
+    const anchorLinkStylePresetClassName = stylesPresetsClassNames?.anchor;
     if (isHeading && anchorLinkStylePresetClassName) {
       const slug = generateHeadingSlug(children, slugCounters,);
       props.id = slug;
@@ -59789,14 +60989,14 @@ function processRichTextChildren(
         children,
       },);
       props.style = {
-        ...(props.style ?? {}),
+        ...props.style,
         scrollMarginTop: anchorLinkOffsetY,
       };
       children = [anchorLink,];
     }
     if (tag === 'ol') {
       props.style = {
-        ...(props.style ?? {}),
+        ...props.style,
         [maxListDigitsProperty]: safeGetMaxListDigits(
           props.start ?? 1,
           Children.count(props.children,),
@@ -60227,7 +61427,7 @@ var SharedSVGManager = class {
     this.entries.forEach((value) => output.push(value.svg,));
     this.vectorSetItems.forEach((value, revision,) => {
       const svg = value.svg;
-      output.push(svg.includes(`id="${revision}"`,) ? svg : svg.replace(/^<svg/, `<svg id="${revision}"`,),);
+      output.push(svg.includes(`id="${revision}"`,) ? svg : svg.replace(/^<svg/u, `<svg id="${revision}"`,),);
     },);
     output.push('</div>',);
     return output.join('\n',);
@@ -60370,7 +61570,7 @@ function sizeSVG(container, props,) {
   ) {
     svg.setAttribute('viewBox', `0 0 ${intrinsicWidth} ${intrinsicHeight}`,);
   }
-  if (_constraints && _constraints.aspectRatio) {
+  if (_constraints?.aspectRatio) {
     svg.setAttribute('preserveAspectRatio', '',);
   } else {
     svg.setAttribute('preserveAspectRatio', 'none',);
@@ -61192,6 +62392,7 @@ var PathSegmentOuter = /* @__PURE__ */ (() => {
     // Describes the in tangent of the segment.
     handleInY = 0;
     radius = 0;
+    radiusSmoothing = void 0;
     constructor(value,) {
       if (value) {
         Object.assign(this, value,);
@@ -61490,6 +62691,19 @@ function getRadialGradientTransform(heightFactor, widthFactor, centerAnchorX, ce
   const scaleWidth = widthFactor ? heightFactor / widthFactor : 1e3;
   return `translate(${centerAnchorX}, ${centerAnchorY}) scale(1 ${scaleWidth}) translate(-${centerAnchorX}, -${centerAnchorY})`;
 }
+function getVectorHostPlacement(left, top,) {
+  const hostLeft = roundToHalfPixel(left,);
+  const hostTop = roundToHalfPixel(top,);
+  return {
+    hostLeft,
+    hostTop,
+    contentOffsetX: snapNoise(left - hostLeft,),
+    contentOffsetY: snapNoise(top - hostTop,),
+  };
+}
+function snapNoise(offset,) {
+  return Math.abs(offset,) < 1e-9 ? 0 : offset;
+}
 var SVGRoot = (props) => {
   const {
     id: id3,
@@ -61509,12 +62723,18 @@ var SVGRoot = (props) => {
     visible: true,
     _needsMeasure,
   }, ref,);
+  const {
+    hostLeft,
+    hostTop,
+    contentOffsetX,
+    contentOffsetY,
+  } = getVectorHostPlacement(left, top,);
   const svgStyle = {
     position: 'absolute',
     width,
     height,
-    left,
-    top,
+    left: hostLeft,
+    top: hostTop,
     overflow: 'visible',
     display: 'block',
     ...style2,
@@ -61528,7 +62748,8 @@ var SVGRoot = (props) => {
   };
   const needsScale = isSafari() ? __unframerWindow2.devicePixelRatio !== 1 : __unframerWindow2.devicePixelRatio === 1;
   const needsTranslate = __unframerWindow2.devicePixelRatio === 1;
-  if (!needsScale && !needsTranslate) {
+  const hasContentOffset = contentOffsetX !== 0 || contentOffsetY !== 0;
+  if (!needsScale && !needsTranslate && !hasContentOffset) {
     return /* @__PURE__ */ jsx('svg', {
       suppressHydrationWarning: true,
       role: 'presentation',
@@ -61557,18 +62778,32 @@ var SVGRoot = (props) => {
         // for root <svg> elements:
         // https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/transform-origin
         transformOrigin: 'center',
-        transform: getShapeTransform(needsScale, needsTranslate, left, top,),
+        transform: getShapeTransform({
+          needsScale,
+          needsTranslate,
+          hostLeft,
+          hostTop,
+          contentOffsetX,
+          contentOffsetY,
+        },),
       },
       children,
     },),
   },);
 };
-function getShapeTransform(needsScale, needsTranslate, left, top,) {
-  const l2 = Math.floor(left,) - left;
-  const t = Math.floor(top,) - top;
+function getShapeTransform({
+  needsScale,
+  needsTranslate,
+  hostLeft,
+  hostTop,
+  contentOffsetX,
+  contentOffsetY,
+},) {
+  const l2 = (needsTranslate ? Math.floor(hostLeft,) - hostLeft : 0) + contentOffsetX;
+  const t = (needsTranslate ? Math.floor(hostTop,) - hostTop : 0) + contentOffsetY;
   const transforms = [];
   if (needsScale) transforms.push('scale(0.5)',);
-  if (needsTranslate && (l2 || t)) transforms.push(`translate(${l2}px, ${t}px)`,);
+  if (l2 || t) transforms.push(`translate(${l2}px, ${t}px)`,);
   return transforms.length ? transforms.join(' ',) : void 0;
 }
 var Vector = /* @__PURE__ */ (() => {
@@ -62066,7 +63301,7 @@ function annotateTypeOnStringify(ctor, typeName,) {
   return ctor;
 }
 function isOfAnnotatedType(object, typeName,) {
-  return object && object.__type__ && object.__type__ === typeName;
+  return object?.__type__ === typeName;
 }
 var LOADING_LAZY_THRESHOLD = 1e3;
 function getLoadingLazyAtYPosition(offset,) {
@@ -62389,6 +63624,48 @@ function useInitialRouteComponent(routes, homeNodeId,) {
   }, [],);
   return RouteComponent;
 }
+function runWithYield(task, scheduling,) {
+  const yieldPromise = yieldToMain({
+    batch: true,
+    priority: scheduling.priority,
+    signal: scheduling.signal,
+  },);
+  if (!yieldPromise) return task();
+  return yieldPromise.then(task,);
+}
+async function runTasksWithYield(tasks, scheduling,) {
+  const settledTasks = [];
+  let isFirstTask = true;
+  for (const task of tasks) {
+    if (!isFirstTask) {
+      const yieldPromise = yieldToMain({
+        batch: true,
+        priority: scheduling.priority,
+        signal: scheduling.signal,
+      },);
+      if (yieldPromise) await yieldPromise;
+    }
+    isFirstTask = false;
+    try {
+      const maybeValue = task();
+      settledTasks.push(
+        Promise.resolve(maybeValue,).then((value) => ({
+          status: 'fulfilled',
+          value,
+        }), (reason) => ({
+          status: 'rejected',
+          reason,
+        }),),
+      );
+    } catch (reason) {
+      settledTasks.push(Promise.resolve({
+        status: 'rejected',
+        reason,
+      },),);
+    }
+  }
+  return Promise.all(settledTasks,);
+}
 function addLoader(component, loaderFn,) {
   Object.assign(component, {
     loader: {
@@ -62447,7 +63724,7 @@ var package_default = {
     'jest-diff': '^29.3.1',
     'jest-environment-jsdom': '^29.3.1',
     'jest-environment-jsdom-global': '^4.0.0',
-    oxlint: '^1.74.0',
+    oxlint: '^1.81.0',
     react: '^18.2.0',
     'react-dom': '^18.2.0',
     semver: '^7.7.1',
@@ -62938,6 +64215,7 @@ export {
   ResetOuterLinkContext,
   resize,
   resolveElements,
+  resolveInitialRouteContentState,
   resolveLink,
   ResolveLinks,
   resolveMotionValue,
@@ -62953,6 +64231,8 @@ export {
   roundedNumber,
   roundedNumberString,
   roundWithOffset,
+  runTasksWithYield,
+  runWithYield,
   safeCSSValue,
   scale,
   scaleCorrectors,
@@ -62963,6 +64243,7 @@ export {
   scroll,
   scrollInfo,
   secondsToMilliseconds,
+  setCurrentSiteId,
   setDragLock,
   setFeatureDefinitions,
   setGlobalRenderEnvironment,
