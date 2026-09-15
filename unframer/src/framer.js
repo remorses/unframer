@@ -13502,7 +13502,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.Q7UYC2X2.mjs
+// /:https://app.framerstatic.com/framer.H2AS4HXK.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -13515,6 +13515,344 @@ import { createPortal, } from 'react-dom';
 import { cloneElement as cloneElement32, } from 'react';
 var __unframerWindow2 = typeof window !== 'undefined' ? window : void 0;
 var __unframerNavigator2 = typeof __unframerWindow2 !== 'undefined' ? navigator : void 0;
+var require_hsluv = __commonJS({
+  '../../../node_modules/hsluv/dist/hsluv.cjs'(exports,) {
+    'use strict';
+
+    Object.defineProperty(exports, '__esModule', {
+      value: true,
+    },);
+    exports.Hsluv = void 0;
+    var Hsluv2 = class _Hsluv {
+      constructor() {
+        this.hex = '#000000';
+        this.rgb_r = 0;
+        this.rgb_g = 0;
+        this.rgb_b = 0;
+        this.xyz_x = 0;
+        this.xyz_y = 0;
+        this.xyz_z = 0;
+        this.luv_l = 0;
+        this.luv_u = 0;
+        this.luv_v = 0;
+        this.lch_l = 0;
+        this.lch_c = 0;
+        this.lch_h = 0;
+        this.hsluv_h = 0;
+        this.hsluv_s = 0;
+        this.hsluv_l = 0;
+        this.hpluv_h = 0;
+        this.hpluv_p = 0;
+        this.hpluv_l = 0;
+        this.r0s = 0;
+        this.r0i = 0;
+        this.r1s = 0;
+        this.r1i = 0;
+        this.g0s = 0;
+        this.g0i = 0;
+        this.g1s = 0;
+        this.g1i = 0;
+        this.b0s = 0;
+        this.b0i = 0;
+        this.b1s = 0;
+        this.b1i = 0;
+      }
+      static fromLinear(c,) {
+        if (c <= 31308e-7) {
+          return 12.92 * c;
+        } else {
+          return 1.055 * Math.pow(c, 1 / 2.4,) - 0.055;
+        }
+      }
+      static toLinear(c,) {
+        if (c > 0.04045) {
+          return Math.pow((c + 0.055) / 1.055, 2.4,);
+        } else {
+          return c / 12.92;
+        }
+      }
+      static yToL(Y,) {
+        if (Y <= _Hsluv.epsilon) {
+          return Y / _Hsluv.refY * _Hsluv.kappa;
+        } else {
+          return 116 * Math.pow(Y / _Hsluv.refY, 1 / 3,) - 16;
+        }
+      }
+      static lToY(L,) {
+        if (L <= 8) {
+          return _Hsluv.refY * L / _Hsluv.kappa;
+        } else {
+          return _Hsluv.refY * Math.pow((L + 16) / 116, 3,);
+        }
+      }
+      static rgbChannelToHex(chan,) {
+        const c = Math.round(chan * 255,);
+        const digit2 = c % 16;
+        const digit1 = (c - digit2) / 16 | 0;
+        return _Hsluv.hexChars.charAt(digit1,) + _Hsluv.hexChars.charAt(digit2,);
+      }
+      static hexToRgbChannel(hex2, offset,) {
+        const digit1 = _Hsluv.hexChars.indexOf(hex2.charAt(offset,),);
+        const digit2 = _Hsluv.hexChars.indexOf(hex2.charAt(offset + 1,),);
+        const n = digit1 * 16 + digit2;
+        return n / 255;
+      }
+      static distanceFromOriginAngle(slope, intercept, angle,) {
+        const d = intercept / (Math.sin(angle,) - slope * Math.cos(angle,));
+        if (d < 0) {
+          return Infinity;
+        } else {
+          return d;
+        }
+      }
+      static distanceFromOrigin(slope, intercept,) {
+        return Math.abs(intercept,) / Math.sqrt(Math.pow(slope, 2,) + 1,);
+      }
+      static min6(f1, f2, f3, f4, f5, f6,) {
+        return Math.min(f1, Math.min(f2, Math.min(f3, Math.min(f4, Math.min(f5, f6,),),),),);
+      }
+      rgbToHex() {
+        this.hex = '#';
+        this.hex += _Hsluv.rgbChannelToHex(this.rgb_r,);
+        this.hex += _Hsluv.rgbChannelToHex(this.rgb_g,);
+        this.hex += _Hsluv.rgbChannelToHex(this.rgb_b,);
+      }
+      hexToRgb() {
+        this.hex = this.hex.toLowerCase();
+        this.rgb_r = _Hsluv.hexToRgbChannel(this.hex, 1,);
+        this.rgb_g = _Hsluv.hexToRgbChannel(this.hex, 3,);
+        this.rgb_b = _Hsluv.hexToRgbChannel(this.hex, 5,);
+      }
+      xyzToRgb() {
+        this.rgb_r = _Hsluv.fromLinear(_Hsluv.m_r0 * this.xyz_x + _Hsluv.m_r1 * this.xyz_y + _Hsluv.m_r2 * this.xyz_z,);
+        this.rgb_g = _Hsluv.fromLinear(_Hsluv.m_g0 * this.xyz_x + _Hsluv.m_g1 * this.xyz_y + _Hsluv.m_g2 * this.xyz_z,);
+        this.rgb_b = _Hsluv.fromLinear(_Hsluv.m_b0 * this.xyz_x + _Hsluv.m_b1 * this.xyz_y + _Hsluv.m_b2 * this.xyz_z,);
+      }
+      rgbToXyz() {
+        const lr = _Hsluv.toLinear(this.rgb_r,);
+        const lg = _Hsluv.toLinear(this.rgb_g,);
+        const lb = _Hsluv.toLinear(this.rgb_b,);
+        this.xyz_x = 0.41239079926595 * lr + 0.35758433938387 * lg + 0.18048078840183 * lb;
+        this.xyz_y = 0.21263900587151 * lr + 0.71516867876775 * lg + 0.072192315360733 * lb;
+        this.xyz_z = 0.019330818715591 * lr + 0.11919477979462 * lg + 0.95053215224966 * lb;
+      }
+      xyzToLuv() {
+        const divider = this.xyz_x + 15 * this.xyz_y + 3 * this.xyz_z;
+        let varU = 4 * this.xyz_x;
+        let varV = 9 * this.xyz_y;
+        if (divider !== 0) {
+          varU /= divider;
+          varV /= divider;
+        } else {
+          varU = NaN;
+          varV = NaN;
+        }
+        this.luv_l = _Hsluv.yToL(this.xyz_y,);
+        if (this.luv_l === 0) {
+          this.luv_u = 0;
+          this.luv_v = 0;
+        } else {
+          this.luv_u = 13 * this.luv_l * (varU - _Hsluv.refU);
+          this.luv_v = 13 * this.luv_l * (varV - _Hsluv.refV);
+        }
+      }
+      luvToXyz() {
+        if (this.luv_l === 0) {
+          this.xyz_x = 0;
+          this.xyz_y = 0;
+          this.xyz_z = 0;
+          return;
+        }
+        const varU = this.luv_u / (13 * this.luv_l) + _Hsluv.refU;
+        const varV = this.luv_v / (13 * this.luv_l) + _Hsluv.refV;
+        this.xyz_y = _Hsluv.lToY(this.luv_l,);
+        this.xyz_x = 0 - 9 * this.xyz_y * varU / ((varU - 4) * varV - varU * varV);
+        this.xyz_z = (9 * this.xyz_y - 15 * varV * this.xyz_y - varV * this.xyz_x) / (3 * varV);
+      }
+      luvToLch() {
+        this.lch_l = this.luv_l;
+        this.lch_c = Math.sqrt(this.luv_u * this.luv_u + this.luv_v * this.luv_v,);
+        if (this.lch_c < 1e-8) {
+          this.lch_h = 0;
+        } else {
+          const hrad = Math.atan2(this.luv_v, this.luv_u,);
+          this.lch_h = hrad * 180 / Math.PI;
+          if (this.lch_h < 0) {
+            this.lch_h = 360 + this.lch_h;
+          }
+        }
+      }
+      lchToLuv() {
+        const hrad = this.lch_h / 180 * Math.PI;
+        this.luv_l = this.lch_l;
+        this.luv_u = Math.cos(hrad,) * this.lch_c;
+        this.luv_v = Math.sin(hrad,) * this.lch_c;
+      }
+      calculateBoundingLines(l2,) {
+        const sub1 = Math.pow(l2 + 16, 3,) / 1560896;
+        const sub2 = sub1 > _Hsluv.epsilon ? sub1 : l2 / _Hsluv.kappa;
+        const s1r = sub2 * (284517 * _Hsluv.m_r0 - 94839 * _Hsluv.m_r2);
+        const s2r = sub2 * (838422 * _Hsluv.m_r2 + 769860 * _Hsluv.m_r1 + 731718 * _Hsluv.m_r0);
+        const s3r = sub2 * (632260 * _Hsluv.m_r2 - 126452 * _Hsluv.m_r1);
+        const s1g = sub2 * (284517 * _Hsluv.m_g0 - 94839 * _Hsluv.m_g2);
+        const s2g = sub2 * (838422 * _Hsluv.m_g2 + 769860 * _Hsluv.m_g1 + 731718 * _Hsluv.m_g0);
+        const s3g = sub2 * (632260 * _Hsluv.m_g2 - 126452 * _Hsluv.m_g1);
+        const s1b = sub2 * (284517 * _Hsluv.m_b0 - 94839 * _Hsluv.m_b2);
+        const s2b = sub2 * (838422 * _Hsluv.m_b2 + 769860 * _Hsluv.m_b1 + 731718 * _Hsluv.m_b0);
+        const s3b = sub2 * (632260 * _Hsluv.m_b2 - 126452 * _Hsluv.m_b1);
+        this.r0s = s1r / s3r;
+        this.r0i = s2r * l2 / s3r;
+        this.r1s = s1r / (s3r + 126452);
+        this.r1i = (s2r - 769860) * l2 / (s3r + 126452);
+        this.g0s = s1g / s3g;
+        this.g0i = s2g * l2 / s3g;
+        this.g1s = s1g / (s3g + 126452);
+        this.g1i = (s2g - 769860) * l2 / (s3g + 126452);
+        this.b0s = s1b / s3b;
+        this.b0i = s2b * l2 / s3b;
+        this.b1s = s1b / (s3b + 126452);
+        this.b1i = (s2b - 769860) * l2 / (s3b + 126452);
+      }
+      calcMaxChromaHpluv() {
+        const r0 = _Hsluv.distanceFromOrigin(this.r0s, this.r0i,);
+        const r1 = _Hsluv.distanceFromOrigin(this.r1s, this.r1i,);
+        const g0 = _Hsluv.distanceFromOrigin(this.g0s, this.g0i,);
+        const g1 = _Hsluv.distanceFromOrigin(this.g1s, this.g1i,);
+        const b0 = _Hsluv.distanceFromOrigin(this.b0s, this.b0i,);
+        const b1 = _Hsluv.distanceFromOrigin(this.b1s, this.b1i,);
+        return _Hsluv.min6(r0, r1, g0, g1, b0, b1,);
+      }
+      calcMaxChromaHsluv(h,) {
+        const hueRad = h / 360 * Math.PI * 2;
+        const r0 = _Hsluv.distanceFromOriginAngle(this.r0s, this.r0i, hueRad,);
+        const r1 = _Hsluv.distanceFromOriginAngle(this.r1s, this.r1i, hueRad,);
+        const g0 = _Hsluv.distanceFromOriginAngle(this.g0s, this.g0i, hueRad,);
+        const g1 = _Hsluv.distanceFromOriginAngle(this.g1s, this.g1i, hueRad,);
+        const b0 = _Hsluv.distanceFromOriginAngle(this.b0s, this.b0i, hueRad,);
+        const b1 = _Hsluv.distanceFromOriginAngle(this.b1s, this.b1i, hueRad,);
+        return _Hsluv.min6(r0, r1, g0, g1, b0, b1,);
+      }
+      hsluvToLch() {
+        if (this.hsluv_l > 99.9999999) {
+          this.lch_l = 100;
+          this.lch_c = 0;
+        } else if (this.hsluv_l < 1e-8) {
+          this.lch_l = 0;
+          this.lch_c = 0;
+        } else {
+          this.lch_l = this.hsluv_l;
+          this.calculateBoundingLines(this.hsluv_l,);
+          const max = this.calcMaxChromaHsluv(this.hsluv_h,);
+          this.lch_c = max / 100 * this.hsluv_s;
+        }
+        this.lch_h = this.hsluv_h;
+      }
+      lchToHsluv() {
+        if (this.lch_l > 99.9999999) {
+          this.hsluv_s = 0;
+          this.hsluv_l = 100;
+        } else if (this.lch_l < 1e-8) {
+          this.hsluv_s = 0;
+          this.hsluv_l = 0;
+        } else {
+          this.calculateBoundingLines(this.lch_l,);
+          const max = this.calcMaxChromaHsluv(this.lch_h,);
+          this.hsluv_s = this.lch_c / max * 100;
+          this.hsluv_l = this.lch_l;
+        }
+        this.hsluv_h = this.lch_h;
+      }
+      hpluvToLch() {
+        if (this.hpluv_l > 99.9999999) {
+          this.lch_l = 100;
+          this.lch_c = 0;
+        } else if (this.hpluv_l < 1e-8) {
+          this.lch_l = 0;
+          this.lch_c = 0;
+        } else {
+          this.lch_l = this.hpluv_l;
+          this.calculateBoundingLines(this.hpluv_l,);
+          const max = this.calcMaxChromaHpluv();
+          this.lch_c = max / 100 * this.hpluv_p;
+        }
+        this.lch_h = this.hpluv_h;
+      }
+      lchToHpluv() {
+        if (this.lch_l > 99.9999999) {
+          this.hpluv_p = 0;
+          this.hpluv_l = 100;
+        } else if (this.lch_l < 1e-8) {
+          this.hpluv_p = 0;
+          this.hpluv_l = 0;
+        } else {
+          this.calculateBoundingLines(this.lch_l,);
+          const max = this.calcMaxChromaHpluv();
+          this.hpluv_p = this.lch_c / max * 100;
+          this.hpluv_l = this.lch_l;
+        }
+        this.hpluv_h = this.lch_h;
+      }
+      hsluvToRgb() {
+        this.hsluvToLch();
+        this.lchToLuv();
+        this.luvToXyz();
+        this.xyzToRgb();
+      }
+      hpluvToRgb() {
+        this.hpluvToLch();
+        this.lchToLuv();
+        this.luvToXyz();
+        this.xyzToRgb();
+      }
+      hsluvToHex() {
+        this.hsluvToRgb();
+        this.rgbToHex();
+      }
+      hpluvToHex() {
+        this.hpluvToRgb();
+        this.rgbToHex();
+      }
+      rgbToHsluv() {
+        this.rgbToXyz();
+        this.xyzToLuv();
+        this.luvToLch();
+        this.lchToHpluv();
+        this.lchToHsluv();
+      }
+      rgbToHpluv() {
+        this.rgbToXyz();
+        this.xyzToLuv();
+        this.luvToLch();
+        this.lchToHpluv();
+        this.lchToHpluv();
+      }
+      hexToHsluv() {
+        this.hexToRgb();
+        this.rgbToHsluv();
+      }
+      hexToHpluv() {
+        this.hexToRgb();
+        this.rgbToHpluv();
+      }
+    };
+    exports.Hsluv = Hsluv2;
+    Hsluv2.hexChars = '0123456789abcdef';
+    Hsluv2.refY = 1;
+    Hsluv2.refU = 0.19783000664283;
+    Hsluv2.refV = 0.46831999493879;
+    Hsluv2.kappa = 903.2962962;
+    Hsluv2.epsilon = 0.0088564516;
+    Hsluv2.m_r0 = 3.240969941904521;
+    Hsluv2.m_r1 = -1.537383177570093;
+    Hsluv2.m_r2 = -0.498610760293;
+    Hsluv2.m_g0 = -0.96924363628087;
+    Hsluv2.m_g1 = 1.87596750150772;
+    Hsluv2.m_g2 = 0.041555057407175;
+    Hsluv2.m_b0 = 0.055630079696993;
+    Hsluv2.m_b1 = -0.20397695888897;
+    Hsluv2.m_b2 = 1.056971514242878;
+  },
+},);
 var require_eventemitter3 = __commonJS({
   '../../../node_modules/eventemitter3/index.js'(exports, module,) {
     'use strict';
@@ -14211,8 +14549,7 @@ function initLazyModulesCache() {
     if (loader) {
       preloadLazyModule(hash2, loader, `registered loader ${hash2}`,);
     } else if (canImportDirectly) {
-      preloadLazyModule(hash2, () =>
-        import(/* webpackIgnore: true */ /* @vite-ignore */ url), url,);
+      preloadLazyModule(hash2, () => import(/* webpackIgnore: true */ /* @vite-ignore */ url), url,);
     }
   }
 }
@@ -16873,14 +17210,6 @@ function syncGeneratedHreflangLinks(links,) {
 }
 var announceDiv;
 var announceNavigation = () => {
-  const title = document.title;
-  if (!title) return;
-  if (document.ariaNotify) {
-    document.ariaNotify(title, {
-      priority: 'high',
-    },);
-    return;
-  }
   if (!announceDiv) {
     announceDiv = document.createElement('div',);
     announceDiv.setAttribute('aria-live', 'assertive',);
@@ -16890,7 +17219,7 @@ var announceNavigation = () => {
     document.body.append(announceDiv,);
   }
   setTimeout(() => {
-    announceDiv.textContent = title;
+    announceDiv.textContent = document.title;
   }, 60,);
 };
 function useAfterPaintEffect(effectFn, deps, options, useEffectFn = useLayoutEffect,) {
@@ -18780,52 +19109,15 @@ async function resolveInitialRouteContentState({
     collectionItemId,
   };
 }
-function unquoteServerTimingParameterValue(value,) {
-  return value.startsWith('"',) && value.endsWith('"',) ? value.slice(1, -1,) : value;
-}
-function getServerTimingEntries(serverTimingHeader,) {
-  const entries = /* @__PURE__ */ new Map();
-  if (!serverTimingHeader) return entries;
-  for (const serverTimingMetric of serverTimingHeader.split(',',)) {
-    const [rawName, ...parameters] = serverTimingMetric.split(';',);
-    const name = rawName?.trim().toLowerCase();
-    if (!name) continue;
-    let description = '';
-    for (const parameter2 of parameters) {
-      const separatorIndex = parameter2.indexOf('=',);
-      if (separatorIndex === -1) continue;
-      const parameterName = parameter2.slice(0, separatorIndex,).trim();
-      if (parameterName.toLowerCase() !== 'desc') continue;
-      description = unquoteServerTimingParameterValue(parameter2.slice(separatorIndex + 1,).trim(),);
-    }
-    entries.set(name, description,);
-  }
-  return entries;
-}
-function getServerTimingEntry(name, serverTimingHeader,) {
-  const metricName = name.toLowerCase();
-  const description = getServerTimingEntries(serverTimingHeader,).get(metricName,);
-  if (description === void 0) return void 0;
-  return {
-    name: metricName,
-    description,
-  };
-}
-function getNavigationServerTimingEntry(name,) {
-  if (typeof __unframerWindow2 === 'undefined' || typeof performance === 'undefined') return void 0;
-  if (!('PerformanceServerTiming' in __unframerWindow2)) return void 0;
-  const serverTiming = performance.getEntriesByType('navigation',)[0]?.serverTiming;
-  if (!serverTiming || serverTiming.length === 0) return void 0;
-  const entry = serverTiming.find((serverTimingEntry) => serverTimingEntry.name === name);
-  if (!entry) return void 0;
-  return {
-    name: entry.name,
-    description: entry.description,
-  };
-}
 function getVariantsFromServerTiming() {
-  const entry = getNavigationServerTimingEntry('abtests',);
-  return new URLSearchParams(entry?.description,);
+  if ('PerformanceServerTiming' in __unframerWindow2) {
+    const serverTiming = performance.getEntriesByType('navigation',)[0]?.serverTiming;
+    if (!serverTiming || serverTiming.length === 0) return new URLSearchParams();
+    const entry = serverTiming.find((it) => it.name === 'abtests');
+    if (!entry) return new URLSearchParams();
+    return new URLSearchParams(entry.description,);
+  }
+  return new URLSearchParams();
 }
 function patchRoute(routes, abTestId, abTestingVariantId,) {
   const route = routes[abTestingVariantId];
@@ -19782,333 +20074,7 @@ var ColorMixModelType = /* @__PURE__ */ ((ColorMixModelType2) => {
   ColorMixModelType2['HUSL'] = 'husl';
   return ColorMixModelType2;
 })(ColorMixModelType || {},);
-var Hsluv = class _Hsluv {
-  constructor() {
-    this.hex = '#000000';
-    this.rgb_r = 0;
-    this.rgb_g = 0;
-    this.rgb_b = 0;
-    this.xyz_x = 0;
-    this.xyz_y = 0;
-    this.xyz_z = 0;
-    this.luv_l = 0;
-    this.luv_u = 0;
-    this.luv_v = 0;
-    this.lch_l = 0;
-    this.lch_c = 0;
-    this.lch_h = 0;
-    this.hsluv_h = 0;
-    this.hsluv_s = 0;
-    this.hsluv_l = 0;
-    this.hpluv_h = 0;
-    this.hpluv_p = 0;
-    this.hpluv_l = 0;
-    this.r0s = 0;
-    this.r0i = 0;
-    this.r1s = 0;
-    this.r1i = 0;
-    this.g0s = 0;
-    this.g0i = 0;
-    this.g1s = 0;
-    this.g1i = 0;
-    this.b0s = 0;
-    this.b0i = 0;
-    this.b1s = 0;
-    this.b1i = 0;
-  }
-  static fromLinear(c,) {
-    if (c <= 31308e-7) {
-      return 12.92 * c;
-    } else {
-      return 1.055 * Math.pow(c, 1 / 2.4,) - 0.055;
-    }
-  }
-  static toLinear(c,) {
-    if (c > 0.04045) {
-      return Math.pow((c + 0.055) / 1.055, 2.4,);
-    } else {
-      return c / 12.92;
-    }
-  }
-  static yToL(Y,) {
-    if (Y <= _Hsluv.epsilon) {
-      return Y / _Hsluv.refY * _Hsluv.kappa;
-    } else {
-      return 116 * Math.pow(Y / _Hsluv.refY, 1 / 3,) - 16;
-    }
-  }
-  static lToY(L,) {
-    if (L <= 8) {
-      return _Hsluv.refY * L / _Hsluv.kappa;
-    } else {
-      return _Hsluv.refY * Math.pow((L + 16) / 116, 3,);
-    }
-  }
-  static rgbChannelToHex(chan,) {
-    const c = Math.round(chan * 255,);
-    const digit2 = c % 16;
-    const digit1 = (c - digit2) / 16 | 0;
-    return _Hsluv.hexChars.charAt(digit1,) + _Hsluv.hexChars.charAt(digit2,);
-  }
-  static hexToRgbChannel(hex2, offset,) {
-    const digit1 = _Hsluv.hexChars.indexOf(hex2.charAt(offset,),);
-    const digit2 = _Hsluv.hexChars.indexOf(hex2.charAt(offset + 1,),);
-    const n = digit1 * 16 + digit2;
-    return n / 255;
-  }
-  static distanceFromOriginAngle(slope, intercept, angle,) {
-    const d = intercept / (Math.sin(angle,) - slope * Math.cos(angle,));
-    if (d < 0) {
-      return Infinity;
-    } else {
-      return d;
-    }
-  }
-  static distanceFromOrigin(slope, intercept,) {
-    return Math.abs(intercept,) / Math.sqrt(Math.pow(slope, 2,) + 1,);
-  }
-  static min6(f1, f2, f3, f4, f5, f6,) {
-    return Math.min(f1, Math.min(f2, Math.min(f3, Math.min(f4, Math.min(f5, f6,),),),),);
-  }
-  rgbToHex() {
-    this.hex = '#';
-    this.hex += _Hsluv.rgbChannelToHex(this.rgb_r,);
-    this.hex += _Hsluv.rgbChannelToHex(this.rgb_g,);
-    this.hex += _Hsluv.rgbChannelToHex(this.rgb_b,);
-  }
-  hexToRgb() {
-    this.hex = this.hex.toLowerCase();
-    this.rgb_r = _Hsluv.hexToRgbChannel(this.hex, 1,);
-    this.rgb_g = _Hsluv.hexToRgbChannel(this.hex, 3,);
-    this.rgb_b = _Hsluv.hexToRgbChannel(this.hex, 5,);
-  }
-  xyzToRgb() {
-    this.rgb_r = _Hsluv.fromLinear(_Hsluv.m_r0 * this.xyz_x + _Hsluv.m_r1 * this.xyz_y + _Hsluv.m_r2 * this.xyz_z,);
-    this.rgb_g = _Hsluv.fromLinear(_Hsluv.m_g0 * this.xyz_x + _Hsluv.m_g1 * this.xyz_y + _Hsluv.m_g2 * this.xyz_z,);
-    this.rgb_b = _Hsluv.fromLinear(_Hsluv.m_b0 * this.xyz_x + _Hsluv.m_b1 * this.xyz_y + _Hsluv.m_b2 * this.xyz_z,);
-  }
-  rgbToXyz() {
-    const lr = _Hsluv.toLinear(this.rgb_r,);
-    const lg = _Hsluv.toLinear(this.rgb_g,);
-    const lb = _Hsluv.toLinear(this.rgb_b,);
-    this.xyz_x = 0.41239079926595 * lr + 0.35758433938387 * lg + 0.18048078840183 * lb;
-    this.xyz_y = 0.21263900587151 * lr + 0.71516867876775 * lg + 0.072192315360733 * lb;
-    this.xyz_z = 0.019330818715591 * lr + 0.11919477979462 * lg + 0.95053215224966 * lb;
-  }
-  xyzToLuv() {
-    const divider = this.xyz_x + 15 * this.xyz_y + 3 * this.xyz_z;
-    let varU = 4 * this.xyz_x;
-    let varV = 9 * this.xyz_y;
-    if (divider !== 0) {
-      varU /= divider;
-      varV /= divider;
-    } else {
-      varU = NaN;
-      varV = NaN;
-    }
-    this.luv_l = _Hsluv.yToL(this.xyz_y,);
-    if (this.luv_l === 0) {
-      this.luv_u = 0;
-      this.luv_v = 0;
-    } else {
-      this.luv_u = 13 * this.luv_l * (varU - _Hsluv.refU);
-      this.luv_v = 13 * this.luv_l * (varV - _Hsluv.refV);
-    }
-  }
-  luvToXyz() {
-    if (this.luv_l === 0) {
-      this.xyz_x = 0;
-      this.xyz_y = 0;
-      this.xyz_z = 0;
-      return;
-    }
-    const varU = this.luv_u / (13 * this.luv_l) + _Hsluv.refU;
-    const varV = this.luv_v / (13 * this.luv_l) + _Hsluv.refV;
-    this.xyz_y = _Hsluv.lToY(this.luv_l,);
-    this.xyz_x = 0 - 9 * this.xyz_y * varU / ((varU - 4) * varV - varU * varV);
-    this.xyz_z = (9 * this.xyz_y - 15 * varV * this.xyz_y - varV * this.xyz_x) / (3 * varV);
-  }
-  luvToLch() {
-    this.lch_l = this.luv_l;
-    this.lch_c = Math.sqrt(this.luv_u * this.luv_u + this.luv_v * this.luv_v,);
-    if (this.lch_c < 1e-8) {
-      this.lch_h = 0;
-    } else {
-      const hrad = Math.atan2(this.luv_v, this.luv_u,);
-      this.lch_h = hrad * 180 / Math.PI;
-      if (this.lch_h < 0) {
-        this.lch_h = 360 + this.lch_h;
-      }
-    }
-  }
-  lchToLuv() {
-    const hrad = this.lch_h / 180 * Math.PI;
-    this.luv_l = this.lch_l;
-    this.luv_u = Math.cos(hrad,) * this.lch_c;
-    this.luv_v = Math.sin(hrad,) * this.lch_c;
-  }
-  calculateBoundingLines(l2,) {
-    const sub1 = Math.pow(l2 + 16, 3,) / 1560896;
-    const sub2 = sub1 > _Hsluv.epsilon ? sub1 : l2 / _Hsluv.kappa;
-    const s1r = sub2 * (284517 * _Hsluv.m_r0 - 94839 * _Hsluv.m_r2);
-    const s2r = sub2 * (838422 * _Hsluv.m_r2 + 769860 * _Hsluv.m_r1 + 731718 * _Hsluv.m_r0);
-    const s3r = sub2 * (632260 * _Hsluv.m_r2 - 126452 * _Hsluv.m_r1);
-    const s1g = sub2 * (284517 * _Hsluv.m_g0 - 94839 * _Hsluv.m_g2);
-    const s2g = sub2 * (838422 * _Hsluv.m_g2 + 769860 * _Hsluv.m_g1 + 731718 * _Hsluv.m_g0);
-    const s3g = sub2 * (632260 * _Hsluv.m_g2 - 126452 * _Hsluv.m_g1);
-    const s1b = sub2 * (284517 * _Hsluv.m_b0 - 94839 * _Hsluv.m_b2);
-    const s2b = sub2 * (838422 * _Hsluv.m_b2 + 769860 * _Hsluv.m_b1 + 731718 * _Hsluv.m_b0);
-    const s3b = sub2 * (632260 * _Hsluv.m_b2 - 126452 * _Hsluv.m_b1);
-    this.r0s = s1r / s3r;
-    this.r0i = s2r * l2 / s3r;
-    this.r1s = s1r / (s3r + 126452);
-    this.r1i = (s2r - 769860) * l2 / (s3r + 126452);
-    this.g0s = s1g / s3g;
-    this.g0i = s2g * l2 / s3g;
-    this.g1s = s1g / (s3g + 126452);
-    this.g1i = (s2g - 769860) * l2 / (s3g + 126452);
-    this.b0s = s1b / s3b;
-    this.b0i = s2b * l2 / s3b;
-    this.b1s = s1b / (s3b + 126452);
-    this.b1i = (s2b - 769860) * l2 / (s3b + 126452);
-  }
-  calcMaxChromaHpluv() {
-    const r0 = _Hsluv.distanceFromOrigin(this.r0s, this.r0i,);
-    const r1 = _Hsluv.distanceFromOrigin(this.r1s, this.r1i,);
-    const g0 = _Hsluv.distanceFromOrigin(this.g0s, this.g0i,);
-    const g1 = _Hsluv.distanceFromOrigin(this.g1s, this.g1i,);
-    const b0 = _Hsluv.distanceFromOrigin(this.b0s, this.b0i,);
-    const b1 = _Hsluv.distanceFromOrigin(this.b1s, this.b1i,);
-    return _Hsluv.min6(r0, r1, g0, g1, b0, b1,);
-  }
-  calcMaxChromaHsluv(h,) {
-    const hueRad = h / 360 * Math.PI * 2;
-    const r0 = _Hsluv.distanceFromOriginAngle(this.r0s, this.r0i, hueRad,);
-    const r1 = _Hsluv.distanceFromOriginAngle(this.r1s, this.r1i, hueRad,);
-    const g0 = _Hsluv.distanceFromOriginAngle(this.g0s, this.g0i, hueRad,);
-    const g1 = _Hsluv.distanceFromOriginAngle(this.g1s, this.g1i, hueRad,);
-    const b0 = _Hsluv.distanceFromOriginAngle(this.b0s, this.b0i, hueRad,);
-    const b1 = _Hsluv.distanceFromOriginAngle(this.b1s, this.b1i, hueRad,);
-    return _Hsluv.min6(r0, r1, g0, g1, b0, b1,);
-  }
-  hsluvToLch() {
-    if (this.hsluv_l > 99.9999999) {
-      this.lch_l = 100;
-      this.lch_c = 0;
-    } else if (this.hsluv_l < 1e-8) {
-      this.lch_l = 0;
-      this.lch_c = 0;
-    } else {
-      this.lch_l = this.hsluv_l;
-      this.calculateBoundingLines(this.hsluv_l,);
-      const max = this.calcMaxChromaHsluv(this.hsluv_h,);
-      this.lch_c = max / 100 * this.hsluv_s;
-    }
-    this.lch_h = this.hsluv_h;
-  }
-  lchToHsluv() {
-    if (this.lch_l > 99.9999999) {
-      this.hsluv_s = 0;
-      this.hsluv_l = 100;
-    } else if (this.lch_l < 1e-8) {
-      this.hsluv_s = 0;
-      this.hsluv_l = 0;
-    } else {
-      this.calculateBoundingLines(this.lch_l,);
-      const max = this.calcMaxChromaHsluv(this.lch_h,);
-      this.hsluv_s = this.lch_c / max * 100;
-      this.hsluv_l = this.lch_l;
-    }
-    this.hsluv_h = this.lch_h;
-  }
-  hpluvToLch() {
-    if (this.hpluv_l > 99.9999999) {
-      this.lch_l = 100;
-      this.lch_c = 0;
-    } else if (this.hpluv_l < 1e-8) {
-      this.lch_l = 0;
-      this.lch_c = 0;
-    } else {
-      this.lch_l = this.hpluv_l;
-      this.calculateBoundingLines(this.hpluv_l,);
-      const max = this.calcMaxChromaHpluv();
-      this.lch_c = max / 100 * this.hpluv_p;
-    }
-    this.lch_h = this.hpluv_h;
-  }
-  lchToHpluv() {
-    if (this.lch_l > 99.9999999) {
-      this.hpluv_p = 0;
-      this.hpluv_l = 100;
-    } else if (this.lch_l < 1e-8) {
-      this.hpluv_p = 0;
-      this.hpluv_l = 0;
-    } else {
-      this.calculateBoundingLines(this.lch_l,);
-      const max = this.calcMaxChromaHpluv();
-      this.hpluv_p = this.lch_c / max * 100;
-      this.hpluv_l = this.lch_l;
-    }
-    this.hpluv_h = this.lch_h;
-  }
-  hsluvToRgb() {
-    this.hsluvToLch();
-    this.lchToLuv();
-    this.luvToXyz();
-    this.xyzToRgb();
-  }
-  hpluvToRgb() {
-    this.hpluvToLch();
-    this.lchToLuv();
-    this.luvToXyz();
-    this.xyzToRgb();
-  }
-  hsluvToHex() {
-    this.hsluvToRgb();
-    this.rgbToHex();
-  }
-  hpluvToHex() {
-    this.hpluvToRgb();
-    this.rgbToHex();
-  }
-  rgbToHsluv() {
-    this.rgbToXyz();
-    this.xyzToLuv();
-    this.luvToLch();
-    this.lchToHpluv();
-    this.lchToHsluv();
-  }
-  rgbToHpluv() {
-    this.rgbToXyz();
-    this.xyzToLuv();
-    this.luvToLch();
-    this.lchToHpluv();
-    this.lchToHpluv();
-  }
-  hexToHsluv() {
-    this.hexToRgb();
-    this.rgbToHsluv();
-  }
-  hexToHpluv() {
-    this.hexToRgb();
-    this.rgbToHpluv();
-  }
-};
-Hsluv.hexChars = '0123456789abcdef';
-Hsluv.refY = 1;
-Hsluv.refU = 0.19783000664283;
-Hsluv.refV = 0.46831999493879;
-Hsluv.kappa = 903.2962962;
-Hsluv.epsilon = 0.0088564516;
-Hsluv.m_r0 = 3.240969941904521;
-Hsluv.m_r1 = -1.537383177570093;
-Hsluv.m_r2 = -0.498610760293;
-Hsluv.m_g0 = -0.96924363628087;
-Hsluv.m_g1 = 1.87596750150772;
-Hsluv.m_g2 = 0.041555057407175;
-Hsluv.m_b0 = 0.055630079696993;
-Hsluv.m_b1 = -0.20397695888897;
-Hsluv.m_b2 = 1.056971514242878;
+var Hsluv = /* @__PURE__ */ (() => require_hsluv().Hsluv)();
 var hsluvConverter = /* @__PURE__ */ new Hsluv();
 function rgbToHsluv(r, g, b,) {
   hsluvConverter.rgb_r = r / 255;
@@ -38979,7 +38945,7 @@ function useReplaceNestedLinks(children, scopeId, nodeId, href, propsAddedByLink
       return;
     }
     if (route) {
-      void propsAddedByLink.navigate?.();
+      propsAddedByLink.navigate?.();
     } else {
       openExternalLink(propsAddedByLink.href, propsAddedByLink.rel, propsAddedByLink.target,);
     }
@@ -38996,7 +38962,7 @@ function useReplaceNestedLinks(children, scopeId, nodeId, href, propsAddedByLink
     event.preventDefault();
     event.stopPropagation();
     if (route) {
-      void propsAddedByLink.navigate?.();
+      propsAddedByLink.navigate?.();
     } else {
       openExternalLink(propsAddedByLink.href, propsAddedByLink.rel, propsAddedByLink.target,);
     }
@@ -39889,13 +39855,6 @@ var GracefullyDegradingErrorBoundary = class extends Component2 {
     );
   }
 };
-var currentSiteId;
-function setCurrentSiteId(siteId,) {
-  currentSiteId = siteId;
-}
-function getCurrentSiteId() {
-  return currentSiteId;
-}
 function findAnchorElement(target, withinElement,) {
   if (target instanceof HTMLAnchorElement) {
     return target;
@@ -40063,137 +40022,6 @@ function useLinkMatchesRoute(link,) {
   const pageLink = isString(link,) ? linkFromFramerPageLink(link,) : link;
   return isLinkToWebPage(pageLink,) ? linkMatchesRoute(route, pageLink, contextPathVariables,) : false;
 }
-var navigationChecks = /* @__PURE__ */ new Map();
-var retryDelayMs = 500;
-var waitForNavigationResolutionTimeoutMs = 500;
-var navigationCheckEnabled;
-var safariOnlyEnablement = false;
-function hasServerOnlyRoutes() {
-  return Boolean(getNavigationServerTimingEntry('ss-only-routes',),);
-}
-function normalizeUrl(url,) {
-  if (typeof __unframerWindow2 === 'undefined') return void 0;
-  const baseUrl = __unframerWindow2.location.href;
-  let normalizedUrl;
-  try {
-    normalizedUrl = new URL(url, baseUrl,);
-  } catch {
-    return void 0;
-  }
-  normalizedUrl.hash = '';
-  return normalizedUrl;
-}
-function isExternalRewrite(serverTimingHeader,) {
-  return getServerTimingEntry('rewrite', serverTimingHeader,)?.description === 'external';
-}
-function isNavigationCheckEnabled() {
-  if (!getLibraryFeatures().checkServerSideRouter) return false;
-  if (navigationCheckEnabled === void 0) {
-    const serverOnlyRoutes = hasServerOnlyRoutes();
-    safariOnlyEnablement = !serverOnlyRoutes && isSafari() && safariVersion() < 16.4;
-    navigationCheckEnabled = serverOnlyRoutes || safariOnlyEnablement;
-  }
-  return navigationCheckEnabled;
-}
-function mapResponseToNavigationResolution(response, probedUrl,) {
-  if (response.type === 'opaqueredirect') {
-    return {
-      decision: 'server',
-    };
-  }
-  if (!response.ok) {
-    return {
-      decision: 'server',
-    };
-  }
-  const redirectLocation = response.headers.get('Framer-Location',);
-  if (redirectLocation) {
-    try {
-      return {
-        decision: 'server',
-        redirectUrl: new URL(redirectLocation, probedUrl,).href,
-      };
-    } catch {
-      return {
-        decision: 'server',
-      };
-    }
-  }
-  const responseSiteId = response.headers.get('Framer-Site-Id',);
-  if (responseSiteId === null) {
-    return {
-      decision: isExternalRewrite(response.headers.get('server-timing',),) ? 'server' : 'client',
-    };
-  }
-  return {
-    decision: responseSiteId === getCurrentSiteId() ? 'client' : 'server',
-  };
-}
-async function probe(url,) {
-  const response = await fetch(url, {
-    method: 'HEAD',
-    redirect: 'manual',
-    credentials: 'same-origin',
-    headers: {
-      'Framer-Navigation': 'true',
-    },
-  },);
-  if (safariOnlyEnablement) {
-    if (response.type !== 'opaqueredirect' && response.status !== 0 && response.ok && !response.headers.has('Framer-Location',)) {
-      safariOnlyEnablement = false;
-      if (!getServerTimingEntry('ss-only-routes', response.headers.get('server-timing',),)) {
-        navigationCheckEnabled = false;
-      }
-    }
-  }
-  if (response.status >= 500) throw new Error(`Transient response status ${response.status}`,);
-  return mapResponseToNavigationResolution(response, url,);
-}
-function cacheNavigationResolution(urlKey, resolution,) {
-  if (navigationChecks.has(urlKey,)) navigationChecks.set(urlKey, resolution,);
-}
-async function retryNavigationCheck(urlKey,) {
-  await delay2(retryDelayMs,);
-  try {
-    cacheNavigationResolution(urlKey, await probe(urlKey,),);
-  } catch {
-    navigationChecks.delete(urlKey,);
-  }
-}
-async function runNavigationCheck(urlKey,) {
-  try {
-    const resolution = await probe(urlKey,);
-    cacheNavigationResolution(urlKey, resolution,);
-    return resolution;
-  } catch {
-    void retryNavigationCheck(urlKey,);
-    return {
-      decision: 'server',
-    };
-  }
-}
-function startNavigationCheck(url,) {
-  if (!isNavigationCheckEnabled()) return;
-  const normalizedUrl = normalizeUrl(url,);
-  if (!normalizedUrl || normalizedUrl.origin !== __unframerWindow2.location.origin) return;
-  const urlKey = normalizedUrl.href;
-  if (navigationChecks.has(urlKey,)) return;
-  navigationChecks.set(urlKey, runNavigationCheck(urlKey,),);
-}
-function getNavigationResolution(url,) {
-  const normalizedUrl = normalizeUrl(url,);
-  if (!normalizedUrl) return void 0;
-  const navigationCheck = navigationChecks.get(normalizedUrl.href,);
-  return navigationCheck && !isPromise(navigationCheck,) ? navigationCheck : void 0;
-}
-async function waitForNavigationResolution(url,) {
-  const normalizedUrl = normalizeUrl(url,);
-  if (!normalizedUrl) return void 0;
-  const navigationCheck = navigationChecks.get(normalizedUrl.href,);
-  if (!navigationCheck) return void 0;
-  if (!isPromise(navigationCheck,)) return navigationCheck;
-  return Promise.race([navigationCheck, delay2(waitForNavigationResolutionTimeoutMs,).then(() => void 0),],);
-}
 var PRELOAD_AFTER_MS = 500;
 var OBSERVER_THRESHOLD = 0.9;
 var LOW_MEMORY_THRESHOLD = 1.7;
@@ -40202,10 +40030,6 @@ var MAX_CONCURRENT_PRELOADS_FAST_NETWORK = Infinity;
 var nodeToRoute = /* @__PURE__ */ new WeakMap();
 var preloadedRoutes = /* @__PURE__ */ new Set();
 var routeToNodesInViewport = /* @__PURE__ */ new Map();
-function startNavigationCheckFromNode(node,) {
-  if (!(node instanceof HTMLAnchorElement) || !node.href) return;
-  startNavigationCheck(node.href,);
-}
 function getObserveRouteForPreloadingFn() {
   const connection = __unframerNavigator2.connection || __unframerNavigator2.mozConnection || __unframerNavigator2.webkitConnection || {};
   const lowDeviceMemory = __unframerNavigator2.deviceMemory && __unframerNavigator2.deviceMemory > LOW_MEMORY_THRESHOLD;
@@ -40225,7 +40049,6 @@ function getObserveRouteForPreloadingFn() {
   let activePreloadsAmount = 0;
   async function preloadTimeout(context, target,) {
     if (preloadDisabled) return;
-    startNavigationCheckFromNode(target,);
     const {
       id: id3,
       preload,
@@ -40472,65 +40295,8 @@ function createOnClickLinkHandler(href, trackLinkClick, navigate,) {
       return;
     }
     event.preventDefault();
-    void navigate(track,);
+    navigate(track,);
   };
-}
-function createNavigate(href, navigationUrl, navigateOnClient,) {
-  return async (beforeUrlUpdate) => {
-    const resolution = await resolveNavigation(navigationUrl,);
-    if (resolution.decision === 'client') {
-      navigateOnClient(beforeUrlUpdate,);
-      return;
-    }
-    void performServerNavigation(href, beforeUrlUpdate, resolution.redirectUrl,);
-  };
-}
-async function resolveNavigation(navigationUrl,) {
-  if (!navigationUrl || !isNavigationCheckEnabled()) {
-    return {
-      decision: 'client',
-    };
-  }
-  const resolution = getNavigationResolution(navigationUrl,);
-  if (resolution) return resolution;
-  startNavigationCheck(navigationUrl,);
-  return (await waitForNavigationResolution(navigationUrl,)) ?? {
-    decision: 'server',
-  };
-}
-async function performServerNavigation(href, beforeUrlUpdate, redirectUrl,) {
-  await yieldToMain({
-    priority: 'user-blocking',
-    ensureContinueBeforeUnload: true,
-    continueAfter: 'paint',
-  },);
-  beforeUrlUpdate?.();
-  __unframerWindow2.location.assign(getServerNavigationUrl(href, redirectUrl,),);
-}
-function getServerNavigationUrl(href, redirectUrl,) {
-  if (!redirectUrl) return href;
-  try {
-    const clickedUrl = new URL(href, __unframerWindow2.location.href,);
-    const destinationUrl = new URL(redirectUrl,);
-    if (clickedUrl.hash && !destinationUrl.hash) destinationUrl.hash = clickedUrl.hash;
-    return destinationUrl.href;
-  } catch {
-    return redirectUrl;
-  }
-}
-function getNavigationUrl(href, isBlankTarget,) {
-  if (isBlankTarget || typeof __unframerWindow2 === 'undefined') return void 0;
-  const baseUrl = __unframerWindow2.location.href;
-  let url;
-  try {
-    url = new URL(href, baseUrl,);
-  } catch {
-    return void 0;
-  }
-  const currentUrl = new URL(baseUrl,);
-  if (url.origin !== currentUrl.origin) return void 0;
-  if (url.pathname === currentUrl.pathname && url.search === currentUrl.search) return void 0;
-  return url.href;
 }
 function propsForRoutePath(href, router, currentRoute, linkOptions, preload, localeId, locales, implicitPathVariables,) {
   if (!currentRoute) return propsForLink(href, linkOptions,);
@@ -40560,30 +40326,25 @@ function propsForRoutePath(href, router, currentRoute, linkOptions, preload, loc
   },);
   const anchorTarget = getTargetAttrValue(linkOptions.openInNewTab, true,);
   const isBlankTarget = anchorTarget === '_blank';
-  const navigationUrl = getNavigationUrl(path, isBlankTarget,);
   const linkContext = {
     pathVariables,
     locale,
   };
-  const navigate = createNavigate(
-    path,
-    navigationUrl,
-    (beforeUrlUpdate) =>
-      performNavigation(
-        router,
-        routeId,
-        () =>
-          preload(routeId, linkContext, {
-            priority: 'user-blocking',
-            yieldBeforePreload: false,
-            shouldLoadRouteData: !isBlankTarget,
-          },),
-        elementId,
-        pathVariables,
-        linkOptions.smoothScroll,
-        beforeUrlUpdate,
-      ),
-  );
+  const navigate = (beforeUrlUpdate) =>
+    performNavigation(
+      router,
+      routeId,
+      () =>
+        preload(routeId, linkContext, {
+          priority: 'user-blocking',
+          yieldBeforePreload: false,
+          shouldLoadRouteData: !isBlankTarget,
+        },),
+      elementId,
+      pathVariables,
+      linkOptions.smoothScroll,
+      beforeUrlUpdate,
+    );
   return {
     href: path,
     target: anchorTarget,
@@ -40603,7 +40364,6 @@ function propsForRoutePath(href, router, currentRoute, linkOptions, preload, loc
     _routeId: routeId,
     _pathVariables: pathVariables,
     _locale: locale,
-    _navigationUrl: navigationUrl,
   };
 }
 var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(function Link2({
@@ -40683,30 +40443,25 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
     } = maybeRouteAttributes;
     const anchorTarget = getTargetAttrValue(openInNewTab, true,);
     const isBlankTarget = anchorTarget === '_blank';
-    const navigationUrl = getNavigationUrl(resolvedHref, isBlankTarget,);
     const linkContext = {
       pathVariables,
       locale,
     };
-    const navigate2 = createNavigate(
-      resolvedHref,
-      navigationUrl,
-      (beforeUrlUpdate) =>
-        performNavigation(
-          router,
-          routeId,
-          () =>
-            preload(routeId, linkContext, {
-              priority: 'user-blocking',
-              yieldBeforePreload: false,
-              shouldLoadRouteData: !isBlankTarget,
-            },),
-          elementId,
-          pathVariables,
-          smoothScroll,
-          beforeUrlUpdate,
-        ),
-    );
+    const navigate2 = (beforeUrlUpdate) =>
+      performNavigation(
+        router,
+        routeId,
+        () =>
+          preload(routeId, linkContext, {
+            priority: 'user-blocking',
+            yieldBeforePreload: false,
+            shouldLoadRouteData: !isBlankTarget,
+          },),
+        elementId,
+        pathVariables,
+        smoothScroll,
+        beforeUrlUpdate,
+      );
     return {
       href: resolvedHref,
       target: anchorTarget,
@@ -40722,7 +40477,6 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
       _routeId: routeId,
       _pathVariables: pathVariables,
       _locale: locale,
-      _navigationUrl: navigationUrl,
     };
   }, [
     href,
@@ -40747,13 +40501,12 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
     _routeId,
     _pathVariables,
     _locale,
-    _navigationUrl,
     ...restPropsAddedByLink
   } = propsAddedByLink;
   useRefEffect(observerRef, (node) => {
-    if (node === null || !_routeId || !preloadFn || !_navigationUrl || isOnFramerCanvas) return;
+    if (node === null || !_routeId || !preloadFn || isOnFramerCanvas) return;
     return observeRouteForPreloading?.(node, preloadFn, `${_routeId}:${_locale?.id}:${JSON.stringify(_pathVariables,)}`,);
-  }, [preloadFn, _routeId, _pathVariables, _locale, _navigationUrl, isOnFramerCanvas,],);
+  }, [preloadFn, _routeId, _pathVariables, _locale, isOnFramerCanvas,],);
   const isInternalNavigation = Boolean(navigate,);
   const clone = useCloneChildrenWithPropsAndRef(forwardedRef,);
   const replacedChildren = clone.cloneAsArray(children, (childProps) =>
@@ -41983,7 +41736,15 @@ function parseTriggerTargetId(targetId,) {
   };
 }
 function getServerTimingCountry() {
-  return getNavigationServerTimingEntry('country',)?.description;
+  if (typeof __unframerWindow2 === 'undefined' || !__unframerWindow2.performance) return void 0;
+  const performanceEntry = __unframerWindow2.performance.getEntriesByType('navigation',)[0];
+  if (!hasServerTiming(performanceEntry,)) return void 0;
+  const countryEntry = performanceEntry.serverTiming.find((entry) => entry.name === 'country');
+  if (!countryEntry) return void 0;
+  return countryEntry.description;
+}
+function hasServerTiming(performanceEntry,) {
+  return Boolean(performanceEntry && 'serverTiming' in performanceEntry,);
 }
 var europeanUnionCountriesInEurope = [
   'AT',
@@ -43200,7 +42961,72 @@ function useNavigationTransition(usesCustomScrollRestoration,) {
     cancelPendingNavigation,
   };
 }
-function Router({
+function Router(props,) {
+  const collectionUtilsCache = useCollectionUtils();
+  const locales = props.locales ?? EMPTY_ARRAY;
+  const initialRouteContentState = useConstant2(() => {
+    const route = props.routes[props.initialRoute];
+    if (!route?.collectionId || props.initialCollectionItemId !== void 0) return;
+    const defaultLocale = locales.find(({
+      id: id3,
+    },) => id3 === defaultLocaleId);
+    const activeLocale = locales.find(({
+      id: id3,
+    },) => id3 === (props.initialLocaleId ?? defaultLocaleId)) ?? null;
+    return new LazyValue(() =>
+      resolveRouteContentState({
+        activeLocale,
+        defaultLocale,
+        collectionUtilsCache,
+        locales,
+        pathVariables: props.initialPathVariables,
+        route,
+        routeId: props.initialRoute,
+      },)
+    );
+  },);
+  const [resolvedInitialRouteContentState, setResolvedInitialRouteContentState,] = useState();
+  if (!initialRouteContentState) {
+    return /* @__PURE__ */ jsx(RouterContent, {
+      suppressHydrationWarning: true,
+      ...props,
+    },);
+  }
+  if (resolvedInitialRouteContentState) {
+    const {
+      contentLocaleId,
+      canonicalPathVariables,
+    } = resolvedInitialRouteContentState;
+    return /* @__PURE__ */ jsx(RouterContent, {
+      suppressHydrationWarning: true,
+      ...props,
+      initialCanonicalPathVariables: canonicalPathVariables,
+      initialContentLocaleIdOverride: contentLocaleId,
+    },);
+  }
+  return /* @__PURE__ */ jsx(Suspense2, {
+    suppressHydrationWarning: true,
+    fallback: null,
+    children: /* @__PURE__ */ jsx(ResolveInitialRouteContentState, {
+      suppressHydrationWarning: true,
+      initialRouteContentState,
+      onResolve: setResolvedInitialRouteContentState,
+    },),
+  },);
+}
+function ResolveInitialRouteContentState({
+  initialRouteContentState,
+  onResolve,
+},) {
+  const resolvedState = initialRouteContentState.use();
+  useLayoutEffect(() => {
+    startTransition2(() => {
+      onResolve(resolvedState,);
+    },);
+  }, [onResolve, resolvedState,],);
+  return null;
+}
+function RouterContent({
   defaultPageStyle,
   disableHistory,
   initialPathVariables,
@@ -49731,8 +49557,6 @@ function mapValueFromRaw(value, type,) {
       return mapImageJsonValue(value,);
     case 'link':
       return mapLinkJsonValue(value,);
-    case 'vectorsetitem':
-      return mapVectorSetItemValue(value,);
     default:
       assertNever(type, 'Unknown server query result type',);
   }
@@ -49805,67 +49629,21 @@ function mapLinkJsonValue(value,) {
   logger.warn(new ServerDatabaseError(`Unexpected link value ${value}, returning null.`,),);
   return null;
 }
-function mapVectorSetItemValue(value,) {
-  if (typeof value !== 'string') {
-    logger.warn(new ServerDatabaseError(`Unexpected vector set item value ${value}, returning null.`,),);
-    return null;
-  }
-  const moduleImport = isWindow ? __unframerWindow2.__framer_serverDatabaseModuleImports?.[value] : void 0;
-  if (!moduleImport) {
-    logger.warn(new ServerDatabaseError(`Missing module import for vector set item ${value}, returning null.`,),);
-    return null;
-  }
-  const moduleExport = moduleImport.readMaybeAsync();
-  if (isPromise(moduleExport,)) {
-    return moduleExport.then((loadedExport) => mapVectorSetItemExport(loadedExport, value,));
-  }
-  return mapVectorSetItemExport(moduleExport, value,);
-}
-function mapVectorSetItemExport(moduleExport, identifier2,) {
-  if (moduleExport === void 0) {
-    logger.warn(new ServerDatabaseError(`Missing vector set item export for ${identifier2}, returning null.`,),);
-    return null;
-  }
-  return moduleExport;
-}
 function mapRowsFromRaw(rows, columns,) {
-  const mappedRows = [];
-  const pendingRows = [];
-  for (const [index, row,] of rows.entries()) {
-    const mappedRow = mapRowFromRaw(row, columns,);
-    if (isPromise(mappedRow,)) {
-      pendingRows.push(mappedRow.then((resolvedRow) => {
-        mappedRows[index] = resolvedRow;
-      },),);
-    } else {
-      mappedRows[index] = mappedRow;
+  return rows.map((row) => {
+    const mappedRow = {};
+    for (const column of columns) {
+      if (!(column.fieldName in row)) {
+        throw new ServerDatabaseError(`Expected SQL result column "${column.fieldName}".`,);
+      }
+      const value = row[column.fieldName];
+      if (value === void 0) {
+        throw new ServerDatabaseError(`Expected SQL result column "${column.fieldName}" returned undefined.`,);
+      }
+      mappedRow[column.fieldName] = mapValueFromRaw(value, column.type,);
     }
-  }
-  if (pendingRows.length === 0) return mappedRows;
-  return Promise.all(pendingRows,).then(() => mappedRows);
-}
-function mapRowFromRaw(row, columns,) {
-  const mappedRow = {};
-  const pendingValues = [];
-  for (const column of columns) {
-    if (!(column.fieldName in row)) {
-      throw new ServerDatabaseError(`Expected SQL result column "${column.fieldName}".`,);
-    }
-    const value = row[column.fieldName];
-    if (value === void 0) {
-      throw new ServerDatabaseError(`Expected SQL result column "${column.fieldName}" returned undefined.`,);
-    }
-    const mappedValue = mapValueFromRaw(value, column.type,);
-    if (isPromise(mappedValue,)) {
-      pendingValues.push(mappedValue.then((resolvedValue) => {
-        mappedRow[column.fieldName] = resolvedValue;
-      },),);
-    } else {
-      mappedRow[column.fieldName] = mappedValue;
-    }
-  }
-  if (pendingValues.length === 0) return mappedRow;
-  return Promise.all(pendingValues,).then(() => mappedRow);
+    return mappedRow;
+  },);
 }
 var collectionItemIdColumn = 'collectionItemId';
 var positionIdColumn = 'position';
@@ -49883,39 +49661,38 @@ var systemColumns = [
   createdAtColumn,
   updatedAtColumn,
 ];
-var BaseSafeSql = class extends String {};
+var SafeSql = class extends String {};
 function isSafeSql(value,) {
-  return value instanceof BaseSafeSql;
+  return value instanceof SafeSql;
 }
-var SafeSql = class extends BaseSafeSql {};
-function sqlTemplate(strings, ...statementsAndParameters) {
+function sqlTemplate(strings, ...queriesAndParameters) {
   assert2(strings[0] !== void 0, 'sql template literal must have at least one string part',);
   const result = [new SafeSql(strings[0],),];
-  statementsAndParameters.forEach((statementOrParameter, i,) => {
-    assert2(strings[i + 1] !== void 0, 'sql template literal must have a string part after each statement or parameter',);
+  queriesAndParameters.forEach((subqueryOrParameter, i,) => {
+    assert2(strings[i + 1] !== void 0, 'sql template literal must have a string part after each query or parameter',);
     const nextStringPart = new SafeSql(strings[i + 1],);
-    if (Array.isArray(statementOrParameter,)) {
-      result.push(...statementOrParameter, nextStringPart,);
+    if (Array.isArray(subqueryOrParameter,)) {
+      result.push(...subqueryOrParameter, nextStringPart,);
       return;
     }
-    if (statementOrParameter instanceof BaseSafeSql) {
-      result.push(statementOrParameter, nextStringPart,);
+    if (subqueryOrParameter instanceof SafeSql) {
+      result.push(subqueryOrParameter, nextStringPart,);
       return;
     }
-    if (isSqlParameter(statementOrParameter,)) {
-      result.push(statementOrParameter, nextStringPart,);
+    if (isSqlParameter(subqueryOrParameter,)) {
+      result.push(subqueryOrParameter, nextStringPart,);
       return;
     }
-    assertNever2(statementOrParameter, 'Unknown value in sql template literal',);
+    assertNever2(subqueryOrParameter, 'Unknown value in sql template literal',);
   },);
   return result;
 }
-function join(statements, separator3, emptyFallback,) {
+function join(queries, separator3, emptyFallback,) {
   const result = [];
-  for (const statement of statements) {
+  for (const query of queries) {
     if (result.length > 0) result.push(new SafeSql(separator3,),);
-    if (Array.isArray(statement,)) result.push(...statement,);
-    else result.push(statement,);
+    if (Array.isArray(query,)) result.push(...query,);
+    else result.push(query,);
   }
   if (result.length === 0 && emptyFallback) {
     result.push(new SafeSql(emptyFallback,),);
@@ -49973,10 +49750,10 @@ var parameterRegex = /^\w+$/u;
 function isSqlParameter(value,) {
   return typeof value === 'object' && value !== null && 'name' in value && 'value' in value;
 }
-function serializeSql(statement,) {
+function serializeSql(sqlQuery,) {
   let sql2 = '';
   const parameters = {};
-  for (const part of Array.isArray(statement,) ? statement : [statement,]) {
+  for (const part of Array.isArray(sqlQuery,) ? sqlQuery : [sqlQuery,]) {
     if (isSafeSql(part,)) {
       sql2 += part;
       continue;
@@ -49994,7 +49771,7 @@ function serializeSql(statement,) {
       parameters[name] = part.value;
       continue;
     }
-    assertNever2(part, 'Unknown part in SQL statement',);
+    assertNever2(part, 'Unknown part in SQL query',);
   }
   return {
     sql: sql2,
@@ -50012,17 +49789,17 @@ function compileFromClause(table, alias2, references, joinType,) {
     );
   }
   return {
-    statement: sql`FROM ${sql.join(joinParts, joinType, '(SELECT 0 WHERE 0)',)}`,
+    query: sql`FROM ${sql.join(joinParts, joinType, '(SELECT 0 WHERE 0)',)}`,
   };
 }
 function compileLimitAndOffsetClause() {
   return {
-    statement: sql`LIMIT 5000`,
+    query: sql`LIMIT 5000`,
   };
 }
 function compileOrderByClause(qualifier2, column,) {
   return {
-    statement: sql`ORDER BY ${sql.qualifiedIdentifier(qualifier2, column,)}`,
+    query: sql`ORDER BY ${sql.qualifiedIdentifier(qualifier2, column,)}`,
   };
 }
 function resolveFieldPath(rootCollectionId, fieldPath, serverCollections, references,) {
@@ -50080,7 +49857,7 @@ function compileMultiReferenceExpression(qualifier2, collectionId, fieldId, refe
   const selectClause = compileMultiReferenceSelectClause(sideTable, joinAlias, referencedCollectionId,);
   const fromClause = compileFromClause(sideTable, void 0, selectClause.references, ' JOIN ',);
   const whereClause = compileMultiReferenceWhereClause(sideTable, qualifier2,);
-  return sql`(${selectClause.statement} ${fromClause.statement} ${whereClause.statement})`;
+  return sql`(${selectClause.query} ${fromClause.query} ${whereClause.query})`;
 }
 function compileMultiReferenceSelectClause(sideTable, joinAlias, referencedCollectionId,) {
   const references = /* @__PURE__ */ new Map([[joinAlias, {
@@ -50090,13 +49867,13 @@ function compileMultiReferenceSelectClause(sideTable, joinAlias, referencedColle
   },],],);
   const orderByClause = compileOrderByClause(sideTable, joinTableIndexColumn,);
   return {
-    statement: sql`SELECT json_group_array(${sql.qualifiedIdentifier(joinAlias, collectionItemIdColumn,)} ${orderByClause.statement})`,
+    query: sql`SELECT json_group_array(${sql.qualifiedIdentifier(joinAlias, collectionItemIdColumn,)} ${orderByClause.query})`,
     references,
   };
 }
 function compileMultiReferenceWhereClause(sideTable, qualifier2,) {
   return {
-    statement: sql`WHERE ${sql.qualifiedIdentifier(sideTable, collectionItemIdColumn,)} = ${
+    query: sql`WHERE ${sql.qualifiedIdentifier(sideTable, collectionItemIdColumn,)} = ${
       sql.qualifiedIdentifier(qualifier2, collectionItemIdColumn,)
     }`,
   };
@@ -50124,7 +49901,7 @@ function compileSelectClause(
     warnOnce2(new ServerDatabaseError('Query selects no column.',).toString(),);
   }
   return {
-    statement: sql`SELECT ${sql.join(selectParts, ', ', '1',)}`,
+    query: sql`SELECT ${sql.join(selectParts, ', ', '1',)}`,
     columns: resultColumns,
   };
 }
@@ -50169,7 +49946,7 @@ function compileWhereClause(collectionId, filters, serverCollections, references
     if (condition) conditions.push(condition,);
   }
   return {
-    statement: sql`WHERE ${sql.join(conditions, getJoinOperator(filters.operator,), '1',)}`,
+    query: sql`WHERE ${sql.join(conditions, getJoinOperator(filters.operator,), '1',)}`,
   };
 }
 function getJoinOperator(filterOperator,) {
@@ -50354,42 +50131,46 @@ function compileQuery(serverQuery, serverCollections,) {
   const fromClause = compileFromClause(`${collectionId}/items`, collectionId, references, ' LEFT JOIN ',);
   const orderByClause = compileOrderByClause(collectionId, positionIdColumn,);
   const limitAndOffsetClause = compileLimitAndOffsetClause();
-  const statement =
-    sql`${selectClause.statement} ${fromClause.statement} ${whereClause.statement} ${orderByClause.statement} ${limitAndOffsetClause.statement}`;
+  const sqlQuery = sql`${selectClause.query} ${fromClause.query} ${whereClause.query} ${orderByClause.query} ${limitAndOffsetClause.query}`;
   return {
-    statement: serializeSql(statement,),
+    query: serializeSql(sqlQuery,),
     columns: selectClause.columns,
   };
 }
 var serverDataCache = /* @__PURE__ */ new Map();
-function getCachedServerData(sql2, parameters, columns,) {
+function getCachedServerData(sql2, parameters = {},) {
   const cacheKey = getCacheKey2(sql2, parameters,);
   const cached = serverDataCache.get(cacheKey,);
   if (cached) return cached;
-  const value = new LazyValue(() =>
-    executeServerDatabaseQuery(sql2, parameters,).then((response) => mapRowsFromRaw(response.rows, columns,))
-  );
+  const value = new LazyValue(() => executeServerDatabaseQuery(sql2, parameters,));
   serverDataCache.set(cacheKey, value,);
   return value;
 }
 function getCacheKey2(sql2, parameters,) {
   return JSON.stringify([sql2, parameters,],);
 }
-function getServerData(query, collections,) {
+function preloadServerData(query, collections,) {
   const {
-    statement: {
+    query: {
       sql: sql2,
       parameters,
     },
     columns,
   } = compileQuery(query, collections,);
-  return getCachedServerData(sql2, mapParametersToRaw(parameters,), columns,);
-}
-function preloadServerData(query, collections,) {
-  return getServerData(query, collections,).readMaybeAsync();
+  const result = getCachedServerData(sql2, mapParametersToRaw(parameters,),).readMaybeAsync();
+  if (isPromise(result,)) return result.then((response) => mapRowsFromRaw(response.rows, columns,));
+  return mapRowsFromRaw(result.rows, columns,);
 }
 function useServerData(query, collections,) {
-  return getServerData(query, collections,).use();
+  const {
+    query: {
+      sql: sql2,
+      parameters,
+    },
+    columns,
+  } = compileQuery(query, collections,);
+  const result = getCachedServerData(sql2, mapParametersToRaw(parameters,),).use();
+  return mapRowsFromRaw(result.rows, columns,);
 }
 var queryEngine = /* @__PURE__ */ new QueryEngine();
 var queryCache = /* @__PURE__ */ new QueryCache(queryEngine,);
@@ -64243,7 +64024,6 @@ export {
   scroll,
   scrollInfo,
   secondsToMilliseconds,
-  setCurrentSiteId,
   setDragLock,
   setFeatureDefinitions,
   setGlobalRenderEnvironment,
