@@ -13502,7 +13502,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.H2AS4HXK.mjs
+// /:https://app.framerstatic.com/framer.P5ZRS7LZ.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -13515,344 +13515,6 @@ import { createPortal, } from 'react-dom';
 import { cloneElement as cloneElement32, } from 'react';
 var __unframerWindow2 = typeof window !== 'undefined' ? window : void 0;
 var __unframerNavigator2 = typeof __unframerWindow2 !== 'undefined' ? navigator : void 0;
-var require_hsluv = __commonJS({
-  '../../../node_modules/hsluv/dist/hsluv.cjs'(exports,) {
-    'use strict';
-
-    Object.defineProperty(exports, '__esModule', {
-      value: true,
-    },);
-    exports.Hsluv = void 0;
-    var Hsluv2 = class _Hsluv {
-      constructor() {
-        this.hex = '#000000';
-        this.rgb_r = 0;
-        this.rgb_g = 0;
-        this.rgb_b = 0;
-        this.xyz_x = 0;
-        this.xyz_y = 0;
-        this.xyz_z = 0;
-        this.luv_l = 0;
-        this.luv_u = 0;
-        this.luv_v = 0;
-        this.lch_l = 0;
-        this.lch_c = 0;
-        this.lch_h = 0;
-        this.hsluv_h = 0;
-        this.hsluv_s = 0;
-        this.hsluv_l = 0;
-        this.hpluv_h = 0;
-        this.hpluv_p = 0;
-        this.hpluv_l = 0;
-        this.r0s = 0;
-        this.r0i = 0;
-        this.r1s = 0;
-        this.r1i = 0;
-        this.g0s = 0;
-        this.g0i = 0;
-        this.g1s = 0;
-        this.g1i = 0;
-        this.b0s = 0;
-        this.b0i = 0;
-        this.b1s = 0;
-        this.b1i = 0;
-      }
-      static fromLinear(c,) {
-        if (c <= 31308e-7) {
-          return 12.92 * c;
-        } else {
-          return 1.055 * Math.pow(c, 1 / 2.4,) - 0.055;
-        }
-      }
-      static toLinear(c,) {
-        if (c > 0.04045) {
-          return Math.pow((c + 0.055) / 1.055, 2.4,);
-        } else {
-          return c / 12.92;
-        }
-      }
-      static yToL(Y,) {
-        if (Y <= _Hsluv.epsilon) {
-          return Y / _Hsluv.refY * _Hsluv.kappa;
-        } else {
-          return 116 * Math.pow(Y / _Hsluv.refY, 1 / 3,) - 16;
-        }
-      }
-      static lToY(L,) {
-        if (L <= 8) {
-          return _Hsluv.refY * L / _Hsluv.kappa;
-        } else {
-          return _Hsluv.refY * Math.pow((L + 16) / 116, 3,);
-        }
-      }
-      static rgbChannelToHex(chan,) {
-        const c = Math.round(chan * 255,);
-        const digit2 = c % 16;
-        const digit1 = (c - digit2) / 16 | 0;
-        return _Hsluv.hexChars.charAt(digit1,) + _Hsluv.hexChars.charAt(digit2,);
-      }
-      static hexToRgbChannel(hex2, offset,) {
-        const digit1 = _Hsluv.hexChars.indexOf(hex2.charAt(offset,),);
-        const digit2 = _Hsluv.hexChars.indexOf(hex2.charAt(offset + 1,),);
-        const n = digit1 * 16 + digit2;
-        return n / 255;
-      }
-      static distanceFromOriginAngle(slope, intercept, angle,) {
-        const d = intercept / (Math.sin(angle,) - slope * Math.cos(angle,));
-        if (d < 0) {
-          return Infinity;
-        } else {
-          return d;
-        }
-      }
-      static distanceFromOrigin(slope, intercept,) {
-        return Math.abs(intercept,) / Math.sqrt(Math.pow(slope, 2,) + 1,);
-      }
-      static min6(f1, f2, f3, f4, f5, f6,) {
-        return Math.min(f1, Math.min(f2, Math.min(f3, Math.min(f4, Math.min(f5, f6,),),),),);
-      }
-      rgbToHex() {
-        this.hex = '#';
-        this.hex += _Hsluv.rgbChannelToHex(this.rgb_r,);
-        this.hex += _Hsluv.rgbChannelToHex(this.rgb_g,);
-        this.hex += _Hsluv.rgbChannelToHex(this.rgb_b,);
-      }
-      hexToRgb() {
-        this.hex = this.hex.toLowerCase();
-        this.rgb_r = _Hsluv.hexToRgbChannel(this.hex, 1,);
-        this.rgb_g = _Hsluv.hexToRgbChannel(this.hex, 3,);
-        this.rgb_b = _Hsluv.hexToRgbChannel(this.hex, 5,);
-      }
-      xyzToRgb() {
-        this.rgb_r = _Hsluv.fromLinear(_Hsluv.m_r0 * this.xyz_x + _Hsluv.m_r1 * this.xyz_y + _Hsluv.m_r2 * this.xyz_z,);
-        this.rgb_g = _Hsluv.fromLinear(_Hsluv.m_g0 * this.xyz_x + _Hsluv.m_g1 * this.xyz_y + _Hsluv.m_g2 * this.xyz_z,);
-        this.rgb_b = _Hsluv.fromLinear(_Hsluv.m_b0 * this.xyz_x + _Hsluv.m_b1 * this.xyz_y + _Hsluv.m_b2 * this.xyz_z,);
-      }
-      rgbToXyz() {
-        const lr = _Hsluv.toLinear(this.rgb_r,);
-        const lg = _Hsluv.toLinear(this.rgb_g,);
-        const lb = _Hsluv.toLinear(this.rgb_b,);
-        this.xyz_x = 0.41239079926595 * lr + 0.35758433938387 * lg + 0.18048078840183 * lb;
-        this.xyz_y = 0.21263900587151 * lr + 0.71516867876775 * lg + 0.072192315360733 * lb;
-        this.xyz_z = 0.019330818715591 * lr + 0.11919477979462 * lg + 0.95053215224966 * lb;
-      }
-      xyzToLuv() {
-        const divider = this.xyz_x + 15 * this.xyz_y + 3 * this.xyz_z;
-        let varU = 4 * this.xyz_x;
-        let varV = 9 * this.xyz_y;
-        if (divider !== 0) {
-          varU /= divider;
-          varV /= divider;
-        } else {
-          varU = NaN;
-          varV = NaN;
-        }
-        this.luv_l = _Hsluv.yToL(this.xyz_y,);
-        if (this.luv_l === 0) {
-          this.luv_u = 0;
-          this.luv_v = 0;
-        } else {
-          this.luv_u = 13 * this.luv_l * (varU - _Hsluv.refU);
-          this.luv_v = 13 * this.luv_l * (varV - _Hsluv.refV);
-        }
-      }
-      luvToXyz() {
-        if (this.luv_l === 0) {
-          this.xyz_x = 0;
-          this.xyz_y = 0;
-          this.xyz_z = 0;
-          return;
-        }
-        const varU = this.luv_u / (13 * this.luv_l) + _Hsluv.refU;
-        const varV = this.luv_v / (13 * this.luv_l) + _Hsluv.refV;
-        this.xyz_y = _Hsluv.lToY(this.luv_l,);
-        this.xyz_x = 0 - 9 * this.xyz_y * varU / ((varU - 4) * varV - varU * varV);
-        this.xyz_z = (9 * this.xyz_y - 15 * varV * this.xyz_y - varV * this.xyz_x) / (3 * varV);
-      }
-      luvToLch() {
-        this.lch_l = this.luv_l;
-        this.lch_c = Math.sqrt(this.luv_u * this.luv_u + this.luv_v * this.luv_v,);
-        if (this.lch_c < 1e-8) {
-          this.lch_h = 0;
-        } else {
-          const hrad = Math.atan2(this.luv_v, this.luv_u,);
-          this.lch_h = hrad * 180 / Math.PI;
-          if (this.lch_h < 0) {
-            this.lch_h = 360 + this.lch_h;
-          }
-        }
-      }
-      lchToLuv() {
-        const hrad = this.lch_h / 180 * Math.PI;
-        this.luv_l = this.lch_l;
-        this.luv_u = Math.cos(hrad,) * this.lch_c;
-        this.luv_v = Math.sin(hrad,) * this.lch_c;
-      }
-      calculateBoundingLines(l2,) {
-        const sub1 = Math.pow(l2 + 16, 3,) / 1560896;
-        const sub2 = sub1 > _Hsluv.epsilon ? sub1 : l2 / _Hsluv.kappa;
-        const s1r = sub2 * (284517 * _Hsluv.m_r0 - 94839 * _Hsluv.m_r2);
-        const s2r = sub2 * (838422 * _Hsluv.m_r2 + 769860 * _Hsluv.m_r1 + 731718 * _Hsluv.m_r0);
-        const s3r = sub2 * (632260 * _Hsluv.m_r2 - 126452 * _Hsluv.m_r1);
-        const s1g = sub2 * (284517 * _Hsluv.m_g0 - 94839 * _Hsluv.m_g2);
-        const s2g = sub2 * (838422 * _Hsluv.m_g2 + 769860 * _Hsluv.m_g1 + 731718 * _Hsluv.m_g0);
-        const s3g = sub2 * (632260 * _Hsluv.m_g2 - 126452 * _Hsluv.m_g1);
-        const s1b = sub2 * (284517 * _Hsluv.m_b0 - 94839 * _Hsluv.m_b2);
-        const s2b = sub2 * (838422 * _Hsluv.m_b2 + 769860 * _Hsluv.m_b1 + 731718 * _Hsluv.m_b0);
-        const s3b = sub2 * (632260 * _Hsluv.m_b2 - 126452 * _Hsluv.m_b1);
-        this.r0s = s1r / s3r;
-        this.r0i = s2r * l2 / s3r;
-        this.r1s = s1r / (s3r + 126452);
-        this.r1i = (s2r - 769860) * l2 / (s3r + 126452);
-        this.g0s = s1g / s3g;
-        this.g0i = s2g * l2 / s3g;
-        this.g1s = s1g / (s3g + 126452);
-        this.g1i = (s2g - 769860) * l2 / (s3g + 126452);
-        this.b0s = s1b / s3b;
-        this.b0i = s2b * l2 / s3b;
-        this.b1s = s1b / (s3b + 126452);
-        this.b1i = (s2b - 769860) * l2 / (s3b + 126452);
-      }
-      calcMaxChromaHpluv() {
-        const r0 = _Hsluv.distanceFromOrigin(this.r0s, this.r0i,);
-        const r1 = _Hsluv.distanceFromOrigin(this.r1s, this.r1i,);
-        const g0 = _Hsluv.distanceFromOrigin(this.g0s, this.g0i,);
-        const g1 = _Hsluv.distanceFromOrigin(this.g1s, this.g1i,);
-        const b0 = _Hsluv.distanceFromOrigin(this.b0s, this.b0i,);
-        const b1 = _Hsluv.distanceFromOrigin(this.b1s, this.b1i,);
-        return _Hsluv.min6(r0, r1, g0, g1, b0, b1,);
-      }
-      calcMaxChromaHsluv(h,) {
-        const hueRad = h / 360 * Math.PI * 2;
-        const r0 = _Hsluv.distanceFromOriginAngle(this.r0s, this.r0i, hueRad,);
-        const r1 = _Hsluv.distanceFromOriginAngle(this.r1s, this.r1i, hueRad,);
-        const g0 = _Hsluv.distanceFromOriginAngle(this.g0s, this.g0i, hueRad,);
-        const g1 = _Hsluv.distanceFromOriginAngle(this.g1s, this.g1i, hueRad,);
-        const b0 = _Hsluv.distanceFromOriginAngle(this.b0s, this.b0i, hueRad,);
-        const b1 = _Hsluv.distanceFromOriginAngle(this.b1s, this.b1i, hueRad,);
-        return _Hsluv.min6(r0, r1, g0, g1, b0, b1,);
-      }
-      hsluvToLch() {
-        if (this.hsluv_l > 99.9999999) {
-          this.lch_l = 100;
-          this.lch_c = 0;
-        } else if (this.hsluv_l < 1e-8) {
-          this.lch_l = 0;
-          this.lch_c = 0;
-        } else {
-          this.lch_l = this.hsluv_l;
-          this.calculateBoundingLines(this.hsluv_l,);
-          const max = this.calcMaxChromaHsluv(this.hsluv_h,);
-          this.lch_c = max / 100 * this.hsluv_s;
-        }
-        this.lch_h = this.hsluv_h;
-      }
-      lchToHsluv() {
-        if (this.lch_l > 99.9999999) {
-          this.hsluv_s = 0;
-          this.hsluv_l = 100;
-        } else if (this.lch_l < 1e-8) {
-          this.hsluv_s = 0;
-          this.hsluv_l = 0;
-        } else {
-          this.calculateBoundingLines(this.lch_l,);
-          const max = this.calcMaxChromaHsluv(this.lch_h,);
-          this.hsluv_s = this.lch_c / max * 100;
-          this.hsluv_l = this.lch_l;
-        }
-        this.hsluv_h = this.lch_h;
-      }
-      hpluvToLch() {
-        if (this.hpluv_l > 99.9999999) {
-          this.lch_l = 100;
-          this.lch_c = 0;
-        } else if (this.hpluv_l < 1e-8) {
-          this.lch_l = 0;
-          this.lch_c = 0;
-        } else {
-          this.lch_l = this.hpluv_l;
-          this.calculateBoundingLines(this.hpluv_l,);
-          const max = this.calcMaxChromaHpluv();
-          this.lch_c = max / 100 * this.hpluv_p;
-        }
-        this.lch_h = this.hpluv_h;
-      }
-      lchToHpluv() {
-        if (this.lch_l > 99.9999999) {
-          this.hpluv_p = 0;
-          this.hpluv_l = 100;
-        } else if (this.lch_l < 1e-8) {
-          this.hpluv_p = 0;
-          this.hpluv_l = 0;
-        } else {
-          this.calculateBoundingLines(this.lch_l,);
-          const max = this.calcMaxChromaHpluv();
-          this.hpluv_p = this.lch_c / max * 100;
-          this.hpluv_l = this.lch_l;
-        }
-        this.hpluv_h = this.lch_h;
-      }
-      hsluvToRgb() {
-        this.hsluvToLch();
-        this.lchToLuv();
-        this.luvToXyz();
-        this.xyzToRgb();
-      }
-      hpluvToRgb() {
-        this.hpluvToLch();
-        this.lchToLuv();
-        this.luvToXyz();
-        this.xyzToRgb();
-      }
-      hsluvToHex() {
-        this.hsluvToRgb();
-        this.rgbToHex();
-      }
-      hpluvToHex() {
-        this.hpluvToRgb();
-        this.rgbToHex();
-      }
-      rgbToHsluv() {
-        this.rgbToXyz();
-        this.xyzToLuv();
-        this.luvToLch();
-        this.lchToHpluv();
-        this.lchToHsluv();
-      }
-      rgbToHpluv() {
-        this.rgbToXyz();
-        this.xyzToLuv();
-        this.luvToLch();
-        this.lchToHpluv();
-        this.lchToHpluv();
-      }
-      hexToHsluv() {
-        this.hexToRgb();
-        this.rgbToHsluv();
-      }
-      hexToHpluv() {
-        this.hexToRgb();
-        this.rgbToHpluv();
-      }
-    };
-    exports.Hsluv = Hsluv2;
-    Hsluv2.hexChars = '0123456789abcdef';
-    Hsluv2.refY = 1;
-    Hsluv2.refU = 0.19783000664283;
-    Hsluv2.refV = 0.46831999493879;
-    Hsluv2.kappa = 903.2962962;
-    Hsluv2.epsilon = 0.0088564516;
-    Hsluv2.m_r0 = 3.240969941904521;
-    Hsluv2.m_r1 = -1.537383177570093;
-    Hsluv2.m_r2 = -0.498610760293;
-    Hsluv2.m_g0 = -0.96924363628087;
-    Hsluv2.m_g1 = 1.87596750150772;
-    Hsluv2.m_g2 = 0.041555057407175;
-    Hsluv2.m_b0 = 0.055630079696993;
-    Hsluv2.m_b1 = -0.20397695888897;
-    Hsluv2.m_b2 = 1.056971514242878;
-  },
-},);
 var require_eventemitter3 = __commonJS({
   '../../../node_modules/eventemitter3/index.js'(exports, module,) {
     'use strict';
@@ -14549,7 +14211,8 @@ function initLazyModulesCache() {
     if (loader) {
       preloadLazyModule(hash2, loader, `registered loader ${hash2}`,);
     } else if (canImportDirectly) {
-      preloadLazyModule(hash2, () => import(/* webpackIgnore: true */ /* @vite-ignore */ url), url,);
+      preloadLazyModule(hash2, () =>
+        import(/* webpackIgnore: true */ /* @vite-ignore */ url), url,);
     }
   }
 }
@@ -17210,6 +16873,14 @@ function syncGeneratedHreflangLinks(links,) {
 }
 var announceDiv;
 var announceNavigation = () => {
+  const title = document.title;
+  if (!title) return;
+  if (document.ariaNotify) {
+    document.ariaNotify(title, {
+      priority: 'high',
+    },);
+    return;
+  }
   if (!announceDiv) {
     announceDiv = document.createElement('div',);
     announceDiv.setAttribute('aria-live', 'assertive',);
@@ -17219,7 +16890,7 @@ var announceNavigation = () => {
     document.body.append(announceDiv,);
   }
   setTimeout(() => {
-    announceDiv.textContent = document.title;
+    announceDiv.textContent = title;
   }, 60,);
 };
 function useAfterPaintEffect(effectFn, deps, options, useEffectFn = useLayoutEffect,) {
@@ -19109,15 +18780,52 @@ async function resolveInitialRouteContentState({
     collectionItemId,
   };
 }
-function getVariantsFromServerTiming() {
-  if ('PerformanceServerTiming' in __unframerWindow2) {
-    const serverTiming = performance.getEntriesByType('navigation',)[0]?.serverTiming;
-    if (!serverTiming || serverTiming.length === 0) return new URLSearchParams();
-    const entry = serverTiming.find((it) => it.name === 'abtests');
-    if (!entry) return new URLSearchParams();
-    return new URLSearchParams(entry.description,);
+function unquoteServerTimingParameterValue(value,) {
+  return value.startsWith('"',) && value.endsWith('"',) ? value.slice(1, -1,) : value;
+}
+function getServerTimingEntries(serverTimingHeader,) {
+  const entries = /* @__PURE__ */ new Map();
+  if (!serverTimingHeader) return entries;
+  for (const serverTimingMetric of serverTimingHeader.split(',',)) {
+    const [rawName, ...parameters] = serverTimingMetric.split(';',);
+    const name = rawName?.trim().toLowerCase();
+    if (!name) continue;
+    let description = '';
+    for (const parameter2 of parameters) {
+      const separatorIndex = parameter2.indexOf('=',);
+      if (separatorIndex === -1) continue;
+      const parameterName = parameter2.slice(0, separatorIndex,).trim();
+      if (parameterName.toLowerCase() !== 'desc') continue;
+      description = unquoteServerTimingParameterValue(parameter2.slice(separatorIndex + 1,).trim(),);
+    }
+    entries.set(name, description,);
   }
-  return new URLSearchParams();
+  return entries;
+}
+function getServerTimingEntry(name, serverTimingHeader,) {
+  const metricName = name.toLowerCase();
+  const description = getServerTimingEntries(serverTimingHeader,).get(metricName,);
+  if (description === void 0) return void 0;
+  return {
+    name: metricName,
+    description,
+  };
+}
+function getNavigationServerTimingEntry(name,) {
+  if (typeof __unframerWindow2 === 'undefined' || typeof performance === 'undefined') return void 0;
+  if (!('PerformanceServerTiming' in __unframerWindow2)) return void 0;
+  const serverTiming = performance.getEntriesByType('navigation',)[0]?.serverTiming;
+  if (!serverTiming || serverTiming.length === 0) return void 0;
+  const entry = serverTiming.find((serverTimingEntry) => serverTimingEntry.name === name);
+  if (!entry) return void 0;
+  return {
+    name: entry.name,
+    description: entry.description,
+  };
+}
+function getVariantsFromServerTiming() {
+  const entry = getNavigationServerTimingEntry('abtests',);
+  return new URLSearchParams(entry?.description,);
 }
 function patchRoute(routes, abTestId, abTestingVariantId,) {
   const route = routes[abTestingVariantId];
@@ -20074,7 +19782,333 @@ var ColorMixModelType = /* @__PURE__ */ ((ColorMixModelType2) => {
   ColorMixModelType2['HUSL'] = 'husl';
   return ColorMixModelType2;
 })(ColorMixModelType || {},);
-var Hsluv = /* @__PURE__ */ (() => require_hsluv().Hsluv)();
+var Hsluv = class _Hsluv {
+  constructor() {
+    this.hex = '#000000';
+    this.rgb_r = 0;
+    this.rgb_g = 0;
+    this.rgb_b = 0;
+    this.xyz_x = 0;
+    this.xyz_y = 0;
+    this.xyz_z = 0;
+    this.luv_l = 0;
+    this.luv_u = 0;
+    this.luv_v = 0;
+    this.lch_l = 0;
+    this.lch_c = 0;
+    this.lch_h = 0;
+    this.hsluv_h = 0;
+    this.hsluv_s = 0;
+    this.hsluv_l = 0;
+    this.hpluv_h = 0;
+    this.hpluv_p = 0;
+    this.hpluv_l = 0;
+    this.r0s = 0;
+    this.r0i = 0;
+    this.r1s = 0;
+    this.r1i = 0;
+    this.g0s = 0;
+    this.g0i = 0;
+    this.g1s = 0;
+    this.g1i = 0;
+    this.b0s = 0;
+    this.b0i = 0;
+    this.b1s = 0;
+    this.b1i = 0;
+  }
+  static fromLinear(c,) {
+    if (c <= 31308e-7) {
+      return 12.92 * c;
+    } else {
+      return 1.055 * Math.pow(c, 1 / 2.4,) - 0.055;
+    }
+  }
+  static toLinear(c,) {
+    if (c > 0.04045) {
+      return Math.pow((c + 0.055) / 1.055, 2.4,);
+    } else {
+      return c / 12.92;
+    }
+  }
+  static yToL(Y,) {
+    if (Y <= _Hsluv.epsilon) {
+      return Y / _Hsluv.refY * _Hsluv.kappa;
+    } else {
+      return 116 * Math.pow(Y / _Hsluv.refY, 1 / 3,) - 16;
+    }
+  }
+  static lToY(L,) {
+    if (L <= 8) {
+      return _Hsluv.refY * L / _Hsluv.kappa;
+    } else {
+      return _Hsluv.refY * Math.pow((L + 16) / 116, 3,);
+    }
+  }
+  static rgbChannelToHex(chan,) {
+    const c = Math.round(chan * 255,);
+    const digit2 = c % 16;
+    const digit1 = (c - digit2) / 16 | 0;
+    return _Hsluv.hexChars.charAt(digit1,) + _Hsluv.hexChars.charAt(digit2,);
+  }
+  static hexToRgbChannel(hex2, offset,) {
+    const digit1 = _Hsluv.hexChars.indexOf(hex2.charAt(offset,),);
+    const digit2 = _Hsluv.hexChars.indexOf(hex2.charAt(offset + 1,),);
+    const n = digit1 * 16 + digit2;
+    return n / 255;
+  }
+  static distanceFromOriginAngle(slope, intercept, angle,) {
+    const d = intercept / (Math.sin(angle,) - slope * Math.cos(angle,));
+    if (d < 0) {
+      return Infinity;
+    } else {
+      return d;
+    }
+  }
+  static distanceFromOrigin(slope, intercept,) {
+    return Math.abs(intercept,) / Math.sqrt(Math.pow(slope, 2,) + 1,);
+  }
+  static min6(f1, f2, f3, f4, f5, f6,) {
+    return Math.min(f1, Math.min(f2, Math.min(f3, Math.min(f4, Math.min(f5, f6,),),),),);
+  }
+  rgbToHex() {
+    this.hex = '#';
+    this.hex += _Hsluv.rgbChannelToHex(this.rgb_r,);
+    this.hex += _Hsluv.rgbChannelToHex(this.rgb_g,);
+    this.hex += _Hsluv.rgbChannelToHex(this.rgb_b,);
+  }
+  hexToRgb() {
+    this.hex = this.hex.toLowerCase();
+    this.rgb_r = _Hsluv.hexToRgbChannel(this.hex, 1,);
+    this.rgb_g = _Hsluv.hexToRgbChannel(this.hex, 3,);
+    this.rgb_b = _Hsluv.hexToRgbChannel(this.hex, 5,);
+  }
+  xyzToRgb() {
+    this.rgb_r = _Hsluv.fromLinear(_Hsluv.m_r0 * this.xyz_x + _Hsluv.m_r1 * this.xyz_y + _Hsluv.m_r2 * this.xyz_z,);
+    this.rgb_g = _Hsluv.fromLinear(_Hsluv.m_g0 * this.xyz_x + _Hsluv.m_g1 * this.xyz_y + _Hsluv.m_g2 * this.xyz_z,);
+    this.rgb_b = _Hsluv.fromLinear(_Hsluv.m_b0 * this.xyz_x + _Hsluv.m_b1 * this.xyz_y + _Hsluv.m_b2 * this.xyz_z,);
+  }
+  rgbToXyz() {
+    const lr = _Hsluv.toLinear(this.rgb_r,);
+    const lg = _Hsluv.toLinear(this.rgb_g,);
+    const lb = _Hsluv.toLinear(this.rgb_b,);
+    this.xyz_x = 0.41239079926595 * lr + 0.35758433938387 * lg + 0.18048078840183 * lb;
+    this.xyz_y = 0.21263900587151 * lr + 0.71516867876775 * lg + 0.072192315360733 * lb;
+    this.xyz_z = 0.019330818715591 * lr + 0.11919477979462 * lg + 0.95053215224966 * lb;
+  }
+  xyzToLuv() {
+    const divider = this.xyz_x + 15 * this.xyz_y + 3 * this.xyz_z;
+    let varU = 4 * this.xyz_x;
+    let varV = 9 * this.xyz_y;
+    if (divider !== 0) {
+      varU /= divider;
+      varV /= divider;
+    } else {
+      varU = NaN;
+      varV = NaN;
+    }
+    this.luv_l = _Hsluv.yToL(this.xyz_y,);
+    if (this.luv_l === 0) {
+      this.luv_u = 0;
+      this.luv_v = 0;
+    } else {
+      this.luv_u = 13 * this.luv_l * (varU - _Hsluv.refU);
+      this.luv_v = 13 * this.luv_l * (varV - _Hsluv.refV);
+    }
+  }
+  luvToXyz() {
+    if (this.luv_l === 0) {
+      this.xyz_x = 0;
+      this.xyz_y = 0;
+      this.xyz_z = 0;
+      return;
+    }
+    const varU = this.luv_u / (13 * this.luv_l) + _Hsluv.refU;
+    const varV = this.luv_v / (13 * this.luv_l) + _Hsluv.refV;
+    this.xyz_y = _Hsluv.lToY(this.luv_l,);
+    this.xyz_x = 0 - 9 * this.xyz_y * varU / ((varU - 4) * varV - varU * varV);
+    this.xyz_z = (9 * this.xyz_y - 15 * varV * this.xyz_y - varV * this.xyz_x) / (3 * varV);
+  }
+  luvToLch() {
+    this.lch_l = this.luv_l;
+    this.lch_c = Math.sqrt(this.luv_u * this.luv_u + this.luv_v * this.luv_v,);
+    if (this.lch_c < 1e-8) {
+      this.lch_h = 0;
+    } else {
+      const hrad = Math.atan2(this.luv_v, this.luv_u,);
+      this.lch_h = hrad * 180 / Math.PI;
+      if (this.lch_h < 0) {
+        this.lch_h = 360 + this.lch_h;
+      }
+    }
+  }
+  lchToLuv() {
+    const hrad = this.lch_h / 180 * Math.PI;
+    this.luv_l = this.lch_l;
+    this.luv_u = Math.cos(hrad,) * this.lch_c;
+    this.luv_v = Math.sin(hrad,) * this.lch_c;
+  }
+  calculateBoundingLines(l2,) {
+    const sub1 = Math.pow(l2 + 16, 3,) / 1560896;
+    const sub2 = sub1 > _Hsluv.epsilon ? sub1 : l2 / _Hsluv.kappa;
+    const s1r = sub2 * (284517 * _Hsluv.m_r0 - 94839 * _Hsluv.m_r2);
+    const s2r = sub2 * (838422 * _Hsluv.m_r2 + 769860 * _Hsluv.m_r1 + 731718 * _Hsluv.m_r0);
+    const s3r = sub2 * (632260 * _Hsluv.m_r2 - 126452 * _Hsluv.m_r1);
+    const s1g = sub2 * (284517 * _Hsluv.m_g0 - 94839 * _Hsluv.m_g2);
+    const s2g = sub2 * (838422 * _Hsluv.m_g2 + 769860 * _Hsluv.m_g1 + 731718 * _Hsluv.m_g0);
+    const s3g = sub2 * (632260 * _Hsluv.m_g2 - 126452 * _Hsluv.m_g1);
+    const s1b = sub2 * (284517 * _Hsluv.m_b0 - 94839 * _Hsluv.m_b2);
+    const s2b = sub2 * (838422 * _Hsluv.m_b2 + 769860 * _Hsluv.m_b1 + 731718 * _Hsluv.m_b0);
+    const s3b = sub2 * (632260 * _Hsluv.m_b2 - 126452 * _Hsluv.m_b1);
+    this.r0s = s1r / s3r;
+    this.r0i = s2r * l2 / s3r;
+    this.r1s = s1r / (s3r + 126452);
+    this.r1i = (s2r - 769860) * l2 / (s3r + 126452);
+    this.g0s = s1g / s3g;
+    this.g0i = s2g * l2 / s3g;
+    this.g1s = s1g / (s3g + 126452);
+    this.g1i = (s2g - 769860) * l2 / (s3g + 126452);
+    this.b0s = s1b / s3b;
+    this.b0i = s2b * l2 / s3b;
+    this.b1s = s1b / (s3b + 126452);
+    this.b1i = (s2b - 769860) * l2 / (s3b + 126452);
+  }
+  calcMaxChromaHpluv() {
+    const r0 = _Hsluv.distanceFromOrigin(this.r0s, this.r0i,);
+    const r1 = _Hsluv.distanceFromOrigin(this.r1s, this.r1i,);
+    const g0 = _Hsluv.distanceFromOrigin(this.g0s, this.g0i,);
+    const g1 = _Hsluv.distanceFromOrigin(this.g1s, this.g1i,);
+    const b0 = _Hsluv.distanceFromOrigin(this.b0s, this.b0i,);
+    const b1 = _Hsluv.distanceFromOrigin(this.b1s, this.b1i,);
+    return _Hsluv.min6(r0, r1, g0, g1, b0, b1,);
+  }
+  calcMaxChromaHsluv(h,) {
+    const hueRad = h / 360 * Math.PI * 2;
+    const r0 = _Hsluv.distanceFromOriginAngle(this.r0s, this.r0i, hueRad,);
+    const r1 = _Hsluv.distanceFromOriginAngle(this.r1s, this.r1i, hueRad,);
+    const g0 = _Hsluv.distanceFromOriginAngle(this.g0s, this.g0i, hueRad,);
+    const g1 = _Hsluv.distanceFromOriginAngle(this.g1s, this.g1i, hueRad,);
+    const b0 = _Hsluv.distanceFromOriginAngle(this.b0s, this.b0i, hueRad,);
+    const b1 = _Hsluv.distanceFromOriginAngle(this.b1s, this.b1i, hueRad,);
+    return _Hsluv.min6(r0, r1, g0, g1, b0, b1,);
+  }
+  hsluvToLch() {
+    if (this.hsluv_l > 99.9999999) {
+      this.lch_l = 100;
+      this.lch_c = 0;
+    } else if (this.hsluv_l < 1e-8) {
+      this.lch_l = 0;
+      this.lch_c = 0;
+    } else {
+      this.lch_l = this.hsluv_l;
+      this.calculateBoundingLines(this.hsluv_l,);
+      const max = this.calcMaxChromaHsluv(this.hsluv_h,);
+      this.lch_c = max / 100 * this.hsluv_s;
+    }
+    this.lch_h = this.hsluv_h;
+  }
+  lchToHsluv() {
+    if (this.lch_l > 99.9999999) {
+      this.hsluv_s = 0;
+      this.hsluv_l = 100;
+    } else if (this.lch_l < 1e-8) {
+      this.hsluv_s = 0;
+      this.hsluv_l = 0;
+    } else {
+      this.calculateBoundingLines(this.lch_l,);
+      const max = this.calcMaxChromaHsluv(this.lch_h,);
+      this.hsluv_s = this.lch_c / max * 100;
+      this.hsluv_l = this.lch_l;
+    }
+    this.hsluv_h = this.lch_h;
+  }
+  hpluvToLch() {
+    if (this.hpluv_l > 99.9999999) {
+      this.lch_l = 100;
+      this.lch_c = 0;
+    } else if (this.hpluv_l < 1e-8) {
+      this.lch_l = 0;
+      this.lch_c = 0;
+    } else {
+      this.lch_l = this.hpluv_l;
+      this.calculateBoundingLines(this.hpluv_l,);
+      const max = this.calcMaxChromaHpluv();
+      this.lch_c = max / 100 * this.hpluv_p;
+    }
+    this.lch_h = this.hpluv_h;
+  }
+  lchToHpluv() {
+    if (this.lch_l > 99.9999999) {
+      this.hpluv_p = 0;
+      this.hpluv_l = 100;
+    } else if (this.lch_l < 1e-8) {
+      this.hpluv_p = 0;
+      this.hpluv_l = 0;
+    } else {
+      this.calculateBoundingLines(this.lch_l,);
+      const max = this.calcMaxChromaHpluv();
+      this.hpluv_p = this.lch_c / max * 100;
+      this.hpluv_l = this.lch_l;
+    }
+    this.hpluv_h = this.lch_h;
+  }
+  hsluvToRgb() {
+    this.hsluvToLch();
+    this.lchToLuv();
+    this.luvToXyz();
+    this.xyzToRgb();
+  }
+  hpluvToRgb() {
+    this.hpluvToLch();
+    this.lchToLuv();
+    this.luvToXyz();
+    this.xyzToRgb();
+  }
+  hsluvToHex() {
+    this.hsluvToRgb();
+    this.rgbToHex();
+  }
+  hpluvToHex() {
+    this.hpluvToRgb();
+    this.rgbToHex();
+  }
+  rgbToHsluv() {
+    this.rgbToXyz();
+    this.xyzToLuv();
+    this.luvToLch();
+    this.lchToHpluv();
+    this.lchToHsluv();
+  }
+  rgbToHpluv() {
+    this.rgbToXyz();
+    this.xyzToLuv();
+    this.luvToLch();
+    this.lchToHpluv();
+    this.lchToHpluv();
+  }
+  hexToHsluv() {
+    this.hexToRgb();
+    this.rgbToHsluv();
+  }
+  hexToHpluv() {
+    this.hexToRgb();
+    this.rgbToHpluv();
+  }
+};
+Hsluv.hexChars = '0123456789abcdef';
+Hsluv.refY = 1;
+Hsluv.refU = 0.19783000664283;
+Hsluv.refV = 0.46831999493879;
+Hsluv.kappa = 903.2962962;
+Hsluv.epsilon = 0.0088564516;
+Hsluv.m_r0 = 3.240969941904521;
+Hsluv.m_r1 = -1.537383177570093;
+Hsluv.m_r2 = -0.498610760293;
+Hsluv.m_g0 = -0.96924363628087;
+Hsluv.m_g1 = 1.87596750150772;
+Hsluv.m_g2 = 0.041555057407175;
+Hsluv.m_b0 = 0.055630079696993;
+Hsluv.m_b1 = -0.20397695888897;
+Hsluv.m_b2 = 1.056971514242878;
 var hsluvConverter = /* @__PURE__ */ new Hsluv();
 function rgbToHsluv(r, g, b,) {
   hsluvConverter.rgb_r = r / 255;
@@ -30736,6 +30770,7 @@ var AnimateSharedLayout = (props) => props.children;
 var ControlType = /* @__PURE__ */ ((ControlType2) => {
   ControlType2['Boolean'] = 'boolean';
   ControlType2['Number'] = 'number';
+  ControlType2['Dimension'] = 'dimension';
   ControlType2['String'] = 'string';
   ControlType2['RichText'] = 'richtext';
   ControlType2['FusedNumber'] = 'fusednumber';
@@ -30792,6 +30827,7 @@ function getControlDefaultValue(control,) {
       case 'padding':
       case 'borderradius':
       case 'gap':
+      case 'dimension':
         return isString(control.defaultValue,) ? control.defaultValue : void 0;
       case 'boolean':
         return isBoolean(control.defaultValue,) ? control.defaultValue : void 0;
@@ -38945,7 +38981,7 @@ function useReplaceNestedLinks(children, scopeId, nodeId, href, propsAddedByLink
       return;
     }
     if (route) {
-      propsAddedByLink.navigate?.();
+      void propsAddedByLink.navigate?.();
     } else {
       openExternalLink(propsAddedByLink.href, propsAddedByLink.rel, propsAddedByLink.target,);
     }
@@ -38962,7 +38998,7 @@ function useReplaceNestedLinks(children, scopeId, nodeId, href, propsAddedByLink
     event.preventDefault();
     event.stopPropagation();
     if (route) {
-      propsAddedByLink.navigate?.();
+      void propsAddedByLink.navigate?.();
     } else {
       openExternalLink(propsAddedByLink.href, propsAddedByLink.rel, propsAddedByLink.target,);
     }
@@ -39068,7 +39104,7 @@ function updateTextSelectionStyles(triggerId,) {
 function getTextSelectionStylesFromTrigger(triggerId,) {
   return [`[data-framer-portal-id="${triggerId}"] * ::selection {
     color: var(${textSelectionColorVariable});
-    background-color: var(${textSelectionBackgroundColorVariable});
+    background-color: var(${textSelectionBackgroundColorVariable}, highlight);
 }`,];
 }
 function InjectSelectionStyleWithoutCSS({
@@ -39855,6 +39891,13 @@ var GracefullyDegradingErrorBoundary = class extends Component2 {
     );
   }
 };
+var currentSiteId;
+function setCurrentSiteId(siteId,) {
+  currentSiteId = siteId;
+}
+function getCurrentSiteId() {
+  return currentSiteId;
+}
 function findAnchorElement(target, withinElement,) {
   if (target instanceof HTMLAnchorElement) {
     return target;
@@ -40022,6 +40065,137 @@ function useLinkMatchesRoute(link,) {
   const pageLink = isString(link,) ? linkFromFramerPageLink(link,) : link;
   return isLinkToWebPage(pageLink,) ? linkMatchesRoute(route, pageLink, contextPathVariables,) : false;
 }
+var navigationChecks = /* @__PURE__ */ new Map();
+var retryDelayMs = 500;
+var waitForNavigationResolutionTimeoutMs = 500;
+var navigationCheckEnabled;
+var safariOnlyEnablement = false;
+function hasServerOnlyRoutes() {
+  return Boolean(getNavigationServerTimingEntry('ss-only-routes',),);
+}
+function normalizeUrl(url,) {
+  if (typeof __unframerWindow2 === 'undefined') return void 0;
+  const baseUrl = __unframerWindow2.location.href;
+  let normalizedUrl;
+  try {
+    normalizedUrl = new URL(url, baseUrl,);
+  } catch {
+    return void 0;
+  }
+  normalizedUrl.hash = '';
+  return normalizedUrl;
+}
+function isExternalRewrite(serverTimingHeader,) {
+  return getServerTimingEntry('rewrite', serverTimingHeader,)?.description === 'external';
+}
+function isNavigationCheckEnabled() {
+  if (!getLibraryFeatures().checkServerSideRouter) return false;
+  if (navigationCheckEnabled === void 0) {
+    const serverOnlyRoutes = hasServerOnlyRoutes();
+    safariOnlyEnablement = !serverOnlyRoutes && isSafari() && safariVersion() < 16.4;
+    navigationCheckEnabled = serverOnlyRoutes || safariOnlyEnablement;
+  }
+  return navigationCheckEnabled;
+}
+function mapResponseToNavigationResolution(response, probedUrl,) {
+  if (response.type === 'opaqueredirect') {
+    return {
+      decision: 'server',
+    };
+  }
+  if (!response.ok) {
+    return {
+      decision: 'server',
+    };
+  }
+  const redirectLocation = response.headers.get('Framer-Location',);
+  if (redirectLocation) {
+    try {
+      return {
+        decision: 'server',
+        redirectUrl: new URL(redirectLocation, probedUrl,).href,
+      };
+    } catch {
+      return {
+        decision: 'server',
+      };
+    }
+  }
+  const responseSiteId = response.headers.get('Framer-Site-Id',);
+  if (responseSiteId === null) {
+    return {
+      decision: isExternalRewrite(response.headers.get('server-timing',),) ? 'server' : 'client',
+    };
+  }
+  return {
+    decision: responseSiteId === getCurrentSiteId() ? 'client' : 'server',
+  };
+}
+async function probe(url,) {
+  const response = await fetch(url, {
+    method: 'HEAD',
+    redirect: 'manual',
+    credentials: 'same-origin',
+    headers: {
+      'Framer-Navigation': 'true',
+    },
+  },);
+  if (safariOnlyEnablement) {
+    if (response.type !== 'opaqueredirect' && response.status !== 0 && response.ok && !response.headers.has('Framer-Location',)) {
+      safariOnlyEnablement = false;
+      if (!getServerTimingEntry('ss-only-routes', response.headers.get('server-timing',),)) {
+        navigationCheckEnabled = false;
+      }
+    }
+  }
+  if (response.status >= 500) throw new Error(`Transient response status ${response.status}`,);
+  return mapResponseToNavigationResolution(response, url,);
+}
+function cacheNavigationResolution(urlKey, resolution,) {
+  if (navigationChecks.has(urlKey,)) navigationChecks.set(urlKey, resolution,);
+}
+async function retryNavigationCheck(urlKey,) {
+  await delay2(retryDelayMs,);
+  try {
+    cacheNavigationResolution(urlKey, await probe(urlKey,),);
+  } catch {
+    navigationChecks.delete(urlKey,);
+  }
+}
+async function runNavigationCheck(urlKey,) {
+  try {
+    const resolution = await probe(urlKey,);
+    cacheNavigationResolution(urlKey, resolution,);
+    return resolution;
+  } catch {
+    void retryNavigationCheck(urlKey,);
+    return {
+      decision: 'server',
+    };
+  }
+}
+function startNavigationCheck(url,) {
+  if (!isNavigationCheckEnabled()) return;
+  const normalizedUrl = normalizeUrl(url,);
+  if (!normalizedUrl || normalizedUrl.origin !== __unframerWindow2.location.origin) return;
+  const urlKey = normalizedUrl.href;
+  if (navigationChecks.has(urlKey,)) return;
+  navigationChecks.set(urlKey, runNavigationCheck(urlKey,),);
+}
+function getNavigationResolution(url,) {
+  const normalizedUrl = normalizeUrl(url,);
+  if (!normalizedUrl) return void 0;
+  const navigationCheck = navigationChecks.get(normalizedUrl.href,);
+  return navigationCheck && !isPromise(navigationCheck,) ? navigationCheck : void 0;
+}
+async function waitForNavigationResolution(url,) {
+  const normalizedUrl = normalizeUrl(url,);
+  if (!normalizedUrl) return void 0;
+  const navigationCheck = navigationChecks.get(normalizedUrl.href,);
+  if (!navigationCheck) return void 0;
+  if (!isPromise(navigationCheck,)) return navigationCheck;
+  return Promise.race([navigationCheck, delay2(waitForNavigationResolutionTimeoutMs,).then(() => void 0),],);
+}
 var PRELOAD_AFTER_MS = 500;
 var OBSERVER_THRESHOLD = 0.9;
 var LOW_MEMORY_THRESHOLD = 1.7;
@@ -40030,6 +40204,10 @@ var MAX_CONCURRENT_PRELOADS_FAST_NETWORK = Infinity;
 var nodeToRoute = /* @__PURE__ */ new WeakMap();
 var preloadedRoutes = /* @__PURE__ */ new Set();
 var routeToNodesInViewport = /* @__PURE__ */ new Map();
+function startNavigationCheckFromNode(node,) {
+  if (!(node instanceof HTMLAnchorElement) || !node.href) return;
+  startNavigationCheck(node.href,);
+}
 function getObserveRouteForPreloadingFn() {
   const connection = __unframerNavigator2.connection || __unframerNavigator2.mozConnection || __unframerNavigator2.webkitConnection || {};
   const lowDeviceMemory = __unframerNavigator2.deviceMemory && __unframerNavigator2.deviceMemory > LOW_MEMORY_THRESHOLD;
@@ -40049,6 +40227,7 @@ function getObserveRouteForPreloadingFn() {
   let activePreloadsAmount = 0;
   async function preloadTimeout(context, target,) {
     if (preloadDisabled) return;
+    startNavigationCheckFromNode(target,);
     const {
       id: id3,
       preload,
@@ -40295,8 +40474,65 @@ function createOnClickLinkHandler(href, trackLinkClick, navigate,) {
       return;
     }
     event.preventDefault();
-    navigate(track,);
+    void navigate(track,);
   };
+}
+function createNavigate(href, navigationUrl, navigateOnClient,) {
+  return async (beforeUrlUpdate) => {
+    const resolution = await resolveNavigation(navigationUrl,);
+    if (resolution.decision === 'client') {
+      navigateOnClient(beforeUrlUpdate,);
+      return;
+    }
+    void performServerNavigation(href, beforeUrlUpdate, resolution.redirectUrl,);
+  };
+}
+async function resolveNavigation(navigationUrl,) {
+  if (!navigationUrl || !isNavigationCheckEnabled()) {
+    return {
+      decision: 'client',
+    };
+  }
+  const resolution = getNavigationResolution(navigationUrl,);
+  if (resolution) return resolution;
+  startNavigationCheck(navigationUrl,);
+  return (await waitForNavigationResolution(navigationUrl,)) ?? {
+    decision: 'server',
+  };
+}
+async function performServerNavigation(href, beforeUrlUpdate, redirectUrl,) {
+  await yieldToMain({
+    priority: 'user-blocking',
+    ensureContinueBeforeUnload: true,
+    continueAfter: 'paint',
+  },);
+  beforeUrlUpdate?.();
+  __unframerWindow2.location.assign(getServerNavigationUrl(href, redirectUrl,),);
+}
+function getServerNavigationUrl(href, redirectUrl,) {
+  if (!redirectUrl) return href;
+  try {
+    const clickedUrl = new URL(href, __unframerWindow2.location.href,);
+    const destinationUrl = new URL(redirectUrl,);
+    if (clickedUrl.hash && !destinationUrl.hash) destinationUrl.hash = clickedUrl.hash;
+    return destinationUrl.href;
+  } catch {
+    return redirectUrl;
+  }
+}
+function getNavigationUrl(href, isBlankTarget,) {
+  if (isBlankTarget || typeof __unframerWindow2 === 'undefined') return void 0;
+  const baseUrl = __unframerWindow2.location.href;
+  let url;
+  try {
+    url = new URL(href, baseUrl,);
+  } catch {
+    return void 0;
+  }
+  const currentUrl = new URL(baseUrl,);
+  if (url.origin !== currentUrl.origin) return void 0;
+  if (url.pathname === currentUrl.pathname && url.search === currentUrl.search) return void 0;
+  return url.href;
 }
 function propsForRoutePath(href, router, currentRoute, linkOptions, preload, localeId, locales, implicitPathVariables,) {
   if (!currentRoute) return propsForLink(href, linkOptions,);
@@ -40326,25 +40562,30 @@ function propsForRoutePath(href, router, currentRoute, linkOptions, preload, loc
   },);
   const anchorTarget = getTargetAttrValue(linkOptions.openInNewTab, true,);
   const isBlankTarget = anchorTarget === '_blank';
+  const navigationUrl = getNavigationUrl(path, isBlankTarget,);
   const linkContext = {
     pathVariables,
     locale,
   };
-  const navigate = (beforeUrlUpdate) =>
-    performNavigation(
-      router,
-      routeId,
-      () =>
-        preload(routeId, linkContext, {
-          priority: 'user-blocking',
-          yieldBeforePreload: false,
-          shouldLoadRouteData: !isBlankTarget,
-        },),
-      elementId,
-      pathVariables,
-      linkOptions.smoothScroll,
-      beforeUrlUpdate,
-    );
+  const navigate = createNavigate(
+    path,
+    navigationUrl,
+    (beforeUrlUpdate) =>
+      performNavigation(
+        router,
+        routeId,
+        () =>
+          preload(routeId, linkContext, {
+            priority: 'user-blocking',
+            yieldBeforePreload: false,
+            shouldLoadRouteData: !isBlankTarget,
+          },),
+        elementId,
+        pathVariables,
+        linkOptions.smoothScroll,
+        beforeUrlUpdate,
+      ),
+  );
   return {
     href: path,
     target: anchorTarget,
@@ -40364,6 +40605,7 @@ function propsForRoutePath(href, router, currentRoute, linkOptions, preload, loc
     _routeId: routeId,
     _pathVariables: pathVariables,
     _locale: locale,
+    _navigationUrl: navigationUrl,
   };
 }
 var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(function Link2({
@@ -40443,25 +40685,30 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
     } = maybeRouteAttributes;
     const anchorTarget = getTargetAttrValue(openInNewTab, true,);
     const isBlankTarget = anchorTarget === '_blank';
+    const navigationUrl = getNavigationUrl(resolvedHref, isBlankTarget,);
     const linkContext = {
       pathVariables,
       locale,
     };
-    const navigate2 = (beforeUrlUpdate) =>
-      performNavigation(
-        router,
-        routeId,
-        () =>
-          preload(routeId, linkContext, {
-            priority: 'user-blocking',
-            yieldBeforePreload: false,
-            shouldLoadRouteData: !isBlankTarget,
-          },),
-        elementId,
-        pathVariables,
-        smoothScroll,
-        beforeUrlUpdate,
-      );
+    const navigate2 = createNavigate(
+      resolvedHref,
+      navigationUrl,
+      (beforeUrlUpdate) =>
+        performNavigation(
+          router,
+          routeId,
+          () =>
+            preload(routeId, linkContext, {
+              priority: 'user-blocking',
+              yieldBeforePreload: false,
+              shouldLoadRouteData: !isBlankTarget,
+            },),
+          elementId,
+          pathVariables,
+          smoothScroll,
+          beforeUrlUpdate,
+        ),
+    );
     return {
       href: resolvedHref,
       target: anchorTarget,
@@ -40477,6 +40724,7 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
       _routeId: routeId,
       _pathVariables: pathVariables,
       _locale: locale,
+      _navigationUrl: navigationUrl,
     };
   }, [
     href,
@@ -40501,12 +40749,13 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
     _routeId,
     _pathVariables,
     _locale,
+    _navigationUrl,
     ...restPropsAddedByLink
   } = propsAddedByLink;
   useRefEffect(observerRef, (node) => {
-    if (node === null || !_routeId || !preloadFn || isOnFramerCanvas) return;
+    if (node === null || !_routeId || !preloadFn || !_navigationUrl || isOnFramerCanvas) return;
     return observeRouteForPreloading?.(node, preloadFn, `${_routeId}:${_locale?.id}:${JSON.stringify(_pathVariables,)}`,);
-  }, [preloadFn, _routeId, _pathVariables, _locale, isOnFramerCanvas,],);
+  }, [preloadFn, _routeId, _pathVariables, _locale, _navigationUrl, isOnFramerCanvas,],);
   const isInternalNavigation = Boolean(navigate,);
   const clone = useCloneChildrenWithPropsAndRef(forwardedRef,);
   const replacedChildren = clone.cloneAsArray(children, (childProps) =>
@@ -41736,15 +41985,7 @@ function parseTriggerTargetId(targetId,) {
   };
 }
 function getServerTimingCountry() {
-  if (typeof __unframerWindow2 === 'undefined' || !__unframerWindow2.performance) return void 0;
-  const performanceEntry = __unframerWindow2.performance.getEntriesByType('navigation',)[0];
-  if (!hasServerTiming(performanceEntry,)) return void 0;
-  const countryEntry = performanceEntry.serverTiming.find((entry) => entry.name === 'country');
-  if (!countryEntry) return void 0;
-  return countryEntry.description;
-}
-function hasServerTiming(performanceEntry,) {
-  return Boolean(performanceEntry && 'serverTiming' in performanceEntry,);
+  return getNavigationServerTimingEntry('country',)?.description;
 }
 var europeanUnionCountriesInEurope = [
   'AT',
@@ -42961,72 +43202,7 @@ function useNavigationTransition(usesCustomScrollRestoration,) {
     cancelPendingNavigation,
   };
 }
-function Router(props,) {
-  const collectionUtilsCache = useCollectionUtils();
-  const locales = props.locales ?? EMPTY_ARRAY;
-  const initialRouteContentState = useConstant2(() => {
-    const route = props.routes[props.initialRoute];
-    if (!route?.collectionId || props.initialCollectionItemId !== void 0) return;
-    const defaultLocale = locales.find(({
-      id: id3,
-    },) => id3 === defaultLocaleId);
-    const activeLocale = locales.find(({
-      id: id3,
-    },) => id3 === (props.initialLocaleId ?? defaultLocaleId)) ?? null;
-    return new LazyValue(() =>
-      resolveRouteContentState({
-        activeLocale,
-        defaultLocale,
-        collectionUtilsCache,
-        locales,
-        pathVariables: props.initialPathVariables,
-        route,
-        routeId: props.initialRoute,
-      },)
-    );
-  },);
-  const [resolvedInitialRouteContentState, setResolvedInitialRouteContentState,] = useState();
-  if (!initialRouteContentState) {
-    return /* @__PURE__ */ jsx(RouterContent, {
-      suppressHydrationWarning: true,
-      ...props,
-    },);
-  }
-  if (resolvedInitialRouteContentState) {
-    const {
-      contentLocaleId,
-      canonicalPathVariables,
-    } = resolvedInitialRouteContentState;
-    return /* @__PURE__ */ jsx(RouterContent, {
-      suppressHydrationWarning: true,
-      ...props,
-      initialCanonicalPathVariables: canonicalPathVariables,
-      initialContentLocaleIdOverride: contentLocaleId,
-    },);
-  }
-  return /* @__PURE__ */ jsx(Suspense2, {
-    suppressHydrationWarning: true,
-    fallback: null,
-    children: /* @__PURE__ */ jsx(ResolveInitialRouteContentState, {
-      suppressHydrationWarning: true,
-      initialRouteContentState,
-      onResolve: setResolvedInitialRouteContentState,
-    },),
-  },);
-}
-function ResolveInitialRouteContentState({
-  initialRouteContentState,
-  onResolve,
-},) {
-  const resolvedState = initialRouteContentState.use();
-  useLayoutEffect(() => {
-    startTransition2(() => {
-      onResolve(resolvedState,);
-    },);
-  }, [onResolve, resolvedState,],);
-  return null;
-}
-function RouterContent({
+function Router({
   defaultPageStyle,
   disableHistory,
   initialPathVariables,
@@ -44136,6 +44312,26 @@ function usePrefetch() {
   }
   return React.useCallback((request) => fetchClient.prefetch(request,), [fetchClient,],);
 }
+var ServerDatabaseClientContext = /* @__PURE__ */ (() => {
+  const Context2 = createContext(void 0,);
+  Context2.displayName = 'ServerDatabaseClientContext';
+  return Context2;
+})();
+function ServerDatabaseClientProvider({
+  client,
+  children,
+},) {
+  return /* @__PURE__ */ jsx(ServerDatabaseClientContext.Provider, {
+    suppressHydrationWarning: true,
+    value: client,
+    children,
+  },);
+}
+function useServerDatabaseClient() {
+  const client = useContext(ServerDatabaseClientContext,);
+  assert(client, 'Missing ServerDatabaseClient',);
+  return client;
+}
 MotionGlobalConfig.WillChange = WillChangeMotionValue;
 function PageRoot(props,) {
   const {
@@ -44148,6 +44344,7 @@ function PageRoot(props,) {
     canonicalPathVariables,
     routes,
     collectionUtils,
+    serverDatabaseClient,
     notFoundPage,
     isReducedMotion = false,
     skipAnimations = false,
@@ -44180,36 +44377,40 @@ function PageRoot(props,) {
         children: /* @__PURE__ */ jsx(CollectionUtilsCacheProvider, {
           suppressHydrationWarning: true,
           collectionUtils,
-          children: /* @__PURE__ */ jsx(FetchClientProvider, {
+          children: /* @__PURE__ */ jsx(ServerDatabaseClientProvider, {
             suppressHydrationWarning: true,
-            children: /* @__PURE__ */ jsx(FormContext.Provider, {
+            client: serverDatabaseClient,
+            children: /* @__PURE__ */ jsx(FetchClientProvider, {
               suppressHydrationWarning: true,
-              value: framerSiteId,
-              children: /* @__PURE__ */ jsx(SnippetsProvider, {
+              children: /* @__PURE__ */ jsx(FormContext.Provider, {
                 suppressHydrationWarning: true,
-                loadSnippetsModule,
-                children: /* @__PURE__ */ jsx(Router, {
+                value: framerSiteId,
+                children: /* @__PURE__ */ jsx(SnippetsProvider, {
                   suppressHydrationWarning: true,
-                  initialRoute: routeId,
-                  initialPathVariables: pathVariables,
-                  initialCanonicalPathVariables: canonicalPathVariables,
-                  initialLocaleId: localeId,
-                  initialCollectionItemId,
-                  initialContentLocaleIdOverride,
-                  routes,
-                  collectionUtils,
-                  notFoundPage,
-                  locales,
-                  defaultPageStyle: defaultPageStyle ?? {
-                    minHeight: '100vh',
-                    width: 'auto',
-                  },
-                  preserveQueryParams,
-                  EditorBar,
-                  disableHistory,
-                  LayoutTemplate,
-                  siteCanonicalURL,
-                  adaptLayoutToTextDirection,
+                  loadSnippetsModule,
+                  children: /* @__PURE__ */ jsx(Router, {
+                    suppressHydrationWarning: true,
+                    initialRoute: routeId,
+                    initialPathVariables: pathVariables,
+                    initialCanonicalPathVariables: canonicalPathVariables,
+                    initialLocaleId: localeId,
+                    initialCollectionItemId,
+                    initialContentLocaleIdOverride,
+                    routes,
+                    collectionUtils,
+                    notFoundPage,
+                    locales,
+                    defaultPageStyle: defaultPageStyle ?? {
+                      minHeight: '100vh',
+                      width: 'auto',
+                    },
+                    preserveQueryParams,
+                    EditorBar,
+                    disableHistory,
+                    LayoutTemplate,
+                    siteCanonicalURL,
+                    adaptLayoutToTextDirection,
+                  },),
                 },),
               },),
             },),
@@ -49475,11 +49676,6 @@ function isServerDatabaseRawRow(value,) {
 function isServerDatabaseRawQueryResult(value,) {
   return isObject2(value,) && Array.isArray(value.rows,) && value.rows.every(isServerDatabaseRawRow,);
 }
-function getServerDatabaseUrl(config,) {
-  const url = new URL(`${config.endpoint}/${config.siteId}/query`,);
-  url.searchParams.set('root', config.root,);
-  return url;
-}
 function isServerDatabaseResponse(value,) {
   if (!isObject2(value,)) return false;
   const hasData = 'data' in value;
@@ -49488,41 +49684,45 @@ function isServerDatabaseResponse(value,) {
   if (hasData) return isServerDatabaseRawQueryResult(value.data,);
   return isObject2(value.error,) && typeof value.error.message === 'string';
 }
-async function executeServerDatabaseQuery(sql2, parameters = {},) {
-  const config = typeof __unframerWindow2 === 'undefined' ? void 0 : __unframerWindow2.__framer_serverDatabaseConfig;
-  if (!config?.endpoint || !config.siteId || !config.root) {
-    throw new ServerDatabaseError('Missing configuration',);
+var NetworkServerDatabase = class {
+  url;
+  constructor(config,) {
+    const url = new URL(`${config.endpoint}/${config.siteId}/query`,);
+    url.searchParams.set('root', config.root,);
+    this.url = url.toString();
   }
-  const url = getServerDatabaseUrl(config,);
-  const statement = {
-    sql: sql2,
-  };
-  if (!isEmptyObject(parameters,)) statement.params = parameters;
-  url.searchParams.set('statement', JSON.stringify(statement,),);
-  const response = await fetch(url.href, {
-    headers: {
-      Accept: 'application/json',
-    },
-  },);
-  const contentType = response.headers.get('content-type',)?.split(';', 1,)[0]?.trim().toLowerCase();
-  if (contentType !== 'application/json') {
-    throw new ServerDatabaseError(`Query failed with status ${response.status}: Expected JSON response`,);
+  async query(sql2, parameters = {},) {
+    const url = new URL(this.url,);
+    const statement = {
+      sql: sql2,
+    };
+    if (!isEmptyObject(parameters,)) statement.params = parameters;
+    url.searchParams.set('statement', JSON.stringify(statement,),);
+    const response = await fetch(url.href, {
+      headers: {
+        Accept: 'application/json',
+      },
+    },);
+    const contentType = response.headers.get('content-type',)?.split(';', 1,)[0]?.trim().toLowerCase();
+    if (contentType !== 'application/json') {
+      throw new ServerDatabaseError(`Query failed with status ${response.status}: Expected JSON response`,);
+    }
+    let responseBody;
+    try {
+      responseBody = await response.json();
+    } catch {
+      throw new ServerDatabaseError(`Query returned invalid JSON`,);
+    }
+    const serverDatabaseResponse = isServerDatabaseResponse(responseBody,) ? responseBody : void 0;
+    const data2 = serverDatabaseResponse && 'data' in serverDatabaseResponse ? serverDatabaseResponse.data : void 0;
+    const error = serverDatabaseResponse && 'error' in serverDatabaseResponse ? serverDatabaseResponse.error : void 0;
+    if (error || !response.ok) {
+      throw new ServerDatabaseError(`Query failed with status ${response.status}${error ? `: ${error.message}` : ''}`,);
+    }
+    if (!data2) throw new ServerDatabaseError('Query returned invalid response',);
+    return data2;
   }
-  let responseBody;
-  try {
-    responseBody = await response.json();
-  } catch {
-    throw new ServerDatabaseError(`Query returned invalid JSON`,);
-  }
-  const serverDatabaseResponse = isServerDatabaseResponse(responseBody,) ? responseBody : void 0;
-  const data2 = serverDatabaseResponse && 'data' in serverDatabaseResponse ? serverDatabaseResponse.data : void 0;
-  const error = serverDatabaseResponse && 'error' in serverDatabaseResponse ? serverDatabaseResponse.error : void 0;
-  if (error || !response.ok) {
-    throw new ServerDatabaseError(`Query failed with status ${response.status}${error ? `: ${error.message}` : ''}`,);
-  }
-  if (!data2) throw new ServerDatabaseError('Query returned invalid response',);
-  return data2;
-}
+};
 function mapValueToRaw(value,) {
   if (value === null || typeof value === 'string' || typeof value === 'number') return value;
   if (typeof value === 'boolean') return value ? 1 : 0;
@@ -49531,8 +49731,46 @@ function mapValueToRaw(value,) {
 function mapParametersToRaw(parameters,) {
   return Object.fromEntries(Object.entries(parameters,).map(([name, value,],) => [name, mapValueToRaw(value,),]),);
 }
+function isServerRichTextNode(value,) {
+  if (isString(value,)) return true;
+  if (isObject2(value,) && isString(value.type,)) return true;
+  return false;
+}
+function shouldBeNever2(_,) {}
+function renderServerRichText(node,) {
+  if (typeof node === 'string') {
+    return node;
+  }
+  function renderChildren(children,) {
+    return children.map(renderServerRichText,);
+  }
+  switch (node.type) {
+    case 'fragment': {
+      const children = renderChildren(node.children,);
+      return createElement(Fragment, void 0, ...children,);
+    }
+    case 'tag': {
+      const children = renderChildren(node.children,);
+      if (node.tag === 'a') {
+        return createElement(motion.a, node.props, ...children,);
+      }
+      return createElement(node.tag, node.props, ...children,);
+    }
+    case 'link': {
+      const children = renderChildren(node.children,);
+      return createElement(Link, node.props, ...children,);
+    }
+    case 'module': {
+      return null;
+    }
+    default: {
+      shouldBeNever2(node,);
+      return null;
+    }
+  }
+}
 var logger = /* @__PURE__ */ getLogger('server database',);
-function mapValueFromRaw(value, type,) {
+function mapValueFromRaw(value, type, components,) {
   if (type === 'unsupported') {
     logger.warn(new UnsupportedQueryError(`result type, returning null.`,),);
     return null;
@@ -49555,8 +49793,12 @@ function mapValueFromRaw(value, type,) {
       return mapStringArrayJsonValue(value,);
     case 'responsiveimage':
       return mapImageJsonValue(value,);
+    case 'richtext':
+      return mapRichTextJsonValue(value,);
     case 'link':
       return mapLinkJsonValue(value,);
+    case 'vectorsetitem':
+      return mapVectorSetItemValue(value, components,);
     default:
       assertNever(type, 'Unknown server query result type',);
   }
@@ -49619,6 +49861,16 @@ function mapImageJsonValue(value,) {
 function isImageValue(value,) {
   return isObject2(value,) && typeof value.src === 'string';
 }
+function mapRichTextJsonValue(value,) {
+  if (typeof value === 'string') {
+    try {
+      const parsed = JSON.parse(value,);
+      if (isServerRichTextNode(parsed,)) return renderServerRichText(parsed,);
+    } catch {}
+  }
+  logger.warn(new ServerDatabaseError(`Unexpected rich text value ${value}, returning null.`,),);
+  return null;
+}
 function mapLinkJsonValue(value,) {
   if (typeof value === 'string') {
     try {
@@ -49629,7 +49881,20 @@ function mapLinkJsonValue(value,) {
   logger.warn(new ServerDatabaseError(`Unexpected link value ${value}, returning null.`,),);
   return null;
 }
-function mapRowsFromRaw(rows, columns,) {
+function mapVectorSetItemValue(value, components,) {
+  if (typeof value !== 'string') {
+    logger.warn(new ServerDatabaseError(`Unexpected vector set item value ${value}, returning null.`,),);
+    return null;
+  }
+  const Component17 = components[value];
+  if (!Component17) {
+    logger.warn(new ServerDatabaseError(`Missing component for vector set item ${value}, returning null.`,),);
+    return null;
+  }
+  void Component17.preload();
+  return Component17;
+}
+function mapRowsFromRaw(rows, columns, components,) {
   return rows.map((row) => {
     const mappedRow = {};
     for (const column of columns) {
@@ -49640,66 +49905,67 @@ function mapRowsFromRaw(rows, columns,) {
       if (value === void 0) {
         throw new ServerDatabaseError(`Expected SQL result column "${column.fieldName}" returned undefined.`,);
       }
-      mappedRow[column.fieldName] = mapValueFromRaw(value, column.type,);
+      mappedRow[column.fieldName] = mapValueFromRaw(value, column.type, components,);
     }
     return mappedRow;
   },);
 }
 var collectionItemIdColumn = 'collectionItemId';
-var positionIdColumn = 'position';
+var positionColumn = 'position';
 var arrayItemIdColumn = 'arrayItemId';
-var joinTableIndexColumn = 'index';
+var indexColumn = 'index';
 var referencedCollectionItemIdColumn = 'referencedCollectionItemId';
 var createdAtColumn = 'createdAt';
 var updatedAtColumn = 'updatedAt';
 var systemColumns = [
   collectionItemIdColumn,
-  positionIdColumn,
+  positionColumn,
   arrayItemIdColumn,
-  joinTableIndexColumn,
+  indexColumn,
   referencedCollectionItemIdColumn,
   createdAtColumn,
   updatedAtColumn,
 ];
-var SafeSql = class extends String {};
+var BaseSafeSql = class extends String {};
 function isSafeSql(value,) {
-  return value instanceof SafeSql;
+  return value instanceof BaseSafeSql;
 }
-function sqlTemplate(strings, ...queriesAndParameters) {
+var SafeSql = class extends BaseSafeSql {};
+function sqlTemplate(strings, ...statementsAndParameters) {
   assert2(strings[0] !== void 0, 'sql template literal must have at least one string part',);
   const result = [new SafeSql(strings[0],),];
-  queriesAndParameters.forEach((subqueryOrParameter, i,) => {
-    assert2(strings[i + 1] !== void 0, 'sql template literal must have a string part after each query or parameter',);
+  statementsAndParameters.forEach((statementOrParameter, i,) => {
+    assert2(strings[i + 1] !== void 0, 'sql template literal must have a string part after each statement or parameter',);
     const nextStringPart = new SafeSql(strings[i + 1],);
-    if (Array.isArray(subqueryOrParameter,)) {
-      result.push(...subqueryOrParameter, nextStringPart,);
+    if (Array.isArray(statementOrParameter,)) {
+      result.push(...statementOrParameter, nextStringPart,);
       return;
     }
-    if (subqueryOrParameter instanceof SafeSql) {
-      result.push(subqueryOrParameter, nextStringPart,);
+    if (statementOrParameter instanceof BaseSafeSql) {
+      result.push(statementOrParameter, nextStringPart,);
       return;
     }
-    if (isSqlParameter(subqueryOrParameter,)) {
-      result.push(subqueryOrParameter, nextStringPart,);
+    if (isSqlParameter(statementOrParameter,)) {
+      result.push(statementOrParameter, nextStringPart,);
       return;
     }
-    assertNever2(subqueryOrParameter, 'Unknown value in sql template literal',);
+    assertNever2(statementOrParameter, 'Unknown value in sql template literal',);
   },);
   return result;
 }
-function join(queries, separator3, emptyFallback,) {
+function join(statements, separator3, emptyFallback,) {
   const result = [];
-  for (const query of queries) {
+  for (const statement of statements) {
     if (result.length > 0) result.push(new SafeSql(separator3,),);
-    if (Array.isArray(query,)) result.push(...query,);
-    else result.push(query,);
+    if (Array.isArray(statement,)) result.push(...statement,);
+    else result.push(statement,);
   }
   if (result.length === 0 && emptyFallback) {
     result.push(new SafeSql(emptyFallback,),);
   }
   return result;
 }
-var identifierRegex = /^[a-z][\w/]+$/iu;
+var identifierRegex = /^[a-z][\w/:]+$/iu;
 function assertIdentifier(identifierString,) {
   if (!identifierRegex.test(identifierString,)) {
     throw new Error(
@@ -49750,10 +50016,10 @@ var parameterRegex = /^\w+$/u;
 function isSqlParameter(value,) {
   return typeof value === 'object' && value !== null && 'name' in value && 'value' in value;
 }
-function serializeSql(sqlQuery,) {
+function serializeSql(statement,) {
   let sql2 = '';
   const parameters = {};
-  for (const part of Array.isArray(sqlQuery,) ? sqlQuery : [sqlQuery,]) {
+  for (const part of Array.isArray(statement,) ? statement : [statement,]) {
     if (isSafeSql(part,)) {
       sql2 += part;
       continue;
@@ -49771,35 +50037,39 @@ function serializeSql(sqlQuery,) {
       parameters[name] = part.value;
       continue;
     }
-    assertNever2(part, 'Unknown part in SQL query',);
+    assertNever2(part, 'Unknown part in SQL statement',);
   }
   return {
     sql: sql2,
     parameters,
   };
 }
+function getItemsTable(collectionId,) {
+  return `${collectionId}/items`;
+}
+function getItemMultiCollectionReferencesTable(collectionId,) {
+  return `${collectionId}/itemMultiCollectionReferences`;
+}
+function getItemMultiCollectionReferencesView(collectionId, fieldId,) {
+  return `${getItemMultiCollectionReferencesTable(collectionId,)}/${fieldId}`;
+}
 function compileFromClause(table, alias2, references, joinType,) {
   const source = sql.identifier(table,);
   const joinParts = [alias2 === void 0 ? source : sql`${source} AS ${sql.alias(alias2,)}`,];
   for (const [joinAlias, reference,] of references) {
     joinParts.push(
-      sql`${sql.identifier(`${reference.referencedCollectionId}/items`,)} AS ${sql.alias(joinAlias,)} ON ${
+      sql`${sql.identifier(getItemsTable(reference.referencedCollectionId,),)} AS ${sql.alias(joinAlias,)} ON ${
         sql.qualifiedIdentifier(reference.qualifier, reference.identifier,)
       } = ${sql.qualifiedIdentifier(joinAlias, collectionItemIdColumn,)}`,
     );
   }
   return {
-    query: sql`FROM ${sql.join(joinParts, joinType, '(SELECT 0 WHERE 0)',)}`,
+    statement: sql`FROM ${sql.join(joinParts, joinType, '(SELECT 0 WHERE 0)',)}`,
   };
 }
 function compileLimitAndOffsetClause() {
   return {
-    query: sql`LIMIT 5000`,
-  };
-}
-function compileOrderByClause(qualifier2, column,) {
-  return {
-    query: sql`ORDER BY ${sql.qualifiedIdentifier(qualifier2, column,)}`,
+    statement: sql`LIMIT 5000`,
   };
 }
 function resolveFieldPath(rootCollectionId, fieldPath, serverCollections, references,) {
@@ -49839,7 +50109,7 @@ function resolveFieldPath(rootCollectionId, fieldPath, serverCollections, refere
     qualifier2 = newQualifier;
     collectionId = field.referencedCollectionId;
   }
-  const tailField = serverCollections[collectionId]?.fields[tailFieldId];
+  const tailField = getServerCollectionField(serverCollections, collectionId, tailFieldId,);
   if (!tailField) {
     warnOnce2(new ServerDatabaseError(`Field ${tailFieldId} does not exist in collection ${collectionId}.`,).toString(),);
     return void 0;
@@ -49851,13 +50121,51 @@ function resolveFieldPath(rootCollectionId, fieldPath, serverCollections, refere
     tailField,
   };
 }
+function getServerCollectionField(serverCollections, collectionId, fieldId,) {
+  if (fieldId === createdAtColumn || fieldId === updatedAtColumn) {
+    return {
+      type: 'date',
+      /* Date */
+    };
+  }
+  return serverCollections[collectionId]?.fields[fieldId];
+}
+function compileOrderByClause(
+  {
+    collectionId,
+    orderBy,
+  },
+  serverCollections,
+  references,
+) {
+  const parts = [];
+  const defaultOrderBy = serverCollections[collectionId]?.defaultOrderBy ?? [];
+  for (const sort of [...orderBy, ...defaultOrderBy,]) {
+    const resolved = resolveFieldPath(collectionId, sort.fieldPath, serverCollections, references,);
+    if (!resolved || resolved.tailField.type === 'multicollectionreference') continue;
+    if (resolved.tailField.type === 'unsupported') {
+      warnOnce2(new UnsupportedQueryError(`sort field type.`,).toString(),);
+      continue;
+    }
+    let expression = sql.qualifiedIdentifier(resolved.qualifier, resolved.tailFieldId,);
+    if (resolved.tailField.type === 'string') {
+      expression = sql`LOWER(${expression})`;
+    }
+    const direction = sort.direction === 'desc' ? sql`DESC` : sql`ASC`;
+    parts.push(sql`${expression} ${direction}`,);
+  }
+  parts.push(sql.qualifiedIdentifier(collectionId, positionColumn,),);
+  return {
+    statement: sql`ORDER BY ${sql.join(parts, ', ', '1',)}`,
+  };
+}
 function compileMultiReferenceExpression(qualifier2, collectionId, fieldId, referencedCollectionId,) {
-  const sideTable = `${collectionId}/itemMultiCollectionReferences/${fieldId}`;
+  const sideTable = getItemMultiCollectionReferencesView(collectionId, fieldId,);
   const joinAlias = `${qualifier2}.${fieldId}`;
   const selectClause = compileMultiReferenceSelectClause(sideTable, joinAlias, referencedCollectionId,);
   const fromClause = compileFromClause(sideTable, void 0, selectClause.references, ' JOIN ',);
   const whereClause = compileMultiReferenceWhereClause(sideTable, qualifier2,);
-  return sql`(${selectClause.query} ${fromClause.query} ${whereClause.query})`;
+  return sql`(${selectClause.statement} ${fromClause.statement} ${whereClause.statement})`;
 }
 function compileMultiReferenceSelectClause(sideTable, joinAlias, referencedCollectionId,) {
   const references = /* @__PURE__ */ new Map([[joinAlias, {
@@ -49865,15 +50173,16 @@ function compileMultiReferenceSelectClause(sideTable, joinAlias, referencedColle
     identifier: referencedCollectionItemIdColumn,
     referencedCollectionId,
   },],],);
-  const orderByClause = compileOrderByClause(sideTable, joinTableIndexColumn,);
   return {
-    query: sql`SELECT json_group_array(${sql.qualifiedIdentifier(joinAlias, collectionItemIdColumn,)} ${orderByClause.query})`,
+    statement: sql`SELECT json_group_array(${sql.qualifiedIdentifier(joinAlias, collectionItemIdColumn,)} ORDER BY ${
+      sql.qualifiedIdentifier(sideTable, indexColumn,)
+    })`,
     references,
   };
 }
 function compileMultiReferenceWhereClause(sideTable, qualifier2,) {
   return {
-    query: sql`WHERE ${sql.qualifiedIdentifier(sideTable, collectionItemIdColumn,)} = ${
+    statement: sql`WHERE ${sql.qualifiedIdentifier(sideTable, collectionItemIdColumn,)} = ${
       sql.qualifiedIdentifier(qualifier2, collectionItemIdColumn,)
     }`,
   };
@@ -49901,7 +50210,7 @@ function compileSelectClause(
     warnOnce2(new ServerDatabaseError('Query selects no column.',).toString(),);
   }
   return {
-    query: sql`SELECT ${sql.join(selectParts, ', ', '1',)}`,
+    statement: sql`SELECT ${sql.join(selectParts, ', ', '1',)}`,
     columns: resultColumns,
   };
 }
@@ -49946,7 +50255,7 @@ function compileWhereClause(collectionId, filters, serverCollections, references
     if (condition) conditions.push(condition,);
   }
   return {
-    query: sql`WHERE ${sql.join(conditions, getJoinOperator(filters.operator,), '1',)}`,
+    statement: sql`WHERE ${sql.join(conditions, getJoinOperator(filters.operator,), '1',)}`,
   };
 }
 function getJoinOperator(filterOperator,) {
@@ -49968,7 +50277,7 @@ function compileFilter(collectionId, filter2, serverCollections, references,) {
   let currentStep = compileField(resolved,);
   for (const transform2 of preOptimizeTransforms(currentStep, filter2.transforms,)) {
     parameterName += `_${transform2.name}`;
-    currentStep = compileTransform(transform2, currentStep, parameterName,);
+    currentStep = compileTransform(transform2, currentStep.lowercaseIfString(), parameterName,);
     if (!currentStep) return void 0;
   }
   if (currentStep.type !== 'boolean') {
@@ -49986,7 +50295,7 @@ function preOptimizeTransforms(currentStep, transforms,) {
   }
   return transforms;
 }
-var Step = class {
+var Step = class _Step {
   #expression;
   #type;
   #nullable;
@@ -50019,6 +50328,13 @@ var Step = class {
       expression: this.#expression,
       nullable: this.#nullable,
     };
+  }
+  lowercaseIfString() {
+    return new _Step({
+      expression: lowercaseIfString(this.#type, this.#expression,),
+      type: this.#type,
+      nullable: this.#nullable,
+    },);
   }
   get type() {
     return this.#type;
@@ -50081,15 +50397,8 @@ function compileEquals(previousStep, parameterName, value,) {
       nullable: 'no',
     },);
   }
-  if (previousStep.type === 'string' && typeof value === 'string') {
-    return new Step({
-      expression: sql`LOWER(${input.expression}) = LOWER(${sql.parameter(parameterName, value,)})`,
-      type: 'boolean',
-      nullable: treatNullInputAsFalse(input,),
-    },);
-  }
   return new Step({
-    expression: sql`${input.expression} = ${sql.parameter(parameterName, value,)}`,
+    expression: sql`${input.expression} = ${lowercaseIfString(previousStep.type, sql.parameter(parameterName, value,),)}`,
     type: 'boolean',
     nullable: treatNullInputAsFalse(input,),
   },);
@@ -50097,7 +50406,9 @@ function compileEquals(previousStep, parameterName, value,) {
 function compileIsIncludedIn(previousStep, parameterName, value,) {
   const input = previousStep.inputToleratingNull();
   return new Step({
-    expression: sql`${input.expression} IN (SELECT value FROM json_each(${sql.parameter(parameterName, value,)}))`,
+    expression: sql`${input.expression} IN (SELECT ${lowercaseIfString(previousStep.type, sql`value`,)} FROM json_each(${
+      sql.parameter(parameterName, value,)
+    }))`,
     type: 'boolean',
     nullable: treatNullInputAsFalse(input,),
   },);
@@ -50121,6 +50432,10 @@ function compileContains(previousStep, parameterName, value,) {
       return void 0;
   }
 }
+function lowercaseIfString(type, expression,) {
+  if (type !== 'string') return expression;
+  return sql`LOWER(${expression})`;
+}
 function compileQuery(serverQuery, serverCollections,) {
   const {
     collectionId,
@@ -50128,49 +50443,59 @@ function compileQuery(serverQuery, serverCollections,) {
   const references = /* @__PURE__ */ new Map();
   const selectClause = compileSelectClause(serverQuery, serverCollections, references,);
   const whereClause = compileWhereClause(collectionId, serverQuery.filters, serverCollections, references,);
-  const fromClause = compileFromClause(`${collectionId}/items`, collectionId, references, ' LEFT JOIN ',);
-  const orderByClause = compileOrderByClause(collectionId, positionIdColumn,);
+  const orderByClause = compileOrderByClause(serverQuery, serverCollections, references,);
+  const fromClause = compileFromClause(getItemsTable(collectionId,), collectionId, references, ' LEFT JOIN ',);
   const limitAndOffsetClause = compileLimitAndOffsetClause();
-  const sqlQuery = sql`${selectClause.query} ${fromClause.query} ${whereClause.query} ${orderByClause.query} ${limitAndOffsetClause.query}`;
+  const statement =
+    sql`${selectClause.statement} ${fromClause.statement} ${whereClause.statement} ${orderByClause.statement} ${limitAndOffsetClause.statement}`;
   return {
-    query: serializeSql(sqlQuery,),
+    statement: serializeSql(statement,),
     columns: selectClause.columns,
   };
 }
-var serverDataCache = /* @__PURE__ */ new Map();
-function getCachedServerData(sql2, parameters = {},) {
-  const cacheKey = getCacheKey2(sql2, parameters,);
-  const cached = serverDataCache.get(cacheKey,);
-  if (cached) return cached;
-  const value = new LazyValue(() => executeServerDatabaseQuery(sql2, parameters,));
-  serverDataCache.set(cacheKey, value,);
-  return value;
-}
-function getCacheKey2(sql2, parameters,) {
-  return JSON.stringify([sql2, parameters,],);
-}
-function preloadServerData(query, collections,) {
-  const {
-    query: {
-      sql: sql2,
-      parameters,
-    },
-    columns,
-  } = compileQuery(query, collections,);
-  const result = getCachedServerData(sql2, mapParametersToRaw(parameters,),).readMaybeAsync();
-  if (isPromise(result,)) return result.then((response) => mapRowsFromRaw(response.rows, columns,));
-  return mapRowsFromRaw(result.rows, columns,);
-}
-function useServerData(query, collections,) {
-  const {
-    query: {
-      sql: sql2,
-      parameters,
-    },
-    columns,
-  } = compileQuery(query, collections,);
-  const result = getCachedServerData(sql2, mapParametersToRaw(parameters,),).use();
-  return mapRowsFromRaw(result.rows, columns,);
+var ServerDatabaseClient = class {
+  constructor(database, {
+    collections,
+    components,
+  },) {
+    this.database = database;
+    this.collections = collections;
+    this.components = components;
+  }
+  database;
+  collections;
+  components;
+  cache = /* @__PURE__ */ new Map();
+  query(query,) {
+    const {
+      statement: {
+        sql: sql2,
+        parameters,
+      },
+      columns,
+    } = compileQuery(query, this.collections,);
+    const rawParameters = mapParametersToRaw(parameters,);
+    const cacheKey = JSON.stringify([sql2, rawParameters,],);
+    const cached = this.cache.get(cacheKey,);
+    if (cached) return cached;
+    const value = new LazyValue(async () => {
+      const rows = await this.execute(sql2, rawParameters,);
+      return mapRowsFromRaw(rows, columns, this.components,);
+    },);
+    this.cache.set(cacheKey, value,);
+    return value;
+  }
+  /** Starts loading the query result so that `query(...).use()` doesn't suspend. */
+  preload(query,) {
+    return this.query(query,).preload();
+  }
+  async execute(sql2, parameters,) {
+    const response = await this.database.query(sql2, parameters,);
+    return response.rows;
+  }
+};
+function useServerData(query,) {
+  return useServerDatabaseClient().query(query,).use();
 }
 var queryEngine = /* @__PURE__ */ new QueryEngine();
 var queryCache = /* @__PURE__ */ new QueryCache(queryEngine,);
@@ -54184,9 +54509,9 @@ function evictOldestIfFull(map2, max,) {
 }
 var shaderTextureCache = /* @__PURE__ */ new ShaderTextureCache();
 var scaledDownWorkingResolution = 1024;
-function generateHeightmap(image, getCacheKey3,) {
+function generateHeightmap(image, getCacheKey2,) {
   if (!isHeightMapSupportedTexImageSource(image,)) return;
-  const cacheKey = getCacheKey3?.();
+  const cacheKey = getCacheKey2?.();
   if (!cacheKey) return buildHeightmap(image,);
   const cached = shaderTextureCache.generate(cacheKey, () => buildHeightmap(image,),);
   if (!(cached instanceof HTMLCanvasElement)) return void 0;
@@ -63716,7 +64041,6 @@ export {
   environment,
   ErrorPlaceholder,
   executeInRenderEnvironment,
-  executeServerDatabaseQuery,
   Feature,
   Fetcher,
   fillOffset,
@@ -63924,6 +64248,7 @@ export {
   NavigationExport as Navigation,
   NavigationTransitionType,
   nestedLinksCollector,
+  NetworkServerDatabase,
   nodeGroup,
   NodeStack,
   noop,
@@ -63961,7 +64286,6 @@ export {
   positionalKeys,
   prefersReducedMotion,
   preloadImage,
-  preloadServerData,
   PresenceChild,
   PresenceContext,
   press,
@@ -64024,6 +64348,8 @@ export {
   scroll,
   scrollInfo,
   secondsToMilliseconds,
+  ServerDatabaseClient,
+  setCurrentSiteId,
   setDragLock,
   setFeatureDefinitions,
   setGlobalRenderEnvironment,
