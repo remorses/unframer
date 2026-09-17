@@ -3516,8 +3516,8 @@ function animateTarget(visualElement, targetAndTransition, {
     transitionEnd,
     ...target
   } = targetAndTransition;
-  const defaultTransition = visualElement.getDefaultTransition();
-  transition = transition ? resolveTransition(transition, defaultTransition,) : defaultTransition;
+  const defaultTransition2 = visualElement.getDefaultTransition();
+  transition = transition ? resolveTransition(transition, defaultTransition2,) : defaultTransition2;
   const reduceMotion = transition?.reduceMotion;
   const skipAnimations = transition?.skipAnimations;
   if (transitionOverride) transition = transitionOverride;
@@ -12236,13 +12236,13 @@ var MAX_REPEAT = 20;
 function createAnimationsFromSequence(
   sequence2,
   {
-    defaultTransition = {},
+    defaultTransition: defaultTransition2 = {},
     ...sequenceTransition
   } = {},
   scope,
   generators,
 ) {
-  const defaultDuration = defaultTransition.duration || 0.3;
+  const defaultDuration = defaultTransition2.duration || 0.3;
   const animationDefinitions = /* @__PURE__ */ new Map();
   const sequences = /* @__PURE__ */ new Map();
   const elementCache = {};
@@ -12269,14 +12269,14 @@ function createAnimationsFromSequence(
       const {
         delay: delay22 = 0,
         times = defaultOffset(valueKeyframesAsList,),
-        type = defaultTransition.type || 'keyframes',
+        type = defaultTransition2.type || 'keyframes',
         repeat,
         repeatType,
         repeatDelay = 0,
         ...remainingTransition
       } = valueTransition;
       let {
-        ease: ease2 = defaultTransition.ease || 'easeOut',
+        ease: ease2 = defaultTransition2.ease || 'easeOut',
         duration,
       } = valueTransition;
       const calculatedDelay = typeof delay22 === 'function' ? delay22(elementIndex, numSubjects,) : delay22;
@@ -12289,7 +12289,7 @@ function createAnimationsFromSequence(
           absoluteDelta = Math.abs(delta,);
         }
         const springTransition = {
-          ...defaultTransition,
+          ...defaultTransition2,
           ...remainingTransition,
         };
         if (duration !== void 0) {
@@ -12414,7 +12414,7 @@ function createAnimationsFromSequence(
       const {
         type: _type,
         ...remainingDefaultTransition
-      } = defaultTransition;
+      } = defaultTransition2;
       definition.transition[key7] = {
         ...remainingDefaultTransition,
         duration: totalDuration,
@@ -13502,7 +13502,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.P5ZRS7LZ.mjs
+// /:https://app.framerstatic.com/framer.DFK3KH4F.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -49737,12 +49737,13 @@ function isServerRichTextNode(value,) {
   return false;
 }
 function shouldBeNever2(_,) {}
-function renderServerRichText(node,) {
+var logger = /* @__PURE__ */ getLogger('server database',);
+function renderServerRichText(node, components,) {
   if (typeof node === 'string') {
     return node;
   }
   function renderChildren(children,) {
-    return children.map(renderServerRichText,);
+    return children.map((child) => renderServerRichText(child, components,));
   }
   switch (node.type) {
     case 'fragment': {
@@ -49761,7 +49762,13 @@ function renderServerRichText(node,) {
       return createElement(Link, node.props, ...children,);
     }
     case 'module': {
-      return null;
+      const Component17 = components[node.identifier];
+      if (!Component17) {
+        logger.warn(new ServerDatabaseError(`Missing component for rich text module ${node.identifier}, rendering nothing.`,),);
+        return null;
+      }
+      void Component17.preload();
+      return renderServerRichTextModule(node, Component17,);
     }
     default: {
       shouldBeNever2(node,);
@@ -49769,10 +49776,57 @@ function renderServerRichText(node,) {
     }
   }
 }
-var logger = /* @__PURE__ */ getLogger('server database',);
+function renderServerRichTextModule({
+  identifier: identifier2,
+  width,
+  alignment,
+  aspectRatio: aspectRatio2,
+}, Component17,) {
+  const wrapperProps = getRichTextModuleWrapperProps(width, alignment, aspectRatio2,);
+  return /* @__PURE__ */ jsx('div', {
+    suppressHydrationWarning: true,
+    ...wrapperProps,
+    children: /* @__PURE__ */ jsx(ComponentPresetsConsumer, {
+      suppressHydrationWarning: true,
+      componentIdentifier: identifier2,
+      children: (presetProps) =>
+        /* @__PURE__ */ jsx(AutoBreakpointVariant, {
+          suppressHydrationWarning: true,
+          component: Component17,
+          props: {
+            ...presetProps,
+            // TODO: ...props,
+          },
+        },),
+    },),
+  },);
+}
+function getRichTextModuleWrapperProps(width, alignment, aspectRatio2,) {
+  const style2 = {
+    width: '100%',
+    height: 'auto',
+    aspectRatio: aspectRatio2,
+  };
+  if (width === 'fit') {
+    style2.overflow = 'hidden';
+    style2.width = 'fit-content';
+    if (alignment === 'center') {
+      style2.marginLeft = 'auto';
+      style2.marginRight = 'auto';
+    } else if (alignment === 'right') {
+      style2.marginLeft = 'auto';
+    }
+  }
+  return {
+    className: 'framer-text-module',
+    style: style2,
+    'data-width': width,
+  };
+}
+var logger2 = /* @__PURE__ */ getLogger('server database',);
 function mapValueFromRaw(value, type, components,) {
   if (type === 'unsupported') {
-    logger.warn(new UnsupportedQueryError(`result type, returning null.`,),);
+    logger2.warn(new UnsupportedQueryError(`result type, returning null.`,),);
     return null;
   }
   if (value === null) return null;
@@ -49794,7 +49848,7 @@ function mapValueFromRaw(value, type, components,) {
     case 'responsiveimage':
       return mapImageJsonValue(value,);
     case 'richtext':
-      return mapRichTextJsonValue(value,);
+      return mapRichTextJsonValue(value, components,);
     case 'link':
       return mapLinkJsonValue(value,);
     case 'vectorsetitem':
@@ -49806,31 +49860,31 @@ function mapValueFromRaw(value, type, components,) {
 function mapBooleanValue(value,) {
   if (value === 0) return false;
   if (value === 1) return true;
-  logger.warn(new ServerDatabaseError(`Unexpected boolean value ${value}, returning null.`,),);
+  logger2.warn(new ServerDatabaseError(`Unexpected boolean value ${value}, returning null.`,),);
   return null;
 }
 function mapDateValue(value,) {
   if (typeof value !== 'string') {
-    logger.warn(new ServerDatabaseError(`Unexpected date value ${value}, returning null.`,),);
+    logger2.warn(new ServerDatabaseError(`Unexpected date value ${value}, returning null.`,),);
     return null;
   }
   const date = new Date(value,);
   if (!isValidDate(date,)) {
-    logger.warn(new ServerDatabaseError(`Unexpected date value ${value}, returning null.`,),);
+    logger2.warn(new ServerDatabaseError(`Unexpected date value ${value}, returning null.`,),);
     return null;
   }
   return date.toISOString();
 }
 function mapNumberValue(value,) {
   if (typeof value !== 'number') {
-    logger.warn(new ServerDatabaseError(`Unexpected number value ${value}, returning null.`,),);
+    logger2.warn(new ServerDatabaseError(`Unexpected number value ${value}, returning null.`,),);
     return null;
   }
   return value;
 }
 function mapStringValue(value,) {
   if (typeof value !== 'string') {
-    logger.warn(new ServerDatabaseError(`Unexpected string value ${value}, returning null.`,),);
+    logger2.warn(new ServerDatabaseError(`Unexpected string value ${value}, returning null.`,),);
     return null;
   }
   return value;
@@ -49842,7 +49896,7 @@ function mapStringArrayJsonValue(value,) {
       if (isStringArray(parsed,)) return parsed;
     } catch {}
   }
-  logger.warn(new ServerDatabaseError(`Unexpected multi reference value ${value}, returning null.`,),);
+  logger2.warn(new ServerDatabaseError(`Unexpected multi reference value ${value}, returning null.`,),);
   return null;
 }
 function isStringArray(value,) {
@@ -49855,20 +49909,20 @@ function mapImageJsonValue(value,) {
       if (isImageValue(parsed,)) return parsed;
     } catch {}
   }
-  logger.warn(new ServerDatabaseError(`Unexpected image value ${value}, returning null.`,),);
+  logger2.warn(new ServerDatabaseError(`Unexpected image value ${value}, returning null.`,),);
   return null;
 }
 function isImageValue(value,) {
   return isObject2(value,) && typeof value.src === 'string';
 }
-function mapRichTextJsonValue(value,) {
+function mapRichTextJsonValue(value, components,) {
   if (typeof value === 'string') {
     try {
       const parsed = JSON.parse(value,);
-      if (isServerRichTextNode(parsed,)) return renderServerRichText(parsed,);
+      if (isServerRichTextNode(parsed,)) return renderServerRichText(parsed, components,);
     } catch {}
   }
-  logger.warn(new ServerDatabaseError(`Unexpected rich text value ${value}, returning null.`,),);
+  logger2.warn(new ServerDatabaseError(`Unexpected rich text value ${value}, returning null.`,),);
   return null;
 }
 function mapLinkJsonValue(value,) {
@@ -49878,17 +49932,17 @@ function mapLinkJsonValue(value,) {
       if (typeof parsed === 'string' || isLinkToWebPage(parsed,)) return parsed;
     } catch {}
   }
-  logger.warn(new ServerDatabaseError(`Unexpected link value ${value}, returning null.`,),);
+  logger2.warn(new ServerDatabaseError(`Unexpected link value ${value}, returning null.`,),);
   return null;
 }
 function mapVectorSetItemValue(value, components,) {
   if (typeof value !== 'string') {
-    logger.warn(new ServerDatabaseError(`Unexpected vector set item value ${value}, returning null.`,),);
+    logger2.warn(new ServerDatabaseError(`Unexpected vector set item value ${value}, returning null.`,),);
     return null;
   }
   const Component17 = components[value];
   if (!Component17) {
-    logger.warn(new ServerDatabaseError(`Missing component for vector set item ${value}, returning null.`,),);
+    logger2.warn(new ServerDatabaseError(`Missing component for vector set item ${value}, returning null.`,),);
     return null;
   }
   void Component17.preload();
@@ -53062,6 +53116,554 @@ var defaultFadeTransition = {
   duration: 0.2,
   ease: 'linear',
 };
+function calcDirection(delta,) {
+  return -Math.sign(delta,);
+}
+function wheel(element, {
+  axis = 'y',
+  onWheel,
+  onSwipe,
+  swipeThreshold = 100,
+  swipeTimeout = 150,
+  jitterThreshold = 2,
+  lineHeight = 16,
+},) {
+  let state = 'IDLE';
+  let accumulator = 0;
+  let swipeDirection = 0;
+  let lastDelta = 0;
+  let isDecelerating = false;
+  let accelerationCount = 0;
+  let hasSwipedInSession = false;
+  let sessionTimeoutId = null;
+  const wheelHandler = (event) => {
+    const primaryDelta = axis === 'x' && !event.shiftKey ? event.deltaX : event.deltaY;
+    const perpendicularDelta = axis === 'x' && !event.shiftKey ? event.deltaY : event.deltaX;
+    if (Math.abs(primaryDelta,) < Math.abs(perpendicularDelta,)) {
+      return;
+    }
+    if (onWheel || onSwipe) event.preventDefault();
+    let delta = -(event.deltaMode === WheelEvent.DOM_DELTA_LINE ? primaryDelta * lineHeight : primaryDelta);
+    if (delta === 0) return;
+    if (sessionTimeoutId) clearTimeout(sessionTimeoutId,);
+    sessionTimeoutId = setTimeout(() => {
+      state = 'IDLE';
+      hasSwipedInSession = false;
+      accumulator = 0;
+    }, swipeTimeout,);
+    if (state === 'IDLE') state = 'WHEELING';
+    const newDirection = calcDirection(delta,);
+    function startSwipe(triggeringDelta, currentAccumulator,) {
+      state = 'SWIPING';
+      hasSwipedInSession = true;
+      swipeDirection = calcDirection(currentAccumulator,);
+      isDecelerating = false;
+      accelerationCount = 0;
+      lastDelta = Math.abs(triggeringDelta,);
+      onSwipe?.(swipeDirection,);
+      accumulator = Math.abs(currentAccumulator,) % swipeThreshold * swipeDirection;
+    }
+    switch (state) {
+      case 'WHEELING': {
+        const newAccumulator = accumulator + delta;
+        if (onSwipe && !hasSwipedInSession && Math.abs(newAccumulator,) >= swipeThreshold) {
+          startSwipe(delta, newAccumulator,);
+        } else {
+          accumulator = newAccumulator;
+          onWheel?.(delta,);
+        }
+        break;
+      }
+      case 'SWIPING': {
+        const deltaAbs = Math.abs(delta,);
+        const isDirectionChange = newDirection !== swipeDirection;
+        let isMomentumChange = false;
+        if (lastDelta > 0) {
+          const deltaDiff = deltaAbs - lastDelta;
+          if (deltaDiff < 0) isDecelerating = true;
+          if (isDecelerating && deltaDiff > jitterThreshold) {
+            accelerationCount++;
+            if (accelerationCount > 2) isMomentumChange = true;
+          } else {
+            accelerationCount = 0;
+          }
+        }
+        if (isDirectionChange || isMomentumChange) {
+          hasSwipedInSession = false;
+          const newAccumulator = delta;
+          if (onSwipe && !hasSwipedInSession && Math.abs(newAccumulator,) >= swipeThreshold) {
+            startSwipe(delta, newAccumulator,);
+          } else {
+            state = 'WHEELING';
+            accumulator = newAccumulator;
+            onWheel?.(delta,);
+          }
+          break;
+        }
+        lastDelta = deltaAbs;
+        break;
+      }
+    }
+  };
+  element.addEventListener('wheel', wheelHandler, {
+    passive: false,
+  },);
+  return () => {
+    if (sessionTimeoutId) clearTimeout(sessionTimeoutId,);
+    element.removeEventListener('wheel', wheelHandler,);
+  };
+}
+var CarouselContext = /* @__PURE__ */ (() => {
+  const Context2 = createContext(null,);
+  Context2.displayName = 'CarouselContext';
+  return Context2;
+})();
+function findCurrentIndexFromInset2(currentInset, itemPositions, wrapInset,) {
+  const iteration = Math.floor(currentInset / wrapInset,);
+  const transform2 = iteration * wrapInset;
+  let itemIndex = 0;
+  for (let i = 0; i < itemPositions.length; i++) {
+    const {
+      end,
+    } = itemPositions[i];
+    itemIndex = i;
+    if (end + transform2 > currentInset) {
+      break;
+    }
+  }
+  return itemIndex + iteration * itemPositions.length;
+}
+function findPrevItemInset2(currentInset, itemPositions, gap, targetInset, containerLength,) {
+  if (itemPositions.length === 0) return 0;
+  const totalItemLength = itemPositions[itemPositions.length - 1].end;
+  const wrapInset = totalItemLength + gap;
+  const idealInset = targetInset ?? currentInset - (containerLength ?? 0);
+  const currentItemIndex = findCurrentIndexFromInset2(currentInset, itemPositions, wrapInset,);
+  let index = currentItemIndex;
+  let prevItemInset = currentInset;
+  let hasFoundPrevInset = false;
+  while (!hasFoundPrevInset) {
+    const {
+      start: start2,
+      end,
+    } = itemPositions[wrap(0, itemPositions.length, index,)];
+    const itemSize = end - start2;
+    const iteration = Math.floor(index / itemPositions.length,);
+    const transformInset = iteration * wrapInset;
+    const transformedStart = start2 + transformInset;
+    if (idealInset <= transformedStart + gap || transformedStart >= currentInset) {
+      prevItemInset = transformedStart;
+      index--;
+    } else if (idealInset <= transformedStart) {
+      prevItemInset = transformedStart;
+      hasFoundPrevInset = true;
+    } else {
+      if (containerLength && itemSize > containerLength || prevItemInset === currentInset && idealInset >= transformedStart) {
+        prevItemInset = transformedStart;
+      }
+      hasFoundPrevInset = true;
+    }
+  }
+  return prevItemInset;
+}
+function findPrevPageInset(currentInset, containerLength, itemPositions, gap,) {
+  const idealInset = currentInset - containerLength;
+  return findPrevItemInset2(currentInset, itemPositions, gap, idealInset, containerLength,);
+}
+function findNextItemInset2(currentInset, itemPositions, gap, targetInset,) {
+  if (itemPositions.length === 0) return 0;
+  const totalItemLength = itemPositions[itemPositions.length - 1].end;
+  const wrapInset = totalItemLength + gap;
+  const idealInset = targetInset ?? currentInset + (itemPositions[0]?.end ?? 0);
+  const currentItemIndex = findCurrentIndexFromInset2(currentInset, itemPositions, wrapInset,);
+  let index = currentItemIndex + 1;
+  let nextItemInset = 0;
+  let hasFoundNextInset = false;
+  while (!hasFoundNextInset) {
+    const {
+      start: start2,
+      end,
+    } = itemPositions[wrap(0, itemPositions.length, index,)];
+    const iteration = Math.floor(index / itemPositions.length,);
+    const transformInset = iteration * wrapInset;
+    const transformedStart = start2 + transformInset;
+    nextItemInset = transformedStart;
+    if (end + transformInset > idealInset) {
+      hasFoundNextInset = true;
+    } else {
+      index++;
+    }
+  }
+  return nextItemInset;
+}
+function findNextPageInset(currentInset, containerLength, itemPositions, gap,) {
+  const idealInset = currentInset + containerLength;
+  return findNextItemInset2(currentInset, itemPositions, gap, idealInset,);
+}
+function calcPageInsets(itemPositions, containerLength, maxInset, allowRescale = true,) {
+  const pageInsetData = {
+    insets: [],
+    visibleLength: containerLength,
+  };
+  if (itemPositions.length === 0) {
+    return pageInsetData;
+  }
+  const insets = [itemPositions[0].start,];
+  for (let i = 1; i < itemPositions.length; i++) {
+    const {
+      start: start2,
+      end,
+    } = itemPositions[i];
+    if (insets[insets.length - 1] + containerLength < end) {
+      if (maxInset !== null) {
+        if (start2 <= maxInset) {
+          insets.push(start2,);
+        } else {
+          insets.push(maxInset,);
+          break;
+        }
+      } else {
+        insets.push(start2,);
+      }
+    }
+  }
+  if (allowRescale && maxInset !== null && insets.length > 1) {
+    const originalLastInset = insets[insets.length - 1];
+    const pageSizes = [];
+    for (let i = 0; i < insets.length - 1; i++) {
+      pageSizes.push(insets[i + 1] - insets[i],);
+    }
+    const averagePageSize = pageSizes.reduce((sum, size,) => sum + size, 0,) / pageSizes.length;
+    const finalPageSize = maxInset - originalLastInset;
+    if (finalPageSize < averagePageSize * 0.5) {
+      const scaledPagination = calcPageInsets(itemPositions, containerLength * 0.75, maxInset, false,);
+      if (scaledPagination.insets.length === insets.length) {
+        return scaledPagination;
+      }
+    }
+  }
+  return {
+    insets,
+    visibleLength: containerLength,
+  };
+}
+function calcCurrentPage(targetOffset, pageInsets, wrapInset, maxInset,) {
+  const targetInset = -targetOffset;
+  const iteration = maxInset === null ? Math.floor(targetInset / wrapInset,) : 0;
+  const transformInset = iteration * wrapInset;
+  for (let i = pageInsets.length - 1; i >= 0; i--) {
+    const inset2 = pageInsets[i] + transformInset;
+    const prevIndex = wrap(0, pageInsets.length, i - 1,);
+    const prevIteration = i === 0 ? iteration - 1 : iteration;
+    const prevTransformInset = prevIteration * wrapInset;
+    const prevInset = pageInsets[prevIndex] + prevTransformInset;
+    const halfDistanceToPrev = (inset2 - prevInset) / 2;
+    const nextIndex = wrap(0, pageInsets.length, i + 1,);
+    const nextIteration = i === pageInsets.length - 1 ? iteration + 1 : iteration;
+    const nextTransformInset = nextIteration * wrapInset;
+    const nextInset = pageInsets[nextIndex] + nextTransformInset;
+    const halfDistanceToNext = (nextInset - inset2) / 2;
+    if (targetInset < nextInset - halfDistanceToNext && targetInset >= prevInset + halfDistanceToPrev) {
+      return i;
+    }
+  }
+  return 0;
+}
+function CarouselView({
+  children,
+  offset,
+  targetOffset,
+  tugOffset,
+  loop = true,
+  transition,
+  tickerRef,
+  axis = 'x',
+  snap = 'page',
+  page,
+  wheelSwipeThreshold,
+},) {
+  const isOffsetAttachedToTarget = useRef(true,);
+  const {
+    clampOffset,
+    totalItemLength,
+    itemPositions,
+    containerLength,
+    gap,
+    maxInset,
+    direction,
+    isMeasured,
+  } = useTicker();
+  const wrapInset = totalItemLength + gap;
+  const pagination = calcPageInsets(itemPositions, containerLength, maxInset,);
+  const totalPages = pagination.insets.length;
+  const {
+    sign,
+  } = getLayoutStrategy(axis, direction,);
+  const lastPageRef = useRef(void 0,);
+  const hasInitialized = useRef(false,);
+  useEffect(() => {
+    if (page === void 0 || !isMeasured || totalPages === 0) return;
+    const pageIndex = clamp(0, totalPages - 1, page,);
+    const newOffset = -pagination.insets[pageIndex] * sign;
+    if (!hasInitialized.current) {
+      hasInitialized.current = true;
+      lastPageRef.current = page;
+      targetOffset.jump(newOffset,);
+      offset.jump(newOffset,);
+    } else if (lastPageRef.current !== page) {
+      lastPageRef.current = page;
+      targetOffset.jump(newOffset,);
+      offset.jump(newOffset,);
+    }
+  }, [isMeasured, totalPages, page, sign, targetOffset, offset, pagination.insets,],);
+  const calculatePaginationState = (targetOffsetValue) => {
+    const current2 = calcCurrentPage(targetOffsetValue * sign, pagination.insets, wrapInset, maxInset,);
+    const isNextActive = loop ? true : targetOffsetValue * -sign < maxInset;
+    const isPrevActive = loop ? true : targetOffsetValue * -sign > 0;
+    return {
+      current: current2,
+      isNextActive,
+      isPrevActive,
+    };
+  };
+  const [paginationState, setPaginationState,] = useState(() => calculatePaginationState(targetOffset.get(),));
+  useEffect(() => {
+    updatePaginationState();
+  }, [containerLength, totalItemLength,],);
+  const updatePaginationState = () => {
+    const newPaginationState = calculatePaginationState(targetOffset.get(),);
+    if (
+      newPaginationState.current !== paginationState.current || newPaginationState.isNextActive !== paginationState.isNextActive ||
+      newPaginationState.isPrevActive !== paginationState.isPrevActive
+    ) {
+      setPaginationState(newPaginationState,);
+    }
+  };
+  useMotionValueEvent(targetOffset, 'change', (latest) => {
+    offset.set(latest,);
+    updatePaginationState();
+  },);
+  const currentAnimation = useRef(null,);
+  const stopOffsetAnimation = () => {
+    if (!currentAnimation.current) return;
+    currentAnimation.current.stop();
+    currentAnimation.current = null;
+  };
+  useEffect(() => {
+    offset.attach((v, onUpdate,) => {
+      stopOffsetAnimation();
+      if (isOffsetAttachedToTarget.current) {
+        onUpdate(v,);
+      } else {
+        currentAnimation.current = new JSAnimation({
+          keyframes: [offset.get(), v,],
+          velocity: clamp(-2e3, 2e3, offset.getVelocity(),),
+          ...transition,
+          onUpdate,
+          onComplete: () => {
+            currentAnimation.current = null;
+          },
+        },);
+      }
+      isOffsetAttachedToTarget.current = true;
+    }, stopOffsetAnimation,);
+  }, [],);
+  const stepOffset = (newOffset) => {
+    const clampedOffset = clampOffset(newOffset,);
+    targetOffset.stop();
+    isOffsetAttachedToTarget.current = false;
+    targetOffset.set(clampedOffset * sign,);
+  };
+  const paginate = (findPageInset, direction2,) => {
+    const offset2 = -findPageInset(-targetOffset.get() * sign, pagination.visibleLength, itemPositions, gap,);
+    const clamped = clampOffset(offset2,);
+    if (clamped * sign === targetOffset.get()) {
+      animate(tugOffset, 0, {
+        velocity: direction2 * sign * 400,
+        ...limitSpring,
+      },);
+    } else {
+      stepOffset(clamped,);
+    }
+  };
+  const nextPage = () => paginate(findNextPageInset, -1,);
+  const prevPage = () => paginate(findPrevPageInset, 1,);
+  const gotoPage = (i) => {
+    const iteration = loop ? Math.floor(-targetOffset.get() * sign / wrapInset,) : 0;
+    const transformOffset = iteration * -wrapInset;
+    stepOffset(-pagination.insets[i] + transformOffset,);
+  };
+  const wheelCallbacks = useRef({
+    nextPage,
+    prevPage,
+    clampOffset,
+  },);
+  useEffect(() => {
+    wheelCallbacks.current = {
+      nextPage,
+      prevPage,
+      clampOffset,
+    };
+  }, [nextPage, prevPage, clampOffset,],);
+  useEffect(() => {
+    const element = tickerRef.current;
+    if (!element) return;
+    return wheel(element, {
+      axis,
+      swipeThreshold: wheelSwipeThreshold,
+      onSwipe: snap
+        ? // oxlint-disable-next-line no-shadow -- present in motion-plus
+        (direction2) => {
+          const {
+            nextPage: nextPage2,
+            prevPage: prevPage2,
+          } = wheelCallbacks.current;
+          direction2 * sign === 1 ? nextPage2() : prevPage2();
+        }
+        : void 0,
+      onWheel: (delta) => {
+        const {
+          clampOffset: clampOffset2,
+        } = wheelCallbacks.current;
+        const newOffset = offset.get() + delta;
+        const clampedOffset = sign > 0 ? clampOffset2(newOffset,) : clamp(0, maxInset, newOffset,);
+        targetOffset.jump(maxInset ? clampedOffset : newOffset,);
+      },
+    },);
+  }, [axis, snap, offset, sign,],);
+  return /* @__PURE__ */ jsx(CarouselContext.Provider, {
+    suppressHydrationWarning: true,
+    value: {
+      currentPage: paginationState.current,
+      isNextActive: paginationState.isNextActive,
+      isPrevActive: paginationState.isPrevActive,
+      totalPages,
+      nextPage,
+      prevPage,
+      gotoPage,
+      offset,
+      targetOffset,
+    },
+    children,
+  },);
+}
+function Carousel({
+  children,
+  loop = true,
+  transition = defaultTransition,
+  axis = 'x',
+  snap = 'page',
+  page,
+  wheelSwipeThreshold,
+  ...props
+},) {
+  const ref = useRef(null,);
+  const targetOffset = useMotionValue(0,);
+  const offset = useMotionValue(0,);
+  const tugOffset = useMotionValue(0,);
+  const renderedOffset = useTransform(() => tugOffset.get() + offset.get());
+  return /* @__PURE__ */ jsx(Ticker, {
+    suppressHydrationWarning: true,
+    role: 'region',
+    'aria-roledescription': 'carousel',
+    offset: renderedOffset,
+    loop,
+    ref,
+    axis,
+    drag: axis,
+    _dragX: axis === 'x' ? targetOffset : false,
+    _dragY: axis === 'y' ? targetOffset : false,
+    snap,
+    pageTransition: transition,
+    ...props,
+    children: /* @__PURE__ */ jsx(CarouselView, {
+      suppressHydrationWarning: true,
+      tickerRef: ref,
+      loop,
+      offset,
+      tugOffset,
+      targetOffset,
+      transition,
+      snap,
+      axis,
+      page,
+      wheelSwipeThreshold,
+      children,
+    },),
+  },);
+}
+var defaultTransition = {
+  type: 'spring',
+  stiffness: 200,
+  damping: 40,
+};
+var limitSpring = {
+  type: 'spring',
+  stiffness: 80,
+  damping: 10,
+};
+var requiredCarouselStyle = {
+  height: '100%',
+  width: '100%',
+};
+var Carousel2 = /* @__PURE__ */ forwardRef(function Carousel3(props, ref,) {
+  const {
+    children,
+    carouselEffectStackDirection,
+    carouselEffectAlign,
+    carouselEffectGap,
+    carouselEffectXOverflow,
+    carouselEffectYOverflow,
+    carouselEffectOverflow,
+    carouselEffectControls,
+    as: asProp,
+    ...rest
+  } = props;
+  const isStatic = useIsStaticRenderer();
+  const axis = carouselEffectStackDirection?.startsWith('column',) ? 'y' : 'x';
+  const xOverflowWithFallback = carouselEffectXOverflow ?? carouselEffectOverflow ?? 'visible';
+  const yOverflowWithFallback = carouselEffectYOverflow ?? carouselEffectOverflow ?? 'visible';
+  const overflow = (axis === 'x' ? xOverflowWithFallback : yOverflowWithFallback) === 'visible';
+  const gap = getGap(carouselEffectGap, axis,);
+  const items = flattenChildrenToTickerItems(children,);
+  const MotionComponent = useMemo(() => motion.create(asProp,), [asProp,],);
+  return /* @__PURE__ */ jsx(MotionComponent, {
+    suppressHydrationWarning: true,
+    ...rest,
+    ref,
+    children: /* @__PURE__ */ jsx(Carousel, {
+      suppressHydrationWarning: true,
+      axis,
+      align: carouselEffectAlign ?? 'center',
+      gap,
+      isStatic,
+      itemSize: 'manual',
+      overflow,
+      items,
+      style: requiredCarouselStyle,
+      children: carouselEffectControls
+        ? /* @__PURE__ */ jsx(Nav, {
+          suppressHydrationWarning: true,
+          controls: carouselEffectControls,
+        },)
+        : null,
+    },),
+  },);
+},);
+function Nav(props,) {
+  return props.controls ?? null;
+}
+function getGap(gap, axis,) {
+  if (typeof gap === 'number' && Number.isFinite(gap,)) return gap;
+  if (!isString(gap,)) return void 0;
+  const gaps = gap.split(' ',);
+  const rowGap = gaps[0];
+  const columnGap = gaps[1] ?? gaps[0];
+  const value = axis === 'x' ? columnGap : rowGap;
+  if (!value) return void 0;
+  const parsed = parseInt(value,);
+  return Number.isNaN(parsed,) ? void 0 : parsed;
+}
 var BasicTicker = /* @__PURE__ */ forwardRef(function BasicTicker2(props, ref,) {
   const {
     children,
@@ -53221,7 +53823,7 @@ var Ticker2 = /* @__PURE__ */ forwardRef(function Ticker3(props, ref,) {
   const xOverflowWithFallback = tickerEffectXOverflow ?? tickerEffectOverflow ?? 'visible';
   const yOverflowWithFallback = tickerEffectYOverflow ?? tickerEffectOverflow ?? 'visible';
   const overflow = (axis === 'x' ? xOverflowWithFallback : yOverflowWithFallback) === 'visible';
-  const gap = getGap(tickerEffectGap, axis,);
+  const gap = getGap2(tickerEffectGap, axis,);
   const items = flattenChildrenToTickerItems(children,);
   const tickerStyle = {
     ...styleProps,
@@ -53268,7 +53870,7 @@ var Ticker2 = /* @__PURE__ */ forwardRef(function Ticker3(props, ref,) {
     },),
   },);
 },);
-function getGap(gap, axis,) {
+function getGap2(gap, axis,) {
   if (isFiniteNumber(gap,)) return gap;
   if (!isString(gap,)) return void 0;
   const gaps = gap.split(' ',);
@@ -53283,6 +53885,13 @@ function naNToUndefined(value,) {
 }
 var withTickerFX = (Component17) => {
   return (props) => {
+    if (props.carouselEffectEnabled) {
+      return /* @__PURE__ */ jsx(Carousel2, {
+        suppressHydrationWarning: true,
+        ...props,
+        as: Component17,
+      },);
+    }
     if (props.tickerEffectEnabled) {
       return /* @__PURE__ */ jsx(Ticker2, {
         suppressHydrationWarning: true,
