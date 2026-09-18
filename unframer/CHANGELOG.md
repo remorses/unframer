@@ -1,5 +1,42 @@
 # unframer
 
+## 4.2.1
+
+1. **Fixed `unframer mcp updateXmlForNode` on pages that are not open** — Framer only fully loads the **canvas root**, the page or component currently open. For every other page `framer.getNode(id)` returned `null` even though the node exists, so edits answered:
+
+   ```
+   No changes were made! Make sure you are not using made up attributes, follow the outlined attributes only.
+   ```
+
+   Node lookup now falls back to a project-wide index, so attribute and text edits work on any page:
+
+   ```bash
+   npx unframer mcp updateXmlForNode --nodeId "abc123" --xml '<Text nodeId="abc123">New text</Text>'
+   ```
+
+   Structural writes (`setParent`, creating a node under a given parent) are still ignored by Framer outside the loaded scope. They are now reported as real failures instead of a fake success:
+
+   ```
+   Failed to process node xBDPav8IN: Framer did not move node xBDPav8IN into parent HAL0sllkT.
+   Framer can only restructure the page or component that is currently open on the canvas.
+   ```
+
+   The "no changes" message is also accurate now. When every attribute already holds the requested value the tool says so, instead of blaming made up attribute names.
+
+2. **Fixed the daily Framer runtime download** — two upstream refactors had broken the `framer.js` patches.
+
+   Framer wrapped `combinedCSSRules` in a `LazyProp` getter. The public export stays a `string[]`. Framer's own `getCombinedCSSRules()` still reads `combinedCSSRules.value`, so the declaration is left untouched and the resolved array is re-exported under the public name.
+
+   The lazy module dynamic import now ships Framer's own `/* @vite-ignore */` comment, often split across lines. The patch matches the whole `import( url )` call and rewrites it to:
+
+   ```js
+   import(/* webpackIgnore: true */ /* @vite-ignore */ url)
+   ```
+
+   `webpackIgnore` is still required. Framer only ships the Vite comment. Without it webpack and Turbopack try to statically resolve a runtime url.
+
+3. **Updated bundled Framer runtime** — refreshed to the latest `framer@2.4.1` release.
+
 ## 4.2.0
 
 1. **Multiple project IDs in a single command** — pass multiple Framer project IDs to bundle all components together with automatic chunk deduplication:
