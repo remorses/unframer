@@ -13502,7 +13502,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.DFK3KH4F.mjs
+// /:https://app.framerstatic.com/framer.PE56BHYF.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -49971,6 +49971,7 @@ var indexColumn = 'index';
 var referencedCollectionItemIdColumn = 'referencedCollectionItemId';
 var createdAtColumn = 'createdAt';
 var updatedAtColumn = 'updatedAt';
+var localeIdColumn = 'localeId';
 var systemColumns = [
   collectionItemIdColumn,
   positionColumn,
@@ -49979,6 +49980,7 @@ var systemColumns = [
   referencedCollectionItemIdColumn,
   createdAtColumn,
   updatedAtColumn,
+  localeIdColumn,
 ];
 var BaseSafeSql = class extends String {};
 function isSafeSql(value,) {
@@ -50101,13 +50103,16 @@ function serializeSql(statement,) {
 function getItemsTable(collectionId,) {
   return `${collectionId}/items`;
 }
+function getItemLocalizationsTable(collectionId,) {
+  return `${collectionId}/itemLocalizations`;
+}
 function getItemMultiCollectionReferencesTable(collectionId,) {
   return `${collectionId}/itemMultiCollectionReferences`;
 }
 function getItemMultiCollectionReferencesView(collectionId, fieldId,) {
   return `${getItemMultiCollectionReferencesTable(collectionId,)}/${fieldId}`;
 }
-function compileFromClause(table, alias2, references, joinType,) {
+function compileFromClause(table, alias2, references, joinType, localizations,) {
   const source = sql.identifier(table,);
   const joinParts = [alias2 === void 0 ? source : sql`${source} AS ${sql.alias(alias2,)}`,];
   for (const [joinAlias, reference,] of references) {
@@ -50115,6 +50120,15 @@ function compileFromClause(table, alias2, references, joinType,) {
       sql`${sql.identifier(getItemsTable(reference.referencedCollectionId,),)} AS ${sql.alias(joinAlias,)} ON ${
         sql.qualifiedIdentifier(reference.qualifier, reference.identifier,)
       } = ${sql.qualifiedIdentifier(joinAlias, collectionItemIdColumn,)}`,
+    );
+  }
+  for (const [joinAlias, localization,] of localizations) {
+    joinParts.push(
+      sql`${sql.identifier(getItemLocalizationsTable(localization.collectionId,),)} AS ${sql.alias(joinAlias,)} ON ${
+        sql.qualifiedIdentifier(localization.qualifier, collectionItemIdColumn,)
+      } = ${sql.qualifiedIdentifier(joinAlias, collectionItemIdColumn,)} AND ${sql.qualifiedIdentifier(joinAlias, localeIdColumn,)} = ${
+        sql.parameter('localeId', localization.localeId,)
+      }`,
     );
   }
   return {
@@ -50126,7 +50140,26 @@ function compileLimitAndOffsetClause() {
     statement: sql`LIMIT 5000`,
   };
 }
-function resolveFieldPath(rootCollectionId, fieldPath, serverCollections, references,) {
+function getLocalizationJoinAlias(qualifier2, localeId,) {
+  return `${qualifier2}/${localeId}`;
+}
+function registerLocalizationJoins(
+  {
+    chainedLocaleIds,
+    joins,
+  },
+  qualifier2,
+  collectionId,
+) {
+  for (const localeId of chainedLocaleIds) {
+    joins.set(getLocalizationJoinAlias(qualifier2, localeId,), {
+      qualifier: qualifier2,
+      collectionId,
+      localeId,
+    },);
+  }
+}
+function resolveFieldPath(rootCollectionId, fieldPath, serverCollections, references, localization,) {
   const referencePath = [...fieldPath,];
   const tailFieldId = referencePath.pop();
   if (tailFieldId === void 0) {
@@ -50168,6 +50201,9 @@ function resolveFieldPath(rootCollectionId, fieldPath, serverCollections, refere
     warnOnce2(new ServerDatabaseError(`Field ${tailFieldId} does not exist in collection ${collectionId}.`,).toString(),);
     return void 0;
   }
+  if ('isLocalized' in tailField && tailField.isLocalized) {
+    registerLocalizationJoins(localization, qualifier2, collectionId,);
+  }
   return {
     qualifier: qualifier2,
     collectionId,
@@ -50179,7 +50215,7 @@ function getServerCollectionField(serverCollections, collectionId, fieldId,) {
   if (fieldId === createdAtColumn || fieldId === updatedAtColumn) {
     return {
       type: 'date',
-      /* Date */
+      isLocalized: false,
     };
   }
   return serverCollections[collectionId]?.fields[fieldId];
@@ -50191,11 +50227,12 @@ function compileOrderByClause(
   },
   serverCollections,
   references,
+  localization,
 ) {
   const parts = [];
   const defaultOrderBy = serverCollections[collectionId]?.defaultOrderBy ?? [];
   for (const sort of [...orderBy, ...defaultOrderBy,]) {
-    const resolved = resolveFieldPath(collectionId, sort.fieldPath, serverCollections, references,);
+    const resolved = resolveFieldPath(collectionId, sort.fieldPath, serverCollections, references, localization,);
     if (!resolved || resolved.tailField.type === 'multicollectionreference') continue;
     if (resolved.tailField.type === 'unsupported') {
       warnOnce2(new UnsupportedQueryError(`sort field type.`,).toString(),);
@@ -50217,7 +50254,7 @@ function compileMultiReferenceExpression(qualifier2, collectionId, fieldId, refe
   const sideTable = getItemMultiCollectionReferencesView(collectionId, fieldId,);
   const joinAlias = `${qualifier2}.${fieldId}`;
   const selectClause = compileMultiReferenceSelectClause(sideTable, joinAlias, referencedCollectionId,);
-  const fromClause = compileFromClause(sideTable, void 0, selectClause.references, ' JOIN ',);
+  const fromClause = compileFromClause(sideTable, void 0, selectClause.references, ' JOIN ', /* @__PURE__ */ new Map(),);
   const whereClause = compileMultiReferenceWhereClause(sideTable, qualifier2,);
   return sql`(${selectClause.statement} ${fromClause.statement} ${whereClause.statement})`;
 }
@@ -50248,11 +50285,12 @@ function compileSelectClause(
   },
   serverCollections,
   references,
+  localization,
 ) {
   const resultColumns = [];
   const selectParts = [];
   for (const column of columns) {
-    const compiledColumn = compileColumn(collectionId, column, serverCollections, references,);
+    const compiledColumn = compileColumn(collectionId, column, serverCollections, references, localization,);
     if (!compiledColumn) continue;
     resultColumns.push({
       fieldName: column.alias,
@@ -50268,8 +50306,8 @@ function compileSelectClause(
     columns: resultColumns,
   };
 }
-function compileColumn(rootCollectionId, column, serverCollections, references,) {
-  const resolved = resolveFieldPath(rootCollectionId, column.fieldPath, serverCollections, references,);
+function compileColumn(rootCollectionId, column, serverCollections, references, localization,) {
+  const resolved = resolveFieldPath(rootCollectionId, column.fieldPath, serverCollections, references, localization,);
   if (!resolved) return void 0;
   const {
     qualifier: qualifier2,
@@ -50302,10 +50340,10 @@ function compileColumn(rootCollectionId, column, serverCollections, references,)
     type: tailField.type,
   };
 }
-function compileWhereClause(collectionId, filters, serverCollections, references,) {
+function compileWhereClause(collectionId, filters, serverCollections, references, localization,) {
   const conditions = [];
   for (const filter2 of filters.conditions) {
-    const condition = compileFilter(collectionId, filter2, serverCollections, references,);
+    const condition = compileFilter(collectionId, filter2, serverCollections, references, localization,);
     if (condition) conditions.push(condition,);
   }
   return {
@@ -50320,8 +50358,8 @@ function getJoinOperator(filterOperator,) {
       return ' AND ';
   }
 }
-function compileFilter(collectionId, filter2, serverCollections, references,) {
-  const resolved = resolveFieldPath(collectionId, filter2.fieldPath, serverCollections, references,);
+function compileFilter(collectionId, filter2, serverCollections, references, localization,) {
+  const resolved = resolveFieldPath(collectionId, filter2.fieldPath, serverCollections, references, localization,);
   if (!resolved) return void 0;
   if (resolved.tailField.type === 'unsupported') {
     warnOnce2(new UnsupportedQueryError(`filter field type.`,).toString(),);
@@ -50490,15 +50528,19 @@ function lowercaseIfString(type, expression,) {
   if (type !== 'string') return expression;
   return sql`LOWER(${expression})`;
 }
-function compileQuery(serverQuery, serverCollections,) {
+function compileQuery(serverQuery, serverCollections, chainedLocaleIds,) {
   const {
     collectionId,
   } = serverQuery;
   const references = /* @__PURE__ */ new Map();
-  const selectClause = compileSelectClause(serverQuery, serverCollections, references,);
-  const whereClause = compileWhereClause(collectionId, serverQuery.filters, serverCollections, references,);
-  const orderByClause = compileOrderByClause(serverQuery, serverCollections, references,);
-  const fromClause = compileFromClause(getItemsTable(collectionId,), collectionId, references, ' LEFT JOIN ',);
+  const localization = {
+    chainedLocaleIds,
+    joins: /* @__PURE__ */ new Map(),
+  };
+  const selectClause = compileSelectClause(serverQuery, serverCollections, references, localization,);
+  const whereClause = compileWhereClause(collectionId, serverQuery.filters, serverCollections, references, localization,);
+  const orderByClause = compileOrderByClause(serverQuery, serverCollections, references, localization,);
+  const fromClause = compileFromClause(getItemsTable(collectionId,), collectionId, references, ' LEFT JOIN ', localization.joins,);
   const limitAndOffsetClause = compileLimitAndOffsetClause();
   const statement =
     sql`${selectClause.statement} ${fromClause.statement} ${whereClause.statement} ${orderByClause.statement} ${limitAndOffsetClause.statement}`;
@@ -50511,25 +50553,29 @@ var ServerDatabaseClient = class {
   constructor(database, {
     collections,
     components,
+    localeIds,
   },) {
     this.database = database;
     this.collections = collections;
     this.components = components;
+    this.localeIds = new Set(localeIds,);
   }
   database;
   collections;
   components;
+  localeIds;
   cache = /* @__PURE__ */ new Map();
-  query(query,) {
+  query(query, locale,) {
+    const chainedLocaleIds = this.getChainedLocaleIds(locale,);
     const {
       statement: {
         sql: sql2,
         parameters,
       },
       columns,
-    } = compileQuery(query, this.collections,);
+    } = compileQuery(query, this.collections, chainedLocaleIds,);
     const rawParameters = mapParametersToRaw(parameters,);
-    const cacheKey = JSON.stringify([sql2, rawParameters,],);
+    const cacheKey = JSON.stringify([sql2, rawParameters, chainedLocaleIds,],);
     const cached = this.cache.get(cacheKey,);
     if (cached) return cached;
     const value = new LazyValue(async () => {
@@ -50540,16 +50586,39 @@ var ServerDatabaseClient = class {
     return value;
   }
   /** Starts loading the query result so that `query(...).use()` doesn't suspend. */
-  preload(query,) {
-    return this.query(query,).preload();
+  preload(query, locale,) {
+    return this.query(query, locale,).preload();
+  }
+  getChainedLocaleIds(locale,) {
+    const chainedLocaleIds = [];
+    for (
+      const {
+        id: id3,
+      } of walkLocaleFallbackChain(locale,)
+    ) {
+      if (id3 === defaultLocaleId) continue;
+      if (!this.localeIds.has(id3,)) continue;
+      chainedLocaleIds.push(id3,);
+    }
+    return chainedLocaleIds;
   }
   async execute(sql2, parameters,) {
     const response = await this.database.query(sql2, parameters,);
     return response.rows;
   }
 };
+function* walkLocaleFallbackChain(locale,) {
+  let current2 = locale;
+  while (current2) {
+    yield current2;
+    current2 = current2.fallback;
+  }
+}
 function useServerData(query,) {
-  return useServerDatabaseClient().query(query,).use();
+  const {
+    activeLocale,
+  } = useLocaleInfo();
+  return useServerDatabaseClient().query(query, activeLocale,).use();
 }
 var queryEngine = /* @__PURE__ */ new QueryEngine();
 var queryCache = /* @__PURE__ */ new QueryCache(queryEngine,);
