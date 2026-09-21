@@ -13502,7 +13502,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.PE56BHYF.mjs
+// /:https://app.framerstatic.com/framer.TI7V4V27.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -50553,17 +50553,14 @@ var ServerDatabaseClient = class {
   constructor(database, {
     collections,
     components,
-    localeIds,
   },) {
     this.database = database;
     this.collections = collections;
     this.components = components;
-    this.localeIds = new Set(localeIds,);
   }
   database;
   collections;
   components;
-  localeIds;
   cache = /* @__PURE__ */ new Map();
   query(query, locale,) {
     const chainedLocaleIds = this.getChainedLocaleIds(locale,);
@@ -50597,7 +50594,6 @@ var ServerDatabaseClient = class {
       } of walkLocaleFallbackChain(locale,)
     ) {
       if (id3 === defaultLocaleId) continue;
-      if (!this.localeIds.has(id3,)) continue;
       chainedLocaleIds.push(id3,);
     }
     return chainedLocaleIds;
@@ -53287,6 +53283,11 @@ var CarouselContext = /* @__PURE__ */ (() => {
   Context2.displayName = 'CarouselContext';
   return Context2;
 })();
+function useCarousel() {
+  const context = useContext(CarouselContext,);
+  invariant3(Boolean(context,), 'useCarousel must be used within a Carousel component',);
+  return context;
+}
 function findCurrentIndexFromInset2(currentInset, itemPositions, wrapInset,) {
   const iteration = Math.floor(currentInset / wrapInset,);
   const transform2 = iteration * wrapInset;
@@ -53671,6 +53672,38 @@ var limitSpring = {
   stiffness: 80,
   damping: 10,
 };
+function invariant3(condition, message,) {
+  if (!condition) {
+    throw new Error(message,);
+  }
+}
+function createCarouselDotsValue(itemCount,) {
+  return Array.from({
+    length: itemCount,
+  }, (_, index,) => ({
+    id: String(index + 1,),
+  }),);
+}
+function useCarouselVariables() {
+  const {
+    currentPage,
+    totalPages,
+    isNextActive,
+    isPrevActive,
+  } = useCarousel();
+  return useMemo(() => ({
+    carousel_active_item_index: currentPage + 1,
+    carousel_total_items: totalPages,
+    carousel_has_next: isNextActive,
+    carousel_has_previous: isPrevActive,
+    carousel_dots: createCarouselDotsValue(totalPages,),
+  }), [currentPage, totalPages, isNextActive, isPrevActive,],);
+}
+function CarouselVariableBindings({
+  children,
+},) {
+  return children(useCarouselVariables(),);
+}
 var requiredCarouselStyle = {
   height: '100%',
   width: '100%',
@@ -53710,18 +53743,10 @@ var Carousel2 = /* @__PURE__ */ forwardRef(function Carousel3(props, ref,) {
       overflow,
       items,
       style: requiredCarouselStyle,
-      children: carouselEffectControls
-        ? /* @__PURE__ */ jsx(Nav, {
-          suppressHydrationWarning: true,
-          controls: carouselEffectControls,
-        },)
-        : null,
+      children: carouselEffectControls,
     },),
   },);
 },);
-function Nav(props,) {
-  return props.controls ?? null;
-}
 function getGap(gap, axis,) {
   if (typeof gap === 'number' && Number.isFinite(gap,)) return gap;
   if (!isString(gap,)) return void 0;
@@ -64614,6 +64639,7 @@ export {
   cancelFrame,
   cancelMicrotask,
   cancelSync,
+  CarouselVariableBindings,
   checkVariantsDidChange,
   ChildrenCanSuspend,
   circIn,
@@ -65103,6 +65129,7 @@ export {
   useAnimationFrame,
   useBooleanQueryParam,
   useBreakpointVariants,
+  useCarouselVariables,
   useCollectionReferenceQueryParam,
   useComponentViewport,
   useComposedRefs,
