@@ -13502,7 +13502,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.TI7V4V27.mjs
+// /:https://app.framerstatic.com/framer.QZRHFQJC.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -27722,16 +27722,19 @@ function withLibraryCSS(Component17,) {
   return withCSS(Component17, getCombinedCSSRules, 'framer-lib-combinedCSSRules',);
 }
 var isChrome2 = /* @__PURE__ */ isChrome();
-function collectLayoutHintDataProps(props, center,) {
+function collectLayoutHintDataProps(props, center, translation,) {
   props['data-framer-layout-hint-center-x'] = center === true || center === 'x' ? true : void 0;
   props['data-framer-layout-hint-center-y'] = center === true || center === 'y' ? true : void 0;
+  props['data-framer-layout-hint-x'] = translation?.x;
+  props['data-framer-layout-hint-y'] = translation?.y;
 }
-function layoutHintDataPropsForCenter(center,) {
+function layoutHintDataProps(center, style2,) {
   const props = {};
-  if (!center || !isChrome2 || RenderTarget.current() !== RenderTarget.canvas) {
-    return props;
-  }
-  collectLayoutHintDataProps(props, center,);
+  if (RenderTarget.current() !== RenderTarget.canvas) return props;
+  collectLayoutHintDataProps(props, isChrome2 ? center : void 0, {
+    x: typeof style2?.x === 'number' ? style2.x : void 0,
+    y: typeof style2?.y === 'number' ? style2.y : void 0,
+  },);
   return props;
 }
 function nodeIdFromString(str,) {
@@ -28673,12 +28676,13 @@ var VisibleFrame = /* @__PURE__ */ forwardRef(function VisibleFrame2(props, forw
   const [currentStyle, rect,] = useStyleAndRect(propsWithOverrides,);
   const unwrappedProps = unwrapFrameProps(propsWithOverrides,);
   const autoSized = isAutoSized(unwrappedProps,);
-  if (center && !(rect && !autoSized && constraintsEnabled(unwrappedProps,))) {
+  const centeringTransform = center && !(rect && !autoSized && constraintsEnabled(unwrappedProps,)) ? center : void 0;
+  if (centeringTransform) {
     if (!motionProps.transformTemplate) motionProps.transformTemplate = transformTemplate(center,);
-    Object.assign(dataProps, layoutHintDataPropsForCenter(center,),);
   } else if (!motionProps.transformTemplate) {
     motionProps.transformTemplate = void 0;
   }
+  Object.assign(dataProps, layoutHintDataProps(centeringTransform, propsWithOverrides.style,),);
   useMeasureLayout(props, ref,);
   const backgroundImage = backgroundImageFromProps(props,);
   const inCodeComponent = useContext(ComponentContainerContext,);
@@ -31030,14 +31034,14 @@ var DeviceCodeComponent = /* @__PURE__ */ (() => {
       hidden: (props) => props.preset !== 'custom',
     },
     customBezelRadius: {
-      title: 'Bezel Radius',
+      title: 'Bezel radius',
       type: 'number',
       min: 0,
       displayStepper: true,
       hidden: (props) => props.preset !== 'custom',
     },
     customScreenRadius: {
-      title: 'Screen Radius',
+      title: 'Screen radius',
       type: 'number',
       min: 0,
       displayStepper: true,
@@ -35685,7 +35689,7 @@ var Scroll = /* @__PURE__ */ (() => {
     },
     scrollBarVisible: {
       type: 'boolean',
-      title: 'Scroll Bar',
+      title: 'Scroll bar',
       enabledTitle: 'Visible',
       disabledTitle: 'Hidden',
       defaultValue: false,
@@ -49972,6 +49976,7 @@ var referencedCollectionItemIdColumn = 'referencedCollectionItemId';
 var createdAtColumn = 'createdAt';
 var updatedAtColumn = 'updatedAt';
 var localeIdColumn = 'localeId';
+var inclusionColumn = 'inclusion';
 var systemColumns = [
   collectionItemIdColumn,
   positionColumn,
@@ -50151,13 +50156,15 @@ function registerLocalizationJoins(
   qualifier2,
   collectionId,
 ) {
-  for (const localeId of chainedLocaleIds) {
-    joins.set(getLocalizationJoinAlias(qualifier2, localeId,), {
+  return chainedLocaleIds.map((localeId) => {
+    const joinAlias = getLocalizationJoinAlias(qualifier2, localeId,);
+    joins.set(joinAlias, {
       qualifier: qualifier2,
       collectionId,
       localeId,
     },);
-  }
+    return joinAlias;
+  },);
 }
 function resolveFieldPath(rootCollectionId, fieldPath, serverCollections, references, localization,) {
   const referencePath = [...fieldPath,];
@@ -50171,6 +50178,7 @@ function resolveFieldPath(rootCollectionId, fieldPath, serverCollections, refere
         type: 'collectionreference',
         referencedCollectionId: rootCollectionId,
       },
+      localizationJoinAliases: [],
     };
   }
   let collectionId = rootCollectionId;
@@ -50201,15 +50209,35 @@ function resolveFieldPath(rootCollectionId, fieldPath, serverCollections, refere
     warnOnce2(new ServerDatabaseError(`Field ${tailFieldId} does not exist in collection ${collectionId}.`,).toString(),);
     return void 0;
   }
+  let localizationJoinAliases = [];
   if ('isLocalized' in tailField && tailField.isLocalized) {
-    registerLocalizationJoins(localization, qualifier2, collectionId,);
+    localizationJoinAliases = registerLocalizationJoins(localization, qualifier2, collectionId,);
   }
   return {
     qualifier: qualifier2,
     collectionId,
     tailFieldId,
     tailField,
+    localizationJoinAliases,
   };
+}
+function compileFieldExpression({
+  qualifier: qualifier2,
+  tailFieldId,
+  localizationJoinAliases,
+},) {
+  const expression = sql.qualifiedIdentifier(qualifier2, tailFieldId,);
+  if (localizationJoinAliases.length === 0) return expression;
+  const localizedExpressions = localizationJoinAliases.map((joinAlias) => {
+    const itemIsIncludedInLocale = compileItemIsIncludedInLocaleCondition(joinAlias,);
+    const valueInLocale = sql.qualifiedIdentifier(joinAlias, tailFieldId,);
+    return sql`IIF(${itemIsIncludedInLocale}, ${valueInLocale}, NULL)`;
+  },);
+  return sql`COALESCE(${sql.join([...localizedExpressions, expression,], ', ', '1',)})`;
+}
+function compileItemIsIncludedInLocaleCondition(joinAlias,) {
+  const inclusion = sql.qualifiedIdentifier(joinAlias, inclusionColumn,);
+  return sql`${inclusion} IS NULL`;
 }
 function getServerCollectionField(serverCollections, collectionId, fieldId,) {
   if (fieldId === createdAtColumn || fieldId === updatedAtColumn) {
@@ -50238,7 +50266,7 @@ function compileOrderByClause(
       warnOnce2(new UnsupportedQueryError(`sort field type.`,).toString(),);
       continue;
     }
-    let expression = sql.qualifiedIdentifier(resolved.qualifier, resolved.tailFieldId,);
+    let expression = compileFieldExpression(resolved,);
     if (resolved.tailField.type === 'string') {
       expression = sql`LOWER(${expression})`;
     }
@@ -50336,7 +50364,7 @@ function compileColumn(rootCollectionId, column, serverCollections, references, 
     };
   }
   return {
-    expression: sql.qualifiedIdentifier(qualifier2, tailFieldId,),
+    expression: compileFieldExpression(resolved,),
     type: tailField.type,
   };
 }
@@ -50447,12 +50475,13 @@ function treatNullValueAsFalse(value,) {
   }
   return 'no';
 }
-function compileField({
-  qualifier: qualifier2,
-  collectionId,
-  tailFieldId,
-  tailField,
-},) {
+function compileField(resolvedFieldPath,) {
+  const {
+    qualifier: qualifier2,
+    collectionId,
+    tailFieldId,
+    tailField,
+  } = resolvedFieldPath;
   if (tailField.type === 'multicollectionreference') {
     return new Step({
       expression: compileMultiReferenceExpression(qualifier2, collectionId, tailFieldId, tailField.referencedCollectionId,),
@@ -50461,7 +50490,7 @@ function compileField({
     },);
   }
   return new Step({
-    expression: sql.qualifiedIdentifier(qualifier2, tailFieldId,),
+    expression: compileFieldExpression(resolvedFieldPath,),
     type: tailField.type,
     nullable: 'yes',
   },);
@@ -61029,6 +61058,7 @@ var DeprecatedRichTextInner = /* @__PURE__ */ React.forwardRef(function Text(pro
     id: id3,
     ref: layoutRef,
     ...rest,
+    ...layoutHintDataProps(hasTransformTemplate ? center : void 0, props.style,),
     style: style2,
     layoutId,
     'data-framer-name': name,
@@ -61696,11 +61726,13 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
   const Component17 = htmlElementAsMotionComponent(props.as,);
   const dataFramerName = rest['data-framer-name'] ?? name;
   const validRestProps = isOnCanvas ? getValidRestProps(asRecord(rest,),) : rest;
+  const layoutHints = layoutHintDataProps(hasTransformTemplate ? center : void 0, style2,);
   if (isString(props.viewBox,)) {
     if (props.as !== void 0) {
       return /* @__PURE__ */ jsx(Component17, {
         suppressHydrationWarning: true,
         ...validRestProps,
+        ...layoutHints,
         ref: containerRef,
         style: containerStyle2,
         layoutId,
@@ -61722,6 +61754,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
       return /* @__PURE__ */ jsx(FitText, {
         suppressHydrationWarning: true,
         ...validRestProps,
+        ...layoutHints,
         ref: containerRef,
         style: containerStyle2,
         layoutId,
@@ -61737,6 +61770,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(p
   return /* @__PURE__ */ jsx(Component17, {
     suppressHydrationWarning: true,
     ...validRestProps,
+    ...layoutHints,
     ref: containerRef,
     style: containerStyle2,
     layoutId,
@@ -62663,9 +62697,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
         'data-framer-component-type': 'SVG',
       };
       const hasTransformTemplate = !frame2;
-      if (hasTransformTemplate) {
-        Object.assign(dataProps, layoutHintDataPropsForCenter(this.props.center,),);
-      }
+      Object.assign(dataProps, layoutHintDataProps(hasTransformTemplate ? this.props.center : void 0, this.props.style,),);
       const svgAsBackgroundImage =
         // If requiresOverflowVisible is true, we cannot safely render the SVG as background
         // images, as it might cropped any centered stroke that exceeds the bounding box.
@@ -63036,7 +63068,7 @@ var TextComponent = /* @__PURE__ */ (() => {
         Object.assign(style2, this.props.style,);
       }
       const centeringTransformTemplate = this.transformTemplate;
-      if (centeringTransformTemplate) Object.assign(dataProps, layoutHintDataPropsForCenter(this.props.center,),);
+      Object.assign(dataProps, layoutHintDataProps(centeringTransformTemplate ? this.props.center : void 0, this.props.style,),);
       if (rawHTML) {
         style2.lineHeight = '1px';
         style2.fontSize = '0px';
