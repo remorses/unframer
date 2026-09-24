@@ -13502,7 +13502,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.QZRHFQJC.mjs
+// /:https://app.framerstatic.com/framer.VZ2NCWRZ.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -41424,6 +41424,7 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
       },)
     );
   };
+  const renderedChildren = React42.useMemo(() => children(state,), [children, state,],);
   return /* @__PURE__ */ jsxs(motion.form, {
     suppressHydrationWarning: true,
     ...props,
@@ -41432,7 +41433,7 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
     onChange: checkValidity,
     ref,
     children: [
-      children(state,),
+      renderedChildren,
       /* @__PURE__ */ jsx(HoneypotFields, {
         suppressHydrationWarning: true,
         states: honeypotStateRefs,
