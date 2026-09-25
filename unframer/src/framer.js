@@ -12121,11 +12121,11 @@ function setValues(visualElement, definition,) {
 }
 function animationControls() {
   let hasMounted = false;
-  const subscribers = /* @__PURE__ */ new Set();
+  const subscribers2 = /* @__PURE__ */ new Set();
   const controls = {
     subscribe(visualElement,) {
-      subscribers.add(visualElement,);
-      return () => void subscribers.delete(visualElement,);
+      subscribers2.add(visualElement,);
+      return () => void subscribers2.delete(visualElement,);
     },
     start(definition, transitionOverride,) {
       invariant(
@@ -12133,7 +12133,7 @@ function animationControls() {
         'controls.start() should only be called after a component has mounted. Consider calling within a useEffect hook.',
       );
       const animations2 = [];
-      subscribers.forEach((visualElement) => {
+      subscribers2.forEach((visualElement) => {
         animations2.push(animateVisualElement(visualElement, definition, {
           transitionOverride,
         },),);
@@ -12145,12 +12145,12 @@ function animationControls() {
         hasMounted,
         'controls.set() should only be called after a component has mounted. Consider calling within a useEffect hook.',
       );
-      return subscribers.forEach((visualElement) => {
+      return subscribers2.forEach((visualElement) => {
         setValues(visualElement, definition,);
       },);
     },
     stop() {
-      subscribers.forEach((visualElement) => {
+      subscribers2.forEach((visualElement) => {
         stopAnimation(visualElement,);
       },);
     },
@@ -13502,7 +13502,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.VZ2NCWRZ.mjs
+// /:https://app.framerstatic.com/framer.7CVDL6KS.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -30911,7 +30911,24 @@ function applyControlDefaultsToReactDefaultProps(component, controls,) {
   const defaultProps = getDefaultProps(component,);
   applyControlDefaultsToDefaultProps(defaultProps, controls,);
 }
-function addPropertyControls(component, propertyControls,) {
+var outputControlsKey = 'outputControls';
+function setInputOutputControls(target, {
+  inputs,
+  outputs,
+},) {
+  Object.assign(target, {
+    inputControls: inputs,
+    [outputControlsKey]: outputs,
+  },);
+}
+function addPropertyControls(component, propertyControls, outputs,) {
+  if (outputs !== void 0) {
+    setInputOutputControls(component, {
+      inputs: propertyControls,
+      outputs,
+    },);
+    return;
+  }
   Object.assign(component, {
     propertyControls,
   },);
@@ -35750,13 +35767,13 @@ function bindActionsToStore(get, set, actions,) {
 function createStore(initialState2, unboundActions,) {
   let state = initialState2;
   let version2 = 0;
-  const subscribers = /* @__PURE__ */ new Set();
+  const subscribers2 = /* @__PURE__ */ new Set();
   const notifySubscriber = (sub) => sub(version2,);
   const get = () => state;
   const set = (latestState) => {
     version2++;
     state = latestState;
-    subscribers.forEach(notifySubscriber,);
+    subscribers2.forEach(notifySubscriber,);
   };
   const actions = unboundActions ? bindActionsToStore(get, set, unboundActions,) : set;
   return {
@@ -35765,8 +35782,8 @@ function createStore(initialState2, unboundActions,) {
     getVersion: () => version2,
     getActions: () => actions,
     subscribe: (sub) => {
-      subscribers.add(sub,);
-      return () => subscribers.delete(sub,);
+      subscribers2.add(sub,);
+      return () => subscribers2.delete(sub,);
     },
   };
 }
@@ -38467,6 +38484,50 @@ function createCloneableLayoutGroupItem(element, key7, layoutGroupId,) {
     key: key7,
   },);
 }
+var hasHoverCapability;
+var subscribers = /* @__PURE__ */ new Set();
+function observeHoverCapability() {
+  if (hasHoverCapability !== void 0 || typeof __unframerWindow2 === 'undefined') return;
+  const query = safeWindow.matchMedia('(any-hover: hover)',);
+  hasHoverCapability = query.matches;
+  query.addEventListener('change', function updateHoverCapability(event,) {
+    const next2 = event.matches;
+    if (next2 === hasHoverCapability) return;
+    hasHoverCapability = next2;
+    for (const notify2 of subscribers) notify2();
+  },);
+}
+function getHoverCapability() {
+  observeHoverCapability();
+  return getHoverCapabilitySnapshot();
+}
+function getHoverCapabilitySnapshot() {
+  return hasHoverCapability ?? false;
+}
+function subscribeToHoverCapability(notify2,) {
+  subscribers.add(notify2,);
+  observeHoverCapability();
+  return () => {
+    subscribers.delete(notify2,);
+  };
+}
+function useHoverCapability(initialValue = false,) {
+  const [canHover, setCanHover,] = useState(initialValue,);
+  useIsomorphicLayoutEffect2(function observeRenderedHoverCapability() {
+    function updateRenderedCapability(useTransition2 = true,) {
+      const current2 = getHoverCapabilitySnapshot();
+      if (useTransition2) {
+        startTransition2(() => setCanHover(current2,));
+      } else {
+        setCanHover(current2,);
+      }
+    }
+    const unsubscribe = subscribeToHoverCapability(updateRenderedCapability,);
+    updateRenderedCapability(false,);
+    return unsubscribe;
+  }, [],);
+  return canHover;
+}
 var CustomCursorContext = /* @__PURE__ */ createContext({
   onRegisterCursors: () => () => {},
   registerCursors: () => {},
@@ -38584,7 +38645,7 @@ var CustomCursorComponent = /* @__PURE__ */ memo2(function CustomCursorComponent
   const {
     onRegisterCursors,
   } = useContext(CustomCursorContext,);
-  const [hasHoverCapability, setHasHoverCapability,] = useState(false,);
+  const hasHoverCapability2 = useHoverCapability(false,);
   const pointerX = useMotionValue(0,);
   const pointerY = useMotionValue(0,);
   const opacity = useMotionValue(0,);
@@ -38594,25 +38655,8 @@ var CustomCursorComponent = /* @__PURE__ */ memo2(function CustomCursorComponent
     cursorHash: void 0,
   },);
   const forceRender = useForceUpdate2();
-  useLayoutEffect(() => {
-    const noHoverMQ = safeWindow.matchMedia('(any-hover: none)',);
-    function updateRender(e,) {
-      if (e.matches) {
-        startTransition2(() => setHasHoverCapability(false,));
-      } else {
-        setHasHoverCapability(true,);
-      }
-    }
-    noHoverMQ.addEventListener('change', updateRender,);
-    if (!noHoverMQ.matches) {
-      setHasHoverCapability(true,);
-    }
-    return () => {
-      noHoverMQ.removeEventListener('change', updateRender,);
-    };
-  }, [],);
   useEffect(() => {
-    if (!hasHoverCapability) return;
+    if (!hasHoverCapability2) return;
     let x3 = 0;
     let y3 = 0;
     function updateValues() {
@@ -38667,9 +38711,9 @@ var CustomCursorComponent = /* @__PURE__ */ memo2(function CustomCursorComponent
       document.removeEventListener('pointerup', fireEventToTarget,);
       cancelFrame(updateVariant,);
     };
-  }, [opacity, pointerX, pointerY, forceRender, hasHoverCapability,],);
+  }, [opacity, pointerX, pointerY, forceRender, hasHoverCapability2,],);
   useEffect(() => {
-    if (!hasHoverCapability) return;
+    if (!hasHoverCapability2) return;
     function hideCursor() {
       void animate(opacity, 0, {
         type: 'tween',
@@ -38682,7 +38726,7 @@ var CustomCursorComponent = /* @__PURE__ */ memo2(function CustomCursorComponent
       document.removeEventListener('mouseleave', hideCursor,);
       safeWindow.removeEventListener('blur', hideCursor,);
     };
-  }, [opacity, hasHoverCapability,],);
+  }, [opacity, hasHoverCapability2,],);
   useLayoutEffect(() => {
     function updateCursors(newCursors,) {
       internalState.current.cursors = newCursors;
@@ -38702,9 +38746,9 @@ var CustomCursorComponent = /* @__PURE__ */ memo2(function CustomCursorComponent
   const cursor = cursorHash ? cursors[cursorHash] : null;
   const replaceNativeCursor = customCursorReplacesNativeCursor(cursor,);
   useLayoutEffect(() => {
-    if (!hasHoverCapability) return;
+    if (!hasHoverCapability2) return;
     document.body.classList.toggle(replaceCursorClassName, replaceNativeCursor,);
-  }, [replaceNativeCursor, hasHoverCapability,],);
+  }, [replaceNativeCursor, hasHoverCapability2,],);
   const Cursor = cursor?.component;
   const springRaw = cursor?.transition ?? {
     duration: 0,
@@ -38725,7 +38769,7 @@ var CustomCursorComponent = /* @__PURE__ */ memo2(function CustomCursorComponent
     alignment,
     placement,
   ],);
-  if (!hasHoverCapability || !cursor || !Cursor) return null;
+  if (!hasHoverCapability2 || !cursor || !Cursor) return null;
   return /* @__PURE__ */ jsx(Suspense2, {
     suppressHydrationWarning: true,
     children: /* @__PURE__ */ jsx(Cursor, {
@@ -44018,9 +44062,9 @@ var FetchClient = class _FetchClient {
   setResponseValue(cacheKey, value,) {
     this.responseValues.set(cacheKey, value,);
     this.persistCache();
-    const subscribers = this.#subscribers.get(cacheKey,);
-    if (!subscribers) return;
-    for (const subscriber of subscribers) {
+    const subscribers2 = this.#subscribers.get(cacheKey,);
+    if (!subscribers2) return;
+    for (const subscriber of subscribers2) {
       subscriber();
     }
   }
@@ -44052,8 +44096,8 @@ var FetchClient = class _FetchClient {
     if (!result || result.status === 'loading') {
       throw new Error('Unexpected result status for prefetch',);
     }
-    const subscribers = this.#subscribers.get(cacheKey,);
-    for (const subscriber of subscribers ?? []) {
+    const subscribers2 = this.#subscribers.get(cacheKey,);
+    for (const subscriber of subscribers2 ?? []) {
       subscriber();
     }
     const resolvedValue = resolveFetchDataValue(result, request,);
@@ -44130,9 +44174,9 @@ var FetchClient = class _FetchClient {
       this.startQueryRefetching(request,);
       void this.fetchWithCache(request,);
     }
-    const subscribers = this.#subscribers.get(cacheKey,) ?? /* @__PURE__ */ new Set();
-    subscribers.add(callback,);
-    this.#subscribers.set(cacheKey, subscribers,);
+    const subscribers2 = this.#subscribers.get(cacheKey,) ?? /* @__PURE__ */ new Set();
+    subscribers2.add(callback,);
+    this.#subscribers.set(cacheKey, subscribers2,);
     return () => {
       const nextSubscribers = this.#subscribers.get(cacheKey,);
       if (!nextSubscribers) return;
@@ -50394,18 +50438,25 @@ function compileFilter(collectionId, filter2, serverCollections, references, loc
     warnOnce2(new UnsupportedQueryError(`filter field type.`,).toString(),);
     return void 0;
   }
-  let parameterName = filter2.fieldPath.join('_',) || resolved.tailFieldId;
-  let currentStep = compileField(resolved,);
-  for (const transform2 of preOptimizeTransforms(currentStep, filter2.transforms,)) {
+  const parameterName = filter2.fieldPath.join('_',) || resolved.tailFieldId;
+  const fieldStep = compileField(resolved,);
+  const transforms = preOptimizeTransforms(fieldStep, filter2.transforms,);
+  const filterStep = compileTransforms(fieldStep, transforms, parameterName,);
+  if (!filterStep) return void 0;
+  if (filterStep.type !== 'boolean') {
+    warnOnce2(new ServerDatabaseError(`Filter chain on ${filterStep.type} field does not result in a boolean.`,).toString(),);
+    return void 0;
+  }
+  return filterStep.inputToleratingNull().expression;
+}
+function compileTransforms(firstStep, transforms, parameterName,) {
+  let currentStep = firstStep;
+  for (const transform2 of transforms) {
     parameterName += `_${transform2.name}`;
     currentStep = compileTransform(transform2, currentStep.lowercaseIfString(), parameterName,);
     if (!currentStep) return void 0;
   }
-  if (currentStep.type !== 'boolean') {
-    warnOnce2(new ServerDatabaseError(`Filter chain on ${currentStep.type} field does not result in a boolean.`,).toString(),);
-    return void 0;
-  }
-  return currentStep.inputToleratingNull().expression;
+  return currentStep;
 }
 function preOptimizeTransforms(currentStep, transforms,) {
   if (currentStep.type === 'boolean' && transforms.length === 0) {
@@ -51983,6 +52034,9 @@ function useVariantState({
     isPressed: isPressed2,
     isError: isError2,
   },) => {
+    if (isHovered2 && !isCanvas && getLibraryFeatures().disableHoverOnMobile && !getHoverCapability()) {
+      isHovered2 = false;
+    }
     const isPressedHasUpdated = isPressed2 !== internalState.current.isPressed;
     const isHoveredHasUpdated = isHovered2 !== internalState.current.isHovered;
     if (isHovered2 !== void 0) internalState.current.isHovered = isHovered2;
@@ -51996,7 +52050,7 @@ function useVariantState({
     internalState.current.isPressedHasUpdated = isPressedHasUpdated;
     internalState.current.isHoveredHasUpdated = isHoveredHasUpdated;
     void updateIfNeeded(baseVariant2, gestureVariant2, defaultVariant2, baseVariant2, false,);
-  }, [updateIfNeeded,],);
+  }, [updateIfNeeded, isCanvas,],);
   const setVariant = useCallback2((proposedVariant, pauseOffscreen = false,) => {
     const {
       defaultVariant: defaultVariant2,
@@ -64566,7 +64620,7 @@ var package_default = {
     'jest-diff': '^29.3.1',
     'jest-environment-jsdom': '^29.3.1',
     'jest-environment-jsdom-global': '^4.0.0',
-    oxlint: '^1.81.0',
+    oxlint: '^1.85.0',
     react: '^18.2.0',
     'react-dom': '^18.2.0',
     semver: '^7.7.1',
