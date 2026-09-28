@@ -10,7 +10,14 @@ import { input, select, password } from '@inquirer/prompts'
 import { bundle, StyleToken, createExampleComponentCode } from './exporter.js'
 import { generateStackblitzFiles } from './stackblitz.js'
 
-import { goke, wrapJsonSchema } from 'goke'
+import { goke, isAgent, wrapJsonSchema } from 'goke'
+import type { GokeExecutionContext } from 'goke'
+import {
+    getSavedFramerApiKey,
+    openUrlWithOs,
+    saveFramerApiKey,
+    startFramerApiKeyAuthorization,
+} from './framer-api-auth.js'
 import { exec } from 'child_process'
 import { promisify } from 'util'
 
@@ -330,113 +337,268 @@ cli.command(
         }
     })
 
+// Env var used to hand the project URL to the `mcp login` daemon, because the
+// project can come from an interactive prompt that is not in the daemon argv.
+const AUTH_PROJECT_URL_ENV = 'UNFRAMER_AUTH_PROJECT_URL'
+
 cli.command(
     'mcp login [url]',
-    'Login to Framer MCP. Choose between plugin mode (requires Framer open) or server API mode (works headlessly with API key).',
-).action(async (url?: string) => {
-    try {
-        // If URL is passed directly, use plugin mode
-        if (url) {
-            saveConfig({ mode: 'plugin', mcpUrl: url })
-            console.log(`MCP URL saved to ${getConfigPath()}`)
-            console.log(
-                `Run \`unframer --help\` to see all available MCP commands`,
+    dedent`
+    Login to Framer MCP.
+
+    Plugin mode: pass the MCP URL shown in the Framer MCP plugin. Framer must be open.
+
+    Server API mode: pass \`--project <url>\`. This opens framer.com in the browser.
+    Click "Approve" and the CLI saves a project API key. Framer does not need to be open after that.
+    Pass \`--api-key <key>\` too if you already have a key from Site Settings, to skip the browser.
+
+    The browser step runs in a background daemon for up to 5 minutes and returns immediately
+    in non-interactive shells. No tmux or background process management needed.
+    `,
+)
+    .option(
+        '--project <url>',
+        'Framer project URL. Authorizes server API mode for this project',
+    )
+    .option(
+        '--api-key <key>',
+        'Existing Framer API key for --project. Skips browser authorization',
+    )
+    .example(dedent`
+    # Authorize a project in the browser (1 click on "Approve")
+    unframer mcp login --project "https://framer.com/projects/My-Site--abc123"
+    `)
+    .example(dedent`
+    # Use an API key you already have
+    unframer mcp login --project "https://framer.com/projects/My-Site--abc123" --api-key fr_xxx
+    `)
+    .example(dedent`
+    # Plugin mode with the URL from the Framer MCP plugin
+    unframer mcp login "https://mcp.unframer.co/mcp?id=...&secret=..."
+    `)
+    .action(async (url, options, ctx) => {
+        if (ctx.daemon.isDaemon) {
+            const projectUrl = ctx.process.env[AUTH_PROJECT_URL_ENV]
+            if (!projectUrl) {
+                ctx.console.error(`Missing ${AUTH_PROJECT_URL_ENV} for login daemon`)
+                ctx.process.exit(1)
+                return
+            }
+            const { authorizationUrl, waitForApiKey } =
+                await startFramerApiKeyAuthorization({ projectUrl })
+            const opened = await openUrlWithOs(authorizationUrl)
+            ctx.daemon.publishStartupMessage(
+                opened
+                    ? `Opened Framer in the browser. Click "Approve" to authorize unframer:\n  ${authorizationUrl}`
+                    : `Open this URL and click "Approve" to authorize unframer:\n  ${authorizationUrl}`,
             )
+            ctx.daemon.ready()
+            const result = await waitForApiKey.catch((error: Error) => {
+                return error
+            })
+            if (result instanceof Error) {
+                ctx.console.error(result.message)
+                ctx.process.exit(1)
+                return
+            }
+            saveFramerApiKey({ projectUrl, ...result })
+            ctx.console.log(green('✓ Authorized. Framer API key saved.'))
             return
         }
 
-        // Show mode selection dropdown
-        const mode = await select<McpMode>({
-            message: 'Select authentication mode:',
-            choices: [
-                {
-                    value: 'plugin' as McpMode,
-                    name: 'MCP Plugin (Recommended)',
-                    description:
-                        'Requires Framer to be open with MCP plugin running. Paste URL from plugin.',
-                },
-                {
-                    value: 'server-api' as McpMode,
-                    name: 'Server API',
-                    description:
-                        'Works without Framer open. Requires API key from project settings.',
-                },
-            ],
-        })
-
-        if (mode === 'plugin') {
-            const shortcut = process.platform === 'darwin' ? 'Cmd+K' : 'Ctrl+K'
-            console.log('\nTo get your MCP URL:')
-            console.log('  1. Go to https://framer.com and open your project')
-            console.log(`  2. Press ${shortcut} and search for "MCP" plugin`)
-            console.log('  3. Copy the URL shown in the plugin\n')
-
-            const mcpUrl = await input({ message: 'Paste MCP URL:' })
-            if (!mcpUrl) {
-                console.error('MCP URL is required')
-                process.exit(1)
-            }
-            saveConfig({ mode: 'plugin', mcpUrl })
-            console.log(`\nMCP URL saved to ${getConfigPath()}`)
-            console.log(
-                `Run \`unframer --help\` to see all available MCP commands`,
-            )
-        } else {
-            // Server API mode
-            console.log('\nTo get your API key:')
-            console.log('  1. Open your Framer project at https://framer.com/projects')
-            console.log('  2. Go to Project Settings > API')
-            console.log('  3. Generate or copy your API key\n')
-
-            const apiKey = await password({ message: 'Enter Framer API key:', mask: '*' })
-            if (!apiKey) {
-                console.error('API key is required')
-                process.exit(1)
-            }
-
-            console.log('\nTo get your project URL:')
-            console.log(
-                '  Copy the URL from your browser when viewing the project',
-            )
-            console.log(
-                '  Example: https://framer.com/projects/MyProject--abc123\n',
-            )
-
-            const projectUrl = await input({
-                message:
-                    'Enter Framer project URL (optional, can use --project later):',
-            })
-
-            saveConfig({
-                mode: 'server-api',
-                framerApiKey: apiKey,
-                framerProjectUrl: projectUrl || undefined,
-            })
-            console.log(`\nServer API credentials saved to ${getConfigPath()}`)
-            console.log(`\nUsage:`)
-            if (projectUrl) {
-                console.log(`  unframer mcp getProjectXml`)
-            } else {
+        try {
+            if (url) {
+                saveConfig({ ...loadConfig(), mode: 'plugin', mcpUrl: url })
+                console.log(`MCP URL saved to ${getConfigPath()}`)
                 console.log(
-                    `  unframer mcp getProjectXml --project "https://framer.com/projects/..."`,
+                    `Run \`unframer --help\` to see all available MCP commands`,
                 )
+                return
             }
-            console.log(`\nOr set FRAMER_PROJECT_URL environment variable`)
+
+            const target = options.project
+                ? { projectUrl: options.project, apiKey: options.apiKey }
+                : await promptLoginInteractively()
+            if (!target) {
+                return
+            }
+            const { projectUrl } = target
+
+            if (target.apiKey) {
+                saveFramerApiKey({ projectUrl, apiKey: target.apiKey })
+                console.log(green('✓ Framer API key saved.'))
+                printServerApiUsage(projectUrl)
+                return
+            }
+
+            const daemonOptions = {
+                timeoutMs: 6 * 60 * 1000,
+                env: { [AUTH_PROJECT_URL_ENV]: projectUrl },
+            }
+            if (isAgent || !process.stdin.isTTY) {
+                await ctx.daemon.start({
+                    ...daemonOptions,
+                    waitForStartup: true,
+                    startupTimeoutMs: 15_000,
+                })
+                console.log(
+                    'Waiting in background up to 5 minutes for approval.',
+                )
+                printServerApiUsage(projectUrl)
+                return
+            }
+
+            // Attached: daemon output streams here and start() throws if the daemon fails
+            await ctx.daemon.start({ ...daemonOptions, attach: true }).catch(() => {
+                process.exit(1)
+            })
+            printServerApiUsage(projectUrl)
+        } catch (error) {
+            if (error instanceof Error && error.name === 'ExitPromptError') {
+                process.exit(0)
+            }
+            throw error
         }
-    } catch (error) {
-        if (error instanceof Error && error.name === 'ExitPromptError') {
-            process.exit(0)
-        }
-        throw error
+    })
+
+/** Returns undefined when the user picked plugin mode (already saved). */
+async function promptLoginInteractively(): Promise<
+    { projectUrl: string; apiKey?: string } | undefined
+> {
+    if (!process.stdin.isTTY) {
+        console.error('Missing arguments. Run non-interactively with one of:')
+        console.error('  unframer mcp login --project "https://framer.com/projects/..."')
+        console.error('  unframer mcp login --project "https://framer.com/projects/..." --api-key fr_xxx')
+        console.error('  unframer mcp login "<mcp url from the Framer MCP plugin>"')
+        process.exit(1)
     }
-})
+
+    const mode = await select<McpMode>({
+        message: 'Select authentication mode:',
+        choices: [
+            {
+                value: 'plugin',
+                name: 'MCP Plugin (Recommended)',
+                description:
+                    'Requires Framer to be open with MCP plugin running. Paste URL from plugin.',
+            },
+            {
+                value: 'server-api',
+                name: 'Server API',
+                description:
+                    'Works without Framer open. Authorize the project in the browser with 1 click.',
+            },
+        ],
+    })
+
+    if (mode === 'plugin') {
+        const shortcut = process.platform === 'darwin' ? 'Cmd+K' : 'Ctrl+K'
+        console.log('\nTo get your MCP URL:')
+        console.log('  1. Go to https://framer.com and open your project')
+        console.log(`  2. Press ${shortcut} and search for "MCP" plugin`)
+        console.log('  3. Copy the URL shown in the plugin\n')
+
+        const mcpUrl = await input({ message: 'Paste MCP URL:' })
+        if (!mcpUrl) {
+            console.error('MCP URL is required')
+            process.exit(1)
+        }
+        saveConfig({ ...loadConfig(), mode: 'plugin', mcpUrl })
+        console.log(`\nMCP URL saved to ${getConfigPath()}`)
+        console.log(`Run \`unframer --help\` to see all available MCP commands`)
+        return undefined
+    }
+
+    const projectUrl = await input({
+        message:
+            'Framer project URL (example: https://framer.com/projects/My-Site--abc123):',
+    })
+    if (!projectUrl) {
+        console.error('Project URL is required')
+        process.exit(1)
+    }
+
+    const method = await select<'browser' | 'paste'>({
+        message: 'How do you want to get the API key?',
+        choices: [
+            {
+                value: 'browser',
+                name: 'Authorize in browser (Recommended)',
+                description: 'Opens framer.com. Click "Approve" to create a key.',
+            },
+            {
+                value: 'paste',
+                name: 'Paste an existing API key',
+                description: 'From Site Settings > General > API Keys.',
+            },
+        ],
+    })
+    if (method === 'browser') {
+        return { projectUrl }
+    }
+    const apiKey = await password({ message: 'Framer API key:', mask: '*' })
+    if (!apiKey) {
+        console.error('API key is required')
+        process.exit(1)
+    }
+    return { projectUrl, apiKey }
+}
+
+function printServerApiUsage(projectUrl: string) {
+    console.log('Run MCP commands without Framer open, for example:')
+    console.log(`  unframer mcp getProjectXml --project ${JSON.stringify(projectUrl)}`)
+}
+
+/**
+ * Resolves the project URL and API key for server-api commands.
+ * Key order: --api-key, FRAMER_API_KEY env, key saved by `mcp login` for that project.
+ */
+async function resolveServerApiCredentials({
+    projectOption,
+    apiKeyOption,
+    daemon,
+}: {
+    projectOption?: string
+    apiKeyOption?: string
+    daemon: GokeExecutionContext['daemon']
+}): Promise<{ projectUrl: string; apiKey: string }> {
+    const projectUrl =
+        projectOption ||
+        process.env.FRAMER_PROJECT_URL ||
+        loadConfig().framerProjectUrl
+    if (!projectUrl) {
+        console.error(
+            'Project URL required. Use --project option, FRAMER_PROJECT_URL env var, or run `unframer mcp login --project <url>`.',
+        )
+        process.exit(1)
+    }
+    const apiKey =
+        apiKeyOption ||
+        process.env.FRAMER_API_KEY ||
+        getSavedFramerApiKey(projectUrl)
+    if (apiKey) {
+        return { projectUrl, apiKey }
+    }
+    if (await daemon.forCommand('mcp login').isRunning()) {
+        console.error(
+            'Authorization is still pending. Click "Approve" in the browser, then run this command again.',
+        )
+        process.exit(1)
+    }
+    console.error(`No Framer API key for this project. Authorize it in the browser with:`)
+    console.error(`  unframer mcp login --project ${JSON.stringify(projectUrl)}`)
+    console.error(`Or pass an existing key with --api-key or the FRAMER_API_KEY env var.`)
+    process.exit(1)
+}
 
 // Add MCP tool commands
 const config = loadConfig()
 const cliArgs = process.argv.slice(2)
 const hasMcpCommand = cliArgs.includes('mcp')
 const hasProjectOption = cliArgs.some((arg) => {
-    return arg === '--project' || arg.startsWith('--project=')
+    return ['--project', '--api-key'].some((flag) => {
+        return arg === flag || arg.startsWith(`${flag}=`)
+    })
 })
 const hasMcpEvalCommand = hasMcpCommand && cliArgs.includes('eval')
 const hasServerApiEnv = Boolean(process.env.FRAMER_PROJECT_URL || process.env.FRAMER_API_KEY)
@@ -495,7 +657,11 @@ async function registerServerApiCommands() {
             '--project <url>',
             'Framer project URL. Also reads FRAMER_PROJECT_URL env var.',
         )
-        .action(async (code: string | undefined, options: { project?: string }) => {
+        .option(
+            '--api-key <key>',
+            'Framer API key. Defaults to FRAMER_API_KEY env var or the key saved by `unframer mcp login --project`.',
+        )
+        .action(async (code, options, ctx) => {
             // Read code from argument or stdin
             let evalCode = code
             if (!evalCode && !process.stdin.isTTY) {
@@ -510,21 +676,11 @@ async function registerServerApiCommands() {
                 process.exit(1)
             }
 
-            const projectUrl =
-                options.project ||
-                process.env.FRAMER_PROJECT_URL ||
-                loadConfig().framerProjectUrl
-            const apiKey =
-                process.env.FRAMER_API_KEY || loadConfig().framerApiKey
-
-            if (!projectUrl) {
-                console.error('Project URL required. Use --project option, FRAMER_PROJECT_URL env var, or set during login.')
-                process.exit(1)
-            }
-            if (!apiKey) {
-                console.error('API key required. Set FRAMER_API_KEY env var or run `unframer mcp login` first.')
-                process.exit(1)
-            }
+            const { projectUrl, apiKey } = await resolveServerApiCredentials({
+                projectOption: options.project,
+                apiKeyOption: options.apiKey,
+                daemon: ctx.daemon,
+            })
 
             let framerClient: Awaited<ReturnType<typeof connect>> | undefined
             let actionError: unknown
@@ -622,6 +778,10 @@ async function registerServerApiCommands() {
             '--project <url>',
             'Framer project URL. Uses server-api mode (framer-api headless). Works alongside plugin mode login, pass --project to switch to server-api for a single command. Also reads FRAMER_PROJECT_URL env var.',
         )
+        cmd.option(
+            '--api-key <key>',
+            'Framer API key for server-api mode. Defaults to FRAMER_API_KEY env var or the key saved by `unframer mcp login --project`.',
+        )
 
         // Add options based on tool input schema, using zod v4 native JSON Schema conversion
         const inputSchema = toolDef.input
@@ -655,35 +815,19 @@ async function registerServerApiCommands() {
             }
         }
 
-        cmd.action(async (options: Record<string, unknown>) => {
-            const projectOption =
-                typeof options.project === 'string'
-                    ? options.project
-                    : undefined
-            const projectUrl =
-                projectOption ||
-                process.env.FRAMER_PROJECT_URL ||
-                loadConfig().framerProjectUrl
-            const apiKey =
-                process.env.FRAMER_API_KEY || loadConfig().framerApiKey
-
-            if (!projectUrl) {
-                console.error(
-                    'Project URL required. Use --project option, FRAMER_PROJECT_URL env var, or set during login.',
-                )
-                process.exit(1)
-            }
-            if (!apiKey) {
-                console.error(
-                    'API key required. Set FRAMER_API_KEY env var or run `unframer mcp login` first.',
-                )
-                process.exit(1)
-            }
+        cmd.action(async (options: Record<string, unknown>, ctx: GokeExecutionContext) => {
+            const { projectUrl, apiKey } = await resolveServerApiCredentials({
+                projectOption:
+                    typeof options.project === 'string' ? options.project : undefined,
+                apiKeyOption:
+                    typeof options.apiKey === 'string' ? options.apiKey : undefined,
+                daemon: ctx.daemon,
+            })
 
             // Remove CLI-specific options from input
             const toolInput = Object.fromEntries(
                 Object.entries(options).filter(([key]) => {
-                    return key !== 'project'
+                    return key !== 'project' && key !== 'apiKey'
                 }),
             )
 

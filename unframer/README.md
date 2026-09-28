@@ -328,6 +328,18 @@ npx unframer mcp login
 
 After login, all MCP commands become available. Run `npx unframer --help` to see the full list.
 
+To use MCP commands **without Framer open**, authorize a project in the browser. The CLI opens framer.com, you click **Approve**, and the CLI saves a project API key:
+
+```sh
+npx unframer mcp login --project "https://framer.com/projects/My-Site--abc123"
+
+# already have a key from Site Settings? skip the browser
+npx unframer mcp login --project "https://framer.com/projects/My-Site--abc123" --api-key fr_xxx
+
+# or pass a key per command
+npx unframer mcp getProjectXml --project "https://framer.com/projects/My-Site--abc123" --api-key fr_xxx
+```
+
 ### Example Commands
 
 ```sh

@@ -14,8 +14,8 @@ export interface UnframerConfig {
     mode?: McpMode
     /** MCP URL for plugin mode (from Framer MCP plugin) */
     mcpUrl?: string
-    /** Framer API key for server-api mode */
-    framerApiKey?: string
+    /** Framer API keys for server-api mode, keyed by Framer project id. Keys are project scoped. */
+    framerProjects?: Record<string, { apiKey: string; userId?: string }>
     /** Default Framer project URL for server-api mode */
     framerProjectUrl?: string
     /** Cached MCP tools schema */

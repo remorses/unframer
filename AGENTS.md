@@ -182,9 +182,10 @@ Framer Cloud
 ```
 
 **Setup:**
-1. Open Framer project settings → API → copy API key
-2. Run `unframer mcp login` → select "Server API"
-3. Enter API key and project URL
+1. Run `unframer mcp login --project <url>`. The CLI opens framer.com, the user clicks "Approve", the CLI saves a project API key in `~/.unframer/config.json` (`framerProjects`, keyed by project id)
+2. Or pass an existing key: `unframer mcp login --project <url> --api-key fr_xxx`, or `--api-key` / `FRAMER_API_KEY` on any command
+
+**Browser authorization (`src/framer-api-auth.ts`):** uses the undocumented consent page `https://framer.com/projects/server-api/auth?projectId&state&callback`, the same flow as Framer's `@framer/agent` CLI. Framer only accepts **loopback callbacks** (`127.0.0.1` / `localhost`); remote https callbacks fail with "Invalid callback URL", so this cannot run inside the plugin iframe. The loopback server runs in a goke daemon: agents and non-TTY shells get the URL and return immediately, TTY users stay attached until approval.
 
 **How it works:**
 - CLI dynamically imports `plugin-mcp-dist/lib/mcp-handlers.js` (pre-built copy of plugin-mcp handler code)
