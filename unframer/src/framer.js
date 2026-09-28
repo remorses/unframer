@@ -13502,7 +13502,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.7CVDL6KS.mjs
+// /:https://app.framerstatic.com/framer.GEEK6M5I.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -30912,27 +30912,17 @@ function applyControlDefaultsToReactDefaultProps(component, controls,) {
   applyControlDefaultsToDefaultProps(defaultProps, controls,);
 }
 var outputControlsKey = 'outputControls';
-function setInputOutputControls(target, {
-  inputs,
-  outputs,
-},) {
+function setOutputControls(target, outputs,) {
   Object.assign(target, {
-    inputControls: inputs,
     [outputControlsKey]: outputs,
   },);
 }
 function addPropertyControls(component, propertyControls, outputs,) {
-  if (outputs !== void 0) {
-    setInputOutputControls(component, {
-      inputs: propertyControls,
-      outputs,
-    },);
-    return;
-  }
   Object.assign(component, {
     propertyControls,
   },);
   applyControlDefaultsToReactDefaultProps(component, propertyControls,);
+  if (outputs !== void 0) setOutputControls(component, outputs,);
 }
 function getPropertyControls(component,) {
   return component.propertyControls;
@@ -50162,56 +50152,244 @@ function getItemMultiCollectionReferencesTable(collectionId,) {
 function getItemMultiCollectionReferencesView(collectionId, fieldId,) {
   return `${getItemMultiCollectionReferencesTable(collectionId,)}/${fieldId}`;
 }
-function compileFromClause(table, alias2, references, joinType, localizations,) {
+function compileFromClause(table, alias2, joins, joinType,) {
   const source = sql.identifier(table,);
   const joinParts = [alias2 === void 0 ? source : sql`${source} AS ${sql.alias(alias2,)}`,];
-  for (const [joinAlias, reference,] of references) {
-    joinParts.push(
-      sql`${sql.identifier(getItemsTable(reference.referencedCollectionId,),)} AS ${sql.alias(joinAlias,)} ON ${
-        sql.qualifiedIdentifier(reference.qualifier, reference.identifier,)
-      } = ${sql.qualifiedIdentifier(joinAlias, collectionItemIdColumn,)}`,
-    );
-  }
-  for (const [joinAlias, localization,] of localizations) {
-    joinParts.push(
-      sql`${sql.identifier(getItemLocalizationsTable(localization.collectionId,),)} AS ${sql.alias(joinAlias,)} ON ${
-        sql.qualifiedIdentifier(localization.qualifier, collectionItemIdColumn,)
-      } = ${sql.qualifiedIdentifier(joinAlias, collectionItemIdColumn,)} AND ${sql.qualifiedIdentifier(joinAlias, localeIdColumn,)} = ${
-        sql.parameter('localeId', localization.localeId,)
-      }`,
-    );
+  for (const [joinAlias, join2,] of joins) {
+    joinParts.push(sql`${sql.identifier(join2.table,)} AS ${sql.alias(joinAlias,)} ON ${join2.condition}`,);
   }
   return {
     statement: sql`FROM ${sql.join(joinParts, joinType, '(SELECT 0 WHERE 0)',)}`,
   };
 }
-function compileLimitAndOffsetClause() {
-  return {
-    statement: sql`LIMIT 5000`,
-  };
+function compileLimitAndOffsetClause(limit,) {
+  switch (limit) {
+    case 1:
+      return {
+        statement: sql`LIMIT 1`,
+      };
+    case 5e3:
+      return {
+        statement: sql`LIMIT 5000`,
+      };
+  }
+}
+function isDateSystemColumn(fieldId,) {
+  return fieldId === createdAtColumn || fieldId === updatedAtColumn;
+}
+var previousItemIdField = 'previousItemId';
+var nextItemIdField = 'nextItemId';
+function isNeighborField(fieldId,) {
+  return fieldId === previousItemIdField || fieldId === nextItemIdField;
+}
+function lookupField(serverCollections, collectionId, fieldId,) {
+  if (isDateSystemColumn(fieldId,)) {
+    return {
+      type: 'date',
+      isLocalized: false,
+    };
+  }
+  if (isNeighborField(fieldId,)) {
+    return {
+      type: 'collectionreference',
+      referencedCollectionId: collectionId,
+    };
+  }
+  return serverCollections[collectionId]?.fields[fieldId];
 }
 function getLocalizationJoinAlias(qualifier2, localeId,) {
   return `${qualifier2}/${localeId}`;
 }
-function registerLocalizationJoins(
-  {
-    chainedLocaleIds,
-    joins,
-  },
-  qualifier2,
-  collectionId,
-) {
+function registerLocalizationJoins(qualifier2, collectionId, {
+  joins,
+  chainedLocaleIds,
+},) {
   return chainedLocaleIds.map((localeId) => {
     const joinAlias = getLocalizationJoinAlias(qualifier2, localeId,);
+    if (joins.has(joinAlias,)) return joinAlias;
     joins.set(joinAlias, {
-      qualifier: qualifier2,
-      collectionId,
-      localeId,
+      table: getItemLocalizationsTable(collectionId,),
+      condition: sql`${sql.qualifiedIdentifier(qualifier2, collectionItemIdColumn,)} = ${
+        sql.qualifiedIdentifier(joinAlias, collectionItemIdColumn,)
+      } AND ${sql.qualifiedIdentifier(joinAlias, localeIdColumn,)} = ${sql.parameter('localeId', localeId,)}`,
     },);
     return joinAlias;
   },);
 }
-function resolveFieldPath(rootCollectionId, fieldPath, serverCollections, references, localization,) {
+function compileReferenceJoin(qualifier2, identifier2, joinAlias, referencedCollectionId,) {
+  return {
+    table: getItemsTable(referencedCollectionId,),
+    condition: sql`${sql.qualifiedIdentifier(qualifier2, identifier2,)} = ${sql.qualifiedIdentifier(joinAlias, collectionItemIdColumn,)}`,
+  };
+}
+function compileMultiReferenceExpression(qualifier2, collectionId, fieldId, referencedCollectionId,) {
+  const sideTable = getItemMultiCollectionReferencesView(collectionId, fieldId,);
+  const joinAlias = `${qualifier2}.${fieldId}`;
+  const selectClause = compileMultiReferenceSelectClause(sideTable, joinAlias, referencedCollectionId,);
+  const fromClause = compileFromClause(sideTable, void 0, selectClause.joins, ' JOIN ',);
+  const whereClause = compileMultiReferenceWhereClause(sideTable, qualifier2,);
+  return sql`(${selectClause.statement} ${fromClause.statement} ${whereClause.statement})`;
+}
+function compileMultiReferenceSelectClause(sideTable, joinAlias, referencedCollectionId,) {
+  const joins = /* @__PURE__ */ new Map([[
+    joinAlias,
+    compileReferenceJoin(sideTable, referencedCollectionItemIdColumn, joinAlias, referencedCollectionId,),
+  ],],);
+  return {
+    statement: sql`SELECT json_group_array(${sql.qualifiedIdentifier(joinAlias, collectionItemIdColumn,)} ORDER BY ${
+      sql.qualifiedIdentifier(sideTable, indexColumn,)
+    })`,
+    joins,
+  };
+}
+function compileMultiReferenceWhereClause(sideTable, qualifier2,) {
+  return {
+    statement: sql`WHERE ${sql.qualifiedIdentifier(sideTable, collectionItemIdColumn,)} = ${
+      sql.qualifiedIdentifier(qualifier2, collectionItemIdColumn,)
+    }`,
+  };
+}
+function resolvePhysicalField(qualifier2, collectionId, fieldId, context,) {
+  if (isNeighborField(fieldId,)) return void 0;
+  const field = lookupField(context.serverCollections, collectionId, fieldId,);
+  if (!field) return void 0;
+  const localizationJoinAliases = 'isLocalized' in field && field.isLocalized
+    ? registerLocalizationJoins(qualifier2, collectionId, context,)
+    : [];
+  return {
+    qualifier: qualifier2,
+    collectionId,
+    tailFieldId: fieldId,
+    tailField: field,
+    localizationJoinAliases,
+  };
+}
+function resolveDefaultOrderField(qualifier2, collectionId, fieldPath, context,) {
+  const [fieldId, ...rest] = fieldPath;
+  if (fieldId === void 0 || rest.length > 0) {
+    warnOnce2(
+      new ServerDatabaseError(`Default order field path "${fieldPath.join('.',)}" of collection ${collectionId} is not a top-level field.`,)
+        .toString(),
+    );
+    return void 0;
+  }
+  const resolved = resolvePhysicalField(qualifier2, collectionId, fieldId, context,);
+  if (!resolved) {
+    warnOnce2(
+      new ServerDatabaseError(`Default order field ${fieldId} is not a physical field of collection ${collectionId}.`,).toString(),
+    );
+  }
+  return resolved;
+}
+function compileFieldExpression({
+  qualifier: qualifier2,
+  collectionId,
+  tailFieldId,
+  tailField,
+  localizationJoinAliases,
+},) {
+  if (tailField.type === 'multicollectionreference') {
+    return compileMultiReferenceExpression(qualifier2, collectionId, tailFieldId, tailField.referencedCollectionId,);
+  }
+  const expression = sql.qualifiedIdentifier(qualifier2, tailFieldId,);
+  if (localizationJoinAliases.length === 0) return expression;
+  const localizedExpressions = localizationJoinAliases.map((joinAlias) => {
+    const itemIsIncludedInLocale = compileItemIsIncludedInLocaleCondition(joinAlias,);
+    const valueInLocale = sql.qualifiedIdentifier(joinAlias, tailFieldId,);
+    return sql`IIF(${itemIsIncludedInLocale}, ${valueInLocale}, NULL)`;
+  },);
+  return sql`COALESCE(${sql.join([...localizedExpressions, expression,], ', ', '1',)})`;
+}
+function compileSortKey(resolved,) {
+  if (resolved.tailField.type === 'multicollectionreference') return void 0;
+  if (resolved.tailField.type === 'unsupported') {
+    warnOnce2(new UnsupportedQueryError(`sort field type.`,).toString(),);
+    return void 0;
+  }
+  let expression = compileFieldExpression(resolved,);
+  if (resolved.tailField.type === 'string') {
+    expression = sql`LOWER(${expression})`;
+  }
+  return expression;
+}
+function compileItemIsIncludedInLocaleCondition(joinAlias,) {
+  const inclusion = sql.qualifiedIdentifier(joinAlias, inclusionColumn,);
+  return sql`${inclusion} IS NULL`;
+}
+function compileNeighborJoin(qualifier2, neighborFieldId, joinAlias, collectionId, context,) {
+  const candidateAlias = `${joinAlias}/candidate`;
+  const candidateContext = {
+    ...context,
+    joins: /* @__PURE__ */ new Map(),
+  };
+  const isPrevious = neighborFieldId === previousItemIdField;
+  const keys3 = [];
+  for (
+    const {
+      fieldPath,
+      direction,
+    } of context.serverCollections[collectionId]?.defaultOrderBy ?? []
+  ) {
+    const current2 = resolveDefaultOrderField(qualifier2, collectionId, fieldPath, context,);
+    const candidate = resolveDefaultOrderField(candidateAlias, collectionId, fieldPath, candidateContext,);
+    const currentKey = current2 && compileSortKey(current2,);
+    const candidateKey = candidate && compileSortKey(candidate,);
+    if (!currentKey || !candidateKey) continue;
+    const descending = isPrevious && direction === 'asc' || !isPrevious && direction === 'desc';
+    keys3.push({
+      current: currentKey,
+      candidate: candidateKey,
+      descending,
+    },);
+  }
+  const follows = compileFollows(keys3, qualifier2, candidateAlias, isPrevious,);
+  const orderByClause = compileNeighborOrderByClause(keys3, candidateAlias, isPrevious,);
+  const itemsTable = getItemsTable(collectionId,);
+  const fromClause = compileFromClause(itemsTable, candidateAlias, candidateContext.joins, ' LEFT JOIN ',);
+  const limitClause = compileLimitAndOffsetClause(1,);
+  const currentId = sql.qualifiedIdentifier(qualifier2, collectionItemIdColumn,);
+  const candidateId = sql.qualifiedIdentifier(candidateAlias, collectionItemIdColumn,);
+  return {
+    table: itemsTable,
+    condition: sql`${
+      sql.qualifiedIdentifier(joinAlias, collectionItemIdColumn,)
+    } = (SELECT ${candidateId} ${fromClause.statement} WHERE ${currentId} IS NOT NULL AND (${follows}) ${orderByClause.statement} ${limitClause.statement})`,
+  };
+}
+function compileFollows(keys3, qualifier2, candidateAlias, isPrevious,) {
+  const currentPosition = sql.qualifiedIdentifier(qualifier2, positionColumn,);
+  const candidatePosition = sql.qualifiedIdentifier(candidateAlias, positionColumn,);
+  let follows = isPrevious ? sql`${candidatePosition} < ${currentPosition}` : sql`${candidatePosition} > ${currentPosition}`;
+  for (const key7 of [...keys3,].reverse()) {
+    follows = sql`${compileFollowsOnKey(key7,)} OR (${key7.candidate} IS ${key7.current} AND (${follows}))`;
+  }
+  return follows;
+}
+function compileNeighborOrderByClause(keys3, candidateAlias, isPrevious,) {
+  const parts = [];
+  for (
+    const {
+      candidate,
+      descending,
+    } of keys3
+  ) {
+    parts.push(sql`${candidate} ${descending ? sql`DESC` : sql`ASC`}`,);
+  }
+  parts.push(sql`${sql.qualifiedIdentifier(candidateAlias, positionColumn,)} ${isPrevious ? sql`DESC` : sql`ASC`}`,);
+  return {
+    statement: sql`ORDER BY ${sql.join(parts, ', ', '1',)}`,
+  };
+}
+function compileFollowsOnKey({
+  current: current2,
+  candidate,
+  descending,
+},) {
+  return descending
+    ? sql`${candidate} < ${current2} OR (${candidate} IS NULL AND ${current2} IS NOT NULL)`
+    : sql`${candidate} > ${current2} OR (${current2} IS NULL AND ${candidate} IS NOT NULL)`;
+}
+function resolveFieldPath(rootCollectionId, fieldPath, context,) {
   const referencePath = [...fieldPath,];
   const tailFieldId = referencePath.pop();
   if (tailFieldId === void 0) {
@@ -50229,7 +50407,7 @@ function resolveFieldPath(rootCollectionId, fieldPath, serverCollections, refere
   let collectionId = rootCollectionId;
   let qualifier2 = collectionId;
   for (const referenceFieldId of referencePath) {
-    const field = serverCollections[collectionId]?.fields[referenceFieldId];
+    const field = lookupField(context.serverCollections, collectionId, referenceFieldId,);
     if (!field) {
       warnOnce2(
         new ServerDatabaseError(`Intermediate field ${referenceFieldId} does not exist in collection ${collectionId}.`,).toString(),
@@ -50240,130 +50418,78 @@ function resolveFieldPath(rootCollectionId, fieldPath, serverCollections, refere
       warnOnce2(new ServerDatabaseError(`Intermediate field ${referenceFieldId} is not a single reference field.`,).toString(),);
       return void 0;
     }
-    const newQualifier = `${qualifier2}.${referenceFieldId}`;
-    references.set(newQualifier, {
-      qualifier: qualifier2,
-      identifier: referenceFieldId,
-      referencedCollectionId: field.referencedCollectionId,
-    },);
-    qualifier2 = newQualifier;
+    qualifier2 = registerReferenceJoin(qualifier2, referenceFieldId, field.referencedCollectionId, context,);
     collectionId = field.referencedCollectionId;
   }
-  const tailField = getServerCollectionField(serverCollections, collectionId, tailFieldId,);
-  if (!tailField) {
+  if (isNeighborField(tailFieldId,)) {
+    return {
+      qualifier: registerReferenceJoin(qualifier2, tailFieldId, collectionId, context,),
+      collectionId,
+      tailFieldId: collectionItemIdColumn,
+      tailField: {
+        type: 'collectionreference',
+        referencedCollectionId: collectionId,
+      },
+      localizationJoinAliases: [],
+    };
+  }
+  const resolved = resolvePhysicalField(qualifier2, collectionId, tailFieldId, context,);
+  if (!resolved) {
     warnOnce2(new ServerDatabaseError(`Field ${tailFieldId} does not exist in collection ${collectionId}.`,).toString(),);
     return void 0;
   }
-  let localizationJoinAliases = [];
-  if ('isLocalized' in tailField && tailField.isLocalized) {
-    localizationJoinAliases = registerLocalizationJoins(localization, qualifier2, collectionId,);
-  }
-  return {
-    qualifier: qualifier2,
-    collectionId,
-    tailFieldId,
-    tailField,
-    localizationJoinAliases,
-  };
+  return resolved;
 }
-function compileFieldExpression({
-  qualifier: qualifier2,
-  tailFieldId,
-  localizationJoinAliases,
-},) {
-  const expression = sql.qualifiedIdentifier(qualifier2, tailFieldId,);
-  if (localizationJoinAliases.length === 0) return expression;
-  const localizedExpressions = localizationJoinAliases.map((joinAlias) => {
-    const itemIsIncludedInLocale = compileItemIsIncludedInLocaleCondition(joinAlias,);
-    const valueInLocale = sql.qualifiedIdentifier(joinAlias, tailFieldId,);
-    return sql`IIF(${itemIsIncludedInLocale}, ${valueInLocale}, NULL)`;
-  },);
-  return sql`COALESCE(${sql.join([...localizedExpressions, expression,], ', ', '1',)})`;
+function registerReferenceJoin(qualifier2, fieldId, referencedCollectionId, context,) {
+  const joinAlias = `${qualifier2}.${fieldId}`;
+  if (context.joins.has(joinAlias,)) return joinAlias;
+  const join2 = isNeighborField(fieldId,)
+    ? compileNeighborJoin(qualifier2, fieldId, joinAlias, referencedCollectionId, context,)
+    : compileReferenceJoin(qualifier2, fieldId, joinAlias, referencedCollectionId,);
+  context.joins.set(joinAlias, join2,);
+  return joinAlias;
 }
-function compileItemIsIncludedInLocaleCondition(joinAlias,) {
-  const inclusion = sql.qualifiedIdentifier(joinAlias, inclusionColumn,);
-  return sql`${inclusion} IS NULL`;
-}
-function getServerCollectionField(serverCollections, collectionId, fieldId,) {
-  if (fieldId === createdAtColumn || fieldId === updatedAtColumn) {
-    return {
-      type: 'date',
-      isLocalized: false,
-    };
-  }
-  return serverCollections[collectionId]?.fields[fieldId];
-}
-function compileOrderByClause(
-  {
-    collectionId,
-    orderBy,
-  },
-  serverCollections,
-  references,
-  localization,
-) {
+function compileOrderByClause({
+  collectionId,
+  orderBy,
+}, context,) {
   const parts = [];
-  const defaultOrderBy = serverCollections[collectionId]?.defaultOrderBy ?? [];
-  for (const sort of [...orderBy, ...defaultOrderBy,]) {
-    const resolved = resolveFieldPath(collectionId, sort.fieldPath, serverCollections, references, localization,);
-    if (!resolved || resolved.tailField.type === 'multicollectionreference') continue;
-    if (resolved.tailField.type === 'unsupported') {
-      warnOnce2(new UnsupportedQueryError(`sort field type.`,).toString(),);
-      continue;
-    }
-    let expression = compileFieldExpression(resolved,);
-    if (resolved.tailField.type === 'string') {
-      expression = sql`LOWER(${expression})`;
-    }
-    const direction = sort.direction === 'desc' ? sql`DESC` : sql`ASC`;
-    parts.push(sql`${expression} ${direction}`,);
+  for (
+    const {
+      fieldPath,
+      direction,
+    } of orderBy
+  ) {
+    const part = compileOrderByField(resolveFieldPath(collectionId, fieldPath, context,), direction,);
+    if (part) parts.push(part,);
+  }
+  for (
+    const {
+      fieldPath,
+      direction,
+    } of context.serverCollections[collectionId]?.defaultOrderBy ?? []
+  ) {
+    const part = compileOrderByField(resolveDefaultOrderField(collectionId, collectionId, fieldPath, context,), direction,);
+    if (part) parts.push(part,);
   }
   parts.push(sql.qualifiedIdentifier(collectionId, positionColumn,),);
   return {
     statement: sql`ORDER BY ${sql.join(parts, ', ', '1',)}`,
   };
 }
-function compileMultiReferenceExpression(qualifier2, collectionId, fieldId, referencedCollectionId,) {
-  const sideTable = getItemMultiCollectionReferencesView(collectionId, fieldId,);
-  const joinAlias = `${qualifier2}.${fieldId}`;
-  const selectClause = compileMultiReferenceSelectClause(sideTable, joinAlias, referencedCollectionId,);
-  const fromClause = compileFromClause(sideTable, void 0, selectClause.references, ' JOIN ', /* @__PURE__ */ new Map(),);
-  const whereClause = compileMultiReferenceWhereClause(sideTable, qualifier2,);
-  return sql`(${selectClause.statement} ${fromClause.statement} ${whereClause.statement})`;
+function compileOrderByField(resolved, direction,) {
+  const expression = resolved && compileSortKey(resolved,);
+  if (!expression) return void 0;
+  return sql`${expression} ${direction === 'desc' ? sql`DESC` : sql`ASC`}`;
 }
-function compileMultiReferenceSelectClause(sideTable, joinAlias, referencedCollectionId,) {
-  const references = /* @__PURE__ */ new Map([[joinAlias, {
-    qualifier: sideTable,
-    identifier: referencedCollectionItemIdColumn,
-    referencedCollectionId,
-  },],],);
-  return {
-    statement: sql`SELECT json_group_array(${sql.qualifiedIdentifier(joinAlias, collectionItemIdColumn,)} ORDER BY ${
-      sql.qualifiedIdentifier(sideTable, indexColumn,)
-    })`,
-    references,
-  };
-}
-function compileMultiReferenceWhereClause(sideTable, qualifier2,) {
-  return {
-    statement: sql`WHERE ${sql.qualifiedIdentifier(sideTable, collectionItemIdColumn,)} = ${
-      sql.qualifiedIdentifier(qualifier2, collectionItemIdColumn,)
-    }`,
-  };
-}
-function compileSelectClause(
-  {
-    collectionId,
-    columns,
-  },
-  serverCollections,
-  references,
-  localization,
-) {
+function compileSelectClause({
+  collectionId,
+  columns,
+}, context,) {
   const resultColumns = [];
   const selectParts = [];
   for (const column of columns) {
-    const compiledColumn = compileColumn(collectionId, column, serverCollections, references, localization,);
+    const compiledColumn = compileColumn(collectionId, column, context,);
     if (!compiledColumn) continue;
     resultColumns.push({
       fieldName: column.alias,
@@ -50379,33 +50505,20 @@ function compileSelectClause(
     columns: resultColumns,
   };
 }
-function compileColumn(rootCollectionId, column, serverCollections, references, localization,) {
-  const resolved = resolveFieldPath(rootCollectionId, column.fieldPath, serverCollections, references, localization,);
+function compileColumn(rootCollectionId, column, context,) {
+  const resolved = resolveFieldPath(rootCollectionId, column.fieldPath, context,);
   if (!resolved) return void 0;
   const {
     qualifier: qualifier2,
-    collectionId,
     tailFieldId,
     tailField,
   } = resolved;
   if (tailField.type === 'collectionreference' && tailFieldId !== collectionItemIdColumn) {
-    const newQualifier = `${qualifier2}.${tailFieldId}`;
-    references.set(newQualifier, {
-      qualifier: qualifier2,
-      identifier: tailFieldId,
-      referencedCollectionId: tailField.referencedCollectionId,
-    },);
+    const referenceQualifier = registerReferenceJoin(qualifier2, tailFieldId, tailField.referencedCollectionId, context,);
     return {
-      expression: sql.qualifiedIdentifier(newQualifier, collectionItemIdColumn,),
+      expression: sql.qualifiedIdentifier(referenceQualifier, collectionItemIdColumn,),
       type: 'collectionreference',
       /* CollectionReference */
-    };
-  }
-  if (tailField.type === 'multicollectionreference') {
-    return {
-      expression: compileMultiReferenceExpression(qualifier2, collectionId, tailFieldId, tailField.referencedCollectionId,),
-      type: 'multicollectionreference',
-      /* MultiCollectionReference */
     };
   }
   return {
@@ -50413,15 +50526,29 @@ function compileColumn(rootCollectionId, column, serverCollections, references, 
     type: tailField.type,
   };
 }
-function compileWhereClause(collectionId, filters, serverCollections, references, localization,) {
-  const conditions = [];
+function compileWhereClause(collectionId, filters, context,) {
+  const compiledFilters = [];
   for (const filter2 of filters.conditions) {
-    const condition = compileFilter(collectionId, filter2, serverCollections, references, localization,);
-    if (condition) conditions.push(condition,);
+    const compiledFilter = compileFilter(collectionId, filter2, context,);
+    if (compiledFilter) compiledFilters.push(compiledFilter,);
   }
   return {
-    statement: sql`WHERE ${sql.join(conditions, getJoinOperator(filters.operator,), '1',)}`,
+    statement: sql`WHERE ${joinCompiledFilters(compiledFilters, getJoinOperator(filters.operator,),)}`,
   };
+}
+function joinCompiledFilters(compiledFilters, operator,) {
+  const expression = sql.join(compiledFilters.map((compiledFilter) => compiledFilter.expression), operator, '1',);
+  if (!compiledFilters.some((compiledFilter) => compiledFilter.indexableSupersetExpression)) return expression;
+  const indexableSupersetExpression = sql.join(
+    compiledFilters.flatMap((compiledFilter) => {
+      if (compiledFilter.indexableSupersetExpression) return [sql`(${compiledFilter.indexableSupersetExpression})`,];
+      if (operator === ' OR ') return [compiledFilter.expression,];
+      return [];
+    },),
+    operator,
+    '1',
+  );
+  return sql`(${indexableSupersetExpression}) AND (${expression})`;
 }
 function getJoinOperator(filterOperator,) {
   switch (filterOperator) {
@@ -50431,8 +50558,8 @@ function getJoinOperator(filterOperator,) {
       return ' AND ';
   }
 }
-function compileFilter(collectionId, filter2, serverCollections, references, localization,) {
-  const resolved = resolveFieldPath(collectionId, filter2.fieldPath, serverCollections, references, localization,);
+function compileFilter(collectionId, filter2, context,) {
+  const resolved = resolveFieldPath(collectionId, filter2.fieldPath, context,);
   if (!resolved) return void 0;
   if (resolved.tailField.type === 'unsupported') {
     warnOnce2(new UnsupportedQueryError(`filter field type.`,).toString(),);
@@ -50447,7 +50574,38 @@ function compileFilter(collectionId, filter2, serverCollections, references, loc
     warnOnce2(new ServerDatabaseError(`Filter chain on ${filterStep.type} field does not result in a boolean.`,).toString(),);
     return void 0;
   }
-  return filterStep.inputToleratingNull().expression;
+  return {
+    expression: filterStep.inputToleratingNull().expression,
+    indexableSupersetExpression: compileIndexableSuperset(resolved, context.chainedLocaleIds, transforms, parameterName,),
+  };
+}
+function compileIndexableSuperset(
+  {
+    qualifier: qualifier2,
+    collectionId,
+    tailFieldId,
+    tailField,
+    localizationJoinAliases,
+  },
+  chainedLocaleIds,
+  transforms,
+  parameterName,
+) {
+  if (localizationJoinAliases.length === 0) return;
+  const defaultLocaleValue = createFieldStep(sql.qualifiedIdentifier(qualifier2, tailFieldId,), tailField.type,);
+  const otherLocalesValue = createFieldStep(sql.identifier(tailFieldId,), tailField.type,);
+  const defaultLocaleCandidateStep = compileTransforms(defaultLocaleValue, transforms, parameterName,);
+  const otherLocalesCandidateStep = compileTransforms(otherLocalesValue, transforms, parameterName,);
+  if (!defaultLocaleCandidateStep || !otherLocalesCandidateStep) return;
+  const isCandidateInDefaultLocale = defaultLocaleCandidateStep.inputToleratingNull().expression;
+  const localeIdParameters = chainedLocaleIds.map((localeId) => sql.parameter('localeId', localeId,));
+  const candidatesInOtherLocales = sql`SELECT ${sql.identifier(collectionItemIdColumn,)} FROM ${
+    sql.identifier(getItemLocalizationsTable(collectionId,),)
+  } WHERE ${sql.identifier(localeIdColumn,)} IN (${
+    sql.join(localeIdParameters, ', ', '1',)
+  }) AND ${otherLocalesCandidateStep.inputToleratingNull().expression}`;
+  const isCandidateInOtherLocales = sql`${sql.qualifiedIdentifier(qualifier2, collectionItemIdColumn,)} IN (${candidatesInOtherLocales})`;
+  return sql`${isCandidateInDefaultLocale} OR ${isCandidateInOtherLocales}`;
 }
 function compileTransforms(firstStep, transforms, parameterName,) {
   let currentStep = firstStep;
@@ -50528,23 +50686,13 @@ function treatNullValueAsFalse(value,) {
   return 'no';
 }
 function compileField(resolvedFieldPath,) {
-  const {
-    qualifier: qualifier2,
-    collectionId,
-    tailFieldId,
-    tailField,
-  } = resolvedFieldPath;
-  if (tailField.type === 'multicollectionreference') {
-    return new Step({
-      expression: compileMultiReferenceExpression(qualifier2, collectionId, tailFieldId, tailField.referencedCollectionId,),
-      type: tailField.type,
-      nullable: 'no',
-    },);
-  }
+  return createFieldStep(compileFieldExpression(resolvedFieldPath,), resolvedFieldPath.tailField.type,);
+}
+function createFieldStep(expression, type,) {
   return new Step({
-    expression: compileFieldExpression(resolvedFieldPath,),
-    type: tailField.type,
-    nullable: 'yes',
+    expression,
+    type,
+    nullable: type === 'multicollectionreference' ? 'no' : 'yes',
   },);
 }
 function compileTransform(transform2, previousStep, parameterName,) {
@@ -50613,16 +50761,16 @@ function compileQuery(serverQuery, serverCollections, chainedLocaleIds,) {
   const {
     collectionId,
   } = serverQuery;
-  const references = /* @__PURE__ */ new Map();
-  const localization = {
-    chainedLocaleIds,
+  const context = {
+    serverCollections,
     joins: /* @__PURE__ */ new Map(),
+    chainedLocaleIds,
   };
-  const selectClause = compileSelectClause(serverQuery, serverCollections, references, localization,);
-  const whereClause = compileWhereClause(collectionId, serverQuery.filters, serverCollections, references, localization,);
-  const orderByClause = compileOrderByClause(serverQuery, serverCollections, references, localization,);
-  const fromClause = compileFromClause(getItemsTable(collectionId,), collectionId, references, ' LEFT JOIN ', localization.joins,);
-  const limitAndOffsetClause = compileLimitAndOffsetClause();
+  const selectClause = compileSelectClause(serverQuery, context,);
+  const whereClause = compileWhereClause(collectionId, serverQuery.filters, context,);
+  const orderByClause = compileOrderByClause(serverQuery, context,);
+  const fromClause = compileFromClause(getItemsTable(collectionId,), collectionId, context.joins, ' LEFT JOIN ',);
+  const limitAndOffsetClause = compileLimitAndOffsetClause(5e3,);
   const statement =
     sql`${selectClause.statement} ${fromClause.statement} ${whereClause.statement} ${orderByClause.statement} ${limitAndOffsetClause.statement}`;
   return {
@@ -53774,14 +53922,21 @@ function useCarouselVariables() {
     totalPages,
     isNextActive,
     isPrevActive,
+    nextPage,
+    prevPage,
+    gotoPage,
   } = useCarousel();
+  const isStatic = useIsStaticRenderer();
   return useMemo(() => ({
-    carousel_active_item_index: currentPage + 1,
-    carousel_total_items: totalPages,
-    carousel_has_next: isNextActive,
-    carousel_has_previous: isPrevActive,
-    carousel_dots: createCarouselDotsValue(totalPages,),
-  }), [currentPage, totalPages, isNextActive, isPrevActive,],);
+    carousel_active_item_index: isStatic ? 1 : currentPage + 1,
+    carousel_total_items: isStatic ? 3 : totalPages,
+    carousel_has_next: isStatic ? true : isNextActive,
+    carousel_has_previous: isStatic ? false : isPrevActive,
+    carousel_dots: createCarouselDotsValue(isStatic ? 3 : totalPages,),
+    carouselNextPage: nextPage,
+    carouselPreviousPage: prevPage,
+    carouselGoToPage: gotoPage,
+  }), [isStatic, currentPage, totalPages, isNextActive, isPrevActive, nextPage, prevPage, gotoPage,],);
 }
 function CarouselVariableBindings({
   children,
@@ -53801,6 +53956,10 @@ var Carousel2 = /* @__PURE__ */ forwardRef(function Carousel3(props, ref,) {
     carouselEffectXOverflow,
     carouselEffectYOverflow,
     carouselEffectOverflow,
+    carouselEffectLoop,
+    carouselEffectAutoPlay,
+    carouselEffectInterval,
+    carouselEffectSnap,
     carouselEffectControls,
     as: asProp,
     ...rest
@@ -53811,13 +53970,14 @@ var Carousel2 = /* @__PURE__ */ forwardRef(function Carousel3(props, ref,) {
   const yOverflowWithFallback = carouselEffectYOverflow ?? carouselEffectOverflow ?? 'visible';
   const overflow = (axis === 'x' ? xOverflowWithFallback : yOverflowWithFallback) === 'visible';
   const gap = getGap(carouselEffectGap, axis,);
+  const snap = carouselEffectSnap === true ? 'page' : carouselEffectSnap;
   const items = flattenChildrenToTickerItems(children,);
   const MotionComponent = useMemo(() => motion.create(asProp,), [asProp,],);
   return /* @__PURE__ */ jsx(MotionComponent, {
     suppressHydrationWarning: true,
     ...rest,
     ref,
-    children: /* @__PURE__ */ jsx(Carousel, {
+    children: /* @__PURE__ */ jsxs(Carousel, {
       suppressHydrationWarning: true,
       axis,
       align: carouselEffectAlign ?? 'center',
@@ -53825,12 +53985,40 @@ var Carousel2 = /* @__PURE__ */ forwardRef(function Carousel3(props, ref,) {
       isStatic,
       itemSize: 'manual',
       overflow,
+      loop: carouselEffectLoop,
+      snap,
       items,
       style: requiredCarouselStyle,
-      children: carouselEffectControls,
+      children: [
+        carouselEffectAutoPlay && /* @__PURE__ */ jsx(CarouselAutoPlay, {
+          suppressHydrationWarning: true,
+          intervalSeconds: carouselEffectInterval ?? 1.5,
+        },),
+        carouselEffectControls,
+      ],
     },),
   },);
 },);
+function CarouselAutoPlay({
+  intervalSeconds,
+},) {
+  const {
+    nextPage,
+    currentPage,
+    isNextActive,
+  } = useCarousel();
+  const progress2 = useMotionValue(0,);
+  useEffect(() => {
+    if (!isNextActive) return;
+    const animation = animate(progress2, [0, 1,], {
+      duration: intervalSeconds,
+      ease: 'linear',
+      onComplete: nextPage,
+    },);
+    return () => animation.stop();
+  }, [intervalSeconds, progress2, currentPage, isNextActive, nextPage,],);
+  return null;
+}
 function getGap(gap, axis,) {
   if (typeof gap === 'number' && Number.isFinite(gap,)) return gap;
   if (!isString(gap,)) return void 0;
@@ -54063,26 +54251,93 @@ function naNToUndefined(value,) {
 }
 var withTickerFX = (Component17) => {
   return (props) => {
+    const {
+      carouselEffectProps,
+      tickerEffectProps,
+      domProps,
+    } = getProps(props,);
     if (props.carouselEffectEnabled) {
       return /* @__PURE__ */ jsx(Carousel2, {
         suppressHydrationWarning: true,
-        ...props,
+        ...carouselEffectProps,
+        ...domProps,
         as: Component17,
       },);
     }
     if (props.tickerEffectEnabled) {
       return /* @__PURE__ */ jsx(Ticker2, {
         suppressHydrationWarning: true,
-        ...props,
+        ...tickerEffectProps,
+        ...domProps,
         as: Component17,
       },);
     }
     return /* @__PURE__ */ jsx(Component17, {
       suppressHydrationWarning: true,
-      ...props,
+      ...domProps,
     },);
   };
 };
+function getProps(props,) {
+  const {
+    carouselEffectEnabled,
+    carouselEffectAlign,
+    carouselEffectAutoPlay,
+    carouselEffectControls,
+    carouselEffectGap,
+    carouselEffectInterval,
+    carouselEffectLoop,
+    carouselEffectOverflow,
+    carouselEffectSnap,
+    carouselEffectStackDirection,
+    carouselEffectXOverflow,
+    carouselEffectYOverflow,
+    tickerEffectEnabled,
+    tickerEffectAlign,
+    tickerEffectDirectionModifier,
+    tickerEffectDraggable,
+    tickerEffectGap,
+    tickerEffectHoverModifier,
+    tickerEffectIsDataRepeater,
+    tickerEffectOverflow,
+    tickerEffectPosition,
+    tickerEffectStackDirection,
+    tickerEffectVelocity,
+    tickerEffectXOverflow,
+    tickerEffectYOverflow,
+    ...domProps
+  } = props;
+  return {
+    carouselEffectProps: {
+      carouselEffectAlign,
+      carouselEffectAutoPlay,
+      carouselEffectControls,
+      carouselEffectGap,
+      carouselEffectInterval,
+      carouselEffectLoop,
+      carouselEffectOverflow,
+      carouselEffectSnap,
+      carouselEffectStackDirection,
+      carouselEffectXOverflow,
+      carouselEffectYOverflow,
+    },
+    tickerEffectProps: {
+      tickerEffectAlign,
+      tickerEffectDirectionModifier,
+      tickerEffectDraggable,
+      tickerEffectGap,
+      tickerEffectHoverModifier,
+      tickerEffectIsDataRepeater,
+      tickerEffectOverflow,
+      tickerEffectPosition,
+      tickerEffectStackDirection,
+      tickerEffectVelocity,
+      tickerEffectXOverflow,
+      tickerEffectYOverflow,
+    },
+    domProps,
+  };
+}
 var withFlowFX = (Component17) =>
   React42.forwardRef((props, forwardedRef,) => {
     const {
@@ -64343,6 +64598,46 @@ function upgradeToComponentFontV3(font,) {
     cssFamilyName,
   };
 }
+function useHookOutputs(hook, inputs, ownerRef,) {
+  const outputs = isFunction(hook,) ? hook(inputs, ownerRef,) : void 0;
+  return isObject2(outputs,) ? outputs : {};
+}
+function HookOutputs({
+  hook,
+  inputs,
+  ownerRef,
+  children,
+},) {
+  const ownRef = React42.useRef(null,);
+  const ref = ownerRef ?? ownRef;
+  return children(useHookOutputs(hook, inputs, ref,), ref,);
+}
+function HookFallback({
+  ownerRef,
+  children,
+},) {
+  const ownRef = React42.useRef(null,);
+  return children({}, ownerRef ?? ownRef,);
+}
+function HookVariableBindings({
+  scopeId,
+  nodeId,
+  ...props
+},) {
+  return /* @__PURE__ */ jsx(CodeComponentBoundary, {
+    suppressHydrationWarning: true,
+    getErrorMessage: () => getErrorMessageFor('hook', scopeId, nodeId,),
+    fallback: /* @__PURE__ */ jsx(HookFallback, {
+      suppressHydrationWarning: true,
+      ownerRef: props.ownerRef,
+      children: props.children,
+    },),
+    children: /* @__PURE__ */ jsx(HookOutputs, {
+      suppressHydrationWarning: true,
+      ...props,
+    },),
+  },);
+}
 function withPerformanceMarks(prefix3, callback,) {
   const markStart = `${prefix3}-start`;
   performance.mark(markStart,);
@@ -64609,7 +64904,7 @@ var package_default = {
     '@types/dom-navigation': '^1.0.6',
     '@types/fontfaceobserver': '2.1',
     '@types/google.fonts': '1.0',
-    '@types/node': '24.10.15',
+    '@types/node': '24.13.6',
     '@types/react': '18.2',
     '@types/react-dom': '18.2',
     '@types/yargs': '^17.0.33',
@@ -64910,6 +65205,7 @@ export {
   hasTransform,
   hasWarned,
   hex,
+  HookVariableBindings,
   hover,
   hsla,
   hslaToRgba,
@@ -65237,6 +65533,7 @@ export {
   useForceUpdate,
   useFormSelectVariableBinding,
   useGamepad,
+  useHookOutputs,
   useHotkey,
   useHydratedBreakpointVariants,
   useInitialRouteComponent,
