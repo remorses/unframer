@@ -633,7 +633,7 @@ body { --framer-will-change-filter-override: none; }
 
         li.framer-text {
             counter-increment: list-item;
-            list-style: none;
+            list-style: "";
             padding-inline-start: 2ch;
         }
     

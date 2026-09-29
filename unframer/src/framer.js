@@ -13502,7 +13502,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.GEEK6M5I.mjs
+// /:https://app.framerstatic.com/framer.JGX6KHCA.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -27348,11 +27348,14 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             padding-inline-start: 0;
             position: relative;
         }
-    `, /* css */
+    `,
+  // Safari drops the list role when the list marker keyword is `none`, "" is better for a11y.
+  // https://www.matuzo.at/blog/2023/removing-list-styles-without-affecting-semantics
+  /* css */
   `
         li.framer-text {
             counter-increment: list-item;
-            list-style: none;
+            list-style: "";
             padding-inline-start: 2ch;
         }
     `, /* css */
@@ -50298,6 +50301,18 @@ function compileFieldExpression({
     const valueInLocale = sql.qualifiedIdentifier(joinAlias, tailFieldId,);
     return sql`IIF(${itemIsIncludedInLocale}, ${valueInLocale}, NULL)`;
   },);
+  if (tailField.type === 'responsiveimage') {
+    const localizedImagesWithoutAlt = localizedExpressions.map((image) => {
+      const imageContainsSrc = sql`json_extract(${image}, '$.src') IS NOT NULL`;
+      const imageWithoutAlt2 = sql`json_remove(${image}, '$.alt')`;
+      return sql`IIF(${imageContainsSrc}, ${imageWithoutAlt2}, NULL)`;
+    },);
+    const defaultImageWithoutAlt = sql`json_remove(${expression}, '$.alt')`;
+    const imageWithoutAlt = sql`COALESCE(${sql.join([...localizedImagesWithoutAlt, defaultImageWithoutAlt,], ', ', '1',)})`;
+    const alts = [...localizedExpressions, expression,].map((image) => sql`json_extract(${image}, '$.alt')`);
+    const alt = sql`json_object('alt', COALESCE(${sql.join(alts, ', ', '1',)}))`;
+    return sql`json_patch(${imageWithoutAlt}, ${alt})`;
+  }
   return sql`COALESCE(${sql.join([...localizedExpressions, expression,], ', ', '1',)})`;
 }
 function compileSortKey(resolved,) {
@@ -59650,6 +59665,10 @@ var passwordManagerIgnoreDataProps = {
 };
 var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(props, ref,) {
   const {
+    // Accessible names and descriptions belong to the editable control, not its layout wrapper.
+    'aria-label': ariaLabel,
+    'aria-labelledby': ariaLabelledBy,
+    'aria-describedby': ariaDescribedBy,
     autoFocus,
     className: className2,
     inputName,
@@ -59724,6 +59743,9 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
           ref: setInputRef,
           ...dataProps,
           ...eventHandlers,
+          'aria-label': ariaLabel,
+          'aria-labelledby': ariaLabelledBy,
+          'aria-describedby': ariaDescribedBy,
           required,
           autoFocus,
           name: inputName,
@@ -59737,6 +59759,9 @@ var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(prop
           ref: setInputRef,
           ...dataProps,
           ...eventHandlers,
+          'aria-label': ariaLabel,
+          'aria-labelledby': ariaLabelledBy,
+          'aria-describedby': ariaDescribedBy,
           type,
           required,
           autoFocus,
@@ -60172,6 +60197,10 @@ var styles2 = /* @__PURE__ */ (() => [
 var FormBooleanInput2 = /* @__PURE__ */ withCSS(BooleanInput, styles2, 'framer-lib-form-boolean-input',);
 var Select = /* @__PURE__ */ React42.forwardRef(function Select2(props, measureRef,) {
   const {
+    // Accessible names and descriptions belong to the select, not its layout wrapper.
+    'aria-label': ariaLabel,
+    'aria-labelledby': ariaLabelledBy,
+    'aria-describedby': ariaDescribedBy,
     autoFocus,
     className: className2,
     inputName,
@@ -60217,6 +60246,9 @@ var Select = /* @__PURE__ */ React42.forwardRef(function Select2(props, measureR
     ...rest,
     children: /* @__PURE__ */ jsx(motion.select, {
       suppressHydrationWarning: true,
+      'aria-label': ariaLabel,
+      'aria-labelledby': ariaLabelledBy,
+      'aria-describedby': ariaDescribedBy,
       ref: setSelectRef,
       name: inputName,
       autoFocus,
