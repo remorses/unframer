@@ -13502,7 +13502,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.JGX6KHCA.mjs
+// /:https://app.framerstatic.com/framer.HWI3YNHQ.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -39603,6 +39603,7 @@ function useDismissFloatingLayer(anchorRef, floatingPositionRef, safeAreaRef, {
     safeWindow.addEventListener('mousemove', scheduleMaybeDismiss,);
     return () => {
       safeWindow.removeEventListener('mousemove', scheduleMaybeDismiss,);
+      cancelFrame(maybeDismiss,);
     };
   }, [onDismiss, safeArea, anchorRef, safeAreaRef, floatingPositionRef,],);
   return descendantStackingContext;
@@ -50207,17 +50208,24 @@ function registerLocalizationJoins(qualifier2, collectionId, {
   joins,
   chainedLocaleIds,
 },) {
-  return chainedLocaleIds.map((localeId) => {
-    const joinAlias = getLocalizationJoinAlias(qualifier2, localeId,);
-    if (joins.has(joinAlias,)) return joinAlias;
-    joins.set(joinAlias, {
-      table: getItemLocalizationsTable(collectionId,),
-      condition: sql`${sql.qualifiedIdentifier(qualifier2, collectionItemIdColumn,)} = ${
-        sql.qualifiedIdentifier(joinAlias, collectionItemIdColumn,)
-      } AND ${sql.qualifiedIdentifier(joinAlias, localeIdColumn,)} = ${sql.parameter('localeId', localeId,)}`,
-    },);
-    return joinAlias;
+  return chainedLocaleIds.map((localeId) =>
+    registerLocalizationJoin(qualifier2, collectionId, localeId, {
+      joins,
+    },)
+  );
+}
+function registerLocalizationJoin(qualifier2, collectionId, localeId, {
+  joins,
+},) {
+  const joinAlias = getLocalizationJoinAlias(qualifier2, localeId,);
+  if (joins.has(joinAlias,)) return joinAlias;
+  joins.set(joinAlias, {
+    table: getItemLocalizationsTable(collectionId,),
+    condition: sql`${sql.qualifiedIdentifier(qualifier2, collectionItemIdColumn,)} = ${
+      sql.qualifiedIdentifier(joinAlias, collectionItemIdColumn,)
+    } AND ${sql.qualifiedIdentifier(joinAlias, localeIdColumn,)} = ${sql.parameter('localeId', localeId,)}`,
   },);
+  return joinAlias;
 }
 function compileReferenceJoin(qualifier2, identifier2, joinAlias, referencedCollectionId,) {
   return {
@@ -50547,8 +50555,16 @@ function compileWhereClause(collectionId, filters, context,) {
     const compiledFilter = compileFilter(collectionId, filter2, context,);
     if (compiledFilter) compiledFilters.push(compiledFilter,);
   }
+  const filterCondition = joinCompiledFilters(compiledFilters, getJoinOperator(filters.operator,),);
+  const activeLocaleId = context.chainedLocaleIds[0];
+  if (activeLocaleId === void 0) {
+    return {
+      statement: sql`WHERE ${filterCondition}`,
+    };
+  }
+  const joinAlias = registerLocalizationJoin(collectionId, collectionId, activeLocaleId, context,);
   return {
-    statement: sql`WHERE ${joinCompiledFilters(compiledFilters, getJoinOperator(filters.operator,),)}`,
+    statement: sql`WHERE (${filterCondition}) AND ${sql.qualifiedIdentifier(joinAlias, inclusionColumn,)} IS NOT 'exclude'`,
   };
 }
 function joinCompiledFilters(compiledFilters, operator,) {
@@ -64928,16 +64944,16 @@ var package_default = {
   devDependencies: {
     '@juggle/resize-observer': '^3.4.0',
     '@microsoft/api-extractor': '^7.58.2',
-    '@testing-library/dom': '^8.19.1',
+    '@testing-library/dom': '^10.4.1',
     '@testing-library/jest-dom': '^5.16.5',
-    '@testing-library/react': '^13.4.0',
+    '@testing-library/react': '^16.3.0',
     '@testing-library/user-event':
       'patch:@testing-library/user-event@npm%3A14.6.1#~/.yarn/patches/@testing-library-user-event-npm-14.6.1-5da7e1d4e2.patch',
     '@types/dom-navigation': '^1.0.6',
     '@types/fontfaceobserver': '2.1',
     '@types/google.fonts': '1.0',
     '@types/node': '24.13.6',
-    '@types/react': '18.2',
+    '@types/react': '18.3.3',
     '@types/react-dom': '18.2',
     '@types/yargs': '^17.0.33',
     chalk: '^4.1.2',
@@ -64948,8 +64964,8 @@ var package_default = {
     'jest-environment-jsdom': '^29.3.1',
     'jest-environment-jsdom-global': '^4.0.0',
     oxlint: '^1.85.0',
-    react: '^18.2.0',
-    'react-dom': '^18.2.0',
+    react: '^18.3.1',
+    'react-dom': '^18.3.1',
     semver: '^7.7.1',
     typescript: '^6.0.3',
     yargs: '^17.7.2',
