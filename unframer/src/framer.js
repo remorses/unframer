@@ -13502,7 +13502,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.HWI3YNHQ.mjs
+// /:https://app.framerstatic.com/framer.CCF6M53K.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -26250,6 +26250,11 @@ var CSSCollector = class {
   }
 };
 var cssCollector = /* @__PURE__ */ new CSSCollector();
+var willChangeOverrideCSSVariable = '--framer-will-change-override';
+var willChangeEffectOverrideCSSVariable = '--framer-will-change-effect-override';
+var willChangeFilterOverrideCSSVariable = '--framer-will-change-filter-override';
+var overflowClipFallbackCSSVariable = '--overflow-clip-fallback';
+var oneIfCornerShapeSupportedCSSVariable = '--one-if-corner-shape-supported';
 var richTextStylesRule = `
 [data-framer-component-type="DeprecatedRichText"] p,
 [data-framer-component-type="DeprecatedRichText"] div,
@@ -27449,11 +27454,6 @@ var safari16TextTruncationFix = /* @__PURE__ */ (() => [`@supports ${anySafariVe
         /* Render text-fill elements inline when text is truncated, otherwise default to their default value (e.g. inline-block) */
         p.framer-text[data-text-fill] { display: var(${textTruncationDisplayInlineVariableForSafari16}, ${defaultTextFillStyle.display}) }
     }`,])();
-var willChangeOverrideCSSVariable = '--framer-will-change-override';
-var willChangeEffectOverrideCSSVariable = '--framer-will-change-effect-override';
-var willChangeFilterOverrideCSSVariable = '--framer-will-change-filter-override';
-var overflowClipFallbackCSSVariable = '--overflow-clip-fallback';
-var oneIfCornerShapeSupportedCSSVariable = '--one-if-corner-shape-supported';
 var combineCSSRules = (isPreview) => {
   const componentCSSRules = `[data-framer-component-type] { position: absolute; }`;
   const textAlignmentRule = `
@@ -50227,6 +50227,21 @@ function registerLocalizationJoin(qualifier2, collectionId, localeId, {
   },);
   return joinAlias;
 }
+function compileLocalizedValue(expression, localizedExpressions, field,) {
+  if (field.type === 'responsiveimage') {
+    const localizedImagesWithoutAlt = localizedExpressions.map((image) => {
+      const imageContainsSrc = sql`json_extract(${image}, '$.src') IS NOT NULL`;
+      const imageWithoutAlt2 = sql`json_remove(${image}, '$.alt')`;
+      return sql`IIF(${imageContainsSrc}, ${imageWithoutAlt2}, NULL)`;
+    },);
+    const defaultImageWithoutAlt = sql`json_remove(${expression}, '$.alt')`;
+    const imageWithoutAlt = sql`COALESCE(${sql.join([...localizedImagesWithoutAlt, defaultImageWithoutAlt,], ', ', '1',)})`;
+    const alts = [...localizedExpressions, expression,].map((image) => sql`json_extract(${image}, '$.alt')`);
+    const alt = sql`json_object('alt', COALESCE(${sql.join(alts, ', ', '1',)}))`;
+    return sql`json_patch(${imageWithoutAlt}, ${alt})`;
+  }
+  return sql`COALESCE(${sql.join([...localizedExpressions, expression,], ', ', '1',)})`;
+}
 function compileReferenceJoin(qualifier2, identifier2, joinAlias, referencedCollectionId,) {
   return {
     table: getItemsTable(referencedCollectionId,),
@@ -50309,19 +50324,7 @@ function compileFieldExpression({
     const valueInLocale = sql.qualifiedIdentifier(joinAlias, tailFieldId,);
     return sql`IIF(${itemIsIncludedInLocale}, ${valueInLocale}, NULL)`;
   },);
-  if (tailField.type === 'responsiveimage') {
-    const localizedImagesWithoutAlt = localizedExpressions.map((image) => {
-      const imageContainsSrc = sql`json_extract(${image}, '$.src') IS NOT NULL`;
-      const imageWithoutAlt2 = sql`json_remove(${image}, '$.alt')`;
-      return sql`IIF(${imageContainsSrc}, ${imageWithoutAlt2}, NULL)`;
-    },);
-    const defaultImageWithoutAlt = sql`json_remove(${expression}, '$.alt')`;
-    const imageWithoutAlt = sql`COALESCE(${sql.join([...localizedImagesWithoutAlt, defaultImageWithoutAlt,], ', ', '1',)})`;
-    const alts = [...localizedExpressions, expression,].map((image) => sql`json_extract(${image}, '$.alt')`);
-    const alt = sql`json_object('alt', COALESCE(${sql.join(alts, ', ', '1',)}))`;
-    return sql`json_patch(${imageWithoutAlt}, ${alt})`;
-  }
-  return sql`COALESCE(${sql.join([...localizedExpressions, expression,], ', ', '1',)})`;
+  return compileLocalizedValue(expression, localizedExpressions, tailField,);
 }
 function compileSortKey(resolved,) {
   if (resolved.tailField.type === 'multicollectionreference') return void 0;
