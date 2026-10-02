@@ -1,6 +1,30 @@
-import { __require, } from './framer-chunks/chunk-IKQSD2QC.js';
+var __require = /* @__PURE__ */ ((x2) =>
+  typeof require !== 'undefined' ? require : typeof Proxy !== 'undefined'
+    ? new Proxy(x2, {
+      get: (a, b,) => (typeof require !== 'undefined' ? require : a)[b],
+    },)
+    : x2)(function (x2,) {
+    if (typeof require !== 'undefined') return require.apply(this, arguments,);
+    throw Error('Dynamic require of "' + x2 + '" is not supported',);
+  },);
 
-// /:https://app.framerstatic.com/chunk-C4Q63SZJ.mjs
+// /:https://app.framerstatic.com/chunk-XU3EFHPV.mjs
+import { createContext, } from 'react';
+import { useEffect, useLayoutEffect, } from 'react';
+import * as React from 'react';
+import { jsx, } from 'react/jsx-runtime';
+import { useContext, useId, useInsertionEffect, useRef, } from 'react';
+import { useMemo, } from 'react';
+import { useCallback as useCallback2, } from 'react';
+import { Fragment, } from 'react/jsx-runtime';
+import { useState, } from 'react';
+import { Children, isValidElement, } from 'react';
+import { jsxs, } from 'react/jsx-runtime';
+import { forwardRef, } from 'react';
+import { createElement, } from 'react';
+import { Component as Component2, } from 'react';
+var __unframerWindow = typeof window !== 'undefined' ? window : void 0;
+var __unframerNavigator = typeof __unframerWindow !== 'undefined' ? navigator : void 0;
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -217,24 +241,6 @@ var __callDispose = (stack, error, hasError,) => {
   };
   return next2();
 };
-
-// /:https://app.framerstatic.com/chunk-B2CCIJNA.mjs
-import { createContext, } from 'react';
-import { useEffect, useLayoutEffect, } from 'react';
-import * as React from 'react';
-import { jsx, } from 'react/jsx-runtime';
-import { useContext, useId, useInsertionEffect, useRef, } from 'react';
-import { useMemo, } from 'react';
-import { useCallback as useCallback2, } from 'react';
-import { Fragment, } from 'react/jsx-runtime';
-import { useState, } from 'react';
-import { Children, isValidElement, } from 'react';
-import { jsxs, } from 'react/jsx-runtime';
-import { forwardRef, } from 'react';
-import { createElement, } from 'react';
-import { Component as Component2, } from 'react';
-var __unframerWindow = typeof window !== 'undefined' ? window : void 0;
-var __unframerNavigator = typeof __unframerWindow !== 'undefined' ? navigator : void 0;
 var LayoutGroupContext = createContext({},);
 var isBrowser = typeof __unframerWindow !== 'undefined';
 var useIsomorphicLayoutEffect = isBrowser ? useLayoutEffect : useEffect;
@@ -13502,7 +13508,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.CCF6M53K.mjs
+// /:https://app.framerstatic.com/framer.NUK4ZAW7.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -14720,9 +14726,6 @@ var DevalueError = class extends Error {
     this.root = root;
   }
 };
-function is_primitive(thing,) {
-  return thing === null || typeof thing !== 'object' && typeof thing !== 'function';
-}
 var object_proto_names = /* @__PURE__ */ Object.getOwnPropertyNames(Object.prototype,).sort().join('\0',);
 function is_plain_object(thing,) {
   const proto = Object.getPrototypeOf(thing,);
@@ -14800,14 +14803,17 @@ function is_valid_array_index_string(s,) {
   }
   return is_valid_array_index(+s,);
 }
-function valid_array_indices(array,) {
-  const keys3 = Object.keys(array,);
+function array_index_cut(keys3,) {
   for (var i = keys3.length - 1; i >= 0; i--) {
     if (is_valid_array_index_string(keys3[i],)) {
       break;
     }
   }
-  keys3.length = i + 1;
+  return i + 1;
+}
+function valid_array_indices(array,) {
+  const keys3 = Object.keys(array,);
+  keys3.length = array_index_cut(keys3,);
   return keys3;
 }
 function encode_native(array_buffer,) {
@@ -14845,10 +14851,106 @@ var native = typeof Uint8Array.fromBase64 === 'function';
 var buffer = typeof process === 'object' && process.versions?.node !== void 0;
 var encode64 = native ? encode_native : buffer ? encode_buffer : encode_legacy;
 var decode64 = native ? decode_native : buffer ? decode_buffer : decode_legacy;
-function parse(serialized, revivers,) {
-  return unflatten(JSON.parse(serialized,), revivers,);
+function merge_operations(defaults, overrides,) {
+  if (!overrides) return defaults;
+  const merged = /** @type {T} */
+    {};
+  for (
+    const key7 of /** @type {(keyof T)[]} */
+    Object.keys(defaults,)
+  ) {
+    merged[key7] = overrides[key7] ?? defaults[key7];
+  }
+  return merged;
 }
-function unflatten(parsed, revivers,) {
+var NOT_PLAIN = /* @__PURE__ */ Object.freeze({
+  kind: 'not-plain',
+},);
+var SYMBOL_KEYS = /* @__PURE__ */ Object.freeze({
+  kind: 'symbol-keys',
+},);
+var stringify_operations = {
+  identify: (value) => value,
+  typeOf: (value) => value === null ? 'null' : typeof value,
+  toPrimitive: (value) => value,
+  tagOf: (value) => get_type(value,),
+  isThenable: (value) => typeof value.then === 'function',
+  toPromise: (thenable) => Promise.resolve(thenable,),
+  unbox: (boxed) => boxed.valueOf(),
+  toISOString: (date) => isNaN(date.getDate(),) ? '' : date.toISOString(),
+  toStringValue: (value) => value.toString(),
+  regExpInfo: (regexp) => ({
+    source: regexp.source,
+    flags: regexp.flags,
+  }),
+  valuesOf: (set) => set,
+  entriesOf: (map2) => map2,
+  viewInfo: (view) => ({
+    buffer: view.buffer,
+    byteOffset: view.byteOffset,
+    byteLength: view.byteLength,
+    length: view.length,
+    bufferByteLength: view.buffer.byteLength,
+  }),
+  toArrayBuffer: (buffer2) => buffer2,
+  lengthOf: (array) => array.length,
+  hasOwn: (value, key7,) => Object.hasOwn(value, key7,),
+  indicesOf: (array) => valid_array_indices(array,),
+  shapeOf: (value) => {
+    if (!is_plain_object(value,)) return NOT_PLAIN;
+    if (enumerable_symbols(value,).length > 0) return SYMBOL_KEYS;
+    return {
+      kind: Object.getPrototypeOf(value,) === null ? 'null-proto' : 'plain',
+      keys: Object.keys(value,),
+    };
+  },
+  get: (value, key7,) => value[key7],
+};
+var default_stringify_operations = /* @__PURE__ */ Object.freeze(stringify_operations,);
+var parse_operations = {
+  fromPrimitive: (primitive) => primitive,
+  fromISOString: (iso) => new Date(iso,),
+  fromStringValue: (tag, text,) => {
+    if (tag === 'URL') return new URL(text,);
+    if (tag === 'URLSearchParams') return new URLSearchParams(text,);
+    return Temporal[tag.slice(9,)].from(text,);
+  },
+  fromArrayBuffer: (buffer2) => buffer2,
+  fromRegExpInfo: (source, flags,) => new RegExp(source, flags,),
+  fromViewInfo: (tag, buffer2, byteOffset, length,) => {
+    const Constructor = /** @type {any} */
+      globalThis[tag];
+    return byteOffset !== void 0 ? new Constructor(buffer2, byteOffset, length,) : new Constructor(buffer2,);
+  },
+  box: (value) => Object(value,),
+  createArray: (length) => new Array(length,),
+  createSparseArray: (length) => {
+    const array = [];
+    array[MAX_ARRAY_INDEX] = void 0;
+    delete array[MAX_ARRAY_INDEX];
+    array.length = length;
+    return array;
+  },
+  createObject: () => ({}),
+  createNullPrototypeObject: () => /* @__PURE__ */ Object.create(null,),
+  createSet: () => /* @__PURE__ */ new Set(),
+  createMap: () => /* @__PURE__ */ new Map(),
+  set: (target, key7, value,) => {
+    target[key7] = value;
+  },
+  addValue: (set, value,) => {
+    set.add(value,);
+  },
+  addEntry: (map2, key7, value,) => {
+    map2.set(key7, value,);
+  },
+};
+var default_parse_operations = /* @__PURE__ */ Object.freeze(parse_operations,);
+function parse(serialized, revivers, options,) {
+  return unflatten(JSON.parse(serialized,), revivers, options,);
+}
+function unflatten(parsed, revivers, options,) {
+  const ops = merge_operations(default_parse_operations, options?.operations,);
   if (typeof parsed === 'number') return hydrate(parsed, true,);
   if (!Array.isArray(parsed,) || parsed.length === 0) {
     throw new Error('Invalid input',);
@@ -14858,18 +14960,18 @@ function unflatten(parsed, revivers,) {
   const hydrated = Array(values.length,);
   let hydrating = null;
   function hydrate(index, standalone = false,) {
-    if (index === UNDEFINED) return void 0;
-    if (index === NAN) return NaN;
-    if (index === POSITIVE_INFINITY) return Infinity;
-    if (index === NEGATIVE_INFINITY) return -Infinity;
-    if (index === NEGATIVE_ZERO) return -0;
+    if (index === UNDEFINED) return ops.fromPrimitive(void 0,);
+    if (index === NAN) return ops.fromPrimitive(NaN,);
+    if (index === POSITIVE_INFINITY) return ops.fromPrimitive(Infinity,);
+    if (index === NEGATIVE_INFINITY) return ops.fromPrimitive(-Infinity,);
+    if (index === NEGATIVE_ZERO) return ops.fromPrimitive(-0,);
     if (standalone || typeof index !== 'number') {
       throw new Error(`Invalid input`,);
     }
     if (index in hydrated) return hydrated[index];
     const value = values[index];
     if (!value || typeof value !== 'object') {
-      hydrated[index] = value;
+      hydrated[index] = ops.fromPrimitive(value,);
     } else if (Array.isArray(value,)) {
       if (typeof value[0] === 'string') {
         const type = value[0];
@@ -14878,6 +14980,9 @@ function unflatten(parsed, revivers,) {
           let i = value[1];
           if (typeof i !== 'number') {
             i = values.push(value[1],) - 1;
+          }
+          if (Object.hasOwn(hydrated, i,)) {
+            return hydrated[index] = reviver(hydrated[i],);
           }
           hydrating ??= /* @__PURE__ */ new Set();
           if (hydrating.has(i,)) {
@@ -14890,44 +14995,44 @@ function unflatten(parsed, revivers,) {
         }
         switch (type) {
           case 'Date':
-            hydrated[index] = new Date(value[1],);
+            hydrated[index] = ops.fromISOString(value[1],);
             break;
           case 'Set':
-            const set = /* @__PURE__ */ new Set();
+            const set = ops.createSet();
             hydrated[index] = set;
             for (let i = 1; i < value.length; i += 1) {
-              set.add(hydrate(value[i],),);
+              ops.addValue(set, hydrate(value[i],),);
             }
             break;
           case 'Map':
-            const map2 = /* @__PURE__ */ new Map();
+            const map2 = ops.createMap();
             hydrated[index] = map2;
             for (let i = 1; i < value.length; i += 2) {
-              map2.set(hydrate(value[i],), hydrate(value[i + 1],),);
+              ops.addEntry(map2, hydrate(value[i],), hydrate(value[i + 1],),);
             }
             break;
           case 'RegExp':
-            hydrated[index] = new RegExp(value[1], value[2],);
+            hydrated[index] = ops.fromRegExpInfo(value[1], value[2],);
             break;
           case 'Object': {
             const wrapped_index = value[1];
             if (typeof values[wrapped_index] === 'object' && values[wrapped_index][0] !== 'BigInt') {
               throw new Error('Invalid input',);
             }
-            hydrated[index] = Object(hydrate(wrapped_index,),);
+            hydrated[index] = ops.box(hydrate(wrapped_index,),);
             break;
           }
           case 'BigInt':
-            hydrated[index] = BigInt(value[1],);
+            hydrated[index] = ops.fromPrimitive(BigInt(value[1],),);
             break;
           case 'null':
-            const obj = /* @__PURE__ */ Object.create(null,);
+            const obj = ops.createNullPrototypeObject();
             hydrated[index] = obj;
             for (let i = 1; i < value.length; i += 2) {
               if (value[i] === '__proto__') {
                 throw new Error('Cannot parse an object with a `__proto__` property',);
               }
-              obj[value[i]] = hydrate(value[i + 1],);
+              ops.set(obj, value[i], hydrate(value[i + 1],),);
             }
             break;
           case 'Int8Array':
@@ -14946,11 +15051,8 @@ function unflatten(parsed, revivers,) {
             if (values[value[1]][0] !== 'ArrayBuffer') {
               throw new Error('Invalid data',);
             }
-            const TypedArrayConstructor = globalThis[type];
             const buffer2 = hydrate(value[1],);
-            hydrated[index] = value[2] !== void 0
-              ? new TypedArrayConstructor(buffer2, value[2], value[3],)
-              : new TypedArrayConstructor(buffer2,);
+            hydrated[index] = ops.fromViewInfo(type, buffer2, value[2], value[3],);
             break;
           }
           case 'ArrayBuffer': {
@@ -14958,10 +15060,11 @@ function unflatten(parsed, revivers,) {
             if (typeof base64 !== 'string') {
               throw new Error('Invalid ArrayBuffer encoding',);
             }
-            const arraybuffer = decode64(base64,);
-            hydrated[index] = arraybuffer;
+            hydrated[index] = ops.fromArrayBuffer(decode64(base64,),);
             break;
           }
+          case 'URL':
+          case 'URLSearchParams':
           case 'Temporal.Duration':
           case 'Temporal.Instant':
           case 'Temporal.PlainDate':
@@ -14970,18 +15073,7 @@ function unflatten(parsed, revivers,) {
           case 'Temporal.PlainMonthDay':
           case 'Temporal.PlainYearMonth':
           case 'Temporal.ZonedDateTime': {
-            const temporalName = type.slice(9,);
-            hydrated[index] = Temporal[temporalName].from(value[1],);
-            break;
-          }
-          case 'URL': {
-            const url = new URL(value[1],);
-            hydrated[index] = url;
-            break;
-          }
-          case 'URLSearchParams': {
-            const url = new URLSearchParams(value[1],);
-            hydrated[index] = url;
+            hydrated[index] = ops.fromStringValue(type, value[1],);
             break;
           }
           default:
@@ -14992,47 +15084,44 @@ function unflatten(parsed, revivers,) {
         if (!is_valid_array_len(len,)) {
           throw new Error('Invalid input',);
         }
-        const array = [];
+        const array = ops.createSparseArray(len,);
         hydrated[index] = array;
-        array[MAX_ARRAY_INDEX] = void 0;
-        delete array[MAX_ARRAY_INDEX];
         for (let i = 2; i < value.length; i += 2) {
           const idx = value[i];
           if (!is_valid_array_index(idx,) || idx >= len) {
             throw new Error('Invalid input',);
           }
-          array[idx] = hydrate(value[i + 1],);
+          ops.set(array, idx, hydrate(value[i + 1],),);
         }
-        array.length = len;
       } else {
-        const array = new Array(value.length,);
+        const array = ops.createArray(value.length,);
         hydrated[index] = array;
         for (let i = 0; i < value.length; i += 1) {
           const n = value[i];
           if (n === HOLE) continue;
-          array[i] = hydrate(n,);
+          ops.set(array, i, hydrate(n,),);
         }
       }
     } else {
-      const object = {};
+      const object = ops.createObject();
       hydrated[index] = object;
       for (const key7 of Object.keys(value,)) {
         if (key7 === '__proto__') {
           throw new Error('Cannot parse an object with a `__proto__` property',);
         }
-        const n = value[key7];
-        object[key7] = hydrate(n,);
+        ops.set(object, key7, hydrate(value[key7],),);
       }
     }
     return hydrated[index];
   }
   return hydrate(0,);
 }
-function stringify(value, reducers,) {
-  const stringified = run(false, value, reducers,);
+function stringify(value, reducers, options,) {
+  const stringified = run(false, value, reducers, options,);
   return typeof stringified === 'string' ? stringified : `[${stringified.join(',',)}]`;
 }
-function run(async, value, reducers,) {
+function run(async, value, reducers, options,) {
+  const ops = merge_operations(default_stringify_operations, options?.operations,);
   const stringified = [];
   const indexes = /* @__PURE__ */ new Map();
   const custom = [];
@@ -15047,14 +15136,21 @@ function run(async, value, reducers,) {
   const keys3 = [];
   let p = 0;
   function flatten(thing, index2,) {
-    if (thing === void 0) return UNDEFINED;
-    if (Number.isNaN(thing,)) return NAN;
-    if (thing === Infinity) return POSITIVE_INFINITY;
-    if (thing === -Infinity) return NEGATIVE_INFINITY;
-    if (thing === 0 && 1 / thing < 0) return NEGATIVE_ZERO;
-    if (indexes.has(thing,)) return /** @type {number} */ indexes.get(thing,);
+    const type = ops.typeOf(thing,);
+    if (type === 'undefined') return UNDEFINED;
+    let number2;
+    if (type === 'number') {
+      number2 = /** @type {number} */
+        ops.toPrimitive(thing,);
+      if (Number.isNaN(number2,)) return NAN;
+      if (number2 === Infinity) return POSITIVE_INFINITY;
+      if (number2 === -Infinity) return NEGATIVE_INFINITY;
+      if (number2 === 0 && 1 / number2 < 0) return NEGATIVE_ZERO;
+    }
+    const id3 = ops.identify(thing,);
+    if (indexes.has(id3,)) return /** @type {number} */ indexes.get(id3,);
     index2 ??= p++;
-    indexes.set(thing, index2,);
+    indexes.set(id3, index2,);
     for (
       const {
         key: key7,
@@ -15067,74 +15163,71 @@ function run(async, value, reducers,) {
         return index2;
       }
     }
-    if (typeof thing === 'function') {
+    if (type === 'function') {
       throw new DevalueError(`Cannot stringify a function`, keys3, thing, value,);
-    } else if (typeof thing === 'symbol') {
+    } else if (type === 'symbol') {
       throw new DevalueError(`Cannot stringify a Symbol primitive`, keys3, thing, value,);
     }
     let str = '';
-    if (is_primitive(thing,)) {
-      str = stringify_primitive(thing,);
-    } else if (typeof thing.then === 'function') {
+    if (type !== 'object') {
+      str = stringify_primitive(type === 'number' ? number2 : ops.toPrimitive(thing,),);
+    } else if (ops.isThenable(thing,)) {
       if (!async) {
         throw new DevalueError(`Cannot stringify a Promise or thenable \u2014 use stringifyAsync instead`, keys3, thing, value,);
       }
-      str = Promise.resolve(thing,).then((value2) => {
+      str = ops.toPromise(thing,).then((value2) => {
         const i = flatten(value2, index2,);
         if (i < 0) stringified[index2] = i;
       },);
     } else {
-      const type = get_type(thing,);
-      switch (type) {
+      const tag = ops.tagOf(thing,);
+      switch (tag) {
         case 'Number':
         case 'String':
         case 'Boolean':
         case 'BigInt':
-          str = `["Object",${flatten(thing.valueOf(),)}]`;
+          str = `["Object",${flatten(ops.unbox(thing,),)}]`;
           break;
         case 'Date':
-          const valid = !isNaN(thing.getDate(),);
-          str = `["Date","${valid ? thing.toISOString() : ''}"]`;
+          str = `["Date","${ops.toISOString(thing,)}"]`;
           break;
         case 'URL':
-          str = `["URL",${stringify_string(thing.toString(),)}]`;
+          str = `["URL",${stringify_string(ops.toStringValue(thing,),)}]`;
           break;
         case 'URLSearchParams':
-          str = `["URLSearchParams",${stringify_string(thing.toString(),)}]`;
+          str = `["URLSearchParams",${stringify_string(ops.toStringValue(thing,),)}]`;
           break;
         case 'RegExp':
           const {
             source,
             flags,
-          } = thing;
+          } = ops.regExpInfo(thing,);
           str = flags ? `["RegExp",${stringify_string(source,)},"${flags}"]` : `["RegExp",${stringify_string(source,)}]`;
           break;
         case 'Array': {
           let mostly_dense = false;
+          const length = ops.lengthOf(thing,);
           str = '[';
-          for (let i = 0; i < thing.length; i += 1) {
+          for (let i = 0; i < length; i += 1) {
             if (i > 0) str += ',';
-            if (Object.hasOwn(thing, i,)) {
+            if (ops.hasOwn(thing, i,)) {
               keys3.push(`[${i}]`,);
-              str += flatten(thing[i],);
+              str += flatten(ops.get(thing, i,),);
               keys3.pop();
             } else if (mostly_dense) {
               str += HOLE;
             } else {
-              const populated_keys = valid_array_indices(
-                /** @type {any[]} */
-                thing,
-              );
+              const populated_keys = ops.indicesOf(thing,);
               const population = populated_keys.length;
-              const d = String(thing.length,).length;
-              const hole_cost = (thing.length - population) * 3;
+              const d = String(length,).length;
+              const hole_cost = (length - population) * 3;
               const sparse_cost = 4 + d + population * (d + 1);
               if (hole_cost > sparse_cost) {
-                str = '[' + SPARSE + ',' + thing.length;
+                str = '[' + SPARSE + ',' + length;
                 for (let j = 0; j < populated_keys.length; j++) {
                   const key7 = populated_keys[j];
                   keys3.push(`[${key7}]`,);
-                  str += ',' + key7 + ',' + flatten(thing[key7],);
+                  str += ',' + key7 + ',' + flatten(ops.get(thing, key7,),);
                   keys3.pop();
                 }
                 break;
@@ -15149,15 +15242,17 @@ function run(async, value, reducers,) {
         }
         case 'Set':
           str = '["Set"';
-          for (const value2 of thing) {
+          for (const value2 of ops.valuesOf(thing,)) {
             str += `,${flatten(value2,)}`;
           }
           str += ']';
           break;
         case 'Map':
           str = '["Map"';
-          for (const [key7, value2,] of thing) {
-            keys3.push(`.get(${is_primitive(key7,) ? stringify_primitive(key7,) : '...'})`,);
+          for (const [key7, value2,] of ops.entriesOf(thing,)) {
+            const key_type = ops.typeOf(key7,);
+            const key_is_primitive = key_type !== 'object' && key_type !== 'function' && key_type !== 'symbol';
+            keys3.push(`.get(${key_is_primitive ? stringify_primitive(ops.toPrimitive(key7,),) : '...'})`,);
             str += `,${flatten(key7,)},${flatten(value2,)}`;
             keys3.pop();
           }
@@ -15174,19 +15269,26 @@ function run(async, value, reducers,) {
         case 'Float32Array':
         case 'Float64Array':
         case 'BigInt64Array':
-        case 'BigUint64Array':
+        case 'BigUint64Array': {
+          const info = ops.viewInfo(thing,);
+          str = '["' + tag + '",' + flatten(info.buffer,);
+          if (info.byteLength !== info.bufferByteLength) {
+            str += `,${info.byteOffset},${info.length}`;
+          }
+          str += ']';
+          break;
+        }
         case 'DataView': {
-          const typedArray = thing;
-          str = '["' + type + '",' + flatten(typedArray.buffer,);
-          if (typedArray.byteLength !== typedArray.buffer.byteLength) {
-            str += `,${typedArray.byteOffset},${typedArray.length}`;
+          const info = ops.viewInfo(thing,);
+          str = '["' + tag + '",' + flatten(info.buffer,);
+          if (info.byteLength !== info.bufferByteLength) {
+            str += `,${info.byteOffset},${info.byteLength}`;
           }
           str += ']';
           break;
         }
         case 'ArrayBuffer': {
-          const arraybuffer = thing;
-          const base64 = encode64(arraybuffer,);
+          const base64 = encode64(ops.toArrayBuffer(thing,),);
           str = `["ArrayBuffer","${base64}"]`;
           break;
         }
@@ -15198,41 +15300,43 @@ function run(async, value, reducers,) {
         case 'Temporal.PlainMonthDay':
         case 'Temporal.PlainYearMonth':
         case 'Temporal.ZonedDateTime':
-          str = `["${type}",${stringify_string(thing.toString(),)}]`;
+          str = `["${tag}",${stringify_string(ops.toStringValue(thing,),)}]`;
           break;
-        default:
-          if (!is_plain_object(thing,)) {
+        default: {
+          const shape = ops.shapeOf(thing,);
+          if (shape.kind === 'not-plain') {
             throw new DevalueError(`Cannot stringify arbitrary non-POJOs`, keys3, thing, value,);
           }
-          if (enumerable_symbols(thing,).length > 0) {
+          if (shape.kind === 'symbol-keys') {
             throw new DevalueError(`Cannot stringify POJOs with symbolic keys`, keys3, thing, value,);
           }
-          if (Object.getPrototypeOf(thing,) === null) {
+          if (shape.kind === 'null-proto') {
             str = '["null"';
-            for (const key7 of Object.keys(thing,)) {
+            for (const key7 of shape.keys) {
               if (key7 === '__proto__') {
                 throw new DevalueError(`Cannot stringify objects with __proto__ keys`, keys3, thing, value,);
               }
               keys3.push(stringify_key(key7,),);
-              str += `,${stringify_string(key7,)},${flatten(thing[key7],)}`;
+              str += `,${stringify_string(key7,)},${flatten(ops.get(thing, key7,),)}`;
               keys3.pop();
             }
             str += ']';
           } else {
             str = '{';
             let started = false;
-            for (const key7 of Object.keys(thing,)) {
+            for (const key7 of shape.keys) {
               if (key7 === '__proto__') {
                 throw new DevalueError(`Cannot stringify objects with __proto__ keys`, keys3, thing, value,);
               }
               if (started) str += ',';
               started = true;
               keys3.push(stringify_key(key7,),);
-              str += `${stringify_string(key7,)}:${flatten(thing[key7],)}`;
+              str += `${stringify_string(key7,)}:${flatten(ops.get(thing, key7,),)}`;
               keys3.pop();
             }
             str += '}';
           }
+        }
       }
     }
     stringified[index2] = str;
@@ -24274,6 +24378,20 @@ var mockWithWarning = (message) => {
 var mockWithoutWarning = () => {
   return () => {};
 };
+var siteFontStore = {
+  isSelectorLoaded() {
+    return true;
+  },
+  async loadFonts() {
+    return {
+      newlyLoadedFontCount: 0,
+    };
+  },
+  async loadWebFontsFromSelectors() {
+    return [];
+  },
+  async loadMissingFonts() {},
+};
 var implementation = {
   // We need a default implementation for useImageSource and useImageElement as it is used for
   // rendering image backgrounds which would break otherwise. The default value is used for HTML
@@ -24295,6 +24413,7 @@ var implementation = {
   canRenderOptimizedCanvasImage() {
     return false;
   },
+  fontStore: siteFontStore,
   isOnPageCanvas: false,
 };
 var isRuntimeInjected = false;
@@ -24313,6 +24432,20 @@ var runtimeProxy = {
   },
 };
 var runtime = /* @__PURE__ */ new Proxy(implementation, runtimeProxy,);
+var fontStore = {
+  isSelectorLoaded(selector,) {
+    return runtime.fontStore.isSelectorLoaded(selector,);
+  },
+  loadFonts(fontSelectors,) {
+    return runtime.fontStore.loadFonts(fontSelectors,);
+  },
+  loadWebFontsFromSelectors(fontSelectors,) {
+    return runtime.fontStore.loadWebFontsFromSelectors(fontSelectors,);
+  },
+  loadMissingFonts(fontSelectors, fontsLoadedCallback,) {
+    return runtime.fontStore.loadMissingFonts(fontSelectors, fontsLoadedCallback,);
+  },
+};
 function _injectRuntime(injectedRuntime,) {
   Object.assign(implementation, injectedRuntime,);
   isRuntimeInjected = true;
@@ -50060,7 +50193,8 @@ function join(statements, separator3, emptyFallback,) {
     if (Array.isArray(statement,)) result.push(...statement,);
     else result.push(statement,);
   }
-  if (result.length === 0 && emptyFallback) {
+  if (result.length === 0) {
+    if (!emptyFallback) return void 0;
     result.push(new SafeSql(emptyFallback,),);
   }
   return result;
@@ -50156,6 +50290,127 @@ function getItemMultiCollectionReferencesTable(collectionId,) {
 function getItemMultiCollectionReferencesView(collectionId, fieldId,) {
   return `${getItemMultiCollectionReferencesTable(collectionId,)}/${fieldId}`;
 }
+function getLocalizedItemsCte(collectionId,) {
+  return `${collectionId}/localizedItems`;
+}
+function getValueInLocaleColumn(fieldId, localeId,) {
+  return `${fieldId}/${localeId}`;
+}
+function getLocalizedValueColumn(fieldId,) {
+  return `localized/${fieldId}`;
+}
+function registerLocalizedField(collectionId, fieldId, field, {
+  localizedItemTables,
+},) {
+  const localizedFields = localizedItemTables.get(collectionId,) ?? /* @__PURE__ */ new Map();
+  localizedFields.set(fieldId, field,);
+  localizedItemTables.set(collectionId, localizedFields,);
+}
+function getActiveLocaleInclusionColumn({
+  chainedLocaleIds: [activeLocaleId,],
+},) {
+  if (activeLocaleId === void 0) return void 0;
+  return getValueInLocaleColumn(inclusionColumn, activeLocaleId,);
+}
+function registerItemsTable(collectionId, {
+  chainedLocaleIds,
+  localizedItemTables,
+},) {
+  if (chainedLocaleIds.length === 0) return getItemsTable(collectionId,);
+  if (!localizedItemTables.has(collectionId,)) {
+    localizedItemTables.set(collectionId, /* @__PURE__ */ new Map(),);
+  }
+  return getLocalizedItemsCte(collectionId,);
+}
+function compileLocalizedValue(expression, localizedExpressions, field,) {
+  if (field.type === 'responsiveimage') {
+    const localizedImagesWithoutAlt = localizedExpressions.map((image) => {
+      const imageContainsSrc = sql`json_extract(${image}, '$.src') IS NOT NULL`;
+      const imageWithoutAlt2 = sql`json_remove(${image}, '$.alt')`;
+      return sql`IIF(${imageContainsSrc}, ${imageWithoutAlt2}, NULL)`;
+    },);
+    const defaultImageWithoutAlt = sql`json_remove(${expression}, '$.alt')`;
+    const imageWithoutAlt = sql`COALESCE(${sql.join([...localizedImagesWithoutAlt, defaultImageWithoutAlt,], ', ', '1',)})`;
+    const alts = [...localizedExpressions, expression,].map((image) => sql`json_extract(${image}, '$.alt')`);
+    const alt = sql`json_object('alt', COALESCE(${sql.join(alts, ', ', '1',)}))`;
+    return sql`json_patch(${imageWithoutAlt}, ${alt})`;
+  }
+  return sql`COALESCE(${sql.join([...localizedExpressions, expression,], ', ', '1',)})`;
+}
+function getItemsInLocaleChainCte(collectionId,) {
+  return `${collectionId}/itemsInLocaleChain`;
+}
+function compileWithClause(context,) {
+  const tables = [];
+  for (const [collectionId, fields,] of context.localizedItemTables) {
+    tables.push(compileItemsInLocaleChainCte(collectionId, fields, context,),);
+    tables.push(compileLocalizedItemsCte(collectionId, fields, context,),);
+  }
+  const commonTableExpressions = sql.join(tables, ', ',);
+  if (!commonTableExpressions) return sql``;
+  return sql`WITH ${commonTableExpressions} `;
+}
+function compileItemsInLocaleChainCte(collectionId, fields, {
+  chainedLocaleIds,
+},) {
+  const localizationsTable = sql.identifier(getItemLocalizationsTable(collectionId,),);
+  const itemId = sql.qualifiedIdentifier(collectionId, collectionItemIdColumn,);
+  function compileValueInLocale(columnId, localeId, condition,) {
+    const itemIdsMatch = sql`${sql.identifier(collectionItemIdColumn,)} = ${itemId}`;
+    const localesMatch = sql`${sql.identifier(localeIdColumn,)} = ${sql.parameter('localeId', localeId,)}`;
+    let whereClause = sql`${itemIdsMatch} AND ${localesMatch}`;
+    if (condition) {
+      whereClause = sql`${whereClause} AND ${condition}`;
+    }
+    const valueInLocale = sql`(SELECT ${sql.identifier(columnId,)} FROM ${localizationsTable} WHERE ${whereClause})`;
+    return sql`${valueInLocale} AS ${sql.identifier(getValueInLocaleColumn(columnId, localeId,),)}`;
+  }
+  const valuesInLocales = [];
+  const activeLocaleId = chainedLocaleIds[0];
+  if (activeLocaleId !== void 0) {
+    valuesInLocales.push(compileValueInLocale(inclusionColumn, activeLocaleId,),);
+  }
+  const itemIsIncludedInLocale = sql`${sql.identifier(inclusionColumn,)} IS NULL`;
+  for (const localeId of chainedLocaleIds) {
+    for (const fieldId of fields.keys()) {
+      valuesInLocales.push(compileValueInLocale(fieldId, localeId, itemIsIncludedInLocale,),);
+    }
+  }
+  const itemsInLocaleChainTable = sql`SELECT ${
+    sql.join(
+      [
+        ...valuesInLocales,
+        // Pass through all other fields (non-localized, system, etc.)
+        sql`*`,
+      ],
+      ', ',
+      '1',
+    )
+  } FROM ${sql.identifier(getItemsTable(collectionId,),)} AS ${sql.alias(collectionId,)}`;
+  return sql`${sql.identifier(getItemsInLocaleChainCte(collectionId,),)} AS (${itemsInLocaleChainTable})`;
+}
+function compileLocalizedItemsCte(collectionId, fields, {
+  chainedLocaleIds,
+},) {
+  const localizedValues = [];
+  for (const [fieldId, field,] of fields) {
+    const localizedExpressions = chainedLocaleIds.map((localeId) => sql.identifier(getValueInLocaleColumn(fieldId, localeId,),));
+    const localizedValue = compileLocalizedValue(sql.identifier(fieldId,), localizedExpressions, field,);
+    localizedValues.push(sql`${localizedValue} AS ${sql.identifier(getLocalizedValueColumn(fieldId,),)}`,);
+  }
+  const localizedItemsTable = sql`SELECT ${
+    sql.join(
+      [
+        ...localizedValues,
+        // Pass through all other fields (non-localized, system, etc.)
+        sql`*`,
+      ],
+      ', ',
+      '1',
+    )
+  } FROM ${sql.identifier(getItemsInLocaleChainCte(collectionId,),)}`;
+  return sql`${sql.identifier(getLocalizedItemsCte(collectionId,),)} AS (${localizedItemsTable})`;
+}
 function compileFromClause(table, alias2, joins, joinType,) {
   const source = sql.identifier(table,);
   const joinParts = [alias2 === void 0 ? source : sql`${source} AS ${sql.alias(alias2,)}`,];
@@ -50201,65 +50456,24 @@ function lookupField(serverCollections, collectionId, fieldId,) {
   }
   return serverCollections[collectionId]?.fields[fieldId];
 }
-function getLocalizationJoinAlias(qualifier2, localeId,) {
-  return `${qualifier2}/${localeId}`;
-}
-function registerLocalizationJoins(qualifier2, collectionId, {
-  joins,
-  chainedLocaleIds,
-},) {
-  return chainedLocaleIds.map((localeId) =>
-    registerLocalizationJoin(qualifier2, collectionId, localeId, {
-      joins,
-    },)
-  );
-}
-function registerLocalizationJoin(qualifier2, collectionId, localeId, {
-  joins,
-},) {
-  const joinAlias = getLocalizationJoinAlias(qualifier2, localeId,);
-  if (joins.has(joinAlias,)) return joinAlias;
-  joins.set(joinAlias, {
-    table: getItemLocalizationsTable(collectionId,),
-    condition: sql`${sql.qualifiedIdentifier(qualifier2, collectionItemIdColumn,)} = ${
-      sql.qualifiedIdentifier(joinAlias, collectionItemIdColumn,)
-    } AND ${sql.qualifiedIdentifier(joinAlias, localeIdColumn,)} = ${sql.parameter('localeId', localeId,)}`,
-  },);
-  return joinAlias;
-}
-function compileLocalizedValue(expression, localizedExpressions, field,) {
-  if (field.type === 'responsiveimage') {
-    const localizedImagesWithoutAlt = localizedExpressions.map((image) => {
-      const imageContainsSrc = sql`json_extract(${image}, '$.src') IS NOT NULL`;
-      const imageWithoutAlt2 = sql`json_remove(${image}, '$.alt')`;
-      return sql`IIF(${imageContainsSrc}, ${imageWithoutAlt2}, NULL)`;
-    },);
-    const defaultImageWithoutAlt = sql`json_remove(${expression}, '$.alt')`;
-    const imageWithoutAlt = sql`COALESCE(${sql.join([...localizedImagesWithoutAlt, defaultImageWithoutAlt,], ', ', '1',)})`;
-    const alts = [...localizedExpressions, expression,].map((image) => sql`json_extract(${image}, '$.alt')`);
-    const alt = sql`json_object('alt', COALESCE(${sql.join(alts, ', ', '1',)}))`;
-    return sql`json_patch(${imageWithoutAlt}, ${alt})`;
-  }
-  return sql`COALESCE(${sql.join([...localizedExpressions, expression,], ', ', '1',)})`;
-}
-function compileReferenceJoin(qualifier2, identifier2, joinAlias, referencedCollectionId,) {
+function compileReferenceJoin(qualifier2, identifier2, joinAlias, table,) {
   return {
-    table: getItemsTable(referencedCollectionId,),
+    table,
     condition: sql`${sql.qualifiedIdentifier(qualifier2, identifier2,)} = ${sql.qualifiedIdentifier(joinAlias, collectionItemIdColumn,)}`,
   };
 }
-function compileMultiReferenceExpression(qualifier2, collectionId, fieldId, referencedCollectionId,) {
+function compileMultiReferenceExpression(qualifier2, collectionId, fieldId, referencedItemsTable,) {
   const sideTable = getItemMultiCollectionReferencesView(collectionId, fieldId,);
   const joinAlias = `${qualifier2}.${fieldId}`;
-  const selectClause = compileMultiReferenceSelectClause(sideTable, joinAlias, referencedCollectionId,);
+  const selectClause = compileMultiReferenceSelectClause(sideTable, joinAlias, referencedItemsTable,);
   const fromClause = compileFromClause(sideTable, void 0, selectClause.joins, ' JOIN ',);
   const whereClause = compileMultiReferenceWhereClause(sideTable, qualifier2,);
   return sql`(${selectClause.statement} ${fromClause.statement} ${whereClause.statement})`;
 }
-function compileMultiReferenceSelectClause(sideTable, joinAlias, referencedCollectionId,) {
+function compileMultiReferenceSelectClause(sideTable, joinAlias, referencedItemsTable,) {
   const joins = /* @__PURE__ */ new Map([[
     joinAlias,
-    compileReferenceJoin(sideTable, referencedCollectionItemIdColumn, joinAlias, referencedCollectionId,),
+    compileReferenceJoin(sideTable, referencedCollectionItemIdColumn, joinAlias, referencedItemsTable,),
   ],],);
   return {
     statement: sql`SELECT json_group_array(${sql.qualifiedIdentifier(joinAlias, collectionItemIdColumn,)} ORDER BY ${
@@ -50279,15 +50493,16 @@ function resolvePhysicalField(qualifier2, collectionId, fieldId, context,) {
   if (isNeighborField(fieldId,)) return void 0;
   const field = lookupField(context.serverCollections, collectionId, fieldId,);
   if (!field) return void 0;
-  const localizationJoinAliases = 'isLocalized' in field && field.isLocalized
-    ? registerLocalizationJoins(qualifier2, collectionId, context,)
-    : [];
+  const isLocalized = 'isLocalized' in field && field.isLocalized && context.chainedLocaleIds.length > 0;
+  if (isLocalized) {
+    registerLocalizedField(collectionId, fieldId, field, context,);
+  }
   return {
     qualifier: qualifier2,
     collectionId,
     tailFieldId: fieldId,
     tailField: field,
-    localizationJoinAliases,
+    isLocalized,
   };
 }
 function resolveDefaultOrderField(qualifier2, collectionId, fieldPath, context,) {
@@ -50307,24 +50522,26 @@ function resolveDefaultOrderField(qualifier2, collectionId, fieldPath, context,)
   }
   return resolved;
 }
-function compileFieldExpression({
-  qualifier: qualifier2,
-  collectionId,
-  tailFieldId,
-  tailField,
-  localizationJoinAliases,
-},) {
+function compileFieldExpression(resolvedField, context,) {
+  const {
+    qualifier: qualifier2,
+    collectionId,
+    tailFieldId,
+    tailField,
+  } = resolvedField;
   if (tailField.type === 'multicollectionreference') {
-    return compileMultiReferenceExpression(qualifier2, collectionId, tailFieldId, tailField.referencedCollectionId,);
+    const referencedItemsTable = registerItemsTable(tailField.referencedCollectionId, context,);
+    return compileMultiReferenceExpression(qualifier2, collectionId, tailFieldId, referencedItemsTable,);
   }
-  const expression = sql.qualifiedIdentifier(qualifier2, tailFieldId,);
-  if (localizationJoinAliases.length === 0) return expression;
-  const localizedExpressions = localizationJoinAliases.map((joinAlias) => {
-    const itemIsIncludedInLocale = compileItemIsIncludedInLocaleCondition(joinAlias,);
-    const valueInLocale = sql.qualifiedIdentifier(joinAlias, tailFieldId,);
-    return sql`IIF(${itemIsIncludedInLocale}, ${valueInLocale}, NULL)`;
-  },);
-  return compileLocalizedValue(expression, localizedExpressions, tailField,);
+  return compileValueExpression(resolvedField,);
+}
+function compileValueExpression({
+  qualifier: qualifier2,
+  tailFieldId,
+  isLocalized,
+},) {
+  if (!isLocalized) return sql.qualifiedIdentifier(qualifier2, tailFieldId,);
+  return sql.qualifiedIdentifier(qualifier2, getLocalizedValueColumn(tailFieldId,),);
 }
 function compileSortKey(resolved,) {
   if (resolved.tailField.type === 'multicollectionreference') return void 0;
@@ -50332,15 +50549,11 @@ function compileSortKey(resolved,) {
     warnOnce2(new UnsupportedQueryError(`sort field type.`,).toString(),);
     return void 0;
   }
-  let expression = compileFieldExpression(resolved,);
+  let expression = compileValueExpression(resolved,);
   if (resolved.tailField.type === 'string') {
     expression = sql`LOWER(${expression})`;
   }
   return expression;
-}
-function compileItemIsIncludedInLocaleCondition(joinAlias,) {
-  const inclusion = sql.qualifiedIdentifier(joinAlias, inclusionColumn,);
-  return sql`${inclusion} IS NULL`;
 }
 function compileNeighborJoin(qualifier2, neighborFieldId, joinAlias, collectionId, context,) {
   const candidateAlias = `${joinAlias}/candidate`;
@@ -50370,7 +50583,7 @@ function compileNeighborJoin(qualifier2, neighborFieldId, joinAlias, collectionI
   }
   const follows = compileFollows(keys3, qualifier2, candidateAlias, isPrevious,);
   const orderByClause = compileNeighborOrderByClause(keys3, candidateAlias, isPrevious,);
-  const itemsTable = getItemsTable(collectionId,);
+  const itemsTable = registerItemsTable(collectionId, context,);
   const fromClause = compileFromClause(itemsTable, candidateAlias, candidateContext.joins, ' LEFT JOIN ',);
   const limitClause = compileLimitAndOffsetClause(1,);
   const currentId = sql.qualifiedIdentifier(qualifier2, collectionItemIdColumn,);
@@ -50427,7 +50640,7 @@ function resolveFieldPath(rootCollectionId, fieldPath, context,) {
         type: 'collectionreference',
         referencedCollectionId: rootCollectionId,
       },
-      localizationJoinAliases: [],
+      isLocalized: false,
     };
   }
   let collectionId = rootCollectionId;
@@ -50456,7 +50669,7 @@ function resolveFieldPath(rootCollectionId, fieldPath, context,) {
         type: 'collectionreference',
         referencedCollectionId: collectionId,
       },
-      localizationJoinAliases: [],
+      isLocalized: false,
     };
   }
   const resolved = resolvePhysicalField(qualifier2, collectionId, tailFieldId, context,);
@@ -50471,7 +50684,7 @@ function registerReferenceJoin(qualifier2, fieldId, referencedCollectionId, cont
   if (context.joins.has(joinAlias,)) return joinAlias;
   const join2 = isNeighborField(fieldId,)
     ? compileNeighborJoin(qualifier2, fieldId, joinAlias, referencedCollectionId, context,)
-    : compileReferenceJoin(qualifier2, fieldId, joinAlias, referencedCollectionId,);
+    : compileReferenceJoin(qualifier2, fieldId, joinAlias, registerItemsTable(referencedCollectionId, context,),);
   context.joins.set(joinAlias, join2,);
   return joinAlias;
 }
@@ -50548,7 +50761,7 @@ function compileColumn(rootCollectionId, column, context,) {
     };
   }
   return {
-    expression: compileFieldExpression(resolved,),
+    expression: compileFieldExpression(resolved, context,),
     type: tailField.type,
   };
 }
@@ -50559,15 +50772,14 @@ function compileWhereClause(collectionId, filters, context,) {
     if (compiledFilter) compiledFilters.push(compiledFilter,);
   }
   const filterCondition = joinCompiledFilters(compiledFilters, getJoinOperator(filters.operator,),);
-  const activeLocaleId = context.chainedLocaleIds[0];
-  if (activeLocaleId === void 0) {
+  const inclusionInActiveLocale = getActiveLocaleInclusionColumn(context,);
+  if (inclusionInActiveLocale === void 0) {
     return {
       statement: sql`WHERE ${filterCondition}`,
     };
   }
-  const joinAlias = registerLocalizationJoin(collectionId, collectionId, activeLocaleId, context,);
   return {
-    statement: sql`WHERE (${filterCondition}) AND ${sql.qualifiedIdentifier(joinAlias, inclusionColumn,)} IS NOT 'exclude'`,
+    statement: sql`WHERE (${filterCondition}) AND ${sql.qualifiedIdentifier(collectionId, inclusionInActiveLocale,)} IS NOT 'exclude'`,
   };
 }
 function joinCompiledFilters(compiledFilters, operator,) {
@@ -50600,7 +50812,7 @@ function compileFilter(collectionId, filter2, context,) {
     return void 0;
   }
   const parameterName = filter2.fieldPath.join('_',) || resolved.tailFieldId;
-  const fieldStep = compileField(resolved,);
+  const fieldStep = compileField(resolved, context,);
   const transforms = preOptimizeTransforms(fieldStep, filter2.transforms,);
   const filterStep = compileTransforms(fieldStep, transforms, parameterName,);
   if (!filterStep) return void 0;
@@ -50619,13 +50831,13 @@ function compileIndexableSuperset(
     collectionId,
     tailFieldId,
     tailField,
-    localizationJoinAliases,
+    isLocalized,
   },
   chainedLocaleIds,
   transforms,
   parameterName,
 ) {
-  if (localizationJoinAliases.length === 0) return;
+  if (!isLocalized) return;
   const defaultLocaleValue = createFieldStep(sql.qualifiedIdentifier(qualifier2, tailFieldId,), tailField.type,);
   const otherLocalesValue = createFieldStep(sql.identifier(tailFieldId,), tailField.type,);
   const defaultLocaleCandidateStep = compileTransforms(defaultLocaleValue, transforms, parameterName,);
@@ -50719,8 +50931,8 @@ function treatNullValueAsFalse(value,) {
   }
   return 'no';
 }
-function compileField(resolvedFieldPath,) {
-  return createFieldStep(compileFieldExpression(resolvedFieldPath,), resolvedFieldPath.tailField.type,);
+function compileField(resolvedFieldPath, context,) {
+  return createFieldStep(compileFieldExpression(resolvedFieldPath, context,), resolvedFieldPath.tailField.type,);
 }
 function createFieldStep(expression, type,) {
   return new Step({
@@ -50799,14 +51011,16 @@ function compileQuery(serverQuery, serverCollections, chainedLocaleIds,) {
     serverCollections,
     joins: /* @__PURE__ */ new Map(),
     chainedLocaleIds,
+    localizedItemTables: /* @__PURE__ */ new Map(),
   };
   const selectClause = compileSelectClause(serverQuery, context,);
   const whereClause = compileWhereClause(collectionId, serverQuery.filters, context,);
   const orderByClause = compileOrderByClause(serverQuery, context,);
-  const fromClause = compileFromClause(getItemsTable(collectionId,), collectionId, context.joins, ' LEFT JOIN ',);
+  const fromClause = compileFromClause(registerItemsTable(collectionId, context,), collectionId, context.joins, ' LEFT JOIN ',);
+  const withClause = compileWithClause(context,);
   const limitAndOffsetClause = compileLimitAndOffsetClause(5e3,);
   const statement =
-    sql`${selectClause.statement} ${fromClause.statement} ${whereClause.statement} ${orderByClause.statement} ${limitAndOffsetClause.statement}`;
+    sql`${withClause}${selectClause.statement} ${fromClause.statement} ${whereClause.statement} ${orderByClause.statement} ${limitAndOffsetClause.statement}`;
   return {
     statement: serializeSql(statement,),
     columns: selectClause.columns,
@@ -57154,596 +57368,6 @@ var withVariantFX = (Component17) =>
   },);
 var WindowContext = /* @__PURE__ */ React42.createContext(void 0,);
 var useProvidedWindow = () => React42.useContext(WindowContext,);
-var safeFonts = {
-  Arial: {
-    Regular: {
-      selector: 'Arial',
-      weight: void 0,
-    },
-    Black: {
-      selector: 'Arial-Black',
-      weight: void 0,
-    },
-    Narrow: {
-      selector: 'Arial Narrow',
-      weight: void 0,
-    },
-    'Rounded Bold': {
-      selector: 'Arial Rounded MT Bold',
-      weight: void 0,
-    },
-  },
-  Avenir: {
-    Book: {
-      selector: 'Avenir',
-      weight: void 0,
-    },
-    Light: {
-      selector: 'Avenir-Light',
-      weight: void 0,
-    },
-    Medium: {
-      selector: 'Avenir-Medium',
-      weight: void 0,
-    },
-    Heavy: {
-      selector: 'Avenir-Heavy',
-      weight: void 0,
-    },
-    Black: {
-      selector: 'Avenir-Black',
-      weight: void 0,
-    },
-  },
-  'Avenir Next': {
-    Regular: {
-      selector: 'Avenir Next',
-      weight: void 0,
-    },
-    'Ultra Light': {
-      selector: 'AvenirNext-UltraLight',
-      weight: void 0,
-    },
-    Medium: {
-      selector: 'AvenirNext-Medium',
-      weight: void 0,
-    },
-    'Demi Bold': {
-      selector: 'AvenirNext-DemiBold',
-      weight: void 0,
-    },
-    Heavy: {
-      selector: 'AvenirNext-Heavy',
-      weight: void 0,
-    },
-  },
-  'Avenir Next Condensed': {
-    Regular: {
-      selector: 'Avenir Next Condensed',
-      weight: void 0,
-    },
-    'Ultra Light': {
-      selector: 'AvenirNextCondensed-UltraLight',
-      weight: void 0,
-    },
-    Medium: {
-      selector: 'AvenirNextCondensed-Medium',
-      weight: void 0,
-    },
-    'Demi Bold': {
-      selector: 'AvenirNextCondensed-DemiBold',
-      weight: void 0,
-    },
-    Heavy: {
-      selector: 'AvenirNextCondensed-Heavy',
-      weight: void 0,
-    },
-  },
-  Baskerville: {
-    Regular: {
-      selector: 'Baskerville',
-      weight: void 0,
-    },
-    'Semi Bold': {
-      selector: 'Baskerville-SemiBold',
-      weight: void 0,
-    },
-  },
-  'Bodoni 72': {
-    Book: {
-      selector: 'Bodoni 72',
-      weight: void 0,
-    },
-    Oldstyle: {
-      selector: 'Bodoni 72 Oldstyle',
-      weight: void 0,
-    },
-    Smallcaps: {
-      selector: 'Bodoni 72 Smallcaps',
-      weight: void 0,
-    },
-  },
-  Courier: {
-    Regular: {
-      selector: 'Courier',
-      weight: void 0,
-    },
-  },
-  'Courier New': {
-    Regular: {
-      selector: 'Courier New',
-      weight: void 0,
-    },
-  },
-  Futura: {
-    Medium: {
-      selector: 'Futura',
-      weight: void 0,
-    },
-    Condensed: {
-      selector: 'Futura-CondensedMedium',
-      weight: void 0,
-    },
-    'Condensed ExtraBold': {
-      selector: 'Futura-CondensedExtraBold',
-      weight: void 0,
-    },
-  },
-  Georgia: {
-    Regular: {
-      selector: 'Georgia',
-      weight: void 0,
-    },
-  },
-  'Gill Sans': {
-    Regular: {
-      selector: 'Gill Sans',
-      weight: void 0,
-    },
-    Light: {
-      selector: 'GillSans-Light',
-      weight: void 0,
-    },
-    SemiBold: {
-      selector: 'GillSans-SemiBold',
-      weight: void 0,
-    },
-    UltraBold: {
-      selector: 'GillSans-UltraBold',
-      weight: void 0,
-    },
-  },
-  Helvetica: {
-    Regular: {
-      selector: 'Helvetica',
-      weight: void 0,
-    },
-    Light: {
-      selector: 'Helvetica-Light',
-      weight: void 0,
-    },
-    Bold: {
-      selector: 'Helvetica-Bold',
-      weight: void 0,
-    },
-    Oblique: {
-      selector: 'Helvetica-Oblique',
-      weight: void 0,
-    },
-    'Light Oblique': {
-      selector: 'Helvetica-LightOblique',
-      weight: void 0,
-    },
-    'Bold Oblique': {
-      selector: 'Helvetica-BoldOblique',
-      weight: void 0,
-    },
-  },
-  'Helvetica Neue': {
-    Regular: {
-      selector: 'Helvetica Neue',
-      weight: void 0,
-    },
-    UltraLight: {
-      selector: 'HelveticaNeue-UltraLight',
-      weight: void 0,
-    },
-    Thin: {
-      selector: 'HelveticaNeue-Thin',
-      weight: void 0,
-    },
-    Light: {
-      selector: 'HelveticaNeue-Light',
-      weight: void 0,
-    },
-    Medium: {
-      selector: 'HelveticaNeue-Medium',
-      weight: void 0,
-    },
-    Bold: {
-      selector: 'HelveticaNeue-Bold',
-      weight: void 0,
-    },
-    Italic: {
-      selector: 'HelveticaNeue-Italic',
-      weight: void 0,
-    },
-    'UltraLight Italic': {
-      selector: 'HelveticaNeue-UltraLightItalic',
-      weight: void 0,
-    },
-    'Thin Italic': {
-      selector: 'HelveticaNeue-ThinItalic',
-      weight: void 0,
-    },
-    'Light Italic': {
-      selector: 'HelveticaNeue-LightItalic',
-      weight: void 0,
-    },
-    'Medium Italic': {
-      selector: 'HelveticaNeue-MediumItalic',
-      weight: void 0,
-    },
-    'Bold Italic': {
-      selector: 'HelveticaNeue-BoldItalic',
-      weight: void 0,
-    },
-    'Condensed Bold': {
-      selector: 'HelveticaNeue-CondensedBold',
-      weight: void 0,
-    },
-    'Condensed Black': {
-      selector: 'HelveticaNeue-CondensedBlack',
-      weight: void 0,
-    },
-  },
-  'Hoefler Text': {
-    Regular: {
-      selector: 'Hoefler Text',
-      weight: void 0,
-    },
-  },
-  Impact: {
-    Regular: {
-      selector: 'Impact',
-      weight: void 0,
-    },
-  },
-  'Lucida Grande': {
-    Regular: {
-      selector: 'Lucida Grande',
-      weight: void 0,
-    },
-  },
-  Menlo: {
-    Regular: {
-      selector: 'Menlo',
-      weight: void 0,
-    },
-  },
-  Monaco: {
-    Regular: {
-      selector: 'Monaco',
-      weight: void 0,
-    },
-  },
-  Optima: {
-    Regular: {
-      selector: 'Optima',
-      weight: void 0,
-    },
-    ExtraBlack: {
-      selector: 'Optima-ExtraBlack',
-      weight: void 0,
-    },
-  },
-  Palatino: {
-    Regular: {
-      selector: 'Palatino',
-      weight: void 0,
-    },
-  },
-  'SF Pro Display': {
-    Regular: {
-      selector: '__SF-UI-Display-Regular__',
-      weight: 400,
-    },
-    Ultralight: {
-      selector: '__SF-UI-Display-Ultralight__',
-      weight: 100,
-    },
-    Thin: {
-      selector: '__SF-UI-Display-Thin__',
-      weight: 200,
-    },
-    Light: {
-      selector: '__SF-UI-Display-Light__',
-      weight: 300,
-    },
-    Medium: {
-      selector: '__SF-UI-Display-Medium__',
-      weight: 500,
-    },
-    Semibold: {
-      selector: '__SF-UI-Display-Semibold__',
-      weight: 600,
-    },
-    Bold: {
-      selector: '__SF-UI-Display-Bold__',
-      weight: 700,
-    },
-    Heavy: {
-      selector: '__SF-UI-Display-Heavy__',
-      weight: 800,
-    },
-    Black: {
-      selector: '__SF-UI-Display-Black__',
-      weight: 900,
-    },
-    Italic: {
-      selector: '__SF-UI-Display-Italic__',
-      weight: 400,
-    },
-    'Ultralight Italic': {
-      selector: '__SF-UI-Display-Ultralight-Italic__',
-      weight: 100,
-    },
-    'Thin Italic': {
-      selector: '__SF-UI-Display-Thin-Italic__',
-      weight: 200,
-    },
-    'Light Italic': {
-      selector: '__SF-UI-Display-Light-Italic__',
-      weight: 300,
-    },
-    'Medium Italic': {
-      selector: '__SF-UI-Display-Medium-Italic__',
-      weight: 500,
-    },
-    'Semibold Italic': {
-      selector: '__SF-UI-Display-Semibold-Italic__',
-      weight: 600,
-    },
-    'Bold Italic': {
-      selector: '__SF-UI-Display-Bold-Italic__',
-      weight: 700,
-    },
-    'Heavy Italic': {
-      selector: '__SF-UI-Display-Heavy-Italic__',
-      weight: 800,
-    },
-    'Black Italic': {
-      selector: '__SF-UI-Display-Black-Italic__',
-      weight: 900,
-    },
-  },
-  'SF Pro Display Condensed': {
-    Regular: {
-      selector: '__SF-UI-Display-Condensed-Regular__',
-      weight: 400,
-    },
-    Ultralight: {
-      selector: '__SF-UI-Display-Condensed-Ultralight__',
-      weight: 100,
-    },
-    Thin: {
-      selector: '__SF-UI-Display-Condensed-Thin__',
-      weight: 200,
-    },
-    Light: {
-      selector: '__SF-UI-Display-Condensed-Light__',
-      weight: 300,
-    },
-    Medium: {
-      selector: '__SF-UI-Display-Condensed-Medium__',
-      weight: 500,
-    },
-    Semibold: {
-      selector: '__SF-UI-Display-Condensed-Semibold__',
-      weight: 600,
-    },
-    Bold: {
-      selector: '__SF-UI-Display-Condensed-Bold__',
-      weight: 700,
-    },
-    Heavy: {
-      selector: '__SF-UI-Display-Condensed-Heavy__',
-      weight: 800,
-    },
-    Black: {
-      selector: '__SF-UI-Display-Condensed-Black__',
-      weight: 900,
-    },
-  },
-  'SF Pro Text': {
-    Regular: {
-      selector: '__SF-UI-Text-Regular__',
-      weight: 400,
-    },
-    Light: {
-      selector: '__SF-UI-Text-Light__',
-      weight: 200,
-    },
-    Medium: {
-      selector: '__SF-UI-Text-Medium__',
-      weight: 500,
-    },
-    Semibold: {
-      selector: '__SF-UI-Text-Semibold__',
-      weight: 600,
-    },
-    Bold: {
-      selector: '__SF-UI-Text-Bold__',
-      weight: 700,
-    },
-    Heavy: {
-      selector: '__SF-UI-Text-Heavy__',
-      weight: 800,
-    },
-    Italic: {
-      selector: '__SF-UI-Text-Italic__',
-      weight: 400,
-    },
-    'Light Italic': {
-      selector: '__SF-UI-Text-Light-Italic__',
-      weight: 200,
-    },
-    'Medium Italic': {
-      selector: '__SF-UI-Text-Medium-Italic__',
-      weight: 500,
-    },
-    'Semibold Italic': {
-      selector: '__SF-UI-Text-Semibold-Italic__',
-      weight: 600,
-    },
-    'Bold Italic': {
-      selector: '__SF-UI-Text-Bold-Italic__',
-      weight: 700,
-    },
-    'Heavy Italic': {
-      selector: '__SF-UI-Text-Heavy-Italic__',
-      weight: 800,
-    },
-  },
-  'SF Pro Text Condensed': {
-    Regular: {
-      selector: '__SF-UI-Text-Condensed-Regular__',
-      weight: 400,
-    },
-    Light: {
-      selector: '__SF-UI-Text-Condensed-Light__',
-      weight: 200,
-    },
-    Medium: {
-      selector: '__SF-UI-Text-Condensed-Medium__',
-      weight: 500,
-    },
-    Semibold: {
-      selector: '__SF-UI-Text-Condensed-Semibold__',
-      weight: 600,
-    },
-    Bold: {
-      selector: '__SF-UI-Text-Condensed-Bold__',
-      weight: 700,
-    },
-    Heavy: {
-      selector: '__SF-UI-Text-Condensed-Heavy__',
-      weight: 800,
-    },
-  },
-  Tahoma: {
-    Regular: {
-      selector: 'Tahoma',
-      weight: void 0,
-    },
-  },
-  Times: {
-    Regular: {
-      selector: 'Times',
-      weight: void 0,
-    },
-  },
-  'Times New Roman': {
-    Regular: {
-      selector: 'Times New Roman',
-      weight: void 0,
-    },
-  },
-  Trebuchet: {
-    Regular: {
-      selector: 'Trebuchet MS',
-      weight: void 0,
-    },
-  },
-  Verdana: {
-    Regular: {
-      selector: 'Verdana',
-      weight: void 0,
-    },
-  },
-};
-var fontAliases = {
-  '__SF-Compact-Display-Regular__': 'SFCompactDisplay-Regular|.SFCompactDisplay-Regular',
-  '__SF-Compact-Display-Ultralight__': 'SFCompactDisplay-Ultralight|.SFCompactDisplay-Ultralight',
-  '__SF-Compact-Display-Thin__': 'SFCompactDisplay-Thin|.SFCompactDisplay-Thin',
-  '__SF-Compact-Display-Light__': 'SFCompactDisplay-Light|.SFCompactDisplay-Light',
-  '__SF-Compact-Display-Medium__': 'SFCompactDisplay-Medium|.SFCompactDisplay-Medium',
-  '__SF-Compact-Display-Semibold__': 'SFCompactDisplay-Semibold|.SFCompactDisplay-Semibold',
-  '__SF-Compact-Display-Heavy__': 'SFCompactDisplay-Heavy|.SFCompactDisplay-Heavy',
-  '__SF-Compact-Display-Black__': 'SFCompactDisplay-Black|.SFCompactDisplay-Black',
-  '__SF-Compact-Display-Bold__': 'SFCompactDisplay-Bold|.SFCompactDisplay-Bold',
-  '__SF-UI-Text-Regular__': '.SFNSText|SFProText-Regular|SFUIText-Regular|.SFUIText',
-  '__SF-UI-Text-Light__': '.SFNSText-Light|SFProText-Light|SFUIText-Light|.SFUIText-Light',
-  '__SF-UI-Text-Medium__': '.SFNSText-Medium|SFProText-Medium|SFUIText-Medium|.SFUIText-Medium',
-  '__SF-UI-Text-Semibold__': '.SFNSText-Semibold|SFProText-Semibold|SFUIText-Semibold|.SFUIText-Semibold',
-  '__SF-UI-Text-Bold__': '.SFNSText-Bold|SFProText-Bold|SFUIText-Bold|.SFUIText-Bold',
-  '__SF-UI-Text-Heavy__': '.SFNSText-Heavy|SFProText-Heavy|.SFUIText-Heavy',
-  '__SF-UI-Text-Italic__': '.SFNSText-Italic|SFProText-Italic|SFUIText-Italic|.SFUIText-Italic',
-  '__SF-UI-Text-Light-Italic__': '.SFNSText-LightItalic|SFProText-LightItalic|SFUIText-LightItalic|.SFUIText-LightItalic',
-  '__SF-UI-Text-Medium-Italic__': '.SFNSText-MediumItalic|SFProText-MediumItalic|SFUIText-MediumItalic|.SFUIText-MediumItalic',
-  '__SF-UI-Text-Semibold-Italic__': '.SFNSText-SemiboldItalic|SFProText-SemiboldItalic|SFUIText-SemiboldItalic|.SFUIText-SemiboldItalic',
-  '__SF-UI-Text-Bold-Italic__': '.SFNSText-BoldItalic|SFProText-BoldItalic|SFUIText-BoldItalic|.SFUIText-BoldItalic',
-  '__SF-UI-Text-Heavy-Italic__': '.SFNSText-HeavyItalic|SFProText-HeavyItalic|.SFUIText-HeavyItalic',
-  '__SF-Compact-Text-Regular__': 'SFCompactText-Regular|.SFCompactText-Regular',
-  '__SF-Compact-Text-Light__': 'SFCompactText-Light|.SFCompactText-Light',
-  '__SF-Compact-Text-Medium__': 'SFCompactText-Medium|.SFCompactText-Medium',
-  '__SF-Compact-Text-Semibold__': 'SFCompactText-Semibold|.SFCompactText-Semibold',
-  '__SF-Compact-Text-Bold__': 'SFCompactText-Bold|.SFCompactText-Bold',
-  '__SF-Compact-Text-Heavy__': 'SFCompactText-Heavy|.SFCompactText-Heavy',
-  '__SF-Compact-Text-Italic__': 'SFCompactText-Italic|.SFCompactText-Italic',
-  '__SF-Compact-Text-Light-Italic__': 'SFCompactText-LightItalic|.SFCompactText-LightItalic',
-  '__SF-Compact-Text-Medium-Italic__': 'SFCompactText-MediumItalic|.SFCompactText-MediumItalic',
-  '__SF-Compact-Text-Semibold-Italic__': 'SFCompactText-SemiboldItalic|.SFCompactText-SemiboldItalic',
-  '__SF-Compact-Text-Bold-Italic__': 'SFCompactText-BoldItalic|.SFCompactText-BoldItalic',
-  '__SF-Compact-Text-Heavy-Italic__': 'SFCompactText-HeavyItalic|.SFCompactText-HeavyItalic',
-  '__SF-UI-Display-Condensed-Regular__': '.SFNSDisplayCondensed-Regular|SFUIDisplayCondensed-Regular|.SFUIDisplayCondensed-Regular',
-  '__SF-UI-Display-Condensed-Ultralight__':
-    '.SFNSDisplayCondensed-Ultralight|SFUIDisplayCondensed-Ultralight|.SFUIDisplayCondensed-Ultralight',
-  '__SF-UI-Display-Condensed-Thin__': '.SFNSDisplayCondensed-Thin|SFUIDisplayCondensed-Thin|.SFUIDisplayCondensed-Thin',
-  '__SF-UI-Display-Condensed-Light__': '.SFNSDisplayCondensed-Light|SFUIDisplayCondensed-Light|.SFUIDisplayCondensed-Light',
-  '__SF-UI-Display-Condensed-Medium__': '.SFNSDisplayCondensed-Medium|SFUIDisplayCondensed-Medium|.SFUIDisplayCondensed-Medium',
-  '__SF-UI-Display-Condensed-Semibold__': '.SFNSDisplayCondensed-Semibold|SFUIDisplayCondensed-Semibold|.SFUIDisplayCondensed-Semibold',
-  '__SF-UI-Display-Condensed-Bold__': '.SFNSDisplayCondensed-Bold|SFUIDisplayCondensed-Bold|.SFUIDisplayCondensed-Bold',
-  '__SF-UI-Display-Condensed-Heavy__': '.SFNSDisplayCondensed-Heavy|SFUIDisplayCondensed-Heavy|.SFUIDisplayCondensed-Heavy',
-  '__SF-UI-Display-Condensed-Black__': '.SFNSDisplayCondensed-Black|.SFUIDisplayCondensed-Black',
-  '__SF-UI-Display-Regular__': '.SFNSDisplay|SFProDisplay-Regular|SFUIDisplay-Regular|.SFUIDisplay',
-  '__SF-UI-Display-Ultralight__': '.SFNSDisplay-Ultralight|SFProDisplay-Ultralight|SFUIDisplay-Ultralight|.SFUIDisplay-Ultralight',
-  '__SF-UI-Display-Thin__': '.SFNSDisplay-Thin|SFProDisplay-Thin|SFUIDisplay-Thin|.SFUIDisplay-Thin',
-  '__SF-UI-Display-Light__': '.SFNSDisplay-Light|SFProDisplay-Light|SFUIDisplay-Light|.SFUIDisplay-Light',
-  '__SF-UI-Display-Medium__': '.SFNSDisplay-Medium|SFProDisplay-Medium|SFUIDisplay-Medium|.SFUIDisplay-Medium',
-  '__SF-UI-Display-Semibold__': '.SFNSDisplay-Semibold|SFProDisplay-Semibold|SFUIDisplay-Semibold|.SFUIDisplay-Semibold',
-  '__SF-UI-Display-Bold__': '.SFNSDisplay-Bold|SFProDisplay-Bold|SFUIDisplay-Bold|.SFUIDisplay-Bold',
-  '__SF-UI-Display-Heavy__': '.SFNSDisplay-Heavy|SFProDisplay-Heavy|SFUIDisplay-Heavy|.SFUIDisplay-Heavy',
-  '__SF-UI-Display-Black__': '.SFNSDisplay-Black|SFProDisplay-Black|.SFUIDisplay-Black',
-  '__SF-UI-Display-Italic__': '.SFNSDisplay-Italic|SFProDisplay-Italic|SFUIDisplay-Italic',
-  '__SF-UI-Display-Ultralight-Italic__':
-    '.SFNSDisplay-UltralightItalic|SFProDisplay-UltralightItalic|SFUIDisplay-UltralightItalic|.SFUIDisplay-UltralightItalic',
-  '__SF-UI-Display-Thin-Italic__': '.SFNSDisplay-ThinItalic|SFProDisplay-ThinItalic|SFUIDisplay-ThinItalic|.SFUIDisplay-ThinItalic',
-  '__SF-UI-Display-Light-Italic__': '.SFNSDisplay-LightItalic|SFProDisplay-LightItalic|SFUIDisplay-LightItalic|.SFUIDisplay-LightItalic',
-  '__SF-UI-Display-Medium-Italic__':
-    '.SFNSDisplay-MediumItalic|SFProDisplay-MediumItalic|SFUIDisplay-MediumItalic|.SFUIDisplay-MediumItalic',
-  '__SF-UI-Display-Semibold-Italic__':
-    '.SFNSDisplay-SemiboldItalic|SFProDisplay-SemiboldItalic|SFUIDisplay-SemiboldItalic|.SFUIDisplay-SemiboldItalic',
-  '__SF-UI-Display-Bold-Italic__': '.SFNSDisplay-BoldItalic|SFProDisplay-BoldItalic|SFUIDisplay-BoldItalic|.SFUIDisplay-BoldItalic',
-  '__SF-UI-Display-Heavy-Italic__': '.SFNSDisplay-HeavyItalic|SFProDisplay-HeavyItalic|SFUIDisplay-HeavyItalic|.SFUIDisplay-HeavyItalic',
-  '__SF-UI-Display-Black-Italic__': '.SFNSDisplay-BlackItalic|SFProDisplay-BlackItalic|.SFUIDisplay-BlackItalic',
-  '__SF-UI-Text-Condensed-Regular__': '.SFNSTextCondensed-Regular|SFUITextCondensed-Regular|.SFUITextCondensed-Regular',
-  '__SF-UI-Text-Condensed-Light__': '.SFNSTextCondensed-Light|SFUITextCondensed-Light|.SFUITextCondensed-Light',
-  '__SF-UI-Text-Condensed-Medium__': '.SFNSTextCondensed-Medium|SFUITextCondensed-Medium|.SFUITextCondensed-Medium',
-  '__SF-UI-Text-Condensed-Semibold__': '.SFNSTextCondensed-Semibold|SFUITextCondensed-Semibold|.SFUITextCondensed-Semibold',
-  '__SF-UI-Text-Condensed-Bold__': '.SFNSTextCondensed-Bold|SFUITextCondensed-Bold|.SFUITextCondensed-Bold',
-  '__SF-UI-Text-Condensed-Heavy__': '.SFNSTextCondensed-Heavy|.SFUITextCondensed-Heavy',
-  '__SF-Compact-Rounded-Regular__': 'SFCompactRounded-Regular|.SFCompactRounded-Regular',
-  '__SF-Compact-Rounded-Ultralight__': 'SFCompactRounded-Ultralight|.SFCompactRounded-Ultralight',
-  '__SF-Compact-Rounded-Thin__': 'SFCompactRounded-Thin|.SFCompactRounded-Thin',
-  '__SF-Compact-Rounded-Light__': 'SFCompactRounded-Light|.SFCompactRounded-Light',
-  '__SF-Compact-Rounded-Medium__': 'SFCompactRounded-Medium|.SFCompactRounded-Medium',
-  '__SF-Compact-Rounded-Semibold__': 'SFCompactRounded-Semibold|.SFCompactRounded-Semibold',
-  '__SF-Compact-Rounded-Bold__': 'SFCompactRounded-Bold|.SFCompactRounded-Bold',
-  '__SF-Compact-Rounded-Heavy__': 'SFCompactRounded-Heavy|.SFCompactRounded-Heavy',
-  '__SF-Compact-Rounded-Black__': 'SFCompactRounded-Black|.SFCompactRounded-Black',
-};
-var fontFamilies = safeFonts;
 var FontSourceNames = /* @__PURE__ */ ((FontSourceNames2) => {
   FontSourceNames2['Google'] = 'google';
   FontSourceNames2['Fontshare'] = 'fontshare';
@@ -57753,1338 +57377,7 @@ var FontSourceNames = /* @__PURE__ */ ((FontSourceNames2) => {
   FontSourceNames2['BuiltIn'] = 'builtIn';
   return FontSourceNames2;
 })(FontSourceNames || {},);
-function isSuccessfullyParsedFontVariant(variant,) {
-  return variant.weight !== void 0 && variant.style !== void 0;
-}
 var systemFontFamilyName = 'System Default';
-var LocalFontSource = class {
-  name = 'local';
-  fontFamilies = [];
-  byFamilyName = /* @__PURE__ */ new Map();
-  fontAliasBySelector = /* @__PURE__ */ new Map();
-  fontAliases = /* @__PURE__ */ new Map();
-  getFontFamilyByName(family,) {
-    return this.byFamilyName.get(family,) ?? null;
-  }
-  // TODO: these are duplicated across implementations of FontSource
-  // When adding a third source, we should abstract them
-  createFontFamily(family,) {
-    const fontFamily = {
-      name: family,
-      fonts: [],
-      source: this.name,
-    };
-    this.addFontFamily(fontFamily,);
-    return fontFamily;
-  }
-  addFontFamily(fontFamily,) {
-    this.fontFamilies.push(fontFamily,);
-    this.byFamilyName.set(fontFamily.name, fontFamily,);
-  }
-  // end of duplication
-  importFonts() {
-    const fonts = [];
-    for (const family of Object.keys(fontFamilies,)) {
-      const members = fontFamilies[family];
-      if (!members) continue;
-      const fontFamily = this.createFontFamily(family,);
-      for (const variant of Object.keys(members,)) {
-        const member = members[variant];
-        if (!member) continue;
-        const {
-          selector,
-          weight,
-        } = member;
-        const font = {
-          variant,
-          selector,
-          weight,
-          family: fontFamily,
-          cssFamilyName: fontFamily.name,
-        };
-        fontFamily.fonts.push(font,);
-      }
-      fonts.push(...fontFamily.fonts,);
-    }
-    for (const [key7, value,] of Object.entries(fontAliases,)) {
-      this.addFontAlias(key7, value,);
-    }
-    const {
-      fontFamily: systemFontFamily,
-      aliases,
-    } = this.getSystemFontFamily();
-    this.addFontFamily(systemFontFamily,);
-    for (const [key7, value,] of aliases) {
-      this.addFontAlias(key7, value,);
-    }
-    fonts.push(...systemFontFamily.fonts,);
-    return fonts;
-  }
-  addFontAlias(key7, value,) {
-    this.fontAliases.set(key7, value,);
-    this.fontAliasBySelector.set(value, key7,);
-  }
-  getSystemFontFamily() {
-    const fontFamilies2 =
-      // System fonts - Taken from https://furbo.org/stuff/systemfonts-new.html - "All Platforms" section
-      'system-ui|-apple-system|BlinkMacSystemFont|Segoe UI|Roboto|Oxygen|Ubuntu|Cantarell|Fira Sans|Droid Sans|Helvetica Neue|sans-serif';
-    const fontFamily = {
-      name: systemFontFamilyName,
-      fonts: [],
-      source: this.name,
-    };
-    const aliases = /* @__PURE__ */ new Map();
-    const weights = [400, 100, 200, 300, 500, 600, 700, 800, 900,];
-    const styles4 = ['normal', 'italic',];
-    for (const style2 of styles4) {
-      for (const weight of weights) {
-        const variant = createVariantName(weight, style2,);
-        const alias2 = `__SystemDefault-${weight}-${style2}__`;
-        const font = {
-          variant,
-          selector: alias2,
-          style: style2,
-          weight,
-          family: fontFamily,
-          cssFamilyName: fontFamily.name,
-        };
-        fontFamily.fonts.push(font,);
-        aliases.set(alias2, fontFamilies2,);
-      }
-    }
-    return {
-      fontFamily,
-      aliases,
-    };
-  }
-  getFontAliasBySelector(selector,) {
-    return this.fontAliasBySelector.get(selector,) || null;
-  }
-  getFontSelectorByAlias(alias2,) {
-    return this.fontAliases.get(alias2,) || null;
-  }
-  /** Font family aliases are in the format of `__Alias-Name__` */
-  isFontFamilyAlias(value,) {
-    if (value && /^__.*__$/u.exec(value,)) return true;
-    return false;
-  }
-};
-var fontWeightNames = {
-  '100': 'Thin',
-  '200': 'Extra Light',
-  '300': 'Light',
-  '400': 'Normal',
-  '500': 'Medium',
-  '600': 'Semi Bold',
-  '700': 'Bold',
-  '800': 'Extra Bold',
-  '900': 'Black',
-};
-function createVariantName(weight, style2,) {
-  const friendlyStyle = style2 === 'normal' ? 'Regular' : 'Italic';
-  if (weight === 400) {
-    return friendlyStyle;
-  }
-  if (style2 !== 'normal') {
-    return `${fontWeightNames[weight]} ${friendlyStyle}`;
-  }
-  return `${fontWeightNames[weight]}`;
-}
-var MapWithHash = class extends Map {
-  _hash = 0;
-  get hash() {
-    return this._hash;
-  }
-  set(key7, value,) {
-    this._hash++;
-    return super.set(key7, value,);
-  }
-  delete(key7,) {
-    this._hash++;
-    return super.delete(key7,);
-  }
-  clear() {
-    this._hash++;
-    return super.clear();
-  }
-};
-var cachedServiceMap;
-function getServiceMap() {
-  if (typeof __unframerWindow2 === 'undefined') return cachedServiceMap ?? {};
-  if (cachedServiceMap) return cachedServiceMap;
-  cachedServiceMap = extractServiceMap();
-  return cachedServiceMap;
-}
-function extractServiceMap() {
-  const location = __unframerWindow2.location;
-  let services = __unframerWindow2?.bootstrap?.services;
-  if (services) {
-    return services;
-  }
-  let topOrigin;
-  try {
-    const topWindow = __unframerWindow2.top;
-    topOrigin = topWindow.location.origin;
-    services = __unframerWindow2.top?.bootstrap?.services;
-    if (services) {
-      return services;
-    }
-  } catch (e) {}
-  if (topOrigin && topOrigin !== location.origin) {
-    throw Error(`Unexpectedly embedded by ${topOrigin} (expected ${location.origin})`,);
-  }
-  if (location.origin.endsWith('framer.com',) || location.origin.endsWith('framer.dev',)) {
-    throw Error('ServiceMap data was not provided in document',);
-  }
-  try {
-    const servicesJSON = new URLSearchParams(location.search,).get('services',) ||
-      new URLSearchParams(location.hash.substring(1,),).get('services',);
-    if (servicesJSON) {
-      services = JSON.parse(servicesJSON,);
-    }
-  } catch (e) {}
-  if (services && typeof services === 'object' && services.api) {
-    return services;
-  }
-  throw Error('ServiceMap requested but not available',);
-}
-function getAssetFilename(asset,) {
-  return asset.key + asset.extension;
-}
-function createAbsoluteAssetURL(filename,) {
-  const serviceMap = getServiceMap();
-  return `${serviceMap.userContent}/assets/${filename}`;
-}
-function createAbsoluteAssetURLFromAsset(asset,) {
-  return createAbsoluteAssetURL(getAssetFilename(asset,),);
-}
-var FRAMER_VARIABLE_FONT_SUFFIX = 'Variable';
-function createCSSFamilyName(fontFamilyName, isVariable,) {
-  return isVariable ? `${fontFamilyName} ${FRAMER_VARIABLE_FONT_SUFFIX}` : fontFamilyName;
-}
-function createCSSFontFamilyFromWebFontLocator(locator, fontSource,) {
-  switch (fontSource) {
-    case 'custom':
-      throw new Error('Custom fonts are not supported',);
-    default:
-      return createCSSFamilyName(locator.name, locator.isVariable,);
-  }
-}
-function supportsOpenType(openTypeData,) {
-  return Boolean(openTypeData && Array.isArray(openTypeData,),);
-}
-function validateVariationAxes(variationAxesData,) {
-  if (!variationAxesData) return;
-  if (!Array.isArray(variationAxesData,)) return;
-  const variationAxes = [];
-  for (const axis of variationAxesData) {
-    if (!isVariationAxis(axis,)) continue;
-    variationAxes.push({
-      tag: axis.tag,
-      name: axis.name,
-      minValue: axis.minValue,
-      maxValue: axis.maxValue,
-      defaultValue: axis.defaultValue,
-    },);
-  }
-  return variationAxes;
-}
-function isOpenTypeFeature(feature,) {
-  if (typeof feature !== 'object' || feature === null) return false;
-  if (!('tag' in feature) || typeof feature.tag !== 'string') return false;
-  if ('coverage' in feature && typeof feature.coverage !== 'undefined' && !Array.isArray(feature.coverage,)) {
-    return false;
-  }
-  return true;
-}
-function isVariationAxis(axis,) {
-  if (typeof axis !== 'object' || axis === null) return false;
-  if (!('tag' in axis) || typeof axis.tag !== 'string') return false;
-  if ('name' in axis && typeof axis.name !== 'string') return false;
-  if (!('minValue' in axis) || typeof axis.minValue !== 'number') return false;
-  if (!('maxValue' in axis) || typeof axis.maxValue !== 'number') return false;
-  if (!('defaultValue' in axis) || typeof axis.defaultValue !== 'number') {
-    return false;
-  }
-  return true;
-}
-var builtInFontSelectorPrefix = 'BI;';
-var BuiltInFontSource = class {
-  name = 'builtIn';
-  fontFamilies = [];
-  byFamilyName = /* @__PURE__ */ new Map();
-  assetByKey = /* @__PURE__ */ new Map();
-  importFonts(assets,) {
-    this.fontFamilies.length = 0;
-    this.byFamilyName.clear();
-    this.assetByKey.clear();
-    const fonts = [];
-    for (const asset of assets) {
-      if (!this.isValidBuiltInFont(asset,)) continue;
-      const {
-        properties,
-      } = asset;
-      const fontName = properties.font.fontFamily;
-      const fontFamily = this.createFontFamily(fontName, properties.font.foundryName, properties.font.fontVersion,);
-      const openTypeData = properties.font.openTypeData;
-      const variationAxesData = properties.font.variationAxes;
-      const isVariableFont2 = Array.isArray(variationAxesData,);
-      const variant = isVariableFont2 ? 'variable' : properties.font.fontSubFamily || 'regular';
-      const url = createAbsoluteAssetURLFromAsset(asset,);
-      const validatedVariationAxes = validateVariationAxes(variationAxesData,);
-      const font = {
-        assetKey: asset.key,
-        family: fontFamily,
-        selector: this.createSelector(fontName, variant, properties.font.fontVersion,),
-        variant,
-        file: url,
-        hasOpenTypeFeatures: supportsOpenType(openTypeData,),
-        variationAxes: validatedVariationAxes,
-        category: properties.font.fontCategory,
-        weight: isVariableFont2
-          ? getWeightFromVariationAxes(validatedVariationAxes, properties.font.faceDescriptors?.weight,)
-          : variantNameToWeight(variant,),
-        style: getFontStyle(variant,),
-        cssFamilyName: createCSSFamilyName(fontName, isVariableFont2,),
-      };
-      fontFamily.fonts.push(font,);
-      this.assetByKey.set(asset.key, asset,);
-      fonts.push(font,);
-    }
-    for (const fontFamily of this.fontFamilies) {
-      fontFamily.fonts.sort((a, b,) => {
-        const weightA = variantNameToWeight(a.variant,);
-        const weightB = variantNameToWeight(b.variant,);
-        if (!weightA || !weightB) return 1;
-        return weightA - weightB;
-      },);
-    }
-    return fonts;
-  }
-  static parseVariant(variant,) {
-    const kebabCaseVariant = variantToKebabCase(variant,);
-    const isVariable = kebabCaseVariant === 'variable' || kebabCaseVariant === 'variable-italic';
-    const weight = isVariable ? 400 : variantsNameToWeight[kebabCaseVariant];
-    const style2 = getFontStyle(variant,);
-    return {
-      weight,
-      style: style2,
-    };
-  }
-  getFontBySelector(selector,) {
-    const locator = this.parseSelector(selector,);
-    if (!locator) return;
-    const fontFamily = this.getFontFamilyByName(locator.name,);
-    if (!fontFamily) return;
-    return fontFamily.fonts.find((f2) => f2.selector === selector);
-  }
-  getFontFamilyByName(family,) {
-    return this.byFamilyName.get(family,) ?? null;
-  }
-  createFontFamily(family, foundryName, version2,) {
-    const existingFontFamily = this.byFamilyName.get(family,);
-    if (existingFontFamily && existingFontFamily.version === version2) return existingFontFamily;
-    const fontFamily = {
-      source: this.name,
-      name: family,
-      fonts: [],
-      foundryName,
-      version: version2,
-    };
-    this.addFontFamily(fontFamily,);
-    return fontFamily;
-  }
-  getOpenTypeFeatures(font,) {
-    assert(font.assetKey, 'Font must have an asset key',);
-    const asset = this.assetByKey.get(font.assetKey,);
-    const openTypeData = asset?.properties?.font?.openTypeData;
-    if (!supportsOpenType(openTypeData,)) return [];
-    return openTypeData?.map((feature) => {
-      if (!isOpenTypeFeature(feature,)) return;
-      return {
-        tag: feature.tag,
-        coverage: feature.coverage,
-      };
-    },);
-  }
-  isValidBuiltInFont(asset,) {
-    if (!asset.mimeType.startsWith('font/',)) return false;
-    if (asset.properties?.kind !== 'font') return false;
-    if (!asset.properties.font) return false;
-    if (!asset.properties.font.fontVersion) return false;
-    if (!asset.properties.font.fontFamily) return false;
-    return 'fontFamily' in asset.properties.font;
-  }
-  createSelector(family, variant, version2,) {
-    return `${builtInFontSelectorPrefix}${family}/${variant}/${version2}`;
-  }
-  parseSelector(selector,) {
-    if (!selector.startsWith(builtInFontSelectorPrefix,)) return null;
-    const [_, selectorWithoutPrefix,] = selector.split(builtInFontSelectorPrefix,);
-    if (selectorWithoutPrefix === void 0) return null;
-    const [name, variant, version2,] = selectorWithoutPrefix.split('/',);
-    if (!name || !variant || !version2) return null;
-    return {
-      name,
-      variant,
-      source: this.name,
-      isVariable: variant.toLowerCase().includes('variable',),
-    };
-  }
-  addFontFamily(fontFamily,) {
-    this.fontFamilies.push(fontFamily,);
-    this.byFamilyName.set(fontFamily.name, fontFamily,);
-  }
-};
-var variantsNameToWeight = {
-  ultralight: 100,
-  'ultralight-italic': 100,
-  thin: 200,
-  'thin-italic': 200,
-  demi: 200,
-  light: 300,
-  'light-italic': 300,
-  normal: 350,
-  base: 400,
-  regular: 400,
-  classic: 400,
-  'regular-slanted': 400,
-  italic: 400,
-  oblique: 400,
-  dense: 400,
-  brukt: 300,
-  book: 400,
-  'book-italic': 400,
-  text: 400,
-  'text-italic': 400,
-  medium: 500,
-  solid: 500,
-  'medium-oblique': 500,
-  'medium-italic': 500,
-  mittel: 500,
-  semibold: 600,
-  'semibold-italic': 600,
-  bold: 700,
-  'bold-italic': 700,
-  'bold-oblique': 700,
-  fett: 700,
-  ultrabold: 800,
-  'ultrabold-italic': 800,
-  extrabold: 800,
-  'extrabold-italic': 800,
-  black: 900,
-  extralight: 100,
-  'extralight-italic': 100,
-  'black-italic': 900,
-  'extra-italic': 900,
-  'extra-italic-bold': 900,
-  satt: 900,
-  heavy: 900,
-  'heavy-italic': 900,
-  // The following variants are only used in the FT88 font. These are not really weights, but more font styles (gothique, cursive, etc.).
-  // We assign them different (fake) weights to ensure that the changes are picked up when switching between variants.
-  serif: 100,
-  school: 200,
-  expanded: 300,
-  gothique: 500,
-  // The following variants are only used in the ARK_ES font.
-  // We assign them different (fake) weights to ensure that the changes are picked up when switching between variants.
-  // The order is important because we want to group all the light together and solid together.
-  'dense-light': 200,
-  'dense-regular': 300,
-  'dense-medium': 400,
-  'dense-bold': 500,
-  'solid-light': 600,
-  'solid-regular': 700,
-  'solid-medium': 800,
-  'solid-bold': 900,
-  // The following variants are only used in the Tecnica font.
-  // We assign them different (fake) weights to ensure that the changes are picked up when switching between variants.
-  '53': 400,
-  '55': 600,
-  // The following variants are only used in the Rag font.
-  // We assign them different (fake) weights to ensure that the changes are picked up when switching between variants.
-  'narrow-regular': 350,
-  'narrow-black': 850,
-  // we want to put variable fonts last
-  variable: 1e3,
-  'variable-italic': 1e3,
-};
-function variantNameToWeight(variant,) {
-  const kebabCaseVariant = variantToKebabCase(variant,);
-  return variantsNameToWeight[kebabCaseVariant];
-}
-function getWeightFromVariationAxes(variationAxes, faceWeight,) {
-  const axisDefault = variationAxes?.find((axis) => axis.tag === 'wght')?.defaultValue;
-  if (axisDefault !== void 0 && axisDefault >= 1 && axisDefault <= 1e3) {
-    return axisDefault;
-  }
-  return faceWeight ?? variantNameToWeight('variable',) ?? 500;
-}
-function variantToKebabCase(variant,) {
-  return variant.toLowerCase().replace(/\s+/gu, '-',);
-}
-function getFontStyle(variant,) {
-  variant = variant.toLowerCase();
-  if (variant.includes('italic',) || variant.includes('oblique',) || variant.includes('slanted',)) return 'italic';
-  return 'normal';
-}
-function getRelatedFontVariants(currentVariant, availableVariants,) {
-  return {
-    ...pickBoldItalicVariants(currentVariant, availableVariants,),
-    ...pickVariableVariants(currentVariant, availableVariants,),
-  };
-}
-function pickBoldItalicVariants(currentVariant, availableVariants,) {
-  if (availableVariants.length === 0) {
-    return {
-      variantBold: void 0,
-      variantBoldItalic: void 0,
-      variantItalic: void 0,
-    };
-  }
-  const {
-    weight: currentWeight,
-    style: currentStyle,
-  } = currentVariant;
-  const variantByWeightAndStyle = /* @__PURE__ */ new Map();
-  const boldVariantByStyle = /* @__PURE__ */ new Map();
-  for (const variant of availableVariants) {
-    if (variant.isVariable !== currentVariant.isVariable) continue;
-    variantByWeightAndStyle.set(`${variant.weight}-${variant.style}`, variant,);
-    if (variant.weight <= currentWeight) continue;
-    if (!boldVariantByStyle.has(variant.style,)) {
-      boldVariantByStyle.set(variant.style, variant,);
-    }
-  }
-  let variantBold = boldVariantByStyle.get(currentStyle,);
-  let variantBoldItalic = boldVariantByStyle.get('italic',);
-  const currentVariantWeight = currentVariant.weight;
-  if (currentVariantWeight <= 300) {
-    variantBold = variantByWeightAndStyle.get(`400-${currentStyle}`,) ?? variantBold;
-    variantBoldItalic = variantByWeightAndStyle.get('400-italic',) ?? variantBoldItalic;
-  } else if (currentVariantWeight <= 500) {
-    variantBold = variantByWeightAndStyle.get(`700-${currentStyle}`,) ?? variantBold;
-    variantBoldItalic = variantByWeightAndStyle.get('700-italic',) ?? variantBoldItalic;
-  } else {
-    variantBold = variantByWeightAndStyle.get(`900-${currentStyle}`,) ?? variantBold;
-    variantBoldItalic = variantByWeightAndStyle.get('900-italic',) ?? variantBoldItalic;
-  }
-  const variantItalic = variantByWeightAndStyle.get(`${currentWeight}-italic`,);
-  return {
-    variantBold,
-    variantItalic,
-    variantBoldItalic,
-  };
-}
-function pickVariableVariants(currentVariant, availableVariants,) {
-  if (availableVariants.length === 0) {
-    return {
-      variantVariable: void 0,
-      variantVariableItalic: void 0,
-    };
-  }
-  const variantByWeightAndStyle = /* @__PURE__ */ new Map();
-  let variantVariable;
-  let variantVariableItalic;
-  let fallbackVariant;
-  let fallbackItalicVariant;
-  for (const variant of availableVariants) {
-    if (!variant.isVariable) continue;
-    const isSameWeight = variant.weight === currentVariant.weight;
-    const isDefaultWeight = variant.weight === 400;
-    if (variant.style === 'normal') {
-      if (isSameWeight) {
-        variantVariable = variant;
-      } else if (isDefaultWeight) {
-        fallbackVariant = variant;
-      } else if (!fallbackVariant) {
-        fallbackVariant = variant;
-      }
-    } else if (variant.style === 'italic') {
-      if (isSameWeight) {
-        variantVariableItalic = variant;
-      } else if (isDefaultWeight) {
-        fallbackItalicVariant = variant;
-      } else if (!fallbackItalicVariant) {
-        fallbackItalicVariant = variant;
-      }
-    }
-  }
-  return {
-    variantVariable: variantVariable ?? fallbackVariant,
-    variantVariableItalic: variantVariableItalic ?? fallbackItalicVariant,
-  };
-}
-function isVariableFont(font,) {
-  return Boolean(font.variationAxes,);
-}
-var log2 = getLogger('custom-font-source',);
-var customFontSelectorLegacyPrefix = 'CUSTOM;';
-var customFontSelectorPrefixV2 = 'CUSTOMV2;';
-function isCustomFontSelector(selector,) {
-  return isCustomFontSelectorV2(selector,) || isCustomFontSelectorLegacy(selector,);
-}
-function isCustomFontSelectorV2(selector,) {
-  return selector.startsWith(customFontSelectorPrefixV2,);
-}
-function isCustomFontSelectorLegacy(selector,) {
-  return selector.startsWith(customFontSelectorLegacyPrefix,);
-}
-function findDuplicateFont(existingFonts, newFont,) {
-  for (let i = 0; i < existingFonts.length; i++) {
-    const existingFont = existingFonts[i];
-    if (!existingFont) continue;
-    if (existingFont.owner !== newFont.owner && existingFont.file === newFont.file) {
-      return {
-        existingFont,
-        index: i,
-        projectDuplicate: true,
-      };
-    }
-    if (
-      existingFont &&
-      // TODO: When fonts have a duplicate selector, we assume it's the same font, but it can
-      // be a different file. Currently there is no way to resolve these conflicts in the UI.
-      // This problem exsits already for files with the same metadata.
-      existingFont.selector === newFont.selector
-    ) {
-      return {
-        existingFont,
-        index: i,
-        projectDuplicate: false,
-      };
-    }
-  }
-  return void 0;
-}
-function getLegacyFontFamilyName(properties,) {
-  const {
-    font,
-  } = properties;
-  const fontFamily = font.fontFamily;
-  const isAssetVariableFont = Array.isArray(font.variationAxes,);
-  if (isAssetVariableFont && fontFamily.toLowerCase().includes('variable',)) return fontFamily;
-  const variant = isAssetVariableFont ? FRAMER_VARIABLE_FONT_SUFFIX : font.fontSubFamily.trim();
-  if (variant === '') return fontFamily;
-  return `${fontFamily} ${variant}`;
-}
-function getCustomFontInfo({
-  fontFamily,
-  fontSubFamily,
-  variationAxes,
-  faceDescriptors,
-},) {
-  const rawVariant = fontSubFamily.trim() || 'Regular';
-  const containsVariant = rawVariant.toLocaleLowerCase().includes('variable',);
-  const variant = validateVariationAxes(variationAxes,) && !containsVariant ? `Variable ${rawVariant}` : rawVariant;
-  let style2 = 'normal';
-  let weight = 400;
-  if (faceDescriptors) {
-    weight = faceDescriptors.weight;
-    style2 = faceDescriptors.italic || faceDescriptors.oblique ? 'italic' : 'normal';
-  }
-  return {
-    family: fontFamily,
-    variant,
-    weight,
-    style: style2,
-  };
-}
-var CustomFontSource = class _CustomFontSource {
-  name = 'custom';
-  fontFamilies = [];
-  byFamilyName = /* @__PURE__ */ new Map();
-  assetsByKey = /* @__PURE__ */ new Map();
-  debugByFamily = /* @__PURE__ */ new Map();
-  // Built lazily on the first `getDebugFamilies()` call (i.e. when the debug bar
-  // opens) and cached until the next import invalidates it.
-  debugFamilies;
-  importFonts(assets,) {
-    this.fontFamilies.length = 0;
-    this.byFamilyName.clear();
-    this.assetsByKey.clear();
-    const fonts = {};
-    const debugByFamily = /* @__PURE__ */ new Map();
-    for (const asset of assets) {
-      if (!this.isValidCustomFontAsset(asset,)) {
-        continue;
-      }
-      const {
-        family,
-        variant,
-        weight,
-        style: style2,
-      } = getCustomFontInfo(asset.properties.font,);
-      const variationAxesData = asset.properties.font.variationAxes;
-      const assetIsVariableFont = Array.isArray(variationAxesData,);
-      const openTypeData = asset.properties.font.openTypeData;
-      const url = createAbsoluteAssetURLFromAsset(asset,);
-      const ownerType = getAssetOwnerType(asset,);
-      const legacyFontFamilyName = getLegacyFontFamilyName(asset.properties,);
-      const legacySelector = _CustomFontSource.createLegacySelector(legacyFontFamilyName,);
-      const fontFamily = this.createFontFamily(family,);
-      const selector = _CustomFontSource.createSelector(fontFamily.name, variant,);
-      const font = {
-        assetKey: asset.key,
-        family: fontFamily,
-        selector,
-        variant,
-        weight,
-        style: style2,
-        file: url,
-        hasOpenTypeFeatures: supportsOpenType(openTypeData,),
-        variationAxes: validateVariationAxes(variationAxesData,),
-        owner: ownerType,
-        alternativeSelectors: {
-          [legacySelector]: {
-            variant: assetIsVariableFont ? 'variable' : this.inferVariantName(legacyFontFamilyName,),
-            cssFamilyName: _CustomFontSource.cssFontFamilyFromSelector(legacySelector,),
-          },
-        },
-        cssFamilyName: _CustomFontSource.cssFontFamilyFromSelector(selector,),
-      };
-      const duplicateInfo = findDuplicateFont(fontFamily.fonts, font,);
-      if (duplicateInfo?.projectDuplicate) {
-        if (font.owner === 'team') {
-          fontFamily.fonts[duplicateInfo.index] = font;
-          fonts[selector] = font;
-        }
-      } else if (duplicateInfo) {
-        log2.debug('Duplicate font found for:', font, 'with existing font:', duplicateInfo.existingFont,);
-        const existingFont = duplicateInfo.existingFont;
-        const newIsWoff2 = font.file?.endsWith('.woff2',) ?? false;
-        const existingIsWoff2 = existingFont.file?.endsWith('.woff2',) ?? false;
-        const newHasBetterFormat = newIsWoff2 && !existingIsWoff2;
-        const fontsHaveEquivFormat = newIsWoff2 === existingIsWoff2;
-        const newHasAtLeastEqualOwnerPriority = font.owner === 'team' || existingFont.owner !== 'team';
-        if (newHasBetterFormat || fontsHaveEquivFormat && newHasAtLeastEqualOwnerPriority) {
-          fontFamily.fonts[duplicateInfo.index] = font;
-          fonts[selector] = font;
-        }
-      } else {
-        fontFamily.fonts.push(font,);
-        fonts[selector] = font;
-      }
-      this.assetsByKey.set(asset.key, asset,);
-      const debugVariant = getOrCreateDebugVariant(debugByFamily, family, variant,);
-      debugVariant.fonts.push({
-        font,
-        asset,
-        selected: false,
-      },);
-    }
-    for (const fontFamily of this.fontFamilies) {
-      if (fontFamily.fonts.length > 0) {
-        updateFontRelationships(fontFamily,);
-      }
-    }
-    this.debugByFamily = debugByFamily;
-    this.debugFamilies = void 0;
-    return Object.values(fonts,);
-  }
-  /**
-   * Expose custom font properties and grouping decisions for the debug bar.
-   */
-  getDebugFamilies() {
-    if (this.debugFamilies) return this.debugFamilies;
-    const selectedAssets = /* @__PURE__ */ new Set();
-    for (const fontFamily of this.fontFamilies) {
-      for (const font of fontFamily.fonts) {
-        if (font.assetKey && font.owner) {
-          selectedAssets.add(`${font.assetKey}:${font.owner}`,);
-        }
-      }
-    }
-    this.debugFamilies = buildDebugFamilies(this.debugByFamily, selectedAssets,);
-    return this.debugFamilies;
-  }
-  static createSelector(family, variant,) {
-    return `${customFontSelectorPrefixV2}${family}${variant ? ` ${variant}` : ''}`;
-  }
-  static createLegacySelector(fontName,) {
-    return `${customFontSelectorLegacyPrefix}${fontName}`;
-  }
-  static cssFontFamilyFromSelector(selector,) {
-    assert(isCustomFontSelector(selector,), 'Selector must be a custom font selector',);
-    if (isCustomFontSelectorLegacy(selector,)) {
-      return selector.slice(customFontSelectorLegacyPrefix.length,);
-    }
-    return selector.slice(customFontSelectorPrefixV2.length,);
-  }
-  isValidCustomFontAsset(asset,) {
-    if (!asset.mimeType.startsWith('font/',)) return false;
-    if (asset.properties?.kind !== 'font') return false;
-    if (!asset.properties.font) return false;
-    return 'fontFamily' in asset.properties.font;
-  }
-  getOpenTypeFeatures(font,) {
-    assert(font.assetKey, 'Font must have an asset key',);
-    const asset = this.assetsByKey.get(font.assetKey,);
-    const openTypeData = asset?.properties?.font?.openTypeData;
-    if (!supportsOpenType(openTypeData,)) return [];
-    return openTypeData?.map((feature) => {
-      if (!isOpenTypeFeature(feature,)) return;
-      return {
-        tag: feature.tag,
-        coverage: feature.coverage,
-      };
-    },);
-  }
-  inferVariantName(family,) {
-    const possibleValues = ['thin', 'ultra light', 'extra light', 'light', 'normal', 'medium', 'semi bold', 'bold', 'extra bold', 'black',];
-    const possibleValuesWithItalics = [...possibleValues.map((value) => `${value} italic`), ...possibleValues,];
-    const lowerCaseFamily = family.toLowerCase();
-    const tokens = [...lowerCaseFamily.split(' ',), ...lowerCaseFamily.split('-',), ...lowerCaseFamily.split('_',),];
-    const foundToken = possibleValuesWithItalics.find((value) => tokens.includes(value,) || tokens.includes(value.replace(/\s+/gu, '',),));
-    if (foundToken) return foundToken.replace(/^\w|\s\w/gu, (char) => char.toUpperCase(),);
-    return 'Regular';
-  }
-  createFontFamily(family,) {
-    const existingFontFamily = this.byFamilyName.get(family,);
-    if (existingFontFamily) return existingFontFamily;
-    const fontFamily = {
-      source: this.name,
-      name: family,
-      fonts: [],
-    };
-    this.addFontFamily(fontFamily,);
-    return fontFamily;
-  }
-  addFontFamily(fontFamily,) {
-    this.fontFamilies.push(fontFamily,);
-    this.byFamilyName.set(fontFamily.name, fontFamily,);
-  }
-  getFontFamilyByName(family,) {
-    const foundFontFamily = this.byFamilyName.get(family,);
-    if (!foundFontFamily) return null;
-    return foundFontFamily;
-  }
-};
-function fontToVariantWithMetadata(font,) {
-  if (!font.weight || !font.style) return void 0;
-  return {
-    weight: font.weight,
-    style: font.style,
-    isVariable: isVariableFont(font,),
-    selector: font.selector,
-  };
-}
-function updateFontRelationships(fontFamily,) {
-  const availableVariants = fontFamily.fonts.map((font) => fontToVariantWithMetadata(font,)).filter((font) => font !== void 0);
-  for (const font of fontFamily.fonts) {
-    const variant = fontToVariantWithMetadata(font,);
-    if (!variant) continue;
-    const relatedVariants = getRelatedFontVariants(variant, availableVariants,);
-    font.selectorVariable = relatedVariants.variantVariable?.selector;
-    font.selectorVariableItalic = relatedVariants.variantVariableItalic?.selector;
-    font.selectorBold = relatedVariants.variantBold?.selector;
-    font.selectorBoldItalic = relatedVariants.variantBoldItalic?.selector;
-    font.selectorItalic = relatedVariants.variantItalic?.selector;
-  }
-}
-function getAssetOwnerType(asset,) {
-  return asset.ownerTypes.includes('team',) ? 'team' : 'project';
-}
-function getOrCreateDebugVariant(debugByFamily, family, variant,) {
-  let variantsByName = debugByFamily.get(family,);
-  if (!variantsByName) {
-    variantsByName = /* @__PURE__ */ new Map();
-    debugByFamily.set(family, variantsByName,);
-  }
-  let debugVariant = variantsByName.get(variant,);
-  if (!debugVariant) {
-    debugVariant = {
-      fonts: [],
-    };
-    variantsByName.set(variant, debugVariant,);
-  }
-  return debugVariant;
-}
-function buildDebugFamilies(debugByFamily, selectedAssets,) {
-  return Array.from(debugByFamily.entries(),).sort(([familyA,], [familyB,],) => familyA.localeCompare(familyB,)).map((
-    [family, variantsByName,],
-  ) => ({
-    family,
-    variants: Array.from(variantsByName.entries(),).sort(([variantA,], [variantB,],) => variantA.localeCompare(variantB,)).map((
-      [, debugVariant,],
-    ) => ({
-      fonts: debugVariant.fonts.map((debugFont) => ({
-        ...debugFont,
-        selected: debugFont.font.assetKey && debugFont.font.owner
-          ? selectedAssets.has(`${debugFont.font.assetKey}:${debugFont.font.owner}`,)
-          : false,
-      })),
-    })),
-  }));
-}
-async function loadFontsWithOpenType(source,) {
-  switch (source) {
-    case 'google': {
-      const supportedFonts = await import('./framer-chunks/google-YSYBFRE6-L7YAHH7V.js');
-      return supportedFonts.default;
-    }
-    case 'fontshare': {
-      const supportedFonts = await import('./framer-chunks/fontshare-TIA7QUPT-PUDLUTQ7.js');
-      return supportedFonts.default;
-    }
-    default:
-      throw new Error(`Unknown font source: ${source}`,);
-  }
-}
-async function loadFontToOpenTypeFeatures(source,) {
-  switch (source) {
-    case 'google': {
-      const features = await import('./framer-chunks/google-H6SFY4F5-5JSJCGDR.js');
-      return features.default;
-    }
-    case 'fontshare': {
-      const features = await import('./framer-chunks/fontshare-PZLWRK4B-MHMZIGTX.js');
-      return features.default;
-    }
-    case 'framer': {
-      const features = await import('./framer-chunks/framer-font-RD2SUPQH-Q4MS7WS6.js');
-      return features.default;
-    }
-    default:
-      throw new Error(`Unknown font source: ${source}`,);
-  }
-}
-var knownFontshareCategories = ['display', 'sans', 'serif', 'slab', 'handwritten', 'script',];
-function parseFontshareCategories(categoriesField,) {
-  return categoriesField.split(',',).map((category) => category.trim().toLowerCase()).filter(isKnownFontshareCategory,);
-}
-function isKnownFontshareCategory(category,) {
-  return knownFontshareCategories.includes(category,);
-}
-var fontsharePrefix = 'FS;';
-var weightNameToNumber = {
-  thin: 100,
-  hairline: 100,
-  // Alternative name for "thin".
-  extralight: 200,
-  light: 300,
-  regular: 400,
-  medium: 500,
-  semibold: 600,
-  bold: 700,
-  extrabold: 800,
-  ultra: 800,
-  // Alternative name for "extrabold".
-  black: 900,
-  heavy: 900,
-  // Alternative name for "black".
-};
-var weightNames = /* @__PURE__ */ Object.keys(weightNameToNumber,);
-var allowedVariantsRegex = /* @__PURE__ */ (() => new RegExp(`^(?:${[...weightNames, 'italic', 'variable',].join('|',)})`, 'u',))();
-var FontshareSource = class _FontshareSource {
-  name = 'fontshare';
-  fontFamilies = [];
-  byFamilyName = /* @__PURE__ */ new Map();
-  getFontFamilyByName(family,) {
-    return this.byFamilyName.get(family,) ?? null;
-  }
-  /**
-   * Parses variant a string into a weight number and style, defaulting to a
-   * weight of `400` and/or a style of `"normal"` depending on what isn't
-   * present in the variant string.
-   *
-   * E.g:
-   *   - `"Bold"` becomes `{ weight: 700, style: "normal" }`
-   *   - `"Bold Italic"` becomes `{ weight: 700, style: "italic" }`
-   *   - `"Italic"` becomes `{ weight: 400, style: "italic" }`
-   *   - `"Variable Italic"` becomes `{ weight: 400, style: "italic" }`
-   */
-  static parseVariant(variant,) {
-    const variantSplit = variant.toLowerCase().split(' ',);
-    const weightName = weightNames.find((weightName2) => {
-      return variantSplit.includes(weightName2,);
-    },);
-    const styleName = variant.toLowerCase().includes('italic',) ? 'italic' : 'normal';
-    const weight = weightName && weightNameToNumber[weightName] || 400;
-    const style2 = styleName === 'italic' ? styleName : 'normal';
-    return {
-      weight,
-      style: style2,
-    };
-  }
-  parseSelector(selector,) {
-    if (!selector.startsWith(fontsharePrefix,)) return null;
-    const tokens = selector.split('-',);
-    if (tokens.length !== 2) return null;
-    const [family, variant,] = tokens;
-    if (!family || !variant) return null;
-    return {
-      name: family.replace(fontsharePrefix, '',),
-      variant,
-      source: this.name,
-      isVariable: variant.toLowerCase().includes('variable',),
-    };
-  }
-  static createSelector(family, variant,) {
-    return `${fontsharePrefix}${family}-${variant.toLowerCase()}`;
-  }
-  /**
-   * We are using this selector to get Open Type features and variable fonts variation axes.
-   * CAUTION: This method has to be exactly the same as the one in font-metadata-extractor tool.
-   * https://github.com/framer/FramerStudio/blob/master/tools/font-metadata-extractor/src/utils/fontShare.ts
-   */
-  static createMetadataSelector(family,) {
-    return `${fontsharePrefix}${family}`;
-  }
-  addFontFamily(fontFamily,) {
-    this.fontFamilies.push(fontFamily,);
-    this.byFamilyName.set(fontFamily.name, fontFamily,);
-  }
-  async importFonts(fontshareFonts, variationAxesData,) {
-    this.fontFamilies.length = 0;
-    this.byFamilyName.clear();
-    const fontsWithOpenType = await loadFontsWithOpenType('fontshare',/* Fontshare */
-    );
-    const fonts = [];
-    for (const fontshareFont of fontshareFonts) {
-      const fontStyles = fontshareFont.font_styles.filter((fontStyle) => {
-        const variant = fontStyle.name.toLowerCase();
-        const allowedVariantMatch = allowedVariantsRegex.exec(variant,);
-        if (!allowedVariantMatch || variant.split(' ',).includes('wide',)) {
-          return false;
-        }
-        return true;
-      },);
-      const fontVariants = fontStyles.map((fontStyle) => {
-        const variantInfo = _FontshareSource.parseVariant(fontStyle.name,);
-        return {
-          ...variantInfo,
-          selector: _FontshareSource.createSelector(fontshareFont.name, fontStyle.name,),
-          isVariable: fontStyle.is_variable,
-          fontshareVariantName: fontStyle.name,
-          file: fontStyle.file,
-        };
-      },);
-      const key7 = _FontshareSource.createMetadataSelector(fontshareFont.name,);
-      const variationAxes = variationAxesData?.[key7];
-      const familyName = fontshareFont.name;
-      let fontFamily = this.getFontFamilyByName(familyName,);
-      if (!fontFamily) {
-        fontFamily = {
-          name: familyName,
-          fonts: [],
-          source: this.name,
-        };
-        this.addFontFamily(fontFamily,);
-      }
-      const fontMetadataSelector = _FontshareSource.createMetadataSelector(fontshareFont.name,);
-      const hasOpenTypeFeatures = fontsWithOpenType[fontMetadataSelector];
-      for (const fontVariant of fontVariants) {
-        const {
-          variantBold,
-          variantBoldItalic,
-          variantItalic,
-          variantVariable,
-          variantVariableItalic,
-        } = getRelatedFontVariants(fontVariant, fontVariants,);
-        const font = {
-          family: fontFamily,
-          variant: fontVariant.fontshareVariantName.toLowerCase(),
-          selector: fontVariant.selector,
-          selectorBold: variantBold?.selector,
-          selectorBoldItalic: variantBoldItalic?.selector,
-          selectorItalic: variantItalic?.selector,
-          selectorVariable: variantVariable?.selector,
-          selectorVariableItalic: variantVariableItalic?.selector,
-          weight: fontVariant.weight,
-          style: fontVariant.style,
-          file: fontVariant.file,
-          category: mapToKnownCategory(fontshareFont.category,),
-          hasOpenTypeFeatures,
-          variationAxes: fontVariant.isVariable ? variationAxes : void 0,
-          cssFamilyName: createCSSFamilyName(fontFamily.name, fontVariant.isVariable,),
-        };
-        fontFamily.fonts.push(font,);
-        fonts.push(font,);
-      }
-    }
-    return fonts;
-  }
-  async getOpenTypeFeatures(font,) {
-    const fontToOpenTypeFeatures = await loadFontToOpenTypeFeatures('fontshare',/* Fontshare */
-    );
-    const metadataSelector = _FontshareSource.createMetadataSelector(font.family.name,);
-    return fontToOpenTypeFeatures[metadataSelector];
-  }
-};
-function mapToKnownCategory(categoryString,) {
-  const categoryMapping = {
-    serif: 'serif',
-    sans: 'sans-serif',
-    slab: 'slab',
-    display: 'display',
-    // As of Nov 2023, these two look similar enough – so we can map them into the same category.
-    handwritten: 'handwriting',
-    script: 'handwriting',
-  };
-  const category = parseFontshareCategories(categoryString,)[0];
-  return category && categoryMapping[category];
-}
-var framerInterFontPrefix = 'Inter';
-var framerFontPrefix = 'FR;';
-var weightNameToNumber2 = {
-  Thin: 100,
-  ExtraLight: 200,
-  Light: 300,
-  '': 400,
-  // Regular weights have a selector like "Inter" or "Inter-Italic", with no mention of weight.
-  Medium: 500,
-  SemiBold: 600,
-  Bold: 700,
-  ExtraBold: 800,
-  Black: 900,
-};
-var FramerFontSource = class _FramerFontSource {
-  name = 'framer';
-  fontFamilies = [];
-  byFamilyName = /* @__PURE__ */ new Map();
-  getFontFamilyByName(family,) {
-    return this.byFamilyName.get(family,) ?? null;
-  }
-  addFontFamily(familyName,) {
-    const fontFamily = {
-      name: familyName,
-      fonts: [],
-      source: this.name,
-    };
-    this.fontFamilies.push(fontFamily,);
-    this.byFamilyName.set(fontFamily.name, fontFamily,);
-    return fontFamily;
-  }
-  static getDraftFontPropertiesBySelector(selector,) {
-    if (!selector.startsWith(framerFontPrefix,) && !selector.startsWith(framerInterFontPrefix,)) return null;
-    const tokens = selector.split('-',);
-    const [family, weightAndStyleInfo = '',] = tokens;
-    if (!family) return null;
-    const style2 = weightAndStyleInfo.includes('Italic',) ? 'italic' : 'normal';
-    const weightName = weightAndStyleInfo.replace('Italic', '',);
-    const weight = weightName && weightNameToNumber2[weightName] || 400;
-    return {
-      cssFamilyName: family,
-      style: style2,
-      weight,
-      source: 'framer',
-      variant: void 0,
-      category: 'sans-serif',
-    };
-  }
-  static createMetadataSelector(family,) {
-    return `${framerFontPrefix}${family}`;
-  }
-  importFonts(framerFonts, variationAxesData,) {
-    this.fontFamilies.length = 0;
-    this.byFamilyName.clear();
-    const fonts = [];
-    framerFonts.forEach((framerFont) => {
-      const {
-        uiFamilyName: familyName,
-        ...rest
-      } = framerFont;
-      const key7 = _FramerFontSource.createMetadataSelector(framerFont.uiFamilyName,);
-      const variationAxes = variationAxesData?.[key7];
-      let fontFamily = this.getFontFamilyByName(familyName,);
-      if (!fontFamily) {
-        fontFamily = this.addFontFamily(familyName,);
-      }
-      const isVariable = framerFont.selector === framerFont.selectorVariable || framerFont.selector === framerFont.selectorVariableItalic;
-      const font = {
-        ...rest,
-        family: fontFamily,
-        variationAxes: isVariable ? variationAxes : void 0,
-      };
-      fontFamily.fonts.push(font,);
-      fonts.push(font,);
-    },);
-    return fonts;
-  }
-  async getOpenTypeFeatures(font,) {
-    const fontToOpenTypeFeatures = await loadFontToOpenTypeFeatures('framer',/* Framer */
-    );
-    const metadataSelector = _FramerFontSource.createMetadataSelector(font.family.name,);
-    return fontToOpenTypeFeatures[metadataSelector];
-  }
-};
-var googleFontSelectorPrefix = 'GF;';
-var GoogleFontSource = class _GoogleFontSource {
-  name = 'google';
-  fontFamilies = [];
-  byFamilyName = /* @__PURE__ */ new Map();
-  supportedSubsetsByFamilyName = /* @__PURE__ */ new Map();
-  getFontFamilyByName(family,) {
-    return this.byFamilyName.get(family,) ?? null;
-  }
-  /** Returns Google Fonts subsets that a given font family includes. The return value looks like ["latin", "latin-ext", "japanese"] or similar. */
-  getSupportedSubsetsByFamilyName(family,) {
-    return this.supportedSubsetsByFamilyName.get(family,) ?? [];
-  }
-  static parseVariant(variant,) {
-    if (variant === 'regular') {
-      return {
-        style: 'normal',
-        weight: 400,
-      };
-    }
-    const match = /(\d*)(normal|italic)?/u.exec(variant,);
-    if (!match) return {};
-    const weight = parseInt(match[1] || '400',);
-    const style2 = match[2] === 'italic' ? 'italic' : 'normal';
-    return {
-      weight,
-      style: style2,
-    };
-  }
-  parseSelector(selector,) {
-    if (!selector.startsWith(googleFontSelectorPrefix,)) return null;
-    const isVariable = selector.includes('-variable-',);
-    const tokens = isVariable ? selector.split('-variable-',) : selector.split('-',);
-    if (tokens.length !== 2) return null;
-    const [family, variant,] = tokens;
-    if (!family || !variant) return null;
-    return {
-      name: family.replace(googleFontSelectorPrefix, '',),
-      variant,
-      source: this.name,
-      isVariable,
-    };
-  }
-  static createSelector(family, variant, isVariableFont2,) {
-    return `${googleFontSelectorPrefix}${family}-${isVariableFont2 ? 'variable-' : ''}${variant}`;
-  }
-  /**
-   * We are using this selector to get Open Type features and variable fonts variation axes.
-   * CAUTION: This method has to be exactly the same as the one in font-metadata-extractor tool.
-   * https://github.com/framer/FramerStudio/blob/master/tools/font-metadata-extractor/src/utils/googleFonts.ts
-   */
-  static createMetadataSelector(family,) {
-    return `${googleFontSelectorPrefix}${family}`;
-  }
-  addFontFamily(family,) {
-    const fontFamily = {
-      name: family,
-      fonts: [],
-      source: this.name,
-    };
-    this.fontFamilies.push(fontFamily,);
-    this.byFamilyName.set(fontFamily.name, fontFamily,);
-    return fontFamily;
-  }
-  async importFonts(webFonts, webFontsWithAxes, fontsToVariationAxes,) {
-    this.fontFamilies.length = 0;
-    this.byFamilyName.clear();
-    this.supportedSubsetsByFamilyName.clear();
-    const fontsWithOpenType = await loadFontsWithOpenType('google',/* Google */
-    );
-    const fonts = [];
-    const webFontsMap = mapBy(webFonts, (webFont) => webFont.family,);
-    const webFontsWithAxesMap = mapBy(webFontsWithAxes, (webFont) => webFont.family,);
-    for (const webFontName in webFontsMap) {
-      const webFont = webFontsMap[webFontName];
-      if (!webFont) continue;
-      this.supportedSubsetsByFamilyName.set(webFont.family, webFont.subsets ?? [],);
-      let fontFamily = this.getFontFamilyByName(webFont.family,);
-      if (!fontFamily) {
-        fontFamily = this.addFontFamily(webFont.family,);
-      }
-      const rawStaticVariants = webFont.variants;
-      const staticVariants = rawStaticVariants.map((variantName) => {
-        const parsedVariant = _GoogleFontSource.parseVariant(variantName,);
-        return {
-          ...parsedVariant,
-          googleFontsVariantName: variantName,
-          selector: _GoogleFontSource.createSelector(webFontName, variantName, false,),
-          isVariable: false,
-          file: webFont.files[variantName],
-        };
-      },);
-      const variableFont = webFontsWithAxesMap[webFontName];
-      const variableVariants = variableFont?.axes
-        ? variableFont.variants.map((variantName) => {
-          const parsedVariant = _GoogleFontSource.parseVariant(variantName,);
-          return {
-            ...parsedVariant,
-            googleFontsVariantName: variantName,
-            selector: _GoogleFontSource.createSelector(webFontName, variantName, true,),
-            isVariable: true,
-            file: variableFont.files[variantName],
-          };
-        },)
-        : [];
-      const key7 = _GoogleFontSource.createMetadataSelector(webFont.family,);
-      const variationAxes = fontsToVariationAxes?.[key7];
-      const allVariants = [...staticVariants, ...variableVariants,];
-      const allSuccessfullyParsedVariants = allVariants.filter(isSuccessfullyParsedFontVariant,);
-      const fontMetadataSelector = _GoogleFontSource.createMetadataSelector(webFontName,);
-      const hasOpenTypeFeatures = fontsWithOpenType[fontMetadataSelector];
-      for (const variant of allVariants) {
-        const {
-          weight,
-          style: style2,
-          selector,
-          googleFontsVariantName,
-        } = variant;
-        const linkedVariants = isSuccessfullyParsedFontVariant(variant,)
-          ? getRelatedFontVariants(variant, allSuccessfullyParsedVariants,)
-          : void 0;
-        const {
-          variantBold,
-          variantItalic,
-          variantBoldItalic,
-          variantVariable,
-          variantVariableItalic,
-        } = linkedVariants ?? {};
-        const font = {
-          family: fontFamily,
-          variant: googleFontsVariantName,
-          selector,
-          selectorBold: variantBold?.selector,
-          selectorBoldItalic: variantBoldItalic?.selector,
-          selectorItalic: variantItalic?.selector,
-          selectorVariable: variantVariable?.selector,
-          selectorVariableItalic: variantVariableItalic?.selector,
-          weight,
-          style: style2,
-          category: mapToKnownCategory2(webFont.category,),
-          file: variant.file?.replace('http://', 'https://',),
-          variationAxes: variant.isVariable ? variationAxes : void 0,
-          hasOpenTypeFeatures,
-          cssFamilyName: createCSSFamilyName(fontFamily.name, variant.isVariable,),
-        };
-        fontFamily.fonts.push(font,);
-        fonts.push(font,);
-      }
-    }
-    return fonts;
-  }
-  async getOpenTypeFeatures(font,) {
-    const fontToOpenTypeFeatures = await loadFontToOpenTypeFeatures('google',/* Google */
-    );
-    const metadataSelector = _GoogleFontSource.createMetadataSelector(font.family.name,);
-    return fontToOpenTypeFeatures[metadataSelector];
-  }
-};
-function mapToKnownCategory2(category,) {
-  const categoryMapping = {
-    serif: 'serif',
-    'sans-serif': 'sans-serif',
-    display: 'display',
-    handwriting: 'handwriting',
-    monospace: 'monospace',
-  };
-  if (!category) return void 0;
-  return categoryMapping[category];
-}
-function mapBy(array, keyFn,) {
-  return array.reduce((acc, item,) => {
-    acc[keyFn(item,)] = item;
-    return acc;
-  }, {},);
-}
 var import_fontfaceobserver = __toESM(require_fontfaceobserver_standalone(), 1,);
 var FONT_LOADING_TIMEOUT = 5e3;
 var MAX_RETRIES = 3;
@@ -59094,17 +57387,27 @@ var FontLoadingError = class extends Error {
     this.name = 'FontLoadingError';
   }
 };
-var fontRequests = /* @__PURE__ */ new Map();
-var fontReadyPromises = /* @__PURE__ */ new Map();
-var loadedFontFaces = /* @__PURE__ */ new Map();
+var fontFacesByDocument = /* @__PURE__ */ new WeakMap();
+function getDocumentFontFaces(targetDocument,) {
+  let documentFontFaces = fontFacesByDocument.get(targetDocument,);
+  if (!documentFontFaces) {
+    documentFontFaces = {
+      requests: /* @__PURE__ */ new Map(),
+      fontFaces: /* @__PURE__ */ new Map(),
+      ready: /* @__PURE__ */ new Map(),
+    };
+    fontFacesByDocument.set(targetDocument, documentFontFaces,);
+  }
+  return documentFontFaces;
+}
 function getRequestId(family, style2, weight, url,) {
   return `${family}-${style2}-${weight}-${url}`;
 }
 function getReadyPromiseId(family, style2, weight,) {
   return `${family}-${style2}-${weight}`;
 }
-var loadFont = (data2, doc,) => loadFontWithRetries(data2, doc,);
-async function loadFontWithRetries(data2, doc, attempt = 0,) {
+var loadFont = (data2, targetDocument,) => loadFontWithRetries(data2, targetDocument, 0,);
+async function loadFontWithRetries(data2, targetDocument, attempt,) {
   const {
     family,
     url,
@@ -59114,26 +57417,25 @@ async function loadFontWithRetries(data2, doc, attempt = 0,) {
   const weight = data2.weight;
   const style2 = data2.style || 'normal';
   const requestId = getRequestId(family, style2, weight, url,);
-  if (!fontRequests.has(requestId,) || attempt > 0) {
+  const documentFontFaces = getDocumentFontFaces(targetDocument,);
+  let request = documentFontFaces.requests.get(requestId,);
+  if (!request || attempt > 0) {
     const fontFace = new FontFace(family, `url(${url})`, {
       weight: isString(weight,) ? weight : weight?.toString(),
       style: style2,
       stretch,
       unicodeRange,
     },);
-    const readyPromise = fontFace.load().then(() => {
-      doc.fonts.add(fontFace,);
-      loadedFontFaces.set(requestId, {
-        fontFace,
-        doc,
-      },);
-      return isFontReady(family, style2, weight,);
+    request = fontFace.load().then(() => {
+      targetDocument.fonts.add(fontFace,);
+      documentFontFaces.fontFaces.set(requestId, fontFace,);
+      return isFontReady(family, style2, weight, targetDocument,);
     },).catch((e) => {
       if (e.name !== 'NetworkError') {
         throw e;
       }
       if (attempt < MAX_RETRIES) {
-        return loadFontWithRetries(data2, doc, attempt + 1,);
+        return loadFontWithRetries(data2, targetDocument, attempt + 1,);
       }
       throw new FontLoadingError(`Font loading failed after ${attempt} retries due to network error: ${
         JSON.stringify({
@@ -59146,22 +57448,31 @@ async function loadFontWithRetries(data2, doc, attempt = 0,) {
         },)
       }`,);
     },);
-    fontRequests.set(requestId, readyPromise,);
-  }
-  await fontRequests.get(requestId,);
-}
-async function isFontReady(family, style2, weight,) {
-  const readyPromiseId = getReadyPromiseId(family, style2, weight,);
-  if (!fontReadyPromises.has(readyPromiseId,)) {
-    const observer2 = new import_fontfaceobserver.default(family, {
-      style: style2,
-      weight,
+    documentFontFaces.requests.set(requestId, request,);
+    const thisRequest = request;
+    void thisRequest.catch(() => {
+      if (documentFontFaces.requests.get(requestId,) === thisRequest) {
+        documentFontFaces.requests.delete(requestId,);
+      }
     },);
-    const readyPromise = observer2.load(null, FONT_LOADING_TIMEOUT,);
-    fontReadyPromises.set(readyPromiseId, readyPromise,);
+  }
+  await request;
+}
+async function isFontReady(family, style2, weight, targetDocument = document,) {
+  const readyPromises = getDocumentFontFaces(targetDocument,).ready;
+  const readyPromiseId = getReadyPromiseId(family, style2, weight,);
+  let readyPromise = readyPromises.get(readyPromiseId,);
+  if (!readyPromise) {
+    readyPromise = targetDocument === document
+      ? new import_fontfaceobserver.default(family, {
+        style: style2,
+        weight,
+      },).load(null, FONT_LOADING_TIMEOUT,)
+      : targetDocument.fonts.ready.then(() => void 0);
+    readyPromises.set(readyPromiseId, readyPromise,);
   }
   try {
-    await fontReadyPromises.get(readyPromiseId,);
+    await readyPromise;
   } catch (e) {
     throw new FontLoadingError(`Failed to check if font is ready (${FONT_LOADING_TIMEOUT}ms timeout exceeded): ${
       JSON.stringify({
@@ -59172,471 +57483,6 @@ async function isFontReady(family, style2, weight,) {
     }`,);
   }
 }
-function removeFont(data2,) {
-  const style2 = data2.style || 'normal';
-  const {
-    family,
-    url,
-    weight,
-  } = data2;
-  const requestId = getRequestId(family, style2, weight, url,);
-  const loaded = loadedFontFaces.get(requestId,);
-  if (loaded) {
-    loaded.doc.fonts.delete(loaded.fontFace,);
-    loadedFontFaces.delete(requestId,);
-  }
-  fontRequests.delete(requestId,);
-  fontReadyPromises.delete(getReadyPromiseId(family, style2, weight,),);
-}
-var framer_default = {
-  'FR;Inter': [{
-    tag: 'opsz',
-    minValue: 14,
-    maxValue: 32,
-    defaultValue: 14,
-    name: 'Optical size',
-  }, {
-    tag: 'wght',
-    minValue: 100,
-    maxValue: 900,
-    defaultValue: 400,
-    name: 'Weight',
-  },],
-};
-function loadVariationAxes(source,) {
-  try {
-    if (source === 'framer') {
-      if (!isValidVariationAxesData(framer_default,)) return void 0;
-      return framer_default;
-    } else {
-      const axes = (async () => {
-        switch (source) {
-          case 'google': {
-            return (await import('./framer-chunks/google-EGNT223R-P4DUHBW2.js')).default;
-          }
-          case 'fontshare': {
-            return (await import('./framer-chunks/fontshare-SXU5BGFE-OWTMMPGS.js')).default;
-          }
-          default:
-            assertNever(source,);
-        }
-      })();
-      if (!isValidVariationAxesData(axes,)) return void 0;
-      return axes;
-    }
-  } catch (error) {
-    console.error(error,);
-    return void 0;
-  }
-}
-function isValidVariationAxesData(data2,) {
-  return isObject2(data2,) && Object.values(data2,).every(isValidVariationAxes,);
-}
-function isVariationAxis2(data2,) {
-  return isObject2(data2,) && isString(data2.tag,);
-}
-function isValidVariationAxes(data2,) {
-  return Array.isArray(data2,) && data2.every(isVariationAxis2,);
-}
-var FontStore = class {
-  /**
-   * Enabling the `FontStore` will make Text components automatically load
-   * their fonts on render. Otherwise font loading is the responsibility of
-   * the environment.
-   */
-  enabled = false;
-  bySelector = new MapWithHash();
-  loadedSelectors = /* @__PURE__ */ new Set();
-  getGoogleFontsListPromise;
-  getFontshareFontsListPromise;
-  getBuiltInFontsListPromise;
-  customFontsImportPromise = new Promise((resolve) => {
-    this.resolveCustomFontsImportPromise = resolve;
-  },);
-  constructor() {
-    this.local = new LocalFontSource();
-    this.google = new GoogleFontSource();
-    this.fontshare = new FontshareSource();
-    this.framer = new FramerFontSource();
-    this.custom = new CustomFontSource();
-    this.builtIn = new BuiltInFontSource();
-    this.importLocalFonts();
-  }
-  local;
-  google;
-  fontshare;
-  builtIn;
-  framer;
-  custom;
-  get hash() {
-    return this.bySelector.hash;
-  }
-  addFont(font,) {
-    this.bySelector.set(font.selector, font,);
-    if (font.alternativeSelectors) {
-      for (const altSelector of Object.keys(font.alternativeSelectors,)) {
-        this.bySelector.set(altSelector, font,);
-      }
-    }
-  }
-  bySelectorValuesCache;
-  getAvailableFonts() {
-    if (!this.bySelectorValuesCache || this.bySelectorValuesCache.hash !== this.bySelector.hash) {
-      const uniqueFonts = /* @__PURE__ */ new Map();
-      for (const font of this.bySelector.values()) {
-        uniqueFonts.set(font, true,);
-      }
-      this.bySelectorValuesCache = {
-        result: Array.from(uniqueFonts.keys(),),
-        hash: this.bySelector.hash,
-      };
-    }
-    return this.bySelectorValuesCache.result;
-  }
-  importLocalFonts() {
-    for (const font of this.local.importFonts()) {
-      this.addFont(font,);
-      void this.loadFont(font.selector,);
-    }
-  }
-  async importGoogleFonts() {
-    if (!this.getGoogleFontsListPromise) {
-      this.getGoogleFontsListPromise = Promise.resolve().then(async () => {
-        const {
-          staticFonts,
-          variableFonts,
-        } = await runtime.fetchGoogleFontsList();
-        const axesData = await loadVariationAxes('google',/* Google */
-        );
-        for (const font of await this.google.importFonts(staticFonts, variableFonts, axesData,)) {
-          this.addFont(font,);
-        }
-        return {
-          staticFonts,
-          variableFonts,
-        };
-      },);
-    }
-    return this.getGoogleFontsListPromise;
-  }
-  async importFontshareFonts() {
-    if (!this.getFontshareFontsListPromise) {
-      this.getFontshareFontsListPromise = runtime.fetchFontshareFontsList();
-      const fontshareFonts = await this.getFontshareFontsListPromise;
-      const axesData = await loadVariationAxes('fontshare',/* Fontshare */
-      );
-      for (const font of await this.fontshare.importFonts(fontshareFonts, axesData,)) {
-        this.addFont(font,);
-      }
-    }
-    return this.getFontshareFontsListPromise;
-  }
-  /** Ensure Google, Fontshare, and BuiltIn font sources are all populated. Idempotent. */
-  async importAllWebFonts() {
-    await Promise.all([this.importGoogleFonts(), this.importFontshareFonts(), this.importBuiltInFonts(),],);
-  }
-  async importBuiltInFonts() {
-    if (!this.getBuiltInFontsListPromise) {
-      this.getBuiltInFontsListPromise = runtime.fetchBuiltInFontsList();
-      const builtInFonts = await this.getBuiltInFontsListPromise;
-      for (const font of await this.builtIn.importFonts(builtInFonts,)) {
-        this.addFont(font,);
-      }
-    }
-    return this.getBuiltInFontsListPromise;
-  }
-  importFramerFonts(fonts,) {
-    const axesData = loadVariationAxes('framer',/* Framer */
-    );
-    this.framer.importFonts(fonts, axesData,).forEach((font) => {
-      this.addFont(font,);
-    },);
-  }
-  importCustomFonts(assets,) {
-    const previouslyLoadedFonts = /* @__PURE__ */ new Map();
-    for (const selector of this.loadedSelectors) {
-      if (!isCustomFontSelector(selector,)) continue;
-      const font = this.getFontBySelector(selector,);
-      if (font) previouslyLoadedFonts.set(selector, font,);
-    }
-    this.bySelector.forEach((_, key7,) => {
-      if (isCustomFontSelector(key7,)) {
-        this.bySelector.delete(key7,);
-      }
-    },);
-    const importedFonts = this.custom.importFonts(assets,);
-    for (const font of importedFonts) {
-      this.addFont(font,);
-    }
-    for (const [selector, previousFont,] of previouslyLoadedFonts) {
-      const currentFont = this.getFontBySelector(selector,);
-      if (currentFont && currentFont.file === previousFont.file) continue;
-      this.loadedSelectors.delete(selector,);
-      if (previousFont.file) {
-        removeFont({
-          family: previousFont.cssFamilyName,
-          url: previousFont.file,
-          weight: previousFont.weight,
-          style: previousFont.style,
-        },);
-      }
-    }
-    this.resolveCustomFontsImportPromise();
-  }
-  /**
-   * Returns a promise that resolves when custom fonts have been imported
-   * @internal
-   */
-  getCustomFontsImportPromise() {
-    return this.customFontsImportPromise;
-  }
-  getCustomFontDebugFamilies() {
-    return this.custom.getDebugFamilies();
-  }
-  getFontFamily(info,) {
-    const fontFamily = this[info.source].getFontFamilyByName(info.name,);
-    return fontFamily;
-  }
-  getFontBySelector(selector,) {
-    if (!selector) return void 0;
-    let font;
-    font = this.bySelector.get(selector,);
-    if (!font) return void 0;
-    if (font.alternativeSelectors && selector in font.alternativeSelectors) {
-      return {
-        ...font,
-        ...font.alternativeSelectors[selector],
-      };
-    }
-    return font;
-  }
-  // Function called by draft to get font properties for a selector, before the (google) font is available in the store
-  // It replaces a previous function that created Font instances and added them to the store
-  // on the fly while rendering drafts, which caused issues (overriding real google font info with fake instances with partial data).
-  // Ideally this should not happen, but that's a fix for another day
-  getDraftPropertiesBySelector(selector,) {
-    const font = this.getFontBySelector(selector,);
-    if (font) {
-      return {
-        style: font.style,
-        weight: font.weight,
-        variant: font.variant,
-        cssFamilyName: font.cssFamilyName,
-        source: font.family.source,
-        category: font.category,
-      };
-    }
-    const googleLocator = this.google.parseSelector(selector,);
-    if (googleLocator) {
-      const fontVariant = GoogleFontSource.parseVariant(googleLocator.variant,);
-      if (isSuccessfullyParsedFontVariant(fontVariant,)) {
-        return {
-          style: fontVariant.style,
-          weight: fontVariant.weight,
-          variant: googleLocator.variant,
-          cssFamilyName: createCSSFontFamilyFromWebFontLocator(googleLocator, 'google',/* Google */
-          ),
-          source: 'google',
-          category: void 0,
-        };
-      }
-    }
-    const fontshareLocator = this.fontshare.parseSelector(selector,);
-    if (fontshareLocator) {
-      const fontVariant = FontshareSource.parseVariant(fontshareLocator.variant,);
-      if (isSuccessfullyParsedFontVariant(fontVariant,)) {
-        return {
-          style: fontVariant.style,
-          weight: fontVariant.weight,
-          variant: fontshareLocator.variant,
-          cssFamilyName: createCSSFontFamilyFromWebFontLocator(fontshareLocator, 'fontshare',/* Fontshare */
-          ),
-          source: 'fontshare',
-          category: void 0,
-        };
-      }
-    }
-    const builtInFontLocator = this.builtIn.parseSelector(selector,);
-    if (builtInFontLocator) {
-      const fontVariant = BuiltInFontSource.parseVariant(builtInFontLocator.variant,);
-      if (isSuccessfullyParsedFontVariant(fontVariant,)) {
-        return {
-          style: fontVariant.style,
-          weight: fontVariant.weight,
-          variant: builtInFontLocator.variant,
-          cssFamilyName: createCSSFontFamilyFromWebFontLocator(builtInFontLocator, 'builtIn',/* BuiltIn */
-          ),
-          source: 'builtIn',
-          category: void 0,
-        };
-      }
-    }
-    const framerFontDraftProperties = FramerFontSource.getDraftFontPropertiesBySelector(selector,);
-    if (framerFontDraftProperties) {
-      return framerFontDraftProperties;
-    }
-    return null;
-  }
-  isSelectorLoaded(selector,) {
-    return this.loadedSelectors.has(selector,);
-  }
-  /**
-   * Load a single font
-   */
-  async loadFont(selector,) {
-    const font = this.getFontBySelector(selector,);
-    if (!font) {
-      return 2;
-    }
-    if (this.loadedSelectors.has(selector,)) {
-      return 0;
-    }
-    const family = font.cssFamilyName;
-    const source = font.family.source;
-    const fontIsVariable = isVariableFont(font,);
-    switch (source) {
-      case 'local':
-        this.loadedSelectors.add(selector,);
-        return 1;
-      case 'framer':
-        if (!isTest()) {
-          await isFontReady(font.family.name, font.style, font.weight,);
-        }
-        if (fontIsVariable) {
-          if (!font.file) {
-            return Promise.reject(`Unable to load font: ${selector}`,);
-          }
-          await loadFont({
-            family,
-            url: font.file,
-            weight: font.weight,
-            style: font.style,
-          }, document,);
-        }
-        this.loadedSelectors.add(selector,);
-        return 1;
-      case 'google':
-      case 'fontshare':
-      case 'builtIn':
-      case 'custom': {
-        if (!font.file) {
-          return Promise.reject(`Unable to load font: ${selector}`,);
-        }
-        const requestedFile = font.file;
-        await loadFont({
-          family,
-          url: requestedFile,
-          weight: font.weight,
-          style: font.style,
-        }, document,);
-        const currentFont = this.getFontBySelector(selector,);
-        if (!currentFont || currentFont.file !== requestedFile) {
-          removeFont({
-            family,
-            url: requestedFile,
-            weight: font.weight,
-            style: font.style,
-          },);
-          return 2;
-        }
-        this.loadedSelectors.add(selector,);
-        return 1;
-      }
-      default:
-        assertNever(source,);
-    }
-  }
-  async loadFontsFromSelectors(selectors,) {
-    if (!this.enabled) return [];
-    const importPromises = [];
-    const shouldImportFontshareFonts = selectors.some((selector) => selector.startsWith(fontsharePrefix,));
-    if (shouldImportFontshareFonts) {
-      importPromises.push(
-        this.importFontshareFonts().catch((error) => {
-          warnOnce2('Failed to load Fontshare fonts:', error,);
-        },),
-      );
-    }
-    const shouldImportGoogleFonts = selectors.some((selector) => selector.startsWith(googleFontSelectorPrefix,));
-    if (shouldImportGoogleFonts) {
-      importPromises.push(
-        this.importGoogleFonts().catch((error) => {
-          warnOnce2('Failed to load Google fonts:', error,);
-        },),
-      );
-    }
-    const shouldImportBuiltInFonts = selectors.some((selector) => selector.startsWith(builtInFontSelectorPrefix,));
-    if (shouldImportBuiltInFonts) {
-      importPromises.push(
-        this.importBuiltInFonts().catch((error) => {
-          warnOnce2('Failed to load built-in fonts:', error,);
-        },),
-      );
-    }
-    const shouldImportCustomFonts = selectors.some(isCustomFontSelector,);
-    if (shouldImportCustomFonts) {
-      importPromises.push(this.customFontsImportPromise.catch((error) => {
-        warnOnce2('Failed to load custom fonts:', error,);
-      },),);
-    }
-    if (importPromises.length > 0) {
-      await Promise.all(importPromises,);
-    }
-    const loadingPromises = [];
-    for (const selector of selectors) {
-      loadingPromises.push(this.loadFont(selector,),);
-    }
-    return Promise.allSettled(loadingPromises,);
-  }
-  async loadFonts(fontSelectors,) {
-    const results = await this.loadFontsFromSelectors(fontSelectors,);
-    const newlyLoadedFontCount = results.filter((result) => result.status === 'fulfilled' && result.value === 1/* Loaded */
-    ).length;
-    return {
-      newlyLoadedFontCount,
-    };
-  }
-  // Deprecated methods that are kept for backwards compatibility with any compiled code that might still be using them
-  /**
-   * @deprecated This method’s API is confusing as 1) it works for all fonts,
-   * not just missing ones, 2) it supports both async/await and a callback,
-   * but the callback is called only if *all* fonts have been loaded. Use
-   * `loadFonts` instead.
-   */
-  async loadMissingFonts(fontSelectors, fontsLoadedCallback,) {
-    const selectors = fontSelectors.filter((selector) => {
-      return !fontStore.loadedSelectors.has(selector,);
-    },);
-    if (selectors.length === 0) return;
-    await fontStore.loadWebFontsFromSelectors(selectors,);
-    const isEachFontLoaded = selectors.every((selector) => {
-      return fontStore.loadedSelectors.has(selector,);
-    },);
-    if (isEachFontLoaded && fontsLoadedCallback) fontsLoadedCallback();
-  }
-  /**
-   * @deprecated This method is misleading as it works with all fonts, not
-   * just web fonts. Use `loadFonts` instead. (In Framer, “web fonts” has a
-   * specific meaning: it refers to Google/Fontshare fonts and exludes custom
-   * and local fonts. See e.g. `WebFontStore` and the “Web”/“Custom” toggle in
-   * the font picker in the UI. More context: https://github.com/framer/FramerStudio/pull/15778#discussion_r1395120760)
-   */
-  async loadWebFontsFromSelectors(selectors,) {
-    return this.loadFontsFromSelectors(selectors,);
-  }
-  // defaultFont doesn’t seem to be used anywhere in our code (except tests),
-  // but keeping it for backwards compatibility with any compiled code.
-  /** @deprecated This will be removed in the future. Don’t use it. */
-  get defaultFont() {
-    const defaultFont = this.getFontBySelector('Inter',);
-    assert(defaultFont, 'Can\u2019t find Inter font',);
-    return defaultFont;
-  }
-  testing = {
-    addFont: this.addFont.bind(this,),
-  };
-};
-var fontStore = /* @__PURE__ */ new FontStore();
 function CustomProperties({
   children,
   customProperties,
@@ -61447,7 +59293,7 @@ function useLoadFonts(fonts, fromCanvasComponent, containerRef,) {
   const prevFontsRef = useRef([],);
   if (!isShallowEqualArray(prevFontsRef.current, fonts,)) {
     prevFontsRef.current = fonts;
-    void fontStore.loadFonts(fonts,).then(({
+    void runtime.fontStore.loadFonts(fonts,).then(({
       newlyLoadedFontCount,
     },) => {
       if (!fromCanvasComponent || !containerRef.current || RenderTarget.current() !== RenderTarget.canvas) return;
@@ -63132,7 +60978,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
 })();
 var SVG2 = /* @__PURE__ */ withLibraryCSS(SVGInner,);
 function useFontLoadStatus(fontSelectors = [], timeout = 5e3,) {
-  const missingFontSelectors = fontSelectors.filter((s) => !fontStore.isSelectorLoaded(s,));
+  const missingFontSelectors = fontSelectors.filter((selector) => !runtime.fontStore.isSelectorLoaded(selector,));
   const [fontLoadStatus, setFontLoadStatus,] = React42.useState(missingFontSelectors.length ? 'loading' : 'done',);
   React42.useEffect(() => {
     if (!missingFontSelectors.length) return;
@@ -63140,7 +60986,7 @@ function useFontLoadStatus(fontSelectors = [], timeout = 5e3,) {
     const timer = setTimeout(() => {
       setFontLoadStatus('timeout',);
     }, timeout,);
-    fontStore.loadFonts(missingFontSelectors,).then(() => {
+    runtime.fontStore.loadFonts(missingFontSelectors,).then(() => {
       clearTimeout(timer,);
       setFontLoadStatus('done',);
     },);
@@ -63171,7 +61017,7 @@ var TextInner = /* @__PURE__ */ React42.forwardRef(function Text2(props, forward
   prevFontsRef.current = fonts;
   useEffect(() => {
     if (!fontsDidChange || !fonts) return;
-    void fontStore.loadFonts(fonts,).then(({
+    void runtime.fontStore.loadFonts(fonts,).then(({
       newlyLoadedFontCount,
     },) => {
       if (!__fromCanvasComponent || !layoutRef.current || RenderTarget.current() !== RenderTarget.canvas) return;
@@ -64544,6 +62390,7 @@ function throttle(fn, time2,) {
 function addActionControls(action, title, controls,) {
   runtime.addActionControls(action, title, controls,);
 }
+var FRAMER_VARIABLE_FONT_SUFFIX = 'Variable';
 function addFonts(component, fontsOrBundles, flags,) {
   const bundles = upgradeFontBundlesAsNeeded(fontsOrBundles,);
   if (
@@ -64938,7 +62785,7 @@ var package_default = {
     watch: 'yarn :jest --watch',
   },
   dependencies: {
-    devalue: '^5.8.1',
+    devalue: '^5.9.1',
     eventemitter3: '^5.0.1',
     fontfaceobserver: '2.2.0',
     'hoist-non-react-statics': '^3.3.2',
