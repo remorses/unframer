@@ -13508,7 +13508,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.NUK4ZAW7.mjs
+// /:https://app.framerstatic.com/framer.FORWRNQ7.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -40379,10 +40379,6 @@ var MAX_CONCURRENT_PRELOADS_FAST_NETWORK = Infinity;
 var nodeToRoute = /* @__PURE__ */ new WeakMap();
 var preloadedRoutes = /* @__PURE__ */ new Set();
 var routeToNodesInViewport = /* @__PURE__ */ new Map();
-function startNavigationCheckFromNode(node,) {
-  if (!(node instanceof HTMLAnchorElement) || !node.href) return;
-  startNavigationCheck(node.href,);
-}
 function getObserveRouteForPreloadingFn() {
   const connection = __unframerNavigator2.connection || __unframerNavigator2.mozConnection || __unframerNavigator2.webkitConnection || {};
   const lowDeviceMemory = __unframerNavigator2.deviceMemory && __unframerNavigator2.deviceMemory > LOW_MEMORY_THRESHOLD;
@@ -40402,7 +40398,7 @@ function getObserveRouteForPreloadingFn() {
   let activePreloadsAmount = 0;
   async function preloadTimeout(context, target,) {
     if (preloadDisabled) return;
-    startNavigationCheckFromNode(target,);
+    startNavigationCheck(context.navigationUrl,);
     const {
       id: id3,
       preload,
@@ -40452,11 +40448,12 @@ function getObserveRouteForPreloadingFn() {
       }
     }
   }
-  return (node, preload, id3,) => {
+  return (node, preload, id3, navigationUrl,) => {
     if (preloadedRoutes.has(id3,)) return;
     nodeToRoute.set(node, {
       id: id3,
       preload,
+      navigationUrl,
     },);
     observer2.observe(node,);
     return () => {
@@ -40659,7 +40656,7 @@ function createNavigate(href, navigationUrl, navigateOnClient,) {
       navigateOnClient(beforeUrlUpdate,);
       return;
     }
-    void performServerNavigation(href, beforeUrlUpdate, resolution.redirectUrl,);
+    void performServerNavigation(navigationUrl ?? href, beforeUrlUpdate, resolution.redirectUrl,);
   };
 }
 async function resolveNavigation(navigationUrl,) {
@@ -40695,9 +40692,18 @@ function getServerNavigationUrl(href, redirectUrl,) {
     return redirectUrl;
   }
 }
-function getNavigationUrl(href, isBlankTarget,) {
+function getLinkBaseUrl(siteCanonicalURL,) {
+  const sitePrefix = getSitePrefix(siteCanonicalURL,);
+  if (sitePrefix && __unframerWindow2.location.pathname === sitePrefix) {
+    const url = new URL(__unframerWindow2.location.href,);
+    url.pathname = `${sitePrefix}/`;
+    return url.href;
+  }
+  return __unframerWindow2.location.href;
+}
+function getNavigationUrl(href, isBlankTarget, siteCanonicalURL,) {
   if (isBlankTarget || typeof __unframerWindow2 === 'undefined') return void 0;
-  const baseUrl = __unframerWindow2.location.href;
+  const baseUrl = getLinkBaseUrl(siteCanonicalURL,);
   let url;
   try {
     url = new URL(href, baseUrl,);
@@ -40737,7 +40743,7 @@ function propsForRoutePath(href, router, currentRoute, linkOptions, preload, loc
   },);
   const anchorTarget = getTargetAttrValue(linkOptions.openInNewTab, true,);
   const isBlankTarget = anchorTarget === '_blank';
-  const navigationUrl = getNavigationUrl(path, isBlankTarget,);
+  const navigationUrl = getNavigationUrl(path, isBlankTarget, router.siteCanonicalURL,);
   const linkContext = {
     pathVariables,
     locale,
@@ -40860,7 +40866,7 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
     } = maybeRouteAttributes;
     const anchorTarget = getTargetAttrValue(openInNewTab, true,);
     const isBlankTarget = anchorTarget === '_blank';
-    const navigationUrl = getNavigationUrl(resolvedHref, isBlankTarget,);
+    const navigationUrl = getNavigationUrl(resolvedHref, isBlankTarget, router.siteCanonicalURL,);
     const linkContext = {
       pathVariables,
       locale,
@@ -40929,7 +40935,7 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(fun
   } = propsAddedByLink;
   useRefEffect(observerRef, (node) => {
     if (node === null || !_routeId || !preloadFn || !_navigationUrl || isOnFramerCanvas) return;
-    return observeRouteForPreloading?.(node, preloadFn, `${_routeId}:${_locale?.id}:${JSON.stringify(_pathVariables,)}`,);
+    return observeRouteForPreloading?.(node, preloadFn, `${_routeId}:${_locale?.id}:${JSON.stringify(_pathVariables,)}`, _navigationUrl,);
   }, [preloadFn, _routeId, _pathVariables, _locale, _navigationUrl, isOnFramerCanvas,],);
   const isInternalNavigation = Boolean(navigate,);
   const clone = useCloneChildrenWithPropsAndRef(forwardedRef,);
