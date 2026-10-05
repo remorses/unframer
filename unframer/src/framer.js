@@ -13508,7 +13508,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.FORWRNQ7.mjs
+// /:https://app.framerstatic.com/framer.M55KQT4O.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -50155,6 +50155,7 @@ var createdAtColumn = 'createdAt';
 var updatedAtColumn = 'updatedAt';
 var localeIdColumn = 'localeId';
 var inclusionColumn = 'inclusion';
+var excludeInclusionValue = 'exclude';
 var systemColumns = [
   collectionItemIdColumn,
   positionColumn,
@@ -50312,12 +50313,6 @@ function registerLocalizedField(collectionId, fieldId, field, {
   localizedFields.set(fieldId, field,);
   localizedItemTables.set(collectionId, localizedFields,);
 }
-function getActiveLocaleInclusionColumn({
-  chainedLocaleIds: [activeLocaleId,],
-},) {
-  if (activeLocaleId === void 0) return void 0;
-  return getValueInLocaleColumn(inclusionColumn, activeLocaleId,);
-}
 function registerItemsTable(collectionId, {
   chainedLocaleIds,
   localizedItemTables,
@@ -50404,7 +50399,7 @@ function compileLocalizedItemsCte(collectionId, fields, {
     const localizedValue = compileLocalizedValue(sql.identifier(fieldId,), localizedExpressions, field,);
     localizedValues.push(sql`${localizedValue} AS ${sql.identifier(getLocalizedValueColumn(fieldId,),)}`,);
   }
-  const localizedItemsTable = sql`SELECT ${
+  let localizedItemsSelect = sql`SELECT ${
     sql.join(
       [
         ...localizedValues,
@@ -50415,7 +50410,14 @@ function compileLocalizedItemsCte(collectionId, fields, {
       '1',
     )
   } FROM ${sql.identifier(getItemsInLocaleChainCte(collectionId,),)}`;
-  return sql`${sql.identifier(getLocalizedItemsCte(collectionId,),)} AS (${localizedItemsTable})`;
+  const activeLocaleId = chainedLocaleIds[0];
+  if (activeLocaleId !== void 0) {
+    const inclusionInActiveLocale = sql.identifier(getValueInLocaleColumn(inclusionColumn, activeLocaleId,),);
+    localizedItemsSelect = sql`${localizedItemsSelect} WHERE ${inclusionInActiveLocale} IS NOT ${
+      sql.parameter('inclusion', excludeInclusionValue,)
+    }`;
+  }
+  return sql`${sql.identifier(getLocalizedItemsCte(collectionId,),)} AS (${localizedItemsSelect})`;
 }
 function compileFromClause(table, alias2, joins, joinType,) {
   const source = sql.identifier(table,);
@@ -50778,14 +50780,8 @@ function compileWhereClause(collectionId, filters, context,) {
     if (compiledFilter) compiledFilters.push(compiledFilter,);
   }
   const filterCondition = joinCompiledFilters(compiledFilters, getJoinOperator(filters.operator,),);
-  const inclusionInActiveLocale = getActiveLocaleInclusionColumn(context,);
-  if (inclusionInActiveLocale === void 0) {
-    return {
-      statement: sql`WHERE ${filterCondition}`,
-    };
-  }
   return {
-    statement: sql`WHERE (${filterCondition}) AND ${sql.qualifiedIdentifier(collectionId, inclusionInActiveLocale,)} IS NOT 'exclude'`,
+    statement: sql`WHERE ${filterCondition}`,
   };
 }
 function joinCompiledFilters(compiledFilters, operator,) {
