@@ -13508,7 +13508,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.M55KQT4O.mjs
+// /:https://app.framerstatic.com/framer.DRLZGCLI.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -50353,6 +50353,7 @@ function compileWithClause(context,) {
 }
 function compileItemsInLocaleChainCte(collectionId, fields, {
   chainedLocaleIds,
+  serverCollections,
 },) {
   const localizationsTable = sql.identifier(getItemLocalizationsTable(collectionId,),);
   const itemId = sql.qualifiedIdentifier(collectionId, collectionItemIdColumn,);
@@ -50374,7 +50375,8 @@ function compileItemsInLocaleChainCte(collectionId, fields, {
   const itemIsIncludedInLocale = sql`${sql.identifier(inclusionColumn,)} IS NULL`;
   for (const localeId of chainedLocaleIds) {
     for (const fieldId of fields.keys()) {
-      valuesInLocales.push(compileValueInLocale(fieldId, localeId, itemIsIncludedInLocale,),);
+      const isSlug = fieldId === serverCollections[collectionId]?.slugFieldId;
+      valuesInLocales.push(compileValueInLocale(fieldId, localeId, isSlug ? void 0 : itemIsIncludedInLocale,),);
     }
   }
   const itemsInLocaleChainTable = sql`SELECT ${
