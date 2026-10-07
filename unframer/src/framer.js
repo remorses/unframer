@@ -13508,15 +13508,15 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.DRLZGCLI.mjs
+// /:https://app.framerstatic.com/framer.IDHEQ73L.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
 import { Suspense as Suspense2, } from 'react';
 import { memo as memo2, } from 'react';
 import ReactDOM from 'react-dom';
-import { createRef, } from 'react';
 import { useTransition, } from 'react';
+import { createRef, } from 'react';
 import { createPortal, } from 'react-dom';
 import { cloneElement as cloneElement32, } from 'react';
 var __unframerWindow2 = typeof window !== 'undefined' ? window : void 0;
@@ -50431,17 +50431,21 @@ function compileFromClause(table, alias2, joins, joinType,) {
     statement: sql`FROM ${sql.join(joinParts, joinType, '(SELECT 0 WHERE 0)',)}`,
   };
 }
-function compileLimitAndOffsetClause(limit,) {
-  switch (limit) {
-    case 1:
-      return {
-        statement: sql`LIMIT 1`,
-      };
-    case 5e3:
-      return {
-        statement: sql`LIMIT 5000`,
-      };
-  }
+var maximumLimit = 5001;
+function compileLimitAndOffsetClause({
+  limit,
+  offset,
+},) {
+  const validLimit = limit !== void 0 && isValidCount(limit, 'limit',) ? Math.min(limit, maximumLimit,) : maximumLimit;
+  const validOffset = isValidCount(offset, 'offset',) ? offset : 0;
+  return {
+    statement: sql`LIMIT ${sql.parameter('limit', validLimit,)} OFFSET ${sql.parameter('offset', validOffset,)}`,
+  };
+}
+function isValidCount(value, name,) {
+  if (Number.isSafeInteger(value,) && value >= 0) return true;
+  warnOnce2(new ServerDatabaseError(`Query ${name} must be a non-negative safe integer, got ${value}.`,).toString(),);
+  return false;
 }
 function isDateSystemColumn(fieldId,) {
   return fieldId === createdAtColumn || fieldId === updatedAtColumn;
@@ -50595,14 +50599,13 @@ function compileNeighborJoin(qualifier2, neighborFieldId, joinAlias, collectionI
   const orderByClause = compileNeighborOrderByClause(keys3, candidateAlias, isPrevious,);
   const itemsTable = registerItemsTable(collectionId, context,);
   const fromClause = compileFromClause(itemsTable, candidateAlias, candidateContext.joins, ' LEFT JOIN ',);
-  const limitClause = compileLimitAndOffsetClause(1,);
   const currentId = sql.qualifiedIdentifier(qualifier2, collectionItemIdColumn,);
   const candidateId = sql.qualifiedIdentifier(candidateAlias, collectionItemIdColumn,);
   return {
     table: itemsTable,
     condition: sql`${
       sql.qualifiedIdentifier(joinAlias, collectionItemIdColumn,)
-    } = (SELECT ${candidateId} ${fromClause.statement} WHERE ${currentId} IS NOT NULL AND (${follows}) ${orderByClause.statement} ${limitClause.statement})`,
+    } = (SELECT ${candidateId} ${fromClause.statement} WHERE ${currentId} IS NOT NULL AND (${follows}) ${orderByClause.statement} LIMIT 1)`,
   };
 }
 function compileFollows(keys3, qualifier2, candidateAlias, isPrevious,) {
@@ -51022,7 +51025,7 @@ function compileQuery(serverQuery, serverCollections, chainedLocaleIds,) {
   const orderByClause = compileOrderByClause(serverQuery, context,);
   const fromClause = compileFromClause(registerItemsTable(collectionId, context,), collectionId, context.joins, ' LEFT JOIN ',);
   const withClause = compileWithClause(context,);
-  const limitAndOffsetClause = compileLimitAndOffsetClause(5e3,);
+  const limitAndOffsetClause = compileLimitAndOffsetClause(serverQuery,);
   const statement =
     sql`${withClause}${selectClause.statement} ${fromClause.statement} ${whereClause.statement} ${orderByClause.statement} ${limitAndOffsetClause.statement}`;
   return {
@@ -51091,11 +51094,147 @@ function* walkLocaleFallbackChain(locale,) {
     current2 = current2.fallback;
   }
 }
-function useServerData(query,) {
+function useServerData(pageQuery,) {
+  const [rows = [],] = useServerDataPages([pageQuery,],);
+  return rows;
+}
+function useServerDataPages(pageQueries,) {
   const {
     activeLocale,
   } = useLocaleInfo();
-  return useServerDatabaseClient().query(query, activeLocale,).use();
+  const client = useServerDatabaseClient();
+  const pages = pageQueries.map((pageQuery) => client.query(pageQuery, activeLocale,));
+  for (const page of pages) void page.preload();
+  return pages.map((page) => page.use());
+}
+function getPersistedCurrentPage(hash2,) {
+  if (typeof __unframerWindow2 === 'undefined') return void 0;
+  const currentPage = readHistoryState()?.paginationInfo?.[hash2]?.currentPage;
+  return typeof currentPage === 'number' ? currentPage : void 0;
+}
+function getInitialCurrentPage(isInitialNavigation, hash2,) {
+  if (isInitialNavigation) {
+    return 1;
+  }
+  return getPersistedCurrentPage(hash2,) ?? 1;
+}
+function useLoadMorePagination(totalSize, pageSize, hash2, paginateWithSuspendedLoadingState = false,) {
+  const pageState = useLoadMorePageState(hash2, paginateWithSuspendedLoadingState,);
+  return useLoadMoreControls(pageState, Math.ceil(totalSize / pageSize,),);
+}
+function useLoadMorePageState(hash2, paginateWithSuspendedLoadingState,) {
+  const {
+    isInitialNavigation = true,
+  } = useRouter();
+  const [isPending, startLoadingTransition,] = useTransition();
+  const persistedPage = getPersistedCurrentPage(hash2,);
+  const pendingRestorePageRef = useRef(isInitialNavigation ? persistedPage : void 0,);
+  const [currentPage, setCurrentPage,] = useState(() => getInitialCurrentPage(isInitialNavigation, hash2,));
+  const currentPageRef = useRef(currentPage,);
+  useEffect(function restorePersistedPageAfterHydration() {
+    if (!isInitialNavigation) return;
+    const pendingRestorePage = pendingRestorePageRef.current;
+    if (pendingRestorePage === void 0 || pendingRestorePage === currentPageRef.current) {
+      pendingRestorePageRef.current = void 0;
+      return;
+    }
+    currentPageRef.current = pendingRestorePage;
+    startTransition2(() => setCurrentPage(pendingRestorePage,));
+  }, [isInitialNavigation,],);
+  const persistToHistory = useCallback2((paginationInfo) => {
+    const pendingRestorePage = pendingRestorePageRef.current;
+    if (pendingRestorePage !== void 0 && pendingRestorePage !== currentPageRef.current) return;
+    pendingRestorePageRef.current = void 0;
+    pushLoadMoreHistory(hash2, paginationInfo,);
+  }, [hash2,],);
+  const onCanvas = useIsOnFramerCanvas();
+  const loadMoreInFlightRef = useRef(false,);
+  const loadNextPage = useCallback2(async (knownMinimumPageCount) => {
+    if (onCanvas) return;
+    if (currentPageRef.current >= knownMinimumPageCount) return;
+    if (loadMoreInFlightRef.current) return;
+    loadMoreInFlightRef.current = true;
+    try {
+      await yieldToMain({
+        priority: 'user-blocking',
+        continueAfter: 'paint',
+      },);
+      if (currentPageRef.current >= knownMinimumPageCount) return;
+      const nextPage = Math.min(currentPageRef.current + 1, knownMinimumPageCount,);
+      currentPageRef.current = nextPage;
+      const schedulePageRender = paginateWithSuspendedLoadingState ? startLoadingTransition : startTransition2;
+      schedulePageRender(() => {
+        setCurrentPage(nextPage,);
+      },);
+    } finally {
+      loadMoreInFlightRef.current = false;
+    }
+  }, [paginateWithSuspendedLoadingState, onCanvas,],);
+  return {
+    currentPage,
+    isLoading: isPending,
+    loadNextPage,
+    persistToHistory,
+  };
+}
+function useLoadMoreControls({
+  currentPage,
+  isLoading,
+  loadNextPage,
+  persistToHistory,
+}, knownMinimumPageCount,) {
+  const paginationInfo = useMemo(() => {
+    return {
+      currentPage,
+      hasNextPage: currentPage < knownMinimumPageCount,
+      totalPages: knownMinimumPageCount,
+      isLoading,
+    };
+  }, [currentPage, knownMinimumPageCount, isLoading,],);
+  useIsomorphicLayoutEffect2(() => {
+    persistToHistory(paginationInfo,);
+  }, [persistToHistory, paginationInfo,],);
+  const loadMore = useCallback2(() => loadNextPage(knownMinimumPageCount,), [loadNextPage, knownMinimumPageCount,],);
+  return {
+    paginationInfo,
+    loadMore,
+  };
+}
+function usePaginatedServerData(query, pagination, hash2,) {
+  const pageState = useLoadMorePageState(hash2, true,);
+  const pageSize = Math.min(pagination.pageSize, maximumLimit - 1,);
+  const pageQueries = Array.from({
+    length: pageState.currentPage,
+  }, (_, pageIndex,) =>
+    getPageQuery(query, {
+      ...pagination,
+      pageSize,
+    }, pageIndex,),);
+  const pagesRows = useServerDataPages(pageQueries,);
+  const hasNextPage = (pagesRows.at(-1,)?.length ?? 0) > pageSize;
+  const rows = pagesRows.flatMap((pageRows) => pageRows.slice(0, pageSize,));
+  const {
+    paginationInfo,
+    loadMore,
+  } = useLoadMoreControls(pageState, pageState.currentPage + (hasNextPage ? 1 : 0),);
+  return {
+    rows,
+    paginationInfo,
+    loadMore,
+  };
+}
+function getPageQuery(query, {
+  startOffset = 0,
+  maximumItemCount = Infinity,
+  pageSize,
+}, pageIndex,) {
+  const itemCountBeforePage = pageSize * pageIndex;
+  const remainingItemCount = Math.max(0, maximumItemCount - itemCountBeforePage,);
+  return {
+    ...query,
+    offset: startOffset + itemCountBeforePage,
+    limit: Math.min(pageSize + 1, remainingItemCount,),
+  };
 }
 var queryEngine = /* @__PURE__ */ new QueryEngine();
 var queryCache = /* @__PURE__ */ new QueryCache(queryEngine,);
@@ -52086,78 +52225,6 @@ function usePrototypeNavigate({
         break;
     }
     return false;
-  };
-}
-function getPersistedCurrentPage(hash2,) {
-  if (typeof __unframerWindow2 === 'undefined') return void 0;
-  const currentPage = readHistoryState()?.paginationInfo?.[hash2]?.currentPage;
-  return typeof currentPage === 'number' ? currentPage : void 0;
-}
-function getInitialCurrentPage(isInitialNavigation, hash2,) {
-  if (isInitialNavigation) {
-    return 1;
-  }
-  return getPersistedCurrentPage(hash2,) ?? 1;
-}
-function useLoadMorePagination(totalSize, pageSize, hash2, paginateWithSuspendedLoadingState = false,) {
-  const {
-    isInitialNavigation = true,
-  } = useRouter();
-  const [isPending, startLoadingTransition,] = useTransition();
-  const totalPages = Math.ceil(totalSize / pageSize,);
-  const persistedPage = getPersistedCurrentPage(hash2,);
-  const pendingRestorePageRef = useRef(isInitialNavigation ? persistedPage : void 0,);
-  const [currentPage, setCurrentPage,] = useState(() => getInitialCurrentPage(isInitialNavigation, hash2,));
-  const currentPageRef = useRef(currentPage,);
-  const paginationInfo = useMemo(() => {
-    return {
-      currentPage,
-      totalPages,
-      isLoading: isPending,
-    };
-  }, [currentPage, totalPages, isPending,],);
-  useIsomorphicLayoutEffect2(() => {
-    const pendingRestorePage = pendingRestorePageRef.current;
-    if (pendingRestorePage !== void 0 && pendingRestorePage !== currentPageRef.current) return;
-    pendingRestorePageRef.current = void 0;
-    pushLoadMoreHistory(hash2, paginationInfo,);
-  }, [hash2, paginationInfo,],);
-  useEffect(function restorePersistedPageAfterHydration() {
-    if (!isInitialNavigation) return;
-    const pendingRestorePage = pendingRestorePageRef.current;
-    if (pendingRestorePage === void 0 || pendingRestorePage === currentPageRef.current) {
-      pendingRestorePageRef.current = void 0;
-      return;
-    }
-    currentPageRef.current = pendingRestorePage;
-    startTransition2(() => setCurrentPage(pendingRestorePage,));
-  }, [isInitialNavigation,],);
-  const onCanvas = useIsOnFramerCanvas();
-  const loadMoreInFlightRef = useRef(false,);
-  const loadMore = useCallback2(async () => {
-    if (onCanvas) return;
-    if (currentPageRef.current >= totalPages) return;
-    if (loadMoreInFlightRef.current) return;
-    loadMoreInFlightRef.current = true;
-    try {
-      await yieldToMain({
-        priority: 'user-blocking',
-        continueAfter: 'paint',
-      },);
-      if (currentPageRef.current >= totalPages) return;
-      const nextPage = Math.min(currentPageRef.current + 1, totalPages,);
-      currentPageRef.current = nextPage;
-      const schedulePageRender = paginateWithSuspendedLoadingState ? startLoadingTransition : startTransition2;
-      schedulePageRender(() => {
-        setCurrentPage(nextPage,);
-      },);
-    } finally {
-      loadMoreInFlightRef.current = false;
-    }
-  }, [totalPages, paginateWithSuspendedLoadingState, onCanvas,],);
-  return {
-    paginationInfo,
-    loadMore,
   };
 }
 function useLoadMorePaginatedQuery(query, pageSize, hash2,) {
@@ -63473,6 +63540,7 @@ export {
   useOverlayState,
   usePageEffects,
   usePageInView,
+  usePaginatedServerData,
   usePrefetch,
   usePreloadQuery,
   usePresence,
