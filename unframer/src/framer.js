@@ -13508,7 +13508,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.IDHEQ73L.mjs
+// /:https://app.framerstatic.com/framer.TMMNKSMY.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -40441,7 +40441,7 @@ function getObserveRouteForPreloadingFn() {
         if (activePreloadsAmount >= maxPreloadAmount) continue;
         if (nodes) nodes.add(target,);
         else routeToNodesInViewport.set(preloadId, /* @__PURE__ */ new Set([target,],),);
-        setTimeout(preloadTimeout, PRELOAD_AFTER_MS, context, target,);
+        setTimeout(() => preloadTimeout(context, target,), PRELOAD_AFTER_MS,);
       } else {
         if (nodes) nodes.delete(target,);
         if (amountOfNodesInViewport <= 1) routeToNodesInViewport.delete(preloadId,);
