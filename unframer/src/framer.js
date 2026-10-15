@@ -13403,7 +13403,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.WSGZOVQW.mjs
+// /:https://app.framerstatic.com/framer.OA3VC6YW.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -18021,6 +18021,37 @@ function useRouteAnchor(routeId, {
 }
 var replayMarker = '__f_replay';
 var replayMarkerIgnore = '__f_replay_ignore';
+var formHydratedAttribute = 'data-framer-form-hydrated';
+var formPendingSubmitAttribute = 'data-framer-form-pending-submit';
+function deferPreHydrationSubmit(hydratedAttribute, pendingSubmitAttribute,) {
+  const form = document.currentScript?.parentElement;
+  if (!form) return;
+  form.addEventListener('submit', (event) => {
+    if (form.hasAttribute(hydratedAttribute,)) return;
+    event.preventDefault();
+    form.setAttribute(pendingSubmitAttribute, '',);
+  },);
+}
+function getDeferPreHydrationSubmitScript() {
+  return `(${deferPreHydrationSubmit.toString()})("${formHydratedAttribute}","${formPendingSubmitAttribute}")`;
+}
+function useReplayPreHydrationSubmit(formRef, submit,) {
+  useEffect(() => {
+    const form = formRef.current;
+    if (!form) return;
+    form.setAttribute(formHydratedAttribute, '',);
+    if (!form.hasAttribute(formPendingSubmitAttribute,)) return;
+    form.removeAttribute(formPendingSubmitAttribute,);
+    let cancelled = false;
+    queueMicrotask(() => {
+      if (cancelled) return;
+      if (form.reportValidity()) void submit(form,);
+    },);
+    return () => {
+      cancelled = true;
+    };
+  }, [],);
+}
 function changeEvent() {
   const event = new Event('change', {
     bubbles: true,
@@ -25240,9 +25271,9 @@ var Rect = {
   },
   /** @internal */
   doesNotIntersect: (rect, rects,) => {
-    return rects.find((comparingRect) => {
+    return !rects.some((comparingRect) => {
       return Rect.intersects(comparingRect, rect,);
-    },) === void 0;
+    },);
   },
   /**
    * @param rectA -
@@ -30085,9 +30116,9 @@ function isNextTargetForward(key7, index, removed, history,) {
   if (removed || index === void 0) return true;
   if (index === 0) return false;
   const forwardHistory = history.slice(index, history.length,);
-  if (forwardHistory.findIndex((item) => item.key === key7) > -1) return true;
+  if (forwardHistory.some((item) => item.key === key7)) return true;
   const backwardsHistory = history.slice(0, index - 1,);
-  if (backwardsHistory.findIndex((item) => item.key === key7) > -1) return false;
+  if (backwardsHistory.some((item) => item.key === key7)) return false;
   return true;
 }
 function transitionForScreen(screenIndex, stackState,) {
@@ -41287,7 +41318,7 @@ function openExternalLinkInCurrentTab(link, formRef,) {
   linkElement.href = href;
   linkElement.target = '_self';
   linkElement.style.display = 'none';
-  if (!('current' in formRef && formRef.current)) return;
+  if (!formRef.current) return;
   formRef.current.appendChild(linkElement,);
   linkElement.click();
   linkElement.remove();
@@ -41304,8 +41335,9 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
   nodeId,
   ...props
 }, forwardedRef,) {
-  const fallbackRef = React42.useRef(null,);
-  const ref = forwardedRef ?? fallbackRef;
+  const formMarkerAttribute = 'data-framer-form';
+  const formRef = React42.useRef(null,);
+  const ref = useComposedRefs(forwardedRef, formRef,);
   const {
     states: honeypotStateRefs,
     convertHoneypotFieldsForSubmission,
@@ -41336,7 +41368,7 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
     if (isString(link,)) {
       const matchingRoute2 = findMatchingRouteAttributesForResolvedPath(router, link, implicitPathVariables, locales,);
       if (!matchingRoute2) {
-        openExternalLinkInCurrentTab(link, ref,);
+        openExternalLinkInCurrentTab(link, formRef,);
         return;
       }
       const {
@@ -41364,13 +41396,16 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
     } = matchingRoute;
     void router.navigate?.(routeId, elementId, pathVariables,);
   }
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
+    void submit(event.currentTarget,);
+  };
+  async function submit(form,) {
     if (!action || !projectHash || submissionInProgressRef.current) return;
     submissionInProgressRef.current = true;
     convertHoneypotFieldsForSubmission();
-    const data2 = new FormData(event.currentTarget,);
-    const fieldNames = getFormFieldNames(event.currentTarget,);
+    const data2 = new FormData(form,);
+    const fieldNames = getFormFieldNames(form,);
     await yieldToMain({
       priority: 'user-visible',
       continueAfter: 'paint',
@@ -41413,7 +41448,7 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
       console.error(error,);
     }
     submissionInProgressRef.current = false;
-  };
+  }
   const handleKeyDown = (event) => {
     const {
       target: input,
@@ -41439,10 +41474,13 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
       },)
     );
   };
+  useReplayPreHydrationSubmit(formRef, (form) => void submit(form,),);
   const renderedChildren = React42.useMemo(() => children(state,), [children, state,],);
   return /* @__PURE__ */ jsxs(motion.form, {
     suppressHydrationWarning: true,
     ...props,
+    method: 'post',
+    'data-framer-form': '',
     onSubmit: stateCanSubmitForm(state,) ? handleSubmit : preventDefault,
     onKeyDown: handleKeyDown,
     onChange: checkValidity,
@@ -41452,6 +41490,34 @@ var FormContainer = /* @__PURE__ */ React42.forwardRef(function FormContainer2({
       /* @__PURE__ */ jsx(HoneypotFields, {
         suppressHydrationWarning: true,
         states: honeypotStateRefs,
+      },),
+      /* @__PURE__ */ jsx('script', {
+        suppressHydrationWarning: true,
+        dangerouslySetInnerHTML: {
+          __html: getDeferPreHydrationSubmitScript(),
+        },
+      },),
+      /* @__PURE__ */ jsxs('noscript', {
+        suppressHydrationWarning: true,
+        children: [
+          /* @__PURE__ */ jsx('style', {
+            suppressHydrationWarning: true,
+            children: `[${formMarkerAttribute}] input[name=framer-noscript] { position: absolute; transform: scale(0); }`,
+          },),
+          /* @__PURE__ */ jsx('input', {
+            suppressHydrationWarning: true,
+            required: true,
+            pattern: '(?!)',
+            name: 'framer-noscript',
+            tabIndex: -1,
+            'aria-label': 'Enable JavaScript to submit this form',
+            title: 'Enable JavaScript to submit this form',
+          },),
+          /* @__PURE__ */ jsx('p', {
+            suppressHydrationWarning: true,
+            children: 'Enable JavaScript to submit this form.',
+          },),
+        ],
       },),
     ],
   },);
@@ -41824,7 +41890,7 @@ var TriggerState = class {
       if (!rule.key) return false;
       switch (rule.type) {
         case 'set':
-          return cookieStrings.find((cookie) => cookie.startsWith(`${rule.key}=`,)) !== void 0;
+          return cookieStrings.some((cookie) => cookie.startsWith(`${rule.key}=`,));
         case 'not-set':
           return !cookieStrings.some((cookie) => cookie.startsWith(`${rule.key}=`,));
         case 'equals': {
@@ -50314,6 +50380,13 @@ function compileReferenceJoin(qualifier2, identifier2, joinAlias, table,) {
     condition: sql`${sql.qualifiedIdentifier(qualifier2, identifier2,)} = ${sql.qualifiedIdentifier(joinAlias, collectionItemIdColumn,)}`,
   };
 }
+function registerReferenceJoin(qualifier2, fieldId, referencedCollectionId, context,) {
+  const joinAlias = `${qualifier2}.${fieldId}`;
+  if (context.joins.has(joinAlias,)) return joinAlias;
+  const join2 = compileReferenceJoin(qualifier2, fieldId, joinAlias, registerItemsTable(referencedCollectionId, context,),);
+  context.joins.set(joinAlias, join2,);
+  return joinAlias;
+}
 function compileMultiReferenceExpression(qualifier2, collectionId, fieldId, referencedItemsTable,) {
   const sideTable = getItemMultiCollectionReferencesView(collectionId, fieldId,);
   const joinAlias = `${qualifier2}.${fieldId}`;
@@ -50385,6 +50458,10 @@ function compileFieldExpression(resolvedField, context,) {
     const referencedItemsTable = registerItemsTable(tailField.referencedCollectionId, context,);
     return compileMultiReferenceExpression(qualifier2, collectionId, tailFieldId, referencedItemsTable,);
   }
+  if (tailField.type === 'collectionreference' && tailFieldId !== collectionItemIdColumn) {
+    const referenceQualifier = registerReferenceJoin(qualifier2, tailFieldId, tailField.referencedCollectionId, context,);
+    return sql.qualifiedIdentifier(referenceQualifier, collectionItemIdColumn,);
+  }
   return compileValueExpression(resolvedField,);
 }
 function compileValueExpression({
@@ -50406,6 +50483,13 @@ function compileSortKey(resolved,) {
     expression = sql`LOWER(${expression})`;
   }
   return expression;
+}
+function registerNeighborJoin(qualifier2, neighborFieldId, collectionId, context,) {
+  const joinAlias = `${qualifier2}.${neighborFieldId}`;
+  if (context.joins.has(joinAlias,)) return joinAlias;
+  const join2 = compileNeighborJoin(qualifier2, neighborFieldId, joinAlias, collectionId, context,);
+  context.joins.set(joinAlias, join2,);
+  return joinAlias;
 }
 function compileNeighborJoin(qualifier2, neighborFieldId, joinAlias, collectionId, context,) {
   const candidateAlias = `${joinAlias}/candidate`;
@@ -50508,12 +50592,14 @@ function resolveFieldPath(rootCollectionId, fieldPath, context,) {
       warnOnce2(new ServerDatabaseError(`Intermediate field ${referenceFieldId} is not a single reference field.`,).toString(),);
       return void 0;
     }
-    qualifier2 = registerReferenceJoin(qualifier2, referenceFieldId, field.referencedCollectionId, context,);
+    qualifier2 = isNeighborField(referenceFieldId,)
+      ? registerNeighborJoin(qualifier2, referenceFieldId, field.referencedCollectionId, context,)
+      : registerReferenceJoin(qualifier2, referenceFieldId, field.referencedCollectionId, context,);
     collectionId = field.referencedCollectionId;
   }
   if (isNeighborField(tailFieldId,)) {
     return {
-      qualifier: registerReferenceJoin(qualifier2, tailFieldId, collectionId, context,),
+      qualifier: registerNeighborJoin(qualifier2, tailFieldId, collectionId, context,),
       collectionId,
       tailFieldId: collectionItemIdColumn,
       tailField: {
@@ -50529,15 +50615,6 @@ function resolveFieldPath(rootCollectionId, fieldPath, context,) {
     return void 0;
   }
   return resolved;
-}
-function registerReferenceJoin(qualifier2, fieldId, referencedCollectionId, context,) {
-  const joinAlias = `${qualifier2}.${fieldId}`;
-  if (context.joins.has(joinAlias,)) return joinAlias;
-  const join2 = isNeighborField(fieldId,)
-    ? compileNeighborJoin(qualifier2, fieldId, joinAlias, referencedCollectionId, context,)
-    : compileReferenceJoin(qualifier2, fieldId, joinAlias, registerItemsTable(referencedCollectionId, context,),);
-  context.joins.set(joinAlias, join2,);
-  return joinAlias;
 }
 function compileOrderByClause({
   collectionId,
@@ -50598,22 +50675,9 @@ function compileSelectClause({
 function compileColumn(rootCollectionId, column, context,) {
   const resolved = resolveFieldPath(rootCollectionId, column.fieldPath, context,);
   if (!resolved) return void 0;
-  const {
-    qualifier: qualifier2,
-    tailFieldId,
-    tailField,
-  } = resolved;
-  if (tailField.type === 'collectionreference' && tailFieldId !== collectionItemIdColumn) {
-    const referenceQualifier = registerReferenceJoin(qualifier2, tailFieldId, tailField.referencedCollectionId, context,);
-    return {
-      expression: sql.qualifiedIdentifier(referenceQualifier, collectionItemIdColumn,),
-      type: 'collectionreference',
-      /* CollectionReference */
-    };
-  }
   return {
     expression: compileFieldExpression(resolved, context,),
-    type: tailField.type,
+    type: resolved.tailField.type,
   };
 }
 function compileWhereClause(collectionId, filters, context,) {
@@ -50667,10 +50731,26 @@ function compileFilter(collectionId, filter2, context,) {
   }
   return {
     expression: filterStep.inputToleratingNull().expression,
-    indexableSupersetExpression: compileIndexableSuperset(resolved, context.chainedLocaleIds, transforms, parameterName,),
+    indexableSupersetExpression: compileLocalizedIndexableSuperset(resolved, context.chainedLocaleIds, transforms, parameterName,) ??
+      compileReferenceIndexableSuperset(resolved, filterStep, transforms, parameterName,),
   };
 }
-function compileIndexableSuperset(
+function compileReferenceIndexableSuperset(
+  {
+    qualifier: qualifier2,
+    tailFieldId,
+    tailField,
+  },
+  filterStep,
+  transforms,
+  parameterName,
+) {
+  if (tailField.type !== 'collectionreference' || tailFieldId === collectionItemIdColumn) return;
+  if (filterStep.inputToleratingNull().nullable === 'no') return;
+  const unresolvedValue = createFieldStep(sql.qualifiedIdentifier(qualifier2, tailFieldId,), tailField.type,);
+  return compileTransforms(unresolvedValue, transforms, parameterName,)?.inputToleratingNull().expression;
+}
+function compileLocalizedIndexableSuperset(
   {
     qualifier: qualifier2,
     collectionId,
