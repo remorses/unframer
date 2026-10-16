@@ -13403,7 +13403,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.OA3VC6YW.mjs
+// /:https://app.framerstatic.com/framer.T3ABPIOG.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -14050,7 +14050,8 @@ var isBot =
     (__unframerNavigator2.webdriver || /bot|-google|google-|yandex|ia_archiver|crawl|spider/iu.test(__unframerNavigator2.userAgent,)))();
 var supportsRequestIdleCallback = isWindow && typeof __unframerWindow2.requestIdleCallback === 'function';
 var requestIdleCallback = /* @__PURE__ */ (() =>
-  // eslint-disable-next-line compat/compat,framer-studio/tscompat
+  // frlint-disable-next-line framer-studio/tscompat
+  // eslint-disable-next-line compat/compat
   supportsRequestIdleCallback ? __unframerWindow2.requestIdleCallback : setTimeout)();
 function encodeSVGForCSS(svg,) {
   return `url('${encodeSVGForURL(svg,)}')`;
@@ -18090,7 +18091,8 @@ function useReplayPreHydrationInput(value,) {
     didReplayRef.current = true;
     const valueProp = getValuePropFromElement(element,);
     const currentDOMValue = element[valueProp];
-    if (currentDOMValue === value) return;
+    const expectedValue = valueProp === 'checked' ? Boolean(value,) : value;
+    if (currentDOMValue === expectedValue) return;
     if (element.type === 'radio' && currentDOMValue === true) {
       element.checked = false;
       element.dispatchEvent(clickEvent(),);
@@ -43139,6 +43141,7 @@ async function prepareSyncLocaleMetadataAction({
     if (currentRoute.includedLocales && !currentRoute.includedLocales.includes(locale.id,)) continue;
     const {
       path,
+      isMissingInLocale,
     } = await getLocalizedNavigationPath({
       currentLocale: activeLocale,
       nextLocale: locale,
@@ -43149,7 +43152,7 @@ async function prepareSyncLocaleMetadataAction({
       collectionUtils,
       preserveQueryParams: false,
     },);
-    if (!path) continue;
+    if (!path || isMissingInLocale) continue;
     const href = canonicalURLForPath(path, siteCanonicalURL,);
     hreflangLinks.push({
       href,
@@ -62802,7 +62805,7 @@ var package_default = {
     'jest-diff': '^29.3.1',
     'jest-environment-jsdom': '^29.3.1',
     'jest-environment-jsdom-global': '^4.0.0',
-    oxlint: '^1.85.0',
+    oxlint: '^1.87.0',
     react: '^18.3.1',
     'react-dom': '^18.3.1',
     semver: '^7.7.1',
