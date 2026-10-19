@@ -13403,7 +13403,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.T3ABPIOG.mjs
+// /:https://app.framerstatic.com/framer.ZDMCAUHJ.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -14631,6 +14631,9 @@ function is_plain_object(thing,) {
 function get_type(thing,) {
   return Object.prototype.toString.call(thing,).slice(8, -1,);
 }
+function is_buffer(thing,) {
+  return typeof Buffer !== 'undefined' && Buffer.isBuffer(thing,);
+}
 function get_escaped_char(char,) {
   switch (char) {
     case '"':
@@ -14781,13 +14784,16 @@ var stringify_operations = {
   }),
   valuesOf: (set) => set,
   entriesOf: (map2) => map2,
-  viewInfo: (view) => ({
-    buffer: view.buffer,
-    byteOffset: view.byteOffset,
-    byteLength: view.byteLength,
-    length: view.length,
-    bufferByteLength: view.buffer.byteLength,
-  }),
+  viewInfo: (view) => {
+    if (is_buffer(view,)) view = new Uint8Array(view,);
+    return {
+      buffer: view.buffer,
+      byteOffset: view.byteOffset,
+      byteLength: view.byteLength,
+      length: view.length,
+      bufferByteLength: view.buffer.byteLength,
+    };
+  },
   toArrayBuffer: (buffer2) => buffer2,
   lengthOf: (array) => array.length,
   hasOwn: (value, key7,) => Object.hasOwn(value, key7,),
@@ -14803,6 +14809,10 @@ var stringify_operations = {
   get: (value, key7,) => value[key7],
 };
 var default_stringify_operations = /* @__PURE__ */ Object.freeze(stringify_operations,);
+var array_buffer_byte_length = /* @__PURE__ */ (() => Object.getOwnPropertyDescriptor(ArrayBuffer.prototype, 'byteLength',).get)();
+var shared_array_buffer_byte_length =
+  /* @__PURE__ */ (() =>
+    typeof SharedArrayBuffer === 'undefined' ? void 0 : Object.getOwnPropertyDescriptor(SharedArrayBuffer.prototype, 'byteLength',).get)();
 var parse_operations = {
   fromPrimitive: (primitive) => primitive,
   fromISOString: (iso) => new Date(iso,),
@@ -14814,6 +14824,12 @@ var parse_operations = {
   fromArrayBuffer: (buffer2) => buffer2,
   fromRegExpInfo: (source, flags,) => new RegExp(source, flags,),
   fromViewInfo: (tag, buffer2, byteOffset, length,) => {
+    try {
+      array_buffer_byte_length.call(buffer2,);
+    } catch (error) {
+      if (!shared_array_buffer_byte_length) throw error;
+      shared_array_buffer_byte_length.call(buffer2,);
+    }
     const Constructor = /** @type {any} */
       globalThis[tag];
     return byteOffset !== void 0 ? new Constructor(buffer2, byteOffset, length,) : new Constructor(buffer2,);
@@ -14865,6 +14881,9 @@ function unflatten(parsed, revivers, options,) {
       throw new Error(`Invalid input`,);
     }
     if (index in hydrated) return hydrated[index];
+    if (index >= values.length) {
+      throw new Error(`Invalid input`,);
+    }
     const value = values[index];
     if (!value || typeof value !== 'object') {
       hydrated[index] = ops.fromPrimitive(value,);
@@ -14925,10 +14944,14 @@ function unflatten(parsed, revivers, options,) {
             const obj = ops.createNullPrototypeObject();
             hydrated[index] = obj;
             for (let i = 1; i < value.length; i += 2) {
-              if (value[i] === '__proto__') {
+              const key7 = value[i];
+              if (typeof key7 !== 'string') {
+                throw new Error('Cannot parse an object with a non-string key',);
+              }
+              if (key7 === '__proto__') {
                 throw new Error('Cannot parse an object with a `__proto__` property',);
               }
-              ops.set(obj, value[i], hydrate(value[i + 1],),);
+              ops.set(obj, key7, hydrate(value[i + 1],),);
             }
             break;
           case 'Int8Array':
@@ -15075,6 +15098,7 @@ function run(async, value, reducers, options,) {
         const i = flatten(value2, index2,);
         if (i < 0) stringified[index2] = i;
       },);
+      str.catch(() => {},);
     } else {
       const tag = ops.tagOf(thing,);
       switch (tag) {
@@ -30781,6 +30805,7 @@ var AnimateSharedLayout = (props) => props.children;
 var ControlType = /* @__PURE__ */ ((ControlType2) => {
   ControlType2['Boolean'] = 'boolean';
   ControlType2['Number'] = 'number';
+  ControlType2['MotionValue'] = 'motionvalue';
   ControlType2['Dimension'] = 'dimension';
   ControlType2['String'] = 'string';
   ControlType2['RichText'] = 'richtext';
@@ -30868,6 +30893,8 @@ function getControlDefaultValue(control,) {
       }
       case 'array':
         return isArray(control.defaultValue,) ? control.defaultValue : void 0;
+      // Scalar initial values must be materialized per instance, never assigned as React defaults.
+      case 'motionvalue':
       case 'file':
       case 'image':
       case 'richtext':
@@ -40252,7 +40279,7 @@ var preloadedRoutes = /* @__PURE__ */ new Set();
 var routeToNodesInViewport = /* @__PURE__ */ new Map();
 function getObserveRouteForPreloadingFn() {
   const connection = __unframerNavigator2.connection || __unframerNavigator2.mozConnection || __unframerNavigator2.webkitConnection || {};
-  const lowDeviceMemory = __unframerNavigator2.deviceMemory && __unframerNavigator2.deviceMemory > LOW_MEMORY_THRESHOLD;
+  const lowDeviceMemory = __unframerNavigator2.deviceMemory && __unframerNavigator2.deviceMemory < LOW_MEMORY_THRESHOLD;
   let effectiveType, preloadDisabled, maxPreloadAmount;
   function updateConnection() {
     effectiveType = connection.effectiveType || '';
@@ -40276,6 +40303,10 @@ function getObserveRouteForPreloadingFn() {
     } = context;
     const nodesInViewport = routeToNodesInViewport.get(id3,);
     if (!nodesInViewport?.size || preloadedRoutes.has(id3,)) return;
+    if (activePreloadsAmount >= maxPreloadAmount) {
+      setTimeout(() => preloadTimeout(context, target,), PRELOAD_AFTER_MS,);
+      return;
+    }
     ++activePreloadsAmount;
     preloadedRoutes.add(id3,);
     const preloadPromise = preload()?.catch(() => {
@@ -40309,7 +40340,6 @@ function getObserveRouteForPreloadingFn() {
       const nodes = routeToNodesInViewport.get(preloadId,);
       const amountOfNodesInViewport = routeToNodesInViewport.get(preloadId,)?.size ?? 0;
       if (entry.isIntersecting) {
-        if (activePreloadsAmount >= maxPreloadAmount) continue;
         if (nodes) nodes.add(target,);
         else routeToNodesInViewport.set(preloadId, /* @__PURE__ */ new Set([target,],),);
         setTimeout(() => preloadTimeout(context, target,), PRELOAD_AFTER_MS,);
@@ -62777,7 +62807,7 @@ var package_default = {
     watch: 'yarn :jest --watch',
   },
   dependencies: {
-    devalue: '^5.9.1',
+    devalue: '^5.9.4',
     eventemitter3: '^5.0.1',
     fontfaceobserver: '2.2.0',
     'hoist-non-react-statics': '^3.3.2',
