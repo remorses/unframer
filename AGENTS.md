@@ -224,7 +224,7 @@ pnpm build       # tsc compiles to esm/lib/
 pnpm gen-unframer # copies esm/lib/ → ../unframer/unframer/src/plugin-mcp-dist/lib/
 ```
 
-The `pnpm pack` script in plugin-mcp automatically runs `build` + `gen-unframer` before creating the zip, so the unframer dist is always in sync when submitting for review.
+The `pack` script in plugin-mcp (`pnpm run pack`, not `pnpm pack`) automatically runs `build` + `gen-unframer` before creating the zip, so the unframer dist is always in sync when submitting for review.
 
 If you change mcp-handlers.ts or schema.ts, always run `pnpm gen-unframer` inside plugin-mcp to update the unframer copy.
 
