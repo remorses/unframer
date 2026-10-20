@@ -14,6 +14,7 @@ import WebSocket from 'ws';
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js';
 import { SSEClientTransport } from '@modelcontextprotocol/sdk/client/sse.js';
+import { z } from 'zod';
 const WS_URL = 'wss://mcp.preview.unframer.co/_tunnel';
 const HTTP_URL = 'https://mcp.preview.unframer.co';
 // Real session credentials for preview (validated by getValidatedSession → website API → KV cache)
@@ -61,6 +62,105 @@ describe('tunnel integration', () => {
         const htmlContent = await resHtml.text();
         expect(htmlContent).toContain('Framer MCP Plugin Not Open');
     }, 15000);
+});
+describe('OAuth integration', () => {
+    test('canonical discovery, bearer challenge and legacy fail-closed dispatch', async () => {
+        const resource = `${HTTP_URL}/mcp`;
+        const metadata = await fetch(`${HTTP_URL}/.well-known/oauth-protected-resource/mcp`);
+        expect(metadata.status).toBe(200);
+        expect(await metadata.json()).toMatchObject({
+            resource, authorization_servers: [HTTP_URL], scopes_supported: ['mcp'],
+        });
+        const server = await fetch(`${HTTP_URL}/.well-known/oauth-authorization-server`);
+        expect(server.status).toBe(200);
+        expect(await server.json()).toMatchObject({
+            issuer: HTTP_URL,
+            authorization_response_iss_parameter_supported: true,
+            authorization_endpoint: `${HTTP_URL}/oauth/authorize`,
+            token_endpoint: `${HTTP_URL}/oauth/token`,
+            registration_endpoint: `${HTTP_URL}/oauth/register`,
+            client_id_metadata_document_supported: true,
+            code_challenge_methods_supported: ['S256'],
+            scopes_supported: ['mcp'],
+        });
+        await Promise.all(['GET', 'POST'].map(async (method) => {
+            const response = await fetch(resource, { method });
+            expect(response.status).toBe(401);
+            expect(response.headers.get('WWW-Authenticate')).toContain(`${HTTP_URL}/.well-known/oauth-protected-resource/mcp`);
+            expect(response.headers.get('WWW-Authenticate')).toContain('scope="mcp"');
+        }));
+        const badBearer = await fetch(resource, {
+            method: 'POST', headers: { Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.e30.invalid' },
+        });
+        expect(badBearer.status).toBe(401);
+        expect(badBearer.headers.get('WWW-Authenticate')).toContain('invalid_token');
+        await Promise.all(['', 'invalid'].map(async (secret) => {
+            const response = await fetch(`${resource}?id=ignored&secret=${secret}`, {
+                method: 'POST', headers: { Authorization: 'Bearer ordinary-supabase-token', 'X-Mcp-Auth-Mode': 'oauth' },
+            });
+            expect(response.status).toBe(401);
+            expect(response.headers.get('WWW-Authenticate')).toBeNull();
+        }));
+        // A callback without the browser state cookie never reaches the website exchange.
+        const callback = await fetch(`${HTTP_URL}/oauth/callback?state=${'a'.repeat(43)}&code=x`, { redirect: 'manual' });
+        expect(callback.status).toBe(400);
+    }, 30000);
+    test('DCR validates exact redirect, S256 PKCE, resource, scope and preserves state', async () => {
+        const callback = 'http://127.0.0.1:48231/callback';
+        const registered = await fetch(`${HTTP_URL}/oauth/register`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                client_name: 'Framer OAuth integration test',
+                redirect_uris: [callback], token_endpoint_auth_method: 'none',
+                grant_types: ['authorization_code', 'refresh_token'], response_types: ['code'],
+            }),
+        });
+        expect(registered.status).toBe(201);
+        const client = z.object({ client_id: z.string() }).parse(await registered.json());
+        const authorize = new URL('/oauth/authorize', HTTP_URL);
+        authorize.search = new URLSearchParams({
+            client_id: client.client_id, redirect_uri: callback, response_type: 'code',
+            resource: `${HTTP_URL}/mcp`, scope: 'mcp', state: 'exact state & binding',
+            code_challenge: 'a'.repeat(43), code_challenge_method: 'S256',
+        }).toString();
+        const valid = await fetch(authorize, { redirect: 'manual' });
+        expect(valid.status).toBe(200);
+        expect(await valid.text()).toContain('Allow Framer OAuth integration test to control Framer?');
+        expect(valid.headers.get('Set-Cookie')).toContain('HttpOnly');
+        expect(valid.headers.get('Set-Cookie')).toContain('Secure');
+        expect(valid.headers.get('Set-Cookie')).toContain('SameSite=Lax');
+        await Promise.all([
+            { field: 'resource', value: 'https://another.example/mcp', error: 'invalid_target' },
+            { field: 'scope', value: 'admin', error: 'invalid_scope' },
+            { field: 'code_challenge_method', value: 'plain', error: 'invalid_request' },
+        ].map(async ({ field, value, error }) => {
+            const changed = new URL(authorize);
+            changed.searchParams.set(field, value);
+            const denied = await fetch(changed, { redirect: 'manual' });
+            expect(denied.status).toBe(302);
+            const location = new URL(denied.headers.get('Location'));
+            expect(location.origin + location.pathname).toBe(callback);
+            expect(location.searchParams.get('error')).toBe(error);
+            expect(location.searchParams.get('state')).toBe('exact state & binding');
+            expect(location.searchParams.get('iss')).toBe(HTTP_URL);
+        }));
+        const changedRedirect = new URL(authorize);
+        changedRedirect.searchParams.set('redirect_uri', `${callback}/other`);
+        const deniedRedirect = await fetch(changedRedirect, { redirect: 'manual' });
+        expect(deniedRedirect.status).toBe(400);
+        expect(deniedRedirect.headers.get('Location')).toBeNull();
+        const invalidCode = await fetch(`${HTTP_URL}/oauth/token`, {
+            method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams({
+                grant_type: 'authorization_code', client_id: client.client_id,
+                redirect_uri: callback, code: 'invalid-code', code_verifier: 'b'.repeat(43),
+                resource: `${HTTP_URL}/mcp`,
+            }),
+        });
+        expect(invalidCode.status).toBe(400);
+        expect(await invalidCode.json()).toMatchObject({ error: 'invalid_grant' });
+    }, 30000);
 });
 /**
  * E2e tests run for each transport mode. Both exercise the same pipeline:

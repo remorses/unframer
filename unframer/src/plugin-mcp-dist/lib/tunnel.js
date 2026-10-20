@@ -10,10 +10,6 @@
  *
  * Dropped: downstream relay, multiplexer, wildcard subscribers, standalone worker export.
  */
-/**
- * Route /_tunnel/* requests to a Tunnel Durable Object.
- * Use in the worker's fetch handler to add tunnel support.
- */
 export function handleTunnelFetch({ req, doNamespace, }) {
     const url = new URL(req.url);
     if (!url.pathname.startsWith('/_tunnel/')) {
@@ -106,6 +102,7 @@ export const addCors = (r) => {
     newHeaders.set('Access-Control-Allow-Origin', '*');
     newHeaders.set('Access-Control-Allow-Headers', '*');
     newHeaders.set('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
+    newHeaders.set('Access-Control-Expose-Headers', 'WWW-Authenticate');
     return new Response(r.body, {
         status: r.status,
         statusText: r.statusText,

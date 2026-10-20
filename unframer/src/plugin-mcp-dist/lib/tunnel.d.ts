@@ -23,9 +23,21 @@ export type Attachment = {
  * Route /_tunnel/* requests to a Tunnel Durable Object.
  * Use in the worker's fetch handler to add tunnel support.
  */
+/**
+ * Only the two methods this function calls are required. `wrangler types`
+ * generates `DurableObjectNamespace<McpTunnel>` for the binding, and McpTunnel
+ * is not `Rpc.DurableObjectBranded`, so naming the class type here would not
+ * type check. Asking for the structural minimum avoids a cast.
+ */
+type TunnelNamespace = {
+    idFromName(name: string): DurableObjectId;
+    get(id: DurableObjectId): {
+        fetch(req: Request): Promise<Response>;
+    };
+};
 export declare function handleTunnelFetch({ req, doNamespace, }: {
     req: Request;
-    doNamespace: DurableObjectNamespace;
+    doNamespace: TunnelNamespace;
 }): Promise<Response> | null;
 /**
  * Upstream-only Tunnel Durable Object.
@@ -52,4 +64,5 @@ export declare class Tunnel<E = unknown> {
     }): void;
 }
 export declare const addCors: (r: Response) => Response;
+export {};
 //# sourceMappingURL=tunnel.d.ts.map
