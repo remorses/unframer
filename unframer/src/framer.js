@@ -13403,7 +13403,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.ZDMCAUHJ.mjs
+// /:https://app.framerstatic.com/framer.TGZX6ROI.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -38393,7 +38393,7 @@ var ContainerInner = /* @__PURE__ */ React42.forwardRef(function ContainerInner2
   const clonedChildren = React42.Children.map(children, (child) => {
     return React42.isValidElement(child,)
       ? React42.cloneElement(child, {
-        layoutId,
+        layoutId: layoutId ?? child.props.layoutId,
       },)
       : child;
   },);
@@ -62824,7 +62824,7 @@ var package_default = {
     '@types/dom-navigation': '^1.0.6',
     '@types/fontfaceobserver': '2.1',
     '@types/google.fonts': '1.0',
-    '@types/node': '24.13.6',
+    '@types/node': '24.19.2',
     '@types/react': '18.3.3',
     '@types/react-dom': '18.2',
     '@types/yargs': '^17.0.33',
@@ -63019,7 +63019,6 @@ export {
   delayInSeconds,
   DeprecatedFrameWithEvents,
   DeprecatedLayoutGroupContext,
-  DeprecatedLayoutGroupContext as LayoutGroupContext,
   Device,
   DeviceCodeComponent,
   devicePresets,
@@ -63198,6 +63197,7 @@ export {
   Layer,
   LayoutAnimationBuilder,
   LayoutGroup,
+  LayoutGroupContext,
   LayoutIdContext,
   lazy,
   lazyModulesCollector,
