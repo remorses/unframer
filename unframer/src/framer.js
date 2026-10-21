@@ -5738,9 +5738,9 @@ var VisualElement = class {
         delete this.propEventSubscriptions[key7];
       }
       const listenerName = 'on' + key7;
-      const listener = props[listenerName];
-      if (listener) {
-        this.propEventSubscriptions[key7] = this.on(key7, listener,);
+      const listener2 = props[listenerName];
+      if (listener2) {
+        this.propEventSubscriptions[key7] = this.on(key7, listener2,);
       }
     }
     this.prevMotionValues = updateMotionValuesFromProps(
@@ -11461,18 +11461,18 @@ function scrollInfo(onScroll, {
         handler.notify();
       }
     };
-    const listener2 = () => frame.read(measureAll,);
-    scrollListeners.set(container, listener2,);
+    const listener22 = () => frame.read(measureAll,);
+    scrollListeners.set(container, listener22,);
     const target = getEventTarget(container,);
-    __unframerWindow.addEventListener('resize', listener2,);
+    __unframerWindow.addEventListener('resize', listener22,);
     if (container !== document.documentElement) {
-      resizeListeners.set(container, resize(container, listener2,),);
+      resizeListeners.set(container, resize(container, listener22,),);
     }
-    target.addEventListener('scroll', listener2,);
-    listener2();
+    target.addEventListener('scroll', listener22,);
+    listener22();
   }
   if (trackContentSize && !dimensionCheckProcesses.has(container,)) {
-    const listener2 = scrollListeners.get(container,);
+    const listener22 = scrollListeners.get(container,);
     const size = {
       width: container.scrollWidth,
       height: container.scrollHeight,
@@ -11482,7 +11482,7 @@ function scrollInfo(onScroll, {
       const newWidth = container.scrollWidth;
       const newHeight = container.scrollHeight;
       if (size.width !== newWidth || size.height !== newHeight) {
-        listener2();
+        listener22();
         size.width = newWidth;
         size.height = newHeight;
       }
@@ -11490,10 +11490,10 @@ function scrollInfo(onScroll, {
     const dimensionCheckProcess = frame.read(checkScrollDimensions, true,);
     dimensionCheckProcesses.set(container, dimensionCheckProcess,);
   }
-  const listener = scrollListeners.get(container,);
-  frame.read(listener, false, true,);
+  const listener2 = scrollListeners.get(container,);
+  frame.read(listener2, false, true,);
   return () => {
-    cancelFrame(listener,);
+    cancelFrame(listener2,);
     const currentHandlers = onScrollHandlers.get(container,);
     if (!currentHandlers) return;
     currentHandlers.delete(containerHandler,);
@@ -13403,7 +13403,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.TGZX6ROI.mjs
+// /:https://app.framerstatic.com/framer.D6DYWMUD.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -13436,11 +13436,11 @@ var require_eventemitter3 = __commonJS({
       if (typeof fn !== 'function') {
         throw new TypeError('The listener must be a function',);
       }
-      var listener = new EE(fn, context || emitter, once,),
+      var listener2 = new EE(fn, context || emitter, once,),
         evt = prefix3 ? prefix3 + event : event;
-      if (!emitter._events[evt]) emitter._events[evt] = listener, emitter._eventsCount++;
-      else if (!emitter._events[evt].fn) emitter._events[evt].push(listener,);
-      else emitter._events[evt] = [emitter._events[evt], listener,];
+      if (!emitter._events[evt]) emitter._events[evt] = listener2, emitter._eventsCount++;
+      else if (!emitter._events[evt].fn) emitter._events[evt].push(listener2,);
+      else emitter._events[evt] = [emitter._events[evt], listener2,];
       return emitter;
     }
     function clearEvent(emitter, evt,) {
@@ -26220,6 +26220,13 @@ function injectCSSRule(cssRule, sheet, cache2 = defaultCache,) {
     sheet.insertRule(cssRule, sheet.cssRules.length,);
   } catch {}
 }
+var listener;
+function hasCSSEvaluationListener() {
+  return listener !== void 0;
+}
+function reportEvaluatedCSS(serializationId, escapedCSS,) {
+  listener?.(serializationId, escapedCSS,);
+}
 var framerPostSSRCSSSelector = 'style[data-framer-css-ssr-minified]';
 var componentsWithServerRenderedStyles = /* @__PURE__ */ (() => {
   if (!isBrowser22()) return /* @__PURE__ */ new Set();
@@ -26232,8 +26239,12 @@ function currentCSSRenderTarget() {
   if (isScreenshotFramerHost()) return RenderTarget.preview;
   return RenderTarget.current();
 }
-var withCSS = (Component17, escapedCSS, componentSerializationId,) =>
-  React42.forwardRef((props, ref,) => {
+var withCSS = (Component17, escapedCSS, componentSerializationId,) => {
+  if (hasCSSEvaluationListener() && componentSerializationId !== void 0 && !isFunction(escapedCSS,)) {
+    const rules = Array.isArray(escapedCSS,) ? escapedCSS : escapedCSS.split('\n',);
+    reportEvaluatedCSS(componentSerializationId, rules.filter(Boolean,),);
+  }
+  return React42.forwardRef((props, ref,) => {
     const {
       sheet,
       cache: cache2,
@@ -26259,6 +26270,7 @@ var withCSS = (Component17, escapedCSS, componentSerializationId,) =>
       ref,
     },);
   },);
+};
 var CSSCollector = class {
   styles = /* @__PURE__ */ new Set();
   componentIds = /* @__PURE__ */ new Set();
@@ -41776,11 +41788,11 @@ var TriggerState = class {
       [...this.triggers.entries(),].filter(([, triggerEntry,],) => triggerEntry.status === 'triggered').map(([trigger,],) => trigger),
     );
   }
-  addOnTriggerListener(listener,) {
-    this.onTriggerListeners.add(listener,);
+  addOnTriggerListener(listener2,) {
+    this.onTriggerListeners.add(listener2,);
   }
-  removeOnTriggerListener(listener,) {
-    this.onTriggerListeners.delete(listener,);
+  removeOnTriggerListener(listener2,) {
+    this.onTriggerListeners.delete(listener2,);
   }
   subscribe(triggerId, targetId, trigger, callback,) {
     if (isEmptyTrigger(trigger,)) return noop2;
@@ -42004,8 +42016,8 @@ var TriggerState = class {
     const triggerEntry = this.triggers.get(triggerId,);
     if (triggerEntry?.status !== 'pending') return;
     triggerEntry.status = 'triggered';
-    for (const listener of this.onTriggerListeners) {
-      listener(triggerId,);
+    for (const listener2 of this.onTriggerListeners) {
+      listener2(triggerId,);
     }
     if (options.callCallback) {
       triggerEntry.callback?.();
@@ -42541,7 +42553,7 @@ var useSendPageView = (
         sendTrackingEvent('published_site_pageview', eventData, 'eager',);
       }
     })();
-    const listener = async (event) => {
+    const listener2 = async (event) => {
       if (event.persisted) {
         const eventDataOrPromise = pageviewEventData.current = getFullPageviewEventData();
         const eventData = eventDataOrPromise instanceof Promise ? await eventDataOrPromise : eventDataOrPromise;
@@ -42549,9 +42561,9 @@ var useSendPageView = (
         sendTrackingEvent('published_site_pageview', eventData, 'eager',);
       }
     };
-    __unframerWindow2.addEventListener('pageshow', listener,);
+    __unframerWindow2.addEventListener('pageshow', listener2,);
     return () => {
-      __unframerWindow2.removeEventListener('pageshow', listener,);
+      __unframerWindow2.removeEventListener('pageshow', listener2,);
     };
   }, [
     currentRoute,
@@ -52578,6 +52590,7 @@ function safeCSSValue(value,) {
   if (reUnsafeCharacters.test(value,)) return 'none';
   return value;
 }
+var appliedOverrides = /* @__PURE__ */ new WeakMap();
 function withCodeBoundaryForOverrides(Component17, {
   scopeId,
   nodeId,
@@ -52585,9 +52598,9 @@ function withCodeBoundaryForOverrides(Component17, {
   inComponentSlot,
 },) {
   if (!shouldEnableCodeBoundaries()) {
-    return override(Component17,);
+    return applyOverride(Component17, override, scopeId, nodeId,);
   }
-  const appliedOverride = tryToApplyOverride(Component17, override,);
+  const appliedOverride = tryToApplyOverride(Component17, override, scopeId, nodeId,);
   let hasErrorBeenLogged = false;
   function CodeBoundaryForOverrides(props, ref,) {
     const nearestExternalComponent = useNearestExternalComponent();
@@ -52658,9 +52671,9 @@ function withCodeBoundaryForOverrides(Component17, {
   }
   return React42.forwardRef(CodeBoundaryForOverrides,);
 }
-function tryToApplyOverride(Component17, override,) {
+function tryToApplyOverride(Component17, override, scopeId, nodeId,) {
   try {
-    const ComponentWithOverrides = override(Component17,);
+    const ComponentWithOverrides = applyOverride(Component17, override, scopeId, nodeId,);
     return {
       status: 'success',
       Component: ComponentWithOverrides,
@@ -52671,6 +52684,23 @@ function tryToApplyOverride(Component17, override,) {
       error,
     };
   }
+}
+function applyOverride(Component17, override, scopeId, nodeId,) {
+  let components = appliedOverrides.get(override,);
+  if (!components) {
+    components = /* @__PURE__ */ new WeakMap();
+    appliedOverrides.set(override, components,);
+  }
+  let callSites = components.get(Component17,);
+  if (!callSites) {
+    callSites = /* @__PURE__ */ new Map();
+    components.set(Component17, callSites,);
+  }
+  const callSite = `${scopeId}:${nodeId}`;
+  if (callSites.has(callSite,)) return callSites.get(callSite,);
+  const ComponentWithOverrides = override(Component17,);
+  callSites.set(callSite, ComponentWithOverrides,);
+  return ComponentWithOverrides;
 }
 function valueWithMirroring(value, mirror,) {
   return mirror ? wrap(0, 2, value,) : value;
