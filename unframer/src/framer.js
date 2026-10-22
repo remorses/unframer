@@ -13403,7 +13403,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.D6DYWMUD.mjs
+// /:https://app.framerstatic.com/framer.L52ZV42Z.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -27084,7 +27084,8 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
     }
 `, /* css */
   `
-        a.framer-text:hover,
+        /* Linked images keep the radius and padding of their image style. */
+        a.framer-text:where(:not(.framer-image)):hover,
         a.framer-text:hover span.framer-text:not([data-text-fill]),
         span.framer-text[data-nested-link]:hover,
         span.framer-text[data-nested-link]:hover span.framer-text:not([data-text-fill]) {
@@ -27163,7 +27164,7 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
     }
    `, /* css */
   `
-        a.framer-text[data-framer-page-link-current],
+        a.framer-text:where(:not(.framer-image))[data-framer-page-link-current],
         a.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]),
         span.framer-text[data-framer-page-link-current],
         span.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]) {
@@ -27257,7 +27258,7 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
         }
     `, /* css */
   `
-        a.framer-text[data-framer-page-link-current]:hover,
+        a.framer-text:where(:not(.framer-image))[data-framer-page-link-current]:hover,
         a.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]),
         span.framer-text[data-framer-page-link-current]:hover,
         span.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]) {
@@ -27352,6 +27353,13 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             display: ${defaultImageStyle.display};
             max-width: 100%;
             height: auto;
+        }
+    `, /* css */
+  `
+        /* A linked image gets its image style on both the link and the image; only the image draws the border and shadow. */
+        a.framer-image.framer-text {
+            border: none;
+            box-shadow: none;
         }
     `, /* css */
   `
@@ -44265,8 +44273,6 @@ var FetchClient = class _FetchClient {
       nextSubscribers.delete(callback,);
       if (nextSubscribers.size === 0) {
         this.#subscribers.delete(cacheKey,);
-      }
-      if (this.#subscribers.size === 0) {
         this.stopQueryRefetching(request,);
       }
     };

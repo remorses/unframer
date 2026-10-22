@@ -413,7 +413,8 @@ body { --framer-will-change-filter-override: none; }
     }
 
 
-        a.framer-text:hover,
+        /* Linked images keep the radius and padding of their image style. */
+        a.framer-text:where(:not(.framer-image)):hover,
         a.framer-text:hover span.framer-text:not([data-text-fill]),
         span.framer-text[data-nested-link]:hover,
         span.framer-text[data-nested-link]:hover span.framer-text:not([data-text-fill]) {
@@ -465,7 +466,7 @@ body { --framer-will-change-filter-override: none; }
     }
    
 
-        a.framer-text[data-framer-page-link-current],
+        a.framer-text:where(:not(.framer-image))[data-framer-page-link-current],
         a.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]),
         span.framer-text[data-framer-page-link-current],
         span.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]) {
@@ -532,7 +533,7 @@ body { --framer-will-change-filter-override: none; }
         }
     
 
-        a.framer-text[data-framer-page-link-current]:hover,
+        a.framer-text:where(:not(.framer-image))[data-framer-page-link-current]:hover,
         a.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]),
         span.framer-text[data-framer-page-link-current]:hover,
         span.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]) {
@@ -592,6 +593,13 @@ body { --framer-will-change-filter-override: none; }
             display: block;
             max-width: 100%;
             height: auto;
+        }
+    
+
+        /* A linked image gets its image style on both the link and the image; only the image draws the border and shadow. */
+        a.framer-image.framer-text {
+            border: none;
+            box-shadow: none;
         }
     
 
