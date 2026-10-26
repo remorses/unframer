@@ -14757,7 +14757,7 @@ function ReorderItemComponent({
 }
 var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 
-// /:https://app.framerstatic.com/framer.A7SQMN7Z.mjs
+// /:https://app.framerstatic.com/framer.7RRNSF5C.mjs
 
 import React42 from 'react';
 import { startTransition as startTransition2, useDeferredValue, useSyncExternalStore, } from 'react';
@@ -45850,7 +45850,12 @@ function useServerDatabaseClient() {
   assert(client, 'Missing ServerDatabaseClient',);
   return client;
 }
-MotionGlobalConfig.WillChange = WillChangeMotionValue;
+MotionGlobalConfig.WillChange = class extends WillChangeMotionValue {
+  add(name,) {
+    if (name === 'backgroundColor') return;
+    super.add(name,);
+  }
+};
 function PageRoot(props,) {
   const {
     RootComponent,
