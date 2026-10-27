@@ -104,6 +104,7 @@
         "dprint-node": "^1.0.8",
         "lightningcss": "^1.32.0",
         "openai": "^4.80.1",
+        "playwright": "1.53.1",
         "posthtml": "^0.16.6",
         "react": "19.2.7",
         "react-dom": "19.2.7",

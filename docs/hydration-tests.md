@@ -32,3 +32,14 @@ The script holds JavaScript requests until SSR and CSS are ready. It checks mobi
 tablet and desktop first paint, keeps the visible SSR navigation node through hydration,
 samples painted navigation variants, hydrates Astro's lazy islands, and resizes across
 every breakpoint edge. React recovery errors and uncaught page errors fail the check.
+
+## Benchmark
+
+**Compare** current hydration with the old pre-hydration DOM pruning, using the same servers:
+
+```sh
+cd unframer && pnpm tsx scripts/bench-hydration.ts
+```
+
+It throttles CPU 4x and alternates both modes, 7 runs each. `prune` runs the old
+`removeInactiveUnframerHiddenElements` body before any app script loads.

@@ -5,7 +5,7 @@ This project is a CLI called `unframer` that downloads Framer website builder co
 ## Architecture
 
 - `unframer/src/exporter.ts` writes React components and their synchronous `styles.css`.
-- `unframer/src/react.tsx` owns responsive rendering. SSR and hydration render all variants; CSS shows only the active breakpoint. React removes inactive variants after hydration.
+- `unframer/src/react.tsx` owns responsive rendering. SSR renders all variants plus an inline script that removes inactive ones while HTML parses and records the kept breakpoint; hydration renders that same variant. If the script is blocked (CSP), all variants hydrate and CSS hides the extra ones.
 - `unframer/src/css-core.ts` generates breakpoint CSS without importing the Framer runtime.
 - The Next.js, Astro and Remix apps exercise the shared runtime. See [docs/hydration-tests.md](docs/hydration-tests.md) for browser regression checks.
 

@@ -106,10 +106,9 @@ for (const app of apps) {
                 before.roots > 0,
                 'The response must include responsive SSR markup',
             )
-            assert.equal(
-                before.navs,
-                2,
-                'Both navigation variants must exist before JavaScript runs',
+            assert.ok(
+                before.navs >= 1,
+                'The navigation must exist before app JavaScript runs',
             )
             assert.equal(
                 before.visible,

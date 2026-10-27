@@ -8,6 +8,8 @@ import {
     createContext,
     forwardRef,
     useContext,
+    useEffect,
+    useId,
     useMemo,
     useSyncExternalStore,
 } from 'react'
@@ -35,6 +37,13 @@ const defaultBreakpoints = Object.keys(
 ).reverse() as UnframerBreakpoint[]
 
 export type UnframerBreakpoint = keyof typeof defaultBreakpointSizes
+
+declare global {
+    interface Window {
+        /** Breakpoint kept by each responsive group's inline prune script, keyed by group class. */
+        __unframerPruned?: Record<string, UnframerBreakpoint>
+    }
+}
 
 type Breakpoints = Record<UnframerBreakpoint, string>
 
@@ -123,16 +132,21 @@ export const WithFramerBreakpoints = <
     Component: T
     variants: Record<UnframerBreakpoint, ComponentPropsWithoutRef<T>['variant']>
 } & Omit<ComponentPropsWithoutRef<T>, 'variant'>): any => {
-    // Keep every SSR variant through hydration; CSS hides inactive ones from first paint.
-    // React prunes them after hydration. Never remove SSR nodes outside React (issue #53).
+    const group = `unframer-group-${useId().replace(/[^\w-]/g, '')}`
+    // An inline script removes inactive SSR variants while the HTML parses and records
+    // the breakpoint it kept. Hydration renders that same variant, so the DOM matches (issue #53).
+    // Without the script (CSP, client navigation) all variants hydrate and CSS hides the extra ones.
     const currentBreakpoint = useSyncExternalStore(
         onResize,
+        getWindowBreakpoint,
         () =>
-            defaultBreakpoints.find(
-                (name) => window.innerWidth >= defaultBreakpointSizes[name],
-            ),
-        () => '',
+            typeof window === 'undefined'
+                ? ''
+                : window.__unframerPruned?.[group] || '',
     )
+    useEffect(() => {
+        delete window.__unframerPruned?.[group]
+    }, [group])
     if (isEmpty(_breakpointsMap)) {
         // @ts-ignore
         return <Component {...rest} />
@@ -173,7 +187,7 @@ export const WithFramerBreakpoints = <
             if (!shouldShow) {
                 return null
             }
-            const c = classNames(className, rest.className)
+            const c = classNames(className, group, rest.className)
 
             return (
                 // @ts-ignore
@@ -191,9 +205,29 @@ export const WithFramerBreakpoints = <
             )
         },
     )
+    parts.push(
+        <script
+            key='prune'
+            dangerouslySetInnerHTML={{ __html: pruneScript(group) }}
+        />,
+    )
     parts.push(<DebugUnframerVersion key='debug-unframer-version' />)
 
     return parts
+}
+
+function getWindowBreakpoint() {
+    return defaultBreakpoints.find(
+        (name) => window.innerWidth >= defaultBreakpointSizes[name],
+    )
+}
+
+const breakpointExpression = defaultBreakpoints
+    .map((name) => `w>=${defaultBreakpointSizes[name]}?'${name}':`)
+    .join('')
+
+function pruneScript(group: string) {
+    return `(function(){var w=innerWidth,b=${breakpointExpression}'';document.querySelectorAll('.${group}').forEach(function(e){if(!e.classList.contains('unframer-'+b))e.remove()});(window.__unframerPruned=window.__unframerPruned||{})['${group}']=b})()`
 }
 
 const onResize = (callback) => {
