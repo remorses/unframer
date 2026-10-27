@@ -1,5 +1,7 @@
-body { --framer-will-change-override: none; --framer-will-change-effect-override: none; }
+body { --framer-will-change-override: none; }
+@supports (background: -webkit-named-image(i)) and (not (grid-template-rows: subgrid)) { body { --framer-will-change-override: transform; } }
 body { --framer-will-change-filter-override: none; }
+@supports (background: -webkit-named-image(i)) and (not (position-area: top right)) { body { --framer-will-change-filter-override: filter; } }
 [data-framer-component-type] { position: absolute; }
 [data-framer-component-type="Text"] { cursor: inherit; }
 [data-framer-component-text-autosized] * { white-space: pre; }
@@ -898,6 +900,8 @@ NavigationContainer
 [data-framer-cursor="pointer"] { cursor: pointer; }
 [data-framer-cursor="grab"] { cursor: grab; }
 [data-framer-cursor="grab"]:active { cursor: grabbing; }
+[data-framer-component-type="Frame"] *, [data-framer-component-type="Stack"] * { pointer-events: auto; }
+[data-framer-generated] * { pointer-events: unset }
 .svgContainer svg { display: block; }
 [data-reset="button"] {
         border-width: 0;
