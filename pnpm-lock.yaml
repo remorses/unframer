@@ -209,7 +209,7 @@ importers:
         version: 1.9.4
       '@goke/mcp':
         specifier: ^0.0.4
-        version: 0.0.4(goke@6.12.2)(hono@4.11.5)(zod@4.4.3)
+        version: 0.0.4(goke@6.17.0)(hono@4.11.5)(zod@4.4.3)
       '@inquirer/prompts':
         specifier: ^8.2.0
         version: 8.2.0(@types/node@22.15.21)
@@ -3705,10 +3705,6 @@ packages:
   globrex@0.1.2:
     resolution: {integrity: sha512-uHJgbwAMwNFf5mLst7IWLNg14x1CkeqglJb/K3doi4dw6q2IvAAmM/Y81kevy83wP+Sst+nutFTYOGg3d1lsxg==}
 
-  goke@6.12.2:
-    resolution: {integrity: sha512-g2NW53fZic1AceEJhm9NFw+BJGxAIgEcIum11APMRKBIy7ZY9325s9uDpwjscOsDG36zPLIi7G8OSK4W96/jfw==}
-    engines: {node: '>=18'}
-
   goke@6.17.0:
     resolution: {integrity: sha512-mSyMJ0TaMgkuypy1NVJ4YvxM1XnZQ2RvfDyry6IcCIU0lfKm0/wdk+OhC1hkIMfvvRmSpONqxifGNCd0JuPl0w==}
     engines: {node: '>=18'}
@@ -7057,10 +7053,10 @@ snapshots:
 
   '@fastify/busboy@2.1.1': {}
 
-  '@goke/mcp@0.0.4(goke@6.12.2)(hono@4.11.5)(zod@4.4.3)':
+  '@goke/mcp@0.0.4(goke@6.17.0)(hono@4.11.5)(zod@4.4.3)':
     dependencies:
       '@modelcontextprotocol/sdk': 1.25.3(hono@4.11.5)(zod@4.4.3)
-      goke: 6.12.2
+      goke: 6.17.0
       js-yaml: 4.1.1
     transitivePeerDependencies:
       - '@cfworker/json-schema'
@@ -9500,8 +9496,6 @@ snapshots:
       slash: 3.0.0
 
   globrex@0.1.2: {}
-
-  goke@6.12.2: {}
 
   goke@6.17.0: {}
 
