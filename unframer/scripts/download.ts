@@ -439,17 +439,18 @@ export async function fixFramerCode({ resultFile }) {
         what: 'webpackIgnore/@vite-ignore comments on the lazy module dynamic import',
     })
 
-    // Framer wraps combinedCSSRules in a LazyProp getter object, see
-    // library/src/modules/LazyProp.ts. Its own getCombinedCSSRules() reads
-    // `combinedCSSRules.value`, so the declaration must be left untouched:
-    // rewriting it into a plain array silently returns undefined there and kills
-    // css injection in every exported site. Re-export the resolved array under
-    // the public name instead, so consumers keep seeing a string[].
-    if (!/var combinedCSSRules = [^\n]*LazyProp\(/.test(codeAfter)) {
-        throw new Error(
-            'Failed to patch framer.js: could not find the `var combinedCSSRules = ... LazyProp(...)` declaration. Framer probably changed how combinedCSSRules is defined, check the bundle and update this script.',
-        )
-    }
+    // Framer lazy-loads library CSS since Oct 2026. Load it synchronously for SSR and CSS exports.
+    codeAfter = replaceOrThrow({
+        code: codeAfter,
+        find: /var getLoadedLibraryCSS;\s*function loadLibraryCSSRules\(\) \{\s*return libraryCSSRules \?\?= import\(('\.\/framer-chunks\/[^']+\.js')\)/,
+        replace: dedent`
+        import { getCombinedCSSRules as unframerGetCombinedCSSRules } from $1;
+        var getLoadedLibraryCSS = unframerGetCombinedCSSRules;
+        function loadLibraryCSSRules() {
+            return libraryCSSRules ??= import($1)
+        `,
+        what: 'synchronous library CSS initialization from the lazy CSS chunk',
+    })
 
     // TODO this code does not work in react strict mode, bug in framer
     const toRemove =
@@ -466,7 +467,7 @@ export async function fixFramerCode({ resultFile }) {
     export { Link as FramerLink  }
     export { Router, FetchClientProvider, FormContext, LocaleInfoContext, injectCSSRule, componentsWithServerRenderedStyles }
 
-    const unframerCombinedCSSRules = combinedCSSRules.value
+    const unframerCombinedCSSRules = getLibraryCSS()
     export { unframerCombinedCSSRules as combinedCSSRules }
     `
     code = codeAfter

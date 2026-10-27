@@ -15,18 +15,18 @@ When it goes red, there are only **two** possible causes. Triage tells them apar
 
 ## Triage: auth or runtime change?
 
-Read the failed run log and look for this line:
+Read the failed run log and look for the runtime download:
 
 ```
-framer.js size is 1.96 Mb
+[FETCH] https://app.framerstatic.com/framer.XXXXXXXX.mjs
 ```
 
-| Log reaches `framer.js size is …`? | Cause | Fix |
+| Failure | Cause | Fix |
 |---|---|---|
-| **no** | expired `FRAMER_SESSION` cookie | refresh the cookie, see below |
-| **yes** | Framer refactored its runtime | patch `download.ts`, see below |
+| Project returns 401 or no runtime URL | expired `FRAMER_SESSION` cookie | refresh the cookie, see below |
+| Runtime downloads, then a patch throws | Framer refactored its runtime | patch `download.ts`, see below |
 
-The size line is printed at the very end of `fixFramerCode()`, long after the session cookie is used. If you see it, authentication worked fine and the cookie is **not** your problem.
+The `[FETCH]` line proves authentication worked. The size line is printed **after** all patches, so a missing size line does not mean the cookie expired.
 
 An expired cookie fails much earlier, with one of:
 
@@ -124,7 +124,31 @@ Compare against the committed `unframer/src/framer.js` to see the old shape, the
 
 Note the raw bundle is **pre-dprint**. `fixFramerCode()` patches the output *after* `dprint.format()`, which adds trailing commas (`combineCSSRules(false,)`). Write patterns loose enough to survive that, then verify against the real regenerated `src/framer.js`.
 
-### Patch internals, never the declarations Framer reads
+### Keep library CSS synchronous for SSR
+
+Since Oct 2026, Framer loads its library CSS from a **separate chunk**:
+
+```js
+let getLoadedLibraryCSS;
+function getLibraryCSS() {
+  if (getLoadedLibraryCSS) return getLoadedLibraryCSS();
+  if (isBrowser()) loadLibraryCSSRules();
+  return [];
+}
+```
+
+Unframer statically imports that chunk's `getCombinedCSSRules` and initializes `getLoadedLibraryCSS` with it. This keeps Framer's own SSR styles and Unframer's `combinedCSSRules` export available without a browser or an asynchronous import. The patch captures the emitted chunk path, so it does not pin a daily hash.
+
+```js
+import { getCombinedCSSRules as unframerGetCombinedCSSRules } from './framer-chunks/chunk.HASH.js';
+var getLoadedLibraryCSS = unframerGetCombinedCSSRules;
+const unframerCombinedCSSRules = getLibraryCSS();
+export { unframerCombinedCSSRules as combinedCSSRules };
+```
+
+The regression test in `unframer/src/exporter.test.ts` checks the real runtime export, server-rendered `FramerStyles`, and generated CSS parsing.
+
+### Leave the CSS chunk's getter internals intact
 
 The `combinedCSSRules` patch is the cautionary example. Framer declares:
 
@@ -141,14 +165,7 @@ function getCombinedCSSRules() {
 }
 ```
 
-Rewriting that declaration into a plain array makes `getCombinedCSSRules()` return `undefined` and **silently kills all CSS injection in every exported site**. So the script leaves the declaration alone and appends an aliased export instead:
-
-```js
-const unframerCombinedCSSRules = combinedCSSRules.value
-export { unframerCombinedCSSRules as combinedCSSRules }
-```
-
-This keeps the public export a `string[]`, which is what `src/react.tsx`, `src/framer.d.ts`, and the `styles/framer.css` generation all expect.
+Rewriting that declaration into a plain array makes `getCombinedCSSRules()` return `undefined` and **silently kills CSS injection**. Leave the chunk's declaration alone. Call its getter instead, and keep Unframer's public export a `string[]` for `src/react.tsx`, `src/framer.d.ts`, and `styles/framer.css` generation.
 
 ## Verifying a fix end to end
 

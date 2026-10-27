@@ -1,5 +1,7 @@
-body { --framer-will-change-override: none; --framer-will-change-effect-override: none; }
+body { --framer-will-change-override: none; }
+@supports (background: -webkit-named-image(i)) and (not (grid-template-rows: subgrid)) { body { --framer-will-change-override: transform; } }
 body { --framer-will-change-filter-override: none; }
+@supports (background: -webkit-named-image(i)) and (not (position-area: top right)) { body { --framer-will-change-filter-override: filter; } }
 [data-framer-component-type] { position: absolute; }
 [data-framer-component-type="Text"] { cursor: inherit; }
 [data-framer-component-text-autosized] * { white-space: pre; }
@@ -413,7 +415,8 @@ body { --framer-will-change-filter-override: none; }
     }
 
 
-        a.framer-text:hover,
+        /* Linked images keep the radius and padding of their image style. */
+        a.framer-text:where(:not(.framer-image)):hover,
         a.framer-text:hover span.framer-text:not([data-text-fill]),
         span.framer-text[data-nested-link]:hover,
         span.framer-text[data-nested-link]:hover span.framer-text:not([data-text-fill]) {
@@ -465,7 +468,7 @@ body { --framer-will-change-filter-override: none; }
     }
    
 
-        a.framer-text[data-framer-page-link-current],
+        a.framer-text:where(:not(.framer-image))[data-framer-page-link-current],
         a.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]),
         span.framer-text[data-framer-page-link-current],
         span.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]) {
@@ -532,7 +535,7 @@ body { --framer-will-change-filter-override: none; }
         }
     
 
-        a.framer-text[data-framer-page-link-current]:hover,
+        a.framer-text:where(:not(.framer-image))[data-framer-page-link-current]:hover,
         a.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]),
         span.framer-text[data-framer-page-link-current]:hover,
         span.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]) {
@@ -595,6 +598,13 @@ body { --framer-will-change-filter-override: none; }
         }
     
 
+        /* A linked image gets its image style on both the link and the image; only the image draws the border and shadow. */
+        a.framer-image.framer-text {
+            border: none;
+            box-shadow: none;
+        }
+    
+
         .text-styles-preset-reset.framer-text {
             --framer-font-family: Inter, Inter Placeholder, sans-serif;
             --framer-font-style: normal;
@@ -633,7 +643,7 @@ body { --framer-will-change-filter-override: none; }
 
         li.framer-text {
             counter-increment: list-item;
-            list-style: none;
+            list-style: "";
             padding-inline-start: 2ch;
         }
     
@@ -890,6 +900,8 @@ NavigationContainer
 [data-framer-cursor="pointer"] { cursor: pointer; }
 [data-framer-cursor="grab"] { cursor: grab; }
 [data-framer-cursor="grab"]:active { cursor: grabbing; }
+[data-framer-component-type="Frame"] *, [data-framer-component-type="Stack"] * { pointer-events: auto; }
+[data-framer-generated] * { pointer-events: unset }
 .svgContainer svg { display: block; }
 [data-reset="button"] {
         border-width: 0;
