@@ -36,12 +36,6 @@ const defaultBreakpoints = Object.keys(
 
 export type UnframerBreakpoint = keyof typeof defaultBreakpointSizes
 
-function getBreakpointNameFromWindowWidth(windowWidth: number) {
-    return defaultBreakpoints.find(
-        (name) => windowWidth >= defaultBreakpointSizes[name],
-    )
-}
-
 type Breakpoints = Record<UnframerBreakpoint, string>
 
 function fillBreakpoints(breakpoints: Breakpoints): Breakpoints {
@@ -119,28 +113,6 @@ export function FramerStyles({ Components = [] as any[] }): any {
         </>
     )
 }
-function removeInactiveUnframerHiddenElements() {
-    // Remove all elements with the 'unframer-hidden' class that are not for the current breakpoint
-    const windowWidth = window.innerWidth
-    const activeBreakpoint = getBreakpointNameFromWindowWidth(windowWidth)
-    const activeClass = activeBreakpoint ? `unframer-${activeBreakpoint}` : null
-
-    document.querySelectorAll('.unframer-hidden').forEach((el) => {
-        if (
-            el.classList.contains('unframer-hidden') &&
-            activeClass &&
-            !el.classList.contains(activeClass)
-        ) {
-            el.parentNode?.removeChild(el)
-        }
-    })
-}
-
-if (typeof window !== 'undefined') {
-    // Known hydration issue: this removes SSR variants before React hydrates. https://github.com/remorses/unframer/issues/53
-    removeInactiveUnframerHiddenElements()
-}
-
 export const WithFramerBreakpoints = <
     T extends ComponentType<{ variant?: any; className?: string }>,
 >({
@@ -151,15 +123,14 @@ export const WithFramerBreakpoints = <
     Component: T
     variants: Record<UnframerBreakpoint, ComponentPropsWithoutRef<T>['variant']>
 } & Omit<ComponentPropsWithoutRef<T>, 'variant'>): any => {
-    // getServerSnapshot must always return '' to match what the server rendered.
-    // During hydration React calls getServerSnapshot on the client too; if it
-    // returned the real breakpoint, the tree structure would differ from the
-    // server (server renders all variants, client would render only one).
+    // Keep every SSR variant through hydration; CSS hides inactive ones from first paint.
+    // React prunes them after hydration. Never remove SSR nodes outside React (issue #53).
     const currentBreakpoint = useSyncExternalStore(
         onResize,
-        () => {
-            return getBreakpointNameFromWindowWidth(window.innerWidth)
-        },
+        () =>
+            defaultBreakpoints.find(
+                (name) => window.innerWidth >= defaultBreakpointSizes[name],
+            ),
         () => '',
     )
     if (isEmpty(_breakpointsMap)) {
@@ -207,7 +178,6 @@ export const WithFramerBreakpoints = <
             return (
                 // @ts-ignore
                 <Component
-                    suppressHydrationWarning
                     // LayoutGroup is used internally
                     layoutId={variant}
                     key={variant}
