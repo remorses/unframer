@@ -3,6 +3,24 @@ import { replaceWebPageIds } from './esbuild.js'
 import { getStyleTokensCss } from './exporter.js'
 import { transform } from 'lightningcss'
 import path from 'path'
+import fs from 'node:fs'
+import { createElement } from 'react'
+import { renderToStaticMarkup } from 'react-dom/server'
+
+test('keeps library CSS available synchronously for exports and SSR', async () => {
+    const { combinedCSSRules } = await import('./framer.js')
+    expect(Array.isArray(combinedCSSRules)).toBe(true)
+    expect(combinedCSSRules.length).toBeGreaterThan(0)
+    expect(combinedCSSRules.every((rule) => typeof rule === 'string')).toBe(true)
+
+    const { FramerStyles } = await import('./react.js')
+    const html = renderToStaticMarkup(createElement(FramerStyles))
+    expect(html).toContain(combinedCSSRules.join('\n'))
+
+    const css = fs.readFileSync(new URL('./styles/framer.css', import.meta.url))
+    expect(css.toString()).toContain('[data-framer-component-type=')
+    transform({ filename: 'framer.css', code: css, minify: true })
+})
 
 // Regression for https://github.com/unframer/website-c50b9 CI failure:
 // a Framer color style whose color value contained CSS-structural chars (a `}`
