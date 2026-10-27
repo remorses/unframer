@@ -1,6 +1,6 @@
 {
     "name": "unframer",
-    "version": "4.2.1",
+    "version": "4.3.0",
     "type": "module",
     "description": "Import Framer components directly in your React app, type safe and customizable",
     "sideEffects": false,
@@ -24,7 +24,6 @@
         "framer-fixed",
         "bin.js",
         "src",
-        "!src/framer-chunks",
         "README.md"
     ],
     "main": "./dist/index.js",

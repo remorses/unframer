@@ -235,8 +235,8 @@ importers:
         specifier: ^0.1.2
         version: 0.1.2
       goke:
-        specifier: ^6.12.1
-        version: 6.12.2
+        specifier: ^6.17.0
+        version: 6.17.0
       htmlparser2:
         specifier: ^10.1.0
         version: 10.1.0
@@ -3707,6 +3707,10 @@ packages:
 
   goke@6.12.2:
     resolution: {integrity: sha512-g2NW53fZic1AceEJhm9NFw+BJGxAIgEcIum11APMRKBIy7ZY9325s9uDpwjscOsDG36zPLIi7G8OSK4W96/jfw==}
+    engines: {node: '>=18'}
+
+  goke@6.17.0:
+    resolution: {integrity: sha512-mSyMJ0TaMgkuypy1NVJ4YvxM1XnZQ2RvfDyry6IcCIU0lfKm0/wdk+OhC1hkIMfvvRmSpONqxifGNCd0JuPl0w==}
     engines: {node: '>=18'}
 
   gopd@1.2.0:
@@ -9498,6 +9502,8 @@ snapshots:
   globrex@0.1.2: {}
 
   goke@6.12.2: {}
+
+  goke@6.17.0: {}
 
   gopd@1.2.0: {}
 

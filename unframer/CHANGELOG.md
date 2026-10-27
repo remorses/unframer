@@ -1,5 +1,20 @@
 # unframer
 
+## 4.3.0
+
+1. **Authorize Framer MCP projects in the browser.** Run `unframer mcp login --project <url>`, approve on framer.com, and the CLI saves a project-scoped API key. Agents and non-interactive shells get the authorization URL while the CLI waits in the background.
+
+   ```sh
+   unframer mcp login --project "https://framer.com/projects/My-Site--abc123"
+   unframer mcp getProjectXml --project "https://framer.com/projects/My-Site--abc123"
+   ```
+
+   Pass `--api-key <key>` to login, MCP tools, or `mcp eval` to use an existing key. Saved keys are now stored per project. Users of the old single-key config must authorize their projects again.
+
+2. **Update the Framer runtime and preserve server-rendered styles.** Framer now puts library CSS in a separate chunk. Unframer loads its getter synchronously for SSR and generated stylesheets. Source imports and CDN consumers also receive the required runtime chunks.
+
+**Known issue:** responsive components can still trigger React hydration error #418. A controlled comparison reproduces the same SVG link versus logo div mismatch with both the previous and current runtime. This predates this release. See [#53](https://github.com/remorses/unframer/issues/53).
+
 ## 4.2.1
 
 1. **Fixed `unframer mcp updateXmlForNode` on pages that are not open** — Framer only fully loads the **canvas root**, the page or component currently open. For every other page `framer.getNode(id)` returned `null` even though the node exists, so edits answered:

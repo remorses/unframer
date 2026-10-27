@@ -137,6 +137,7 @@ function removeInactiveUnframerHiddenElements() {
 }
 
 if (typeof window !== 'undefined') {
+    // Known hydration issue: this removes SSR variants before React hydrates. https://github.com/remorses/unframer/issues/53
     removeInactiveUnframerHiddenElements()
 }
 
