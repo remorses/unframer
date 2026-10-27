@@ -1,5 +1,13 @@
 # unframer
 
+## 4.3.1
+
+1. **Responsive components hydrate without React error #418, about 2x faster.** Each `.Responsive` component renders a small inline script after its variants. The script removes inactive variants while the HTML parses, and React hydrates only the variant that stays. Breakpoint CSS still shows the right variant from first paint, so there is no flash.
+
+   In a 4x CPU throttled benchmark, hydration of the Next.js example dropped from about 1000 ms to about 500 ms, and Remix from about 1000 ms to about 400 ms.
+
+   If a Content Security Policy blocks inline scripts, all variants hydrate and React removes the inactive ones afterwards, still without hydration errors. Fixes [#53](https://github.com/remorses/unframer/issues/53).
+
 ## 4.3.0
 
 1. **Authorize Framer MCP projects in the browser.** Run `unframer mcp login --project <url>`, approve on framer.com, and the CLI saves a project-scoped API key. Agents and non-interactive shells get the authorization URL while the CLI waits in the background.
