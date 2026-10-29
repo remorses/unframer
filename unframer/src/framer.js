@@ -12738,7 +12738,7 @@ var namespace_exports = /* @__PURE__ */ __exportAll({
   Item: () => ReorderItem,
 },);
 
-// /:https://app.framerstatic.com/framer.CDGohruR.mjs
+// /:https://app.framerstatic.com/framer.CJxjZoiu.mjs
 
 import React, {
   cloneElement as cloneElement3,
@@ -14748,13 +14748,6 @@ function useRouteHandler(routeId, preload = false, elementId,) {
   useRoutePreloader([routeId,], preload,);
   return React.useCallback(() => navigate?.(routeId, elementId,), [navigate, elementId, routeId,],);
 }
-function fillPathVariables(path, variables,) {
-  return path.replace(pathVariablesRegExpGlobal, (match, name,) => {
-    const value = variables[name];
-    if (typeof value !== 'string' || value.length === 0) return match;
-    return encodeURIComponent(value,);
-  },);
-}
 var bugExistenceChecked = false;
 function logIfPopstateCalledSynchronously() {
   if (bugExistenceChecked) return;
@@ -15532,17 +15525,14 @@ function usePopStateHandler(scrollRestoration, currentRouteId, setCurrentRouteId
     };
   }, [popStateHandler, traversalHandler,],);
 }
-async function handleRedirectForMissingSlugs(route, pathVariables, nextLocale, sitePrefix,) {
-  if (!route.path) return false;
-  if (!pathVariables) return false;
-  const nextLocaleWithDefaultSlugPath = sitePrefix + prependLocaleSlug(fillPathVariables(route.path, pathVariables,), nextLocale.slug,);
+async function handleRedirectForMissingPage(path,) {
   if (
-    (await fetch(nextLocaleWithDefaultSlugPath, {
+    (await fetch(path, {
       method: 'HEAD',
       redirect: 'manual',
     },)).type === 'opaqueredirect'
   ) {
-    __unframerWindow2.location.href = __unframerWindow2.location.origin + nextLocaleWithDefaultSlugPath;
+    __unframerWindow2.location.href = __unframerWindow2.location.origin + path;
     return true;
   }
   return false;
@@ -15567,8 +15557,8 @@ async function switchLocale({
   } catch {}
   try {
     if (!isString(result.path,)) throw new Error('Expected result.path to be a string',);
-    if (result.isMissingInLocale) {
-      if (await handleRedirectForMissingSlugs(options.route, result.pathVariables, options.nextLocale, sitePrefix,)) return;
+    if (result.isMissingInLocale || options.route.includedLocales && !options.route.includedLocales.includes(options.nextLocale.id,)) {
+      if (await handleRedirectForMissingPage(sitePrefix + result.path,)) return;
     }
   } catch {}
   return result;
@@ -33609,6 +33599,22 @@ var DeprecatedContainerErrorBoundary = class extends Component2 {
     return hasError ? null : children;
   }
 };
+function DisabledCodeComponent() {
+  return /* @__PURE__ */ jsx('div', {
+    suppressHydrationWarning: true,
+    style: {
+      padding: '12px 16px',
+      borderWidth: 1,
+      borderRadius: 6,
+      borderStyle: 'solid',
+      borderColor: 'rgba(149, 149, 149, 0.15)',
+      backgroundColor: 'rgba(149, 149, 149, 0.1)',
+      fontSize: 12,
+      color: '#a5a5a5',
+    },
+    children: 'Code component disabled',
+  },);
+}
 var ExternalComponentContext = /* @__PURE__ */ (() => React.createContext(void 0,))();
 function useNearestExternalComponent() {
   return React.useContext(ExternalComponentContext,);
@@ -33696,19 +33702,8 @@ function useMaybeWrapComponentWithCodeBoundary(children, scopeId, nodeId, isAuth
     disableCustomCode,
   } = getLibraryFeatures();
   if (disableCustomCode && isAuthoredByUser) {
-    return /* @__PURE__ */ jsx('div', {
+    return /* @__PURE__ */ jsx(DisabledCodeComponent, {
       suppressHydrationWarning: true,
-      style: {
-        padding: '12px 16px',
-        borderWidth: 1,
-        borderRadius: 6,
-        borderStyle: 'solid',
-        borderColor: 'rgba(149, 149, 149, 0.15)',
-        backgroundColor: 'rgba(149, 149, 149, 0.1)',
-        fontSize: 12,
-        color: '#a5a5a5',
-      },
-      children: 'Code component disabled',
     },);
   }
   if (
@@ -36841,6 +36836,13 @@ function EditorBarLauncher({
         features: editorBarFeatures,
       },),
     },),
+  },);
+}
+function fillPathVariables(path, variables,) {
+  return path.replace(pathVariablesRegExpGlobal, (match, name,) => {
+    const value = variables[name];
+    if (typeof value !== 'string' || value.length === 0) return match;
+    return encodeURIComponent(value,);
   },);
 }
 var triggerHistoryStorageKey = 'framer:trigger-history:v1';
@@ -47182,21 +47184,12 @@ function withCodeBoundaryForOverrides(Component22, {
   override,
   inComponentSlot,
 },) {
+  if (getLibraryFeatures().disableCustomCode) return Component22;
   if (!shouldEnableCodeBoundaries()) return applyOverride(Component22, override, scopeId, nodeId,);
   const appliedOverride = tryToApplyOverride(Component22, override, scopeId, nodeId,);
   let hasErrorBeenLogged = false;
   function CodeBoundaryForOverrides(props, ref,) {
     const nearestExternalComponent = useNearestExternalComponent();
-    const {
-      disableCustomCode,
-    } = getLibraryFeatures();
-    if (disableCustomCode) {
-      return /* @__PURE__ */ jsx(Component22, {
-        suppressHydrationWarning: true,
-        ...props,
-        ref,
-      },);
-    }
     if (
       shouldWrapOverrideWithBoundary(scopeId, nearestExternalComponent?.scopeId, nearestExternalComponent?.level, inComponentSlot ?? false,)
     ) {
