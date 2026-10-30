@@ -12738,7 +12738,7 @@ var namespace_exports = /* @__PURE__ */ __exportAll({
   Item: () => ReorderItem,
 },);
 
-// /:https://app.framerstatic.com/framer.CJxjZoiu.mjs
+// /:https://app.framerstatic.com/framer.B6PCHH0A.mjs
 
 import React, {
   cloneElement as cloneElement3,
@@ -32818,10 +32818,14 @@ var withFX = (Component22) =>
       inSmartComponent = false,
     } = extractFXOptions(props,);
     const observerRef = useObserverRef(forwardedRef,);
+    const presenceStyle = isUndefined(targetOpacityValue,) ? props.style : {
+      ...props.style,
+      opacity: void 0,
+    };
     const {
       values: presenceEffectValues,
       style: presenceEffectStyle,
-    } = usePresenceAnimation(presence, observerRef, inSmartComponent, props.style, props[optimizedAppearDataAttribute],);
+    } = usePresenceAnimation(presence, observerRef, inSmartComponent, presenceStyle, props[optimizedAppearDataAttribute],);
     const {
       values: parallaxValues,
       style: parallaxStyle,
