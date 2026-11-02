@@ -12738,7 +12738,7 @@ var namespace_exports = /* @__PURE__ */ __exportAll({
   Item: () => ReorderItem,
 },);
 
-// /:https://app.framerstatic.com/framer.B6PCHH0A.mjs
+// /:https://app.framerstatic.com/framer.B1b760uK.mjs
 
 import React, {
   cloneElement as cloneElement3,
@@ -26937,8 +26937,47 @@ var ControlType = /* @__PURE__ */ function (ControlType2,) {
   ControlType2['VectorSetItem'] = 'vectorsetitem';
   ControlType2['LinkRelValues'] = 'linkrelvalues';
   ControlType2['Location'] = 'location';
+  ControlType2['SharedType'] = 'sharedtype';
   return ControlType2;
 }({},);
+var sharedEnumBrand = /* @__PURE__ */ Symbol.for('framer.sharedEnum',);
+var sharedTypeIdentity = /* @__PURE__ */ Symbol.for('framer.sharedTypeIdentity',);
+function isSharedEnum(value,) {
+  return isObject(value,) && sharedEnumBrand in value;
+}
+function defineEnum(definition,) {
+  const {
+    options,
+    localizedOptionTitles,
+  } = definition;
+  const optionTitles = options.map((option, index,) => definition.optionTitles?.[index] ?? option);
+  const optionForTitle = (title) => {
+    if (typeof title !== 'string') return void 0;
+    const index = optionTitles.indexOf(title,);
+    return index === -1 ? void 0 : options[index];
+  };
+  return {
+    [sharedEnumBrand]: true,
+    kind: 'enum',
+    options,
+    optionTitles,
+    titleFor(value, locale,) {
+      if (typeof value !== 'string') return void 0;
+      const index = options.indexOf(value,);
+      if (index === -1) return void 0;
+      for (let current2 = locale; current2; current2 = current2.fallback) {
+        const title = localizedOptionTitles?.[current2.id]?.[index];
+        if (title) return title;
+      }
+      return optionTitles[index];
+    },
+    optionForTitle,
+    getValidValue(value, fallback,) {
+      if (typeof value === 'string' && options.includes(value,)) return value;
+      return optionForTitle(value,) ?? (fallback !== void 0 && options.includes(fallback,) ? fallback : void 0);
+    },
+  };
+}
 function isReactComponent(component,) {
   return isObject(component,) || isFunction(component,);
 }
@@ -26960,6 +26999,20 @@ function getControlDefaultValue(control,) {
       case 'gap':
       case 'dimension':
         return isString(control.defaultValue,) ? control.defaultValue : void 0;
+      case 'sharedtype': {
+        if (!('definition' in control) || !isSharedEnum(control.definition,)) return void 0;
+        const {
+          definition,
+        } = control;
+        switch (definition.kind) {
+          case 'enum':
+            if (!isString(control.defaultValue,)) return void 0;
+            return definition.options.includes(control.defaultValue,) ? control.defaultValue : void 0;
+          default:
+            definition.kind;
+            return;
+        }
+      }
       case 'boolean':
         return isBoolean(control.defaultValue,) ? control.defaultValue : void 0;
       case 'enum':
@@ -57083,6 +57136,7 @@ export {
   defaultOffset$1 as defaultOffset,
   defaultTransformValue,
   defaultValueTypes,
+  defineEnum,
   defineShader,
   degrees,
   degreesToRadians,
@@ -57253,6 +57307,7 @@ export {
   isRelativeNumber,
   isShaderConfig,
   isShallowEqualArray,
+  isSharedEnum,
   isStaticRenderer,
   isStraightCurve,
   isSVGElement,
@@ -57445,6 +57500,7 @@ export {
   Shader,
   Shadow,
   sharedSVGManager,
+  sharedTypeIdentity,
   shouldOpenLinkInNewTab,
   Size,
   SmartComponentScopedContainer,
