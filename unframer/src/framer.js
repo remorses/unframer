@@ -12738,7 +12738,7 @@ var namespace_exports = /* @__PURE__ */ __exportAll({
   Item: () => ReorderItem,
 },);
 
-// /:https://app.framerstatic.com/framer.B1b760uK.mjs
+// /:https://app.framerstatic.com/framer.BikQVKhx.mjs
 
 import React, {
   cloneElement as cloneElement3,
@@ -40856,6 +40856,11 @@ var FieldMetadata = class {
     this.definition = definition;
     this.collection = collection;
   }
+  /** Whether scanning the field's collection provides it, see `DatabaseCollection.scannedFields`. */
+  isProvidedByScan() {
+    const scannedFields = this.collection?.data.scannedFields;
+    return !scannedFields || this.name !== void 0 && this.name in scannedFields;
+  }
   getValue(item,) {
     assert(this.name, 'Can only get value of field with a name',);
     const value = item.data[this.name];
@@ -42150,8 +42155,12 @@ var RelationalScan = class RelationalScan2 extends RelationalNode {
   canProvideOrdering() {
     return false;
   }
+  getScanFields() {
+    if (!this.collection.data.scannedFields) return this.collection.fields;
+    return new Fields(Array.from(this.collection.fields,).filter((field) => field.isProvidedByScan()),);
+  }
   canProvideResolvedFields(resolvedFields,) {
-    return resolvedFields.subsetOf(this.collection.fields,);
+    return resolvedFields.subsetOf(this.getScanFields(),);
   }
   optimize() {
     return Cost.estimate(1, 200 * KB,);
@@ -42162,6 +42171,7 @@ var RelationalScan = class RelationalScan2 extends RelationalNode {
   *evaluate() {
     const collection = this.collection;
     const outputFields = this.getOutputFields();
+    const scanFields = this.getScanFields();
     const items = yield collection.data.scanItems(getEvaluationContextPriority(),);
     const priority = getEvaluationContextPriority();
     const tuples = [];
@@ -42169,7 +42179,7 @@ var RelationalScan = class RelationalScan2 extends RelationalNode {
       const yieldPromise = yieldToMainDuringEvaluation(priority,);
       if (yieldPromise) yield yieldPromise;
       const tuple = new Tuple();
-      for (const field of outputFields) {
+      for (const field of scanFields) {
         const value = field.getValue(item,);
         tuple.addPointer(collection, item.pointer,);
         tuple.addValue(field, value,);
@@ -43198,8 +43208,8 @@ var RelationalLimit = class RelationalLimit2 extends RelationalNode {
   canProvideOrdering(ordering,) {
     return ordering.equals(this.ordering,);
   }
-  canProvideResolvedFields() {
-    return true;
+  canProvideResolvedFields(resolvedFields,) {
+    return Array.from(resolvedFields,).every((field) => field.isProvidedByScan());
   }
   getInputRequiredProps(required,) {
     const resolvedFields = new Fields(required.resolvedFields,);
