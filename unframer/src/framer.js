@@ -12738,7 +12738,7 @@ var namespace_exports = /* @__PURE__ */ __exportAll({
   Item: () => ReorderItem,
 },);
 
-// /:https://app.framerstatic.com/framer.BikQVKhx.mjs
+// /:https://app.framerstatic.com/framer.DymZktPS.mjs
 
 import React, {
   cloneElement as cloneElement3,
@@ -47895,7 +47895,7 @@ function TickerComponent({
   },);
   const isPageInView = usePageInView();
   const isInView = isInViewport && isPageInView;
-  const isReducedMotion = useReducedMotion();
+  const isReducedMotion = useReducedMotionConfig();
   const updateMeasurements = () => {
     if (!internalContainerRef.current || !listRef.current) return;
     const direction = __unframerWindow2.getComputedStyle(internalContainerRef.current,).direction;
