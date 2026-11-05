@@ -12738,7 +12738,7 @@ var namespace_exports = /* @__PURE__ */ __exportAll({
   Item: () => ReorderItem,
 },);
 
-// /:https://app.framerstatic.com/framer.DymZktPS.mjs
+// /:https://app.framerstatic.com/framer.BWFVvmND.mjs
 
 import React, {
   cloneElement as cloneElement3,
@@ -48613,6 +48613,9 @@ function CarouselView({
           keyframes: [offset.get(), v,],
           velocity: clamp(-2e3, 2e3, offset.getVelocity(),),
           ...transition,
+          duration: transition.duration === void 0 ? void 0 : transition.duration * 1e3,
+          delay: transition.delay === void 0 ? void 0 : transition.delay * 1e3,
+          repeatDelay: transition.repeatDelay === void 0 ? void 0 : transition.repeatDelay * 1e3,
           onUpdate,
           onComplete: () => {
             currentAnimation.current = null;
@@ -48620,7 +48623,7 @@ function CarouselView({
         },);}
       isOffsetAttachedToTarget.current = true;
     }, stopOffsetAnimation,);
-  }, [],);
+  }, [transition,],);
   const stepOffset = (newOffset) => {
     const clampedOffset = clampOffset(newOffset,);
     targetOffset.stop();
@@ -48811,6 +48814,7 @@ var Carousel = /* @__PURE__ */ forwardRef(function Carousel2(props, ref,) {
     carouselEffectAutoPlay,
     carouselEffectInterval,
     carouselEffectSnap,
+    carouselEffectTransition,
     carouselEffectControls,
     as: asProp,
     ...rest
@@ -48839,6 +48843,7 @@ var Carousel = /* @__PURE__ */ forwardRef(function Carousel2(props, ref,) {
       overflow,
       loop: carouselEffectLoop,
       snap,
+      transition: carouselEffectTransition,
       items,
       style: requiredCarouselStyle,
       children: [
@@ -49133,6 +49138,7 @@ function getProps(props,) {
     carouselEffectOverflow,
     carouselEffectSnap,
     carouselEffectStackDirection,
+    carouselEffectTransition,
     carouselEffectXOverflow,
     carouselEffectYOverflow,
     tickerEffectEnabled,
@@ -49161,6 +49167,7 @@ function getProps(props,) {
       carouselEffectOverflow,
       carouselEffectSnap,
       carouselEffectStackDirection,
+      carouselEffectTransition,
       carouselEffectXOverflow,
       carouselEffectYOverflow,
     },
