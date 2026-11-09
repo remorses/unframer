@@ -12738,7 +12738,7 @@ var namespace_exports = /* @__PURE__ */ __exportAll({
   Item: () => ReorderItem,
 },);
 
-// /:https://app.framerstatic.com/framer.BWFVvmND.mjs
+// /:https://app.framerstatic.com/framer.DKWANagr.mjs
 
 import React, {
   cloneElement as cloneElement3,
@@ -14770,11 +14770,10 @@ function logIfPopstateCalledSynchronously() {
     }
   },);
 }
-var defaultSitePageEffects = {
+var PageEffectsContext = /* @__PURE__ */ React.createContext({
   global: void 0,
   routes: {},
-};
-var PageEffectsContext = /* @__PURE__ */ React.createContext(defaultSitePageEffects,);
+},);
 function PageEffectsProvider({
   children,
   value,
@@ -15356,15 +15355,14 @@ function withEntryId(data2, entryId = createEntryId(),) {
     entryId,
   };
 }
-var hasNavigationAPI = /* @__PURE__ */ (() => isWindow && typeof __unframerWindow2.navigation?.back === 'function')();
-var isImpactedPopstateBugChromiumVersion = /* @__PURE__ */ (() => {
-  if (typeof __unframerNavigator2 === 'undefined') return false;
-  const userAgent = __unframerNavigator2.userAgent;
-  const chromePos = userAgent.indexOf('Chrome/',);
-  const chromiumVersion = +userAgent.slice(chromePos + 7, userAgent.indexOf('.', chromePos,),);
-  return chromiumVersion > 101 && chromiumVersion < 128;
-})();
-var useNavigationAPI = hasNavigationAPI && !isImpactedPopstateBugChromiumVersion && /* @__PURE__ */ (() => !isSafari())();
+var useNavigationAPI = /* @__PURE__ */ (() => isWindow && typeof __unframerWindow2.navigation?.back === 'function')() &&
+  !/* @__PURE__ */ (() => {
+    if (typeof __unframerNavigator2 === 'undefined') return false;
+    const userAgent = __unframerNavigator2.userAgent;
+    const chromePos = userAgent.indexOf('Chrome/',);
+    const chromiumVersion = +userAgent.slice(chromePos + 7, userAgent.indexOf('.', chromePos,),);
+    return chromiumVersion > 101 && chromiumVersion < 128;
+  })() && /* @__PURE__ */ (() => !isSafari())();
 function replaceHistoryState(data2, url,) {
   performance.mark('framer-history-replace',);
   setLastKnownHistoryState(withCurrentEntryId(data2, readHistoryState(),),);
@@ -48443,7 +48441,7 @@ function findPrevItemInset(currentInset, itemPositions, gap, targetInset, contai
       prevItemInset = transformedStart;
       hasFoundPrevInset = true;
     } else {
-      if (containerLength && itemSize > containerLength || prevItemInset === currentInset && idealInset >= transformedStart) {
+      if (containerLength && itemSize > containerLength || prevItemInset >= currentInset && idealInset >= transformedStart) {
         prevItemInset = transformedStart;
       }
       hasFoundPrevInset = true;
@@ -48451,8 +48449,8 @@ function findPrevItemInset(currentInset, itemPositions, gap, targetInset, contai
   }
   return prevItemInset;
 }
-function findPrevPageInset(currentInset, containerLength, itemPositions, gap,) {
-  return findPrevItemInset(currentInset, itemPositions, gap, currentInset - containerLength, containerLength,);
+function findPrevPageInset(currentInset, visibleLength, itemPositions, gap, containerLength,) {
+  return findPrevItemInset(currentInset, itemPositions, gap, currentInset - visibleLength, containerLength,);
 }
 function findNextItemInset(currentInset, itemPositions, gap, targetInset,) {
   if (itemPositions.length === 0) return 0;
@@ -48631,7 +48629,7 @@ function CarouselView({
     targetOffset.set(clampedOffset * sign,);
   };
   const paginate = (findPageInset, direction2,) => {
-    const offset2 = -findPageInset(-targetOffset.get() * sign, pagination.visibleLength, itemPositions, gap,);
+    const offset2 = -findPageInset(-targetOffset.get() * sign, pagination.visibleLength, itemPositions, gap, containerLength,);
     const clamped = clampOffset(offset2,);
     if (clamped * sign === targetOffset.get()) {
       animate(tugOffset, 0, {
@@ -50052,7 +50050,7 @@ function isArrayLengthUniformName(s,) {
   return isUniformName(s,) && s.endsWith(arrayLengthSuffix,);
 }
 function isBufferUniformName(s,) {
-  return isUniformName(s,) && s.endsWith('_buffer',);
+  return isUniformName(s,) && s.endsWith(bufferSuffix,);
 }
 function sanitizeUniformKey(key2,) {
   return key2.replace(nonWordCharPattern, '_',);
