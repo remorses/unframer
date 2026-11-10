@@ -12738,7 +12738,7 @@ var namespace_exports = /* @__PURE__ */ __exportAll({
   Item: () => ReorderItem,
 },);
 
-// /:https://app.framerstatic.com/framer.DKWANagr.mjs
+// /:https://app.framerstatic.com/framer.BL70qLPA.mjs
 
 import React, {
   cloneElement as cloneElement3,
@@ -15708,10 +15708,21 @@ var URLSearchParamsContext = /* @__PURE__ */ (() => {
 function URLSearchParamsProvider({
   children,
   routerRenderKey,
+  currentRouteId,
   isNavigationCommitPending,
 },) {
   const isPreview = useRenderTargetEnvironment() === 'preview';
-  const [previewURLSearchString, setPreviewURLSearchString,] = useState('',);
+  const [previewURLSearch, setPreviewURLSearch,] = useState({
+    routeId: currentRouteId,
+    search: '',
+  },);
+  if (previewURLSearch.routeId !== currentRouteId) {
+    setPreviewURLSearch({
+      routeId: currentRouteId,
+      search: '',
+    },);
+  }
+  const previewURLSearchString = previewURLSearch.search;
   const committedRouterRenderKeyRef = useRef(routerRenderKey,);
   useIsomorphicLayoutEffect$1(() => {
     committedRouterRenderKeyRef.current = routerRenderKey;
@@ -15727,8 +15738,12 @@ function URLSearchParamsProvider({
   const replaceSearchParams = useCallback2(async (replacer) => {
     if (isPreview) {
       startTransition2(() => {
-        setPreviewURLSearchString((currentSearchString) => {
-          return replacer(new URLSearchParams(currentSearchString,),).toString();
+        setPreviewURLSearch((current2) => {
+          if (current2.routeId !== currentRouteId) return current2;
+          return {
+            routeId: currentRouteId,
+            search: replacer(new URLSearchParams(current2.search,),).toString(),
+          };
         },);
       },);
       return;
@@ -15758,7 +15773,7 @@ function URLSearchParamsProvider({
     if (isFirstFilterChange || filtersCleared) pushHistoryState(nextHistoryState, urlString,);
     else replaceHistoryState(nextHistoryState, urlString,);
     notifyURLSearchStringSubscribers();
-  }, [isNavigationCommitPending, isPreview, routerRenderKey,],);
+  }, [currentRouteId, isNavigationCommitPending, isPreview, routerRenderKey,],);
   const value = useMemoOne(() => ({
     urlSearchParams: new URLSearchParams(urlSearchString,),
     replaceSearchParams,
@@ -27093,8 +27108,19 @@ function addPropertyControls(component, propertyControls, outputs,) {
   Object.assign(component, {
     propertyControls,
   },);
+  addSharedEnumOptions(propertyControls,);
   applyControlDefaultsToReactDefaultProps(component, propertyControls,);
   if (outputs !== void 0) setOutputControls(component, outputs,);
+}
+function addSharedEnumOptions(propertyControls,) {
+  for (const control of Object.values(propertyControls,)) {
+    if (control?.type !== 'sharedtype' || !('definition' in control)) continue;
+    if (!isSharedEnum(control.definition,) || !Object.isExtensible(control,)) continue;
+    Object.defineProperty(control, 'options', {
+      value: control.definition.options,
+      configurable: true,
+    },);
+  }
 }
 function getPropertyControls(component,) {
   return component.propertyControls;
@@ -39004,6 +39030,7 @@ function Router({
           children: /* @__PURE__ */ jsx(URLSearchParamsProvider, {
             suppressHydrationWarning: true,
             routerRenderKey: dep,
+            currentRouteId,
             isNavigationCommitPending: scrollRestoration.isNavigationCommitPending,
             children: /* @__PURE__ */ jsxs(TriggerStateProvider, {
               suppressHydrationWarning: true,
@@ -46671,6 +46698,51 @@ function useHotkey(shortcut, callback,) {
     return () => document.removeEventListener('keydown', eventHandler,);
   }, [eventHandler,],);
 }
+var loading = {
+  status: 'loading',
+};
+var signedOut = {
+  status: 'signedOut',
+};
+var cookiePrefix = 'framer_user_info=';
+function getRawLoginInfoCookieValue(cookie,) {
+  return cookie.split(';',).map((value) => value.trim()).find((value) => value.startsWith(cookiePrefix,))?.slice(17,);
+}
+function parseLoginInfoCookieValue(rawValue,) {
+  if (rawValue === void 0) return signedOut;
+  try {
+    const value = JSON.parse(decodeURIComponent(rawValue,),);
+    if (!isObject(value,)) return signedOut;
+    const user = {};
+    if (typeof value.given_name === 'string' && value.given_name !== '') user.givenName = value.given_name;
+    if (typeof value.family_name === 'string' && value.family_name !== '') user.familyName = value.family_name;
+    return {
+      status: 'signedIn',
+      user,
+    };
+  } catch {
+    return signedOut;
+  }
+}
+var cachedValue;
+var cachedInfo = signedOut;
+var hasCachedValue = false;
+function getSnapshot() {
+  const rawValue = getRawLoginInfoCookieValue(document.cookie,);
+  if (!hasCachedValue || rawValue !== cachedValue) {
+    cachedValue = rawValue;
+    cachedInfo = parseLoginInfoCookieValue(rawValue,);
+    hasCachedValue = true;
+  }
+  return cachedInfo;
+}
+function getLoadingSnapshot() {
+  return loading;
+}
+function useLoginInfo() {
+  const info = useSyncExternalStore2(noopSubscribe, getSnapshot, getLoadingSnapshot,);
+  return useDeferredValue2(info,);
+}
 function useNavigate() {
   const {
     navigate,
@@ -46725,11 +46797,13 @@ function useOverlayState({
   dismissWithEsc = false,
 } = {},) {
   const [showOverlay, setShowOverlay,] = React.useState(false,);
+  const isOverlayShown = React.useRef(false,);
   const callback = React.useCallback(async (show) => {
     await yieldToMain({
       priority: 'user-blocking',
       continueAfter: 'paint',
     },);
+    isOverlayShown.current = show;
     startTransition2(() => setShowOverlay(show,));
     setOverflow(blockDocumentScrolling, show,);
   }, [blockDocumentScrolling,],);
@@ -46744,7 +46818,7 @@ function useOverlayState({
   React.useEffect(() => {
     if (!dismissWithEsc) return;
     const handleEscapeKeyDown = (event) => {
-      if (event.key !== 'Escape') return;
+      if (event.key !== 'Escape' || !isOverlayShown.current) return;
       event.preventDefault();
       event.stopPropagation();
       callback(false,);
@@ -46906,11 +46980,11 @@ function getGesture(enabledGestures, isHovered, isPressed, isLoading, isError,) 
   const {
     hover: hover2,
     pressed,
-    loading,
+    loading: loading2,
     error,
   } = enabledGestures || {};
   if (error && isError) return 'error';
-  if (loading && isLoading) return 'loading';
+  if (loading2 && isLoading) return 'loading';
   if (pressed && isPressed) return 'pressed';
   if (hover2 && isHovered) return 'hover';
 }
@@ -48862,16 +48936,16 @@ function CarouselAutoPlay({
     currentPage,
     isNextActive,
   } = useCarousel();
-  const progress2 = useMotionValue(0,);
   useEffect2(() => {
     if (!isNextActive) return;
-    const animation = animate(progress2, [0, 1,], {
-      duration: intervalSeconds,
+    const animation = new JSAnimation({
+      keyframes: [0, 1,],
+      duration: intervalSeconds * 1e3,
       ease: 'linear',
       onComplete: nextPage,
     },);
     return () => animation.stop();
-  }, [intervalSeconds, progress2, currentPage, isNextActive, nextPage,],);
+  }, [intervalSeconds, currentPage, isNextActive, nextPage,],);
   return null;
 }
 function getGap$1(gap, axis,) {
@@ -57627,6 +57701,7 @@ export {
   useLocaleInfo,
   useLocalesForCurrentRoute,
   useLocalizationInfo,
+  useLoginInfo,
   useMeasureLayout,
   useMetadata,
   useMotionTemplate,
