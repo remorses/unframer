@@ -12738,7 +12738,7 @@ var namespace_exports = /* @__PURE__ */ __exportAll({
   Item: () => ReorderItem,
 },);
 
-// /:https://app.framerstatic.com/framer.BL70qLPA.mjs
+// /:https://app.framerstatic.com/framer.D6uXRwWs.mjs
 
 import React, {
   cloneElement as cloneElement3,
@@ -13173,80 +13173,6 @@ var LazyValue = class LazyValue2 {
 };
 var MAX_ARRAY_LEN = 2 ** 32 - 1;
 var MAX_ARRAY_INDEX = MAX_ARRAY_LEN - 1;
-var DevalueError = class extends Error {
-  /**
-   * @param {string} message
-   * @param {string[]} keys
-   * @param {any} [value] - The value that failed to be serialized
-   * @param {any} [root] - The root value being serialized
-   */
-  constructor(message, keys2, value, root,) {
-    super(message,);
-    this.name = 'DevalueError';
-    this.path = keys2.join('',);
-    this.value = value;
-    this.root = root;
-  }
-};
-var object_proto_names = /* @__PURE__ */ Object.getOwnPropertyNames(Object.prototype,).sort().join('\0',);
-function is_plain_object(thing,) {
-  const proto = Object.getPrototypeOf(thing,);
-  return proto === Object.prototype || proto === null || Object.getPrototypeOf(proto,) === null ||
-    Object.getOwnPropertyNames(proto,).sort().join('\0',) === object_proto_names;
-}
-function get_type(thing,) {
-  return Object.prototype.toString.call(thing,).slice(8, -1,);
-}
-function is_buffer(thing,) {
-  return typeof Buffer !== 'undefined' && Buffer.isBuffer(thing,);
-}
-function get_escaped_char(char,) {
-  switch (char) {
-    case '"':
-      return '\\"';
-    case '<':
-      return '\\u003C';
-    case '\\':
-      return '\\\\';
-    case '\n':
-      return '\\n';
-    case '\r':
-      return '\\r';
-    case '	':
-      return '\\t';
-    case '\b':
-      return '\\b';
-    case '\f':
-      return '\\f';
-    case '\u2028':
-      return '\\u2028';
-    case '\u2029':
-      return '\\u2029';
-    default:
-      return char < ' ' ? `\\u${char.charCodeAt(0,).toString(16,).padStart(4, '0',)}` : '';
-  }
-}
-function stringify_string(str,) {
-  let result = '';
-  let last_pos = 0;
-  const len = str.length;
-  for (let i = 0; i < len; i += 1) {
-    const char = str[i];
-    const replacement = get_escaped_char(char,);
-    if (replacement) {
-      result += str.slice(last_pos, i,) + replacement;
-      last_pos = i + 1;
-    }
-  }
-  return `"${last_pos === 0 ? str : result + str.slice(last_pos,)}"`;
-}
-function enumerable_symbols(object,) {
-  return Object.getOwnPropertySymbols(object,).filter((symbol) => Object.getOwnPropertyDescriptor(object, symbol,).enumerable);
-}
-var is_identifier = /^[a-zA-Z_$][a-zA-Z_$0-9]*$/;
-function stringify_key(key2,) {
-  return is_identifier.test(key2,) ? '.' + key2 : '[' + JSON.stringify(key2,) + ']';
-}
 function is_valid_array_index(n,) {
   if (!Number.isInteger(n,)) return false;
   if (n < 0) return false;
@@ -13259,45 +13185,11 @@ function is_valid_array_len(n,) {
   if (n > MAX_ARRAY_LEN) return false;
   return true;
 }
-function is_valid_array_index_string(s,) {
-  if (s.length === 0) return false;
-  if (s.length > 1 && s.charCodeAt(0,) === 48) return false;
-  for (let i = 0; i < s.length; i++) {
-    const c = s.charCodeAt(i,);
-    if (c < 48 || c > 57) return false;
-  }
-  return is_valid_array_index(+s,);
-}
-function array_index_cut(keys2,) {
-  for (var i = keys2.length - 1; i >= 0; i--) if (is_valid_array_index_string(keys2[i],)) break;
-  return i + 1;
-}
-function valid_array_indices(array,) {
-  const keys2 = Object.keys(array,);
-  keys2.length = array_index_cut(keys2,);
-  return keys2;
-}
-function encode_native(array_buffer,) {
-  return new Uint8Array(array_buffer,).toBase64();
-}
 function decode_native(base64,) {
   return Uint8Array.fromBase64(base64,).buffer;
 }
-function encode_buffer(array_buffer,) {
-  return Buffer.from(array_buffer,).toString('base64',);
-}
 function decode_buffer(base64,) {
   return Uint8Array.from(Buffer.from(base64, 'base64',),).buffer;
-}
-function encode_legacy(array_buffer,) {
-  const array = new Uint8Array(array_buffer,);
-  let binary = '';
-  const chunk_size = 32768;
-  for (let i = 0; i < array.length; i += chunk_size) {
-    const chunk = array.subarray(i, i + chunk_size,);
-    binary += String.fromCharCode.apply(null, chunk,);
-  }
-  return btoa(binary,);
 }
 function decode_legacy(base64,) {
   const binary_string = atob(base64,);
@@ -13308,7 +13200,6 @@ function decode_legacy(base64,) {
 }
 var native = typeof Uint8Array.fromBase64 === 'function';
 var buffer = typeof process === 'object' && process.versions?.node !== void 0;
-var encode64 = native ? encode_native : buffer ? encode_buffer : encode_legacy;
 var decode64 = native ? decode_native : buffer ? decode_buffer : decode_legacy;
 function merge_operations(defaults, overrides,) {
   if (!overrides) return defaults;
@@ -13316,53 +13207,6 @@ function merge_operations(defaults, overrides,) {
   for (const key2 of Object.keys(defaults,)) merged[key2] = overrides[key2] ?? defaults[key2];
   return merged;
 }
-var NOT_PLAIN = /* @__PURE__ */ Object.freeze({
-  kind: 'not-plain',
-},);
-var SYMBOL_KEYS = /* @__PURE__ */ Object.freeze({
-  kind: 'symbol-keys',
-},);
-var stringify_operations = {
-  identify: (value) => value,
-  typeOf: (value) => value === null ? 'null' : typeof value,
-  toPrimitive: (value) => value,
-  tagOf: (value) => get_type(value,),
-  isThenable: (value) => typeof value.then === 'function',
-  toPromise: (thenable) => Promise.resolve(thenable,),
-  unbox: (boxed) => boxed.valueOf(),
-  toISOString: (date) => isNaN(date.getDate(),) ? '' : date.toISOString(),
-  toStringValue: (value) => value.toString(),
-  regExpInfo: (regexp) => ({
-    source: regexp.source,
-    flags: regexp.flags,
-  }),
-  valuesOf: (set) => set,
-  entriesOf: (map2) => map2,
-  viewInfo: (view) => {
-    if (is_buffer(view,)) view = new Uint8Array(view,);
-    return {
-      buffer: view.buffer,
-      byteOffset: view.byteOffset,
-      byteLength: view.byteLength,
-      length: view.length,
-      bufferByteLength: view.buffer.byteLength,
-    };
-  },
-  toArrayBuffer: (buffer2) => buffer2,
-  lengthOf: (array) => array.length,
-  hasOwn: (value, key2,) => Object.hasOwn(value, key2,),
-  indicesOf: (array) => valid_array_indices(array,),
-  shapeOf: (value) => {
-    if (!is_plain_object(value,)) return NOT_PLAIN;
-    if (enumerable_symbols(value,).length > 0) return SYMBOL_KEYS;
-    return {
-      kind: Object.getPrototypeOf(value,) === null ? 'null-proto' : 'plain',
-      keys: Object.keys(value,),
-    };
-  },
-  get: (value, key2,) => value[key2],
-};
-var default_stringify_operations = /* @__PURE__ */ Object.freeze(stringify_operations,);
 var array_buffer_byte_length = /* @__PURE__ */ (() => Object.getOwnPropertyDescriptor(ArrayBuffer.prototype, 'byteLength',).get)();
 var shared_array_buffer_byte_length =
   /* @__PURE__ */ (() =>
@@ -13553,219 +13397,6 @@ function unflatten(parsed, revivers, options,) {
   }
   return hydrate(0,);
 }
-function stringify(value, reducers, options,) {
-  const stringified = run(false, value, reducers, options,);
-  return typeof stringified === 'string' ? stringified : `[${stringified.join(',',)}]`;
-}
-function run(async, value, reducers, options,) {
-  const ops = merge_operations(default_stringify_operations, options?.operations,);
-  const stringified = [];
-  const indexes = /* @__PURE__ */ new Map();
-  const custom = [];
-  if (reducers) {
-    for (const key2 of Object.getOwnPropertyNames(reducers,)) {
-      custom.push({
-        key: key2,
-        fn: reducers[key2],
-      },);
-    }
-  }
-  const keys2 = [];
-  let p = 0;
-  function flatten(thing, index2,) {
-    const type = ops.typeOf(thing,);
-    if (type === 'undefined') return -1;
-    let number2;
-    if (type === 'number') {
-      number2 = ops.toPrimitive(thing,);
-      if (Number.isNaN(number2,)) return -3;
-      if (number2 === Infinity) return -4;
-      if (number2 === -Infinity) return -5;
-      if (number2 === 0 && 1 / number2 < 0) return -6;
-    }
-    const id2 = ops.identify(thing,);
-    if (indexes.has(id2,)) return indexes.get(id2,);
-    index2 ??= p++;
-    indexes.set(id2, index2,);
-    for (
-      const {
-        key: key2,
-        fn,
-      } of custom
-    ) {
-      const value2 = fn(thing,);
-      if (value2) {
-        stringified[index2] = `["${key2}",${flatten(value2,)}]`;
-        return index2;
-      }
-    }
-    if (type === 'function') throw new DevalueError(`Cannot stringify a function`, keys2, thing, value,);
-    else if (type === 'symbol') throw new DevalueError(`Cannot stringify a Symbol primitive`, keys2, thing, value,);
-    let str = '';
-    if (type !== 'object') str = stringify_primitive(type === 'number' ? number2 : ops.toPrimitive(thing,),);
-    else if (ops.isThenable(thing,)) {
-      if (!async) throw new DevalueError(`Cannot stringify a Promise or thenable \u2014 use stringifyAsync instead`, keys2, thing, value,);
-      str = ops.toPromise(thing,).then((value2) => {
-        const i = flatten(value2, index2,);
-        if (i < 0) stringified[index2] = i;
-      },);
-      str.catch(() => {},);
-    } else {
-      const tag = ops.tagOf(thing,);
-      switch (tag) {
-        case 'Number':
-        case 'String':
-        case 'Boolean':
-        case 'BigInt':
-          str = `["Object",${flatten(ops.unbox(thing,),)}]`;
-          break;
-        case 'Date':
-          str = `["Date","${ops.toISOString(thing,)}"]`;
-          break;
-        case 'URL':
-          str = `["URL",${stringify_string(ops.toStringValue(thing,),)}]`;
-          break;
-        case 'URLSearchParams':
-          str = `["URLSearchParams",${stringify_string(ops.toStringValue(thing,),)}]`;
-          break;
-        case 'RegExp':
-          const {
-            source,
-            flags,
-          } = ops.regExpInfo(thing,);
-          str = flags ? `["RegExp",${stringify_string(source,)},"${flags}"]` : `["RegExp",${stringify_string(source,)}]`;
-          break;
-        case 'Array': {
-          let mostly_dense = false;
-          const length = ops.lengthOf(thing,);
-          str = '[';
-          for (let i = 0; i < length; i += 1) {
-            if (i > 0) str += ',';
-            if (ops.hasOwn(thing, i,)) {
-              keys2.push(`[${i}]`,);
-              str += flatten(ops.get(thing, i,),);
-              keys2.pop();
-            } else if (mostly_dense) str += -2;
-            else {
-              const populated_keys = ops.indicesOf(thing,);
-              const population = populated_keys.length;
-              const d = String(length,).length;
-              if ((length - population) * 3 > 4 + d + population * (d + 1)) {
-                str = '[-7,' + length;
-                for (let j = 0; j < populated_keys.length; j++) {
-                  const key2 = populated_keys[j];
-                  keys2.push(`[${key2}]`,);
-                  str += ',' + key2 + ',' + flatten(ops.get(thing, key2,),);
-                  keys2.pop();
-                }
-                break;
-              } else {
-                mostly_dense = true;
-                str += -2;
-              }
-            }
-          }
-          str += ']';
-          break;
-        }
-        case 'Set':
-          str = '["Set"';
-          for (const value2 of ops.valuesOf(thing,)) str += `,${flatten(value2,)}`;
-          str += ']';
-          break;
-        case 'Map':
-          str = '["Map"';
-          for (const [key2, value2,] of ops.entriesOf(thing,)) {
-            const key_type = ops.typeOf(key2,);
-            const key_is_primitive = key_type !== 'object' && key_type !== 'function' && key_type !== 'symbol';
-            keys2.push(`.get(${key_is_primitive ? stringify_primitive(ops.toPrimitive(key2,),) : '...'})`,);
-            str += `,${flatten(key2,)},${flatten(value2,)}`;
-            keys2.pop();
-          }
-          str += ']';
-          break;
-        case 'Int8Array':
-        case 'Uint8Array':
-        case 'Uint8ClampedArray':
-        case 'Int16Array':
-        case 'Uint16Array':
-        case 'Float16Array':
-        case 'Int32Array':
-        case 'Uint32Array':
-        case 'Float32Array':
-        case 'Float64Array':
-        case 'BigInt64Array':
-        case 'BigUint64Array': {
-          const info = ops.viewInfo(thing,);
-          str = '["' + tag + '",' + flatten(info.buffer,);
-          if (info.byteLength !== info.bufferByteLength) str += `,${info.byteOffset},${info.length}`;
-          str += ']';
-          break;
-        }
-        case 'DataView': {
-          const info = ops.viewInfo(thing,);
-          str = '["' + tag + '",' + flatten(info.buffer,);
-          if (info.byteLength !== info.bufferByteLength) str += `,${info.byteOffset},${info.byteLength}`;
-          str += ']';
-          break;
-        }
-        case 'ArrayBuffer':
-          str = `["ArrayBuffer","${encode64(ops.toArrayBuffer(thing,),)}"]`;
-          break;
-        case 'Temporal.Duration':
-        case 'Temporal.Instant':
-        case 'Temporal.PlainDate':
-        case 'Temporal.PlainTime':
-        case 'Temporal.PlainDateTime':
-        case 'Temporal.PlainMonthDay':
-        case 'Temporal.PlainYearMonth':
-        case 'Temporal.ZonedDateTime':
-          str = `["${tag}",${stringify_string(ops.toStringValue(thing,),)}]`;
-          break;
-        default: {
-          const shape = ops.shapeOf(thing,);
-          if (shape.kind === 'not-plain') throw new DevalueError(`Cannot stringify arbitrary non-POJOs`, keys2, thing, value,);
-          if (shape.kind === 'symbol-keys') throw new DevalueError(`Cannot stringify POJOs with symbolic keys`, keys2, thing, value,);
-          if (shape.kind === 'null-proto') {
-            str = '["null"';
-            for (const key2 of shape.keys) {
-              if (key2 === '__proto__') throw new DevalueError(`Cannot stringify objects with __proto__ keys`, keys2, thing, value,);
-              keys2.push(stringify_key(key2,),);
-              str += `,${stringify_string(key2,)},${flatten(ops.get(thing, key2,),)}`;
-              keys2.pop();
-            }
-            str += ']';
-          } else {
-            str = '{';
-            let started = false;
-            for (const key2 of shape.keys) {
-              if (key2 === '__proto__') throw new DevalueError(`Cannot stringify objects with __proto__ keys`, keys2, thing, value,);
-              if (started) str += ',';
-              started = true;
-              keys2.push(stringify_key(key2,),);
-              str += `${stringify_string(key2,)}:${flatten(ops.get(thing, key2,),)}`;
-              keys2.pop();
-            }
-            str += '}';
-          }
-        }
-      }
-    }
-    stringified[index2] = str;
-    return index2;
-  }
-  const index = flatten(value,);
-  if (index < 0) return `${index}`;
-  return stringified;
-}
-function stringify_primitive(thing,) {
-  const type = typeof thing;
-  if (type === 'string') return stringify_string(thing,);
-  if (thing === void 0) return (-1).toString();
-  if (thing === 0 && 1 / thing < 0) return (-6).toString();
-  if (type === 'bigint') return `["BigInt","${thing}"]`;
-  return String(thing,);
-}
 function sendTrackingEvent(eventType, eventData, sendOn = 'lazy',) {
   safeWindow.__framer_events?.push([eventType, eventData, sendOn,],);
   switch (eventType) {
@@ -13905,16 +13536,10 @@ var HandoverCollector = class {
     return this.payload[dataType].get(key2,);
   }
   /**
-   * Serializes the handover data to a string safe to use inside `<script>` tags.
+   * SSG serializes the payload itself, so that `devalue`'s `stringify` isn't shipped to sites.
    */
-  toString() {
-    if (this.isEmpty) return void 0;
-    try {
-      return stringify(this.payload,);
-    } catch (error) {
-      console.error('Failed to serialize handover data.', error,);
-      return;
-    }
+  getPayload() {
+    return this.isEmpty ? void 0 : this.payload;
   }
   clear() {
     for (const map2 of Object.values(this.payload,)) map2.clear();
@@ -15385,7 +15010,7 @@ function afterNavigationTransition(callback,) {
     callback();
     return;
   }
-  const run2 = () => {
+  const run = () => {
     const currentTransition = __unframerWindow2.navigation.transition;
     if (currentTransition && currentTransition !== transition) {
       afterNavigationTransition(callback,);
@@ -15393,7 +15018,7 @@ function afterNavigationTransition(callback,) {
     }
     callback();
   };
-  transition.finished.then(run2, run2,);
+  transition.finished.then(run, run,);
 }
 function pushHistoryState(data2, url,) {
   performance.mark('framer-history-push',);
@@ -16987,11 +16612,11 @@ function getServerTimingEntries(serverTimingHeader,) {
     const name = rawName?.trim().toLowerCase();
     if (!name) continue;
     let description = '';
-    for (const parameter2 of parameters) {
-      const separatorIndex = parameter2.indexOf('=',);
+    for (const parameter of parameters) {
+      const separatorIndex = parameter.indexOf('=',);
       if (separatorIndex === -1) continue;
-      if (parameter2.slice(0, separatorIndex,).trim().toLowerCase() !== 'desc') continue;
-      description = unquoteServerTimingParameterValue(parameter2.slice(separatorIndex + 1,).trim(),);
+      if (parameter.slice(0, separatorIndex,).trim().toLowerCase() !== 'desc') continue;
+      description = unquoteServerTimingParameterValue(parameter.slice(separatorIndex + 1,).trim(),);
     }
     entries.set(name, description,);
   }
@@ -20204,12 +19829,12 @@ function LayoutIdProvider({
       return possible;
     }
     const rootDuplicatedId = duplicatedFrom?.[0];
-    const identifier2 = name || rootDuplicatedId || id2;
+    const identifier = name || rootDuplicatedId || id2;
     const {
       layoutId,
       value: nextValue,
-    } = nextLayoutId(identifier2, (cache2.current.count[cacheKey][identifier2] ?? -1) + 1, usedIds,);
-    cache2.current.count[cacheKey][identifier2] = nextValue;
+    } = nextLayoutId(identifier, (cache2.current.count[cacheKey][identifier] ?? -1) + 1, usedIds,);
+    cache2.current.count[cacheKey][identifier] = nextValue;
     screen.current[cacheKey][id2] = layoutId;
     if (duplicatedFrom?.length) {
       if (!name) {
@@ -20281,12 +19906,12 @@ function LayoutIdProvider({
     children,
   },);
 }
-function nextLayoutId(identifier2, initialValue, usedIds,) {
+function nextLayoutId(identifier, initialValue, usedIds,) {
   let value = initialValue;
-  let layoutId = value ? `${identifier2}-${value}` : identifier2;
+  let layoutId = value ? `${identifier}-${value}` : identifier;
   while (usedIds.has(layoutId,)) {
     value++;
-    layoutId = `${identifier2}-${value}`;
+    layoutId = `${identifier}-${value}`;
   }
   return {
     layoutId,
@@ -43608,11 +43233,6 @@ function assert2(condition, message,) {
   }
   throw e;
 }
-function assertNever2(x2, error,) {
-  if (error instanceof Error) throw error;
-  if (error !== void 0) throw new Error(String(error,),);
-  throw new Error(x2 ? `Unexpected value: ${x2}` : 'Application entered invalid state',);
-}
 var ScalarIntersection = class ScalarIntersection2 extends ScalarNode {
   left;
   right;
@@ -44395,9 +44015,9 @@ function stringifyCollection(collection,) {
   if (collection.alias) return `"${collection.data.displayName}" AS "${collection.alias}"`;
   return `"${collection.data.displayName}"`;
 }
-function stringifyJoin(join2,) {
-  let result = `${stringifyFrom(join2.left,)} LEFT JOIN ${stringifyFrom(join2.right,)}`;
-  if (join2.constraint) result += ` ON ${stringifyExpression(join2.constraint,)}`;
+function stringifyJoin(join,) {
+  let result = `${stringifyFrom(join.left,)} LEFT JOIN ${stringifyFrom(join.right,)}`;
+  if (join.constraint) result += ` ON ${stringifyExpression(join.constraint,)}`;
   return result;
 }
 function stringifyFrom(from,) {
@@ -44410,9 +44030,9 @@ function stringifyFrom(from,) {
       assertNever(from,);
   }
 }
-function autoIndentSql(sql2,) {
+function autoIndentSql(sql,) {
   let formattedSql = '';
-  sql2.split(/\s+/u,).forEach((token) => {
+  sql.split(/\s+/u,).forEach((token) => {
     if (token === '') return;
     if (['SELECT', 'FROM', 'WHERE', 'ORDER', 'LIMIT', 'OFFSET',].includes(token,)) {
       formattedSql += `
@@ -44595,6 +44215,13 @@ function getCacheKey(query, locale,) {
   const localeId = locale?.id ?? 'default';
   return JSON.stringify(query, replaceCollection,) + localeId;
 }
+function isServerDatabaseQueryResult(value,) {
+  return Array.isArray(value,) &&
+    value.every((row) => isObject(row,) && Object.values(row,).every((value2) => value2 === null || isMaybeServerControlProp(value2,)));
+}
+function isMaybeServerControlProp(value,) {
+  return isObject(value,) && typeof value.type === 'string' && (value.type === 'unsupported' || 'value' in value);
+}
 var ServerDatabaseError = class extends Error {
   constructor(...args) {
     const [message = 'error', ...rest] = args;
@@ -44608,36 +44235,26 @@ var UnsupportedQueryError = class extends ServerDatabaseError {
     super(`unsupported: ${message}`, ...rest,);
   }
 };
-function isServerDatabaseRawValue(value,) {
-  return value === null || typeof value === 'string' || typeof value === 'number';
-}
-function isServerDatabaseRawRow(value,) {
-  return isObject(value,) && Object.values(value,).every(isServerDatabaseRawValue,);
-}
-function isServerDatabaseRawQueryResult(value,) {
-  return isObject(value,) && Array.isArray(value.rows,) && value.rows.every(isServerDatabaseRawRow,);
-}
 function isServerDatabaseResponse(value,) {
   if (!isObject(value,)) return false;
   const hasData = 'data' in value;
   if (hasData === 'error' in value) return false;
-  if (hasData) return isServerDatabaseRawQueryResult(value.data,);
-  return isObject(value.error,) && typeof value.error.message === 'string';
+  if (hasData) return isServerDatabaseQueryResult(value.data,);
+  return typeof value.error === 'string';
 }
 var NetworkServerDatabase = class {
   url;
   constructor(config,) {
-    const url = new URL(`${config.endpoint}/${config.siteId}/query`,);
-    url.searchParams.set('root', config.root,);
+    const url = new URL(`${config.endpoint}/${encodeURIComponent(config.siteId,)}/query`,);
+    url.searchParams.set('version', String(config.version,),);
+    url.searchParams.set('saveId', config.saveId,);
+    url.searchParams.set('bundle', config.bundle,);
+    if (config.preview !== void 0) url.searchParams.set('preview', config.preview,);
     this.url = url.toString();
   }
-  async query(sql2, parameters = {},) {
+  async query(query,) {
     const url = new URL(this.url,);
-    const statement = {
-      sql: sql2,
-    };
-    if (!isEmptyObject(parameters,)) statement.params = parameters;
-    url.searchParams.set('statement', JSON.stringify(statement,),);
+    url.searchParams.set('query', JSON.stringify(query,),);
     const response = await fetch(url.href, {
       headers: {
         Accept: 'application/json',
@@ -44655,21 +44272,13 @@ var NetworkServerDatabase = class {
     const serverDatabaseResponse = isServerDatabaseResponse(responseBody,) ? responseBody : void 0;
     const data2 = serverDatabaseResponse && 'data' in serverDatabaseResponse ? serverDatabaseResponse.data : void 0;
     const error = serverDatabaseResponse && 'error' in serverDatabaseResponse ? serverDatabaseResponse.error : void 0;
-    if (error || !response.ok) {
-      throw new ServerDatabaseError(`Query failed with status ${response.status}${error ? `: ${error.message}` : ''}`,);
+    if (error !== void 0 || !response.ok) {
+      throw new ServerDatabaseError(`Query failed with status ${response.status}${error !== void 0 ? `: ${error}` : ''}`,);
     }
-    if (!data2) throw new ServerDatabaseError('Query returned invalid response',);
+    if (data2 === void 0) throw new ServerDatabaseError('Query returned invalid response',);
     return data2;
   }
 };
-function mapValueToRaw(value,) {
-  if (value === null || typeof value === 'string' || typeof value === 'number') return value;
-  if (typeof value === 'boolean') return value ? 1 : 0;
-  return JSON.stringify(value,);
-}
-function mapParametersToRaw(parameters,) {
-  return Object.fromEntries(Object.entries(parameters,).map(([name, value,],) => [name, mapValueToRaw(value,),]),);
-}
 function isServerRichTextNode(value,) {
   if (isString(value,)) return true;
   if (isObject(value,) && isString(value.type,)) return true;
@@ -44711,7 +44320,7 @@ function renderServerRichText(node, components,) {
   }
 }
 function renderServerRichTextModule({
-  identifier: identifier2,
+  identifier,
   width,
   alignment,
   aspectRatio: aspectRatio2,
@@ -44722,7 +44331,7 @@ function renderServerRichTextModule({
     ...wrapperProps,
     children: /* @__PURE__ */ jsx(ComponentPresetsConsumer, {
       suppressHydrationWarning: true,
-      componentIdentifier: identifier2,
+      componentIdentifier: identifier,
       children: (presetProps) =>
         /* @__PURE__ */ jsx(AutoBreakpointVariant, {
           suppressHydrationWarning: true,
@@ -44755,122 +44364,66 @@ function getRichTextModuleWrapperProps(width, alignment, aspectRatio2,) {
   };
 }
 var logger = /* @__PURE__ */ getLogger('server database',);
-function mapValueFromRaw(value, type, components,) {
-  if (type === 'unsupported') {
-    logger.warn(new UnsupportedQueryError(`result type, returning null.`,),);
+function mapValueFromServerControlProp(value, components,) {
+  if (value === null) return null;
+  if (value.type === 'unsupported') {
+    logger.warn(new UnsupportedQueryError('result type, returning null.',),);
     return null;
   }
-  if (value === null) return null;
-  switch (type) {
+  const {
+    type,
+  } = value;
+  const propValue = value.value;
+  switch (value.type) {
     case 'boolean':
-      return mapBooleanValue(value,);
+      return typeof propValue === 'boolean' ? propValue : warnInvalidValue(type, propValue,);
     case 'date':
-      return mapDateValue(value,);
+      return mapDateValue(propValue,);
     case 'number':
-      return mapNumberValue(value,);
+      return typeof propValue === 'number' ? propValue : warnInvalidValue(type, propValue,);
     case 'color':
     case 'enum':
     case 'file':
     case 'string':
     case 'collectionreference':
-      return mapStringValue(value,);
+      return typeof propValue === 'string' ? propValue : warnInvalidValue(type, propValue,);
     case 'multicollectionreference':
-      return mapStringArrayJsonValue(value,);
+      return isStringArray(propValue,) ? propValue : warnInvalidValue(type, propValue,);
     case 'responsiveimage':
-      return mapImageJsonValue(value,);
+      return isImageValue(propValue,) ? propValue : warnInvalidValue(type, propValue,);
     case 'richtext':
-      return mapRichTextJsonValue(value, components,);
+      return mapRichTextValue(propValue, components,);
     case 'link':
-      return mapLinkJsonValue(value,);
+      return typeof propValue === 'string' || isLinkToWebPage(propValue,) ? propValue : warnInvalidValue(type, propValue,);
     case 'vectorsetitem':
-      return mapVectorSetItemValue(value, components,);
+      return mapVectorSetItemValue(propValue, components,);
     default:
-      assertNever(type, 'Unknown server query result type',);
+      logger.warn(new UnsupportedQueryError(`result type ${type}, returning null.`,),);
+      return null;
   }
-}
-function mapBooleanValue(value,) {
-  if (value === 0) return false;
-  if (value === 1) return true;
-  logger.warn(new ServerDatabaseError(`Unexpected boolean value ${value}, returning null.`,),);
-  return null;
 }
 function mapDateValue(value,) {
-  if (typeof value !== 'string') {
-    logger.warn(new ServerDatabaseError(`Unexpected date value ${value}, returning null.`,),);
-    return null;
-  }
+  if (typeof value !== 'string') return warnInvalidValue('date', value,);
   const date = new Date(value,);
-  if (!isValidDate(date,)) {
-    logger.warn(new ServerDatabaseError(`Unexpected date value ${value}, returning null.`,),);
-    return null;
-  }
+  if (!isValidDate(date,)) return warnInvalidValue('date', value,);
   return date.toISOString();
-}
-function mapNumberValue(value,) {
-  if (typeof value !== 'number') {
-    logger.warn(new ServerDatabaseError(`Unexpected number value ${value}, returning null.`,),);
-    return null;
-  }
-  return value;
-}
-function mapStringValue(value,) {
-  if (typeof value !== 'string') {
-    logger.warn(new ServerDatabaseError(`Unexpected string value ${value}, returning null.`,),);
-    return null;
-  }
-  return value;
-}
-function mapStringArrayJsonValue(value,) {
-  if (typeof value === 'string') {
-    try {
-      const parsed = JSON.parse(value,);
-      if (isStringArray(parsed,)) return parsed;
-    } catch {}
-  }
-  logger.warn(new ServerDatabaseError(`Unexpected multi reference value ${value}, returning null.`,),);
-  return null;
 }
 function isStringArray(value,) {
   return Array.isArray(value,) && value.every((item) => typeof item === 'string');
 }
-function mapImageJsonValue(value,) {
-  if (typeof value === 'string') {
-    try {
-      const parsed = JSON.parse(value,);
-      if (isImageValue(parsed,)) return parsed;
-    } catch {}
-  }
-  logger.warn(new ServerDatabaseError(`Unexpected image value ${value}, returning null.`,),);
-  return null;
-}
 function isImageValue(value,) {
   return isObject(value,) && typeof value.src === 'string';
 }
-function mapRichTextJsonValue(value, components,) {
-  if (typeof value === 'string') {
-    try {
-      const parsed = JSON.parse(value,);
-      if (isServerRichTextNode(parsed,)) return renderServerRichText(parsed, components,);
-    } catch {}
+function mapRichTextValue(value, components,) {
+  if (!isServerRichTextNode(value,)) return warnInvalidValue('richtext', value,);
+  try {
+    return renderServerRichText(value, components,);
+  } catch {
+    return warnInvalidValue('richtext', value,);
   }
-  logger.warn(new ServerDatabaseError(`Unexpected rich text value ${value}, returning null.`,),);
-  return null;
-}
-function mapLinkJsonValue(value,) {
-  if (typeof value === 'string') {
-    try {
-      const parsed = JSON.parse(value,);
-      if (typeof parsed === 'string' || isLinkToWebPage(parsed,)) return parsed;
-    } catch {}
-  }
-  logger.warn(new ServerDatabaseError(`Unexpected link value ${value}, returning null.`,),);
-  return null;
 }
 function mapVectorSetItemValue(value, components,) {
-  if (typeof value !== 'string') {
-    logger.warn(new ServerDatabaseError(`Unexpected vector set item value ${value}, returning null.`,),);
-    return null;
-  }
+  if (typeof value !== 'string') return warnInvalidValue('vectorsetitem', value,);
   const Component22 = components[value];
   if (!Component22) {
     logger.warn(new ServerDatabaseError(`Missing component for vector set item ${value}, returning null.`,),);
@@ -44879,912 +44432,34 @@ function mapVectorSetItemValue(value, components,) {
   Component22.preload();
   return Component22;
 }
-function mapRowsFromRaw(rows, columns, components,) {
-  return rows.map((row) => {
-    const mappedRow = {};
-    for (const column of columns) {
-      if (!(column.fieldName in row)) throw new ServerDatabaseError(`Expected SQL result column "${column.fieldName}".`,);
-      const value = row[column.fieldName];
-      if (value === void 0) throw new ServerDatabaseError(`Expected SQL result column "${column.fieldName}" returned undefined.`,);
-      mappedRow[column.fieldName] = mapValueFromRaw(value, column.type, components,);
-    }
-    return mappedRow;
-  },);
+function warnInvalidValue(type, value,) {
+  logger.warn(new ServerDatabaseError(`Unexpected ${type} value ${String(value,)}, returning null.`,),);
+  return null;
 }
-var collectionItemIdColumn = 'collectionItemId';
-var positionColumn = 'position';
-var arrayItemIdColumn = 'arrayItemId';
-var indexColumn = 'index';
-var referencedCollectionItemIdColumn = 'referencedCollectionItemId';
-var createdAtColumn = 'createdAt';
-var updatedAtColumn = 'updatedAt';
-var localeIdColumn = 'localeId';
-var inclusionColumn = 'inclusion';
-var excludeInclusionValue = 'exclude';
-var systemColumns = [
-  collectionItemIdColumn,
-  positionColumn,
-  arrayItemIdColumn,
-  indexColumn,
-  referencedCollectionItemIdColumn,
-  createdAtColumn,
-  updatedAtColumn,
-  localeIdColumn,
-];
-var BaseSafeSql = class extends String {};
-function isSafeSql(value,) {
-  return value instanceof BaseSafeSql;
-}
-var SafeSql = class extends BaseSafeSql {};
-function sqlTemplate(strings, ...statementsAndParameters) {
-  assert2(strings[0] !== void 0, 'sql template literal must have at least one string part',);
-  const result = [new SafeSql(strings[0],),];
-  statementsAndParameters.forEach((statementOrParameter, i,) => {
-    assert2(strings[i + 1] !== void 0, 'sql template literal must have a string part after each statement or parameter',);
-    const nextStringPart = new SafeSql(strings[i + 1],);
-    if (Array.isArray(statementOrParameter,)) {
-      result.push(...statementOrParameter, nextStringPart,);
-      return;
-    }
-    if (statementOrParameter instanceof BaseSafeSql) {
-      result.push(statementOrParameter, nextStringPart,);
-      return;
-    }
-    if (isSqlParameter(statementOrParameter,)) {
-      result.push(statementOrParameter, nextStringPart,);
-      return;
-    }
-    assertNever2(statementOrParameter, 'Unknown value in sql template literal',);
-  },);
-  return result;
-}
-function join(statements, separator2, emptyFallback,) {
-  const result = [];
-  for (const statement of statements) {
-    if (result.length > 0) result.push(new SafeSql(separator2,),);
-    if (Array.isArray(statement,)) result.push(...statement,);
-    else result.push(statement,);
-  }
-  if (result.length === 0) {
-    if (!emptyFallback) return void 0;
-    result.push(new SafeSql(emptyFallback,),);
-  }
-  return result;
-}
-var identifierRegex = /^[a-z][\w/:]+$/iu;
-function assertIdentifier(identifierString,) {
-  if (!identifierRegex.test(identifierString,)) {
-    throw new Error(
-      `Only system columns, collection ids, and field ids may be used as SQL identifiers. Received invalid SQL identifier: ${identifierString}`,
-    );
-  }
-}
-function identifier(identifierString,) {
-  assertIdentifier(identifierString,);
-  return new SafeSql(`"${identifierString}"`,);
-}
-function assertQualifier(qualifierString,) {
-  if (!qualifierString.split('.',).every((segment) => identifierRegex.test(segment,) && !systemColumns.includes(segment,))) {
-    throw new Error(`Only collection ids and field ids may be used as SQL qualifiers. Received invalid SQL qualifier: ${qualifierString}`,);
-  }
-}
-function qualifier(qualifierString,) {
-  assertQualifier(qualifierString,);
-  return new SafeSql(`"${qualifierString}"`,);
-}
-function qualifiedIdentifier(qualifierString, id2,) {
-  return sql`${qualifier(qualifierString,)}.${identifier(id2,)}`;
-}
-function alias(aliasString,) {
-  const lastSeparatorIndex = aliasString.lastIndexOf('.',);
-  if (lastSeparatorIndex === -1) return identifier(aliasString,);
-  const qualifierString = aliasString.slice(0, lastSeparatorIndex,);
-  const identifierString = aliasString.slice(lastSeparatorIndex + 1,);
-  assertQualifier(qualifierString,);
-  assertIdentifier(identifierString,);
-  return new SafeSql(`"${aliasString}"`,);
-}
-function parameter(name, value,) {
-  assert2(parameterRegex.test(name,), `Invalid SQL parameter name ${name}`,);
-  return {
-    name,
-    value,
-  };
-}
-var sql = /* @__PURE__ */ Object.assign(sqlTemplate, {
-  join,
-  identifier,
-  qualifiedIdentifier,
-  alias,
-  parameter,
-},);
-var parameterRegex = /^\w+$/u;
-function isSqlParameter(value,) {
-  return typeof value === 'object' && value !== null && 'name' in value && 'value' in value;
-}
-function serializeSql(statement,) {
-  let sql2 = '';
-  const parameters = {};
-  for (const part of Array.isArray(statement,) ? statement : [statement,]) {
-    if (isSafeSql(part,)) {
-      sql2 += part;
-      continue;
-    }
-    if (isSqlParameter(part,)) {
-      let conflictingParameterCount = 0;
-      let name = part.name;
-      while (true) {
-        if (parameters[name] === void 0) break;
-        if (parameters[name] === part.value) break;
-        conflictingParameterCount++;
-        name = `${part.name}::${conflictingParameterCount}`;
-      }
-      sql2 += `$${name}`;
-      parameters[name] = part.value;
-      continue;
-    }
-    assertNever2(part, 'Unknown part in SQL statement',);
-  }
-  return {
-    sql: sql2,
-    parameters,
-  };
-}
-function getItemsTable(collectionId,) {
-  return `${collectionId}/items`;
-}
-function getItemLocalizationsTable(collectionId,) {
-  return `${collectionId}/itemLocalizations`;
-}
-function getItemMultiCollectionReferencesTable(collectionId,) {
-  return `${collectionId}/itemMultiCollectionReferences`;
-}
-function getItemMultiCollectionReferencesView(collectionId, fieldId,) {
-  return `${getItemMultiCollectionReferencesTable(collectionId,)}/${fieldId}`;
-}
-function getLocalizedItemsCte(collectionId,) {
-  return `${collectionId}/localizedItems`;
-}
-function getValueInLocaleColumn(fieldId, localeId,) {
-  return `${fieldId}/${localeId}`;
-}
-function getLocalizedValueColumn(fieldId,) {
-  return `localized/${fieldId}`;
-}
-function registerLocalizedField(collectionId, fieldId, field, {
-  localizedItemTables,
-},) {
-  const localizedFields = localizedItemTables.get(collectionId,) ?? /* @__PURE__ */ new Map();
-  localizedFields.set(fieldId, field,);
-  localizedItemTables.set(collectionId, localizedFields,);
-}
-function registerItemsTable(collectionId, {
-  chainedLocaleIds,
-  localizedItemTables,
-},) {
-  if (chainedLocaleIds.length === 0) return getItemsTable(collectionId,);
-  if (!localizedItemTables.has(collectionId,)) localizedItemTables.set(collectionId, /* @__PURE__ */ new Map(),);
-  return getLocalizedItemsCte(collectionId,);
-}
-function compileLocalizedValue(expression, localizedExpressions, field,) {
-  if (field.type === 'responsiveimage') {
-    const localizedImagesWithoutAlt = localizedExpressions.map((image) => {
-      const imageContainsSrc = sql`json_extract(${image}, '$.src') IS NOT NULL`;
-      const imageWithoutAlt2 = sql`json_remove(${image}, '$.alt')`;
-      return sql`IIF(${imageContainsSrc}, ${imageWithoutAlt2}, NULL)`;
-    },);
-    const defaultImageWithoutAlt = sql`json_remove(${expression}, '$.alt')`;
-    const imageWithoutAlt = sql`COALESCE(${sql.join([...localizedImagesWithoutAlt, defaultImageWithoutAlt,], ', ', '1',)})`;
-    const alts = [...localizedExpressions, expression,].map((image) => sql`json_extract(${image}, '$.alt')`);
-    const alt = sql`json_object('alt', COALESCE(${sql.join(alts, ', ', '1',)}))`;
-    return sql`json_patch(${imageWithoutAlt}, ${alt})`;
-  }
-  return sql`COALESCE(${sql.join([...localizedExpressions, expression,], ', ', '1',)})`;
-}
-function getItemsInLocaleChainCte(collectionId,) {
-  return `${collectionId}/itemsInLocaleChain`;
-}
-function compileWithClause(context,) {
-  const tables = [];
-  for (const [collectionId, fields,] of context.localizedItemTables) {
-    tables.push(compileItemsInLocaleChainCte(collectionId, fields, context,),);
-    tables.push(compileLocalizedItemsCte(collectionId, fields, context,),);
-  }
-  const commonTableExpressions = sql.join(tables, ', ',);
-  if (!commonTableExpressions) return sql``;
-  return sql`WITH ${commonTableExpressions} `;
-}
-function compileItemsInLocaleChainCte(collectionId, fields, {
-  chainedLocaleIds,
-  serverCollections,
-},) {
-  const localizationsTable = sql.identifier(getItemLocalizationsTable(collectionId,),);
-  const itemId = sql.qualifiedIdentifier(collectionId, collectionItemIdColumn,);
-  function compileValueInLocale(columnId, localeId, condition,) {
-    const itemIdsMatch = sql`${sql.identifier(collectionItemIdColumn,)} = ${itemId}`;
-    const localesMatch = sql`${sql.identifier(localeIdColumn,)} = ${sql.parameter('localeId', localeId,)}`;
-    let whereClause = sql`${itemIdsMatch} AND ${localesMatch}`;
-    if (condition) whereClause = sql`${whereClause} AND ${condition}`;
-    const valueInLocale = sql`(SELECT ${sql.identifier(columnId,)} FROM ${localizationsTable} WHERE ${whereClause})`;
-    return sql`${valueInLocale} AS ${sql.identifier(getValueInLocaleColumn(columnId, localeId,),)}`;
-  }
-  const valuesInLocales = [];
-  const activeLocaleId = chainedLocaleIds[0];
-  if (activeLocaleId !== void 0) valuesInLocales.push(compileValueInLocale(inclusionColumn, activeLocaleId,),);
-  const itemIsIncludedInLocale = sql`${sql.identifier(inclusionColumn,)} IS NULL`;
-  for (const localeId of chainedLocaleIds) {
-    for (const fieldId of fields.keys()) {
-      const isSlug = fieldId === serverCollections[collectionId]?.slugFieldId;
-      valuesInLocales.push(compileValueInLocale(fieldId, localeId, isSlug ? void 0 : itemIsIncludedInLocale,),);
-    }
-  }
-  const itemsInLocaleChainTable = sql`SELECT ${sql.join([...valuesInLocales, sql`*`,], ', ', '1',)} FROM ${
-    sql.identifier(getItemsTable(collectionId,),)
-  } AS ${sql.alias(collectionId,)}`;
-  return sql`${sql.identifier(getItemsInLocaleChainCte(collectionId,),)} AS (${itemsInLocaleChainTable})`;
-}
-function compileLocalizedItemsCte(collectionId, fields, {
-  chainedLocaleIds,
-},) {
-  const localizedValues = [];
-  for (const [fieldId, field,] of fields) {
-    const localizedExpressions = chainedLocaleIds.map((localeId) => sql.identifier(getValueInLocaleColumn(fieldId, localeId,),));
-    const localizedValue = compileLocalizedValue(sql.identifier(fieldId,), localizedExpressions, field,);
-    localizedValues.push(sql`${localizedValue} AS ${sql.identifier(getLocalizedValueColumn(fieldId,),)}`,);
-  }
-  let localizedItemsSelect = sql`SELECT ${sql.join([...localizedValues, sql`*`,], ', ', '1',)} FROM ${
-    sql.identifier(getItemsInLocaleChainCte(collectionId,),)
-  }`;
-  const activeLocaleId = chainedLocaleIds[0];
-  if (activeLocaleId !== void 0) {
-    const inclusionInActiveLocale = sql.identifier(getValueInLocaleColumn(inclusionColumn, activeLocaleId,),);
-    localizedItemsSelect = sql`${localizedItemsSelect} WHERE ${inclusionInActiveLocale} IS NOT ${
-      sql.parameter('inclusion', excludeInclusionValue,)
-    }`;
-  }
-  return sql`${sql.identifier(getLocalizedItemsCte(collectionId,),)} AS (${localizedItemsSelect})`;
-}
-function compileFromClause(table, alias2, joins, joinType,) {
-  const source = sql.identifier(table,);
-  const joinParts = [alias2 === void 0 ? source : sql`${source} AS ${sql.alias(alias2,)}`,];
-  for (const [joinAlias, join2,] of joins) {
-    joinParts.push(sql`${sql.identifier(join2.table,)} AS ${sql.alias(joinAlias,)} ON ${join2.condition}`,);
-  }
-  return {
-    statement: sql`FROM ${sql.join(joinParts, joinType, '(SELECT 0 WHERE 0)',)}`,
-  };
-}
-var maximumLimit = 5001;
-function compileLimitAndOffsetClause({
-  limit,
-  offset,
-},) {
-  const validLimit = limit !== void 0 && isValidCount(limit, 'limit',) ? Math.min(limit, maximumLimit,) : maximumLimit;
-  const validOffset = isValidCount(offset, 'offset',) ? offset : 0;
-  return {
-    statement: sql`LIMIT ${sql.parameter('limit', validLimit,)} OFFSET ${sql.parameter('offset', validOffset,)}`,
-  };
-}
-function isValidCount(value, name,) {
-  if (Number.isSafeInteger(value,) && value >= 0) return true;
-  warnOnce$1(new ServerDatabaseError(`Query ${name} must be a non-negative safe integer, got ${value}.`,).toString(),);
-  return false;
-}
-function isDateSystemColumn(fieldId,) {
-  return fieldId === 'createdAt' || fieldId === 'updatedAt';
-}
-var previousItemIdField = 'previousItemId';
-function isNeighborField(fieldId,) {
-  return fieldId === 'previousItemId' || fieldId === 'nextItemId';
-}
-function lookupField(serverCollections, collectionId, fieldId,) {
-  if (isDateSystemColumn(fieldId,)) {
-    return {
-      type: 'date',
-      isLocalized: false,
-    };
-  }
-  if (isNeighborField(fieldId,)) {
-    return {
-      type: 'collectionreference',
-      referencedCollectionId: collectionId,
-    };
-  }
-  return serverCollections[collectionId]?.fields[fieldId];
-}
-function compileReferenceJoin(qualifier2, identifier2, joinAlias, table,) {
-  return {
-    table,
-    condition: sql`${sql.qualifiedIdentifier(qualifier2, identifier2,)} = ${sql.qualifiedIdentifier(joinAlias, collectionItemIdColumn,)}`,
-  };
-}
-function registerReferenceJoin(qualifier2, fieldId, referencedCollectionId, context,) {
-  const joinAlias = `${qualifier2}.${fieldId}`;
-  if (context.joins.has(joinAlias,)) return joinAlias;
-  const join2 = compileReferenceJoin(qualifier2, fieldId, joinAlias, registerItemsTable(referencedCollectionId, context,),);
-  context.joins.set(joinAlias, join2,);
-  return joinAlias;
-}
-function compileMultiReferenceExpression(qualifier2, collectionId, fieldId, referencedItemsTable,) {
-  const sideTable = getItemMultiCollectionReferencesView(collectionId, fieldId,);
-  const selectClause = compileMultiReferenceSelectClause(sideTable, `${qualifier2}.${fieldId}`, referencedItemsTable,);
-  const fromClause = compileFromClause(sideTable, void 0, selectClause.joins, ' JOIN ',);
-  const whereClause = compileMultiReferenceWhereClause(sideTable, qualifier2,);
-  return sql`(${selectClause.statement} ${fromClause.statement} ${whereClause.statement})`;
-}
-function compileMultiReferenceSelectClause(sideTable, joinAlias, referencedItemsTable,) {
-  const joins = /* @__PURE__ */ new Map([[
-    joinAlias,
-    compileReferenceJoin(sideTable, referencedCollectionItemIdColumn, joinAlias, referencedItemsTable,),
-  ],],);
-  return {
-    statement: sql`SELECT json_group_array(${sql.qualifiedIdentifier(joinAlias, collectionItemIdColumn,)} ORDER BY ${
-      sql.qualifiedIdentifier(sideTable, indexColumn,)
-    })`,
-    joins,
-  };
-}
-function compileMultiReferenceWhereClause(sideTable, qualifier2,) {
-  return {
-    statement: sql`WHERE ${sql.qualifiedIdentifier(sideTable, collectionItemIdColumn,)} = ${
-      sql.qualifiedIdentifier(qualifier2, collectionItemIdColumn,)
-    }`,
-  };
-}
-function resolvePhysicalField(qualifier2, collectionId, fieldId, context,) {
-  if (isNeighborField(fieldId,)) return void 0;
-  const field = lookupField(context.serverCollections, collectionId, fieldId,);
-  if (!field) return void 0;
-  const isLocalized = 'isLocalized' in field && field.isLocalized && context.chainedLocaleIds.length > 0;
-  if (isLocalized) registerLocalizedField(collectionId, fieldId, field, context,);
-  return {
-    qualifier: qualifier2,
-    collectionId,
-    tailFieldId: fieldId,
-    tailField: field,
-    isLocalized,
-  };
-}
-function resolveDefaultOrderField(qualifier2, collectionId, fieldPath, context,) {
-  const [fieldId, ...rest] = fieldPath;
-  if (fieldId === void 0 || rest.length > 0) {
-    warnOnce$1(
-      new ServerDatabaseError(`Default order field path "${fieldPath.join('.',)}" of collection ${collectionId} is not a top-level field.`,)
-        .toString(),
-    );
-    return;
-  }
-  const resolved = resolvePhysicalField(qualifier2, collectionId, fieldId, context,);
-  if (!resolved) {
-    warnOnce$1(
-      new ServerDatabaseError(`Default order field ${fieldId} is not a physical field of collection ${collectionId}.`,).toString(),
-    );
-  }
-  return resolved;
-}
-function compileFieldExpression(resolvedField, context,) {
-  const {
-    qualifier: qualifier2,
-    collectionId,
-    tailFieldId,
-    tailField,
-  } = resolvedField;
-  if (tailField.type === 'multicollectionreference') {
-    const referencedItemsTable = registerItemsTable(tailField.referencedCollectionId, context,);
-    return compileMultiReferenceExpression(qualifier2, collectionId, tailFieldId, referencedItemsTable,);
-  }
-  if (tailField.type === 'collectionreference' && tailFieldId !== 'collectionItemId') {
-    const referenceQualifier = registerReferenceJoin(qualifier2, tailFieldId, tailField.referencedCollectionId, context,);
-    return sql.qualifiedIdentifier(referenceQualifier, collectionItemIdColumn,);
-  }
-  return compileValueExpression(resolvedField,);
-}
-function compileValueExpression({
-  qualifier: qualifier2,
-  tailFieldId,
-  isLocalized,
-},) {
-  if (!isLocalized) return sql.qualifiedIdentifier(qualifier2, tailFieldId,);
-  return sql.qualifiedIdentifier(qualifier2, getLocalizedValueColumn(tailFieldId,),);
-}
-function compileSortKey(resolved,) {
-  if (resolved.tailField.type === 'multicollectionreference') return void 0;
-  if (resolved.tailField.type === 'unsupported') {
-    warnOnce$1(new UnsupportedQueryError(`sort field type.`,).toString(),);
-    return;
-  }
-  let expression = compileValueExpression(resolved,);
-  if (resolved.tailField.type === 'string') expression = sql`LOWER(${expression})`;
-  return expression;
-}
-function registerNeighborJoin(qualifier2, neighborFieldId, collectionId, context,) {
-  const joinAlias = `${qualifier2}.${neighborFieldId}`;
-  if (context.joins.has(joinAlias,)) return joinAlias;
-  const join2 = compileNeighborJoin(qualifier2, neighborFieldId, joinAlias, collectionId, context,);
-  context.joins.set(joinAlias, join2,);
-  return joinAlias;
-}
-function compileNeighborJoin(qualifier2, neighborFieldId, joinAlias, collectionId, context,) {
-  const candidateAlias = `${joinAlias}/candidate`;
-  const candidateContext = {
-    ...context,
-    joins: /* @__PURE__ */ new Map(),
-  };
-  const isPrevious = neighborFieldId === previousItemIdField;
-  const keys2 = [];
-  for (
-    const {
-      fieldPath,
-      direction,
-    } of context.serverCollections[collectionId]?.defaultOrderBy ?? []
-  ) {
-    const current2 = resolveDefaultOrderField(qualifier2, collectionId, fieldPath, context,);
-    const candidate = resolveDefaultOrderField(candidateAlias, collectionId, fieldPath, candidateContext,);
-    const currentKey = current2 && compileSortKey(current2,);
-    const candidateKey = candidate && compileSortKey(candidate,);
-    if (!currentKey || !candidateKey) continue;
-    const descending = isPrevious && direction === 'asc' || !isPrevious && direction === 'desc';
-    keys2.push({
-      current: currentKey,
-      candidate: candidateKey,
-      descending,
-    },);
-  }
-  const follows = compileFollows(keys2, qualifier2, candidateAlias, isPrevious,);
-  const orderByClause = compileNeighborOrderByClause(keys2, candidateAlias, isPrevious,);
-  const itemsTable = registerItemsTable(collectionId, context,);
-  const fromClause = compileFromClause(itemsTable, candidateAlias, candidateContext.joins, ' LEFT JOIN ',);
-  const currentId = sql.qualifiedIdentifier(qualifier2, collectionItemIdColumn,);
-  const candidateId = sql.qualifiedIdentifier(candidateAlias, collectionItemIdColumn,);
-  return {
-    table: itemsTable,
-    condition: sql`${
-      sql.qualifiedIdentifier(joinAlias, collectionItemIdColumn,)
-    } = (SELECT ${candidateId} ${fromClause.statement} WHERE ${currentId} IS NOT NULL AND (${follows}) ${orderByClause.statement} LIMIT 1)`,
-  };
-}
-function compileFollows(keys2, qualifier2, candidateAlias, isPrevious,) {
-  const currentPosition = sql.qualifiedIdentifier(qualifier2, positionColumn,);
-  const candidatePosition = sql.qualifiedIdentifier(candidateAlias, positionColumn,);
-  let follows = isPrevious ? sql`${candidatePosition} < ${currentPosition}` : sql`${candidatePosition} > ${currentPosition}`;
-  for (const key2 of [...keys2,].reverse()) {
-    follows = sql`${compileFollowsOnKey(key2,)} OR (${key2.candidate} IS ${key2.current} AND (${follows}))`;
-  }
-  return follows;
-}
-function compileNeighborOrderByClause(keys2, candidateAlias, isPrevious,) {
-  const parts = [];
-  for (
-    const {
-      candidate,
-      descending,
-    } of keys2
-  ) parts.push(sql`${candidate} ${descending ? sql`DESC` : sql`ASC`}`,);
-  parts.push(sql`${sql.qualifiedIdentifier(candidateAlias, positionColumn,)} ${isPrevious ? sql`DESC` : sql`ASC`}`,);
-  return {
-    statement: sql`ORDER BY ${sql.join(parts, ', ', '1',)}`,
-  };
-}
-function compileFollowsOnKey({
-  current: current2,
-  candidate,
-  descending,
-},) {
-  return descending
-    ? sql`${candidate} < ${current2} OR (${candidate} IS NULL AND ${current2} IS NOT NULL)`
-    : sql`${candidate} > ${current2} OR (${current2} IS NULL AND ${candidate} IS NOT NULL)`;
-}
-function resolveFieldPath(rootCollectionId, fieldPath, context,) {
-  const referencePath = [...fieldPath,];
-  const tailFieldId = referencePath.pop();
-  if (tailFieldId === void 0) {
-    return {
-      qualifier: rootCollectionId,
-      collectionId: rootCollectionId,
-      tailFieldId: collectionItemIdColumn,
-      tailField: {
-        type: 'collectionreference',
-        referencedCollectionId: rootCollectionId,
-      },
-      isLocalized: false,
-    };
-  }
-  let collectionId = rootCollectionId;
-  let qualifier2 = collectionId;
-  for (const referenceFieldId of referencePath) {
-    const field = lookupField(context.serverCollections, collectionId, referenceFieldId,);
-    if (!field) {
-      warnOnce$1(
-        new ServerDatabaseError(`Intermediate field ${referenceFieldId} does not exist in collection ${collectionId}.`,).toString(),
-      );
-      return;
-    }
-    if (field.type !== 'collectionreference') {
-      warnOnce$1(new ServerDatabaseError(`Intermediate field ${referenceFieldId} is not a single reference field.`,).toString(),);
-      return;
-    }
-    qualifier2 = isNeighborField(referenceFieldId,)
-      ? registerNeighborJoin(qualifier2, referenceFieldId, field.referencedCollectionId, context,)
-      : registerReferenceJoin(qualifier2, referenceFieldId, field.referencedCollectionId, context,);
-    collectionId = field.referencedCollectionId;
-  }
-  if (isNeighborField(tailFieldId,)) {
-    return {
-      qualifier: registerNeighborJoin(qualifier2, tailFieldId, collectionId, context,),
-      collectionId,
-      tailFieldId: collectionItemIdColumn,
-      tailField: {
-        type: 'collectionreference',
-        referencedCollectionId: collectionId,
-      },
-      isLocalized: false,
-    };
-  }
-  const resolved = resolvePhysicalField(qualifier2, collectionId, tailFieldId, context,);
-  if (!resolved) {
-    warnOnce$1(new ServerDatabaseError(`Field ${tailFieldId} does not exist in collection ${collectionId}.`,).toString(),);
-    return;
-  }
-  return resolved;
-}
-function compileOrderByClause({
-  collectionId,
-  orderBy,
-}, context,) {
-  const parts = [];
-  for (
-    const {
-      fieldPath,
-      direction,
-    } of orderBy
-  ) {
-    const part = compileOrderByField(resolveFieldPath(collectionId, fieldPath, context,), direction,);
-    if (part) parts.push(part,);
-  }
-  for (
-    const {
-      fieldPath,
-      direction,
-    } of context.serverCollections[collectionId]?.defaultOrderBy ?? []
-  ) {
-    const part = compileOrderByField(resolveDefaultOrderField(collectionId, collectionId, fieldPath, context,), direction,);
-    if (part) parts.push(part,);
-  }
-  parts.push(sql.qualifiedIdentifier(collectionId, positionColumn,),);
-  return {
-    statement: sql`ORDER BY ${sql.join(parts, ', ', '1',)}`,
-  };
-}
-function compileOrderByField(resolved, direction,) {
-  const expression = resolved && compileSortKey(resolved,);
-  if (!expression) return void 0;
-  return sql`${expression} ${direction === 'desc' ? sql`DESC` : sql`ASC`}`;
-}
-function compileSelectClause({
-  collectionId,
-  columns,
-}, context,) {
-  const resultColumns = [];
-  const selectParts = [];
+function mapRowFromServerControlProps(row, columns, components,) {
+  const mappedRow = {};
   for (const column of columns) {
-    const compiledColumn = compileColumn(collectionId, column, context,);
-    if (!compiledColumn) continue;
-    resultColumns.push({
-      fieldName: column.alias,
-      type: compiledColumn.type,
-    },);
-    selectParts.push(sql`${compiledColumn.expression} AS ${sql.alias(column.alias,)}`,);
+    const value = row[column.alias];
+    mappedRow[column.alias] = value === void 0 ? void 0 : mapValueFromServerControlProp(value, components,);
   }
-  if (selectParts.length === 0) warnOnce$1(new ServerDatabaseError('Query selects no column.',).toString(),);
-  return {
-    statement: sql`SELECT ${sql.join(selectParts, ', ', '1',)}`,
-    columns: resultColumns,
-  };
-}
-function compileColumn(rootCollectionId, column, context,) {
-  const resolved = resolveFieldPath(rootCollectionId, column.fieldPath, context,);
-  if (!resolved) return void 0;
-  return {
-    expression: compileFieldExpression(resolved, context,),
-    type: resolved.tailField.type,
-  };
-}
-function compileWhereClause(collectionId, filters, context,) {
-  const compiledFilters = [];
-  for (const filter2 of filters.conditions) {
-    const compiledFilter = compileFilter(collectionId, filter2, context,);
-    if (compiledFilter) compiledFilters.push(compiledFilter,);
-  }
-  const filterCondition = joinCompiledFilters(compiledFilters, getJoinOperator(filters.operator,),);
-  return {
-    statement: sql`WHERE ${filterCondition}`,
-  };
-}
-function joinCompiledFilters(compiledFilters, operator,) {
-  const expression = sql.join(compiledFilters.map((compiledFilter) => compiledFilter.expression), operator, '1',);
-  if (!compiledFilters.some((compiledFilter) => compiledFilter.indexableSupersetExpression)) return expression;
-  const indexableSupersetExpression = sql.join(
-    compiledFilters.flatMap((compiledFilter) => {
-      if (compiledFilter.indexableSupersetExpression) return [sql`(${compiledFilter.indexableSupersetExpression})`,];
-      if (operator === ' OR ') return [compiledFilter.expression,];
-      return [];
-    },),
-    operator,
-    '1',
-  );
-  return sql`(${indexableSupersetExpression}) AND (${expression})`;
-}
-function getJoinOperator(filterOperator,) {
-  switch (filterOperator) {
-    case 'any':
-      return ' OR ';
-    case 'all':
-      return ' AND ';
-  }
-}
-function compileFilter(collectionId, filter2, context,) {
-  const resolved = resolveFieldPath(collectionId, filter2.fieldPath, context,);
-  if (!resolved) return void 0;
-  if (resolved.tailField.type === 'unsupported') {
-    warnOnce$1(new UnsupportedQueryError(`filter field type.`,).toString(),);
-    return;
-  }
-  const parameterName = filter2.fieldPath.join('_',) || resolved.tailFieldId;
-  const fieldStep = compileField(resolved, context,);
-  const transforms = preOptimizeTransforms(fieldStep, filter2.transforms,);
-  const filterStep = compileTransforms(fieldStep, transforms, parameterName,);
-  if (!filterStep) return void 0;
-  if (filterStep.type !== 'boolean') {
-    warnOnce$1(new ServerDatabaseError(`Filter chain on ${filterStep.type} field does not result in a boolean.`,).toString(),);
-    return;
-  }
-  return {
-    expression: filterStep.inputToleratingNull().expression,
-    indexableSupersetExpression: compileLocalizedIndexableSuperset(resolved, context.chainedLocaleIds, transforms, parameterName,) ??
-      compileReferenceIndexableSuperset(resolved, filterStep, transforms, parameterName,),
-  };
-}
-function compileReferenceIndexableSuperset(
-  {
-    qualifier: qualifier2,
-    tailFieldId,
-    tailField,
-  },
-  filterStep,
-  transforms,
-  parameterName,
-) {
-  if (tailField.type !== 'collectionreference' || tailFieldId === 'collectionItemId') return;
-  if (filterStep.inputToleratingNull().nullable === 'no') return;
-  return compileTransforms(createFieldStep(sql.qualifiedIdentifier(qualifier2, tailFieldId,), tailField.type,), transforms, parameterName,)
-    ?.inputToleratingNull().expression;
-}
-function compileLocalizedIndexableSuperset(
-  {
-    qualifier: qualifier2,
-    collectionId,
-    tailFieldId,
-    tailField,
-    isLocalized,
-  },
-  chainedLocaleIds,
-  transforms,
-  parameterName,
-) {
-  if (!isLocalized) return;
-  const defaultLocaleValue = createFieldStep(sql.qualifiedIdentifier(qualifier2, tailFieldId,), tailField.type,);
-  const otherLocalesValue = createFieldStep(sql.identifier(tailFieldId,), tailField.type,);
-  const defaultLocaleCandidateStep = compileTransforms(defaultLocaleValue, transforms, parameterName,);
-  const otherLocalesCandidateStep = compileTransforms(otherLocalesValue, transforms, parameterName,);
-  if (!defaultLocaleCandidateStep || !otherLocalesCandidateStep) return;
-  const isCandidateInDefaultLocale = defaultLocaleCandidateStep.inputToleratingNull().expression;
-  const localeIdParameters = chainedLocaleIds.map((localeId) => sql.parameter('localeId', localeId,));
-  const candidatesInOtherLocales = sql`SELECT ${sql.identifier(collectionItemIdColumn,)} FROM ${
-    sql.identifier(getItemLocalizationsTable(collectionId,),)
-  } WHERE ${sql.identifier(localeIdColumn,)} IN (${
-    sql.join(localeIdParameters, ', ', '1',)
-  }) AND ${otherLocalesCandidateStep.inputToleratingNull().expression}`;
-  const isCandidateInOtherLocales = sql`${sql.qualifiedIdentifier(qualifier2, collectionItemIdColumn,)} IN (${candidatesInOtherLocales})`;
-  return sql`${isCandidateInDefaultLocale} OR ${isCandidateInOtherLocales}`;
-}
-function compileTransforms(firstStep, transforms, parameterName,) {
-  let currentStep = firstStep;
-  for (const transform2 of transforms) {
-    parameterName += `_${transform2.name}`;
-    currentStep = compileTransform(transform2, currentStep.lowercaseIfString(), parameterName,);
-    if (!currentStep) return void 0;
-  }
-  return currentStep;
-}
-function preOptimizeTransforms(currentStep, transforms,) {
-  if (currentStep.type === 'boolean' && transforms.length === 0) {
-    return [{
-      name: 'equals',
-      value: true,
-    },];
-  }
-  return transforms;
-}
-var Step = class Step2 {
-  #expression;
-  #type;
-  #nullable;
-  constructor(init,) {
-    this.#expression = init.expression;
-    this.#type = init.type;
-    this.#nullable = init.nullable;
-  }
-  /**
-   * Get the input to be used in a context that carries through NULL representing false,
-   * or correctly handles NULL representing false (e.g. `WHERE`/`AND` coercing to false).
-   */
-  inputToleratingNull() {
-    return {
-      expression: this.#expression,
-      nullable: this.#nullable,
-    };
-  }
-  /**
-   * Get the input to be used in a context that misbehaves on a NULL representing false (e.g. `= NULL`).
-   */
-  inputSensitiveToNull() {
-    if (this.#nullable === 'treat-as-false') {
-      return {
-        expression: sql`(${this.#expression} IS TRUE)`,
-        nullable: 'no',
-      };
-    }
-    return {
-      expression: this.#expression,
-      nullable: this.#nullable,
-    };
-  }
-  lowercaseIfString() {
-    return new Step2({
-      expression: lowercaseIfString(this.#type, this.#expression,),
-      type: this.#type,
-      nullable: this.#nullable,
-    },);
-  }
-  get type() {
-    return this.#type;
-  }
-};
-function treatNullInputAsFalse(input,) {
-  switch (input.nullable) {
-    case 'yes':
-    case 'treat-as-false':
-      return 'treat-as-false';
-    case 'no':
-      return 'no';
-  }
-}
-function treatNullValueAsFalse(value,) {
-  if (value === null) return 'treat-as-false';
-  return 'no';
-}
-function compileField(resolvedFieldPath, context,) {
-  return createFieldStep(compileFieldExpression(resolvedFieldPath, context,), resolvedFieldPath.tailField.type,);
-}
-function createFieldStep(expression, type,) {
-  return new Step({
-    expression,
-    type,
-    nullable: type === 'multicollectionreference' ? 'no' : 'yes',
-  },);
-}
-function compileTransform(transform2, previousStep, parameterName,) {
-  if (transform2.value === void 0) return void 0;
-  switch (transform2.name) {
-    case 'equals':
-      return compileEquals(previousStep, parameterName, transform2.value,);
-    case 'isIncludedIn':
-      return compileIsIncludedIn(previousStep, parameterName, transform2.value,);
-    case 'contains':
-      return compileContains(previousStep, parameterName, transform2.value,);
-    default:
-      warnOnce$1(new UnsupportedQueryError(`filter transform.`,).toString(),);
-      return;
-  }
-}
-function compileEquals(previousStep, parameterName, value,) {
-  const input = previousStep.inputSensitiveToNull();
-  if (value === null) {
-    return new Step({
-      expression: sql`${input.expression} IS NULL`,
-      type: 'boolean',
-      nullable: 'no',
-    },);
-  }
-  return new Step({
-    expression: sql`${input.expression} = ${lowercaseIfString(previousStep.type, sql.parameter(parameterName, value,),)}`,
-    type: 'boolean',
-    nullable: treatNullInputAsFalse(input,),
-  },);
-}
-function compileIsIncludedIn(previousStep, parameterName, value,) {
-  const input = previousStep.inputToleratingNull();
-  return new Step({
-    expression: sql`${input.expression} IN (SELECT ${lowercaseIfString(previousStep.type, sql`value`,)} FROM json_each(${
-      sql.parameter(parameterName, value,)
-    }))`,
-    type: 'boolean',
-    nullable: treatNullInputAsFalse(input,),
-  },);
-}
-function compileContains(previousStep, parameterName, value,) {
-  switch (previousStep.type) {
-    case 'multicollectionreference':
-      return new Step({
-        expression: sql`${
-          sql.parameter(parameterName, value,)
-        } IN (SELECT value FROM json_each(${previousStep.inputToleratingNull().expression}))`,
-        type: 'boolean',
-        nullable: treatNullValueAsFalse(value,),
-      },);
-    case 'string':
-      warnOnce$1(new UnsupportedQueryError(`contains filter on a ${previousStep.type} field.`,).toString(),);
-      return;
-    default:
-      warnOnce$1(new ServerDatabaseError(`Contains filter on a ${previousStep.type} field.`,).toString(),);
-      return;
-  }
-}
-function lowercaseIfString(type, expression,) {
-  if (type !== 'string') return expression;
-  return sql`LOWER(${expression})`;
-}
-function compileQuery(serverQuery, serverCollections,) {
-  const {
-    collectionId,
-  } = serverQuery;
-  const context = {
-    serverCollections,
-    joins: /* @__PURE__ */ new Map(),
-    chainedLocaleIds: serverQuery.chainedLocaleIds,
-    localizedItemTables: /* @__PURE__ */ new Map(),
-  };
-  const selectClause = compileSelectClause(serverQuery, context,);
-  const whereClause = compileWhereClause(collectionId, serverQuery.filters, context,);
-  const orderByClause = compileOrderByClause(serverQuery, context,);
-  const fromClause = compileFromClause(registerItemsTable(collectionId, context,), collectionId, context.joins, ' LEFT JOIN ',);
-  const withClause = compileWithClause(context,);
-  const limitAndOffsetClause = compileLimitAndOffsetClause(serverQuery,);
-  const statement =
-    sql`${withClause}${selectClause.statement} ${fromClause.statement} ${whereClause.statement} ${orderByClause.statement} ${limitAndOffsetClause.statement}`;
-  return {
-    statement: serializeSql(statement,),
-    columns: selectClause.columns,
-  };
+  return mappedRow;
 }
 var ServerDatabaseClient = class {
   database;
-  collections;
   components;
   cache = /* @__PURE__ */ new Map();
   constructor(database, {
-    collections,
     components,
   },) {
     this.database = database;
-    this.collections = collections;
     this.components = components;
   }
   query(query,) {
-    const {
-      statement: {
-        sql: sql2,
-        parameters,
-      },
-      columns,
-    } = compileQuery(query, this.collections,);
-    const rawParameters = mapParametersToRaw(parameters,);
-    const cacheKey = JSON.stringify([sql2, rawParameters,],);
+    const cacheKey = JSON.stringify(query,);
     const cached = this.cache.get(cacheKey,);
     if (cached) return cached;
     const value = new LazyValue(async () => {
-      const rows = await this.execute(sql2, rawParameters,);
-      return mapRowsFromRaw(rows, columns, this.components,);
+      return (await this.database.query(query,)).map((row) => mapRowFromServerControlProps(row, query.columns, this.components,));
     },);
     this.cache.set(cacheKey, value,);
     return value;
@@ -45792,9 +44467,6 @@ var ServerDatabaseClient = class {
   /** Starts loading the query result so that `query(...).use()` doesn't suspend. */
   preload(query,) {
     return this.query(query,).preload();
-  }
-  async execute(sql2, parameters,) {
-    return (await this.database.query(sql2, parameters,)).rows;
   }
 };
 function useServerData(pageQuery,) {
@@ -45922,6 +44594,7 @@ function useLoadMoreControls({
     loadMore: useCallback2(() => loadNextPage(knownMinimumPageCount,), [loadNextPage, knownMinimumPageCount,],),
   };
 }
+var maximumLimit = 5001;
 function usePaginatedServerData(query, pagination, hash2,) {
   const pageState = useLoadMorePageState(hash2, true,);
   const pageSize = Math.min(pagination.pageSize, maximumLimit - 1,);
@@ -55264,7 +53937,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
         ...rest
       } = this.props;
       if (!withExternalLayout && (!visible || !id2)) return null;
-      const identifier2 = id2 ?? layoutId ?? 'svg';
+      const identifier = id2 ?? layoutId ?? 'svg';
       const rect = this.frame;
       const size = rect || {
         width: intrinsicWidth || 100,
@@ -55295,7 +53968,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
           x2,
           y1,
           y2,
-        } = elementPropertiesForLinearGradient(gradient, identifier2,);
+        } = elementPropertiesForLinearGradient(gradient, identifier,);
         fillElement = /* @__PURE__ */ jsx('svg', {
           suppressHydrationWarning: true,
           ref: this.setSVGElement,
@@ -55326,7 +53999,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
         const gradient = fill;
         const gradientId = `${encodeURI(id2 || '',)}g${RadialGradient.hash(gradient,)}`;
         outerStyle.fill = `url(#${gradientId})`;
-        const elementProperties = elementPropertiesForRadialGradient(gradient, identifier2,);
+        const elementProperties = elementPropertiesForRadialGradient(gradient, identifier,);
         fillElement = /* @__PURE__ */ jsx('svg', {
           suppressHydrationWarning: true,
           ref: this.setSVGElement,
@@ -55353,7 +54026,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
           },),
         },);
       } else if (BackgroundImage.isImageObject(fill,)) {
-        const imagePattern = imagePatternPropsForFill(fill, size, identifier2,);
+        const imagePattern = imagePatternPropsForFill(fill, size, identifier,);
         if (imagePattern) {
           outerStyle.fill = `url(#${imagePattern.id})`;
           fillElement = /* @__PURE__ */ jsx('svg', {
