@@ -12738,7 +12738,7 @@ var namespace_exports = /* @__PURE__ */ __exportAll({
   Item: () => ReorderItem,
 },);
 
-// /:https://app.framerstatic.com/framer.D6uXRwWs.mjs
+// /:https://app.framerstatic.com/framer.BL9pqxmF.mjs
 
 import React, {
   cloneElement as cloneElement3,
@@ -44215,7 +44215,7 @@ function getCacheKey(query, locale,) {
   const localeId = locale?.id ?? 'default';
   return JSON.stringify(query, replaceCollection,) + localeId;
 }
-function isServerDatabaseQueryResult(value,) {
+function isServerQueryResult(value,) {
   return Array.isArray(value,) &&
     value.every((row) => isObject(row,) && Object.values(row,).every((value2) => value2 === null || isMaybeServerControlProp(value2,)));
 }
@@ -44239,7 +44239,7 @@ function isServerDatabaseResponse(value,) {
   if (!isObject(value,)) return false;
   const hasData = 'data' in value;
   if (hasData === 'error' in value) return false;
-  if (hasData) return isServerDatabaseQueryResult(value.data,);
+  if (hasData) return isServerQueryResult(value.data,);
   return typeof value.error === 'string';
 }
 var NetworkServerDatabase = class {
@@ -44436,12 +44436,9 @@ function warnInvalidValue(type, value,) {
   logger.warn(new ServerDatabaseError(`Unexpected ${type} value ${String(value,)}, returning null.`,),);
   return null;
 }
-function mapRowFromServerControlProps(row, columns, components,) {
+function mapRowFromServerControlProps(row, components,) {
   const mappedRow = {};
-  for (const column of columns) {
-    const value = row[column.alias];
-    mappedRow[column.alias] = value === void 0 ? void 0 : mapValueFromServerControlProp(value, components,);
-  }
+  for (const [key2, value,] of Object.entries(row,)) mappedRow[key2] = mapValueFromServerControlProp(value, components,);
   return mappedRow;
 }
 var ServerDatabaseClient = class {
@@ -44459,7 +44456,7 @@ var ServerDatabaseClient = class {
     const cached = this.cache.get(cacheKey,);
     if (cached) return cached;
     const value = new LazyValue(async () => {
-      return (await this.database.query(query,)).map((row) => mapRowFromServerControlProps(row, query.columns, this.components,));
+      return (await this.database.query(query,)).map((row) => mapRowFromServerControlProps(row, this.components,));
     },);
     this.cache.set(cacheKey, value,);
     return value;
