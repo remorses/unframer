@@ -12738,7 +12738,7 @@ var namespace_exports = /* @__PURE__ */ __exportAll({
   Item: () => ReorderItem,
 },);
 
-// /:https://app.framerstatic.com/framer.BL9pqxmF.mjs
+// /:https://app.framerstatic.com/framer.CaDWdxiz.mjs
 
 import React, {
   cloneElement as cloneElement3,
@@ -26563,6 +26563,7 @@ var ControlType = /* @__PURE__ */ function (ControlType2,) {
   ControlType2['Font'] = 'font';
   ControlType2['PageScope'] = 'pagescope';
   ControlType2['ScrollSectionRef'] = 'scrollsectionref';
+  ControlType2['Ref'] = 'ref';
   ControlType2['CustomCursor'] = 'customcursor';
   ControlType2['Border'] = 'border';
   ControlType2['Cursor'] = 'cursor';
@@ -26688,6 +26689,7 @@ function getControlDefaultValue(control,) {
       case 'responsiveimage':
       case 'componentinstance':
       case 'slot':
+      case 'ref':
       case 'scrollsectionref':
       case 'customcursor':
       case 'cursor':
@@ -55496,22 +55498,47 @@ function useHookOutputs(hook, inputs, ownerRef,) {
   const outputs = isFunction(hook,) ? hook(inputs, ownerRef,) : void 0;
   return isObject(outputs,) ? outputs : {};
 }
+function useRefInputs(inputs, ownerRef, ownerRefInputs, refInputs,) {
+  const localRefs = useConstant2(() => ({}));
+  if (!ownerRefInputs && !refInputs) {
+    return {
+      inputs,
+      refs: localRefs,
+    };
+  }
+  const resolvedInputs = {
+    ...inputs,
+  };
+  for (const key2 of ownerRefInputs ?? []) resolvedInputs[key2] = ownerRef;
+  for (const [key2, refId,] of Object.entries(refInputs ?? {},)) resolvedInputs[key2] = localRefs[refId] ??= React.createRef();
+  return {
+    inputs: resolvedInputs,
+    refs: localRefs,
+  };
+}
 function HookOutputs({
   hook,
   inputs,
   ownerRef,
+  ownerRefInputs,
+  refInputs,
   children,
 },) {
   const ownRef = React.useRef(null,);
   const ref = ownerRef ?? ownRef;
-  return children(useHookOutputs(hook, inputs, ref,), ref,);
+  const resolved = useRefInputs(inputs, ref, ownerRefInputs, refInputs,);
+  return children(useHookOutputs(hook, resolved.inputs, ref,), ref, resolved.refs,);
 }
 function HookFallback({
+  inputs,
   ownerRef,
+  ownerRefInputs,
+  refInputs,
   children,
 },) {
   const ownRef = React.useRef(null,);
-  return children({}, ownerRef ?? ownRef,);
+  const ref = ownerRef ?? ownRef;
+  return children({}, ref, useRefInputs(inputs, ref, ownerRefInputs, refInputs,).refs,);
 }
 function HookVariableBindings({
   scopeId,
@@ -55524,6 +55551,9 @@ function HookVariableBindings({
     fallback: /* @__PURE__ */ jsx(HookFallback, {
       suppressHydrationWarning: true,
       ownerRef: props.ownerRef,
+      inputs: props.inputs,
+      ownerRefInputs: props.ownerRefInputs,
+      refInputs: props.refInputs,
       children: props.children,
     },),
     children: /* @__PURE__ */ jsx(HookOutputs, {
