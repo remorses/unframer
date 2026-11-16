@@ -12738,7 +12738,7 @@ var namespace_exports = /* @__PURE__ */ __exportAll({
   Item: () => ReorderItem,
 },);
 
-// /:https://app.framerstatic.com/framer.CaDWdxiz.mjs
+// /:https://app.framerstatic.com/framer.BCdLsbZT.mjs
 
 import React, {
   cloneElement as cloneElement3,
@@ -13682,11 +13682,13 @@ var macIntelRegex = /MacIntel/iu;
 var androidRegex = /android/iu;
 function isMacOS() {
   const nav = getNavigator();
-  return nav ? macRegex.test(nav.platform,) : false;
+  if (nav) return macRegex.test(nav.platform,);
+  return false;
 }
 function isWindows() {
   const nav = getNavigator();
-  return nav ? winRegex.test(nav.platform,) : false;
+  if (nav) return winRegex.test(nav.platform,);
+  return false;
 }
 function isIOS() {
   const nav = getNavigator();
@@ -13699,12 +13701,14 @@ function isAppleDevice() {
 }
 function isAndroid() {
   const nav = getNavigator();
-  return nav ? androidRegex.test(nav.userAgent,) : false;
+  if (nav) return androidRegex.test(nav.userAgent,);
+  return false;
 }
 var edgeRegex = /Edg\//u;
 function isEdge() {
   const nav = getNavigator();
-  return nav ? edgeRegex.test(nav.userAgent,) : false;
+  if (nav) return edgeRegex.test(nav.userAgent,);
+  return false;
 }
 var chromeRegex = /Chrome/u;
 var googleVendorRegex = /Google Inc/u;
@@ -13726,7 +13730,8 @@ function isSafari() {
 var firefoxRegex = /Firefox\/\d+\.\d+$/u;
 function isFirefox() {
   const nav = getNavigator();
-  return nav ? firefoxRegex.test(nav.userAgent,) : false;
+  if (nav) return firefoxRegex.test(nav.userAgent,);
+  return false;
 }
 function isBrowser$12() {
   return typeof document === 'object';
@@ -13751,7 +13756,8 @@ function safariVersion() {
 var framerXRegex = /FramerX/u;
 function isFramerX() {
   const nav = getNavigator();
-  return nav ? framerXRegex.test(nav.userAgent,) : false;
+  if (nav) return framerXRegex.test(nav.userAgent,);
+  return false;
 }
 function isTest() {
   return false;
@@ -13785,7 +13791,8 @@ function isMobile() {
 var embeddedRegex = /Instagram|FB_IAB\/FB4A|FBAN\/FBIOS|BytedanceWebview|Twitter|LinkedIn/iu;
 function isEmbedded() {
   const nav = getNavigator();
-  return nav ? embeddedRegex.test(nav.userAgent,) : false;
+  if (nav) return embeddedRegex.test(nav.userAgent,);
+  return false;
 }
 var absoluteUrlRegex = /^[a-z]{1,8}:\/\/.*$/iu;
 function isRelativeUrl(url,) {
@@ -13816,7 +13823,8 @@ var YIELD_TARGET_FREQUENTLY = /* @__PURE__ */ (() => 1e3 / 60)();
 var YIELD_TARGET_INFREQUENTLY = /* @__PURE__ */ (() => 40)();
 var HIDDEN_TAB_YIELD_TARGET = /* @__PURE__ */ (() => 500)();
 function resolveSchedulerPriority(priority,) {
-  return typeof priority === 'function' ? priority() : priority;
+  if (typeof priority === 'function') return priority();
+  return priority;
 }
 var schedulerPriorityRank = /* @__PURE__ */ (() => ({
   background: 0,
@@ -13894,7 +13902,8 @@ function createYieldToMain(scheduleFrameRead2, scheduleFallbackTask, shouldWaitF
     const yieldPromise = waitForPaint ?? continueAfter === 'paint'
       ? interactionResponse(schedulerOptions,)
       : schedulerYield(schedulerOptions, scheduleFallbackTask,);
-    return ensureContinueBeforeUnload ? withUnloadGuarantee(yieldPromise,) : yieldPromise;
+    if (ensureContinueBeforeUnload) return withUnloadGuarantee(yieldPromise,);
+    return yieldPromise;
   }
   function scheduleBatchYield(episode, schedulingOptions, waitForPaint,) {
     if (waitForPaint) episode.pendingPaintYieldCount++;
@@ -14154,14 +14163,15 @@ async function resolveRouteContentState({
     collectionUtils: collectionUtilsCache,
     preserveQueryParams: false,
   },);
-  return !isEqual(canonicalPathVariables ?? {}, pathVariables ?? {}, false,)
-    ? {
+  if (!isEqual(canonicalPathVariables ?? {}, pathVariables ?? {}, false,)) {
+    return {
       contentLocaleId,
       canonicalPathVariables,
-    }
-    : {
-      contentLocaleId,
     };
+  }
+  return {
+    contentLocaleId,
+  };
 }
 async function getLocalesForCurrentRoute(activeLocale, locales, currentRoute, pathVariables, collectionUtils,) {
   if (!currentRoute) return locales;
@@ -15834,7 +15844,8 @@ function getSitePrefix(siteCanonicalURL,) {
     return '';
   }
   if (url.pathname === '/' || __unframerWindow2.location.origin !== url.origin) return '';
-  return url.pathname.endsWith('/',) ? url.pathname.slice(0, -1,) : url.pathname;
+  if (url.pathname.endsWith('/',)) return url.pathname.slice(0, -1,);
+  return url.pathname;
 }
 function resolveHash(template, variables,) {
   const resolvedHash = template.replace(pathVariablesRegExpGlobal, (match, pathVariable,) => variables[pathVariable] ?? match,);
@@ -16292,7 +16303,8 @@ function renderPage(Page3, defaultPageStyle,) {
     style: defaultPageStyle,
     'data-framer-root': '',
   };
-  return React.isValidElement(Page3,) ? React.cloneElement(Page3, props,) : /* @__PURE__ */ jsx(Page3, {
+  if (React.isValidElement(Page3,)) return React.cloneElement(Page3, props,);
+  return /* @__PURE__ */ jsx(Page3, {
     suppressHydrationWarning: true,
     ...props,
   },);
@@ -16602,7 +16614,8 @@ async function resolveInitialRouteContentState({
   };
 }
 function unquoteServerTimingParameterValue(value,) {
-  return value.startsWith('"',) && value.endsWith('"',) ? value.slice(1, -1,) : value;
+  if (value.startsWith('"',) && value.endsWith('"',)) return value.slice(1, -1,);
+  return value;
 }
 function getServerTimingEntries(serverTimingHeader,) {
   const entries = /* @__PURE__ */ new Map();
@@ -16783,7 +16796,8 @@ var Observers = class {
 var Animatable = /* @__PURE__ */ (() => {
   function Animatable2(value,) {
     deprecationWarning('Animatable()', '2.0.0', 'the new animation API (https://www.framer.com/api/animation/)',);
-    return isAnimatable2(value,) ? value : new AnimatableValue(value,);
+    if (isAnimatable2(value,)) return value;
+    return new AnimatableValue(value,);
   }
   Animatable2.transaction = (update) => {
     const transactionId = Math.random();
@@ -17502,7 +17516,7 @@ function percentToFraction(val,) {
 }
 function numberFromString(input,) {
   const match = /\d?\.?\d+/u.exec(input,);
-  return match ? Number(match[0],) : void 0;
+  if (match) return Number(match[0],);
 }
 var ColorFormat = /* @__PURE__ */ function (ColorFormat2,) {
   ColorFormat2['RGB'] = 'rgb';
@@ -18445,7 +18459,8 @@ var Color = /* @__PURE__ */ (() => {
       return c;
     }
     const created = createColor(color2, r, g, b,);
-    return created !== void 0 ? created : {
+    if (created !== void 0) return created;
+    return {
       ...Color2('black',),
       isValid: false,
     };
@@ -19037,7 +19052,8 @@ var PrecalculatedAnimator = class {
     assert(this.totalTime !== void 0, 'expecting totalTime to be set after calling preCalculate()',);
     const value = this.valueForTime(this.totalTime,);
     assert(this.values !== void 0, 'expecting values to be set after calling preCalculate()',);
-    return this.values.length > 0 ? value : this.animator.next(0,);
+    if (this.values.length > 0) return value;
+    return this.animator.next(0,);
   }
 };
 var require_eventemitter3 = /* @__PURE__ */ __commonJSMin((exports, module,) => {
@@ -19688,7 +19704,8 @@ function deprecatedAnimate(from, to, animator, options,) {
 }
 var animate2 = /* @__PURE__ */ (() => {
   function animate22(from, to, animatorOrTransition, options,) {
-    return isAnimatable2(from,) ? deprecatedAnimate(from, to, animatorOrTransition, options,) : animate(from, to, animatorOrTransition,);
+    if (isAnimatable2(from,)) return deprecatedAnimate(from, to, animatorOrTransition, options,);
+    return animate(from, to, animatorOrTransition,);
   }
   animate22.spring = (from, to, options,) => {
     return animate22(from, to, SpringAnimator, options,);
@@ -23943,7 +23960,8 @@ var ConvertColor = {
   },
   toHexOrRgbaString: (input) => {
     const color2 = Color(input,);
-    return color2.a !== 1 ? Color.toRgbString(color2,) : Color.toHexString(color2,);
+    if (color2.a !== 1) return Color.toRgbString(color2,);
+    return Color.toHexString(color2,);
   },
   /**
    * Converts a color to a string to consistent formats for animating.
@@ -27052,7 +27070,8 @@ var FramerEvent = class FramerEvent2 {
    * @internal
    */
   velocity(t,) {
-    return this.session ? this.session.velocity(t,) : {
+    if (this.session) return this.session.velocity(t,);
+    return {
       x: 0,
       y: 0,
     };
@@ -27061,7 +27080,8 @@ var FramerEvent = class FramerEvent2 {
    * @internal
    */
   get offset() {
-    return this.session ? this.session.offset(this,) : {
+    if (this.session) return this.session.offset(this,);
+    return {
       x: 0,
       y: 0,
     };
@@ -27931,7 +27951,8 @@ var ObservableObjectProxyHandler = class {
   get = (target, key2, receiver,) => {
     if (key2 === $private) return asRecord(target,)[key2];
     const value = Reflect.get(target, key2, receiver,);
-    return typeof value === 'function' ? value.bind(receiver,) : value;
+    if (typeof value === 'function') return value.bind(receiver,);
+    return value;
   };
   deleteProperty(target, key2,) {
     const result = Reflect.deleteProperty(target, key2,);
@@ -28442,7 +28463,8 @@ var transformDefaults = {
 };
 function getRotation(rotation, rotate2,) {
   if (typeof rotate2 === 'string') rotate2 = parseFloat(rotate2,);
-  return isFiniteNumber(rotate2,) ? rotate2 : getNumber(rotation,);
+  if (isFiniteNumber(rotate2,)) return rotate2;
+  return getNumber(rotation,);
 }
 function collectTransformFromProps(props, rect, style2,) {
   const motionStyle = style2;
@@ -28905,10 +28927,12 @@ function useWheelScroll(ref, {
   let handler;
   if (enabled) {
     let clampX = function (v,) {
-        return constraints.current === null ? v : clamp$1(v, constraints.current.left, constraints.current.right,);
+        if (constraints.current === null) return v;
+        return clamp$1(v, constraints.current.left, constraints.current.right,);
       },
       clampY = function (v,) {
-        return constraints.current === null ? v : clamp$1(v, constraints.current.top, constraints.current.bottom,);
+        if (constraints.current === null) return v;
+        return clamp$1(v, constraints.current.top, constraints.current.bottom,);
       },
       updateX = function (delta,) {
         offsetX.stop();
@@ -29920,7 +29944,8 @@ function useSnapToPage(currentContentPageRef, contentOffsetRef, isHorizontal,) {
   };
 }
 function getBoundedCurrentPage(pageIndex, pageCount,) {
-  return pageIndex >= 0 ? Math.min(pageIndex, pageCount - 1,) : (pageIndex % pageCount + pageCount) % pageCount;
+  if (pageIndex >= 0) return Math.min(pageIndex, pageCount - 1,);
+  return (pageIndex % pageCount + pageCount) % pageCount;
 }
 function effectValues(index, latestPropsRef, pageRectsRef, contentOffsetRef, maxOffsetRef,) {
   const {
@@ -30225,7 +30250,8 @@ var useUpdateChildSize = ({
   }, [dragDirection, children, fromCanvasComponent,],);
 };
 var numberFromOptionalMotionValue = (value) => {
-  return typeof value === 'number' ? value : value.get();
+  if (typeof value === 'number') return value;
+  return value.get();
 };
 var EmulatedScrollInner = /* @__PURE__ */ React.forwardRef(function EmulatedScroll(props, forwardedRef,) {
   const {
@@ -32286,11 +32312,12 @@ var styleTransformOptionsKeys = /* @__PURE__ */ new Set([
 ],);
 var defaultValues$1 = (transformTargets, shouldReduceMotion,) => {
   const initial = transformTargets?.[0]?.target;
-  return shouldReduceMotion
-    ? {
+  if (shouldReduceMotion) {
+    return {
       opacity: initial?.opacity ?? 1,
-    }
-    : initial;
+    };
+  }
+  return initial;
 };
 var defaultRanges$1 = () => ({
   opacity: [],
@@ -33457,11 +33484,12 @@ var ContainerInner = /* @__PURE__ */ React.forwardRef(function ContainerInner2({
   const outerLayoutId = useConstant2(() => layoutId ? `${layoutId}-container` : void 0);
   const MotionComponent = htmlElementAsMotionComponent(as,);
   const clonedChildren = React.Children.map(children, (child) => {
-    return React.isValidElement(child,)
-      ? React.cloneElement(child, {
+    if (React.isValidElement(child,)) {
+      return React.cloneElement(child, {
         layoutId: layoutId ?? child.props.layoutId,
-      },)
-      : child;
+      },);
+    }
+    return child;
   },);
   const childrenWithCodeBoundary = useMaybeWrapComponentWithCodeBoundary(
     clonedChildren,
@@ -35114,7 +35142,8 @@ function useLinkMatchesRoute(link,) {
   const contextPathVariables = useContext(PathVariablesContext,);
   if (!route) return false;
   const pageLink = isString(link,) ? linkFromFramerPageLink(link,) : link;
-  return isLinkToWebPage(pageLink,) ? linkMatchesRoute(route, pageLink, contextPathVariables,) : false;
+  if (isLinkToWebPage(pageLink,)) return linkMatchesRoute(route, pageLink, contextPathVariables,);
+  return false;
 }
 var navigationChecks = /* @__PURE__ */ new Map();
 var retryDelayMs = 500;
@@ -36778,7 +36807,8 @@ var TriggerState = class {
         return this.maxScrollPercentage >= condition.scrollPercentage;
       case 'exit':
         if (eventPayload?.type !== 'exit') return false;
-        return condition.exitType === 'all' ? Boolean(eventPayload.exitType,) : eventPayload.exitType === condition.exitType;
+        if (condition.exitType === 'all') return Boolean(eventPayload.exitType,);
+        return eventPayload.exitType === condition.exitType;
       default:
         assertNever(condition,);
     }
@@ -37312,7 +37342,8 @@ async function sendTrackingEventForTriggerInvoke(maybePageViewEventData, event,)
 function resolveRoutePath(routerAPI, routeId, pathVariables,) {
   const route = routerAPI.getRoute(routeId,);
   if (!route?.path) return '';
-  return pathVariables ? fillPathVariables(route.path, pathVariables,) : route.path;
+  if (pathVariables) return fillPathVariables(route.path, pathVariables,);
+  return route.path;
 }
 function useTriggerState() {
   return getTriggerState(useContext(TriggerStateContext,),);
@@ -37378,8 +37409,8 @@ var useSendPageView = (
         locale: visitorLocale,
       };
       const hydratedCollectionItemId = skipFirstPageView.current && initialCollectionItemId !== void 0 ? initialCollectionItemId : void 0;
-      return currentRoute?.collectionId && currentPathVariables
-        ? (async () => {
+      if (currentRoute?.collectionId && currentPathVariables) {
+        return (async () => {
           let collectionItemId = hydratedCollectionItemId ?? null;
           if (hydratedCollectionItemId === void 0) {
             const utils = currentRoute.collectionId && collectionUtils?.get(currentRoute.collectionId,);
@@ -37393,8 +37424,9 @@ var useSendPageView = (
             ...eventData,
             collectionItemId,
           };
-        })()
-        : eventData;
+        })();
+      }
+      return eventData;
     }
     (async () => {
       const eventDataOrPromise = pageviewEventData.current = getFullPageviewEventData();
@@ -44378,25 +44410,31 @@ function mapValueFromServerControlProp(value, components,) {
   const propValue = value.value;
   switch (value.type) {
     case 'boolean':
-      return typeof propValue === 'boolean' ? propValue : warnInvalidValue(type, propValue,);
+      if (typeof propValue === 'boolean') return propValue;
+      return warnInvalidValue(type, propValue,);
     case 'date':
       return mapDateValue(propValue,);
     case 'number':
-      return typeof propValue === 'number' ? propValue : warnInvalidValue(type, propValue,);
+      if (typeof propValue === 'number') return propValue;
+      return warnInvalidValue(type, propValue,);
     case 'color':
     case 'enum':
     case 'file':
     case 'string':
     case 'collectionreference':
-      return typeof propValue === 'string' ? propValue : warnInvalidValue(type, propValue,);
+      if (typeof propValue === 'string') return propValue;
+      return warnInvalidValue(type, propValue,);
     case 'multicollectionreference':
-      return isStringArray(propValue,) ? propValue : warnInvalidValue(type, propValue,);
+      if (isStringArray(propValue,)) return propValue;
+      return warnInvalidValue(type, propValue,);
     case 'responsiveimage':
-      return isImageValue(propValue,) ? propValue : warnInvalidValue(type, propValue,);
+      if (isImageValue(propValue,)) return propValue;
+      return warnInvalidValue(type, propValue,);
     case 'richtext':
       return mapRichTextValue(propValue, components,);
     case 'link':
-      return typeof propValue === 'string' || isLinkToWebPage(propValue,) ? propValue : warnInvalidValue(type, propValue,);
+      if (typeof propValue === 'string' || isLinkToWebPage(propValue,)) return propValue;
+      return warnInvalidValue(type, propValue,);
     case 'vectorsetitem':
       return mapVectorSetItemValue(propValue, components,);
     default:
@@ -46081,7 +46119,8 @@ function applyOverride(Component22, override, scopeId, nodeId,) {
   return ComponentWithOverrides;
 }
 function valueWithMirroring(value, mirror,) {
-  return mirror ? wrap(0, 2, value,) : value;
+  if (mirror) return wrap(0, 2, value,);
+  return value;
 }
 function singleFrame() {
   return new Promise((resolve) => {
@@ -46757,7 +46796,8 @@ function TickerComponent({
   }
   useFocusNavigation(internalContainerRef, axis, focusOffset, offset, setHasFocus,);
   const clampOffset = useCallback2((value) => {
-    return state.maxInset !== null ? clamp(-state.maxInset, 0, value,) : value;
+    if (state.maxInset !== null) return clamp(-state.maxInset, 0, value,);
+    return value;
   }, [state.maxInset,],);
   const tickerContext = useMemo(() => ({
     ...state,
@@ -49195,22 +49235,24 @@ function getImageInfo(image,) {
   if (image instanceof HTMLImageElement) {
     const w = image.naturalWidth;
     const h = image.naturalHeight;
-    return w > 0 && h > 0
-      ? {
+    if (w > 0 && h > 0) {
+      return {
         source: image,
         width: w,
         height: h,
-      }
-      : void 0;
+      };
+    }
+    return;
   }
   if (image instanceof HTMLCanvasElement) {
-    return image.width > 0 && image.height > 0
-      ? {
+    if (image.width > 0 && image.height > 0) {
+      return {
         source: image,
         width: image.width,
         height: image.height,
-      }
-      : void 0;
+      };
+    }
+    return;
   }
 }
 function isHeightMapSupportedTexImageSource(image,) {
@@ -50153,12 +50195,13 @@ var fallbackShaderMouseSpringOptions = {
 };
 function toSpringOptions(spring2,) {
   const resolved = spring2 ?? fallbackShaderMouseSpringOptions;
-  return resolved.duration !== void 0
-    ? {
+  if (resolved.duration !== void 0) {
+    return {
       ...resolved,
       duration: resolved.duration * 1e3,
-    }
-    : resolved;
+    };
+  }
+  return resolved;
 }
 function toElementRelative(rect, clientX, clientY,) {
   if (!rect || rect.width <= 0 || rect.height <= 0) return [offScreen, offScreen,];
@@ -53204,7 +53247,8 @@ function processRichTextChildren(
       return processRichTextChildren(child, stylesPresetsClassNames, plainText, anchorLinkOffsetY, slugCounters, tokenizer, depth + 1,);
     }
     const text = !isUndefined(plainText,) ? plainText : child;
-    return isString(text,) && tokenizer ? tokenizer.text(text,) : text;
+    if (isString(text,) && tokenizer) return tokenizer.text(text,);
+    return text;
   },);
   const {
     ['data-preset-tag']: dataPresetTag,
@@ -54902,7 +54946,7 @@ function getShapeTransform({
   const transforms = [];
   if (needsScale) transforms.push('scale(0.5)',);
   if (l2 || t) transforms.push(`translate(${l2}px, ${t}px)`,);
-  return transforms.length ? transforms.join(' ',) : void 0;
+  if (transforms.length) return transforms.join(' ',);
 }
 var Vector = /* @__PURE__ */ (() => {
   return class VectorInner extends Layer {
