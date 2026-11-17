@@ -12738,7 +12738,7 @@ var namespace_exports = /* @__PURE__ */ __exportAll({
   Item: () => ReorderItem,
 },);
 
-// /:https://app.framerstatic.com/framer.BCdLsbZT.mjs
+// /:https://app.framerstatic.com/framer.BkYB2Gqq.mjs
 
 import React, {
   cloneElement as cloneElement3,
@@ -16676,10 +16676,17 @@ function patchRoute(routes, abTestId, abTestingVariantId,) {
       ...route.elements,
     }
     : void 0;
+  const elementPatterns = controlRoute.elementPatterns || route.elementPatterns
+    ? {
+      ...controlRoute.elementPatterns,
+      ...route.elementPatterns,
+    }
+    : void 0;
   routes[routeId] = {
     ...patchingRoute,
     includedLocales: controlRoute.includedLocales,
     elements,
+    elementPatterns,
     abTestingVariantId,
     abTestId,
   };
@@ -16705,18 +16712,25 @@ function patchInitialRoute(routes, routeId,) {
       ...route.elements,
     }
     : void 0;
+  const elementPatterns = controlRoute?.elementPatterns || route.elementPatterns
+    ? {
+      ...controlRoute?.elementPatterns,
+      ...route.elementPatterns,
+    }
+    : void 0;
   routes[parentId] = {
     ...route,
     includedLocales: controlRoute?.includedLocales,
     elements,
+    elementPatterns,
     abTestingVariantId: routeId,
   };
 }
 function patchRoutesForABTesting(routes, initialRouteId,) {
+  if (initialRouteId) patchInitialRoute(routes, initialRouteId,);
   if (typeof __unframerWindow2 === 'undefined') return initialRouteId;
   let resolvedInitialRouteId = initialRouteId;
   if (initialRouteId) {
-    patchInitialRoute(routes, initialRouteId,);
     const parentRouteId = routes[initialRouteId]?.abTestingParentId;
     if (parentRouteId) resolvedInitialRouteId = parentRouteId;
   }
@@ -44282,6 +44296,7 @@ var NetworkServerDatabase = class {
     const url = new URL(`${config.endpoint}/${encodeURIComponent(config.siteId,)}/query`,);
     url.searchParams.set('version', String(config.version,),);
     url.searchParams.set('saveId', config.saveId,);
+    url.searchParams.set('branchId', config.branchId,);
     url.searchParams.set('bundle', config.bundle,);
     if (config.preview !== void 0) url.searchParams.set('preview', config.preview,);
     this.url = url.toString();
