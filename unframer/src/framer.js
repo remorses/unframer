@@ -12738,7 +12738,7 @@ var namespace_exports = /* @__PURE__ */ __exportAll({
   Item: () => ReorderItem,
 },);
 
-// /:https://app.framerstatic.com/framer.BkYB2Gqq.mjs
+// /:https://app.framerstatic.com/framer.CN96F41L.mjs
 
 import React, {
   cloneElement as cloneElement3,
@@ -13682,13 +13682,13 @@ var macIntelRegex = /MacIntel/iu;
 var androidRegex = /android/iu;
 function isMacOS() {
   const nav = getNavigator();
-  if (nav) return macRegex.test(nav.platform,);
-  return false;
+  if (!nav) return false;
+  return macRegex.test(nav.platform,);
 }
 function isWindows() {
   const nav = getNavigator();
-  if (nav) return winRegex.test(nav.platform,);
-  return false;
+  if (!nav) return false;
+  return winRegex.test(nav.platform,);
 }
 function isIOS() {
   const nav = getNavigator();
@@ -13701,14 +13701,14 @@ function isAppleDevice() {
 }
 function isAndroid() {
   const nav = getNavigator();
-  if (nav) return androidRegex.test(nav.userAgent,);
-  return false;
+  if (!nav) return false;
+  return androidRegex.test(nav.userAgent,);
 }
 var edgeRegex = /Edg\//u;
 function isEdge() {
   const nav = getNavigator();
-  if (nav) return edgeRegex.test(nav.userAgent,);
-  return false;
+  if (!nav) return false;
+  return edgeRegex.test(nav.userAgent,);
 }
 var chromeRegex = /Chrome/u;
 var googleVendorRegex = /Google Inc/u;
@@ -13730,8 +13730,8 @@ function isSafari() {
 var firefoxRegex = /Firefox\/\d+\.\d+$/u;
 function isFirefox() {
   const nav = getNavigator();
-  if (nav) return firefoxRegex.test(nav.userAgent,);
-  return false;
+  if (!nav) return false;
+  return firefoxRegex.test(nav.userAgent,);
 }
 function isBrowser$12() {
   return typeof document === 'object';
@@ -13756,8 +13756,8 @@ function safariVersion() {
 var framerXRegex = /FramerX/u;
 function isFramerX() {
   const nav = getNavigator();
-  if (nav) return framerXRegex.test(nav.userAgent,);
-  return false;
+  if (!nav) return false;
+  return framerXRegex.test(nav.userAgent,);
 }
 function isTest() {
   return false;
@@ -13791,8 +13791,8 @@ function isMobile() {
 var embeddedRegex = /Instagram|FB_IAB\/FB4A|FBAN\/FBIOS|BytedanceWebview|Twitter|LinkedIn/iu;
 function isEmbedded() {
   const nav = getNavigator();
-  if (nav) return embeddedRegex.test(nav.userAgent,);
-  return false;
+  if (!nav) return false;
+  return embeddedRegex.test(nav.userAgent,);
 }
 var absoluteUrlRegex = /^[a-z]{1,8}:\/\/.*$/iu;
 function isRelativeUrl(url,) {
@@ -17530,7 +17530,8 @@ function percentToFraction(val,) {
 }
 function numberFromString(input,) {
   const match = /\d?\.?\d+/u.exec(input,);
-  if (match) return Number(match[0],);
+  if (!match) return void 0;
+  return Number(match[0],);
 }
 var ColorFormat = /* @__PURE__ */ function (ColorFormat2,) {
   ColorFormat2['RGB'] = 'rgb';
@@ -23543,10 +23544,10 @@ var CSSCollector = class {
 };
 var cssCollector = /* @__PURE__ */ new CSSCollector();
 var libraryCSSRules;
-import { getCombinedCSSRules as unframerGetCombinedCSSRules } from './framer-chunks/chunk.B3RYC8bk-YHKDYM7G.js';
+import { getCombinedCSSRules as unframerGetCombinedCSSRules } from './framer-chunks/chunk.sFqYMxFT-VYARTI2O.js';
 var getLoadedLibraryCSS = unframerGetCombinedCSSRules;
 function loadLibraryCSSRules() {
-    return libraryCSSRules ??= import('./framer-chunks/chunk.B3RYC8bk-YHKDYM7G.js').then((module) => {
+    return libraryCSSRules ??= import('./framer-chunks/chunk.sFqYMxFT-VYARTI2O.js').then((module) => {
     getLoadedLibraryCSS = module.getCombinedCSSRules;
     if (isBrowser$12()) for (const rule of getLoadedLibraryCSS()) injectCSSRule(rule, void 0,);
     return module;
@@ -35156,8 +35157,8 @@ function useLinkMatchesRoute(link,) {
   const contextPathVariables = useContext(PathVariablesContext,);
   if (!route) return false;
   const pageLink = isString(link,) ? linkFromFramerPageLink(link,) : link;
-  if (isLinkToWebPage(pageLink,)) return linkMatchesRoute(route, pageLink, contextPathVariables,);
-  return false;
+  if (!isLinkToWebPage(pageLink,)) return false;
+  return linkMatchesRoute(route, pageLink, contextPathVariables,);
 }
 var navigationChecks = /* @__PURE__ */ new Map();
 var retryDelayMs = 500;
@@ -37321,12 +37322,14 @@ function TriggerStateProvider({
   const [initialState2,] = useState(() => ({
     getInitialState: () => ({
       visitedPages: visitedPagesRef.current ?? /* @__PURE__ */ new Set(),
-      getCurrentRoutePath: () =>
-        routerAPIRef.current
-          ? resolveRoutePath(routerAPIRef.current, routerAPIRef.current.currentRouteId, routerAPIRef.current.currentPathVariables,)
-          : '',
-      resolveRoute: (linkToWebPage) =>
-        routerAPIRef.current ? resolveRoutePath(routerAPIRef.current, linkToWebPage.webPageId, linkToWebPage.pathVariables,) : '',
+      getCurrentRoutePath: () => {
+        if (!routerAPIRef.current) return '';
+        return resolveRoutePath(routerAPIRef.current, routerAPIRef.current.currentRouteId, routerAPIRef.current.currentPathVariables,);
+      },
+      resolveRoute: (linkToWebPage) => {
+        if (!routerAPIRef.current) return '';
+        return resolveRoutePath(routerAPIRef.current, linkToWebPage.webPageId, linkToWebPage.pathVariables,);
+      },
       setRouteChangeHandler: (handler) => {
         routeChangeHandlerRef.current = handler;
       },
@@ -46729,7 +46732,12 @@ function TickerComponent({
     const computedContainerStyle = __unframerWindow2.getComputedStyle(container,);
     const containerPaddingStart = parseInt(computedContainerStyle[paddingStartProp] ?? 0,);
     const containerPaddingEnd = parseInt(computedContainerStyle[paddingEndProp] ?? 0,);
-    const inset2 = overflow ? getCumulativeInset(allItems[0],) : containerPaddingStart;
+    let inset2 = overflow ? getCumulativeInset(allItems[0],) : containerPaddingStart;
+    const viewportLength = __unframerWindow2[viewportLengthProp];
+    if (overflow && inset2 > viewportLength) {
+      inset2 = viewportLength;
+      visibleLength += viewportLength + containerLength;
+    }
     const maxInset = loop === false ? Math.max(0, totalItemLength - containerLength + containerPaddingStart + containerPaddingEnd,) : null;
     if (
       visibleLength !== state.visibleLength || totalItemLength !== state.totalItemLength || inset2 !== state.inset ||
@@ -47996,13 +48004,15 @@ var withFlowFX = (Component22) =>
       transition,
       ...forwardedProps
     } = props;
-    const mergedTransition = useMemo(() =>
-      flowEffectTransition
-        ? {
+    const mergedTransition = useMemo(() => {
+      if (flowEffectTransition) {
+        return {
           default: transition,
           layout: flowEffectTransition,
-        }
-        : transition, [transition, flowEffectTransition,],);
+        };
+      }
+      return transition;
+    }, [transition, flowEffectTransition,],);
     if (!flowEffectEnabled) {
       return /* @__PURE__ */ jsx(Component22, {
         suppressHydrationWarning: true,
@@ -53410,7 +53420,7 @@ function elementPropertiesForLinearGradient(gradient, id2,) {
     y2: endPoint.y,
     stops: stops.map((stop) => ({
       color: stop.value,
-      alpha: ConvertColor.getAlpha(stop.value,) * gradient.alpha,
+      alpha: gradient.alpha,
       position: interpolator(stop.position,),
     })),
   };
@@ -53424,7 +53434,7 @@ function elementPropertiesForRadialGradient(gradient, id2,) {
     centerAnchorY: gradient.centerAnchorY,
     stops: gradientColorStops(gradient,).map((stop) => ({
       color: stop.value,
-      alpha: ConvertColor.getAlpha(stop.value,) * gradient.alpha,
+      alpha: gradient.alpha,
       position: stop.position,
     })),
   };
@@ -54961,7 +54971,8 @@ function getShapeTransform({
   const transforms = [];
   if (needsScale) transforms.push('scale(0.5)',);
   if (l2 || t) transforms.push(`translate(${l2}px, ${t}px)`,);
-  if (transforms.length) return transforms.join(' ',);
+  if (!transforms.length) return void 0;
+  return transforms.join(' ',);
 }
 var Vector = /* @__PURE__ */ (() => {
   return class VectorInner extends Layer {

@@ -5,7 +5,7 @@ import {
   safari16TextTruncationFix
 } from "./chunk-QCWO6VQ4.js";
 
-// /:https://app.framerstatic.com/chunk.B3RYC8bk.mjs
+// /:https://app.framerstatic.com/chunk.sFqYMxFT.mjs
 function LazyProp(factory) {
   let initialized = false;
   let value;
@@ -406,8 +406,14 @@ NavigationContainer
   const anySafariVersion = "(background: -webkit-named-image(i))";
   const safari16OrGreater = "(grid-template-rows: subgrid)";
   const safari26OrGreater = "(position-area: top right)";
-  const willChangeTransformRules = (isPreview2) => isPreview2 ? [`body { ${willChangeOverrideCSSVariable}: none; }`, `@supports ${anySafariVersion} and (not ${safari16OrGreater}) { body { ${willChangeOverrideCSSVariable}: transform; } }`] : [`body { ${willChangeOverrideCSSVariable}: none; ${willChangeEffectOverrideCSSVariable}: none; }`];
-  const willChangeFilterRules = (isPreview2) => isPreview2 ? [`body { ${willChangeFilterOverrideCSSVariable}: none; }`, `@supports ${anySafariVersion} and (not ${safari26OrGreater}) { body { ${willChangeFilterOverrideCSSVariable}: filter; } }`] : [`body { ${willChangeFilterOverrideCSSVariable}: none; }`];
+  const willChangeTransformRules = (isPreview2) => {
+    if (isPreview2) return [`body { ${willChangeOverrideCSSVariable}: none; }`, `@supports ${anySafariVersion} and (not ${safari16OrGreater}) { body { ${willChangeOverrideCSSVariable}: transform; } }`];
+    return [`body { ${willChangeOverrideCSSVariable}: none; ${willChangeEffectOverrideCSSVariable}: none; }`];
+  };
+  const willChangeFilterRules = (isPreview2) => {
+    if (isPreview2) return [`body { ${willChangeFilterOverrideCSSVariable}: none; }`, `@supports ${anySafariVersion} and (not ${safari26OrGreater}) { body { ${willChangeFilterOverrideCSSVariable}: filter; } }`];
+    return [`body { ${willChangeFilterOverrideCSSVariable}: none; }`];
+  };
   const frameCSSRules = (isPreview2) => {
     return isPreview2 ? frameCSS : [];
   };
