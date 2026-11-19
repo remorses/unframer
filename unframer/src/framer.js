@@ -12738,7 +12738,7 @@ var namespace_exports = /* @__PURE__ */ __exportAll({
   Item: () => ReorderItem,
 },);
 
-// /:https://app.framerstatic.com/framer.CN96F41L.mjs
+// /:https://app.framerstatic.com/framer.Bf4-tcb2.mjs
 
 import React, {
   cloneElement as cloneElement3,
@@ -33498,6 +33498,7 @@ var ContainerInner = /* @__PURE__ */ React.forwardRef(function ContainerInner2({
 }, ref,) {
   const outerLayoutId = useConstant2(() => layoutId ? `${layoutId}-container` : void 0);
   const MotionComponent = htmlElementAsMotionComponent(as,);
+  const slotCopyLayoutGroupId = React.useId();
   const clonedChildren = React.Children.map(children, (child) => {
     if (React.isValidElement(child,)) {
       return React.cloneElement(child, {
@@ -33530,7 +33531,7 @@ var ContainerInner = /* @__PURE__ */ React.forwardRef(function ContainerInner2({
           enabled: false,
           children: /* @__PURE__ */ jsx(LayoutGroup, {
             suppressHydrationWarning: true,
-            id: layoutId ?? '',
+            id: layoutId ?? (inComponentSlot ? slotCopyLayoutGroupId : ''),
             inherit: props.layout ? true : 'id',
             children: childrenWithCodeBoundary,
           },),
