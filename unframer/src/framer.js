@@ -49,7 +49,7 @@ import {
   supportsRequestIdleCallback,
   useCustomValidity,
   useRenderEnvironment,
-} from './framer-chunks/chunk-QCWO6VQ4.js';
+} from './framer-chunks/chunk-XAGBKBAT.js';
 
 // /:https://app.framerstatic.com/chunk.C4BJMiCP.mjs
 import * as React$1 from 'react';
@@ -12738,7 +12738,7 @@ var namespace_exports = /* @__PURE__ */ __exportAll({
   Item: () => ReorderItem,
 },);
 
-// /:https://app.framerstatic.com/framer.Bf4-tcb2.mjs
+// /:https://app.framerstatic.com/framer.BEr93sCn.mjs
 
 import React, {
   cloneElement as cloneElement3,
@@ -23544,10 +23544,10 @@ var CSSCollector = class {
 };
 var cssCollector = /* @__PURE__ */ new CSSCollector();
 var libraryCSSRules;
-import { getCombinedCSSRules as unframerGetCombinedCSSRules } from './framer-chunks/chunk.sFqYMxFT-VYARTI2O.js';
+import { getCombinedCSSRules as unframerGetCombinedCSSRules } from './framer-chunks/chunk.Dy1d_AYg-W6VJYSRG.js';
 var getLoadedLibraryCSS = unframerGetCombinedCSSRules;
 function loadLibraryCSSRules() {
-    return libraryCSSRules ??= import('./framer-chunks/chunk.sFqYMxFT-VYARTI2O.js').then((module) => {
+    return libraryCSSRules ??= import('./framer-chunks/chunk.Dy1d_AYg-W6VJYSRG.js').then((module) => {
     getLoadedLibraryCSS = module.getCombinedCSSRules;
     if (isBrowser$12()) for (const rule of getLoadedLibraryCSS()) injectCSSRule(rule, void 0,);
     return module;
@@ -28077,13 +28077,12 @@ function shadowsAsFilter(shadows,) {
   }
   return filters;
 }
+function shadowsAsTextShadow(shadows,) {
+  return shadows.map((shadow) => `${shadow.x}px ${shadow.y}px ${shadow.blur}px ${shadow.color}`).join(', ',);
+}
 function collectTextShadowsForProps(props, style2,) {
   if (!props.shadows || props.shadows.length === 0) return;
-  const textShadow = props.shadows.map((shadow) => {
-    return `${shadow.x}px ${shadow.y}px ${shadow.blur}px ${shadow.color}`;
-  },).join(', ',);
-  if (!textShadow) return;
-  style2.textShadow = textShadow;
+  style2.textShadow = shadowsAsTextShadow(props.shadows,);
 }
 function collectBoxShadowsForProps(props, style2,) {
   if (!props.shadows || props.shadows.length === 0) return;
@@ -46712,7 +46711,6 @@ function TickerComponent({
     const container = internalContainerRef.current;
     const allItems = listRef.current.querySelectorAll('.ticker-item',);
     if (!allItems.length) return;
-    let hasItemSizeChanged = false;
     const itemPositions = [];
     const itemBounds = [];
     const itemSetPositions = [];
@@ -46723,8 +46721,6 @@ function TickerComponent({
       itemPositions.push(size,);
       itemBounds[itemIndex] = size;
       itemSetPositions[itemIndex] = itemPositions.length;
-      const prevSize = state.itemBounds[itemIndex];
-      if (!prevSize || size.start !== prevSize.start || size.end !== prevSize.end) hasItemSizeChanged = true;
     }
     const containerLength = Math.min(container[lengthProp], __unframerWindow2[viewportLengthProp],);
     let visibleLength = overflow ? __unframerWindow2[viewportLengthProp] : containerLength;
@@ -46740,11 +46736,16 @@ function TickerComponent({
       visibleLength += viewportLength + containerLength;
     }
     const maxInset = loop === false ? Math.max(0, totalItemLength - containerLength + containerPaddingStart + containerPaddingEnd,) : null;
-    if (
-      visibleLength !== state.visibleLength || totalItemLength !== state.totalItemLength || inset2 !== state.inset ||
-      state.itemPositions.length !== itemPositions.length || hasItemSizeChanged
-    ) {
-      setState({
+    setState((previous) => {
+      if (
+        direction === previous.direction && visibleLength === previous.visibleLength && totalItemLength === previous.totalItemLength &&
+        inset2 === previous.inset && containerLength === previous.containerLength && maxInset === previous.maxInset &&
+        itemPositions.length === previous.itemPositions.length && !itemBounds.some((size, itemIndex,) => {
+          const previousSize = previous.itemBounds[itemIndex];
+          return size?.start !== previousSize?.start || size?.end !== previousSize?.end;
+        },)
+      ) return previous;
+      return {
         direction,
         visibleLength,
         itemPositions,
@@ -46755,8 +46756,8 @@ function TickerComponent({
         containerLength,
         maxInset,
         isMeasured: true,
-      },);
-    }
+      };
+    },);
   };
   useIsomorphicLayoutEffect(() => {
     if (!isInView || !internalContainerRef.current) return;
@@ -47321,8 +47322,16 @@ function calcPageInsets(itemPositions, containerLength, maxInset, allowRescale =
     visibleLength: containerLength,
   };
 }
-function calcCurrentPage(targetOffset, pageInsets, wrapInset, maxInset,) {
+var insetEpsilon = 1e-3;
+function calcCurrentPage(targetOffset, pageInsets, wrapInset, maxInset, useContainingPage,) {
   const targetInset = -targetOffset;
+  if (useContainingPage) {
+    const firstInset = pageInsets[0] ?? 0;
+    const inset2 = targetInset + insetEpsilon;
+    const localInset = maxInset === null && wrapInset > 0 ? wrap(firstInset, firstInset + wrapInset, inset2,) : inset2;
+    const containingPageIndex = pageInsets.findLastIndex((pageInset) => pageInset <= localInset);
+    return Math.max(0, containingPageIndex,);
+  }
   const iteration = maxInset === null ? Math.floor(targetInset / wrapInset,) : 0;
   const transformInset = iteration * wrapInset;
   for (let i = pageInsets.length - 1; i >= 0; i--) {
@@ -47351,7 +47360,8 @@ function CarouselView({
   page,
   wheelSwipeThreshold,
 },) {
-  const isOffsetAttachedToTarget = useRef(true,);
+  const nextOffsetTransition = useRef(void 0,);
+  const shouldReduceMotion = useReducedMotionConfig();
   const {
     clampOffset,
     totalItemLength,
@@ -47363,39 +47373,34 @@ function CarouselView({
     isMeasured,
   } = useTicker();
   const wrapInset = totalItemLength + gap;
-  const pagination = calcPageInsets(itemPositions, containerLength, maxInset,);
-  const totalPages = pagination.insets.length;
   const {
     sign,
   } = getLayoutStrategy(axis, direction,);
+  const loopLength = loop ? wrapInset : 0;
+  const pagination = useMemo(() => ({
+    ...calcPageInsets(itemPositions, containerLength, maxInset,),
+    itemPositions,
+    sign,
+    loopLength,
+  }), [itemPositions, containerLength, maxInset, sign, loopLength,],);
+  const totalPages = pagination.insets.length;
+  const previousPagination = useRef(null,);
   const lastPageRef = useRef(void 0,);
-  const hasInitialized = useRef(false,);
-  useEffect2(() => {
-    if (page === void 0 || !isMeasured || totalPages === 0) return;
-    const pageIndex = clamp(0, totalPages - 1, page,);
-    const newOffset = -pagination.insets[pageIndex] * sign;
-    if (!hasInitialized.current) {
-      hasInitialized.current = true;
-      lastPageRef.current = page;
-      targetOffset.jump(newOffset,);
-      offset.jump(newOffset,);
-    } else if (lastPageRef.current !== page) {
-      lastPageRef.current = page;
-      targetOffset.jump(newOffset,);
-      offset.jump(newOffset,);
-    }
-  }, [isMeasured, totalPages, page, sign, targetOffset, offset, pagination.insets,],);
+  const resizeAnchor = useRef(void 0,);
   const calculatePaginationState = (targetOffsetValue) => {
     return {
-      current: calcCurrentPage(targetOffsetValue * sign, pagination.insets, wrapInset, maxInset,),
+      current: calcCurrentPage(
+        targetOffsetValue * sign,
+        pagination.insets,
+        wrapInset,
+        maxInset,
+        resizeAnchor.current === targetOffsetValue,
+      ),
       isNextActive: loop ? true : targetOffsetValue * -sign < maxInset,
       isPrevActive: loop ? true : targetOffsetValue * -sign > 0,
     };
   };
   const [paginationState, setPaginationState,] = useState(() => calculatePaginationState(targetOffset.get(),));
-  useEffect2(() => {
-    updatePaginationState();
-  }, [containerLength, totalItemLength,],);
   const updatePaginationState = () => {
     const newPaginationState = calculatePaginationState(targetOffset.get(),);
     if (
@@ -47404,39 +47409,96 @@ function CarouselView({
     ) setPaginationState(newPaginationState,);
   };
   useMotionValueEvent(targetOffset, 'change', (latest) => {
+    if (resizeAnchor.current !== latest) resizeAnchor.current = void 0;
     offset.set(latest,);
     updatePaginationState();
   },);
-  const currentAnimation = useRef(null,);
-  const stopOffsetAnimation = () => {
-    if (!currentAnimation.current) return;
-    currentAnimation.current.stop();
-    currentAnimation.current = null;
-  };
-  useEffect2(() => {
+  useIsomorphicLayoutEffect(() => {
+    let currentAnimation;
+    const stopOffsetAnimation = () => {
+      currentAnimation?.stop();
+      currentAnimation = void 0;
+    };
     offset.attach((v, onUpdate,) => {
       stopOffsetAnimation();
-      if (isOffsetAttachedToTarget.current) onUpdate(v,);
-      else {currentAnimation.current = new JSAnimation({
+      const offsetTransition = nextOffsetTransition.current;
+      nextOffsetTransition.current = void 0;
+      if (!offsetTransition) onUpdate(v,);
+      else {currentAnimation = new JSAnimation({
           keyframes: [offset.get(), v,],
           velocity: clamp(-2e3, 2e3, offset.getVelocity(),),
-          ...transition,
-          duration: transition.duration === void 0 ? void 0 : transition.duration * 1e3,
-          delay: transition.delay === void 0 ? void 0 : transition.delay * 1e3,
-          repeatDelay: transition.repeatDelay === void 0 ? void 0 : transition.repeatDelay * 1e3,
+          ...offsetTransition,
+          duration: offsetTransition.duration === void 0 ? void 0 : offsetTransition.duration * 1e3,
+          delay: offsetTransition.delay === void 0 ? void 0 : offsetTransition.delay * 1e3,
+          repeatDelay: offsetTransition.repeatDelay === void 0 ? void 0 : offsetTransition.repeatDelay * 1e3,
           onUpdate,
           onComplete: () => {
-            currentAnimation.current = null;
+            currentAnimation = void 0;
           },
         },);}
-      isOffsetAttachedToTarget.current = true;
     }, stopOffsetAnimation,);
-  }, [transition,],);
+    return stopOffsetAnimation;
+  }, [offset,],);
+  useIsomorphicLayoutEffect(() => {
+    const previous = previousPagination.current;
+    previousPagination.current = isMeasured && totalPages > 0 ? pagination : null;
+    const currentOffset = targetOffset.get();
+    let newOffset;
+    let resize2;
+    if (isMeasured && totalPages > 0) {
+      if (page !== void 0 && lastPageRef.current !== page) {
+        lastPageRef.current = page;
+        resizeAnchor.current = void 0;
+        const pageIndex = clamp(0, totalPages - 1, page,);
+        newOffset = pagination.insets[pageIndex] * -sign;
+      } else if (previous && previous !== pagination) {
+        const previousInset = currentOffset * -previous.sign;
+        const iteration = previous.loopLength ? Math.floor((previousInset - previous.insets[0] + insetEpsilon) / previous.loopLength,) : 0;
+        const localInset = previousInset - iteration * previous.loopLength;
+        if (previous.insets.some((inset2) => Math.abs(localInset - inset2,) < insetEpsilon) || resizeAnchor.current === currentOffset) {
+          const itemIndex = Math.max(0, previous.itemPositions.findLastIndex((item) => item.start <= localInset + insetEpsilon),);
+          const previousItem = previous.itemPositions[itemIndex];
+          const inset2 = previousInset +
+            (itemPositions[Math.min(itemIndex, itemPositions.length - 1,)].start - previousItem.start +
+              iteration * (loopLength - previous.loopLength));
+          const alignedOffset = clampOffset(-inset2,) * sign;
+          resizeAnchor.current = alignedOffset;
+          if (alignedOffset !== currentOffset) {
+            newOffset = alignedOffset;
+            if (!shouldReduceMotion) {
+              const renderedInNewLoop = offset.get() * previous.sign + iteration * (previous.loopLength - loopLength);
+              resize2 = {
+                from: (loopLength
+                  ? -inset2 + wrap(-loopLength / 2, loopLength / 2, renderedInNewLoop + inset2,)
+                  : clampOffset(renderedInNewLoop,)) * sign,
+                velocity: offset.getVelocity() * previous.sign * sign,
+              };
+            }
+          }
+        }
+      }
+    }
+    if (newOffset !== void 0) {
+      if (resize2) {
+        if (Math.abs(resize2.from - offset.get(),) > insetEpsilon) offset.jump(resize2.from,);
+        if (Math.abs(resize2.from - newOffset,) > insetEpsilon) {
+          nextOffsetTransition.current = {
+            ...resizeTransition,
+            velocity: clamp(-2e3, 2e3, resize2.velocity,),
+          };
+        }
+      }
+      targetOffset.jump(newOffset,);
+      if (!resize2) offset.jump(newOffset,);
+    }
+    if (newOffset === void 0 || newOffset === currentOffset) updatePaginationState();
+  }, [isMeasured, page, pagination, targetOffset, offset, wrapInset, clampOffset, shouldReduceMotion,],);
   const stepOffset = (newOffset) => {
     const clampedOffset = clampOffset(newOffset,);
     targetOffset.stop();
-    isOffsetAttachedToTarget.current = false;
+    nextOffsetTransition.current = transition;
     targetOffset.set(clampedOffset * sign,);
+    nextOffsetTransition.current = void 0;
   };
   const paginate = (findPageInset, direction2,) => {
     const offset2 = -findPageInset(-targetOffset.get() * sign, pagination.visibleLength, itemPositions, gap, containerLength,);
@@ -47556,6 +47618,11 @@ var defaultTransition = {
   type: 'spring',
   stiffness: 200,
   damping: 40,
+};
+var resizeTransition = {
+  type: 'spring',
+  stiffness: 700,
+  damping: 53,
 };
 var limitSpring = {
   type: 'spring',

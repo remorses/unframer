@@ -1,4 +1,4 @@
-// /:https://app.framerstatic.com/chunk.YXhckCOx.mjs
+// /:https://app.framerstatic.com/chunk.0ySiml3q.mjs
 import React from "react";
 var __unframerWindow = typeof window !== "undefined" ? window : void 0;
 var __unframerNavigator = typeof __unframerWindow !== "undefined" ? navigator : void 0;
@@ -587,6 +587,8 @@ var defaultRichTextContainerStyle = {
   justifyContent: "flex-start"
 };
 var defaultTextFillStyle = { display: "inline-block" };
+var textFillShadowVariable = "--framer-text-fill-shadow";
+var textFillTextShadowVariable = "--framer-text-fill-text-shadow";
 var defaultImageStyle = { display: "block" };
 function selectComponentChild(parentSelector, childSelector) {
   return `${parentSelector} > ${childSelector}, ${parentSelector} > .ssr-variant > ${childSelector}`;
@@ -599,6 +601,10 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             justify-content: ${defaultRichTextContainerStyle.justifyContent};
             outline: none;
             flex-shrink: 0;
+            /* Stops the variables of an outer text layer from reaching the gradient text fills of
+               a text layer nested in it that doesn't set its own. */
+            ${textFillShadowVariable}: initial;
+            ${textFillTextShadowVariable}: initial;
         }
     `,
   `
@@ -760,6 +766,11 @@ var richTextCSSRules = /* @__PURE__ */ (() => [
             -webkit-text-fill-color: transparent;
             padding: max(0em, calc(calc(1.3em - var(--framer-blockquote-line-height, var(--framer-line-height, 1.3em))) / 2));
             margin: min(0em, calc(calc(1.3em - var(--framer-blockquote-line-height, var(--framer-line-height, 1.3em))) / -2));
+            /* An inherited text-shadow would paint on top of the gradient, so layers with shadows
+               set these variables to render them as a filter here. Without the variables the
+               text-shadow declaration is invalid and keeps inheriting. */
+            text-shadow: var(${textFillTextShadowVariable});
+            filter: var(${textFillShadowVariable}, initial);
         }
     `,
   `

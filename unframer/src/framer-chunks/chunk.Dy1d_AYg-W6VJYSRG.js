@@ -3,9 +3,9 @@ import {
   injectCSSRule,
   richTextCSSRules,
   safari16TextTruncationFix
-} from "./chunk-QCWO6VQ4.js";
+} from "./chunk-XAGBKBAT.js";
 
-// /:https://app.framerstatic.com/chunk.sFqYMxFT.mjs
+// /:https://app.framerstatic.com/chunk.Dy1d_AYg.mjs
 function LazyProp(factory) {
   let initialized = false;
   let value;
