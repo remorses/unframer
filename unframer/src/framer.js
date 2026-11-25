@@ -12738,7 +12738,7 @@ var namespace_exports = /* @__PURE__ */ __exportAll({
   Item: () => ReorderItem,
 },);
 
-// /:https://app.framerstatic.com/framer.BEr93sCn.mjs
+// /:https://app.framerstatic.com/framer.BisrWwwE.mjs
 
 import React, {
   cloneElement as cloneElement3,
@@ -16696,6 +16696,14 @@ function patchRoutesFromSearchParams(routes, variants,) {
 }
 function removeRoutesVariants(routes,) {
   for (const routeId in routes) if (routes[routeId]?.abTestingParentId) delete routes[routeId];
+}
+function createABTestingRouteIdResolver(routes,) {
+  const controlRouteIds = /* @__PURE__ */ new Map();
+  for (const routeId in routes) {
+    const variantId = routes[routeId]?.abTestingVariantId;
+    if (variantId && !routes[variantId]) controlRouteIds.set(variantId, routeId,);
+  }
+  return (routeId) => controlRouteIds.get(routeId,) ?? routeId;
 }
 function patchInitialRoute(routes, routeId,) {
   if (!routes[routeId]) return;
@@ -38207,6 +38215,8 @@ function Router({
   adaptLayoutToTextDirection,
 },) {
   useMarkRouterEffects();
+  const resolveRouteId = useMemo(() => createABTestingRouteIdResolver(routes,), [routes,],);
+  const getRoute = useCallback2((routeId) => routes[resolveRouteId(routeId,)], [routes, resolveRouteId,],);
   useReplaceInitialState({
     disabled: disableHistory,
     routeId: initialRoute,
@@ -38491,7 +38501,8 @@ function Router({
     __unframerWindow2.addEventListener('hashchange', onHashChange,);
     return () => __unframerWindow2.removeEventListener('hashchange', onHashChange,);
   }, [disableHistory, routes,],);
-  const navigate = useCallback2(async (routeId, hash2, pathVariables, shouldSmoothScroll, beforeUrlUpdate,) => {
+  const navigate = useCallback2(async (targetRouteId, hash2, pathVariables, shouldSmoothScroll, beforeUrlUpdate,) => {
+    const routeId = resolveRouteId(targetRouteId,);
     const newRoute = routes[routeId];
     const routeStatus = isLazyComponentType(newRoute?.page,) ? newRoute.page.getStatus() : void 0;
     const hasRendered = routeStatus?.hasRendered;
@@ -38624,6 +38635,7 @@ function Router({
     );
   }, [
     cancelPendingNavigation,
+    resolveRouteId,
     routes,
     locales,
     setCurrentRouteId,
@@ -38638,7 +38650,6 @@ function Router({
     defaultLocale,
     activeLocale,
   ],);
-  const getRoute = useGetRouteCallback(routes,);
   const currentPathnameWithHash = routerPathnameWithHashRef.current;
   const pageviewEventData = useSendPageView(
     currentRoute,
@@ -39649,6 +39660,160 @@ function isLocalizedDatabaseCollection(value,) {
 function isAnyDatabaseCollection(value,) {
   return isDatabaseCollection(value,) || isLocalizedDatabaseCollection(value,);
 }
+async function getCollectionItems(collection, locale,) {
+  if (isLegacyLocalizedCollection(collection,)) {
+    await collection.preload(locale,);
+    return collection.read(locale,);
+  }
+  return collection;
+}
+var CompatibilityDatabaseCollection = class {
+  collection;
+  locale;
+  schema;
+  indexes = [];
+  constructor(collection, locale,) {
+    this.collection = collection;
+    this.locale = locale;
+    const propertyControls = getPropertyControls(collection,);
+    assert(propertyControls, 'Collection does not have properties',);
+    const schema = {
+      id: {
+        type: 'string',
+        isNullable: false,
+      },
+    };
+    const controlEntries = Object.entries(propertyControls,);
+    for (const [key2, controlDescription,] of controlEntries) {
+      if (!controlDescription) continue;
+      const type = controlDescription.type;
+      assert(type !== 'array', 'Array properties are not supported',);
+      assert(type !== 'object', 'Object properties are not supported',);
+      schema[key2] = {
+        type,
+        isNullable: true,
+      };
+    }
+    this.schema = schema;
+  }
+  getDatabaseItem(item, pointer,) {
+    const data2 = {};
+    const itemIndex = Number(pointer,);
+    for (const key2 in this.schema) {
+      const value = item[key2];
+      if (isNullish(value,)) continue;
+      const definition = this.schema[key2];
+      if (isUndefined(definition,)) continue;
+      assert(definition.type !== 'unknown', 'Invalid definition type',);
+      if (definition.type === 'richtext') {
+        data2[key2] = {
+          type: definition.type,
+          value: {
+            itemIndex,
+            key: key2,
+          },
+        };
+        continue;
+      }
+      data2[key2] = {
+        type: definition.type,
+        value,
+      };
+    }
+    return {
+      pointer,
+      data: data2,
+    };
+  }
+  async resolveRichText(pointer,) {
+    const {
+      itemIndex,
+      key: key2,
+    } = pointer;
+    const richText = (await getCollectionItems(this.collection, this.locale,))[itemIndex]?.[key2];
+    if (LazyValue.is(richText,)) return richText.readMaybeAsync();
+    return richText;
+  }
+  async scanItems(priority,) {
+    const items = await getCollectionItems(this.collection, this.locale,);
+    const databaseItems = [];
+    for (let index = 0; index < items.length; index++) {
+      const yieldPromise = yieldToMainDuringEvaluation(priority,);
+      if (yieldPromise) await yieldPromise;
+      const item = items[index];
+      assert(item, 'Can\'t find collection item',);
+      const pointer = String(index,);
+      databaseItems.push(this.getDatabaseItem(item, pointer,),);
+    }
+    return databaseItems;
+  }
+  async resolveItems(pointers, priority,) {
+    const items = await getCollectionItems(this.collection, this.locale,);
+    const databaseItems = [];
+    for (const pointer of pointers) {
+      const yieldPromise = yieldToMainDuringEvaluation(priority,);
+      if (yieldPromise) await yieldPromise;
+      const item = items[Number(pointer,)];
+      assert(item, 'Can\'t find collection item',);
+      databaseItems.push(this.getDatabaseItem(item, pointer,),);
+    }
+    return databaseItems;
+  }
+  compareItems(left, right,) {
+    return Number(left.pointer,) - Number(right.pointer,);
+  }
+};
+var persistedCollectionIdToSeenCollectionRef = /* @__PURE__ */ new Map();
+var collectionRefToStableCollectionId = /* @__PURE__ */ new WeakMap();
+var prefix = '$r_';
+function hasRandomCollectionId(id2,) {
+  return id2.includes(prefix,);
+}
+function getPersistedCollectionId(collection,) {
+  if (!isAnyDatabaseCollection(collection,)) return void 0;
+  if (!collection.id) return void 0;
+  const existingCollectionRef = persistedCollectionIdToSeenCollectionRef.get(collection.id,);
+  if (!existingCollectionRef) {
+    persistedCollectionIdToSeenCollectionRef.set(collection.id, new WeakRef(collection,),);
+    return collection.id;
+  }
+  if (existingCollectionRef.deref() === collection) return collection.id;
+}
+function getCollectionId(collection,) {
+  const persistedId = getPersistedCollectionId(collection,);
+  if (persistedId) return persistedId;
+  const stableCollectionId = collectionRefToStableCollectionId.get(collection,);
+  if (stableCollectionId) return stableCollectionId;
+  const id2 = `${prefix}${Math.random().toString(16,).slice(2,)}`;
+  collectionRefToStableCollectionId.set(collection, id2,);
+  return id2;
+}
+var compatibilityCache = /* @__PURE__ */ new Map();
+function getFirstCollectionInQuery(query, locale,) {
+  let from = query.from;
+  while (from?.type === 'LeftJoin') from = from.left;
+  if (from?.type === 'Collection') return getCollectionForLocale(from.data, locale,);
+}
+function getCollectionForLocale(data2, locale,) {
+  if (isAnyLegacyCollection(data2,)) {
+    const cacheKey = getCollectionId(data2,) + (locale?.id ?? 'default');
+    const cached = compatibilityCache.get(cacheKey,);
+    if (cached) return cached;
+    const collection = new CompatibilityDatabaseCollection(data2, locale,);
+    compatibilityCache.set(cacheKey, collection,);
+    return collection;
+  }
+  if (isDatabaseCollection(data2,)) return data2;
+  if (isLocalizedDatabaseCollection(data2,)) {
+    while (locale) {
+      const collection = data2.collectionByLocaleId[locale.id];
+      if (collection) return collection;
+      locale = locale.fallback;
+    }
+    return data2.collectionByLocaleId.default;
+  }
+  assertNever(data2, 'Unsupported collection type',);
+}
 function compareArray(left, right, collation2,) {
   const leftLength = left.value.length;
   const rightLength = right.value.length;
@@ -40177,155 +40342,6 @@ var unknownDefinition = {
   type: 'unknown',
   isNullable: true,
 };
-async function getCollectionItems(collection, locale,) {
-  if (isLegacyLocalizedCollection(collection,)) {
-    await collection.preload(locale,);
-    return collection.read(locale,);
-  }
-  return collection;
-}
-var CompatibilityDatabaseCollection = class {
-  collection;
-  locale;
-  schema;
-  indexes = [];
-  constructor(collection, locale,) {
-    this.collection = collection;
-    this.locale = locale;
-    const propertyControls = getPropertyControls(collection,);
-    assert(propertyControls, 'Collection does not have properties',);
-    const schema = {
-      id: {
-        type: 'string',
-        isNullable: false,
-      },
-    };
-    const controlEntries = Object.entries(propertyControls,);
-    for (const [key2, controlDescription,] of controlEntries) {
-      if (!controlDescription) continue;
-      const type = controlDescription.type;
-      assert(type !== 'array', 'Array properties are not supported',);
-      assert(type !== 'object', 'Object properties are not supported',);
-      schema[key2] = {
-        type,
-        isNullable: true,
-      };
-    }
-    this.schema = schema;
-  }
-  getDatabaseItem(item, pointer,) {
-    const data2 = {};
-    const itemIndex = Number(pointer,);
-    for (const key2 in this.schema) {
-      const value = item[key2];
-      if (isNullish(value,)) continue;
-      const definition = this.schema[key2];
-      if (isUndefined(definition,)) continue;
-      assert(definition.type !== 'unknown', 'Invalid definition type',);
-      if (definition.type === 'richtext') {
-        data2[key2] = {
-          type: definition.type,
-          value: {
-            itemIndex,
-            key: key2,
-          },
-        };
-        continue;
-      }
-      data2[key2] = {
-        type: definition.type,
-        value,
-      };
-    }
-    return {
-      pointer,
-      data: data2,
-    };
-  }
-  async resolveRichText(pointer,) {
-    const {
-      itemIndex,
-      key: key2,
-    } = pointer;
-    const richText = (await getCollectionItems(this.collection, this.locale,))[itemIndex]?.[key2];
-    if (LazyValue.is(richText,)) return richText.readMaybeAsync();
-    return richText;
-  }
-  async scanItems(priority,) {
-    const items = await getCollectionItems(this.collection, this.locale,);
-    const databaseItems = [];
-    for (let index = 0; index < items.length; index++) {
-      const yieldPromise = yieldToMainDuringEvaluation(priority,);
-      if (yieldPromise) await yieldPromise;
-      const item = items[index];
-      assert(item, 'Can\'t find collection item',);
-      const pointer = String(index,);
-      databaseItems.push(this.getDatabaseItem(item, pointer,),);
-    }
-    return databaseItems;
-  }
-  async resolveItems(pointers, priority,) {
-    const items = await getCollectionItems(this.collection, this.locale,);
-    const databaseItems = [];
-    for (const pointer of pointers) {
-      const yieldPromise = yieldToMainDuringEvaluation(priority,);
-      if (yieldPromise) await yieldPromise;
-      const item = items[Number(pointer,)];
-      assert(item, 'Can\'t find collection item',);
-      databaseItems.push(this.getDatabaseItem(item, pointer,),);
-    }
-    return databaseItems;
-  }
-  compareItems(left, right,) {
-    return Number(left.pointer,) - Number(right.pointer,);
-  }
-};
-var persistedCollectionIdToSeenCollectionRef = /* @__PURE__ */ new Map();
-var collectionRefToStableCollectionId = /* @__PURE__ */ new WeakMap();
-var prefix = '$r_';
-function hasRandomCollectionId(id2,) {
-  return id2.includes(prefix,);
-}
-function getPersistedCollectionId(collection,) {
-  if (!isAnyDatabaseCollection(collection,)) return void 0;
-  if (!collection.id) return void 0;
-  const existingCollectionRef = persistedCollectionIdToSeenCollectionRef.get(collection.id,);
-  if (!existingCollectionRef) {
-    persistedCollectionIdToSeenCollectionRef.set(collection.id, new WeakRef(collection,),);
-    return collection.id;
-  }
-  if (existingCollectionRef.deref() === collection) return collection.id;
-}
-function getCollectionId(collection,) {
-  const persistedId = getPersistedCollectionId(collection,);
-  if (persistedId) return persistedId;
-  const stableCollectionId = collectionRefToStableCollectionId.get(collection,);
-  if (stableCollectionId) return stableCollectionId;
-  const id2 = `${prefix}${Math.random().toString(16,).slice(2,)}`;
-  collectionRefToStableCollectionId.set(collection, id2,);
-  return id2;
-}
-var compatibilityCache = /* @__PURE__ */ new Map();
-function getCollectionForLocale(data2, locale,) {
-  if (isAnyLegacyCollection(data2,)) {
-    const cacheKey = getCollectionId(data2,) + (locale?.id ?? 'default');
-    const cached = compatibilityCache.get(cacheKey,);
-    if (cached) return cached;
-    const collection = new CompatibilityDatabaseCollection(data2, locale,);
-    compatibilityCache.set(cacheKey, collection,);
-    return collection;
-  }
-  if (isDatabaseCollection(data2,)) return data2;
-  if (isLocalizedDatabaseCollection(data2,)) {
-    while (locale) {
-      const collection = data2.collectionByLocaleId[locale.id];
-      if (collection) return collection;
-      locale = locale.fallback;
-    }
-    return data2.collectionByLocaleId.default;
-  }
-  assertNever(data2, 'Unsupported collection type',);
-}
 function Hash(value,) {
   return value;
 }
@@ -44117,11 +44133,18 @@ function stringifyQuery(query,) {
   if (query.offset) queryString += ` OFFSET ${stringifyExpression(query.offset,)}`;
   return autoIndentSql(queryString,);
 }
-var log = /* @__PURE__ */ getLogger('query-engine',);
+var log$1 = /* @__PURE__ */ getLogger('query-engine',);
 var QueryEngine = class {
-  async evalQuery(query, locale, includeRaw, priority,) {
-    if (log.enabled) {
-      log.debug(`Query:
+  async evalQuery(query, locale, includeRaw, priority, rows,) {
+    const collection = getFirstCollectionInQuery(query, locale,);
+    if (collection?.query) {
+      const raw = await collection.query(query, locale,);
+      const result = await this.resolveSerializableQueryResult(raw, query, locale, priority, rows,);
+      if (includeRaw) return [result, raw,];
+      return result;
+    }
+    if (log$1.enabled) {
+      log$1.debug(`Query:
 ${stringifyQuery(query,)}`,);
     }
     const resolver = new Resolver(query, locale, priority,);
@@ -44156,20 +44179,24 @@ ${stringifyQuery(query,)}`,);
   async serializeableQuery(query, locale, priority,) {
     return this.evalQuery(query, locale, true, priority,);
   }
-  async query(query, locale, priority,) {
-    return this.evalQuery(query, locale, false, priority,);
+  async query(query, locale, priority, rows,) {
+    return this.evalQuery(query, locale, false, priority, rows,);
   }
-  resolveSerializableQueryResult(raw, query, locale, priority,) {
+  resolveSerializableQueryResult(raw, query, locale, priority, rows,) {
     const resolver = new Resolver(query, locale, priority,);
     return evaluateMaybeAsync(
-      evaluateArray(raw.map((item) => {
+      evaluateArray(raw.map(function* (item,) {
+        const cached = rows?.get(item,);
+        if (cached) return cached;
         const object = {};
         let key2;
         for (key2 in item) {
           const value = item[key2];
           object[key2] = resolver.resolveValue(value,);
         }
-        return evaluateObject(object,);
+        const result = yield* evaluateObject(object,);
+        rows?.set(item, result,);
+        return result;
       },),),
       void 0,
       false,
@@ -44177,6 +44204,7 @@ ${stringifyQuery(query,)}`,);
   }
 };
 var handoverDataType = /* @__PURE__ */ (() => HandoverDataType.QueryCache)();
+var log = /* @__PURE__ */ getLogger('query-cache',);
 function isCollection(value,) {
   return isObject(value,) && value.type === 'Collection';
 }
@@ -44191,33 +44219,50 @@ var QueryCache = class {
     this.maxSize = maxSize;
   }
   clear() {
+    for (const entry of this.cache.values()) {
+      clearTimeout(entry.eviction,);
+      entry.unsubscribe?.();
+    }
     this.cache.clear();
     this.serializedCache?.clear();
+  }
+  async scheduleEviction(key2, entry,) {
+    await entry.value.preload();
+    clearTimeout(entry.eviction,);
+    entry.eviction = setTimeout(() => {
+      if (this.cache.get(key2,) !== entry || entry.listeners?.size) return;
+      entry.unsubscribe?.();
+      this.cache.delete(key2,);
+      this.serializedCache?.delete(key2,);
+    }, 1e3,);
   }
   prune() {
     if (this.cache.size <= this.maxSize) return;
     for (const [key2, entry,] of this.cache) {
       if (this.cache.size <= this.maxSize) break;
-      if (entry.value.state === 'pending') continue;
+      if (entry.value.state === 'pending' || entry.listeners?.size) continue;
+      clearTimeout(entry.eviction,);
       this.cache.delete(key2,);
       this.serializedCache?.delete(key2,);
     }
   }
   get(query, locale, priority,) {
-    const key2 = getCacheKey(query, locale,);
+    return this.getEntry(query, locale, getCacheKey(query, locale,), priority,).value;
+  }
+  getEntry(query, locale, key2, priority,) {
     const existing = this.cache.get(key2,);
     if (existing) {
       const requestedPriority = readExecutionPriority(priority,) ?? 'user-visible';
       const existingPriority = readExecutionPriority(existing.priority,);
       if (existingPriority === void 0 && priority !== void 0 && existing.value.state === 'pending') {
         this.cache.delete(key2,);
-        return this.get(query, locale, priority,);
+        return this.getEntry(query, locale, key2, priority,);
       }
       if (
         existingPriority !== void 0 && isHigherSchedulerPriority(requestedPriority, existingPriority,) && existing.value.state === 'pending'
       ) {
         this.cache.delete(key2,);
-        return this.get(query, locale, requestedPriority,);
+        return this.getEntry(query, locale, key2, requestedPriority,);
       }
       this.cache.delete(key2,);
       this.cache.set(key2, existing,);
@@ -44228,7 +44273,7 @@ var QueryCache = class {
         const cachedSerialized = this.serializedCache.get(key2,);
         if (cachedSerialized !== void 0) handoverCollector.set(handoverDataType, key2, cachedSerialized,);
       }
-      return existing.value;
+      return existing;
     }
     const resolver = () => {
       const containsRandomCollectionId = hasRandomCollectionId(key2,);
@@ -44240,6 +44285,8 @@ var QueryCache = class {
           handleHydrationError(error, key2,);
         }
       }
+      entry.rows = getFirstCollectionInQuery(query, locale,)?.subscribe ? /* @__PURE__ */ new WeakMap() : void 0;
+      if (entry.rows) Promise.resolve().then(() => this.scheduleEviction(key2, entry,));
       if (handoverCollector !== void 0 && !containsRandomCollectionId) {
         return this.queryEngine.serializeableQuery(query, locale, priority,).then(([queryResult, serializableResult,],) => {
           this.serializedCache?.set(key2, serializableResult,);
@@ -44247,15 +44294,60 @@ var QueryCache = class {
           return queryResult;
         },);
       }
-      return this.queryEngine.query(query, locale, priority,);
+      return this.queryEngine.query(query, locale, priority, entry.rows,);
     };
-    const value = new LazyValue(resolver,);
-    this.cache.set(key2, {
-      value,
+    const entry = {
+      value: new LazyValue(resolver,),
       priority,
-    },);
+    };
+    this.cache.set(key2, entry,);
     this.prune();
-    return value;
+    return entry;
+  }
+  getStore(query, locale,) {
+    const key2 = getCacheKey(query, locale,);
+    let currentEntry = this.getEntry(query, locale, key2,);
+    return currentEntry.store ??= {
+      getSnapshot: () => currentEntry.value,
+      subscribe: (listener2) => {
+        const collection = getFirstCollectionInQuery(query, locale,);
+        if (!collection?.subscribe) return () => {};
+        const entry = this.cache.get(key2,) ?? currentEntry;
+        currentEntry = entry;
+        this.cache.set(key2, entry,);
+        clearTimeout(entry.eviction,);
+        const listeners = entry.listeners ??= /* @__PURE__ */ new Set();
+        listeners.add(listener2,);
+        if (listeners.size === 1) {
+          const refresh = async () => {
+            const revision = entry.revision = (entry.revision ?? 0) + 1;
+            let result;
+            try {
+              result = await this.queryEngine.query(query, locale, void 0, entry.rows,);
+            } catch (error) {
+              log.error(error,);
+              return;
+            }
+            if (this.cache.get(key2,) !== entry || entry.revision !== revision || !listeners.size) return;
+            const value = new LazyValue(() => result);
+            value.preload();
+            entry.value = value;
+            this.serializedCache?.delete(key2,);
+            for (const notify2 of listeners) notify2();
+          };
+          entry.unsubscribe = collection.subscribe(query, locale, () => void refresh(),);
+        }
+        return () => {
+          listeners.delete(listener2,);
+          if (!listeners.size) {
+            entry.revision = (entry.revision ?? 0) + 1;
+            entry.unsubscribe?.();
+            entry.unsubscribe = void 0;
+            this.scheduleEviction(key2, entry,);
+          }
+        };
+      },
+    };
   }
 };
 function replaceCollection(_, value,) {
@@ -44688,11 +44780,24 @@ function getPageQuery(query, {
 }
 var queryEngine = /* @__PURE__ */ new QueryEngine();
 var queryCache = /* @__PURE__ */ new QueryCache(queryEngine,);
+var queryRefreshEnabled = false;
+function useQueryRefresh(query, locale, cached,) {
+  const store = queryCache.getStore(query, locale,);
+  const [, setRevision,] = useState(0,);
+  useEffect2(() => {
+    const refresh = () => startTransition2(() => setRevision((revision) => revision + 1));
+    const unsubscribe = store.subscribe(refresh,);
+    if (store.getSnapshot() !== cached) refresh();
+    return unsubscribe;
+  }, [store,],);
+}
 function useQueryData(query,) {
   const {
     activeLocale,
   } = useLocaleInfo();
-  return queryCache.get(query, activeLocale,).use();
+  const cached = queryCache.get(query, activeLocale,);
+  if (queryRefreshEnabled) useQueryRefresh(query, activeLocale, cached,);
+  return cached.use();
 }
 function useQueryCount(query,) {
   return useQueryData({
@@ -45126,6 +45231,8 @@ function useHydratedBreakpointVariants(initial, mediaQueries, hydratedWithInitia
       addMQLCallback(mql, callback,);
       callbacks.push([mql, callback,],);
     }
+    const activeVariant = activeMediaQueryFromWindow(mediaQueries,);
+    if (activeVariant) setActiveVariantInstant(activeVariant,);
     return () => callbacks.forEach(([mql, callback,],) => removeMQLCallback(mql, callback,));
   }, [isScreenshotHost, mediaQueries, setActiveVariantInstant, usesMediaQueries,],);
   return [baseVariant.current, basePropsVariant.current,];
@@ -47809,6 +47916,13 @@ var DraggableTicker = /* @__PURE__ */ forwardRef(function DraggableTicker2(props
     ...rest
   } = props;
   const Component22 = asProp ?? motion.div;
+  const containerRef = useRef(null,);
+  const composedRef = useComposedRefs(ref, containerRef,);
+  const isInViewport = useInView(containerRef, {
+    margin: '100px',
+  },);
+  const isPageInView = usePageInView();
+  const isInView = isInViewport && isPageInView;
   const layoutDirectionModifier = useLayoutDirection() === 'rtl' && axis === 'x' ? -1 : 1;
   const targetVelocity = (playState === 'paused' ? 0 : tickerEffectVelocity ?? 100) * directionModifier * layoutDirectionModifier;
   const offsetMotionValue = useMotionValue(0,);
@@ -47823,25 +47937,29 @@ var DraggableTicker = /* @__PURE__ */ forwardRef(function DraggableTicker2(props
       event.stopPropagation();
     }
   };
-  useAnimationFrame((_, delta,) => {
-    const velocity = Math.abs(offsetMotionValue.getVelocity(),);
-    const currentTargetVelocity = isHovering.current ? targetVelocity * hoverModifier : targetVelocity;
-    if (performance.now() > lastDrag.current && (!dragMomentum.current || velocity < Math.abs(currentTargetVelocity,))) {
-      const frameOffset = delta / 1e3 * currentTargetVelocity;
-      const updated = offsetMotionValue.get() - frameOffset;
-      if (dragMomentum.current) {
-        offsetMotionValue.stop();
-        dragMomentum.current = false;
+  useAnimationFrame(
+    isInView
+      ? (_, delta,) => {
+        const velocity = Math.abs(offsetMotionValue.getVelocity(),);
+        const currentTargetVelocity = isHovering.current ? targetVelocity * hoverModifier : targetVelocity;
+        if (performance.now() > lastDrag.current && (!dragMomentum.current || velocity < Math.abs(currentTargetVelocity,))) {
+          const frameOffset = delta / 1e3 * currentTargetVelocity;
+          const updated = offsetMotionValue.get() - frameOffset;
+          if (dragMomentum.current) {
+            offsetMotionValue.stop();
+            dragMomentum.current = false;
+          }
+          offsetMotionValue.set(updated,);
+        }
       }
-      offsetMotionValue.set(updated,);
-    }
-  },);
+      : noop2,
+  );
   useEffect2(() => {
     if (playState === 'paused') offsetMotionValue.stop();
   }, [playState, offsetMotionValue,],);
   return /* @__PURE__ */ jsx(Ticker$1, {
     suppressHydrationWarning: true,
-    ref,
+    ref: composedRef,
     as: Component22,
     ...rest,
     gap,
