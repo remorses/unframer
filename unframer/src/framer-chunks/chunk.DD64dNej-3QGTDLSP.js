@@ -1,591 +1,227 @@
-// /:https://app.framerstatic.com/chunk.0ySiml3q.mjs
-import React from "react";
-var __unframerWindow = typeof window !== "undefined" ? window : void 0;
-var __unframerNavigator = typeof __unframerWindow !== "undefined" ? navigator : void 0;
-function encodeSVGForURL(svg) {
-  return `data:image/svg+xml,${svg.replaceAll("#", "%23").replaceAll("'", "%27").replaceAll('"', "%22")}`;
-}
-function isFunction(value) {
-  return typeof value === "function";
-}
-function isBoolean(value) {
-  return typeof value === "boolean";
-}
-function isString(value) {
-  return typeof value === "string";
-}
-function isNumber(value) {
-  return Number.isFinite(value);
-}
-function isArray(value) {
-  return Array.isArray(value);
-}
-function isObject(value) {
-  return value !== null && typeof value === "object" && !isArray(value);
-}
-function isEmptyObject(object) {
-  for (const _ in object) return false;
-  return true;
-}
-function isUndefined(value) {
-  return typeof value === "undefined";
-}
-function isNull(value) {
-  return value === null;
-}
-function isNullish(value) {
-  return value == null;
-}
-function isValidDate(value) {
-  return value instanceof Date && !Number.isNaN(value.getTime());
-}
-function isGenerator(value) {
-  return isObject(value) && isFunction(value.return);
-}
-function isPromiseLike(value) {
-  return isObject(value) && isFunction(value.then);
-}
-function isPromise(value) {
-  return value instanceof Promise;
-}
-var noop = () => {
-};
-var isWindow = typeof __unframerWindow !== "undefined";
-var isBot = /* @__PURE__ */ (() => isWindow && (__unframerNavigator.webdriver || /bot|-google|google-|yandex|ia_archiver|crawl|spider/iu.test(__unframerNavigator.userAgent)))();
-var supportsRequestIdleCallback = /* @__PURE__ */ (() => isWindow && typeof __unframerWindow.requestIdleCallback === "function")();
-var requestIdleCallback = /* @__PURE__ */ (() => supportsRequestIdleCallback ? __unframerWindow.requestIdleCallback : setTimeout)();
-function encodeSVGForCSS(svg) {
-  return `url('${encodeSVGForURL(svg)}')`;
-}
-function getPleaseReportMessage(message, error) {
-  const formattedError = error instanceof Error ? error.stack ?? error.message : error;
-  return `${message ? `${message}
-` : ""}In case the issue persists, report this to the Framer team via https://www.framer.com/contact/${formattedError ? `:
-${formattedError}` : "."}`;
-}
-var noopSubscribe = () => noop;
-var returnTrue = () => true;
-var returnFalse = () => false;
-function assert(condition, message) {
-  if (condition) return;
-  if (typeof message === "function") try {
-    message = message();
-  } catch {
-    message = "(assert message threw)";
-  }
-  if (typeof message === "string" && message.length > 2048) message = message.slice(0, 2048) + "\u2026";
-  const e = Error(message ? "Assertion Error: " + message : "Assertion Error");
-  if (e.stack) try {
-    const lines = e.stack.split("\n");
-    if (lines[1]?.includes("assert")) {
-      lines.splice(1, 1);
-      e.stack = lines.join("\n");
-    } else if (lines[0]?.includes("assert")) {
-      lines.splice(0, 1);
-      e.stack = lines.join("\n");
+import {
+  RenderTarget,
+  css,
+  defaultRichTextContainerStyle,
+  injectCSSRule,
+  maxListDigitsProperty
+} from "./chunk-6BSHZ6IR.js";
+
+// /:https://app.framerstatic.com/chunk.DD64dNej.mjs
+function LazyProp(factory) {
+  let initialized = false;
+  let value;
+  return { get value() {
+    if (!initialized) {
+      value = factory();
+      initialized = true;
     }
-  } catch {
-  }
-  throw e;
-}
-function assertNever(x, error) {
-  if (error instanceof Error) throw error;
-  if (error !== void 0) throw new Error(String(error));
-  throw new Error(x ? `Unexpected value: ${x}` : "Application entered invalid state");
-}
-var mockWindow = {
-  addEventListener: () => {
-  },
-  removeEventListener: () => {
-  },
-  dispatchEvent: () => false,
-  ResizeObserver: void 0,
-  onpointerdown: false,
-  onpointermove: false,
-  onpointerup: false,
-  ontouchstart: false,
-  ontouchmove: false,
-  ontouchend: false,
-  onmousedown: false,
-  onmousemove: false,
-  onmouseup: false,
-  devicePixelRatio: 1,
-  scrollX: 0,
-  scrollY: 0,
-  location: {
-    hash: "",
-    hostname: "",
-    href: "",
-    origin: "",
-    pathname: "",
-    search: ""
-  },
-  document: {
-    baseURI: "",
-    cookie: "",
-    referrer: null
-  },
-  setTimeout: () => 0,
-  clearTimeout: () => {
-  },
-  setInterval: () => 0,
-  clearInterval: () => {
-  },
-  requestAnimationFrame: () => 0,
-  cancelAnimationFrame: () => {
-  },
-  requestIdleCallback: () => 0,
-  getSelection: () => null,
-  matchMedia: (query) => {
-    return {
-      matches: false,
-      media: query,
-      onchange: () => {
-      },
-      addEventListener: () => {
-      },
-      removeEventListener: () => {
-      },
-      addListener: () => {
-      },
-      removeListener: () => {
-      },
-      dispatchEvent: () => false
-    };
-  },
-  innerHeight: 0,
-  innerWidth: 0,
-  SVGSVGElement: {},
-  open: function(_url, _target, _features) {
-  },
-  __framer_events: []
-};
-var safeWindow = !isWindow ? mockWindow : __unframerWindow;
-function isScreenshotFramerHost() {
-  return safeWindow.location.origin === "https://screenshot.framer.invalid";
-}
-var RenderEnvironment = /* @__PURE__ */ (() => ({
-  target: isScreenshotFramerHost() ? "EXPORT" : "PREVIEW",
-  zoom: 1
-}))();
-function executeInRenderEnvironment(customEnvironment, task) {
-  const previousEnvironment = Object.assign({}, RenderEnvironment);
-  Object.assign(RenderEnvironment, customEnvironment);
-  const result = task();
-  Object.assign(RenderEnvironment, previousEnvironment);
-  return result;
-}
-function setGlobalRenderEnvironment(environment) {
-  Object.assign(RenderEnvironment, environment);
-}
-function useRenderEnvironment(target, zoom) {
-  let willChangeElements = false;
-  if (RenderEnvironment.target !== target) {
-    RenderEnvironment.target = target;
-    willChangeElements = true;
-  }
-  if (RenderEnvironment.zoom !== zoom) RenderEnvironment.zoom = zoom;
-  return { willChangeElements };
-}
-var RenderTarget = {
-  /**
-  * The component is to be rendered for the Framer canvas.
-  *
-  * @remarks
-  * ```jsx
-  * function App() {
-  *   if (RenderTarget.current() === RenderTarget.canvas) {
-  *     return <CanvasComponent />
-  *   }
-  *   return <DefaultComponent />
-  * }
-  * ```
-  */
-  canvas: "CANVAS",
-  /**
-  * The component is to be rendered for export.
-  *
-  * @remarks
-  * ```jsx
-  * function App() {
-  *   if (RenderTarget.current() === RenderTarget.export) {
-  *     return <ExportComponent />
-  *   }
-  *   return <DefaultComponent />
-  * }
-  * ```
-  */
-  export: "EXPORT",
-  /**
-  * The component is to be rendered as a preview thumbnail, for example in the
-  * component panel.
-  *
-  * @remarks
-  * ```jsx
-  * function App() {
-  *   if (RenderTarget.current() === RenderTarget.thumbnail) {
-  *     return <Thumbnail />
-  *   }
-  *   return <DefaultComponent />
-  * }
-  * ```
-  */
-  thumbnail: "THUMBNAIL",
-  /**
-  * The component is being rendered in the preview window.
-  *
-  * @remarks
-  * ```jsx
-  * function App() {
-  *   React.useEffect(() => {
-  *     if (RenderTarget.current() === RenderTarget.preview) {
-  *       // Do something in preview.
-  *     }
-  *   })
-  *   return <DefaultComponent />
-  * }
-  * ```
-  */
-  preview: "PREVIEW",
-  /**
-  * Returns the current `RenderTarget` allowing components to apply
-  * different behaviors depending on the environment.
-  *
-  * @remarks
-  * ```jsx
-  * function App() {
-  *   if (RenderTarget.current() === RenderTarget.thumbnail) {
-  *     return <PreviewIcon />
-  *   }
-  *   return <Frame>...</Frame>
-  * }
-  * ```
-  */
-  current: () => RenderEnvironment.target,
-  /**
-  * Returns true if the current `RenderTarget` has performance restrictions.
-  * Use this to avoid doing heavy work in these contexts because they may
-  * bail on the rendering if the component takes too long.
-  *
-  * @remarks
-  * ```jsx
-  * function App() {
-  *   if (RenderTarget.hasRestrictions()) {
-  *     return <SomePlaceholder />
-  *   }
-  *   return <RichPreviewContent />
-  * }
-  * ```
-  */
-  hasRestrictions: () => {
-    const target = RenderEnvironment.target;
-    if (target === "CANVAS") return true;
-    if (target === "EXPORT") return true;
-    return false;
-  }
-};
-var defaultCache = /* @__PURE__ */ new Set();
-var defaultSheet;
-function injectCSSRule(cssRule, sheet, cache = defaultCache) {
-  if (!cssRule || cache.has(cssRule) || typeof document === "undefined") return;
-  cache.add(cssRule);
-  if (!sheet) {
-    if (!defaultSheet) {
-      const styleElement = document.createElement("style");
-      styleElement.setAttribute("type", "text/css");
-      styleElement.setAttribute("data-framer-css", "true");
-      if (!document.head) {
-        console.warn("not injecting CSS: the document is missing a <head> element");
-        return;
-      }
-      document.head.appendChild(styleElement);
-      if (styleElement.sheet) defaultSheet = styleElement.sheet;
-      else {
-        console.warn("not injecting CSS: injected <style> element does not have a sheet", styleElement);
-        return;
-      }
-    }
-    sheet = defaultSheet;
-  }
-  try {
-    sheet.insertRule(cssRule, sheet.cssRules.length);
-  } catch {
-  }
-}
-var FormInputStyleVariableNames = /* @__PURE__ */ (function(FormInputStyleVariableNames2) {
-  FormInputStyleVariableNames2["Padding"] = "--framer-input-padding";
-  FormInputStyleVariableNames2["BorderRadiusTopLeft"] = "--framer-input-border-radius-top-left";
-  FormInputStyleVariableNames2["BorderRadiusTopRight"] = "--framer-input-border-radius-top-right";
-  FormInputStyleVariableNames2["BorderRadiusBottomRight"] = "--framer-input-border-radius-bottom-right";
-  FormInputStyleVariableNames2["BorderRadiusBottomLeft"] = "--framer-input-border-radius-bottom-left";
-  FormInputStyleVariableNames2["CornerShape"] = "--framer-input-corner-shape";
-  FormInputStyleVariableNames2["BorderColor"] = "--framer-input-border-color";
-  FormInputStyleVariableNames2["BorderTopWidth"] = "--framer-input-border-top-width";
-  FormInputStyleVariableNames2["BorderRightWidth"] = "--framer-input-border-right-width";
-  FormInputStyleVariableNames2["BorderBottomWidth"] = "--framer-input-border-bottom-width";
-  FormInputStyleVariableNames2["BorderLeftWidth"] = "--framer-input-border-left-width";
-  FormInputStyleVariableNames2["BorderStyle"] = "--framer-input-border-style";
-  FormInputStyleVariableNames2["Background"] = "--framer-input-background";
-  FormInputStyleVariableNames2["FontFamily"] = "--framer-input-font-family";
-  FormInputStyleVariableNames2["FontWeight"] = "--framer-input-font-weight";
-  FormInputStyleVariableNames2["FontSize"] = "--framer-input-font-size";
-  FormInputStyleVariableNames2["FontColor"] = "--framer-input-font-color";
-  FormInputStyleVariableNames2["FontStyle"] = "--framer-input-font-style";
-  FormInputStyleVariableNames2["FontLetterSpacing"] = "--framer-input-font-letter-spacing";
-  FormInputStyleVariableNames2["FontTextAlignment"] = "--framer-input-font-text-alignment";
-  FormInputStyleVariableNames2["FontLineHeight"] = "--framer-input-font-line-height";
-  FormInputStyleVariableNames2["FontOpenType"] = "--framer-input-font-open-type-features";
-  FormInputStyleVariableNames2["FontVariationAxes"] = "--framer-input-font-variation-axes";
-  FormInputStyleVariableNames2["PlaceholderColor"] = "--framer-input-placeholder-color";
-  FormInputStyleVariableNames2["BoxShadow"] = "--framer-input-box-shadow";
-  FormInputStyleVariableNames2["FocusedBorderColor"] = "--framer-input-focused-border-color";
-  FormInputStyleVariableNames2["FocusedBorderWidth"] = "--framer-input-focused-border-width";
-  FormInputStyleVariableNames2["FocusedBorderStyle"] = "--framer-input-focused-border-style";
-  FormInputStyleVariableNames2["FocusedBackground"] = "--framer-input-focused-background";
-  FormInputStyleVariableNames2["FocusedBoxShadow"] = "--framer-input-focused-box-shadow";
-  FormInputStyleVariableNames2["FocusedTransition"] = "--framer-input-focused-transition";
-  FormInputStyleVariableNames2["BooleanCheckedBackground"] = "--framer-input-boolean-checked-background";
-  FormInputStyleVariableNames2["BooleanCheckedBorderColor"] = "--framer-input-boolean-checked-border-color";
-  FormInputStyleVariableNames2["BooleanCheckedBorderWidth"] = "--framer-input-boolean-checked-border-width";
-  FormInputStyleVariableNames2["BooleanCheckedBorderStyle"] = "--framer-input-boolean-checked-border-style";
-  FormInputStyleVariableNames2["BooleanCheckedBoxShadow"] = "--framer-input-boolean-checked-box-shadow";
-  FormInputStyleVariableNames2["BooleanCheckedTransition"] = "--framer-input-boolean-checked-transition";
-  FormInputStyleVariableNames2["InvalidTextColor"] = "--framer-input-invalid-text-color";
-  FormInputStyleVariableNames2["IconBackgroundImage"] = "--framer-input-icon-image";
-  FormInputStyleVariableNames2["IconMaskImage"] = "--framer-input-icon-mask-image";
-  FormInputStyleVariableNames2["IconColor"] = "--framer-input-icon-color";
-  FormInputStyleVariableNames2["IconContent"] = "--framer-input-icon-content";
-  FormInputStyleVariableNames2["WrapperHeight"] = "--framer-input-wrapper-height";
-  return FormInputStyleVariableNames2;
-})({});
-var Var = FormInputStyleVariableNames;
-var inputClassName = "framer-form-input";
-var inputWrapperClassName = "framer-form-input-wrapper";
-var emptyValueClassName = "framer-form-input-empty";
-var forcedFocusClassName = "framer-form-input-forced-focus";
-var forcedCheckedClassName = "framer-form-input-forced-checked";
-function cssValue(value) {
-  if (typeof value === "number") return value;
-  if (value.startsWith("--")) return css.variable(value);
-  if (value === "") return '""';
-  return value;
-}
-var css = /* @__PURE__ */ (() => {
-  function css2(selector, declaration) {
-    let output = " ";
-    for (const key in declaration) {
-      const value = declaration[key];
-      assert(value !== void 0, "Encountered `undefined` in CSSDeclaration");
-      output += `${key.replace(/([A-Z])/gu, "-$1").toLowerCase()}: ${cssValue(value)}; `;
-    }
-    return selector + " {" + output + "}";
-  }
-  css2.variable = (...variables) => {
-    const lastItem = variables[variables.length - 1];
-    assert(lastItem !== void 0, "Zero variables passed to `css.variable`");
-    let value = lastItem.startsWith("--") ? `var(${lastItem})` : lastItem;
-    for (let index = variables.length - 2; index >= 0; index--) value = `var(${variables[index]}, ${value})`;
     return value;
-  };
-  return css2;
-})();
-var sharedInputCSS = /* @__PURE__ */ (() => [css(`.${inputClassName}`, {
-  padding: css.variable(Var.Padding),
-  background: "transparent",
-  fontFamily: css.variable(Var.FontFamily),
-  fontWeight: css.variable(Var.FontWeight),
-  fontSize: css.variable(Var.FontSize),
-  fontStyle: css.variable(Var.FontStyle),
-  color: css.variable(Var.FontColor),
-  fontFeatureSettings: css.variable(Var.FontOpenType),
-  fontVariationSettings: css.variable(Var.FontVariationAxes),
-  border: "none",
-  textOverflow: "ellipsis",
-  whiteSpace: "nowrap",
-  overflow: "hidden",
-  width: "100%",
-  height: css.variable(Var.WrapperHeight, "100%"),
-  letterSpacing: css.variable(Var.FontLetterSpacing),
-  textAlign: css.variable(Var.FontTextAlignment),
-  lineHeight: css.variable(Var.FontLineHeight)
-}), css(`.${inputClassName}:focus-visible`, { outline: "none" })])();
-var inputWrapperCSS = /* @__PURE__ */ (() => [css(`.${inputWrapperClassName}`, { overflow: "hidden" })])();
-var inputBorderAllSides = /* @__PURE__ */ (() => `var(${Var.BorderTopWidth}) var(${Var.BorderRightWidth}) var(${Var.BorderBottomWidth}) var(${Var.BorderLeftWidth})`)();
-var inputBorderCSS = /* @__PURE__ */ (() => [`.${inputWrapperClassName}:after {
-        content: "";
-        pointer-events: none;
-        box-sizing: border-box;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border-top-left-radius: var(${Var.BorderRadiusTopLeft});
-        border-top-right-radius: var(${Var.BorderRadiusTopRight});
-        border-bottom-right-radius: var(${Var.BorderRadiusBottomRight});
-        border-bottom-left-radius: var(${Var.BorderRadiusBottomLeft});
-        corner-shape: var(${Var.CornerShape});
-        border-color: var(${Var.BorderColor});
-        border-top-width: var(${Var.BorderTopWidth});
-        border-right-width: var(${Var.BorderRightWidth});
-        border-bottom-width: var(${Var.BorderBottomWidth});
-        border-left-width: var(${Var.BorderLeftWidth});
-        border-style: var(${Var.BorderStyle});
-        transition: var(${Var.FocusedTransition});
-        transition-property: border-color, border-width, border-style, border-top-left-radius, border-top-right-radius, border-bottom-right-radius, border-bottom-left-radius, corner-shape;
-    }`])();
-var customValidityKey = "customError";
-var validKey = "valid";
-function isRelevantValidityStateKey(key) {
-  return key !== customValidityKey && key !== validKey;
+  } };
 }
-function isInvalid(validity) {
-  for (const key in validity) {
-    if (!isRelevantValidityStateKey(key)) continue;
-    if (validity?.[key] === true) return true;
-  }
-  return false;
+var willChangeOverrideCSSVariable = "--framer-will-change-override";
+var willChangeEffectOverrideCSSVariable = "--framer-will-change-effect-override";
+var willChangeFilterOverrideCSSVariable = "--framer-will-change-filter-override";
+var overflowClipFallbackCSSVariable = "--overflow-clip-fallback";
+var oneIfCornerShapeSupportedCSSVariable = "--one-if-corner-shape-supported";
+var richTextStylesRule = `
+[data-framer-component-type="DeprecatedRichText"] p,
+[data-framer-component-type="DeprecatedRichText"] div,
+[data-framer-component-type="DeprecatedRichText"] h1,
+[data-framer-component-type="DeprecatedRichText"] h2,
+[data-framer-component-type="DeprecatedRichText"] h3,
+[data-framer-component-type="DeprecatedRichText"] h4,
+[data-framer-component-type="DeprecatedRichText"] h5,
+[data-framer-component-type="DeprecatedRichText"] h6,
+[data-framer-component-type="DeprecatedRichText"] li,
+[data-framer-component-type="DeprecatedRichText"] ol,
+[data-framer-component-type="DeprecatedRichText"] ul,
+[data-framer-component-type="DeprecatedRichText"] span:not([data-text-fill]) {
+    font-family: var(--framer-font-family, Inter, Inter Placeholder, sans-serif);
+    font-style: var(--framer-font-style, normal);
+    font-weight: var(--framer-font-weight, 400);
+    color: var(--framer-text-color, #000);
+    font-size: var(--framer-font-size, 16px);
+    letter-spacing: var(--framer-letter-spacing, 0);
+    text-transform: var(--framer-text-transform, none);
+    text-decoration: var(--framer-text-decoration, none);
+    line-height: var(--framer-line-height, 1.2em);
+    text-align: var(--framer-text-alignment, start);
 }
-function useCustomValidity(onValid, onInvalid, onChange, onBlur, onFocus) {
-  const isValidRef = React.useRef(null);
-  const handleInvalid = React.useCallback((e) => {
-    if (!onInvalid) return;
-    if (isValidRef.current === false) return;
-    isValidRef.current = false;
-    e.currentTarget.setCustomValidity(" ");
-    e.currentTarget.reportValidity();
-    onInvalid(e);
-  }, [onInvalid]);
-  const handleChange = React.useCallback((e) => {
-    onChange?.(e);
-    if (!onInvalid && !onValid) return;
-    const validity = e.target.validity;
-    if (isValidRef.current === false && !isInvalid(validity)) {
-      e.currentTarget.setCustomValidity("");
-      e.target.reportValidity();
-      isValidRef.current = true;
-      onValid?.();
-    }
-  }, [
-    onInvalid,
-    onValid,
-    onChange
-  ]);
-  const handleBlur = React.useCallback((e) => {
-    if (!onInvalid) {
-      onBlur?.(e);
-      return;
-    }
-    if (isValidRef.current === false) return;
-    const validity = e.currentTarget.validity;
-    if (isInvalid(validity)) {
-      handleInvalid(e);
-      return;
-    }
-    onBlur?.(e);
-  }, [
-    handleInvalid,
-    onBlur,
-    onInvalid
-  ]);
-  return React.useMemo(() => {
-    return {
-      onInvalid: handleInvalid,
-      onChange: handleChange,
-      onBlur: handleBlur,
-      onFocus
-    };
-  }, [
-    handleInvalid,
-    handleChange,
-    handleBlur,
-    onFocus
-  ]);
+`;
+var richTextParagraphSpacingStylesRule = `
+[data-framer-component-type="DeprecatedRichText"] p:not(:first-child),
+[data-framer-component-type="DeprecatedRichText"] div:not(:first-child),
+[data-framer-component-type="DeprecatedRichText"] h1:not(:first-child),
+[data-framer-component-type="DeprecatedRichText"] h2:not(:first-child),
+[data-framer-component-type="DeprecatedRichText"] h3:not(:first-child),
+[data-framer-component-type="DeprecatedRichText"] h4:not(:first-child),
+[data-framer-component-type="DeprecatedRichText"] h5:not(:first-child),
+[data-framer-component-type="DeprecatedRichText"] h6:not(:first-child),
+[data-framer-component-type="DeprecatedRichText"] ol:not(:first-child),
+[data-framer-component-type="DeprecatedRichText"] ul:not(:first-child),
+[data-framer-component-type="DeprecatedRichText"] .framer-image:not(:first-child) {
+    margin-top: var(--framer-paragraph-spacing, 0);
 }
-var iconImageCSS = /* @__PURE__ */ (() => ({
-  backgroundRepeat: "no-repeat",
-  backgroundSize: `${16}px`,
-  maskRepeat: "no-repeat",
-  maskSize: `${16}px`,
-  backgroundColor: css.variable(Var.IconColor)
-}))();
-var inputIconCSSDeclaration = /* @__PURE__ */ (() => ({
-  content: "",
-  display: "block",
-  position: "absolute",
-  right: 0,
-  top: 0,
-  bottom: 0,
-  width: `${16}px`,
-  boxSizing: "content-box",
-  padding: css.variable(Var.Padding),
-  border: "none",
-  pointerEvents: "none",
-  ...iconImageCSS
-}))();
-var maxListDigitsProperty = "--max-list-digits";
-function getMaxListDigits(start, itemCount, listStyleType) {
-  const lastListNumber = start + Math.max(itemCount, 1) - 1;
-  switch (listStyleType) {
-    case "decimal":
-      return decimalMaxListDigits(lastListNumber);
-    case "lower-alpha":
-    case "upper-alpha":
-    case "lower-latin":
-    case "upper-latin":
-      return alphaMaxListDigits(lastListNumber);
-    case "lower-roman":
-    case "upper-roman":
-      return romanMaxListDigits(lastListNumber);
-    default:
-      return decimalMaxListDigits(lastListNumber);
-  }
+`;
+var richTextBackgroundMaskStylesRule = `
+[data-framer-component-type="DeprecatedRichText"] span[data-text-fill] {
+    display: inline-block;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
-function decimalMaxListDigits(lastListNumber) {
-  return String(lastListNumber).length;
+`;
+var richTextLinkStylesRule = `
+[data-framer-component-type="DeprecatedRichText"] a,
+[data-framer-component-type="DeprecatedRichText"] a span:not([data-text-fill]) {
+    font-family: var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
+    font-style: var(--framer-link-font-style, var(--framer-font-style, normal));
+    font-weight: var(--framer-link-font-weight, var(--framer-font-weight, 400));
+    color: var(--framer-link-text-color, var(--framer-text-color, #000));
+    font-size: var(--framer-link-font-size, var(--framer-font-size, 16px));
+    text-transform: var(--framer-link-text-transform, var(--framer-text-transform, none));
+    text-decoration: var(--framer-link-text-decoration, var(--framer-text-decoration, none));
 }
-function alphaMaxListDigits(lastListNumber) {
-  let nextCharacters = 1;
-  while (letterPermutations(nextCharacters) < lastListNumber) nextCharacters++;
-  return nextCharacters;
+`;
+var richTextLinkHoverStylesRule = `
+[data-framer-component-type="DeprecatedRichText"] a:hover,
+[data-framer-component-type="DeprecatedRichText"] a:hover span:not([data-text-fill]) {
+    font-family: var(--framer-link-hover-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
+    font-style: var(--framer-link-hover-font-style, var(--framer-link-font-style, var(--framer-font-style, normal)));
+    font-weight: var(--framer-link-hover-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400)));
+    color: var(--framer-link-hover-text-color, var(--framer-link-text-color, var(--framer-text-color, #000)));
+    font-size: var(--framer-link-hover-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)));
+    text-transform: var(--framer-link-hover-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none)));
+    text-decoration: var(--framer-link-hover-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, none)));
 }
-function letterPermutations(characters) {
-  let permutations = 0;
-  for (let i = 0; i < characters; i++) permutations += 26 ** (i + 1);
-  return permutations;
+`;
+var richTextLinkCurrentStylesRule = `
+[data-framer-component-type="DeprecatedRichText"] a[data-framer-page-link-current],
+[data-framer-component-type="DeprecatedRichText"] a[data-framer-page-link-current] span:not([data-text-fill]):not([data-nested-link]) {
+    font-family: var(--framer-link-current-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
+    font-style: var(--framer-link-current-font-style, var(--framer-link-font-style, var(--framer-font-style, normal)));
+    font-weight: var(--framer-link-current-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400)));
+    color: var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-text-color, #000)));
+    font-size: var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)));
+    text-transform: var(--framer-link-current-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none)));
+    text-decoration: var(--framer-link-current-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, none)));
 }
-var romanNumeralLengthThresholds = [
-  1,
-  2,
-  3,
-  8,
-  18,
-  28,
-  38,
-  88,
-  188,
-  288,
-  388,
-  888
+`;
+var richTextLinkCurrentHoverStylesRule = `
+[data-framer-component-type="DeprecatedRichText"] a[data-framer-page-link-current]:hover,
+[data-framer-component-type="DeprecatedRichText"] a[data-framer-page-link-current]:hover span:not([data-text-fill]):not([data-nested-link]) {
+    font-family: var(--framer-link-hover-font-family, var(--framer-link-current-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif))));
+    font-style: var(--framer-link-hover-font-style, var(--framer-link-current-font-style, var(--framer-link-font-style, var(--framer-font-style, normal))));
+    font-weight: var(--framer-link-hover-font-weight, var(--framer-link-current-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400))));
+    color: var(--framer-link-hover-text-color, var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-text-color, #000))));
+    font-size: var(--framer-link-hover-font-size, var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px))));
+    text-transform: var(--framer-link-hover-text-transform, var(--framer-link-current-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none))));
+    text-decoration: var(--framer-link-hover-text-decoration, var(--framer-link-current-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, none))));
+}
+`;
+var richTextBoldStylesRule = `
+[data-framer-component-type="DeprecatedRichText"] strong {
+    font-weight: bolder;
+}
+`;
+var richTextItalicStylesRule = `
+[data-framer-component-type="DeprecatedRichText"] em {
+    font-style: italic;
+}
+`;
+var richTextImageRule = `
+[data-framer-component-type="DeprecatedRichText"] .framer-image {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+`;
+var richTextBlockElementResetRule = `
+[data-framer-component-type="DeprecatedRichText"] p,
+[data-framer-component-type="DeprecatedRichText"] div,
+[data-framer-component-type="DeprecatedRichText"] h1,
+[data-framer-component-type="DeprecatedRichText"] h2,
+[data-framer-component-type="DeprecatedRichText"] h3,
+[data-framer-component-type="DeprecatedRichText"] h4,
+[data-framer-component-type="DeprecatedRichText"] h5,
+[data-framer-component-type="DeprecatedRichText"] h6 {
+    margin: 0;
+    padding: 0;
+}
+`;
+var richTextStylesPresetResetRule = `
+[data-framer-component-type="DeprecatedRichText"] .text-styles-preset-reset {
+    --framer-font-family: Inter, Inter Placeholder, sans-serif;
+    --framer-font-style: normal;
+    --framer-font-weight: 500;
+    --framer-text-color: #000;
+    --framer-font-size: 16px;
+    --framer-letter-spacing: 0;
+    --framer-text-transform: none;
+    --framer-text-decoration: none;
+    --framer-line-height: 1.2em;
+    --framer-text-alignment: start;
+    --framer-font-open-type-features: normal;
+    --font-variation-settings: normal;
+}
+`;
+var richTextStylesList = `
+[data-framer-component-type="DeprecatedRichText"] ul,
+[data-framer-component-type="DeprecatedRichText"] ol {
+    display: table;
+    width: 100%;
+    padding-left: 0;
+    margin: 0;
+}
+`;
+var richTextStylesListItem = `
+[data-framer-component-type="DeprecatedRichText"] li {
+    display: table-row;
+    counter-increment: list-item;
+    list-style: none;
+}
+`;
+var richTextStylesNumberedListMarker = `
+[data-framer-component-type="DeprecatedRichText"] ol > li::before {
+    display: table-cell;
+    width: 2.25ch;
+    box-sizing: border-box;
+    padding-right: 0.75ch;
+    content: counter(list-item) ".";
+    white-space: nowrap;
+}
+`;
+var richTextStylesBulletedListMarker = `
+[data-framer-component-type="DeprecatedRichText"] ul > li::before {
+    display: table-cell;
+    width: 2.25ch;
+    box-sizing: border-box;
+    padding-right: 0.75ch;
+    content: "\u2022";
+}
+`;
+var deprecatedRichTextCSSRules = [
+  `[data-framer-component-type="DeprecatedRichText"] { cursor: inherit; }`,
+  richTextStylesPresetResetRule,
+  richTextBlockElementResetRule,
+  richTextStylesRule,
+  richTextParagraphSpacingStylesRule,
+  richTextBackgroundMaskStylesRule,
+  richTextLinkStylesRule,
+  richTextLinkHoverStylesRule,
+  richTextLinkCurrentStylesRule,
+  richTextLinkCurrentHoverStylesRule,
+  richTextBoldStylesRule,
+  richTextItalicStylesRule,
+  richTextImageRule,
+  richTextStylesList,
+  richTextStylesListItem,
+  richTextStylesNumberedListMarker,
+  richTextStylesBulletedListMarker
 ];
-function romanMaxListDigits(lastListNumber) {
-  let maxLength = 0;
-  for (const threshold of romanNumeralLengthThresholds) {
-    if (lastListNumber < threshold) return maxLength;
-    maxLength++;
-  }
-  const thousands = Math.floor((lastListNumber - 888) / 1e3);
-  if (thousands >= 1) return Math.max(maxLength, thousands + 12);
-  return maxLength;
-}
 function createRGBVariableFallbacks(variables, fallback) {
   return css.variable(...variables.flatMap((variable) => [`${variable}-rgb`, variable]), fallback);
 }
-var defaultRichTextContainerStyle = {
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "flex-start"
-};
 var defaultTextFillStyle = { display: "inline-block" };
 var textFillShadowVariable = "--framer-text-fill-shadow";
 var textFillTextShadowVariable = "--framer-text-fill-text-shadow";
@@ -1269,58 +905,246 @@ var safari16TextTruncationFix = /* @__PURE__ */ (() => [`@supports ${anySafariVe
         /* Render text-fill elements inline when text is truncated, otherwise default to their default value (e.g. inline-block) */
         p.framer-text[data-text-fill] { display: var(${textTruncationDisplayInlineVariableForSafari16}, ${defaultTextFillStyle.display}) }
     }`])();
-
+var combineCSSRules = (isPreview) => {
+  const componentCSSRules = `[data-framer-component-type] { position: absolute; }`;
+  const textCSSRules = [
+    `[data-framer-component-type="Text"] { cursor: inherit; }`,
+    `[data-framer-component-text-autosized] * { white-space: pre; }`,
+    `
+[data-framer-component-type="Text"] > * {
+    text-align: var(--framer-text-alignment, start);
+}`,
+    `
+[data-framer-component-type="Text"] span span,
+[data-framer-component-type="Text"] p span,
+[data-framer-component-type="Text"] h1 span,
+[data-framer-component-type="Text"] h2 span,
+[data-framer-component-type="Text"] h3 span,
+[data-framer-component-type="Text"] h4 span,
+[data-framer-component-type="Text"] h5 span,
+[data-framer-component-type="Text"] h6 span {
+    display: block;
+}`,
+    `
+[data-framer-component-type="Text"] span span span,
+[data-framer-component-type="Text"] p span span,
+[data-framer-component-type="Text"] h1 span span,
+[data-framer-component-type="Text"] h2 span span,
+[data-framer-component-type="Text"] h3 span span,
+[data-framer-component-type="Text"] h4 span span,
+[data-framer-component-type="Text"] h5 span span,
+[data-framer-component-type="Text"] h6 span span {
+    display: unset;
+}`,
+    `
+[data-framer-component-type="Text"] div div span,
+[data-framer-component-type="Text"] a div span,
+[data-framer-component-type="Text"] span span span,
+[data-framer-component-type="Text"] p span span,
+[data-framer-component-type="Text"] h1 span span,
+[data-framer-component-type="Text"] h2 span span,
+[data-framer-component-type="Text"] h3 span span,
+[data-framer-component-type="Text"] h4 span span,
+[data-framer-component-type="Text"] h5 span span,
+[data-framer-component-type="Text"] h6 span span,
+[data-framer-component-type="Text"] a {
+    font-family: var(--font-family);
+    font-style: var(--font-style);
+    font-weight: min(calc(var(--framer-font-weight-increase, 0) + var(--font-weight, 400)), 900);
+    color: var(--text-color);
+    letter-spacing: var(--letter-spacing);
+    font-size: var(--font-size);
+    text-transform: var(--text-transform);
+    --text-decoration: var(--framer-text-decoration-style, solid) var(--framer-text-decoration, none) var(--framer-text-decoration-color, currentcolor) var(--framer-text-decoration-thickness, auto);
+    --text-decoration-skip-ink: var(--framer-text-decoration-skip-ink);
+    --text-underline-offset: var(--framer-text-decoration-offset);
+    line-height: var(--line-height);
+}`,
+    `
+[data-framer-component-type="Text"] div div span,
+[data-framer-component-type="Text"] a div span,
+[data-framer-component-type="Text"] span span span,
+[data-framer-component-type="Text"] p span span,
+[data-framer-component-type="Text"] h1 span span,
+[data-framer-component-type="Text"] h2 span span,
+[data-framer-component-type="Text"] h3 span span,
+[data-framer-component-type="Text"] h4 span span,
+[data-framer-component-type="Text"] h5 span span,
+[data-framer-component-type="Text"] h6 span span,
+[data-framer-component-type="Text"] a {
+    --font-family: var(--framer-font-family);
+    --font-style: var(--framer-font-style);
+    --font-weight: var(--framer-font-weight);
+    --text-color: var(--framer-text-color);
+    --letter-spacing: var(--framer-letter-spacing);
+    --font-size: var(--framer-font-size);
+    --text-transform: var(--framer-text-transform);
+    --text-decoration: var(--framer-text-decoration-style, solid) var(--framer-text-decoration, none) var(--framer-text-decoration-color, currentcolor) var(--framer-text-decoration-thickness, auto);
+    --text-decoration-skip-ink: var(--framer-text-decoration-skip-ink);
+    --text-underline-offset: var(--framer-text-decoration-offset);
+    --line-height: var(--framer-line-height);
+}`,
+    `
+[data-framer-component-type="Text"] a,
+[data-framer-component-type="Text"] a div span,
+[data-framer-component-type="Text"] a span span span,
+[data-framer-component-type="Text"] a p span span,
+[data-framer-component-type="Text"] a h1 span span,
+[data-framer-component-type="Text"] a h2 span span,
+[data-framer-component-type="Text"] a h3 span span,
+[data-framer-component-type="Text"] a h4 span span,
+[data-framer-component-type="Text"] a h5 span span,
+[data-framer-component-type="Text"] a h6 span span {
+    --font-family: var(--framer-link-font-family, var(--framer-font-family));
+    --font-style: var(--framer-link-font-style, var(--framer-font-style));
+    --font-weight: var(--framer-link-font-weight, var(--framer-font-weight));
+    --text-color: var(--framer-link-text-color, var(--framer-text-color));
+    --font-size: var(--framer-link-font-size, var(--framer-font-size));
+    --text-transform: var(--framer-link-text-transform, var(--framer-text-transform));
+    --text-decoration: var(--framer-link-text-decoration-style, var(--framer-text-decoration-style, solid)) var(--framer-link-text-decoration, var(--framer-text-decoration, none)) var(--framer-link-text-decoration-color, var(--framer-text-decoration-color, currentcolor)) var(--framer-link-text-decoration-thickness, var(--framer-text-decoration-thickness, auto));
+    --text-decoration-skip-ink: var(--framer-link-text-decoration-skip-ink, var(--framer-text-decoration-skip-ink));
+    --text-underline-offset: var(--framer-link-text-decoration-offset, var(--framer-text-decoration-offset));
+}`,
+    `
+[data-framer-component-type="Text"] a:hover,
+[data-framer-component-type="Text"] a div span:hover,
+[data-framer-component-type="Text"] a span span span:hover,
+[data-framer-component-type="Text"] a p span span:hover,
+[data-framer-component-type="Text"] a h1 span span:hover,
+[data-framer-component-type="Text"] a h2 span span:hover,
+[data-framer-component-type="Text"] a h3 span span:hover,
+[data-framer-component-type="Text"] a h4 span span:hover,
+[data-framer-component-type="Text"] a h5 span span:hover,
+[data-framer-component-type="Text"] a h6 span span:hover {
+    --font-family: var(--framer-link-hover-font-family, var(--framer-link-font-family, var(--framer-font-family)));
+    --font-style: var(--framer-link-hover-font-style, var(--framer-link-font-style, var(--framer-font-style)));
+    --font-weight: var(--framer-link-hover-font-weight, var(--framer-link-font-weight, var(--framer-font-weight)));
+    --text-color: var(--framer-link-hover-text-color, var(--framer-link-text-color, var(--framer-text-color)));
+    --font-size: var(--framer-link-hover-font-size, var(--framer-link-font-size, var(--framer-font-size)));
+    --text-transform: var(--framer-link-hover-text-transform, var(--framer-link-text-transform, var(--framer-text-transform)));
+    --text-decoration: var(--framer-link-hover-text-decoration-style, var(--framer-link-text-decoration-style, var(--framer-text-decoration-style, solid))) var(--framer-link-hover-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, none))) var(--framer-link-hover-text-decoration-color, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color, currentcolor))) var(--framer-link-hover-text-decoration-thickness, var(--framer-link-text-decoration-thickness, var(--framer-text-decoration-thickness, auto)));
+    --text-decoration-skip-ink: var(--framer-link-hover-text-decoration-skip-ink, var(--framer-link-text-decoration-skip-ink, var(--framer-text-decoration-skip-ink)));
+    --text-underline-offset: var(--framer-link-hover-text-decoration-offset, var(--framer-link-text-decoration-offset, var(--framer-text-decoration-offset)));
+}`,
+    `
+[data-framer-component-type="Text"].isCurrent a,
+[data-framer-component-type="Text"].isCurrent a div span,
+[data-framer-component-type="Text"].isCurrent a span span span,
+[data-framer-component-type="Text"].isCurrent a p span span,
+[data-framer-component-type="Text"].isCurrent a h1 span span,
+[data-framer-component-type="Text"].isCurrent a h2 span span,
+[data-framer-component-type="Text"].isCurrent a h3 span span,
+[data-framer-component-type="Text"].isCurrent a h4 span span,
+[data-framer-component-type="Text"].isCurrent a h5 span span,
+[data-framer-component-type="Text"].isCurrent a h6 span span {
+    --font-family: var(--framer-link-current-font-family, var(--framer-link-font-family, var(--framer-font-family)));
+    --font-style: var(--framer-link-current-font-style, var(--framer-link-font-style, var(--framer-font-style)));
+    --font-weight: var(--framer-link-current-font-weight, var(--framer-link-font-weight, var(--framer-font-weight)));
+    --text-color: var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-text-color)));
+    --font-size: var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size)));
+    --text-transform: var(--framer-link-current-text-transform, var(--framer-link-text-transform, var(--framer-text-transform)));
+    --text-decoration: var(--framer-link-current-text-decoration-style, var(--framer-link-text-decoration-style, var(--framer-text-decoration-style, solid))) var(--framer-link-current-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, none))) var(--framer-link-current-text-decoration-color, var(--framer-link-text-decoration-color, var(--framer-text-decoration-color, currentcolor))) var(--framer-link-current-text-decoration-thickness, var(--framer-link-text-decoration-thickness, var(--framer-text-decoration-thickness, auto)));
+    --text-decoration-skip-ink: var(--framer-link-current-text-decoration-skip-ink, var(--framer-link-text-decoration-skip-ink, var(--framer-text-decoration-skip-ink)));
+    --text-underline-offset: var(--framer-link-current-text-decoration-offset, var(--framer-link-text-decoration-offset, var(--framer-text-decoration-offset)));
+}`
+  ];
+  const stackPositionRule = `
+[data-framer-component-type="Stack"]:not([data-framer-generated]) > *,
+[data-framer-component-type="Stack"]:not([data-framer-generated]) > [data-framer-component-type] {
+    position: relative;
+}`;
+  const navigationCSSRules = `
+NavigationContainer
+[data-framer-component-type="NavigationContainer"] > *,
+[data-framer-component-type="NavigationContainer"] > [data-framer-component-type] {
+    position: relative;
+}`;
+  const scrollCSSRules = [`[data-framer-component-type="Scroll"]::-webkit-scrollbar { display: none; }`, `[data-framer-component-type="ScrollContentWrapper"] > * { position: relative; }`];
+  const nativeScrollCSSRules = [
+    `[data-framer-component-type="NativeScroll"] { -webkit-overflow-scrolling: touch; }`,
+    `[data-framer-component-type="NativeScroll"] > * { position: relative; }`,
+    `[data-framer-component-type="NativeScroll"].direction-both { overflow-x: auto; overflow-y: auto; }`,
+    `[data-framer-component-type="NativeScroll"].direction-vertical { overflow-x: hidden; overflow-y: auto; }`,
+    `[data-framer-component-type="NativeScroll"].direction-horizontal { overflow-x: auto; overflow-y: hidden; }`,
+    `[data-framer-component-type="NativeScroll"].direction-vertical > * { width: 100% !important; }`,
+    `[data-framer-component-type="NativeScroll"].direction-horizontal > * { height: 100% !important; }`,
+    `[data-framer-component-type="NativeScroll"].scrollbar-hidden::-webkit-scrollbar { display: none; }`
+  ];
+  const deviceComponentCSSRules = `[data-framer-component-type="DeviceComponent"].no-device > * { width: 100% !important; height: 100% !important; }`;
+  const pageContentWrapperWrapperCSSRules = `[data-framer-component-type="PageContentWrapper"] > *, [data-framer-component-type="PageContentWrapper"] > [data-framer-component-type] { position: relative; }`;
+  const presenceCSS = `[data-is-present="false"], [data-is-present="false"] * { pointer-events: none !important; }`;
+  const lightboxCSS = `.framer-lightbox-container { opacity: 1 !important; pointer-events: auto !important; }`;
+  const cursorCSS = [
+    `[data-framer-cursor="pointer"] { cursor: pointer; }`,
+    `[data-framer-cursor="grab"] { cursor: grab; }`,
+    `[data-framer-cursor="grab"]:active { cursor: grabbing; }`
+  ];
+  const frameCSS = [`[data-framer-component-type="Frame"] *, [data-framer-component-type="Stack"] * { pointer-events: auto; }`, `[data-framer-generated] * { pointer-events: unset }`];
+  const resetCSS = `[data-reset="button"] {
+        border-width: 0;
+        padding: 0;
+        background: none;
+}`;
+  const hideScrollbars = [
+    `[data-hide-scrollbars="true"]::-webkit-scrollbar { width: 0px; height: 0px; }`,
+    `[data-hide-scrollbars="true"]::-webkit-scrollbar-thumb { background: transparent; }`,
+    `[data-hide-scrollbars="true"] { scrollbar-width: none; }`
+  ];
+  const anySafariVersion2 = "(background: -webkit-named-image(i))";
+  const safari16OrGreater = "(grid-template-rows: subgrid)";
+  const safari26OrGreater = "(position-area: top right)";
+  const willChangeTransformRules = (isPreview2) => {
+    if (isPreview2) return [`body { ${willChangeOverrideCSSVariable}: none; }`, `@supports ${anySafariVersion2} and (not ${safari16OrGreater}) { body { ${willChangeOverrideCSSVariable}: transform; } }`];
+    return [`body { ${willChangeOverrideCSSVariable}: none; ${willChangeEffectOverrideCSSVariable}: none; }`];
+  };
+  const willChangeFilterRules = (isPreview2) => {
+    if (isPreview2) return [`body { ${willChangeFilterOverrideCSSVariable}: none; }`, `@supports ${anySafariVersion2} and (not ${safari26OrGreater}) { body { ${willChangeFilterOverrideCSSVariable}: filter; } }`];
+    return [`body { ${willChangeFilterOverrideCSSVariable}: none; }`];
+  };
+  const frameCSSRules = (isPreview2) => {
+    return isPreview2 ? frameCSS : [];
+  };
+  const svgCSSRules = `.svgContainer svg { display: block; }`;
+  const overflowClipFallbackCSSRules = `@supports (not (overflow: clip)) {
+        :root { ${overflowClipFallbackCSSVariable}: hidden; }
+    }`;
+  const cornerShapeCSSRules = `@supports (corner-shape: superellipse(2)) { :root { ${oneIfCornerShapeSupportedCSSVariable}: 1 } }`;
+  return [
+    ...willChangeTransformRules(isPreview),
+    ...willChangeFilterRules(isPreview),
+    componentCSSRules,
+    ...textCSSRules,
+    ...richTextCSSRules,
+    ...deprecatedRichTextCSSRules,
+    stackPositionRule,
+    navigationCSSRules,
+    ...scrollCSSRules,
+    ...nativeScrollCSSRules,
+    pageContentWrapperWrapperCSSRules,
+    deviceComponentCSSRules,
+    presenceCSS,
+    ...cursorCSS,
+    ...frameCSSRules(isPreview),
+    svgCSSRules,
+    resetCSS,
+    ...hideScrollbars,
+    overflowClipFallbackCSSRules,
+    lightboxCSS,
+    ...safari16TextTruncationFix,
+    cornerShapeCSSRules
+  ];
+};
+var combinedCSSRules = /* @__PURE__ */ LazyProp(() => combineCSSRules(false));
+var combinedCSSRulesForPreview = /* @__PURE__ */ LazyProp(() => combineCSSRules(true));
+function getCombinedCSSRules() {
+  return RenderTarget.current() === RenderTarget.preview ? combinedCSSRulesForPreview.value : combinedCSSRules.value;
+}
+function injectComponentCSSRulesWithSheet(sheet, cache) {
+  const styles = RenderTarget.current() === RenderTarget.preview ? combinedCSSRulesForPreview.value : combinedCSSRules.value;
+  for (const rule of styles) injectCSSRule(rule, sheet, cache);
+}
 export {
-  isFunction,
-  isBoolean,
-  isString,
-  isNumber,
-  isArray,
-  isObject,
-  isEmptyObject,
-  isUndefined,
-  isNull,
-  isNullish,
-  isValidDate,
-  isGenerator,
-  isPromiseLike,
-  isPromise,
-  noop,
-  isWindow,
-  isBot,
-  supportsRequestIdleCallback,
-  requestIdleCallback,
-  encodeSVGForCSS,
-  getPleaseReportMessage,
-  noopSubscribe,
-  returnTrue,
-  returnFalse,
-  assert,
-  assertNever,
-  safeWindow,
-  isScreenshotFramerHost,
-  RenderEnvironment,
-  executeInRenderEnvironment,
-  setGlobalRenderEnvironment,
-  useRenderEnvironment,
-  RenderTarget,
-  injectCSSRule,
-  inputClassName,
-  inputWrapperClassName,
-  emptyValueClassName,
-  forcedFocusClassName,
-  forcedCheckedClassName,
-  css,
-  sharedInputCSS,
-  inputWrapperCSS,
-  inputBorderAllSides,
-  inputBorderCSS,
-  useCustomValidity,
-  iconImageCSS,
-  inputIconCSSDeclaration,
-  maxListDigitsProperty,
-  getMaxListDigits,
-  defaultRichTextContainerStyle,
-  richTextCSSRules,
-  safari16TextTruncationFix
+  combinedCSSRulesForPreview,
+  getCombinedCSSRules,
+  injectComponentCSSRulesWithSheet
 };
