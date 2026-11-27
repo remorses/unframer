@@ -51,7 +51,7 @@ import {
   useRenderEnvironment,
 } from './framer-chunks/chunk-6BSHZ6IR.js';
 
-// /:https://app.framerstatic.com/framer.B3LLf74D.mjs
+// /:https://app.framerstatic.com/framer.BWzg2IRg.mjs
 import * as React2 from 'react';
 import React$1, {
   Children as Children3,
@@ -12747,7 +12747,7 @@ var namespace_exports = /* @__PURE__ */ __exportAll({
   Item: () => ReorderItem,
 },);
 
-// /:https://app.framerstatic.com/framer.B3LLf74D.mjs
+// /:https://app.framerstatic.com/framer.BWzg2IRg.mjs
 import ReactDOM, { createPortal, } from 'react-dom';
 var __unframerWindow2 = typeof window !== 'undefined' ? window : void 0;
 var __unframerNavigator2 = typeof __unframerWindow2 !== 'undefined' ? navigator : void 0;
@@ -13396,19 +13396,21 @@ function unflatten(parsed, revivers, options,) {
   return hydrate(0,);
 }
 function sendTrackingEvent(eventType, eventData, sendOn = 'lazy',) {
-  safeWindow.__framer_events?.push([eventType, eventData, sendOn,],);
+  safeWindow.__framer_events?.push([eventType, getAnalyticsEventData(eventData,), sendOn,],);
   switch (eventType) {
     case 'published_site_click': {
+      const data2 = eventData;
       const {
         trackingId,
         href,
-      } = eventData;
+      } = data2;
       if (trackingId) {
         document.dispatchEvent(
           new CustomEvent('framer:click', {
             detail: {
               trackingId,
               href,
+              ...getCustomCodePageDetail(data2,),
             },
           },),
         );
@@ -13416,14 +13418,16 @@ function sendTrackingEvent(eventType, eventData, sendOn = 'lazy',) {
       break;
     }
     case 'published_site_form_submit': {
+      const data2 = eventData;
       const {
         trackingId,
-      } = eventData;
+      } = data2;
       if (trackingId) {
         document.dispatchEvent(
           new CustomEvent('framer:formsubmit', {
             detail: {
               trackingId,
+              ...getCustomCodePageDetail(data2,),
             },
           },),
         );
@@ -13431,27 +13435,28 @@ function sendTrackingEvent(eventType, eventData, sendOn = 'lazy',) {
       break;
     }
     case 'published_site_pageview': {
-      const {
-        framerLocale,
-      } = eventData;
+      const data2 = eventData;
       document.dispatchEvent(
         new CustomEvent('framer:pageview', {
           detail: {
-            framerLocale,
+            framerLocale: data2.framerLocale,
+            ...getCustomCodePageDetail(data2,),
           },
         },),
       );
       break;
     }
     case 'published_site_trigger_invoke': {
+      const data2 = eventData;
       const {
         trackingId,
-      } = eventData;
+      } = data2;
       if (trackingId) {
         document.dispatchEvent(
           new CustomEvent('framer:triggerinvoke', {
             detail: {
               trackingId,
+              ...getCustomCodePageDetail(data2,),
             },
           },),
         );
@@ -13459,6 +13464,28 @@ function sendTrackingEvent(eventType, eventData, sendOn = 'lazy',) {
       break;
     }
   }
+}
+function getAnalyticsEventData(eventData,) {
+  if (!('controlWebPageId' in eventData) && !('abTestingVariantName' in eventData)) return eventData;
+  const {
+    controlWebPageId: _,
+    abTestingVariantName: _variantName,
+    ...analyticsEventData
+  } = eventData;
+  return analyticsEventData;
+}
+function getCustomCodePageDetail({
+  abTestId,
+  webPageId,
+  controlWebPageId,
+  abTestingVariantName,
+},) {
+  return {
+    abTestId,
+    abTestingVariantId: controlWebPageId === void 0 ? void 0 : webPageId ?? void 0,
+    abTestingVariantName: controlWebPageId === void 0 ? void 0 : abTestingVariantName,
+    webPageId: controlWebPageId ?? webPageId,
+  };
 }
 var validTrackingIdRegExp = /^[a-z0-9]+(?:-[a-z0-9]+)*$/u;
 function isValidTrackingId(trackingId,) {
@@ -16685,6 +16712,7 @@ function patchRoute(routes, abTestId, abTestingVariantId,) {
     elements,
     elementPatterns,
     abTestingVariantId,
+    abTestingVariantName: routeId === abTestingVariantId ? 'control' : route.abTestingVariantName,
     abTestId,
   };
 }
@@ -27830,7 +27858,7 @@ var ObservableObjectProxyHandler = class {
     if (privateObject.observeAnimatables && animatable) {
       const transactions = privateObject.transactions;
       animatable.onUpdate({
-        update: (change, transaction,) => {
+        update: (_change, transaction,) => {
           if (transaction) transactions.add(transaction,);
           privateObject.observers.notify({
             value: receiver,
@@ -33127,11 +33155,7 @@ var DisableSuspenseSuspenseThatPreservesDomContext = /* @__PURE__ */ (() => {
 function SuspenseThatPreservesDom({
   children,
 },) {
-  if (useContext3(DisableSuspenseSuspenseThatPreservesDomContext,)) {
-    return /* @__PURE__ */ jsx2(Fragment3, {
-      children,
-    },);
-  }
+  if (useContext3(DisableSuspenseSuspenseThatPreservesDomContext,)) return children;
   return /* @__PURE__ */ jsx2(Suspense, {
     suppressHydrationWarning: true,
     fallback: suspend,
@@ -37318,11 +37342,12 @@ var useSendPageView = (
     function getFullPageviewEventData() {
       if (!timezone || !visitorLocale) setTimezoneAndLocaleForTracking();
       const currentLocation = currentPathnameWithHash ? new URL(currentPathnameWithHash, safeWindow.location.href,) : safeWindow.location;
+      const abTestingVariantId = currentRoute?.abTestingVariantId;
       const eventData = {
         version: 2,
         abTestId: currentRoute?.abTestId,
         framerSiteId: framerSiteId ?? null,
-        webPageId: currentRoute?.abTestingVariantId ?? currentRouteId,
+        webPageId: abTestingVariantId ?? currentRouteId,
         routePath: currentRoute?.path || '/',
         collectionItemId: null,
         framerLocale: activeLocale?.code || null,
@@ -37335,6 +37360,10 @@ var useSendPageView = (
         timezone,
         locale: visitorLocale,
       };
+      if (abTestingVariantId !== void 0) {
+        eventData.controlWebPageId = currentRouteId;
+        eventData.abTestingVariantName = currentRoute?.abTestingVariantName;
+      }
       const hydratedCollectionItemId = skipFirstPageView.current && initialCollectionItemId !== void 0 ? initialCollectionItemId : void 0;
       if (currentRoute?.collectionId && currentPathVariables) {
         return (async () => {
@@ -39328,6 +39357,221 @@ function getLogger(name,) {
     },
   };
 }
+function isAnyCollection(value,) {
+  return isAnyLegacyCollection(value,) || isAnyDatabaseCollection(value,);
+}
+function isLegacyCollection(value,) {
+  return isArray(value,) && value.every(isObject,);
+}
+function isLegacyLocalizedCollection(value,) {
+  return isObject(value,) && isFunction(value.read,) && isFunction(value.preload,);
+}
+function isAnyLegacyCollection(value,) {
+  return isLegacyCollection(value,) || isLegacyLocalizedCollection(value,);
+}
+function isDatabaseCollection(value,) {
+  return isObject(value,) && isObject(value.schema,);
+}
+function isLocalizedDatabaseCollection(value,) {
+  return isObject(value,) && isObject(value.collectionByLocaleId,);
+}
+function isAnyDatabaseCollection(value,) {
+  return isDatabaseCollection(value,) || isLocalizedDatabaseCollection(value,);
+}
+var persistedCollectionIdToSeenCollectionRef = /* @__PURE__ */ new Map();
+var collectionRefToStableCollectionId = /* @__PURE__ */ new WeakMap();
+var prefix = '$r_';
+function hasRandomCollectionId(id2,) {
+  return id2.includes(prefix,);
+}
+function getPersistedCollectionId(collection,) {
+  if (!isAnyDatabaseCollection(collection,)) return void 0;
+  if (!collection.id) return void 0;
+  const existingCollectionRef = persistedCollectionIdToSeenCollectionRef.get(collection.id,);
+  if (!existingCollectionRef) {
+    persistedCollectionIdToSeenCollectionRef.set(collection.id, new WeakRef(collection,),);
+    return collection.id;
+  }
+  if (existingCollectionRef.deref() === collection) return collection.id;
+}
+function getCollectionId(collection,) {
+  const persistedId = getPersistedCollectionId(collection,);
+  if (persistedId) return persistedId;
+  const stableCollectionId = collectionRefToStableCollectionId.get(collection,);
+  if (stableCollectionId) return stableCollectionId;
+  const id2 = `${prefix}${Math.random().toString(16,).slice(2,)}`;
+  collectionRefToStableCollectionId.set(collection, id2,);
+  return id2;
+}
+function createSchedulingPrioritySource(priority,) {
+  if (priority === void 0) return;
+  if (typeof priority !== 'function') return priority;
+  const initialPriority = priority();
+  return () => priority() ?? initialPriority;
+}
+function readExecutionPriority(priority,) {
+  if (priority === void 0) return;
+  return resolveSchedulerPriority(priority,);
+}
+var handoverDataType = /* @__PURE__ */ (() => HandoverDataType.QueryCache)();
+var log$1 = /* @__PURE__ */ getLogger('query-cache',);
+var remoteQueryEvaluator;
+function getRemoteQueryEvaluator() {
+  return remoteQueryEvaluator;
+}
+function isCollection(value,) {
+  return isObject(value,) && value.type === 'Collection';
+}
+var QueryCache = class {
+  queryEngine;
+  maxSize;
+  cache = /* @__PURE__ */ new Map();
+  /** Server-only cache for serialized results to avoid re-serializing on cache hits */
+  serializedCache = handoverCollector !== void 0 ? /* @__PURE__ */ new Map() : void 0;
+  constructor(queryEngine2, maxSize = Infinity,) {
+    this.queryEngine = queryEngine2;
+    this.maxSize = maxSize;
+  }
+  clear() {
+    for (const entry of this.cache.values()) {
+      clearTimeout(entry.eviction,);
+      entry.unsubscribe?.();
+    }
+    this.cache.clear();
+    this.serializedCache?.clear();
+  }
+  async scheduleEviction(key2, entry,) {
+    await entry.value.preload();
+    clearTimeout(entry.eviction,);
+    entry.eviction = setTimeout(() => {
+      if (this.cache.get(key2,) !== entry || entry.listeners?.size) return;
+      entry.unsubscribe?.();
+      this.cache.delete(key2,);
+      this.serializedCache?.delete(key2,);
+    }, 1e3,);
+  }
+  prune() {
+    if (this.cache.size <= this.maxSize) return;
+    for (const [key2, entry,] of this.cache) {
+      if (this.cache.size <= this.maxSize) break;
+      if (entry.value.state === 'pending' || entry.listeners?.size) continue;
+      clearTimeout(entry.eviction,);
+      this.cache.delete(key2,);
+      this.serializedCache?.delete(key2,);
+    }
+  }
+  get(query, locale, priority,) {
+    return this.getEntry(query, locale, getCacheKey(query, locale,), priority,).value;
+  }
+  getEntry(query, locale, key2, priority,) {
+    const existing = this.cache.get(key2,);
+    if (existing) {
+      const requestedPriority = readExecutionPriority(priority,) ?? 'user-visible';
+      const existingPriority = readExecutionPriority(existing.priority,);
+      if (existingPriority === void 0 && priority !== void 0 && existing.value.state === 'pending') {
+        this.cache.delete(key2,);
+        return this.getEntry(query, locale, key2, priority,);
+      }
+      if (
+        existingPriority !== void 0 && isHigherSchedulerPriority(requestedPriority, existingPriority,) && existing.value.state === 'pending'
+      ) {
+        this.cache.delete(key2,);
+        return this.getEntry(query, locale, key2, requestedPriority,);
+      }
+      this.cache.delete(key2,);
+      this.cache.set(key2, existing,);
+      if (
+        handoverCollector !== void 0 && this.serializedCache !== void 0 && !hasRandomCollectionId(key2,) &&
+        existing.value.state === 'fulfilled'
+      ) {
+        const cachedSerialized = this.serializedCache.get(key2,);
+        if (cachedSerialized !== void 0) handoverCollector.set(handoverDataType, key2, cachedSerialized,);
+      }
+      return existing;
+    }
+    const resolver = () => {
+      const containsRandomCollectionId = hasRandomCollectionId(key2,);
+      const handoverResult = containsRandomCollectionId ? void 0 : getHandoverData(handoverDataType, key2,);
+      if (handoverResult) {
+        try {
+          return this.queryEngine.resolveSerializableQueryResult(handoverResult, query, locale,);
+        } catch (error) {
+          handleHydrationError(error, key2,);
+        }
+      }
+      entry.rows = remoteQueryEvaluator ? /* @__PURE__ */ new WeakMap() : void 0;
+      if (entry.rows) Promise.resolve().then(() => this.scheduleEviction(key2, entry,));
+      if (handoverCollector !== void 0 && !containsRandomCollectionId) {
+        return this.queryEngine.serializeableQuery(query, locale, priority,).then(([queryResult, serializableResult,],) => {
+          this.serializedCache?.set(key2, serializableResult,);
+          handoverCollector.set(handoverDataType, key2, serializableResult,);
+          return queryResult;
+        },);
+      }
+      return this.queryEngine.query(query, locale, priority, entry.rows,);
+    };
+    const entry = {
+      value: new LazyValue(resolver,),
+      priority,
+    };
+    this.cache.set(key2, entry,);
+    this.prune();
+    return entry;
+  }
+  getStore(query, locale,) {
+    const key2 = getCacheKey(query, locale,);
+    let currentEntry = this.getEntry(query, locale, key2,);
+    return currentEntry.store ??= {
+      getSnapshot: () => currentEntry.value,
+      subscribe: (listener2) => {
+        const evaluator = remoteQueryEvaluator;
+        if (!evaluator) return () => {};
+        const entry = this.cache.get(key2,) ?? currentEntry;
+        currentEntry = entry;
+        this.cache.set(key2, entry,);
+        clearTimeout(entry.eviction,);
+        const listeners = entry.listeners ??= /* @__PURE__ */ new Set();
+        listeners.add(listener2,);
+        if (listeners.size === 1) {
+          const refresh = async () => {
+            const revision = entry.revision = (entry.revision ?? 0) + 1;
+            let result;
+            try {
+              result = await this.queryEngine.query(query, locale, void 0, entry.rows,);
+            } catch (error) {
+              log$1.error(error,);
+              return;
+            }
+            if (this.cache.get(key2,) !== entry || entry.revision !== revision || !listeners.size) return;
+            const value = new LazyValue(() => result);
+            value.preload();
+            entry.value = value;
+            this.serializedCache?.delete(key2,);
+            for (const notify2 of listeners) notify2();
+          };
+          entry.unsubscribe = evaluator.subscribe(query, locale, () => void refresh(),);
+        }
+        return () => {
+          listeners.delete(listener2,);
+          if (!listeners.size) {
+            entry.revision = (entry.revision ?? 0) + 1;
+            entry.unsubscribe?.();
+            entry.unsubscribe = void 0;
+            this.scheduleEviction(key2, entry,);
+          }
+        };
+      },
+    };
+  }
+};
+function replaceCollection(_, value,) {
+  if (isCollection(value,) && isAnyCollection(value.data,)) return getCollectionId(value.data,);
+  return value;
+}
+function getCacheKey(query, locale,) {
+  const localeId = locale?.id ?? 'default';
+  return JSON.stringify(query, replaceCollection,) + localeId;
+}
 function getSymbolDispose() {
   if (!Symbol.dispose) {
     Object.defineProperty(Symbol, 'dispose', {
@@ -39540,181 +39784,6 @@ function* evaluateArray(values, priority = activeEvaluationContext.priority,) {
   }
   if (promises.length > 0) yield Promise.all(promises,);
   return result;
-}
-function isAnyCollection(value,) {
-  return isAnyLegacyCollection(value,) || isAnyDatabaseCollection(value,);
-}
-function isLegacyCollection(value,) {
-  return isArray(value,) && value.every(isObject,);
-}
-function isLegacyLocalizedCollection(value,) {
-  return isObject(value,) && isFunction(value.read,) && isFunction(value.preload,);
-}
-function isAnyLegacyCollection(value,) {
-  return isLegacyCollection(value,) || isLegacyLocalizedCollection(value,);
-}
-function isDatabaseCollection(value,) {
-  return isObject(value,) && isObject(value.schema,);
-}
-function isLocalizedDatabaseCollection(value,) {
-  return isObject(value,) && isObject(value.collectionByLocaleId,);
-}
-function isAnyDatabaseCollection(value,) {
-  return isDatabaseCollection(value,) || isLocalizedDatabaseCollection(value,);
-}
-async function getCollectionItems(collection, locale,) {
-  if (isLegacyLocalizedCollection(collection,)) {
-    await collection.preload(locale,);
-    return collection.read(locale,);
-  }
-  return collection;
-}
-var CompatibilityDatabaseCollection = class {
-  collection;
-  locale;
-  schema;
-  indexes = [];
-  constructor(collection, locale,) {
-    this.collection = collection;
-    this.locale = locale;
-    const propertyControls = getPropertyControls(collection,);
-    assert(propertyControls, 'Collection does not have properties',);
-    const schema = {
-      id: {
-        type: 'string',
-        isNullable: false,
-      },
-    };
-    const controlEntries = Object.entries(propertyControls,);
-    for (const [key2, controlDescription,] of controlEntries) {
-      if (!controlDescription) continue;
-      const type = controlDescription.type;
-      assert(type !== 'array', 'Array properties are not supported',);
-      assert(type !== 'object', 'Object properties are not supported',);
-      schema[key2] = {
-        type,
-        isNullable: true,
-      };
-    }
-    this.schema = schema;
-  }
-  getDatabaseItem(item, pointer,) {
-    const data2 = {};
-    const itemIndex = Number(pointer,);
-    for (const key2 in this.schema) {
-      const value = item[key2];
-      if (isNullish(value,)) continue;
-      const definition = this.schema[key2];
-      if (isUndefined(definition,)) continue;
-      assert(definition.type !== 'unknown', 'Invalid definition type',);
-      if (definition.type === 'richtext') {
-        data2[key2] = {
-          type: definition.type,
-          value: {
-            itemIndex,
-            key: key2,
-          },
-        };
-        continue;
-      }
-      data2[key2] = {
-        type: definition.type,
-        value,
-      };
-    }
-    return {
-      pointer,
-      data: data2,
-    };
-  }
-  async resolveRichText(pointer,) {
-    const {
-      itemIndex,
-      key: key2,
-    } = pointer;
-    const richText = (await getCollectionItems(this.collection, this.locale,))[itemIndex]?.[key2];
-    if (LazyValue.is(richText,)) return richText.readMaybeAsync();
-    return richText;
-  }
-  async scanItems(priority,) {
-    const items = await getCollectionItems(this.collection, this.locale,);
-    const databaseItems = [];
-    for (let index = 0; index < items.length; index++) {
-      const yieldPromise = yieldToMainDuringEvaluation(priority,);
-      if (yieldPromise) await yieldPromise;
-      const item = items[index];
-      assert(item, 'Can\'t find collection item',);
-      const pointer = String(index,);
-      databaseItems.push(this.getDatabaseItem(item, pointer,),);
-    }
-    return databaseItems;
-  }
-  async resolveItems(pointers, priority,) {
-    const items = await getCollectionItems(this.collection, this.locale,);
-    const databaseItems = [];
-    for (const pointer of pointers) {
-      const yieldPromise = yieldToMainDuringEvaluation(priority,);
-      if (yieldPromise) await yieldPromise;
-      const item = items[Number(pointer,)];
-      assert(item, 'Can\'t find collection item',);
-      databaseItems.push(this.getDatabaseItem(item, pointer,),);
-    }
-    return databaseItems;
-  }
-  compareItems(left, right,) {
-    return Number(left.pointer,) - Number(right.pointer,);
-  }
-};
-var persistedCollectionIdToSeenCollectionRef = /* @__PURE__ */ new Map();
-var collectionRefToStableCollectionId = /* @__PURE__ */ new WeakMap();
-var prefix = '$r_';
-function hasRandomCollectionId(id2,) {
-  return id2.includes(prefix,);
-}
-function getPersistedCollectionId(collection,) {
-  if (!isAnyDatabaseCollection(collection,)) return void 0;
-  if (!collection.id) return void 0;
-  const existingCollectionRef = persistedCollectionIdToSeenCollectionRef.get(collection.id,);
-  if (!existingCollectionRef) {
-    persistedCollectionIdToSeenCollectionRef.set(collection.id, new WeakRef(collection,),);
-    return collection.id;
-  }
-  if (existingCollectionRef.deref() === collection) return collection.id;
-}
-function getCollectionId(collection,) {
-  const persistedId = getPersistedCollectionId(collection,);
-  if (persistedId) return persistedId;
-  const stableCollectionId = collectionRefToStableCollectionId.get(collection,);
-  if (stableCollectionId) return stableCollectionId;
-  const id2 = `${prefix}${Math.random().toString(16,).slice(2,)}`;
-  collectionRefToStableCollectionId.set(collection, id2,);
-  return id2;
-}
-var compatibilityCache = /* @__PURE__ */ new Map();
-function getFirstCollectionInQuery(query, locale,) {
-  let from = query.from;
-  while (from?.type === 'LeftJoin') from = from.left;
-  if (from?.type === 'Collection') return getCollectionForLocale(from.data, locale,);
-}
-function getCollectionForLocale(data2, locale,) {
-  if (isAnyLegacyCollection(data2,)) {
-    const cacheKey = getCollectionId(data2,) + (locale?.id ?? 'default');
-    const cached = compatibilityCache.get(cacheKey,);
-    if (cached) return cached;
-    const collection = new CompatibilityDatabaseCollection(data2, locale,);
-    compatibilityCache.set(cacheKey, collection,);
-    return collection;
-  }
-  if (isDatabaseCollection(data2,)) return data2;
-  if (isLocalizedDatabaseCollection(data2,)) {
-    while (locale) {
-      const collection = data2.collectionByLocaleId[locale.id];
-      if (collection) return collection;
-      locale = locale.fallback;
-    }
-    return data2.collectionByLocaleId.default;
-  }
-  assertNever(data2, 'Unsupported collection type',);
 }
 function compareArray(left, right, collation2,) {
   const leftLength = left.value.length;
@@ -40240,6 +40309,130 @@ var unknownDefinition = {
   type: 'unknown',
   isNullable: true,
 };
+async function getCollectionItems(collection, locale,) {
+  if (isLegacyLocalizedCollection(collection,)) {
+    await collection.preload(locale,);
+    return collection.read(locale,);
+  }
+  return collection;
+}
+var CompatibilityDatabaseCollection = class {
+  collection;
+  locale;
+  schema;
+  indexes = [];
+  constructor(collection, locale,) {
+    this.collection = collection;
+    this.locale = locale;
+    const propertyControls = getPropertyControls(collection,);
+    assert(propertyControls, 'Collection does not have properties',);
+    const schema = {
+      id: {
+        type: 'string',
+        isNullable: false,
+      },
+    };
+    const controlEntries = Object.entries(propertyControls,);
+    for (const [key2, controlDescription,] of controlEntries) {
+      if (!controlDescription) continue;
+      const type = controlDescription.type;
+      assert(type !== 'array', 'Array properties are not supported',);
+      assert(type !== 'object', 'Object properties are not supported',);
+      schema[key2] = {
+        type,
+        isNullable: true,
+      };
+    }
+    this.schema = schema;
+  }
+  getDatabaseItem(item, pointer,) {
+    const data2 = {};
+    const itemIndex = Number(pointer,);
+    for (const key2 in this.schema) {
+      const value = item[key2];
+      if (isNullish(value,)) continue;
+      const definition = this.schema[key2];
+      if (isUndefined(definition,)) continue;
+      assert(definition.type !== 'unknown', 'Invalid definition type',);
+      if (definition.type === 'richtext') {
+        data2[key2] = {
+          type: definition.type,
+          value: {
+            itemIndex,
+            key: key2,
+          },
+        };
+        continue;
+      }
+      data2[key2] = {
+        type: definition.type,
+        value,
+      };
+    }
+    return {
+      pointer,
+      data: data2,
+    };
+  }
+  async resolveRichText(pointer,) {
+    const {
+      itemIndex,
+      key: key2,
+    } = pointer;
+    const richText = (await getCollectionItems(this.collection, this.locale,))[itemIndex]?.[key2];
+    if (LazyValue.is(richText,)) return richText.readMaybeAsync();
+    return richText;
+  }
+  async scanItems(priority,) {
+    const items = await getCollectionItems(this.collection, this.locale,);
+    const databaseItems = [];
+    for (let index = 0; index < items.length; index++) {
+      const yieldPromise = yieldToMainDuringEvaluation(priority,);
+      if (yieldPromise) await yieldPromise;
+      const item = items[index];
+      assert(item, 'Can\'t find collection item',);
+      const pointer = String(index,);
+      databaseItems.push(this.getDatabaseItem(item, pointer,),);
+    }
+    return databaseItems;
+  }
+  async resolveItems(pointers, priority,) {
+    const items = await getCollectionItems(this.collection, this.locale,);
+    const databaseItems = [];
+    for (const pointer of pointers) {
+      const yieldPromise = yieldToMainDuringEvaluation(priority,);
+      if (yieldPromise) await yieldPromise;
+      const item = items[Number(pointer,)];
+      assert(item, 'Can\'t find collection item',);
+      databaseItems.push(this.getDatabaseItem(item, pointer,),);
+    }
+    return databaseItems;
+  }
+  compareItems(left, right,) {
+    return Number(left.pointer,) - Number(right.pointer,);
+  }
+};
+var compatibilityCache = /* @__PURE__ */ new Map();
+function getCollectionForLocale(data2, locale,) {
+  if (isAnyLegacyCollection(data2,)) {
+    const cacheKey = getCollectionId(data2,) + (locale?.id ?? 'default');
+    const cached = compatibilityCache.get(cacheKey,);
+    if (cached) return cached;
+    const collection = new CompatibilityDatabaseCollection(data2, locale,);
+    compatibilityCache.set(cacheKey, collection,);
+    return collection;
+  }
+  if (isDatabaseCollection(data2,)) return data2;
+  if (isLocalizedDatabaseCollection(data2,)) {
+    while (locale) {
+      const collection = data2.collectionByLocaleId[locale.id];
+      if (collection) return collection;
+      locale = locale.fallback;
+    }
+    return data2.collectionByLocaleId.default;
+  }
+  assertNever(data2, 'Unsupported collection type',);
+}
 function Hash(value,) {
   return value;
 }
@@ -40258,16 +40451,6 @@ function calculateHash(name, ...values) {
     hash2 += JSON.stringify(value,) ?? '';
   }
   return Hash(`${hash2})`,);
-}
-function createSchedulingPrioritySource(priority,) {
-  if (priority === void 0) return;
-  if (typeof priority !== 'function') return priority;
-  const initialPriority = priority();
-  return () => priority() ?? initialPriority;
-}
-function readExecutionPriority(priority,) {
-  if (priority === void 0) return;
-  return resolveSchedulerPriority(priority,);
 }
 function wrapRichTextPointer(collection, pointer,) {
   return {
@@ -44028,18 +44211,24 @@ function stringifyQuery(query,) {
   if (query.offset) queryString += ` OFFSET ${stringifyExpression(query.offset,)}`;
   return autoIndentSql(queryString,);
 }
-var log$1 = /* @__PURE__ */ getLogger('query-engine',);
+var log = /* @__PURE__ */ getLogger('query-engine',);
 var QueryEngine = class {
+  options;
+  constructor(options,) {
+    this.options = options;
+  }
   async evalQuery(query, locale, includeRaw, priority, rows,) {
-    const collection = getFirstCollectionInQuery(query, locale,);
-    if (collection?.query) {
-      const raw = await collection.query(query, locale,);
-      const result = await this.resolveSerializableQueryResult(raw, query, locale, priority, rows,);
-      if (includeRaw) return [result, raw,];
-      return result;
+    const remote = !this.options?.localOnly && getRemoteQueryEvaluator()?.evaluate(query, locale,);
+    if (remote) {
+      const answer = await remote;
+      if (answer) {
+        const result = await this.resolveSerializableQueryResult(answer.rows, answer.query ?? query, locale, priority, rows,);
+        if (includeRaw) return [result, answer.rows,];
+        return result;
+      }
     }
-    if (log$1.enabled) {
-      log$1.debug(`Query:
+    if (log.enabled) {
+      log.debug(`Query:
 ${stringifyQuery(query,)}`,);
     }
     const resolver = new Resolver(query, locale, priority,);
@@ -44098,161 +44287,6 @@ ${stringifyQuery(query,)}`,);
     );
   }
 };
-var handoverDataType = /* @__PURE__ */ (() => HandoverDataType.QueryCache)();
-var log = /* @__PURE__ */ getLogger('query-cache',);
-function isCollection(value,) {
-  return isObject(value,) && value.type === 'Collection';
-}
-var QueryCache = class {
-  queryEngine;
-  maxSize;
-  cache = /* @__PURE__ */ new Map();
-  /** Server-only cache for serialized results to avoid re-serializing on cache hits */
-  serializedCache = handoverCollector !== void 0 ? /* @__PURE__ */ new Map() : void 0;
-  constructor(queryEngine2, maxSize = Infinity,) {
-    this.queryEngine = queryEngine2;
-    this.maxSize = maxSize;
-  }
-  clear() {
-    for (const entry of this.cache.values()) {
-      clearTimeout(entry.eviction,);
-      entry.unsubscribe?.();
-    }
-    this.cache.clear();
-    this.serializedCache?.clear();
-  }
-  async scheduleEviction(key2, entry,) {
-    await entry.value.preload();
-    clearTimeout(entry.eviction,);
-    entry.eviction = setTimeout(() => {
-      if (this.cache.get(key2,) !== entry || entry.listeners?.size) return;
-      entry.unsubscribe?.();
-      this.cache.delete(key2,);
-      this.serializedCache?.delete(key2,);
-    }, 1e3,);
-  }
-  prune() {
-    if (this.cache.size <= this.maxSize) return;
-    for (const [key2, entry,] of this.cache) {
-      if (this.cache.size <= this.maxSize) break;
-      if (entry.value.state === 'pending' || entry.listeners?.size) continue;
-      clearTimeout(entry.eviction,);
-      this.cache.delete(key2,);
-      this.serializedCache?.delete(key2,);
-    }
-  }
-  get(query, locale, priority,) {
-    return this.getEntry(query, locale, getCacheKey(query, locale,), priority,).value;
-  }
-  getEntry(query, locale, key2, priority,) {
-    const existing = this.cache.get(key2,);
-    if (existing) {
-      const requestedPriority = readExecutionPriority(priority,) ?? 'user-visible';
-      const existingPriority = readExecutionPriority(existing.priority,);
-      if (existingPriority === void 0 && priority !== void 0 && existing.value.state === 'pending') {
-        this.cache.delete(key2,);
-        return this.getEntry(query, locale, key2, priority,);
-      }
-      if (
-        existingPriority !== void 0 && isHigherSchedulerPriority(requestedPriority, existingPriority,) && existing.value.state === 'pending'
-      ) {
-        this.cache.delete(key2,);
-        return this.getEntry(query, locale, key2, requestedPriority,);
-      }
-      this.cache.delete(key2,);
-      this.cache.set(key2, existing,);
-      if (
-        handoverCollector !== void 0 && this.serializedCache !== void 0 && !hasRandomCollectionId(key2,) &&
-        existing.value.state === 'fulfilled'
-      ) {
-        const cachedSerialized = this.serializedCache.get(key2,);
-        if (cachedSerialized !== void 0) handoverCollector.set(handoverDataType, key2, cachedSerialized,);
-      }
-      return existing;
-    }
-    const resolver = () => {
-      const containsRandomCollectionId = hasRandomCollectionId(key2,);
-      const handoverResult = containsRandomCollectionId ? void 0 : getHandoverData(handoverDataType, key2,);
-      if (handoverResult) {
-        try {
-          return this.queryEngine.resolveSerializableQueryResult(handoverResult, query, locale,);
-        } catch (error) {
-          handleHydrationError(error, key2,);
-        }
-      }
-      entry.rows = getFirstCollectionInQuery(query, locale,)?.subscribe ? /* @__PURE__ */ new WeakMap() : void 0;
-      if (entry.rows) Promise.resolve().then(() => this.scheduleEviction(key2, entry,));
-      if (handoverCollector !== void 0 && !containsRandomCollectionId) {
-        return this.queryEngine.serializeableQuery(query, locale, priority,).then(([queryResult, serializableResult,],) => {
-          this.serializedCache?.set(key2, serializableResult,);
-          handoverCollector.set(handoverDataType, key2, serializableResult,);
-          return queryResult;
-        },);
-      }
-      return this.queryEngine.query(query, locale, priority, entry.rows,);
-    };
-    const entry = {
-      value: new LazyValue(resolver,),
-      priority,
-    };
-    this.cache.set(key2, entry,);
-    this.prune();
-    return entry;
-  }
-  getStore(query, locale,) {
-    const key2 = getCacheKey(query, locale,);
-    let currentEntry = this.getEntry(query, locale, key2,);
-    return currentEntry.store ??= {
-      getSnapshot: () => currentEntry.value,
-      subscribe: (listener2) => {
-        const collection = getFirstCollectionInQuery(query, locale,);
-        if (!collection?.subscribe) return () => {};
-        const entry = this.cache.get(key2,) ?? currentEntry;
-        currentEntry = entry;
-        this.cache.set(key2, entry,);
-        clearTimeout(entry.eviction,);
-        const listeners = entry.listeners ??= /* @__PURE__ */ new Set();
-        listeners.add(listener2,);
-        if (listeners.size === 1) {
-          const refresh = async () => {
-            const revision = entry.revision = (entry.revision ?? 0) + 1;
-            let result;
-            try {
-              result = await this.queryEngine.query(query, locale, void 0, entry.rows,);
-            } catch (error) {
-              log.error(error,);
-              return;
-            }
-            if (this.cache.get(key2,) !== entry || entry.revision !== revision || !listeners.size) return;
-            const value = new LazyValue(() => result);
-            value.preload();
-            entry.value = value;
-            this.serializedCache?.delete(key2,);
-            for (const notify2 of listeners) notify2();
-          };
-          entry.unsubscribe = collection.subscribe(query, locale, () => void refresh(),);
-        }
-        return () => {
-          listeners.delete(listener2,);
-          if (!listeners.size) {
-            entry.revision = (entry.revision ?? 0) + 1;
-            entry.unsubscribe?.();
-            entry.unsubscribe = void 0;
-            this.scheduleEviction(key2, entry,);
-          }
-        };
-      },
-    };
-  }
-};
-function replaceCollection(_, value,) {
-  if (isCollection(value,) && isAnyCollection(value.data,)) return getCollectionId(value.data,);
-  return value;
-}
-function getCacheKey(query, locale,) {
-  const localeId = locale?.id ?? 'default';
-  return JSON.stringify(query, replaceCollection,) + localeId;
-}
 function isServerQueryResult(value,) {
   return Array.isArray(value,) &&
     value.every((row) => isObject(row,) && Object.values(row,).every((value2) => value2 === null || isMaybeServerControlProp(value2,)));
