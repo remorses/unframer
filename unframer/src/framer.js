@@ -49,40 +49,29 @@ import {
   supportsRequestIdleCallback,
   useCustomValidity,
   useRenderEnvironment,
-} from './framer-chunks/chunk-6BSHZ6IR.js';
+} from './framer-chunks/chunk-6VLYG2AR.js';
 
-// /:https://app.framerstatic.com/framer.BWzg2IRg.mjs
-import * as React2 from 'react';
-import React$1, {
-  Children as Children3,
-  cloneElement as cloneElement3,
-  Component as Component$1,
-  createContext as createContext3,
-  createElement as createElement2,
-  createRef,
-  forwardRef as forwardRef3,
-  Fragment as Fragment3,
-  isValidElement as isValidElement3,
-  memo as memo$1,
-  startTransition as startTransition3,
-  Suspense,
-  useCallback as useCallback4,
-  useContext as useContext3,
-  useDeferredValue as useDeferredValue2,
-  useEffect as useEffect4,
-  useId as useId2,
-  useInsertionEffect as useInsertionEffect3,
-  useLayoutEffect as useLayoutEffect3,
-  useMemo as useMemo3,
-  useRef as useRef3,
-  useState as useState3,
-  useSyncExternalStore as useSyncExternalStore2,
-  useTransition,
+// /:https://app.framerstatic.com/chunk.C4BJMiCP.mjs
+import * as React$1 from 'react';
+import {
+  Children,
+  Component as Component2,
+  createContext,
+  createElement,
+  forwardRef,
+  Fragment,
+  isValidElement,
+  useCallback as useCallback2,
+  useContext,
+  useEffect as useEffect2,
+  useId,
+  useInsertionEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
 } from 'react';
-import { jsx as jsx2, jsxs as jsxs2, } from 'react/jsx-runtime';
-
-// /:https://app.framerstatic.com/chunk.9pLYllVU.mjs
-
+import { jsx, jsxs, } from 'react/jsx-runtime';
 var __unframerWindow = typeof window !== 'undefined' ? window : void 0;
 var __unframerNavigator = typeof __unframerWindow !== 'undefined' ? navigator : void 0;
 var __defProp = Object.defineProperty;
@@ -95,30 +84,30 @@ var __commonJSMin = (cb, mod,) => () => (mod || (cb(
 ),
   cb = null),
   mod.exports);
-var __exportAll = (all, flags,) => {
-  let target = Object.setPrototypeOf({}, null,);
+var __exportAll = (all, no_symbols,) => {
+  let target = {};
   for (var name in all) {
     __defProp(target, name, {
       get: all[name],
       enumerable: true,
     },);
   }
-  if (!(flags & 1)) {
+  if (!no_symbols) {
     __defProp(target, Symbol.toStringTag, {
       value: 'Module',
     },);
   }
-  return flags & 2 ? target : Object.preventExtensions(target,);
+  return target;
 };
-var LayoutGroupContext = createContext3({},);
+var LayoutGroupContext = createContext({},);
 function useConstant(init,) {
-  const ref = useRef3(null,);
+  const ref = useRef(null,);
   if (ref.current === null) ref.current = init();
   return ref.current;
 }
 var isBrowser$2 = typeof __unframerWindow !== 'undefined';
-var useIsomorphicLayoutEffect = isBrowser$2 ? useLayoutEffect3 : useEffect4;
-var PresenceContext = /* @__PURE__ */ createContext3(null,);
+var useIsomorphicLayoutEffect = isBrowser$2 ? useLayoutEffect : useEffect2;
+var PresenceContext = /* @__PURE__ */ createContext(null,);
 function addUniqueItem(arr, item,) {
   if (arr.indexOf(item,) === -1) arr.push(item,);
 }
@@ -152,7 +141,7 @@ var isNumericalString = (v) => /^-?(?:\d+(?:\.\d+)?|\.\d+)$/u.test(v,);
 var isObject2 = (value) => typeof value === 'object' && value !== null;
 var isZeroValueString = (v) => /^0[^.\s]+$/u.test(v,);
 // @__NO_SIDE_EFFECTS__
-function memo(callback,) {
+function memo$1(callback,) {
   let result;
   return () => {
     if (result === void 0) result = callback();
@@ -2135,7 +2124,7 @@ function setStyle(element, name, value,) {
 }
 var supportsFlags = {};
 function memoSupports(callback, supportsFlag,) {
-  const memoized = /* @__PURE__ */ memo(callback,);
+  const memoized = /* @__PURE__ */ memo$1(callback,);
   return () => supportsFlags[supportsFlag] ?? memoized();
 }
 var supportsScrollTimeline = /* @__PURE__ */ memoSupports(() => __unframerWindow.ScrollTimeline !== void 0, 'scrollTimeline',);
@@ -2465,7 +2454,7 @@ var colorProperties = /* @__PURE__ */ new Set([
   'borderBottomColor',
   'borderLeftColor',
 ],);
-var supportsWaapi = /* @__PURE__ */ memo(() => Object.hasOwnProperty.call(Element.prototype, 'animate',));
+var supportsWaapi = /* @__PURE__ */ memo$1(() => Object.hasOwnProperty.call(Element.prototype, 'animate',));
 function supportsBrowserAnimation(options,) {
   const {
     motionValue: motionValue2,
@@ -3662,7 +3651,7 @@ function isWaapiSupportedEasing(easing,) {
       isBezierDefinition(easing,) || Array.isArray(easing,) && easing.every(isWaapiSupportedEasing,),
   );
 }
-var supportsPartialKeyframes = /* @__PURE__ */ memo(() => {
+var supportsPartialKeyframes = /* @__PURE__ */ memo$1(() => {
   try {
     document.createElement('div',).animate({
       opacity: [1,],
@@ -3905,7 +3894,8 @@ function createEffect(addValue, {
     stateCache.set(subject, state,);
     const subscriptions = [];
     for (const key2 in values) {
-      const remove2 = addValue(subject, state, key2, values[key2],);
+      const value = values[key2];
+      const remove2 = addValue(subject, state, key2, value,);
       subscriptions.push(remove2,);
     }
     return () => {
@@ -8306,7 +8296,7 @@ var cancelSync = stepsOrder.reduce((acc, key2,) => {
   acc[key2] = (process2) => cancelFrame(process2,);
   return acc;
 }, {},);
-var MotionConfigContext = createContext3({
+var MotionConfigContext = createContext({
   transformPagePoint: (p) => p,
   isStatic: false,
   reducedMotion: 'never',
@@ -8335,9 +8325,9 @@ function composeRefs(...refs) {
   };
 }
 function useComposedRefs(...refs) {
-  return React2.useCallback(composeRefs(...refs,), refs,);
+  return React$1.useCallback(composeRefs(...refs,), refs,);
 }
-var PopChildMeasure = class extends React2.Component {
+var PopChildMeasure = class extends React$1.Component {
   getSnapshotBeforeUpdate(prevProps,) {
     const element = this.props.childRef.current;
     if (isHTMLElement(element,) && prevProps.isPresent && !this.props.isPresent && this.props.pop !== false) {
@@ -8372,9 +8362,9 @@ function PopChild({
   root,
   pop,
 },) {
-  const id2 = useId2();
-  const ref = useRef3(null,);
-  const size = useRef3({
+  const id2 = useId();
+  const ref = useRef(null,);
+  const size = useRef({
     width: 0,
     height: 0,
     top: 0,
@@ -8385,10 +8375,10 @@ function PopChild({
   },);
   const {
     nonce,
-  } = useContext3(MotionConfigContext,);
+  } = useContext(MotionConfigContext,);
   const childRef = pop !== false ? children.props?.ref ?? children?.ref : void 0;
   const composedRef = useComposedRefs(ref, childRef,);
-  useInsertionEffect3(() => {
+  useInsertionEffect(() => {
     const {
       width,
       height,
@@ -8425,13 +8415,13 @@ function PopChild({
       if (parent.contains(style2,)) parent.removeChild(style2,);
     };
   }, [isPresent2,],);
-  return jsx2(PopChildMeasure, {
+  return jsx(PopChildMeasure, {
     suppressHydrationWarning: true,
     isPresent: isPresent2,
     childRef: ref,
     sizeRef: size,
     pop,
-    children: pop === false ? children : React2.cloneElement(children, {
+    children: pop === false ? children : React$1.cloneElement(children, {
       ref: composedRef,
     },),
   },);
@@ -8449,15 +8439,15 @@ var PresenceChild = ({
   root,
 },) => {
   const presenceChildren = useConstant(newChildrenMap,);
-  const id2 = useId2();
-  const isPresentRef = useRef3(isPresent2,);
-  const onExitCompleteRef = useRef3(onExitComplete,);
+  const id2 = useId();
+  const isPresentRef = useRef(isPresent2,);
+  const onExitCompleteRef = useRef(onExitComplete,);
   useIsomorphicLayoutEffect(() => {
     isPresentRef.current = isPresent2;
     onExitCompleteRef.current = onExitComplete;
   },);
   let isReusedContext = true;
-  let context = useMemo3(() => {
+  let context = useMemo(() => {
     isReusedContext = false;
     return {
       id: id2,
@@ -8483,13 +8473,13 @@ var PresenceChild = ({
       ...context,
     };
   }
-  useMemo3(() => {
+  useMemo(() => {
     presenceChildren.forEach((_, key2,) => presenceChildren.set(key2, false,));
   }, [isPresent2,],);
-  React2.useEffect(() => {
+  React$1.useEffect(() => {
     !isPresent2 && !presenceChildren.size && onExitComplete && onExitComplete();
   }, [isPresent2,],);
-  children = jsx2(PopChild, {
+  children = jsx(PopChild, {
     suppressHydrationWarning: true,
     pop: mode === 'popLayout',
     isPresent: isPresent2,
@@ -8498,7 +8488,7 @@ var PresenceChild = ({
     root,
     children,
   },);
-  return jsx2(PresenceContext.Provider, {
+  return jsx(PresenceContext.Provider, {
     suppressHydrationWarning: true,
     value: context,
     children,
@@ -8508,22 +8498,22 @@ function newChildrenMap() {
   return /* @__PURE__ */ new Map();
 }
 function usePresence(subscribe = true,) {
-  const context = useContext3(PresenceContext,);
+  const context = useContext(PresenceContext,);
   if (context === null) return [true, null,];
   const {
     isPresent: isPresent2,
     onExitComplete,
     register,
   } = context;
-  const id2 = useId2();
-  useEffect4(() => {
+  const id2 = useId();
+  useEffect2(() => {
     if (subscribe) return register(id2,);
   }, [subscribe,],);
-  const safeToRemove = useCallback4(() => subscribe && onExitComplete && onExitComplete(id2,), [id2, onExitComplete, subscribe,],);
+  const safeToRemove = useCallback2(() => subscribe && onExitComplete && onExitComplete(id2,), [id2, onExitComplete, subscribe,],);
   return !isPresent2 && onExitComplete ? [false, safeToRemove,] : [true,];
 }
 function useIsPresent() {
-  return isPresent(useContext3(PresenceContext,),);
+  return isPresent(useContext(PresenceContext,),);
 }
 function isPresent(context,) {
   return context === null ? true : context.isPresent;
@@ -8531,8 +8521,8 @@ function isPresent(context,) {
 var getChildKey = (child) => child.key || '';
 function onlyElements(children,) {
   const filtered = [];
-  Children3.forEach(children, (child) => {
-    if (isValidElement3(child,)) filtered.push(child,);
+  Children.forEach(children, (child) => {
+    if (isValidElement(child,)) filtered.push(child,);
   },);
   return filtered;
 }
@@ -8549,13 +8539,13 @@ var AnimatePresence = ({
   root,
 },) => {
   const [isParentPresent, safeToRemove,] = usePresence(propagate,);
-  const presentChildren = useMemo3(() => onlyElements(children,), [children,],);
+  const presentChildren = useMemo(() => onlyElements(children,), [children,],);
   const presentKeys = propagate && !isParentPresent ? [] : presentChildren.map(getChildKey,);
-  const isInitialRender = useRef3(true,);
+  const isInitialRender = useRef(true,);
   const exitComplete = useConstant(() => /* @__PURE__ */ new Map());
-  const exitingComponents = useRef3(/* @__PURE__ */ new Set(),);
-  const [diffedChildren, setDiffedChildren,] = useState3(presentChildren,);
-  const [renderedChildren, setRenderedChildren,] = useState3(presentChildren,);
+  const exitingComponents = useRef(/* @__PURE__ */ new Set(),);
+  const [diffedChildren, setDiffedChildren,] = useState(presentChildren,);
+  const [renderedChildren, setRenderedChildren,] = useState(presentChildren,);
   useIsomorphicLayoutEffect(() => {
     if (propagate && !isParentPresent && !renderedChildren.length) safeToRemove?.();
   }, [isParentPresent, propagate, renderedChildren.length, safeToRemove,],);
@@ -8590,8 +8580,8 @@ var AnimatePresence = ({
   }
   const {
     forceRender,
-  } = useContext3(LayoutGroupContext,);
-  return jsx2(Fragment3, {
+  } = useContext(LayoutGroupContext,);
+  return jsx(Fragment, {
     children: renderedChildren.map((child) => {
       const key2 = getChildKey(child,);
       const isPresent2 = propagate && !isParentPresent ? false : presentChildren === renderedChildren || presentKeys.includes(key2,);
@@ -8612,7 +8602,7 @@ var AnimatePresence = ({
           onExitComplete && onExitComplete();
         }
       };
-      return jsx2(PresenceChild, {
+      return jsx(PresenceChild, {
         suppressHydrationWarning: true,
         isPresent: isPresent2,
         initial: !isInitialRender.current || initial ? void 0 : false,
@@ -8628,9 +8618,9 @@ var AnimatePresence = ({
     },),
   },);
 };
-var DeprecatedLayoutGroupContext = createContext3(null,);
+var DeprecatedLayoutGroupContext = createContext(null,);
 function useIsMounted() {
-  const isMounted = useRef3(false,);
+  const isMounted = useRef(false,);
   useIsomorphicLayoutEffect(() => {
     isMounted.current = true;
     return () => {
@@ -8641,11 +8631,11 @@ function useIsMounted() {
 }
 function useForceUpdate() {
   const isMounted = useIsMounted();
-  const [forcedRenderCount, setForcedRenderCount,] = useState3(0,);
-  const forceRender = useCallback4(() => {
+  const [forcedRenderCount, setForcedRenderCount,] = useState(0,);
+  const forceRender = useCallback2(() => {
     isMounted.current && setForcedRenderCount(forcedRenderCount + 1,);
   }, [forcedRenderCount,],);
-  return [useCallback4(() => frame.postRender(forceRender,), [forceRender,],), forcedRenderCount,];
+  return [useCallback2(() => frame.postRender(forceRender,), [forceRender,],), forcedRenderCount,];
 }
 var shouldInheritGroup = (inherit) => inherit === true;
 var shouldInheritId = (inherit) => shouldInheritGroup(inherit === true,) || inherit === 'id';
@@ -8654,10 +8644,10 @@ var LayoutGroup = ({
   id: id2,
   inherit = true,
 },) => {
-  const layoutGroupContext = useContext3(LayoutGroupContext,);
-  const deprecatedLayoutGroupContext = useContext3(DeprecatedLayoutGroupContext,);
+  const layoutGroupContext = useContext(LayoutGroupContext,);
+  const deprecatedLayoutGroupContext = useContext(DeprecatedLayoutGroupContext,);
   const [forceRender, key2,] = useForceUpdate();
-  const context = useRef3(null,);
+  const context = useRef(null,);
   const upstreamId = layoutGroupContext.id || deprecatedLayoutGroupContext;
   if (context.current === null) {
     if (shouldInheritId(inherit,) && upstreamId) id2 = id2 ? upstreamId + '-' + id2 : upstreamId;
@@ -8666,17 +8656,17 @@ var LayoutGroup = ({
       group: shouldInheritGroup(inherit,) ? layoutGroupContext.group || nodeGroup() : nodeGroup(),
     };
   }
-  const memoizedContext = useMemo3(() => ({
+  const memoizedContext = useMemo(() => ({
     ...context.current,
     forceRender,
   }), [key2,],);
-  return jsx2(LayoutGroupContext.Provider, {
+  return jsx(LayoutGroupContext.Provider, {
     suppressHydrationWarning: true,
     value: memoizedContext,
     children,
   },);
 };
-var LazyContext = createContext3({
+var LazyContext = createContext({
   strict: false,
 },);
 var featureProps = {
@@ -8721,8 +8711,8 @@ function LazyMotion({
   features,
   strict = false,
 },) {
-  const [, setIsLoaded,] = useState3(!isLazyBundle(features,),);
-  const loadedRenderer = useRef3(void 0,);
+  const [, setIsLoaded,] = useState(!isLazyBundle(features,),);
+  const loadedRenderer = useRef(void 0,);
   if (!isLazyBundle(features,)) {
     const {
       renderer,
@@ -8731,7 +8721,7 @@ function LazyMotion({
     loadedRenderer.current = renderer;
     loadFeatures(loadedFeatures,);
   }
-  useEffect4(() => {
+  useEffect2(() => {
     if (isLazyBundle(features,)) {
       features().then(({
         renderer,
@@ -8743,7 +8733,7 @@ function LazyMotion({
       },);
     }
   }, [],);
-  return jsx2(LazyContext.Provider, {
+  return jsx(LazyContext.Provider, {
     suppressHydrationWarning: true,
     value: {
       renderer: loadedRenderer.current,
@@ -8759,27 +8749,27 @@ function MotionConfig({
   children,
   ...config
 },) {
-  const parentConfig = useContext3(MotionConfigContext,);
+  const parentConfig = useContext(MotionConfigContext,);
   config = {
     ...parentConfig,
     ...config,
   };
   config.transition = resolveTransition(config.transition, parentConfig.transition,);
   config.isStatic = useConstant(() => config.isStatic);
-  const context = useMemo3(() => config, [
+  const context = useMemo(() => config, [
     JSON.stringify(config.transition,),
     config.transformPagePoint,
     config.reducedMotion,
     config.skipAnimations,
     config.isValidProp,
   ],);
-  return jsx2(MotionConfigContext.Provider, {
+  return jsx(MotionConfigContext.Provider, {
     suppressHydrationWarning: true,
     value: context,
     children,
   },);
 }
-var MotionContext = /* @__PURE__ */ createContext3({},);
+var MotionContext = /* @__PURE__ */ createContext({},);
 function getCurrentTreeVariants(props, context,) {
   if (isControllingVariants(props,)) {
     const {
@@ -8797,8 +8787,8 @@ function useCreateMotionContext(props,) {
   const {
     initial,
     animate: animate22,
-  } = getCurrentTreeVariants(props, useContext3(MotionContext,),);
-  return useMemo3(() => ({
+  } = getCurrentTreeVariants(props, useContext(MotionContext,),);
+  return useMemo(() => ({
     initial,
     animate: animate22,
   }), [variantLabelsAsDependency(initial,), variantLabelsAsDependency(animate22,),],);
@@ -8818,7 +8808,7 @@ function copyRawValuesOnly(target, source, props,) {
 function useInitialMotionValues({
   transformTemplate: transformTemplate2,
 }, visualState,) {
-  return useMemo3(() => {
+  return useMemo(() => {
     const state = createHtmlRenderState();
     buildHTMLStyles(state, visualState, transformTemplate2,);
     return Object.assign({}, state.vars, state.style,);
@@ -8848,7 +8838,7 @@ var createSvgRenderState = () => ({
   attrs: {},
 });
 function useSVGProps(props, visualState, _isStatic, Component22,) {
-  const visualProps = useMemo3(() => {
+  const visualProps = useMemo(() => {
     const state = createSvgRenderState();
     buildSVGAttrs(state, visualState, isSVGTag(Component22,), props.transformTemplate, props.style,);
     return {
@@ -8965,7 +8955,7 @@ function useRender(
 ) {
   const visualProps = (isSVG ?? isSVGComponent(Component22,) ? useSVGProps : useHTMLProps)(props, latestValues, isStatic, Component22,);
   const filteredProps2 = filterProps(props, typeof Component22 === 'string', forwardMotionProps, isValidProp,);
-  const elementProps = Component22 !== Fragment3
+  const elementProps = Component22 !== Fragment
     ? {
       ...filteredProps2,
       ...visualProps,
@@ -8975,8 +8965,8 @@ function useRender(
   const {
     children,
   } = props;
-  const renderedChildren = useMemo3(() => isMotionValue(children,) ? children.get() : children, [children,],);
-  return createElement2(Component22, {
+  const renderedChildren = useMemo(() => isMotionValue(children,) ? children.get() : children, [children,],);
+  return createElement(Component22, {
     ...elementProps,
     children: renderedChildren,
   },);
@@ -9037,8 +9027,8 @@ function makeLatestValues(props, context, presenceContext, scrapeMotionValues,) 
   return values;
 }
 var makeUseVisualState = (config) => (props, isStatic,) => {
-  const context = useContext3(MotionContext,);
-  const presenceContext = useContext3(PresenceContext,);
+  const context = useContext(MotionContext,);
+  const presenceContext = useContext(PresenceContext,);
   const make = () => makeState(config, props, context, presenceContext,);
   return isStatic ? make() : useConstant(make,);
 };
@@ -9052,12 +9042,12 @@ var useSVGVisualState = /* @__PURE__ */ makeUseVisualState({
 },);
 var motionComponentSymbol = /* @__PURE__ */ Symbol.for('motionComponentSymbol',);
 function useMotionRef(visualState, visualElement, externalRef,) {
-  const externalRefContainer = useRef3(externalRef,);
-  useInsertionEffect3(() => {
+  const externalRefContainer = useRef(externalRef,);
+  useInsertionEffect(() => {
     externalRefContainer.current = externalRef;
   },);
-  const refCleanup = useRef3(null,);
-  return useCallback4((instance) => {
+  const refCleanup = useRef(null,);
+  return useCallback2((instance) => {
     if (instance) visualState.onMount?.(instance,);
     if (visualElement) instance ? visualElement.mount(instance,) : visualElement.unmount();
     const ref = externalRefContainer.current;
@@ -9072,21 +9062,21 @@ function useMotionRef(visualState, visualElement, externalRef,) {
     } else if (ref) ref.current = instance;
   }, [visualElement,],);
 }
-var SwitchLayoutGroupContext = createContext3({},);
+var SwitchLayoutGroupContext = createContext({},);
 function isRefObject(ref,) {
   return ref && typeof ref === 'object' && Object.prototype.hasOwnProperty.call(ref, 'current',);
 }
 function useVisualElement(Component22, visualState, props, createVisualElement2, ProjectionNodeConstructor, isSVG,) {
   const {
     visualElement: parent,
-  } = useContext3(MotionContext,);
-  const lazyContext = useContext3(LazyContext,);
-  const presenceContext = useContext3(PresenceContext,);
-  const motionConfig = useContext3(MotionConfigContext,);
+  } = useContext(MotionContext,);
+  const lazyContext = useContext(LazyContext,);
+  const presenceContext = useContext(PresenceContext,);
+  const motionConfig = useContext(MotionConfigContext,);
   const reducedMotionConfig = motionConfig.reducedMotion;
   const skipAnimations = motionConfig.skipAnimations;
-  const visualElementRef = useRef3(null,);
-  const hasMountedOnce = useRef3(false,);
+  const visualElementRef = useRef(null,);
+  const hasMountedOnce = useRef(false,);
   createVisualElement2 = createVisualElement2 || lazyContext.renderer;
   if (!visualElementRef.current && createVisualElement2) {
     visualElementRef.current = createVisualElement2(Component22, {
@@ -9102,17 +9092,17 @@ function useVisualElement(Component22, visualState, props, createVisualElement2,
     if (hasMountedOnce.current && visualElementRef.current) visualElementRef.current.manuallyAnimateOnMount = true;
   }
   const visualElement = visualElementRef.current;
-  const initialLayoutGroupConfig = useContext3(SwitchLayoutGroupContext,);
+  const initialLayoutGroupConfig = useContext(SwitchLayoutGroupContext,);
   if (
     visualElement && !visualElement.projection && ProjectionNodeConstructor &&
     (visualElement.type === 'html' || visualElement.type === 'svg')
   ) createProjectionNode(visualElementRef.current, props, ProjectionNodeConstructor, initialLayoutGroupConfig,);
-  const isMounted = useRef3(false,);
-  useInsertionEffect3(() => {
+  const isMounted = useRef(false,);
+  useInsertionEffect(() => {
     if (visualElement && isMounted.current) visualElement.update(props, presenceContext,);
   },);
   const optimisedAppearId = props[optimizedAppearDataAttribute];
-  const wantsHandoff = useRef3(
+  const wantsHandoff = useRef(
     Boolean(optimisedAppearId,) && typeof __unframerWindow !== 'undefined' &&
       !__unframerWindow.MotionHandoffIsComplete?.(optimisedAppearId,) && __unframerWindow.MotionHasOptimisedAnimation?.(optimisedAppearId,),
   );
@@ -9130,7 +9120,7 @@ function useVisualElement(Component22, visualState, props, createVisualElement2,
     visualElement.scheduleRenderMicrotask();
     if (wantsHandoff.current && visualElement.animationState) visualElement.animationState.animateChanges();
   },);
-  useEffect4(() => {
+  useEffect2(() => {
     if (!visualElement) return;
     if (!wantsHandoff.current && visualElement.animationState) visualElement.animationState.animateChanges();
     if (wantsHandoff.current) {
@@ -9196,7 +9186,7 @@ function createMotionComponent(
   function MotionDOMComponent(props, externalRef,) {
     let MeasureLayout2;
     const configAndProps = {
-      ...useContext3(MotionConfigContext,),
+      ...useContext(MotionConfigContext,),
       ...props,
       layoutId: useLayoutId(props,),
     };
@@ -9219,12 +9209,12 @@ function createMotionComponent(
         isSVG,
       );
     }
-    return jsxs2(MotionContext.Provider, {
+    return jsxs(MotionContext.Provider, {
       suppressHydrationWarning: true,
       value: context,
       children: [
         MeasureLayout2 && context.visualElement
-          ? jsx2(MeasureLayout2, {
+          ? jsx(MeasureLayout2, {
             suppressHydrationWarning: true,
             visualElement: context.visualElement,
             ...configAndProps,
@@ -9246,18 +9236,18 @@ function createMotionComponent(
   MotionDOMComponent.displayName = `motion.${
     typeof Component22 === 'string' ? Component22 : `create(${Component22.displayName ?? Component22.name ?? ''})`
   }`;
-  const ForwardRefMotionComponent = forwardRef3(MotionDOMComponent,);
+  const ForwardRefMotionComponent = forwardRef(MotionDOMComponent,);
   ForwardRefMotionComponent[motionComponentSymbol] = Component22;
   return ForwardRefMotionComponent;
 }
 function useLayoutId({
   layoutId,
 },) {
-  const layoutGroupId = useContext3(LayoutGroupContext,).id;
+  const layoutGroupId = useContext(LayoutGroupContext,).id;
   return layoutGroupId && layoutId !== void 0 ? layoutGroupId + '-' + layoutId : layoutId;
 }
 function useStrictMode(configAndProps, preloadedFeatures,) {
-  useContext3(LazyContext,).strict;
+  useContext(LazyContext,).strict;
 }
 function getProjectionFunctionality(props,) {
   const {
@@ -9301,7 +9291,7 @@ function createMotionProxy(preloadedFeatures, createVisualElement2,) {
 var m = /* @__PURE__ */ createMotionProxy();
 var createDomVisualElement = (Component22, options,) => {
   return options.isSVG ?? isSVGComponent(Component22,) ? new SVGVisualElement(options,) : new HTMLVisualElement(options, {
-    allowProjection: Component22 !== Fragment3,
+    allowProjection: Component22 !== Fragment,
   },);
 };
 var AnimationFeature = class extends Feature {
@@ -10301,7 +10291,7 @@ var PanGesture = class extends Feature {
   }
 };
 var hasTakenAnySnapshot = false;
-var MeasureLayoutWithContext = class extends Component$1 {
+var MeasureLayoutWithContext = class extends Component2 {
   /**
    * This only mounts projection nodes for components that
    * need measuring, we might want to do it for all components
@@ -10409,12 +10399,12 @@ var MeasureLayoutWithContext = class extends Component$1 {
 };
 function MeasureLayout(props,) {
   const [isPresent2, safeToRemove,] = usePresence();
-  const layoutGroup = useContext3(LayoutGroupContext,);
-  return jsx2(MeasureLayoutWithContext, {
+  const layoutGroup = useContext(LayoutGroupContext,);
+  return jsx(MeasureLayoutWithContext, {
     suppressHydrationWarning: true,
     ...props,
     layoutGroup,
-    switchLayoutGroup: useContext3(SwitchLayoutGroupContext,),
+    switchLayoutGroup: useContext(SwitchLayoutGroupContext,),
     isPresent: isPresent2,
     safeToRemove,
   },);
@@ -10640,7 +10630,7 @@ var featureBundle = {
 };
 var motion = /* @__PURE__ */ createMotionProxy(featureBundle, createDomVisualElement,);
 function useUnmountEffect(callback,) {
-  return useEffect4(() => () => callback(), [],);
+  return useEffect2(() => () => callback(), [],);
 }
 var domAnimation = {
   renderer: createDomVisualElement,
@@ -10657,7 +10647,7 @@ var domMin = {
   ...animations,
 };
 function useMotionValueEvent(value, event, callback,) {
-  useInsertionEffect3(() => value.on(event, callback,), [value, event, callback,],);
+  useInsertionEffect(() => value.on(event, callback,), [value, event, callback,],);
 }
 var maxElapsed = 50;
 var createAxisInfo = () => ({
@@ -11122,9 +11112,9 @@ function useScroll({
     values.scrollXProgress.accelerate = makeAccelerateConfig('x', options, container, target,);
     values.scrollYProgress.accelerate = makeAccelerateConfig('y', options, container, target,);
   }
-  const scrollAnimation = useRef3(null,);
-  const needsStart = useRef3(false,);
-  const start2 = useCallback4(() => {
+  const scrollAnimation = useRef(null,);
+  const needsStart = useRef(false,);
+  const start2 = useCallback2(() => {
     scrollAnimation.current = scroll((_progress, {
       x: x2,
       y: y2,
@@ -11149,7 +11139,7 @@ function useScroll({
       return;
     } else return start2();
   }, [start2,],);
-  useEffect4(() => {
+  useEffect2(() => {
     if (!needsStart.current) return;
     let cleanup;
     const tryStart = () => {
@@ -11179,10 +11169,10 @@ function useMotionValue(initial,) {
   const value = useConstant(() => motionValue(initial,));
   const {
     isStatic,
-  } = useContext3(MotionConfigContext,);
+  } = useContext(MotionConfigContext,);
   if (isStatic) {
-    const [, setLatest,] = useState3(initial,);
-    useEffect4(() => value.on('change', setLatest,), [],);
+    const [, setLatest,] = useState(initial,);
+    useEffect2(() => value.on('change', setLatest,), [],);
   }
   return value;
 }
@@ -11273,11 +11263,11 @@ function useFollowValue(source, options = {},) {
 function useFollow(source, options, attach,) {
   const {
     isStatic,
-  } = useContext3(MotionConfigContext,);
+  } = useContext(MotionConfigContext,);
   const getFromSource = () => isMotionValue(source,) ? source.get() : source;
   if (isStatic) return useTransform(getFromSource,);
   const value = useMotionValue(getFromSource(),);
-  useInsertionEffect3(() => {
+  useInsertionEffect(() => {
     return attach(value, source, options,);
   }, [value, JSON.stringify(options,),],);
   return value;
@@ -11286,11 +11276,11 @@ function useSpring(source, options = {},) {
   return useFollow(source, options, attachSpring,);
 }
 function useAnimationFrame(callback,) {
-  const initialTimestamp = useRef3(0,);
+  const initialTimestamp = useRef(0,);
   const {
     isStatic,
-  } = useContext3(MotionConfigContext,);
-  useEffect4(() => {
+  } = useContext(MotionConfigContext,);
+  useEffect2(() => {
     if (isStatic) return;
     const provideTimeSinceStart = ({
       timestamp,
@@ -11340,14 +11330,14 @@ function useWillChange() {
 }
 function useReducedMotion() {
   !hasReducedMotionListener.current && initPrefersReducedMotion();
-  const [shouldReduceMotion,] = useState3(prefersReducedMotion.current,);
+  const [shouldReduceMotion,] = useState(prefersReducedMotion.current,);
   return shouldReduceMotion;
 }
 function useReducedMotionConfig() {
   const reducedMotionPreference = useReducedMotion();
   const {
     reducedMotion,
-  } = useContext3(MotionConfigContext,);
+  } = useContext(MotionConfigContext,);
   if (reducedMotion === 'never') return false;
   else if (reducedMotion === 'always') return true;
   else return reducedMotionPreference;
@@ -11590,7 +11580,8 @@ function createAnimationsFromSequence(
       for (let subjectIndex = 0; subjectIndex < numSubjects; subjectIndex++) {
         keyframes2 = keyframes2;
         transition = transition;
-        const subjectSequence = getSubjectSequence(subjects[subjectIndex], sequences,);
+        const thisSubject = subjects[subjectIndex];
+        const subjectSequence = getSubjectSequence(thisSubject, sequences,);
         for (const key2 in keyframes2) {
           resolveValueSequence(
             keyframes2[key2],
@@ -11797,8 +11788,8 @@ function useAnimate() {
   const reduceMotion = useReducedMotionConfig() ?? void 0;
   const {
     skipAnimations,
-  } = useContext3(MotionConfigContext,);
-  const animate22 = useMemo3(() =>
+  } = useContext(MotionConfigContext,);
+  const animate22 = useMemo(() =>
     createScopedAnimate({
       scope,
       reduceMotion,
@@ -11902,11 +11893,11 @@ function useAnimationControls() {
 }
 var useAnimation = useAnimationControls;
 function usePresenceData() {
-  const context = useContext3(PresenceContext,);
+  const context = useContext(PresenceContext,);
   return context ? context.custom : void 0;
 }
 function useDomEvent(ref, eventName, handler, options,) {
-  useEffect4(() => {
+  useEffect2(() => {
     const element = ref.current;
     if (handler && element) return addDomEvent(element, eventName, handler, options,);
   }, [ref, eventName, handler, options,],);
@@ -11984,27 +11975,27 @@ function unwrapMotionComponent(component,) {
   if (isMotionComponent(component,)) return component[motionComponentSymbol];
 }
 function useInstantLayoutTransition() {
-  return startTransition;
+  return startTransition$1;
 }
-function startTransition(callback,) {
+function startTransition$1(callback,) {
   if (!rootProjectionNode.current) return;
   rootProjectionNode.current.isUpdating = false;
   rootProjectionNode.current.blockUpdate();
   callback && callback();
 }
 function useResetProjection() {
-  return useCallback4(() => {
+  return useCallback2(() => {
     const root = rootProjectionNode.current;
     if (!root) return;
     root.resetTree();
   }, [],);
 }
 function useCycle(...items) {
-  const index = useRef3(0,);
-  const [item, setItem,] = useState3(items[index.current],);
+  const index = useRef(0,);
+  const [item, setItem,] = useState(items[index.current],);
   return [
     item,
-    useCallback4((next2) => {
+    useCallback2((next2) => {
       index.current = typeof next2 !== 'number' ? wrap(0, items.length, index.current + 1,) : next2;
       setItem(items[index.current],);
     }, [items.length, ...items,],),
@@ -12050,8 +12041,8 @@ function useInView(ref, {
   once = false,
   initial = false,
 } = {},) {
-  const [isInView, setInView,] = useState3(initial,);
-  useEffect4(() => {
+  const [isInView, setInView,] = useState(initial,);
+  useEffect2(() => {
     if (!ref.current || once && isInView) return;
     const onEnter = () => {
       setInView(true,);
@@ -12069,8 +12060,8 @@ function useInView(ref, {
 function useInstantTransition() {
   const [forceUpdate, forcedRenderCount,] = useForceUpdate();
   const startInstantLayoutTransition = useInstantLayoutTransition();
-  const unlockOnFrameRef = useRef3(-1,);
-  useEffect4(() => {
+  const unlockOnFrameRef = useRef(-1,);
+  useEffect2(() => {
     frame.postRender(() =>
       frame.postRender(() => {
         if (forcedRenderCount !== unlockOnFrameRef.current) return;
@@ -12091,8 +12082,8 @@ function disableInstantTransitions() {
   MotionGlobalConfig.instantAnimations = false;
 }
 function usePageInView() {
-  const [isInView, setIsInView,] = useState3(true,);
-  useEffect4(() => {
+  const [isInView, setIsInView,] = useState(true,);
+  useEffect2(() => {
     const handleVisibilityChange = () => setIsInView(!document.hidden,);
     if (document.hidden) handleVisibilityChange();
     document.addEventListener('visibilitychange', handleVisibilityChange,);
@@ -12299,7 +12290,7 @@ var useVisualState = makeUseVisualState({
   createRenderState: createObject,
 },);
 function useAnimatedState(initialState2,) {
-  const [animationState, setAnimationState,] = useState3(initialState2,);
+  const [animationState, setAnimationState,] = useState(initialState2,);
   const visualState = useVisualState({}, false,);
   const element = useConstant(() => {
     return new StateVisualElement({
@@ -12316,7 +12307,7 @@ function useAnimatedState(initialState2,) {
       initialState: initialState2,
     },);
   },);
-  useLayoutEffect3(() => {
+  useLayoutEffect(() => {
     element.mount({},);
     return () => element.unmount();
   }, [element,],);
@@ -12335,7 +12326,7 @@ function useInvertedScale(scale2,) {
   let parentScaleY = useMotionValue(1,);
   const {
     visualElement,
-  } = useContext3(MotionContext,);
+  } = useContext(MotionContext,);
   invariant(
     !!(scale2 || visualElement),
     'If no scale values are provided, useInvertedScale must be used within a child of another motion component.',
@@ -12354,7 +12345,7 @@ function useInvertedScale(scale2,) {
     scaleY: useTransform(parentScaleY, invertScale,),
   };
 }
-var ReorderContext = createContext3(null,);
+var ReorderContext = createContext(null,);
 function checkReorder(order, value, offset, velocity, axis, direction = 'ltr',) {
   const index = order.findIndex((item) => item.value === value);
   if (index === -1) return order;
@@ -12463,11 +12454,11 @@ function ReorderGroupComponent({
   ...props
 }, externalRef,) {
   const Component22 = useConstant(() => motion[as]);
-  const itemLayouts = useRef3(/* @__PURE__ */ new Map(),);
-  const [detectedAxis, setDetectedAxis,] = useState3('y',);
-  const isReordering = useRef3(false,);
-  const hasReordered = useRef3(false,);
-  const groupRef = useRef3(null,);
+  const itemLayouts = useRef(/* @__PURE__ */ new Map(),);
+  const [detectedAxis, setDetectedAxis,] = useState('y',);
+  const isReordering = useRef(false,);
+  const hasReordered = useRef(false,);
+  const groupRef = useRef(null,);
   const axis = axisOverride || detectedAxis;
   invariant(Boolean(values,), 'Reorder.Group must be provided a values prop', 'reorder-values',);
   const valuesSet = new Set(values,);
@@ -12519,7 +12510,7 @@ function ReorderGroupComponent({
       }
     },
   };
-  useEffect4(() => {
+  useEffect2(() => {
     isReordering.current = false;
   }, [values,],);
   const setRef22 = (element) => {
@@ -12531,7 +12522,7 @@ function ReorderGroupComponent({
     overflowAnchor: 'none',
     ...props.style,
   };
-  return jsx2(Component22, {
+  return jsx(Component22, {
     suppressHydrationWarning: true,
     ...props,
     style: groupStyle,
@@ -12561,14 +12552,14 @@ function ReorderGroupComponent({
       onClickCapture?.(event,);
     },
     ignoreStrict: true,
-    children: jsx2(ReorderContext.Provider, {
+    children: jsx(ReorderContext.Provider, {
       suppressHydrationWarning: true,
       value: context,
       children,
     },),
   },);
 }
-var ReorderGroup = /* @__PURE__ */ forwardRef3(ReorderGroupComponent,);
+var ReorderGroup = /* @__PURE__ */ forwardRef(ReorderGroupComponent,);
 var threshold = 50;
 var maxSpeed = 25;
 var overflowStyles = /* @__PURE__ */ new Set(['auto', 'scroll',],);
@@ -12688,7 +12679,7 @@ function ReorderItemComponent({
   ...props
 }, externalRef,) {
   const Component22 = useConstant(() => motion[as]);
-  const context = useContext3(ReorderContext,);
+  const context = useContext(ReorderContext,);
   const point = {
     x: useDefaultMotionValue(style2.x,),
     y: useDefaultMotionValue(style2.y,),
@@ -12702,7 +12693,7 @@ function ReorderItemComponent({
     groupRef,
     hasReordered,
   } = context;
-  return jsx2(Component22, {
+  return jsx(Component22, {
     suppressHydrationWarning: true,
     drag: axis === 'xy' ? true : axis,
     ...props,
@@ -12741,13 +12732,24 @@ function ReorderItemComponent({
     children,
   },);
 }
-var ReorderItem = /* @__PURE__ */ forwardRef3(ReorderItemComponent,);
+var ReorderItem = /* @__PURE__ */ forwardRef(ReorderItemComponent,);
 var namespace_exports = /* @__PURE__ */ __exportAll({
   Group: () => ReorderGroup,
   Item: () => ReorderItem,
 },);
 
-// /:https://app.framerstatic.com/framer.BWzg2IRg.mjs
+// /:https://app.framerstatic.com/framer.BpuvUAiZ.mjs
+
+import React, {
+  cloneElement as cloneElement3,
+  createRef,
+  memo as memo$12,
+  startTransition as startTransition2,
+  Suspense,
+  useDeferredValue as useDeferredValue2,
+  useSyncExternalStore as useSyncExternalStore2,
+  useTransition,
+} from 'react';
 import ReactDOM, { createPortal, } from 'react-dom';
 var __unframerWindow2 = typeof window !== 'undefined' ? window : void 0;
 var __unframerNavigator2 = typeof __unframerWindow2 !== 'undefined' ? navigator : void 0;
@@ -12795,7 +12797,7 @@ function initLazyModulesCache() {
 var lazyModulesCollector = isWindow ? void 0 : /* @__PURE__ */ new Set();
 var preloadKey$1 = 'preload';
 function isLazyComponentType(componentType,) {
-  return typeof componentType === 'object' && componentType !== null && !isValidElement3(componentType,) && preloadKey$1 in componentType;
+  return typeof componentType === 'object' && componentType !== null && !isValidElement(componentType,) && preloadKey$1 in componentType;
 }
 function getLoadedComponent(module, moduleName,) {
   if (moduleName in module) return module[moduleName];
@@ -12826,15 +12828,15 @@ function lazy(factory, moduleName = 'default', cacheHash,) {
     return factoryPromise;
   };
   let hasRendered = false;
-  const Component22 = forwardRef3(function LazyWithPreload(props, ref,) {
-    useEffect4(() => {
+  const Component22 = forwardRef(function LazyWithPreload(props, ref,) {
+    useEffect2(() => {
       hasRendered = true;
     }, [],);
     if (error) throw error;
     updateFromCache();
     if (cacheHash !== void 0 && lazyModulesCollector !== void 0) lazyModulesCollector.add(cacheHash,);
     if (!LoadedComponent) throw load(factory,);
-    return /* @__PURE__ */ jsx2(LoadedComponent, {
+    return /* @__PURE__ */ jsx(LoadedComponent, {
       suppressHydrationWarning: true,
       ref,
       ...props,
@@ -12959,45 +12961,45 @@ function isEqual(a, b, deep = true,) {
   }
 }
 function useGetRouteCallback(routes,) {
-  return React$1.useCallback((routeId) => routes[routeId], [routes,],);
+  return React.useCallback((routeId) => routes[routeId], [routes,],);
 }
-var RouterContext = /* @__PURE__ */ (() => React$1.createContext({},))();
+var RouterContext = /* @__PURE__ */ (() => React.createContext({},))();
 function RouterAPIProvider({
   api,
   children,
 },) {
-  return /* @__PURE__ */ jsx2(RouterContext.Provider, {
+  return /* @__PURE__ */ jsx(RouterContext.Provider, {
     suppressHydrationWarning: true,
     value: api,
     children,
   },);
 }
 function useRouter() {
-  return React$1.useContext(RouterContext,);
+  return React.useContext(RouterContext,);
 }
 function RoutesProvider({
   routes,
   children,
 },) {
   const getRoute = useGetRouteCallback(routes,);
-  const api = useMemo3(() => ({
+  const api = useMemo(() => ({
     getRoute,
   }), [getRoute,],);
-  return /* @__PURE__ */ jsx2(RouterContext.Provider, {
+  return /* @__PURE__ */ jsx(RouterContext.Provider, {
     suppressHydrationWarning: true,
     value: api,
     children,
   },);
 }
-var CurrentRouteContext = /* @__PURE__ */ (() => React$1.createContext({},))();
+var CurrentRouteContext = /* @__PURE__ */ (() => React.createContext({},))();
 function useCurrentRoute() {
   const router = useRouter();
-  const override = useContext3(CurrentRouteContext,);
+  const override = useContext(CurrentRouteContext,);
   const id2 = override?.routeId ?? router.currentRouteId;
   const pathVariables = override?.routeId ? override.pathVariables : router.currentPathVariables;
   const canonicalPathVariables = override?.routeId ? void 0 : router.currentCanonicalPathVariables;
   const route = id2 ? router.getRoute?.(id2,) : void 0;
-  return useMemo3(() => {
+  return useMemo(() => {
     if (!id2 || !route) return void 0;
     return {
       ...route,
@@ -13017,7 +13019,7 @@ function useCurrentRouteId() {
 }
 function useOnRouteChange(cb,) {
   const currentRoute = useCurrentRoute();
-  const lastRoute = React$1.useRef(currentRoute,);
+  const lastRoute = React.useRef(currentRoute,);
   if (isEqual(lastRoute.current, currentRoute,) || !currentRoute) return;
   lastRoute.current = currentRoute;
   cb(currentRoute,);
@@ -13057,7 +13059,7 @@ function monitorINPRelatedInputs(signal,) {
 function useRouteElementId(id2, targetRouteId,) {
   const currentRoute = useCurrentRoute();
   const route = useRoute(targetRouteId,) ?? currentRoute;
-  return React$1.useMemo(() => {
+  return React.useMemo(() => {
     if (!route) return id2;
     return getRouteElementId(route, id2,);
   }, [id2, route,],);
@@ -13591,24 +13593,24 @@ function createCollectionUtilsCache(collectionUtils,) {
     return cache2;
   };
 }
-var CollectionUtilsCacheContext = /* @__PURE__ */ createContext3(void 0,);
+var CollectionUtilsCacheContext = /* @__PURE__ */ createContext(void 0,);
 function CollectionUtilsCacheProvider({
   children,
   collectionUtils,
 },) {
-  const getCollectionUtilsCacheMemoized = useMemo3(() => {
+  const getCollectionUtilsCacheMemoized = useMemo(() => {
     return {
       get: createCollectionUtilsCache(collectionUtils,),
     };
   }, [collectionUtils,],);
-  return /* @__PURE__ */ jsx2(CollectionUtilsCacheContext.Provider, {
+  return /* @__PURE__ */ jsx(CollectionUtilsCacheContext.Provider, {
     suppressHydrationWarning: true,
     value: getCollectionUtilsCacheMemoized,
     children,
   },);
 }
 function useCollectionUtils() {
-  return useContext3(CollectionUtilsCacheContext,);
+  return useContext(CollectionUtilsCacheContext,);
 }
 var CollectionUtilsCache = class {
   collectionId;
@@ -14260,12 +14262,12 @@ var defaultLocaleInfo = {
   setLocale: noopAsync,
 };
 var LocaleInfoContext = /* @__PURE__ */ (() => {
-  const Context2 = React$1.createContext(defaultLocaleInfo,);
+  const Context2 = React.createContext(defaultLocaleInfo,);
   Context2.displayName = 'LocaleInfoContext';
   return Context2;
 })();
 function useLocaleInfo() {
-  return React$1.useContext(LocaleInfoContext,);
+  return React.useContext(LocaleInfoContext,);
 }
 function useLocalesForCurrentRoute() {
   const {
@@ -14277,14 +14279,14 @@ function useLocalesForCurrentRoute() {
     activeLocale,
     locales,
   } = useLocaleInfo();
-  const [localesForCurrentRoute, setLocalesForCurrentRoute,] = React$1.useState(() => activeLocale ? [activeLocale,] : []);
+  const [localesForCurrentRoute, setLocalesForCurrentRoute,] = React.useState(() => activeLocale ? [activeLocale,] : []);
   const currentRoute = currentRouteId ? routes?.[currentRouteId] : void 0;
   const collectionUtils = useCollectionUtils();
-  React$1.useEffect(() => {
+  React.useEffect(() => {
     let active2 = true;
     getLocalesForCurrentRoute(activeLocale, locales, currentRoute, currentPathVariables, collectionUtils,).then((localesSubset) => {
       if (!active2) return;
-      React$1.startTransition(() => {
+      React.startTransition(() => {
         if (localesSubset) setLocalesForCurrentRoute(localesSubset,);
         else setLocalesForCurrentRoute(activeLocale ? [activeLocale,] : [],);
       },);
@@ -14314,12 +14316,12 @@ function useLocale() {
   return useLocaleCode();
 }
 var LayoutDirectionContext = /* @__PURE__ */ (() => {
-  const Context2 = React$1.createContext('ltr',);
+  const Context2 = React.createContext('ltr',);
   Context2.displayName = 'LayoutDirectionContext';
   return Context2;
 })();
 function useLayoutDirection() {
-  return React$1.useContext(LayoutDirectionContext,);
+  return React.useContext(LayoutDirectionContext,);
 }
 var shouldPreloadBasedOnUA = !isBot;
 function usePreloadRoute() {
@@ -14331,7 +14333,7 @@ function usePreloadRoute() {
     activeLocale,
     locales,
   } = useLocaleInfo();
-  return useCallback4((routeId, linkContext, options,) => {
+  return useCallback2((routeId, linkContext, options,) => {
     if (!routeId || !getRoute) return;
     const route = getRoute(routeId,);
     const {
@@ -14348,7 +14350,7 @@ function usePreloadRoute() {
 }
 function useRoutePreloader(routeIds, enabled = true,) {
   const preload = usePreloadRoute();
-  useEffect4(() => {
+  useEffect2(() => {
     if (!enabled || !shouldPreloadBasedOnUA) return;
     for (const routeId of routeIds) preload(routeId, {},);
   }, [routeIds, enabled, preload,],);
@@ -14406,7 +14408,7 @@ function useRouteHandler(routeId, preload = false, elementId,) {
     navigate,
   } = useRouter();
   useRoutePreloader([routeId,], preload,);
-  return React$1.useCallback(() => navigate?.(routeId, elementId,), [navigate, elementId, routeId,],);
+  return React.useCallback(() => navigate?.(routeId, elementId,), [navigate, elementId, routeId,],);
 }
 var bugExistenceChecked = false;
 function logIfPopstateCalledSynchronously() {
@@ -14430,7 +14432,7 @@ function logIfPopstateCalledSynchronously() {
     }
   },);
 }
-var PageEffectsContext = /* @__PURE__ */ React$1.createContext({
+var PageEffectsContext = /* @__PURE__ */ React.createContext({
   global: void 0,
   routes: {},
 },);
@@ -14438,14 +14440,14 @@ function PageEffectsProvider({
   children,
   value,
 },) {
-  return /* @__PURE__ */ jsx2(PageEffectsContext.Provider, {
+  return /* @__PURE__ */ jsx(PageEffectsContext.Provider, {
     suppressHydrationWarning: true,
     value,
     children,
   },);
 }
 function usePageEffects() {
-  return React$1.useContext(PageEffectsContext,);
+  return React.useContext(PageEffectsContext,);
 }
 function getPageEffectForRoute(currentRouteId, nextRouteId, {
   global,
@@ -14810,14 +14812,14 @@ async function startViewTransition(updateView, effect, signal,) {
 }
 function useViewTransition() {
   const sitePageEffects = usePageEffects();
-  const resolveHasPainted = useRef3(void 0,);
-  useEffect4(() => {
+  const resolveHasPainted = useRef(void 0,);
+  useEffect2(() => {
     if (resolveHasPainted.current) {
       resolveHasPainted.current();
       resolveHasPainted.current = void 0;
     }
   },);
-  return useCallback4((currentRouteId, nextRouteId, update, signal,) => {
+  return useCallback2((currentRouteId, nextRouteId, update, signal,) => {
     const pageEffect = getPageEffectForRoute(currentRouteId, nextRouteId, sitePageEffects,);
     if (pageEffect) {
       const hasPainted = new Promise((resolve) => {
@@ -14916,7 +14918,7 @@ var announceNavigation = () => {
     announceDiv.textContent = title;
   }, 60,);
 };
-function useAfterPaintEffect(effectFn, deps, options, useEffectFn = useLayoutEffect3,) {
+function useAfterPaintEffect(effectFn, deps, options, useEffectFn = useLayoutEffect,) {
   useEffectFn(() => {
     const runAfterPaint = async (fn) => {
       await yieldToMain({
@@ -14936,7 +14938,7 @@ function useAfterPaintEffect(effectFn, deps, options, useEffectFn = useLayoutEff
   }, deps,);
 }
 function useMonitorNextPaintAfterRender(label,) {
-  const pendingPaintResolvers = useRef3(/* @__PURE__ */ new Set(),);
+  const pendingPaintResolvers = useRef(/* @__PURE__ */ new Set(),);
   useAfterPaintEffect(
     () => {
       for (const resolve of pendingPaintResolvers.current) resolve();
@@ -14947,7 +14949,7 @@ function useMonitorNextPaintAfterRender(label,) {
       priority: 'user-blocking',
     },
   );
-  return useCallback4((measureDetail) => {
+  return useCallback2((measureDetail) => {
     let resolveHasPainted;
     const hasPainted = new Promise((resolve) => {
       resolveHasPainted = resolve;
@@ -15072,7 +15074,7 @@ function useReplaceInitialState({
   initialContentLocaleId,
   initialCanonicalPathVariables,
 },) {
-  useLayoutEffect3(() => {
+  useLayoutEffect(() => {
     if (disabled) return;
     performance.mark('framer-history-set-initial-state',);
     const initialHash = __unframerWindow2.location.hash ? __unframerWindow2.location.hash.slice(1,) : void 0;
@@ -15095,12 +15097,12 @@ function usePopStateHandler(scrollRestoration, currentRouteId, setCurrentRouteId
     usesCustomScrollRestoration,
   } = scrollRestoration;
   const scrollRestorationForFramerTraversal = usesCustomScrollRestoration ? 'manual' : 'after-transition';
-  const viewTransitionReady = useRef3(void 0,);
-  const resolvePendingTraversal = useCallback4(() => {
+  const viewTransitionReady = useRef(void 0,);
+  const resolvePendingTraversal = useCallback2(() => {
     viewTransitionReady.current?.resolve();
     viewTransitionReady.current = void 0;
   }, [],);
-  const popStateHandler = useCallback4(async ({
+  const popStateHandler = useCallback2(async ({
     state,
   },) => {
     if (!isHistoryState(state,)) return;
@@ -15157,9 +15159,10 @@ function usePopStateHandler(scrollRestoration, currentRouteId, setCurrentRouteId
     startViewTransition2,
     scrollRestorationForFramerTraversal,
   ],);
-  const traversalHandler = useCallback4((event) => {
+  const traversalHandler = useCallback2((event) => {
     if (event.navigationType !== 'traverse' || !event.canIntercept) return;
-    if (!isHistoryState(event.destination?.getState(),)) return;
+    const destinationState = event.destination?.getState();
+    if (!isHistoryState(destinationState,)) return;
     event.intercept({
       async handler() {
         await new Promise((resolve, reject,) => {
@@ -15173,7 +15176,7 @@ function usePopStateHandler(scrollRestoration, currentRouteId, setCurrentRouteId
       scroll: scrollRestorationForFramerTraversal,
     },);
   }, [scrollRestorationForFramerTraversal,],);
-  useEffect4(() => {
+  useEffect2(() => {
     __unframerWindow2.addEventListener('popstate', popStateHandler,);
     if (useNavigationAPI) __unframerWindow2.navigation.addEventListener('navigate', traversalHandler,);
     return () => {
@@ -15196,7 +15199,7 @@ async function handleRedirectForMissingPage(path,) {
 }
 function useSwitchLocale() {
   const collectionUtils = useCollectionUtils();
-  return useCallback4((options) => {
+  return useCallback2((options) => {
     return switchLocale({
       ...options,
       collectionUtils,
@@ -15238,9 +15241,9 @@ function pushLoadMoreHistory(hash2, paginationInfo,) {
   },);
 }
 function useCommitNavigationURL(usesCustomScrollRestoration,) {
-  const navigationPromise = useRef3(Promise.resolve(),);
-  const navigationController = useRef3();
-  const navigateListener = useCallback4((navigateEvent) => {
+  const navigationPromise = useRef(Promise.resolve(),);
+  const navigationController = useRef();
+  const navigateListener = useCallback2((navigateEvent) => {
     if (navigateEvent.navigationType === 'traverse' || !navigateEvent.canIntercept) return;
     const controller = navigationController.current;
     controller?.signal.addEventListener('abort', () => {
@@ -15251,7 +15254,7 @@ function useCommitNavigationURL(usesCustomScrollRestoration,) {
       scroll: usesCustomScrollRestoration ? 'manual' : 'after-transition',
     },);
   }, [usesCustomScrollRestoration,],);
-  return useCallback4((promise, controller, updateURL,) => {
+  return useCallback2((promise, controller, updateURL,) => {
     if (!useNavigationAPI) {
       updateURL?.();
       return;
@@ -15278,11 +15281,11 @@ function trimDashes(str,) {
 function slugify(value,) {
   return trimDashes(value.trim().toLowerCase().replace(unsafeSlugCharactersRegExp, '-',),);
 }
-var NodeIdContext = /* @__PURE__ */ React$1.createContext(null,);
+var NodeIdContext = /* @__PURE__ */ React.createContext(null,);
 function useTracking() {
   const router = useRouter();
-  const nodeId = useContext3(NodeIdContext,);
-  return useCallback4((trackingId) => {
+  const nodeId = useContext(NodeIdContext,);
+  return useCallback2((trackingId) => {
     if (!router.pageviewEventData?.current) return;
     if (!isValidTrackingId(trackingId,)) throw new Error(`Invalid tracking ID: ${trackingId}`,);
     if (router.pageviewEventData.current instanceof Promise) {
@@ -15298,7 +15301,7 @@ function sendCustomTrackingEvent(eventData, nodeId, trackingId,) {
   }, 'eager',);
 }
 var RenderTargetEnvironmentContext = /* @__PURE__ */ (() => {
-  const Context2 = createContext3('preview',);
+  const Context2 = createContext('preview',);
   Context2.displayName = 'RenderTargetEnvironmentContext';
   return Context2;
 })();
@@ -15306,30 +15309,30 @@ function RenderTargetEnvironmentProvider({
   children,
   value,
 },) {
-  return /* @__PURE__ */ jsx2(RenderTargetEnvironmentContext.Provider, {
+  return /* @__PURE__ */ jsx(RenderTargetEnvironmentContext.Provider, {
     suppressHydrationWarning: true,
     value,
     children,
   },);
 }
 function useRenderTargetEnvironment() {
-  return useContext3(RenderTargetEnvironmentContext,);
+  return useContext(RenderTargetEnvironmentContext,);
 }
-var useIsomorphicLayoutEffect$1 = typeof document !== 'undefined' ? useLayoutEffect3 : useEffect4;
+var useIsomorphicLayoutEffect$1 = typeof document !== 'undefined' ? useLayoutEffect : useEffect2;
 function useMemoOne(factory, inputs,) {
-  const initial = useState3(() => ({
+  const initial = useState(() => ({
     inputs,
     result: factory(),
   }))[0];
-  const isFirstRun = useRef3(true,);
-  const committed = useRef3(initial,);
+  const isFirstRun = useRef(true,);
+  const committed = useRef(initial,);
   const cache2 = isFirstRun.current || Boolean(inputs && committed.current.inputs && isEqual(inputs, committed.current.inputs, false,),)
     ? committed.current
     : {
       inputs,
       result: factory(),
     };
-  useEffect4(() => {
+  useEffect2(() => {
     isFirstRun.current = false;
     committed.current = cache2;
   }, [cache2,],);
@@ -15357,7 +15360,7 @@ function notifyURLSearchStringSubscribers() {
   for (const subscriber of urlSearchStringSubscribers) subscriber();
 }
 var URLSearchParamsContext = /* @__PURE__ */ (() => {
-  const Context2 = createContext3({
+  const Context2 = createContext({
     urlSearchParams: new URLSearchParams(),
     replaceSearchParams: async () => {},
   },);
@@ -15371,7 +15374,7 @@ function URLSearchParamsProvider({
   isNavigationCommitPending,
 },) {
   const isPreview = useRenderTargetEnvironment() === 'preview';
-  const [previewURLSearch, setPreviewURLSearch,] = useState3({
+  const [previewURLSearch, setPreviewURLSearch,] = useState({
     routeId: currentRouteId,
     search: '',
   },);
@@ -15382,7 +15385,7 @@ function URLSearchParamsProvider({
     },);
   }
   const previewURLSearchString = previewURLSearch.search;
-  const committedRouterRenderKeyRef = useRef3(routerRenderKey,);
+  const committedRouterRenderKeyRef = useRef(routerRenderKey,);
   useIsomorphicLayoutEffect$1(() => {
     committedRouterRenderKeyRef.current = routerRenderKey;
   }, [routerRenderKey,],);
@@ -15394,9 +15397,9 @@ function URLSearchParamsProvider({
   const deferredURLSearchString = useDeferredValue2(siteURLSearchString,);
   const isUrgentRouterRender = routerRenderKey !== useDeferredValue2(routerRenderKey,);
   const urlSearchString = isPreview ? previewURLSearchString : isUrgentRouterRender ? siteURLSearchString : deferredURLSearchString;
-  const replaceSearchParams = useCallback4(async (replacer) => {
+  const replaceSearchParams = useCallback2(async (replacer) => {
     if (isPreview) {
-      startTransition3(() => {
+      startTransition2(() => {
         setPreviewURLSearch((current2) => {
           if (current2.routeId !== currentRouteId) return current2;
           return {
@@ -15437,7 +15440,7 @@ function URLSearchParamsProvider({
     urlSearchParams: new URLSearchParams(urlSearchString,),
     replaceSearchParams,
   }), [urlSearchString, replaceSearchParams,],);
-  return /* @__PURE__ */ jsx2(URLSearchParamsContext.Provider, {
+  return /* @__PURE__ */ jsx(URLSearchParamsContext.Provider, {
     suppressHydrationWarning: true,
     value,
     children,
@@ -15446,16 +15449,16 @@ function URLSearchParamsProvider({
 function useStringArrayQueryParam({
   parameterName,
 },) {
-  const parameterNameRef = useRef3(parameterName,);
+  const parameterNameRef = useRef(parameterName,);
   const {
     urlSearchParams,
     replaceSearchParams,
-  } = useContext3(URLSearchParamsContext,);
+  } = useContext(URLSearchParamsContext,);
   return [
-    useMemo3(() => {
+    useMemo(() => {
       return urlSearchParams.getAll(parameterNameRef.current,);
     }, [urlSearchParams,],),
-    useCallback4(async (newValues) => {
+    useCallback2(async (newValues) => {
       if (!isArray(newValues,)) return;
       await replaceSearchParams((currentSearchParams) => {
         const name = parameterNameRef.current;
@@ -15489,16 +15492,16 @@ function useStringQueryParam({
   parameterName,
   optional,
 },) {
-  const initialValueRef = useRef3(optional ? void 0 : isString(initialValue,) ? initialValue : '',);
+  const initialValueRef = useRef(optional ? void 0 : isString(initialValue,) ? initialValue : '',);
   const [arrayValue, setArrayValue,] = useStringArrayQueryParam({
     parameterName,
   },);
   return [
-    useMemo3(() => {
+    useMemo(() => {
       if (arrayValue.length === 0) return initialValueRef.current;
       return arrayValue[0] ?? '';
     }, [arrayValue,],),
-    useCallback4(async (newValue) => {
+    useCallback2(async (newValue) => {
       if (newValue === initialValueRef.current) return setArrayValue(EMPTY_ARRAY,);
       if (!isString(newValue,)) return;
       return setArrayValue([newValue,],);
@@ -15512,21 +15515,21 @@ function useBooleanQueryParam({
   parameterName,
   optional,
 },) {
-  const initialValueRef = useRef3(optional ? void 0 : initialValue ? BOOLEAN_YES : BOOLEAN_NO,);
+  const initialValueRef = useRef(optional ? void 0 : initialValue ? BOOLEAN_YES : BOOLEAN_NO,);
   const [stringValue, setStringValue,] = useStringQueryParam({
     initialValue: initialValueRef.current,
     parameterName,
     optional,
   },);
   return [
-    useMemo3(() => {
+    useMemo(() => {
       if (stringValue === BOOLEAN_YES) return true;
       if (stringValue === BOOLEAN_NO) return false;
       if (isUndefined(stringValue,)) return void 0;
       if (initialValueRef.current === BOOLEAN_YES) return true;
       if (initialValueRef.current === BOOLEAN_NO) return false;
     }, [stringValue,],),
-    useCallback4(async (newValue) => {
+    useCallback2(async (newValue) => {
       if (isUndefined(newValue,)) return setStringValue(void 0,);
       if (!isBoolean(newValue,)) return;
       return setStringValue(newValue ? BOOLEAN_YES : BOOLEAN_NO,);
@@ -15550,21 +15553,21 @@ function useNumberQueryParam({
   parameterName,
   optional,
 },) {
-  const initialNumberValueRef = useRef3(optional ? void 0 : isNumber(initialValue,) ? initialValue : 0,);
+  const initialNumberValueRef = useRef(optional ? void 0 : isNumber(initialValue,) ? initialValue : 0,);
   const [stringValue, setStringValue,] = useStringQueryParam({
     initialValue:
-      useRef3(isNumber(initialNumberValueRef.current,) ? serializeNumberQueryParam(initialNumberValueRef.current,) : void 0,).current,
+      useRef(isNumber(initialNumberValueRef.current,) ? serializeNumberQueryParam(initialNumberValueRef.current,) : void 0,).current,
     parameterName,
     optional,
   },);
   return [
-    useMemo3(() => {
+    useMemo(() => {
       if (isUndefined(stringValue,)) return void 0;
       const parsed = parseNumberQueryParam(stringValue,);
       if (isNumber(parsed,)) return parsed;
       return initialNumberValueRef.current;
     }, [stringValue,],),
-    useCallback4(async (newValue) => {
+    useCallback2(async (newValue) => {
       if (!isNumber(newValue,)) return setStringValue(void 0,);
       return setStringValue(serializeNumberQueryParam(newValue,),);
     }, [setStringValue,],),
@@ -15599,8 +15602,8 @@ function useDateQueryParam({
   displayTime,
   optional,
 },) {
-  const displayTimeRef = useRef3(isBoolean(displayTime,) ? displayTime : false,);
-  const initialStringValueRef = useRef3(
+  const displayTimeRef = useRef(isBoolean(displayTime,) ? displayTime : false,);
+  const initialStringValueRef = useRef(
     optional || !isString(initialValue,) ? void 0 : serializeDateQueryParam(initialValue, displayTimeRef.current,),
   );
   const [stringValue, setStringValue,] = useStringQueryParam({
@@ -15609,7 +15612,7 @@ function useDateQueryParam({
     optional: isUndefined(initialStringValueRef.current,),
   },);
   return [
-    useMemo3(() => {
+    useMemo(() => {
       if (isUndefined(stringValue,)) return void 0;
       const date = parseDateQueryParam(stringValue,);
       if (isString(date,)) return date;
@@ -15617,7 +15620,7 @@ function useDateQueryParam({
       if (!isString(initialDate,)) return void 0;
       return parseDateQueryParam(initialDate,);
     }, [stringValue,],),
-    useCallback4(async (newValue) => {
+    useCallback2(async (newValue) => {
       if (isUndefined(newValue,)) return setStringValue(void 0,);
       if (!isString(newValue,)) return;
       const serializedDate = serializeDateQueryParam(newValue, displayTimeRef.current,);
@@ -15634,18 +15637,18 @@ function useCollectionReferenceQueryParam({
 },) {
   const collectionUtils = useCollectionUtils();
   const locale = useLocaleInfo().activeLocale ?? void 0;
-  const initialValueRef = useRef3(optional ? void 0 : initialValue,);
+  const initialValueRef = useRef(optional ? void 0 : initialValue,);
   const [slug, setSlug,] = useStringQueryParam({
     initialValue: void 0,
     parameterName,
     optional: true,
   },);
   return [
-    useMemo3(() => {
+    useMemo(() => {
       if (!isString(slug,)) return initialValueRef.current;
       return use(getCollectionUtilsCache(collectionUtils, collectionId,).getRecordIdBySlug(slug, locale,),);
     }, [collectionUtils, collectionId, locale, slug,],),
-    useCallback4(async (newId) => {
+    useCallback2(async (newId) => {
       if (isUndefined(newId,)) return setSlug(void 0,);
       const newSlug = await getCollectionUtilsCache(collectionUtils, collectionId,).getSlugByRecordId(newId, locale,);
       if (!isString(newSlug,)) return;
@@ -15661,12 +15664,12 @@ function useMultiCollectionReferenceQueryParam({
 },) {
   const collectionUtils = useCollectionUtils();
   const locale = useLocaleInfo().activeLocale ?? void 0;
-  const initialArrayValue = useRef3(optional ? void 0 : isArray(initialValue,) ? initialValue : EMPTY_ARRAY,);
+  const initialArrayValue = useRef(optional ? void 0 : isArray(initialValue,) ? initialValue : EMPTY_ARRAY,);
   const [slugs, setSlugs,] = useStringArrayQueryParam({
     parameterName,
   },);
   return [
-    useMemo3(() => {
+    useMemo(() => {
       if (slugs.length === 0) return initialArrayValue.current;
       const cache2 = getCollectionUtilsCache(collectionUtils, collectionId,);
       const maybePromises = slugs.filter(isNonEmptyString,).map((slug) => cache2.getRecordIdBySlug(slug, locale,));
@@ -15675,7 +15678,7 @@ function useMultiCollectionReferenceQueryParam({
       if (resolvedIds.length === 0 && supportsOptional) return void 0;
       return resolvedIds;
     }, [collectionUtils, collectionId, locale, slugs,],),
-    useCallback4(async (newIds) => {
+    useCallback2(async (newIds) => {
       if (isUndefined(newIds,)) return setSlugs(EMPTY_ARRAY,);
       if (!isArray(newIds,)) return;
       const initialArray = initialArrayValue.current;
@@ -15697,7 +15700,7 @@ function useEnumQueryParam({
   getOptionTitle = noOpGetOptionTitle,
   optional,
 },) {
-  useEffect4(() => {
+  useEffect2(() => {
     if (options === EMPTY_ARRAY || getOptionTitle === noOpGetOptionTitle) {
       console.warn(
         '[useEnumQueryParam]',
@@ -15706,7 +15709,7 @@ function useEnumQueryParam({
     }
   }, [options, getOptionTitle, parameterName,],);
   const locale = useLocaleInfo().activeLocale ?? void 0;
-  const titleToIdMap = useMemo3(() => {
+  const titleToIdMap = useMemo(() => {
     const map2 = /* @__PURE__ */ new Map();
     for (const id2 of options) {
       const title = getOptionTitle(id2, locale,);
@@ -15716,7 +15719,7 @@ function useEnumQueryParam({
     return map2;
   }, [locale, options, getOptionTitle,],);
   const [titleValue, setTitleValue,] = useStringQueryParam({
-    initialValue: useMemo3(() => {
+    initialValue: useMemo(() => {
       if (!initialValue) return void 0;
       if (!options.includes(initialValue,)) return void 0;
       return getOptionTitle(initialValue, locale,) || '';
@@ -15725,7 +15728,7 @@ function useEnumQueryParam({
     optional,
   },);
   return [
-    useMemo3(() => {
+    useMemo(() => {
       const validInitialId = initialValue && options.includes(initialValue,) ? initialValue : void 0;
       if (isUndefined(titleValue,)) return;
       if (!titleValue) return validInitialId;
@@ -15736,7 +15739,7 @@ function useEnumQueryParam({
       }
       return resolvedId;
     }, [titleValue, titleToIdMap, initialValue, options, optional,],),
-    useCallback4(async (newValue) => {
+    useCallback2(async (newValue) => {
       if (isUndefined(newValue,)) return setTitleValue(void 0,);
       const title = getOptionTitle(newValue, locale,);
       if (title) return setTitleValue(title,);
@@ -15948,7 +15951,7 @@ function useRouteAnchor(routeId, {
   const currentRoute = useRoute(currentRouteId ?? '',);
   useRoutePreloader([routeId,], true,);
   const hash2 = linkHash ?? elementId;
-  const href = React$1.useMemo(() =>
+  const href = React.useMemo(() =>
     getPathForRoute(route, {
       currentRoutePath: currentRoute?.path,
       currentRoutePathLocalized: currentRoute?.pathLocalized,
@@ -15958,9 +15961,9 @@ function useRouteAnchor(routeId, {
       siteCanonicalURL,
       localeId: activeLocale?.id,
     },), [currentRoute, currentPathVariables, hash2, preserveQueryParams, route, siteCanonicalURL, activeLocale?.id,],);
-  const navigateToRoute = React$1.useCallback(() => navigate?.(routeId, hash2,), [hash2, navigate, routeId,],);
+  const navigateToRoute = React.useCallback(() => navigate?.(routeId, hash2,), [hash2, navigate, routeId,],);
   return {
-    onClick: React$1.useCallback((event) => {
+    onClick: React.useCallback((event) => {
       event.preventDefault();
       navigateToRoute();
     }, [navigateToRoute,],),
@@ -15984,7 +15987,7 @@ function getDeferPreHydrationSubmitScript() {
   return `(${deferPreHydrationSubmit.toString()})("${formHydratedAttribute}","${formPendingSubmitAttribute}")`;
 }
 function useReplayPreHydrationSubmit(formRef, submit,) {
-  useEffect4(() => {
+  useEffect2(() => {
     const form = formRef.current;
     if (!form) return;
     form.setAttribute(formHydratedAttribute, '',);
@@ -16026,10 +16029,10 @@ function shouldIgnoreReplayEvent(event,) {
 }
 var isHydrationFn = () => isWindow;
 function useReplayPreHydrationInput(value,) {
-  const didReplayRef = useRef3(false,);
-  const elementRef = useRef3(null,);
+  const didReplayRef = useRef(false,);
+  const elementRef = useRef(null,);
   const isHydration = useSyncExternalStore2(noopSubscribe, returnFalse, isHydrationFn,);
-  useEffect4(() => {
+  useEffect2(() => {
     if (!isHydration) return;
     const element = elementRef.current;
     if (didReplayRef.current || !element) return;
@@ -16113,7 +16116,7 @@ function turnOffReactEventHandling() {
   eventsToStop.forEach((event) => body.addEventListener(event, stopFn, options,));
 }
 function TurnOnReactEventHandling() {
-  useEffect4(() => {
+  useEffect2(() => {
     if (!shouldTurnOnEventHandling || !eventsToStop) return;
     const options = {
       capture: true,
@@ -16257,23 +16260,23 @@ function markHydrationStart() {
   hydrationMarker.render.markStart();
 }
 function useMarkRouterEffects() {
-  useInsertionEffect3(() => {
+  useInsertionEffect(() => {
     hydrationMarker?.useInsertionEffects.markRouterStart();
   }, [],);
-  useLayoutEffect3(() => {
+  useLayoutEffect(() => {
     hydrationMarker?.useLayoutEffects.markRouterStart();
   }, [],);
-  useEffect4(() => {
+  useEffect2(() => {
     hydrationMarker?.useEffects.markRouterStart();
   }, [],);
 }
 var wasInBackground = false;
 function useMarkSuspenseEffectsStart() {
-  useInsertionEffect3(() => {
+  useInsertionEffect(() => {
     hydrationMarker?.render.markEnd();
     hydrationMarker?.useInsertionEffects.markStart();
   }, [],);
-  useLayoutEffect3(() => {
+  useLayoutEffect(() => {
     hydrationMarker?.useLayoutEffects.markStart();
     if (document.visibilityState !== 'visible') {
       wasInBackground = true;
@@ -16284,7 +16287,7 @@ function useMarkSuspenseEffectsStart() {
       hydrationMarker?.unattributedHydrationOverhead.measure();
     },);
   }, [],);
-  useEffect4(() => {
+  useEffect2(() => {
     hydrationMarker?.useEffects.markStart();
     if (!hydrationMarker?.browserRendering.hasStarted) {
       hydrationMarker?.mutationEffects.measure();
@@ -16293,10 +16296,10 @@ function useMarkSuspenseEffectsStart() {
   }, [],);
 }
 function useMarkSuspenseEffectEnd() {
-  useInsertionEffect3(() => {
+  useInsertionEffect(() => {
     hydrationMarker?.useInsertionEffects.markEnd();
   }, [],);
-  useLayoutEffect3(() => {
+  useLayoutEffect(() => {
     hydrationMarker?.useLayoutEffects.markEnd();
     if (wasInBackground || document.visibilityState !== 'visible') return;
     frame.read(() => {
@@ -16306,7 +16309,7 @@ function useMarkSuspenseEffectEnd() {
       },);
     },);
   }, [],);
-  useEffect4(() => {
+  useEffect2(() => {
     hydrationMarker?.useEffects.markEnd();
   }, [],);
 }
@@ -16327,14 +16330,14 @@ function renderPage(Page3, defaultPageStyle,) {
     style: defaultPageStyle,
     'data-framer-root': '',
   };
-  if (React$1.isValidElement(Page3,)) return React$1.cloneElement(Page3, props,);
-  return /* @__PURE__ */ jsx2(Page3, {
+  if (React.isValidElement(Page3,)) return React.cloneElement(Page3, props,);
+  return /* @__PURE__ */ jsx(Page3, {
     suppressHydrationWarning: true,
     ...props,
   },);
 }
 var NotFoundError = class extends Error {};
-var NotFoundErrorBoundary = class extends Component$1 {
+var NotFoundErrorBoundary = class extends Component2 {
   constructor(props,) {
     super(props,);
     this.state = {
@@ -16772,7 +16775,7 @@ function patchRoutesForABTesting(routes, initialRouteId,) {
   return resolvedInitialRouteId;
 }
 function useMetadata(metadata,) {
-  React2.useEffect(() => {
+  React$1.useEffect(() => {
     if (metadata.robots) {
       let robotsTag = document.querySelector('meta[name="robots"]',);
       if (robotsTag) robotsTag.setAttribute('content', metadata.robots,);
@@ -16784,7 +16787,7 @@ function useMetadata(metadata,) {
       }
     }
   }, [metadata.robots,],);
-  React2.useInsertionEffect(() => {
+  React$1.useInsertionEffect(() => {
     document.title = metadata.title || '';
     if (metadata.viewport) document.querySelector('meta[name="viewport"]',)?.setAttribute('content', metadata.viewport,);
   }, [metadata.title, metadata.viewport,],);
@@ -19684,7 +19687,7 @@ addScaleCorrector({
 function MotionSetup({
   children,
 },) {
-  return /* @__PURE__ */ jsx2(Fragment3, {
+  return /* @__PURE__ */ jsx(Fragment, {
     children,
   },);
 }
@@ -19793,7 +19796,7 @@ var animate2 = /* @__PURE__ */ (() => {
   };
   return animate22;
 })();
-var LayoutIdContext = /* @__PURE__ */ React$1.createContext({
+var LayoutIdContext = /* @__PURE__ */ React.createContext({
   getLayoutId: (args) => null,
   persistLayoutIdCache: () => {},
   top: false,
@@ -19802,8 +19805,8 @@ var LayoutIdContext = /* @__PURE__ */ React$1.createContext({
 function LayoutIdProvider({
   children,
 },) {
-  if (useContext3(LayoutIdContext,).top) return children;
-  const cache2 = useRef3({
+  if (useContext(LayoutIdContext,).top) return children;
+  const cache2 = useRef({
     byId: {},
     byName: {},
     byLastId: {},
@@ -19815,7 +19818,7 @@ function LayoutIdProvider({
       byName: {},
     },
   },);
-  const screen = useRef3({
+  const screen = useRef({
     byId: {},
     byName: {},
     byLastId: {},
@@ -19823,8 +19826,8 @@ function LayoutIdProvider({
     byLastName: {},
     byLayoutId: {},
   },);
-  const usedIdsRef = useRef3(/* @__PURE__ */ new Set(),);
-  const getLayoutId = useCallback4(({
+  const usedIdsRef = useRef(/* @__PURE__ */ new Set(),);
+  const getLayoutId = useCallback2(({
     id: id2,
     name,
     duplicatedFrom,
@@ -19915,7 +19918,7 @@ function LayoutIdProvider({
     usedIds.add(layoutId,);
     return layoutId;
   }, [],);
-  const persistLayoutIdCache = useCallback4(() => {
+  const persistLayoutIdCache = useCallback2(() => {
     cache2.current = {
       byId: {
         ...cache2.current.byId,
@@ -19956,13 +19959,13 @@ function LayoutIdProvider({
     };
     usedIdsRef.current.clear();
   }, [],);
-  const contextValue = useRef3({
+  const contextValue = useRef({
     getLayoutId,
     persistLayoutIdCache,
     top: true,
     enabled: true,
   },).current;
-  return /* @__PURE__ */ jsx2(LayoutIdContext.Provider, {
+  return /* @__PURE__ */ jsx(LayoutIdContext.Provider, {
     suppressHydrationWarning: true,
     value: contextValue,
     children,
@@ -19984,21 +19987,21 @@ function AutomaticLayoutIds({
   enabled = true,
   ...props
 },) {
-  const context = useContext3(LayoutIdContext,);
-  const contextValue = useMemo3(() => {
+  const context = useContext(LayoutIdContext,);
+  const contextValue = useMemo(() => {
     return {
       ...context,
       enabled,
     };
   }, [enabled,],);
-  return /* @__PURE__ */ jsx2(LayoutIdContext.Provider, {
+  return /* @__PURE__ */ jsx(LayoutIdContext.Provider, {
     suppressHydrationWarning: true,
     ...props,
     value: contextValue,
   },);
 }
 function useConstant2(init,) {
-  const ref = useRef3(null,);
+  const ref = useRef(null,);
   if (ref.current === null) ref.current = init();
   return ref.current;
 }
@@ -20048,17 +20051,17 @@ function ErrorPlaceholder(props,) {
   } = props;
   const title = file ? `Error in ${stripSlash(file,)}` : 'Error';
   const message = error instanceof Error ? error.message : '' + error;
-  return /* @__PURE__ */ jsxs2('div', {
+  return /* @__PURE__ */ jsxs('div', {
     suppressHydrationWarning: true,
     style: errorStyle,
     children: [
-      /* @__PURE__ */ jsx2('div', {
+      /* @__PURE__ */ jsx('div', {
         suppressHydrationWarning: true,
         className: 'text',
         style: titleStyle,
         children: title,
       },),
-      message && /* @__PURE__ */ jsx2('div', {
+      message && /* @__PURE__ */ jsx('div', {
         suppressHydrationWarning: true,
         className: 'text',
         style: messageStyle,
@@ -20107,7 +20110,7 @@ function getColorsFromTheme(theme, type,) {
     screenColor: isDarkTheme ? '#333' : '#eee',
   };
 }
-var ErrorBoundary = class extends Component$1 {
+var ErrorBoundary = class extends Component2 {
   state = {};
   componentDidCatch(error, info,) {
     let stack = info.componentStack?.split('\n',).filter((line) => line.length !== 0);
@@ -20136,7 +20139,7 @@ var ErrorBoundary = class extends Component$1 {
   }
   render() {
     if (this.state.lastError) {
-      return /* @__PURE__ */ jsx2(ErrorPlaceholder, {
+      return /* @__PURE__ */ jsx(ErrorPlaceholder, {
         suppressHydrationWarning: true,
         error: this.state.lastError.error.message,
         file: 'Prototype',
@@ -20151,14 +20154,14 @@ function Device({
   ResizeObserver: ResizeObserver2 = safeWindow.ResizeObserver,
   ...options
 },) {
-  const optionsRef = React$1.useRef(void 0,);
+  const optionsRef = React.useRef(void 0,);
   if (optionsRef.current === void 0) optionsRef.current = options;
   const deviceAppearance = options.deviceOptions?.appearance.type;
-  const scaleDataRef = React$1.useRef();
-  const containerRef = React$1.useRef(null,);
-  const deviceRef = React$1.useRef(null,);
-  const screenRef = React$1.useRef(null,);
-  const updateImperativeScale = React$1.useCallback(({
+  const scaleDataRef = React.useRef();
+  const containerRef = React.useRef(null,);
+  const deviceRef = React.useRef(null,);
+  const screenRef = React.useRef(null,);
+  const updateImperativeScale = React.useCallback(({
     scale: scale2,
     screenScalePixelFix,
   },) => {
@@ -20169,7 +20172,7 @@ function Device({
   if (scaleDataRef.current === void 0 && options.deviceOptions && options.scaleTo && options.scaleTo !== 'dynamic') {
     updateImperativeScale(scaleDataRef.current = getScaleData(options.deviceOptions, options.scaleTo,),);
   }
-  const invertScale2 = React$1.useCallback((point) => {
+  const invertScale2 = React.useCallback((point) => {
     if (!scaleDataRef.current) return point;
     const {
       scale: scale2 = 1,
@@ -20179,7 +20182,7 @@ function Device({
       y: point.y / scale2,
     };
   }, [],);
-  const updateScale = React$1.useCallback(() => {
+  const updateScale = React.useCallback(() => {
     const {
       deviceOptions,
       scaleTo,
@@ -20196,17 +20199,17 @@ function Device({
     if (!ResizeObserver2) return;
     return new ResizeObserver2(() => updateScale());
   },);
-  React$1.useLayoutEffect(() => {
+  React.useLayoutEffect(() => {
     optionsRef.current = {
       deviceOptions: options.deviceOptions,
       overrideTheme: options.overrideTheme,
       scaleTo: options.scaleTo,
     };
   }, [options.deviceOptions, options.overrideTheme, options.scaleTo,],);
-  React$1.useLayoutEffect(() => {
+  React.useLayoutEffect(() => {
     updateScale();
   }, [updateScale,],);
-  React$1.useEffect(() => {
+  React.useEffect(() => {
     if (!observer2 || !containerRef.current) return;
     observer2.observe(containerRef.current,);
     return () => observer2.disconnect();
@@ -20227,29 +20230,29 @@ function Device({
     }
     : {};
   const screenBackground = options.deviceOptions?.transparentBackground ? 'transparent' : 'white';
-  return /* @__PURE__ */ jsx2('div', {
+  return /* @__PURE__ */ jsx('div', {
     suppressHydrationWarning: true,
     style: {
       ...containerStyle2,
       ...resizeStyles,
     },
     ref: containerRef,
-    children: /* @__PURE__ */ jsxs2('div', {
+    children: /* @__PURE__ */ jsxs('div', {
       suppressHydrationWarning: true,
       style: {
         ...deviceStyle,
       },
       ref: deviceRef,
       children: [
-        handStyle && /* @__PURE__ */ jsx2('div', {
+        handStyle && /* @__PURE__ */ jsx('div', {
           suppressHydrationWarning: true,
           style: handStyle,
         },),
-        deviceAppearance === 'external-clay' && deviceImageStyle && /* @__PURE__ */ jsx2('div', {
+        deviceAppearance === 'external-clay' && deviceImageStyle && /* @__PURE__ */ jsx('div', {
           suppressHydrationWarning: true,
           style: deviceImageStyle,
         },),
-        /* @__PURE__ */ jsx2('div', {
+        /* @__PURE__ */ jsx('div', {
           suppressHydrationWarning: true,
           style: {
             ...screenStyle,
@@ -20257,16 +20260,16 @@ function Device({
             backgroundColor: children ? screenBackground : screenStyle.backgroundColor,
           },
           ref: screenRef,
-          children: /* @__PURE__ */ jsx2(MotionConfig, {
+          children: /* @__PURE__ */ jsx(MotionConfig, {
             suppressHydrationWarning: true,
             transformPagePoint: invertScale2,
-            children: /* @__PURE__ */ jsx2(ErrorBoundary, {
+            children: /* @__PURE__ */ jsx(ErrorBoundary, {
               suppressHydrationWarning: true,
               children,
             },),
           },),
         },),
-        deviceAppearance === 'realistic' && deviceImageStyle && /* @__PURE__ */ jsx2('div', {
+        deviceAppearance === 'realistic' && deviceImageStyle && /* @__PURE__ */ jsx('div', {
           suppressHydrationWarning: true,
           style: deviceImageStyle,
         },),
@@ -21761,7 +21764,7 @@ function isStaticRenderer() {
   return currentTarget === RenderTarget.canvas || currentTarget === RenderTarget.export;
 }
 function useIsStaticRenderer() {
-  const [isStatic,] = useState3(() => isStaticRenderer());
+  const [isStatic,] = useState(() => isStaticRenderer());
   return isStatic;
 }
 var asRecord = (object) => object;
@@ -21793,7 +21796,7 @@ var implementation = {
   },
   useImageElement(image, rect, nodeId,) {
     const src = runtime.useImageSource(image, rect, nodeId,);
-    return useMemo3(() => {
+    return useMemo(() => {
       const element = new Image();
       element.src = src;
       if (image.srcSet) element.srcset = image.srcSet;
@@ -21894,15 +21897,15 @@ function getImageStyle(image,) {
   };
 }
 function useDecodingAttribute(avoidAsyncDecoding,) {
-  const currentDecoding = React$1.useRef(avoidAsyncDecoding ? 'auto' : 'async',);
-  const switchDecodingToAuto = useCallback4((node) => {
+  const currentDecoding = React.useRef(avoidAsyncDecoding ? 'auto' : 'async',);
+  const switchDecodingToAuto = useCallback2((node) => {
     currentDecoding.current = 'auto';
     node.decoding = 'auto';
   }, [],);
-  const onImageLoad = useCallback4((event) => {
+  const onImageLoad = useCallback2((event) => {
     switchDecodingToAuto(event.currentTarget,);
   }, [switchDecodingToAuto,],);
-  const onImageMount = useCallback4((node) => {
+  const onImageMount = useCallback2((node) => {
     if (node?.complete) switchDecodingToAuto(node,);
   }, [switchDecodingToAuto,],);
   return {
@@ -21926,7 +21929,7 @@ function StaticImage({
     onImageLoad,
     onImageMount,
   } = useDecodingAttribute(avoidAsyncDecoding,);
-  return /* @__PURE__ */ jsx2('img', {
+  return /* @__PURE__ */ jsx('img', {
     suppressHydrationWarning: true,
     ref: onImageMount,
     decoding,
@@ -21948,10 +21951,10 @@ function CanvasImage({
   containerSize,
   nodeId,
 },) {
-  const wrapperRef = React$1.useRef(null,);
+  const wrapperRef = React.useRef(null,);
   const imageElement = runtime.useImageElement(image, containerSize, nodeId,);
   const imageStyle = getImageStyle(image,);
-  React$1.useLayoutEffect(() => {
+  React.useLayoutEffect(() => {
     const wrapper = wrapperRef.current;
     if (wrapper === null) return;
     wrapper.appendChild(imageElement,);
@@ -21960,7 +21963,7 @@ function CanvasImage({
     };
   }, [imageElement,],);
   Object.assign(imageElement.style, imageStyle,);
-  return /* @__PURE__ */ jsx2('div', {
+  return /* @__PURE__ */ jsx('div', {
     suppressHydrationWarning: true,
     ref: wrapperRef,
     style: {
@@ -21974,15 +21977,15 @@ function OptimizedCanvasImage({
   image,
   containerSize,
 },) {
-  const wrapperRef = React$1.useRef(null,);
+  const wrapperRef = React.useRef(null,);
   const source = runtime.useImageSource(image, containerSize, nodeId,);
-  React$1.useLayoutEffect(() => {
+  React.useLayoutEffect(() => {
     const wrapper = wrapperRef.current;
     if (wrapper === null) return;
     const imageStyle = getImageStyle(image,);
     runtime.renderOptimizedCanvasImage(wrapper, source, imageStyle, nodeId,);
   }, [nodeId, image, source,],);
-  return /* @__PURE__ */ jsx2('div', {
+  return /* @__PURE__ */ jsx('div', {
     suppressHydrationWarning: true,
     ref: wrapperRef,
     style: {
@@ -22021,19 +22024,19 @@ function BackgroundImageComponent({
       imageNode = null;
       needsMotion = true;
     } else if (RenderTarget.current() !== RenderTarget.canvas) {
-      imageNode = /* @__PURE__ */ jsx2(StaticImage, {
+      imageNode = /* @__PURE__ */ jsx(StaticImage, {
         suppressHydrationWarning: true,
         image,
         avoidAsyncDecoding: RenderTarget.current() === RenderTarget.export,
         ...props,
       },);
     } else if (runtime.canRenderOptimizedCanvasImage(runtime.useImageSource(image,),)) {
-      imageNode = /* @__PURE__ */ jsx2(OptimizedCanvasImage, {
+      imageNode = /* @__PURE__ */ jsx(OptimizedCanvasImage, {
         suppressHydrationWarning: true,
         image,
         ...props,
       },);
-    } else {imageNode = /* @__PURE__ */ jsx2(CanvasImage, {
+    } else {imageNode = /* @__PURE__ */ jsx(CanvasImage, {
         suppressHydrationWarning: true,
         image,
         ...props,
@@ -22044,14 +22047,14 @@ function BackgroundImageComponent({
     ...getPlaceholderStyle(),
   };
   return needsMotion
-    ? /* @__PURE__ */ jsx2(motion.div, {
+    ? /* @__PURE__ */ jsx(motion.div, {
       suppressHydrationWarning: true,
       layoutId,
       style: style2,
       'data-framer-background-image-wrapper': true,
       children: imageNode,
     },)
-    : /* @__PURE__ */ jsx2('div', {
+    : /* @__PURE__ */ jsx('div', {
       suppressHydrationWarning: true,
       style: style2,
       'data-framer-background-image-wrapper': true,
@@ -22107,13 +22110,13 @@ function Border(props,) {
   };
   if (props.border) {
     style2.border = props.border;
-    return /* @__PURE__ */ jsx2(motion.div, {
+    return /* @__PURE__ */ jsx(motion.div, {
       suppressHydrationWarning: true,
       style: style2,
     },);
   }
   collectBorderStyleForProps(props, style2, false,);
-  return /* @__PURE__ */ jsx2(motion.div, {
+  return /* @__PURE__ */ jsx(motion.div, {
     suppressHydrationWarning: true,
     'data-frame-border': true,
     style: style2,
@@ -23333,7 +23336,7 @@ function getConstraintValues(props,) {
     maxWidth: props.maxWidth,
   };
 }
-var ConstraintsContext = /* @__PURE__ */ React$1.createContext({
+var ConstraintsContext = /* @__PURE__ */ React.createContext({
   parentSize: 0,
 },);
 function deprecatedParentSize(parentSize,) {
@@ -23341,7 +23344,7 @@ function deprecatedParentSize(parentSize,) {
   return parentSize;
 }
 function useParentSize() {
-  return React$1.useContext(ConstraintsContext,).parentSize;
+  return React.useContext(ConstraintsContext,).parentSize;
 }
 function isSize(o,) {
   return typeof o === 'object';
@@ -23352,11 +23355,11 @@ var ProvideParentSize = (props) => {
     parentSize,
     children,
   } = props;
-  const value = React$1.useMemo(() => ({
+  const value = React.useMemo(() => ({
     parentSize,
   }), [getParentWidth(parentSize,), getParentHeight(parentSize,),],);
   if (currentParentSize === 1) return children || null;
-  return /* @__PURE__ */ jsx2(ConstraintsContext.Provider, {
+  return /* @__PURE__ */ jsx(ConstraintsContext.Provider, {
     suppressHydrationWarning: true,
     value,
     children,
@@ -23369,7 +23372,7 @@ function getParentHeight(parentSize,) {
   return isSize(parentSize,) ? parentSize.height : parentSize;
 }
 function useProvideParentSize(node, parentSize,) {
-  return /* @__PURE__ */ jsx2(ProvideParentSize, {
+  return /* @__PURE__ */ jsx(ProvideParentSize, {
     suppressHydrationWarning: true,
     parentSize,
     children: node,
@@ -23402,7 +23405,7 @@ function getIntrinsicSizeForBackgroundImage(background,) {
 function htmlElementAsMotionComponent(asElem,) {
   return asElem && asElem !== 'search' && asElem !== 'slot' && asElem !== 'template' ? motion[asElem] : motion['div'];
 }
-var StyleSheetContext = /* @__PURE__ */ React$1.createContext(void 0,);
+var StyleSheetContext = /* @__PURE__ */ React.createContext(void 0,);
 var listener;
 function hasCSSEvaluationListener() {
   return listener !== void 0;
@@ -23427,18 +23430,18 @@ var withCSS = (Component22, escapedCSS, componentSerializationId,) => {
     const rules = Array.isArray(escapedCSS,) ? escapedCSS : escapedCSS.split('\n',);
     reportEvaluatedCSS(componentSerializationId, rules.filter(Boolean,),);
   }
-  return React$1.forwardRef((props, ref,) => {
+  return React.forwardRef((props, ref,) => {
     const {
       sheet,
       cache: cache2,
-    } = React$1.useContext(StyleSheetContext,) ?? {};
+    } = React.useContext(StyleSheetContext,) ?? {};
     const id2 = componentSerializationId;
     if (!isBrowser$12()) {
       if (isFunction(escapedCSS,)) escapedCSS = escapedCSS(currentCSSRenderTarget(), props,);
       const concatenatedCSS = Array.isArray(escapedCSS,) ? escapedCSS.join('\n',) : escapedCSS;
       cssCollector.add(concatenatedCSS, id2,);
     }
-    useInsertionEffect3(() => {
+    useInsertionEffect(() => {
       if (id2 && componentsWithServerRenderedStyles.has(id2,)) return;
       (isFunction(escapedCSS,)
         ? escapedCSS(currentCSSRenderTarget(), props,)
@@ -23446,7 +23449,7 @@ var withCSS = (Component22, escapedCSS, componentSerializationId,) => {
         ? escapedCSS
         : escapedCSS.split('\n',)).forEach((rule) => rule && injectCSSRule(rule, sheet, cache2,));
     }, [],);
-    return /* @__PURE__ */ jsx2(Component22, {
+    return /* @__PURE__ */ jsx(Component22, {
       suppressHydrationWarning: true,
       ...props,
       ref,
@@ -23473,10 +23476,10 @@ var CSSCollector = class {
 };
 var cssCollector = /* @__PURE__ */ new CSSCollector();
 var libraryCSSRules;
-import { getCombinedCSSRules as unframerGetCombinedCSSRules } from './framer-chunks/chunk.DD64dNej-3QGTDLSP.js';
+import { getCombinedCSSRules as unframerGetCombinedCSSRules } from './framer-chunks/chunk.Cr27RyyP-UFFGAYFW.js';
 var getLoadedLibraryCSS = unframerGetCombinedCSSRules;
 function loadLibraryCSSRules() {
-    return libraryCSSRules ??= import('./framer-chunks/chunk.DD64dNej-3QGTDLSP.js').then((module) => {
+    return libraryCSSRules ??= import('./framer-chunks/chunk.Cr27RyyP-UFFGAYFW.js').then((module) => {
     getLoadedLibraryCSS = module.getCombinedCSSRules;
     if (isBrowser$12()) for (const rule of getLoadedLibraryCSS()) injectCSSRule(rule, void 0,);
     return module;
@@ -23529,9 +23532,9 @@ function processOverrideForwarding(props, children,) {
       children,
     };
   }
-  children = React$1.Children.map(children, (child) => {
-    if (!React$1.isValidElement(child,)) return child;
-    return React$1.cloneElement(child, {
+  children = React.Children.map(children, (child) => {
+    if (!React.isValidElement(child,)) return child;
+    return React.cloneElement(child, {
       _forwardedOverrides,
     },);
   },);
@@ -23562,8 +23565,8 @@ function useLayoutId2(props, {
   const {
     getLayoutId,
     enabled,
-  } = useContext3(LayoutIdContext,);
-  return useMemo3(() => {
+  } = useContext(LayoutIdContext,);
+  return useMemo(() => {
     if (!enabled) return props.layoutId;
     const existingLayoutId = specificLayoutId || props.layoutId;
     if (!existingLayoutId) {
@@ -23578,10 +23581,10 @@ function useLayoutId2(props, {
     return postfix ? `${layoutIdCandidate}-${postfix}` : layoutIdCandidate;
   }, [enabled,],);
 }
-var ComponentContainerContext = /* @__PURE__ */ React$1.createContext(false,);
+var ComponentContainerContext = /* @__PURE__ */ React.createContext(false,);
 function useForceUpdate$2() {
-  const [_, setForcedRenderCount,] = React$1.useState(0,);
-  return React$1.useCallback(() => setForcedRenderCount((v) => v + 1), [],);
+  const [_, setForcedRenderCount,] = React.useState(0,);
+  return React.useCallback(() => setForcedRenderCount((v) => v + 1), [],);
 }
 var DEFAULT_SIZE = 200;
 var SharedObserver = class {
@@ -23608,7 +23611,7 @@ var SharedObserver = class {
 var sharedResizeObserver = /* @__PURE__ */ (() => isBrowser$12() ? new SharedObserver() : void 0)();
 function useRerenderOnResize(ref,) {
   const update = useForceUpdate$2();
-  useEffect4(() => {
+  useEffect2(() => {
     const element = ref?.current;
     if (!element) return;
     sharedResizeObserver?.observeElementWithCallback(ref.current, update,);
@@ -23619,7 +23622,7 @@ function useRerenderOnResize(ref,) {
 }
 function useMeasuredSize(ref,) {
   const forceUpdate = useForceUpdate$2();
-  const size = React$1.useRef(null,);
+  const size = React.useRef(null,);
   function updateSize(newSize,) {
     if (newSize.width === 0 && newSize.height === 0) return;
     if (!size.current || newSize.height !== size.current.height || newSize.width !== size.current.width) {
@@ -23650,7 +23653,7 @@ function useMeasuredSize(ref,) {
 }
 var SIZE_COMPATIBILITY_WRAPPER_ATTRIBUTE = 'data-framer-size-compatibility-wrapper';
 var withMeasuredSize = (Component22) => (props) => {
-  const ref = React$1.useRef(null,);
+  const ref = React.useRef(null,);
   const size = useMeasuredSize(ref,);
   const dataProps = {
     [SIZE_COMPATIBILITY_WRAPPER_ATTRIBUTE]: true,
@@ -23658,7 +23661,7 @@ var withMeasuredSize = (Component22) => (props) => {
   const shouldRender = Boolean(size,);
   const fallbackWidth = props.width ?? DEFAULT_SIZE;
   const fallbackHeight = props.height ?? DEFAULT_SIZE;
-  return /* @__PURE__ */ jsx2('div', {
+  return /* @__PURE__ */ jsx('div', {
     suppressHydrationWarning: true,
     style: {
       width: '100%',
@@ -23667,7 +23670,7 @@ var withMeasuredSize = (Component22) => (props) => {
     },
     ref,
     ...dataProps,
-    children: shouldRender && /* @__PURE__ */ jsx2(Component22, {
+    children: shouldRender && /* @__PURE__ */ jsx(Component22, {
       suppressHydrationWarning: true,
       ...props,
       width: size?.width ?? fallbackWidth,
@@ -23707,7 +23710,7 @@ function useMeasureLayout(props, ref, getChildren = () => [], options = {},) {
   const {
     skipHook = false,
   } = options;
-  const inCodeComponent = useContext3(ComponentContainerContext,);
+  const inCodeComponent = useContext(ComponentContainerContext,);
   const onCanvas = RenderTarget.current() === RenderTarget.canvas;
   useIsomorphicLayoutEffect$1(() => {
     if (!onCanvas || inCodeComponent || skipHook) return;
@@ -23756,7 +23759,7 @@ function isValidCSSStyleValue(value,) {
   return isString(value,) || isNumber(value,) || isNull(value,);
 }
 var Layer = /* @__PURE__ */ (() => {
-  class Layer2 extends Component$1 {
+  class Layer2 extends Component2 {
     static defaultProps = {};
     static applyWillChange(props, style2, usingMotionStyle,) {
       if (props.willChangeTransform) {
@@ -24189,7 +24192,7 @@ var defaultFrameRect = {
   height: 200,
 };
 function useStyleAndRect(props,) {
-  const inCodeComponent = useContext3(ComponentContainerContext,);
+  const inCodeComponent = useContext(ComponentContainerContext,);
   const {
     style: style2,
     _initialStyle,
@@ -24207,7 +24210,7 @@ function useStyleAndRect(props,) {
   const shouldDisablePointerEvents = !hasEvents(props,) && !props.__fromCanvasComponent && !hasScrollableContent(props,);
   const safeToEditPointerEvents = props.style ? !('pointerEvents' in props.style) : true;
   if (shouldDisablePointerEvents && safeToEditPointerEvents) defaultStyle.pointerEvents = 'none';
-  const centerTextStyle = React$1.Children.count(props.children,) > 0 && React$1.Children.toArray(props.children,).every((child) => {
+  const centerTextStyle = React.Children.count(props.children,) > 0 && React.Children.toArray(props.children,).every((child) => {
     return typeof child === 'string' || typeof child === 'number';
   },) && {
     display: 'flex',
@@ -24306,7 +24309,7 @@ function getMotionProps(props,) {
 function hasDataFramerName(props,) {
   return 'data-framer-name' in props;
 }
-var VisibleFrame = /* @__PURE__ */ forwardRef3(function VisibleFrame2(props, forwardedRef,) {
+var VisibleFrame = /* @__PURE__ */ forwardRef(function VisibleFrame2(props, forwardedRef,) {
   const {
     name,
     center,
@@ -24321,7 +24324,7 @@ var VisibleFrame = /* @__PURE__ */ forwardRef3(function VisibleFrame2(props, for
   const motionProps = getMotionProps(propsWithOverrides,);
   const layoutId = useLayoutId2(props,);
   const cursor = getCursorFromEvents(props,);
-  const fallbackRef = useRef3(null,);
+  const fallbackRef = useRef(null,);
   const ref = forwardedRef ?? fallbackRef;
   const dataProps = {
     'data-framer-component-type': props.componentType ?? 'Frame',
@@ -24341,12 +24344,12 @@ var VisibleFrame = /* @__PURE__ */ forwardRef3(function VisibleFrame2(props, for
   Object.assign(dataProps, layoutHintDataProps(centeringTransform, propsWithOverrides.style,),);
   useMeasureLayout(props, ref,);
   const backgroundImage = backgroundImageFromProps(props,);
-  const parentSize = resolveParentSize(propsWithOverrides, unwrappedProps, rect, useContext3(ComponentContainerContext,),);
+  const parentSize = resolveParentSize(propsWithOverrides, unwrappedProps, rect, useContext(ComponentContainerContext,),);
   const wrappedContent = useProvideParentSize(
-    /* @__PURE__ */ jsxs2(Fragment3, {
+    /* @__PURE__ */ jsxs(Fragment, {
       children: [
         backgroundImage
-          ? /* @__PURE__ */ jsx2(BackgroundImageComponent, {
+          ? /* @__PURE__ */ jsx(BackgroundImageComponent, {
             suppressHydrationWarning: true,
             alt: props.alt ?? '',
             image: backgroundImage,
@@ -24356,7 +24359,7 @@ var VisibleFrame = /* @__PURE__ */ forwardRef3(function VisibleFrame2(props, for
           },)
           : null,
         children,
-        /* @__PURE__ */ jsx2(Border, {
+        /* @__PURE__ */ jsx(Border, {
           suppressHydrationWarning: true,
           ..._border,
           border,
@@ -24372,7 +24375,7 @@ var VisibleFrame = /* @__PURE__ */ forwardRef3(function VisibleFrame2(props, for
     currentStyle[props.fitImageDimension] = 'auto';
     currentStyle.aspectRatio = intrinsicSize.width / intrinsicSize.height;
   }
-  return /* @__PURE__ */ jsxs2(MotionComponent, {
+  return /* @__PURE__ */ jsxs(MotionComponent, {
     suppressHydrationWarning: true,
     ...dataProps,
     ...motionProps,
@@ -24382,13 +24385,13 @@ var VisibleFrame = /* @__PURE__ */ forwardRef3(function VisibleFrame2(props, for
     children: [wrappedContent, __portal,],
   },);
 },);
-var FrameWithMotionInner = /* @__PURE__ */ forwardRef3(function FrameWithMotion(props, ref,) {
+var FrameWithMotionInner = /* @__PURE__ */ forwardRef(function FrameWithMotion(props, ref,) {
   /* @__PURE__ */ countNodeRender();
   const {
     visible = true,
   } = props;
   if (!visible) return null;
-  return /* @__PURE__ */ jsx2(VisibleFrame, {
+  return /* @__PURE__ */ jsx(VisibleFrame, {
     suppressHydrationWarning: true,
     ...props,
     ref,
@@ -24435,9 +24438,9 @@ function EmptyState({
   const {
     target,
   } = RenderEnvironment;
-  const childCount = React$1.Children.count(children,);
+  const childCount = React.Children.count(children,);
   if (insideUserCodeComponent && childCount === 0) {
-    return /* @__PURE__ */ jsx2(FrameWithMotion2, {
+    return /* @__PURE__ */ jsx(FrameWithMotion2, {
       suppressHydrationWarning: true,
       ...size,
       'data-name': 'placeholder',
@@ -24446,7 +24449,7 @@ function EmptyState({
   if (target !== RenderTarget.canvas) return null;
   if (hide) return null;
   if (childCount !== 0) return null;
-  return /* @__PURE__ */ jsx2(FrameWithMotion2, {
+  return /* @__PURE__ */ jsx(FrameWithMotion2, {
     suppressHydrationWarning: true,
     className: 'framerInternalUI-canvasPlaceholder',
     top: 0,
@@ -24457,7 +24460,7 @@ function EmptyState({
       position,
       ...size,
     },
-    children: /* @__PURE__ */ jsx2('div', {
+    children: /* @__PURE__ */ jsx('div', {
       suppressHydrationWarning: true,
       style: {
         display: 'flex',
@@ -24466,7 +24469,7 @@ function EmptyState({
         height: '100%',
         width: '100%',
       },
-      children: /* @__PURE__ */ jsxs2('div', {
+      children: /* @__PURE__ */ jsxs('div', {
         suppressHydrationWarning: true,
         style: {
           display: 'flex',
@@ -24477,11 +24480,11 @@ function EmptyState({
           WebkitMaskImage: `linear-gradient(90deg, black, black calc(100% - 12px * ${scaleFactor}), transparent)`,
         },
         children: [
-          /* @__PURE__ */ jsx2(Title, {
+          /* @__PURE__ */ jsx(Title, {
             suppressHydrationWarning: true,
             children: title,
           },),
-          /* @__PURE__ */ jsx2(Description, {
+          /* @__PURE__ */ jsx(Description, {
             suppressHydrationWarning: true,
             children: description,
           },),
@@ -24494,7 +24497,7 @@ var scaleFactor = 'var(--framerInternalCanvas-canvasPlaceholderContentScaleFacto
 function Title({
   children,
 },) {
-  return /* @__PURE__ */ jsx2('span', {
+  return /* @__PURE__ */ jsx('span', {
     suppressHydrationWarning: true,
     style: {
       display: 'flex',
@@ -24511,7 +24514,7 @@ function Title({
 function Description({
   children,
 },) {
-  return /* @__PURE__ */ jsx2('span', {
+  return /* @__PURE__ */ jsx('span', {
     suppressHydrationWarning: true,
     style: {
       display: 'flex',
@@ -24526,12 +24529,12 @@ function Description({
   },);
 }
 var TREE_ROOT_ID = '__LAYOUT_TREE_ROOT';
-var SharedLayoutContext = /* @__PURE__ */ React$1.createContext({
+var SharedLayoutContext = /* @__PURE__ */ React.createContext({
   schedulePromoteTree: () => {},
   scheduleProjectionDidUpdate: () => {},
   initLead: () => {},
 },);
-var SharedLayoutRoot = class extends Component$1 {
+var SharedLayoutRoot = class extends Component2 {
   shouldAnimate = false;
   transition;
   lead;
@@ -24583,7 +24586,7 @@ var SharedLayoutRoot = class extends Component$1 {
     initLead: this.initLead,
   };
   render() {
-    return /* @__PURE__ */ jsx2(SharedLayoutContext.Provider, {
+    return /* @__PURE__ */ jsx(SharedLayoutContext.Provider, {
       suppressHydrationWarning: true,
       value: this.sharedLayoutContext,
       children: this.props.children,
@@ -24596,7 +24599,7 @@ var rootStyles = {
   backgroundColor: 'none',
 };
 function MagicMotionCrossfadeRoot(props,) {
-  return /* @__PURE__ */ jsx2(motion.div, {
+  return /* @__PURE__ */ jsx(motion.div, {
     suppressHydrationWarning: true,
     layoutId: TREE_ROOT_ID,
     style: rootStyles,
@@ -24668,7 +24671,7 @@ function useStableRefWithObserver() {
   });
 }
 function useObserverRef(forwardedRef,) {
-  const fallbackRef = useRef3(null,);
+  const fallbackRef = useRef(null,);
   const createStableRefWithObserver = useStableRefWithObserver();
   return useConstant2(() => {
     if (isMutableRef(forwardedRef,)) return createStableRefWithObserver(forwardedRef,);
@@ -24677,8 +24680,8 @@ function useObserverRef(forwardedRef,) {
   },);
 }
 function useRefEffect(ref, effect, deps,) {
-  const effectRef = useRef3();
-  const depsChangedRef = useRef3();
+  const effectRef = useRef();
+  const depsChangedRef = useRef();
   useMemoOne(() => {
     if (depsChangedRef.current !== void 0) depsChangedRef.current = true;
   }, deps ?? [{},],);
@@ -24715,7 +24718,7 @@ var SharedIntersectionObserver = class {
     return this.sharedIntersectionObserver?.root;
   }
 };
-var SharedIntersectionObserverContext = /* @__PURE__ */ createContext3(/* @__PURE__ */ new Map(),);
+var SharedIntersectionObserverContext = /* @__PURE__ */ createContext(/* @__PURE__ */ new Map(),);
 function observeElement(observers2, key2, element, root, callback, rootMargin, threshold2,) {
   let observer2 = observers2.get(key2,);
   if (!observer2 || observer2.root !== root?.current) {
@@ -24733,7 +24736,7 @@ function observeElement(observers2, key2, element, root, callback, rootMargin, t
 }
 function useSharedIntersectionObserverImpl(ref, callback, options,) {
   const key2 = useConstant2(() => `${options.rootMargin}`);
-  const observers2 = useContext3(SharedIntersectionObserverContext,);
+  const observers2 = useContext(SharedIntersectionObserverContext,);
   const {
     enabled,
     root,
@@ -24748,9 +24751,9 @@ function useSharedIntersectionObserverImpl(ref, callback, options,) {
 }
 var useSharedIntersectionObserver = typeof IntersectionObserver === 'undefined' ? noop : useSharedIntersectionObserverImpl;
 var thresholds2 = /* @__PURE__ */ new Array(100,).fill(void 0,).map((_, i,) => i * 0.01);
-var ViewportContext = /* @__PURE__ */ React$1.createContext(null,);
+var ViewportContext = /* @__PURE__ */ React.createContext(null,);
 function useAppearEffect(ref, appearCallback, options,) {
-  const internalState = React$1.useRef({
+  const internalState = React.useRef({
     isInView: false,
     hasAnimatedOnce: false,
   },);
@@ -24760,7 +24763,7 @@ function useAppearEffect(ref, appearCallback, options,) {
     threshold: threshold2,
     rootMargin = `0px 0px 0px 0px`,
   } = options;
-  const callback = React$1.useCallback((entry) => {
+  const callback = React.useCallback((entry) => {
     const {
       isInView,
       hasAnimatedOnce,
@@ -24798,7 +24801,7 @@ function isIntersectingWithThreshold({
   if (boundingClientRect.height === 0) return isIntersecting;
   return isIntersecting && calculatedIntersection(intersectionRect, boundingClientRect,) >= threshold2;
 }
-var LayoutTree = class extends Component$1 {
+var LayoutTree = class extends Component2 {
   /**
    * SharedLayoutTrees need to reset the projections styles previously applied
    * on their boxes if they are becoming lead but not animating.
@@ -24871,7 +24874,7 @@ var LayoutTree = class extends Component$1 {
     if (layoutId) this.projectionNodes.delete(layoutId,);
   }
   render() {
-    return /* @__PURE__ */ jsx2(SwitchLayoutGroupContext.Provider, {
+    return /* @__PURE__ */ jsx(SwitchLayoutGroupContext.Provider, {
       suppressHydrationWarning: true,
       value: this.switchLayoutGroupContext,
       children: this.props.children,
@@ -24879,16 +24882,16 @@ var LayoutTree = class extends Component$1 {
   }
 };
 var SharedLayoutTree = (props) => {
-  const sharedLayoutContext = React$1.useContext(SharedLayoutContext,);
-  return /* @__PURE__ */ jsx2(LayoutTree, {
+  const sharedLayoutContext = React.useContext(SharedLayoutContext,);
+  return /* @__PURE__ */ jsx(LayoutTree, {
     suppressHydrationWarning: true,
     ...props,
     sharedLayoutContext,
   },);
 };
-var NavigationContainerContext = /* @__PURE__ */ React$1.createContext(true,);
+var NavigationContainerContext = /* @__PURE__ */ React.createContext(true,);
 function useIsInCurrentNavigationTarget() {
-  return useContext3(NavigationContainerContext,);
+  return useContext(NavigationContainerContext,);
 }
 function newMap() {
   return /* @__PURE__ */ new Map();
@@ -24896,7 +24899,7 @@ function newMap() {
 function useMap() {
   return useConstant2(newMap,);
 }
-var NavigationTargetContext = /* @__PURE__ */ createContext3({
+var NavigationTargetContext = /* @__PURE__ */ createContext({
   register: () => {},
   deregister: () => {},
 },);
@@ -24906,22 +24909,22 @@ var NavigationTargetWrapper = ({
   children,
 },) => {
   const callbacks = useMap();
-  const register = useCallback4((fn) => {
+  const register = useCallback2((fn) => {
     if (callbacks.has(fn,)) {
       console.warn('NavigationTargetWrapper: already registered',);
       return;
     }
     callbacks.set(fn, void 0,);
   }, [callbacks,],);
-  const deregister = useCallback4((fn) => {
+  const deregister = useCallback2((fn) => {
     callbacks.get(fn,)?.();
     callbacks.delete(fn,);
   }, [callbacks,],);
-  const value = useRef3({
+  const value = useRef({
     register,
     deregister,
   },).current;
-  useEffect4(() => {
+  useEffect2(() => {
     callbacks.forEach((_, cb,) => {
       const newCleanup = cb(isCurrent, isOverlayed,);
       callbacks.set(cb, isFunction(newCleanup,) ? newCleanup : void 0,);
@@ -24934,7 +24937,7 @@ var NavigationTargetWrapper = ({
       },);
     };
   }, [isCurrent, isOverlayed, callbacks,],);
-  return /* @__PURE__ */ jsx2(NavigationTargetContext.Provider, {
+  return /* @__PURE__ */ jsx(NavigationTargetContext.Provider, {
     suppressHydrationWarning: true,
     value,
     children,
@@ -24944,14 +24947,14 @@ function useOnCurrentTargetChange(callback, deps = [],) {
   const {
     register,
     deregister,
-  } = useContext3(NavigationTargetContext,);
-  useEffect4(() => {
+  } = useContext(NavigationTargetContext,);
+  useEffect2(() => {
     if (!callback) return;
     register(callback,);
     return () => deregister(callback,);
   }, [register, deregister, ...deps,],);
 }
-var NavigationContainer = /* @__PURE__ */ React$1.memo(function NavigationContainer2({
+var NavigationContainer = /* @__PURE__ */ React.memo(function NavigationContainer2({
   isLayeredContainer,
   isCurrent,
   isPrevious,
@@ -24981,21 +24984,21 @@ var NavigationContainer = /* @__PURE__ */ React$1.memo(function NavigationContai
   isInitial,
 },) {
   const animate22 = useAnimation();
-  const presence = useContext3(PresenceContext,);
+  const presence = useContext(PresenceContext,);
   const {
     persistLayoutIdCache,
-  } = useContext3(LayoutIdContext,);
-  const previousState = useRef3({
+  } = useContext(LayoutIdContext,);
+  const previousState = useRef({
     wasCurrent: void 0,
     wasPrevious: false,
     wasBeingRemoved: false,
     wasReset: true,
     origins: getOriginProps({}, initialProps, transitionProps,),
   },);
-  const viewportRef = useRef3(null,);
+  const viewportRef = useRef(null,);
   const isBeingRemoved = presence !== null && !presence.isPresent;
   if (isCurrent && previousState.current.wasCurrent === void 0) persistLayoutIdCache();
-  useEffect4(() => {
+  useEffect2(() => {
     if (isLayeredContainer || !animate22) return;
     if (isBeingRemoved) {
       previousState.current = {
@@ -25093,7 +25096,7 @@ var NavigationContainer = /* @__PURE__ */ React$1.memo(function NavigationContai
   const isPresent2 = !(isBeingRemoved || areMagicMotionLayersPresent === false);
   const isCurrentTarget = !!isCurrent && isPresent2;
   const forceOpacity = isCurrent && isInitial;
-  return /* @__PURE__ */ jsxs2(FrameWithMotion2, {
+  return /* @__PURE__ */ jsxs(FrameWithMotion2, {
     suppressHydrationWarning: true,
     'data-framer-component-type': 'NavigationContainerWrapper',
     width: '100%',
@@ -25109,7 +25112,7 @@ var NavigationContainer = /* @__PURE__ */ React$1.memo(function NavigationContai
       perspective,
     },
     children: [
-      isLayeredContainer && /* @__PURE__ */ jsx2(FrameWithMotion2, {
+      isLayeredContainer && /* @__PURE__ */ jsx(FrameWithMotion2, {
         suppressHydrationWarning: true,
         width: '100%',
         height: '100%',
@@ -25127,7 +25130,7 @@ var NavigationContainer = /* @__PURE__ */ React$1.memo(function NavigationContai
         backgroundColor: backdropColor ? backdropColor : 'transparent',
         onTap: !isBeingRemoved ? onTapBackdrop : void 0,
       },),
-      /* @__PURE__ */ jsx2(FrameWithMotion2, {
+      /* @__PURE__ */ jsx(FrameWithMotion2, {
         suppressHydrationWarning: true,
         ...layout2,
         ...animations2,
@@ -25153,17 +25156,17 @@ var NavigationContainer = /* @__PURE__ */ React$1.memo(function NavigationContai
         },
         'data-is-present': isPresent2 ? void 0 : false,
         ref: viewportRef,
-        children: /* @__PURE__ */ jsx2(ViewportContext.Provider, {
+        children: /* @__PURE__ */ jsx(ViewportContext.Provider, {
           suppressHydrationWarning: true,
           value: viewportRef,
-          children: /* @__PURE__ */ jsx2(NavigationContainerContext.Provider, {
+          children: /* @__PURE__ */ jsx(NavigationContainerContext.Provider, {
             suppressHydrationWarning: true,
             value: isCurrentTarget,
-            children: /* @__PURE__ */ jsx2(NavigationTargetWrapper, {
+            children: /* @__PURE__ */ jsx(NavigationTargetWrapper, {
               suppressHydrationWarning: true,
               isCurrent: isCurrentTarget,
               isOverlayed,
-              children: /* @__PURE__ */ jsx2(SharedLayoutTree, {
+              children: /* @__PURE__ */ jsx(SharedLayoutTree, {
                 suppressHydrationWarning: true,
                 isLead: isCurrent,
                 animatesLayout: !!withMagicMotion,
@@ -25246,7 +25249,7 @@ var NavigatorMock = class {
   magicMotion = () => this.warning();
 };
 var navigatorMock = /* @__PURE__ */ new NavigatorMock();
-var NavigationContext = /* @__PURE__ */ createContext3(navigatorMock,);
+var NavigationContext = /* @__PURE__ */ createContext(navigatorMock,);
 var TransitionDefaults = {
   Fade: {
     exit: {
@@ -25753,11 +25756,11 @@ function sequence(direction, transition, animation,) {
   };
 }
 var NavigationConsumer = /* @__PURE__ */ (() => NavigationContext.Consumer)();
-var NavigationCallbackContext = /* @__PURE__ */ React$1.createContext(void 0,);
+var NavigationCallbackContext = /* @__PURE__ */ React.createContext(void 0,);
 var NavigationCallbackProvider = /* @__PURE__ */ (() => NavigationCallbackContext.Provider)();
-var IsInitialNavigationContext = /* @__PURE__ */ React$1.createContext(void 0,);
+var IsInitialNavigationContext = /* @__PURE__ */ React.createContext(void 0,);
 var FramerNavigation = /* @__PURE__ */ (() => {
-  class NavigationClassImpl extends Component$1 {
+  class NavigationClassImpl extends Component2 {
     #lastEventTimeStamp = null;
     state = defaultState();
     static defaultProps = {
@@ -25932,7 +25935,7 @@ var FramerNavigation = /* @__PURE__ */ (() => {
         const isPrevious = index === this.state.previous;
         const areMagicMotionLayersPresent = isCurrent ? false : removed;
         const withMagicMotion = historyItem?.transition?.withMagicMotion || isCurrent && !!this.state.previousTransition;
-        contentContainers.push(/* @__PURE__ */ jsx2(NavigationContainer, {
+        contentContainers.push(/* @__PURE__ */ jsx(NavigationContainer, {
           suppressHydrationWarning: true,
           id: key2,
           index: visualIndex,
@@ -25951,7 +25954,7 @@ var FramerNavigation = /* @__PURE__ */ (() => {
           exitProps: historyItem?.transition?.enter,
           withMagicMotion,
           areMagicMotionLayersPresent: areMagicMotionLayersPresent ? false : void 0,
-          children: /* @__PURE__ */ jsx2(MagicMotionCrossfadeRoot, {
+          children: /* @__PURE__ */ jsx(MagicMotionCrossfadeRoot, {
             suppressHydrationWarning: true,
             children: containerContent({
               component,
@@ -25961,7 +25964,7 @@ var FramerNavigation = /* @__PURE__ */ (() => {
         }, key2,),);
       }
       const overlayContainers = this.state.overlayStack.map((item, stackIndex,) => {
-        return /* @__PURE__ */ jsx2(NavigationContainer, {
+        return /* @__PURE__ */ jsx(NavigationContainer, {
           suppressHydrationWarning: true,
           isLayeredContainer: true,
           isCurrent: stackIndex === this.state.currentOverlay,
@@ -25982,7 +25985,7 @@ var FramerNavigation = /* @__PURE__ */ (() => {
           },),
         }, item.key,);
       },);
-      return /* @__PURE__ */ jsx2(FrameWithMotion2, {
+      return /* @__PURE__ */ jsx(FrameWithMotion2, {
         suppressHydrationWarning: true,
         'data-framer-component-type': 'NavigationRoot',
         top: 0,
@@ -25996,14 +25999,14 @@ var FramerNavigation = /* @__PURE__ */ (() => {
           pointerEvents: void 0,
           ...this.props.style,
         },
-        children: /* @__PURE__ */ jsx2(NavigationContext.Provider, {
+        children: /* @__PURE__ */ jsx(NavigationContext.Provider, {
           suppressHydrationWarning: true,
           value: this,
-          children: /* @__PURE__ */ jsxs2(IsInitialNavigationContext.Provider, {
+          children: /* @__PURE__ */ jsxs(IsInitialNavigationContext.Provider, {
             suppressHydrationWarning: true,
             value: isInitial,
             children: [
-              /* @__PURE__ */ jsx2(NavigationContainer, {
+              /* @__PURE__ */ jsx(NavigationContainer, {
                 suppressHydrationWarning: true,
                 isLayeredContainer: true,
                 position: void 0,
@@ -26016,11 +26019,11 @@ var FramerNavigation = /* @__PURE__ */ (() => {
                 backdropColor: void 0,
                 onTapBackdrop: void 0,
                 index: 0,
-                children: /* @__PURE__ */ jsx2(LayoutIdProvider, {
+                children: /* @__PURE__ */ jsx(LayoutIdProvider, {
                   suppressHydrationWarning: true,
-                  children: /* @__PURE__ */ jsx2(SharedLayoutRoot, {
+                  children: /* @__PURE__ */ jsx(SharedLayoutRoot, {
                     suppressHydrationWarning: true,
-                    children: /* @__PURE__ */ jsx2(AnimatePresence, {
+                    children: /* @__PURE__ */ jsx(AnimatePresence, {
                       suppressHydrationWarning: true,
                       presenceAffectsLayout: false,
                       children: contentContainers,
@@ -26028,7 +26031,7 @@ var FramerNavigation = /* @__PURE__ */ (() => {
                   },),
                 },),
               },),
-              /* @__PURE__ */ jsx2(AnimatePresence, {
+              /* @__PURE__ */ jsx(AnimatePresence, {
                 suppressHydrationWarning: true,
                 children: overlayContainers,
               },),
@@ -26168,7 +26171,7 @@ function containerIsVisible(containerIndex, stackState,) {
   return false;
 }
 function containerContent(item,) {
-  return React$1.Children.map(item.component, (child) => {
+  return React.Children.map(item.component, (child) => {
     if (!isReactChild(child,) || !isReactElement(child,) || !child.props) return child;
     const props = {
       style: child.props.style ?? {},
@@ -26185,7 +26188,7 @@ function containerContent(item,) {
       if ('height' in child.props) props.height = '100%';
       if (canStretchStyle) props.style.height = '100%';
     }
-    return React$1.cloneElement(child, props,);
+    return React.cloneElement(child, props,);
   },);
 }
 function backdropTapAction(transition, goBackAction,) {
@@ -26202,7 +26205,7 @@ function NavigationWrapper(props, ref,) {
     }
     ref.current = instance;
   };
-  return /* @__PURE__ */ jsx2(FramerNavigation, {
+  return /* @__PURE__ */ jsx(FramerNavigation, {
     suppressHydrationWarning: true,
     ref: setNavigationRef,
     ...props,
@@ -26211,7 +26214,7 @@ function NavigationWrapper(props, ref,) {
     children: props['children'],
   },);
 }
-var NavigationExport = /* @__PURE__ */ withLibraryCSS(/* @__PURE__ */ React$1.forwardRef(NavigationWrapper,),);
+var NavigationExport = /* @__PURE__ */ withLibraryCSS(/* @__PURE__ */ React.forwardRef(NavigationWrapper,),);
 var NavigateTo = /* @__PURE__ */ function (NavigateTo2,) {
   NavigateTo2['Previous'] = '@Previous';
   return NavigateTo2;
@@ -26423,9 +26426,9 @@ var require_hoist_non_react_statics_cjs = /* @__PURE__ */ __commonJSMin((exports
 },);
 var hoistNonReactStatic = /* @__PURE__ */ (() => require_hoist_non_react_statics_cjs())();
 function WithNavigator(BaseComponent, navigationTransition, navigationTransitionDirection, NavigationTarget, navigationTransitionOptions,) {
-  const InternalWithNavigator = class extends React$1.Component {
+  const InternalWithNavigator = class extends React.Component {
     render() {
-      return /* @__PURE__ */ jsx2(NavigationContext.Consumer, {
+      return /* @__PURE__ */ jsx(NavigationContext.Consumer, {
         suppressHydrationWarning: true,
         children: (navigation) => {
           const navigate = () => {
@@ -26476,7 +26479,7 @@ function WithNavigator(BaseComponent, navigationTransition, navigationTransition
               navigate.apply(this, args,);
             };
           } else props.onTap = navigate;
-          return /* @__PURE__ */ jsx2(BaseComponent, {
+          return /* @__PURE__ */ jsx(BaseComponent, {
             suppressHydrationWarning: true,
             ...props,
           },);
@@ -26726,7 +26729,7 @@ function applyMetaTag(name, props,) {
   for (const [k, v,] of Object.entries(props,)) tag.setAttribute(k, v,);
 }
 function usePrototypingMetaTags() {
-  React$1.useEffect(() => {
+  React.useEffect(() => {
     applyMetaTag('mobile-web-app-capable', {
       content: 'yes',
     },);
@@ -26750,7 +26753,7 @@ var DeviceCodeComponentInner = /* @__PURE__ */ withLibraryCSS(({
     forceOldClay: true,
   },);
   if (!deviceOptions) {
-    return /* @__PURE__ */ jsx2('div', {
+    return /* @__PURE__ */ jsx('div', {
       suppressHydrationWarning: true,
       'data-framer-component-type': 'DeviceComponent',
       className: 'no-device',
@@ -26758,7 +26761,7 @@ var DeviceCodeComponentInner = /* @__PURE__ */ withLibraryCSS(({
         width: '100%',
         height: '100%',
       },
-      children: /* @__PURE__ */ jsx2(ProvideParentSize, {
+      children: /* @__PURE__ */ jsx(ProvideParentSize, {
         suppressHydrationWarning: true,
         parentSize: 1,
         children,
@@ -26766,13 +26769,13 @@ var DeviceCodeComponentInner = /* @__PURE__ */ withLibraryCSS(({
     },);
   }
   const child = Array.isArray(children,) ? children[0] : children;
-  const resizedChild = child && React$1.isValidElement(child,)
-    ? React$1.cloneElement(child, {
+  const resizedChild = child && React.isValidElement(child,)
+    ? React.cloneElement(child, {
       width: deviceOptions.screenWidth,
       height: deviceOptions.screenHeight,
     },)
     : null;
-  return /* @__PURE__ */ jsx2(Device, {
+  return /* @__PURE__ */ jsx(Device, {
     suppressHydrationWarning: true,
     scaleTo: 'dynamic',
     deviceOptions,
@@ -27196,11 +27199,11 @@ var clamp$1 = (value, a, b,) => {
   if (value > max) value = max;
   return value;
 };
-var DraggingContext = /* @__PURE__ */ React$1.createContext({
+var DraggingContext = /* @__PURE__ */ React.createContext({
   dragging: false,
 },);
 function WithDragging(Component22,) {
-  class WithDraggingHOC extends React$1.Component {
+  class WithDraggingHOC extends React.Component {
     static draggingDefaultProps = {
       momentum: true,
       momentumOptions: {
@@ -27688,12 +27691,12 @@ function WithDragging(Component22,) {
       originalProps.onMouseWheelEnd = this.wrapHandler(this.mouseWheelEnd, originalProps.onMouseWheelEnd,);
       originalProps.left = this.x;
       originalProps.top = this.y;
-      return /* @__PURE__ */ jsx2(DraggingContext.Provider, {
+      return /* @__PURE__ */ jsx(DraggingContext.Provider, {
         suppressHydrationWarning: true,
         value: {
           dragging: this.state.isDragging,
         },
-        children: /* @__PURE__ */ jsx2(Component22, {
+        children: /* @__PURE__ */ jsx(Component22, {
           suppressHydrationWarning: true,
           ...originalProps,
         },),
@@ -27722,7 +27725,7 @@ var eventHandlerMapping = {
 };
 var tapEventKeys = /* @__PURE__ */ new Set(['tapstart', 'tap', 'tapend',],);
 function WithEvents(BaseComponent,) {
-  const withEvents = class WithEventsHOC extends React$1.Component {
+  const withEvents = class WithEventsHOC extends React.Component {
     static defaultProps = Object.assign({}, BaseComponent.defaultProps,);
     shouldCancelTap = false;
     activeEventListeners = /* @__PURE__ */ new Map();
@@ -27730,7 +27733,7 @@ function WithEvents(BaseComponent,) {
       return this.component.current && this.component.current.element;
     }
     hasFramerEventListener = false;
-    component = React$1.createRef();
+    component = React.createRef();
     componentDidMount() {
       this.addEventListeners();
     }
@@ -27793,11 +27796,11 @@ function WithEvents(BaseComponent,) {
       },);
     }
     render() {
-      return /* @__PURE__ */ jsx2(DraggingContext.Consumer, {
+      return /* @__PURE__ */ jsx(DraggingContext.Consumer, {
         suppressHydrationWarning: true,
         children: (value) => {
           this.shouldCancelTap = value.dragging;
-          return /* @__PURE__ */ jsx2(BaseComponent, {
+          return /* @__PURE__ */ jsx(BaseComponent, {
             suppressHydrationWarning: true,
             ...this.props,
             ref: this.component,
@@ -28074,7 +28077,7 @@ function shadowForShape(boxShadows, rect, shapeId, fillEnabled, strokeEnabled, s
       width: `${filterWidth.toFixed(1,)}%`,
       height: `${filterHeight.toFixed(1,)}%`,
     };
-    definition.push(/* @__PURE__ */ jsxs2('filter', {
+    definition.push(/* @__PURE__ */ jsxs('filter', {
       suppressHydrationWarning: true,
       id: outsideShadowId.id,
       filterUnits: 'objectBoundingBox',
@@ -28083,7 +28086,7 @@ function shadowForShape(boxShadows, rect, shapeId, fillEnabled, strokeEnabled, s
       children: [
         filterElements,
         shadows.length > 1
-          ? /* @__PURE__ */ jsx2('feMerge', {
+          ? /* @__PURE__ */ jsx('feMerge', {
             suppressHydrationWarning: true,
             children: mergeElements,
           },)
@@ -28091,17 +28094,17 @@ function shadowForShape(boxShadows, rect, shapeId, fillEnabled, strokeEnabled, s
       ],
     }, outsideShadowId.id,),);
     const maskId = shapeId.add('mask',);
-    maskElement = /* @__PURE__ */ jsxs2('mask', {
+    maskElement = /* @__PURE__ */ jsxs('mask', {
       suppressHydrationWarning: true,
       id: maskId.id,
       ...svgRect,
       children: [
-        /* @__PURE__ */ jsx2('rect', {
+        /* @__PURE__ */ jsx('rect', {
           suppressHydrationWarning: true,
           ...svgRect,
           fill: 'white',
         },),
-        /* @__PURE__ */ jsx2('use', {
+        /* @__PURE__ */ jsx('use', {
           suppressHydrationWarning: true,
           href: shapeId.link,
           fill: 'black',
@@ -28109,12 +28112,12 @@ function shadowForShape(boxShadows, rect, shapeId, fillEnabled, strokeEnabled, s
         },),
       ],
     },);
-    outsetElement = /* @__PURE__ */ jsx2('g', {
+    outsetElement = /* @__PURE__ */ jsx('g', {
       suppressHydrationWarning: true,
       filter: outsideShadowId.urlLink,
       ...svgShadowProps,
       mask: maskId.urlLink,
-      children: /* @__PURE__ */ jsx2('use', {
+      children: /* @__PURE__ */ jsx('use', {
         suppressHydrationWarning: true,
         ...svgStrokeAttributes,
         fill: 'black',
@@ -28153,7 +28156,7 @@ function shadowForShape(boxShadows, rect, shapeId, fillEnabled, strokeEnabled, s
       filterElements.push(shadowElements.filterElements,);
       mergeElements.push(shadowElements.mergeElement,);
     }
-    definition.push(/* @__PURE__ */ jsxs2('filter', {
+    definition.push(/* @__PURE__ */ jsxs('filter', {
       suppressHydrationWarning: true,
       id: insideShadowId.id,
       x: `${filterX.toFixed(1,)}%`,
@@ -28165,7 +28168,7 @@ function shadowForShape(boxShadows, rect, shapeId, fillEnabled, strokeEnabled, s
       children: [
         filterElements,
         insetShadows.length > 1
-          ? /* @__PURE__ */ jsx2('feMerge', {
+          ? /* @__PURE__ */ jsx('feMerge', {
             suppressHydrationWarning: true,
             children: mergeElements,
           },)
@@ -28173,7 +28176,7 @@ function shadowForShape(boxShadows, rect, shapeId, fillEnabled, strokeEnabled, s
       ],
     }, insideShadowId.id,),);
     let clipPath;
-    insetElement = /* @__PURE__ */ jsx2('use', {
+    insetElement = /* @__PURE__ */ jsx('use', {
       suppressHydrationWarning: true,
       fill: 'black',
       fillOpacity: '1',
@@ -28194,12 +28197,12 @@ function shadowForShape(boxShadows, rect, shapeId, fillEnabled, strokeEnabled, s
 function outerShadowElements(shapeID, shadow, index,) {
   const shadowKey = shapeID.add('_outer_shadow' + index,);
   return {
-    filterElements: /* @__PURE__ */ jsx2(OuterShadowFilterElements, {
+    filterElements: /* @__PURE__ */ jsx(OuterShadowFilterElements, {
       suppressHydrationWarning: true,
       shadow,
       shadowKey,
     }, shadowKey.id + '-filters',),
-    mergeElement: /* @__PURE__ */ jsx2('feMergeNode', {
+    mergeElement: /* @__PURE__ */ jsx('feMergeNode', {
       suppressHydrationWarning: true,
       in: shadowKey.id,
     }, shadowKey.id + '-merge',),
@@ -28213,27 +28216,27 @@ var OuterShadowFilterElements = (props) => {
   const offsetId = shadowKey.add('offset',).id;
   const blurId = shadowKey.add('blur',).id;
   const floodId = shadowKey.add('flood',).id;
-  return /* @__PURE__ */ jsxs2(Fragment3, {
+  return /* @__PURE__ */ jsxs(Fragment, {
     children: [
-      /* @__PURE__ */ jsx2('feOffset', {
+      /* @__PURE__ */ jsx('feOffset', {
         suppressHydrationWarning: true,
         dx: shadow.x,
         dy: shadow.y,
         in: 'SourceAlpha',
         result: offsetId,
       },),
-      /* @__PURE__ */ jsx2('feGaussianBlur', {
+      /* @__PURE__ */ jsx('feGaussianBlur', {
         suppressHydrationWarning: true,
         stdDeviation: shadow.blur / 2,
         in: offsetId,
         result: blurId,
       },),
-      /* @__PURE__ */ jsx2('feFlood', {
+      /* @__PURE__ */ jsx('feFlood', {
         suppressHydrationWarning: true,
         floodColor: shadow.color,
         result: floodId,
       },),
-      /* @__PURE__ */ jsx2('feComposite', {
+      /* @__PURE__ */ jsx('feComposite', {
         suppressHydrationWarning: true,
         in: floodId,
         in2: blurId,
@@ -28246,12 +28249,12 @@ var OuterShadowFilterElements = (props) => {
 function innerShadowElements(shapeID, shadow, index,) {
   const shadowKey = shapeID.add('_inside_shadow' + index,);
   return {
-    filterElements: /* @__PURE__ */ jsx2(InnerShadowFilterElements, {
+    filterElements: /* @__PURE__ */ jsx(InnerShadowFilterElements, {
       suppressHydrationWarning: true,
       shadow,
       shadowKey,
     }, shadowKey.id + '-filters',),
-    mergeElement: /* @__PURE__ */ jsx2('feMergeNode', {
+    mergeElement: /* @__PURE__ */ jsx('feMergeNode', {
       suppressHydrationWarning: true,
       in: shadowKey.id,
     }, shadowKey.id + '-merge',),
@@ -28266,22 +28269,22 @@ var InnerShadowFilterElements = (props) => {
   const offsetId = shadowKey.add('offset',).id;
   const compositeId = shadowKey.add('composite',).id;
   const floodId = shadowKey.add('flood',).id;
-  return /* @__PURE__ */ jsxs2(Fragment3, {
+  return /* @__PURE__ */ jsxs(Fragment, {
     children: [
-      /* @__PURE__ */ jsx2('feGaussianBlur', {
+      /* @__PURE__ */ jsx('feGaussianBlur', {
         suppressHydrationWarning: true,
         stdDeviation: shadow.blur / 2,
         in: 'SourceAlpha',
         result: blurId,
       },),
-      /* @__PURE__ */ jsx2('feOffset', {
+      /* @__PURE__ */ jsx('feOffset', {
         suppressHydrationWarning: true,
         dx: shadow.x,
         dy: shadow.y,
         in: blurId,
         result: offsetId,
       },),
-      /* @__PURE__ */ jsx2('feComposite', {
+      /* @__PURE__ */ jsx('feComposite', {
         suppressHydrationWarning: true,
         in: offsetId,
         in2: 'SourceAlpha',
@@ -28290,12 +28293,12 @@ var InnerShadowFilterElements = (props) => {
         k3: '1',
         result: compositeId,
       },),
-      /* @__PURE__ */ jsx2('feFlood', {
+      /* @__PURE__ */ jsx('feFlood', {
         suppressHydrationWarning: true,
         floodColor: shadow.color,
         result: floodId,
       },),
-      /* @__PURE__ */ jsx2('feComposite', {
+      /* @__PURE__ */ jsx('feComposite', {
         suppressHydrationWarning: true,
         in: floodId,
         in2: compositeId,
@@ -28688,19 +28691,19 @@ var DeprecatedFrame = /* @__PURE__ */ (() => {
         width: rect.width,
         height: rect.height,
       };
-      return /* @__PURE__ */ jsxs2('div', {
+      return /* @__PURE__ */ jsxs('div', {
         suppressHydrationWarning: true,
         id: id2,
         style: style2,
         ref: this.setElement,
         className: className2,
         children: [
-          /* @__PURE__ */ jsx2(ProvideParentSize, {
+          /* @__PURE__ */ jsx(ProvideParentSize, {
             suppressHydrationWarning: true,
             parentSize,
             children: this.layoutChildren(),
           },),
-          /* @__PURE__ */ jsx2(Border, {
+          /* @__PURE__ */ jsx(Border, {
             suppressHydrationWarning: true,
             ...this.props,
           },),
@@ -28709,20 +28712,20 @@ var DeprecatedFrame = /* @__PURE__ */ (() => {
     }
     layoutChildren() {
       const _forwardedOverrides = this.props._forwardedOverrides;
-      let children = React$1.Children.map(this.props.children, (child) => {
+      let children = React.Children.map(this.props.children, (child) => {
         if (isConstraintSupportingChild(child,)) {
-          return React$1.cloneElement(child, {
+          return React.cloneElement(child, {
             parentSize: this.state.size,
             _forwardedOverrides,
           },);
         } else if (_forwardedOverrides && child) {
-          return React$1.cloneElement(child, {
+          return React.cloneElement(child, {
             _forwardedOverrides,
           },);
         } else return child;
       },);
       if (children?.length === 1 && typeof children[0] === 'string') {
-        children = [/* @__PURE__ */ jsx2(Center, {
+        children = [/* @__PURE__ */ jsx(Center, {
           suppressHydrationWarning: true,
           children,
         }, '0',),];
@@ -28741,7 +28744,7 @@ function Center(props,) {
     justifyContent: 'center',
     fontFamily: 'Helvetica',
   }, props.style || {},);
-  return /* @__PURE__ */ jsx2('div', {
+  return /* @__PURE__ */ jsx('div', {
     suppressHydrationWarning: true,
     style: style2,
     children: props.children,
@@ -28803,17 +28806,17 @@ function isDeprecatedFrameProps(props,) {
 }
 var DeprecatedFrameWithEvents = /* @__PURE__ */ WithEvents(DeprecatedFrame,);
 var Frame = /* @__PURE__ */ (() => {
-  const FrameInner = forwardRef3(function FrameInner2(props, ref,) {
+  const FrameInner = forwardRef(function FrameInner2(props, ref,) {
     const parentSize = useParentSize();
     if (isDeprecatedFrameProps(props,)) {
       const currentParentSize = props.parentSize || deprecatedParentSize(parentSize,);
-      return /* @__PURE__ */ jsx2(DeprecatedFrameWithEvents, {
+      return /* @__PURE__ */ jsx(DeprecatedFrameWithEvents, {
         suppressHydrationWarning: true,
         ...props,
         parentSize: currentParentSize,
       },);
     }
-    return /* @__PURE__ */ jsx2(FrameWithMotion2, {
+    return /* @__PURE__ */ jsx(FrameWithMotion2, {
       suppressHydrationWarning: true,
       ...props,
       ref,
@@ -28847,8 +28850,8 @@ function useWheelScroll(ref, {
   onScroll,
   onScrollEnd,
 },) {
-  const isWheelScrollActive = useRef3(false,);
-  const getPointData = useCallback4(() => {
+  const isWheelScrollActive = useRef(false,);
+  const getPointData = useCallback2(() => {
     const point = getPoint(offsetX, offsetY,);
     const data2 = {
       point,
@@ -29024,7 +29027,7 @@ function parsePaddingString(padding,) {
   }
 }
 var Stack = /* @__PURE__ */ (() => {
-  const StackInner = React$1.forwardRef(function StackInner2(stackProps, forwardedRef,) {
+  const StackInner = React.forwardRef(function StackInner2(stackProps, forwardedRef,) {
     const {
       as = 'div',
       direction = 'vertical',
@@ -29105,7 +29108,7 @@ var Stack = /* @__PURE__ */ (() => {
     }
     if (style2.width === void 0 && widthType === 2) style2.width = 'min-content';
     if (style2.height === void 0 && heightType === 2) style2.height = 'min-content';
-    return /* @__PURE__ */ jsx2(FrameWithMotion2, {
+    return /* @__PURE__ */ jsx(FrameWithMotion2, {
       suppressHydrationWarning: true,
       as,
       background: fromCanvasComponent ? void 0 : 'none',
@@ -29173,7 +29176,7 @@ function fraction(dimension,) {
   return isFiniteNumber(value,) ? value : 0;
 }
 function handleFraction(children, direction, widthType, heightType,) {
-  return React$1.Children.map(children, (child) => {
+  return React.Children.map(children, (child) => {
     if (!isReactChild(child,) || !isReactElement(child,)) return;
     const isVertical = direction === 'vertical';
     const style2 = {};
@@ -29224,7 +29227,7 @@ function handleFraction(children, direction, widthType, heightType,) {
       ...propsStyle,
       ...style2,
     };
-    return React$1.cloneElement(child, {
+    return React.cloneElement(child, {
       width: newWidth,
       height: newHeight,
       style: nextStyle,
@@ -29289,7 +29292,7 @@ function PageContainer({
   const wrapperHeight = hasAutoHeight ? 'auto' : '100%';
   const containerWidth = hasHorizontalGap && wrapperWidth === '100%' ? `calc(100% + ${gap}px)` : wrapperWidth;
   const containerHeight = hasVerticalGap && wrapperHeight === '100%' ? `calc(100% + ${gap}px)` : wrapperHeight;
-  return /* @__PURE__ */ jsx2(FrameWithMotion2, {
+  return /* @__PURE__ */ jsx(FrameWithMotion2, {
     suppressHydrationWarning: true,
     position: 'relative',
     'data-framer-component-type': 'PageContainer',
@@ -29311,7 +29314,7 @@ function PageContainer({
       paddingRight: hasHorizontalGap ? gap : 0,
       paddingBottom: hasVerticalGap ? gap : 0,
     },
-    children: /* @__PURE__ */ jsx2(FrameWithMotion2, {
+    children: /* @__PURE__ */ jsx(FrameWithMotion2, {
       suppressHydrationWarning: true,
       position: 'relative',
       'data-framer-component-type': pageContentWrapperType,
@@ -29330,7 +29333,7 @@ function PageContainer({
     }, effect ? Object.keys(effect,).join('',) : '',),
   },);
 }
-var PageInner = /* @__PURE__ */ React$1.forwardRef(function Page(props, forwardedRef,) {
+var PageInner = /* @__PURE__ */ React.forwardRef(function Page(props, forwardedRef,) {
   const {
     direction = 'horizontal',
     contentWidth = 'stretch',
@@ -29372,7 +29375,7 @@ var PageInner = /* @__PURE__ */ React$1.forwardRef(function Page(props, forwarde
     ...rest,
     background,
   };
-  const hasMountedRef = React$1.useRef(false,);
+  const hasMountedRef = React.useRef(false,);
   const hasFixedSize = RenderTarget.hasRestrictions() && props.__fromCodeComponentNode && isFiniteNumber(containerProps.width,) &&
     isFiniteNumber(containerProps.height,);
   if (!hasFixedSize && __fromCodeComponentNode && !containerProps.__fromCanvasComponent) {
@@ -29385,7 +29388,7 @@ var PageInner = /* @__PURE__ */ React$1.forwardRef(function Page(props, forwarde
   const {
     initial,
     prev,
-  } = React$1.useRef({
+  } = React.useRef({
     initial: {
       x: 0,
       y: 0,
@@ -29401,33 +29404,33 @@ var PageInner = /* @__PURE__ */ React$1.forwardRef(function Page(props, forwarde
     warnOnce$1(`The 'gap' property of Page component can not be negative, but is ${gapValue}.`,);
     gap = 0;
   }
-  const pageCount = React$1.Children.count(children,);
-  const maxOffsetRef = React$1.useRef(0,);
-  const constraints = React$1.useRef({
+  const pageCount = React.Children.count(children,);
+  const maxOffsetRef = React.useRef(0,);
+  const constraints = React.useRef({
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
   },);
-  const fallbackContainerRef = React$1.useRef(null,);
+  const fallbackContainerRef = React.useRef(null,);
   const containerRef = forwardedRef || fallbackContainerRef;
-  const scrollableRef = React$1.useRef(null,);
-  const pageEffectValuesRef = React$1.useRef([],);
-  const pageRectsRef = React$1.useRef([],);
+  const scrollableRef = React.useRef(null,);
+  const pageEffectValuesRef = React.useRef([],);
+  const pageRectsRef = React.useRef([],);
   const internalX = useMotionValue(isMotionValue2(contentOffsetX,) ? 0 : contentOffsetX ?? 0,);
   const internalY = useMotionValue(isMotionValue2(contentOffsetY,) ? 0 : contentOffsetY ?? 0,);
-  const contentOffsetRef = React$1.useRef({
+  const contentOffsetRef = React.useRef({
     x: isMotionValue2(contentOffsetX,) ? contentOffsetX : internalX,
     y: isMotionValue2(contentOffsetY,) ? contentOffsetY : internalY,
   },);
-  const currentContentPageRef = React$1.useRef(currentPage,);
-  const propsBoundedCurrentPageRef = React$1.useRef(currentPage,);
-  const latestPropsRef = React$1.useRef(props,);
+  const currentContentPageRef = React.useRef(currentPage,);
+  const propsBoundedCurrentPageRef = React.useRef(currentPage,);
+  const latestPropsRef = React.useRef(props,);
   latestPropsRef.current = props;
-  const lastDirectionRef = React$1.useRef(props.direction,);
+  const lastDirectionRef = React.useRef(props.direction,);
   const snapToPage = useSnapToPage(currentContentPageRef, contentOffsetRef, isHorizontal,);
-  const [_, setForceUpdateCount,] = React$1.useState(0,);
-  const containerSizeRef = React$1.useRef({
+  const [_, setForceUpdateCount,] = React.useState(0,);
+  const containerSizeRef = React.useRef({
     width: 200,
     height: 200,
   },);
@@ -29435,10 +29438,10 @@ var PageInner = /* @__PURE__ */ React$1.forwardRef(function Page(props, forwarde
     containerSizeRef.current.width = containerProps.width;
     containerSizeRef.current.height = containerProps.height;
   }
-  const updateOnResize = React$1.useCallback(() => {
-    if (!hasFixedSize) startTransition3(() => setForceUpdateCount((v) => v + 1));
+  const updateOnResize = React.useCallback(() => {
+    if (!hasFixedSize) startTransition2(() => setForceUpdateCount((v) => v + 1));
   }, [hasFixedSize,],);
-  React$1.useEffect(() => {
+  React.useEffect(() => {
     if (RenderTarget.current() !== RenderTarget.preview) return;
     globalThis.addEventListener('resize', updateOnResize,);
     return () => {
@@ -29509,7 +29512,7 @@ var PageInner = /* @__PURE__ */ React$1.forwardRef(function Page(props, forwarde
       updateAndSnapToPage(currentContentPageRef.current, true,);
     },);
   }, [],);
-  React$1.useEffect(() => {
+  React.useEffect(() => {
     if (currentPage !== currentContentPageRef.current) updateAndSnapToPage(currentPage,);
   }, [currentPage,],);
   const handleMeasureLifecycle = () => {
@@ -29598,7 +29601,7 @@ var PageInner = /* @__PURE__ */ React$1.forwardRef(function Page(props, forwarde
     },);
   };
   pageEffectValuesRef.current = [];
-  const childComponents = React$1.Children.map(children, (child, index,) => {
+  const childComponents = React.Children.map(children, (child, index,) => {
     if (!isReactChild(child,) || !isReactElement(child,)) return child;
     const update = {
       right: void 0,
@@ -29625,7 +29628,7 @@ var PageInner = /* @__PURE__ */ React$1.forwardRef(function Page(props, forwarde
       for (const key2 in values) effectDictionary[key2] = motionValue(values[key2],);
     }
     pageEffectValuesRef.current.push(effectDictionary,);
-    return /* @__PURE__ */ jsx2(PageContainer, {
+    return /* @__PURE__ */ jsx(PageContainer, {
       suppressHydrationWarning: true,
       effect: effectDictionary,
       dragEnabled,
@@ -29642,7 +29645,7 @@ var PageInner = /* @__PURE__ */ React$1.forwardRef(function Page(props, forwarde
       onDrag: onDragHandler,
       onDragEnd: onDragEndHandler,
       layoutId: layoutId ? `${layoutId}-${index}` : void 0,
-      children: React$1.cloneElement(child, update,),
+      children: React.cloneElement(child, update,),
     }, index,);
   },);
   useWheelScroll(scrollableRef, {
@@ -29657,7 +29660,7 @@ var PageInner = /* @__PURE__ */ React$1.forwardRef(function Page(props, forwarde
     onScroll,
     onScrollEnd,
   },);
-  return /* @__PURE__ */ jsx2(FrameWithMotion2, {
+  return /* @__PURE__ */ jsx(FrameWithMotion2, {
     suppressHydrationWarning: true,
     'data-framer-component-type': 'PageWrapper',
     preserve3d: false,
@@ -29671,7 +29674,7 @@ var PageInner = /* @__PURE__ */ React$1.forwardRef(function Page(props, forwarde
     layoutId,
     ref: containerRef,
     onLayoutMeasure: handleMeasureLifecycle,
-    children: /* @__PURE__ */ jsxs2(FrameWithMotion2, {
+    children: /* @__PURE__ */ jsxs(FrameWithMotion2, {
       suppressHydrationWarning: true,
       'data-framer-component-type': 'Page',
       ref: scrollableRef,
@@ -29690,7 +29693,7 @@ var PageInner = /* @__PURE__ */ React$1.forwardRef(function Page(props, forwarde
         pointerEvents: props.style?.pointerEvents,
       },
       children: [
-        /* @__PURE__ */ jsx2(EmptyState, {
+        /* @__PURE__ */ jsx(EmptyState, {
           suppressHydrationWarning: true,
           title: 'Page',
           description: 'Click and drag the connector to any frame on the canvas \u2192',
@@ -30116,8 +30119,8 @@ function useInfiniteScroll({
   rootMargin = '0px',
   paginationInfo,
 },) {
-  const isVisibleRef = useRef3(false,);
-  const callback = React$1.useCallback((entry) => {
+  const isVisibleRef = useRef(false,);
+  const callback = React.useCallback((entry) => {
     if (!entry.isIntersecting) {
       isVisibleRef.current = false;
       return;
@@ -30125,7 +30128,7 @@ function useInfiniteScroll({
     isVisibleRef.current = true;
     loadMore();
   }, [loadMore,],);
-  useEffect4(() => {
+  useEffect2(() => {
     frame.postRender(() => {
       frame.render(() => {
         if (isVisibleRef.current) loadMore();
@@ -30139,7 +30142,7 @@ function useInfiniteScroll({
   },);
 }
 function withInfiniteScroll(Component22,) {
-  return React$1.forwardRef(({
+  return React.forwardRef(({
     __paginationInfo,
     __loadMore,
     ...props
@@ -30151,7 +30154,7 @@ function withInfiniteScroll(Component22,) {
       ref: infiniteScrollRef,
       paginationInfo: __paginationInfo,
     },);
-    return /* @__PURE__ */ jsx2(Component22, {
+    return /* @__PURE__ */ jsx(Component22, {
       suppressHydrationWarning: true,
       ...props,
       ref: infiniteScrollRef,
@@ -30171,8 +30174,8 @@ var useUpdateChildSize = ({
   children,
   fromCanvasComponent,
 },) => {
-  return useMemo3(() => {
-    return React$1.Children.map(children, (child) => {
+  return useMemo(() => {
+    return React.Children.map(children, (child) => {
       if (child === null || typeof child !== 'object' || typeof child.type === 'string') return child;
       const updatedSize = {};
       switch (dragDirection) {
@@ -30190,7 +30193,7 @@ var useUpdateChildSize = ({
           style: Object.assign({}, child.props.style, updatedSize,),
         }
         : updatedSize;
-      return React$1.cloneElement(child, update,);
+      return React.cloneElement(child, update,);
     },);
   }, [dragDirection, children, fromCanvasComponent,],);
 };
@@ -30198,7 +30201,7 @@ var numberFromOptionalMotionValue = (value) => {
   if (typeof value === 'number') return value;
   return value.get();
 };
-var EmulatedScrollInner = /* @__PURE__ */ React$1.forwardRef(function EmulatedScroll(props, forwardedRef,) {
+var EmulatedScrollInner = /* @__PURE__ */ React.forwardRef(function EmulatedScroll(props, forwardedRef,) {
   const {
     direction = 'vertical',
     directionLock = false,
@@ -30236,10 +30239,10 @@ var EmulatedScrollInner = /* @__PURE__ */ React$1.forwardRef(function EmulatedSc
   const defaultY = useMotionValue(typeof contentOffsetY === 'number' ? contentOffsetY : 0,);
   const x2 = isMotionValue2(contentOffsetX,) ? contentOffsetX : defaultX;
   const y2 = isMotionValue2(contentOffsetY,) ? contentOffsetY : defaultY;
-  const measuredConstraints = useRef3(null,);
+  const measuredConstraints = useRef(null,);
   const dragControls = useDragControls();
   const isInTarget = useIsInCurrentNavigationTarget();
-  const wasInTargetRef = useRef3(true,);
+  const wasInTargetRef = useRef(true,);
   function setMeasureDragConstraints(constraints,) {
     constraints = offsetToZero(constraints,);
     if (contentWidth !== void 0) constraints.left = -contentWidth;
@@ -30249,7 +30252,7 @@ var EmulatedScrollInner = /* @__PURE__ */ React$1.forwardRef(function EmulatedSc
   const {
     initial,
     prev,
-  } = useRef3({
+  } = useRef({
     initial: {
       x: 0,
       y: 0,
@@ -30260,10 +30263,10 @@ var EmulatedScrollInner = /* @__PURE__ */ React$1.forwardRef(function EmulatedSc
     },
   },).current;
   const isPreview = RenderTarget.current() === RenderTarget.preview;
-  const containerFallbackRef = useRef3(null,);
+  const containerFallbackRef = useRef(null,);
   const containerRef = forwardedRef || containerFallbackRef;
-  const contentRef = useRef3(null,);
-  const lastOffsetRef = useRef3(null,);
+  const contentRef = useRef(null,);
+  const lastOffsetRef = useRef(null,);
   function shouldResetScroll(inTarget,) {
     const hasEnteredTarget = inTarget && wasInTargetRef.current === false;
     return resetOffset && hasEnteredTarget;
@@ -30305,7 +30308,7 @@ var EmulatedScrollInner = /* @__PURE__ */ React$1.forwardRef(function EmulatedSc
     if (RenderTarget.current() === RenderTarget.canvas) return;
     measureAndUpdateScrollOffset();
   }, [],);
-  React$1.useEffect(() => {
+  React.useEffect(() => {
     if (shouldResetScroll(isInTarget,)) measureAndUpdateScrollOffset();
     if (isInTarget === false) wasInTargetRef.current = false;
   }, [isInTarget,],);
@@ -30313,14 +30316,14 @@ var EmulatedScrollInner = /* @__PURE__ */ React$1.forwardRef(function EmulatedSc
     x: x2.get(),
     y: y2.get(),
   });
-  const resetInitialPoint = useCallback4(() => {
+  const resetInitialPoint = useCallback2(() => {
     const point = getLatestPoint();
     initial.x = point.x;
     initial.y = point.y;
     prev.x = point.x;
     prev.y = point.y;
   }, [],);
-  const getPointData = useCallback4(() => {
+  const getPointData = useCallback2(() => {
     const point = {
       x: x2.get(),
       y: y2.get(),
@@ -30344,14 +30347,14 @@ var EmulatedScrollInner = /* @__PURE__ */ React$1.forwardRef(function EmulatedSc
     prev.y = point.y;
     return data2;
   }, [initial, prev, x2, y2,],);
-  const updateScrollListeners = useCallback4(() => {
+  const updateScrollListeners = useCallback2(() => {
     onUpdate?.({
       x: x2.get(),
       y: y2.get(),
     },);
     onScroll?.(getPointData(),);
   }, [onScroll, onUpdate, getPointData, x2, y2,],);
-  const scheduleUpdateScrollListeners = useCallback4(() => {
+  const scheduleUpdateScrollListeners = useCallback2(() => {
     frame.update(updateScrollListeners, false, true,);
   }, [updateScrollListeners,],);
   const onMotionDragStart = (event, info,) => {
@@ -30413,7 +30416,7 @@ var EmulatedScrollInner = /* @__PURE__ */ React$1.forwardRef(function EmulatedSc
     if (currentY !== 0) setScrollY(currentY,);
     return y2.on('change', setScrollY,);
   }, [y2, overdragY, scheduleUpdateScrollListeners, overdragEnabled,],);
-  const nativeOnScroll = React$1.useCallback(() => {
+  const nativeOnScroll = React.useCallback(() => {
     const element = containerRef.current;
     if (!(element instanceof HTMLDivElement)) return;
     const xDelta = Math.abs(x2.get() + element.scrollLeft,);
@@ -30421,7 +30424,7 @@ var EmulatedScrollInner = /* @__PURE__ */ React$1.forwardRef(function EmulatedSc
     if (xDelta > 1) x2.set(-element.scrollLeft,);
     if (yDelta > 1) y2.set(-element.scrollTop,);
   }, [x2, y2,],);
-  const isEmpty2 = React$1.Children.count(children,) === 0;
+  const isEmpty2 = React.Children.count(children,) === 0;
   const width = direction !== 'vertical' && !isEmpty2 ? 'auto' : '100%';
   const height = direction !== 'horizontal' && !isEmpty2 ? 'auto' : '100%';
   const size = !containerProps.__fromCanvasComponent
@@ -30430,7 +30433,7 @@ var EmulatedScrollInner = /* @__PURE__ */ React$1.forwardRef(function EmulatedSc
       height: containerProps.__fromCodeComponentNode ? '100%' : containerProps.height,
     }
     : {};
-  return /* @__PURE__ */ jsx2(FrameWithMotion2, {
+  return /* @__PURE__ */ jsx(FrameWithMotion2, {
     suppressHydrationWarning: true,
     'data-framer-component-type': 'Scroll',
     background: 'none',
@@ -30447,7 +30450,7 @@ var EmulatedScrollInner = /* @__PURE__ */ React$1.forwardRef(function EmulatedSc
     layoutId,
     layoutScroll: true,
     onBeforeLayoutMeasure: measureAndUpdateScrollOffset,
-    children: /* @__PURE__ */ jsxs2(FrameWithMotion2, {
+    children: /* @__PURE__ */ jsxs(FrameWithMotion2, {
       suppressHydrationWarning: true,
       'data-framer-component-type': 'ScrollContentWrapper',
       animate: scrollAnimate,
@@ -30482,7 +30485,7 @@ var EmulatedScrollInner = /* @__PURE__ */ React$1.forwardRef(function EmulatedSc
       },
       preserve3d: containerProps.preserve3d,
       children: [
-        /* @__PURE__ */ jsx2(EmptyState, {
+        /* @__PURE__ */ jsx(EmptyState, {
           suppressHydrationWarning: true,
           size: {
             width: isFiniteNumber(containerProps.width,) ? containerProps.width : '100%',
@@ -30643,8 +30646,8 @@ var emptyObject = /* @__PURE__ */ Object.freeze({},);
 function useEmulateTouchScroll(ref, direction, enabled,) {
   if (isTouchDevice) return emptyObject;
   if (RenderTarget.current() !== RenderTarget.preview) return emptyObject;
-  const scrollAnimationControlsRef = React$1.useRef(null,);
-  useEffect4(() => {
+  const scrollAnimationControlsRef = React.useRef(null,);
+  useEffect2(() => {
     if (!ref.current) return;
     const element = ref.current;
     let phase = 0;
@@ -30774,7 +30777,7 @@ function useEmulateTouchScroll(ref, direction, enabled,) {
       scrollAnimationControlsRef.current?.stop();
     };
   }, [ref, direction, enabled,],);
-  return React$1.useMemo(() => {
+  return React.useMemo(() => {
     return {
       cancelEmulatedTouchScrollAnimation: () => {
         scrollAnimationControlsRef.current?.stop();
@@ -30824,7 +30827,7 @@ function useUpdateScrollOffset(ref, side, offset, cancelEmulatedTouchScrollAnima
     }
   }, [offset,],);
 }
-var NativeScrollInner = /* @__PURE__ */ React$1.forwardRef(function NativeScroll(props, forwardedRef,) {
+var NativeScrollInner = /* @__PURE__ */ React.forwardRef(function NativeScroll(props, forwardedRef,) {
   const {
     direction = 'vertical',
     scrollBarVisible = false,
@@ -30859,13 +30862,13 @@ var NativeScrollInner = /* @__PURE__ */ React$1.forwardRef(function NativeScroll
     specificLayoutId,
     postfix: 'scroll',
   },);
-  const fallbackRef = React$1.useRef(null,);
+  const fallbackRef = React.useRef(null,);
   const ref = forwardedRef || fallbackRef;
   const {
     cancelEmulatedTouchScrollAnimation,
   } = useEmulateTouchScroll(ref, direction, dragEnabled,);
   const isInTarget = useIsInCurrentNavigationTarget();
-  const previousIsInTargetRef = React$1.useRef(isInTarget,);
+  const previousIsInTargetRef = React.useRef(isInTarget,);
   const updateScrollOffsetHandler = () => {
     if (!resetOffset) return;
     const previousIsTarget = previousIsInTargetRef.current;
@@ -30891,7 +30894,7 @@ var NativeScrollInner = /* @__PURE__ */ React$1.forwardRef(function NativeScroll
       height: containerProps.__fromCodeComponentNode ? '100%' : containerProps.height,
     }
     : {};
-  return /* @__PURE__ */ jsxs2(FrameWithMotion2, {
+  return /* @__PURE__ */ jsxs(FrameWithMotion2, {
     suppressHydrationWarning: true,
     ref,
     'data-framer-component-type': 'NativeScroll',
@@ -30904,7 +30907,7 @@ var NativeScrollInner = /* @__PURE__ */ React$1.forwardRef(function NativeScroll
     layoutScroll: true,
     className: cx(className2, `direction-${direction}`, !scrollBarVisible && 'scrollbar-hidden',),
     children: [
-      /* @__PURE__ */ jsx2(EmptyState, {
+      /* @__PURE__ */ jsx(EmptyState, {
         suppressHydrationWarning: true,
         children,
         size: {
@@ -30921,14 +30924,14 @@ var NativeScrollInner = /* @__PURE__ */ React$1.forwardRef(function NativeScroll
 },);
 var NativeScroll2 = /* @__PURE__ */ withLibraryCSS(NativeScrollInner,);
 var Scroll = /* @__PURE__ */ (() => {
-  const ScrollInner = React$1.forwardRef(function ScrollInner2(props, forwardedRef,) {
+  const ScrollInner = React.forwardRef(function ScrollInner2(props, forwardedRef,) {
     if (props.native) {
-      return /* @__PURE__ */ jsx2(NativeScroll2, {
+      return /* @__PURE__ */ jsx(NativeScroll2, {
         suppressHydrationWarning: true,
         ref: forwardedRef,
         ...props,
       },);
-    } else {return /* @__PURE__ */ jsx2(EmulatedScroll2, {
+    } else {return /* @__PURE__ */ jsx(EmulatedScroll2, {
         suppressHydrationWarning: true,
         ref: forwardedRef,
         ...props,
@@ -31027,7 +31030,7 @@ var Scroll = /* @__PURE__ */ (() => {
   return ScrollInner;
 })();
 function useNavigation() {
-  return useContext3(NavigationContext,);
+  return useContext(NavigationContext,);
 }
 var data = /* @__PURE__ */ (() => {
   function Data2(initial = {},) {
@@ -31091,19 +31094,19 @@ function createStore(initialState2, unboundActions,) {
   };
 }
 var defaultId = /* @__PURE__ */ Symbol('default',);
-var DataContext = /* @__PURE__ */ createContext3(defaultId,);
+var DataContext = /* @__PURE__ */ createContext(defaultId,);
 function createData(defaultState2, actions,) {
   const stores = /* @__PURE__ */ new Map();
   const useData = (id2, initialState2,) => {
-    const contextId = useContext3(DataContext,);
+    const contextId = useContext(DataContext,);
     id2 = id2 || contextId;
-    const store = useMemo3(() => {
+    const store = useMemo(() => {
       if (!stores.has(id2,)) stores.set(id2, createStore(initialState2 || defaultState2, actions,),);
       return stores.get(id2,);
     }, [id2,],);
-    const [, notifyUpdates,] = useState3(store.getVersion(),);
-    const storeValueAtHookCallTime = useMemo3(() => store.get(), [store,],);
-    useEffect4(() => {
+    const [, notifyUpdates,] = useState(store.getVersion(),);
+    const storeValueAtHookCallTime = useMemo(() => store.get(), [store,],);
+    useEffect2(() => {
       const unsubscribe = store.subscribe(notifyUpdates,);
       if (storeValueAtHookCallTime !== store.get()) notifyUpdates(store.getVersion(),);
       return unsubscribe;
@@ -31115,14 +31118,14 @@ function createData(defaultState2, actions,) {
 var initialState = {
   update: 0,
 };
-var DataObserverContext = /* @__PURE__ */ React$1.createContext({
+var DataObserverContext = /* @__PURE__ */ React.createContext({
   update: NaN,
 },);
 function useObserveData() {
-  const context = React$1.useContext(DataObserverContext,);
+  const context = React.useContext(DataObserverContext,);
   return !Number.isNaN(context.update,);
 }
-var DataObserver = class extends Component$1 {
+var DataObserver = class extends Component2 {
   observers = [];
   state = initialState;
   taskAdded = false;
@@ -31151,7 +31154,7 @@ var DataObserver = class extends Component$1 {
       const observer2 = Data.addObserver(d, this.observer,);
       this.observers.push(observer2,);
     },);
-    return /* @__PURE__ */ jsx2(DataObserverContext.Provider, {
+    return /* @__PURE__ */ jsx(DataObserverContext.Provider, {
       suppressHydrationWarning: true,
       value: {
         ...this.state,
@@ -31179,13 +31182,13 @@ function convertColorProps(props,) {
 function WithOverride(Component22, override,) {
   const useOverride = typeof override === 'function' ? (props) => override(convertColorProps(props,),) : () => convertColorProps(override,);
   const ComponentWithOverride = function (props,) {
-    useContext3(DataObserverContext,);
+    useContext(DataObserverContext,);
     const overrideProps = useOverride(props,);
     const {
       style: style2,
       ...rest
     } = props;
-    return /* @__PURE__ */ jsx2(Component22, {
+    return /* @__PURE__ */ jsx(Component22, {
       suppressHydrationWarning: true,
       ...rest,
       ...overrideProps,
@@ -31214,14 +31217,14 @@ function extractPrefixedProps(props, keys2,) {
 function stripPrefixFromPrefixedKey(key2,) {
   if (key2.startsWith(prefix$1,)) return key2.substr(prefixLength,);
 }
-var GeneratedComponentContext = /* @__PURE__ */ React$1.createContext(void 0,);
+var GeneratedComponentContext = /* @__PURE__ */ React.createContext(void 0,);
 function cloneChildrenWithProps(children, props, asNode,) {
-  const cloned = React2.Children.map(children, (child) => {
-    if (React2.isValidElement(child,)) return React2.cloneElement(child, props,);
+  const cloned = React$1.Children.map(children, (child) => {
+    if (React$1.isValidElement(child,)) return React$1.cloneElement(child, props,);
     return child;
   },);
   if (asNode) return cloned;
-  return /* @__PURE__ */ jsx2(Fragment3, {
+  return /* @__PURE__ */ jsx(Fragment, {
     children: cloned,
   },);
 }
@@ -31260,16 +31263,16 @@ function createHook(forwardedRef,) {
       ;
     }
     preventNextCall = true;
-    if (React2.Children.count(children,) > 1 && forwardedRef) {
+    if (React$1.Children.count(children,) > 1 && forwardedRef) {
       state.forwardedRef = void 0;
       state.ref = state.childRef;
     }
-    return React2.Children.map(children, (child) => {
-      if (React2.isValidElement(child,)) {
+    return React$1.Children.map(children, (child) => {
+      if (React$1.isValidElement(child,)) {
         const ownRef = 'ref' in child ? child.ref : void 0;
         updateIfNeeded(state.forwardedRef, ownRef,);
         const newProps = isFunction(props,) ? props(child.props,) : props;
-        return React2.cloneElement(
+        return React$1.cloneElement(
           child,
           state.ref !== ownRef
             ? {
@@ -31283,7 +31286,7 @@ function createHook(forwardedRef,) {
     },);
   }
   const cloneAsElement = function cloneAsElement2(children, props,) {
-    return /* @__PURE__ */ jsx2(Fragment3, {
+    return /* @__PURE__ */ jsx(Fragment, {
       children: cloneChildrenWithPropsAndRef(children, props,),
     },);
   };
@@ -31311,7 +31314,7 @@ function createRefFunction(state,) {
     setRef2(prevForwardedRef, value,);
   };
 }
-var SSRParentVariantsContext = /* @__PURE__ */ React$1.createContext(void 0,);
+var SSRParentVariantsContext = /* @__PURE__ */ React.createContext(void 0,);
 var SSRVariantClassName = 'ssr-variant';
 var SSRVariantGroupSeparatorClassName = 'ssr-variant-group-separator';
 function renderBranchedChildrenFromPropertyOverrides(
@@ -31324,9 +31327,9 @@ function renderBranchedChildrenFromPropertyOverrides(
   cloneChildren,
   activeVariantId,
 ) {
-  const childrenArray = React$1.Children.toArray(children,);
+  const childrenArray = React.Children.toArray(children,);
   const child = childrenArray[0];
-  if (childrenArray.length !== 1 || !React$1.isValidElement(child,)) {
+  if (childrenArray.length !== 1 || !React.isValidElement(child,)) {
     console.warn('PropertyOverrides: expected exactly one React element for a child', children,);
     return cloneChildren(children, props,);
   }
@@ -31363,7 +31366,7 @@ function renderBranchedChildrenFromPropertyOverrides(
   ) {
     if (activeVariantId && !variants.includes(activeVariantId,)) continue;
     const key2 = activeVariantId ? 'active-branch' : variants.join('+',);
-    let element = /* @__PURE__ */ jsx2(SSRParentVariantsContext.Provider, {
+    let element = /* @__PURE__ */ jsx(SSRParentVariantsContext.Provider, {
       suppressHydrationWarning: true,
       value: {
         primaryVariantId,
@@ -31382,7 +31385,7 @@ function renderBranchedChildrenFromPropertyOverrides(
     const hiddenClassNames = generateHiddenClassNames(variants, parentVariants, variantClassNames,);
     if (hiddenClassNames.length) {
       assert(branches.length > 1, 'Must branch out when there are hiddenClassNames',);
-      element = /* @__PURE__ */ jsx2('div', {
+      element = /* @__PURE__ */ jsx('div', {
         className: `${SSRVariantClassName} ${hiddenClassNames.join(' ',)}`,
         suppressHydrationWarning: true,
         children: element,
@@ -31394,7 +31397,7 @@ function renderBranchedChildrenFromPropertyOverrides(
   if (!activeVariantId) {
     return [
       ...renderedBranches,
-      /* @__PURE__ */ jsx2('div', {
+      /* @__PURE__ */ jsx('div', {
         suppressHydrationWarning: true,
         className: SSRVariantGroupSeparatorClassName,
       }, 'property-overrides-separator',),
@@ -31402,7 +31405,7 @@ function renderBranchedChildrenFromPropertyOverrides(
   }
   return renderedBranches;
 }
-var SSRVariants = /* @__PURE__ */ React$1.forwardRef(function SSRVariants2({
+var SSRVariants = /* @__PURE__ */ React.forwardRef(function SSRVariants2({
   id: _nodeId,
   children,
   ...props
@@ -31438,17 +31441,17 @@ function propsForBreakpoint(variant, props, overrides,) {
     ...overrides[variant],
   };
 }
-var PropertyOverridesWithoutCSS = /* @__PURE__ */ React$1.forwardRef(function PropertyOverrides(props, ref,) {
+var PropertyOverridesWithoutCSS = /* @__PURE__ */ React.forwardRef(function PropertyOverrides(props, ref,) {
   const cloneWithRefs = useCloneChildrenWithPropsAndRef(ref,);
-  const ancestorCtx = React$1.useContext(SSRParentVariantsContext,);
-  const isHydrationOrSSR = React$1.useSyncExternalStore(noopSubscribe, returnFalse, returnTrue,);
+  const ancestorCtx = React.useContext(SSRParentVariantsContext,);
+  const isHydrationOrSSR = React.useSyncExternalStore(noopSubscribe, returnFalse, returnTrue,);
   const action = useConstant2(() => {
     if (isHydrationOrSSR) {
       if (isBrowser$12()) return 1;
       else return 2;
     } else return 0;
   },);
-  const generatedComponentContext = React$1.useContext(GeneratedComponentContext,);
+  const generatedComponentContext = React.useContext(GeneratedComponentContext,);
   return useMemoOne(() => {
     const {
       breakpoint,
@@ -31564,16 +31567,16 @@ var AnimationCollector = class {
 };
 var framerAppearEffects = /* @__PURE__ */ new AnimationCollector();
 function withOptimizedAppearEffect(Component22,) {
-  return React$1.forwardRef(({
+  return React.forwardRef(({
     optimized,
     ...props
   }, ref,) => {
-    const generatedComponentContext = React$1.useContext(GeneratedComponentContext,);
-    const variants = React$1.useContext(SSRParentVariantsContext,)?.variants;
+    const generatedComponentContext = React.useContext(GeneratedComponentContext,);
+    const variants = React.useContext(SSRParentVariantsContext,)?.variants;
     const id2 = props[framerAppearIdKey];
     if (id2 && !isBrowser$12()) framerAppearEffects.setAll(id2, variants, optimized ? props : null, generatedComponentContext,);
     const disabledProps = getDisabledFXPropsInStaticRenderer(props,);
-    return /* @__PURE__ */ jsx2(Component22, {
+    return /* @__PURE__ */ jsx(Component22, {
       suppressHydrationWarning: true,
       ref,
       ...props,
@@ -31647,7 +31650,7 @@ function useFXValues(values, enabled,) {
   const effect = useConstant2(() => ({
     values: makeFXValues(enabled ? values : void 0,),
   }));
-  React$1.useEffect(() => {
+  React.useEffect(() => {
     if (enabled) return;
     for (const key2 of effectValuesKeys) {
       const value = defaultFXValues[key2];
@@ -31666,8 +31669,8 @@ var loopOptionsKeys = /* @__PURE__ */ new Set([
   'loopPauseOffscreen',
 ],);
 var useDelay = () => {
-  const timeoutRef = useRef3();
-  useEffect4(() => {
+  const timeoutRef = useRef();
+  useEffect2(() => {
     return () => {
       clearTimeout(timeoutRef.current,);
     };
@@ -31689,10 +31692,10 @@ function useLoop({
 }, ref,) {
   const shouldReduceMotion = useReducedMotionConfig();
   const values = useConstant2(makeFXValues,);
-  const mirrorStateRef = useRef3(false,);
+  const mirrorStateRef = useRef(false,);
   const delay2 = useDelay();
-  const animationPromiseRef = useRef3(null,);
-  const animateValues2 = useCallback4(async () => {
+  const animationPromiseRef = useRef(null,);
+  const animateValues2 = useCallback2(async () => {
     if (!loop) return;
     const transition = loopTransition || void 0;
     const mirror = mirrorStateRef.current && loopRepeatType === 'mirror';
@@ -31713,21 +31716,21 @@ function useLoop({
     },),);
     return animationPromiseRef.current;
   }, [loop, loopRepeatType, loopTransition, shouldReduceMotion, values,],);
-  const [isRunning, setIsRunning,] = useState3(false,);
-  const shouldRunRef = useRef3(false,);
-  const animateLoop = useCallback4(async function animateLoop2() {
+  const [isRunning, setIsRunning,] = useState(false,);
+  const shouldRunRef = useRef(false,);
+  const animateLoop = useCallback2(async function animateLoop2() {
     if (!loopEffectEnabled || !shouldRunRef.current) return;
     await animateValues2();
     await delay2(loopRepeatDelay ?? 0,);
     animateLoop2();
   }, [animateValues2, delay2, loopEffectEnabled, loopRepeatDelay,],);
-  const start2 = useCallback4(() => {
+  const start2 = useCallback2(() => {
     if (shouldRunRef.current) return;
     shouldRunRef.current = true;
-    startTransition3(() => setIsRunning(true,));
+    startTransition2(() => setIsRunning(true,));
     animateLoop();
   }, [animateLoop,],);
-  const stop = useCallback4((overrideRunRef = true,) => {
+  const stop = useCallback2((overrideRunRef = true,) => {
     effectValuesKeys.forEach((key2) => {
       values[key2].stop();
     },);
@@ -31737,40 +31740,40 @@ function useLoop({
     mirrorStateRef.current = false;
     if (overrideRunRef) {
       shouldRunRef.current = false;
-      startTransition3(() => setIsRunning(false,));
+      startTransition2(() => setIsRunning(false,));
     }
   }, [values,],);
   const hasLoop = loopEffectEnabled && loop;
-  const startStopTabVisibilityListener = useCallback4(() => {
+  const startStopTabVisibilityListener = useCallback2(() => {
     if (document.hidden) stop(false,);
     else if (shouldRunRef.current) {
       shouldRunRef.current = false;
       start2();
     }
   }, [start2, stop,],);
-  useEffect4(() => {
+  useEffect2(() => {
     if (!hasLoop) return;
     document.addEventListener('visibilitychange', startStopTabVisibilityListener,);
     return () => {
       document.removeEventListener('visibilitychange', startStopTabVisibilityListener,);
     };
   }, [hasLoop, startStopTabVisibilityListener,],);
-  useEffect4(() => {
+  useEffect2(() => {
     if (hasLoop && loopPauseOffscreen) return;
     if (hasLoop) start2();
     else stop();
   }, [start2, stop, loopPauseOffscreen, hasLoop,],);
-  useEffect4(() => {
+  useEffect2(() => {
     return () => stop();
   }, [stop,],);
-  const isIntersectingRef = useRef3(false,);
-  const stopAfterAnimationEnds = useCallback4(async () => {
+  const isIntersectingRef = useRef(false,);
+  const stopAfterAnimationEnds = useCallback2(async () => {
     if (!animationPromiseRef.current) return;
     await animationPromiseRef.current;
     if (isIntersectingRef.current) return;
     stop();
   }, [stop,],);
-  const startAndStopBasedOnIntersection = useCallback4((entry) => {
+  const startAndStopBasedOnIntersection = useCallback2((entry) => {
     if (entry.isIntersecting) {
       isIntersectingRef.current = true;
       start2();
@@ -31783,7 +31786,7 @@ function useLoop({
     enabled: hasLoop && loopPauseOffscreen,
   },);
   const addWillChange = isRunning || !loopPauseOffscreen;
-  return useMemo3(() => {
+  return useMemo(() => {
     return {
       values,
       style: hasLoop && addWillChange ? effectEnabledStyle : effectDisabledStyle,
@@ -31802,9 +31805,9 @@ function useParallax(options, ref, visibilityStyle,) {
     adjustPosition = false,
     parallaxTransformEnabled,
   } = options;
-  const originalPosition = React$1.useRef(null,);
+  const originalPosition = React.useRef(null,);
   const shouldReduceMotion = useReducedMotionConfig();
-  const transform2 = React$1.useCallback((yValue) => {
+  const transform2 = React.useCallback((yValue) => {
     if (originalPosition.current === null) return 0;
     if (speed === 100) return 0;
     return parallaxTransform(yValue, originalPosition.current, speed, offset, adjustPosition,);
@@ -31815,7 +31818,7 @@ function useParallax(options, ref, visibilityStyle,) {
   const parallaxY = useTransform(scrollY, transform2,);
   const visibility = useMotionValue(adjustPosition && originalPosition.current === null ? 'hidden' : visibilityStyle,);
   const defaultValue = useMotionValue(0,);
-  const observers2 = useContext3(SharedIntersectionObserverContext,);
+  const observers2 = useContext(SharedIntersectionObserverContext,);
   useRefEffect(ref, (element) => {
     if (element === null || !parallaxTransformEnabled) return;
     const unobserve = observeElement(observers2, 'undefined', element, null, (entry) => {
@@ -31897,7 +31900,7 @@ function usePresenceAnimation(
   const animateConfig = presenceAnimate ?? motionAnimate;
   const exit = presenceExit ?? motionExit;
   const [isPresent2, safeToRemove,] = usePresence();
-  const internalState = useRef3({
+  const internalState = useRef({
     lastPresence: false,
     lastAnimate: animateConfig,
     hasMounted: false,
@@ -31985,7 +31988,7 @@ function usePresenceAnimation(
     );
   },);
   const effectEnabled = enabled && animateConfig;
-  return useMemo3(() => {
+  return useMemo(() => {
     return {
       values: effect.values,
       style: effectEnabled ? effectEnabledStyle : effectDisabledStyle,
@@ -32037,7 +32040,7 @@ function useScrollDirectionChange(scrollDirection, cb, options = {},) {
     enabled = true,
   } = options;
   const currentRouteKey = useCurrentRouteKey();
-  React$1.useEffect(() => {
+  React.useEffect(() => {
     if (!direction || !enabled) return;
     let lastOffset = void 0;
     let directionChangeOffset = 0;
@@ -32132,7 +32135,7 @@ function useAnimationVariants({
   animate: animateVariant2,
   ...defaultStyles
 },) {
-  return React$1.useMemo(() => ({
+  return React.useMemo(() => ({
     initial: enter ?? makeStyle({
       ...defaultStyles,
       opacity: opacity ?? targetOpacity ?? 1,
@@ -32149,14 +32152,14 @@ function useStyleAppearEffect(options, ref,) {
   const variants = useAnimationVariants(options,);
   const enabled = options.styleAppearEffectEnabled;
   const effect = useFXValues(enabled ? variants.initial : variants.animate, enabled,);
-  const playState = React$1.useRef({
+  const playState = React.useRef({
     isPlaying: false,
     scheduledAppearState: void 0,
     lastAppearState: !options.styleAppearEffectEnabled,
   },);
   const currentRouteKey = useCurrentRouteKey();
-  const animation = React$1.useRef();
-  const runAnimation = React$1.useCallback(async ({
+  const animation = React.useRef();
+  const runAnimation = React.useCallback(async ({
     transition,
     ...target
   }, fromInitial,) => {
@@ -32206,7 +32209,7 @@ function useStyleAppearEffect(options, ref,) {
     },
   },);
   const animateWithScrollInfo = options.targets && enabled && !options.scrollDirection;
-  React$1.useEffect(() => {
+  React.useEffect(() => {
     if (!animateWithScrollInfo) return;
     const playedState = {
       initial: true,
@@ -32244,7 +32247,7 @@ function useStyleAppearEffect(options, ref,) {
     if (!options.targets && !options.scrollDirection) return;
     for (const key2 of effectValuesKeys) effect.values[key2].set(variants.initial?.[key2] ?? defaultFXValues[key2],);
   },);
-  return useMemo3(() => {
+  return useMemo(() => {
     return {
       values: effect.values,
       style: enabled ? effectEnabledStyle : effectDisabledStyle,
@@ -32280,8 +32283,8 @@ var defaultRanges$1 = () => ({
   transformPerspective: [],
 });
 function useAttachOptionalSpring(values, spring2,) {
-  const springs = React$1.useRef({},);
-  React$1.useEffect(() => {
+  const springs = React.useRef({},);
+  React.useEffect(() => {
     if (spring2 === void 0) return;
     for (const key2 of objectKeys(values,)) {
       let startAnimation2 = function () {
@@ -32340,7 +32343,7 @@ function useStyleTransform({
   const effectDisabled = !styleTransformEffectEnabled || !transformTargets;
   const triggerOnScroll = transformTrigger === 'onScrollTarget';
   const currentRouteKey = useCurrentRouteKey();
-  useLayoutEffect3(() => {
+  useLayoutEffect(() => {
     if (effectDisabled || !triggerOnScroll) return;
     return scroll((_, {
       y: scrollY,
@@ -32387,7 +32390,7 @@ function useStyleTransform({
     const values = defaultValues$1(transformTargets, shouldReduceMotion,);
     for (const key2 of effectValuesKeys) effect.values[key2].set(values?.[key2] ?? defaultFXValues[key2],);
   },);
-  return React$1.useMemo(() => {
+  return React.useMemo(() => {
     return {
       values: effect.values,
       style: styleTransformEffectEnabled ? effectEnabledStyle : effectDisabledStyle,
@@ -32460,14 +32463,14 @@ function isVariantOrVariantList(value,) {
   return isString(value,) || Array.isArray(value,);
 }
 var withFX = (Component22) =>
-  React$1.forwardRef((props, forwardedRef,) => {
+  React.forwardRef((props, forwardedRef,) => {
     const forwardWithFXFlag = !isMotionComponent(Component22,);
     if (props.__withFX) {
       const propsToForward = {
         ...props,
       };
       if (!forwardWithFXFlag) Reflect.deleteProperty(propsToForward, '__withFX',);
-      return /* @__PURE__ */ jsx2(Component22, {
+      return /* @__PURE__ */ jsx(Component22, {
         suppressHydrationWarning: true,
         ...propsToForward,
         animate: void 0,
@@ -32478,7 +32481,7 @@ var withFX = (Component22) =>
     }
     const disabledProps = getDisabledFXPropsInStaticRenderer(props,);
     if (disabledProps) {
-      return /* @__PURE__ */ jsx2(Component22, {
+      return /* @__PURE__ */ jsx(Component22, {
         suppressHydrationWarning: true,
         ...extractFXOptions(props,).forwardedProps,
         ...disabledProps,
@@ -32521,7 +32524,7 @@ var withFX = (Component22) =>
       values: loopValues,
       style: loopStyle,
     } = useLoop(loop, observerRef,);
-    const fxValues = React$1.useMemo(() => {
+    const fxValues = React.useMemo(() => {
       const layerOpacity = new MotionValue(targetOpacityValue ?? 1,);
       return {
         scale: [appearEffectValues.scale, loopValues.scale, presenceEffectValues.scale, transformValues2.scale,],
@@ -32580,7 +32583,7 @@ var withFX = (Component22) =>
         __withFX: true,
       }
       : {};
-    return /* @__PURE__ */ jsx2(Component22, {
+    return /* @__PURE__ */ jsx(Component22, {
       suppressHydrationWarning: true,
       ...forwardedProps,
       ...motionGestures,
@@ -32600,7 +32603,7 @@ var withFX = (Component22) =>
   },);
 var withParallaxTransform = withFX;
 var withStyleAppearEffect = withFX;
-var MouseEventListener = class extends Component$1 {
+var MouseEventListener = class extends Component2 {
   /**
    * @internal
    */
@@ -32660,7 +32663,7 @@ var MouseEventListener = class extends Component$1 {
     this.props.session.mouseWheel(event,);
   };
 };
-var TouchEventListener = class extends Component$1 {
+var TouchEventListener = class extends Component2 {
   /**
    * @internal
    */
@@ -33016,14 +33019,14 @@ var FramerEventSession = class {
     return Point.subtract(event.devicePoint, this.startEvent.devicePoint,);
   }
 };
-var Context = /* @__PURE__ */ createContext3({},);
+var Context = /* @__PURE__ */ createContext({},);
 function ComponentPresetsProvider({
   presets,
   children,
 },) {
-  const lastPresets = useRef3(presets,);
+  const lastPresets = useRef(presets,);
   if (!isEqual(presets, lastPresets.current, false,)) lastPresets.current = presets;
-  return /* @__PURE__ */ jsx2(Context.Provider, {
+  return /* @__PURE__ */ jsx(Context.Provider, {
     suppressHydrationWarning: true,
     value: lastPresets.current,
     children,
@@ -33033,20 +33036,20 @@ function ComponentPresetsConsumer({
   componentIdentifier,
   children,
 },) {
-  return children(useContext3(Context,)[componentIdentifier] ?? {},);
+  return children(useContext(Context,)[componentIdentifier] ?? {},);
 }
-var ComponentViewportContext = /* @__PURE__ */ React$1.createContext({},);
+var ComponentViewportContext = /* @__PURE__ */ React.createContext({},);
 function useComponentViewport() {
-  return React$1.useContext(ComponentViewportContext,);
+  return React.useContext(ComponentViewportContext,);
 }
-var ComponentViewportProvider = /* @__PURE__ */ React$1.forwardRef(function ComponentViewportProvider2({
+var ComponentViewportProvider = /* @__PURE__ */ React.forwardRef(function ComponentViewportProvider2({
   width,
   height,
   y: y2,
   children,
   ...rest
 }, ref,) {
-  const componentViewport = React$1.useMemo(() => {
+  const componentViewport = React.useMemo(() => {
     return {
       width,
       height,
@@ -33054,16 +33057,16 @@ var ComponentViewportProvider = /* @__PURE__ */ React$1.forwardRef(function Comp
     };
   }, [width, height, y2,],);
   const cloneWithPropsAndRef = useCloneChildrenWithPropsAndRef(ref,);
-  return /* @__PURE__ */ jsx2(ComponentViewportContext.Provider, {
+  return /* @__PURE__ */ jsx(ComponentViewportContext.Provider, {
     suppressHydrationWarning: true,
     value: componentViewport,
     children: cloneWithPropsAndRef(children, rest,),
   },);
 },);
 var withGeneratedLayoutId = (Component22) =>
-  React$1.forwardRef((props, ref,) => {
+  React.forwardRef((props, ref,) => {
     const layoutIdProps = useLayoutIdProps(props,);
-    return /* @__PURE__ */ jsx2(Component22, {
+    return /* @__PURE__ */ jsx(Component22, {
       suppressHydrationWarning: true,
       ...layoutIdProps,
       ref,
@@ -33089,7 +33092,7 @@ var setLibraryFeatures = (features) => {
   libraryFeatures = features;
 };
 var shouldSuspenseBoundariesBeActive = false;
-var SynchronousSuspenseErrorBoundary = class extends Component$1 {
+var SynchronousSuspenseErrorBoundary = class extends Component2 {
   state = {
     error: void 0,
   };
@@ -33134,7 +33137,7 @@ function isSuspense426Error(error,) {
 var suspendPromise = /* @__PURE__ */ (() => typeof __unframerWindow2 !== 'undefined' ? new Promise(() => {},) : null)();
 function Suspend() {
   if (typeof __unframerWindow2 === 'undefined' || shouldSuspenseBoundariesBeActive) {
-    return /* @__PURE__ */ jsx2('div', {
+    return /* @__PURE__ */ jsx('div', {
       suppressHydrationWarning: true,
       hidden: true,
       dangerouslySetInnerHTML: {
@@ -33144,26 +33147,26 @@ function Suspend() {
   }
   throw suspendPromise;
 }
-var suspend = /* @__PURE__ */ jsx2(Suspend, {
+var suspend = /* @__PURE__ */ jsx(Suspend, {
   suppressHydrationWarning: true,
 },);
 var DisableSuspenseSuspenseThatPreservesDomContext = /* @__PURE__ */ (() => {
-  const context = createContext3(false,);
+  const context = createContext(false,);
   context.displayName = 'DisableSuspenseSuspenseThatPreservesDomContext';
   return context;
 })();
 function SuspenseThatPreservesDom({
   children,
 },) {
-  if (useContext3(DisableSuspenseSuspenseThatPreservesDomContext,)) return children;
-  return /* @__PURE__ */ jsx2(Suspense, {
+  if (useContext(DisableSuspenseSuspenseThatPreservesDomContext,)) return children;
+  return /* @__PURE__ */ jsx(Suspense, {
     suppressHydrationWarning: true,
     fallback: suspend,
     children,
   },);
 }
 function NullFallback() {
-  return /* @__PURE__ */ jsx2('div', {
+  return /* @__PURE__ */ jsx('div', {
     suppressHydrationWarning: true,
     hidden: true,
     dangerouslySetInnerHTML: {
@@ -33171,7 +33174,7 @@ function NullFallback() {
     },
   },);
 }
-var nullFallback = /* @__PURE__ */ jsx2(NullFallback, {
+var nullFallback = /* @__PURE__ */ jsx(NullFallback, {
   suppressHydrationWarning: true,
 },);
 function collectErrorToAnalytics(error, errorInfo,) {
@@ -33197,10 +33200,10 @@ function CodeComponentBoundary({
   children,
 },) {
   if (!shouldEnableCodeBoundaries()) return children;
-  return /* @__PURE__ */ jsx2(ServerSideErrorBoundary, {
+  return /* @__PURE__ */ jsx(ServerSideErrorBoundary, {
     suppressHydrationWarning: true,
     fallback,
-    children: /* @__PURE__ */ jsx2(ClientSideErrorBoundary, {
+    children: /* @__PURE__ */ jsx(ClientSideErrorBoundary, {
       suppressHydrationWarning: true,
       fallback,
       getErrorMessage,
@@ -33208,7 +33211,7 @@ function CodeComponentBoundary({
     },),
   },);
 }
-var ClientSideErrorBoundary = class extends Component$1 {
+var ClientSideErrorBoundary = class extends Component2 {
   state = {
     hasError: false,
   };
@@ -33237,17 +33240,17 @@ function ServerSideErrorBoundary({
   fallback = nullFallback,
 },) {
   return typeof __unframerWindow2 === 'undefined'
-    ? /* @__PURE__ */ jsx2(Suspense, {
+    ? /* @__PURE__ */ jsx(Suspense, {
       suppressHydrationWarning: true,
       fallback,
       children,
     },)
-    : /* @__PURE__ */ jsx2(SuspenseThatPreservesDom, {
+    : /* @__PURE__ */ jsx(SuspenseThatPreservesDom, {
       suppressHydrationWarning: true,
       children,
     },);
 }
-var DeprecatedContainerErrorBoundary = class extends Component$1 {
+var DeprecatedContainerErrorBoundary = class extends Component2 {
   state = {
     hasError: false,
   };
@@ -33273,7 +33276,7 @@ var DeprecatedContainerErrorBoundary = class extends Component$1 {
   }
 };
 function DisabledCodeComponent() {
-  return /* @__PURE__ */ jsx2('div', {
+  return /* @__PURE__ */ jsx('div', {
     suppressHydrationWarning: true,
     style: {
       padding: '12px 16px',
@@ -33288,13 +33291,13 @@ function DisabledCodeComponent() {
     children: 'Code component disabled',
   },);
 }
-var ExternalComponentContext = /* @__PURE__ */ (() => React$1.createContext(void 0,))();
+var ExternalComponentContext = /* @__PURE__ */ (() => React.createContext(void 0,))();
 function useNearestExternalComponent() {
-  return React$1.useContext(ExternalComponentContext,);
+  return React.useContext(ExternalComponentContext,);
 }
 function useFurthestExternalComponent() {
   const nearestExternalComponent = useNearestExternalComponent();
-  return React$1.useMemo(() => {
+  return React.useMemo(() => {
     if (!nearestExternalComponent) return void 0;
     let item = nearestExternalComponent;
     while (item.parent && item.parent.level > 0) item = item.parent;
@@ -33307,13 +33310,13 @@ function IsExternalComponent({
   nodeId,
 },) {
   const parent = useNearestExternalComponent();
-  const newValue = React$1.useMemo(() => ({
+  const newValue = React.useMemo(() => ({
     level: (parent?.level ?? 0) + 1,
     scopeId,
     nodeId,
     parent,
   }), [scopeId, nodeId, parent,],);
-  return /* @__PURE__ */ jsx2(ExternalComponentContext.Provider, {
+  return /* @__PURE__ */ jsx(ExternalComponentContext.Provider, {
     suppressHydrationWarning: true,
     value: newValue,
     children,
@@ -33366,7 +33369,7 @@ function isNodeLocalToProject(scopeIdOfThisNode, scopeIdOfNearestExternalCompone
 function useMaybeWrapComponentWithCodeBoundary(children, scopeId, nodeId, isAuthoredByUser, isModuleExternal, inComponentSlot,) {
   const nearestExternalComponent = useNearestExternalComponent();
   if (isUndefined(scopeId,) || isUndefined(nodeId,)) {
-    return /* @__PURE__ */ jsx2(DeprecatedContainerErrorBoundary, {
+    return /* @__PURE__ */ jsx(DeprecatedContainerErrorBoundary, {
       suppressHydrationWarning: true,
       children,
     },);
@@ -33375,7 +33378,7 @@ function useMaybeWrapComponentWithCodeBoundary(children, scopeId, nodeId, isAuth
     disableCustomCode,
   } = getLibraryFeatures();
   if (disableCustomCode && isAuthoredByUser) {
-    return /* @__PURE__ */ jsx2(DisabledCodeComponent, {
+    return /* @__PURE__ */ jsx(DisabledCodeComponent, {
       suppressHydrationWarning: true,
     },);
   }
@@ -33389,7 +33392,7 @@ function useMaybeWrapComponentWithCodeBoundary(children, scopeId, nodeId, isAuth
       inComponentSlot ?? false,
     )
   ) {
-    children = /* @__PURE__ */ jsx2(CodeComponentBoundary, {
+    children = /* @__PURE__ */ jsx(CodeComponentBoundary, {
       suppressHydrationWarning: true,
       getErrorMessage: getErrorMessageForComponent.bind(null, scopeId, nodeId,),
       fallback: null,
@@ -33397,7 +33400,7 @@ function useMaybeWrapComponentWithCodeBoundary(children, scopeId, nodeId, isAuth
     },);
   }
   if (isModuleExternal) {
-    children = /* @__PURE__ */ jsx2(IsExternalComponent, {
+    children = /* @__PURE__ */ jsx(IsExternalComponent, {
       suppressHydrationWarning: true,
       scopeId,
       nodeId,
@@ -33406,7 +33409,7 @@ function useMaybeWrapComponentWithCodeBoundary(children, scopeId, nodeId, isAuth
   }
   return children;
 }
-var ContainerInner = /* @__PURE__ */ React$1.forwardRef(function ContainerInner2({
+var ContainerInner = /* @__PURE__ */ React.forwardRef(function ContainerInner2({
   children,
   layoutId,
   as,
@@ -33421,10 +33424,10 @@ var ContainerInner = /* @__PURE__ */ React$1.forwardRef(function ContainerInner2
 }, ref,) {
   const outerLayoutId = useConstant2(() => layoutId ? `${layoutId}-container` : void 0);
   const MotionComponent = htmlElementAsMotionComponent(as,);
-  const slotCopyLayoutGroupId = React$1.useId();
-  const clonedChildren = React$1.Children.map(children, (child) => {
-    if (React$1.isValidElement(child,)) {
-      return React$1.cloneElement(child, {
+  const slotCopyLayoutGroupId = React.useId();
+  const clonedChildren = React.Children.map(children, (child) => {
+    if (React.isValidElement(child,)) {
+      return React.cloneElement(child, {
         layoutId: layoutId ?? child.props.layoutId,
       },);
     }
@@ -33438,21 +33441,21 @@ var ContainerInner = /* @__PURE__ */ React$1.forwardRef(function ContainerInner2
     isModuleExternal,
     inComponentSlot,
   );
-  return /* @__PURE__ */ jsx2(MotionComponent, {
+  return /* @__PURE__ */ jsx(MotionComponent, {
     suppressHydrationWarning: true,
     layoutId: outerLayoutId,
     ...props,
     ref,
-    children: /* @__PURE__ */ jsx2(ComponentContainerContext.Provider, {
+    children: /* @__PURE__ */ jsx(ComponentContainerContext.Provider, {
       suppressHydrationWarning: true,
       value: true,
-      children: /* @__PURE__ */ jsx2(NodeIdContext.Provider, {
+      children: /* @__PURE__ */ jsx(NodeIdContext.Provider, {
         suppressHydrationWarning: true,
         value: nodeId ?? null,
-        children: /* @__PURE__ */ jsx2(AutomaticLayoutIds, {
+        children: /* @__PURE__ */ jsx(AutomaticLayoutIds, {
           suppressHydrationWarning: true,
           enabled: false,
-          children: /* @__PURE__ */ jsx2(LayoutGroup, {
+          children: /* @__PURE__ */ jsx(LayoutGroup, {
             suppressHydrationWarning: true,
             id: layoutId ?? (inComponentSlot ? slotCopyLayoutGroupId : ''),
             inherit: props.layout ? true : 'id',
@@ -33464,7 +33467,7 @@ var ContainerInner = /* @__PURE__ */ React$1.forwardRef(function ContainerInner2
   },);
 },);
 var Container = /* @__PURE__ */ withGeneratedLayoutId(ContainerInner,);
-var SmartComponentScopedContainer = /* @__PURE__ */ React$1.forwardRef(function SmartComponentScopedContainer2(props, ref,) {
+var SmartComponentScopedContainer = /* @__PURE__ */ React.forwardRef(function SmartComponentScopedContainer2(props, ref,) {
   const {
     as,
     children,
@@ -33487,10 +33490,10 @@ var SmartComponentScopedContainer = /* @__PURE__ */ React$1.forwardRef(function 
   const tagName = props.as ?? 'div';
   if (props.rendersWithMotion) {
     const Component22 = htmlElementAsMotionComponent(tagName,);
-    return /* @__PURE__ */ jsx2(NodeIdContext.Provider, {
+    return /* @__PURE__ */ jsx(NodeIdContext.Provider, {
       suppressHydrationWarning: true,
       value: nodeId ?? null,
-      children: /* @__PURE__ */ jsx2(Component22, {
+      children: /* @__PURE__ */ jsx(Component22, {
         suppressHydrationWarning: true,
         ...otherProps,
         ref,
@@ -33505,10 +33508,10 @@ var SmartComponentScopedContainer = /* @__PURE__ */ React$1.forwardRef(function 
       layoutDependency,
       ...plainHTMLRenderableProps
     } = otherProps;
-    return /* @__PURE__ */ jsx2(NodeIdContext.Provider, {
+    return /* @__PURE__ */ jsx(NodeIdContext.Provider, {
       suppressHydrationWarning: true,
       value: nodeId ?? null,
-      children: /* @__PURE__ */ jsx2(Component22, {
+      children: /* @__PURE__ */ jsx(Component22, {
         suppressHydrationWarning: true,
         ...plainHTMLRenderableProps,
         ref,
@@ -33518,21 +33521,21 @@ var SmartComponentScopedContainer = /* @__PURE__ */ React$1.forwardRef(function 
     },);
   }
 },);
-var CloneableLayoutGroupItem = /* @__PURE__ */ React$1.forwardRef(function CloneableLayoutGroupItem2({
+var CloneableLayoutGroupItem = /* @__PURE__ */ React.forwardRef(function CloneableLayoutGroupItem2({
   __framerLayoutGroupElement,
   __framerLayoutGroupId,
   ...props
 }, ref,) {
   if (ref) props.ref = ref;
-  return /* @__PURE__ */ jsx2(LayoutGroup, {
+  return /* @__PURE__ */ jsx(LayoutGroup, {
     suppressHydrationWarning: true,
     id: __framerLayoutGroupId,
-    children: React$1.cloneElement(__framerLayoutGroupElement, props,),
+    children: React.cloneElement(__framerLayoutGroupElement, props,),
   },);
 },);
 function createCloneableLayoutGroupItem(element, key2, layoutGroupId,) {
-  if (!React$1.isValidElement(element,)) return element;
-  return React$1.createElement(CloneableLayoutGroupItem, {
+  if (!React.isValidElement(element,)) return element;
+  return React.createElement(CloneableLayoutGroupItem, {
     ...element.props,
     __framerLayoutGroupElement: element,
     __framerLayoutGroupId: layoutGroupId,
@@ -33567,11 +33570,11 @@ function subscribeToHoverCapability(notify2,) {
   };
 }
 function useHoverCapability(initialValue = false,) {
-  const [canHover, setCanHover,] = useState3(initialValue,);
+  const [canHover, setCanHover,] = useState(initialValue,);
   useIsomorphicLayoutEffect$1(function observeRenderedHoverCapability() {
     function updateRenderedCapability(useTransition2 = true,) {
       const current2 = getHoverCapabilitySnapshot();
-      if (useTransition2) startTransition3(() => setCanHover(current2,));
+      if (useTransition2) startTransition2(() => setCanHover(current2,));
       else setCanHover(current2,);
     }
     const unsubscribe = subscribeToHoverCapability(updateRenderedCapability,);
@@ -33580,7 +33583,7 @@ function useHoverCapability(initialValue = false,) {
   }, [],);
   return canHover;
 }
-var CustomCursorContext = /* @__PURE__ */ createContext3({
+var CustomCursorContext = /* @__PURE__ */ createContext({
   onRegisterCursors: () => () => {},
   registerCursors: () => {},
 },);
@@ -33596,7 +33599,7 @@ function getActiveDefinitions(map2, previousDefinitions, newDefinitions,) {
   }
   return allCursors;
 }
-var CustomCursorContextProvider = /* @__PURE__ */ memo$1(function CustomCursorList({
+var CustomCursorContextProvider = /* @__PURE__ */ memo$12(function CustomCursorList({
   children,
 },) {
   const value = useConstant2(() => {
@@ -33620,12 +33623,12 @@ var CustomCursorContextProvider = /* @__PURE__ */ memo$1(function CustomCursorLi
     };
   },);
   const shouldReduceMotion = useReducedMotionConfig();
-  return /* @__PURE__ */ jsxs2(CustomCursorContext.Provider, {
+  return /* @__PURE__ */ jsxs(CustomCursorContext.Provider, {
     suppressHydrationWarning: true,
     value,
     children: [
       children,
-      !shouldReduceMotion && /* @__PURE__ */ jsx2(CustomCursorComponent, {
+      !shouldReduceMotion && /* @__PURE__ */ jsx(CustomCursorComponent, {
         suppressHydrationWarning: true,
       },),
     ],
@@ -33689,21 +33692,21 @@ function getCursorHash(x2, y2,) {
     } else el = el.parentElement;
   }
 }
-var CustomCursorComponent = /* @__PURE__ */ memo$1(function CustomCursorComponent2() {
+var CustomCursorComponent = /* @__PURE__ */ memo$12(function CustomCursorComponent2() {
   const {
     onRegisterCursors,
-  } = useContext3(CustomCursorContext,);
+  } = useContext(CustomCursorContext,);
   const hasHoverCapability2 = useHoverCapability(false,);
   const pointerX = useMotionValue(0,);
   const pointerY = useMotionValue(0,);
   const opacity = useMotionValue(0,);
-  const cursorRef = useRef3(null,);
-  const internalState = useRef3({
+  const cursorRef = useRef(null,);
+  const internalState = useRef({
     cursors: {},
     cursorHash: void 0,
   },);
   const forceRender = useForceUpdate$2();
-  useEffect4(() => {
+  useEffect2(() => {
     if (!hasHoverCapability2) return;
     let x3 = 0;
     let y3 = 0;
@@ -33760,7 +33763,7 @@ var CustomCursorComponent = /* @__PURE__ */ memo$1(function CustomCursorComponen
       cancelFrame(updateVariant,);
     };
   }, [opacity, pointerX, pointerY, forceRender, hasHoverCapability2,],);
-  useEffect4(() => {
+  useEffect2(() => {
     if (!hasHoverCapability2) return;
     function hideCursor() {
       animate(opacity, 0, {
@@ -33775,7 +33778,7 @@ var CustomCursorComponent = /* @__PURE__ */ memo$1(function CustomCursorComponen
       safeWindow.removeEventListener('blur', hideCursor,);
     };
   }, [opacity, hasHoverCapability2,],);
-  useLayoutEffect3(() => {
+  useLayoutEffect(() => {
     function updateCursors(newCursors,) {
       internalState.current.cursors = newCursors;
       internalState.current.cursorHash = !isEmptyObject(newCursors,) ? getCursorHash(pointerX.get(), pointerY.get(),) : null;
@@ -33793,7 +33796,7 @@ var CustomCursorComponent = /* @__PURE__ */ memo$1(function CustomCursorComponen
   } = internalState.current;
   const cursor = cursorHash ? cursors[cursorHash] : null;
   const replaceNativeCursor = customCursorReplacesNativeCursor(cursor,);
-  useLayoutEffect3(() => {
+  useLayoutEffect(() => {
     if (!hasHoverCapability2) return;
     document.body.classList.toggle(replaceCursorClassName, replaceNativeCursor,);
   }, [replaceNativeCursor, hasHoverCapability2,],);
@@ -33813,14 +33816,14 @@ var CustomCursorComponent = /* @__PURE__ */ memo$1(function CustomCursorComponen
   const y2 = useTransform(() => sprungY.get() + (cursor?.offset?.y ?? 0));
   const alignment = cursor?.alignment;
   const placement = cursor?.placement;
-  const transformTemplate2 = useCallback4((_, t,) => `translate(${getCenteringTransform(placement, alignment,)}) ${t}`, [
+  const transformTemplate2 = useCallback2((_, t,) => `translate(${getCenteringTransform(placement, alignment,)}) ${t}`, [
     alignment,
     placement,
   ],);
   if (!hasHoverCapability2 || !cursor || !Cursor) return null;
-  return /* @__PURE__ */ jsx2(Suspense, {
+  return /* @__PURE__ */ jsx(Suspense, {
     suppressHydrationWarning: true,
-    children: /* @__PURE__ */ jsx2(Cursor, {
+    children: /* @__PURE__ */ jsx(Cursor, {
       suppressHydrationWarning: true,
       transformTemplate: transformTemplate2,
       style: {
@@ -33839,10 +33842,10 @@ var CustomCursorComponent = /* @__PURE__ */ memo$1(function CustomCursorComponen
 function useCustomCursors(webPageCursors,) {
   const {
     registerCursors,
-  } = useContext3(CustomCursorContext,);
+  } = useContext(CustomCursorContext,);
   const cursors = useConstant2(() => webPageCursors);
-  const id2 = useId2();
-  useLayoutEffect3(() => {
+  const id2 = useId();
+  useLayoutEffect(() => {
     return registerCursors(cursors, id2,);
   }, [registerCursors, cursors, id2,],);
 }
@@ -34025,20 +34028,20 @@ function createVariablesFromPageLinkCollectionItem(collectionItem,) {
   }
   return variables;
 }
-var OuterLinkContext = /* @__PURE__ */ createContext3(void 0,);
+var OuterLinkContext = /* @__PURE__ */ createContext(void 0,);
 function ResetOuterLinkContext({
   children,
 },) {
-  return /* @__PURE__ */ jsx2(OuterLinkContext.Provider, {
+  return /* @__PURE__ */ jsx(OuterLinkContext.Provider, {
     suppressHydrationWarning: true,
     value: void 0,
     children,
   },);
 }
 function useReplaceNestedLinks(children, scopeId, nodeId, href, propsAddedByLink, observerRef,) {
-  const outerLink = useContext3(OuterLinkContext,);
+  const outerLink = useContext(OuterLinkContext,);
   const furthestExternalComponent = useFurthestExternalComponent();
-  const innerLink = useMemo3(() => ({
+  const innerLink = useMemo(() => ({
     scopeId,
     nodeId,
     furthestExternalComponent,
@@ -34048,14 +34051,14 @@ function useReplaceNestedLinks(children, scopeId, nodeId, href, propsAddedByLink
   const {
     locales,
   } = useLocaleInfo();
-  const route = useMemo3(() => {
+  const route = useMemo(() => {
     const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
     if (!pageLink) return;
     return getRouteFromPageLink(pageLink, router, currentRoute, locales,);
   }, [currentRoute, href, router, locales,],);
   const isOnFramerCanvas = useIsOnFramerCanvas();
   const shouldReplaceLink = Boolean(!isOnFramerCanvas && outerLink?.nodeId && innerLink.nodeId,);
-  const onClick = useCallback4((event) => {
+  const onClick = useCallback2((event) => {
     if (!propsAddedByLink.href) return;
     event.preventDefault();
     event.stopPropagation();
@@ -34066,13 +34069,13 @@ function useReplaceNestedLinks(children, scopeId, nodeId, href, propsAddedByLink
     if (route) propsAddedByLink.navigate?.();
     else openExternalLink(propsAddedByLink.href, propsAddedByLink.rel, propsAddedByLink.target,);
   }, [propsAddedByLink, route,],);
-  const onAuxClick = useCallback4((event) => {
+  const onAuxClick = useCallback2((event) => {
     if (!propsAddedByLink.href) return;
     event.preventDefault();
     event.stopPropagation();
     openExternalLink(propsAddedByLink.href, '', '_blank',);
   }, [propsAddedByLink,],);
-  const onKeyDown = useCallback4((event) => {
+  const onKeyDown = useCallback2((event) => {
     if (!propsAddedByLink.href) return;
     if (event.key !== 'Enter') return;
     event.preventDefault();
@@ -34087,7 +34090,7 @@ function useReplaceNestedLinks(children, scopeId, nodeId, href, propsAddedByLink
   }, [shouldReplaceLink,],);
   let replacedChildren = children;
   if (shouldReplaceLink) {
-    Children3.forEach(children, (child) => {
+    Children.forEach(children, (child) => {
       if (!isChildReplaceable(child,)) return;
       assert(
         linkInfoIsCollectable(outerLink,),
@@ -34099,7 +34102,7 @@ function useReplaceNestedLinks(children, scopeId, nodeId, href, propsAddedByLink
       );
       nestedLinksCollector.collectNestedLink(outerLink, innerLink,);
     },);
-    replacedChildren = Children3.map(children, (child) => {
+    replacedChildren = Children.map(children, (child) => {
       if (!isChildReplaceable(child,)) return child;
       const tag = maybeReplaceAnchorWithSpan(child.type,);
       const {
@@ -34117,13 +34120,13 @@ function useReplaceNestedLinks(children, scopeId, nodeId, href, propsAddedByLink
         as: childProps.as && maybeReplaceAnchorWithSpan(childProps.as,),
       };
       const ref = 'ref' in child ? child.ref : void 0;
-      return createElement2(tag, {
+      return createElement(tag, {
         ...props,
         ref,
       }, childChildren,);
     },);
   }
-  return /* @__PURE__ */ jsx2(OuterLinkContext.Provider, {
+  return /* @__PURE__ */ jsx(OuterLinkContext.Provider, {
     suppressHydrationWarning: true,
     value: innerLink,
     children: replacedChildren,
@@ -34133,7 +34136,7 @@ function linkInfoIsCollectable(linkInfo,) {
   return !isUndefined(linkInfo?.nodeId,);
 }
 function isChildReplaceable(child,) {
-  return isValidElement3(child,) &&
+  return isValidElement(child,) &&
     (maybeReplaceAnchorWithSpan(child.type,) !== child.type || maybeReplaceAnchorWithSpan(child.props.as,) !== child.props.as);
 }
 function openExternalLink(href, rel, target,) {
@@ -34180,7 +34183,7 @@ function InjectSelectionStyleWithoutCSS({
   triggerId,
   children,
 },) {
-  React$1.useLayoutEffect(() => {
+  React.useLayoutEffect(() => {
     if (triggerId) updateTextSelectionStyles(triggerId,);
   }, [triggerId,],);
   return children;
@@ -34584,7 +34587,7 @@ function domWriteUpdatePosition(floatingPositionRef, position, rect, scrollX, sc
   },);
 }
 var FloatingStackingContext = /* @__PURE__ */ (() => {
-  const Context2 = React$1.createContext(/* @__PURE__ */ new Set(),);
+  const Context2 = React.createContext(/* @__PURE__ */ new Set(),);
   Context2.displayName = 'FloatingStackingContext';
   return Context2;
 })();
@@ -34593,9 +34596,9 @@ function useDismissFloatingLayer(anchorRef, floatingPositionRef, safeAreaRef, {
   onDismiss,
 },) {
   const descendantStackingContext = useConstant2(() => /* @__PURE__ */ new Set());
-  const ancestorStackingContext = React$1.useContext(FloatingStackingContext,);
+  const ancestorStackingContext = React.useContext(FloatingStackingContext,);
   const [isPresent2, safeToRemove,] = usePresence();
-  React$1.useEffect(() => {
+  React.useEffect(() => {
     if (isPresent2) {
       if (!floatingPositionRef.current) return;
       floatingPositionRef.current.style.pointerEvents = '';
@@ -34607,7 +34610,7 @@ function useDismissFloatingLayer(anchorRef, floatingPositionRef, safeAreaRef, {
       safeToRemove();
     }
   }, [isPresent2, safeToRemove, floatingPositionRef, ancestorStackingContext,],);
-  React$1.useEffect(() => {
+  React.useEffect(() => {
     if (!safeArea) {
       const handleEscape = (e) => {
         if (e.key !== 'Escape') return;
@@ -34676,7 +34679,7 @@ function childrenWithOrigin(child, {
     originX: x2,
     originY: y2,
   };
-  return React$1.cloneElement(child, {
+  return React.cloneElement(child, {
     style: style2,
   },);
 }
@@ -34705,11 +34708,11 @@ function Floating({
   onDismiss,
   ...rest
 },) {
-  const floatingPositionRef = React$1.useRef(null,);
-  const safeAreaRef = React$1.useRef(null,);
-  const contentRef = React$1.useRef(null,);
+  const floatingPositionRef = React.useRef(null,);
+  const safeAreaRef = React.useRef(null,);
+  const contentRef = React.useRef(null,);
   const [origin, updateOrigin,] = useDynamicMotionOrigin(placement, alignment,);
-  React$1.useLayoutEffect(() => {
+  React.useLayoutEffect(() => {
     if (!refHasValue(anchorRef,) || !contentRef.current || !placement || !alignment) return;
     const offset = {
       x: offsetX ?? 0,
@@ -34799,9 +34802,9 @@ function Floating({
     safeArea,
     onDismiss,
   },);
-  const inComponent = useContext3(ComponentContainerContext,);
+  const inComponent = useContext(ComponentContainerContext,);
   return ReactDOM.createPortal(
-    /* @__PURE__ */ jsxs2(motion.div, {
+    /* @__PURE__ */ jsxs(motion.div, {
       suppressHydrationWarning: true,
       ref: floatingPositionRef,
       className: className2,
@@ -34817,7 +34820,7 @@ function Floating({
       ...rest,
       children: [
         safeArea
-          ? /* @__PURE__ */ jsx2('div', {
+          ? /* @__PURE__ */ jsx('div', {
             suppressHydrationWarning: true,
             ref: safeAreaRef,
             style: {
@@ -34825,7 +34828,7 @@ function Floating({
             },
             'data-safearea': true,
           },)
-          : /* @__PURE__ */ jsx2('div', {
+          : /* @__PURE__ */ jsx('div', {
             suppressHydrationWarning: true,
             style: {
               position: 'fixed',
@@ -34834,15 +34837,15 @@ function Floating({
             'aria-hidden': true,
             onClick: onDismiss,
           },),
-        /* @__PURE__ */ jsx2(FloatingStackingContext.Provider, {
+        /* @__PURE__ */ jsx(FloatingStackingContext.Provider, {
           suppressHydrationWarning: true,
           value: descendantContext,
-          children: /* @__PURE__ */ jsx2(ResetOuterLinkContext, {
+          children: /* @__PURE__ */ jsx(ResetOuterLinkContext, {
             suppressHydrationWarning: true,
-            children: /* @__PURE__ */ jsx2(InjectSelectionStyle, {
+            children: /* @__PURE__ */ jsx(InjectSelectionStyle, {
               suppressHydrationWarning: true,
               triggerId: anchorRef.current?.id ?? void 0,
-              children: /* @__PURE__ */ jsx2('div', {
+              children: /* @__PURE__ */ jsx('div', {
                 suppressHydrationWarning: true,
                 ref: contentRef,
                 children: childrenWithOrigin(children, origin,),
@@ -34855,12 +34858,12 @@ function Floating({
     getPortalContainer$1(portalSelector, inComponent,),
   );
 }
-var Instance = /* @__PURE__ */ React$1.forwardRef(function Instance2({
+var Instance = /* @__PURE__ */ React.forwardRef(function Instance2({
   Component: Component22,
   ...props
 }, ref,) {
   return Component22
-    ? /* @__PURE__ */ jsx2(Component22, {
+    ? /* @__PURE__ */ jsx(Component22, {
       suppressHydrationWarning: true,
       ...props,
       ref,
@@ -34871,8 +34874,8 @@ function AutoBreakpointVariant({
   component,
   props,
 },) {
-  const generatedComponentContext = useContext3(GeneratedComponentContext,);
-  const element = createElement2(component, props,);
+  const generatedComponentContext = useContext(GeneratedComponentContext,);
+  const element = createElement(component, props,);
   if ('variant' in props && props.variant != null) return element;
   if (!generatedComponentContext) return element;
   const {
@@ -34886,14 +34889,14 @@ function AutoBreakpointVariant({
       variant: name,
     };
   }
-  return /* @__PURE__ */ jsx2(PropertyOverrides2, {
+  return /* @__PURE__ */ jsx(PropertyOverrides2, {
     suppressHydrationWarning: true,
     overrides,
     breakpoint: activeVariantId,
     children: element,
   },);
 }
-var GracefullyDegradingErrorBoundary = class extends Component$1 {
+var GracefullyDegradingErrorBoundary = class extends Component2 {
   state = {
     error: void 0,
   };
@@ -34922,7 +34925,7 @@ var GracefullyDegradingErrorBoundary = class extends Component$1 {
     const closingHTMLComment = /-->/gu;
     const closingHTMLCommentReplacement = '--!>';
     const dom = isBot ? document.getElementById('main',)?.innerHTML || '' : '';
-    return /* @__PURE__ */ jsx2('div', {
+    return /* @__PURE__ */ jsx('div', {
       style: {
         display: 'contents',
       },
@@ -34954,16 +34957,16 @@ function findAnchorElement(target, withinElement,) {
 function ChildrenCanSuspend({
   children,
 },) {
-  return /* @__PURE__ */ jsx2(SuspenseThatPreservesDom, {
+  return /* @__PURE__ */ jsx(SuspenseThatPreservesDom, {
     suppressHydrationWarning: true,
     children,
   },);
 }
 function withChildrenCanSuspend(Component22,) {
-  return forwardRef3(function withChildrenCanSuspendInner(props, ref,) {
-    return /* @__PURE__ */ jsx2(ChildrenCanSuspend, {
+  return forwardRef(function withChildrenCanSuspendInner(props, ref,) {
+    return /* @__PURE__ */ jsx(ChildrenCanSuspend, {
       suppressHydrationWarning: true,
-      children: /* @__PURE__ */ jsx2(Component22, {
+      children: /* @__PURE__ */ jsx(Component22, {
         suppressHydrationWarning: true,
         ...props,
         ref,
@@ -35064,9 +35067,9 @@ function getRouteAttributes(
   };
 }
 var pathVariablesRegExp = /:([a-z]\w*)/gi;
-var PathVariablesContext = /* @__PURE__ */ createContext3(void 0,);
+var PathVariablesContext = /* @__PURE__ */ createContext(void 0,);
 function useImplicitPathVariables() {
-  const contextPathVariables = useContext3(PathVariablesContext,);
+  const contextPathVariables = useContext(PathVariablesContext,);
   const currentPathVariables = useCurrentRoute()?.pathVariables;
   return contextPathVariables || currentPathVariables;
 }
@@ -35088,7 +35091,7 @@ function linkMatchesRoute(route, {
 }
 function useLinkMatchesRoute(link,) {
   const route = useCurrentRoute();
-  const contextPathVariables = useContext3(PathVariablesContext,);
+  const contextPathVariables = useContext(PathVariablesContext,);
   if (!route) return false;
   const pageLink = isString(link,) ? linkFromFramerPageLink(link,) : link;
   if (!isLinkToWebPage(pageLink,)) return false;
@@ -35400,7 +35403,7 @@ function resolveSlugsWithSuspense(unresolvedPathSlugs, unresolvedHashSlugs, acti
 }
 function useResolveSlugsWithSuspense() {
   const collectionUtils = useCollectionUtils();
-  return useCallback4((unresolvedPathSlugs, unresolvedHashSlugs, activeLocale, promises = [],) => {
+  return useCallback2((unresolvedPathSlugs, unresolvedHashSlugs, activeLocale, promises = [],) => {
     return resolveSlugsWithSuspense(unresolvedPathSlugs, unresolvedHashSlugs, activeLocale, collectionUtils, promises,);
   }, [collectionUtils,],);
 }
@@ -35412,7 +35415,7 @@ function useTrackLinkClick({
   activeLocale,
 },) {
   const collectionUtils = useCollectionUtils();
-  return useCallback4(async (hrefAttribute) => {
+  return useCallback2(async (hrefAttribute) => {
     if (!router.pageviewEventData?.current) return;
     const pageviewEventData = router.pageviewEventData.current instanceof Promise
       ? await router.pageviewEventData.current
@@ -35621,7 +35624,7 @@ function propsForRoutePath(href, router, currentRoute, linkOptions, preload, loc
     _navigationUrl: navigationUrl,
   };
 }
-var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef3(function Link2({
+var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(function Link2({
   children,
   href,
   openInNewTab,
@@ -35651,7 +35654,7 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef3(fu
     href,
     activeLocale,
   },);
-  const propsAddedByLink = useMemo3(() => {
+  const propsAddedByLink = useMemo(() => {
     if (!href) return {};
     const pageLink = isLinkToWebPage(href,) ? href : linkFromFramerPageLink(href,);
     if (!pageLink) return {};
@@ -35744,7 +35747,7 @@ var Link = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef3(fu
     resolveSlugsWithSuspense2,
     preload,
   ],);
-  const hasRef = isValidElement3(children,) && 'ref' in children;
+  const hasRef = isValidElement(children,) && 'ref' in children;
   const observerRef = useObserverRef(hasRef ? children.ref : void 0,);
   const {
     navigate,
@@ -36046,13 +36049,13 @@ var HoneypotInput = ({
     inputRef,
     originalName,
   } = inputStateRef;
-  React$1.useLayoutEffect(() => {
+  React.useLayoutEffect(() => {
     const honeypotInput = inputRef.current;
     if (!honeypotInput) return;
     const methodsUsed = inputStateRef.methodsUsed;
     if (honeypotInput.value) methodsUsed.wasFilledBeforeHydration = true;
   }, [inputRef, inputStateRef,],);
-  React$1.useEffect(() => {
+  React.useEffect(() => {
     const myInput = inputRef.current;
     if (!myInput) return;
     const methodsUsed = inputStateRef.methodsUsed;
@@ -36091,7 +36094,7 @@ var HoneypotInput = ({
       myInput.removeEventListener('input', handleInput,);
     };
   }, [inputRef, inputStateRef,],);
-  return /* @__PURE__ */ jsx2('input', {
+  return /* @__PURE__ */ jsx('input', {
     ref: inputRef,
     type: 'text',
     name: originalName,
@@ -36111,10 +36114,10 @@ var HoneypotInput = ({
   },);
 };
 function useHoneypotFields() {
-  const framerSiteId = React$1.useContext(FormContext,);
-  const states = React$1.useMemo(() =>
+  const framerSiteId = React.useContext(FormContext,);
+  const states = React.useMemo(() =>
     COMMON_FIELD_NAMES.map((fieldName) => ({
-      inputRef: React$1.createRef(),
+      inputRef: React.createRef(),
       originalName: fieldName,
       methodsUsed: {
         setAttribute: false,
@@ -36123,13 +36126,13 @@ function useHoneypotFields() {
     })), [],);
   return {
     states,
-    convertHoneypotFieldsForSubmission: React$1.useCallback(() => {
+    convertHoneypotFieldsForSubmission: React.useCallback(() => {
       states.forEach((state) => {
         const currentHoneypotInput = state.inputRef.current;
         if (currentHoneypotInput) currentHoneypotInput.name = `${HONEYPOT_FIELD_NAME}_${state.originalName}`;
       },);
     }, [states,],),
-    replaceHoneypotWithMetadata: React$1.useCallback((formData) => {
+    replaceHoneypotWithMetadata: React.useCallback((formData) => {
       const honeypotCount = states.length;
       let honeypotFilled = 0;
       const filledFieldsData = [];
@@ -36167,9 +36170,9 @@ function useHoneypotFields() {
 function HoneypotFields({
   states,
 },) {
-  return /* @__PURE__ */ jsx2(Fragment3, {
+  return /* @__PURE__ */ jsx(Fragment, {
     children: states.map((stateRef) =>
-      /* @__PURE__ */ jsx2(HoneypotInput, {
+      /* @__PURE__ */ jsx(HoneypotInput, {
         suppressHydrationWarning: true,
         inputStateRef: stateRef,
       }, `hp_${stateRef.originalName}`,)
@@ -36251,8 +36254,8 @@ function openExternalLinkInCurrentTab(link, formRef,) {
   linkElement.click();
   linkElement.remove();
 }
-var FormContext = /* @__PURE__ */ React$1.createContext(void 0,);
-var FormContainer = /* @__PURE__ */ React$1.forwardRef(function FormContainer2({
+var FormContext = /* @__PURE__ */ React.createContext(void 0,);
+var FormContainer = /* @__PURE__ */ React.forwardRef(function FormContainer2({
   action,
   children,
   redirectUrl,
@@ -36264,7 +36267,7 @@ var FormContainer = /* @__PURE__ */ React$1.forwardRef(function FormContainer2({
   ...props
 }, forwardedRef,) {
   const formMarkerAttribute = 'data-framer-form';
-  const formRef = React$1.useRef(null,);
+  const formRef = React.useRef(null,);
   const ref = useComposedRefs(forwardedRef, formRef,);
   const {
     states: honeypotStateRefs,
@@ -36275,13 +36278,13 @@ var FormContainer = /* @__PURE__ */ React$1.forwardRef(function FormContainer2({
   const currentRoute = useCurrentRoute();
   const implicitPathVariables = useImplicitPathVariables();
   const collectionUtils = useCollectionUtils();
-  const [state, dispatch,] = React$1.useReducer(formReducer, incompleteState,);
+  const [state, dispatch,] = React.useReducer(formReducer, incompleteState,);
   const {
     activeLocale,
     locales,
   } = useLocaleInfo();
-  const projectHash = useContext3(FormContext,);
-  const callbacks = React$1.useRef({
+  const projectHash = useContext(FormContext,);
+  const callbacks = React.useRef({
     onSuccess,
     onError,
     onLoading,
@@ -36291,7 +36294,7 @@ var FormContainer = /* @__PURE__ */ React$1.forwardRef(function FormContainer2({
     onError,
     onLoading,
   };
-  const submissionInProgressRef = React$1.useRef(false,);
+  const submissionInProgressRef = React.useRef(false,);
   async function redirectTo(link,) {
     if (isString(link,)) {
       const matchingRoute = findMatchingRouteAttributesForResolvedPath(router, link, implicitPathVariables, locales,);
@@ -36331,7 +36334,7 @@ var FormContainer = /* @__PURE__ */ React$1.forwardRef(function FormContainer2({
       continueAfter: 'paint',
     },);
     replaceHoneypotWithMetadata(data2,);
-    startTransition3(() =>
+    startTransition2(() =>
       dispatch({
         type: 'submit',
       },)
@@ -36347,7 +36350,7 @@ var FormContainer = /* @__PURE__ */ React$1.forwardRef(function FormContainer2({
         activeLocale,
       },);
       await submitForm(action, data2, fieldNames, projectHash,);
-      startTransition3(() =>
+      startTransition2(() =>
         dispatch({
           type: 'success',
         },)
@@ -36355,7 +36358,7 @@ var FormContainer = /* @__PURE__ */ React$1.forwardRef(function FormContainer2({
       callbacks.current.onSuccess?.();
       if (redirectUrl) await redirectTo(redirectUrl,);
     } catch (error) {
-      startTransition3(() =>
+      startTransition2(() =>
         dispatch({
           type: 'error',
         },)
@@ -36383,15 +36386,15 @@ var FormContainer = /* @__PURE__ */ React$1.forwardRef(function FormContainer2({
       priority: 'background',
       continueAfter: 'paint',
     },);
-    startTransition3(() =>
+    startTransition2(() =>
       dispatch({
         type: anyEmptyRequiredFields(target,) ? 'incomplete' : 'complete',
       },)
     );
   };
   useReplayPreHydrationSubmit(formRef, (form) => void submit(form,),);
-  const renderedChildren = React$1.useMemo(() => children(state,), [children, state,],);
-  return /* @__PURE__ */ jsxs2(motion.form, {
+  const renderedChildren = React.useMemo(() => children(state,), [children, state,],);
+  return /* @__PURE__ */ jsxs(motion.form, {
     suppressHydrationWarning: true,
     ...props,
     method: 'post',
@@ -36402,24 +36405,24 @@ var FormContainer = /* @__PURE__ */ React$1.forwardRef(function FormContainer2({
     ref,
     children: [
       renderedChildren,
-      /* @__PURE__ */ jsx2(HoneypotFields, {
+      /* @__PURE__ */ jsx(HoneypotFields, {
         suppressHydrationWarning: true,
         states: honeypotStateRefs,
       },),
-      /* @__PURE__ */ jsx2('script', {
+      /* @__PURE__ */ jsx('script', {
         suppressHydrationWarning: true,
         dangerouslySetInnerHTML: {
           __html: getDeferPreHydrationSubmitScript(),
         },
       },),
-      /* @__PURE__ */ jsxs2('noscript', {
+      /* @__PURE__ */ jsxs('noscript', {
         suppressHydrationWarning: true,
         children: [
-          /* @__PURE__ */ jsx2('style', {
+          /* @__PURE__ */ jsx('style', {
             suppressHydrationWarning: true,
             children: `[${formMarkerAttribute}] input[name=framer-noscript] { position: absolute; transform: scale(0); }`,
           },),
-          /* @__PURE__ */ jsx2('input', {
+          /* @__PURE__ */ jsx('input', {
             suppressHydrationWarning: true,
             required: true,
             pattern: '(?!)',
@@ -36428,7 +36431,7 @@ var FormContainer = /* @__PURE__ */ React$1.forwardRef(function FormContainer2({
             'aria-label': 'Enable JavaScript to submit this form',
             title: 'Enable JavaScript to submit this form',
           },),
-          /* @__PURE__ */ jsx2('p', {
+          /* @__PURE__ */ jsx('p', {
             suppressHydrationWarning: true,
             children: 'Enable JavaScript to submit this form.',
           },),
@@ -36472,7 +36475,7 @@ function responseHasError(response,) {
     'message' in response.error && typeof response.error.message === 'string';
 }
 var FORCE_SHOW_EDITORBAR_LOCALSTORAGE_KEY = '__framer_force_showing_editorbar_since';
-var IgnoreErrors = class extends Component$1 {
+var IgnoreErrors = class extends Component2 {
   state = {
     error: void 0,
   };
@@ -36498,10 +36501,10 @@ function EditorBarLauncher({
   EditorBar,
   fast = false,
 },) {
-  const framerSiteId = useContext3(FormContext,);
+  const framerSiteId = useContext(FormContext,);
   const enabled = useSyncExternalStore2(noopSubscribe, fast ? isPrioritized : isntPrioritized, returnFalse,);
   const libraryFeatures2 = getLibraryFeatures();
-  const editorBarFeatures = useMemo3(() => {
+  const editorBarFeatures = useMemo(() => {
     const features = {};
     let key2;
     for (key2 in libraryFeatures2) {
@@ -36512,11 +36515,11 @@ function EditorBarLauncher({
     return features;
   }, [libraryFeatures2,],);
   if (!EditorBar || !framerSiteId || !enabled) return null;
-  return /* @__PURE__ */ jsx2(IgnoreErrors, {
+  return /* @__PURE__ */ jsx(IgnoreErrors, {
     suppressHydrationWarning: true,
-    children: /* @__PURE__ */ jsx2(Suspense, {
+    children: /* @__PURE__ */ jsx(Suspense, {
       suppressHydrationWarning: true,
-      children: /* @__PURE__ */ jsx2(EditorBar, {
+      children: /* @__PURE__ */ jsx(EditorBar, {
         suppressHydrationWarning: true,
         framerSiteId,
         features: editorBarFeatures,
@@ -37233,7 +37236,7 @@ function matchesLocation(currentCountry, targetLocation,) {
   return currentCountry === targetLocation;
 }
 var TriggerStateContext = /* @__PURE__ */ (() => {
-  const Context2 = createContext3(void 0,);
+  const Context2 = createContext(void 0,);
   Context2.displayName = 'TriggerStateContext';
   return Context2;
 })();
@@ -37242,18 +37245,18 @@ function TriggerStateProvider({
   routerAPI,
   children,
 },) {
-  const visitedPagesRef = useRef3();
-  const routeChangeHandlerRef = useRef3();
-  const routerAPIRef = useRef3(routerAPI,);
-  const triggerStateRef = useRef3(null,);
+  const visitedPagesRef = useRef();
+  const routeChangeHandlerRef = useRef();
+  const routerAPIRef = useRef(routerAPI,);
+  const triggerStateRef = useRef(null,);
   routerAPIRef.current = routerAPI;
-  useEffect4(() => {
+  useEffect2(() => {
     if (!currentRoutePath) return;
     visitedPagesRef.current ??= /* @__PURE__ */ new Set();
     visitedPagesRef.current.add(currentRoutePath,);
     routeChangeHandlerRef.current?.(currentRoutePath,);
   }, [currentRoutePath,],);
-  const [initialState2,] = useState3(() => ({
+  const [initialState2,] = useState(() => ({
     getInitialState: () => ({
       visitedPages: visitedPagesRef.current ?? /* @__PURE__ */ new Set(),
       getCurrentRoutePath: () => {
@@ -37274,7 +37277,7 @@ function TriggerStateProvider({
     }),
     triggerStateRef,
   }));
-  return /* @__PURE__ */ jsx2(TriggerStateContext.Provider, {
+  return /* @__PURE__ */ jsx(TriggerStateContext.Provider, {
     suppressHydrationWarning: true,
     value: initialState2,
     children,
@@ -37297,7 +37300,7 @@ function resolveRoutePath(routerAPI, routeId, pathVariables,) {
   return route.path;
 }
 function useTriggerState() {
-  return getTriggerState(useContext3(TriggerStateContext,),);
+  return getTriggerState(useContext(TriggerStateContext,),);
 }
 function getTriggerState(triggerStateContext,) {
   if (typeof __unframerWindow2 === 'undefined' || !__unframerWindow2.document || isStaticRenderer()) return null;
@@ -37334,11 +37337,11 @@ var useSendPageView = (
   activeLocale,
   initialCollectionItemId,
 ) => {
-  const framerSiteId = useContext3(FormContext,);
-  const pageviewEventData = useRef3();
+  const framerSiteId = useContext(FormContext,);
+  const pageviewEventData = useRef();
   const collectionUtils = useCollectionUtils();
-  const skipFirstPageView = useRef3(true,);
-  useEffect4(() => {
+  const skipFirstPageView = useRef(true,);
+  useEffect2(() => {
     function getFullPageviewEventData() {
       if (!timezone || !visitorLocale) setTimezoneAndLocaleForTracking();
       const currentLocation = currentPathnameWithHash ? new URL(currentPathnameWithHash, safeWindow.location.href,) : safeWindow.location;
@@ -37651,34 +37654,34 @@ function restoreInitialScroll(hash2, shouldSmoothScroll,) {
 }
 function useScrollRestoration(disableHistory,) {
   const isScrollRestorationEnabled = getLibraryFeatures().scrollRestoration;
-  const pendingNavigationScrollRef = useRef3(void 0,);
-  const isScrollTrackingPausedRef = useRef3(false,);
+  const pendingNavigationScrollRef = useRef(void 0,);
+  const isScrollTrackingPausedRef = useRef(false,);
   const isCustomScrollRestorationConfigured = Boolean(isScrollRestorationEnabled && !disableHistory,);
-  const scheduleScroll = useCallback4((request) => {
+  const scheduleScroll = useCallback2((request) => {
     pendingNavigationScrollRef.current = request;
     if (!isCustomScrollRestorationConfigured) return;
     isScrollTrackingPausedRef.current = true;
   }, [isCustomScrollRestorationConfigured,],);
-  const trackScrollPosition = useCallback4((position, flush = false,) => {
+  const trackScrollPosition = useCallback2((position, flush = false,) => {
     if (isScrollTrackingPausedRef.current) return;
     updateScrollPosition(position, flush,);
   }, [],);
-  const onHistoryTraversal = useCallback4(() => {
+  const onHistoryTraversal = useCallback2(() => {
     if (!isCustomScrollRestorationConfigured) return;
     isScrollTrackingPausedRef.current = true;
   }, [isCustomScrollRestorationConfigured,],);
-  const isNavigationCommitPending = useCallback4(
+  const isNavigationCommitPending = useCallback2(
     () => pendingNavigationScrollRef.current !== void 0 || isScrollTrackingPausedRef.current,
     [],
   );
-  const commitNavigationScroll = useCallback4((routeId, remountKey,) => {
+  const commitNavigationScroll = useCallback2((routeId, remountKey,) => {
     const request = pendingNavigationScrollRef.current;
     if (!request || request.routeId !== routeId || request.remountKey !== remountKey) return;
     pendingNavigationScrollRef.current = void 0;
     isScrollTrackingPausedRef.current = false;
     updateScrollForNavigation(request.hash, request.shouldSmoothScroll, request.behavior,);
   }, [],);
-  useLayoutEffect3(() => {
+  useLayoutEffect(() => {
     if (!isCustomScrollRestorationConfigured) return;
     return setupScrollRestoration(trackScrollPosition,);
   }, [isCustomScrollRestorationConfigured, trackScrollPosition,],);
@@ -37699,18 +37702,18 @@ function ScrollRestorationEffects({
     commitNavigationScroll,
     usesCustomScrollRestoration,
   } = scrollRestoration;
-  useLayoutEffect3(() => {
+  useLayoutEffect(() => {
     commitNavigationScroll(currentRouteId, remountKey,);
   },);
-  useEffect4(() => {
+  useEffect2(() => {
     if (!usesCustomScrollRestoration) return;
     restoreInitialScroll(__unframerWindow2.location.hash.slice(1,) || void 0, false,);
   }, [],);
   return null;
 }
 function useForceUpdate$1() {
-  const [_, setForcedRenderCount,] = React$1.useState(0,);
-  return [_, React$1.useCallback(() => setForcedRenderCount((v) => v + 1), [],),];
+  const [_, setForcedRenderCount,] = React.useState(0,);
+  return [_, React.useCallback(() => setForcedRenderCount((v) => v + 1), [],),];
 }
 var mainTagId = 'main';
 var generatedPageDatasetKey = 'framerGeneratedPage';
@@ -37722,19 +37725,19 @@ var startOfBodyStartMarker = '<!-- Start of bodyStart -->';
 var endOfBodyStartMarker = '<!-- End of bodyStart -->';
 var startOfBodyEndMarker = '<!-- Start of bodyEnd -->';
 var endOfBodyEndMarker = '<!-- End of bodyEnd -->';
-var SnippetsContext = /* @__PURE__ */ (() => React$1.createContext(void 0,))();
+var SnippetsContext = /* @__PURE__ */ (() => React.createContext(void 0,))();
 function SnippetsProvider({
   children,
   loadSnippetsModule,
 },) {
-  return /* @__PURE__ */ jsx2(SnippetsContext.Provider, {
+  return /* @__PURE__ */ jsx(SnippetsContext.Provider, {
     suppressHydrationWarning: true,
     value: loadSnippetsModule,
     children,
   },);
 }
 function useSnippets() {
-  return React$1.useContext(SnippetsContext,);
+  return React.useContext(SnippetsContext,);
 }
 function getSnippetMarkers(id2,) {
   return {
@@ -37923,7 +37926,7 @@ function findInsertReferece(snippetId, sorting, start2, end,) {
 }
 function useLoadSnippets() {
   const loadSnippetsModule = useSnippets();
-  return useCallback4(async (pageId, pathVariables, contentLocale, isInitialNavigation,) => {
+  return useCallback2(async (pageId, pathVariables, contentLocale, isInitialNavigation,) => {
     if (!loadSnippetsModule) return;
     const isGeneratedPage = document.getElementById(mainTagId,)?.dataset[generatedPageDatasetKey] !== void 0;
     if (isInitialNavigation && isGeneratedPage) return;
@@ -38020,7 +38023,7 @@ function useRouteLocaleContentSync({
 },) {
   const collectionUtilsCache = useCollectionUtils();
   const loadSnippets2 = useLoadSnippets();
-  useEffect4(() => {
+  useEffect2(() => {
     let isCurrent = true;
     const markAsStale = () => void (isCurrent = false);
     if (!activeLocale || !contentLocale) {
@@ -38087,13 +38090,13 @@ function executeBeforeUrlUpdateOnce(beforeUrlUpdate,) {
 }
 function useNavigationTransition(usesCustomScrollRestoration,) {
   const commitNavigationURL = useCommitNavigationURL(usesCustomScrollRestoration,);
-  const pendingNavigationControllerRef = useRef3(void 0,);
-  const cancelPendingNavigation = useCallback4(() => {
+  const pendingNavigationControllerRef = useRef(void 0,);
+  const cancelPendingNavigation = useCallback2(() => {
     pendingNavigationControllerRef.current?.abort();
     pendingNavigationControllerRef.current = void 0;
   }, [],);
   return {
-    startNavigation: useCallback4(async (transitionFn, nextRender, updateURL, isAbortable = true,) => {
+    startNavigation: useCallback2(async (transitionFn, nextRender, updateURL, isAbortable = true,) => {
       cancelPendingNavigation();
       const controller = isAbortable ? new AbortController() : void 0;
       pendingNavigationControllerRef.current = controller;
@@ -38146,8 +38149,8 @@ function Router({
   adaptLayoutToTextDirection,
 },) {
   useMarkRouterEffects();
-  const resolveRouteId = useMemo3(() => createABTestingRouteIdResolver(routes,), [routes,],);
-  const getRoute = useCallback4((routeId) => routes[resolveRouteId(routeId,)], [routes, resolveRouteId,],);
+  const resolveRouteId = useMemo(() => createABTestingRouteIdResolver(routes,), [routes,],);
+  const getRoute = useCallback2((routeId) => routes[resolveRouteId(routeId,)], [routes, resolveRouteId,],);
   useReplaceInitialState({
     disabled: disableHistory,
     routeId: initialRoute,
@@ -38159,17 +38162,17 @@ function Router({
   const startViewTransition2 = useViewTransition();
   const [dep, forceUpdate,] = useForceUpdate$1();
   const monitorNextPaintAfterRender = useMonitorNextPaintAfterRender('framer-route-change',);
-  const transitionFn = useMemo3(() => {
-    if (!getLibraryFeatures().synchronousNavigationOnDesktop || !isDesktop()) return startTransition3;
+  const transitionFn = useMemo(() => {
+    if (!getLibraryFeatures().synchronousNavigationOnDesktop || !isDesktop()) return startTransition2;
     return (fn) => fn();
   }, [],);
-  const isInitialNavigationRef = useRef3(true,);
-  const routerPathnameWithHashRef = useRef3();
-  const localeSwitchRequestIndexRef = useRef3(0,);
-  const currentRouteRef = useRef3(initialRoute,);
-  const currentPathVariablesRef = useRef3(initialPathVariables,);
-  const pendingNavigationResolutionRef = useRef3();
-  const currentLocaleIdRef = useRef3(initialLocaleId,);
+  const isInitialNavigationRef = useRef(true,);
+  const routerPathnameWithHashRef = useRef();
+  const localeSwitchRequestIndexRef = useRef(0,);
+  const currentRouteRef = useRef(initialRoute,);
+  const currentPathVariablesRef = useRef(initialPathVariables,);
+  const pendingNavigationResolutionRef = useRef();
+  const currentLocaleIdRef = useRef(initialLocaleId,);
   const scrollRestoration = useScrollRestoration(disableHistory,);
   const {
     isNavigationCommitPending,
@@ -38187,12 +38190,12 @@ function Router({
   const currentRoute = routes[currentRouteId];
   const currentRoutePath = currentRoute?.path;
   if (!currentRoute) throw new Error(`Router cannot find route for ${currentRouteId}`,);
-  const defaultLocale = useMemo3(() => {
+  const defaultLocale = useMemo(() => {
     return locales.find(({
       id: id2,
     },) => id2 === defaultLocaleId);
   }, [locales,],);
-  const activeLocale = useMemo3(() => {
+  const activeLocale = useMemo(() => {
     return locales.find(({
       id: id2,
     },) => {
@@ -38215,16 +38218,16 @@ function Router({
   },);
   const textDirection = activeLocale?.textDirection ?? 'ltr';
   const layoutDirection = adaptLayoutToTextDirection ? textDirection : 'ltr';
-  useLayoutEffect3(() => {
+  useLayoutEffect(() => {
     if (!adaptLayoutToTextDirection) return;
     document.documentElement.setAttribute('dir', textDirection,);
   }, [textDirection, adaptLayoutToTextDirection,],);
   const lang = activeLocale?.code;
-  useLayoutEffect3(() => {
+  useLayoutEffect(() => {
     if (lang) document.documentElement.setAttribute('lang', lang,);
   }, [lang,],);
   const switchLocale2 = useSwitchLocale();
-  const localeInfo = useMemo3(() => {
+  const localeInfo = useMemo(() => {
     return {
       activeLocale,
       contentLocale,
@@ -38349,7 +38352,7 @@ function Router({
     collectionUtilsCache,
     siteCanonicalURL,
   ],);
-  const setCurrentRouteId = useCallback4(
+  const setCurrentRouteId = useCallback2(
     (
       routeId,
       localeId,
@@ -38410,7 +38413,7 @@ function Router({
     ],
   );
   usePopStateHandler(scrollRestoration, currentRouteRef, setCurrentRouteId,);
-  useEffect4(() => {
+  useEffect2(() => {
     if (disableHistory) return;
     const onHashChange = () => {
       const currentState = readHistoryState();
@@ -38432,7 +38435,7 @@ function Router({
     __unframerWindow2.addEventListener('hashchange', onHashChange,);
     return () => __unframerWindow2.removeEventListener('hashchange', onHashChange,);
   }, [disableHistory, routes,],);
-  const navigate = useCallback4(async (targetRouteId, hash2, pathVariables, shouldSmoothScroll, beforeUrlUpdate,) => {
+  const navigate = useCallback2(async (targetRouteId, hash2, pathVariables, shouldSmoothScroll, beforeUrlUpdate,) => {
     const routeId = resolveRouteId(targetRouteId,);
     const newRoute = routes[routeId];
     const routeStatus = isLazyComponentType(newRoute?.page,) ? newRoute.page.getStatus() : void 0;
@@ -38601,7 +38604,7 @@ function Router({
     locales,
     siteCanonicalURL,
   },);
-  const api = useMemo3(() => ({
+  const api = useMemo(() => ({
     navigate,
     getRoute,
     currentRouteId,
@@ -38634,58 +38637,58 @@ function Router({
     ...defaultPageStyle,
     display: 'contents',
   }));
-  return /* @__PURE__ */ jsx2(RouterAPIProvider, {
+  return /* @__PURE__ */ jsx(RouterAPIProvider, {
     suppressHydrationWarning: true,
     api,
-    children: /* @__PURE__ */ jsx2(LocaleInfoContext.Provider, {
+    children: /* @__PURE__ */ jsx(LocaleInfoContext.Provider, {
       suppressHydrationWarning: true,
       value: localeInfo,
-      children: /* @__PURE__ */ jsx2(LayoutDirectionContext.Provider, {
+      children: /* @__PURE__ */ jsx(LayoutDirectionContext.Provider, {
         suppressHydrationWarning: true,
         value: layoutDirection,
-        children: /* @__PURE__ */ jsx2(CustomCursorHost, {
+        children: /* @__PURE__ */ jsx(CustomCursorHost, {
           suppressHydrationWarning: true,
-          children: /* @__PURE__ */ jsx2(URLSearchParamsProvider, {
+          children: /* @__PURE__ */ jsx(URLSearchParamsProvider, {
             suppressHydrationWarning: true,
             routerRenderKey: dep,
             currentRouteId,
             isNavigationCommitPending: scrollRestoration.isNavigationCommitPending,
-            children: /* @__PURE__ */ jsxs2(TriggerStateProvider, {
+            children: /* @__PURE__ */ jsxs(TriggerStateProvider, {
               suppressHydrationWarning: true,
               currentRoutePath: pathWithFilledVariables,
               routerAPI: api,
               children: [
-                EditorBar && /* @__PURE__ */ jsx2(EditorBarLauncher, {
+                EditorBar && /* @__PURE__ */ jsx(EditorBarLauncher, {
                   suppressHydrationWarning: true,
                   EditorBar,
                   fast: true,
                 },),
-                /* @__PURE__ */ jsx2(SynchronousSuspenseErrorBoundary, {
+                /* @__PURE__ */ jsx(SynchronousSuspenseErrorBoundary, {
                   suppressHydrationWarning: true,
-                  children: /* @__PURE__ */ jsxs2(SuspenseThatPreservesDom, {
+                  children: /* @__PURE__ */ jsxs(SuspenseThatPreservesDom, {
                     suppressHydrationWarning: true,
                     children: [
-                      /* @__PURE__ */ jsx2(MarkSuspenseEffects.Start, {
+                      /* @__PURE__ */ jsx(MarkSuspenseEffects.Start, {
                         suppressHydrationWarning: true,
                       },),
-                      /* @__PURE__ */ jsx2(ScrollRestorationEffects, {
+                      /* @__PURE__ */ jsx(ScrollRestorationEffects, {
                         suppressHydrationWarning: true,
                         currentRouteId,
                         remountKey,
                         scrollRestoration,
                       },),
-                      /* @__PURE__ */ jsx2(NotFoundErrorBoundary, {
+                      /* @__PURE__ */ jsx(NotFoundErrorBoundary, {
                         suppressHydrationWarning: true,
                         notFoundPage,
                         defaultPageStyle,
                         routerRenderKey: dep,
-                        children: /* @__PURE__ */ jsx2(WithLayoutTemplate, {
+                        children: /* @__PURE__ */ jsx(WithLayoutTemplate, {
                           suppressHydrationWarning: true,
                           LayoutTemplate,
                           webPageId: currentRoute?.abTestingVariantId ?? currentRouteId,
                           style: defaultPageStyle,
                           children: (inLayoutTemplate) => {
-                            return /* @__PURE__ */ jsx2(Fragment3, {
+                            return /* @__PURE__ */ jsx(Fragment, {
                               children: pageExistsInCurrentLocale
                                 ? renderPage(currentRoute.page, inLayoutTemplate ? templatePageStyle : defaultPageStyle,)
                                 : notFoundPage && renderPage(notFoundPage, defaultPageStyle,),
@@ -38693,14 +38696,14 @@ function Router({
                           },
                         },),
                       },),
-                      EditorBar && /* @__PURE__ */ jsx2(EditorBarLauncher, {
+                      EditorBar && /* @__PURE__ */ jsx(EditorBarLauncher, {
                         suppressHydrationWarning: true,
                         EditorBar,
                       },),
-                      /* @__PURE__ */ jsx2(TurnOnReactEventHandling, {
+                      /* @__PURE__ */ jsx(TurnOnReactEventHandling, {
                         suppressHydrationWarning: true,
                       },),
-                      /* @__PURE__ */ jsx2(MarkSuspenseEffects.End, {
+                      /* @__PURE__ */ jsx(MarkSuspenseEffects.End, {
                         suppressHydrationWarning: true,
                       },),
                     ],
@@ -38721,7 +38724,7 @@ function WithLayoutTemplate({
   children,
 },) {
   if (!LayoutTemplate) return children(false,);
-  return /* @__PURE__ */ jsx2(LayoutTemplate, {
+  return /* @__PURE__ */ jsx(LayoutTemplate, {
     suppressHydrationWarning: true,
     webPageId,
     style: style2,
@@ -38736,12 +38739,12 @@ function useRouteContentState({
   locales,
   routes,
 },) {
-  const currentCanonicalPathVariablesRef = useRef3(initialCanonicalPathVariables,);
-  const overrideContentLocaleIdRef = useRef3(initialContentLocaleIdOverride,);
+  const currentCanonicalPathVariablesRef = useRef(initialCanonicalPathVariables,);
+  const overrideContentLocaleIdRef = useRef(initialContentLocaleIdOverride,);
   const overrideContentLocaleId = overrideContentLocaleIdRef.current;
   const pageExistsInCurrentLocale = !activeLocale || !currentRoute.includedLocales ||
     currentRoute.includedLocales.includes(activeLocale.id,);
-  const contentLocale = useMemo3(() => {
+  const contentLocale = useMemo(() => {
     if (!activeLocale) return null;
     let contentLocaleId;
     if (pageExistsInCurrentLocale) {
@@ -38753,7 +38756,7 @@ function useRouteContentState({
       id: id2,
     },) => id2 === contentLocaleId) ?? activeLocale;
   }, [activeLocale, currentRoute, locales, overrideContentLocaleId, pageExistsInCurrentLocale, routes,],);
-  const setRouteContentState = useCallback4((contentLocaleId, canonicalPathVariables,) => {
+  const setRouteContentState = useCallback2((contentLocaleId, canonicalPathVariables,) => {
     overrideContentLocaleIdRef.current = contentLocaleId;
     currentCanonicalPathVariablesRef.current = canonicalPathVariables;
   }, [],);
@@ -39018,25 +39021,25 @@ var FetchClient = class FetchClient2 {
     };
   }
 };
-var FetchClientContext = /* @__PURE__ */ React2.createContext(void 0,);
-var IsRestoringCacheContext = /* @__PURE__ */ React2.createContext(true,);
+var FetchClientContext = /* @__PURE__ */ React$1.createContext(void 0,);
+var IsRestoringCacheContext = /* @__PURE__ */ React$1.createContext(true,);
 var FetchClientProvider = ({
   children,
   client: initialClient,
 },) => {
-  const [client,] = React2.useState(() => initialClient ?? new FetchClient());
-  const [isRestoring, setIsRestoring,] = React2.useState(true,);
-  React2.useEffect(() => {
+  const [client,] = React$1.useState(() => initialClient ?? new FetchClient());
+  const [isRestoring, setIsRestoring,] = React$1.useState(true,);
+  React$1.useEffect(() => {
     client.hydrateCache();
-    React2.startTransition(() => {
+    React$1.startTransition(() => {
       setIsRestoring(false,);
     },);
     return () => client.unmount();
   }, [client,],);
-  return /* @__PURE__ */ jsx2(IsRestoringCacheContext.Provider, {
+  return /* @__PURE__ */ jsx(IsRestoringCacheContext.Provider, {
     suppressHydrationWarning: true,
     value: isRestoring,
-    children: /* @__PURE__ */ jsx2(FetchClientContext.Provider, {
+    children: /* @__PURE__ */ jsx(FetchClientContext.Provider, {
       suppressHydrationWarning: true,
       value: client,
       children,
@@ -39144,34 +39147,34 @@ var RequestsObserver = class {
   };
 };
 function useFetchRequestsForChildren(requests, disabled, children,) {
-  const fetchClient = React2.useContext(FetchClientContext,);
+  const fetchClient = React$1.useContext(FetchClientContext,);
   if (!fetchClient) throw new Error('useFetchRequest must be used within a FetchClientProvider',);
-  const isRestoringCache = React2.useContext(IsRestoringCacheContext,);
-  const [observer2,] = React2.useState(() => new RequestsObserver(fetchClient, requests,));
-  React2.useLayoutEffect(() => {
+  const isRestoringCache = React$1.useContext(IsRestoringCacheContext,);
+  const [observer2,] = React$1.useState(() => new RequestsObserver(fetchClient, requests,));
+  React$1.useLayoutEffect(() => {
     if (disabled) return;
     observer2.setRequests(requests, {
       onlyPrefetched: false,
     },);
   }, [requests, observer2, disabled,],);
-  React2.useEffect(() => {
+  React$1.useEffect(() => {
     return () => observer2.unmount();
   }, [observer2,],);
-  const subscribe = React2.useCallback((onChange) => {
+  const subscribe = React$1.useCallback((onChange) => {
     if (isRestoringCache || disabled) return noop$2;
     return observer2.subscribe(onChange,);
   }, [disabled, observer2, isRestoringCache,],);
-  const synchronousData = React2.useSyncExternalStore(subscribe, observer2.getResults, observer2.getServerResults,);
-  const deferredData = React2.useDeferredValue(synchronousData,);
+  const synchronousData = React$1.useSyncExternalStore(subscribe, observer2.getResults, observer2.getServerResults,);
+  const deferredData = React$1.useDeferredValue(synchronousData,);
   return useMemoOne(() => children(deferredData.data, deferredData.status,), [deferredData, children,],);
 }
 function usePrefetch() {
-  const fetchClient = React2.useContext(FetchClientContext,);
+  const fetchClient = React$1.useContext(FetchClientContext,);
   if (!fetchClient) throw new Error('useFetchRequest must be used within a FetchClientProvider',);
-  return React2.useCallback((request) => fetchClient.prefetch(request,), [fetchClient,],);
+  return React$1.useCallback((request) => fetchClient.prefetch(request,), [fetchClient,],);
 }
 var ServerDatabaseClientContext = /* @__PURE__ */ (() => {
-  const Context2 = createContext3(void 0,);
+  const Context2 = createContext(void 0,);
   Context2.displayName = 'ServerDatabaseClientContext';
   return Context2;
 })();
@@ -39179,14 +39182,14 @@ function ServerDatabaseClientProvider({
   client,
   children,
 },) {
-  return /* @__PURE__ */ jsx2(ServerDatabaseClientContext.Provider, {
+  return /* @__PURE__ */ jsx(ServerDatabaseClientContext.Provider, {
     suppressHydrationWarning: true,
     value: client,
     children,
   },);
 }
 function useServerDatabaseClient() {
-  const client = useContext3(ServerDatabaseClientContext,);
+  const client = useContext(ServerDatabaseClientContext,);
   assert(client, 'Missing ServerDatabaseClient',);
   return client;
 }
@@ -39225,33 +39228,33 @@ function PageRoot(props,) {
     initialCollectionItemId,
     initialContentLocaleIdOverride,
   } = props;
-  React$1.useEffect(() => {
+  React.useEffect(() => {
     if (isWebsite) return;
     MainLoop.start();
   }, [],);
   if (isWebsite) {
-    return /* @__PURE__ */ jsx2(RenderTargetEnvironmentProvider, {
+    return /* @__PURE__ */ jsx(RenderTargetEnvironmentProvider, {
       suppressHydrationWarning: true,
       value: environment2 ?? 'preview',
-      children: /* @__PURE__ */ jsx2(MotionConfig, {
+      children: /* @__PURE__ */ jsx(MotionConfig, {
         suppressHydrationWarning: true,
         reducedMotion: skipAnimations ? 'always' : isReducedMotion ? 'user' : 'never',
         skipAnimations,
-        children: /* @__PURE__ */ jsx2(CollectionUtilsCacheProvider, {
+        children: /* @__PURE__ */ jsx(CollectionUtilsCacheProvider, {
           suppressHydrationWarning: true,
           collectionUtils,
-          children: /* @__PURE__ */ jsx2(ServerDatabaseClientProvider, {
+          children: /* @__PURE__ */ jsx(ServerDatabaseClientProvider, {
             suppressHydrationWarning: true,
             client: serverDatabaseClient,
-            children: /* @__PURE__ */ jsx2(FetchClientProvider, {
+            children: /* @__PURE__ */ jsx(FetchClientProvider, {
               suppressHydrationWarning: true,
-              children: /* @__PURE__ */ jsx2(FormContext.Provider, {
+              children: /* @__PURE__ */ jsx(FormContext.Provider, {
                 suppressHydrationWarning: true,
                 value: framerSiteId,
-                children: /* @__PURE__ */ jsx2(SnippetsProvider, {
+                children: /* @__PURE__ */ jsx(SnippetsProvider, {
                   suppressHydrationWarning: true,
                   loadSnippetsModule,
-                  children: /* @__PURE__ */ jsx2(Router, {
+                  children: /* @__PURE__ */ jsx(Router, {
                     suppressHydrationWarning: true,
                     initialRoute: routeId,
                     initialPathVariables: pathVariables,
@@ -39282,15 +39285,15 @@ function PageRoot(props,) {
       },),
     },);
   } else {
-    const Wrapper = includeDataObserver ? DataObserver : React$1.Fragment;
-    return /* @__PURE__ */ jsx2(Wrapper, {
+    const Wrapper = includeDataObserver ? DataObserver : React.Fragment;
+    return /* @__PURE__ */ jsx(Wrapper, {
       suppressHydrationWarning: true,
-      children: /* @__PURE__ */ jsx2(RoutesProvider, {
+      children: /* @__PURE__ */ jsx(RoutesProvider, {
         suppressHydrationWarning: true,
         routes,
-        children: /* @__PURE__ */ jsx2(NavigationExport, {
+        children: /* @__PURE__ */ jsx(NavigationExport, {
           suppressHydrationWarning: true,
-          children: React$1.isValidElement(RootComponent,) ? RootComponent : React$1.createElement(RootComponent, {
+          children: React.isValidElement(RootComponent,) ? RootComponent : React.createElement(RootComponent, {
             key: routeId,
           },),
         },),
@@ -39319,14 +39322,14 @@ function useResolveLinks(resolve, dependencies,) {
     return resolvedValue;
   }, [router, activeLocale, resolveSlugsWithSuspense2, ...dependencies,],);
 }
-var ResolveLinks = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef3(function ResolveLinksInner({
+var ResolveLinks = /* @__PURE__ */ withChildrenCanSuspend(/* @__PURE__ */ forwardRef(function ResolveLinksInner({
   links,
   children,
   ...rest
 }, ref,) {
   return useCloneChildrenWithPropsAndRef(ref,)(children(useResolveLinks((resolveLink2) => links.map(resolveLink2,), [links,],),), rest,);
 },),);
-var Fetcher = /* @__PURE__ */ React2.forwardRef(function Fetcher2({
+var Fetcher = /* @__PURE__ */ React$1.forwardRef(function Fetcher2({
   requests,
   disabled,
   children,
@@ -39791,7 +39794,9 @@ function compareArray(left, right, collation2,) {
   if (leftLength < rightLength) return -1;
   if (leftLength > rightLength) return 1;
   for (let i = 0; i < leftLength; i++) {
-    const result = compare(left.value[i], right.value[i], collation2,);
+    const leftItem = left.value[i];
+    const rightItem = right.value[i];
+    const result = compare(leftItem, rightItem, collation2,);
     if (result !== 0) return result;
   }
   return 0;
@@ -40557,7 +40562,10 @@ function getCollectionsFromQuery(query, locale,) {
         const collection = getCollectionForLocale(value.data, locale,);
         const collectionId = getCollectionId(collection,);
         collections.set(collectionId, collection,);
-      } else for (const key2 in value) collect(value[key2],);
+      } else {for (const key2 in value) {
+          const property = value[key2];
+          collect(property,);
+        }}
     } else if (isArray(value,)) for (const item of value) collect(item,);
   }
   collect(query,);
@@ -44367,16 +44375,16 @@ function renderServerRichText(node, components,) {
   switch (node.type) {
     case 'fragment': {
       const children = renderChildren(node.children,);
-      return createElement2(Fragment3, void 0, ...children,);
+      return createElement(Fragment, void 0, ...children,);
     }
     case 'tag': {
       const children = renderChildren(node.children,);
-      if (node.tag === 'a') return createElement2(motion.a, node.props, ...children,);
-      return createElement2(node.tag, node.props, ...children,);
+      if (node.tag === 'a') return createElement(motion.a, node.props, ...children,);
+      return createElement(node.tag, node.props, ...children,);
     }
     case 'link': {
       const children = renderChildren(node.children,);
-      return createElement2(Link, node.props, ...children,);
+      return createElement(Link, node.props, ...children,);
     }
     case 'module': {
       const Component22 = components[node.identifier];
@@ -44399,14 +44407,14 @@ function renderServerRichTextModule({
   aspectRatio: aspectRatio2,
 }, Component22,) {
   const wrapperProps = getRichTextModuleWrapperProps(width, alignment, aspectRatio2,);
-  return /* @__PURE__ */ jsx2('div', {
+  return /* @__PURE__ */ jsx('div', {
     suppressHydrationWarning: true,
     ...wrapperProps,
-    children: /* @__PURE__ */ jsx2(ComponentPresetsConsumer, {
+    children: /* @__PURE__ */ jsx(ComponentPresetsConsumer, {
       suppressHydrationWarning: true,
       componentIdentifier: identifier,
       children: (presetProps) =>
-        /* @__PURE__ */ jsx2(AutoBreakpointVariant, {
+        /* @__PURE__ */ jsx(AutoBreakpointVariant, {
           suppressHydrationWarning: true,
           component: Component22,
           props: {
@@ -44601,10 +44609,10 @@ function useLoadMorePageState(hash2, paginateWithSuspendedLoadingState,) {
   } = useRouter();
   const [isPending, startLoadingTransition,] = useTransition();
   const persistedPage = getPersistedCurrentPage(hash2,);
-  const pendingRestorePageRef = useRef3(isInitialNavigation ? persistedPage : void 0,);
-  const [currentPage, setCurrentPage,] = useState3(() => getInitialCurrentPage(isInitialNavigation, hash2,));
-  const currentPageRef = useRef3(currentPage,);
-  useEffect4(function restorePersistedPageAfterHydration() {
+  const pendingRestorePageRef = useRef(isInitialNavigation ? persistedPage : void 0,);
+  const [currentPage, setCurrentPage,] = useState(() => getInitialCurrentPage(isInitialNavigation, hash2,));
+  const currentPageRef = useRef(currentPage,);
+  useEffect2(function restorePersistedPageAfterHydration() {
     if (!isInitialNavigation) return;
     const pendingRestorePage = pendingRestorePageRef.current;
     if (pendingRestorePage === void 0 || pendingRestorePage === currentPageRef.current) {
@@ -44612,20 +44620,20 @@ function useLoadMorePageState(hash2, paginateWithSuspendedLoadingState,) {
       return;
     }
     currentPageRef.current = pendingRestorePage;
-    startTransition3(() => setCurrentPage(pendingRestorePage,));
+    startTransition2(() => setCurrentPage(pendingRestorePage,));
   }, [isInitialNavigation,],);
-  const persistToHistory = useCallback4((paginationInfo) => {
+  const persistToHistory = useCallback2((paginationInfo) => {
     const pendingRestorePage = pendingRestorePageRef.current;
     if (pendingRestorePage !== void 0 && pendingRestorePage !== currentPageRef.current) return;
     pendingRestorePageRef.current = void 0;
     pushLoadMoreHistory(hash2, paginationInfo,);
   }, [hash2,],);
   const onCanvas = useIsOnFramerCanvas();
-  const loadMoreInFlightRef = useRef3(false,);
+  const loadMoreInFlightRef = useRef(false,);
   return {
     currentPage,
     isLoading: isPending,
-    loadNextPage: useCallback4(async (knownMinimumPageCount) => {
+    loadNextPage: useCallback2(async (knownMinimumPageCount) => {
       if (onCanvas) return;
       if (currentPageRef.current >= knownMinimumPageCount) return;
       if (loadMoreInFlightRef.current) return;
@@ -44638,7 +44646,7 @@ function useLoadMorePageState(hash2, paginateWithSuspendedLoadingState,) {
         if (currentPageRef.current >= knownMinimumPageCount) return;
         const nextPage = Math.min(currentPageRef.current + 1, knownMinimumPageCount,);
         currentPageRef.current = nextPage;
-        (paginateWithSuspendedLoadingState ? startLoadingTransition : startTransition3)(() => {
+        (paginateWithSuspendedLoadingState ? startLoadingTransition : startTransition2)(() => {
           setCurrentPage(nextPage,);
         },);
       } finally {
@@ -44654,7 +44662,7 @@ function useLoadMoreControls({
   loadNextPage,
   persistToHistory,
 }, knownMinimumPageCount,) {
-  const paginationInfo = useMemo3(() => {
+  const paginationInfo = useMemo(() => {
     return {
       currentPage,
       hasNextPage: currentPage < knownMinimumPageCount,
@@ -44667,7 +44675,7 @@ function useLoadMoreControls({
   }, [persistToHistory, paginationInfo,],);
   return {
     paginationInfo,
-    loadMore: useCallback4(() => loadNextPage(knownMinimumPageCount,), [loadNextPage, knownMinimumPageCount,],),
+    loadMore: useCallback2(() => loadNextPage(knownMinimumPageCount,), [loadNextPage, knownMinimumPageCount,],),
   };
 }
 var maximumLimit = 5001;
@@ -44712,9 +44720,9 @@ var queryCache = /* @__PURE__ */ new QueryCache(queryEngine,);
 var queryRefreshEnabled = false;
 function useQueryRefresh(query, locale, cached,) {
   const store = queryCache.getStore(query, locale,);
-  const [, setRevision,] = useState3(0,);
-  useEffect4(() => {
-    const refresh = () => startTransition3(() => setRevision((revision) => revision + 1));
+  const [, setRevision,] = useState(0,);
+  useEffect2(() => {
+    const refresh = () => startTransition2(() => setRevision((revision) => revision + 1));
     const unsubscribe = store.subscribe(refresh,);
     if (store.getSnapshot() !== cached) refresh();
     return unsubscribe;
@@ -44738,7 +44746,7 @@ function usePreloadQuery(priority = 'background',) {
   const {
     activeLocale,
   } = useLocaleInfo();
-  return useCallback4((query) => {
+  return useCallback2((query) => {
     return queryCache.get(query, activeLocale, priority,).readMaybeAsync();
   }, [activeLocale, priority,],);
 }
@@ -44786,7 +44794,7 @@ var variableBindingHooks = {
   ['enum']: useFormSelectEnumVariableBinding,
 };
 function useFormSelectVariableBinding(options,) {
-  const variableTypeRef = useRef3(options.variableType,);
+  const variableTypeRef = useRef(options.variableType,);
   return variableBindingHooks[variableTypeRef.current](options,);
 }
 function useFormSelectBooleanVariableBinding({
@@ -44798,12 +44806,12 @@ function useFormSelectBooleanVariableBinding({
   value,
 },) {
   return [
-    useMemo3(() => {
+    useMemo(() => {
       if (value === true) return BOOLEAN_TRUE_VALUE;
       if (value === false) return BOOLEAN_FALSE_VALUE;
       return isOptional ? ALL_ELEMENTS_VALUE : BOOLEAN_TRUE_VALUE;
     }, [isOptional, value,],),
-    useMemo3(() =>
+    useMemo(() =>
       withAllOption(
         [{
           disabled: false,
@@ -44820,10 +44828,10 @@ function useFormSelectBooleanVariableBinding({
         allItemsLabel,
         false,
       ), [allItemsLabel, booleanTrueLabel, booleanFalseLabel, isOptional,],),
-    useCallback4((event) => {
+    useCallback2((event) => {
       if (!(event.target instanceof HTMLSelectElement)) return;
       const selectedValue = event.target.value;
-      startTransition3(() => {
+      startTransition2(() => {
         if (selectedValue === ALL_ELEMENTS_VALUE) setValue(void 0,);
         else if (selectedValue === BOOLEAN_TRUE_VALUE) setValue(true,);
         else if (selectedValue === BOOLEAN_FALSE_VALUE) setValue(false,);
@@ -44866,7 +44874,7 @@ function useFormSelectEnumVariableBinding({
   return useStringSelectBinding({
     allItemsLabel,
     isOptional,
-    selectOptions: useMemo3(() => {
+    selectOptions: useMemo(() => {
       if (!enumOptions) return void 0;
       return enumOptions.map((enumId) => ({
         type: 'option',
@@ -44883,7 +44891,7 @@ function useCollectionSelectOptions({
   slugId,
   titleId,
 },) {
-  const query = useMemo3(() => ({
+  const query = useMemo(() => ({
     from: {
       type: 'Collection',
       data: collectionData,
@@ -44906,7 +44914,7 @@ function useCollectionSelectOptions({
     ],
   }), [collectionData, slugId, titleId,],);
   const records = useQueryData(query,);
-  return useMemo3(() => {
+  return useMemo(() => {
     if (!Array.isArray(records,) || records.length === 0) return void 0;
     return records.filter((record) => typeof record?.id === 'string').flatMap((record) => {
       const id2 = record.id;
@@ -44931,11 +44939,11 @@ function useStringSelectBinding({
 },) {
   return [
     value === void 0 ? ALL_ELEMENTS_VALUE : value,
-    useMemo3(() => withAllOption(selectOptions, isOptional, allItemsLabel,), [allItemsLabel, isOptional, selectOptions,],),
-    useCallback4((event) => {
+    useMemo(() => withAllOption(selectOptions, isOptional, allItemsLabel,), [allItemsLabel, isOptional, selectOptions,],),
+    useCallback2((event) => {
       if (!(event.target instanceof HTMLSelectElement)) return;
       const selectedValue = event.target.value;
-      startTransition3(() => {
+      startTransition2(() => {
         if (selectedValue === ALL_ELEMENTS_VALUE) setValue(void 0,);
         else setValue(selectedValue,);
       },);
@@ -44968,12 +44976,13 @@ function createTrigger(input,) {
   return input;
 }
 function useStableCallback(callback,) {
-  const ref = useRef3(callback,);
-  useInsertionEffect3(() => {
+  const ref = useRef(callback,);
+  useInsertionEffect(() => {
     ref.current = callback;
   }, [callback,],);
   return useCallbackOne((...args) => {
-    return (0, ref.current)(...args,);
+    const latestFn = ref.current;
+    return latestFn(...args,);
   }, [],);
 }
 function TriggerSubscription({
@@ -44985,10 +44994,10 @@ function TriggerSubscription({
 },) {
   const triggerState = useTriggerState();
   const stableCallback = useStableCallback(callback ?? noop,);
-  useEffect4(() => {
+  useEffect2(() => {
     return triggerState?.subscribe(triggerId, targetId, trigger, stableCallback,);
   }, [triggerState, triggerId, targetId, trigger, stableCallback,],);
-  useEffect4(() => {
+  useEffect2(() => {
     if (triggeredExternally) {
       triggerState?.invoke(triggerId, {
         callCallback: false,
@@ -44999,23 +45008,23 @@ function TriggerSubscription({
 }
 function useTriggers() {
   const triggerState = useTriggerState();
-  const [invokedTriggers, setInvokedTriggers,] = useState3(() => triggerState?.invokedTriggers ?? /* @__PURE__ */ new Set());
-  useEffect4(() => {
+  const [invokedTriggers, setInvokedTriggers,] = useState(() => triggerState?.invokedTriggers ?? /* @__PURE__ */ new Set());
+  useEffect2(() => {
     if (!triggerState) return;
     const onTrigger = () => {
-      startTransition3(() => {
+      startTransition2(() => {
         setInvokedTriggers(triggerState.invokedTriggers,);
       },);
     };
     triggerState.addOnTriggerListener(onTrigger,);
-    startTransition3(() => {
+    startTransition2(() => {
       setInvokedTriggers((current2) => current2.size !== triggerState.invokedTriggers.size ? triggerState.invokedTriggers : current2);
     },);
     return () => {
       triggerState.removeOnTriggerListener(onTrigger,);
     };
   }, [triggerState,],);
-  return useMemo3(() => ({
+  return useMemo(() => ({
     hasTriggered: (triggerId) => {
       return invokedTriggers.has(triggerId,);
     },
@@ -45036,13 +45045,13 @@ function useActiveVariantCallback(baseVariant,) {
   useOnCurrentTargetChange(() => {
     return () => rejectPending(pendingTimers, pendingPromises,);
   },);
-  useEffect4(() => {
+  useEffect2(() => {
     return () => rejectPending(pendingTimers, pendingPromises,);
   }, [pendingTimers, pendingPromises,],);
-  useEffect4(() => {
+  useEffect2(() => {
     rejectPending(pendingTimers, pendingPromises,);
   }, [baseVariant,],);
-  return useRef3({
+  return useRef({
     /**
      * Create a callback that can be cancelled if the base variant changes.
      */
@@ -45067,13 +45076,13 @@ function useActiveVariantCallback(baseVariant,) {
 }
 function useActiveTargetCallback() {
   const value = useActiveVariantCallback(void 0,);
-  return useRef3({
+  return useRef({
     activeTargetCallback: value.activeVariantCallback,
     delay: value.delay,
   },).current;
 }
 function useAddVariantProps(baseVariant, gestureVariant, variantProps2,) {
-  return React$1.useCallback((id2) => {
+  return React.useCallback((id2) => {
     if (!variantProps2) return {};
     if (!baseVariant) return {};
     if (gestureVariant) return Object.assign({}, variantProps2[baseVariant]?.[id2], variantProps2[gestureVariant]?.[id2],);
@@ -45114,19 +45123,19 @@ function activeBreakpointHashesFromWindow(breakpoints,) {
   return [defaultHash,];
 }
 function useHydratedBreakpointVariants(initial, mediaQueries, hydratedWithInitial = true,) {
-  const isInitialNavigation = useContext3(IsInitialNavigationContext,);
+  const isInitialNavigation = useContext(IsInitialNavigationContext,);
   const isStaticRenderer2 = useIsStaticRenderer();
   const isScreenshotHost = isScreenshotFramerHost();
   const usesMediaQueries = isBrowser$12() && (!isStaticRenderer2 || isScreenshotHost);
-  const baseVariant = useRef3(usesMediaQueries ? activeMediaQueryFromWindow(mediaQueries,) ?? initial : initial,);
-  const basePropsVariant = useRef3(hydratedWithInitial && isInitialNavigation ? initial : baseVariant.current,);
+  const baseVariant = useRef(usesMediaQueries ? activeMediaQueryFromWindow(mediaQueries,) ?? initial : initial,);
+  const basePropsVariant = useRef(hydratedWithInitial && isInitialNavigation ? initial : baseVariant.current,);
   const forceUpdate = useForceUpdate$2();
   const instantTransition = useInstantTransition();
-  const setActiveVariantInstant = useCallback4((variant) => {
+  const setActiveVariantInstant = useCallback2((variant) => {
     if (variant !== baseVariant.current || variant !== basePropsVariant.current) {
       let updateStateAndRerender = function () {
         baseVariant.current = basePropsVariant.current = variant;
-        startTransition3(() => {
+        startTransition2(() => {
           forceUpdate();
         },);
       };
@@ -45148,7 +45157,7 @@ function useHydratedBreakpointVariants(initial, mediaQueries, hydratedWithInitia
     if (!hydratedWithInitial || isInitialNavigation !== true) return;
     setActiveVariantInstant(baseVariant.current,);
   }, [],);
-  useEffect4(() => {
+  useEffect2(() => {
     if (!usesMediaQueries || isScreenshotHost) return;
     const callbacks = [];
     for (const [variant, query,] of Object.entries(mediaQueries,)) {
@@ -45218,7 +45227,7 @@ function isSuspenseBoundaryEnd(node,) {
   return node?.nodeType === Node.COMMENT_NODE && node.textContent === '/$';
 }
 function useDataRecord(collection, variables,) {
-  return useMemo3(() => {
+  return useMemo(() => {
     if (!Array.isArray(collection,)) return null;
     if (!variables) return null;
     return collection.find((record) => {
@@ -45232,7 +45241,7 @@ function useDataRecord(collection, variables,) {
 }
 function useDynamicRefs() {
   const map2 = useConstant2(() => /* @__PURE__ */ new Map());
-  return React$1.useCallback((key2) => {
+  return React.useCallback((key2) => {
     const existing = map2.get(key2,);
     if (existing) return existing;
     const ref = createRef();
@@ -45246,7 +45255,7 @@ function useSiteRefs() {
   const {
     activeLocale,
   } = useLocaleInfo();
-  const path = useMemo3(() => {
+  const path = useMemo(() => {
     return getPathForRoute(route, {
       currentRoutePath: route?.path,
       currentRoutePathLocalized: route?.pathLocalized,
@@ -45257,7 +45266,7 @@ function useSiteRefs() {
       localeId: activeLocale?.id,
     },);
   }, [route, activeLocale?.id,],);
-  return React$1.useCallback((key2) => {
+  return React.useCallback((key2) => {
     if (!key2) return;
     const computedKey = `${path}-${key2}`;
     const existing = map.get(computedKey,);
@@ -45346,7 +45355,7 @@ function createGamepadPoller() {
   };
 }
 var gamepadPoller = /* @__PURE__ */ createGamepadPoller();
-var GamepadContext = /* @__PURE__ */ React$1.createContext(gamepadPoller,);
+var GamepadContext = /* @__PURE__ */ React.createContext(gamepadPoller,);
 function getGamepadInputs() {
   let firstConnectedGamepad = null;
   const gamepads = __unframerNavigator2.getGamepads();
@@ -45390,16 +45399,16 @@ function useGamepad(input, callback, {
   mapping,
   on,
 } = {},) {
-  const context = React$1.useContext(GamepadContext,);
+  const context = React.useContext(GamepadContext,);
   const settings = useConstant2(() => ({
     mapping: mapping ?? 'standard',
     on: on ?? 'keydown',
   }));
-  const stateRef = React$1.useRef({
+  const stateRef = React.useRef({
     pressed: false,
     handler: callback,
   },);
-  const cb = React$1.useCallback((gamepad) => {
+  const cb = React.useCallback((gamepad) => {
     const {
       pressed,
       handler,
@@ -45417,10 +45426,10 @@ function useGamepad(input, callback, {
     else context.unregister(cb,);
     return () => context.unregister(cb,);
   }, [],);
-  React$1.useEffect(() => {
+  React.useEffect(() => {
     return () => context.unregister(cb,);
   }, [cb, context,],);
-  React$1.useEffect(() => {
+  React.useEffect(() => {
     stateRef.current.handler = callback;
   }, [callback,],);
 }
@@ -45443,20 +45452,20 @@ function createShortcutDefinition(shortcut,) {
   };
 }
 function useHotkey(shortcut, callback,) {
-  const inTarget = React$1.useRef(true,);
+  const inTarget = React.useRef(true,);
   const shortcutDefinition = useConstant2(() => createShortcutDefinition(shortcut,));
   useOnCurrentTargetChange((isCurrentTarget, isOverlayed,) => {
     inTarget.current = isCurrentTarget && !isOverlayed;
     return () => inTarget.current = false;
   },);
-  const eventHandler = React$1.useCallback((event) => {
+  const eventHandler = React.useCallback((event) => {
     if (!shortcutDefinition) return;
     if (!inTarget.current) return;
     if (!Object.keys(shortcutDefinition,).every((key2) => shortcutDefinition[key2] === asRecord(event,)[key2])) return;
     event.preventDefault();
     callback();
   }, [shortcutDefinition, callback,],);
-  React$1.useEffect(() => {
+  React.useEffect(() => {
     document.addEventListener('keydown', eventHandler,);
     return () => document.removeEventListener('keydown', eventHandler,);
   }, [eventHandler,],);
@@ -45525,8 +45534,8 @@ function callbackForVariant(map2, variant,) {
 }
 function useOnVariantChange(variant, callbackMap,) {
   if (isStaticRenderer()) return;
-  const isActiveScreenRef = React$1.useRef(true,);
-  const callbackMapRef = React$1.useRef(callbackMap,);
+  const isActiveScreenRef = React.useRef(true,);
+  const callbackMapRef = React.useRef(callbackMap,);
   useOnCurrentTargetChange((isCurrent, isOverlayed,) => {
     const isActiveScreen = isCurrent && !isOverlayed;
     if (!isActiveScreenRef.current && isActiveScreen) {
@@ -45535,7 +45544,7 @@ function useOnVariantChange(variant, callbackMap,) {
     }
     isActiveScreenRef.current = isActiveScreen;
   }, [],);
-  React$1.useEffect(() => {
+  React.useEffect(() => {
     if (isActiveScreenRef.current) {
       const callback = callbackForVariant(callbackMapRef.current, variant,);
       if (callback) callback();
@@ -45559,18 +45568,18 @@ function useOverlayState({
   blockDocumentScrolling = true,
   dismissWithEsc = false,
 } = {},) {
-  const [showOverlay, setShowOverlay,] = React$1.useState(false,);
-  const isOverlayShown = React$1.useRef(false,);
-  const callback = React$1.useCallback(async (show) => {
+  const [showOverlay, setShowOverlay,] = React.useState(false,);
+  const isOverlayShown = React.useRef(false,);
+  const callback = React.useCallback(async (show) => {
     await yieldToMain({
       priority: 'user-blocking',
       continueAfter: 'paint',
     },);
     isOverlayShown.current = show;
-    startTransition3(() => setShowOverlay(show,));
+    startTransition2(() => setShowOverlay(show,));
     setOverflow(blockDocumentScrolling, show,);
   }, [blockDocumentScrolling,],);
-  React$1.useEffect(() => () => {
+  React.useEffect(() => () => {
     yieldToMain({
       priority: 'user-blocking',
       continueAfter: 'paint',
@@ -45578,7 +45587,7 @@ function useOverlayState({
       setOverflow(blockDocumentScrolling, false,);
     },);
   }, [blockDocumentScrolling,],);
-  React$1.useEffect(() => {
+  React.useEffect(() => {
     if (!dismissWithEsc) return;
     const handleEscapeKeyDown = (event) => {
       if (event.key !== 'Escape' || !isOverlayShown.current) return;
@@ -45601,9 +45610,9 @@ async function componentForRoute(route,) {
     page: routeComponent,
   } = route;
   if (!routeComponent) return;
-  if (React$1.isValidElement(routeComponent,)) return routeComponent;
+  if (React.isValidElement(routeComponent,)) return routeComponent;
   if (withPreload(routeComponent,)) await routeComponent.preload();
-  return React$1.createElement(routeComponent, {
+  return React.createElement(routeComponent, {
     key: route.path,
   },);
 }
@@ -45619,7 +45628,7 @@ function usePrototypeNavigate({
     getRoute,
   } = useRouter();
   const onCanvas = useIsOnFramerCanvas();
-  React$1.useEffect(() => {
+  React.useEffect(() => {
     if (!navigation || onCanvas) return;
     preload?.forEach((componentOrRoute) => {
       let component;
@@ -45639,7 +45648,7 @@ function usePrototypeNavigate({
     }
     const Component22 = typeof target === 'string'
       ? await componentForRoute(getRoute?.(target,),).catch(() => {},)
-      : React$1.isValidElement(target,)
+      : React.isValidElement(target,)
       ? target
       : null;
     if (!Component22) return;
@@ -45697,7 +45706,7 @@ function useLoadMorePaginatedQuery(query, pageSize, hash2,) {
     loadMore,
   } = useLoadMorePagination(count, pageSize, hash2, true,);
   return {
-    paginatedQuery: useMemo3(() => {
+    paginatedQuery: useMemo(() => {
       let limit = pageSize * paginationInfo.currentPage;
       if (query.limit) {
         if (query.limit.type !== 'LiteralValue' || typeof query.limit.value !== 'number') {
@@ -45763,20 +45772,20 @@ function safeBaseVariant(targetVariant, fallbackVariant, validBaseVariants,) {
 }
 var CycleVariantState = /* @__PURE__ */ Symbol('cycle',);
 function useRunCallbackIfPageIsVisible() {
-  const listenerRef = useRef3();
-  const callbackRef = useRef3();
-  const clean = useCallback4(() => {
+  const listenerRef = useRef();
+  const callbackRef = useRef();
+  const clean = useCallback2(() => {
     if (!listenerRef.current) return;
     document.removeEventListener('visibilitychange', listenerRef.current,);
     listenerRef.current = void 0;
     callbackRef.current = void 0;
   }, [],);
-  useEffect4(() => {
+  useEffect2(() => {
     return () => {
       clean();
     };
   }, [clean,],);
-  return useCallback4((callback) => {
+  return useCallback2((callback) => {
     if (!document.hidden) {
       callback();
       clean();
@@ -45794,18 +45803,18 @@ function useRunCallbackIfPageIsVisible() {
   }, [clean,],);
 }
 function useRunCallbackIfElementIsInView() {
-  const observerRefCleanup = useRef3();
-  const isInViewRef = useRef3(false,);
-  const callbackRef = useRef3();
-  const observers2 = useContext3(SharedIntersectionObserverContext,);
-  useEffect4(() => {
+  const observerRefCleanup = useRef();
+  const isInViewRef = useRef(false,);
+  const callbackRef = useRef();
+  const observers2 = useContext(SharedIntersectionObserverContext,);
+  useEffect2(() => {
     return () => {
       observerRefCleanup.current?.();
       callbackRef.current = void 0;
       observerRefCleanup.current = void 0;
     };
   }, [],);
-  return useCallback4((callback, ref,) => {
+  return useCallback2((callback, ref,) => {
     if (!ref?.current || isInViewRef.current) {
       callback();
       return;
@@ -45829,7 +45838,7 @@ function useRunCallbackIfElementIsInView() {
 function useUpdateIfVisible(ref,) {
   const runUpdateIfPageIsVisible = useRunCallbackIfPageIsVisible();
   const runUpdateIfElementIsInView = useRunCallbackIfElementIsInView();
-  return useCallback4((callback, checkViewport = false,) => {
+  return useCallback2((callback, checkViewport = false,) => {
     if (isBot) {
       callback();
       return;
@@ -45866,7 +45875,7 @@ function globalClickReceivedListener() {
   globalWaitingForClickResolve = void 0;
 }
 function useWaitForGlobalClick(enabled = false,) {
-  useEffect4(() => {
+  useEffect2(() => {
     if (!enabled) return;
     document.addEventListener('pointerup', globalWaitForClickListener, true,);
     document.__proto__.addEventListener.call(document, 'click', globalClickReceivedListener, true,);
@@ -45887,7 +45896,7 @@ function useVariantState({
   const validBaseVariants = useConstant2(() => new Set(externalCycleOrder,));
   useWaitForGlobalClick(getLibraryFeatures().yieldOnTap,);
   const runUpdateIfVisible = useUpdateIfVisible(ref,);
-  const internalState = useRef3({
+  const internalState = useRef({
     isHovered: false,
     isHoveredHasUpdated: false,
     isPressed: false,
@@ -45903,7 +45912,7 @@ function useVariantState({
     cycleOrder: externalCycleOrder,
     transitions: externalTransitions,
   },);
-  const resolveNextVariant = useCallback4((targetBaseVariant) => {
+  const resolveNextVariant = useCallback2((targetBaseVariant) => {
     const {
       isHovered: isHovered2,
       isPressed: isPressed2,
@@ -45915,7 +45924,7 @@ function useVariantState({
     const gesture = getGesture(enabledGestures2?.[nextBaseVariant], isHovered2, isPressed2, false, isError2,);
     return [nextBaseVariant, gesture ? createGestureVariant(nextBaseVariant, gesture,) : void 0,];
   }, [validBaseVariants,],);
-  const updateIfNeeded = useCallback4(
+  const updateIfNeeded = useCallback2(
     async (baseVariant2, gestureVariant2, defaultVariant2, nextBaseVariant, checkViewport = false, clearError = false,) => {
       const [nextBase, nextGesture,] = resolveNextVariant(nextBaseVariant,);
       if (nextBase === baseVariant2 && nextGesture === gestureVariant2) return;
@@ -45943,14 +45952,14 @@ function useVariantState({
         isPressedHasUpdated,
       } = internalState.current;
       if (isHovered2 || isHoveredHasUpdated || isPressed2 || isPressedHasUpdated) {
-        startTransition3(forceUpdate,);
+        startTransition2(forceUpdate,);
         return;
       }
-      runUpdateIfVisible(() => startTransition3(forceUpdate,), checkViewport,);
+      runUpdateIfVisible(() => startTransition2(forceUpdate,), checkViewport,);
     },
     [resolveNextVariant, forceUpdate, runUpdateIfVisible,],
   );
-  const setGestureState = useCallback4(({
+  const setGestureState = useCallback2(({
     isHovered: isHovered2,
     isPressed: isPressed2,
     isError: isError2,
@@ -45970,7 +45979,7 @@ function useVariantState({
     internalState.current.isHoveredHasUpdated = isHoveredHasUpdated;
     updateIfNeeded(baseVariant2, gestureVariant2, defaultVariant2, baseVariant2, false,);
   }, [updateIfNeeded, isCanvas,],);
-  const setVariant = useCallback4((proposedVariant, pauseOffscreen = false,) => {
+  const setVariant = useCallback2((proposedVariant, pauseOffscreen = false,) => {
     const {
       defaultVariant: defaultVariant2,
       cycleOrder,
@@ -45982,12 +45991,12 @@ function useVariantState({
       : proposedVariant;
     updateIfNeeded(baseVariant2, gestureVariant2, defaultVariant2, nextBaseVariant, pauseOffscreen, true,);
   }, [updateIfNeeded,],);
-  const clearLoadingGesture = useCallback4(() => {
+  const clearLoadingGesture = useCallback2(() => {
     const {
       baseVariant: baseVariant2,
     } = internalState.current;
     internalState.current.loadedBaseVariant[baseVariant2] = true;
-    runUpdateIfVisible(() => startTransition3(forceUpdate,), true,);
+    runUpdateIfVisible(() => startTransition2(forceUpdate,), true,);
   }, [forceUpdate, runUpdateIfVisible,],);
   if (variant !== internalState.current.lastVariant) {
     const [nextBase, nextGesture,] = resolveNextVariant(variant,);
@@ -46008,7 +46017,7 @@ function useVariantState({
     loadedBaseVariant,
   } = internalState.current;
   const addVariantProps = useAddVariantProps(internalState.current.baseVariant, internalState.current.gestureVariant, variantProps2,);
-  return useMemo3(() => {
+  return useMemo(() => {
     const variants = [];
     if (baseVariant !== defaultVariant) variants.push(baseVariant,);
     const hasLoadingVariant = enabledGestures?.[baseVariant]?.loading;
@@ -46096,18 +46105,18 @@ function withCodeBoundaryForOverrides(Component22, {
       shouldWrapOverrideWithBoundary(scopeId, nearestExternalComponent?.scopeId, nearestExternalComponent?.level, inComponentSlot ?? false,)
     ) {
       if (appliedOverride.status === 'success') {
-        return /* @__PURE__ */ jsx2(NodeIdContext.Provider, {
+        return /* @__PURE__ */ jsx(NodeIdContext.Provider, {
           suppressHydrationWarning: true,
           value: nodeId,
-          children: /* @__PURE__ */ jsx2(CodeComponentBoundary, {
+          children: /* @__PURE__ */ jsx(CodeComponentBoundary, {
             suppressHydrationWarning: true,
             getErrorMessage: getErrorMessageForOverride.bind(null, scopeId, nodeId,),
-            fallback: /* @__PURE__ */ jsx2(Component22, {
+            fallback: /* @__PURE__ */ jsx(Component22, {
               suppressHydrationWarning: true,
               ...props,
               ref,
             },),
-            children: /* @__PURE__ */ jsx2(appliedOverride.Component, {
+            children: /* @__PURE__ */ jsx(appliedOverride.Component, {
               suppressHydrationWarning: true,
               ...props,
               ref,
@@ -46121,17 +46130,17 @@ function withCodeBoundaryForOverrides(Component22, {
           collectErrorToAnalytics(appliedOverride.error,);
           hasErrorBeenLogged = true;
         }
-        return /* @__PURE__ */ jsx2(Component22, {
+        return /* @__PURE__ */ jsx(Component22, {
           suppressHydrationWarning: true,
           ...props,
           ref,
         },);
       }
     } else if (appliedOverride.status === 'success') {
-      return /* @__PURE__ */ jsx2(NodeIdContext.Provider, {
+      return /* @__PURE__ */ jsx(NodeIdContext.Provider, {
         suppressHydrationWarning: true,
         value: nodeId,
-        children: /* @__PURE__ */ jsx2(appliedOverride.Component, {
+        children: /* @__PURE__ */ jsx(appliedOverride.Component, {
           suppressHydrationWarning: true,
           ...props,
           ref,
@@ -46139,7 +46148,7 @@ function withCodeBoundaryForOverrides(Component22, {
       },);
     } else throw appliedOverride.error;
   }
-  return React$1.forwardRef(CodeBoundaryForOverrides,);
+  return React.forwardRef(CodeBoundaryForOverrides,);
 }
 function tryToApplyOverride(Component22, override, scopeId, nodeId,) {
   try {
@@ -46181,7 +46190,7 @@ function singleFrame() {
   },);
 }
 var withV1StrokeFX = (Component22) =>
-  forwardRef3((props, forwardedRef,) => {
+  forwardRef((props, forwardedRef,) => {
     const {
       strokeEffectLength,
       strokeEffectGap,
@@ -46201,7 +46210,7 @@ var withV1StrokeFX = (Component22) =>
       length: strokeEffectTotalLength * strokeEffectLength,
       gap: strokeEffectTotalLength * strokeEffectGap,
     }));
-    useEffect4(() => {
+    useEffect2(() => {
       if (isCanvas) return;
       const signal = new AbortController();
       async function loop() {
@@ -46231,7 +46240,7 @@ var withV1StrokeFX = (Component22) =>
         strokeDashoffset: value,
       }
       : void 0;
-    return /* @__PURE__ */ jsx2(Component22, {
+    return /* @__PURE__ */ jsx(Component22, {
       suppressHydrationWarning: true,
       ...restProps,
       ...effect,
@@ -46240,8 +46249,8 @@ var withV1StrokeFX = (Component22) =>
   },);
 function flattenChildrenToTickerItems(children,) {
   const result = [];
-  Children3.forEach(children, (child) => {
-    if (isValidElement3(child,) && child.type === Fragment3) result.push(...flattenChildrenToTickerItems(child.props.children,),);
+  Children.forEach(children, (child) => {
+    if (isValidElement(child,) && child.type === Fragment) result.push(...flattenChildrenToTickerItems(child.props.children,),);
     else if (child) result.push(child,);
   },);
   return result;
@@ -46308,22 +46317,22 @@ function findPrevItemInset$1(currentInset, itemPositions, gap, targetInset, cont
   return prevItemInset;
 }
 var TickerContext$1 = /* @__PURE__ */ (() => {
-  const Context2 = createContext3(null,);
+  const Context2 = createContext(null,);
   Context2.displayName = 'TickerContext';
   return Context2;
 })();
 function useTicker() {
-  const context = useContext3(TickerContext$1,);
+  const context = useContext(TickerContext$1,);
   invariant$2(context, 'useTicker must be used within a Ticker component',);
   return context;
 }
 var TickerItemContext = /* @__PURE__ */ (() => {
-  const Context2 = createContext3(void 0,);
+  const Context2 = createContext(void 0,);
   Context2.displayName = 'TickerItemContext';
   return Context2;
 })();
 function useTickerItem() {
-  const itemContext = useContext3(TickerItemContext,);
+  const itemContext = useContext(TickerItemContext,);
   invariant$2(itemContext, 'useTickerItem must be used within a TickerItem',);
   return itemContext;
 }
@@ -46457,7 +46466,7 @@ function TickerItemWrapper({
     },
     ...ariaProps,
   };
-  return /* @__PURE__ */ jsx2(TickerItemContext.Provider, {
+  return /* @__PURE__ */ jsx(TickerItemContext.Provider, {
     suppressHydrationWarning: true,
     value: {
       start: start2,
@@ -46468,7 +46477,7 @@ function TickerItemWrapper({
       cloneIndex,
       props,
     },
-    children: size === 'manual' ? children : /* @__PURE__ */ jsx2(DefaultTickerItem, {
+    children: size === 'manual' ? children : /* @__PURE__ */ jsx(DefaultTickerItem, {
       suppressHydrationWarning: true,
       children,
     },),
@@ -46480,15 +46489,15 @@ function DefaultTickerItem({
   const {
     props,
   } = useTickerItem();
-  return /* @__PURE__ */ jsx2(motion.li, {
+  return /* @__PURE__ */ jsx(motion.li, {
     suppressHydrationWarning: true,
     ...props,
     children,
   },);
 }
 function useFocusNavigation(containerRef, axis, focusOffset, offset, setHasFocus,) {
-  const isFocusTrapped = useRef3(false,);
-  useEffect4(() => {
+  const isFocusTrapped = useRef(false,);
+  useEffect2(() => {
     const container = containerRef.current;
     if (!container) return;
     let detectionEnabled = false;
@@ -46663,10 +46672,10 @@ function TickerComponent({
   pageTransition,
   ...props
 }, ref,) {
-  const internalContainerRef = useRef3(null,);
+  const internalContainerRef = useRef(null,);
   const containerRef = useComposedRefs(ref, internalContainerRef,);
-  const listRef = useRef3(null,);
-  const [state, setState,] = useState3({
+  const listRef = useRef(null,);
+  const [state, setState,] = useState({
     direction: 'ltr',
     visibleLength: 0,
     inset: 0,
@@ -46684,17 +46693,17 @@ function TickerComponent({
   } = getLayoutStrategy(axis, state.direction,);
   if (isStatic) {
     const renderedOffset2 = useMotionValue(0,);
-    const tickerContext2 = useMemo3(() => ({
+    const tickerContext2 = useMemo(() => ({
       ...state,
       gap,
       clampOffset: noop2,
       offset: renderedOffset2,
       renderedOffset: renderedOffset2,
     }), [state, gap, renderedOffset2,],);
-    return /* @__PURE__ */ jsx2(TickerContext$1.Provider, {
+    return /* @__PURE__ */ jsx(TickerContext$1.Provider, {
       suppressHydrationWarning: true,
       value: tickerContext2,
-      children: /* @__PURE__ */ jsx2(ListView, {
+      children: /* @__PURE__ */ jsx(ListView, {
         suppressHydrationWarning: true,
         containerProps: props,
         containerRef,
@@ -46716,7 +46725,7 @@ function TickerComponent({
       },),
     },);
   }
-  const [hasFocus, setHasFocus,] = useState3(false,);
+  const [hasFocus, setHasFocus,] = useState(false,);
   const velocityFactor = useMotionValue(1,);
   const defaultOffset2 = useMotionValue(0,);
   offset ??= defaultOffset2;
@@ -46813,7 +46822,7 @@ function TickerComponent({
       }
       : noop2,
   );
-  const cloneCount = useMemo3(() => {
+  const cloneCount = useMemo(() => {
     if (!isMeasured || !state.visibleLength) return 0;
     return calcNumClones(state.visibleLength, state.itemPositions, gap,);
   }, [isMeasured, state, gap,],);
@@ -46831,7 +46840,7 @@ function TickerComponent({
             end: originalBounds.end + cloneOffset,
           }
           : defaultBounds;
-        clonedItems.push(/* @__PURE__ */ jsx2(TickerItemWrapper, {
+        clonedItems.push(/* @__PURE__ */ jsx(TickerItemWrapper, {
           suppressHydrationWarning: true,
           offset: renderedOffset,
           axis,
@@ -46847,7 +46856,7 @@ function TickerComponent({
         }, `clone-${i}-${itemIndex}`,),);
       },);
       const id2 = `ticker-group-${i}`;
-      clonedItemGroups.push(/* @__PURE__ */ jsx2(LayoutGroup, {
+      clonedItemGroups.push(/* @__PURE__ */ jsx(LayoutGroup, {
         suppressHydrationWarning: true,
         id: id2,
         children: clonedItems,
@@ -46855,21 +46864,21 @@ function TickerComponent({
     }
   }
   useFocusNavigation(internalContainerRef, axis, focusOffset, offset, setHasFocus,);
-  const clampOffset = useCallback4((value) => {
+  const clampOffset = useCallback2((value) => {
     if (state.maxInset !== null) return clamp(-state.maxInset, 0, value,);
     return value;
   }, [state.maxInset,],);
-  const tickerContext = useMemo3(() => ({
+  const tickerContext = useMemo(() => ({
     ...state,
     gap,
     clampOffset,
     offset,
     renderedOffset,
   }), [state, gap, clampOffset, offset, renderedOffset,],);
-  return /* @__PURE__ */ jsx2(TickerContext$1.Provider, {
+  return /* @__PURE__ */ jsx(TickerContext$1.Provider, {
     suppressHydrationWarning: true,
     value: tickerContext,
-    children: /* @__PURE__ */ jsx2(ListView, {
+    children: /* @__PURE__ */ jsx(ListView, {
       suppressHydrationWarning: true,
       containerProps: props,
       containerRef,
@@ -46906,7 +46915,7 @@ function TickerComponent({
     },),
   },);
 }
-var Ticker$1 = /* @__PURE__ */ forwardRef3(TickerComponent,);
+var Ticker$1 = /* @__PURE__ */ forwardRef(TickerComponent,);
 function ListView({
   children,
   containerProps,
@@ -46938,7 +46947,7 @@ function ListView({
   fadeTransition = defaultFadeTransition,
   pageTransition,
 },) {
-  const MotionComponent = useMemo3(() => motion.create(as,), [as,],);
+  const MotionComponent = useMemo(() => motion.create(as,), [as,],);
   let dragConstraints = {};
   const {
     maxInset,
@@ -46971,7 +46980,7 @@ function ListView({
   let onDragEnd = onDragEndProp;
   let onPointerDown = onPointerDownProp;
   const dragMotionValue = axis === 'x' ? _dragX : _dragY;
-  const dragMomentumAnimation = useRef3(null,);
+  const dragMomentumAnimation = useRef(null,);
   const stopDragMomentumAnimation = () => {
     if (!dragMomentumAnimation.current) return;
     dragMomentumAnimation.current.stop();
@@ -47035,7 +47044,7 @@ function ListView({
       WebkitMaskImage: maskImage,
     }
     : {};
-  const isAtLimits = useRef3({
+  const isAtLimits = useRef({
     start: true,
     end: false,
   },);
@@ -47062,9 +47071,9 @@ function ListView({
       isAtLimits.current.end = true;
     }
   },);
-  return /* @__PURE__ */ jsxs2(Fragment3, {
+  return /* @__PURE__ */ jsxs(Fragment, {
     children: [
-      /* @__PURE__ */ jsx2(MotionComponent, {
+      /* @__PURE__ */ jsx(MotionComponent, {
         suppressHydrationWarning: true,
         ...remainingProps,
         ref: containerRef,
@@ -47084,7 +47093,7 @@ function ListView({
         dragMomentum,
         onPointerDown,
         onDragEnd,
-        children: /* @__PURE__ */ jsxs2(motion.ul, {
+        children: /* @__PURE__ */ jsxs(motion.ul, {
           suppressHydrationWarning: true,
           ref: listRef,
           style: {
@@ -47103,7 +47112,7 @@ function ListView({
           },
           children: [
             items.map((item, index,) =>
-              /* @__PURE__ */ jsx2(TickerItemWrapper, {
+              /* @__PURE__ */ jsx(TickerItemWrapper, {
                 suppressHydrationWarning: true,
                 axis,
                 offset: renderedOffset,
@@ -47244,12 +47253,12 @@ function wheel(element, {
   };
 }
 var CarouselContext = /* @__PURE__ */ (() => {
-  const Context2 = createContext3(null,);
+  const Context2 = createContext(null,);
   Context2.displayName = 'CarouselContext';
   return Context2;
 })();
 function useCarousel() {
-  const context = useContext3(CarouselContext,);
+  const context = useContext(CarouselContext,);
   invariant$1(Boolean(context,), 'useCarousel must be used within a Carousel component',);
   return context;
 }
@@ -47395,7 +47404,7 @@ function CarouselView({
   page,
   wheelSwipeThreshold,
 },) {
-  const nextOffsetTransition = useRef3(void 0,);
+  const nextOffsetTransition = useRef(void 0,);
   const shouldReduceMotion = useReducedMotionConfig();
   const {
     clampOffset,
@@ -47412,16 +47421,16 @@ function CarouselView({
     sign,
   } = getLayoutStrategy(axis, direction,);
   const loopLength = loop ? wrapInset : 0;
-  const pagination = useMemo3(() => ({
+  const pagination = useMemo(() => ({
     ...calcPageInsets(itemPositions, containerLength, maxInset,),
     itemPositions,
     sign,
     loopLength,
   }), [itemPositions, containerLength, maxInset, sign, loopLength,],);
   const totalPages = pagination.insets.length;
-  const previousPagination = useRef3(null,);
-  const lastPageRef = useRef3(void 0,);
-  const resizeAnchor = useRef3(void 0,);
+  const previousPagination = useRef(null,);
+  const lastPageRef = useRef(void 0,);
+  const resizeAnchor = useRef(void 0,);
   const calculatePaginationState = (targetOffsetValue) => {
     return {
       current: calcCurrentPage(
@@ -47435,7 +47444,7 @@ function CarouselView({
       isPrevActive: loop ? true : targetOffsetValue * -sign > 0,
     };
   };
-  const [paginationState, setPaginationState,] = useState3(() => calculatePaginationState(targetOffset.get(),));
+  const [paginationState, setPaginationState,] = useState(() => calculatePaginationState(targetOffset.get(),));
   const updatePaginationState = () => {
     const newPaginationState = calculatePaginationState(targetOffset.get(),);
     if (
@@ -47551,19 +47560,19 @@ function CarouselView({
     const transformOffset = (loop ? Math.floor(-targetOffset.get() * sign / wrapInset,) : 0) * -wrapInset;
     stepOffset(-pagination.insets[i] + transformOffset,);
   };
-  const wheelCallbacks = useRef3({
+  const wheelCallbacks = useRef({
     nextPage,
     prevPage,
     clampOffset,
   },);
-  useEffect4(() => {
+  useEffect2(() => {
     wheelCallbacks.current = {
       nextPage,
       prevPage,
       clampOffset,
     };
   }, [nextPage, prevPage, clampOffset,],);
-  useEffect4(() => {
+  useEffect2(() => {
     const element = tickerRef.current;
     if (!element) return;
     return wheel(element, {
@@ -47588,7 +47597,7 @@ function CarouselView({
       },
     },);
   }, [axis, snap, offset, sign,],);
-  return /* @__PURE__ */ jsx2(CarouselContext.Provider, {
+  return /* @__PURE__ */ jsx(CarouselContext.Provider, {
     suppressHydrationWarning: true,
     value: {
       currentPage: paginationState.current,
@@ -47614,12 +47623,12 @@ function Carousel$1({
   wheelSwipeThreshold,
   ...props
 },) {
-  const ref = useRef3(null,);
+  const ref = useRef(null,);
   const targetOffset = useMotionValue(0,);
   const offset = useMotionValue(0,);
   const tugOffset = useMotionValue(0,);
   const renderedOffset = useTransform(() => tugOffset.get() + offset.get());
-  return /* @__PURE__ */ jsx2(Ticker$1, {
+  return /* @__PURE__ */ jsx(Ticker$1, {
     suppressHydrationWarning: true,
     role: 'region',
     'aria-roledescription': 'carousel',
@@ -47633,7 +47642,7 @@ function Carousel$1({
     snap,
     pageTransition: transition,
     ...props,
-    children: /* @__PURE__ */ jsx2(CarouselView, {
+    children: /* @__PURE__ */ jsx(CarouselView, {
       suppressHydrationWarning: true,
       tickerRef: ref,
       loop,
@@ -47685,7 +47694,7 @@ function useCarouselVariables() {
     gotoPage,
   } = useCarousel();
   const isStatic = useIsStaticRenderer();
-  return useMemo3(() => ({
+  return useMemo(() => ({
     carousel_active_item_index: isStatic ? 1 : currentPage + 1,
     carousel_total_items: isStatic ? 3 : totalPages,
     carousel_has_next: isStatic ? true : isNextActive,
@@ -47711,7 +47720,7 @@ var requiredCarouselStyle = {
   height: '100%',
   width: '100%',
 };
-var Carousel = /* @__PURE__ */ forwardRef3(function Carousel2(props, ref,) {
+var Carousel = /* @__PURE__ */ forwardRef(function Carousel2(props, ref,) {
   const {
     children,
     carouselEffectStackDirection,
@@ -47737,13 +47746,13 @@ var Carousel = /* @__PURE__ */ forwardRef3(function Carousel2(props, ref,) {
   const gap = getGap$1(carouselEffectGap, axis,);
   const snap = carouselEffectSnap === true ? 'page' : carouselEffectSnap;
   const items = flattenChildrenToTickerItems(children,);
-  const MotionComponent = useMemo3(() =>
+  const MotionComponent = useMemo(() =>
     motion.create(asProp,), [asProp,],);
-  return /* @__PURE__ */ jsx2(MotionComponent, {
+  return /* @__PURE__ */ jsx(MotionComponent, {
     suppressHydrationWarning: true,
     ...rest,
     ref,
-    children: /* @__PURE__ */ jsxs2(Carousel$1, {
+    children: /* @__PURE__ */ jsxs(Carousel$1, {
       suppressHydrationWarning: true,
       axis,
       align: carouselEffectAlign ?? 'center',
@@ -47757,7 +47766,7 @@ var Carousel = /* @__PURE__ */ forwardRef3(function Carousel2(props, ref,) {
       items,
       style: requiredCarouselStyle,
       children: [
-        carouselEffectAutoPlay && /* @__PURE__ */ jsx2(CarouselAutoPlay, {
+        carouselEffectAutoPlay && /* @__PURE__ */ jsx(CarouselAutoPlay, {
           suppressHydrationWarning: true,
           intervalSeconds: carouselEffectInterval ?? 1.5,
         },),
@@ -47774,7 +47783,7 @@ function CarouselAutoPlay({
     currentPage,
     isNextActive,
   } = useCarousel();
-  useEffect4(() => {
+  useEffect2(() => {
     if (!isNextActive) return;
     const animation = new JSAnimation({
       keyframes: [0, 1,],
@@ -47797,7 +47806,7 @@ function getGap$1(gap, axis,) {
   const parsed = parseInt(value,);
   return Number.isNaN(parsed,) ? void 0 : parsed;
 }
-var BasicTicker = /* @__PURE__ */ forwardRef3(function BasicTicker2(props, ref,) {
+var BasicTicker = /* @__PURE__ */ forwardRef(function BasicTicker2(props, ref,) {
   const {
     children,
     as: asProp,
@@ -47814,7 +47823,7 @@ var BasicTicker = /* @__PURE__ */ forwardRef3(function BasicTicker2(props, ref,)
   const Component22 = asProp ?? motion.div;
   const isStatic = useIsStaticRenderer();
   const velocity = (playState === 'paused' ? 0 : tickerEffectVelocity ?? 100) * directionModifier;
-  return /* @__PURE__ */ jsx2(Ticker$1, {
+  return /* @__PURE__ */ jsx(Ticker$1, {
     suppressHydrationWarning: true,
     ref,
     as: Component22,
@@ -47829,7 +47838,7 @@ var BasicTicker = /* @__PURE__ */ forwardRef3(function BasicTicker2(props, ref,)
     overflow,
   },);
 },);
-var DraggableTicker = /* @__PURE__ */ forwardRef3(function DraggableTicker2(props, ref,) {
+var DraggableTicker = /* @__PURE__ */ forwardRef(function DraggableTicker2(props, ref,) {
   const {
     children,
     as: asProp,
@@ -47844,7 +47853,7 @@ var DraggableTicker = /* @__PURE__ */ forwardRef3(function DraggableTicker2(prop
     ...rest
   } = props;
   const Component22 = asProp ?? motion.div;
-  const containerRef = useRef3(null,);
+  const containerRef = useRef(null,);
   const composedRef = useComposedRefs(ref, containerRef,);
   const isInViewport = useInView(containerRef, {
     margin: '100px',
@@ -47854,10 +47863,10 @@ var DraggableTicker = /* @__PURE__ */ forwardRef3(function DraggableTicker2(prop
   const layoutDirectionModifier = useLayoutDirection() === 'rtl' && axis === 'x' ? -1 : 1;
   const targetVelocity = (playState === 'paused' ? 0 : tickerEffectVelocity ?? 100) * directionModifier * layoutDirectionModifier;
   const offsetMotionValue = useMotionValue(0,);
-  const lastDrag = useRef3(0,);
-  const dragMomentum = useRef3(false,);
-  const isHovering = useRef3(false,);
-  const isDragging2 = useRef3(false,);
+  const lastDrag = useRef(0,);
+  const dragMomentum = useRef(false,);
+  const isHovering = useRef(false,);
+  const isDragging2 = useRef(false,);
   const handleClickCapture = (event) => {
     if (!isDragging2.current) return;
     if (event.target && event.target !== event.currentTarget) {
@@ -47882,10 +47891,10 @@ var DraggableTicker = /* @__PURE__ */ forwardRef3(function DraggableTicker2(prop
       }
       : noop2,
   );
-  useEffect4(() => {
+  useEffect2(() => {
     if (playState === 'paused') offsetMotionValue.stop();
   }, [playState, offsetMotionValue,],);
-  return /* @__PURE__ */ jsx2(Ticker$1, {
+  return /* @__PURE__ */ jsx(Ticker$1, {
     suppressHydrationWarning: true,
     ref: composedRef,
     as: Component22,
@@ -47920,7 +47929,7 @@ var DraggableTicker = /* @__PURE__ */ forwardRef3(function DraggableTicker2(prop
   },);
 },);
 var TickerContext = /* @__PURE__ */ (() => {
-  const Context2 = createContext3(void 0,);
+  const Context2 = createContext(void 0,);
   Context2.displayName = 'TickerContext';
   return Context2;
 })();
@@ -47928,17 +47937,17 @@ var TickerContextProvider = ({
   onPlayStateChange,
   children,
 },) => {
-  const value = useMemo3(() => ({
-    start: () => startTransition3(() => onPlayStateChange('running',)),
-    stop: () => startTransition3(() => onPlayStateChange('paused',)),
+  const value = useMemo(() => ({
+    start: () => startTransition2(() => onPlayStateChange('running',)),
+    stop: () => startTransition2(() => onPlayStateChange('paused',)),
   }), [onPlayStateChange,],);
-  return /* @__PURE__ */ jsx2(TickerContext.Provider, {
+  return /* @__PURE__ */ jsx(TickerContext.Provider, {
     suppressHydrationWarning: true,
     value,
     children,
   },);
 };
-var Ticker = /* @__PURE__ */ forwardRef3(function Ticker2(props, ref,) {
+var Ticker = /* @__PURE__ */ forwardRef(function Ticker2(props, ref,) {
   const {
     children,
     tickerEffectDraggable,
@@ -47955,7 +47964,7 @@ var Ticker = /* @__PURE__ */ forwardRef3(function Ticker2(props, ref,) {
     ...rest
   } = props;
   const isStatic = useIsStaticRenderer();
-  const [playState, setPlayState,] = useState3('running',);
+  const [playState, setPlayState,] = useState('running',);
   const axis = tickerEffectStackDirection?.startsWith('column',) ? 'y' : 'x';
   const directionModifier = tickerEffectDirectionModifier === 'reverse' ? -1 : 1;
   const hoverModifier = isFiniteNumber(tickerEffectHoverModifier,) ? tickerEffectHoverModifier / 100 : 1;
@@ -47970,10 +47979,10 @@ var Ticker = /* @__PURE__ */ forwardRef3(function Ticker2(props, ref,) {
     position: tickerEffectPosition,
   };
   if (isStatic || !tickerEffectDraggable) {
-    return /* @__PURE__ */ jsx2(TickerContextProvider, {
+    return /* @__PURE__ */ jsx(TickerContextProvider, {
       suppressHydrationWarning: true,
       onPlayStateChange: setPlayState,
-      children: /* @__PURE__ */ jsx2(BasicTicker, {
+      children: /* @__PURE__ */ jsx(BasicTicker, {
         suppressHydrationWarning: true,
         ...rest,
         style: tickerStyle,
@@ -47988,10 +47997,10 @@ var Ticker = /* @__PURE__ */ forwardRef3(function Ticker2(props, ref,) {
       },),
     },);
   }
-  return /* @__PURE__ */ jsx2(TickerContextProvider, {
+  return /* @__PURE__ */ jsx(TickerContextProvider, {
     suppressHydrationWarning: true,
     onPlayStateChange: setPlayState,
-    children: /* @__PURE__ */ jsx2(DraggableTicker, {
+    children: /* @__PURE__ */ jsx(DraggableTicker, {
       suppressHydrationWarning: true,
       ...rest,
       style: tickerStyle,
@@ -48026,7 +48035,7 @@ var withTickerFX = (Component22) => {
       domProps,
     } = getProps(props,);
     if (props.carouselEffectEnabled) {
-      return /* @__PURE__ */ jsx2(Carousel, {
+      return /* @__PURE__ */ jsx(Carousel, {
         suppressHydrationWarning: true,
         ...carouselEffectProps,
         ...domProps,
@@ -48034,14 +48043,14 @@ var withTickerFX = (Component22) => {
       },);
     }
     if (props.tickerEffectEnabled) {
-      return /* @__PURE__ */ jsx2(Ticker, {
+      return /* @__PURE__ */ jsx(Ticker, {
         suppressHydrationWarning: true,
         ...tickerEffectProps,
         ...domProps,
         as: Component22,
       },);
     }
-    return /* @__PURE__ */ jsx2(Component22, {
+    return /* @__PURE__ */ jsx(Component22, {
       suppressHydrationWarning: true,
       ...domProps,
     },);
@@ -48110,7 +48119,7 @@ function getProps(props,) {
   };
 }
 var withFlowFX = (Component22) =>
-  React$1.forwardRef((props, forwardedRef,) => {
+  React.forwardRef((props, forwardedRef,) => {
     const {
       flowEffectEnabled,
       flowEffectTransition,
@@ -48118,7 +48127,7 @@ var withFlowFX = (Component22) =>
       transition,
       ...forwardedProps
     } = props;
-    const mergedTransition = useMemo3(() => {
+    const mergedTransition = useMemo(() => {
       if (flowEffectTransition) {
         return {
           default: transition,
@@ -48128,27 +48137,27 @@ var withFlowFX = (Component22) =>
       return transition;
     }, [transition, flowEffectTransition,],);
     if (!flowEffectEnabled) {
-      return /* @__PURE__ */ jsx2(Component22, {
+      return /* @__PURE__ */ jsx(Component22, {
         suppressHydrationWarning: true,
         ...forwardedProps,
         ref: forwardedRef,
         transition,
       },);
     }
-    let componentWithFlowEffect = /* @__PURE__ */ jsx2(Component22, {
+    let componentWithFlowEffect = /* @__PURE__ */ jsx(Component22, {
       suppressHydrationWarning: true,
       ...forwardedProps,
       ref: forwardedRef,
     },);
     if (flowEffectTransition) {
-      componentWithFlowEffect = /* @__PURE__ */ jsx2(MotionConfig, {
+      componentWithFlowEffect = /* @__PURE__ */ jsx(MotionConfig, {
         suppressHydrationWarning: true,
         transition: mergedTransition,
         children: componentWithFlowEffect,
       },);
     }
     if (!isNestedFlowEffect) {
-      componentWithFlowEffect = /* @__PURE__ */ jsx2(LayoutGroup, {
+      componentWithFlowEffect = /* @__PURE__ */ jsx(LayoutGroup, {
         suppressHydrationWarning: true,
         children: componentWithFlowEffect,
       },);
@@ -48169,7 +48178,7 @@ function withMappedReactProps(Component22, info,) {
     const props = {};
     const mapping = extractMappingFromInfo(info,);
     for (const key2 in rawProps) asRecord(props,)[mapping?.[key2] ?? key2] = rawProps[key2];
-    return /* @__PURE__ */ jsx2(Component22, {
+    return /* @__PURE__ */ jsx(Component22, {
       suppressHydrationWarning: true,
       ...props,
     },);
@@ -49153,11 +49162,11 @@ function validateShaderInputs(shaderConfig,) {
     }
   }
 }
-var ShaderFallbackImage = /* @__PURE__ */ memo$1(function ShaderFallbackImage2({
+var ShaderFallbackImage = /* @__PURE__ */ memo$12(function ShaderFallbackImage2({
   src,
 },) {
   if (!src) return null;
-  return /* @__PURE__ */ jsx2(BackgroundImageComponent, {
+  return /* @__PURE__ */ jsx(BackgroundImageComponent, {
     suppressHydrationWarning: true,
     image: {
       src,
@@ -49675,46 +49684,46 @@ var sandboxFallbackContainerStyle = {
   position: 'absolute',
   inset: 0,
 };
-var ShaderSandboxFallbackImage = /* @__PURE__ */ memo$1(function ShaderSandboxFallbackImage2({
+var ShaderSandboxFallbackImage = /* @__PURE__ */ memo$12(function ShaderSandboxFallbackImage2({
   src,
   hidden = false,
   onDisplaySrcChange,
 },) {
-  const [displaySrc, setDisplaySrc,] = useState3(src,);
-  const [previousSrc, setPreviousSrc,] = useState3(void 0,);
-  const [prevDisplaySrc, setPrevDisplaySrc,] = useState3(displaySrc,);
-  const fadeRef = useRef3(null,);
+  const [displaySrc, setDisplaySrc,] = useState(src,);
+  const [previousSrc, setPreviousSrc,] = useState(void 0,);
+  const [prevDisplaySrc, setPrevDisplaySrc,] = useState(displaySrc,);
+  const fadeRef = useRef(null,);
   if (displaySrc !== prevDisplaySrc) {
     setPreviousSrc(prevDisplaySrc,);
     setPrevDisplaySrc(displaySrc,);
   }
-  const onDisplaySrcChangeRef = useRef3(onDisplaySrcChange,);
-  useLayoutEffect3(() => {
+  const onDisplaySrcChangeRef = useRef(onDisplaySrcChange,);
+  useLayoutEffect(() => {
     onDisplaySrcChangeRef.current = onDisplaySrcChange;
   }, [onDisplaySrcChange,],);
-  const isInitialMountRef = useRef3(true,);
-  useLayoutEffect3(() => {
+  const isInitialMountRef = useRef(true,);
+  useLayoutEffect(() => {
     if (isInitialMountRef.current) {
       isInitialMountRef.current = false;
       return;
     }
     if (!previousSrc) onDisplaySrcChangeRef.current?.();
   }, [displaySrc,],);
-  useEffect4(() => {
+  useEffect2(() => {
     if (src === displaySrc) return;
     let isActive = true;
     if (src) {
       const img = new Image();
       img.src = src;
-      const setSrc = () => isActive ? startTransition3(() => setDisplaySrc(src,)) : void 0;
+      const setSrc = () => isActive ? startTransition2(() => setDisplaySrc(src,)) : void 0;
       if (typeof img.decode === 'function') img.decode().then(setSrc,).catch(setSrc,);
       else img.onload = setSrc;
-    } else startTransition3(() => setDisplaySrc(void 0,));
+    } else startTransition2(() => setDisplaySrc(void 0,));
     return () => {
       isActive = false;
     };
   }, [src, displaySrc,],);
-  useEffect4(() => {
+  useEffect2(() => {
     const el = fadeRef.current;
     if (!el || !previousSrc) return;
     let cancelled = false;
@@ -49729,7 +49738,7 @@ var ShaderSandboxFallbackImage = /* @__PURE__ */ memo$1(function ShaderSandboxFa
     },);
     animation.onfinish = () => {
       if (!cancelled) {
-        startTransition3(() => setPreviousSrc(void 0,));
+        startTransition2(() => setPreviousSrc(void 0,));
         onDisplaySrcChangeRef.current?.();
       }
     };
@@ -49744,11 +49753,11 @@ var ShaderSandboxFallbackImage = /* @__PURE__ */ memo$1(function ShaderSandboxFa
     opacity: hidden ? 0 : 1,
     pointerEvents: hidden ? 'none' : void 0,
   };
-  return /* @__PURE__ */ jsxs2('div', {
+  return /* @__PURE__ */ jsxs('div', {
     suppressHydrationWarning: true,
     style: containerStyle2,
     children: [
-      previousSrc && /* @__PURE__ */ jsx2('img', {
+      previousSrc && /* @__PURE__ */ jsx('img', {
         suppressHydrationWarning: true,
         src: previousSrc,
         decoding: 'async',
@@ -49756,11 +49765,11 @@ var ShaderSandboxFallbackImage = /* @__PURE__ */ memo$1(function ShaderSandboxFa
         draggable: false,
         alt: '',
       }, `prev-${previousSrc}`,),
-      /* @__PURE__ */ jsx2('div', {
+      /* @__PURE__ */ jsx('div', {
         suppressHydrationWarning: true,
         ref: previousSrc ? fadeRef : void 0,
         style: sandboxFallbackContainerStyle,
-        children: /* @__PURE__ */ jsx2('img', {
+        children: /* @__PURE__ */ jsx('img', {
           suppressHydrationWarning: true,
           src: displaySrc,
           style: sandboxFallbackImageStyle,
@@ -49803,24 +49812,24 @@ var slotStatus = {
   /** Slot allocated, run continuous rAF animation. */
   animate: 2,
 };
-var ShaderPoolContext = /* @__PURE__ */ createContext3(null,);
+var ShaderPoolContext = /* @__PURE__ */ createContext(null,);
 function useShaderPoolContext() {
-  return useContext3(ShaderPoolContext,);
+  return useContext(ShaderPoolContext,);
 }
 function useStableUniforms(uniforms,) {
-  const ref = useRef3(uniforms,);
+  const ref = useRef(uniforms,);
   if (!isEqual(ref.current, uniforms,)) ref.current = uniforms;
   return ref.current;
 }
 function useResolvedUniforms(uniforms, canvasRef, heightmapSource, onUniformResolutionSucceeded, onUniformResolutionFailed,) {
-  const [resolvedUniforms, setResolvedUniforms,] = useState3({},);
-  const [haveUniformsResolved, setHaveUniformsResolved,] = useState3(uniforms === void 0,);
+  const [resolvedUniforms, setResolvedUniforms,] = useState({},);
+  const [haveUniformsResolved, setHaveUniformsResolved,] = useState(uniforms === void 0,);
   const stableUniforms = useStableUniforms(uniforms,);
-  useEffect4(() => () => videoDecoderPool.releaseAll(canvasRef,), [canvasRef,],);
-  useEffect4(() => {
+  useEffect2(() => () => videoDecoderPool.releaseAll(canvasRef,), [canvasRef,],);
+  useEffect2(() => {
     if (!stableUniforms) {
       videoDecoderPool.releaseAll(canvasRef,);
-      startTransition3(() => {
+      startTransition2(() => {
         setResolvedUniforms({},);
         setHaveUniformsResolved(true,);
       },);
@@ -49830,7 +49839,7 @@ function useResolvedUniforms(uniforms, canvasRef, heightmapSource, onUniformReso
     resolveUniforms(stableUniforms, canvasRef, heightmapSource, controller.signal,).then((resolved) => {
       if (controller.signal.aborted) return;
       videoDecoderPool.keepOnly(canvasRef, collectVideoUrls(stableUniforms,),);
-      startTransition3(() => {
+      startTransition2(() => {
         setResolvedUniforms(resolved,);
         setHaveUniformsResolved(true,);
       },);
@@ -49848,7 +49857,7 @@ function useResolvedUniforms(uniforms, canvasRef, heightmapSource, onUniformReso
   };
 }
 function useCanvasResize(canvasRef, resizeHandler,) {
-  useEffect4(() => {
+  useEffect2(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const resizeObserver = new ResizeObserver(resizeHandler,);
@@ -49860,7 +49869,7 @@ function useCanvasResize(canvasRef, resizeHandler,) {
   useOnDprChange(resizeHandler,);
 }
 function useOnDprChange(callback,) {
-  useEffect4(() => {
+  useEffect2(() => {
     let dprQuery = matchMedia(`(resolution: ${__unframerWindow2.devicePixelRatio}dppx)`,);
     const handleChange = () => {
       callback();
@@ -49902,23 +49911,23 @@ function useShaderRenderState(
     effectiveSingleFrame = !effectiveAnimated;
     effectiveMode = mode;
   }
-  const [contextLost, setContextLost,] = useState3(false,);
-  const onContextLost = useCallback4(() => {
-    startTransition3(() => setContextLost(true,));
+  const [contextLost, setContextLost,] = useState(false,);
+  const onContextLost = useCallback2(() => {
+    startTransition2(() => setContextLost(true,));
   }, [],);
-  useLayoutEffect3(() => {
-    if (contextLost && isSelected) startTransition3(() => setContextLost(false,));
+  useLayoutEffect(() => {
+    if (contextLost && isSelected) startTransition2(() => setContextLost(false,));
   }, [contextLost, isSelected,],);
   if (contextLost) isFallbackOnly = true;
-  const [uniformResolutionFailed, setUniformResolutionFailed,] = useState3(false,);
-  const onUniformResolutionFailed = useCallback4(() => {
-    startTransition3(() => setUniformResolutionFailed(true,));
+  const [uniformResolutionFailed, setUniformResolutionFailed,] = useState(false,);
+  const onUniformResolutionFailed = useCallback2(() => {
+    startTransition2(() => setUniformResolutionFailed(true,));
   }, [],);
-  const onUniformResolutionSucceeded = useCallback4(() => {
-    startTransition3(() => setUniformResolutionFailed(false,));
+  const onUniformResolutionSucceeded = useCallback2(() => {
+    startTransition2(() => setUniformResolutionFailed(false,));
   }, [],);
-  const wasSelectedRef = useRef3(isSelected,);
-  useLayoutEffect3(() => {
+  const wasSelectedRef = useRef(isSelected,);
+  useLayoutEffect(() => {
     const becameSelected = !wasSelectedRef.current && isSelected;
     wasSelectedRef.current = isSelected;
     if (becameSelected && uniformResolutionFailed) onUniformResolutionSucceeded();
@@ -49941,15 +49950,15 @@ function useShaderRenderState(
 }
 var SHADER_REVEAL_DELAY_MS = 300;
 function usePatchDelayShaderRender(enabled = true,) {
-  const [mayRender, setMayRender,] = useState3(!enabled,);
+  const [mayRender, setMayRender,] = useState(!enabled,);
   useIsomorphicLayoutEffect$1(() => {
     if (!enabled) {
-      startTransition3(() => setMayRender(true,));
+      startTransition2(() => setMayRender(true,));
       return;
     }
-    startTransition3(() => setMayRender(false,));
+    startTransition2(() => setMayRender(false,));
     const timeoutId = __unframerWindow2.setTimeout(() => {
-      startTransition3(() => setMayRender(true,));
+      startTransition2(() => setMayRender(true,));
     }, SHADER_REVEAL_DELAY_MS,);
     return () => {
       clearTimeout(timeoutId,);
@@ -49961,8 +49970,8 @@ function forEachVideoUniform(uniforms, fn,) {
   for (const uniform of Object.values(uniforms,)) if (uniform.type === 'sampler2D' && isVideoElement(uniform.value,)) fn(uniform.value,);
 }
 function useShaderVideoPlayback(resolvedUniforms, shouldPlay, renderSingleFrame,) {
-  const wasPlayingRef = useRef3(false,);
-  useLayoutEffect3(() => {
+  const wasPlayingRef = useRef(false,);
+  useLayoutEffect(() => {
     const startedPlaying = shouldPlay && !wasPlayingRef.current;
     wasPlayingRef.current = shouldPlay;
     let didRewind = false;
@@ -50004,36 +50013,36 @@ function ShaderCanvas({
   mouseDataRef,
   buffers,
 },) {
-  const canvasRef = useRef3(null,);
-  const rendererRef = useRef3(null,);
-  const animationFrameRef = useRef3(0,);
-  const startTimeRef = useRef3(0,);
-  const lastTimeRef = useRef3(0,);
-  const shaderRenderedFrameRef = useRef3(null,);
-  const [isRendererLive, setIsRendererLive,] = useState3(false,);
-  const onReadyRef = useRef3(onReady,);
-  useLayoutEffect3(() => {
+  const canvasRef = useRef(null,);
+  const rendererRef = useRef(null,);
+  const animationFrameRef = useRef(0,);
+  const startTimeRef = useRef(0,);
+  const lastTimeRef = useRef(0,);
+  const shaderRenderedFrameRef = useRef(null,);
+  const [isRendererLive, setIsRendererLive,] = useState(false,);
+  const onReadyRef = useRef(onReady,);
+  useLayoutEffect(() => {
     onReadyRef.current = onReady;
   }, [onReady,],);
-  const onContextLostRef = useRef3(onContextLost,);
-  useLayoutEffect3(() => {
+  const onContextLostRef = useRef(onContextLost,);
+  useLayoutEffect(() => {
     onContextLostRef.current = onContextLost;
   }, [onContextLost,],);
   const {
     resolvedUniforms,
     haveUniformsResolved,
   } = useResolvedUniforms(uniforms, canvasRef, heightmapSource, onUniformResolutionSucceeded, onUniformResolutionFailed,);
-  const resolvedUniformsRef = useRef3(resolvedUniforms,);
-  const animatedRef = useRef3(animated,);
-  useLayoutEffect3(() => {
+  const resolvedUniformsRef = useRef(resolvedUniforms,);
+  const animatedRef = useRef(animated,);
+  useLayoutEffect(() => {
     animatedRef.current = animated;
   }, [animated,],);
-  const singleFrameRef = useRef3(singleFrame2,);
-  useLayoutEffect3(() => {
+  const singleFrameRef = useRef(singleFrame2,);
+  useLayoutEffect(() => {
     singleFrameRef.current = singleFrame2;
   }, [singleFrame2,],);
-  const readySignalledRef = useRef3(false,);
-  const signalReadyIfNeeded = useCallback4(() => {
+  const readySignalledRef = useRef(false,);
+  const signalReadyIfNeeded = useCallback2(() => {
     if (readySignalledRef.current || !haveUniformsResolved) return;
     readySignalledRef.current = true;
     onReadyRef.current?.();
@@ -50042,17 +50051,17 @@ function ShaderCanvas({
       performance.mark?.('shader_rendered',);
     },);
   }, [haveUniformsResolved,],);
-  const currentSizeRef = useRef3({
+  const currentSizeRef = useRef({
     width: 0,
     height: 0,
     dpr: 0,
   },);
-  const lastAppliedSizeRef = useRef3({
+  const lastAppliedSizeRef = useRef({
     width: 0,
     height: 0,
     dpr: 0,
   },);
-  const updateCurrentSize = useCallback4(() => {
+  const updateCurrentSize = useCallback2(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     currentSizeRef.current = {
@@ -50061,7 +50070,7 @@ function ShaderCanvas({
       dpr: __unframerWindow2.devicePixelRatio,
     };
   }, [],);
-  const maybeResize = useCallback4(() => {
+  const maybeResize = useCallback2(() => {
     const renderer = rendererRef.current;
     if (!renderer) return;
     const current2 = currentSizeRef.current;
@@ -50072,7 +50081,7 @@ function ShaderCanvas({
       ...current2,
     };
   }, [],);
-  const animate22 = useCallback4((time2) => {
+  const animate22 = useCallback2((time2) => {
     const renderer = rendererRef.current;
     if (!renderer) return;
     if (singleFrameRef.current) {
@@ -50101,19 +50110,19 @@ function ShaderCanvas({
     signalReadyIfNeeded();
     if (!singleFrameRef.current && animatedRef.current) animationFrameRef.current = requestAnimationFrame(animate22,);
   }, [haveUniformsResolved, signalReadyIfNeeded, mouseDataRef, maybeResize,],);
-  const renderSingleFrame = useCallback4(() => {
+  const renderSingleFrame = useCallback2(() => {
     const renderer = rendererRef.current;
     if (!renderer || !haveUniformsResolved) return;
     maybeResize();
     renderer.render(0, 0, resolvedUniformsRef.current, mouseDataRef?.current ?? defaultMouseData,);
     signalReadyIfNeeded();
   }, [haveUniformsResolved, mouseDataRef, signalReadyIfNeeded, maybeResize,],);
-  useLayoutEffect3(() => {
+  useLayoutEffect(() => {
     resolvedUniformsRef.current = resolvedUniforms;
     if (singleFrameRef.current && rendererRef.current) renderSingleFrame();
   }, [resolvedUniforms, renderSingleFrame,],);
   useShaderVideoPlayback(resolvedUniforms, animated && !singleFrame2 && haveUniformsResolved && isRendererLive, renderSingleFrame,);
-  useEffect4(() => {
+  useEffect2(() => {
     const canvas = canvasRef.current;
     if (!canvas || !haveUniformsResolved) return;
     readySignalledRef.current = false;
@@ -50138,9 +50147,9 @@ function ShaderCanvas({
       lastTimeRef.current = startTimeRef.current;
       if (singleFrameRef.current) renderSingleFrame();
       else animationFrameRef.current = requestAnimationFrame(animate22,);
-      startTransition3(() => setIsRendererLive(true,));
+      startTransition2(() => setIsRendererLive(true,));
     } catch (error) {
-      startTransition3(() => setIsRendererLive(false,));
+      startTransition2(() => setIsRendererLive(false,));
       if (onError && error instanceof Error) onError(error,);
     }
     return () => {
@@ -50161,9 +50170,9 @@ function ShaderCanvas({
     updateCurrentSize,
     maybeResize,
   ],);
-  const wasAnimatedRef = useRef3(animated,);
-  const wasReactiveRef = useRef3(singleFrame2,);
-  useEffect4(() => {
+  const wasAnimatedRef = useRef(animated,);
+  const wasReactiveRef = useRef(singleFrame2,);
+  useEffect2(() => {
     const becameAnimated = animated && !wasAnimatedRef.current;
     const leftReactive = !singleFrame2 && wasReactiveRef.current;
     if ((becameAnimated || leftReactive) && rendererRef.current) {
@@ -50174,7 +50183,7 @@ function ShaderCanvas({
     wasAnimatedRef.current = animated;
     wasReactiveRef.current = singleFrame2;
   }, [animated, singleFrame2, animate22,],);
-  const handleResize = useCallback4(() => {
+  const handleResize = useCallback2(() => {
     const renderer = rendererRef.current;
     if (!renderer || !haveUniformsResolved) return;
     updateCurrentSize();
@@ -50192,7 +50201,7 @@ function ShaderCanvas({
     renderer.render(elapsedTime, deltaTime, resolvedUniformsRef.current, mouseDataRef?.current ?? defaultMouseData,);
   }, [haveUniformsResolved, mouseDataRef, renderSingleFrame, updateCurrentSize, maybeResize,],);
   useCanvasResize(canvasRef, handleResize,);
-  return /* @__PURE__ */ jsx2('canvas', {
+  return /* @__PURE__ */ jsx('canvas', {
     suppressHydrationWarning: true,
     ref: canvasRef,
     style: canvasStyle,
@@ -50200,7 +50209,7 @@ function ShaderCanvas({
   },);
 }
 var SHADER_PLAY_DELAY = 250;
-var ShaderWithFallbackOverlay = /* @__PURE__ */ memo$1(function ShaderWithFallbackOverlay2({
+var ShaderWithFallbackOverlay = /* @__PURE__ */ memo$12(function ShaderWithFallbackOverlay2({
   mode,
   fallbackImage,
   skipInitialFallback,
@@ -50219,26 +50228,26 @@ var ShaderWithFallbackOverlay = /* @__PURE__ */ memo$1(function ShaderWithFallba
   mouseDataRef,
   buffers,
 },) {
-  const [isShaderReady, setIsShaderReady,] = useState3(false,);
-  const [shouldPlay, setShouldPlay,] = useState3(false,);
+  const [isShaderReady, setIsShaderReady,] = useState(false,);
+  const [shouldPlay, setShouldPlay,] = useState(false,);
   const isProgressive = mode === 'progressive';
   const hasFallbackImage = Boolean(fallbackImage,);
   const shouldSkipInitialFallback = Boolean(skipInitialFallback && hasFallbackImage,);
   const isFallbackShown = isProgressive && hasFallbackImage && !shouldSkipInitialFallback;
   const isRevealDelayComplete = usePatchDelayShaderRender(isFallbackShown,);
-  const onReadyRef = useRef3(onReady,);
-  useLayoutEffect3(() => {
+  const onReadyRef = useRef(onReady,);
+  useLayoutEffect(() => {
     onReadyRef.current = onReady;
   }, [onReady,],);
-  const handleReady = useCallback4(() => {
-    startTransition3(() => setIsShaderReady(true,));
+  const handleReady = useCallback2(() => {
+    startTransition2(() => setIsShaderReady(true,));
     onReadyRef.current?.();
   }, [],);
-  useEffect4(() => {
+  useEffect2(() => {
     if (!isProgressive) return;
     if (!isShaderReady || !isRevealDelayComplete) return;
     const timeout = __unframerWindow2.setTimeout(() => {
-      startTransition3(() => setShouldPlay(true,));
+      startTransition2(() => setShouldPlay(true,));
     }, SHADER_PLAY_DELAY,);
     return () => {
       clearTimeout(timeout,);
@@ -50247,15 +50256,15 @@ var ShaderWithFallbackOverlay = /* @__PURE__ */ memo$1(function ShaderWithFallba
   const shouldHideCanvas = isFallbackShown && !isRevealDelayComplete;
   const effectiveSingleFrame = singleFrame2 || shouldHideCanvas || isProgressive && !shouldSkipInitialFallback && !shouldPlay;
   const shouldShowFallback = hasFallbackImage && !shouldSkipInitialFallback && (!isRevealDelayComplete || !isShaderReady);
-  return /* @__PURE__ */ jsxs2(Fragment3, {
+  return /* @__PURE__ */ jsxs(Fragment, {
     children: [
-      /* @__PURE__ */ jsx2('div', {
+      /* @__PURE__ */ jsx('div', {
         suppressHydrationWarning: true,
         style: {
           ...overlayStyle,
           opacity: shouldHideCanvas ? 0 : 1,
         },
-        children: /* @__PURE__ */ jsx2(ShaderCanvas, {
+        children: /* @__PURE__ */ jsx(ShaderCanvas, {
           suppressHydrationWarning: true,
           vertexShader,
           fragmentShader,
@@ -50273,7 +50282,7 @@ var ShaderWithFallbackOverlay = /* @__PURE__ */ memo$1(function ShaderWithFallba
           buffers,
         },),
       },),
-      fallbackImage && !shouldSkipInitialFallback && /* @__PURE__ */ jsx2('div', {
+      fallbackImage && !shouldSkipInitialFallback && /* @__PURE__ */ jsx('div', {
         suppressHydrationWarning: true,
         style: {
           ...overlayStyle,
@@ -50281,7 +50290,7 @@ var ShaderWithFallbackOverlay = /* @__PURE__ */ memo$1(function ShaderWithFallba
           transition: 'opacity 200ms ease-in-out',
           pointerEvents: 'none',
         },
-        children: /* @__PURE__ */ jsx2(ShaderFallbackImage, {
+        children: /* @__PURE__ */ jsx(ShaderFallbackImage, {
           suppressHydrationWarning: true,
           src: fallbackImage,
         },),
@@ -50347,11 +50356,11 @@ function toElementRelative(rect, clientX, clientY,) {
   return [(clientX - rect.left) / rect.width, 1 - (clientY - rect.top) / rect.height,];
 }
 function useShaderMouse(containerRef, mouseConfig,) {
-  const dataRef = useRef3(defaultMouseData,);
+  const dataRef = useRef(defaultMouseData,);
   const enabled = mouseConfig?.enabled ?? false;
   const springOptions = toSpringOptions(mouseConfig?.springOptions,);
-  const rectRef = useRef3(null,);
-  const updateRect = useCallback4(() => {
+  const rectRef = useRef(null,);
+  const updateRect = useCallback2(() => {
     const el = containerRef.current;
     if (el) rectRef.current = el.getBoundingClientRect();
   }, [containerRef,],);
@@ -50373,7 +50382,7 @@ function useShaderMouse(containerRef, mouseConfig,) {
   const smoothHover = useSpring(rawHover, springOptions,);
   const velocityX = useVelocity(smoothX,);
   const velocityY = useVelocity(smoothY,);
-  useEffect4(() => {
+  useEffect2(() => {
     if (!enabled) return;
     const el = containerRef.current;
     if (!el) return;
@@ -50412,7 +50421,7 @@ function useShaderMouse(containerRef, mouseConfig,) {
   }, [enabled, containerRef, rawX, rawY, rawPointerDown, rawHover, smoothX, smoothY, updateRect,],);
   useConditionalAnimationFrame(
     enabled,
-    useCallback4(() => {
+    useCallback2(() => {
       dataRef.current = {
         position: [smoothX.get(), smoothY.get(), velocityX.get(), velocityY.get(),],
         pointerDown: smoothPointerDown.get(),
@@ -50423,7 +50432,7 @@ function useShaderMouse(containerRef, mouseConfig,) {
   return dataRef;
 }
 function useConditionalAnimationFrame(enabled, callback,) {
-  useEffect4(() => {
+  useEffect2(() => {
     if (!enabled) return;
     let rafId = 0;
     let lastTime = performance.now();
@@ -50438,19 +50447,19 @@ function useConditionalAnimationFrame(enabled, callback,) {
 }
 function useShaderPoolSlot(id2, isSelected, isVisible,) {
   const pool = useShaderPoolContext();
-  const [status, setStatus,] = useState3(slotStatus.noSlot,);
-  useEffect4(() => {
+  const [status, setStatus,] = useState(slotStatus.noSlot,);
+  useEffect2(() => {
     if (!pool || !id2) return;
     pool.register(id2, isSelected, isVisible,);
-    startTransition3(() => setStatus(pool.getSlotStatus(id2,),));
+    startTransition2(() => setStatus(pool.getSlotStatus(id2,),));
     const unsub = pool.subscribe(id2, () => {
-      startTransition3(() => setStatus(pool.getSlotStatus(id2,),));
+      startTransition2(() => setStatus(pool.getSlotStatus(id2,),));
     },);
     return () => {
       unsub();
     };
   }, [pool, id2, isSelected, isVisible,],);
-  useEffect4(() => {
+  useEffect2(() => {
     if (!pool || !id2) return;
     return () => {
       pool.deregister(id2,);
@@ -50459,7 +50468,7 @@ function useShaderPoolSlot(id2, isSelected, isVisible,) {
   if (!pool) return null;
   return status;
 }
-var Shader = /* @__PURE__ */ forwardRef3(function Shader2({
+var Shader = /* @__PURE__ */ forwardRef(function Shader2({
   mode = 'instant',
   fallbackImage,
   skipInitialFallback,
@@ -50489,17 +50498,17 @@ var Shader = /* @__PURE__ */ forwardRef3(function Shader2({
   const shouldSkipInitialFallback = Boolean(fallbackImage && (skipInitialFallback || shouldSkipPreviewFallback),);
   const isOnCanvas = useIsOnFramerCanvas();
   const mouseDataRef = useShaderMouse(observerRef, isOnCanvas ? void 0 : mouse,);
-  const [isIntersecting, setIsIntersecting,] = useState3(shouldSkipInitialFallback,);
-  const intersectionCallback = useCallback4((entry) => {
-    startTransition3(() => setIsIntersecting(entry.isIntersecting,));
+  const [isIntersecting, setIsIntersecting,] = useState(shouldSkipInitialFallback,);
+  const intersectionCallback = useCallback2((entry) => {
+    startTransition2(() => setIsIntersecting(entry.isIntersecting,));
   }, [],);
   useSharedIntersectionObserver(observerRef, intersectionCallback, {
     threshold: 0,
     enabled: true,
   },);
-  const autoId = useId2();
+  const autoId = useId();
   const poolSlot = useShaderPoolSlot(poolId ?? autoId, isSelected, isIntersecting,);
-  useEffect4(() => {
+  useEffect2(() => {
     performance.mark?.('shader_register',);
   }, [],);
   const {
@@ -50521,12 +50530,12 @@ var Shader = /* @__PURE__ */ forwardRef3(function Shader2({
     shouldSkipInitialFallback,
     isPreviewActive,
   );
-  const [isShaderReady, setIsShaderReady,] = useState3(false,);
-  useLayoutEffect3(() => {
-    if (isFallbackOnly) startTransition3(() => setIsShaderReady(false,));
+  const [isShaderReady, setIsShaderReady,] = useState(false,);
+  useLayoutEffect(() => {
+    if (isFallbackOnly) startTransition2(() => setIsShaderReady(false,));
   }, [isFallbackOnly,],);
-  const handleShaderReady = useCallback4(() => {
-    startTransition3(() => setIsShaderReady(true,));
+  const handleShaderReady = useCallback2(() => {
+    startTransition2(() => setIsShaderReady(true,));
     onReady?.();
   }, [onReady,],);
   const shaderProps = {
@@ -50549,12 +50558,12 @@ var Shader = /* @__PURE__ */ forwardRef3(function Shader2({
   };
   if (isOnCanvas) {
     const hideFallback = !isFallbackOnly && (shouldSkipInitialFallback || isShaderReady);
-    return /* @__PURE__ */ jsxs2(ShaderContainerFrame, {
+    return /* @__PURE__ */ jsxs(ShaderContainerFrame, {
       suppressHydrationWarning: true,
       ref: observerRef,
       ...containerFrameProps,
       children: [
-        !isFallbackOnly && /* @__PURE__ */ jsx2(ShaderWithFallbackOverlay, {
+        !isFallbackOnly && /* @__PURE__ */ jsx(ShaderWithFallbackOverlay, {
           suppressHydrationWarning: true,
           mode: effectiveMode,
           skipInitialFallback: shouldSkipFallbackOverlay,
@@ -50564,7 +50573,7 @@ var Shader = /* @__PURE__ */ forwardRef3(function Shader2({
           singleFrame: effectiveSingleFrame,
           mouseDataRef,
         },),
-        /* @__PURE__ */ jsx2(ShaderSandboxFallbackImage, {
+        /* @__PURE__ */ jsx(ShaderSandboxFallbackImage, {
           suppressHydrationWarning: true,
           src: fallbackImage,
           hidden: hideFallback,
@@ -50574,21 +50583,21 @@ var Shader = /* @__PURE__ */ forwardRef3(function Shader2({
     },);
   }
   if (isFallbackOnly) {
-    return /* @__PURE__ */ jsx2(ShaderContainerFrame, {
+    return /* @__PURE__ */ jsx(ShaderContainerFrame, {
       suppressHydrationWarning: true,
       ref: observerRef,
       ...containerFrameProps,
-      children: shouldSkipFallbackOverlay && !isIntersecting ? null : /* @__PURE__ */ jsx2(ShaderFallbackImage, {
+      children: shouldSkipFallbackOverlay && !isIntersecting ? null : /* @__PURE__ */ jsx(ShaderFallbackImage, {
         suppressHydrationWarning: true,
         src: fallbackImage,
       },),
     },);
   }
-  return /* @__PURE__ */ jsx2(ShaderContainerFrame, {
+  return /* @__PURE__ */ jsx(ShaderContainerFrame, {
     suppressHydrationWarning: true,
     ref: observerRef,
     ...containerFrameProps,
-    children: /* @__PURE__ */ jsx2(ShaderWithFallbackOverlay, {
+    children: /* @__PURE__ */ jsx(ShaderWithFallbackOverlay, {
       suppressHydrationWarning: true,
       mode: effectiveMode,
       fallbackImage,
@@ -50601,7 +50610,7 @@ var Shader = /* @__PURE__ */ forwardRef3(function Shader2({
     },),
   },);
 },);
-var ShaderContainerFrame = /* @__PURE__ */ forwardRef3(function ShaderContainerFrame2({
+var ShaderContainerFrame = /* @__PURE__ */ forwardRef(function ShaderContainerFrame2({
   children,
   style: style2,
   ...rest
@@ -50612,7 +50621,7 @@ var ShaderContainerFrame = /* @__PURE__ */ forwardRef3(function ShaderContainerF
     ...style2,
     overflow: 'hidden',
   };
-  return /* @__PURE__ */ jsx2(FrameWithMotion2, {
+  return /* @__PURE__ */ jsx(FrameWithMotion2, {
     suppressHydrationWarning: true,
     ref,
     __fromCanvasComponent: true,
@@ -50659,9 +50668,9 @@ function createInputOutputRanges(transformTargets, threshold2, exitTarget,) {
   };
 }
 var withVariantAppearEffect = (Component22) =>
-  React$1.forwardRef((props, forwardedRef,) => {
+  React.forwardRef((props, forwardedRef,) => {
     if (RenderTarget.current() === RenderTarget.canvas) {
-      return /* @__PURE__ */ jsx2(Component22, {
+      return /* @__PURE__ */ jsx(Component22, {
         suppressHydrationWarning: true,
         ...props,
         ref: forwardedRef,
@@ -50678,8 +50687,8 @@ var withVariantAppearEffect = (Component22) =>
       exitTarget,
       scrollDirection,
     } = options;
-    const [activeVariant, setVariant,] = React$1.useState(obscuredVariantId,);
-    const animateState = React$1.useRef(false,);
+    const [activeVariant, setVariant,] = React.useState(obscuredVariantId,);
+    const animateState = React.useRef(false,);
     const observerRef = useObserverRef(forwardedRef,);
     useAppearEffect(observerRef, (appears) => {
       if (options.targets) return;
@@ -50687,7 +50696,7 @@ var withVariantAppearEffect = (Component22) =>
       if (animateOnce && animateState.current === true) return;
       if (animateState.current === appears) return;
       animateState.current = appears;
-      React$1.startTransition(() => {
+      React.startTransition(() => {
         setVariant(appears ? visibleVariantId : obscuredVariantId,);
       },);
     }, {
@@ -50698,13 +50707,13 @@ var withVariantAppearEffect = (Component22) =>
       },
     },);
     const currentRouteKey = useCurrentRouteKey();
-    const prevRouteKey = React$1.useRef(currentRouteKey,);
-    React$1.useEffect(() => {
+    const prevRouteKey = React.useRef(currentRouteKey,);
+    React.useEffect(() => {
       if (scrollDirection) return;
       if (!targets) return;
       if (prevRouteKey.current !== currentRouteKey) {
         prevRouteKey.current = currentRouteKey;
-        React$1.startTransition(() => setVariant(obscuredVariantId,));
+        React.startTransition(() => setVariant(obscuredVariantId,));
       }
       const playedState = {};
       let currentVariant = void 0;
@@ -50723,34 +50732,34 @@ var withVariantAppearEffect = (Component22) =>
         const variant = targets[index]?.target ?? void 0;
         if (variant === currentVariant) return;
         currentVariant = variant;
-        React$1.startTransition(() => {
+        React.startTransition(() => {
           setVariant(variant,);
         },);
       },);
     }, [currentRouteKey, animateOnce, threshold2, targets, props.variant, scrollDirection, exitTarget,],);
-    useScrollDirectionChange(scrollDirection, (variant) => React$1.startTransition(() => setVariant(variant,)), {
+    useScrollDirectionChange(scrollDirection, (variant) => React.startTransition(() => setVariant(variant,)), {
       enabled: variantAppearEffectEnabled,
       repeat: !animateOnce,
     },);
     useOnRouteChange(() => {
       if (!variantAppearEffectEnabled) return;
       const target = !options.targets && !options.scrollDirection ? options.obscuredVariantId : void 0;
-      React$1.startTransition(() => setVariant(target,));
+      React.startTransition(() => setVariant(target,));
     },);
     if (!('variantAppearEffectEnabled' in options) || variantAppearEffectEnabled === true) {
-      return /* @__PURE__ */ jsx2(Component22, {
+      return /* @__PURE__ */ jsx(Component22, {
         suppressHydrationWarning: true,
         ...rest,
         variant: activeVariant ?? props.variant,
         ref: observerRef,
       },);
-    } else {return /* @__PURE__ */ jsx2(Component22, {
+    } else {return /* @__PURE__ */ jsx(Component22, {
         suppressHydrationWarning: true,
         ...rest,
       },);}
   },);
 var withVariantFX = (Component22) =>
-  React$1.forwardRef(({
+  React.forwardRef(({
     initial,
     animate: animate22,
     exit,
@@ -50766,7 +50775,7 @@ var withVariantFX = (Component22) =>
       observerRef,
       true,
     );
-    return /* @__PURE__ */ jsx2(Component22, {
+    return /* @__PURE__ */ jsx(Component22, {
       suppressHydrationWarning: true,
       ...props,
       style: {
@@ -50776,8 +50785,8 @@ var withVariantFX = (Component22) =>
       ref: observerRef,
     },);
   },);
-var WindowContext = /* @__PURE__ */ React$1.createContext(void 0,);
-var useProvidedWindow = () => React$1.useContext(WindowContext,);
+var WindowContext = /* @__PURE__ */ React.createContext(void 0,);
+var useProvidedWindow = () => React.useContext(WindowContext,);
 var FontSourceNames = /* @__PURE__ */ function (FontSourceNames2,) {
   FontSourceNames2['Google'] = 'google';
   FontSourceNames2['Fontshare'] = 'fontshare';
@@ -51079,7 +51088,7 @@ function CustomProperties({
   children,
   customProperties,
 },) {
-  return /* @__PURE__ */ jsx2('div', {
+  return /* @__PURE__ */ jsx('div', {
     suppressHydrationWarning: true,
     style: customProperties,
     children,
@@ -51089,8 +51098,8 @@ var defaultGetValueFromEvent = (event) => {
   return event.target.value;
 };
 function useOptimisticValue(externalValue, shouldSyncExternalValue, onChange, getValueFromEvent = defaultGetValueFromEvent,) {
-  const [optimisticValue, setOptimisticValue,] = React$1.useState(externalValue,);
-  const [previousExternalValue, setPreviousExternalValue,] = React$1.useState(externalValue,);
+  const [optimisticValue, setOptimisticValue,] = React.useState(externalValue,);
+  const [previousExternalValue, setPreviousExternalValue,] = React.useState(externalValue,);
   if (shouldSyncExternalValue && externalValue !== previousExternalValue) {
     setPreviousExternalValue(externalValue,);
     setOptimisticValue(externalValue,);
@@ -51098,11 +51107,11 @@ function useOptimisticValue(externalValue, shouldSyncExternalValue, onChange, ge
   return [
     optimisticValue,
     setOptimisticValue,
-    React$1.useCallback((event) => {
+    React.useCallback((event) => {
       if (shouldIgnoreReplayEvent(event,)) return;
       if (shouldSyncExternalValue) setOptimisticValue(getValueFromEvent(event,),);
       if (onChange) {
-        React$1.startTransition(() => {
+        React.startTransition(() => {
           onChange(event,);
         },);
       }
@@ -51115,7 +51124,7 @@ var passwordManagerIgnoreDataProps = {
   'data-form-type': 'other',
   autocomplete: 'off',
 };
-var PlainTextInput = /* @__PURE__ */ forwardRef3(function FormPlainTextInput(props, ref,) {
+var PlainTextInput = /* @__PURE__ */ forwardRef(function FormPlainTextInput(props, ref,) {
   const {
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledBy,
@@ -51145,16 +51154,16 @@ var PlainTextInput = /* @__PURE__ */ forwardRef3(function FormPlainTextInput(pro
   const normalizedExternalValue = normalizeValueForInputType(value ?? defaultValue, type,);
   const [optimisticValue, setOptimisticValue, handleChange,] = useOptimisticValue(normalizedExternalValue ?? '', true, onChange,);
   const setInputRef = useReplayPreHydrationInput(normalizedExternalValue,);
-  const handleClear = useCallback4(() => {
+  const handleClear = useCallback2(() => {
     setOptimisticValue('',);
-    if (onClear) startTransition3(() => onClear());
+    if (onClear) startTransition2(() => onClear());
   }, [onClear, setOptimisticValue,],);
   const eventHandlers = useCustomValidity(onValid, onInvalid, handleChange, onBlur, onFocus,);
-  const handleWrapperClick = useCallback4((e) => {
+  const handleWrapperClick = useCallback2((e) => {
     if (e.target === e.currentTarget) setInputRef.current?.focus();
   }, [setInputRef,],);
   if (type === 'hidden') {
-    return /* @__PURE__ */ jsx2(motion.input, {
+    return /* @__PURE__ */ jsx(motion.input, {
       suppressHydrationWarning: true,
       type: 'hidden',
       name: inputName,
@@ -51171,7 +51180,7 @@ var PlainTextInput = /* @__PURE__ */ forwardRef3(function FormPlainTextInput(pro
     type === 'text' && textInputTypeWrapperClassName,
     type === 'textarea' && textareaInputTypeWrapperClassName,
   );
-  return /* @__PURE__ */ jsxs2(motion.div, {
+  return /* @__PURE__ */ jsxs(motion.div, {
     suppressHydrationWarning: true,
     ref,
     onClick: handleWrapperClick,
@@ -51180,7 +51189,7 @@ var PlainTextInput = /* @__PURE__ */ forwardRef3(function FormPlainTextInput(pro
     ...rest,
     children: [
       type === 'textarea'
-        ? /* @__PURE__ */ jsx2(motion.textarea, {
+        ? /* @__PURE__ */ jsx(motion.textarea, {
           suppressHydrationWarning: true,
           ref: setInputRef,
           ...dataProps,
@@ -51196,7 +51205,7 @@ var PlainTextInput = /* @__PURE__ */ forwardRef3(function FormPlainTextInput(pro
           value: optimisticValue,
           maxLength,
         },)
-        : /* @__PURE__ */ jsx2(motion.input, {
+        : /* @__PURE__ */ jsx(motion.input, {
           suppressHydrationWarning: true,
           ref: setInputRef,
           ...dataProps,
@@ -51216,13 +51225,13 @@ var PlainTextInput = /* @__PURE__ */ forwardRef3(function FormPlainTextInput(pro
           step: step2,
           maxLength,
         },),
-      showClear && /* @__PURE__ */ jsx2('button', {
+      showClear && /* @__PURE__ */ jsx('button', {
         suppressHydrationWarning: true,
         type: 'button',
         className: clearButtonClassName,
         onClick: handleClear,
         'aria-label': 'Clear',
-        children: /* @__PURE__ */ jsx2(ClearIcon, {
+        children: /* @__PURE__ */ jsx(ClearIcon, {
           suppressHydrationWarning: true,
         },),
       },),
@@ -51235,14 +51244,14 @@ function normalizeValueForInputType(value, type,) {
   return value;
 }
 function ClearIcon() {
-  return /* @__PURE__ */ jsx2('svg', {
+  return /* @__PURE__ */ jsx('svg', {
     suppressHydrationWarning: true,
     xmlns: 'http://www.w3.org/2000/svg',
     width: '8',
     height: '8',
     viewBox: '0 0 8 8',
     'aria-hidden': 'true',
-    children: /* @__PURE__ */ jsx2('path', {
+    children: /* @__PURE__ */ jsx('path', {
       suppressHydrationWarning: true,
       d: 'm1.5 6.5 5-5M6.5 6.5l-5-5',
       fill: 'none',
@@ -51415,13 +51424,13 @@ var styles$2 = /* @__PURE__ */ (() => [
 ])();
 var FormPlainTextInput2 = /* @__PURE__ */ withCSS(PlainTextInput, styles$2, 'framer-lib-form-plain-text-input',);
 function useBooleanLatch(value, latchTo = true,) {
-  const [latchedValue, setLatchedValue,] = useState3(value,);
+  const [latchedValue, setLatchedValue,] = useState(value,);
   if (latchedValue !== latchTo && latchedValue !== value) setLatchedValue(value,);
   return latchedValue;
 }
 var className = 'framer-form-boolean-input';
 var getCheckedFromEvent = (event) => event.target.checked;
-var BooleanInput = /* @__PURE__ */ React$1.forwardRef(function FormBooleanInput(props, ref,) {
+var BooleanInput = /* @__PURE__ */ React.forwardRef(function FormBooleanInput(props, ref,) {
   const {
     inputName,
     type = 'checkbox',
@@ -51451,11 +51460,11 @@ var BooleanInput = /* @__PURE__ */ React$1.forwardRef(function FormBooleanInput(
     : {
       defaultChecked,
     };
-  const setInputRef = React$1.useCallback((input) => {
+  const setInputRef = React.useCallback((input) => {
     setRef2(ref, input,);
     setRef2(setReplayInputRef, input,);
   }, [ref, setReplayInputRef,],);
-  return /* @__PURE__ */ jsx2(motion.input, {
+  return /* @__PURE__ */ jsx(motion.input, {
     suppressHydrationWarning: true,
     ...rest,
     ...attributes,
@@ -51567,7 +51576,7 @@ var styles$1 = /* @__PURE__ */ (() => [
   },),
 ])();
 var FormBooleanInput2 = /* @__PURE__ */ withCSS(BooleanInput, styles$1, 'framer-lib-form-boolean-input',);
-var Select = /* @__PURE__ */ React$1.forwardRef(function Select2(props, measureRef,) {
+var Select = /* @__PURE__ */ React.forwardRef(function Select2(props, measureRef,) {
   const {
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledBy,
@@ -51597,14 +51606,14 @@ var Select = /* @__PURE__ */ React$1.forwardRef(function Select2(props, measureR
   const setSelectRef = useReplayPreHydrationInput(isControlled ? externalValue : defaultValue,);
   const eventHandlers = useCustomValidity(onValid, onInvalid, handleChange, onBlur, onFocus,);
   if (hidden) {
-    return /* @__PURE__ */ jsx2(motion.input, {
+    return /* @__PURE__ */ jsx(motion.input, {
       suppressHydrationWarning: true,
       type: 'hidden',
       name: inputName,
       defaultValue,
     },);
   }
-  return /* @__PURE__ */ jsx2(motion.div, {
+  return /* @__PURE__ */ jsx(motion.div, {
     suppressHydrationWarning: true,
     ref: measureRef,
     style: style2,
@@ -51615,7 +51624,7 @@ var Select = /* @__PURE__ */ React$1.forwardRef(function Select2(props, measureR
       className2,
     ),
     ...rest,
-    children: /* @__PURE__ */ jsx2(motion.select, {
+    children: /* @__PURE__ */ jsx(motion.select, {
       suppressHydrationWarning: true,
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
@@ -51631,11 +51640,11 @@ var Select = /* @__PURE__ */ React$1.forwardRef(function Select2(props, measureR
       children: selectOptions?.map((option, index,) => {
         switch (option.type) {
           case 'divider':
-            return /* @__PURE__ */ jsx2('hr', {
+            return /* @__PURE__ */ jsx('hr', {
               suppressHydrationWarning: true,
             }, index,);
           case 'option':
-            return /* @__PURE__ */ jsx2('option', {
+            return /* @__PURE__ */ jsx('option', {
               suppressHydrationWarning: true,
               value: option.value ?? option.title,
               disabled: option.disabled,
@@ -51745,7 +51754,7 @@ var styles2 = /* @__PURE__ */ (() => [
 ])();
 var FormSelect = /* @__PURE__ */ withCSS(Select, styles2, 'framer-lib-form-select',);
 function useEscToClose(isOpen, close,) {
-  useEffect4(() => {
+  useEffect2(() => {
     function handleKeyDown(e,) {
       if (e.key === 'Escape' && isOpen) {
         e.preventDefault();
@@ -51849,26 +51858,26 @@ var targetBackdropAnimation = {
   opacity: 1,
 };
 function withLightboxEffect(Component22,) {
-  return forwardRef3(function LightboxEffect({
+  return forwardRef(function LightboxEffect({
     lightbox,
     lightboxClassName,
     onClick,
     ...props
   }, forwardedRef,) {
-    const config = useContext3(MotionConfigContext,);
-    const ancestorTickerContext = useContext3(TickerContext,);
+    const config = useContext(MotionConfigContext,);
+    const ancestorTickerContext = useContext(TickerContext,);
     const isInTickerItem = Boolean(ancestorTickerContext,);
     const stopTicker = ancestorTickerContext?.stop;
-    const fallbackRef = useRef3(null,);
+    const fallbackRef = useRef(null,);
     const ref = forwardedRef ?? fallbackRef;
-    const decodePromiseRef = useRef3();
-    const image = useMemo3(() => createImageWithSrcSet(lightbox, props.background,), [lightbox, props.background,],);
-    const [open, setOpen,] = useState3(false,);
-    const [openOverrides, setOpenOverrides,] = useState3();
-    const onOpen = useCallback4(() => {
+    const decodePromiseRef = useRef();
+    const image = useMemo(() => createImageWithSrcSet(lightbox, props.background,), [lightbox, props.background,],);
+    const [open, setOpen,] = useState(false,);
+    const [openOverrides, setOpenOverrides,] = useState();
+    const onOpen = useCallback2(() => {
       if (!lightbox) return;
       if (open) {
-        startTransition3(() => {
+        startTransition2(() => {
           setOpen(true,);
         },);
         return;
@@ -51884,7 +51893,7 @@ function withLightboxEffect(Component22,) {
             duration: 0,
           }
           : lightbox.transition;
-        startTransition3(() => {
+        startTransition2(() => {
           setOpenOverrides({
             borderRadius: style22.borderRadius,
             aspectRatio: width / (height || 1),
@@ -51923,20 +51932,20 @@ function withLightboxEffect(Component22,) {
       };
       return promise;
     },);
-    const handleClick = useCallback4(async (e) => {
+    const handleClick = useCallback2(async (e) => {
       onClick?.(e,);
       if (open || !lightbox || !image) return;
       await decode();
       onOpen();
     }, [onClick, onOpen, open, image, lightbox, decode,],);
-    const onClose = useCallback4((e) => {
+    const onClose = useCallback2((e) => {
       e?.stopPropagation();
-      startTransition3(() => {
+      startTransition2(() => {
         setOpen(false,);
       },);
     }, [],);
     useEscToClose(open, onClose,);
-    useEffect4(() => {
+    useEffect2(() => {
       if (!lightbox) return;
       let timer;
       function enter() {
@@ -51958,7 +51967,7 @@ function withLightboxEffect(Component22,) {
         currentRef?.removeEventListener('pointerdown', decode,);
       };
     }, [decode, ref, lightbox,],);
-    const fallbackLayoutId = useId2();
+    const fallbackLayoutId = useId();
     const transition = openOverrides?.transition ?? props.transition ?? config.transition;
     const borderRadius2 = openOverrides?.borderRadius;
     const imageRendering = openOverrides?.imageRendering;
@@ -51995,9 +52004,9 @@ function withLightboxEffect(Component22,) {
       : props.style;
     const layoutDependency = open ? props.layoutDependency ? `${props.layoutDependency}-open` : 'open' : props.layoutDependency;
     const layoutId = isInTickerItem && open ? void 0 : props.layoutId ?? (lightbox ? fallbackLayoutId : void 0);
-    return /* @__PURE__ */ jsxs2(Fragment3, {
+    return /* @__PURE__ */ jsxs(Fragment, {
       children: [
-        /* @__PURE__ */ jsx2(Component22, {
+        /* @__PURE__ */ jsx(Component22, {
           suppressHydrationWarning: true,
           ...props,
           style: style2,
@@ -52007,19 +52016,19 @@ function withLightboxEffect(Component22,) {
           layoutDependency,
           transition,
         },),
-        /* @__PURE__ */ jsx2(AnimatePresence, {
+        /* @__PURE__ */ jsx(AnimatePresence, {
           suppressHydrationWarning: true,
           onExitComplete: () => {
-            startTransition3(() => {
+            startTransition2(() => {
               setOpenOverrides(void 0,);
               ancestorTickerContext?.start();
             },);
           },
-          children: open && lightbox && image && /* @__PURE__ */ jsx2(Fragment3, {
+          children: open && lightbox && image && /* @__PURE__ */ jsx(Fragment, {
             children: createPortal(
-              /* @__PURE__ */ jsxs2(Fragment3, {
+              /* @__PURE__ */ jsxs(Fragment, {
                 children: [
-                  /* @__PURE__ */ jsx2(motion.div, {
+                  /* @__PURE__ */ jsx(motion.div, {
                     suppressHydrationWarning: true,
                     ...portalProps,
                     className: lightboxClassName,
@@ -52035,7 +52044,7 @@ function withLightboxEffect(Component22,) {
                     animate: targetBackdropAnimation,
                     exit: enterExitBackdropAnimation,
                   },),
-                  /* @__PURE__ */ jsx2(motion.div, {
+                  /* @__PURE__ */ jsx(motion.div, {
                     suppressHydrationWarning: true,
                     ...portalProps,
                     className: lightboxClassName,
@@ -52048,7 +52057,7 @@ function withLightboxEffect(Component22,) {
                       position: 'fixed',
                       zIndex: lightbox.zIndex,
                     },
-                    children: /* @__PURE__ */ jsx2('div', {
+                    children: /* @__PURE__ */ jsx('div', {
                       suppressHydrationWarning: true,
                       style: {
                         alignItems: 'center',
@@ -52060,7 +52069,7 @@ function withLightboxEffect(Component22,) {
                         width: '100%',
                         maxWidth: lightbox.maxWidth,
                       },
-                      children: /* @__PURE__ */ jsx2(motion.div, {
+                      children: /* @__PURE__ */ jsx(motion.div, {
                         suppressHydrationWarning: true,
                         layoutId,
                         transition,
@@ -52078,7 +52087,7 @@ function withLightboxEffect(Component22,) {
                           filter: filter2,
                           ...border,
                         },
-                        children: /* @__PURE__ */ jsx2(BackgroundImageComponent, {
+                        children: /* @__PURE__ */ jsx(BackgroundImageComponent, {
                           suppressHydrationWarning: true,
                           image,
                           alt: image.alt,
@@ -52097,7 +52106,7 @@ function withLightboxEffect(Component22,) {
     },);
   },);
 }
-var Component3 = /* @__PURE__ */ React$1.forwardRef(function Image2(props, ref,) {
+var Component$1 = /* @__PURE__ */ React.forwardRef(function Image2(props, ref,) {
   const {
     background,
     children,
@@ -52110,16 +52119,16 @@ var Component3 = /* @__PURE__ */ React$1.forwardRef(function Image2(props, ref,)
   const style2 = {
     ...styleFromProps,
   };
-  const intrinsicSize = useMemo3(() => getIntrinsicSizeForBackgroundImage(background,), [background,],);
-  const [fallbackIntrinsicSize, setFallbackIntrinsicSize,] = useState3();
-  React$1.useEffect(() => {
+  const intrinsicSize = useMemo(() => getIntrinsicSizeForBackgroundImage(background,), [background,],);
+  const [fallbackIntrinsicSize, setFallbackIntrinsicSize,] = useState();
+  React.useEffect(() => {
     if (!background?.src) return;
     if (!fitImageDimension) return;
     if (intrinsicSize) return;
     const img = document.createElement('img',);
     img.onload = () => {
       if (img.naturalWidth && img.naturalHeight) {
-        startTransition3(() =>
+        startTransition2(() =>
           setFallbackIntrinsicSize({
             width: img.naturalWidth,
             height: img.naturalHeight,
@@ -52136,14 +52145,14 @@ var Component3 = /* @__PURE__ */ React$1.forwardRef(function Image2(props, ref,)
   }
   if (background) delete style2.background;
   const MotionComponent = htmlElementAsMotionComponent(props.as,);
-  return /* @__PURE__ */ jsxs2(MotionComponent, {
+  return /* @__PURE__ */ jsxs(MotionComponent, {
     suppressHydrationWarning: true,
     ...rest,
     style: style2,
     ref,
     draggable,
     children: [
-      background && /* @__PURE__ */ jsx2(BackgroundImageComponent, {
+      background && /* @__PURE__ */ jsx(BackgroundImageComponent, {
         suppressHydrationWarning: true,
         image: background,
         alt,
@@ -52153,8 +52162,8 @@ var Component3 = /* @__PURE__ */ React$1.forwardRef(function Image2(props, ref,)
     ],
   },);
 },);
-var Image$1 = /* @__PURE__ */ withLightboxEffect(Component3,);
-var ColumnMasonryLayout = /* @__PURE__ */ React$1.memo(function ColumnMasonryLayout2({
+var Image$1 = /* @__PURE__ */ withLightboxEffect(Component$1,);
+var ColumnMasonryLayout = /* @__PURE__ */ React.memo(function ColumnMasonryLayout2({
   trackCount,
   rowGap,
   parentIsDataRepeater = false,
@@ -52166,7 +52175,7 @@ var ColumnMasonryLayout = /* @__PURE__ */ React$1.memo(function ColumnMasonryLay
   const tracks = groupChildrenIntoTracks(trackCount, normalizedChildren,);
   const wrapperStyle2 = getMasonryColumnStyle(rowGap,);
   return tracks.map((trackChildren, i,) =>
-    /* @__PURE__ */ jsx2('div', {
+    /* @__PURE__ */ jsx('div', {
       suppressHydrationWarning: true,
       style: wrapperStyle2,
       children: trackChildren,
@@ -52174,7 +52183,7 @@ var ColumnMasonryLayout = /* @__PURE__ */ React$1.memo(function ColumnMasonryLay
   );
 },);
 function getChildOrderId(child,) {
-  return React$1.isValidElement(child,) ? child.props['data-framer-order-id'] : void 0;
+  return React.isValidElement(child,) ? child.props['data-framer-order-id'] : void 0;
 }
 function reorderChildrenForItemsOrder(children, itemsOrder,) {
   const childrenById = /* @__PURE__ */ new Map();
@@ -52193,10 +52202,10 @@ function reorderChildrenForItemsOrder(children, itemsOrder,) {
   return [...ordered, ...remaining,];
 }
 function prepareChildrenArrayForMasonry(children, parentIsDataRepeater,) {
-  const array = React$1.Children.toArray(children,);
+  const array = React.Children.toArray(children,);
   if (!parentIsDataRepeater) return array;
   return array.flatMap((child) =>
-    React$1.isValidElement(child,) && child.type === React$1.Fragment ? React$1.Children.toArray(child.props.children,) : child
+    React.isValidElement(child,) && child.type === React.Fragment ? React.Children.toArray(child.props.children,) : child
   );
 }
 function groupChildrenIntoTracks(trackCount, children,) {
@@ -52225,7 +52234,7 @@ function pickMasonryTrack(trackCount, childIndex,) {
   return childIndex % trackCount;
 }
 var withColumnMasonryLayout = (Component22) => {
-  return forwardRef3(function MasonryLayout({
+  return forwardRef(function MasonryLayout({
     columnMasonryLayoutEnabled,
     trackCount = 1,
     rowGap,
@@ -52236,7 +52245,7 @@ var withColumnMasonryLayout = (Component22) => {
     ...rest
   }, ref,) {
     if (!columnMasonryLayoutEnabled) {
-      return /* @__PURE__ */ jsx2(Component22, {
+      return /* @__PURE__ */ jsx(Component22, {
         suppressHydrationWarning: true,
         ref,
         style: existingStyle,
@@ -52248,12 +52257,12 @@ var withColumnMasonryLayout = (Component22) => {
       ...existingStyle,
       gridTemplateColumns: `repeat(${trackCount}, 1fr)`,
     };
-    return /* @__PURE__ */ jsx2(Component22, {
+    return /* @__PURE__ */ jsx(Component22, {
       suppressHydrationWarning: true,
       ref,
       style: mergedStyle,
       ...rest,
-      children: /* @__PURE__ */ jsx2(ColumnMasonryLayout, {
+      children: /* @__PURE__ */ jsx(ColumnMasonryLayout, {
         suppressHydrationWarning: true,
         trackCount,
         rowGap,
@@ -52363,7 +52372,7 @@ function differenceInCalendarQuarters(targetDate, referenceDate,) {
 function differenceInCalendarYears(targetDate, referenceDate,) {
   return targetDate.getUTCFullYear() - referenceDate.getUTCFullYear();
 }
-var RelativeDate = /* @__PURE__ */ memo$1(function RelativeDate2({
+var RelativeDate = /* @__PURE__ */ memo$12(function RelativeDate2({
   date: dateString,
   dateFormat = 'auto',
   dateStyle = 'long',
@@ -52375,11 +52384,11 @@ var RelativeDate = /* @__PURE__ */ memo$1(function RelativeDate2({
   const fallbackLocale = useLocaleCode();
   const locale = externalLocale || fallbackLocale;
   const targetDate = dateString ? new Date(dateString,) : null;
-  const [currentDate, setCurrentDate,] = useState3(getCurrentDate,);
+  const [currentDate, setCurrentDate,] = useState(getCurrentDate,);
   const interval = dateFormat === 'second' ? 1e3 : 6e4;
-  useEffect4(() => {
+  useEffect2(() => {
     const timeout = setInterval(() => {
-      startTransition3(() => {
+      startTransition2(() => {
         setCurrentDate(getCurrentDate,);
       },);
     }, interval,);
@@ -52395,14 +52404,14 @@ var RelativeDate = /* @__PURE__ */ memo$1(function RelativeDate2({
   },);
   const formattedRelativeDate = formatRelativeDate(targetDate, currentDate, dateFormat, dateStyle, dateNumeric, dateCapitalize, locale,);
   const formattedIsoDate = targetDate.toISOString();
-  return /* @__PURE__ */ jsxs2('time', {
+  return /* @__PURE__ */ jsxs('time', {
     suppressHydrationWarning: true,
     dateTime: formattedIsoDate,
     title: formattedDate,
     ...props,
     children: [
       isWindow ? formattedRelativeDate : formattedDate,
-      isWindow ? null : /* @__PURE__ */ jsx2('script', {
+      isWindow ? null : /* @__PURE__ */ jsx('script', {
         suppressHydrationWarning: true,
         'data-relative-date-script': 'inline',
         dangerouslySetInnerHTML: {
@@ -52570,7 +52579,7 @@ function isShallowEqualArray(a, b,) {
 }
 var deprecatedRichTextPlaceholder = '{{ text-placeholder }}';
 var richTextWrapperClassName = 'rich-text-wrapper';
-var DeprecatedRichTextInner = /* @__PURE__ */ React2.forwardRef(function Text(props, forwardedRef,) {
+var DeprecatedRichTextInner = /* @__PURE__ */ React$1.forwardRef(function Text(props, forwardedRef,) {
   const {
     id: id2,
     name,
@@ -52610,7 +52619,7 @@ var DeprecatedRichTextInner = /* @__PURE__ */ React2.forwardRef(function Text(pr
   } = props;
   const parentSize = useParentSize();
   const layoutId = useLayoutId2(props,);
-  const fallbackLayoutRef = useRef3(null,);
+  const fallbackLayoutRef = useRef(null,);
   const layoutRef = forwardedRef ?? fallbackLayoutRef;
   const {
     navigate,
@@ -52619,7 +52628,7 @@ var DeprecatedRichTextInner = /* @__PURE__ */ React2.forwardRef(function Text(pr
   const currentRoute = useCurrentRoute();
   useRoutePreloader(props.preload ?? [],);
   useMeasureLayout(props, layoutRef,);
-  const inCodeComponent = React2.useContext(ComponentContainerContext,);
+  const inCodeComponent = React$1.useContext(ComponentContainerContext,);
   const isOnCanvas = useIsOnFramerCanvas();
   let textOrOverride = text;
   const forwardedOverrideId = _forwardedOverrideId ?? id2;
@@ -52637,11 +52646,11 @@ var DeprecatedRichTextInner = /* @__PURE__ */ React2.forwardRef(function Text(pr
     innerHTML = __htmlStructure ? __htmlStructure.replace(deprecatedRichTextPlaceholder, escapedText,) : `<p>${escapedText}</p>`;
   } else if (htmlFromDesign) innerHTML = htmlFromDesign;
   const implicitPathVariables = useImplicitPathVariables();
-  const innerHTMLWithReplacedFramerPageLinks = React2.useMemo(() => {
+  const innerHTMLWithReplacedFramerPageLinks = React$1.useMemo(() => {
     if (isOnCanvas || !getRoute || !currentRoute) return innerHTML;
     return replaceFramerPageLinks(innerHTML, getRoute, currentRoute, implicitPathVariables,);
   }, [innerHTML, getRoute, currentRoute, implicitPathVariables,],);
-  React2.useEffect(() => {
+  React$1.useEffect(() => {
     const container = layoutRef.current;
     if (container === null) return;
     function interceptPageLinks(event,) {
@@ -52700,7 +52709,7 @@ var DeprecatedRichTextInner = /* @__PURE__ */ React2.forwardRef(function Text(pr
   collectFiltersFromProps(props, style2,);
   collectTextShadowsForProps(props, style2,);
   Object.assign(style2, props.style,);
-  return /* @__PURE__ */ jsx2(motion.div, {
+  return /* @__PURE__ */ jsx(motion.div, {
     suppressHydrationWarning: true,
     id: id2,
     ref: layoutRef,
@@ -52730,7 +52739,7 @@ function convertVerticalAlignment$1(verticalAlignment,) {
   }
 }
 function useLoadFonts(fonts, fromCanvasComponent, containerRef,) {
-  const prevFontsRef = useRef3([],);
+  const prevFontsRef = useRef([],);
   if (!isShallowEqualArray(prevFontsRef.current, fonts,)) {
     prevFontsRef.current = fonts;
     runtime.fontStore.loadFonts(fonts,).then(({
@@ -52804,7 +52813,7 @@ function tokenizeText(text, tokenization = 'character', elements, shouldReduceMo
   if (shouldReduceMotion) {
     const ref = newOverrideableRef();
     elements.add(ref,);
-    return /* @__PURE__ */ jsx2('span', {
+    return /* @__PURE__ */ jsx('span', {
       suppressHydrationWarning: true,
       ref,
       style: style2,
@@ -52819,9 +52828,9 @@ function tokenizeText(text, tokenization = 'character', elements, shouldReduceMo
       return words.map((word, wordIndex,) => {
         const isLastWord = wordIndex === lastWordIndex;
         const short = word.length <= 12;
-        return /* @__PURE__ */ jsxs2(React2.Fragment, {
+        return /* @__PURE__ */ jsxs(React$1.Fragment, {
           children: [
-            /* @__PURE__ */ jsx2('span', {
+            /* @__PURE__ */ jsx('span', {
               suppressHydrationWarning: true,
               style: {
                 whiteSpace: short ? 'nowrap' : 'unset',
@@ -52829,7 +52838,7 @@ function tokenizeText(text, tokenization = 'character', elements, shouldReduceMo
               children: word.match(emojiSplitRe,)?.map((char, i,) => {
                 const ref = newOverrideableRef();
                 elements.add(ref,);
-                return /* @__PURE__ */ jsx2('span', {
+                return /* @__PURE__ */ jsx('span', {
                   suppressHydrationWarning: true,
                   ref,
                   style: style2,
@@ -52849,9 +52858,9 @@ function tokenizeText(text, tokenization = 'character', elements, shouldReduceMo
         const isLastWord = i === lastWordIndex;
         const ref = newOverrideableRef();
         elements.add(ref,);
-        return /* @__PURE__ */ jsxs2(React2.Fragment, {
+        return /* @__PURE__ */ jsxs(React$1.Fragment, {
           children: [
-            /* @__PURE__ */ jsx2('span', {
+            /* @__PURE__ */ jsx('span', {
               suppressHydrationWarning: true,
               ref,
               style: style2,
@@ -52922,7 +52931,7 @@ function useTextEffect(config, ref, preview,) {
   const isRenderingStaticContent = isStaticRenderer();
   const canPlay = preview || !isRenderingStaticContent;
   const shouldReduceMotion = useReducedMotionConfig();
-  const state = React2.useRef({
+  const state = React$1.useRef({
     hasMounted: false,
     hasAnimatedOnce: false,
     isAnimating: false,
@@ -52932,7 +52941,7 @@ function useTextEffect(config, ref, preview,) {
   const trigger = config?.trigger ?? 'onMount';
   const target = config?.target;
   const threshold2 = config?.threshold;
-  React2.useEffect(() => {
+  React$1.useEffect(() => {
     if (!canPlay || preview) return;
     state.current.hasMounted = true;
     function play() {
@@ -52995,7 +53004,7 @@ function useTextEffect(config, ref, preview,) {
   }, [canPlay, elements, preview, ref, target, threshold2, trigger,],);
   const effectEnabled = !!config;
   const tokenization = config ? tokenizationForEffect(config,) : void 0;
-  return React2.useMemo(() => ({
+  return React$1.useMemo(() => ({
     getTokenizer: () => {
       elements.clear();
       if (!effectEnabled) return void 0;
@@ -53169,8 +53178,8 @@ function createLineGroups(elements,) {
   groups2.push(currentGroup,);
   return groups2;
 }
-var BaseSVG = /* @__PURE__ */ forwardRef3(function BaseSVG2(props, forwardedRef,) {
-  return /* @__PURE__ */ jsx2('svg', {
+var BaseSVG = /* @__PURE__ */ forwardRef(function BaseSVG2(props, forwardedRef,) {
+  return /* @__PURE__ */ jsx('svg', {
     suppressHydrationWarning: true,
     ...props,
     ref: forwardedRef,
@@ -53178,18 +53187,18 @@ var BaseSVG = /* @__PURE__ */ forwardRef3(function BaseSVG2(props, forwardedRef,
   },);
 },);
 var MotionSVG = /* @__PURE__ */ motion.create(BaseSVG,);
-var FitText = /* @__PURE__ */ forwardRef3(function FitText2({
+var FitText = /* @__PURE__ */ forwardRef(function FitText2({
   viewBoxScale,
   viewBox,
   children,
   ...props
 }, forwardedRef,) {
-  return /* @__PURE__ */ jsx2(MotionSVG, {
+  return /* @__PURE__ */ jsx(MotionSVG, {
     suppressHydrationWarning: true,
     ...props,
     ref: forwardedRef,
     viewBox,
-    children: /* @__PURE__ */ jsx2(motion.foreignObject, {
+    children: /* @__PURE__ */ jsx(motion.foreignObject, {
       suppressHydrationWarning: true,
       width: '100%',
       height: '100%',
@@ -53205,7 +53214,7 @@ var FitText = /* @__PURE__ */ forwardRef3(function FitText2({
 },);
 var defaultFonts = [];
 var richTextContainerComponentType = 'RichTextContainer';
-var RichTextContainer = /* @__PURE__ */ forwardRef3(function RichTextContainer2(props, forwardedRef,) {
+var RichTextContainer = /* @__PURE__ */ forwardRef(function RichTextContainer2(props, forwardedRef,) {
   const {
     __fromCanvasComponent = false,
     _forwardedOverrideId,
@@ -53248,14 +53257,14 @@ var RichTextContainer = /* @__PURE__ */ forwardRef3(function RichTextContainer2(
   const renderTarget = environment2();
   const isOnCanvas = renderTarget === RenderTarget.canvas;
   const isRenderingStaticContent = isOnCanvas || renderTarget === RenderTarget.export;
-  const inCodeComponent = useContext3(ComponentContainerContext,);
+  const inCodeComponent = useContext(ComponentContainerContext,);
   const layoutId = useLayoutId2(props,);
-  const fallbackRef = useRef3(null,);
+  const fallbackRef = useRef(null,);
   const containerRef = forwardedRef ?? fallbackRef;
   useMeasureLayout(props, containerRef,);
   useLoadFonts(fonts, __fromCanvasComponent, containerRef,);
   const textEffect = useTextEffect(effect, containerRef,);
-  const processedChildren = useMemo3(() => {
+  const processedChildren = useMemo(() => {
     if (!children) return;
     return processRichTextChildren(children, stylesPresetsClassNames, plainText, anchorLinkOffsetY, void 0, textEffect.getTokenizer(),);
   }, [children, stylesPresetsClassNames, plainText, anchorLinkOffsetY, textEffect,],);
@@ -53311,7 +53320,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef3(function RichTextContainer2(
   const layoutHints = layoutHintDataProps(hasTransformTemplate ? center : void 0, style2,);
   if (isString(props.viewBox,)) {
     if (props.as !== void 0) {
-      return /* @__PURE__ */ jsx2(Component22, {
+      return /* @__PURE__ */ jsx(Component22, {
         suppressHydrationWarning: true,
         ...validRestProps,
         ...layoutHints,
@@ -53321,7 +53330,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef3(function RichTextContainer2(
         transformTemplate: template,
         'data-framer-name': dataFramerName,
         'data-framer-component-type': richTextContainerComponentType,
-        children: /* @__PURE__ */ jsx2(FitText, {
+        children: /* @__PURE__ */ jsx(FitText, {
           suppressHydrationWarning: true,
           viewBox,
           viewBoxScale,
@@ -53332,7 +53341,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef3(function RichTextContainer2(
           children: processedChildren,
         },),
       },);
-    } else {return /* @__PURE__ */ jsx2(FitText, {
+    } else {return /* @__PURE__ */ jsx(FitText, {
         suppressHydrationWarning: true,
         ...validRestProps,
         ...layoutHints,
@@ -53347,7 +53356,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef3(function RichTextContainer2(
         children: processedChildren,
       },);}
   }
-  return /* @__PURE__ */ jsx2(Component22, {
+  return /* @__PURE__ */ jsx(Component22, {
     suppressHydrationWarning: true,
     ...validRestProps,
     ...layoutHints,
@@ -53361,7 +53370,7 @@ var RichTextContainer = /* @__PURE__ */ forwardRef3(function RichTextContainer2(
   },);
 },);
 function isFragment(element,) {
-  return element.type === Fragment3;
+  return element.type === Fragment;
 }
 function isLineBreak(element,) {
   return element.type === 'br';
@@ -53375,12 +53384,12 @@ function processRichTextChildren(
   tokenizer,
   depth = isFragment(element,) ? -1 : 0,
 ) {
-  let children = Children3.toArray(element.props.children,);
+  let children = Children.toArray(element.props.children,);
   if (!isUndefined(plainText,)) children = children.slice(0, 1,);
   let onlyLineBreaks = true;
   children = children.map((child) => {
-    if (!isValidElement3(child,) || !isLineBreak(child,)) onlyLineBreaks = false;
-    if (isValidElement3(child,)) {
+    if (!isValidElement(child,) || !isLineBreak(child,)) onlyLineBreaks = false;
+    if (isValidElement(child,)) {
       return processRichTextChildren(child, stylesPresetsClassNames, plainText, anchorLinkOffsetY, slugCounters, tokenizer, depth + 1,);
     }
     const text = !isUndefined(plainText,) ? plainText : child;
@@ -53404,7 +53413,7 @@ function processRichTextChildren(
       const slug = generateHeadingSlug(children, slugCounters,);
       props.id = slug;
       const className2 = cx('framer-text', anchorLinkStylePresetClassName,);
-      const anchorLink = /* @__PURE__ */ jsx2('a', {
+      const anchorLink = /* @__PURE__ */ jsx('a', {
         suppressHydrationWarning: true,
         href: `#${slug}`,
         className: className2,
@@ -53421,7 +53430,7 @@ function processRichTextChildren(
         ...props.style,
         [maxListDigitsProperty]: safeGetMaxListDigits(
           props.start ?? 1,
-          Children3.count(props.children,),
+          Children.count(props.children,),
           props.style?.['--list-style-type'] ?? '',
         ),
       };
@@ -53439,7 +53448,7 @@ function generateHeadingSlug(children, slugCounters,) {
 }
 function extractTextFromReactNode(node,) {
   if (isString(node,) || isNumber(node,)) return node.toString();
-  if (isValidElement3(node,)) return extractTextFromReactNode(node.props.children,);
+  if (isValidElement(node,)) return extractTextFromReactNode(node.props.children,);
   if (Array.isArray(node,)) return node.map(extractTextFromReactNode,).join('',);
   return '';
 }
@@ -53447,7 +53456,7 @@ function safeGetMaxListDigits(start2, itemCount, listStyleType,) {
   const startNumber = Number(start2,) || 1;
   return getMaxListDigits(startNumber, itemCount, listStyleType,);
 }
-var RichTextInner = /* @__PURE__ */ forwardRef3(function RichText({
+var RichTextInner = /* @__PURE__ */ forwardRef(function RichText({
   children,
   html,
   htmlFromDesign,
@@ -53461,7 +53470,7 @@ var RichTextInner = /* @__PURE__ */ forwardRef3(function RichText({
     const contentProp = {
       [isString(html,) ? 'html' : 'htmlFromDesign']: content,
     };
-    return /* @__PURE__ */ jsx2(DeprecatedRichText, {
+    return /* @__PURE__ */ jsx(DeprecatedRichText, {
       suppressHydrationWarning: true,
       ...props,
       ...contentProp,
@@ -53480,11 +53489,11 @@ var RichTextInner = /* @__PURE__ */ forwardRef3(function RichText({
         a,
       };}
   }
-  return /* @__PURE__ */ jsx2(RichTextContainer, {
+  return /* @__PURE__ */ jsx(RichTextContainer, {
     suppressHydrationWarning: true,
     ...props,
     ref: forwardedRef,
-    children: isValidElement3(content,) ? content : void 0,
+    children: isValidElement(content,) ? content : void 0,
   },);
 },);
 var RichText2 = /* @__PURE__ */ withLibraryCSS(RichTextInner,);
@@ -53660,7 +53669,7 @@ var ImagePatternElement = ({
   offsetY,
 },) => {
   const href = imageUrlForAsset(path,);
-  return /* @__PURE__ */ jsx2('pattern', {
+  return /* @__PURE__ */ jsx('pattern', {
     suppressHydrationWarning: true,
     id: id2,
     width: repeat ? width : '100%',
@@ -53669,7 +53678,7 @@ var ImagePatternElement = ({
     patternUnits: repeat ? 'userSpaceOnUse' : void 0,
     x: repeat ? offsetX : void 0,
     y: repeat ? offsetY : void 0,
-    children: /* @__PURE__ */ jsx2('image', {
+    children: /* @__PURE__ */ jsx('image', {
       suppressHydrationWarning: true,
       width: repeat ? width : 1,
       height: repeat ? height : 1,
@@ -53831,7 +53840,7 @@ var SharedSVGManager = class {
   }
 };
 function useSVGTemplate(revision, svg,) {
-  useEffect4(() => sharedSVGManager.subscribeToTemplate(revision,), [revision,],);
+  useEffect2(() => sharedSVGManager.subscribeToTemplate(revision,), [revision,],);
   return sharedSVGManager.template(revision, svg,);
 }
 var sharedSVGManager = /* @__PURE__ */ new SharedSVGManager();
@@ -53904,14 +53913,14 @@ function getSVGSize(svg,) {
     height,
   };
 }
-var SVGInner = /* @__PURE__ */ forwardRef3(function SVG(props, forwardedRef,) {
+var SVGInner = /* @__PURE__ */ forwardRef(function SVG(props, forwardedRef,) {
   const parentSize = useParentSize();
   const layoutId = useLayoutId2(props,);
-  const layoutRef = React$1.useRef(null,);
+  const layoutRef = React.useRef(null,);
   const ref = forwardedRef ?? layoutRef;
   const providedWindow = useProvidedWindow();
   useMeasureLayout(props, layoutRef,);
-  return /* @__PURE__ */ jsx2(SVGComponent, {
+  return /* @__PURE__ */ jsx(SVGComponent, {
     suppressHydrationWarning: true,
     ...props,
     innerRef: ref,
@@ -53986,7 +53995,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
     static frame(props,) {
       return calculateRect(props, props.parentSize || 0,);
     }
-    container = React$1.createRef();
+    container = React.createRef();
     svgElement = null;
     setSVGElement = (element) => {
       this.svgElement = element;
@@ -54147,7 +54156,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
           y1,
           y2,
         } = elementPropertiesForLinearGradient(gradient, identifier,);
-        fillElement = /* @__PURE__ */ jsx2('svg', {
+        fillElement = /* @__PURE__ */ jsx('svg', {
           suppressHydrationWarning: true,
           ref: this.setSVGElement,
           width: '100%',
@@ -54156,7 +54165,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
             position: 'absolute',
           },
           role: 'presentation',
-          children: /* @__PURE__ */ jsx2('linearGradient', {
+          children: /* @__PURE__ */ jsx('linearGradient', {
             suppressHydrationWarning: true,
             id: gradientId,
             x1,
@@ -54164,7 +54173,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
             y1,
             y2,
             children: stops.map((stop, idx,) => {
-              return /* @__PURE__ */ jsx2('stop', {
+              return /* @__PURE__ */ jsx('stop', {
                 suppressHydrationWarning: true,
                 offset: stop.position,
                 stopColor: stop.color,
@@ -54178,7 +54187,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
         const gradientId = `${encodeURI(id2 || '',)}g${RadialGradient.hash(gradient,)}`;
         outerStyle.fill = `url(#${gradientId})`;
         const elementProperties = elementPropertiesForRadialGradient(gradient, identifier,);
-        fillElement = /* @__PURE__ */ jsx2('svg', {
+        fillElement = /* @__PURE__ */ jsx('svg', {
           suppressHydrationWarning: true,
           ref: this.setSVGElement,
           width: '100%',
@@ -54187,14 +54196,14 @@ var SVGComponent = /* @__PURE__ */ (() => {
             position: 'absolute',
           },
           role: 'presentation',
-          children: /* @__PURE__ */ jsx2('radialGradient', {
+          children: /* @__PURE__ */ jsx('radialGradient', {
             suppressHydrationWarning: true,
             id: gradientId,
             cy: gradient.centerAnchorY,
             cx: gradient.centerAnchorX,
             r: gradient.widthFactor,
             children: elementProperties.stops.map((stop, idx,) => {
-              return /* @__PURE__ */ jsx2('stop', {
+              return /* @__PURE__ */ jsx('stop', {
                 suppressHydrationWarning: true,
                 offset: stop.position,
                 stopColor: stop.color,
@@ -54207,7 +54216,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
         const imagePattern = imagePatternPropsForFill(fill, size, identifier,);
         if (imagePattern) {
           outerStyle.fill = `url(#${imagePattern.id})`;
-          fillElement = /* @__PURE__ */ jsx2('svg', {
+          fillElement = /* @__PURE__ */ jsx('svg', {
             suppressHydrationWarning: true,
             ref: this.setSVGElement,
             width: '100%',
@@ -54216,9 +54225,9 @@ var SVGComponent = /* @__PURE__ */ (() => {
               position: 'absolute',
             },
             role: 'presentation',
-            children: /* @__PURE__ */ jsx2('defs', {
+            children: /* @__PURE__ */ jsx('defs', {
               suppressHydrationWarning: true,
-              children: /* @__PURE__ */ jsx2(ImagePatternElement, {
+              children: /* @__PURE__ */ jsx(ImagePatternElement, {
                 suppressHydrationWarning: true,
                 ...imagePattern,
               },),
@@ -54246,10 +54255,10 @@ var SVGComponent = /* @__PURE__ */ (() => {
         sharedSVGManager.unsubscribe(this.previouslyRenderedSVG,);
         this.previouslyRenderedSVG = svg;
         if (hasBorderRadius(outerStyle,)) outerStyle.overflow = 'hidden';
-        content = /* @__PURE__ */ jsxs2(Fragment3, {
+        content = /* @__PURE__ */ jsxs(Fragment, {
           children: [
             fillElement,
-            /* @__PURE__ */ jsx2('div', {
+            /* @__PURE__ */ jsx('div', {
               suppressHydrationWarning: true,
               className: 'svgContainer',
               style: innerStyle,
@@ -54270,7 +54279,7 @@ var SVGComponent = /* @__PURE__ */ (() => {
         onTap,
       } = this.props;
       const hasTitleOrDescription = title || description;
-      return /* @__PURE__ */ jsx2(MotionComponent, {
+      return /* @__PURE__ */ jsx(MotionComponent, {
         suppressHydrationWarning: true,
         ...dataProps,
         ...filterValidMotionAndDOMProps(asRecord(rest,),),
@@ -54299,8 +54308,8 @@ var SVGComponent = /* @__PURE__ */ (() => {
 var SVG2 = /* @__PURE__ */ withLibraryCSS(SVGInner,);
 function useFontLoadStatus(fontSelectors = [], timeout = 5e3,) {
   const missingFontSelectors = fontSelectors.filter((selector) => !runtime.fontStore.isSelectorLoaded(selector,));
-  const [fontLoadStatus, setFontLoadStatus,] = React$1.useState(missingFontSelectors.length ? 'loading' : 'done',);
-  React$1.useEffect(() => {
+  const [fontLoadStatus, setFontLoadStatus,] = React.useState(missingFontSelectors.length ? 'loading' : 'done',);
+  React.useEffect(() => {
     if (!missingFontSelectors.length) return;
     setFontLoadStatus('loading',);
     const timer = setTimeout(() => {
@@ -54313,10 +54322,10 @@ function useFontLoadStatus(fontSelectors = [], timeout = 5e3,) {
   }, [fontSelectors.join(', ',), missingFontSelectors.join(', ',),],);
   return fontLoadStatus;
 }
-var TextInner = /* @__PURE__ */ React$1.forwardRef(function Text2(props, forwardedRef,) {
+var TextInner = /* @__PURE__ */ React.forwardRef(function Text2(props, forwardedRef,) {
   const parentSize = useParentSize();
   const layoutId = useLayoutId2(props,);
-  const fallbackLayoutRef = useRef3(null,);
+  const fallbackLayoutRef = useRef(null,);
   const layoutRef = forwardedRef ?? fallbackLayoutRef;
   const {
     navigate,
@@ -54332,10 +54341,10 @@ var TextInner = /* @__PURE__ */ React$1.forwardRef(function Text2(props, forward
     fonts,
     __fromCanvasComponent,
   } = props;
-  const prevFontsRef = useRef3([],);
+  const prevFontsRef = useRef([],);
   const fontsDidChange = !isShallowEqualArray(prevFontsRef.current ?? [], fonts ?? [],);
   prevFontsRef.current = fonts;
-  useEffect4(() => {
+  useEffect2(() => {
     if (!fontsDidChange || !fonts) return;
     runtime.fontStore.loadFonts(fonts,).then(({
       newlyLoadedFontCount,
@@ -54346,22 +54355,22 @@ var TextInner = /* @__PURE__ */ React$1.forwardRef(function Text2(props, forward
     },);
   }, [fonts,],);
   const implicitPathVariables = useImplicitPathVariables();
-  const interceptPageLinks = React$1.useCallback((event) => {
+  const interceptPageLinks = React.useCallback((event) => {
     const anchorElement = findAnchorElement(event.target, layoutRef.current,);
     if (isCommandKeyPressed(event,) || !navigate || !anchorElement) return;
     if (navigateFromAttributes(navigate, anchorElement, implicitPathVariables,)) event.preventDefault();
   }, [navigate, implicitPathVariables, layoutRef,],);
-  useEffect4(() => {
+  useEffect2(() => {
     const ref = layoutRef.current;
     if (!ref) return;
     ref.addEventListener('click', interceptPageLinks,);
     return () => ref.removeEventListener('click', interceptPageLinks,);
   }, [interceptPageLinks,],);
-  const rawHTML = React$1.useMemo(() => {
+  const rawHTML = React.useMemo(() => {
     if (!props.rawHTML || onCanvas || !getRoute || !currentRoute) return props.rawHTML;
     return replaceFramerPageLinks(props.rawHTML, getRoute, currentRoute, implicitPathVariables,);
   }, [props.rawHTML, onCanvas, getRoute, currentRoute, implicitPathVariables,],);
-  return /* @__PURE__ */ jsx2(TextComponent, {
+  return /* @__PURE__ */ jsx(TextComponent, {
     suppressHydrationWarning: true,
     ...props,
     innerRef: layoutRef,
@@ -54417,7 +54426,7 @@ var TextComponent = /* @__PURE__ */ (() => {
       }
     }
     render() {
-      return /* @__PURE__ */ jsx2(ComponentContainerContext.Consumer, {
+      return /* @__PURE__ */ jsx(ComponentContainerContext.Consumer, {
         suppressHydrationWarning: true,
         children: this.renderMain,
       },);
@@ -54569,7 +54578,7 @@ var TextComponent = /* @__PURE__ */ (() => {
         Object.assign(style2, styleProp,);
         if (alignment) asRecord(style2,)['--framer-text-alignment'] = alignment;
         const tabIndexProps = getTabIndexProps(tabIndex,);
-        return /* @__PURE__ */ jsx2(motion.div, {
+        return /* @__PURE__ */ jsx(motion.div, {
           suppressHydrationWarning: true,
           layoutId,
           id: id2,
@@ -54640,7 +54649,7 @@ function TickerItem({
   const {
     props,
   } = itemProps;
-  return /* @__PURE__ */ jsx2(motion.li, {
+  return /* @__PURE__ */ jsx(motion.li, {
     suppressHydrationWarning: true,
     ...props,
     style: {
@@ -54914,7 +54923,7 @@ function transformString(transform2,) {
   }
   return result;
 }
-var LinearGradientElement = class extends Component$1 {
+var LinearGradientElement = class extends Component2 {
   render() {
     const {
       id: id2,
@@ -54924,7 +54933,7 @@ var LinearGradientElement = class extends Component$1 {
       y1,
       y2,
     } = this.props;
-    return /* @__PURE__ */ jsx2('linearGradient', {
+    return /* @__PURE__ */ jsx('linearGradient', {
       suppressHydrationWarning: true,
       id: id2,
       x1,
@@ -54932,7 +54941,7 @@ var LinearGradientElement = class extends Component$1 {
       y1,
       y2,
       children: stops.map((stop, idx,) => {
-        return /* @__PURE__ */ jsx2('stop', {
+        return /* @__PURE__ */ jsx('stop', {
           suppressHydrationWarning: true,
           offset: stop.position,
           stopColor: stop.color,
@@ -54942,7 +54951,7 @@ var LinearGradientElement = class extends Component$1 {
     },);
   }
 };
-var RadialGradientElement = class extends Component$1 {
+var RadialGradientElement = class extends Component2 {
   render() {
     const {
       centerAnchorX,
@@ -54952,7 +54961,7 @@ var RadialGradientElement = class extends Component$1 {
       heightFactor,
       stops,
     } = this.props;
-    return /* @__PURE__ */ jsx2('radialGradient', {
+    return /* @__PURE__ */ jsx('radialGradient', {
       suppressHydrationWarning: true,
       id: id2,
       cy: centerAnchorY,
@@ -54960,7 +54969,7 @@ var RadialGradientElement = class extends Component$1 {
       r: widthFactor,
       gradientTransform: getRadialGradientTransform(heightFactor, widthFactor, centerAnchorX, centerAnchorY,),
       children: stops.map((stop, idx,) => {
-        return /* @__PURE__ */ jsx2('stop', {
+        return /* @__PURE__ */ jsx('stop', {
           suppressHydrationWarning: true,
           offset: stop.position,
           stopColor: stop.color,
@@ -54999,8 +55008,8 @@ var SVGRoot = (props) => {
     style: style2,
     _needsMeasure,
   } = props;
-  const inCodeComponent = React$1.useContext(ComponentContainerContext,);
-  const ref = React$1.useRef(null,);
+  const inCodeComponent = React.useContext(ComponentContainerContext,);
+  const ref = React.useRef(null,);
   useMeasureLayout({
     id: id2,
     visible: true,
@@ -55030,7 +55039,7 @@ var SVGRoot = (props) => {
   const needsScale = isSafari() ? __unframerWindow2.devicePixelRatio !== 1 : __unframerWindow2.devicePixelRatio === 1;
   const needsTranslate = __unframerWindow2.devicePixelRatio === 1;
   if (!needsScale && !needsTranslate && !(contentOffsetX !== 0 || contentOffsetY !== 0)) {
-    return /* @__PURE__ */ jsx2('svg', {
+    return /* @__PURE__ */ jsx('svg', {
       suppressHydrationWarning: true,
       role: 'presentation',
       ...svgProps,
@@ -55043,7 +55052,7 @@ var SVGRoot = (props) => {
       transform: 'scale(2)',
     }
     : void 0;
-  return /* @__PURE__ */ jsx2('svg', {
+  return /* @__PURE__ */ jsx('svg', {
     suppressHydrationWarning: true,
     role: 'presentation',
     ...svgProps,
@@ -55051,7 +55060,7 @@ var SVGRoot = (props) => {
       ...svgStyle,
       ...svgTransform,
     },
-    children: /* @__PURE__ */ jsx2('g', {
+    children: /* @__PURE__ */ jsx('g', {
       suppressHydrationWarning: true,
       style: {
         transformOrigin: 'center',
@@ -55261,24 +55270,24 @@ var Vector = /* @__PURE__ */ (() => {
       const currentName = target === RenderTarget.preview ? name || void 0 : void 0;
       if (shadow.insetElement !== null || shadow.outsetElement !== null || insideStroke) {
         pathAttributes.id = internalShapeId.id;
-        shapeReference = /* @__PURE__ */ jsx2(motion.path, {
+        shapeReference = /* @__PURE__ */ jsx(motion.path, {
           suppressHydrationWarning: true,
           ...pathAttributes,
           variants,
           transition,
         },);
         if (shadow.needsStrokeClip || insideStroke) {
-          strokeClipPath = /* @__PURE__ */ jsx2('clipPath', {
+          strokeClipPath = /* @__PURE__ */ jsx('clipPath', {
             suppressHydrationWarning: true,
             id: internalStrokeClipId.id,
-            children: /* @__PURE__ */ jsx2('use', {
+            children: /* @__PURE__ */ jsx('use', {
               suppressHydrationWarning: true,
               xlinkHref: internalShapeId.link,
             },),
           },);
         }
         if (shadow.insetElement !== null && strokeEnabled && strokeWidth && strokeWidth > 0) {
-          mainElement = /* @__PURE__ */ jsx2('use', {
+          mainElement = /* @__PURE__ */ jsx('use', {
             suppressHydrationWarning: true,
             xlinkHref: internalShapeId.link,
             fill: vectorFill,
@@ -55286,7 +55295,7 @@ var Vector = /* @__PURE__ */ (() => {
             strokeOpacity: '0',
             name: currentName,
           },);
-          strokeElement = /* @__PURE__ */ jsx2('use', {
+          strokeElement = /* @__PURE__ */ jsx('use', {
             suppressHydrationWarning: true,
             xlinkHref: internalShapeId.link,
             clipPath: internalStrokeClipId.urlLink,
@@ -55294,7 +55303,7 @@ var Vector = /* @__PURE__ */ (() => {
             ...svgStrokeAttributes,
             strokeWidth,
           },);
-        } else {mainElement = /* @__PURE__ */ jsx2('use', {
+        } else {mainElement = /* @__PURE__ */ jsx('use', {
             suppressHydrationWarning: true,
             xlinkHref: internalShapeId.link,
             fill: vectorFill,
@@ -55306,7 +55315,7 @@ var Vector = /* @__PURE__ */ (() => {
           },);}
       } else {
         pathAttributes.id = idAttribute;
-        mainElement = /* @__PURE__ */ jsx2(motion.path, {
+        mainElement = /* @__PURE__ */ jsx(motion.path, {
           suppressHydrationWarning: true,
           ...pathAttributes,
           fill: vectorFill,
@@ -55318,7 +55327,7 @@ var Vector = /* @__PURE__ */ (() => {
         },);
       }
       const imagePatternElement = imagePattern
-        ? /* @__PURE__ */ jsx2(ImagePatternElement, {
+        ? /* @__PURE__ */ jsx(ImagePatternElement, {
           suppressHydrationWarning: true,
           ...imagePattern,
           repeat: BackgroundImage.isImageObject(fill,) && fill.fit === 'tile',
@@ -55326,26 +55335,26 @@ var Vector = /* @__PURE__ */ (() => {
         : void 0;
       let gradient;
       if (linearGradient) {
-        gradient = /* @__PURE__ */ jsx2(LinearGradientElement, {
+        gradient = /* @__PURE__ */ jsx(LinearGradientElement, {
           suppressHydrationWarning: true,
           ...linearGradient,
         },);
       } else if (radialGradient) {
-        gradient = /* @__PURE__ */ jsx2(RadialGradientElement, {
+        gradient = /* @__PURE__ */ jsx(RadialGradientElement, {
           suppressHydrationWarning: true,
           ...radialGradient,
         },);
       }
       let defs = null;
       if (shapeReference || strokeClipPath || shadow.definition && shadow.definition.length || gradient || imagePatternElement) {
-        defs = /* @__PURE__ */ jsxs2('defs', {
+        defs = /* @__PURE__ */ jsxs('defs', {
           suppressHydrationWarning: true,
           children: [shapeReference, strokeClipPath, shadow.definition, gradient, imagePatternElement,],
         },);
       }
       const opacityValue = opacity ?? (variants ? 1 : void 0);
       if (defs === null && shadow.outsetElement === null && shadow.insetElement === null && strokeElement === null) {
-        mainElement = /* @__PURE__ */ jsx2(motion.path, {
+        mainElement = /* @__PURE__ */ jsx(motion.path, {
           suppressHydrationWarning: true,
           ...pathAttributes,
           fill: vectorFill,
@@ -55358,7 +55367,7 @@ var Vector = /* @__PURE__ */ (() => {
         },);
         return this.renderElement(mainElement,);
       }
-      return this.renderElement(/* @__PURE__ */ jsxs2(motion.g, {
+      return this.renderElement(/* @__PURE__ */ jsxs(motion.g, {
         suppressHydrationWarning: true,
         opacity: opacityValue,
         variants,
@@ -55380,7 +55389,7 @@ var Vector = /* @__PURE__ */ (() => {
       } = this.props;
       if (!isRootVectorNode) return element;
       if (includeTransform) return element;
-      return /* @__PURE__ */ jsx2(SVGRoot, {
+      return /* @__PURE__ */ jsx(SVGRoot, {
         suppressHydrationWarning: true,
         id: id2,
         width,
@@ -55455,7 +55464,7 @@ var VectorGroup = /* @__PURE__ */ (() => {
         else if (nameProp) name = nameProp;
         else name = defaultName;
       }
-      return this.renderElement(/* @__PURE__ */ jsx2('g', {
+      return this.renderElement(/* @__PURE__ */ jsx('g', {
         suppressHydrationWarning: true,
         transform: transformString(transform2,),
         name,
@@ -55477,7 +55486,7 @@ var VectorGroup = /* @__PURE__ */ (() => {
       } = this.props;
       if (!isRootVectorNode) return element;
       if (includeTransform) return element;
-      return /* @__PURE__ */ jsx2(SVGRoot, {
+      return /* @__PURE__ */ jsx(SVGRoot, {
         suppressHydrationWarning: true,
         id: id2,
         left,
@@ -55691,7 +55700,7 @@ function useRefInputs(inputs, ownerRef, ownerRefInputs, refInputs,) {
     ...inputs,
   };
   for (const key2 of ownerRefInputs ?? []) resolvedInputs[key2] = ownerRef;
-  for (const [key2, refId,] of Object.entries(refInputs ?? {},)) resolvedInputs[key2] = localRefs[refId] ??= React$1.createRef();
+  for (const [key2, refId,] of Object.entries(refInputs ?? {},)) resolvedInputs[key2] = localRefs[refId] ??= React.createRef();
   return {
     inputs: resolvedInputs,
     refs: localRefs,
@@ -55705,7 +55714,7 @@ function HookOutputs({
   refInputs,
   children,
 },) {
-  const ownRef = React$1.useRef(null,);
+  const ownRef = React.useRef(null,);
   const ref = ownerRef ?? ownRef;
   const resolved = useRefInputs(inputs, ref, ownerRefInputs, refInputs,);
   return children(useHookOutputs(hook, resolved.inputs, ref,), ref, resolved.refs,);
@@ -55717,7 +55726,7 @@ function HookFallback({
   refInputs,
   children,
 },) {
-  const ownRef = React$1.useRef(null,);
+  const ownRef = React.useRef(null,);
   const ref = ownerRef ?? ownRef;
   return children({}, ref, useRefInputs(inputs, ref, ownerRefInputs, refInputs,).refs,);
 }
@@ -55726,10 +55735,10 @@ function HookVariableBindings({
   nodeId,
   ...props
 },) {
-  return /* @__PURE__ */ jsx2(CodeComponentBoundary, {
+  return /* @__PURE__ */ jsx(CodeComponentBoundary, {
     suppressHydrationWarning: true,
     getErrorMessage: () => getErrorMessageFor('hook', scopeId, nodeId,),
-    fallback: /* @__PURE__ */ jsx2(HookFallback, {
+    fallback: /* @__PURE__ */ jsx(HookFallback, {
       suppressHydrationWarning: true,
       ownerRef: props.ownerRef,
       inputs: props.inputs,
@@ -55737,7 +55746,7 @@ function HookVariableBindings({
       refInputs: props.refInputs,
       children: props.children,
     },),
-    children: /* @__PURE__ */ jsx2(HookOutputs, {
+    children: /* @__PURE__ */ jsx(HookOutputs, {
       suppressHydrationWarning: true,
       ...props,
     },),
@@ -55868,8 +55877,8 @@ function initialRouteComponent(component,) {
 }
 function useInitialRouteComponent(routes, homeNodeId,) {
   const InitialRouteComponent = routes[homeNodeId]?.page;
-  const [RouteComponent, setRouteComponent,] = useState3(() => initialRouteComponent(InitialRouteComponent,));
-  useEffect4(() => {
+  const [RouteComponent, setRouteComponent,] = useState(() => initialRouteComponent(InitialRouteComponent,));
+  useEffect2(() => {
     if (withPreload(InitialRouteComponent,)) {
       (async () => {
         await InitialRouteComponent.preload();
@@ -56320,7 +56329,7 @@ export {
   maxGeneratorDuration,
   measurePageBox,
   measureViewportBox,
-  memo,
+  memo$1 as memo,
   memoize,
   microtask,
   millisecondsToSeconds,

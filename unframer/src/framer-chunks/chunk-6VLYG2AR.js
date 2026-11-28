@@ -1,4 +1,4 @@
-// /:https://app.framerstatic.com/chunk.DXK935xZ.mjs
+// /:https://app.framerstatic.com/chunk.DyR0BimO.mjs
 import React from "react";
 var __unframerWindow = typeof window !== "undefined" ? window : void 0;
 var __unframerNavigator = typeof __unframerWindow !== "undefined" ? navigator : void 0;
@@ -477,7 +477,8 @@ function useCustomValidity(onValid, onInvalid, onChange, onBlur, onFocus) {
       return;
     }
     if (isValidRef.current === false) return;
-    if (isInvalid(e.currentTarget.validity)) {
+    const validity = e.currentTarget.validity;
+    if (isInvalid(validity)) {
       handleInvalid(e);
       return;
     }

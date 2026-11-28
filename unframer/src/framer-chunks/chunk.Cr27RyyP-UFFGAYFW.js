@@ -4,9 +4,9 @@ import {
   defaultRichTextContainerStyle,
   injectCSSRule,
   maxListDigitsProperty
-} from "./chunk-6BSHZ6IR.js";
+} from "./chunk-6VLYG2AR.js";
 
-// /:https://app.framerstatic.com/chunk.DD64dNej.mjs
+// /:https://app.framerstatic.com/chunk.Cr27RyyP.mjs
 function LazyProp(factory) {
   let initialized = false;
   let value;
